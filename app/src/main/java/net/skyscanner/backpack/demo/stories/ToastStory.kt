@@ -46,7 +46,6 @@ fun ToastStory(modifier: Modifier = Modifier) {
 
         if (automationMode) {
             BpkToast.makeText(context, R.string.toast_short, BpkToast.LENGTH_SHORT).show()
-            Thread.sleep(100) // wait for toast to be shown
         }
     }
 }

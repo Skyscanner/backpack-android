@@ -20,7 +20,11 @@ package net.skyscanner.backpack.docs
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
@@ -66,10 +70,11 @@ open class GenerateScreenshots(
                     component = story.component.name,
                     story = story.name,
                     isCompose = story.isCompose,
+                    modifier = Modifier.testTag(story.id),
                 )
             }
         }
-        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag(story.id).assertIsDisplayed()
     }
 
     private fun captureScreenshot(suffix: String? = null) {
@@ -83,4 +88,7 @@ open class GenerateScreenshots(
                 .let { if (suffix != null) "${it}_$suffix" else it },
         )
     }
+
+    private val Story.id: String
+        get() = component.name + " - " + name
 }
