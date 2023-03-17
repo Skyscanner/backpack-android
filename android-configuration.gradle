@@ -17,39 +17,39 @@
  */
 
 android {
-  compileSdk 33
+    compileSdk 33
 
-  defaultConfig {
-    minSdkVersion 28
-    targetSdkVersion 33
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-    freeCompilerArgs += [
-      "-Xopt-in=kotlin.RequiresOptIn",
-    ]
-  }
-  lintOptions {
-    lintConfig file("$rootDir/lint.xml")
-    baseline file("$projectDir/lint-baseline.xml")
-    checkReleaseBuilds false // we're already running lint separately
-    warningsAsErrors true
-    disable 'UnusedResources' // we're exposing resources for consumers
-  }
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += [
+            "-Xopt-in=kotlin.RequiresOptIn",
+        ]
+    }
+    lintOptions {
+        lintConfig file("$rootDir/lint.xml")
+        baseline file("$projectDir/lint-baseline.xml")
+        checkReleaseBuilds false // we're already running lint separately
+        warningsAsErrors true
+        disable 'UnusedResources' // we're exposing resources for consumers
+    }
 
-  buildFeatures {
-    buildConfig = false
-  }
+    buildFeatures {
+        buildConfig = false
+    }
 }
 
 dependencies {
-  api rootProject.ext.androidxAnnotations
-  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api rootProject.ext.coroutines
-  api rootProject.ext.androidxAppCompat
+    api rootProject.ext.androidxAnnotations
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api rootProject.ext.coroutines
+    api rootProject.ext.androidxAppCompat
 }

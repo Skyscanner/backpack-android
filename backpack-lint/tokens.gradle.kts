@@ -23,26 +23,26 @@ import net.skyscanner.backpack.tokens.saveTo
 import net.skyscanner.backpack.tokens.transformTo
 
 tasks {
-  val tokensPackage = "net.skyscanner.backpack.lint.check"
-  val group = "tokens"
-  val src = project.projectDir.resolve("src/main/java").path
+    val tokensPackage = "net.skyscanner.backpack.lint.check"
+    val group = "tokens"
+    val src = project.projectDir.resolve("src/main/java").path
 
-  val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
-    .readAs(BpkFormat.Json)
+    val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
+        .readAs(BpkFormat.Json)
 
-  val generateDeprecatedTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(net.skyscanner.backpack.tokens.BpkDeprecatedToken.Category)
-        .transformTo(net.skyscanner.backpack.tokens.BpkDeprecatedToken.Format.Kotlin("BpkDeprecatedTokens"))
-        .saveTo(net.skyscanner.backpack.tokens.BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateDeprecatedTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(net.skyscanner.backpack.tokens.BpkDeprecatedToken.Category)
+                .transformTo(net.skyscanner.backpack.tokens.BpkDeprecatedToken.Format.Kotlin("BpkDeprecatedTokens"))
+                .saveTo(net.skyscanner.backpack.tokens.BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateTokens by creating {
-    this.group = group
-    dependsOn(generateDeprecatedTokens)
-  }
+    val generateTokens by creating {
+        this.group = group
+        dependsOn(generateDeprecatedTokens)
+    }
 }

@@ -111,5 +111,5 @@ private fun toCompose(
 
 private fun toXml(source: BpkDimensions, type: String): String =
     source.map { (name, value) ->
-        "  <dimen name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">${value}dp</dimen>"
+        "    <dimen name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">${value}dp</dimen>"
     }.joinToString("\n")

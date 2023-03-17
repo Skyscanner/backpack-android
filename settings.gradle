@@ -1,6 +1,6 @@
 include ':Backpack',
-  ':backpack-common',
-  ':backpack-compose',
-  ':backpack-lint',
-  ':meta-processor',
-  ':app'
+    ':backpack-common',
+    ':backpack-compose',
+    ':backpack-lint',
+    ':meta-processor',
+    ':app'

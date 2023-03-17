@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  style="@style/App.Story"
-  android:orientation="vertical"
-  tools:ignore="HardcodedText">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/App.Story"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
-  <net.skyscanner.backpack.fab.BpkFab
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:layout_margin="@dimen/bpkSpacingLg"
-    android:contentDescription="Search"
-    android:src="@drawable/bpk_search" />
+    <net.skyscanner.backpack.fab.BpkFab
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/bpkSpacingLg"
+        android:contentDescription="Search"
+        android:src="@drawable/bpk_search" />
 
-  <net.skyscanner.backpack.fab.BpkFab
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:layout_margin="@dimen/bpkSpacingLg"
-    android:contentDescription="Star"
-    android:src="@drawable/bpk_star" />
+    <net.skyscanner.backpack.fab.BpkFab
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/bpkSpacingLg"
+        android:contentDescription="Star"
+        android:src="@drawable/bpk_star" />
 
-  <net.skyscanner.backpack.fab.BpkFab
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:layout_margin="@dimen/bpkSpacingLg"
-    android:contentDescription="Flight"
-    android:src="@drawable/bpk_flight"
-    android:enabled="false"/>
+    <net.skyscanner.backpack.fab.BpkFab
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/bpkSpacingLg"
+        android:contentDescription="Flight"
+        android:enabled="false"
+        android:src="@drawable/bpk_flight" />
 
 </LinearLayout>

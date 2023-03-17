@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  tools:layout_width="match_parent"
-  android:layout_height="48dp"
-  tools:background="#CCC">
-
-  <ImageView
-    android:id="@android:id/icon"
-    android:layout_width="@dimen/bpk_icon_size_small"
-    android:layout_height="@dimen/bpk_icon_size_small"
-    tools:src="@drawable/bpk_cars"
-    android:scaleType="centerInside"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@android:id/text1"
-    app:layout_constraintHorizontal_chainStyle="packed"
-    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
-    android:importantForAccessibility="no"
-    />
-
-  <TextView
-    android:id="@android:id/text1"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="13sp"
-    android:maxLines="1"
-    android:ellipsize="end"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toEndOf="@android:id/icon"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
-    tools:text="Tab"
-    tools:textAllCaps="true"/>
+    android:layout_height="48dp"
+    tools:background="#CCC"
+    tools:layout_width="match_parent">
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="@dimen/bpk_icon_size_small"
+        android:layout_height="@dimen/bpk_icon_size_small"
+        android:layout_marginHorizontal="@dimen/bpkSpacingSm"
+        android:importantForAccessibility="no"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@android:id/text1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/bpk_cars" />
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bpkSpacingSm"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@android:id/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tab"
+        tools:textAllCaps="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:gravity="center_horizontal"
-  android:orientation="vertical">
-
-  <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bpk_map_marker_bg"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:padding="@dimen/bpkSpacingMd">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bpk_map_marker_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/bpkSpacingMd">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:importantForAccessibility="no"
+            android:paddingEnd="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bpk_airports"
+            app:tint="@color/bpk_map_marker_content_color" />
+
+        <net.skyscanner.backpack.text.BpkText
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/bpk_map_marker_content_color"
+            app:textStyle="label2"
+            tools:text="£35+" />
+
+    </LinearLayout>
 
     <ImageView
-      android:id="@+id/icon"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:paddingEnd="2dp"
-      android:scaleType="fitCenter"
-      android:src="@drawable/bpk_airports"
-      android:importantForAccessibility="no"
-      app:tint="@color/bpk_map_marker_content_color" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@drawable/bpk_map_marker_flare"
+        app:tint="@color/bpkCoreAccent" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:id="@+id/text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_vertical"
-      android:gravity="center"
-      android:textAlignment="center"
-      android:textColor="@color/bpk_map_marker_content_color"
-      app:textStyle="label2"
-      tools:text="£35+" />
-
-  </LinearLayout>
-
-  <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:importantForAccessibility="no"
-    android:src="@drawable/bpk_map_marker_flare"
-    app:tint="@color/bpkCoreAccent" />
-
-  <ImageView
-    android:id="@+id/pointer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:importantForAccessibility="no"
-    android:src="@drawable/bpk_map_marker_pointer" />
+    <ImageView
+        android:id="@+id/pointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@drawable/bpk_map_marker_pointer" />
 
 </LinearLayout>

@@ -27,99 +27,99 @@ apply from: "screenshots.gradle"
 def properties = new Properties()
 properties.putAll(System.getenv())
 if (rootProject.file("local.properties").exists()) {
-  properties.load(rootProject.file("local.properties").newDataInputStream())
+    properties.load(rootProject.file("local.properties").newDataInputStream())
 }
 
 android {
-  defaultConfig {
-    applicationId 'net.skyscanner.backpack'
-    versionCode 1
-    versionName "🐨"
+    defaultConfig {
+        applicationId 'net.skyscanner.backpack'
+        versionCode 1
+        versionName "🐨"
 
-    testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
-    testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.docs.GenerateScreenshots"
-    testInstrumentationRunnerArgument "variant", project.findProperty("directorySuffix") ?: "default"
+        testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
+        testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.docs.GenerateScreenshots"
+        testInstrumentationRunnerArgument "variant", project.findProperty("directorySuffix") ?: "default"
 
-    manifestPlaceholders = [ MAPS_API_KEY : properties.getProperty("MAPS_API_KEY", "") ]
-  }
+        manifestPlaceholders = [MAPS_API_KEY: properties.getProperty("MAPS_API_KEY", "")]
+    }
 
-  signingConfigs {
-    release {
-      storeFile rootProject.file('backpack.android.demo.key')
-      storePassword properties.getProperty('KEYSTORE_PASSWORD')
-      keyAlias properties.getProperty('KEYSTORE_ALIAS')
-      keyPassword properties.getProperty('KEYSTORE_ALIAS_PASSWORD')
+    signingConfigs {
+        release {
+            storeFile rootProject.file('backpack.android.demo.key')
+            storePassword properties.getProperty('KEYSTORE_PASSWORD')
+            keyAlias properties.getProperty('KEYSTORE_ALIAS')
+            keyPassword properties.getProperty('KEYSTORE_ALIAS_PASSWORD')
+        }
     }
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      signingConfig signingConfigs.release
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
     }
-  }
-  namespace 'net.skyscanner.backpack.demo'
-  flavorDimensions "version"
-  productFlavors {
-    oss {
-      dimension "version"
-      versionNameSuffix "-oss"
+    namespace 'net.skyscanner.backpack.demo'
+    flavorDimensions "version"
+    productFlavors {
+        oss {
+            dimension "version"
+            versionNameSuffix "-oss"
+        }
+        internal {
+            dimension "version"
+            versionNameSuffix "-internal"
+        }
     }
-    internal {
-      dimension "version"
-      versionNameSuffix "-internal"
+    testOptions {
+        animationsDisabled = true
     }
-  }
-  testOptions {
-    animationsDisabled = true
-  }
-  flavorDimensions "version"
-  productFlavors {
-    oss {
-      dimension "version"
+    flavorDimensions "version"
+    productFlavors {
+        oss {
+            dimension "version"
+        }
+        internal {
+            dimension "version"
+        }
     }
-    internal {
-      dimension "version"
+    buildFeatures {
+        compose true
     }
-  }
-  buildFeatures {
-    compose true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion compose_compiler_version
-  }
-  packagingOptions {
-    exclude "**/attach_hotspot_windows.dll"
-    exclude "META-INF/licenses/**"
-    exclude "META-INF/AL2.0"
-    exclude "META-INF/LGPL2.1"
-  }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler_version
+    }
+    packagingOptions {
+        exclude "**/attach_hotspot_windows.dll"
+        exclude "META-INF/licenses/**"
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
 }
 
 dependencies {
-  implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation rootProject.ext.picasso
-  implementation rootProject.ext.accompanistFlowLayout
-  implementation rootProject.ext.androidXLifecycleKtx
-  implementation rootProject.ext.composeActivity
-  implementation rootProject.ext.kotlinReflection
-  implementation rootProject.ext.stetho
-  implementation rootProject.ext.destinationsCore
-  implementation rootProject.ext.accompanistPager
-  testImplementation rootProject.ext.junit
-  debugImplementation rootProject.ext.composeTestManifest
-  androidTestImplementation rootProject.ext.composeFoundation
-  androidTestImplementation rootProject.ext.testCoreKtx
-  androidTestImplementation rootProject.ext.junitKtx
-  androidTestImplementation rootProject.ext.junitAndroid
-  androidTestImplementation rootProject.ext.espressoCore
-  androidTestImplementation rootProject.ext.espressoContrib
-  androidTestImplementation rootProject.ext.testRules
-  androidTestImplementation rootProject.ext.coroutinesTest
-  androidTestImplementation rootProject.ext.composeTestJUnit
-  androidTestImplementation rootProject.ext.facebookSnapshotTestingCore
-  implementation project(':Backpack')
-  implementation project(':backpack-compose')
-  ksp project(":meta-processor")
-  ksp rootProject.ext.destinationsKsp
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.picasso
+    implementation rootProject.ext.accompanistFlowLayout
+    implementation rootProject.ext.androidXLifecycleKtx
+    implementation rootProject.ext.composeActivity
+    implementation rootProject.ext.kotlinReflection
+    implementation rootProject.ext.stetho
+    implementation rootProject.ext.destinationsCore
+    implementation rootProject.ext.accompanistPager
+    testImplementation rootProject.ext.junit
+    debugImplementation rootProject.ext.composeTestManifest
+    androidTestImplementation rootProject.ext.composeFoundation
+    androidTestImplementation rootProject.ext.testCoreKtx
+    androidTestImplementation rootProject.ext.junitKtx
+    androidTestImplementation rootProject.ext.junitAndroid
+    androidTestImplementation rootProject.ext.espressoCore
+    androidTestImplementation rootProject.ext.espressoContrib
+    androidTestImplementation rootProject.ext.testRules
+    androidTestImplementation rootProject.ext.coroutinesTest
+    androidTestImplementation rootProject.ext.composeTestJUnit
+    androidTestImplementation rootProject.ext.facebookSnapshotTestingCore
+    implementation project(':Backpack')
+    implementation project(':backpack-compose')
+    ksp project(":meta-processor")
+    ksp rootProject.ext.destinationsKsp
 }

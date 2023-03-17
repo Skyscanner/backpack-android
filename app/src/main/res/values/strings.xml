@@ -1,294 +1,294 @@
 <resources>
-  <string name="app_name">Backpack</string>
+    <string name="app_name">Backpack</string>
 
-  <string name="stub" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    <string name="stub" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
     exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
     in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
     sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt laborum.</string>
 
-  <string name="stub_md" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    <string name="stub_md" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aenean commodo ligula eget dolor.
     Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
 
-  <string name="stub_sm" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    <string name="stub_sm" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aenean commodo ligula eget dolor.
     Aenean massa.</string>
 
-  <string name="stub_xs" translatable="false">Lorem ipsum dolor sit amet.</string>
+    <string name="stub_xs" translatable="false">Lorem ipsum dolor sit amet.</string>
 
-  <string name="txt_lorem_ipsum">Lorem ipsum</string>
-  <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://skyscanner.design">Click me!</a></string>
-  <string name="preference_file_key">bpk_preferences</string>
+    <string name="txt_lorem_ipsum">Lorem ipsum</string>
+    <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://skyscanner.design">Click me!</a></string>
+    <string name="preference_file_key">bpk_preferences</string>
 
-  <string name="calendar_colored_switch">Shift colors</string>
-  <string name="calendar_disabled_switch">Shift dates</string>
-  <string name="calendar_single">Single</string>
-  <string name="calendar_range">Range</string>
+    <string name="calendar_colored_switch">Shift colors</string>
+    <string name="calendar_disabled_switch">Shift dates</string>
+    <string name="calendar_single">Single</string>
+    <string name="calendar_range">Range</string>
 
-  <string name="rating_sample_const_title">Constant Title</string>
-  <string name="rating_sample_const_subtitle">Constant Subtitle</string>
+    <string name="rating_sample_const_title">Constant Title</string>
+    <string name="rating_sample_const_subtitle">Constant Subtitle</string>
 
-  <string-array name="rating_sample_titles">
-    <item>Low Title</item>
-    <item>Medium Title</item>
-    <item>High Title</item>
-  </string-array>
+    <string-array name="rating_sample_titles">
+        <item>Low Title</item>
+        <item>Medium Title</item>
+        <item>High Title</item>
+    </string-array>
 
-  <string-array name="rating_sample_subtitles">
-    <item>Low Subtitle</item>
-    <item>Medium Subtitle</item>
-    <item>High Subtitle</item>
-  </string-array>
+    <string-array name="rating_sample_subtitles">
+        <item>Low Subtitle</item>
+        <item>Medium Subtitle</item>
+        <item>High Subtitle</item>
+    </string-array>
 
-  <string name="star_rating_description">Rating</string>
-  <string name="star_rating_accessibility_status">%.0f out of %d</string>
-  <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
-  <string name="star_rating_0_5">0 out of 5</string>
-  <string name="star_rating_25_5">2.5 out of 5</string>
-  <string name="star_rating_3_5">3 out of 5</string>
-  <string name="star_rating_5_5">5 out of 5</string>
-  <string name="star_rating_2_5_rtl">2 out of 5 RTL</string>
-  <string name="star_rating_5_8">5 out of 8</string>
+    <string name="star_rating_description">Rating</string>
+    <string name="star_rating_accessibility_status">%.0f out of %d</string>
+    <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
+    <string name="star_rating_0_5">0 out of 5</string>
+    <string name="star_rating_25_5">2.5 out of 5</string>
+    <string name="star_rating_3_5">3 out of 5</string>
+    <string name="star_rating_5_5">5 out of 5</string>
+    <string name="star_rating_2_5_rtl">2 out of 5 RTL</string>
+    <string name="star_rating_5_8">5 out of 8</string>
 
-  <string name="bottom_nav_home">Home</string>
-  <string name="bottom_nav_explore">Explore</string>
-  <string name="bottom_nav_trips">Trips</string>
-  <string name="bottom_nav_profile">Profile</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_explore">Explore</string>
+    <string name="bottom_nav_trips">Trips</string>
+    <string name="bottom_nav_profile">Profile</string>
 
-  <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+    <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
 
-  <string name="overlay_rounded_corners">Rounded corners</string>
-  <string name="overlay_no_rounded_corners">No rounded corners</string>
+    <string name="overlay_rounded_corners">Rounded corners</string>
+    <string name="overlay_no_rounded_corners">No rounded corners</string>
 
-  <string name="icons_small">Small</string>
-  <string name="icons_large">Large</string>
-  <string name="icons_color">In color</string>
-  <string name="icons_flight">Flight icon</string>
-  <string name="icons_car">Car icon</string>
-  <string name="icons_hotel">Hotel icon</string>
+    <string name="icons_small">Small</string>
+    <string name="icons_large">Large</string>
+    <string name="icons_color">In color</string>
+    <string name="icons_flight">Flight icon</string>
+    <string name="icons_car">Car icon</string>
+    <string name="icons_hotel">Hotel icon</string>
 
-  <string name="input_placeholder">Placeholder</string>
-  <string name="input_entering">Entering…</string>
-  <string name="input_disabled">Disabled</string>
-  <string name="input_label">Label</string>
-  <string name="input_error">Error message</string>
-  <string name="input_helper">Help text</string>
+    <string name="input_placeholder">Placeholder</string>
+    <string name="input_entering">Entering…</string>
+    <string name="input_disabled">Disabled</string>
+    <string name="input_label">Label</string>
+    <string name="input_error">Error message</string>
+    <string name="input_helper">Help text</string>
 
-  <string name="settings_title">Settings</string>
-  <string name="settings_selected">Selected</string>
-  <string name="settings_section_theme">Component Themes</string>
-  <string name="settings_option_theme_title">Enable themes</string>
-  <string name="settings_option_theme_description">This will enable themes for compatible components</string>
-  <string name="settings_theme_doha">Doha</string>
-  <string name="settings_theme_london">London</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_selected">Selected</string>
+    <string name="settings_section_theme">Component Themes</string>
+    <string name="settings_option_theme_title">Enable themes</string>
+    <string name="settings_option_theme_description">This will enable themes for compatible components</string>
+    <string name="settings_theme_doha">Doha</string>
+    <string name="settings_theme_london">London</string>
 
-  <string name="snackbar_title">Title</string>
-  <string name="snackbar_message">Message</string>
-  <string name="snackbar_icon_content_description">Close</string>
-  <string name="snackbar_action">Action!</string>
+    <string name="snackbar_title">Title</string>
+    <string name="snackbar_message">Message</string>
+    <string name="snackbar_icon_content_description">Close</string>
+    <string name="snackbar_action">Action!</string>
 
-  <string name="story_badge_compose">Compose-only</string>
-  <string name="story_badge_view">View-only</string>
+    <string name="story_badge_compose">Compose-only</string>
+    <string name="story_badge_view">View-only</string>
 
-  <string name="text_subheading">Subheading</string>
-  <string name="text_body_default">Body Default</string>
-  <string name="text_body_longform">Body Longform</string>
-  <string name="text_footnote">Footnote</string>
-  <string name="text_caption">Caption</string>
-  <string name="text_label1">Label 1</string>
-  <string name="text_label2">Label 2</string>
-  <string name="text_label3">Label 3</string>
-  <string name="text_heading1">Heading 1</string>
-  <string name="text_heading2">Heading 2</string>
-  <string name="text_heading3">Heading 3</string>
-  <string name="text_heading4">Heading 4</string>
-  <string name="text_heading5">Heading 5</string>
-  <string name="text_hero1">Hero 1</string>
-  <string name="text_hero2">Hero 2</string>
-  <string name="text_hero3">Hero 3</string>
-  <string name="text_hero4">Hero 4</string>
-  <string name="text_hero5">Hero 5</string>
+    <string name="text_subheading">Subheading</string>
+    <string name="text_body_default">Body Default</string>
+    <string name="text_body_longform">Body Longform</string>
+    <string name="text_footnote">Footnote</string>
+    <string name="text_caption">Caption</string>
+    <string name="text_label1">Label 1</string>
+    <string name="text_label2">Label 2</string>
+    <string name="text_label3">Label 3</string>
+    <string name="text_heading1">Heading 1</string>
+    <string name="text_heading2">Heading 2</string>
+    <string name="text_heading3">Heading 3</string>
+    <string name="text_heading4">Heading 4</string>
+    <string name="text_heading5">Heading 5</string>
+    <string name="text_hero1">Hero 1</string>
+    <string name="text_hero2">Hero 2</string>
+    <string name="text_hero3">Hero 3</string>
+    <string name="text_hero4">Hero 4</string>
+    <string name="text_hero5">Hero 5</string>
 
-  <string name="button">Button</string>
-  <string name="button_increased">%s increased</string>
-  <string name="button_short_text">Short Text</string>
-  <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
+    <string name="button">Button</string>
+    <string name="button_increased">%s increased</string>
+    <string name="button_short_text">Short Text</string>
+    <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
 
-  <string name="toggle_default">Default</string>
-  <string name="toggle_indeterminate">Indeterminate</string>
-  <string name="toggle_default_unchecked">Default Unchecked</string>
-  <string name="toggle_default_checked">Default Checked</string>
-  <string name="toggle_default_rtl">Default RTL</string>
-  <string name="toggle_disabled_unchecked">Disabled Unchecked</string>
-  <string name="toggle_disabled_checked">Disabled Checked</string>
-  <string name="toggle_custom_title">Custom</string>
-  <string name="toggle_custom_subtitle">Content</string>
+    <string name="toggle_default">Default</string>
+    <string name="toggle_indeterminate">Indeterminate</string>
+    <string name="toggle_default_unchecked">Default Unchecked</string>
+    <string name="toggle_default_checked">Default Checked</string>
+    <string name="toggle_default_rtl">Default RTL</string>
+    <string name="toggle_disabled_unchecked">Disabled Unchecked</string>
+    <string name="toggle_disabled_checked">Disabled Checked</string>
+    <string name="toggle_custom_title">Custom</string>
+    <string name="toggle_custom_subtitle">Content</string>
 
-  <string name="panel_default">Default</string>
-  <string name="panel_no_padding">No padding</string>
+    <string name="panel_default">Default</string>
+    <string name="panel_no_padding">No padding</string>
 
-  <string name="dialog_title">Title in here</string>
-  <string name="dialog_text">Description that goes two lines ideally, but sometimes it can go longer</string>
-  <string name="dialog_confirmation">Confirmation</string>
-  <string name="dialog_skip">Skip</string>
-  <string name="dialog_link_optional">Link optional</string>
-  <string name="dialog_delete">Delete</string>
-  <string name="dialog_cancel">Cancel</string>
-  <string name="dialog_continue">Continue</string>
-  <string name="copied_to_clipboard">\'%s\' has been copied to the clipboard</string>
-  <string name="icons_story_guide">Click on icon to copy its name</string>
-  <string name="icons_story_content_description">Icon \'%s\'</string>
-  <string name="icons_force_rtl">Force RTL</string>
-  <string name="with_icon">With icon</string>
+    <string name="dialog_title">Title in here</string>
+    <string name="dialog_text">Description that goes two lines ideally, but sometimes it can go longer</string>
+    <string name="dialog_confirmation">Confirmation</string>
+    <string name="dialog_skip">Skip</string>
+    <string name="dialog_link_optional">Link optional</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_continue">Continue</string>
+    <string name="copied_to_clipboard">\'%s\' has been copied to the clipboard</string>
+    <string name="icons_story_guide">Click on icon to copy its name</string>
+    <string name="icons_story_content_description">Icon \'%s\'</string>
+    <string name="icons_force_rtl">Force RTL</string>
+    <string name="with_icon">With icon</string>
 
-  <string name="navigation_bar_title">Page title</string>
-  <string name="navigation_back">Back</string>
-  <string name="navigation_close">Close</string>
-  <string name="navigation_id_card">ID Card</string>
-  <string name="navigation_accessibility">Accessibility</string>
-  <string name="navigation_account">Account</string>
-  <string name="navigation_text_action">Text</string>
-  <string name="navigation_search">Search</string>
+    <string name="navigation_bar_title">Page title</string>
+    <string name="navigation_back">Back</string>
+    <string name="navigation_close">Close</string>
+    <string name="navigation_id_card">ID Card</string>
+    <string name="navigation_accessibility">Accessibility</string>
+    <string name="navigation_account">Account</string>
+    <string name="navigation_text_action">Text</string>
+    <string name="navigation_search">Search</string>
 
-  <string name="badge_success">Success</string>
-  <string name="badge_warning">Warning</string>
-  <string name="badge_destructive">Destructive</string>
-  <string name="badge_normal">Normal</string>
-  <string name="badge_strong">Strong</string>
-  <string name="badge_inverse">Inverse</string>
-  <string name="badge_outline">Outline</string>
-  <string name="badge_apples">Apples</string>
-  <string name="badge_bananas">Bananas</string>
-  <string name="badge_strawberries">Strawberries</string>
-  <string name="badge_pears">Pears</string>
+    <string name="badge_success">Success</string>
+    <string name="badge_warning">Warning</string>
+    <string name="badge_destructive">Destructive</string>
+    <string name="badge_normal">Normal</string>
+    <string name="badge_strong">Strong</string>
+    <string name="badge_inverse">Inverse</string>
+    <string name="badge_outline">Outline</string>
+    <string name="badge_apples">Apples</string>
+    <string name="badge_bananas">Bananas</string>
+    <string name="badge_strawberries">Strawberries</string>
+    <string name="badge_pears">Pears</string>
 
-  <string name="chip_option">Option</string>
-  <string name="chip_dropdown">Dropdown</string>
-  <string name="chip_dismiss">Dismiss</string>
+    <string name="chip_option">Option</string>
+    <string name="chip_dropdown">Dropdown</string>
+    <string name="chip_dismiss">Dismiss</string>
 
-  <string name="tabs_small">Small</string>
-  <string name="tabs_small_with_icon">Small with icon</string>
-  <string name="tabs_large">Large</string>
-  <string name="tabs_large_with_icon">Large with icon</string>
-  <string name="tabs_one">One</string>
-  <string name="tabs_two">Two</string>
+    <string name="tabs_small">Small</string>
+    <string name="tabs_small_with_icon">Small with icon</string>
+    <string name="tabs_large">Large</string>
+    <string name="tabs_large_with_icon">Large with icon</string>
+    <string name="tabs_one">One</string>
+    <string name="tabs_two">Two</string>
 
-  <string name="image_skeleton_title">Image Skeleton</string>
-  <string name="circle_skeleton_title">Circle Skeleton</string>
-  <string name="body_text_skeleton_title">Body Text Skeleton</string>
-  <string name="headline_skeleton_title">Headline Skeleton</string>
+    <string name="image_skeleton_title">Image Skeleton</string>
+    <string name="circle_skeleton_title">Circle Skeleton</string>
+    <string name="body_text_skeleton_title">Body Text Skeleton</string>
+    <string name="headline_skeleton_title">Headline Skeleton</string>
 
-  <string name="shimmer_overlay_title">Shimmer Overlay</string>
-  <string name="tokens_title">Tokens</string>
-  <string name="token_placeholder">%1$s = %2$s</string>
+    <string name="shimmer_overlay_title">Shimmer Overlay</string>
+    <string name="tokens_title">Tokens</string>
+    <string name="token_placeholder">%1$s = %2$s</string>
 
-  <string name="components_title">Components</string>
+    <string name="components_title">Components</string>
 
-  <string name="spinner_textPrimary">TextPrimary</string>
-  <string name="spinner_disabled">Disabled</string>
-  <string name="spinner_onDarkSurface">OnDarkSurface</string>
+    <string name="spinner_textPrimary">TextPrimary</string>
+    <string name="spinner_disabled">Disabled</string>
+    <string name="spinner_onDarkSurface">OnDarkSurface</string>
 
-  <string name="content_description">Content description</string>
+    <string name="content_description">Content description</string>
 
-  <string name="generic_default">Default</string>
-  <string name="generic_with_description">With description</string>
-  <string name="generic_description">Description</string>
-  <string name="generic_placeholder">Placeholder</string>
-  <string name="generic_no_label">No label</string>
-  <string name="generic_no_description">No description</string>
-  <string name="generic_read_only">Read only</string>
-  <string name="generic_with_leading_icon">With leading icon</string>
-  <string name="generic_single_line">Single line</string>
-  <string name="generic_multiline">Multiline</string>
-  <string name="generic_read_only_value">Read only value</string>
-  <string name="generic_error_text">Error text</string>
-  <string name="generic_message">Message</string>
-  <string name="generic_scroll_the_list">Scroll the list…</string>
-  <string name="generic_to_see_the_effect">to see the effect</string>
-  <string name="generic_list_item">Item #%d</string>
-  <string name="generic_disabled">Disabled</string>
-  <string name="generic_dismiss">Dismiss</string>
-  <string name="generic_empty" />
-  <string name="generic_small">Small</string>
-  <string name="generic_item">List item</string>
-  <string name="generic_selected">Selected</string>
-  <string name="generic_no_price">No Price</string>
-  <string name="generic_price">Price</string>
-  <string name="generic_departures">Departures</string>
+    <string name="generic_default">Default</string>
+    <string name="generic_with_description">With description</string>
+    <string name="generic_description">Description</string>
+    <string name="generic_placeholder">Placeholder</string>
+    <string name="generic_no_label">No label</string>
+    <string name="generic_no_description">No description</string>
+    <string name="generic_read_only">Read only</string>
+    <string name="generic_with_leading_icon">With leading icon</string>
+    <string name="generic_single_line">Single line</string>
+    <string name="generic_multiline">Multiline</string>
+    <string name="generic_read_only_value">Read only value</string>
+    <string name="generic_error_text">Error text</string>
+    <string name="generic_message">Message</string>
+    <string name="generic_scroll_the_list">Scroll the list…</string>
+    <string name="generic_to_see_the_effect">to see the effect</string>
+    <string name="generic_list_item">Item #%d</string>
+    <string name="generic_disabled">Disabled</string>
+    <string name="generic_dismiss">Dismiss</string>
+    <string name="generic_empty" />
+    <string name="generic_small">Small</string>
+    <string name="generic_item">List item</string>
+    <string name="generic_selected">Selected</string>
+    <string name="generic_no_price">No Price</string>
+    <string name="generic_price">Price</string>
+    <string name="generic_departures">Departures</string>
 
-  <string name="nudger_minus_disabled">Minus Disabled</string>
-  <string name="nudger_plus_disabled">Plus Disabled</string>
+    <string name="nudger_minus_disabled">Minus Disabled</string>
+    <string name="nudger_plus_disabled">Plus Disabled</string>
 
-  <string name="floating_notification_just_text">Just text</string>
-  <string name="floating_notification_text_with_icon">Text with icon</string>
-  <string name="floating_notification_with_action">With action</string>
-  <string name="floating_notification_with_icon_and_action">With icon and action</string>
-  <string name="floating_notification_saved">Saved</string>
-  <string name="floating_notification_view">View</string>
+    <string name="floating_notification_just_text">Just text</string>
+    <string name="floating_notification_text_with_icon">Text with icon</string>
+    <string name="floating_notification_with_action">With action</string>
+    <string name="floating_notification_with_icon_and_action">With icon and action</string>
+    <string name="floating_notification_saved">Saved</string>
+    <string name="floating_notification_view">View</string>
 
-  <string name="rating_title">Excellent</string>
-  <string name="rating_subtitle">1532 reviews</string>
+    <string name="rating_title">Excellent</string>
+    <string name="rating_subtitle">1532 reviews</string>
 
-  <string name="slider_range">Range</string>
-  <string name="slider_standard">Standard</string>
-  <string name="slider_stepped">Stepped</string>
+    <string name="slider_range">Range</string>
+    <string name="slider_standard">Standard</string>
+    <string name="slider_stepped">Stepped</string>
 
-  <string name="toast_long">Long Toast</string>
-  <string name="toast_short">Short Toast</string>
+    <string name="toast_long">Long Toast</string>
+    <string name="toast_short">Short Toast</string>
 
-  <string name="snackbar_short">Message (Duration Short)</string>
-  <string name="snackbar_long">Message (Duration Long)</string>
-  <string name="snackbar_indefinite">Message (Duration Indefinite)</string>
-  <string name="snackbar_title_message">Title + Message</string>
-  <string name="snackbar_icon_message">Icon + Message</string>
-  <string name="snackbar_icon_title_message">Icon + Title + Message</string>
-  <string name="snackbar_icon_action">Message (Icon Action)</string>
-  <string name="snackbar_title_icon_action">Title + Message (Icon Action)</string>
-  <string name="snackbar_icon_icon_action">Icon + Message (Icon Action)</string>
-  <string name="snackbar_icon_title_icon_action">Icon + title + message (Icon Action)</string>
-  <string name="bar_chart_accessibility_label">%1$s the %2$s of %3$s, price is %4$s</string>
-  <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s of %3$s, price is unknown</string>
-  <string name="divider_no_indent">No indent</string>
-  <string name="divider_indent">With indent</string>
-  <string name="divided_card_width_more_than_minimum"><![CDATA[Card width >= 240 Dp]]></string>
-  <string name="divided_card_width_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
-  <string name="divided_card_empty_card">Empty Card</string>
-  <string name="divided_card_primary_content">Divided Card primary content</string>
-  <string name="divided_card_no_shadow_primary_content">Divided Card No Shadow primary content</string>
-  <string name="divided_card_secondary_content">Divided Card secondary content</string>
-  <string name="divided_card_no_shadow_secondary_content">Divided Card No Shadow secondary content</string>
-  <string name="price_price">£1,830</string>
-  <string name="price_trailing_text">per day</string>
-  <string name="price_line_through_text">£2,033</string>
-  <string name="price_leading_text">App only deal</string>
-  <string name="hotel_star_rating_title">Hotel star rating</string>
-  <string name="static_default_rating_title">Static (default)</string>
+    <string name="snackbar_short">Message (Duration Short)</string>
+    <string name="snackbar_long">Message (Duration Long)</string>
+    <string name="snackbar_indefinite">Message (Duration Indefinite)</string>
+    <string name="snackbar_title_message">Title + Message</string>
+    <string name="snackbar_icon_message">Icon + Message</string>
+    <string name="snackbar_icon_title_message">Icon + Title + Message</string>
+    <string name="snackbar_icon_action">Message (Icon Action)</string>
+    <string name="snackbar_title_icon_action">Title + Message (Icon Action)</string>
+    <string name="snackbar_icon_icon_action">Icon + Message (Icon Action)</string>
+    <string name="snackbar_icon_title_icon_action">Icon + title + message (Icon Action)</string>
+    <string name="bar_chart_accessibility_label">%1$s the %2$s of %3$s, price is %4$s</string>
+    <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s of %3$s, price is unknown</string>
+    <string name="divider_no_indent">No indent</string>
+    <string name="divider_indent">With indent</string>
+    <string name="divided_card_width_more_than_minimum"><![CDATA[Card width >= 240 Dp]]></string>
+    <string name="divided_card_width_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
+    <string name="divided_card_empty_card">Empty Card</string>
+    <string name="divided_card_primary_content">Divided Card primary content</string>
+    <string name="divided_card_no_shadow_primary_content">Divided Card No Shadow primary content</string>
+    <string name="divided_card_secondary_content">Divided Card secondary content</string>
+    <string name="divided_card_no_shadow_secondary_content">Divided Card No Shadow secondary content</string>
+    <string name="price_price">£1,830</string>
+    <string name="price_trailing_text">per day</string>
+    <string name="price_line_through_text">£2,033</string>
+    <string name="price_leading_text">App only deal</string>
+    <string name="hotel_star_rating_title">Hotel star rating</string>
+    <string name="static_default_rating_title">Static (default)</string>
 
-  <string name="page_indicator_less_than_5">Less than 5 pages</string>
-  <string name="page_indicator_more_than_5">More than 5 pages</string>
-  <string name="page_indicator_over_image">Over Image</string>
-  <string name="page_indicator_next">Next</string>
-  <string name="page_indicator_prev">Prev</string>
-  <string name="card_wrapper_header">Card Wrapper header</string>
-  <string name="card_wrapper_card">Card Wrapper card</string>
+    <string name="page_indicator_less_than_5">Less than 5 pages</string>
+    <string name="page_indicator_more_than_5">More than 5 pages</string>
+    <string name="page_indicator_over_image">Over Image</string>
+    <string name="page_indicator_next">Next</string>
+    <string name="page_indicator_prev">Prev</string>
+    <string name="card_wrapper_header">Card Wrapper header</string>
+    <string name="card_wrapper_card">Card Wrapper card</string>
 
-  <string name="carousel_only_1_item">Single Image</string>
-  <string name="carousel_multiple_items">Multiple Images</string>
-  <string name="carousel_start_at_different_index">Start at the end</string>
-  <string name="carousel_image_change_callback">Image change callback</string>
-  <string name="carousel_current_image">Current Image: %s</string>
+    <string name="carousel_only_1_item">Single Image</string>
+    <string name="carousel_multiple_items">Multiple Images</string>
+    <string name="carousel_start_at_different_index">Start at the end</string>
+    <string name="carousel_image_change_callback">Image change callback</string>
+    <string name="carousel_current_image">Current Image: %s</string>
 
-  <string name="tab_view">View</string>
-  <string name="tab_compose">Compose</string>
+    <string name="tab_view">View</string>
+    <string name="tab_compose">Compose</string>
 
-  <string name="flight_leg_basic_example">Basic Flight Leg</string>
-  <string name="flight_leg_complete_example">Complete Flight Leg</string>
-  <string name="maps_markers_pointers_only">Pointers</string>
-  <string name="maps_markers_badges">Badges</string>
-  <string name="maps_markers_badges_with_icons">With icons</string>
-  <string name="map_markers">Map markers</string>
-  <string name="compose">Compose</string>
-  <string name="image_sea_content_description">Image of surface of a wavy sea</string>
+    <string name="flight_leg_basic_example">Basic Flight Leg</string>
+    <string name="flight_leg_complete_example">Complete Flight Leg</string>
+    <string name="maps_markers_pointers_only">Pointers</string>
+    <string name="maps_markers_badges">Badges</string>
+    <string name="maps_markers_badges_with_icons">With icons</string>
+    <string name="map_markers">Map markers</string>
+    <string name="compose">Compose</string>
+    <string name="image_sea_content_description">Image of surface of a wavy sea</string>
 
 </resources>

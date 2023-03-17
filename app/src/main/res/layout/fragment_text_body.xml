@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story"
-  android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story"
+    android:orientation="vertical">
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_subheading"
-    app:textStyle="subheading" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_subheading"
+        app:textStyle="subheading" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_body_longform"
-    app:textStyle="bodyLongform" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_body_longform"
+        app:textStyle="bodyLongform" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_body_default"
-    app:textStyle="bodyDefault" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_body_default"
+        app:textStyle="bodyDefault" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_footnote"
-    app:textStyle="footnote" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_footnote"
+        app:textStyle="footnote" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_caption"
-    app:textStyle="caption" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_caption"
+        app:textStyle="caption" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_label1"
-    app:textStyle="label1" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_label1"
+        app:textStyle="label1" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_label2"
-    app:textStyle="label2" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_label2"
+        app:textStyle="label2" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/text_label3"
-    app:textStyle="label3" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_label3"
+        app:textStyle="label3" />
 </LinearLayout>
