@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- internal resources -->
-  <dimen name="badge_border_size">1dp</dimen>
+    <!-- internal resources -->
+    <dimen name="badge_border_size">1dp</dimen>
 
-  <!-- consumer facing resources -->
-  <dimen name="bpk_icon_size_small">16dp</dimen>
-  <dimen name="bpk_icon_size_normal">24dp</dimen>
-  <dimen name="bpk_horizontal_nav_size_small">@dimen/bpkSpacingXl</dimen>
-  <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
-  <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
-  <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
-  <dimen name="bpk_rating_score_pill_width_large">64dp</dimen>
-  <dimen name="bpk_rating_score_pill_height_base">36dp</dimen>
-  <dimen name="bpk_rating_score_pill_height_large">42dp</dimen>
-  <dimen name="bpk_rating_score_pill_spacing_medium">12dp</dimen>
-  <dimen name="bpk_nav_bar_toolbar_height">48dp</dimen>
-  <dimen name="bpk_nav_bar_expanded_spacing_horizontal_large">72dp</dimen>
-  <dimen name="bpk_nav_bar_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>
-  <dimen name="bpk_nav_bar_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
-  <dimen name="bpk_nav_bar_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
-  <!--spacing_top(40) + spacing_bottom(16) + text_size(36) -->
-  <dimen name="bpk_nav_bar_min_height">92dp</dimen>
+    <!-- consumer facing resources -->
+    <dimen name="bpk_icon_size_small">16dp</dimen>
+    <dimen name="bpk_icon_size_normal">24dp</dimen>
+    <dimen name="bpk_horizontal_nav_size_small">@dimen/bpkSpacingXl</dimen>
+    <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
+    <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
+    <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
+    <dimen name="bpk_rating_score_pill_width_large">64dp</dimen>
+    <dimen name="bpk_rating_score_pill_height_base">36dp</dimen>
+    <dimen name="bpk_rating_score_pill_height_large">42dp</dimen>
+    <dimen name="bpk_rating_score_pill_spacing_medium">12dp</dimen>
+    <dimen name="bpk_nav_bar_toolbar_height">48dp</dimen>
+    <dimen name="bpk_nav_bar_expanded_spacing_horizontal_large">72dp</dimen>
+    <dimen name="bpk_nav_bar_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>
+    <dimen name="bpk_nav_bar_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
+    <dimen name="bpk_nav_bar_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
+    <!--spacing_top(40) + spacing_bottom(16) + text_size(36) -->
+    <dimen name="bpk_nav_bar_min_height">92dp</dimen>
 
-  <!-- TODO: change to values build by task from tokens  -->
-  <dimen name="bpk_dialog_padding_horizontal">@dimen/bpkSpacingBase</dimen>
-  <dimen name="bpk_dialog_margin">@dimen/bpkSpacingXxl</dimen>
-  <dimen name="bpk_dialog_spacing_title">12dp</dimen>
-  <dimen name="bpk_dialog_spacing_button">@dimen/bpkSpacingMd</dimen>
-  <dimen name="bpk_dialog_padding_bottom">@dimen/bpkSpacingMd</dimen>
-  <dimen name="bpk_dialog_icon_stroke">@dimen/bpkSpacingSm</dimen>
-  <dimen name="bpk_dialog_icon_size">64dp</dimen>
-  <dimen name="bpk_dialog_max_width">320dp</dimen>
-  <dimen name="bpk_dialog_flare_max_width">440dp</dimen>
-  <dimen name="bpk_snackbar_min_height">60dp</dimen>
-  <dimen name="bpk_bottom_nav_height">56dp</dimen>
-  <!--spacing_md * 2(16) + font sm line height(18) -->
-  <dimen name="bpk_chip_height">32sp</dimen>
-  <dimen name="bpk_barchart_popup_triangle_width">12dp</dimen>
-  <dimen name="bpk_barchart_popup_triangle_height">@dimen/bpkSpacingSm</dimen>
-  <dimen name="bpk_calendar_header_height">50dp</dimen>
-  <dimen name="bpk_calendar_border_width">1dp</dimen>
-  <dimen name="bpk_calendar_date_size">36dp</dimen>
-  <dimen name="bpk_internal_spacing_zero">0dp</dimen>
-  <dimen name="bpk_button_default_min_height">36dp</dimen>
-  <dimen name="bpk_button_default_icon_size">@dimen/bpkSpacingBase</dimen>
-  <dimen name="bpk_button_default_height">36dp</dimen>
-  <dimen name="bpk_button_large_height">48dp</dimen>
-  <dimen name="bpk_switch_min_width">49dp</dimen>
-  <dimen name="bpk_skeleton_xxs_border_radius">2dp</dimen>
+    <!-- TODO: change to values build by task from tokens  -->
+    <dimen name="bpk_dialog_padding_horizontal">@dimen/bpkSpacingBase</dimen>
+    <dimen name="bpk_dialog_margin">@dimen/bpkSpacingXxl</dimen>
+    <dimen name="bpk_dialog_spacing_title">12dp</dimen>
+    <dimen name="bpk_dialog_spacing_button">@dimen/bpkSpacingMd</dimen>
+    <dimen name="bpk_dialog_padding_bottom">@dimen/bpkSpacingMd</dimen>
+    <dimen name="bpk_dialog_icon_stroke">@dimen/bpkSpacingSm</dimen>
+    <dimen name="bpk_dialog_icon_size">64dp</dimen>
+    <dimen name="bpk_dialog_max_width">320dp</dimen>
+    <dimen name="bpk_dialog_flare_max_width">440dp</dimen>
+    <dimen name="bpk_snackbar_min_height">60dp</dimen>
+    <dimen name="bpk_bottom_nav_height">56dp</dimen>
+    <!--spacing_md * 2(16) + font sm line height(18) -->
+    <dimen name="bpk_chip_height">32sp</dimen>
+    <dimen name="bpk_barchart_popup_triangle_width">12dp</dimen>
+    <dimen name="bpk_barchart_popup_triangle_height">@dimen/bpkSpacingSm</dimen>
+    <dimen name="bpk_calendar_header_height">50dp</dimen>
+    <dimen name="bpk_calendar_border_width">1dp</dimen>
+    <dimen name="bpk_calendar_date_size">36dp</dimen>
+    <dimen name="bpk_internal_spacing_zero">0dp</dimen>
+    <dimen name="bpk_button_default_min_height">36dp</dimen>
+    <dimen name="bpk_button_default_icon_size">@dimen/bpkSpacingBase</dimen>
+    <dimen name="bpk_button_default_height">36dp</dimen>
+    <dimen name="bpk_button_large_height">48dp</dimen>
+    <dimen name="bpk_switch_min_width">49dp</dimen>
+    <dimen name="bpk_skeleton_xxs_border_radius">2dp</dimen>
 </resources>

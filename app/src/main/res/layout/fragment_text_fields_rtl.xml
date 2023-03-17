@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/bpkSurfaceHighlight"
-  android:orientation="vertical">
-
-  <net.skyscanner.backpack.text.BpkTextField
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:hint="@string/input_placeholder"
-    android:layoutDirection="rtl"
-    app:textFieldIconStart="@drawable/bpk_search" />
+    android:layout_height="match_parent"
+    android:background="@color/bpkSurfaceHighlight"
+    android:orientation="vertical">
 
-  <net.skyscanner.backpack.text.BpkTextField
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:hint="@string/input_placeholder"
-    android:layoutDirection="rtl"
-    android:text="@string/input_entering"
-    app:textFieldIconStart="@drawable/bpk_search" />
+    <net.skyscanner.backpack.text.BpkTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        android:hint="@string/input_placeholder"
+        android:layoutDirection="rtl"
+        app:textFieldIconStart="@drawable/bpk_search" />
 
-  <net.skyscanner.backpack.text.BpkTextField
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:hint="@string/input_placeholder"
-    android:layoutDirection="rtl"
-    app:textFieldIconEnd="@drawable/bpk_search" />
+    <net.skyscanner.backpack.text.BpkTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        android:hint="@string/input_placeholder"
+        android:layoutDirection="rtl"
+        android:text="@string/input_entering"
+        app:textFieldIconStart="@drawable/bpk_search" />
 
-  <net.skyscanner.backpack.text.BpkTextField
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:layoutDirection="rtl"
-    android:hint="@string/input_disabled"
-    android:enabled="false"/>
+    <net.skyscanner.backpack.text.BpkTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        android:hint="@string/input_placeholder"
+        android:layoutDirection="rtl"
+        app:textFieldIconEnd="@drawable/bpk_search" />
+
+    <net.skyscanner.backpack.text.BpkTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        android:enabled="false"
+        android:hint="@string/input_disabled"
+        android:layoutDirection="rtl" />
 
 </LinearLayout>

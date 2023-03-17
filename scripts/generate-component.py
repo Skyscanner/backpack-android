@@ -5,44 +5,44 @@ import sys
 import os
 
 def generate_file(template, path, name, mapping):
-  with open(template, 'r') as file:
-      src = Template(file.read())
-      result = src.safe_substitute(mapping)
+    with open(template, 'r') as file:
+        src = Template(file.read())
+        result = src.safe_substitute(mapping)
 
-      if not os.path.exists(path):
-          os.mkdir(path)
-      f = open(os.path.join(path, name), 'w')
-      f.write(result)
-      f.close()
+        if not os.path.exists(path):
+            os.mkdir(path)
+        f = open(os.path.join(path, name), 'w')
+        f.write(result)
+        f.close()
 
-      print(f'Created {name}')
+        print(f'Created {name}')
 
 
 if len(sys.argv) < 2:
-  name = input("Enter the name of the component:\nBpk")
+    name = input("Enter the name of the component:\nBpk")
 else:
-  name = sys.argv[1]
+    name = sys.argv[1]
 
 if len(sys.argv) < 3:
-  package = input("Enter the package name of the component, or leave empty for " + name.lower() + ":\n")
-  if len(package) == 0:
-    package = name.lower()
+    package = input("Enter the package name of the component, or leave empty for " + name.lower() + ":\n")
+    if len(package) == 0:
+        package = name.lower()
 else:
-  package = sys.argv[2]
+    package = sys.argv[2]
 
 print('')
 print(f'Create compose component structure for {package}.Bpk{name}?')
 confirmation = input("[Y/n]: ").lower()
 if confirmation != "" and confirmation != "y" and confirmation != "yes":
-  sys.exit("Component creation cancelled")
+    sys.exit("Component creation cancelled")
 
 print('')
 print('Creating compose component structure...')
 print('')
 
 mapping = {
-  'name': name,
-  'package': package
+    'name': name,
+    'package': package
 }
 dirname = os.path.dirname(__file__)
 generate_file(os.path.join(dirname, '../templates/component/Component.kt'), os.path.join(dirname, f'../backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}.kt', mapping)

@@ -1,395 +1,395 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <declare-styleable name="BpkBadge">
-    <!-- type of badge -->
-    <attr name="badgeType" format="enum">
-      <enum name="success" value="1" />
-      <enum name="warning" value="2" />
-      <enum name="destructive" value="3" />
-      <enum name="light" value="4" />
-      <enum name="inverse" value="5" />
-      <enum name="outline" value="6" />
-      <enum name="dark" value="7" />
-      <enum name="normal" value="8" />
-      <enum name="strong" value="9" />
-    </attr>
-    <!-- message to be displayed -->
-    <attr name="message" format="string" />
-  </declare-styleable>
+    <declare-styleable name="BpkBadge">
+        <!-- type of badge -->
+        <attr name="badgeType" format="enum">
+            <enum name="success" value="1" />
+            <enum name="warning" value="2" />
+            <enum name="destructive" value="3" />
+            <enum name="light" value="4" />
+            <enum name="inverse" value="5" />
+            <enum name="outline" value="6" />
+            <enum name="dark" value="7" />
+            <enum name="normal" value="8" />
+            <enum name="strong" value="9" />
+        </attr>
+        <!-- message to be displayed -->
+        <attr name="message" format="string" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkCalendar">
-    <attr name="calendarDateSelectedBackgroundColor" format="color" />
-    <attr name="calendarDateSelectedSameDayBackgroundColor" format="color" />
-    <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />
-    <attr name="calendarDateSelectedTextColor" format="color" />
-    <attr name="calendarRangeTextColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkCalendar">
+        <attr name="calendarDateSelectedBackgroundColor" format="color" />
+        <attr name="calendarDateSelectedSameDayBackgroundColor" format="color" />
+        <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />
+        <attr name="calendarDateSelectedTextColor" format="color" />
+        <attr name="calendarRangeTextColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkText">
-    <attr name="textStyle" format="enum">
-      <enum name="hero1" value="0" />
-      <enum name="hero2" value="1" />
-      <enum name="hero3" value="2" />
-      <enum name="hero4" value="3" />
-      <enum name="hero5" value="4" />
-      <enum name="heading1" value="5" />
-      <enum name="heading2" value="6" />
-      <enum name="heading3" value="7" />
-      <enum name="heading4" value="8" />
-      <enum name="heading5" value="9" />
-      <enum name="subheading" value="10" />
-      <enum name="bodyLongform" value="11" />
-      <enum name="bodyDefault" value="12" />
-      <enum name="label1" value="13" />
-      <enum name="label2" value="14" />
-      <enum name="label3" value="15" />
-      <enum name="footnote" value="16" />
-      <enum name="caption" value="17" />
-    </attr>
-    <attr name="android:textColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkText">
+        <attr name="textStyle" format="enum">
+            <enum name="hero1" value="0" />
+            <enum name="hero2" value="1" />
+            <enum name="hero3" value="2" />
+            <enum name="hero4" value="3" />
+            <enum name="hero5" value="4" />
+            <enum name="heading1" value="5" />
+            <enum name="heading2" value="6" />
+            <enum name="heading3" value="7" />
+            <enum name="heading4" value="8" />
+            <enum name="heading5" value="9" />
+            <enum name="subheading" value="10" />
+            <enum name="bodyLongform" value="11" />
+            <enum name="bodyDefault" value="12" />
+            <enum name="label1" value="13" />
+            <enum name="label2" value="14" />
+            <enum name="label3" value="15" />
+            <enum name="footnote" value="16" />
+            <enum name="caption" value="17" />
+        </attr>
+        <attr name="android:textColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkTextField">
-    <attr name="textFieldColor" format="color" />
-    <attr name="textFieldColorHintNormal" format="color" />
-    <attr name="textFieldColorHintFocused" format="color" />
-    <attr name="textFieldColorIcon" format="color" />
-    <attr name="textFieldBackground" format="reference" />
-    <attr name="textFieldIconStart" format="reference" />
-    <attr name="textFieldIconEnd" format="reference" />
-  </declare-styleable>
+    <declare-styleable name="BpkTextField">
+        <attr name="textFieldColor" format="color" />
+        <attr name="textFieldColorHintNormal" format="color" />
+        <attr name="textFieldColorHintFocused" format="color" />
+        <attr name="textFieldColorIcon" format="color" />
+        <attr name="textFieldBackground" format="reference" />
+        <attr name="textFieldIconStart" format="reference" />
+        <attr name="textFieldIconEnd" format="reference" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkTextInputLayout">
-    <attr name="android:label" format="string" />
-    <attr name="textInputHelperText" format="string" />
-    <attr name="textInputError" format="string" />
-    <attr name="textInputHelperTextColor" format="color" />
-    <attr name="textInputErrorTextColor" format="color" />
-    <attr name="textInputErrorIcon" format="reference" />
-    <attr name="textInputErrorEnabled" format="boolean" />
-  </declare-styleable>
+    <declare-styleable name="BpkTextInputLayout">
+        <attr name="android:label" format="string" />
+        <attr name="textInputHelperText" format="string" />
+        <attr name="textInputError" format="string" />
+        <attr name="textInputHelperTextColor" format="color" />
+        <attr name="textInputErrorTextColor" format="color" />
+        <attr name="textInputErrorIcon" format="reference" />
+        <attr name="textInputErrorEnabled" format="boolean" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkPanel">
-    <attr name="padding" format="boolean" />
-  </declare-styleable>
+    <declare-styleable name="BpkPanel">
+        <attr name="padding" format="boolean" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkBaseButton">
-    <attr name="bpkButtonSize" format="enum">
-      <enum name="standard" value="0" />
-      <enum name="large" value="1" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkBaseButton">
+        <attr name="bpkButtonSize" format="enum">
+            <enum name="standard" value="0" />
+            <enum name="large" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkButton">
-    <attr name="buttonType" format="enum">
-      <enum name="primary" value="0" />
-      <enum name="secondary" value="1" />
-      <enum name="featured" value="2" />
-      <enum name="destructive" value="3" />
-      <enum name="primaryOnDark" value="4" />
-      <enum name="primaryOnLight" value="5" />
-      <enum name="secondaryOnDark" value="6" />
-      <enum name="link" value="7" />
-      <enum name="linkOnDark" value="8" />
-    </attr>
-    <attr name="buttonIcon" format="reference" />
-    <attr name="buttonIconPosition" format="enum">
-      <enum name="start" value="0" />
-      <enum name="end" value="1" />
-      <enum name="icon_only" value="2" />
-    </attr>
-    <attr name="buttonLoading" format="boolean" />
-    <attr name="buttonBackgroundColor" format="color" />
-    <attr name="buttonTextColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkButton">
+        <attr name="buttonType" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="secondary" value="1" />
+            <enum name="featured" value="2" />
+            <enum name="destructive" value="3" />
+            <enum name="primaryOnDark" value="4" />
+            <enum name="primaryOnLight" value="5" />
+            <enum name="secondaryOnDark" value="6" />
+            <enum name="link" value="7" />
+            <enum name="linkOnDark" value="8" />
+        </attr>
+        <attr name="buttonIcon" format="reference" />
+        <attr name="buttonIconPosition" format="enum">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+            <enum name="icon_only" value="2" />
+        </attr>
+        <attr name="buttonLoading" format="boolean" />
+        <attr name="buttonBackgroundColor" format="color" />
+        <attr name="buttonTextColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkCardView">
-    <attr name="focused" format="boolean" />
-    <attr name="padded" format="boolean" />
-    <attr name="cardBackgroundColor" format="color" />
-    <attr name="cornerStyle" format="enum">
-      <enum name="small" value="0" />
-      <enum name="large" value="1" />
-    </attr>
-    <attr name="elevationLevel" format="enum">
-      <enum name="none" value="0" />
-      <enum name="normal" value="1" />
-      <enum name="focused" value="2" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkCardView">
+        <attr name="focused" format="boolean" />
+        <attr name="padded" format="boolean" />
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cornerStyle" format="enum">
+            <enum name="small" value="0" />
+            <enum name="large" value="1" />
+        </attr>
+        <attr name="elevationLevel" format="enum">
+            <enum name="none" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="focused" value="2" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkSpinner">
-    <attr name="small" format="boolean" />
-    <attr name="type" format="enum">
-      <enum name="primary" value="0" />
-      <enum name="light" value="1" />
-      <enum name="dark" value="2" />
-      <enum name="textPrimary" value="3" />
-      <enum name="disabled" value="4" />
-      <enum name="onDarkSurface" value="5" />
-    </attr>
-    <attr name="spinnerColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkSpinner">
+        <attr name="small" format="boolean" />
+        <attr name="type" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="light" value="1" />
+            <enum name="dark" value="2" />
+            <enum name="textPrimary" value="3" />
+            <enum name="disabled" value="4" />
+            <enum name="onDarkSurface" value="5" />
+        </attr>
+        <attr name="spinnerColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkChip">
-    <attr name="selected" format="boolean" />
-    <attr name="chipsStyle" format="enum">
-      <enum name="normal" value="0" />
-      <enum name="onDark" value="1" />
-      <enum name="onImage" value="2" />
-    </attr>
-    <attr name="chipType" format="enum">
-      <enum name="option" value="0" />
-      <enum name="dropdown" value="1" />
-      <enum name="dismiss" value="2" />
-    </attr>
-    <attr name="chipSelectedBackgroundColor" format="color" />
-    <attr name="chipDisabledBackgroundColor" format="color" />
-    <attr name="chipBackgroundColor" format="color" />
-    <attr name="chipTextColor" format="color" />
-    <attr name="chipIcon" format="reference" />
-  </declare-styleable>
+    <declare-styleable name="BpkChip">
+        <attr name="selected" format="boolean" />
+        <attr name="chipsStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="onDark" value="1" />
+            <enum name="onImage" value="2" />
+        </attr>
+        <attr name="chipType" format="enum">
+            <enum name="option" value="0" />
+            <enum name="dropdown" value="1" />
+            <enum name="dismiss" value="2" />
+        </attr>
+        <attr name="chipSelectedBackgroundColor" format="color" />
+        <attr name="chipDisabledBackgroundColor" format="color" />
+        <attr name="chipBackgroundColor" format="color" />
+        <attr name="chipTextColor" format="color" />
+        <attr name="chipIcon" format="reference" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkSwitch">
-    <attr name="switchPrimaryColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkSwitch">
+        <attr name="switchPrimaryColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkStarRating">
-    <attr name="starColor" format="color" />
-    <attr name="starFilledColor" format="color" />
-    <attr name="rating" format="float" />
-    <attr name="maxRating" format="integer" />
-    <attr name="accessibilityStatus" format="reference" />
-    <attr name="rounding" format="enum">
-      <enum name="down" value="0" />
-      <enum name="up" value="1" />
-      <enum name="nearest" value="2" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkStarRating">
+        <attr name="starColor" format="color" />
+        <attr name="starFilledColor" format="color" />
+        <attr name="rating" format="float" />
+        <attr name="maxRating" format="integer" />
+        <attr name="accessibilityStatus" format="reference" />
+        <attr name="rounding" format="enum">
+            <enum name="down" value="0" />
+            <enum name="up" value="1" />
+            <enum name="nearest" value="2" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkHorizontalNav">
-    <attr name="horizontalNavTextColor" format="color" />
-    <attr name="horizontalNavSelectedTextColor" format="color" />
-    <attr name="horizontalNavIndicatorColor" format="color" />
-    <attr name="horizontalNavAppearance" format="enum">
-      <enum name="normal" value="0" />
-      <enum name="alternate" value="1" />
-    </attr>
-    <attr name="horizontalNavSize" format="enum">
-      <enum name="small" value="0" />
-      <enum name="normal" value="1" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkHorizontalNav">
+        <attr name="horizontalNavTextColor" format="color" />
+        <attr name="horizontalNavSelectedTextColor" format="color" />
+        <attr name="horizontalNavIndicatorColor" format="color" />
+        <attr name="horizontalNavAppearance" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="alternate" value="1" />
+        </attr>
+        <attr name="horizontalNavSize" format="enum">
+            <enum name="small" value="0" />
+            <enum name="normal" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkFab">
-    <attr name="fabIconColor" format="color" />
-    <attr name="fabBackgroundColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkFab">
+        <attr name="fabIconColor" format="color" />
+        <attr name="fabBackgroundColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkCheckbox">
-    <attr name="checkboxColorChecked" format="color" />
-    <attr name="checkboxColorDisabled" format="color" />
-    <attr name="checkboxColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkCheckbox">
+        <attr name="checkboxColorChecked" format="color" />
+        <attr name="checkboxColorDisabled" format="color" />
+        <attr name="checkboxColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkRadioButton">
-    <attr name="radioButtonColorChecked" format="color" />
-    <attr name="radioButtonColorDisabled" format="color" />
-    <attr name="radioButtonColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkRadioButton">
+        <attr name="radioButtonColorChecked" format="color" />
+        <attr name="radioButtonColorDisabled" format="color" />
+        <attr name="radioButtonColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkRating">
-    <attr name="ratingColorLow" format="color" />
-    <attr name="ratingColorMedium" format="color" />
-    <attr name="ratingColorHigh" format="color" />
+    <declare-styleable name="BpkRating">
+        <attr name="ratingColorLow" format="color" />
+        <attr name="ratingColorMedium" format="color" />
+        <attr name="ratingColorHigh" format="color" />
 
-    <attr name="ratingIcon" format="reference" />
-    <attr name="ratingTitle" format="string|reference" />
-    <attr name="ratingSubtitle" format="string|reference" />
-    <attr name="ratingValue" format="float" />
+        <attr name="ratingIcon" format="reference" />
+        <attr name="ratingTitle" format="string|reference" />
+        <attr name="ratingSubtitle" format="string|reference" />
+        <attr name="ratingValue" format="float" />
 
-    <attr name="ratingStyle" format="enum">
-      <enum name="horizontal" value="0" />
-      <enum name="vertical" value="1" />
-      <enum name="pill" value="2" />
-    </attr>
-    <attr name="ratingSize" format="enum">
-      <enum name="icon" value="0" />
-      <enum name="extra_small" value="1" />
-      <enum name="small" value="2" />
-      <enum name="base" value="3" />
-      <enum name="large" value="4" />
-    </attr>
-    <attr name="ratingScale" format="enum">
-      <enum name="zeroToTen" value="0" />
-      <enum name="zeroToFive" value="1" />
-    </attr>
-  </declare-styleable>
+        <attr name="ratingStyle" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+            <enum name="pill" value="2" />
+        </attr>
+        <attr name="ratingSize" format="enum">
+            <enum name="icon" value="0" />
+            <enum name="extra_small" value="1" />
+            <enum name="small" value="2" />
+            <enum name="base" value="3" />
+            <enum name="large" value="4" />
+        </attr>
+        <attr name="ratingScale" format="enum">
+            <enum name="zeroToTen" value="0" />
+            <enum name="zeroToFive" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkFlare">
-    <attr name="flareRound" format="boolean" />
-    <attr name="flareInsetPaddingMode" format="enum">
-      <enum name="none" value="0" />
-      <enum name="bottom" value="1" />
-      <enum name="top" value="2" />
-    </attr>
-    <attr name="flarePointerPosition" format="enum">
-      <enum name="start" value="0" />
-      <enum name="middle" value="1" />
-      <enum name="end" value="2" />
-    </attr>
-    <attr name="flarePointerDirection" format="enum">
-      <enum name="down" value="0" />
-      <enum name="up" value="1" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkFlare">
+        <attr name="flareRound" format="boolean" />
+        <attr name="flareInsetPaddingMode" format="enum">
+            <enum name="none" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="top" value="2" />
+        </attr>
+        <attr name="flarePointerPosition" format="enum">
+            <enum name="start" value="0" />
+            <enum name="middle" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+        <attr name="flarePointerDirection" format="enum">
+            <enum name="down" value="0" />
+            <enum name="up" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkSnackbar">
-    <attr name="snackbarTextColor" format="color" />
-    <attr name="snackbarActionColor" format="color" />
-    <attr name="snackbarBackgroundColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkSnackbar">
+        <attr name="snackbarTextColor" format="color" />
+        <attr name="snackbarActionColor" format="color" />
+        <attr name="snackbarBackgroundColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkNavBar">
-    <attr name="navBarExpandedTextColor" format="color" />
-    <attr name="navBarCollapsedTextColor" format="color" />
-    <attr name="navBarTitle" format="string" />
-    <attr name="navBarIcon" format="reference" />
-    <attr name="navBarMenu" format="reference" />
-  </declare-styleable>
+    <declare-styleable name="BpkNavBar">
+        <attr name="navBarExpandedTextColor" format="color" />
+        <attr name="navBarCollapsedTextColor" format="color" />
+        <attr name="navBarTitle" format="string" />
+        <attr name="navBarIcon" format="reference" />
+        <attr name="navBarMenu" format="reference" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkBarChart">
-    <attr name="barChartColumnTitleColor" format="color" />
-    <attr name="barChartColumnSubtitleColor" format="color" />
-    <attr name="barChartGroupTitleColor" format="color" />
-    <attr name="barChartBarBackgroundColor" format="color" />
-    <attr name="barChartBarForegroundColor" format="color" />
-    <attr name="barChartLineColor" format="color" />
-    <attr name="barChartPopupBackgroundColor" format="color" />
-    <attr name="barChartPopupTextColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkBarChart">
+        <attr name="barChartColumnTitleColor" format="color" />
+        <attr name="barChartColumnSubtitleColor" format="color" />
+        <attr name="barChartGroupTitleColor" format="color" />
+        <attr name="barChartBarBackgroundColor" format="color" />
+        <attr name="barChartBarForegroundColor" format="color" />
+        <attr name="barChartLineColor" format="color" />
+        <attr name="barChartPopupBackgroundColor" format="color" />
+        <attr name="barChartPopupTextColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkOverlay">
-    <attr name="overlayType" format="enum">
-      <enum name="none" value="0" />
-      <enum name="tint" value="1" />
-    </attr>
-    <attr name="overlayCornerType" format="enum">
-      <enum name="none" value="0" />
-      <enum name="rounded" value="1" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkOverlay">
+        <attr name="overlayType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="tint" value="1" />
+        </attr>
+        <attr name="overlayCornerType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="rounded" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkNudger">
-    <attr name="nudgerMinValue" format="integer" />
-    <attr name="nudgerMaxValue" format="integer" />
-    <attr name="nudgerValue" format="integer" />
-  </declare-styleable>
+    <declare-styleable name="BpkNudger">
+        <attr name="nudgerMinValue" format="integer" />
+        <attr name="nudgerMaxValue" format="integer" />
+        <attr name="nudgerValue" format="integer" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkSlider">
-    <attr name="android:value" format="float" />
-    <attr name="sliderTrackColorActive" format="color" />
-    <attr name="sliderTrackColorInactive" format="color" />
-    <attr name="sliderThumbColor" format="color" />
-  </declare-styleable>
+    <declare-styleable name="BpkSlider">
+        <attr name="android:value" format="float" />
+        <attr name="sliderTrackColorActive" format="color" />
+        <attr name="sliderTrackColorInactive" format="color" />
+        <attr name="sliderThumbColor" format="color" />
+    </declare-styleable>
 
-  <declare-styleable name="ErrorState">
-    <attr name="state_error" format="boolean" />
-  </declare-styleable>
+    <declare-styleable name="ErrorState">
+        <attr name="state_error" format="boolean" />
+    </declare-styleable>
 
-  <declare-styleable name="BpkImageSkeleton">
-    <attr name="skeletonCornerType" format="enum">
-      <enum name="square" value="0" />
-      <enum name="rounded" value="1" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkImageSkeleton">
+        <attr name="skeletonCornerType" format="enum">
+            <enum name="square" value="0" />
+            <enum name="rounded" value="1" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkHeadlineSkeleton">
-    <!-- Specifies skeleton headline height size, default value is "small".<br/>
-     Values: small -> 8dp, medium -> 16dp, large -> 32dp.<br/>
-     We recommend you to use this attr to size the component's height, but if a custom height is needed,
-     just set this value to "custom" and specify the height of the component.
-    -->
-    <attr name="skeletonHeadlineHeightSize" format="enum">
-      <enum name="small" value="0" />
-      <enum name="medium" value="1" />
-      <enum name="large" value="2" />
-      <enum name="custom" value="3" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkHeadlineSkeleton">
+        <!-- Specifies skeleton headline height size, default value is "small".<br/>
+         Values: small -> 8dp, medium -> 16dp, large -> 32dp.<br/>
+         We recommend you to use this attr to size the component's height, but if a custom height is needed,
+         just set this value to "custom" and specify the height of the component.
+        -->
+        <attr name="skeletonHeadlineHeightSize" format="enum">
+            <enum name="small" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="large" value="2" />
+            <enum name="custom" value="3" />
+        </attr>
+    </declare-styleable>
 
-  <declare-styleable name="BpkCircleSkeleton">
-    <!-- Specify skeleton circle diameter, only set it when skeletonCircleSize is "custom".-->
-    <attr name="skeletonDiameter" format="dimension" />
-    <!-- Specify skeleton circle size, default value is "small".<br/>
-     Values: small -> 32dp, large -> 48dp.<br/>
-     We recommend you to use this attr to size the component's size, but if a custom height is needed,
-     just set this value to "custom" and specify the skeletonDiameter attr.
-    -->
-    <attr name="skeletonCircleSize" format="enum">
-      <enum name="small" value="0" />
-      <enum name="large" value="1" />
-      <enum name="custom" value="2" />
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="BpkCircleSkeleton">
+        <!-- Specify skeleton circle diameter, only set it when skeletonCircleSize is "custom".-->
+        <attr name="skeletonDiameter" format="dimension" />
+        <!-- Specify skeleton circle size, default value is "small".<br/>
+         Values: small -> 32dp, large -> 48dp.<br/>
+         We recommend you to use this attr to size the component's size, but if a custom height is needed,
+         just set this value to "custom" and specify the skeletonDiameter attr.
+        -->
+        <attr name="skeletonCircleSize" format="enum">
+            <enum name="small" value="0" />
+            <enum name="large" value="1" />
+            <enum name="custom" value="2" />
+        </attr>
+    </declare-styleable>
 
-  <attr name="bpkThemeOverlay" format="reference" />
+    <attr name="bpkThemeOverlay" format="reference" />
 
-  <attr name="bpkPrimaryColor" format="color" />
+    <attr name="bpkPrimaryColor" format="color" />
 
-  <attr name="bpkStarRatingStyle" format="reference" />
-  <attr name="bpkInteractiveStarRatingStyle" format="reference" />
-  <attr name="bpkSwitchStyle" format="reference" />
-  <attr name="bpkButtonSecondaryStyle" format="reference" />
-  <attr name="bpkButtonPrimaryStyle" format="reference" />
-  <attr name="bpkButtonFeaturedStyle" format="reference" />
-  <attr name="bpkButtonDestructiveStyle" format="reference" />
-  <attr name="bpkButtonPrimaryOnDarkStyle" format="reference" />
-  <attr name="bpkButtonPrimaryOnLightStyle" format="reference" />
-  <attr name="bpkButtonSecondaryOnDarkStyle" format="reference" />
-  <attr name="bpkFabStyle" format="reference" />
-  <attr name="bpkButtonLinkStyle" format="reference" />
-  <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
-  <attr name="bpkCalendarStyle" format="reference" />
-  <attr name="bpkChipStyle" format="reference" />
-  <attr name="bpkSpinnerPrimaryStyle" format="reference" />
-  <attr name="bpkCheckboxStyle" format="reference" />
-  <attr name="bpkRadioButtonStyle" format="reference" />
-  <attr name="bpkHorizontalNavStyle" format="reference" />
-  <attr name="bpkHorizontalNavStyleAlternate" format="reference" />
-  <attr name="bpkTextFieldStyle" format="reference" />
-  <attr name="bpkTextInputLayoutStyle" format="reference" />
-  <attr name="bpkSnackbarStyle" format="reference" />
-  <attr name="bpkRatingStyle" format="reference" />
-  <attr name="bpkBarChartStyle" format="reference" />
-  <attr name="bpkNavBarStyle" format="reference" />
-  <attr name="bpkSliderStyle" format="reference" />
+    <attr name="bpkStarRatingStyle" format="reference" />
+    <attr name="bpkInteractiveStarRatingStyle" format="reference" />
+    <attr name="bpkSwitchStyle" format="reference" />
+    <attr name="bpkButtonSecondaryStyle" format="reference" />
+    <attr name="bpkButtonPrimaryStyle" format="reference" />
+    <attr name="bpkButtonFeaturedStyle" format="reference" />
+    <attr name="bpkButtonDestructiveStyle" format="reference" />
+    <attr name="bpkButtonPrimaryOnDarkStyle" format="reference" />
+    <attr name="bpkButtonPrimaryOnLightStyle" format="reference" />
+    <attr name="bpkButtonSecondaryOnDarkStyle" format="reference" />
+    <attr name="bpkFabStyle" format="reference" />
+    <attr name="bpkButtonLinkStyle" format="reference" />
+    <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
+    <attr name="bpkCalendarStyle" format="reference" />
+    <attr name="bpkChipStyle" format="reference" />
+    <attr name="bpkSpinnerPrimaryStyle" format="reference" />
+    <attr name="bpkCheckboxStyle" format="reference" />
+    <attr name="bpkRadioButtonStyle" format="reference" />
+    <attr name="bpkHorizontalNavStyle" format="reference" />
+    <attr name="bpkHorizontalNavStyleAlternate" format="reference" />
+    <attr name="bpkTextFieldStyle" format="reference" />
+    <attr name="bpkTextInputLayoutStyle" format="reference" />
+    <attr name="bpkSnackbarStyle" format="reference" />
+    <attr name="bpkRatingStyle" format="reference" />
+    <attr name="bpkBarChartStyle" format="reference" />
+    <attr name="bpkNavBarStyle" format="reference" />
+    <attr name="bpkSliderStyle" format="reference" />
 
-  <!-- FONT THEMING START -->
+    <!-- FONT THEMING START -->
 
-  <attr name="bpkFontFamilyBase" format="reference|string" />
-  <attr name="bpkFontFamilyEmphasized" format="reference|string" />
+    <attr name="bpkFontFamilyBase" format="reference|string" />
+    <attr name="bpkFontFamilyEmphasized" format="reference|string" />
 
-  <attr name="bpkTextHero1Appearance" format="reference" />
-  <attr name="bpkTextHero2Appearance" format="reference" />
-  <attr name="bpkTextHero3Appearance" format="reference" />
-  <attr name="bpkTextHero4Appearance" format="reference" />
-  <attr name="bpkTextHero5Appearance" format="reference" />
-  <attr name="bpkTextHeading1Appearance" format="reference" />
-  <attr name="bpkTextHeading2Appearance" format="reference" />
-  <attr name="bpkTextHeading3Appearance" format="reference" />
-  <attr name="bpkTextHeading4Appearance" format="reference" />
-  <attr name="bpkTextHeading5Appearance" format="reference" />
-  <attr name="bpkTextSubheadingAppearance" format="reference" />
-  <attr name="bpkTextBodyLongformAppearance" format="reference" />
-  <attr name="bpkTextBodyDefaultAppearance" format="reference" />
-  <attr name="bpkTextLabel1Appearance" format="reference" />
-  <attr name="bpkTextLabel2Appearance" format="reference" />
-  <attr name="bpkTextLabel3Appearance" format="reference" />
-  <attr name="bpkTextFootnoteAppearance" format="reference" />
-  <attr name="bpkTextCaptionAppearance" format="reference" />
+    <attr name="bpkTextHero1Appearance" format="reference" />
+    <attr name="bpkTextHero2Appearance" format="reference" />
+    <attr name="bpkTextHero3Appearance" format="reference" />
+    <attr name="bpkTextHero4Appearance" format="reference" />
+    <attr name="bpkTextHero5Appearance" format="reference" />
+    <attr name="bpkTextHeading1Appearance" format="reference" />
+    <attr name="bpkTextHeading2Appearance" format="reference" />
+    <attr name="bpkTextHeading3Appearance" format="reference" />
+    <attr name="bpkTextHeading4Appearance" format="reference" />
+    <attr name="bpkTextHeading5Appearance" format="reference" />
+    <attr name="bpkTextSubheadingAppearance" format="reference" />
+    <attr name="bpkTextBodyLongformAppearance" format="reference" />
+    <attr name="bpkTextBodyDefaultAppearance" format="reference" />
+    <attr name="bpkTextLabel1Appearance" format="reference" />
+    <attr name="bpkTextLabel2Appearance" format="reference" />
+    <attr name="bpkTextLabel3Appearance" format="reference" />
+    <attr name="bpkTextFootnoteAppearance" format="reference" />
+    <attr name="bpkTextCaptionAppearance" format="reference" />
 
-  <!-- FONT THEMING END -->
+    <!-- FONT THEMING END -->
 
 </resources>

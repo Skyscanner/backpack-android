@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  style="@style/App.Story"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
-
-  <net.skyscanner.backpack.text.BpkText
-    android:id="@+id/text"
+    style="@style/App.Story"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:lineSpacingMultiplier="1.2"
-    android:textSize="14sp" />
+    android:orientation="vertical">
+
+    <net.skyscanner.backpack.text.BpkText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:lineSpacingMultiplier="1.2"
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -66,5 +66,5 @@ private fun parseIntegers(
 
 private fun toXml(source: BpkDurations, type: String): String =
     source.map { (name, value) ->
-        "  <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">$value</integer>"
+        "    <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">$value</integer>"
     }.joinToString("\n")

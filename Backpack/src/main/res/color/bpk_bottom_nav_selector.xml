@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_checked="true" android:color="@color/bpkTextLink" />
-  <item android:state_checked="false" android:color="@color/bpkTextSecondary"/>
+    <item android:color="@color/bpkTextLink" android:state_checked="true" />
+    <item android:color="@color/bpkTextSecondary" android:state_checked="false" />
 </selector>

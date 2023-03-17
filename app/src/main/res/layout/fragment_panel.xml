@@ -1,36 +1,35 @@
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:padding="@dimen/bpkSpacingBase">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/bpkSpacingBase">
 
-      <net.skyscanner.backpack.panel.BpkPanel
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_marginBottom="@dimen/bpkSpacingBase"
-          app:padding="false">
+        <net.skyscanner.backpack.panel.BpkPanel
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bpkSpacingBase"
+            app:padding="false">
 
-          <net.skyscanner.backpack.text.BpkText
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:text="@string/stub_md" />
-      </net.skyscanner.backpack.panel.BpkPanel>
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/stub_md" />
+        </net.skyscanner.backpack.panel.BpkPanel>
 
-      <net.skyscanner.backpack.panel.BpkPanel
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          app:padding="true">
+        <net.skyscanner.backpack.panel.BpkPanel
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:padding="true">
 
-          <net.skyscanner.backpack.text.BpkText
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:text="@string/stub_md" />
-      </net.skyscanner.backpack.panel.BpkPanel>
-  </LinearLayout>
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/stub_md" />
+        </net.skyscanner.backpack.panel.BpkPanel>
+    </LinearLayout>
 
 </RelativeLayout>
