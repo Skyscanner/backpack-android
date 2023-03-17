@@ -20,14 +20,17 @@ package net.skyscanner.backpack.demo
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import com.ramcosta.composedestinations.DestinationsNavHost
+import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.NavGraphs
 
-class MainActivity : BpkBaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(SharedPreferences.getTheme(this))
         setContent {
             DemoScaffold {
                 DestinationsNavHost(
