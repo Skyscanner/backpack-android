@@ -18,11 +18,13 @@
 
 package net.skyscanner.backpack.docs
 
-import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.demo.BpkBaseActivity
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
@@ -45,40 +47,37 @@ open class GenerateScreenshots(
     }
 
     @get:Rule
-    var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
-
-    @get:Rule
-    val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
+    val composeTestRule = createAndroidComposeRule<AppCompatActivity>()
 
     @Test
     fun testTakeScreenshot() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        runActivityAndTakeScreenshot()
+        composeTestRule.runOnUiThread { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
+        setScreenshotContent()
+        captureScreenshot()
     }
 
     @Test
     fun testTakeScreenshotDm() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        runActivityAndTakeScreenshot("dm")
+        composeTestRule.runOnUiThread { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
+        setScreenshotContent()
+        captureScreenshot("dm")
     }
 
-    private fun runActivityAndTakeScreenshot(suffix: String? = null) {
-        val intent = Intent()
-        activityRule.launchActivity(intent)
+    private fun setScreenshotContent() {
         composeTestRule.setContent {
             DemoScaffold(automationMode = true) {
                 StoryScreen(
                     component = story.component.name,
                     story = story.name,
                     isCompose = story.isCompose,
+                    modifier = Modifier.testTag(story.id),
                 )
             }
         }
-        takeScreenshot(suffix)
-        activityRule.finishActivity()
+        composeTestRule.onNodeWithTag(story.id).assertIsDisplayed()
     }
 
-    private fun takeScreenshot(suffix: String?) {
+    private fun captureScreenshot(suffix: String? = null) {
         RemoteScreenGrab.takeScreenshot(
             component = story.component.name.replace(" ", ""),
             type = if (story.isCompose) "compose" else "view",
@@ -89,4 +88,7 @@ open class GenerateScreenshots(
                 .let { if (suffix != null) "${it}_$suffix" else it },
         )
     }
+
+    private val Story.id: String
+        get() = component.name + " - " + name
 }
