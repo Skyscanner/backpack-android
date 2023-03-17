@@ -22,6 +22,6 @@ Example of a ${name}:
 import net.skyscanner.backpack.compose.${package}.Bpk$name
 
 Bpk${name}(
-  // TODO
+    // TODO
 )
 ```
