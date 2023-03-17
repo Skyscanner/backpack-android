@@ -197,6 +197,7 @@ private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<
                     it
                 }
             }
+            .replace("  <path", "    <path")
 
     val metadata = BpkFormat.Json(File(rootDir, metadataPath)).mapValues { (it.value as Map<String, String>)["autoMirror"] }
     return source.associate { icon ->

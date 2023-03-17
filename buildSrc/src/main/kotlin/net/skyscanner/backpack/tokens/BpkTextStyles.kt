@@ -203,10 +203,10 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
 private fun toXml(source: BpkTextStyles): String {
     val textStylesDeclaration = """
   <declare-styleable name="BpkTextStyle">
-    <attr name="android:fontFamily" />
-    <attr name="android:textSize" />
-    <attr name="android:letterSpacing" />
-    <attr name="lineHeight" />
+      <attr name="android:fontFamily" />
+      <attr name="android:textSize" />
+      <attr name="android:letterSpacing" />
+      <attr name="lineHeight" />
   </declare-styleable>
   """
 
