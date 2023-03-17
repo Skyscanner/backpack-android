@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="AppThemeBase" parent="BpkTheme"/>
+    <!-- Base application theme. -->
+    <style name="AppThemeBase" parent="BpkTheme" />
 
-  <style name="AppTheme" parent="AppThemeBase">
-    <!-- Customize your theme here. -->
-    <item name="android:windowBackground">@color/bpkCanvas</item>
-    <item name="android:windowTranslucentStatus">true</item>
-  </style>
+    <style name="AppTheme" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/bpkCanvas</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-  <style name="App.Story" parent="android:Widget">
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">match_parent</item>
-    <item name="android:padding">@dimen/bpkSpacingBase</item>
-  </style>
+    <style name="App.Story" parent="android:Widget">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/bpkSpacingBase</item>
+    </style>
 
-  <style name="App.ListItem" parent="">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:paddingStart">@dimen/bpkSpacingLg</item>
-    <item name="android:paddingEnd">@dimen/bpkSpacingLg</item>
-    <item name="android:paddingTop">@dimen/bpkSpacingBase</item>
-    <item name="android:paddingBottom">@dimen/bpkSpacingBase</item>
-    <item name="android:background">?selectableItemBackground</item>
-    <item name="android:clickable">true</item>
-    <item name="android:gravity">start|center_vertical</item>
-    <item name="textStyle">bodyLongform</item>
-  </style>
+    <style name="App.ListItem" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/bpkSpacingLg</item>
+        <item name="android:paddingEnd">@dimen/bpkSpacingLg</item>
+        <item name="android:paddingTop">@dimen/bpkSpacingBase</item>
+        <item name="android:paddingBottom">@dimen/bpkSpacingBase</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="textStyle">bodyLongform</item>
+    </style>
 
 </resources>

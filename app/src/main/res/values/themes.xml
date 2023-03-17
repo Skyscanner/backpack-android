@@ -1,314 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <!-- London theme start -->
-  <style name="LondonTheme" parent="CustomTextStyle">
-    <item name="bpkPrimaryColor">#013A76</item>
-    <item name="colorPrimary">?bpkPrimaryColor</item>
-    <item name="colorPrimaryDark">#00254B</item>
+    <!-- London theme start -->
+    <style name="LondonTheme" parent="CustomTextStyle">
+        <item name="bpkPrimaryColor">#013A76</item>
+        <item name="colorPrimary">?bpkPrimaryColor</item>
+        <item name="colorPrimaryDark">#00254B</item>
 
-    <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
-    <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
-    <item name="bpkInteractiveStarRatingStyle">@style/LondonThemeBpkStarRating</item>
+        <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
+        <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
+        <item name="bpkInteractiveStarRatingStyle">@style/LondonThemeBpkStarRating</item>
 
-    <item name="bpkChipStyle">@style/LondonThemeChip</item>
+        <item name="bpkChipStyle">@style/LondonThemeChip</item>
 
-    <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
-    <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
-    <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
-    <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
-    <item name="bpkFabStyle">@style/LondonThemeFab</item>
-    <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
-    <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
-    <item name="bpkRadioButtonStyle">@style/LondonThemeRadioButton</item>
-    <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
-    <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
-    <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
-    <item name="bpkNavBarStyle">@style/LondonThemeNavBar</item>
-    <item name="bpkSliderStyle">@style/LondonThemeSlider</item>
+        <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
+        <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
+        <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
+        <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
+        <item name="bpkFabStyle">@style/LondonThemeFab</item>
+        <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
+        <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
+        <item name="bpkRadioButtonStyle">@style/LondonThemeRadioButton</item>
+        <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
+        <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
+        <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
+        <item name="bpkNavBarStyle">@style/LondonThemeNavBar</item>
+        <item name="bpkSliderStyle">@style/LondonThemeSlider</item>
 
-    <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
+        <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
-    <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
+        <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
 
-    <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
-    <item name="bpkTextInputLayoutStyle">@style/LondonThemeTextInputLayout</item>
-    <item name="bpkRatingStyle">@style/LondonThemeRating</item>
-    <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
-  </style>
+        <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
+        <item name="bpkTextInputLayoutStyle">@style/LondonThemeTextInputLayout</item>
+        <item name="bpkRatingStyle">@style/LondonThemeRating</item>
+        <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
+    </style>
 
-  <style name="LondonThemeBpkStarRating" parent="">
-    <item name="starColor">@color/bpkSkyGrayTint06</item>
-    <item name="starFilledColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeBpkStarRating" parent="">
+        <item name="starColor">@color/bpkSkyGrayTint06</item>
+        <item name="starFilledColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeBpkSwitch" parent="">
-    <item name="switchPrimaryColor">#ED1B28</item>
-  </style>
+    <style name="LondonThemeBpkSwitch" parent="">
+        <item name="switchPrimaryColor">#ED1B28</item>
+    </style>
 
-  <style name="LondonThemeButtonPrimary">
-    <item name="buttonBackgroundColor">?bpkPrimaryColor</item>
-    <item name="buttonTextColor">@color/bpkWhite</item>
-  </style>
+    <style name="LondonThemeButtonPrimary">
+        <item name="buttonBackgroundColor">?bpkPrimaryColor</item>
+        <item name="buttonTextColor">@color/bpkWhite</item>
+    </style>
 
-  <style name="LondonThemeButtonSecondary">
-    <item name="buttonBackgroundColor">@color/bpkWhite</item>
-    <item name="buttonTextColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeButtonSecondary">
+        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeButtonFeatured">
-    <item name="buttonBackgroundColor">#ED1B28</item>
-    <item name="buttonTextColor">@color/bpkWhite</item>
-  </style>
+    <style name="LondonThemeButtonFeatured">
+        <item name="buttonBackgroundColor">#ED1B28</item>
+        <item name="buttonTextColor">@color/bpkWhite</item>
+    </style>
 
-  <style name="LondonThemeButtonDestructive">
-    <item name="buttonBackgroundColor">@color/bpkWhite</item>
-    <item name="buttonTextColor">#ED1B28</item>
-  </style>
+    <style name="LondonThemeButtonDestructive">
+        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">#ED1B28</item>
+    </style>
 
-  <style name="LondonThemeSpinnerPrimary">
-    <item name="spinnerColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeSpinnerPrimary">
+        <item name="spinnerColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeChip">
-    <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeChip">
+        <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeCalendar">
-    <item name="calendarDateSelectedBackgroundColor">#D11622</item>
-    <item name="calendarDateSelectedSameDayBackgroundColor">#ED1B28</item>
-    <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
-    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
-  </style>
+    <style name="LondonThemeCalendar">
+        <item name="calendarDateSelectedBackgroundColor">#D11622</item>
+        <item name="calendarDateSelectedSameDayBackgroundColor">#ED1B28</item>
+        <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
+        <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+    </style>
 
-  <style name="LondonThemeFab">
-    <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="fabIconColor">@color/bpkPanjin</item>
-  </style>
+    <style name="LondonThemeFab">
+        <item name="fabBackgroundColor">?bpkPrimaryColor</item>
+        <item name="fabIconColor">@color/bpkPanjin</item>
+    </style>
 
-  <style name="LondonThemeButtonLink">
-    <item name="buttonTextColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeButtonLink">
+        <item name="buttonTextColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeCheckbox">
-    <item name="checkboxColorChecked">@color/bpkPanjin</item>
-    <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
-    <item name="checkboxColor">#013A76</item>
-  </style>
+    <style name="LondonThemeCheckbox">
+        <item name="checkboxColorChecked">@color/bpkPanjin</item>
+        <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
+        <item name="checkboxColor">#013A76</item>
+    </style>
 
-  <style name="LondonThemeRadioButton">
-    <item name="radioButtonColorChecked">@color/bpkPanjin</item>
-    <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
-    <item name="radioButtonColor">#013A76</item>
-  </style>
+    <style name="LondonThemeRadioButton">
+        <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+        <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
+        <item name="radioButtonColor">#013A76</item>
+    </style>
 
-  <style name="LondonThemeBarChart">
-    <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
-    <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
-    <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
-    <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
-    <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
-    <item name="barChartLineColor">?bpkPrimaryColor</item>
-    <item name="barChartPopupBackgroundColor">@color/bpkSkyBlueShade01</item>
-    <item name="barChartPopupTextColor">@color/bpkSagano</item>
-  </style>
+    <style name="LondonThemeBarChart">
+        <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
+        <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+        <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
+        <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+        <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
+        <item name="barChartLineColor">?bpkPrimaryColor</item>
+        <item name="barChartPopupBackgroundColor">@color/bpkSkyBlueShade01</item>
+        <item name="barChartPopupTextColor">@color/bpkSagano</item>
+    </style>
 
-  <style name="LondonThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
-    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
-    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeHorizontalNav">
+        <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
+        <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+        <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
-    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
-    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="LondonThemeHorizontalNavAlternate">
+        <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
+        <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+        <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="LondonThemeTextField">
-    <item name="textFieldColor">?bpkPrimaryColor</item>
-    <item name="textFieldColorHintNormal">#9dbde6</item>
-    <item name="textFieldColorHintFocused">#6392ce</item>
-    <item name="textFieldColorIcon">?bpkPrimaryColor</item>
-    <item name="textFieldBackground">@color/bpkWhite</item>
-  </style>
+    <style name="LondonThemeTextField">
+        <item name="textFieldColor">?bpkPrimaryColor</item>
+        <item name="textFieldColorHintNormal">#9dbde6</item>
+        <item name="textFieldColorHintFocused">#6392ce</item>
+        <item name="textFieldColorIcon">?bpkPrimaryColor</item>
+        <item name="textFieldBackground">@color/bpkWhite</item>
+    </style>
 
-  <style name="LondonThemeTextInputLayout">
-    <item name="textInputErrorTextColor">#B1121C</item>
-    <item name="textInputHelperTextColor">#6392ce</item>
-  </style>
+    <style name="LondonThemeTextInputLayout">
+        <item name="textInputErrorTextColor">#B1121C</item>
+        <item name="textInputHelperTextColor">#6392ce</item>
+    </style>
 
-  <style name="LondonThemeRating">
-    <item name="ratingColorLow">#6392ce</item>
-    <item name="ratingColorMedium">#013A76</item>
-    <item name="ratingColorHigh">#00254B</item>
-  </style>
+    <style name="LondonThemeRating">
+        <item name="ratingColorLow">#6392ce</item>
+        <item name="ratingColorMedium">#013A76</item>
+        <item name="ratingColorHigh">#00254B</item>
+    </style>
 
-  <style name="LondonThemeSnackbar">
-    <item name="snackbarTextColor">#6392ce</item>
-    <item name="snackbarActionColor">@color/bpkPanjin</item>
-    <item name="snackbarBackgroundColor">#00254B</item>
-  </style>
+    <style name="LondonThemeSnackbar">
+        <item name="snackbarTextColor">#6392ce</item>
+        <item name="snackbarActionColor">@color/bpkPanjin</item>
+        <item name="snackbarBackgroundColor">#00254B</item>
+    </style>
 
-  <style name="LondonThemeNavBar">
-    <item name="navBarCollapsedTextColor">#6392ce</item>
-  </style>
+    <style name="LondonThemeNavBar">
+        <item name="navBarCollapsedTextColor">#6392ce</item>
+    </style>
 
-  <style name="LondonThemeSlider">
-    <item name="sliderThumbColor">@color/bpkPanjin</item>
-    <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
-    <item name="sliderTrackColorActive">#013A76</item>
-  </style>
+    <style name="LondonThemeSlider">
+        <item name="sliderThumbColor">@color/bpkPanjin</item>
+        <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
+        <item name="sliderTrackColorActive">#013A76</item>
+    </style>
 
-  <!-- London theme end -->
+    <!-- London theme end -->
 
-  <!-- Doha theme start -->
-  <style name="DohaTheme" parent="CustomTextStyle">
-    <item name="bpkPrimaryColor">#ffb300</item>
-    <item name="colorPrimary">?bpkPrimaryColor</item>
-    <item name="colorPrimaryDark">#ffa000</item>
+    <!-- Doha theme start -->
+    <style name="DohaTheme" parent="CustomTextStyle">
+        <item name="bpkPrimaryColor">#ffb300</item>
+        <item name="colorPrimary">?bpkPrimaryColor</item>
+        <item name="colorPrimaryDark">#ffa000</item>
 
-    <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
-    <item name="bpkStarRatingStyle">@style/DohaThemeBpkStarRating</item>
-    <item name="bpkInteractiveStarRatingStyle">@style/DohaThemeBpkStarRating</item>
-    <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
-    <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
-    <item name="bpkChipStyle">@style/DohaThemeChip</item>
-    <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
-    <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
-    <item name="bpkFabStyle">@style/DohaThemeFab</item>
-    <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
-    <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
-    <item name="bpkRadioButtonStyle">@style/DohaThemeRadioButton</item>
-    <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
-    <item name="bpkTextInputLayoutStyle">@style/DohaThemeTextInputLayout</item>
-    <item name="bpkRatingStyle">@style/DohaThemeRating</item>
-    <item name="bpkSliderStyle">@style/DohaThemeSlider</item>
+        <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
+        <item name="bpkStarRatingStyle">@style/DohaThemeBpkStarRating</item>
+        <item name="bpkInteractiveStarRatingStyle">@style/DohaThemeBpkStarRating</item>
+        <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
+        <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
+        <item name="bpkChipStyle">@style/DohaThemeChip</item>
+        <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
+        <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
+        <item name="bpkFabStyle">@style/DohaThemeFab</item>
+        <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
+        <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
+        <item name="bpkRadioButtonStyle">@style/DohaThemeRadioButton</item>
+        <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
+        <item name="bpkTextInputLayoutStyle">@style/DohaThemeTextInputLayout</item>
+        <item name="bpkRatingStyle">@style/DohaThemeRating</item>
+        <item name="bpkSliderStyle">@style/DohaThemeSlider</item>
 
-    <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
-    <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
-    <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
-    <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
-    <item name="bpkBarChartStyle">@style/DohaThemeBarChart</item>
-  </style>
+        <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
+        <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
+        <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
+        <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
+        <item name="bpkBarChartStyle">@style/DohaThemeBarChart</item>
+    </style>
 
-  <style name="DohaThemeBpkStarRating" parent="">
-    <item name="starColor">@color/bpkSkyGrayTint06</item>
-    <item name="starFilledColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeBpkStarRating" parent="">
+        <item name="starColor">@color/bpkSkyGrayTint06</item>
+        <item name="starFilledColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeBpkSwitch" parent="">
-    <item name="switchPrimaryColor">@color/bpkKolkata</item>
-  </style>
+    <style name="DohaThemeBpkSwitch" parent="">
+        <item name="switchPrimaryColor">@color/bpkKolkata</item>
+    </style>
 
-  <style name="DohaThemeButtonPrimary">
-    <item name="buttonBackgroundColor">#ffb300</item>
-    <item name="buttonTextColor">@color/bpkWhite</item>
-  </style>
+    <style name="DohaThemeButtonPrimary">
+        <item name="buttonBackgroundColor">#ffb300</item>
+        <item name="buttonTextColor">@color/bpkWhite</item>
+    </style>
 
-  <style name="DohaThemeButtonSecondary">
-    <item name="buttonBackgroundColor">@color/bpkWhite</item>
-    <item name="buttonTextColor">#9B104C</item>
-  </style>
+    <style name="DohaThemeButtonSecondary">
+        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">#9B104C</item>
+    </style>
 
-  <style name="DohaThemeSpinnerPrimary">
-    <item name="spinnerColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeSpinnerPrimary">
+        <item name="spinnerColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeCalendar">
-    <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
-    <item name="calendarDateSelectedSameDayBackgroundColor">#9B104C</item>
-    <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
-    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
-  </style>
+    <style name="DohaThemeCalendar">
+        <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
+        <item name="calendarDateSelectedSameDayBackgroundColor">#9B104C</item>
+        <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
+        <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+    </style>
 
-  <style name="DohaThemeChip">
-    <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeChip">
+        <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeFab">
-    <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="fabIconColor">@color/bpkSkyGrayTint06</item>
-  </style>
+    <style name="DohaThemeFab">
+        <item name="fabBackgroundColor">?bpkPrimaryColor</item>
+        <item name="fabIconColor">@color/bpkSkyGrayTint06</item>
+    </style>
 
-  <style name="DohaThemeButtonLink">
-    <item name="buttonTextColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeButtonLink">
+        <item name="buttonTextColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeCheckbox">
-    <item name="checkboxColorChecked">@color/bpkPanjin</item>
-    <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
-    <item name="checkboxColor">#ffb300</item>
-  </style>
+    <style name="DohaThemeCheckbox">
+        <item name="checkboxColorChecked">@color/bpkPanjin</item>
+        <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
+        <item name="checkboxColor">#ffb300</item>
+    </style>
 
-  <style name="DohaThemeRadioButton">
-    <item name="radioButtonColorChecked">@color/bpkPanjin</item>
-    <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
-    <item name="radioButtonColor">#ffb300</item>
-  </style>
+    <style name="DohaThemeRadioButton">
+        <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+        <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
+        <item name="radioButtonColor">#ffb300</item>
+    </style>
 
-  <style name="DohaThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
-    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
-    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeHorizontalNav">
+        <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
+        <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+        <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
-    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
-    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
-  </style>
+    <style name="DohaThemeHorizontalNavAlternate">
+        <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
+        <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+        <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+    </style>
 
-  <style name="DohaThemeTextField">
-    <item name="textFieldColor">?bpkPrimaryColor</item>
-    <item name="textFieldColorHintNormal">#ffd677</item>
-    <item name="textFieldColorHintFocused">#ffca4c</item>
-    <item name="textFieldColorIcon">?bpkPrimaryColor</item>
-    <item name="textFieldBackground">@color/bpkWhite</item>
-  </style>
+    <style name="DohaThemeTextField">
+        <item name="textFieldColor">?bpkPrimaryColor</item>
+        <item name="textFieldColorHintNormal">#ffd677</item>
+        <item name="textFieldColorHintFocused">#ffca4c</item>
+        <item name="textFieldColorIcon">?bpkPrimaryColor</item>
+        <item name="textFieldBackground">@color/bpkWhite</item>
+    </style>
 
-  <style name="DohaThemeTextInputLayout">
-    <item name="textInputErrorTextColor">#B1121C</item>
-    <item name="textInputHelperTextColor">#ffa000</item>
-  </style>
+    <style name="DohaThemeTextInputLayout">
+        <item name="textInputErrorTextColor">#B1121C</item>
+        <item name="textInputHelperTextColor">#ffa000</item>
+    </style>
 
-  <style name="DohaThemeRating">
-    <item name="ratingColorLow">#ffd677</item>
-    <item name="ratingColorMedium">#ffb300</item>
-    <item name="ratingColorHigh">#ffa000</item>
-  </style>
+    <style name="DohaThemeRating">
+        <item name="ratingColorLow">#ffd677</item>
+        <item name="ratingColorMedium">#ffb300</item>
+        <item name="ratingColorHigh">#ffa000</item>
+    </style>
 
-  <style name="DohaThemeSnackbar">
-    <item name="snackbarTextColor">#ffd677</item>
-    <item name="snackbarActionColor">@color/bpkHillier</item>
-    <item name="snackbarBackgroundColor">#ffa000</item>
-  </style>
+    <style name="DohaThemeSnackbar">
+        <item name="snackbarTextColor">#ffd677</item>
+        <item name="snackbarActionColor">@color/bpkHillier</item>
+        <item name="snackbarBackgroundColor">#ffa000</item>
+    </style>
 
-  <style name="DohaThemeNavBar">
-    <item name="navBarCollapsedTextColor">#ffd677</item>
-  </style>
+    <style name="DohaThemeNavBar">
+        <item name="navBarCollapsedTextColor">#ffd677</item>
+    </style>
 
-  <style name="DohaThemeBarChart">
-    <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
-    <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
-    <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
-    <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
-    <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
-    <item name="barChartLineColor">?bpkPrimaryColor</item>
-    <item name="barChartPopupBackgroundColor">@color/bpkSagano</item>
-    <item name="barChartPopupTextColor">@color/bpkAbisko</item>
-  </style>
+    <style name="DohaThemeBarChart">
+        <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
+        <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+        <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
+        <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+        <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
+        <item name="barChartLineColor">?bpkPrimaryColor</item>
+        <item name="barChartPopupBackgroundColor">@color/bpkSagano</item>
+        <item name="barChartPopupTextColor">@color/bpkAbisko</item>
+    </style>
 
-  <style name="DohaThemeSlider">
-    <item name="sliderThumbColor">@color/bpkPanjin</item>
-    <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
-    <item name="sliderTrackColorActive">#ffb300</item>
-  </style>
-  <!-- Doha theme end -->
+    <style name="DohaThemeSlider">
+        <item name="sliderThumbColor">@color/bpkPanjin</item>
+        <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
+        <item name="sliderTrackColorActive">#ffb300</item>
+    </style>
+    <!-- Doha theme end -->
 
-  <style name="CustomTextStyle" parent="AppTheme">
-    <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
-    <item name="bpkFontFamilyEmphasized">@font/shadows_into_light</item>
-  </style>
+    <style name="CustomTextStyle" parent="AppTheme">
+        <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
+        <item name="bpkFontFamilyEmphasized">@font/shadows_into_light</item>
+    </style>
 
 </resources>
