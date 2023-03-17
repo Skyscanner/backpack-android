@@ -17,9 +17,9 @@
  */
 
 task lintOssDebug {
-  dependsOn("lintDebug")
+    dependsOn("lintDebug")
 }
 
 task testOssDebugUnitTest {
-  dependsOn("testDebugUnitTest")
+    dependsOn("testDebugUnitTest")
 }

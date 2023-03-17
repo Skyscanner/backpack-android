@@ -20,20 +20,20 @@ apply plugin: 'kotlin'
 apply from: "tokens.gradle.kts"
 
 dependencies {
-  compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  compileOnly rootProject.ext.lintApi
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly rootProject.ext.lintApi
 
-  testImplementation rootProject.ext.lint
-  testImplementation rootProject.ext.lintTests
-  testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.lint
+    testImplementation rootProject.ext.lintTests
+    testImplementation rootProject.ext.junit
 }
 
 jar {
-  manifest {
-    attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
-  }
+    manifest {
+        attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
+    }
 }
 
 task testOssDebugUnitTest {
-  dependsOn("test")
+    dependsOn("test")
 }

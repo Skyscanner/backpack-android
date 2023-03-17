@@ -32,153 +32,153 @@ import net.skyscanner.backpack.tokens.transformTo
 
 tasks {
 
-  val tokensPackage = "net.skyscanner.backpack.compose.tokens"
-  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
-  val group = "tokens"
-  val src = project.projectDir.resolve("src/main/kotlin").path
+    val tokensPackage = "net.skyscanner.backpack.compose.tokens"
+    val rClass = ClassName("net.skyscanner.backpack.compose", "R")
+    val group = "tokens"
+    val src = project.projectDir.resolve("src/main/kotlin").path
 
-  val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
-    .readAs(BpkFormat.Json)
+    val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
+        .readAs(BpkFormat.Json)
 
-  val generateElevationTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Elevation)
-        .transformTo(BpkDimension.Format.Compose(namespace = "BpkElevation"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateElevationTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Elevation)
+                .transformTo(BpkDimension.Format.Compose(namespace = "BpkElevation"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateSpacingTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Spacing)
-        .transformTo(BpkDimension.Format.Compose(namespace = "BpkSpacing"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateSpacingTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Spacing)
+                .transformTo(BpkDimension.Format.Compose(namespace = "BpkSpacing"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateRadiiTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Radii)
-        .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderRadius"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateRadiiTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Radii)
+                .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderRadius"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateBorderSizeTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Border)
-        .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderSize"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateBorderSizeTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Border)
+                .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderSize"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateFontSizeTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextUnit.Category.FontSize)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkFontSize", internal = true))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateFontSizeTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextUnit.Category.FontSize)
+                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkFontSize", internal = true))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateLetterSpacingTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextUnit.Category.LetterSpacing)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateLetterSpacingTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextUnit.Category.LetterSpacing)
+                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateLineHeightTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextUnit.Category.LineHeight)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight", internal = true))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateLineHeightTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextUnit.Category.LineHeight)
+                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight", internal = true))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateTypographyTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextStyle.Category)
-        .transformTo(BpkTextStyle.Format.Compose(className = "BpkTypography"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateTypographyTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextStyle.Category)
+                .transformTo(BpkTextStyle.Format.Compose(className = "BpkTypography"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateSemanticColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Semantic)
-        .transformTo(BpkColor.Format.SemanticCompose(className = "BpkColors"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
+    val generateSemanticColors by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkColor.Semantic)
+                .transformTo(BpkColor.Format.SemanticCompose(className = "BpkColors"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
     }
-  }
 
-  val generateInternalColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Internal)
-        .transformTo(BpkColor.Format.InternalCompose)
-        .saveTo(BpkOutput.KotlinFiles(src, tokensPackage + ".internal"))
-        .execute()
+    val generateInternalColors by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkColor.Internal)
+                .transformTo(BpkColor.Format.InternalCompose)
+                .saveTo(BpkOutput.KotlinFiles(src, tokensPackage + ".internal"))
+                .execute()
+        }
     }
-  }
 
-  val generateSizeTokens by creating {
-    this.group = group
-    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
-  }
-
-  val generateTextTokens by creating {
-    this.group = group
-    dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
-  }
-
-  val generateColorTokens by creating {
-    this.group = group
-    dependsOn(generateSemanticColors, generateInternalColors)
-  }
-
-  val generateIcons by creating {
-    this.group = group
-    doLast {
-      project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-        .readAs(BpkFormat.Folder)
-        .parseAs(BpkIcon.Parser.Xml)
-        .transformTo(BpkIcon.Format.Compose(rClass))
-        .saveTo(BpkOutput.KotlinExtensionFile(src, tokensPackage, "BpkIcon"))
-        .execute()
+    val generateSizeTokens by creating {
+        this.group = group
+        dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
     }
-  }
 
-  val generateTokens by creating {
-    this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
-  }
+    val generateTextTokens by creating {
+        this.group = group
+        dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
+    }
+
+    val generateColorTokens by creating {
+        this.group = group
+        dependsOn(generateSemanticColors, generateInternalColors)
+    }
+
+    val generateIcons by creating {
+        this.group = group
+        doLast {
+            project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+                .readAs(BpkFormat.Folder)
+                .parseAs(BpkIcon.Parser.Xml)
+                .transformTo(BpkIcon.Format.Compose(rClass))
+                .saveTo(BpkOutput.KotlinExtensionFile(src, tokensPackage, "BpkIcon"))
+                .execute()
+        }
+    }
+
+    val generateTokens by creating {
+        this.group = group
+        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
+    }
 }
