@@ -10,7 +10,7 @@ def generate_file(template, path, name, mapping):
         result = src.safe_substitute(mapping)
 
         if not os.path.exists(path):
-          os.mkdir(path)
+            os.mkdir(path)
         f = open(os.path.join(path, name), 'w')
         f.write(result)
         f.close()
