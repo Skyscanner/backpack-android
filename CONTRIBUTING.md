@@ -246,11 +246,6 @@ Verify the screenshots and commit the changes.
 
 > Note: Sometimes the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
 
-## Demo app shortcuts
-
-- `Shift + D` : Toggle story view between RTL and LTR
-- `Shift + T` : Hide the toolbar
-
 ## Token generation
 
 In some cases you may need to re-generate tokens after an update in foundation. Token generation currently relies on node. To manage the language runtime we recommend using [`nvm`](https://github.com/creationix/nvm). The required Node version is in `.nvmrc`.

@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -32,9 +33,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
+import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.ComponentItem
@@ -62,7 +63,7 @@ fun MapStory(modifier: Modifier = Modifier) {
     }
 }
 
-class MapActivity : BpkBaseActivity() {
+class MapActivity : AppCompatActivity() {
 
     enum class Type {
         PointersOnly,
@@ -72,6 +73,7 @@ class MapActivity : BpkBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(SharedPreferences.getTheme(this))
         setContentView(R.layout.activity_map)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
