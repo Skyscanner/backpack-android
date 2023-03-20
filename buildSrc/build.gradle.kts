@@ -16,7 +16,7 @@ dependencies {
     implementation("com.google.guava:guava:31.1-jre")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    implementation(platform("org.http4k:http4k-bom:4.40.2.0"))
+    implementation(platform("org.http4k:http4k-bom:4.41.0.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-undertow")
     implementation("org.http4k:http4k-client-apache")
