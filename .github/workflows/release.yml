@@ -98,7 +98,5 @@ jobs:
     runs-on: ubuntu-latest
     environment: Publishing
     steps:
-      - uses: actions/checkout@v3
-
       - name: Update Supernova docs
         run: npx @supernovaio/cli publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemid=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
