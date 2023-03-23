@@ -76,6 +76,7 @@ internal fun BpkRatingDefaultSample(modifier: Modifier = Modifier) {
 internal fun BpkRatingNoTitleSample(modifier: Modifier = Modifier) {
     BpkRating(
         modifier = modifier,
+        title = null,
         subtitle = stringResource(R.string.rating_subtitle),
         value = RatingValue,
         scale = BpkRatingScale.ZeroToTen,
@@ -140,6 +141,7 @@ internal fun BpkRatingLargeTitleOnlySample(modifier: Modifier = Modifier) {
 internal fun BpkRatingLargeNoTitleSample(modifier: Modifier = Modifier) {
     BpkRating(
         modifier = modifier,
+        title = null,
         subtitle = stringResource(R.string.rating_subtitle),
         value = RatingValue,
         size = BpkRatingSize.Large,
