@@ -148,7 +148,7 @@ ext {
     destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
 
     // update this alongside with Compose version
-    accompanistVersion = "0.28.0"
+    accompanistVersion = "0.30.0"
     accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
     accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
 }
