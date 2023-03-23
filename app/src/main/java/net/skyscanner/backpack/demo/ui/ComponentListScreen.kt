@@ -22,9 +22,15 @@ import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -39,10 +45,14 @@ import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
+import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.ui.destinations.ComponentScreenDestination
 
@@ -57,10 +67,11 @@ fun ComponentListScreen(
 
     val state = rememberTopAppBarState()
 
-    Column(modifier = modifier
-        .background(BpkTheme.colors.canvas)
-        .fillMaxSize()
-        .nestedScroll(state),
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.canvas)
+            .fillMaxSize()
+            .nestedScroll(state),
     ) {
         val context = LocalContext.current
         BpkTopNavBar(
@@ -78,11 +89,33 @@ fun ComponentListScreen(
                 ),
             ),
         )
+        var textState by rememberSaveable { mutableStateOf("") }
+        BpkTextField(
+            placeholder = stringResource(R.string.navigation_search),
+            value = textState,
+            onValueChange = { value ->
+                textState = value
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(BpkSpacing.Base),
+            icon = BpkIcon.Search,
+        )
+        val filteredTokens = repository.tokenComponents.filter { it: Component ->
+            it.name.contains(textState)
+        }
+
+        val filteredComponents = repository.uiComponents.filter { it: Component ->
+            it.name.contains(textState)
+        }
+
         LazyColumn {
             item {
-                ComponentsTitle(title = stringResource(R.string.tokens_title))
+                if (filteredTokens.isNotEmpty()) {
+                    ComponentsTitle(title = stringResource(R.string.tokens_title))
+                }
             }
-            items(repository.tokenComponents) { component ->
+            items(filteredTokens) { component ->
                 ComponentItem(
                     title = component.name,
                     onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
@@ -90,9 +123,11 @@ fun ComponentListScreen(
             }
 
             item {
-                ComponentsTitle(title = stringResource(R.string.components_title))
+                if (filteredComponents.isNotEmpty()) {
+                    ComponentsTitle(title = stringResource(R.string.components_title))
+                }
             }
-            items(repository.uiComponents) { component ->
+            items(filteredComponents) { component ->
                 val composeOnly = repository.isComposeOnly(component.name)
                 val viewOnly = repository.isViewOnly(component.name)
                 ComponentItem(
