@@ -18,14 +18,17 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
@@ -68,7 +71,11 @@ internal fun BasicFlightLegSample(modifier: Modifier = Modifier) {
         duration = "7h 55m",
         contentDescription = null,
         carrierLogoContent = {
-            BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
+            Image(
+                modifier = Modifier.size(BpkSpacing.Lg),
+                painter = painterResource(id = R.drawable.sample_icon),
+                contentDescription = null,
+            )
         },
     )
 }
@@ -94,7 +101,11 @@ internal fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
         warning = "Change airports in London",
         contentDescription = null,
         carrierLogoContent = {
-            BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
+            BpkIcon(
+                modifier = Modifier.size(BpkSpacing.Lg),
+                icon = BpkIcon.Aircraft,
+                contentDescription = null,
+            )
         },
     )
 }
