@@ -15,101 +15,91 @@ threeTenAbp = "1.4.4"
 androidXJunit = "1.1.5"
 coroutines = "1.6.4"
 
-[gradle]
-shotPlugin = "com.karumi:shot:5.14.1"
-nexusPublishingPlugin = "io.github.gradle-nexus:publish-plugin:1.3.0"
-androidPlugin = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
-kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-dokkaPlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
-detektPlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-kspPlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
-[detektRules]
-compose = "io.nlopez.compose.rules:detekt:0.1.5"
-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
-
-[androidx]
-appCompat = "androidx.appcompat:appcompat:1.6.1"
-annotations = "androidx.annotation:annotation:1.6.0"
-cardView = "androidx.cardview:cardview:1.0.0"
-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-coreKts = "androidx.core:core-ktx:1.9.0"
-
-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
-
-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+[plugins]
+shot = { id = "com.karumi.shot", version = "5.14.1" }
+nexusPublishing = { id = "io.github.gradle-nexus.publish-plugin", version="1.3.0"}
+android-application = { id = "com.android.application", version.ref = "androidPlugin" }
+android-library = { id = "com.android.library", version.ref = "androidPlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 
-[threeTenAbp]
-base = { module = "org.threeten:threetenbp", version.ref = "threeTenAbp" }
-android = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeTenAbp" }
+[libraries]
 
-[testing]
-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidXJunit" }
-junitAndroid = { module = "androidx.test.ext:junit", version.ref = "androidXJunit" }
-coreKtx = "androidx.test:core-ktx:1.5.0"
-junit = "junit:junit:4.13.2"
-espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
-testRules = "androidx.test:rules:1.5.0"
-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-mockitoAndroid = "org.mockito:mockito-android:5.2.0"
-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.1.5"
+detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
-[google]
-material = "com.google.android.material:material:1.8.0"
-maps = "com.google.android.gms:play-services-maps:18.1.0"
-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+androidx-appCompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-annotations = "androidx.annotation:annotation:1.6.0"
+androidx-cardView = "androidx.cardview:cardview:1.0.0"
+androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+androidx-coreKts = "androidx.core:core-ktx:1.9.0"
 
-[square]
-picasso = "com.squareup.picasso:picasso:2.71828"
-kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
+androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
 
-[kotlin]
-reflection = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
+androidx-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
-[lint]
-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
+threeTenAbp-base = { module = "org.threeten:threetenbp", version.ref = "threeTenAbp" }
+threeTenAbp-android = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeTenAbp" }
 
-[compose]
-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "2023.01.00" }
-ui = { group = "androidx.compose.ui", name = "ui" }
-foundation = { group = "androidx.compose.foundation", name = "foundation" }
-runtime = { group = "androidx.compose.runtime", name = "runtime" }
-material = { group = "androidx.compose.material", name = "material" }
-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-testjUnit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-activity = "androidx.activity:activity-compose:1.6.1"
+testing-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidXJunit" }
+testing-junitAndroid = { module = "androidx.test.ext:junit", version.ref = "androidXJunit" }
+testing-coreKtx = "androidx.test:core-ktx:1.5.0"
+testing-junit = "junit:junit:4.13.2"
+testing-espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
+testing-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
+testing-testRules = "androidx.test:rules:1.5.0"
+testing-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
+testing-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+testing-mockitoAndroid = "org.mockito:mockito-android:5.2.0"
+testing-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+testing-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 
-[destinations]
-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
+google-material = "com.google.android.material:material:1.8.0"
+google-maps = "com.google.android.gms:play-services-maps:18.1.0"
+google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+google-guava = "com.google.guava:guava:31.1-jre"
 
-[accompanist]
-flowLayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
-pager = { module = "com.google.accompanist:accompanist-pager:$accompanistVersion", version.ref = "accompanist" }
+square-picasso = "com.squareup.picasso:picasso:2.71828"
+square-kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
 
-[protocol]
-gson = "com.google.code.gson:gson:2.10.1"
-dadb = "dev.mobile:dadb:1.2.6"
+kotlin-reflection = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
-[http4k]
-bom = { group = "org.http4k", name = "http4k-bom", version.ref = "4.41.0.0" }
-ui = { group = "org.http4k", name = "http4k-core" }
-ui = { group = "org.http4k", name = "http4k-server-undertow" }
-ui = { group = "org.http4k", name = "http4k-client-apache" }
+lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
+lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-[util]
-guava = "com.google.guava:guava:31.1-jre"
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.01.00" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+compose-material = { group = "androidx.compose.material", name = "material" }
+compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-testjUnit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
+compose-activity = "androidx.activity:activity-compose:1.6.1"
+
+destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
+destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
+
+accompanist-flowLayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+
+protocol-gson = "com.google.code.gson:gson:2.10.1"
+protocol-dadb = "dev.mobile:dadb:1.2.6"
+
+http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.41.0.0" }
+http4k-core = { group = "org.http4k", name = "http4k-core" }
+http4k-serverUnderflow = { group = "org.http4k", name = "http4k-server-undertow" }
+http4k-clientApache = { group = "org.http4k", name = "http4k-client-apache" }
+
 androidSdkCommon = { module = "com.android.tools:sdk-common", version.ref = "androidSdkCommon" }
