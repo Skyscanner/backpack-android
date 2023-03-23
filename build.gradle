@@ -128,7 +128,7 @@ ext {
     lintApi = "com.android.tools.lint:lint-api:$lintVersion"
     lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
 
-    composeVersion = "2023.01.00"
+    composeVersion = "2023.03.00"
     composeBom = dependencies.platform("androidx.compose:compose-bom:$composeVersion")
     composeUi = [composeBom, "androidx.compose.ui:ui"]
     composeFoundation = [composeBom, "androidx.compose.foundation:foundation"]
