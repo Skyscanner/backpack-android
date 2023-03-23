@@ -49,11 +49,13 @@ fun RatingStory(modifier: Modifier = Modifier) {
     ) {
         BpkRatingDefaultSample()
         BpkRatingTitleOnlySample()
+        BpkRatingNoTitleSample()
         BpkRatingNoScaleSample()
         BpkRatingCustomContentSample()
 
         BpkRatingLargeSample()
         BpkRatingLargeTitleOnlySample()
+        BpkRatingLargeNoTitleSample()
         BpkRatingLargeNoScaleSample()
         BpkRatingLargeCustomContentSample()
         BpkRatingLargeCustomContentNoSubtitleSample()
@@ -67,6 +69,16 @@ internal fun BpkRatingDefaultSample(modifier: Modifier = Modifier) {
         title = stringResource(R.string.rating_title),
         subtitle = stringResource(R.string.rating_subtitle),
         value = RatingValue,
+    )
+}
+
+@Composable
+internal fun BpkRatingNoTitleSample(modifier: Modifier = Modifier) {
+    BpkRating(
+        modifier = modifier,
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+        scale = BpkRatingScale.ZeroToTen,
     )
 }
 
@@ -121,6 +133,16 @@ internal fun BpkRatingLargeTitleOnlySample(modifier: Modifier = Modifier) {
         value = RatingValue,
         size = BpkRatingSize.Large,
         scale = BpkRatingScale.ZeroToTen,
+    )
+}
+
+@Composable
+internal fun BpkRatingLargeNoTitleSample(modifier: Modifier = Modifier) {
+    BpkRating(
+        modifier = modifier,
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+        size = BpkRatingSize.Large,
     )
 }
 

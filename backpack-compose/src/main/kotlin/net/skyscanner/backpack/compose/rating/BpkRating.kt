@@ -36,9 +36,9 @@ enum class BpkRatingScale {
 
 @Composable
 fun BpkRating(
-    title: String,
     value: Float,
     modifier: Modifier = Modifier,
+    title: String? = null,
     scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
     size: BpkRatingSize = BpkRatingSize.Base,
     subtitle: String? = null,
@@ -51,13 +51,14 @@ fun BpkRating(
         size = size,
         subtitle = subtitle,
         showScale = showScale,
-    ) {
-        BpkText(
-            text = title,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-    }
+        title = if (title != null) { ->
+            BpkText(
+                text = title,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        } else null,
+    )
 }
 
 @Composable
@@ -75,9 +76,8 @@ fun BpkRating(
         modifier = modifier,
         scale = scale,
         size = size,
+        title = title,
         subtitle = subtitle,
         showScale = showScale,
-    ) {
-        title()
-    }
+    )
 }

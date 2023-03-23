@@ -30,6 +30,8 @@ import net.skyscanner.backpack.demo.compose.BpkRatingLargeCustomContentSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeNoScaleSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeTitleOnlySample
+import net.skyscanner.backpack.demo.compose.BpkRatingLargeNoTitleSample
+import net.skyscanner.backpack.demo.compose.BpkRatingNoTitleSample
 import net.skyscanner.backpack.demo.compose.BpkRatingNoScaleSample
 import net.skyscanner.backpack.demo.compose.BpkRatingTitleOnlySample
 import org.junit.Test
@@ -48,6 +50,14 @@ class BpkRatingTest : BpkSnapshotTest() {
     fun titleOnly() {
         snap {
             BpkRatingTitleOnlySample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noTitle() {
+        snap {
+            BpkRatingNoTitleSample()
         }
     }
 
@@ -77,6 +87,14 @@ class BpkRatingTest : BpkSnapshotTest() {
     fun largeTitleOnly() {
         snap {
             BpkRatingLargeTitleOnlySample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeNoTitle() {
+        snap {
+            BpkRatingLargeNoTitleSample()
         }
     }
 

@@ -34,10 +34,10 @@ internal fun BpkRatingLayout(
     value: Float,
     scale: BpkRatingScale,
     size: BpkRatingSize,
+    title: @Composable (() -> Unit)?,
     subtitle: String?,
     showScale: Boolean,
     modifier: Modifier = Modifier,
-    title: @Composable () -> Unit,
 ) {
 
     Row(
@@ -56,7 +56,9 @@ internal fun BpkRatingLayout(
         when (size) {
 
             BpkRatingSize.Base -> {
-                BpkRatingTitle(Modifier.alignByBaseline(), title)
+                if (title != null) {
+                    BpkRatingTitle(Modifier.alignByBaseline(), title)
+                }
                 if (subtitle != null) {
                     BpkRatingSubtitle(subtitle, Modifier.alignByBaseline())
                 }
@@ -66,7 +68,9 @@ internal fun BpkRatingLayout(
                 Column(
                     modifier = Modifier.alignBy(LastBaseline),
                 ) {
-                    BpkRatingTitle(content = title)
+                    if (title != null) {
+                        BpkRatingTitle(content = title)
+                    }
                     if (subtitle != null) {
                         BpkRatingSubtitle(subtitle)
                     }
