@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
@@ -80,7 +79,7 @@ fun BpkFlightLeg(
                 Box(
                     modifier = Modifier
                         .padding(top = BpkSpacing.Sm)
-                        .background(color = Color.White, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
+                        .background(color = BpkTheme.colors.textOnDark, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
                     content = it,
                 )
                 Spacer(modifier = Modifier.width(BpkSpacing.Base))

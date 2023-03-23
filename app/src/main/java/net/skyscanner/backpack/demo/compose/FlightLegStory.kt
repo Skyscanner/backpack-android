@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 import net.skyscanner.backpack.compose.flightleg.bpkAirportHighlightStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -104,6 +105,7 @@ internal fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
             BpkIcon(
                 modifier = Modifier.size(BpkSpacing.Lg),
                 icon = BpkIcon.Aircraft,
+                tint = BpkTheme.colors.textOnLight,
                 contentDescription = null,
             )
         },
