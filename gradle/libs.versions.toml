@@ -36,7 +36,7 @@ androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 androidx-coreKts = "androidx.core:core-ktx:1.9.0"
 
-androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
+androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.1"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
