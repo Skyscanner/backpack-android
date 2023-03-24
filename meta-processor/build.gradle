@@ -1,9 +1,11 @@
-apply plugin: 'kotlin'
+plugins {
+    alias(libs.plugins.kotlin)
+}
 
 dependencies {
-  implementation rootProject.ext.kspApi
-  implementation rootProject.ext.kotlinPoet
-  implementation rootProject.ext.roomCompilerProcessing
+  implementation libs.google.kspApi
+  implementation libs.square.kotlinPoet
+  implementation libs.androidx.roomCompilerProcessing
 }
 
 sourceSets.main {
