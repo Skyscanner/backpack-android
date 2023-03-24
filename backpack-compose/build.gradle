@@ -16,8 +16,10 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinAndroid)
+}
 
 ext {
     artifactId = "backpack-compose"
@@ -50,29 +52,28 @@ android {
 }
 
 dependencies {
-    api rootProject.ext.composeUi
-    api rootProject.ext.composeFoundation
-    api rootProject.ext.composeUiToolingPreview
-    api rootProject.ext.composeUtil
-    implementation rootProject.ext.composeMaterial
+    api libs.compose.ui
+    api libs.compose.foundation
+    api libs.compose.uiToolingPreview
+    api libs.compose.uiUtil
+    implementation libs.compose.material
 
-    implementation rootProject.ext.androidXLifecycleViewmodel
-    implementation rootProject.ext.androidXLifecycleViewmodelKtx
-    implementation rootProject.ext.ktx
-    implementation rootProject.ext.composeFoundation
-    implementation rootProject.ext.accompanistPager
+    implementation libs.androidx.lifecycleViewmodel
+    implementation libs.androidx.lifecycleViewmodelKtx
+    implementation libs.androidx.coreKts
+    implementation libs.accompanist.pager
 
-    androidTestImplementation rootProject.ext.junitAndroid
-    androidTestImplementation rootProject.ext.testRules
-    androidTestImplementation rootProject.ext.mockitoKotlin
-    androidTestImplementation rootProject.ext.mockitoAndroid
-    androidTestImplementation rootProject.ext.composeTestJUnit
+    androidTestImplementation libs.testing.junitAndroid
+    androidTestImplementation libs.testing.testRules
+    androidTestImplementation libs.testing.mockitoKotlin
+    androidTestImplementation libs.testing.mockitoAndroid
+    androidTestImplementation libs.compose.testjUnit
 
-    debugImplementation rootProject.ext.composeUiTooling
-    debugImplementation rootProject.ext.composeUiTestManifest
+    debugImplementation libs.compose.uiTooling
+    debugImplementation libs.compose.uiToolingTestManifest
 
-    testImplementation rootProject.ext.junit
-    testImplementation rootProject.ext.coroutinesTest
+    testImplementation libs.testing.junit
+    testImplementation libs.testing.coroutines
 
     lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))
