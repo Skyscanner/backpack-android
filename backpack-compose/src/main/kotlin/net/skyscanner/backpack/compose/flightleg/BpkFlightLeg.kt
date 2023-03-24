@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
@@ -77,15 +78,15 @@ fun BpkFlightLeg(
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             carrierLogoContent?.let {
-                Box(modifier = Modifier.padding(top = BpkSpacing.Sm)) {
-                    Box(
-                        modifier = Modifier
-                            .size(BpkSpacing.Lg)
-                            .background(color = BpkTheme.colors.textOnDark, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
-                        content = it,
-                        contentAlignment = Alignment.Center,
-                    )
-                }
+                Box(
+                    modifier = Modifier
+                        .padding(top = BpkSpacing.Sm)
+                        .size(BpkSpacing.Lg)
+                        .clip(RoundedCornerShape(BpkBorderRadius.Xs))
+                        .background(BpkTheme.colors.textOnDark),
+                    content = it,
+                    contentAlignment = Alignment.Center,
+                )
                 Spacer(modifier = Modifier.width(BpkSpacing.Base))
             }
             Column(

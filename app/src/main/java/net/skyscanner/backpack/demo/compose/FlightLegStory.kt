@@ -129,7 +129,7 @@ internal fun CompleteFlightLegShortStopsSample(modifier: Modifier = Modifier) {
             }
             append("-SIN, SwissAir")
         },
-        stopsInfo = "2 stops",
+        stopsInfo = "2 Stops",
         highlightStopsInfo = true,
         duration = "7h 55m",
         nextDayArrival = "+1",
