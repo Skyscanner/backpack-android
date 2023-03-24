@@ -52,7 +52,6 @@ import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
-import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.ui.destinations.ComponentScreenDestination
 
@@ -89,24 +88,24 @@ fun ComponentListScreen(
                 ),
             ),
         )
-        var textState by rememberSaveable { mutableStateOf("") }
+        var searchQuery by rememberSaveable { mutableStateOf("") }
         BpkTextField(
             placeholder = stringResource(R.string.navigation_search),
-            value = textState.replaceFirstChar { it.uppercase() },
+            value = searchQuery.replaceFirstChar { it.uppercase() },
             onValueChange = { value ->
-                textState = value
+                searchQuery = value
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(BpkSpacing.Base),
             icon = BpkIcon.Search,
         )
-        val filteredTokens = repository.tokenComponents.filter { it: Component ->
-            it.name.contains(textState)
+        val filteredTokens = repository.tokenComponents.filter {
+            it.name.contains(searchQuery)
         }
 
-        val filteredComponents = repository.uiComponents.filter { it: Component ->
-            it.name.contains(textState)
+        val filteredComponents = repository.uiComponents.filter {
+            it.name.contains(searchQuery)
         }
 
         LazyColumn {
