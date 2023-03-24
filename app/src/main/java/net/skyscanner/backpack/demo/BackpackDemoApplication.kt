@@ -22,7 +22,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
-import com.facebook.stetho.Stetho
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
@@ -49,7 +48,6 @@ class BackpackDemoApplication : Application() {
         super.onCreate()
         AndroidThreeTen.init(this)
         instance = applicationContext!! as BackpackDemoApplication
-        Stetho.initializeWithDefaults(this)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
 }

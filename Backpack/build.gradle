@@ -37,22 +37,22 @@ android {
 }
 
 dependencies {
-    api rootProject.ext.androidMaterial
-    api rootProject.ext.constraintLayout
-    api rootProject.ext.cardView
-    api rootProject.ext.threeTenAbpAndroid
-    api rootProject.ext.googleMaps
-    implementation rootProject.ext.swiperefreshLayout
-    implementation rootProject.ext.ktx
-    androidTestImplementation rootProject.ext.junitAndroid
-    androidTestImplementation rootProject.ext.junitKtx
-    androidTestImplementation rootProject.ext.espressoCore
-    androidTestImplementation rootProject.ext.espressoContrib
-    androidTestImplementation rootProject.ext.testRules
-    androidTestImplementation rootProject.ext.mockitoKotlin
-    androidTestImplementation rootProject.ext.mockitoAndroid
-    androidTestImplementation rootProject.ext.junit
-    androidTestImplementation rootProject.ext.coroutinesTest
+    api libs.google.material
+    api libs.androidx.constraintLayout
+    api libs.androidx.cardView
+    api libs.threeTenAbp.android
+    api libs.google.maps
+    implementation libs.androidx.swiperefreshLayout
+    implementation libs.androidx.coreKts
+    androidTestImplementation libs.test.junitAndroid
+    androidTestImplementation libs.test.junitKtx
+    androidTestImplementation libs.test.espressoCore
+    androidTestImplementation libs.test.espressoContrib
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.mockitoKotlin
+    androidTestImplementation libs.test.mockitoAndroid
+    androidTestImplementation libs.test.junit
+    androidTestImplementation libs.test.coroutines
 
     api project(':backpack-common')
     lintPublish project(':backpack-lint')

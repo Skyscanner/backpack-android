@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.demo.meta
 
-import javax.annotation.concurrent.Immutable
+import androidx.compose.runtime.Immutable
 
 @Immutable
 @Target(AnnotationTarget.ANNOTATION_CLASS)

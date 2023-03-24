@@ -35,7 +35,7 @@ android {
         resValues false
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_compiler_version
+        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
     }
     packagingOptions {
         exclude "**/attach_hotspot_windows.dll"
@@ -50,32 +50,37 @@ android {
 }
 
 dependencies {
-    api rootProject.ext.composeUi
-    api rootProject.ext.composeFoundation
-    api rootProject.ext.composeUiToolingPreview
-    api rootProject.ext.composeUtil
-    implementation rootProject.ext.composeMaterial
+    api libs.compose.ui
+    api libs.compose.foundation
+    api libs.compose.uiToolingPreview
+    api libs.compose.uiUtil
+    implementation libs.compose.material
 
-    implementation rootProject.ext.androidXLifecycleViewmodel
-    implementation rootProject.ext.androidXLifecycleViewmodelKtx
-    implementation rootProject.ext.ktx
-    implementation rootProject.ext.composeFoundation
-    implementation rootProject.ext.accompanistPager
+    implementation libs.androidx.lifecycleViewmodel
+    implementation libs.androidx.lifecycleViewmodelKtx
+    implementation libs.androidx.coreKts
+    implementation libs.accompanist.pager
 
-    androidTestImplementation rootProject.ext.junitAndroid
-    androidTestImplementation rootProject.ext.testRules
-    androidTestImplementation rootProject.ext.mockitoKotlin
-    androidTestImplementation rootProject.ext.mockitoAndroid
-    androidTestImplementation rootProject.ext.composeTestJUnit
+    androidTestImplementation libs.test.junitAndroid
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.mockitoKotlin
+    androidTestImplementation libs.test.mockitoAndroid
+    androidTestImplementation libs.test.compose
 
-    debugImplementation rootProject.ext.composeUiTooling
-    debugImplementation rootProject.ext.composeUiTestManifest
+    debugImplementation libs.compose.uiTooling
+    debugImplementation libs.compose.uiToolingTestManifest
 
-    testImplementation rootProject.ext.junit
-    testImplementation rootProject.ext.coroutinesTest
+    testImplementation libs.test.junit
+    testImplementation libs.test.coroutines
 
     lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))
+
+    def composeBom = platform(libs.compose.bom)
+    api composeBom
+    implementation composeBom
+    androidTestImplementation composeBom
+    debugImplementation composeBom
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"
