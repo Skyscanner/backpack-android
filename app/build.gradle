@@ -15,11 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'shot'
-apply plugin: 'com.google.devtools.ksp'
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.shot)
+    alias(libs.plugins.ksp)
+}
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 apply from: "screenshots.gradle"
@@ -98,28 +99,27 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.picasso
-    implementation rootProject.ext.accompanistFlowLayout
-    implementation rootProject.ext.androidXLifecycleKtx
-    implementation rootProject.ext.composeActivity
-    implementation rootProject.ext.kotlinReflection
-    implementation rootProject.ext.stetho
-    implementation rootProject.ext.destinationsCore
-    implementation rootProject.ext.accompanistPager
-    testImplementation rootProject.ext.junit
-    debugImplementation rootProject.ext.composeTestManifest
-    androidTestImplementation rootProject.ext.composeFoundation
-    androidTestImplementation rootProject.ext.testCoreKtx
-    androidTestImplementation rootProject.ext.junitKtx
-    androidTestImplementation rootProject.ext.junitAndroid
-    androidTestImplementation rootProject.ext.espressoCore
-    androidTestImplementation rootProject.ext.espressoContrib
-    androidTestImplementation rootProject.ext.testRules
-    androidTestImplementation rootProject.ext.coroutinesTest
-    androidTestImplementation rootProject.ext.composeTestJUnit
-    androidTestImplementation rootProject.ext.facebookSnapshotTestingCore
+    implementation libs.square.picasso
+    implementation libs.accompanist.flowLayout
+    implementation libs.androidx.lifecycleKtx
+    implementation libs.compose.activity
+    implementation libs.kotlin.reflection
+    implementation libs.destinations.core
+    implementation libs.accompanist.pager
+    testImplementation libs.testing.junit
+    debugImplementation libs.compose.uiToolingTestManifest
+    androidTestImplementation libs.compose.foundation
+    androidTestImplementation libs.testing.coreKtx
+    androidTestImplementation libs.testing.junitKtx
+    androidTestImplementation libs.testing.junitAndroid
+    androidTestImplementation libs.testing.espressoCore
+    androidTestImplementation libs.testing.espressoContrib
+    androidTestImplementation libs.testing.testRules
+    androidTestImplementation libs.testing.coroutines
+    androidTestImplementation libs.compose.testjUnit
+    androidTestImplementation libs.testing.facebookSnapshotTestingCore
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     ksp project(":meta-processor")
-    ksp rootProject.ext.destinationsKsp
+    ksp libs.destinations.ksp
 }
