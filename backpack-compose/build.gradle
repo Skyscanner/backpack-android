@@ -16,10 +16,8 @@
  * limitations under the License.
  */
 
-plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinAndroid)
-}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 ext {
     artifactId = "backpack-compose"
@@ -52,10 +50,15 @@ android {
 }
 
 dependencies {
+    def composeBom = platform(libs.compose.bom)
+
+    api composeBom
     api libs.compose.ui
     api libs.compose.foundation
     api libs.compose.uiToolingPreview
     api libs.compose.uiUtil
+
+    implementation composeBom
     implementation libs.compose.material
 
     implementation libs.androidx.lifecycleViewmodel
@@ -63,12 +66,14 @@ dependencies {
     implementation libs.androidx.coreKts
     implementation libs.accompanist.pager
 
+    androidTestImplementation composeBom
     androidTestImplementation libs.testing.junitAndroid
     androidTestImplementation libs.testing.testRules
     androidTestImplementation libs.testing.mockitoKotlin
     androidTestImplementation libs.testing.mockitoAndroid
     androidTestImplementation libs.compose.testjUnit
 
+    debugImplementation composeBom
     debugImplementation libs.compose.uiTooling
     debugImplementation libs.compose.uiToolingTestManifest
 

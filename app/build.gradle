@@ -15,12 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.shot)
-    alias(libs.plugins.ksp)
-}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'shot'
+apply plugin: 'com.google.devtools.ksp'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 apply from: "screenshots.gradle"
@@ -98,7 +97,10 @@ android {
 }
 
 dependencies {
+    def composeBom = platform(libs.compose.bom)
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation composeBom
     implementation libs.square.picasso
     implementation libs.accompanist.flowLayout
     implementation libs.androidx.lifecycleKtx
@@ -107,7 +109,11 @@ dependencies {
     implementation libs.destinations.core
     implementation libs.accompanist.pager
     testImplementation libs.testing.junit
+
+    debugImplementation composeBom
     debugImplementation libs.compose.uiToolingTestManifest
+
+    androidTestImplementation composeBom
     androidTestImplementation libs.compose.foundation
     androidTestImplementation libs.testing.coreKtx
     androidTestImplementation libs.testing.junitKtx

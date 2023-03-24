@@ -1,6 +1,4 @@
-plugins {
-    alias(libs.plugins.kotlin)
-}
+apply plugin: 'kotlin'
 
 dependencies {
   implementation libs.google.kspApi
