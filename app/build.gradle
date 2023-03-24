@@ -108,22 +108,22 @@ dependencies {
     implementation libs.kotlin.reflection
     implementation libs.destinations.core
     implementation libs.accompanist.pager
-    testImplementation libs.testing.junit
+    testImplementation libs.test.junit
 
     debugImplementation composeBom
     debugImplementation libs.compose.uiToolingTestManifest
 
     androidTestImplementation composeBom
     androidTestImplementation libs.compose.foundation
-    androidTestImplementation libs.testing.coreKtx
-    androidTestImplementation libs.testing.junitKtx
-    androidTestImplementation libs.testing.junitAndroid
-    androidTestImplementation libs.testing.espressoCore
-    androidTestImplementation libs.testing.espressoContrib
-    androidTestImplementation libs.testing.testRules
-    androidTestImplementation libs.testing.coroutines
-    androidTestImplementation libs.compose.testjUnit
-    androidTestImplementation libs.testing.facebookSnapshotTestingCore
+    androidTestImplementation libs.test.coreKtx
+    androidTestImplementation libs.test.junitKtx
+    androidTestImplementation libs.test.junitAndroid
+    androidTestImplementation libs.test.espressoCore
+    androidTestImplementation libs.test.espressoContrib
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.coroutines
+    androidTestImplementation libs.test.compose
+    androidTestImplementation libs.test.facebookSnapshotTestingCore
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     ksp project(":meta-processor")

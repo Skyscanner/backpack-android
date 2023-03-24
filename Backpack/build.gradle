@@ -44,15 +44,15 @@ dependencies {
     api libs.google.maps
     implementation libs.androidx.swiperefreshLayout
     implementation libs.androidx.coreKts
-    androidTestImplementation libs.testing.junitAndroid
-    androidTestImplementation libs.testing.junitKtx
-    androidTestImplementation libs.testing.espressoCore
-    androidTestImplementation libs.testing.espressoContrib
-    androidTestImplementation libs.testing.testRules
-    androidTestImplementation libs.testing.mockitoKotlin
-    androidTestImplementation libs.testing.mockitoAndroid
-    androidTestImplementation libs.testing.junit
-    androidTestImplementation libs.testing.coroutines
+    androidTestImplementation libs.test.junitAndroid
+    androidTestImplementation libs.test.junitKtx
+    androidTestImplementation libs.test.espressoCore
+    androidTestImplementation libs.test.espressoContrib
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.mockitoKotlin
+    androidTestImplementation libs.test.mockitoAndroid
+    androidTestImplementation libs.test.junit
+    androidTestImplementation libs.test.coroutines
 
     api project(':backpack-common')
     lintPublish project(':backpack-lint')

@@ -45,18 +45,19 @@ androidx-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmo
 threeTenAbp-base = { module = "org.threeten:threetenbp", version.ref = "threeTenAbp" }
 threeTenAbp-android = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeTenAbp" }
 
-testing-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidXJunit" }
-testing-junitAndroid = { module = "androidx.test.ext:junit", version.ref = "androidXJunit" }
-testing-coreKtx = "androidx.test:core-ktx:1.5.0"
-testing-junit = "junit:junit:4.13.2"
-testing-espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
-testing-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
-testing-testRules = "androidx.test:rules:1.5.0"
-testing-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
-testing-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-testing-mockitoAndroid = "org.mockito:mockito-android:5.2.0"
-testing-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-testing-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+test-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidXJunit" }
+test-junitAndroid = { module = "androidx.test.ext:junit", version.ref = "androidXJunit" }
+test-coreKtx = "androidx.test:core-ktx:1.5.0"
+test-junit = "junit:junit:4.13.2"
+test-espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
+test-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
+test-rules = "androidx.test:rules:1.5.0"
+test-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
+test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.2.0"
+test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.8.0"
 google-maps = "com.google.android.gms:play-services-maps:18.1.0"
@@ -79,7 +80,6 @@ compose-foundation = { group = "androidx.compose.foundation", name = "foundation
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 compose-material = { group = "androidx.compose.material", name = "material" }
 compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-compose-testjUnit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }

@@ -67,18 +67,18 @@ dependencies {
     implementation libs.accompanist.pager
 
     androidTestImplementation composeBom
-    androidTestImplementation libs.testing.junitAndroid
-    androidTestImplementation libs.testing.testRules
-    androidTestImplementation libs.testing.mockitoKotlin
-    androidTestImplementation libs.testing.mockitoAndroid
-    androidTestImplementation libs.compose.testjUnit
+    androidTestImplementation libs.test.junitAndroid
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.test.mockitoKotlin
+    androidTestImplementation libs.test.mockitoAndroid
+    androidTestImplementation libs.test.compose
 
     debugImplementation composeBom
     debugImplementation libs.compose.uiTooling
     debugImplementation libs.compose.uiToolingTestManifest
 
-    testImplementation libs.testing.junit
-    testImplementation libs.testing.coroutines
+    testImplementation libs.test.junit
+    testImplementation libs.test.coroutines
 
     lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))

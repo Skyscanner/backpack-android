@@ -23,8 +23,8 @@ dependencies {
     compileOnly libs.lint.api
 
     testImplementation libs.lint.lint
-    testImplementation libs.testing.lint
-    testImplementation libs.testing.junit
+    testImplementation libs.test.lint
+    testImplementation libs.test.junit
 }
 
 jar {
