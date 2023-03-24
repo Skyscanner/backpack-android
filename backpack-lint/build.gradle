@@ -15,17 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-apply plugin: 'kotlin'
+plugins {
+    alias(libs.plugins.kotlin)
+}
 apply from: "tokens.gradle.kts"
 
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compileOnly rootProject.ext.lintApi
 
-    testImplementation rootProject.ext.lint
-    testImplementation rootProject.ext.lintTests
-    testImplementation rootProject.ext.junit
+    testImplementation libs.lint.lint
+    testImplementation libs.testing.lint
+    testImplementation libs.testing.junit
 }
 
 jar {
