@@ -19,9 +19,9 @@ coroutines = "1.6.4"
 [plugins]
 shot = { id = "com.karumi.shot", version = "5.14.1" }
 nexusPublishing = { id = "io.github.gradle-nexus.publish-plugin", version="1.3.0"}
-android-application = { id = "com.android.application", version.ref = "androidPlugin" }
-android-library = { id = "com.android.library", version.ref = "androidPlugin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidApplication = { id = "com.android.application", version.ref = "androidPlugin" }
+androidLibrary = { id = "com.android.library", version.ref = "androidPlugin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
