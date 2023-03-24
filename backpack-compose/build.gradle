@@ -50,15 +50,10 @@ android {
 }
 
 dependencies {
-    def composeBom = platform(libs.compose.bom)
-
-    api composeBom
     api libs.compose.ui
     api libs.compose.foundation
     api libs.compose.uiToolingPreview
     api libs.compose.uiUtil
-
-    implementation composeBom
     implementation libs.compose.material
 
     implementation libs.androidx.lifecycleViewmodel
@@ -66,14 +61,12 @@ dependencies {
     implementation libs.androidx.coreKts
     implementation libs.accompanist.pager
 
-    androidTestImplementation composeBom
     androidTestImplementation libs.test.junitAndroid
     androidTestImplementation libs.test.rules
     androidTestImplementation libs.test.mockitoKotlin
     androidTestImplementation libs.test.mockitoAndroid
     androidTestImplementation libs.test.compose
 
-    debugImplementation composeBom
     debugImplementation libs.compose.uiTooling
     debugImplementation libs.compose.uiToolingTestManifest
 
@@ -82,6 +75,12 @@ dependencies {
 
     lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))
+
+    def composeBom = platform(libs.compose.bom)
+    api composeBom
+    implementation composeBom
+    androidTestImplementation composeBom
+    debugImplementation composeBom
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

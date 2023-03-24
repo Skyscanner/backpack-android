@@ -38,12 +38,12 @@ android {
 
 dependencies {
     api libs.threeTenAbp.android
-    implementation platform(libs.compose.bom)
     implementation libs.compose.runtime
     androidTestImplementation libs.test.espressoCore
     androidTestImplementation libs.test.junit
     androidTestImplementation libs.test.junitAndroid
     androidTestImplementation libs.test.coroutines
+    implementation platform(libs.compose.bom)
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

@@ -97,10 +97,7 @@ android {
 }
 
 dependencies {
-    def composeBom = platform(libs.compose.bom)
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    implementation composeBom
     implementation libs.square.picasso
     implementation libs.accompanist.flowLayout
     implementation libs.androidx.lifecycleKtx
@@ -109,11 +106,7 @@ dependencies {
     implementation libs.destinations.core
     implementation libs.accompanist.pager
     testImplementation libs.test.junit
-
-    debugImplementation composeBom
     debugImplementation libs.compose.uiToolingTestManifest
-
-    androidTestImplementation composeBom
     androidTestImplementation libs.compose.foundation
     androidTestImplementation libs.test.coreKtx
     androidTestImplementation libs.test.junitKtx
@@ -128,4 +121,9 @@ dependencies {
     implementation project(':backpack-compose')
     ksp project(":meta-processor")
     ksp libs.destinations.ksp
+
+    def composeBom = platform(libs.compose.bom)
+    implementation composeBom
+    debugImplementation composeBom
+    androidTestImplementation composeBom
 }
