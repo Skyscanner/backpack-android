@@ -77,16 +77,19 @@ fun BpkFlightLeg(
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             carrierLogoContent?.let {
-                Box(
-                    modifier = Modifier
-                        .size(BpkSpacing.Lg)
-                        .padding(top = BpkSpacing.Sm)
-                        .background(color = BpkTheme.colors.textOnDark, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
-                    content = it,
-                )
+                Box(modifier = Modifier.padding(top = BpkSpacing.Sm)) {
+                    Box(
+                        modifier = Modifier
+                            .size(BpkSpacing.Lg)
+                            .background(color = BpkTheme.colors.textOnDark, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
+                        content = it,
+                        contentAlignment = Alignment.Center,
+                    )
+                }
                 Spacer(modifier = Modifier.width(BpkSpacing.Base))
             }
             Column(
+                modifier = Modifier.weight(0.67f),
                 horizontalAlignment = Alignment.Start,
             ) {
                 Row {
@@ -124,7 +127,6 @@ fun BpkFlightLeg(
                     )
                 }
             }
-            Spacer(modifier = Modifier.weight(1f))
             Column(
                 horizontalAlignment = Alignment.End,
             ) {

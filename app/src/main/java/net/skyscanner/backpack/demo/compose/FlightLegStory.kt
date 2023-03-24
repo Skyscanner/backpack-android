@@ -53,11 +53,18 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
             .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
     ) {
-        BpkText(text = stringResource(id = R.string.flight_leg_basic_example))
+        BpkText(text = stringResource(id = R.string.flight_leg_basic_example), color = BpkTheme.colors.textPrimary)
         BasicFlightLegSample()
+
         Spacer(modifier = Modifier.height(BpkSpacing.Lg))
-        BpkText(text = stringResource(id = R.string.flight_leg_complete_example))
-        CompleteFlightLegSample()
+
+        BpkText(text = stringResource(id = R.string.flight_leg_complete_long_stops_example), color = BpkTheme.colors.textPrimary)
+        CompleteFlightLegLongStopsSample()
+
+        Spacer(modifier = Modifier.height(BpkSpacing.Lg))
+
+        BpkText(text = stringResource(id = R.string.flight_leg_complete_short_stops_example), color = BpkTheme.colors.textPrimary)
+        CompleteFlightLegShortStopsSample()
     }
 }
 
@@ -80,7 +87,7 @@ internal fun BasicFlightLegSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
+internal fun CompleteFlightLegLongStopsSample(modifier: Modifier = Modifier) {
     BpkFlightLeg(
         modifier = modifier,
         departureArrivalTime = "19:50 - 22:45",
@@ -92,12 +99,42 @@ internal fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
             }
             append("-SIN, SwissAir")
         },
-        stopsInfo = "2 Stops",
+        stopsInfo = "2 Zwischenlandungen",
         highlightStopsInfo = true,
         duration = "7h 55m",
         nextDayArrival = "+1",
-        operatedBy = "Operated by Ryanair",
-        warning = "Change airports in London",
+        operatedBy = "Operated by Ryanair, partly operated by WestJet",
+        warning = "Change airports in London. Very short layovers.",
+        contentDescription = null,
+        carrierLogoContent = {
+            BpkIcon(
+                icon = BpkIcon.Aircraft,
+                tint = BpkTheme.colors.textOnLight,
+                contentDescription = null,
+            )
+        },
+    )
+}
+
+@Composable
+internal fun CompleteFlightLegShortStopsSample(modifier: Modifier = Modifier) {
+    BpkFlightLeg(
+        modifier = modifier,
+        departureArrivalTime = "19:50 - 22:45",
+        description = buildAnnotatedString {
+            withStyle(
+                bpkAirportHighlightStyle(),
+            ) {
+                append("LHR")
+            }
+            append("-SIN, SwissAir")
+        },
+        stopsInfo = "2 stops",
+        highlightStopsInfo = true,
+        duration = "7h 55m",
+        nextDayArrival = "+1",
+        operatedBy = "Operated by Ryanair, partly operated by WestJet",
+        warning = "Change airports in London. Very short layovers.",
         contentDescription = null,
         carrierLogoContent = {
             BpkIcon(
