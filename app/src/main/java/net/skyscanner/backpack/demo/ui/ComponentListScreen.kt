@@ -92,7 +92,7 @@ fun ComponentListScreen(
         var textState by rememberSaveable { mutableStateOf("") }
         BpkTextField(
             placeholder = stringResource(R.string.navigation_search),
-            value = textState,
+            value = textState.replaceFirstChar { it.uppercase() },
             onValueChange = { value ->
                 textState = value
             },
