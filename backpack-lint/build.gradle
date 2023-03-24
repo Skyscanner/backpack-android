@@ -20,6 +20,7 @@ apply plugin: 'kotlin'
 apply from: "tokens.gradle.kts"
 
 dependencies {
+    compileOnly libs.kotlin.stdlib
     compileOnly libs.lint.api
 
     testImplementation libs.lint.lint
