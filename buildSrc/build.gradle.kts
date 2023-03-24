@@ -9,7 +9,7 @@ plugins {
 
 dependencies {
     implementation(gradleApi())
-    implementation(libs.android.gradlePlugin)
+    implementation(libs.plugin.android)
     implementation(libs.android.sdkCommon)
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.square.kotlinPoet)

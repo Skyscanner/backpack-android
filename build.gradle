@@ -17,11 +17,6 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.8.10'
-    ext.compose_compiler_version = '1.4.2'
-    ext.ksp_version = '1.8.10-1.0.9'
-    ext.detekt_version = '1.22.0'
-    ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.8.10"
     repositories {
         google()
         mavenCentral()
@@ -29,14 +24,13 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath dokka
-        classpath 'com.karumi:shot:5.14.1'
-        classpath 'io.github.gradle-nexus:publish-plugin:1.3.0'
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
-        classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$ksp_version"
+        classpath libs.plugin.android
+        classpath libs.plugin.kotlin
+        classpath libs.plugin.dokka
+        classpath libs.plugin.shot
+        classpath libs.plugin.nexusPublishing
+        classpath libs.plugin.detekt
+        classpath libs.plugin.ksp
     }
 }
 
@@ -66,9 +60,9 @@ subprojects {
     }
 
     dependencies {
-        detektPlugins "io.nlopez.compose.rules:detekt:0.1.5"
-        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
-        detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
+        detektPlugins libs.detektRules.compose
+        detektPlugins libs.detektRules.formatting
+        detektPlugins libs.detektRules.libraries
     }
 }
 
@@ -79,78 +73,6 @@ task clean(type: Delete) {
 ext {
     group = "net.skyscanner.backpack"
     dokkaOutputDir = "dokka"
-
-    androidxAppCompat = "androidx.appcompat:appcompat:1.6.1"
-    androidxAnnotations = "androidx.annotation:annotation:1.6.0"
-
-    lifecycleVersion = "2.6.0"
-    androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
-    // The below dependencies can be removed once the following issue is fixed: https://issuetracker.google.com/issues/238425626
-    androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
-    androidXLifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-
-    threeTenAbpVersion = "1.4.4"
-    threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
-    threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
-
-    androidXJunitVersion = "1.1.5"
-    junitKtx = "androidx.test.ext:junit-ktx:$androidXJunitVersion"
-    junitAndroid = "androidx.test.ext:junit:$androidXJunitVersion"
-
-    androidMaterial = "com.google.android.material:material:1.8.0"
-    cardView = "androidx.cardview:cardview:1.0.0"
-    googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
-    constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-    swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    picasso = "com.squareup.picasso:picasso:2.71828"
-    ktx = "androidx.core:core-ktx:1.9.0"
-    testCoreKtx = "androidx.test:core-ktx:1.5.0"
-    kotlinReflection = "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    junit = "junit:junit:4.13.2"
-    stetho = "com.facebook.stetho:stetho:1.6.0"
-    facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
-    espressoCore = "androidx.test.espresso:espresso-core:3.5.1"
-    espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
-    testRules = "androidx.test:rules:1.5.0"
-    mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-    mockitoAndroid = "org.mockito:mockito-android:5.2.0"
-
-    kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
-    roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
-    kspApi = "com.google.devtools.ksp:symbol-processing-api:$ksp_version"
-
-    coroutinesVersion = "1.6.4"
-    coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-
-    lintVersion = "30.4.2"
-    lint = "com.android.tools.lint:lint:$lintVersion"
-    lintApi = "com.android.tools.lint:lint-api:$lintVersion"
-    lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
-
-    composeVersion = "2023.01.00"
-    composeBom = dependencies.platform("androidx.compose:compose-bom:$composeVersion")
-    composeUi = [composeBom, "androidx.compose.ui:ui"]
-    composeFoundation = [composeBom, "androidx.compose.foundation:foundation"]
-    composeRuntime = [composeBom, "androidx.compose.runtime:runtime"]
-    composeMaterial = [composeBom, "androidx.compose.material:material"]
-    composeUiToolingPreview = [composeBom, "androidx.compose.ui:ui-tooling-preview"]
-    composeTestJUnit = [composeBom, "androidx.compose.ui:ui-test-junit4"]
-    composeUiTooling = [composeBom, "androidx.compose.ui:ui-tooling"]
-    composeUiTestManifest = [composeBom, "androidx.compose.ui:ui-test-manifest"]
-    composeUtil = [composeBom, "androidx.compose.ui:ui-util"]
-    composeTestManifest = [composeBom, "androidx.compose.ui:ui-test-manifest"]
-    composeActivity = "androidx.activity:activity-compose:1.6.1"
-
-    // update this alongside with Compose version
-    destinationsVersion = "1.7.36-beta"
-    destinationsCore = "io.github.raamcosta.compose-destinations:core:$destinationsVersion"
-    destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
-
-    // update this alongside with Compose version
-    accompanistVersion = "0.28.0"
-    accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
-    accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.demo.meta
 
+import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
-import javax.annotation.concurrent.Immutable
 
 @Immutable
 @Suppress("Detekt.PreviewNaming")

@@ -22,7 +22,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath rootProject.ext.dokka
+        classpath libs.plugin.dokka
     }
 }
 

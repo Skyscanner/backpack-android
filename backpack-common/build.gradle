@@ -38,6 +38,7 @@ android {
 
 dependencies {
     api libs.threeTenAbp.android
+    implementation platform(libs.compose.bom)
     implementation libs.compose.runtime
     androidTestImplementation libs.testing.espressoCore
     androidTestImplementation libs.testing.junit
