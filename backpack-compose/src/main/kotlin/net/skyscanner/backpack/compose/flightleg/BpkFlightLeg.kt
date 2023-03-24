@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -78,6 +79,7 @@ fun BpkFlightLeg(
             carrierLogoContent?.let {
                 Box(
                     modifier = Modifier
+                        .size(BpkSpacing.Lg)
                         .padding(top = BpkSpacing.Sm)
                         .background(color = BpkTheme.colors.textOnDark, shape = RoundedCornerShape(BpkBorderRadius.Xs)),
                     content = it,
