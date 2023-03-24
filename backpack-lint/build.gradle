@@ -20,8 +20,7 @@ apply plugin: 'kotlin'
 apply from: "tokens.gradle.kts"
 
 dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly rootProject.ext.lintApi
+    compileOnly libs.lint.api
 
     testImplementation libs.lint.lint
     testImplementation libs.testing.lint
