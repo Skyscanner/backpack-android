@@ -22,6 +22,7 @@ nexusPublishing = { id = "io.github.gradle-nexus.publish-plugin", version="1.3.0
 androidApplication = { id = "com.android.application", version.ref = "androidPlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidPlugin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin = { id = "org.jetbrains.kotlin", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
