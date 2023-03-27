@@ -37,6 +37,14 @@ data class StoryDefinition(
     val location: FileLocation,
 )
 
+data class SampleDefinition(
+    val component: ComponentDefinition,
+    val kDocs: String,
+    val sourceCode: String,
+    val reference: String,
+    val location: FileLocation,
+)
+
 data class EnumValue(
     val value: String,
     val type: String,

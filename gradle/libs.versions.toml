@@ -62,6 +62,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 google-material = "com.google.android.material:material:1.8.0"
 google-maps = "com.google.android.gms:play-services-maps:18.1.0"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+google-kspSymbols = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:31.1-jre"
 
 square-picasso = "com.squareup.picasso:picasso:2.71828"
@@ -71,6 +72,7 @@ kotlin-reflection = { module = "org.jetbrains.kotlin:kotlin-reflect", version.re
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-compilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
 
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }

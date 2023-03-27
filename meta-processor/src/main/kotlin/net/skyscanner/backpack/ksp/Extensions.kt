@@ -19,9 +19,26 @@
 package net.skyscanner.backpack.ksp
 
 import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSFunctionDeclaration
+import com.google.devtools.ksp.symbol.KSPropertyDeclaration
+import com.google.devtools.ksp.symbol.impl.kotlin.KSFunctionDeclarationImpl
+import com.google.devtools.ksp.symbol.impl.kotlin.KSPropertyDeclarationImpl
+import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 
 operator fun <T> KSAnnotation.get(param: AnnotationParam<T>): T =
     arguments.first { it.name!!.getShortName() == param.name }.value!!.let(param::parse)
 
 fun Sequence<KSAnnotation>.find(definition: AnnotationDefinition): KSAnnotation? =
     find { it.shortName.getShortName() == definition.simpleName }
+
+val KSFunctionDeclaration.bodyText: String
+    get() =
+        (this as KSFunctionDeclarationImpl).ktFunction.bodyText
+
+val KSPropertyDeclaration.bodyText: String
+    get() =
+        (this as KSPropertyDeclarationImpl).ktProperty.getter?.bodyText ?: ""
+
+private val KtDeclarationWithBody.bodyText: String
+    get() =
+        bodyExpression?.text ?: bodyBlockExpression?.statements?.joinToString("\n") { it.text } ?: ""

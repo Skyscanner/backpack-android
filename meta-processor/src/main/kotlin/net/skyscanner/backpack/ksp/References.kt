@@ -40,3 +40,8 @@ object ComponentAnnotation : AnnotationDefinition {
     val paramName = stringParamOf("name")
     val paramToken = booleanParamOf("isToken")
 }
+
+object SampleAnnotation : AnnotationDefinition {
+    override val simpleName = "Sample"
+    override val pkg = metaPkg
+}
