@@ -2,7 +2,7 @@
 kotlin = "1.8.10"
 ksp = "1.8.10-1.0.9" # depends on Kotlin version
 composeCompiler = "1.4.2" # depends on Kotlin version
-destinations = "1.7.36-beta" # update this alongside with compiler version
+destinations = "1.7.37-beta" # update this alongside with compiler version
 accompanist = "0.28.0" # update this alongside with compiler version
 
 androidPlugin = "7.4.2"
@@ -10,7 +10,7 @@ lint = "30.4.2"  # android plugin, lint and sdk-common need to be updated togeth
 androidSdkCommon = "30.4.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.22.0"
-lifecycle = "2.6.0"
+lifecycle = "2.6.1"
 threeTenAbp = "1.4.4"
 androidXJunit = "1.1.5"
 coroutines = "1.6.4"
@@ -95,7 +95,7 @@ accompanist-pager = { module = "com.google.accompanist:accompanist-pager", versi
 protocol-gson = "com.google.code.gson:gson:2.10.1"
 protocol-dadb = "dev.mobile:dadb:1.2.6"
 
-http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.41.0.0" }
+http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.41.1.1" }
 http4k-core = { group = "org.http4k", name = "http4k-core" }
 http4k-serverUnderflow = { group = "org.http4k", name = "http4k-server-undertow" }
 http4k-clientApache = { group = "org.http4k", name = "http4k-client-apache" }
