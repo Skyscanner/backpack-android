@@ -99,6 +99,19 @@ fun FabStorySample1() {
     )
 }
 
+/**
+ * Sample 2
+ */
+@Sample
+@FabComponent
+@Composable
+fun FabStorySample2() =
+    BpkFab(
+        onClick = { },
+        icon = BpkIcon.Flight,
+        contentDescription = stringResource(R.string.content_description),
+    )
+
 private fun showGenericMessageToast(context: Context) {
     BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
 }

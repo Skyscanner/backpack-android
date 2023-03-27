@@ -41,4 +41,17 @@ val KSPropertyDeclaration.bodyText: String
 
 private val KtDeclarationWithBody.bodyText: String
     get() =
-        bodyExpression?.text ?: bodyBlockExpression?.statements?.joinToString("\n") { it.text } ?: ""
+        (
+            bodyExpression
+                ?.text
+                ?.split("\n")
+
+                ?: bodyBlockExpression
+                    ?.statements
+                    ?.map { it.text }
+
+                ?: emptyList()
+            )
+            .filter { it != "{" && it != "}" }
+            .map { it.removePrefix("    ") }
+            .joinToString("\n")
