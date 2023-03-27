@@ -91,7 +91,7 @@ fun ComponentListScreen(
         var searchQuery by rememberSaveable { mutableStateOf("") }
         BpkTextField(
             placeholder = stringResource(R.string.navigation_search),
-            value = searchQuery.replaceFirstChar { it.uppercase() },
+            value = searchQuery,
             onValueChange = { value ->
                 searchQuery = value
             },
@@ -101,11 +101,11 @@ fun ComponentListScreen(
             icon = BpkIcon.Search,
         )
         val filteredTokens = repository.tokenComponents.filter {
-            it.name.contains(searchQuery)
+            it.name.contains(searchQuery, ignoreCase = true)
         }
 
         val filteredComponents = repository.uiComponents.filter {
-            it.name.contains(searchQuery)
+            it.name.contains(searchQuery, ignoreCase = true)
         }
 
         LazyColumn {
