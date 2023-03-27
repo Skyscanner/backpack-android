@@ -96,6 +96,10 @@ android {
     }
 }
 
+ksp {
+    arg("docsDir", "$rootProject.projectDir/docs2/Compose")
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libs.square.picasso

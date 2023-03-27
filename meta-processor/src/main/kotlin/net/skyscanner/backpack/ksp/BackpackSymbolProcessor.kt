@@ -28,7 +28,9 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.validate
 import net.skyscanner.backpack.ksp.visitor.ComponentsVisitor
 import net.skyscanner.backpack.ksp.visitor.ComposeStoriesVisitor
+import net.skyscanner.backpack.ksp.visitor.SamplesVisitor
 import net.skyscanner.backpack.ksp.visitor.ViewStoriesVisitor
+import net.skyscanner.backpack.ksp.writer.writeListOfSamples
 import net.skyscanner.backpack.ksp.writer.writeListOfStories
 
 @OptIn(ExperimentalProcessingApi::class)
@@ -61,7 +63,13 @@ class BackpackSymbolProcessor(
             .filter { it.validate() }
             .mapNotNull { it.accept(ViewStoriesVisitor, components) }
 
+        val samples = resolver
+            .getSymbolsWithAnnotation(SampleAnnotation.qualifiedName)
+            .filter { it.validate() }
+            .mapNotNull { it.accept(SamplesVisitor, components) }
+
         writeListOfStories((composeStories + viewStories).toList(), filer)
+        writeListOfSamples(samples, environment.options["docsDir"]!!)
 
         invoked = true
         return emptyList()

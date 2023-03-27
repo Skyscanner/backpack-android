@@ -46,7 +46,7 @@ object SamplesVisitor : KSDefaultVisitor<Map<KSName, ComponentDefinition>, Sampl
         return when {
             annotation != null && location is FileLocation -> SampleDefinition(
                 component = componentAnnotation ?: error("No component definition is found!"),
-                kDocs = function.docString ?: "",
+                kDocs = (function.docString ?: "").lines().joinToString("\n") { it.trim() },
                 sourceCode = function.bodyText,
                 reference = function.qualifiedName!!.asString(),
                 location = location,

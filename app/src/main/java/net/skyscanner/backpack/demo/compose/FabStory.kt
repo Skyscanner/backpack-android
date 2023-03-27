@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FabComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.Sample
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
@@ -66,6 +67,36 @@ fun FabStory(modifier: Modifier = Modifier) {
             contentDescription = stringResource(R.string.content_description),
         )
     }
+}
+
+/**
+ * Sample
+ */
+@Sample
+@FabComponent
+@Composable
+fun FabStorySample() {
+    val context = LocalContext.current
+    BpkFab(
+        onClick = { showGenericMessageToast(context) },
+        icon = BpkIcon.Flight,
+        contentDescription = stringResource(R.string.content_description),
+    )
+}
+
+/**
+ * Sample 1
+ */
+@Sample
+@FabComponent
+@Composable
+fun FabStorySample1() {
+    val context = LocalContext.current
+    BpkFab(
+        onClick = { showGenericMessageToast(context) },
+        icon = BpkIcon.Flight,
+        contentDescription = stringResource(R.string.content_description),
+    )
 }
 
 private fun showGenericMessageToast(context: Context) {

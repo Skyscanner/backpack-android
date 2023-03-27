@@ -39,6 +39,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.components.CardComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.Sample
 
 @Composable
 @CardComponent
@@ -66,6 +67,18 @@ fun CardStory(modifier: Modifier = Modifier) {
         NoElevationCardExample(cardModifier)
 
         FocusableCardExample(cardModifier)
+    }
+}
+
+/**
+ * Card sample docs:
+ */
+@Sample
+@CardComponent
+@Composable
+fun CardExample() {
+    BpkCard {
+        // content goes here
     }
 }
 
