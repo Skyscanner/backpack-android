@@ -106,7 +106,7 @@ internal class BpkCarouselInternalState constructor(
         return delegate.currentPage - (currentPage - page)
     }
 
-    private fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
+    fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
 
     private fun Int.floorMod(other: Int): Int = when (other) {
         0 -> this
