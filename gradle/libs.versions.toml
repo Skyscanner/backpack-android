@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.8.10"
-ksp = "1.8.10-1.0.9" # depends on Kotlin version
+ksp = "1.8.20-1.0.10" # depends on Kotlin version
 composeCompiler = "1.4.2" # depends on Kotlin version
 destinations = "1.7.37-beta" # update this alongside with compiler version
 accompanist = "0.28.0" # update this alongside with compiler version
