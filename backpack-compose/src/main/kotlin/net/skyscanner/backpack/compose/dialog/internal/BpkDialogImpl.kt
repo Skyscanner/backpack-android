@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -59,7 +60,11 @@ internal fun BpkDialogImpl(
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Box(contentAlignment = Alignment.TopCenter) {
             Surface(
-                modifier = Modifier.padding(top = IconPadding),
+                modifier = Modifier.padding(
+                    top = IconPadding,
+                    start = BpkDimension.Spacing.Lg,
+                    end = BpkDimension.Spacing.Lg,
+                ).widthIn(max = 400.dp),
                 shape = BpkTheme.shapes.medium,
                 color = BpkTheme.colors.surfaceDefault,
             ) {
@@ -86,7 +91,11 @@ internal fun BpkFlareDialogImpl(
 ) {
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(top = IconPadding),
+            modifier = Modifier.padding(
+                top = IconPadding,
+                start = BpkDimension.Spacing.Lg,
+                end = BpkDimension.Spacing.Lg,
+            ).widthIn(max = 400.dp),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
@@ -110,7 +119,11 @@ internal fun BpkImageDialogImpl(
 ) {
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(top = IconPadding),
+            modifier = Modifier.padding(
+                top = IconPadding,
+                start = BpkDimension.Spacing.Lg,
+                end = BpkDimension.Spacing.Lg,
+            ).widthIn(max = 400.dp),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
