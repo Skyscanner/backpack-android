@@ -30,6 +30,7 @@ import net.skyscanner.backpack.compose.dialog.internal.BpkImageDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkSuccessDialog(
@@ -39,7 +40,7 @@ fun BpkSuccessDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -54,6 +55,7 @@ fun BpkSuccessDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkSuccessDialog(
@@ -64,7 +66,7 @@ fun BpkSuccessDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -80,6 +82,7 @@ fun BpkSuccessDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkWarningDialog(
@@ -89,7 +92,7 @@ fun BpkWarningDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -104,6 +107,7 @@ fun BpkWarningDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkWarningDialog(
@@ -114,7 +118,7 @@ fun BpkWarningDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -130,6 +134,7 @@ fun BpkWarningDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkDestructiveDialog(
@@ -139,7 +144,7 @@ fun BpkDestructiveDialog(
     text: String,
     confirmButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Destructive(icon) },
@@ -154,6 +159,7 @@ fun BpkDestructiveDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkFlareDialog(
@@ -162,7 +168,7 @@ fun BpkFlareDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -178,6 +184,7 @@ fun BpkFlareDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkFlareDialog(
@@ -187,7 +194,7 @@ fun BpkFlareDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -204,6 +211,7 @@ fun BpkFlareDialog(
     )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkImageDialog(
@@ -213,7 +221,7 @@ fun BpkImageDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
