@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.text
 
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import net.skyscanner.backpack.compose.LocalTextStyle
 
 @Composable
 fun BpkText(
