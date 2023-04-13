@@ -31,8 +31,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -74,19 +74,16 @@ internal fun BpkButtonImpl(
                 .requiredHeight(size.minHeight),
             interactionSource = interactionSource,
             colors = ButtonDefaults.buttonColors(
-                containerColor = type.backgroundColor(interactionSource),
-                contentColor = Color.Red,
-                disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-                disabledContentColor = Color.Green,
+                backgroundColor = type.backgroundColor(interactionSource),
+                contentColor = type.contentColor(interactionSource),
+                disabledBackgroundColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
+                disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
             ),
             shape = ButtonShape,
             contentPadding = type.contentPadding,
             elevation = null,
             content = {
-                CompositionLocalProvider(
-                    LocalTextStyle provides size.textStyle(),
-//                    LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
-                ) {
+                CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
                     Box {
                         Row(
                             modifier = Modifier.hideContentIf(loading),
