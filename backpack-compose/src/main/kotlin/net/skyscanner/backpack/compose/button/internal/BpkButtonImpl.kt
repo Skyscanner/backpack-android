@@ -52,7 +52,6 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -78,7 +77,7 @@ internal fun BpkButtonImpl(
                 containerColor = type.backgroundColor(interactionSource),
                 contentColor = type.contentColor(interactionSource),
                 disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-                disabledContentColor = BpkButtonColors.linkOnDarkPressedForeground,
+                disabledContentColor = Color(0x80FFFFFF),
             ),
             shape = ButtonShape,
             contentPadding = type.contentPadding,
