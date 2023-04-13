@@ -77,7 +77,7 @@ internal fun BpkButtonImpl(
                 containerColor = type.backgroundColor(interactionSource),
                 contentColor = type.contentColor(interactionSource),
                 disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-                disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
+                disabledContentColor = Color.Red,
             ),
             shape = ButtonShape,
             contentPadding = type.contentPadding,
