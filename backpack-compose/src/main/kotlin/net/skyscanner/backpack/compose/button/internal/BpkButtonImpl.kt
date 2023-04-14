@@ -77,16 +77,13 @@ internal fun BpkButtonImpl(
                 backgroundColor = type.backgroundColor(interactionSource),
                 contentColor = type.contentColor(interactionSource),
                 disabledBackgroundColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-                disabledContentColor = Color(0x80FFFFFF),
+                disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
             ),
             shape = ButtonShape,
             contentPadding = type.contentPadding,
             elevation = null,
             content = {
-                CompositionLocalProvider(
-                    LocalTextStyle provides size.textStyle(),
-                    LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
-                ) {
+                CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
                     Box {
                         Row(
                             modifier = Modifier.hideContentIf(loading),
