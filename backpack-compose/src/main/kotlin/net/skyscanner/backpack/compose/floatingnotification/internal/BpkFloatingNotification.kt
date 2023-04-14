@@ -30,13 +30,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.Snackbar
+import androidx.compose.material3.Snackbar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -56,10 +56,12 @@ internal fun BpkFloatingNotificationImpl(
     Snackbar(
         modifier = modifier,
         shape = RoundedCornerShape(BpkBorderRadius.Md),
-        backgroundColor = BpkTheme.colors.corePrimary,
+        containerColor = BpkTheme.colors.corePrimary,
         contentColor = BpkTheme.colors.textOnDark,
     ) {
-        CompositionLocalProvider(LocalContentAlpha provides 1f) {
+        CompositionLocalProvider(
+            LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
+        ) {
             Row(
                 modifier = Modifier.fillMaxHeight(),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
