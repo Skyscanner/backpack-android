@@ -19,10 +19,10 @@
 package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
