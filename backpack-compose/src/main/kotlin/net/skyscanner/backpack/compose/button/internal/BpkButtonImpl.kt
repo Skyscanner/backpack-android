@@ -31,8 +31,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -74,9 +74,9 @@ internal fun BpkButtonImpl(
                 .requiredHeight(size.minHeight),
             interactionSource = interactionSource,
             colors = ButtonDefaults.buttonColors(
-                containerColor = type.backgroundColor(interactionSource),
+                backgroundColor = type.backgroundColor(interactionSource),
                 contentColor = type.contentColor(interactionSource),
-                disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
+                disabledBackgroundColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
                 disabledContentColor = Color(0x80FFFFFF),
             ),
             shape = ButtonShape,
