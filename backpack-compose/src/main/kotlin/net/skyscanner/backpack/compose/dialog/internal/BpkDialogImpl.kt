@@ -60,11 +60,7 @@ internal fun BpkDialogImpl(
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Box(contentAlignment = Alignment.TopCenter) {
             Surface(
-                modifier = Modifier.padding(
-                    top = IconPadding,
-                    start = BpkDimension.Spacing.Lg,
-                    end = BpkDimension.Spacing.Lg,
-                ).widthIn(max = 400.dp),
+                modifier = Modifier.dialogSurface(),
                 shape = BpkTheme.shapes.medium,
                 color = BpkTheme.colors.surfaceDefault,
             ) {
@@ -91,11 +87,7 @@ internal fun BpkFlareDialogImpl(
 ) {
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(
-                top = IconPadding,
-                start = BpkDimension.Spacing.Lg,
-                end = BpkDimension.Spacing.Lg,
-            ).widthIn(max = 400.dp),
+            modifier = Modifier.dialogSurface(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
@@ -119,11 +111,7 @@ internal fun BpkImageDialogImpl(
 ) {
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(
-                top = IconPadding,
-                start = BpkDimension.Spacing.Lg,
-                end = BpkDimension.Spacing.Lg,
-            ).widthIn(max = 400.dp),
+            modifier = Modifier.dialogSurface(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
@@ -213,6 +201,16 @@ private fun DialogIcon(icon: Dialog.Icon?) {
             )
         }
     }
+}
+
+private fun Modifier.dialogSurface(): Modifier {
+    return this.then(
+        Modifier.padding(
+            top = IconPadding,
+            start = BpkDimension.Spacing.Lg,
+            end = BpkDimension.Spacing.Lg,
+        ).widthIn(max = 400.dp),
+    )
 }
 
 private val IconSize = 64.dp
