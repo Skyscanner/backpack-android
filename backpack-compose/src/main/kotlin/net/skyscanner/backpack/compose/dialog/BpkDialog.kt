@@ -30,7 +30,6 @@ import net.skyscanner.backpack.compose.dialog.internal.BpkImageDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkSuccessDialog(
@@ -40,7 +39,8 @@ fun BpkSuccessDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -51,11 +51,10 @@ fun BpkSuccessDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkSuccessDialog(
@@ -66,7 +65,8 @@ fun BpkSuccessDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -78,11 +78,10 @@ fun BpkSuccessDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkWarningDialog(
@@ -92,7 +91,8 @@ fun BpkWarningDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -103,11 +103,10 @@ fun BpkWarningDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkWarningDialog(
@@ -118,7 +117,8 @@ fun BpkWarningDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -130,11 +130,10 @@ fun BpkWarningDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkDestructiveDialog(
@@ -144,7 +143,8 @@ fun BpkDestructiveDialog(
     text: String,
     confirmButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Destructive(icon) },
@@ -155,11 +155,10 @@ fun BpkDestructiveDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkFlareDialog(
@@ -168,7 +167,8 @@ fun BpkFlareDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -179,12 +179,11 @@ fun BpkFlareDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         content = content,
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkFlareDialog(
@@ -194,7 +193,8 @@ fun BpkFlareDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -206,12 +206,11 @@ fun BpkFlareDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         content = content,
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkImageDialog(
@@ -221,7 +220,8 @@ fun BpkImageDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
@@ -232,13 +232,12 @@ fun BpkImageDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         textAlign = textAlign,
         content = content,
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkImageDialog(
@@ -249,7 +248,8 @@ fun BpkImageDialog(
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
@@ -261,10 +261,17 @@ fun BpkImageDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         textAlign = textAlign,
         content = content,
     )
 }
+
+@OptIn(ExperimentalComposeUiApi::class)
+private fun getDialogProperties(dismissOnBackPress: Boolean, dismissOnClickOutside: Boolean) = DialogProperties(
+    dismissOnBackPress = dismissOnBackPress,
+    dismissOnClickOutside = dismissOnClickOutside,
+    usePlatformDefaultWidth = false,
+)
 
 data class DialogButton(internal val text: String, internal val onClick: () -> Unit)
