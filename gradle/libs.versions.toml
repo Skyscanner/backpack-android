@@ -5,7 +5,7 @@ composeCompiler = "1.4.2" # depends on Kotlin version
 destinations = "1.7.37-beta" # update this alongside with compiler version
 accompanist = "0.28.0" # update this alongside with compiler version
 
-androidPlugin = "7.4.2"
+androidPlugin = "8.0.0"
 lint = "30.4.2"  # android plugin, lint and sdk-common need to be updated together
 androidSdkCommon = "30.4.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
