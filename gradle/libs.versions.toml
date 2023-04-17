@@ -1,9 +1,9 @@
 [versions]
-kotlin = "1.8.10"
-ksp = "1.8.10-1.0.9" # depends on Kotlin version
-composeCompiler = "1.4.2" # depends on Kotlin version
-destinations = "1.7.37-beta" # update this alongside with compiler version
-accompanist = "0.28.0" # update this alongside with compiler version
+kotlin = "1.8.20"
+ksp = "1.8.20-1.0.10" # depends on Kotlin version
+composeCompiler = "1.4.5" # depends on Kotlin version
+destinations = "1.8.39-beta" # update this alongside with compiler version
+accompanist = "0.30.1" # update this alongside with compiler version
 
 androidPlugin = "7.4.2"
 lint = "30.4.2"  # android plugin, lint and sdk-common need to be updated together
@@ -36,7 +36,7 @@ androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 androidx-coreKts = "androidx.core:core-ktx:1.10.0"
 
-androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
+androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.1"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -75,7 +75,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.01.00" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.04.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
@@ -85,7 +85,7 @@ compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-compose-activity = "androidx.activity:activity-compose:1.6.1"
+compose-activity = "androidx.activity:activity-compose:1.7.0"
 
 destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
 destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
