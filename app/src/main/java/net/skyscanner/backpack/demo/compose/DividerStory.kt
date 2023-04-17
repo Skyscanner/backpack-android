@@ -39,18 +39,10 @@ fun DividerStory(modifier: Modifier = Modifier) {
 
         Column {
             BpkText(
-                text = stringResource(R.string.divider_no_indent),
+                text = stringResource(R.string.generic_default),
                 modifier = Modifier.padding(BpkSpacing.Base),
             )
             DividerSampleNoIndent()
-        }
-
-        Column {
-            BpkText(
-                text = stringResource(R.string.divider_indent),
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            DividerSample_WithIndent()
         }
     }
 }
@@ -58,9 +50,4 @@ fun DividerStory(modifier: Modifier = Modifier) {
 @Composable
 internal fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
     BpkDivider(modifier = modifier)
-}
-
-@Composable
-internal fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
-    BpkDivider(modifier = modifier, startIndent = BpkSpacing.Base)
 }
