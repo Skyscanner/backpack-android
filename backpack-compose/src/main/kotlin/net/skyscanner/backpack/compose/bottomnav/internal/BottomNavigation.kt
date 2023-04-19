@@ -1,8 +1,8 @@
 package net.skyscanner.backpack.compose.bottomnav.internal
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.TweenSpec
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,10 +17,11 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
@@ -67,6 +68,11 @@ internal fun RowScope.BottomNavigationItem(
     // provided by BottomNavigationTransition.
     val ripple = rememberRipple(bounded = false, color = BpkTheme.colors.textLink)
 
+    val contentColor by animateColorAsState(
+        targetValue = if (selected) BpkTheme.colors.textLink else BpkTheme.colors.textSecondary,
+        animationSpec = BottomNavigationAnimationSpec,
+    )
+
     Box(
         modifier
             .selectable(
@@ -80,17 +86,8 @@ internal fun RowScope.BottomNavigationItem(
         contentAlignment = Alignment.Center,
     ) {
 
-        val color = lerp(
-            start = BpkTheme.colors.textSecondary,
-            stop = BpkTheme.colors.textLink,
-            fraction = animateFloatAsState(
-                targetValue = if (selected) 1f else 0f,
-                animationSpec = BottomNavigationAnimationSpec,
-            ).value,
-        )
-
         CompositionLocalProvider(
-            LocalContentColor provides color,
+            LocalContentColor provides contentColor,
         ) {
             BottomNavigationItemBaselineLayout(
                 icon = icon,
@@ -144,7 +141,7 @@ private fun BottomNavigationItemBaselineLayout(
     }
 }
 
-private val BottomNavigationAnimationSpec = TweenSpec<Float>(
+private val BottomNavigationAnimationSpec = TweenSpec<Color>(
     durationMillis = 300,
     easing = FastOutSlowInEasing,
 )
