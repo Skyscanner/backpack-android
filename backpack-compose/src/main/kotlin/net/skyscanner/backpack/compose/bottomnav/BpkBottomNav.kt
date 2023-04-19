@@ -115,8 +115,6 @@ fun BpkBottomNav(
                         overflow = TextOverflow.Ellipsis,
                     )
                 },
-                selectedContentColor = BpkTheme.colors.textLink,
-                unselectedContentColor = BpkTheme.colors.textSecondary,
             )
         }
     }

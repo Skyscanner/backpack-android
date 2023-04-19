@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
@@ -73,12 +72,7 @@ internal fun RowScope.BottomNavigationItem(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     label: @Composable (() -> Unit)? = null,
-    alwaysShowLabel: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    selectedContentColor: Color = LocalContentColor.current,
-    unselectedContentColor: Color = selectedContentColor.copy(alpha = ContentAlpha.medium),
 ) {
     val styledLabel: @Composable (() -> Unit)? = label?.let {
         @Composable {
@@ -89,27 +83,26 @@ internal fun RowScope.BottomNavigationItem(
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
     // provided by BottomNavigationTransition.
-    val ripple = rememberRipple(bounded = false, color = selectedContentColor)
+    val ripple = rememberRipple(bounded = false, color = BpkTheme.colors.textLink)
 
     Box(
         modifier
             .selectable(
                 selected = selected,
                 onClick = onClick,
-                enabled = enabled,
                 role = Role.Tab,
-                interactionSource = interactionSource,
+                interactionSource = remember { MutableInteractionSource() },
                 indication = ripple,
             )
             .weight(1f),
         contentAlignment = Alignment.Center,
     ) {
         BottomNavigationTransition(
-            selectedContentColor,
-            unselectedContentColor,
-            selected,
+            activeColor = BpkTheme.colors.textLink,
+            inactiveColor = BpkTheme.colors.textSecondary,
+            selected = selected,
         ) { progress ->
-            val animationProgress = if (alwaysShowLabel) 1f else progress
+            val animationProgress = 1f
 
             BottomNavigationItemBaselineLayout(
                 icon = icon,
