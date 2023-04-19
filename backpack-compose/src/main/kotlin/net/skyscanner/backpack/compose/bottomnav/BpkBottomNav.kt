@@ -19,31 +19,15 @@
 
 package net.skyscanner.backpack.compose.bottomnav
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigation
 import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Stable
 sealed interface BpkBottomNavItem {
@@ -82,63 +66,22 @@ fun BpkBottomNav(
     ) {
         items.forEach { tabItem ->
             BottomNavigationItem(
+                tabItem = tabItem,
                 selected = selectedItemId == tabItem.id,
                 onClick = { onTabClicked(tabItem.id) },
-                icon = {
-                    Box {
-                        when (tabItem) {
-                            is IconBottomNavItem -> BpkIcon(
-                                icon = tabItem.icon,
-                                contentDescription = null,
-                                size = BpkIconSize.Large,
-                            )
-                            is PainterBottomNavItem -> Icon(
-                                modifier = Modifier.height(BpkSpacing.Lg),
-                                painter = tabItem.painter,
-                                contentDescription = null,
-                            )
-                        }
-                        if (tabItem.showBadge) {
-                            NotificationDot(
-                                Modifier
-                                    .align(Alignment.BottomEnd)
-                                    .offset(x = 1.dp, y = (-2).dp),
-                            )
-                        }
-                    }
-                },
-                label = {
-                    BpkText(
-                        text = tabItem.title,
-                        style = BpkTheme.typography.label3,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                },
             )
         }
     }
 }
 
-@Composable
-private fun NotificationDot(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .size(12.dp)
-            .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
-            .padding(2.dp)
-            .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
-    )
-}
-
-private data class IconBottomNavItem(
+internal data class IconBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,
     val icon: BpkIcon,
 ) : BpkBottomNavItem
 
-private data class PainterBottomNavItem(
+internal data class PainterBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,

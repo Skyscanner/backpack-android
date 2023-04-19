@@ -3,34 +3,44 @@ package net.skyscanner.backpack.compose.bottomnav.internal
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.TweenSpec
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.LastBaseline
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavItem
+import net.skyscanner.backpack.compose.bottomnav.IconBottomNavItem
+import net.skyscanner.backpack.compose.bottomnav.PainterBottomNavItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import kotlin.math.max
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BottomNavigation(
@@ -57,11 +67,10 @@ internal fun BottomNavigation(
 
 @Composable
 internal fun RowScope.BottomNavigationItem(
+    tabItem: BpkBottomNavItem,
     selected: Boolean,
     onClick: () -> Unit,
-    icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    label: @Composable () -> Unit,
 ) {
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
@@ -69,12 +78,14 @@ internal fun RowScope.BottomNavigationItem(
     val ripple = rememberRipple(bounded = false, color = BpkTheme.colors.textLink)
 
     val contentColor by animateColorAsState(
+        label = "BottomNavItem content color",
         targetValue = if (selected) BpkTheme.colors.textLink else BpkTheme.colors.textSecondary,
         animationSpec = BottomNavigationAnimationSpec,
     )
 
-    Box(
+    Column(
         modifier
+            .fillMaxHeight()
             .selectable(
                 selected = selected,
                 onClick = onClick,
@@ -83,62 +94,54 @@ internal fun RowScope.BottomNavigationItem(
                 indication = ripple,
             )
             .weight(1f),
-        contentAlignment = Alignment.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
 
-        CompositionLocalProvider(
-            LocalContentColor provides contentColor,
-        ) {
-            BottomNavigationItemBaselineLayout(
-                icon = icon,
-                label = label,
-            )
+        Box {
+            when (tabItem) {
+                is IconBottomNavItem -> BpkIcon(
+                    icon = tabItem.icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Large,
+                    tint = contentColor,
+                )
+
+                is PainterBottomNavItem -> Icon(
+                    modifier = Modifier.height(BpkSpacing.Lg),
+                    painter = tabItem.painter,
+                    contentDescription = null,
+                    tint = contentColor,
+                )
+            }
+            if (tabItem.showBadge) {
+                NotificationDot(
+                    Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset(x = 1.dp, y = (-2).dp),
+                )
+            }
         }
+
+        BpkText(
+            text = tabItem.title,
+            style = BpkTheme.typography.label3,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = contentColor,
+        )
     }
 }
 
 @Composable
-private fun BottomNavigationItemBaselineLayout(
-    icon: @Composable () -> Unit,
-    label: @Composable (() -> Unit),
-) {
-    Layout(
-        {
-            Box(Modifier.layoutId("icon")) { icon() }
-            Box(
-                Modifier
-                    .layoutId("label")
-                    .padding(horizontal = BottomNavigationItemHorizontalPadding),
-            ) { label() }
-        },
-    ) { measurables, constraints ->
-        val iconPlaceable = measurables.first { it.layoutId == "icon" }.measure(constraints)
-
-        val labelPlaceable = measurables.first { it.layoutId == "label" }.measure(
-            // Measure with loose constraints for height as we don't want the label to take up more
-            // space than it needs
-            constraints.copy(minHeight = 0),
-        )
-
-        // If there is no label, just place the icon.
-        val height = constraints.maxHeight
-        // TODO: consider multiple lines of text here, not really supported by spec but we should
-        // have a better strategy than overlapping the icon and label
-        val baseline = labelPlaceable[LastBaseline]
-        val baselineOffset = CombinedItemTextBaseline.roundToPx()
-        // Label should be [baselineOffset] from the bottom
-        val labelY = height - baseline - baselineOffset
-        // Icon should be [baselineOffset] from the text baseline, which is itself
-        // [baselineOffset] from the bottom
-        val selectedIconY = height - (baselineOffset * 2) - iconPlaceable.height
-        val containerWidth = max(labelPlaceable.width, iconPlaceable.width)
-        val labelX = (containerWidth - labelPlaceable.width) / 2
-        val iconX = (containerWidth - iconPlaceable.width) / 2
-        layout(containerWidth, height) {
-            labelPlaceable.placeRelative(labelX, labelY)
-            iconPlaceable.placeRelative(iconX, selectedIconY)
-        }
-    }
+private fun NotificationDot(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .size(12.dp)
+            .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
+            .padding(2.dp)
+            .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
+    )
 }
 
 private val BottomNavigationAnimationSpec = TweenSpec<Color>(
@@ -147,5 +150,3 @@ private val BottomNavigationAnimationSpec = TweenSpec<Color>(
 )
 
 private val BottomNavigationHeight = 56.dp
-private val BottomNavigationItemHorizontalPadding = 12.dp
-private val CombinedItemTextBaseline = 12.dp
