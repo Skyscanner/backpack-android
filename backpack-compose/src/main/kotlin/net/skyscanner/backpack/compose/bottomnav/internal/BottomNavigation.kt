@@ -9,20 +9,16 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -31,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavItem
 import net.skyscanner.backpack.compose.bottomnav.IconBottomNavItem
@@ -41,29 +36,6 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-
-@Composable
-internal fun BottomNavigation(
-    elevation: Dp,
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    Surface(
-        color = BpkTheme.colors.surfaceDefault,
-        contentColor = BpkTheme.colors.textSecondary,
-        shadowElevation = elevation,
-        modifier = modifier,
-    ) {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .height(BottomNavigationHeight)
-                .selectableGroup(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            content = content,
-        )
-    }
-}
 
 @Composable
 internal fun RowScope.BottomNavigationItem(
@@ -158,5 +130,3 @@ private val BottomNavigationAnimationSpec = TweenSpec<Color>(
     durationMillis = 300,
     easing = FastOutSlowInEasing,
 )
-
-private val BottomNavigationHeight = 56.dp

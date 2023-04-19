@@ -19,14 +19,21 @@
 
 package net.skyscanner.backpack.compose.bottomnav
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
-import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigation
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 
 @Stable
@@ -60,16 +67,26 @@ fun BpkBottomNav(
     modifier: Modifier = Modifier,
     elevation: Dp = BpkElevation.Lg,
 ) {
-    BottomNavigation(
+    Surface(
+        color = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textSecondary,
+        shadowElevation = elevation,
         modifier = modifier,
-        elevation = elevation,
     ) {
-        items.forEach { tabItem ->
-            BottomNavigationItem(
-                tabItem = tabItem,
-                selected = selectedItemId == tabItem.id,
-                onClick = { onTabClicked(tabItem.id) },
-            )
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .selectableGroup(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            items.forEach { tabItem ->
+                BottomNavigationItem(
+                    tabItem = tabItem,
+                    selected = selectedItemId == tabItem.id,
+                    onClick = { onTabClicked(tabItem.id) },
+                )
+            }
         }
     }
 }
