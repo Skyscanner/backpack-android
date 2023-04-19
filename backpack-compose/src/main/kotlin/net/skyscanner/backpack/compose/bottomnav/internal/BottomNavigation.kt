@@ -2,7 +2,7 @@ package net.skyscanner.backpack.compose.bottomnav.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -50,7 +50,10 @@ internal fun RowScope.BottomNavigationItem(
     val contentColor by animateColorAsState(
         label = "BottomNavItem content color",
         targetValue = if (selected) BpkTheme.colors.textLink else BpkTheme.colors.textSecondary,
-        animationSpec = BottomNavigationAnimationSpec,
+        animationSpec = tween(
+            durationMillis = 300,
+            easing = FastOutSlowInEasing,
+        ),
     )
 
     Column(
@@ -125,8 +128,3 @@ private fun NotificationDot(modifier: Modifier = Modifier) {
             .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
     )
 }
-
-private val BottomNavigationAnimationSpec = TweenSpec<Color>(
-    durationMillis = 300,
-    easing = FastOutSlowInEasing,
-)
