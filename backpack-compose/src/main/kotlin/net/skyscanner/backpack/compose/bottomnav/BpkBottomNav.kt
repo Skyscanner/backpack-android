@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigation
-import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationDefaults
-import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -39,10 +36,13 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigation
+import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Stable
@@ -74,12 +74,10 @@ fun BpkBottomNav(
     selectedItemId: Int,
     items: List<BpkBottomNavItem>,
     modifier: Modifier = Modifier,
-    elevation: Dp = BottomNavigationDefaults.Elevation,
+    elevation: Dp = BpkElevation.Lg,
 ) {
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = BpkTheme.colors.surfaceDefault,
-        contentColor = BpkTheme.colors.textSecondary,
         elevation = elevation,
     ) {
         items.forEach { tabItem ->

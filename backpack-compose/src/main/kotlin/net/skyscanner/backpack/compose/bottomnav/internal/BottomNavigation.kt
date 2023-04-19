@@ -18,9 +18,7 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.contentColorFor
-import androidx.compose.material.primarySurface
+import androidx.compose.material3.Surface
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -42,21 +40,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
 fun BottomNavigation(
+    elevation: Dp,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.primarySurface,
-    contentColor: Color = contentColorFor(backgroundColor),
-    elevation: Dp = BottomNavigationDefaults.Elevation,
     content: @Composable RowScope.() -> Unit,
 ) {
     Surface(
-        color = backgroundColor,
-        contentColor = contentColor,
-        elevation = elevation,
+        color = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textSecondary,
+        shadowElevation = elevation,
         modifier = modifier,
     ) {
         Row(
@@ -121,10 +118,6 @@ fun RowScope.BottomNavigationItem(
             )
         }
     }
-}
-
-object BottomNavigationDefaults {
-    val Elevation = 8.dp
 }
 
 @Composable
