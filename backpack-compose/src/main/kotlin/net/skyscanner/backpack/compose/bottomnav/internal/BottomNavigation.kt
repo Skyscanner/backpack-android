@@ -13,15 +13,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material3.Surface
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,10 +28,10 @@ import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import kotlin.math.max
 
@@ -71,12 +66,6 @@ internal fun RowScope.BottomNavigationItem(
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
 ) {
-    val styledLabel: @Composable (() -> Unit)? = label?.let {
-        @Composable {
-            val style = MaterialTheme.typography.caption.copy(textAlign = TextAlign.Center)
-            ProvideTextStyle(style, content = label)
-        }
-    }
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
     // provided by BottomNavigationTransition.
@@ -106,11 +95,10 @@ internal fun RowScope.BottomNavigationItem(
 
         CompositionLocalProvider(
             LocalContentColor provides color.copy(alpha = 1f),
-            LocalContentAlpha provides color.alpha,
         ) {
             BottomNavigationItemBaselineLayout(
                 icon = icon,
-                label = styledLabel,
+                label = label,
             )
         }
     }
