@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import kotlin.math.max
-import kotlin.math.roundToInt
 
 @Composable
 internal fun BottomNavigation(
@@ -102,12 +101,10 @@ internal fun RowScope.BottomNavigationItem(
             inactiveColor = BpkTheme.colors.textSecondary,
             selected = selected,
         ) { progress ->
-            val animationProgress = 1f
 
             BottomNavigationItemBaselineLayout(
                 icon = icon,
                 label = styledLabel,
-                iconPositionAnimationProgress = animationProgress,
             )
         }
     }
@@ -139,8 +136,6 @@ private fun BottomNavigationTransition(
 private fun BottomNavigationItemBaselineLayout(
     icon: @Composable () -> Unit,
     label: @Composable (() -> Unit)?,
-    /*@FloatRange(from = 0.0, to = 1.0)*/
-    iconPositionAnimationProgress: Float,
 ) {
     Layout(
         {
@@ -149,7 +144,6 @@ private fun BottomNavigationItemBaselineLayout(
                 Box(
                     Modifier
                         .layoutId("label")
-                        .alpha(iconPositionAnimationProgress)
                         .padding(horizontal = BottomNavigationItemHorizontalPadding),
                 ) { label() }
             }
@@ -173,7 +167,6 @@ private fun BottomNavigationItemBaselineLayout(
                 labelPlaceable!!,
                 iconPlaceable,
                 constraints,
-                iconPositionAnimationProgress,
             )
         }
     }
@@ -194,8 +187,6 @@ private fun MeasureScope.placeLabelAndIcon(
     labelPlaceable: Placeable,
     iconPlaceable: Placeable,
     constraints: Constraints,
-    /*@FloatRange(from = 0.0, to = 1.0)*/
-    iconPositionAnimationProgress: Float,
 ): MeasureResult {
     val height = constraints.maxHeight
 
@@ -208,8 +199,6 @@ private fun MeasureScope.placeLabelAndIcon(
     // Label should be [baselineOffset] from the bottom
     val labelY = height - baseline - baselineOffset
 
-    val unselectedIconY = (height - iconPlaceable.height) / 2
-
     // Icon should be [baselineOffset] from the text baseline, which is itself
     // [baselineOffset] from the bottom
     val selectedIconY = height - (baselineOffset * 2) - iconPlaceable.height
@@ -219,19 +208,9 @@ private fun MeasureScope.placeLabelAndIcon(
     val labelX = (containerWidth - labelPlaceable.width) / 2
     val iconX = (containerWidth - iconPlaceable.width) / 2
 
-    // How far the icon needs to move between unselected and selected states
-    val iconDistance = unselectedIconY - selectedIconY
-
-    // When selected the icon is above the unselected position, so we will animate moving
-    // downwards from the selected state, so when progress is 1, the total distance is 0, and we
-    // are at the selected state.
-    val offset = (iconDistance * (1 - iconPositionAnimationProgress)).roundToInt()
-
     return layout(containerWidth, height) {
-        if (iconPositionAnimationProgress != 0f) {
-            labelPlaceable.placeRelative(labelX, labelY + offset)
-        }
-        iconPlaceable.placeRelative(iconX, selectedIconY + offset)
+        labelPlaceable.placeRelative(labelX, labelY)
+        iconPlaceable.placeRelative(iconX, selectedIconY)
     }
 }
 
