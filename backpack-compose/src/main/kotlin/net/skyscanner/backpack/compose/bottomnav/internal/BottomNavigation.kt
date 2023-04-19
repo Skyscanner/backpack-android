@@ -135,7 +135,7 @@ private fun BottomNavIcon(
         }
         if (tabItem.showBadge) {
             NotificationDot(
-                Modifier
+                modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .offset(x = 1.dp, y = (-2).dp),
             )
