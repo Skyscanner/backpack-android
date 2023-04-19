@@ -72,9 +72,7 @@ internal fun RowScope.BottomNavigationItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    // The color of the Ripple should always the selected color, as we want to show the color
-    // before the item is considered selected, and hence before the new contentColor is
-    // provided by BottomNavigationTransition.
+
     val ripple = rememberRipple(bounded = false, color = BpkTheme.colors.textLink)
 
     val contentColor by animateColorAsState(
@@ -84,44 +82,24 @@ internal fun RowScope.BottomNavigationItem(
     )
 
     Column(
-        modifier
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
             .fillMaxHeight()
+            .weight(1f)
             .selectable(
                 selected = selected,
                 onClick = onClick,
                 role = Role.Tab,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = ripple,
-            )
-            .weight(1f),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+            ),
     ) {
 
-        Box {
-            when (tabItem) {
-                is IconBottomNavItem -> BpkIcon(
-                    icon = tabItem.icon,
-                    contentDescription = null,
-                    size = BpkIconSize.Large,
-                    tint = contentColor,
-                )
-
-                is PainterBottomNavItem -> Icon(
-                    modifier = Modifier.height(BpkSpacing.Lg),
-                    painter = tabItem.painter,
-                    contentDescription = null,
-                    tint = contentColor,
-                )
-            }
-            if (tabItem.showBadge) {
-                NotificationDot(
-                    Modifier
-                        .align(Alignment.BottomEnd)
-                        .offset(x = 1.dp, y = (-2).dp),
-                )
-            }
-        }
+        BottomNavIcon(
+            tabItem = tabItem,
+            tint = contentColor,
+        )
 
         BpkText(
             text = tabItem.title,
@@ -130,6 +108,38 @@ internal fun RowScope.BottomNavigationItem(
             overflow = TextOverflow.Ellipsis,
             color = contentColor,
         )
+    }
+}
+
+@Composable
+private fun BottomNavIcon(
+    tabItem: BpkBottomNavItem,
+    tint: Color,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier) {
+        when (tabItem) {
+            is IconBottomNavItem -> BpkIcon(
+                icon = tabItem.icon,
+                contentDescription = null,
+                size = BpkIconSize.Large,
+                tint = tint,
+            )
+
+            is PainterBottomNavItem -> Icon(
+                modifier = Modifier.height(BpkSpacing.Lg),
+                painter = tabItem.painter,
+                contentDescription = null,
+                tint = tint,
+            )
+        }
+        if (tabItem.showBadge) {
+            NotificationDot(
+                Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 1.dp, y = (-2).dp),
+            )
+        }
     }
 }
 
