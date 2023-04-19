@@ -25,8 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
@@ -96,39 +94,25 @@ internal fun RowScope.BottomNavigationItem(
             .weight(1f),
         contentAlignment = Alignment.Center,
     ) {
-        BottomNavigationTransition(
-            activeColor = BpkTheme.colors.textLink,
-            inactiveColor = BpkTheme.colors.textSecondary,
-            selected = selected,
-        ) { progress ->
 
+        val color = lerp(
+            start = BpkTheme.colors.textSecondary,
+            stop = BpkTheme.colors.textLink,
+            fraction = animateFloatAsState(
+                targetValue = if (selected) 1f else 0f,
+                animationSpec = BottomNavigationAnimationSpec,
+            ).value,
+        )
+
+        CompositionLocalProvider(
+            LocalContentColor provides color.copy(alpha = 1f),
+            LocalContentAlpha provides color.alpha,
+        ) {
             BottomNavigationItemBaselineLayout(
                 icon = icon,
                 label = styledLabel,
             )
         }
-    }
-}
-
-@Composable
-private fun BottomNavigationTransition(
-    activeColor: Color,
-    inactiveColor: Color,
-    selected: Boolean,
-    content: @Composable (animationProgress: Float) -> Unit,
-) {
-    val animationProgress by animateFloatAsState(
-        targetValue = if (selected) 1f else 0f,
-        animationSpec = BottomNavigationAnimationSpec,
-    )
-
-    val color = lerp(inactiveColor, activeColor, animationProgress)
-
-    CompositionLocalProvider(
-        LocalContentColor provides color.copy(alpha = 1f),
-        LocalContentAlpha provides color.alpha,
-    ) {
-        content(animationProgress)
     }
 }
 
