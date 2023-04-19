@@ -64,7 +64,7 @@ internal fun RowScope.BottomNavigationItem(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    label: @Composable (() -> Unit)? = null,
+    label: @Composable () -> Unit,
 ) {
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
@@ -94,7 +94,7 @@ internal fun RowScope.BottomNavigationItem(
         )
 
         CompositionLocalProvider(
-            LocalContentColor provides color.copy(alpha = 1f),
+            LocalContentColor provides color,
         ) {
             BottomNavigationItemBaselineLayout(
                 icon = icon,
@@ -107,18 +107,16 @@ internal fun RowScope.BottomNavigationItem(
 @Composable
 private fun BottomNavigationItemBaselineLayout(
     icon: @Composable () -> Unit,
-    label: @Composable (() -> Unit)?,
+    label: @Composable (() -> Unit),
 ) {
     Layout(
         {
             Box(Modifier.layoutId("icon")) { icon() }
-            if (label != null) {
-                Box(
-                    Modifier
-                        .layoutId("label")
-                        .padding(horizontal = BottomNavigationItemHorizontalPadding),
-                ) { label() }
-            }
+            Box(
+                Modifier
+                    .layoutId("label")
+                    .padding(horizontal = BottomNavigationItemHorizontalPadding),
+            ) { label() }
         },
     ) { measurables, constraints ->
         val iconPlaceable = measurables.first { it.layoutId == "icon" }.measure(constraints)
@@ -132,26 +130,11 @@ private fun BottomNavigationItemBaselineLayout(
         }
 
         // If there is no label, just place the icon.
-        if (label == null) {
-            placeIcon(iconPlaceable, constraints)
-        } else {
-            placeLabelAndIcon(
-                labelPlaceable!!,
-                iconPlaceable,
-                constraints,
-            )
-        }
-    }
-}
-
-private fun MeasureScope.placeIcon(
-    iconPlaceable: Placeable,
-    constraints: Constraints,
-): MeasureResult {
-    val height = constraints.maxHeight
-    val iconY = (height - iconPlaceable.height) / 2
-    return layout(iconPlaceable.width, height) {
-        iconPlaceable.placeRelative(0, iconY)
+        placeLabelAndIcon(
+            labelPlaceable!!,
+            iconPlaceable,
+            constraints,
+        )
     }
 }
 
