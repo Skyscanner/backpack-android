@@ -45,7 +45,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
-fun BottomNavigation(
+internal fun BottomNavigation(
     elevation: Dp,
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
@@ -68,7 +68,7 @@ fun BottomNavigation(
 }
 
 @Composable
-fun RowScope.BottomNavigationItem(
+internal fun RowScope.BottomNavigationItem(
     selected: Boolean,
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
