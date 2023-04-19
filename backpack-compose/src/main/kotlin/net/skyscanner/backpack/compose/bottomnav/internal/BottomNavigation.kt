@@ -23,12 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.MeasureResult
-import androidx.compose.ui.layout.MeasureScope
-import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
@@ -128,42 +124,23 @@ private fun BottomNavigationItemBaselineLayout(
         )
 
         // If there is no label, just place the icon.
-        placeLabelAndIcon(
-            labelPlaceable,
-            iconPlaceable,
-            constraints,
-        )
-    }
-}
-
-private fun MeasureScope.placeLabelAndIcon(
-    labelPlaceable: Placeable,
-    iconPlaceable: Placeable,
-    constraints: Constraints,
-): MeasureResult {
-    val height = constraints.maxHeight
-
-    // TODO: consider multiple lines of text here, not really supported by spec but we should
-    // have a better strategy than overlapping the icon and label
-    val baseline = labelPlaceable[LastBaseline]
-
-    val baselineOffset = CombinedItemTextBaseline.roundToPx()
-
-    // Label should be [baselineOffset] from the bottom
-    val labelY = height - baseline - baselineOffset
-
-    // Icon should be [baselineOffset] from the text baseline, which is itself
-    // [baselineOffset] from the bottom
-    val selectedIconY = height - (baselineOffset * 2) - iconPlaceable.height
-
-    val containerWidth = max(labelPlaceable.width, iconPlaceable.width)
-
-    val labelX = (containerWidth - labelPlaceable.width) / 2
-    val iconX = (containerWidth - iconPlaceable.width) / 2
-
-    return layout(containerWidth, height) {
-        labelPlaceable.placeRelative(labelX, labelY)
-        iconPlaceable.placeRelative(iconX, selectedIconY)
+        val height = constraints.maxHeight
+        // TODO: consider multiple lines of text here, not really supported by spec but we should
+        // have a better strategy than overlapping the icon and label
+        val baseline = labelPlaceable[LastBaseline]
+        val baselineOffset = CombinedItemTextBaseline.roundToPx()
+        // Label should be [baselineOffset] from the bottom
+        val labelY = height - baseline - baselineOffset
+        // Icon should be [baselineOffset] from the text baseline, which is itself
+        // [baselineOffset] from the bottom
+        val selectedIconY = height - (baselineOffset * 2) - iconPlaceable.height
+        val containerWidth = max(labelPlaceable.width, iconPlaceable.width)
+        val labelX = (containerWidth - labelPlaceable.width) / 2
+        val iconX = (containerWidth - iconPlaceable.width) / 2
+        layout(containerWidth, height) {
+            labelPlaceable.placeRelative(labelX, labelY)
+            iconPlaceable.placeRelative(iconX, selectedIconY)
+        }
     }
 }
 
