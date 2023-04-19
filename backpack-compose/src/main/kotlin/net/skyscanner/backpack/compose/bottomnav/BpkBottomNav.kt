@@ -27,9 +27,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationDefaults
-import androidx.compose.material.BottomNavigationItem
+import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigation
+import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationDefaults
+import net.skyscanner.backpack.compose.bottomnav.internal.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
