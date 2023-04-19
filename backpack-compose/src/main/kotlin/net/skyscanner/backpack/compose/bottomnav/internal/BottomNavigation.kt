@@ -121,17 +121,15 @@ private fun BottomNavigationItemBaselineLayout(
     ) { measurables, constraints ->
         val iconPlaceable = measurables.first { it.layoutId == "icon" }.measure(constraints)
 
-        val labelPlaceable = label?.let {
-            measurables.first { it.layoutId == "label" }.measure(
-                // Measure with loose constraints for height as we don't want the label to take up more
-                // space than it needs
-                constraints.copy(minHeight = 0),
-            )
-        }
+        val labelPlaceable = measurables.first { it.layoutId == "label" }.measure(
+            // Measure with loose constraints for height as we don't want the label to take up more
+            // space than it needs
+            constraints.copy(minHeight = 0),
+        )
 
         // If there is no label, just place the icon.
         placeLabelAndIcon(
-            labelPlaceable!!,
+            labelPlaceable,
             iconPlaceable,
             constraints,
         )
