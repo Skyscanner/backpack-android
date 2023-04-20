@@ -119,7 +119,7 @@ dependencies {
     androidTestImplementation libs.test.facebookSnapshotTestingCore
     implementation project(':Backpack')
     implementation project(':backpack-compose')
-    ksp project(":meta-processor")
+    ksp project(":meta:processor")
     ksp libs.destinations.ksp
 
     def composeBom = platform(libs.compose.bom)
