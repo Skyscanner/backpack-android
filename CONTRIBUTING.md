@@ -263,6 +263,65 @@ Code style is ensured by [detekt](https://github.com/detekt/detekt). It runs aut
 
 To auto fix problems run `./gradlew detekt --auto-correct`.
 
+## Experimental changes
+
+Want to run A/B experiments on features that entail changes to Backpack components? Continue reading below 👇
+
+<details>
+<summary>When is a component change considered experimental?</summary>
+
+If the component or change you want to contribute to Backpack is not stable and it depends on the results of an experiment then it is considered experimental.
+
+</details>
+
+<details>
+<summary>What do you need to do to mark a component or part of a component as experimental?</summary>
+
+For experimental changes or experimental components, you should use the `ExperimentalBackpackApi` annotation. This will require consumers to opt in to use the API and therefore highlight that the component or property is experimental. 
+
+For major changes, you should create a new experimental V2 component. If the experiment is successful, the old component should be deprecated. 
+
+Any follow-up changes to experimental components will not be considered breaking.
+</details>
+
+<details>
+<summary>When should documentation be created and published?</summary>
+
+Each Bpk component has a corresponding README file which contains information about the component such as usage examples and API documentation. Our components' full documentation is at [skyscanner.design](https://www.skyscanner.design). New experimental components should have a README file, but don’t need to be published to [skyscanner.design](https://www.skyscanner.design). Instead, when an experiment has run and is considered successful and so the change is stable, documentation can be published.
+
+For changes to existing components, make sure the API documentation is updated to indicate if something is experimental.
+</details>
+
+<details>
+<summary>How long does experimentation code live in Backpack?</summary>
+
+Experimentation code should be cleaned up at most 2 weeks after an experiment has completed. In the case of a successful experiment, annotations should be removed and documentation should be published. In the case of an unsuccessful experiment, the code should be removed altogether.
+</details>
+
+<details>
+<summary>Examples</summary>
+
+Here’s an end-to-end example on how to add an experimental prop to a Bpk component:
+
+1. Reach out to Koala with the proposed change
+2. Contribute code changes. Make sure the API table is updated too!
+```kotlin
+@Composable
+fun BpkText(
+  text: String,
+  color: Color,
+  @ExperimentalBackpackApi sparkles: Boolean? = false,
+  ...
+)
+```
+3. Released by Koala
+4. Adopt changes in project
+5. Run experiment
+    - if experiment is successful, publish documentation (only Koala members) and remove experimental code.
+    - if experiment is unsuccessful and further iterations are needed, repeat from step 2. Otherwise, remove experimental code. That’s all!
+</details>
+
+
 ## How we review Backpack contributions
 
 Please see the [code review guidelines](https://github.com/Skyscanner/backpack/blob/main/CODE_REVIEW_GUIDELINES.md).
