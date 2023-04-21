@@ -20,10 +20,11 @@ package net.skyscanner.backpack.demo.meta
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import net.skyscanner.backpack.meta.ComponentMarker
 
 @Immutable
 data class Story(
-    val component: Component,
+    val component: ComponentMarker,
     val name: String,
     val isCompose: Boolean,
     val kind: StoryKind,

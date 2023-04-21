@@ -23,14 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.ui.AndroidView
+import net.skyscanner.backpack.meta.ComponentMarker
 import net.skyscanner.backpack.text.BpkText
 import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-    val uiComponents: List<Component>
+    val uiComponents: List<ComponentMarker>
 
-    val tokenComponents: List<Component>
+    val tokenComponents: List<ComponentMarker>
 
     val screenshotStories: List<Story>
 
@@ -72,7 +73,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
             .filter { !it.component.isToken }
             .map(Story::component)
             .distinct()
-            .sortedBy(Component::name)
+            .sortedBy(ComponentMarker::name)
             .toList()
 
     override val tokenComponents =
@@ -80,7 +81,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
             .filter { it.component.isToken }
             .map(Story::component)
             .distinct()
-            .sortedBy(Component::name)
+            .sortedBy(ComponentMarker::name)
             .toList()
 
     override val screenshotStories =
@@ -112,7 +113,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
         this.component.name == "TestComponent"
 }
 
-@Component(name = "TestComponent", isToken = true)
+@ComponentMarker(name = "TestComponent", isToken = true)
 private annotation class TestComponent
 
 @ComposeStory(name = "TestComposeStory", kind = StoryKind.DemoOnly)
