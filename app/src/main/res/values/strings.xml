@@ -57,6 +57,7 @@
     <string name="bottom_nav_profile">Profile</string>
 
     <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+    <string name="image_sunset_content_description">Image of a man floating on water watching sunset</string>
 
     <string name="overlay_rounded_corners">Rounded corners</string>
     <string name="overlay_no_rounded_corners">No rounded corners</string>

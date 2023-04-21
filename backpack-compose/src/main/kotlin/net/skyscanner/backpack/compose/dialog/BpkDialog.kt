@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
+import net.skyscanner.backpack.compose.dialog.internal.BpkDialogProperties
 import net.skyscanner.backpack.compose.dialog.internal.BpkFlareDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.BpkImageDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
@@ -38,7 +39,7 @@ fun BpkSuccessDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -63,7 +64,7 @@ fun BpkSuccessDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -88,7 +89,7 @@ fun BpkWarningDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -113,7 +114,7 @@ fun BpkWarningDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -138,7 +139,7 @@ fun BpkDestructiveDialog(
     text: String,
     confirmButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Destructive(icon) },
@@ -161,7 +162,7 @@ fun BpkFlareDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -186,7 +187,7 @@ fun BpkFlareDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -212,7 +213,7 @@ fun BpkImageDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
@@ -239,7 +240,7 @@ fun BpkImageDialog(
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(),
+    properties: DialogProperties = BpkDialogProperties,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(

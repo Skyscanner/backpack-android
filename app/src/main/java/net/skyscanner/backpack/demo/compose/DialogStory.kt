@@ -20,15 +20,12 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
 import net.skyscanner.backpack.compose.dialog.BpkImageDialog
@@ -151,14 +148,13 @@ internal fun FlareDialogExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(264.dp),
             )
         }
     }
 
 @Composable
 @DialogComponent
-@ComposeStory("Image Start alignment")
+@ComposeStory("Horizontal Image with Start Alignment")
 internal fun ImageDialogStartAlignmentExample() =
     DialogDemo { onDismiss ->
         BpkImageDialog(
@@ -173,15 +169,14 @@ internal fun ImageDialogStartAlignmentExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
             )
         }
     }
 
 @Composable
 @DialogComponent
-@ComposeStory("Image End alignment")
-internal fun ImageDialogEndAlignmentExample() =
+@ComposeStory("Vertical Image with End Alignment")
+internal fun ImageDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkImageDialog(
             title = stringResource(id = R.string.dialog_title),
@@ -192,10 +187,9 @@ internal fun ImageDialogEndAlignmentExample() =
             textAlign = TextAlign.End,
         ) {
             Image(
-                painter = painterResource(R.drawable.canadian_rockies_canada),
-                contentDescription = stringResource(R.string.image_rockies_content_description),
+                painter = painterResource(R.drawable.sunset),
+                contentDescription = stringResource(R.string.image_sunset_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
             )
         }
     }
