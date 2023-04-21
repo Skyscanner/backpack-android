@@ -19,12 +19,12 @@
 package net.skyscanner.backpack.ksp
 
 import com.google.devtools.ksp.symbol.KSType
+import kotlin.reflect.KClass
 
-interface AnnotationDefinition {
-    val pkg: String
-    val simpleName: String
-    val qualifiedName: String
-        get() = "$pkg.$simpleName"
+abstract class AnnotationDefinition(kClass: KClass<*>) {
+    val simpleName: String = kClass.simpleName!!
+    val qualifiedName: String = kClass.qualifiedName!!
+    val pkg = qualifiedName.removeSuffix(".$simpleName")
 }
 
 abstract class AnnotationParam<Type>(val name: String) {
