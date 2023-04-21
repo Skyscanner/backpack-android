@@ -119,6 +119,7 @@ dependencies {
     androidTestImplementation libs.test.facebookSnapshotTestingCore
     implementation project(':Backpack')
     implementation project(':backpack-compose')
+    implementation project(":meta:annotations")
     ksp project(":meta:processor")
     ksp libs.destinations.ksp
 
