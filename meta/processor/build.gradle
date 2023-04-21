@@ -1,12 +1,13 @@
 apply plugin: 'kotlin'
 
 dependencies {
-  implementation libs.google.kspApi
-  implementation libs.square.kotlinPoet
-  implementation libs.androidx.roomCompilerProcessing
+    implementation libs.google.kspApi
+    implementation libs.square.kotlinPoet
+    implementation libs.androidx.roomCompilerProcessing
+    implementation project(":meta:annotations")
 }
 
 sourceSets.main {
-  java.srcDirs("src/main/kotlin")
+    java.srcDirs("src/main/kotlin")
 }
 
