@@ -30,8 +30,7 @@
     <dimen name="bpk_dialog_padding_bottom">@dimen/bpkSpacingMd</dimen>
     <dimen name="bpk_dialog_icon_stroke">@dimen/bpkSpacingSm</dimen>
     <dimen name="bpk_dialog_icon_size">64dp</dimen>
-    <dimen name="bpk_dialog_max_width">320dp</dimen>
-    <dimen name="bpk_dialog_flare_max_width">440dp</dimen>
+    <dimen name="bpk_dialog_max_width">400dp</dimen>
     <dimen name="bpk_snackbar_min_height">60dp</dimen>
     <dimen name="bpk_bottom_nav_height">56dp</dimen>
     <!--spacing_md * 2(16) + font sm line height(18) -->

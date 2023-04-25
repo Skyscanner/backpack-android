@@ -1,89 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.skyscanner.backpack.dialog.internal.DialogInsetsLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.skyscanner.backpack.card.BpkCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:background="@color/bpkTextSecondary">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/bpkSurfaceDefault"
+    app:cornerStyle="small"
+    app:padded="false">
 
-    <net.skyscanner.backpack.dialog.internal.DialogWindowLayout
-        android:id="@+id/dialog_window_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="@dimen/bpk_dialog_max_width">
+            android:paddingBottom="@dimen/bpkSpacingBase">
 
-            <ScrollView
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fadingEdge="vertical"
-                android:fadingEdgeLength="@dimen/bpkSpacingLg"
-                android:requiresFadingEdge="vertical"
-                android:scrollbarStyle="outsideOverlay">
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.46" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bpk_dialog_bg_top"
-                    android:orientation="vertical">
+            <net.skyscanner.backpack.dialog.internal.BpkDialogIcon
+                android:id="@+id/dialog_icon"
+                app:layout_constraintBottom_toBottomOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                tools:src="@drawable/bpk_trash" />
 
-                    <net.skyscanner.backpack.dialog.internal.BpkDialogIcon
-                        android:id="@+id/dialog_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        tools:src="@drawable/bpk_trash" />
+            <net.skyscanner.backpack.text.BpkText
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
+                android:layout_marginTop="@dimen/bpkSpacingLg"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/dialog_icon"
+                app:textStyle="heading3"
+                tools:text="Where will you go?" />
 
-                    <net.skyscanner.backpack.text.BpkText
-                        android:id="@+id/dialog_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/bpkSpacingMd"
-                        android:layout_marginTop="@dimen/bpk_dialog_spacing_title"
-                        android:layout_marginEnd="@dimen/bpkSpacingMd"
-                        android:textAlignment="center"
-                        android:textColor="@color/bpkTextPrimary"
-                        app:textStyle="heading3"
-                        tools:text="Title" />
-
-                    <net.skyscanner.backpack.text.BpkText
-                        android:id="@+id/dialog_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/bpkSpacingMd"
-                        android:layout_marginTop="@dimen/bpkSpacingBase"
-                        android:layout_marginEnd="@dimen/bpkSpacingMd"
-                        android:layout_marginBottom="@dimen/bpkSpacingLg"
-                        android:textAlignment="center"
-                        android:textColor="@color/bpkTextPrimary"
-                        app:textStyle="bodyDefault"
-                        tools:text="Message" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </ScrollView>
+            <net.skyscanner.backpack.text.BpkText
+                android:id="@+id/dialog_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
+                android:layout_marginTop="@dimen/bpkSpacingMd"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/dialog_title"
+                app:lineHeight="23dp"
+                tools:text="Get the best Black Friday travel deals on the go" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/dialog_buttons_root"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bpk_dialog_bg_bottom"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
+                android:layout_marginTop="@dimen/bpkSpacingLg"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/bpk_dialog_padding_bottom"
                 app:divider="@drawable/bpk_dialog_bg_divider"
-                app:showDividers="middle|end" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_description"
+                app:showDividers="middle" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </net.skyscanner.backpack.dialog.internal.DialogWindowLayout>
+    </ScrollView>
 
-</net.skyscanner.backpack.dialog.internal.DialogInsetsLayout>
+</net.skyscanner.backpack.card.BpkCardView>

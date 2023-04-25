@@ -19,11 +19,15 @@
 package net.skyscanner.backpack.dialog.internal
 
 import android.app.Dialog
+import android.content.Context
+import android.os.Build
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
@@ -113,9 +117,23 @@ internal interface BpkDialogImpl {
             BpkButton(root.context).apply {
                 this.type = type
                 this.text = button.text
+                this.size = BpkButton.Size.Large
                 this.setOnClickListener {
                     button.onClick()
                 }
             }
+
+        protected fun getScreenWidth(dialog: Dialog): Int {
+            val windowManager = dialog.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val metrics = windowManager.currentWindowMetrics
+                metrics.bounds.width()
+            } else {
+                val metrics = DisplayMetrics()
+                @Suppress("DEPRECATION")
+                windowManager.defaultDisplay.getMetrics(metrics)
+                metrics.widthPixels
+            }
+        }
     }
 }

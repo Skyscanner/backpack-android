@@ -38,17 +38,15 @@ internal class AlertDialogImpl(
             it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             @Suppress("DEPRECATION")
             it.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-            it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        }
 
-        root.findViewById<DialogWindowLayout>(R.id.dialog_window_layout).apply {
-            verticalGravity = DialogWindowLayout.Gravity.Center
-            dismissListener = {
-                if (isCanceledOnTouchOutside) {
-                    dialog.dismiss()
-                }
-            }
+            // val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_max_width)
+            // val displayWidth = getScreenWidth(dialog)
+            // it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
+            it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            // val background = ColorDrawable(Color.TRANSPARENT)
+            // val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
+            // it.setBackgroundDrawable(InsetDrawable(background, margin))
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
     }
 }

@@ -19,14 +19,10 @@
 package net.skyscanner.backpack.dialog.internal
 
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
-import android.os.Build
-import android.util.DisplayMetrics
 import android.view.ViewGroup.LayoutParams
-import android.view.WindowManager
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.BpkDialog
 import kotlin.math.min
@@ -37,26 +33,13 @@ internal class FlareDialogImpl(
 
     init {
         dialog.window?.let {
-            val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_flare_max_width)
+            val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_max_width)
             val displayWidth = getScreenWidth(dialog)
             it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
             val background = ColorDrawable(Color.TRANSPARENT)
-            val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+            val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
             it.setBackgroundDrawable(InsetDrawable(background, margin))
-        }
-    }
-
-    private fun getScreenWidth(dialog: Dialog): Int {
-        val windowManager = dialog.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val metrics = windowManager.currentWindowMetrics
-            metrics.bounds.width()
-        } else {
-            val metrics = DisplayMetrics()
-            @Suppress("DEPRECATION")
-            windowManager.defaultDisplay.getMetrics(metrics)
-            metrics.widthPixels
         }
     }
 }
