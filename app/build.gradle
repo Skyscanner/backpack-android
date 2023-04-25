@@ -120,6 +120,7 @@ dependencies {
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     implementation project(":meta:annotations")
+    implementation project(":meta:runtime")
     ksp project(":meta:processor")
     ksp libs.destinations.ksp
 

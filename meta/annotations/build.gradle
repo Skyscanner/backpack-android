@@ -1,9 +1,5 @@
 apply plugin: 'kotlin'
 
-dependencies {
-    implementation libs.compose.runtime
-}
-
 sourceSets.main {
     java.srcDirs("src/main/kotlin")
 }

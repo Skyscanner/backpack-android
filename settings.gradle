@@ -4,4 +4,5 @@ include ':Backpack',
     ':backpack-lint',
     ':meta:annotations',
     ':meta:processor',
+    ':meta:runtime',
     ':app'
