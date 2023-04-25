@@ -151,7 +151,7 @@ internal fun FlareDialogExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
+                modifier = Modifier.height(264.dp),
             )
         }
     }
