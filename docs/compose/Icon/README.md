@@ -41,3 +41,18 @@ BpkIcon(
   size = BpkIconSize.Large,
 )
 ```
+
+If you receive icon names from the server, you can use the `BpkIcon.findByName` method to retrieve the icon:
+
+```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.BpkIcon
+
+val icon = BpkIcon.findByName("add-circle")
+icon?.let {
+    BpkIcon(
+        icon = it,
+        contentDescription = myContentDescription,
+    )
+}
+```
