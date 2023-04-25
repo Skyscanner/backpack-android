@@ -145,7 +145,7 @@ internal fun FlareDialogExample() =
             onDismissRequest = onDismiss,
         ) {
             Image(
-                painter = painterResource(R.drawable.nons),
+                painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
             )
@@ -166,7 +166,7 @@ internal fun ImageDialogStartAlignmentExample() =
             textAlign = TextAlign.Start,
         ) {
             Image(
-                painter = painterResource(R.drawable.nons),
+                painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
             )
