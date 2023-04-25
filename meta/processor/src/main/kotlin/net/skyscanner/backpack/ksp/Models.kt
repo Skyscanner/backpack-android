@@ -28,6 +28,11 @@ data class ComponentDefinition(
     val location: FileLocation,
 )
 
+data class StoryAnnotationDefinition(
+    val qualifiedName: String,
+    val isCompose: Boolean,
+)
+
 data class StoryDefinition(
     val component: ComponentDefinition,
     val name: String,
