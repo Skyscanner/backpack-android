@@ -49,7 +49,7 @@ object StoryAnnotationsVisitor : KSDefaultVisitor<Unit, StoryAnnotationDefinitio
         return when {
             annotation != null && qualifiedName != null && paramName != null && paramKind != null && location is FileLocation ->
                 StoryAnnotationDefinition(
-                    annotationDefinition = AnnotationDefinition(classDeclaration),
+                    annotation = AnnotationDefinition(classDeclaration),
                     namePropertyName = paramName.simpleName.getShortName(),
                     kindPropertyName = paramKind.simpleName.getShortName(),
                     isCompose = annotation[StoryMarkerAnnotation.paramIsCompose],

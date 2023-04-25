@@ -29,13 +29,13 @@ data class ComponentDefinition(
 )
 
 data class StoryAnnotationDefinition(
-    val annotationDefinition: AnnotationDefinition,
+    val annotation: AnnotationDefinition,
     val namePropertyName: String,
     val kindPropertyName: String,
     val isCompose: Boolean,
 ) {
-    val paramName = annotationDefinition.stringParamOf(namePropertyName)
-    val paramKind = annotationDefinition.stringParamOf(kindPropertyName)
+    val paramName = annotation.stringParamOf(namePropertyName)
+    val paramKind = annotation.stringParamOf(kindPropertyName)
 }
 
 data class StoryDefinition(
