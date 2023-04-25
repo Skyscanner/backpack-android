@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.ksp.visitor
 
-import com.google.devtools.ksp.getDeclaredProperties
 import com.google.devtools.ksp.symbol.FileLocation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
@@ -39,19 +38,23 @@ object StoryAnnotationsVisitor : KSDefaultVisitor<Unit, StoryAnnotationDefinitio
         val qualifiedName = classDeclaration.qualifiedName
 
         val paramName = classDeclaration
-            .getDeclaredProperties()
+            .primaryConstructor!!
+            .parameters
             .find { it.annotations.find(StoryNameAnnotation) != null }
+            ?.name
 
         val paramKind = classDeclaration
-            .getDeclaredProperties()
+            .primaryConstructor!!
+            .parameters
             .find { it.annotations.find(StoryKindAnnotation) != null }
+            ?.name
 
         return when {
             annotation != null && qualifiedName != null && paramName != null && paramKind != null && location is FileLocation ->
                 StoryAnnotationDefinition(
                     annotation = AnnotationDefinition(classDeclaration),
-                    namePropertyName = paramName.simpleName.getShortName(),
-                    kindPropertyName = paramKind.simpleName.getShortName(),
+                    namePropertyName = paramName.getShortName(),
+                    kindPropertyName = paramKind.getShortName(),
                     isCompose = annotation[StoryMarkerAnnotation.paramIsCompose],
                 )
 
