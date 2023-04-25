@@ -28,10 +28,8 @@ import net.skyscanner.backpack.ksp.StoryAnnotationDefinition
 import net.skyscanner.backpack.ksp.StoryKindAnnotation
 import net.skyscanner.backpack.ksp.StoryMarkerAnnotation
 import net.skyscanner.backpack.ksp.StoryNameAnnotation
-import net.skyscanner.backpack.ksp.enumParamOf
 import net.skyscanner.backpack.ksp.find
 import net.skyscanner.backpack.ksp.get
-import net.skyscanner.backpack.ksp.stringParamOf
 
 object StoryAnnotationsVisitor : KSDefaultVisitor<Unit, StoryAnnotationDefinition?>() {
 
@@ -51,9 +49,9 @@ object StoryAnnotationsVisitor : KSDefaultVisitor<Unit, StoryAnnotationDefinitio
         return when {
             annotation != null && qualifiedName != null && paramName != null && paramKind != null && location is FileLocation ->
                 StoryAnnotationDefinition(
-                    qualifiedName = qualifiedName,
-                    paramName = AnnotationDefinition(classDeclaration).stringParamOf(paramName.simpleName.getShortName()),
-                    paramKind = AnnotationDefinition(classDeclaration).enumParamOf(paramKind.simpleName.getShortName()),
+                    annotationDefinition = AnnotationDefinition(classDeclaration),
+                    namePropertyName = paramName.simpleName.getShortName(),
+                    kindPropertyName = paramKind.simpleName.getShortName(),
                     isCompose = annotation[StoryMarkerAnnotation.paramIsCompose],
                 )
 
