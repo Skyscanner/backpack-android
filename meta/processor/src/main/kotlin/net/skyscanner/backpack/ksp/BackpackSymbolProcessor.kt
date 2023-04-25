@@ -26,10 +26,12 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.validate
+import net.skyscanner.backpack.ksp.visitor.StoriesVisitor
 import net.skyscanner.backpack.ksp.visitor.ComponentsVisitor
-import net.skyscanner.backpack.ksp.visitor.ComposeStoriesVisitor
-import net.skyscanner.backpack.ksp.visitor.ViewStoriesVisitor
+import net.skyscanner.backpack.ksp.visitor.StoryAnnotationsVisitor
 import net.skyscanner.backpack.ksp.writer.writeListOfStories
+import net.skyscanner.backpack.meta.ComponentMarker
+import net.skyscanner.backpack.meta.StoryMarker
 
 @OptIn(ExperimentalProcessingApi::class)
 class BackpackSymbolProcessor(
@@ -46,22 +48,26 @@ class BackpackSymbolProcessor(
         val filer = XProcessingEnv.create(environment.options, resolver, environment.codeGenerator, environment.logger).filer
 
         val components = resolver
-            .getSymbolsWithAnnotation(ComponentAnnotation.qualifiedName)
+            .getSymbolsWithAnnotation(ComponentMarker::class.qualifiedName!!)
             .filter { it.validate() }
             .mapNotNull { it.accept(ComponentsVisitor, Unit) }
             .associateBy { it.id }
 
-        val composeStories = resolver
-            .getSymbolsWithAnnotation(ComposeStoryAnnotation.qualifiedName)
-            .filter { it.validate() }
-            .mapNotNull { it.accept(ComposeStoriesVisitor, components) }
+        val storyAnnotations =
+            resolver
+                .getSymbolsWithAnnotation(StoryMarker::class.qualifiedName!!)
+                .filter { it.validate() }
+                .mapNotNull { it.accept(StoryAnnotationsVisitor, Unit) }
 
-        val viewStories = resolver
-            .getSymbolsWithAnnotation(ViewStoryAnnotation.qualifiedName)
-            .filter { it.validate() }
-            .mapNotNull { it.accept(ViewStoriesVisitor, components) }
+        val stories = storyAnnotations
+            .flatMap { annotation ->
+                resolver
+                    .getSymbolsWithAnnotation(annotation.annotation.qualifiedName)
+                    .filter { it.validate() }
+                    .mapNotNull { it.accept(StoriesVisitor(annotation), components) }
+            }
 
-        writeListOfStories((composeStories + viewStories).toList(), filer)
+        writeListOfStories(stories.toList(), filer)
 
         invoked = true
         return emptyList()

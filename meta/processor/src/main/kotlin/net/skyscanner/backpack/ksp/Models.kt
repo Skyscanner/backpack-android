@@ -35,7 +35,7 @@ data class StoryAnnotationDefinition(
     val isCompose: Boolean,
 ) {
     val paramName = annotation.stringParamOf(namePropertyName)
-    val paramKind = annotation.stringParamOf(kindPropertyName)
+    val paramKind = annotation.enumParamOf(kindPropertyName)
 }
 
 data class StoryDefinition(
