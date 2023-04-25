@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DividerSampleNoIndent
-import net.skyscanner.backpack.demo.compose.DividerSample_WithIndent
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -33,10 +32,5 @@ class BpkDividerTest : BpkSnapshotTest() {
     @Test
     fun default() = snap(width = 100.dp) {
         DividerSampleNoIndent()
-    }
-
-    @Test
-    fun withIndent() = snap(width = 100.dp) {
-        DividerSample_WithIndent()
     }
 }
