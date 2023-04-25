@@ -18,26 +18,42 @@
 
 package net.skyscanner.backpack.ksp.visitor
 
+import com.google.devtools.ksp.getDeclaredProperties
 import com.google.devtools.ksp.symbol.FileLocation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.visitor.KSDefaultVisitor
+import net.skyscanner.backpack.ksp.AnnotationDefinition
 import net.skyscanner.backpack.ksp.StoryAnnotationDefinition
+import net.skyscanner.backpack.ksp.StoryKindAnnotation
 import net.skyscanner.backpack.ksp.StoryMarkerAnnotation
+import net.skyscanner.backpack.ksp.StoryNameAnnotation
+import net.skyscanner.backpack.ksp.enumParamOf
 import net.skyscanner.backpack.ksp.find
 import net.skyscanner.backpack.ksp.get
+import net.skyscanner.backpack.ksp.stringParamOf
 
 object StoryAnnotationsVisitor : KSDefaultVisitor<Unit, StoryAnnotationDefinition?>() {
 
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit): StoryAnnotationDefinition? {
         val annotation = classDeclaration.annotations.find(StoryMarkerAnnotation)
         val location = classDeclaration.location
-        val qualifiedName = classDeclaration.qualifiedName?.getShortName()
+        val qualifiedName = classDeclaration.qualifiedName
+
+        val paramName = classDeclaration
+            .getDeclaredProperties()
+            .find { it.annotations.find(StoryNameAnnotation) != null }
+
+        val paramKind = classDeclaration
+            .getDeclaredProperties()
+            .find { it.annotations.find(StoryKindAnnotation) != null }
 
         return when {
-            annotation != null && qualifiedName != null && location is FileLocation ->
+            annotation != null && qualifiedName != null && paramName != null && paramKind != null && location is FileLocation ->
                 StoryAnnotationDefinition(
                     qualifiedName = qualifiedName,
+                    paramName = AnnotationDefinition(classDeclaration).stringParamOf(paramName.simpleName.getShortName()),
+                    paramKind = AnnotationDefinition(classDeclaration).enumParamOf(paramKind.simpleName.getShortName()),
                     isCompose = annotation[StoryMarkerAnnotation.paramIsCompose],
                 )
 

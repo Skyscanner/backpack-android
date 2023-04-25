@@ -29,7 +29,9 @@ data class ComponentDefinition(
 )
 
 data class StoryAnnotationDefinition(
-    val qualifiedName: String,
+    val qualifiedName: KSName,
+    val paramName: AnnotationParam<String>,
+    val paramKind: AnnotationParam<EnumValue>,
     val isCompose: Boolean,
 )
 
