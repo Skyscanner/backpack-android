@@ -54,7 +54,7 @@ test-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0
 test-rules = "androidx.test:rules:1.5.0"
 test-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-test-mockitoAndroid = "org.mockito:mockito-android:5.3.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.3.1"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
@@ -96,7 +96,7 @@ accompanist-pager = { module = "com.google.accompanist:accompanist-pager", versi
 protocol-gson = "com.google.code.gson:gson:2.10.1"
 protocol-dadb = "dev.mobile:dadb:1.2.6"
 
-http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.41.4.0" }
+http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.42.1.0" }
 http4k-core = { group = "org.http4k", name = "http4k-core" }
 http4k-serverUnderflow = { group = "org.http4k", name = "http4k-server-undertow" }
 http4k-clientApache = { group = "org.http4k", name = "http4k-client-apache" }
