@@ -20,15 +20,12 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
 import net.skyscanner.backpack.compose.dialog.BpkImageDialog
@@ -148,10 +145,9 @@ internal fun FlareDialogExample() =
             onDismissRequest = onDismiss,
         ) {
             Image(
-                painter = painterResource(R.drawable.canadian_rockies_canada),
+                painter = painterResource(R.drawable.nons),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(264.dp),
             )
         }
     }
@@ -170,10 +166,9 @@ internal fun ImageDialogStartAlignmentExample() =
             textAlign = TextAlign.Start,
         ) {
             Image(
-                painter = painterResource(R.drawable.canadian_rockies_canada),
+                painter = painterResource(R.drawable.nons),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
             )
         }
     }
@@ -195,7 +190,6 @@ internal fun ImageDialogEndAlignmentExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
             )
         }
     }
