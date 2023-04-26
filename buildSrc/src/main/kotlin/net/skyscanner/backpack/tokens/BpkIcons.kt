@@ -55,16 +55,11 @@ data class BpkIcon(
                             value = file.nameWithoutExtension,
                         )
                     }
-                    .sortedBy { it.name }
+                    .sortedBy { it.name.toComposeName() }
             }
 
             private fun transformIconName(name: String): String =
-                CaseFormat.UPPER_UNDERSCORE.to(
-                    CaseFormat.UPPER_CAMEL,
-                    name.removePrefix("bpk_")
-                        .removeSuffix("_sm")
-                        .replace("__", "_"),
-                )
+                name.removePrefix("bpk_").removeSuffix("_sm")
         }
 
         object Svg : Parser() {
@@ -114,6 +109,11 @@ private val BpkIconClass = ClassName("net.skyscanner.backpack.compose.icon", "Bp
 private val BpkIconReceiverClass = ClassName("net.skyscanner.backpack.compose.icon", "BpkIcon.Companion")
 private val BpkIconsType = List::class.asClassName().parameterizedBy(BpkIconClass)
 
+private fun String.toComposeName(): String =
+    CaseFormat.UPPER_UNDERSCORE.to(
+        CaseFormat.UPPER_CAMEL,
+        replace("__", "_"),
+    )
 private fun toCompose(
     rClass: ClassName,
     source: BpkIcons,
@@ -129,7 +129,7 @@ private fun toCompose(
                 ?: error("Invalid icon format! : $name")
 
         PropertySpec.builder(
-            name = name,
+            name = name.toComposeName(),
             type = BpkIconClass,
         )
             .receiver(BpkIconReceiverClass)
@@ -140,7 +140,7 @@ private fun toCompose(
                     .indent()
                     .addStatement("%T(", BpkIconClass)
                     .indent()
-                    .addStatement("name = %S,", name)
+                    .addStatement("name = %S,", name.replace("_", "-"))
                     .addStatement("small = %T.drawable.%N,", rClass, small)
                     .addStatement("large = %T.drawable.%N,", rClass, large)
                     .unindent()
@@ -165,7 +165,7 @@ private fun toCompose(
                     .addStatement("listOf(", BpkIconClass)
                     .indent()
                     .apply {
-                        source.map { it.name }.distinct().forEach {
+                        source.map { it.name.toComposeName() }.distinct().forEach {
                             add("%T.%N, ", BpkIconClass, it)
                         }
                     }

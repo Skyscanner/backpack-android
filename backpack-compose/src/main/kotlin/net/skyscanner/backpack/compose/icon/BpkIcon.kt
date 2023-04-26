@@ -28,11 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.values
 
 @Immutable
 class BpkIcon internal constructor(
     val name: String,
-    val autoMirror: Boolean = false,
     internal val small: Int,
     internal val large: Int,
 ) {
@@ -72,6 +72,9 @@ fun BpkIcon(
             .defaultMinSize(size),
     )
 }
+
+fun BpkIcon.Companion.findByName(name: String): BpkIcon? =
+    BpkIcon.values.find { it.name == name }
 
 private operator fun BpkIcon.get(size: BpkIconSize): Int =
     when (size) {
