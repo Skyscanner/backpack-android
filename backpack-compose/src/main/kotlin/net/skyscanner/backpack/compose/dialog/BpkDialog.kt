@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.dialog
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -267,7 +266,6 @@ fun BpkImageDialog(
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 private fun getDialogProperties(dismissOnBackPress: Boolean, dismissOnClickOutside: Boolean) = DialogProperties(
     dismissOnBackPress = dismissOnBackPress,
     dismissOnClickOutside = dismissOnClickOutside,
