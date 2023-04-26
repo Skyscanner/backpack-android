@@ -151,7 +151,7 @@ internal fun FlareDialogExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(264.dp),
+                modifier = Modifier.height(192.dp),
             )
         }
     }
@@ -163,16 +163,14 @@ internal fun FlareDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkFlareDialog(
             title = stringResource(id = R.string.dialog_title),
-            text = stringResource(id = R.string.dialog_text),
+            text = stringResource(id = R.string.dialog_text_one_line),
             confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
             onDismissRequest = onDismiss,
         ) {
             Image(
                 painter = painterResource(R.drawable.sunset),
-                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentDescription = stringResource(R.string.image_sunset_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(264.dp),
             )
         }
     }
@@ -228,17 +226,15 @@ internal fun ImageDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkImageDialog(
             title = stringResource(id = R.string.dialog_title),
-            text = stringResource(id = R.string.dialog_text),
+            text = stringResource(id = R.string.dialog_text_one_line),
             confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
             onDismissRequest = onDismiss,
             textAlign = TextAlign.Start,
         ) {
             Image(
                 painter = painterResource(R.drawable.sunset),
-                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentDescription = stringResource(R.string.image_sunset_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(192.dp),
             )
         }
     }
