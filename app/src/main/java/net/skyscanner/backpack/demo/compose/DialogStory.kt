@@ -158,6 +158,27 @@ internal fun FlareDialogExample() =
 
 @Composable
 @DialogComponent
+@ComposeStory("Flare Vertical")
+internal fun FlareDialogVerticalExample() =
+    DialogDemo { onDismiss ->
+        BpkFlareDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sunset),
+                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(264.dp),
+            )
+        }
+    }
+
+@Composable
+@DialogComponent
 @ComposeStory("Image Start alignment")
 internal fun ImageDialogStartAlignmentExample() =
     DialogDemo { onDismiss ->
@@ -193,6 +214,28 @@ internal fun ImageDialogEndAlignmentExample() =
         ) {
             Image(
                 painter = painterResource(R.drawable.canadian_rockies_canada),
+                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(192.dp),
+            )
+        }
+    }
+
+@Composable
+@DialogComponent
+@ComposeStory("Image Vertical")
+internal fun ImageDialogVerticalExample() =
+    DialogDemo { onDismiss ->
+        BpkImageDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+            textAlign = TextAlign.Start,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sunset),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.height(192.dp),
