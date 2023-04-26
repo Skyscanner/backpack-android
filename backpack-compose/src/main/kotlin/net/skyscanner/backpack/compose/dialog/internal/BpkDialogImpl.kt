@@ -65,7 +65,7 @@ internal fun BpkDialogImpl(
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Box(contentAlignment = Alignment.TopCenter) {
             Surface(
-                modifier = Modifier.dialogSurface(),
+                modifier = Modifier.dialogWidth(),
                 shape = BpkTheme.shapes.medium,
                 color = BpkTheme.colors.surfaceDefault,
             ) {
@@ -94,14 +94,14 @@ internal fun BpkFlareDialogImpl(
 
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.dialogSurface(),
+            modifier = Modifier.dialogWidth(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
             Column {
                 BpkFlare(
                     content = content,
-                    modifier = Modifier.imageSizeModifier(size = size, setSize = setSize),
+                    modifier = Modifier.contentSize(size = size, setSize = setSize),
                 )
                 DialogContent(title = title, text = text, buttons = buttons)
             }
@@ -123,14 +123,14 @@ internal fun BpkImageDialogImpl(
 
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.dialogSurface(),
+            modifier = Modifier.dialogWidth(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
             Column {
                 Box(
                     content = content,
-                    modifier = Modifier.imageSizeModifier(size = size, setSize = setSize),
+                    modifier = Modifier.contentSize(size = size, setSize = setSize),
                 )
                 DialogContent(title = title, text = text, textAlign = textAlign, buttons = buttons)
             }
@@ -218,32 +218,29 @@ private fun DialogIcon(icon: Dialog.Icon?) {
     }
 }
 
-private fun Modifier.dialogSurface(): Modifier {
-    return this.then(
-        Modifier.padding(
-            top = IconPadding,
-            start = BpkDimension.Spacing.Lg,
-            end = BpkDimension.Spacing.Lg,
-        ).widthIn(max = 400.dp),
+private fun Modifier.dialogWidth(): Modifier =
+    widthIn(
+        max = DialogMaxWidth,
+    ).padding(
+        top = IconPadding,
+        start = BpkDimension.Spacing.Lg,
+        end = BpkDimension.Spacing.Lg,
     )
-}
 
-private fun Modifier.imageSizeModifier(size: Dp, setSize: (Dp) -> Unit): Modifier {
-    return this.then(
-        Modifier.layout { measurable, constraints ->
-            val placeable = measurable.measure(constraints)
-            if (placeable.width < placeable.height) {
-                setSize(placeable.width.toDp())
-            }
-            layout(placeable.width, placeable.height) {
-                placeable.placeRelative(0, 0)
-            }
-        }.then(
-            if (size > 0.dp) Modifier.size(size) else Modifier,
-        ),
+private fun Modifier.contentSize(size: Dp, setSize: (Dp) -> Unit): Modifier =
+    layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        if (placeable.width < placeable.height) {
+            setSize(placeable.width.toDp())
+        }
+        layout(placeable.width, placeable.height) {
+            placeable.placeRelative(0, 0)
+        }
+    }.then(
+        if (size > 0.dp) Modifier.size(size) else Modifier,
     )
-}
 
 private val IconSize = 64.dp
 private val IconBorder = 4.dp
 private val IconPadding = 40.dp
+private val DialogMaxWidth = 400.dp
