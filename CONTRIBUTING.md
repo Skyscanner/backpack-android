@@ -212,7 +212,7 @@ In a case you have multiple sections for the component, you need to specify the 
 To make our documentation clearer we include screenshots on the docs site for each components.
 
 By default, every story will have a screenshot generated. To exclude a story from the screenshot generation,
-set `kind` attribute to `StoryOnly`: `@ComposeStory(kind = StoryKind.StoryOnly)`.
+set `kind` attribute to `DemoOnly`: `@ComposeStory(kind = StoryKind.DemoOnly)`.
 
 If you want to create a screenshot for a story that is not included in the demo app,
 set `kind` attribute to `ScreenshotOnly`: `@ViewStory(kind = StoryKind.ScreenshotOnly)`.
@@ -277,9 +277,9 @@ If the component or change you want to contribute to Backpack is not stable and 
 <details>
 <summary>What do you need to do to mark a component or part of a component as experimental?</summary>
 
-For experimental changes or experimental components, you should use the `ExperimentalBackpackApi` annotation. This will require consumers to opt in to use the API and therefore highlight that the component or property is experimental. 
+For experimental changes or experimental components, you should use the `ExperimentalBackpackApi` annotation. This will require consumers to opt in to use the API and therefore highlight that the component or property is experimental.
 
-For major changes, you should create a new experimental V2 component. If the experiment is successful, the old component should be deprecated. 
+For major changes, you should create a new experimental V2 component. If the experiment is successful, the old component should be deprecated.
 
 Any follow-up changes to experimental components will not be considered breaking.
 </details>

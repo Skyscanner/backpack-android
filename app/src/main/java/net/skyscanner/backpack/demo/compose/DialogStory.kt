@@ -158,7 +158,7 @@ internal fun FlareDialogExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory("Flare Vertical")
+@ComposeStory(kind = StoryKind.DemoOnly)
 internal fun FlareDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkFlareDialog(
