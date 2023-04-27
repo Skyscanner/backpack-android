@@ -144,6 +144,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         rule.setContent { BpkTheme { content() } }
         val dialogNode = rule.onNodeWithContentDescription(description)
         dialogNode.assertIsDisplayed()
+        Thread.sleep(2000)
         compareScreenshot(rule.onNode(isDialog()))
     }
 }
