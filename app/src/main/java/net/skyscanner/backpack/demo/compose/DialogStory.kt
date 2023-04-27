@@ -158,7 +158,7 @@ internal fun FlareDialogExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory(kind = StoryKind.DemoOnly)
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Flare vertical")
 internal fun FlareDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkFlareDialog(
@@ -221,7 +221,7 @@ internal fun ImageDialogEndAlignmentExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory(kind = StoryKind.DemoOnly)
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Vertical")
 internal fun ImageDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkImageDialog(
