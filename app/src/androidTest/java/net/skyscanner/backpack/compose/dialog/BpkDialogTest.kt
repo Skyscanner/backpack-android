@@ -19,8 +19,10 @@
 package net.skyscanner.backpack.compose.dialog
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -102,7 +104,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun flareVertical() {
-        record {
+        recordWithAssertion(description = "Image of man floating on water watching sunset") {
             FlareDialogVerticalExample()
         }
     }
@@ -124,7 +126,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun imageVertical() {
-        record {
+        recordWithAssertion(description = "Image of man floating on water watching sunset") {
             ImageDialogVerticalExample()
         }
     }
@@ -132,6 +134,16 @@ class BpkDialogTest : BpkSnapshotTest() {
     private fun record(content: @Composable () -> Unit) {
         rule.setContent { BpkTheme { content() } }
 
+        compareScreenshot(rule.onNode(isDialog()))
+    }
+
+    private fun recordWithAssertion(
+        description: String,
+        content: @Composable () -> Unit,
+    ) {
+        rule.setContent { BpkTheme { content() } }
+        val dialogNode = rule.onNodeWithContentDescription(description)
+        dialogNode.assertIsDisplayed()
         compareScreenshot(rule.onNode(isDialog()))
     }
 }
