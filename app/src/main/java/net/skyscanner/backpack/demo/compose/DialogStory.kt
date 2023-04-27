@@ -221,7 +221,7 @@ internal fun ImageDialogEndAlignmentExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory("Image Vertical")
+@ComposeStory(kind = StoryKind.DemoOnly)
 internal fun ImageDialogVerticalExample() =
     DialogDemo { onDismiss ->
         BpkImageDialog(
