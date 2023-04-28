@@ -45,6 +45,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
@@ -83,6 +84,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
@@ -121,6 +123,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
@@ -159,6 +162,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
@@ -197,6 +201,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
@@ -235,6 +240,7 @@ package net.skyscanner.backpack.demo.meta
 
 import FabStory
 import kotlin.collections.List
+import net.skyscanner.backpack.meta.StoryKind
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
