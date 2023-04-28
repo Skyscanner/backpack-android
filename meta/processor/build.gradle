@@ -5,6 +5,9 @@ dependencies {
     implementation libs.square.kotlinPoet
     implementation libs.androidx.roomCompilerProcessing
     implementation project(":meta:annotations")
+    testImplementation libs.test.junit
+    testImplementation libs.kotlin.compilerTesting
+    testImplementation libs.kotlin.compilerTestingKsp
 }
 
 sourceSets.main {

@@ -43,7 +43,7 @@ class BackpackSymbolProcessor(
     override fun process(resolver: Resolver): List<KSAnnotated> {
         if (invoked) return emptyList()
         // if we run the ksp for test sources we will generate empty stories list
-        if (!resolver.getAllFiles().any { "main" in it.filePath }) return emptyList()
+//        if (!resolver.getAllFiles().any { "main" in it.filePath }) return emptyList()
 
         val filer = XProcessingEnv.create(environment.options, resolver, environment.codeGenerator, environment.logger).filer
 

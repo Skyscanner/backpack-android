@@ -33,9 +33,3 @@ data class Story(
     // used for code-generated extensions
     companion object
 }
-
-enum class StoryKind {
-    DemoOnly,
-    ScreenshotOnly,
-    StoryAndScreenshot,
-}

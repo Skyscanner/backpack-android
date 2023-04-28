@@ -34,7 +34,12 @@ open class AnnotationDefinition private constructor(
 
     constructor(kDeclaration: KSDeclaration) : this(
         simpleName = kDeclaration.qualifiedName?.getShortName()!!,
-        qualifiedName = kDeclaration.qualifiedName!!.getQualifier() + "." + kDeclaration.qualifiedName!!.getShortName(),
+        qualifiedName = listOf(
+            kDeclaration.qualifiedName?.getQualifier(),
+            kDeclaration.qualifiedName?.getShortName(),
+        )
+            .filter { !it.isNullOrEmpty() }
+            .joinToString(separator = "."),
     )
 
     val pkg = qualifiedName.removeSuffix(".$simpleName")
