@@ -25,8 +25,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
-import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
+import net.skyscanner.backpack.R
+import net.skyscanner.backpack.dialog.internal.BpkDialogImpl
 
 open class BpkDialog private constructor(
     context: Context,
@@ -81,9 +81,14 @@ open class BpkDialog private constructor(
         ALERT, FLARE,
     }
 
-    private val impl = when (type) {
-        Type.Flare -> FlareDialogImpl(this)
-        else -> AlertDialogImpl(this, type)
+    private var impl: BpkDialogImpl
+
+    init {
+        val layout = when (type) {
+            Type.Flare -> R.layout.bpk_dialog_flare
+            else -> R.layout.bpk_dialog
+        }
+        impl = BpkDialogImpl(layout, this, type)
     }
 
     var title: String
