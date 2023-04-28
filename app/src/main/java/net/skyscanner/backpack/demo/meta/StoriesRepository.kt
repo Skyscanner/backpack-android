@@ -29,9 +29,9 @@ import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-    val uiComponents: List<ComponentMarker>
+    val uiComponents: List<Component>
 
-    val tokenComponents: List<ComponentMarker>
+    val tokenComponents: List<Component>
 
     val screenshotStories: List<Story>
 
@@ -73,7 +73,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
             .filter { !it.component.isToken }
             .map(Story::component)
             .distinct()
-            .sortedBy(ComponentMarker::name)
+            .sortedBy(Component::name)
             .toList()
 
     override val tokenComponents =
@@ -81,7 +81,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
             .filter { it.component.isToken }
             .map(Story::component)
             .distinct()
-            .sortedBy(ComponentMarker::name)
+            .sortedBy(Component::name)
             .toList()
 
     override val screenshotStories =
