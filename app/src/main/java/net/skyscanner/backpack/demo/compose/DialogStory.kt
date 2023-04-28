@@ -42,7 +42,7 @@ import net.skyscanner.backpack.compose.tokens.Trash
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @DialogComponent

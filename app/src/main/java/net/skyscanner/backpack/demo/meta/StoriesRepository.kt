@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.demo.meta
 
+import net.skyscanner.backpack.meta.StoryKind
+
 interface StoriesRepository {
 
     val uiComponents: List<Component>

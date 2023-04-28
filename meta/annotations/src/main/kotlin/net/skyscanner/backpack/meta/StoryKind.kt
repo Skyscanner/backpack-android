@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.demo.meta
+package net.skyscanner.backpack.meta
 
 enum class StoryKind {
     DemoOnly,

@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.meta
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import net.skyscanner.backpack.meta.StoryKind
 
 @Immutable
 data class Story(

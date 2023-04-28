@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.meta
 
 import net.skyscanner.backpack.demo.meta.StoriesRepository
-import net.skyscanner.backpack.demo.meta.StoryKind
 import org.junit.Assert.assertTrue
 import org.junit.Test
 

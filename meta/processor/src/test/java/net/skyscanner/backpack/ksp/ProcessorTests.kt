@@ -24,7 +24,7 @@ class ProcessorTests {
 
     @Test
     fun `view story generation`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
@@ -62,7 +62,7 @@ public fun Story.Companion.all(): List<Story> = listOf(
 
     @Test
     fun `compose story generation`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
@@ -100,7 +100,7 @@ public fun Story.Companion.all(): List<Story> = listOf(
 
     @Test
     fun `custom story name`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
@@ -138,7 +138,7 @@ public fun Story.Companion.all(): List<Story> = listOf(
 
     @Test
     fun `kind is DemoOnly`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
@@ -176,7 +176,7 @@ public fun Story.Companion.all(): List<Story> = listOf(
 
     @Test
     fun `kind is ScreenshotOnly`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
@@ -214,7 +214,7 @@ public fun Story.Companion.all(): List<Story> = listOf(
 
     @Test
     fun `token component generation`() = testKsp("""
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button", isToken = true)
 annotation class FabComponent

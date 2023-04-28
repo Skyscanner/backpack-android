@@ -41,7 +41,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextFieldComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
 @Composable
