@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.ksp
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ProcessorTests {
@@ -32,8 +31,8 @@ annotation class FabComponent
 
 @net.skyscanner.backpack.meta.StoryMarker(isCompose = false)
 annotation class ViewStory(
-    @net.skyscanner.backpack.meta.StoryKindMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryNameMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
 )
 
 @FabComponent
@@ -41,33 +40,61 @@ annotation class ViewStory(
 fun FabStory() {
 
 }
-        """.trimIndent(),) {
-        assertEquals("", it)
-    }
+""", """
+package net.skyscanner.backpack.demo.meta
+
+import FabStory
+import kotlin.collections.List
+
+public fun Story.Companion.all(): List<Story> = listOf(
+  Story(
+    name = "Default",
+    kind = StoryKind.StoryAndScreenshot,
+    isCompose = false,
+    component = Component(
+      name = "Floating Action Button",
+      isToken = false,
+    ),
+    content = { FabStory() },
+  ),
+)
+""",)
 
     @Test
     fun `compose story generation`() = testKsp("""
-import androidx.compose.runtime.Composable
-import net.skyscanner.backpack.meta.StoryKindMarker
-import net.skyscanner.backpack.meta.StoryMarker
-import net.skyscanner.backpack.meta.StoryNameMarker
+import net.skyscanner.backpack.demo.meta.StoryKind
 
-@ComponentMarker("Floating Action Button")
+@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
 annotation class FabComponent
 
-@StoryMarker(isCompose = true)
+@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
 annotation class ComposeStory(
-    @StoryNameMarker val name: String = "Default",
-    @StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
 )
 
 @FabComponent
-@Composable
 @ComposeStory
 fun FabStory() {
 
 }
-        """.trimIndent(),) {
-        assertEquals("", it)
-    }
+""", """
+package net.skyscanner.backpack.demo.meta
+
+import FabStory
+import kotlin.collections.List
+
+public fun Story.Companion.all(): List<Story> = listOf(
+  Story(
+    name = "Default",
+    kind = StoryKind.StoryAndScreenshot,
+    isCompose = true,
+    component = Component(
+      name = "Floating Action Button",
+      isToken = false,
+    ),
+    content = { FabStory() },
+  ),
+)
+""",)
 }

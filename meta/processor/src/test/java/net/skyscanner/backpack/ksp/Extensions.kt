@@ -23,6 +23,7 @@ import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspSourcesDir
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import org.intellij.lang.annotations.Language
+import org.junit.Assert.assertEquals
 
 internal fun testKsp(
     @Language("kotlin") vararg sourceFile: String,
@@ -39,3 +40,11 @@ internal fun testKsp(
     val generatedStories = compilation.kspSourcesDir.walkTopDown().first { it.name == "GeneratedStories.kt" }
     evaluate(result, generatedStories.readText())
 }
+
+internal fun testKsp(
+    @Language("kotlin") source: String,
+    @Language("kotlin") expected: String,
+) =
+    testKsp(source.trimIndent()) {
+        assertEquals(expected.trimIndent(), it.trimIndent())
+    }
