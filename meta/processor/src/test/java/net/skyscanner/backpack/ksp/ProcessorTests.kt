@@ -48,7 +48,7 @@ import kotlin.collections.List
 
 public fun Story.Companion.all(): List<Story> = listOf(
   Story(
-    name = "Default",
+    name = "Fail",
     kind = StoryKind.StoryAndScreenshot,
     isCompose = false,
     component = Component(
