@@ -57,6 +57,7 @@
     <string name="bottom_nav_profile">Profile</string>
 
     <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+    <string name="image_sunset_content_description">Image of man floating on water watching sunset</string>
 
     <string name="overlay_rounded_corners">Rounded corners</string>
     <string name="overlay_no_rounded_corners">No rounded corners</string>
@@ -130,6 +131,7 @@
 
     <string name="dialog_title">Title in here</string>
     <string name="dialog_text">Description that goes two lines ideally, but sometimes it can go longer</string>
+    <string name="dialog_text_one_line">Description in here</string>
     <string name="dialog_confirmation">Confirmation</string>
     <string name="dialog_skip">Skip</string>
     <string name="dialog_link_optional">Link optional</string>

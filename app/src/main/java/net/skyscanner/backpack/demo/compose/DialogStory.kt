@@ -151,7 +151,26 @@ internal fun FlareDialogExample() =
                 painter = painterResource(R.drawable.canadian_rockies_canada),
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(264.dp),
+                modifier = Modifier.height(192.dp),
+            )
+        }
+    }
+
+@Composable
+@DialogComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Flare vertical")
+internal fun FlareDialogVerticalExample() =
+    DialogDemo { onDismiss ->
+        BpkFlareDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text_one_line),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            onDismissRequest = onDismiss,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sunset),
+                contentDescription = stringResource(R.string.image_sunset_content_description),
+                contentScale = ContentScale.Crop,
             )
         }
     }
@@ -196,6 +215,26 @@ internal fun ImageDialogEndAlignmentExample() =
                 contentDescription = stringResource(R.string.image_rockies_content_description),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.height(192.dp),
+            )
+        }
+    }
+
+@Composable
+@DialogComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Vertical")
+internal fun ImageDialogVerticalExample() =
+    DialogDemo { onDismiss ->
+        BpkImageDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text_one_line),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            onDismissRequest = onDismiss,
+            textAlign = TextAlign.Start,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sunset),
+                contentDescription = stringResource(R.string.image_sunset_content_description),
+                contentScale = ContentScale.Crop,
             )
         }
     }

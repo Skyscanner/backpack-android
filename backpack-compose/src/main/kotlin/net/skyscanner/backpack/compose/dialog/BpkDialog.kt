@@ -38,7 +38,8 @@ fun BpkSuccessDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -49,7 +50,7 @@ fun BpkSuccessDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
@@ -63,7 +64,8 @@ fun BpkSuccessDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Success(icon) },
@@ -75,7 +77,7 @@ fun BpkSuccessDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
@@ -88,7 +90,8 @@ fun BpkWarningDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -99,7 +102,7 @@ fun BpkWarningDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
@@ -113,7 +116,8 @@ fun BpkWarningDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Warning(icon) },
@@ -125,7 +129,7 @@ fun BpkWarningDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
@@ -138,7 +142,8 @@ fun BpkDestructiveDialog(
     text: String,
     confirmButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
 ) {
     BpkDialogImpl(
         icon = icon?.let { Dialog.Icon.Destructive(icon) },
@@ -149,7 +154,7 @@ fun BpkDestructiveDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
     )
 }
 
@@ -161,7 +166,8 @@ fun BpkFlareDialog(
     text: String,
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -172,7 +178,7 @@ fun BpkFlareDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         content = content,
     )
 }
@@ -186,7 +192,8 @@ fun BpkFlareDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkFlareDialogImpl(
@@ -198,7 +205,7 @@ fun BpkFlareDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         content = content,
     )
 }
@@ -212,7 +219,8 @@ fun BpkImageDialog(
     confirmButton: DialogButton,
     secondaryButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
@@ -223,7 +231,7 @@ fun BpkImageDialog(
             secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         textAlign = textAlign,
         content = content,
     )
@@ -239,7 +247,8 @@ fun BpkImageDialog(
     secondaryButton: DialogButton,
     linkButton: DialogButton? = null,
     textAlign: TextAlign = TextAlign.Center,
-    properties: DialogProperties = DialogProperties(),
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkImageDialogImpl(
@@ -251,10 +260,16 @@ fun BpkImageDialog(
             linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
         ),
         onDismissRequest = onDismissRequest,
-        properties = properties,
+        properties = getDialogProperties(dismissOnBackPress, dismissOnClickOutside),
         textAlign = textAlign,
         content = content,
     )
 }
+
+private fun getDialogProperties(dismissOnBackPress: Boolean, dismissOnClickOutside: Boolean) = DialogProperties(
+    dismissOnBackPress = dismissOnBackPress,
+    dismissOnClickOutside = dismissOnClickOutside,
+    usePlatformDefaultWidth = false,
+)
 
 data class DialogButton(internal val text: String, internal val onClick: () -> Unit)
