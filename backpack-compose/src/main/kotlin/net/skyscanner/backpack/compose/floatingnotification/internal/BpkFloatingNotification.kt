@@ -29,8 +29,9 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Snackbar
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -45,6 +46,7 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -53,17 +55,20 @@ internal fun BpkFloatingNotificationImpl(
     modifier: Modifier = Modifier,
 ) {
 
-    Snackbar(
+    Surface(
         modifier = modifier,
         shape = RoundedCornerShape(BpkBorderRadius.Md),
-        containerColor = BpkTheme.colors.corePrimary,
+        shadowElevation = BpkElevation.Lg,
+        color = BpkTheme.colors.corePrimary,
         contentColor = BpkTheme.colors.textOnDark,
     ) {
         CompositionLocalProvider(
             LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
         ) {
             Row(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(horizontal = BpkSpacing.Base),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
