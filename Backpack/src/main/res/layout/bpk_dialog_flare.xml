@@ -10,13 +10,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/bpkSpacingBase">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -48,21 +47,21 @@
                 android:id="@+id/dialog_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/bpkSpacingBase"
-                android:layout_marginTop="@dimen/bpkSpacingBase"
-                android:layout_marginEnd="@dimen/bpkSpacingBase"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
+                android:layout_marginTop="@dimen/bpkSpacingLg"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@id/dialog_flare"
-                app:textStyle="heading2"
+                app:textStyle="heading3"
                 tools:text="Where will you go?" />
 
             <net.skyscanner.backpack.text.BpkText
                 android:id="@+id/dialog_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/bpkSpacingXl"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
                 android:layout_marginTop="@dimen/bpkSpacingMd"
-                android:layout_marginEnd="@dimen/bpkSpacingXl"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@id/dialog_title"
                 app:lineHeight="23dp"
@@ -72,9 +71,10 @@
                 android:id="@+id/dialog_buttons_root"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/bpkSpacingBase"
+                android:layout_marginStart="@dimen/bpkSpacingLg"
                 android:layout_marginTop="@dimen/bpkSpacingLg"
-                android:layout_marginEnd="@dimen/bpkSpacingBase"
+                android:layout_marginEnd="@dimen/bpkSpacingLg"
+                android:paddingBottom="@dimen/bpk_dialog_padding_bottom"
                 android:orientation="vertical"
                 app:divider="@drawable/bpk_dialog_bg_divider"
                 app:layout_constraintEnd_toEndOf="parent"
