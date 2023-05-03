@@ -52,7 +52,7 @@ class ProcessorTests {
 
     public fun Story.Companion.all(): List<Story> = listOf(
       Story(
-        name = "Fail",
+        name = "Default",
         kind = StoryKind.StoryAndScreenshot,
         isCompose = false,
         component = Component(
