@@ -173,9 +173,9 @@ To verify changes during development, generate docs screenshots and showcase our
 To add a new component, add an annotation to `components` package:
 
 ```kotlin
-import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.meta.ComponentMarker
 
-@Component("My Component") // name of the component to be used in UI. Also used for the docs folder
+@ComponentMarker("My Component") // name of the component to be used in UI. Also used for the docs folder
 annotation class MyComponent
 ```
 

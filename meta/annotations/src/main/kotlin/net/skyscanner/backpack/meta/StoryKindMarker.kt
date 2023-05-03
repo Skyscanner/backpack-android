@@ -16,13 +16,8 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.ksp.visitor
+package net.skyscanner.backpack.meta
 
-import net.skyscanner.backpack.ksp.ViewStoryAnnotation
-
-object ViewStoriesVisitor : AbstractStoriesVisitor(
-    annotationDefinition = ViewStoryAnnotation,
-    paramName = ViewStoryAnnotation.paramName,
-    paramKind = ViewStoryAnnotation.paramKind,
-    isCompose = false,
-)
+@Target(AnnotationTarget.VALUE_PARAMETER)
+@Retention(AnnotationRetention.BINARY)
+annotation class StoryKindMarker

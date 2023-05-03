@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.demo.components
 
-import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.meta.ComponentMarker
 
-@Component("Radii", isToken = true)
+@ComponentMarker("Radii", isToken = true)
 annotation class RadiiTokensComponent

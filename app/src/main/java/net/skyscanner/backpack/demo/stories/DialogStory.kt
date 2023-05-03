@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.dialog.BpkDialog
 

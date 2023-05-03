@@ -31,7 +31,7 @@ import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 

@@ -1,12 +1,17 @@
 apply plugin: 'kotlin'
 
 dependencies {
-  implementation libs.google.kspApi
-  implementation libs.square.kotlinPoet
-  implementation libs.androidx.roomCompilerProcessing
+    implementation libs.google.kspApi
+    implementation libs.square.kotlinPoet
+    implementation libs.androidx.roomCompilerProcessing
+    implementation project(":meta:annotations")
+    testImplementation libs.test.junit
+    testImplementation libs.kotlin.compilerTesting
+    testImplementation libs.kotlin.compilerTestingKsp
 }
 
 sourceSets.main {
-  java.srcDirs("src/main/kotlin")
+    java.srcDirs("src/main/kotlin")
 }
 
+apply from: "$rootProject.projectDir/kotlin-configuration-check.gradle"

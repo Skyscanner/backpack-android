@@ -18,25 +18,20 @@
 
 package net.skyscanner.backpack.ksp
 
-private const val metaPkg = "net.skyscanner.backpack.demo.meta"
+import net.skyscanner.backpack.meta.ComponentMarker
+import net.skyscanner.backpack.meta.StoryKindMarker
+import net.skyscanner.backpack.meta.StoryMarker
+import net.skyscanner.backpack.meta.StoryNameMarker
 
-object ComposeStoryAnnotation : AnnotationDefinition {
-    override val simpleName = "ComposeStory"
-    override val pkg = metaPkg
-    val paramName = stringParamOf("name")
-    val paramKind = enumParamOf("kind")
+object StoryNameAnnotation : AnnotationDefinition(StoryNameMarker::class)
+
+object StoryKindAnnotation : AnnotationDefinition(StoryKindMarker::class)
+
+object StoryMarkerAnnotation : AnnotationDefinition(StoryMarker::class) {
+    val paramIsCompose = booleanParamOf("isCompose")
 }
 
-object ViewStoryAnnotation : AnnotationDefinition {
-    override val simpleName = "ViewStory"
-    override val pkg = metaPkg
-    val paramName = stringParamOf("name")
-    val paramKind = enumParamOf("kind")
-}
-
-object ComponentAnnotation : AnnotationDefinition {
-    override val simpleName = "Component"
-    override val pkg = metaPkg
+object ComponentAnnotation : AnnotationDefinition(ComponentMarker::class) {
     val paramName = stringParamOf("name")
     val paramToken = booleanParamOf("isToken")
 }

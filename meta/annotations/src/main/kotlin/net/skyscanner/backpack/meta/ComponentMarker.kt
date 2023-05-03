@@ -16,13 +16,11 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.ksp.visitor
+package net.skyscanner.backpack.meta
 
-import net.skyscanner.backpack.ksp.ComposeStoryAnnotation
-
-object ComposeStoriesVisitor : AbstractStoriesVisitor(
-    annotationDefinition = ComposeStoryAnnotation,
-    paramName = ComposeStoryAnnotation.paramName,
-    paramKind = ComposeStoryAnnotation.paramKind,
-    isCompose = true,
+@Target(AnnotationTarget.ANNOTATION_CLASS)
+@Retention(AnnotationRetention.BINARY)
+annotation class ComponentMarker(
+    val name: String,
+    val isToken: Boolean = false,
 )

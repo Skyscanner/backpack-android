@@ -28,6 +28,16 @@ data class ComponentDefinition(
     val location: FileLocation,
 )
 
+data class StoryAnnotationDefinition(
+    val annotation: AnnotationDefinition,
+    val namePropertyName: String,
+    val kindPropertyName: String,
+    val isCompose: Boolean,
+) {
+    val paramName = annotation.stringParamOf(namePropertyName)
+    val paramKind = annotation.enumParamOf(kindPropertyName)
+}
+
 data class StoryDefinition(
     val component: ComponentDefinition,
     val name: String,

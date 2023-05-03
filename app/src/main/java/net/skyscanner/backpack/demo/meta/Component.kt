@@ -18,12 +18,7 @@
 
 package net.skyscanner.backpack.demo.meta
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
-@Target(AnnotationTarget.ANNOTATION_CLASS)
-@Retention(AnnotationRetention.BINARY)
-annotation class Component(
+data class Component(
     val name: String,
     val isToken: Boolean = false,
 )
