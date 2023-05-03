@@ -14,3 +14,4 @@ sourceSets.main {
     java.srcDirs("src/main/kotlin")
 }
 
+apply from: "$rootProject.projectDir/kotlin-configuration-check.gradle"

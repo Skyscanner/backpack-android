@@ -67,9 +67,6 @@ jobs:
       - name: Unit Tests
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
-      - name: KSP Tests
-        run: ./gradlew :meta:processor:test
-
   Android:
     name: Android tests
     runs-on: macos-latest

@@ -34,6 +34,4 @@ jar {
     }
 }
 
-task testOssDebugUnitTest {
-    dependsOn("test")
-}
+apply from: "$rootProject.projectDir/kotlin-configuration-check.gradle"

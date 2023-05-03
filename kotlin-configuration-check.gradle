@@ -16,9 +16,6 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.meta
-
-data class Component(
-    val name: String,
-    val isToken: Boolean = false,
-)
+task testOssDebugUnitTest {
+    dependsOn("test")
+}

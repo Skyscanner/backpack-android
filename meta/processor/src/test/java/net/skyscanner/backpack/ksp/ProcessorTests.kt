@@ -23,236 +23,272 @@ import org.junit.Test
 class ProcessorTests {
 
     @Test
-    fun `view story generation`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    fun `view story generation`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
-annotation class FabComponent
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
+    annotation class FabComponent
 
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = false)
-annotation class ViewStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = false)
+    annotation class ViewStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
 
-@FabComponent
-@ViewStory
-fun FabStory() {
+    @FabComponent
+    @ViewStory
+    fun FabStory() {
 
-}
-""", """
-package net.skyscanner.backpack.demo.meta
+    }
+    """
 
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
+        val output = """
+    package net.skyscanner.backpack.demo.meta
 
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Default",
-    kind = StoryKind.StoryAndScreenshot,
-    isCompose = false,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = false,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
 
-    @Test
-    fun `compose story generation`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Default",
+        kind = StoryKind.StoryAndScreenshot,
+        isCompose = false,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = false,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
-annotation class FabComponent
-
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
-
-@FabComponent
-@ComposeStory
-fun FabStory() {
-
-}
-""", """
-package net.skyscanner.backpack.demo.meta
-
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
-
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Default",
-    kind = StoryKind.StoryAndScreenshot,
-    isCompose = true,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = false,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+        testKsp(input, output)
+    }
 
     @Test
-    fun `custom story name`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    fun `compose story generation`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
-annotation class FabComponent
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
+    annotation class FabComponent
 
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
+    annotation class ComposeStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
 
-@FabComponent
-@ComposeStory("Custom name")
-fun FabStory() {
+    @FabComponent
+    @ComposeStory
+    fun FabStory() {
 
-}
-""", """
-package net.skyscanner.backpack.demo.meta
+    }
+    """
 
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
+        val output = """
+    package net.skyscanner.backpack.demo.meta
 
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Custom name",
-    kind = StoryKind.StoryAndScreenshot,
-    isCompose = true,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = false,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
 
-    @Test
-    fun `kind is DemoOnly`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Default",
+        kind = StoryKind.StoryAndScreenshot,
+        isCompose = true,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = false,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
-annotation class FabComponent
-
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
-
-@FabComponent
-@ComposeStory(kind = StoryKind.DemoOnly)
-fun FabStory() {
-
-}
-""", """
-package net.skyscanner.backpack.demo.meta
-
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
-
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Default",
-    kind = StoryKind.DemoOnly,
-    isCompose = true,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = false,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+        testKsp(input, output)
+    }
 
     @Test
-    fun `kind is ScreenshotOnly`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    fun `custom story name`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
-annotation class FabComponent
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
+    annotation class FabComponent
 
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
+    annotation class ComposeStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
 
-@FabComponent
-@ComposeStory(kind = StoryKind.ScreenshotOnly)
-fun FabStory() {
+    @FabComponent
+    @ComposeStory("Custom name")
+    fun FabStory() {
 
-}
-""", """
-package net.skyscanner.backpack.demo.meta
+    }
+    """
 
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
+        val output = """
+    package net.skyscanner.backpack.demo.meta
 
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Default",
-    kind = StoryKind.ScreenshotOnly,
-    isCompose = true,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = false,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
+
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Custom name",
+        kind = StoryKind.StoryAndScreenshot,
+        isCompose = true,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = false,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
+
+        testKsp(input, output)
+    }
 
     @Test
-    fun `token component generation`() = testKsp("""
-import net.skyscanner.backpack.meta.StoryKind
+    fun `kind is DemoOnly`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
 
-@net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button", isToken = true)
-annotation class FabComponent
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
+    annotation class FabComponent
 
-@net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
-    @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
+    annotation class ComposeStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
 
-@FabComponent
-@ComposeStory
-fun FabStory() {
+    @FabComponent
+    @ComposeStory(kind = StoryKind.DemoOnly)
+    fun FabStory() {
 
-}
-""", """
-package net.skyscanner.backpack.demo.meta
+    }
+    """
 
-import FabStory
-import kotlin.collections.List
-import net.skyscanner.backpack.meta.StoryKind
+        val output = """
+    package net.skyscanner.backpack.demo.meta
 
-public fun Story.Companion.all(): List<Story> = listOf(
-  Story(
-    name = "Default",
-    kind = StoryKind.StoryAndScreenshot,
-    isCompose = true,
-    component = Component(
-      name = "Floating Action Button",
-      isToken = true,
-    ),
-    content = { FabStory() },
-  ),
-)
-""",)
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
+
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Default",
+        kind = StoryKind.DemoOnly,
+        isCompose = true,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = false,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
+
+        testKsp(input, output)
+    }
+
+    @Test
+    fun `kind is ScreenshotOnly`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
+
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button")
+    annotation class FabComponent
+
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
+    annotation class ComposeStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
+
+    @FabComponent
+    @ComposeStory(kind = StoryKind.ScreenshotOnly)
+    fun FabStory() {
+
+    }
+    """
+
+        val output = """
+    package net.skyscanner.backpack.demo.meta
+
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
+
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Default",
+        kind = StoryKind.ScreenshotOnly,
+        isCompose = true,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = false,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
+
+        testKsp(input, output)
+    }
+
+    @Test
+    fun `token component generation`() {
+        val input = """
+    import net.skyscanner.backpack.meta.StoryKind
+
+    @net.skyscanner.backpack.meta.ComponentMarker("Floating Action Button", isToken = true)
+    annotation class FabComponent
+
+    @net.skyscanner.backpack.meta.StoryMarker(isCompose = true)
+    annotation class ComposeStory(
+        @net.skyscanner.backpack.meta.StoryNameMarker val name: String = "Default",
+        @net.skyscanner.backpack.meta.StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    )
+
+    @FabComponent
+    @ComposeStory
+    fun FabStory() {
+
+    }
+    """
+
+        val output = """
+    package net.skyscanner.backpack.demo.meta
+
+    import FabStory
+    import kotlin.collections.List
+    import net.skyscanner.backpack.meta.StoryKind
+
+    public fun Story.Companion.all(): List<Story> = listOf(
+      Story(
+        name = "Default",
+        kind = StoryKind.StoryAndScreenshot,
+        isCompose = true,
+        component = Component(
+          name = "Floating Action Button",
+          isToken = true,
+        ),
+        content = { FabStory() },
+      ),
+    )
+    """
+
+        testKsp(input, output)
+    }
 }
