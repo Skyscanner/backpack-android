@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.dialog
 
-import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -29,8 +28,10 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
 import net.skyscanner.backpack.demo.compose.FlareDialogExample
+import net.skyscanner.backpack.demo.compose.FlareDialogVerticalExample
 import net.skyscanner.backpack.demo.compose.ImageDialogEndAlignmentExample
 import net.skyscanner.backpack.demo.compose.ImageDialogStartAlignmentExample
+import net.skyscanner.backpack.demo.compose.ImageDialogVerticalExample
 import net.skyscanner.backpack.demo.compose.NoIconDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessOneButtonDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessThreeButtonsDialogExample
@@ -99,6 +100,14 @@ class BpkDialogTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun flareVertical() {
+        record {
+            FlareDialogVerticalExample()
+        }
+    }
+
+    @Test
     fun imageStartAlignment() {
         record {
             ImageDialogStartAlignmentExample()
@@ -109,6 +118,14 @@ class BpkDialogTest : BpkSnapshotTest() {
     fun imageEndAlignment() {
         record {
             ImageDialogEndAlignmentExample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun imageVertical() {
+        record {
+            ImageDialogVerticalExample()
         }
     }
 

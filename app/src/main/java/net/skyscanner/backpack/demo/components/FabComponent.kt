@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.demo.components
 
-import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.meta.ComponentMarker
 
-@Component("Floating Action Button")
+@ComponentMarker("Floating Action Button")
 annotation class FabComponent

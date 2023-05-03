@@ -33,7 +33,7 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.Highlig
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 

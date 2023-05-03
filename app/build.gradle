@@ -96,6 +96,18 @@ android {
     }
 }
 
+project.afterEvaluate {
+    tasks.configureEach { task ->
+        def name = task.name.toLowerCase()
+        def isAndroidTestFlavour = name.contains("androidtest") || name.contains("screenshots")
+        def isKspTask = name.startsWith("ksp")
+        if (isAndroidTestFlavour && isKspTask) {
+            // if we run the ksp for android test sources we will generate empty stories list
+            task.enabled = false
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libs.square.picasso
@@ -119,6 +131,7 @@ dependencies {
     androidTestImplementation libs.test.facebookSnapshotTestingCore
     implementation project(':Backpack')
     implementation project(':backpack-compose')
+    implementation project(":meta:annotations")
     ksp project(":meta:processor")
     ksp libs.destinations.ksp
 

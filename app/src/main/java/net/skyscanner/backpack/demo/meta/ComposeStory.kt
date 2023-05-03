@@ -20,13 +20,18 @@ package net.skyscanner.backpack.demo.meta
 
 import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
+import net.skyscanner.backpack.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKindMarker
+import net.skyscanner.backpack.meta.StoryMarker
+import net.skyscanner.backpack.meta.StoryNameMarker
 
 @Immutable
 @Suppress("Detekt.PreviewNaming")
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @BpkPreviews
+@StoryMarker(isCompose = true)
 annotation class ComposeStory(
-    val name: String = "Default",
-    val kind: StoryKind = StoryKind.StoryAndScreenshot,
+    @StoryNameMarker val name: String = "Default",
+    @StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
 )

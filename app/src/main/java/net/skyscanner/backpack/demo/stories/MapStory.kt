@@ -36,7 +36,7 @@ import com.google.android.gms.maps.model.LatLng
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.data.SharedPreferences
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.ComponentItem
 import net.skyscanner.backpack.map.addBpkMarker

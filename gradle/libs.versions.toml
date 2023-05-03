@@ -2,6 +2,7 @@
 kotlin = "1.8.10"
 ksp = "1.8.10-1.0.9" # depends on Kotlin version
 composeCompiler = "1.4.4" # depends on Kotlin version
+compilerTesting = "1.5.0"
 destinations = "1.8.39-beta" # update this alongside with compiler version
 accompanist = "0.30.1" # update this alongside with compiler version
 
@@ -71,6 +72,8 @@ kotlin-reflection = { module = "org.jetbrains.kotlin:kotlin-reflect", version.re
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-compilerTesting = { module = "com.github.tschuchortdev:kotlin-compile-testing", version.ref = "compilerTesting" }
+kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "compilerTesting" }
 
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
