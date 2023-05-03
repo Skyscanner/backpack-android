@@ -173,9 +173,9 @@ To verify changes during development, generate docs screenshots and showcase our
 To add a new component, add an annotation to `components` package:
 
 ```kotlin
-import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.meta.ComponentMarker
 
-@Component("My Component") // name of the component to be used in UI. Also used for the docs folder
+@ComponentMarker("My Component") // name of the component to be used in UI. Also used for the docs folder
 annotation class MyComponent
 ```
 
@@ -277,9 +277,9 @@ If the component or change you want to contribute to Backpack is not stable and 
 <details>
 <summary>What do you need to do to mark a component or part of a component as experimental?</summary>
 
-For experimental changes or experimental components, you should use the `ExperimentalBackpackApi` annotation. This will require consumers to opt in to use the API and therefore highlight that the component or property is experimental. 
+For experimental changes or experimental components, you should use the `ExperimentalBackpackApi` annotation. This will require consumers to opt in to use the API and therefore highlight that the component or property is experimental.
 
-For major changes, you should create a new experimental V2 component. If the experiment is successful, the old component should be deprecated. 
+For major changes, you should create a new experimental V2 component. If the experiment is successful, the old component should be deprecated.
 
 Any follow-up changes to experimental components will not be considered breaking.
 </details>
