@@ -24,10 +24,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
-import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.TriStateCheckbox
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -142,7 +142,7 @@ fun BpkCheckbox(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkCheckboxImpl(
     state: ToggleableState,
@@ -164,7 +164,8 @@ private fun BpkCheckboxImpl(
                 checkedColor = BpkTheme.colors.coreAccent,
                 uncheckedColor = BpkTheme.colors.textSecondary,
                 checkmarkColor = BpkTheme.colors.textPrimaryInverse,
-                disabledColor = BpkTheme.colors.textDisabled,
+                disabledCheckedColor = BpkTheme.colors.textDisabled,
+                disabledUncheckedColor = BpkTheme.colors.textDisabled,
                 disabledIndeterminateColor = BpkTheme.colors.textDisabled,
             ),
         )
