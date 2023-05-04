@@ -37,7 +37,7 @@ import java.util.Locale
  * @param selectionMode setting describing the selection behaviour
  * @param cellsInfo additional information to be added to dates cell
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
- * @param dayOfWeekText [TextStyle] to format days of week in calendar header
+ * @param dayOfWeekText [TextStyle] to format days of week in calendar header. Beware of the fact that some Chinese languages may require SHORT style instead of NARROW.
  * @param now [LocalDate] a date for the calendar to consider as current
  * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  */
@@ -156,11 +156,9 @@ enum class CellStatusStyle {
 private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
     when (locale.language.lowercase()) {
         "zh" -> when (locale.country.lowercase()) {
-            "mo" -> TextStyle.SHORT // Traditional
-            "hk" -> TextStyle.SHORT // Traditional
-            "tw" -> TextStyle.SHORT // Traditional
-            "sg" -> TextStyle.SHORT // Singapore
+            "mo", "hk", "tw", "sg" -> TextStyle.SHORT // Traditional
             else -> TextStyle.NARROW
         }
+
         else -> TextStyle.NARROW
     }
