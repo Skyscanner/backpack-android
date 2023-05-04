@@ -2287,6 +2287,15 @@ public val BpkIcon.Companion.Upgrade: BpkIcon by Delegates.singleton(
 )
 
 
+public val BpkIcon.Companion.Upload: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "upload",
+        small = R.drawable.bpk_upload_sm,
+        large = R.drawable.bpk_upload,
+    )
+)
+
+
 public val BpkIcon.Companion.UseLocation: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "use-location",
@@ -2532,11 +2541,12 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
                 BpkIcon.Time, BpkIcon.Toilets, BpkIcon.Train, BpkIcon.TransmissionAutomatic,
                 BpkIcon.TransmissionManual, BpkIcon.Trash, BpkIcon.Trend, BpkIcon.TrendDown,
                 BpkIcon.TrendSteady, BpkIcon.TrendWillRise, BpkIcon.Trips, BpkIcon.Undo,
-                BpkIcon.Unlock, BpkIcon.Unmute, BpkIcon.Upgrade, BpkIcon.UseLocation, BpkIcon.View,
-                BpkIcon.Virus, BpkIcon.Wallet, BpkIcon.Weather, BpkIcon.WeatherClear,
-                BpkIcon.WeatherCloudy, BpkIcon.WeatherFog, BpkIcon.WeatherPartlyCloudy,
-                BpkIcon.WeatherRain, BpkIcon.WeatherSnow, BpkIcon.WeatherThunderstorm,
-                BpkIcon.WeatherTornado, BpkIcon.WeatherWind, BpkIcon.Wifi, BpkIcon.Window,
-                BpkIcon.WindowReduce, BpkIcon.WorldAmer, BpkIcon.WorldApac, BpkIcon.WorldEmea, )
+                BpkIcon.Unlock, BpkIcon.Unmute, BpkIcon.Upgrade, BpkIcon.Upload,
+                BpkIcon.UseLocation, BpkIcon.View, BpkIcon.Virus, BpkIcon.Wallet, BpkIcon.Weather,
+                BpkIcon.WeatherClear, BpkIcon.WeatherCloudy, BpkIcon.WeatherFog,
+                BpkIcon.WeatherPartlyCloudy, BpkIcon.WeatherRain, BpkIcon.WeatherSnow,
+                BpkIcon.WeatherThunderstorm, BpkIcon.WeatherTornado, BpkIcon.WeatherWind,
+                BpkIcon.Wifi, BpkIcon.Window, BpkIcon.WindowReduce, BpkIcon.WorldAmer,
+                BpkIcon.WorldApac, BpkIcon.WorldEmea, )
 )
 
