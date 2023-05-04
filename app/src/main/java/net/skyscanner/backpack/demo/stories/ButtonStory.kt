@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ButtonComponent
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import kotlin.math.max

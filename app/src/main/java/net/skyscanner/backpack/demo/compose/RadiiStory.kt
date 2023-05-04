@@ -41,7 +41,7 @@ import net.skyscanner.backpack.demo.components.RadiiTokensComponent
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @RadiiTokensComponent

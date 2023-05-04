@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.demo.components
 
-import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.meta.ComponentMarker
 
-@Component("Map Markers")
+@ComponentMarker("Map Markers")
 annotation class MapMarkersComponent

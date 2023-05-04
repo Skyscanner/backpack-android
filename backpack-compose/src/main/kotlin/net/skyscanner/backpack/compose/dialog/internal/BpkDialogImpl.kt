@@ -27,13 +27,16 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -59,7 +62,7 @@ internal fun BpkDialogImpl(
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Box(contentAlignment = Alignment.TopCenter) {
             Surface(
-                modifier = Modifier.padding(top = IconPadding),
+                modifier = Modifier.dialogWidth(),
                 shape = BpkTheme.shapes.medium,
                 color = BpkTheme.colors.surfaceDefault,
             ) {
@@ -84,14 +87,18 @@ internal fun BpkFlareDialogImpl(
     properties: DialogProperties,
     content: @Composable BoxScope.() -> Unit,
 ) {
+
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(top = IconPadding),
+            modifier = Modifier.dialogWidth(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
             Column {
-                BpkFlare(content = content)
+                BpkFlare(
+                    content = content,
+                    modifier = Modifier.dialogContentSizeRestrictions(),
+                )
                 DialogContent(title = title, text = text, buttons = buttons)
             }
         }
@@ -108,14 +115,18 @@ internal fun BpkImageDialogImpl(
     textAlign: TextAlign,
     content: @Composable BoxScope.() -> Unit,
 ) {
+
     Dialog(onDismissRequest = onDismissRequest, properties = properties) {
         Surface(
-            modifier = Modifier.padding(top = IconPadding),
+            modifier = Modifier.dialogWidth(),
             shape = BpkTheme.shapes.medium,
             color = BpkTheme.colors.surfaceDefault,
         ) {
             Column {
-                Box(content = content)
+                Box(
+                    content = content,
+                    modifier = Modifier.dialogContentSizeRestrictions(),
+                )
                 DialogContent(title = title, text = text, textAlign = textAlign, buttons = buttons)
             }
         }
@@ -202,6 +213,26 @@ private fun DialogIcon(icon: Dialog.Icon?) {
     }
 }
 
+private fun Modifier.dialogWidth(): Modifier =
+    widthIn(
+        max = DialogMaxWidth,
+    ).padding(
+        top = IconPadding,
+        start = BpkDimension.Spacing.Lg,
+        end = BpkDimension.Spacing.Lg,
+    )
+
+private fun Modifier.dialogContentSizeRestrictions(): Modifier =
+    layout { measurable, constraints ->
+        val imageWidth = constraints.maxWidth
+        val imageHeight = measurable.maxIntrinsicHeight(imageWidth).coerceAtMost(imageWidth)
+        val placeable = measurable.measure(Constraints.fixed(imageWidth, imageHeight))
+        layout(placeable.width, placeable.height) {
+            placeable.placeRelative(0, 0)
+        }
+    }
+
 private val IconSize = 64.dp
 private val IconBorder = 4.dp
 private val IconPadding = 40.dp
+private val DialogMaxWidth = 400.dp

@@ -18,13 +18,7 @@
 
 package net.skyscanner.backpack.demo.meta
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.ui.AndroidView
-import net.skyscanner.backpack.text.BpkText
-import org.jetbrains.annotations.TestOnly
+import net.skyscanner.backpack.meta.StoryKind
 
 interface StoriesRepository {
 
@@ -42,9 +36,6 @@ interface StoriesRepository {
 
     fun isViewOnly(component: String): Boolean
 
-    @get:TestOnly
-    val testStories: List<Story>
-
     companion object {
 
         fun getInstance(): StoriesRepository = StoriesRepositoryImpl
@@ -53,16 +44,9 @@ interface StoriesRepository {
 
 private object StoriesRepositoryImpl : StoriesRepository {
 
-    private val generatedStories = Story
+    private val stories = Story
         .all()
         .asSequence()
-
-    override val testStories =
-        generatedStories
-            .filter { it.isTestStory() }
-            .toList()
-
-    private val stories = generatedStories - testStories.toSet()
 
     private val visibleStories = stories
         .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.DemoOnly }
@@ -107,47 +91,4 @@ private object StoriesRepositoryImpl : StoriesRepository {
         visibleStories
             .filter { it.component.name == component }
             .none { it.isCompose }
-
-    private fun Story.isTestStory() =
-        this.component.name == "TestComponent"
-}
-
-@Component(name = "TestComponent", isToken = true)
-private annotation class TestComponent
-
-@ComposeStory(name = "TestComposeStory", kind = StoryKind.DemoOnly)
-@TestComponent
-@Composable
-internal fun TestComposeStory(modifier: Modifier = Modifier) {
-    Box(modifier = modifier)
-}
-
-@ViewStory(name = "TestViewStory", kind = StoryKind.DemoOnly)
-@TestComponent
-@Composable
-internal fun TestViewStory(modifier: Modifier = Modifier) {
-    Box(modifier = modifier)
-}
-
-@ComposeStory(name = "TestComposeScreenshot", kind = StoryKind.ScreenshotOnly)
-@TestComponent
-@Composable
-internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
-    Box(modifier = modifier)
-}
-
-@ComposeStory(kind = StoryKind.ScreenshotOnly)
-@TestComponent
-@Composable
-internal fun TestDefaultStory(modifier: Modifier = Modifier) {
-    Box(modifier = modifier)
-}
-
-@ViewStory(name = "TestViewScreenshot", kind = StoryKind.ScreenshotOnly)
-@TestComponent
-@Composable
-internal fun TestViewScreenshot(modifier: Modifier = Modifier) {
-    AndroidView<BpkText>(modifier = modifier) {
-        text = context.getString(R.string.app_name)
-    }
 }
