@@ -47,7 +47,7 @@ data class CalendarParams(
     val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
     val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
     val locale: Locale = Locale.getDefault(),
-    val dayOfWeekText: TextStyle = TextStyle.NARROW,
+    val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
@@ -152,3 +152,15 @@ enum class CellStatusStyle {
      */
     Label,
 }
+
+private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
+    when (locale.language.lowercase()) {
+        "zh" -> when (locale.country.lowercase()) {
+            "mo" -> TextStyle.SHORT // Traditional
+            "hk" -> TextStyle.SHORT // Traditional
+            "tw" -> TextStyle.SHORT // Traditional
+            "sg" -> TextStyle.SHORT // Singapore
+            else -> TextStyle.NARROW
+        }
+        else -> TextStyle.NARROW
+    }
