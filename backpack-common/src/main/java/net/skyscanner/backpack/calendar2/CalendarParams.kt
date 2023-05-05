@@ -37,7 +37,7 @@ import java.util.Locale
  * @param selectionMode setting describing the selection behaviour
  * @param cellsInfo additional information to be added to dates cell
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
- * @param dayOfWeekText [TextStyle] to format days of week in calendar header
+ * @param dayOfWeekText [TextStyle] to format days of week in calendar header. Beware of the fact that some Chinese languages may require SHORT style instead of NARROW.
  * @param now [LocalDate] a date for the calendar to consider as current
  * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  */
@@ -47,7 +47,7 @@ data class CalendarParams(
     val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
     val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
     val locale: Locale = Locale.getDefault(),
-    val dayOfWeekText: TextStyle = TextStyle.NARROW,
+    val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
@@ -152,3 +152,15 @@ enum class CellStatusStyle {
      */
     Label,
 }
+
+private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
+    when (locale.language.lowercase()) {
+        "zh" -> when (locale.country.lowercase()) {
+            // In Traditional Chinese, the narrow form is presented by all the same hieroglyphs
+            // Therefore we fallback to the short form
+            "mo", "hk", "tw", "sg" -> TextStyle.SHORT
+            else -> TextStyle.NARROW
+        }
+
+        else -> TextStyle.NARROW
+    }
