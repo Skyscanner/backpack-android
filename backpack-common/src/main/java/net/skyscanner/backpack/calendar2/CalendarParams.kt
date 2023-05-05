@@ -156,7 +156,9 @@ enum class CellStatusStyle {
 private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
     when (locale.language.lowercase()) {
         "zh" -> when (locale.country.lowercase()) {
-            "mo", "hk", "tw", "sg" -> TextStyle.SHORT // Traditional
+            // In Traditional Chinese, the narrow form is presented by all the same hieroglyphs
+            // Therefore we fallback to the short form
+            "mo", "hk", "tw", "sg" -> TextStyle.SHORT
             else -> TextStyle.NARROW
         }
 
