@@ -20,8 +20,8 @@ package net.skyscanner.backpack.compose.card.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardColors
@@ -29,7 +29,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCardCorner
@@ -43,17 +42,15 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal inline fun CardContent(
     padding: BpkCardPadding,
-    contentAlignment: Alignment,
-    content: @Composable BoxScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    Box(
+    Column(
         modifier = Modifier.padding(
             all = when (padding) {
                 BpkCardPadding.None -> 0.dp
                 BpkCardPadding.Small -> BpkSpacing.Base
             },
         ),
-        contentAlignment = contentAlignment,
         content = content,
     )
 }
