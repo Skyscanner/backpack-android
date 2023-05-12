@@ -19,19 +19,19 @@
 package net.skyscanner.backpack.compose.cardwrapper
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
+import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 
@@ -44,22 +44,22 @@ fun BpkCardWrapper(
     corner: BpkCardCorner = BpkCardCorner.Small,
     elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
-    Surface(
+    Card(
         modifier = modifier.fillMaxWidth(),
         shape = cardShape(corner),
-        color = backgroundColor,
-        shadowElevation = 0.dp,
-        tonalElevation = 0.dp,
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor,
+            disabledContainerColor = backgroundColor,
+        ),
+        elevation = cardElevation(elevation),
         border = BorderStroke(width = BpkBorderSize.Lg, color = backgroundColor),
     ) {
         Column {
             headerContent.invoke()
             BpkCard(
-                modifier = Modifier
-                    .background(color = backgroundColor, shape = cardShape(corner))
-                    .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner))
-                    .padding(BpkBorderSize.Lg),
-                elevation = elevation,
+                corner = corner,
+                modifier = Modifier.padding(BpkBorderSize.Lg),
+                elevation = BpkCardElevation.None,
             ) {
                 cardContent.invoke()
             }
