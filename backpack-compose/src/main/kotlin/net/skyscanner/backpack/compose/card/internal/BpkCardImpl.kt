@@ -20,15 +20,16 @@ package net.skyscanner.backpack.compose.card.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
@@ -41,39 +42,55 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal inline fun CardContent(
     padding: BpkCardPadding,
-    contentAlignment: Alignment,
-    content: @Composable BoxScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    Box(
+    Column(
         modifier = Modifier.padding(
             all = when (padding) {
                 BpkCardPadding.None -> 0.dp
                 BpkCardPadding.Small -> BpkSpacing.Base
             },
         ),
-        contentAlignment = contentAlignment,
         content = content,
     )
 }
 
 @Composable
-internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
-    animateColorAsState(
-        when (elevation) {
+internal fun cardColors(elevation: BpkCardElevation): CardColors {
+    val value by animateColorAsState(
+        targetValue = when (elevation) {
             BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
             BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
         },
-    ).value
+        label = "BpkCard background color",
+    )
+    return CardDefaults.cardColors(
+        containerColor = value,
+        disabledContainerColor = value,
+        contentColor = BpkTheme.colors.textPrimary,
+        disabledContentColor = BpkTheme.colors.textPrimary,
+    )
+}
 
 @Composable
-internal fun cardElevation(elevation: BpkCardElevation): Dp =
-    animateDpAsState(
-        when (elevation) {
+internal fun cardElevation(elevation: BpkCardElevation): CardElevation {
+    val value by animateDpAsState(
+        targetValue = when (elevation) {
             BpkCardElevation.None -> 0.dp
             BpkCardElevation.Focus -> BpkElevation.Xl
             BpkCardElevation.Default -> BpkElevation.Sm
         },
-    ).value
+        label = "BpkCard elevation",
+    )
+    return CardDefaults.cardElevation(
+        defaultElevation = value,
+        pressedElevation = value,
+        focusedElevation = value,
+        hoveredElevation = value,
+        draggedElevation = value,
+        disabledElevation = value,
+    )
+}
 
 internal fun cardShape(corner: BpkCardCorner) =
     RoundedCornerShape(

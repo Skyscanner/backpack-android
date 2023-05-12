@@ -19,19 +19,16 @@
 package net.skyscanner.backpack.compose.card
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.card.internal.CardContent
-import net.skyscanner.backpack.compose.card.internal.cardBackgroundColor
+import net.skyscanner.backpack.compose.card.internal.cardColors
 import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
-import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkCardCorner {
     Small,
@@ -49,7 +46,7 @@ enum class BpkCardElevation {
     Focus,
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkCard(
     onClick: () -> Unit,
@@ -57,22 +54,19 @@ fun BpkCard(
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
     elevation: BpkCardElevation = BpkCardElevation.Default,
-    contentAlignment: Alignment = Alignment.TopStart,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
-    onClickLabel: String? = null,
-    role: Role? = null,
-    content: @Composable BoxScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    Card(onClick = onClick,
+    Card(
+        onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         shape = cardShape(corner),
-        backgroundColor = cardBackgroundColor(elevation),
-        contentColor = BpkTheme.colors.textPrimary,
+        colors = cardColors(elevation),
         elevation = cardElevation(elevation),
         interactionSource = interactionSource,
-        content = { CardContent(padding, contentAlignment, content) },
+        content = { CardContent(padding, content) },
     )
 }
 
@@ -81,16 +75,14 @@ fun BpkCard(
     modifier: Modifier = Modifier,
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
-    contentAlignment: Alignment = Alignment.TopStart,
     elevation: BpkCardElevation = BpkCardElevation.Default,
-    content: @Composable BoxScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
         modifier = modifier,
         shape = cardShape(corner),
-        backgroundColor = cardBackgroundColor(elevation),
-        contentColor = BpkTheme.colors.textPrimary,
+        colors = cardColors(elevation),
         elevation = cardElevation(elevation),
-        content = { CardContent(padding, contentAlignment, content) },
+        content = { CardContent(padding, content) },
     )
 }

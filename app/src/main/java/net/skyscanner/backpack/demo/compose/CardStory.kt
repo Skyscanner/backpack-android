@@ -73,10 +73,14 @@ fun CardStory(modifier: Modifier = Modifier) {
 internal fun SmallCornersCardExample(modifier: Modifier = Modifier) {
     BpkCard(
         modifier = modifier,
-        onClick = {},
-        contentAlignment = Alignment.Center,
     ) {
-        BpkText("Small corners")
+
+        BpkText(
+            text = "Small corners",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
@@ -84,11 +88,14 @@ internal fun SmallCornersCardExample(modifier: Modifier = Modifier) {
 internal fun LargeCornersCardExample(modifier: Modifier = Modifier) {
     BpkCard(
         modifier = modifier,
-        onClick = {},
         corner = BpkCardCorner.Large,
-        contentAlignment = Alignment.Center,
     ) {
-        BpkText("Large corners")
+        BpkText(
+            text = "Large corners",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
@@ -96,18 +103,26 @@ internal fun LargeCornersCardExample(modifier: Modifier = Modifier) {
 internal fun NoPaddingCardExample(modifier: Modifier = Modifier) {
     BpkCard(
         modifier = modifier,
-        onClick = {},
         padding = BpkCardPadding.None,
-        contentAlignment = Alignment.Center,
     ) {
-        BpkText("No padding")
+        BpkText(
+            text = "No padding",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
 @Composable
 internal fun NonClickableCardExample(modifier: Modifier = Modifier) {
-    BpkCard(modifier, contentAlignment = Alignment.Center) {
-        BpkText("Non clickable")
+    BpkCard(modifier) {
+        BpkText(
+            text = "Non clickable",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
@@ -118,7 +133,6 @@ internal fun FocusableCardExample(modifier: Modifier = Modifier) {
     BpkCard(
         modifier = modifier,
         elevation = elevation,
-        contentAlignment = Alignment.Center,
         onClick = {
             elevation = when (elevation) {
                 BpkCardElevation.None, BpkCardElevation.Default -> BpkCardElevation.Focus
@@ -126,7 +140,12 @@ internal fun FocusableCardExample(modifier: Modifier = Modifier) {
             }
         },
     ) {
-        BpkText(if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus")
+        BpkText(
+            text = if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
@@ -134,10 +153,13 @@ internal fun FocusableCardExample(modifier: Modifier = Modifier) {
 internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
     BpkCard(
         modifier = modifier,
-        onClick = {},
-        contentAlignment = Alignment.Center,
         elevation = BpkCardElevation.None,
     ) {
-        BpkText("No elevation")
+        BpkText(
+            text = "No elevation",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
