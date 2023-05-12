@@ -69,7 +69,7 @@ fun BpkCardWrapper(
                     .background(color = backgroundColor, shape = cardShape(corner))
                     .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner))
                     .padding(BpkBorderSize.Lg),
-                elevation = elevation,
+                elevation = BpkCardElevation.None,
             ) {
                 cardContent.invoke()
             }
