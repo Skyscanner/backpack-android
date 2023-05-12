@@ -66,8 +66,8 @@ internal fun cardColors(elevation: BpkCardElevation): CardColors {
     )
     return CardDefaults.cardColors(
         containerColor = value,
+        disabledContainerColor = value,
         contentColor = BpkTheme.colors.textPrimary,
-        disabledContainerColor = BpkTheme.colors.surfaceDefault,
         disabledContentColor = BpkTheme.colors.textPrimary,
     )
 }
