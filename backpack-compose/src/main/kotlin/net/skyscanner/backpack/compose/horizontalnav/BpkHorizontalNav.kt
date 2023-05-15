@@ -28,7 +28,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.selection.selectable
@@ -213,8 +213,7 @@ private fun Tab(
                     interactionSource = interactionSource,
                     indication = ripple,
                 )
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
             content = content,
