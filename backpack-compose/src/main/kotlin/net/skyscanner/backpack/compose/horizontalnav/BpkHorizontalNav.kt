@@ -48,8 +48,10 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -163,11 +165,13 @@ private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modif
             val tabWidth = size.width / tabsCount
             val left = tabWidth * indicatorOffset
 
-            drawRect(
-                color = indicatorColor,
-                topLeft = Offset(left, size.height - indicatorHeight),
-                size = Size(tabWidth, indicatorHeight),
-            )
+            scale(scaleX = if (layoutDirection == LayoutDirection.Rtl) -1f else 1f, scaleY = 1f) {
+                drawRect(
+                    color = indicatorColor,
+                    topLeft = Offset(left, size.height - indicatorHeight),
+                    size = Size(tabWidth, indicatorHeight),
+                )
+            }
         }
     }
 
