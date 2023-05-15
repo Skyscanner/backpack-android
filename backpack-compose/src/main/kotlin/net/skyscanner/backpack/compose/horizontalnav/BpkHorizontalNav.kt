@@ -29,7 +29,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -309,36 +308,15 @@ private fun Tab(
             ProvideTextStyle(style, content = text)
         }
     }
-    Tab(
-        selected,
-        onClick,
-        modifier,
-        enabled,
-        interactionSource,
-        selectedContentColor,
-        unselectedContentColor,
-    ) {
-        TabBaselineLayout(icon = icon, text = styledText)
-    }
-}
-
-@Composable
-private fun Tab(
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    selectedContentColor: Color = LocalContentColor.current,
-    unselectedContentColor: Color = selectedContentColor.copy(alpha = ContentAlpha.medium),
-    content: @Composable ColumnScope.() -> Unit,
-) {
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
     // provided by TabTransition.
     val ripple = rememberRipple(bounded = true, color = selectedContentColor)
-
-    TabTransition(selectedContentColor, unselectedContentColor, selected) {
+    TabTransition(
+        activeColor = selectedContentColor,
+        inactiveColor = unselectedContentColor,
+        selected = selected,
+    ) {
         Column(
             modifier = modifier
                 .selectable(
@@ -352,8 +330,9 @@ private fun Tab(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            content = content,
-        )
+        ) {
+            TabBaselineLayout(icon = icon, text = styledText)
+        }
     }
 }
 
@@ -399,7 +378,9 @@ private fun TabBaselineLayout(
         {
             if (text != null) {
                 Box(
-                    Modifier.layoutId("text").padding(horizontal = HorizontalTextPadding),
+                    Modifier
+                        .layoutId("text")
+                        .padding(horizontal = HorizontalTextPadding),
                 ) { text() }
             }
             if (icon != null) {
@@ -441,6 +422,7 @@ private fun TabBaselineLayout(
                     firstBaseline = firstBaseline!!,
                     lastBaseline = lastBaseline!!,
                 )
+
                 textPlaceable != null -> placeTextOrIcon(textPlaceable, tabHeight)
                 iconPlaceable != null -> placeTextOrIcon(iconPlaceable, tabHeight)
                 else -> {
@@ -508,10 +490,13 @@ private val HorizontalTextPadding = 16.dp
 // Distance from the top of the indicator to the text baseline when there is one line of text and an
 // icon
 private val SingleLineTextBaselineWithIcon = 14.dp
+
 // Distance from the top of the indicator to the last text baseline when there are two lines of text
 // and an icon
 private val DoubleLineTextBaselineWithIcon = 6.dp
+
 // Distance from the first text baseline to the bottom of the icon in a combined tab
 private val IconDistanceFromBaseline = 20.sp
+
 // Distance from the end of the leading icon to the start of the text
 private val TextDistanceFromLeadingIcon = 8.dp
