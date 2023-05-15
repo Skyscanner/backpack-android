@@ -75,37 +75,28 @@ fun BpkHorizontalNav(
 ) {
     TabRow(
         selectedTabIndex = activeIndex,
-        tabsCount = tabs.size,
+        tabs = tabs,
+        onChanged = onChanged,
         modifier = modifier.height(
             when (size) {
                 BpkHorizontalNavSize.Default -> 48.dp
                 BpkHorizontalNavSize.Small -> 36.dp
             },
         ),
-    ) {
-        tabs.forEachIndexed { index, tab ->
-            Tab(
-                selected = index == activeIndex,
-                modifier = Modifier.weight(1f),
-                onClick = { onChanged(index) },
-            ) {
-
-                if (tab.icon != null) {
-                    BpkIcon(
-                        icon = tab.icon,
-                        contentDescription = null,
-                    )
-                }
-
-                BpkText(
-                    text = tab.title,
-                    style = when (size) {
-                        BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
-                        BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
-                    },
-                )
-            }
+    ) { tab ->
+        if (tab.icon != null) {
+            BpkIcon(
+                icon = tab.icon,
+                contentDescription = null,
+            )
         }
+        BpkText(
+            text = tab.title,
+            style = when (size) {
+                BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
+                BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
+            },
+        )
     }
 }
 
@@ -113,9 +104,10 @@ fun BpkHorizontalNav(
 @UiComposable
 private fun TabRow(
     selectedTabIndex: Int,
-    tabsCount: Int,
+    onChanged: (Int) -> Unit,
+    tabs: List<BpkHorizontalNavTab>,
     modifier: Modifier = Modifier,
-    tabs: @Composable @UiComposable RowScope.() -> Unit,
+    content: @Composable RowScope.(BpkHorizontalNavTab) -> Unit,
 ) {
     Surface(
         modifier = modifier.selectableGroup(),
@@ -126,9 +118,17 @@ private fun TabRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .drawDivider()
-                .drawIndicator(tabsCount, selectedTabIndex),
+                .drawIndicator(tabs.size, selectedTabIndex),
         ) {
-            tabs()
+            tabs.forEachIndexed { index, tab ->
+                Tab(
+                    selected = index == selectedTabIndex,
+                    modifier = Modifier.weight(1f),
+                    onClick = { onChanged(index) },
+                ) {
+                    content(tab)
+                }
+            }
         }
     }
 }
