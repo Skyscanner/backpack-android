@@ -312,10 +312,29 @@ private fun Tab(
     // before the item is considered selected, and hence before the new contentColor is
     // provided by TabTransition.
     val ripple = rememberRipple(bounded = true, color = selectedContentColor)
-    TabTransition(
-        activeColor = selectedContentColor,
-        inactiveColor = unselectedContentColor,
-        selected = selected,
+    val transition = updateTransition(targetState = selected)
+    val color by transition.animateColor(
+        transitionSpec = {
+            if (false isTransitioningTo true) {
+                tween(
+                    durationMillis = TabFadeInAnimationDuration,
+                    delayMillis = TabFadeInAnimationDelay,
+                    easing = LinearEasing,
+                )
+            } else {
+                tween(
+                    durationMillis = TabFadeOutAnimationDuration,
+                    easing = LinearEasing,
+                )
+            }
+        },
+        targetValueByState = {
+            if (it) selectedContentColor else unselectedContentColor
+        },
+    )
+    CompositionLocalProvider(
+        LocalContentColor provides color.copy(alpha = 1f),
+        LocalContentAlpha provides color.alpha,
     ) {
         Column(
             modifier = modifier
@@ -334,39 +353,6 @@ private fun Tab(
             TabBaselineLayout(icon = icon, text = styledText)
         }
     }
-}
-
-@Composable
-private fun TabTransition(
-    activeColor: Color,
-    inactiveColor: Color,
-    selected: Boolean,
-    content: @Composable () -> Unit,
-) {
-    val transition = updateTransition(selected)
-    val color by transition.animateColor(
-        transitionSpec = {
-            if (false isTransitioningTo true) {
-                tween(
-                    durationMillis = TabFadeInAnimationDuration,
-                    delayMillis = TabFadeInAnimationDelay,
-                    easing = LinearEasing,
-                )
-            } else {
-                tween(
-                    durationMillis = TabFadeOutAnimationDuration,
-                    easing = LinearEasing,
-                )
-            }
-        },
-    ) {
-        if (it) activeColor else inactiveColor
-    }
-    CompositionLocalProvider(
-        LocalContentColor provides color.copy(alpha = 1f),
-        LocalContentAlpha provides color.alpha,
-        content = content,
-    )
 }
 
 @Composable
