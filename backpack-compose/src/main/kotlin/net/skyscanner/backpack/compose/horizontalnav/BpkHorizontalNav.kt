@@ -136,12 +136,12 @@ private fun TabRow(
 private fun Modifier.drawDivider(): Modifier =
     composed {
         val dividerColor = BpkTheme.colors.line
-        val dividerThickness = 1.dp
+        val dividerThickness = with(LocalDensity.current) { 1.dp.toPx() }
         drawBehind {
             drawRect(
                 color = dividerColor,
-                topLeft = Offset(0f, size.height - dividerThickness.toPx()),
-                size = Size(size.width, dividerThickness.toPx()),
+                topLeft = Offset(0f, size.height - dividerThickness),
+                size = Size(size.width, dividerThickness),
             )
         }
     }
