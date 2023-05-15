@@ -33,8 +33,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Surface
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
@@ -51,6 +49,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -179,11 +178,8 @@ private fun Tab(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
-    // The color of the Ripple should always the selected color, as we want to show the color
-    // before the item is considered selected, and hence before the new contentColor is
-    // provided by TabTransition.
     val ripple = rememberRipple(bounded = true, color = BpkTheme.colors.textLink)
-    val transition = updateTransition(targetState = selected)
+    val transition = updateTransition(targetState = selected, label = "HorizontalNav.Tab transition")
     val color by transition.animateColor(
         transitionSpec = {
             if (false isTransitioningTo true) {
@@ -202,10 +198,10 @@ private fun Tab(
         targetValueByState = {
             if (it) BpkTheme.colors.textLink else BpkTheme.colors.textPrimary
         },
+        label = "HorizontalNav.Tab color",
     )
     CompositionLocalProvider(
-        LocalContentColor provides color.copy(alpha = 1f),
-        LocalContentAlpha provides color.alpha,
+        LocalContentColor provides color,
     ) {
         Row(
             modifier = modifier
