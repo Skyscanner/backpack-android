@@ -21,21 +21,18 @@ package net.skyscanner.backpack.compose.horizontalnav
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.ContentAlpha
@@ -47,29 +44,27 @@ import androidx.compose.material.Surface
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Placeable
-import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import net.skyscanner.backpack.compose.horizontalnav.TabRowDefaults.tabIndicatorOffset
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -96,6 +91,7 @@ fun BpkHorizontalNav(
 ) {
     TabRow(
         selectedTabIndex = activeIndex,
+        tabsCount = tabs.size,
         modifier = modifier.height(
             when (size) {
                 BpkHorizontalNavSize.Default -> 48.dp
@@ -106,6 +102,7 @@ fun BpkHorizontalNav(
         tabs.forEachIndexed { index, tab ->
             Tab(
                 selected = index == activeIndex,
+                modifier = Modifier.weight(1f),
                 onClick = { onChanged(index) },
                 selectedContentColor = BpkTheme.colors.textLink,
                 unselectedContentColor = BpkTheme.colors.textPrimary,
@@ -139,146 +136,61 @@ fun BpkHorizontalNav(
 @UiComposable
 private fun TabRow(
     selectedTabIndex: Int,
+    tabsCount: Int,
     modifier: Modifier = Modifier,
-    indicator: @Composable @UiComposable
-    (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
-        TabRowDefaults.Indicator(
-            Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-        )
-    },
-    tabs: @Composable @UiComposable () -> Unit,
+    tabs: @Composable @UiComposable RowScope.() -> Unit,
 ) {
-    val divider = @Composable {
-        if (BpkTheme.colors.isLight) {
-            TabRowDefaults.Divider(color = BpkTheme.colors.line)
-        }
-    }
     Surface(
         modifier = modifier.selectableGroup(),
         color = BpkTheme.colors.surfaceDefault,
         contentColor = BpkTheme.colors.textLink,
     ) {
-        SubcomposeLayout(Modifier.fillMaxWidth()) { constraints ->
-            val tabRowWidth = constraints.maxWidth
-            val tabMeasurables = subcompose(TabSlots.Tabs, tabs)
-            val tabCount = tabMeasurables.size
-            val tabWidth = (tabRowWidth / tabCount)
-            val tabPlaceables = tabMeasurables.map {
-                it.measure(constraints.copy(minWidth = tabWidth, maxWidth = tabWidth))
-            }
-
-            val tabRowHeight = tabPlaceables.maxByOrNull { it.height }?.height ?: 0
-
-            val tabPositions = List(tabCount) { index ->
-                TabPosition(tabWidth.toDp() * index, tabWidth.toDp())
-            }
-
-            layout(tabRowWidth, tabRowHeight) {
-                tabPlaceables.forEachIndexed { index, placeable ->
-                    placeable.placeRelative(index * tabWidth, 0)
-                }
-
-                subcompose(TabSlots.Divider, divider).forEach {
-                    val placeable = it.measure(constraints.copy(minHeight = 0))
-                    placeable.placeRelative(0, tabRowHeight - placeable.height)
-                }
-
-                subcompose(TabSlots.Indicator) {
-                    indicator(tabPositions)
-                }.forEach {
-                    it.measure(Constraints.fixed(tabRowWidth, tabRowHeight)).placeRelative(0, 0)
-                }
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .drawDivider()
+                .drawIndicator(tabsCount, selectedTabIndex),
+        ) {
+            tabs()
         }
     }
 }
 
-private object TabRowDefaults {
-
-    @Composable
-    fun Divider(
-        modifier: Modifier = Modifier,
-        thickness: Dp = DividerThickness,
-        color: Color = LocalContentColor.current.copy(alpha = DividerOpacity),
-    ) {
-        androidx.compose.material.Divider(modifier = modifier, thickness = thickness, color = color)
+private fun Modifier.drawDivider(): Modifier =
+    composed {
+        val dividerColor = BpkTheme.colors.line
+        val dividerThickness = 1.dp
+        drawBehind {
+            drawRect(
+                color = dividerColor,
+                topLeft = Offset(0f, size.height - dividerThickness.toPx()),
+                size = Size(size.width, dividerThickness.toPx()),
+            )
+        }
     }
 
-    @Composable
-    fun Indicator(
-        modifier: Modifier = Modifier,
-        height: Dp = IndicatorHeight,
-        color: Color = LocalContentColor.current,
-    ) {
-        Box(
-            modifier
-                .fillMaxWidth()
-                .height(height)
-                .background(color = color),
-        )
-    }
+private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modifier =
+    composed {
+        val indicatorColor = BpkTheme.colors.textLink
+        val indicatorHeight = with(LocalDensity.current) { 2.dp.toPx() }
 
-    fun Modifier.tabIndicatorOffset(
-        currentTabPosition: TabPosition,
-    ): Modifier = composed(
-        inspectorInfo = debugInspectorInfo {
-            name = "tabIndicatorOffset"
-            value = currentTabPosition
-        },
-    ) {
-        val currentTabWidth by animateDpAsState(
-            targetValue = currentTabPosition.width,
+        val indicatorOffset by animateFloatAsState(
+            targetValue = selectedTabIndex.toFloat(),
             animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
+            label = "HorizontalNav indicator offset",
         )
-        val indicatorOffset by animateDpAsState(
-            targetValue = currentTabPosition.left,
-            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-        )
-        fillMaxWidth()
-            .wrapContentSize(Alignment.BottomStart)
-            .offset(x = indicatorOffset)
-            .width(currentTabWidth)
+
+        drawBehind {
+            val tabWidth = size.width / tabsCount
+            val left = tabWidth * indicatorOffset
+
+            drawRect(
+                color = indicatorColor,
+                topLeft = Offset(left, size.height - indicatorHeight),
+                size = Size(tabWidth, indicatorHeight),
+            )
+        }
     }
-
-    const val DividerOpacity = 0.12f
-
-    val DividerThickness = 1.dp
-
-    val IndicatorHeight = 2.dp
-
-    val ScrollableTabRowPadding = 52.dp
-}
-
-@Immutable
-class TabPosition internal constructor(val left: Dp, val width: Dp) {
-    val right: Dp get() = left + width
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is TabPosition) return false
-
-        if (left != other.left) return false
-        if (width != other.width) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = left.hashCode()
-        result = 31 * result + width.hashCode()
-        return result
-    }
-
-    override fun toString(): String {
-        return "TabPosition(left=$left, right=$right, width=$width)"
-    }
-}
-
-private enum class TabSlots {
-    Tabs,
-    Divider,
-    Indicator,
-}
 
 @Composable
 private fun Tab(
@@ -433,7 +345,7 @@ private fun Placeable.PlacementScope.placeTextAndIcon(
 
     // Total offset between the last text baseline and the bottom of the Tab layout
     val textOffset = with(density) {
-        baselineOffset.roundToPx() + TabRowDefaults.IndicatorHeight.roundToPx()
+        baselineOffset.roundToPx() + 2.dp.roundToPx()
     }
 
     // How much space there is between the top of the icon (essentially the top of this layout)
