@@ -25,6 +25,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -46,6 +47,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -135,7 +137,7 @@ private fun TabRow(
 
 private fun Modifier.drawDivider(): Modifier =
     composed {
-        val dividerColor = BpkTheme.colors.line
+        val dividerColor = if (isSystemInDarkTheme()) Color.Transparent else BpkTheme.colors.line
         val dividerThickness = with(LocalDensity.current) { 1.dp.toPx() }
         drawBehind {
             drawRect(
