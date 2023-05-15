@@ -44,8 +44,6 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Surface
-import androidx.compose.material.contentColorFor
-import androidx.compose.material.primarySurface
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -97,14 +95,7 @@ fun BpkHorizontalNav(
     size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
     TabRow(
-        contentColor = BpkTheme.colors.textLink,
-        backgroundColor = BpkTheme.colors.surfaceDefault,
         selectedTabIndex = activeIndex,
-        divider = {
-            if (BpkTheme.colors.isLight) {
-                TabRowDefaults.Divider(color = BpkTheme.colors.line)
-            }
-        },
         modifier = modifier.height(
             when (size) {
                 BpkHorizontalNavSize.Default -> 48.dp
@@ -149,24 +140,23 @@ fun BpkHorizontalNav(
 private fun TabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.primarySurface,
-    contentColor: Color = contentColorFor(backgroundColor),
     indicator: @Composable @UiComposable
     (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
         TabRowDefaults.Indicator(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
-    divider: @Composable @UiComposable () -> Unit =
-        @Composable {
-            TabRowDefaults.Divider()
-        },
     tabs: @Composable @UiComposable () -> Unit,
 ) {
+    val divider = @Composable {
+        if (BpkTheme.colors.isLight) {
+            TabRowDefaults.Divider(color = BpkTheme.colors.line)
+        }
+    }
     Surface(
         modifier = modifier.selectableGroup(),
-        color = backgroundColor,
-        contentColor = contentColor,
+        color = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textLink,
     ) {
         SubcomposeLayout(Modifier.fillMaxWidth()) { constraints ->
             val tabRowWidth = constraints.maxWidth
