@@ -157,7 +157,7 @@ private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modif
 
         val indicatorOffset by animateFloatAsState(
             targetValue = selectedTabIndex.toFloat(),
-            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
+            animationSpec = tween(durationMillis = IndicatorAnimationDuration, easing = FastOutSlowInEasing),
             label = "HorizontalNav indicator offset",
         )
 
@@ -229,5 +229,6 @@ private fun Tab(
 
 // Tab transition specifications
 private const val TabFadeInAnimationDuration = 150
+private const val IndicatorAnimationDuration = 250
 private const val TabFadeInAnimationDelay = 100
 private const val TabFadeOutAnimationDuration = 100
