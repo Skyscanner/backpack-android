@@ -34,9 +34,15 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -54,7 +60,19 @@ fun BpkBottomSheet(
     peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    val openingPercent = 1f
+    var contentHeight by remember { mutableStateOf(0) }
+
+    var openingPercent = if (state.currentValue == BpkBottomSheetValue.Collapsed) 1f else 0f
+    if (contentHeight > 0) {
+        val total = contentHeight - with(LocalDensity.current) { peekHeight.toPx() }
+        val currentPosition = try {
+            state.delegate.requireOffset()
+        } catch (e: Exception) {
+            0f
+        }
+        openingPercent = (currentPosition / total).coerceIn(0f, 1f)
+    }
+
     val radius = BpkBorderRadius.Lg * openingPercent
 
     BottomSheetScaffold(
@@ -86,8 +104,12 @@ fun BpkBottomSheet(
         snackbarHost = { Box(Modifier) },
         containerColor = BpkTheme.colors.surfaceDefault,
         contentColor = BpkTheme.colors.textPrimary,
-        content = content,
-    )
+    ) {
+        Box(
+            modifier = Modifier.onGloballyPositioned { contentHeight = it.size.height },
+            content = { content(it) },
+        )
+    }
 }
 
 @Composable
