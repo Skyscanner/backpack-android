@@ -43,7 +43,7 @@ fun rememberBpkBottomSheetState(
             skipPartiallyExpanded = true,
             initialValue = initialValue.toBottomSheetValue(),
             confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
-            skipHiddenState = true,
+            skipHiddenState = false,
         )
     }
     return remember { BpkBottomSheetState(delegate) }
@@ -66,7 +66,7 @@ class BpkBottomSheetState internal constructor(
     ) : this(
         SheetState(
             skipPartiallyExpanded = true,
-            skipHiddenState = true,
+            skipHiddenState = false,
             initialValue = initialValue.toBottomSheetValue(),
             confirmValueChange = { confirmValueChange(it.toBpkBottomSheetValue()) },
         ),
