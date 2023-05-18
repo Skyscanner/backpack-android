@@ -19,31 +19,29 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffoldDefaults
+import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,42 +49,47 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 fun BpkBottomSheet(
     sheetContent: @Composable ColumnScope.(PaddingValues) -> Unit,
     modifier: Modifier = Modifier,
-    state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
+    state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
     peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
     content: @Composable (PaddingValues) -> Unit,
 ) {
+    val openingPercent = 1f
+    val radius = BpkBorderRadius.Lg * openingPercent
 
-    BoxWithConstraints(modifier) {
-        val fullHeight = constraints.maxHeight.toFloat()
-        val peekHeightWithHandle = peekHeight + HandleHeight
-        val peekHeightPx = with(LocalDensity.current) { peekHeightWithHandle.toPx() }
-        var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
-//        val progress = state.wrapped.progress
-//        val openingPercent = when (progress.to) {
-//            BpkBottomSheetValue.Expanded -> (1f - progress.fraction)
-//            BpkBottomSheetValue.Collapsed -> progress.fraction
-//        }
-
-//        val radius = BpkBorderRadius.Lg * openingPercent
-        val radius = BpkBorderRadius.Lg
-
-        content(PaddingValues(bottom = peekHeightWithHandle))
-
-        ModalBottomSheet(
-            onDismissRequest = {},
-            modifier = Modifier.fillMaxWidth(),
-            sheetState = state.delegate,
-            shape = RoundedCornerShape(topStart = radius, topEnd = radius),
-            containerColor = BpkTheme.colors.surfaceElevated,
-            contentColor = BpkTheme.colors.textPrimary,
-            tonalElevation = 0.dp,
-            scrimColor = Color.Transparent,
-            dragHandle = { BpkBottomSheetHandle() },
-            content = { sheetContent(PaddingValues.Absolute(0.dp)) },
-        )
-    }
+    BottomSheetScaffold(
+        sheetContent = {
+            Box {
+                BpkBottomSheetHandle(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .alpha(openingPercent),
+                )
+                Column {
+                    sheetContent(PaddingValues(top = HandleHeight * openingPercent))
+                }
+            }
+        },
+        modifier = modifier,
+        scaffoldState = rememberBottomSheetScaffoldState(
+            bottomSheetState = state.delegate,
+        ),
+        sheetPeekHeight = peekHeight,
+        sheetShape = RoundedCornerShape(topStart = radius, topEnd = radius),
+        sheetContainerColor = BpkTheme.colors.surfaceElevated,
+        sheetContentColor = BpkTheme.colors.textPrimary,
+        sheetTonalElevation = 0.dp,
+        sheetShadowElevation = BpkElevation.Lg,
+        sheetDragHandle = null,
+        sheetSwipeEnabled = sheetGesturesEnabled,
+        topBar = null,
+        snackbarHost = { Box(Modifier) },
+        containerColor = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textPrimary,
+        content = content,
+    )
 }
+
 @Composable
 private fun BpkBottomSheetHandle(
     modifier: Modifier = Modifier,

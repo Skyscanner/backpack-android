@@ -21,31 +21,22 @@ package net.skyscanner.backpack.compose.bottomsheet
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun rememberBpkBottomSheetState(
-    initialValue: BpkBottomSheetValue,
+    initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
     confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
 ): BpkBottomSheetState {
-    val delegate = rememberSaveable(
-        confirmStateChange,
-        saver = SheetState.Saver(
-            skipPartiallyExpanded = true,
-            confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
-        ),
-    ) {
-        SheetState(
-            skipPartiallyExpanded = true,
-            initialValue = initialValue.toBottomSheetValue(),
-            confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
-            skipHiddenState = false,
-        )
-    }
+    val delegate = rememberStandardBottomSheetState(
+        initialValue = initialValue.toBottomSheetValue(),
+        confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
+        skipHiddenState = true,
+    )
     return remember { BpkBottomSheetState(delegate) }
 }
 
@@ -65,8 +56,8 @@ class BpkBottomSheetState internal constructor(
         confirmValueChange: (BpkBottomSheetValue) -> Boolean = { true },
     ) : this(
         SheetState(
-            skipPartiallyExpanded = true,
-            skipHiddenState = false,
+            skipPartiallyExpanded = false,
+            skipHiddenState = true,
             initialValue = initialValue.toBottomSheetValue(),
             confirmValueChange = { confirmValueChange(it.toBpkBottomSheetValue()) },
         ),
@@ -80,20 +71,20 @@ class BpkBottomSheetState internal constructor(
 
     suspend fun expand() = delegate.expand()
 
-    suspend fun collapse() = delegate.hide()
+    suspend fun collapse() = delegate.partialExpand()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 private fun SheetValue.toBpkBottomSheetValue(): BpkBottomSheetValue =
     when (this) {
-        SheetValue.Hidden -> BpkBottomSheetValue.Collapsed
+        SheetValue.PartiallyExpanded -> BpkBottomSheetValue.Collapsed
         SheetValue.Expanded -> BpkBottomSheetValue.Expanded
-        SheetValue.PartiallyExpanded -> error("PartiallyExpanded is not supported")
+        SheetValue.Hidden -> error("Hidden state is not supported")
     }
 
 @OptIn(ExperimentalMaterial3Api::class)
 private fun BpkBottomSheetValue.toBottomSheetValue(): SheetValue =
     when (this) {
-        BpkBottomSheetValue.Collapsed -> SheetValue.Hidden
+        BpkBottomSheetValue.Collapsed -> SheetValue.PartiallyExpanded
         BpkBottomSheetValue.Expanded -> SheetValue.Expanded
     }
