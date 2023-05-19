@@ -61,10 +61,11 @@ fun BpkBottomSheet(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     var contentHeight by remember { mutableStateOf(0) }
+    val totalSheetHeight = peekHeight + HandleHeight
 
     var openingPercent = if (state.currentValue == BpkBottomSheetValue.Collapsed) 1f else 0f
     if (contentHeight > 0) {
-        val total = contentHeight - with(LocalDensity.current) { peekHeight.toPx() }
+        val total = contentHeight - with(LocalDensity.current) { totalSheetHeight.toPx() }
         val currentPosition = try {
             state.delegate.requireOffset()
         } catch (e: Exception) {
@@ -92,7 +93,7 @@ fun BpkBottomSheet(
         scaffoldState = rememberBottomSheetScaffoldState(
             bottomSheetState = state.delegate,
         ),
-        sheetPeekHeight = peekHeight,
+        sheetPeekHeight = totalSheetHeight,
         sheetShape = RoundedCornerShape(topStart = radius, topEnd = radius),
         sheetContainerColor = BpkTheme.colors.surfaceElevated,
         sheetContentColor = BpkTheme.colors.textPrimary,
