@@ -23,16 +23,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
@@ -97,7 +98,7 @@ fun BpkSwitch(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkSwitchImpl(
     checked: Boolean,
@@ -116,16 +117,22 @@ private fun BpkSwitchImpl(
             enabled = enabled,
             interactionSource = interactionSource,
             colors = SwitchDefaults.colors(
-                checkedThumbColor = BpkTheme.colors.coreAccent,
-                checkedTrackColor = BpkTheme.colors.textDisabled,
-                checkedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
-                uncheckedThumbColor = BpkTheme.colors.textOnDark,
-                uncheckedTrackColor = BpkTheme.colors.textDisabled,
-                uncheckedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
-                disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
+                checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
+                checkedTrackColor = BpkTheme.colors.coreAccent,
+                checkedBorderColor = BpkTheme.colors.coreAccent,
+                checkedIconColor = Color.Transparent,
+                uncheckedThumbColor = BpkTheme.colors.textSecondary,
+                uncheckedTrackColor = BpkTheme.colors.canvasContrast,
+                uncheckedBorderColor = BpkTheme.colors.textSecondary,
+                uncheckedIconColor = Color.Transparent,
+                disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
                 disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
+                disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
+                disabledCheckedIconColor = Color.Transparent,
+                disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
                 disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+                disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
+                disabledUncheckedIconColor = Color.Transparent,
             ),
         )
     }
