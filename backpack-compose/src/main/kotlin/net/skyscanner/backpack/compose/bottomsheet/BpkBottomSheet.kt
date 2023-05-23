@@ -41,7 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -64,11 +64,14 @@ fun BpkBottomSheet(
     val totalSheetHeight = peekHeight + HandleHeight
 
     var openingPercent = if (state.currentValue == BpkBottomSheetValue.Collapsed) 1f else 0f
+    // requireOffset may throw an IllegalStateException if called before 1st layout pass
+    // we bypass it with an if statement here – the content height will only be set after the layout is measured
     if (contentHeight > 0) {
         val total = contentHeight - with(LocalDensity.current) { totalSheetHeight.toPx() }
+        // try-catch statement just in case something changes in the implementation of requireOffset/onSizeChanged
         val currentPosition = try {
             state.delegate.requireOffset()
-        } catch (e: Exception) {
+        } catch (e: IllegalStateException) {
             0f
         }
         openingPercent = (currentPosition / total).coerceIn(0f, 1f)
@@ -107,7 +110,7 @@ fun BpkBottomSheet(
         contentColor = BpkTheme.colors.textPrimary,
     ) {
         Box(
-            modifier = Modifier.onGloballyPositioned { contentHeight = it.size.height },
+            modifier = Modifier.onSizeChanged { contentHeight = it.height },
             content = { content(it) },
         )
     }
