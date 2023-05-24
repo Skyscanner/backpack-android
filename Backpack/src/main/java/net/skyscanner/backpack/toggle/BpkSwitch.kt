@@ -20,64 +20,85 @@ package net.skyscanner.backpack.toggle
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
-import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.view.ContextThemeWrapper
+import com.google.android.material.materialswitch.MaterialSwitch
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
-
-private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
-    val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
-    return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
-}
 
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
  *
- * This class extends [SwitchCompat] directly and thus follows the same interface and design,
- * with the exception of [SwitchCompat.getTrackTintList] and [SwitchCompat.getThumbTintList] that are set
+ * This class extends [MaterialSwitch] directly and thus follows the same interface and design,
+ * with the exception of [MaterialSwitch.getTrackTintList] and [MaterialSwitch.getThumbTintList] that are set
  * according to Backpack's design.
  *
- * @see SwitchCompat
+ * @see MaterialSwitch
  */
 open class BpkSwitch @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
+) : MaterialSwitch(
+    createContextThemeWrapper(
+        ContextThemeWrapper(context, R.style.Widget_Material3_CompoundButton_MaterialSwitch),
+        attrs,
+        R.attr.bpkSwitchStyle,
+    ),
+    attrs,
+    defStyleAttr,
+) {
 
     init {
         initialize(attrs, defStyleAttr)
     }
 
-    fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
         val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
         val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
+        val textSecondaryColor = context.getColor(R.color.bpkTextSecondary)
+        val coreAccentColor = context.getColor(R.color.bpkCoreAccent)
+        val canvasContrastColor = context.getColor(R.color.bpkCanvasContrast)
+        var primaryInverseColor = context.getColor(R.color.bpkTextPrimaryInverse)
         context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-            val primaryColor = context.getColor(R.color.bpkCoreAccent)
-            val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
-
-            trackTintList = context.getColorStateList(R.color.bpkTextDisabled)
-            thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkTextOnDark))
+            primaryInverseColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryInverseColor)
         }
+
+        thumbTintList = colorStateList(
+            disabledUncheckedColor = textDisabledColor,
+            disabledCheckedColor = textDisabledColor,
+            checkedColor = primaryInverseColor,
+            uncheckedColor = textSecondaryColor,
+        )
+        trackTintList = colorStateList(
+            disabledUncheckedColor = textDisabledColor,
+            disabledCheckedColor = textDisabledColor,
+            checkedColor = coreAccentColor,
+            uncheckedColor = canvasContrastColor,
+        )
+        trackDecorationDrawable = AppCompatResources.getDrawable(context, R.drawable.bpk_switch_decoration)
+        trackDecorationTintList = colorStateList(
+            disabledUncheckedColor = textDisabledColor,
+            disabledCheckedColor = textDisabledColor,
+            checkedColor = coreAccentColor,
+            uncheckedColor = textSecondaryColor,
+        )
+        thumbIconTintList = colorStateList(
+            Color.TRANSPARENT,
+            Color.TRANSPARENT,
+            Color.TRANSPARENT,
+            Color.TRANSPARENT,
+        )
+
         setTextColor(
             ColorStateList(
                 arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
                 intArrayOf(textDisabledColor, textEnabledColor),
             ),
         )
-        switchMinWidth = resources.getDimensionPixelSize(R.dimen.bpk_switch_min_width)
     }
-
-    private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =
-        ColorStateList(
-            arrayOf(
-                intArrayOf(android.R.attr.state_checked),
-                intArrayOf(-android.R.attr.state_checked),
-            ),
-            intArrayOf(
-                checkedColor,
-                uncheckedColor,
-            ),
-        )
 }

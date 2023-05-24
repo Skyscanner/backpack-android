@@ -40,3 +40,19 @@ internal fun colorStateList(
     ),
     intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color),
 )
+
+internal fun colorStateList(
+    @ColorInt disabledUncheckedColor: Int,
+    @ColorInt disabledCheckedColor: Int,
+    @ColorInt checkedColor: Int,
+    @ColorInt uncheckedColor: Int,
+): ColorStateList =
+    ColorStateList(
+        arrayOf(
+            intArrayOf(-android.R.attr.state_enabled, -android.R.attr.state_checked),
+            intArrayOf(-android.R.attr.state_enabled, android.R.attr.state_checked),
+            intArrayOf(android.R.attr.state_checked),
+            intArrayOf(),
+        ),
+        intArrayOf(disabledUncheckedColor, disabledCheckedColor, checkedColor, uncheckedColor),
+    )
