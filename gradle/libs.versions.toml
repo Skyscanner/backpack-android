@@ -88,7 +88,7 @@ compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-compose-activity = "androidx.activity:activity-compose:1.7.1"
+compose-activity = "androidx.activity:activity-compose:1.7.2"
 
 destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
 destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
