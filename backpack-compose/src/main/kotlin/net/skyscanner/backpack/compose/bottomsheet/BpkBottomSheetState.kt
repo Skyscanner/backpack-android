@@ -18,78 +18,73 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeableDefaults
-import androidx.compose.material.SwipeableState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
-import net.skyscanner.backpack.compose.BpkSwipeableState
+import androidx.compose.runtime.remember
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun rememberBpkBottomSheetState(
-    initialValue: BpkBottomSheetValue,
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
+    initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
     confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
-): BpkBottomSheetState =
-    rememberSaveable(
-        animationSpec,
-        saver = BpkBottomSheetState.Saver(
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-        ),
-    ) {
-        BpkBottomSheetState(
-            initialValue = initialValue,
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-        )
-    }
+): BpkBottomSheetState {
+    val delegate = rememberStandardBottomSheetState(
+        initialValue = initialValue.toBottomSheetValue(),
+        confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
+        skipHiddenState = true,
+    )
+    return remember { BpkBottomSheetState(delegate) }
+}
 
 enum class BpkBottomSheetValue {
     Collapsed,
     Expanded,
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Stable
-class BpkBottomSheetState private constructor(
-    internal val wrapped: SwipeableState<BpkBottomSheetValue>,
-    internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean,
-) : BpkSwipeableState<BpkBottomSheetValue> by BpkSwipeableState(wrapped) {
+@OptIn(ExperimentalMaterial3Api::class)
+class BpkBottomSheetState internal constructor(
+    internal val delegate: SheetState,
+) {
 
     constructor(
-        initialValue: BpkBottomSheetValue,
-        animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-        confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
-    ) : this(SwipeableState(initialValue, animationSpec, confirmStateChange), confirmStateChange)
+        initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
+        confirmValueChange: (BpkBottomSheetValue) -> Boolean = { true },
+    ) : this(
+        SheetState(
+            skipPartiallyExpanded = false,
+            skipHiddenState = true,
+            initialValue = initialValue.toBottomSheetValue(),
+            confirmValueChange = { confirmValueChange(it.toBpkBottomSheetValue()) },
+        ),
+    )
 
-    val isExpanded: Boolean
-        get() = currentValue == BpkBottomSheetValue.Expanded
+    val currentValue: BpkBottomSheetValue
+        get() = delegate.currentValue.toBpkBottomSheetValue()
 
-    val isCollapsed: Boolean
-        get() = currentValue == BpkBottomSheetValue.Collapsed
+    val targetValue: BpkBottomSheetValue
+        get() = delegate.targetValue.toBpkBottomSheetValue()
 
-    suspend fun expand() = animateTo(BpkBottomSheetValue.Expanded)
+    suspend fun expand() = delegate.expand()
 
-    suspend fun collapse() = animateTo(BpkBottomSheetValue.Collapsed)
-
-    companion object {
-
-        fun Saver(
-            animationSpec: AnimationSpec<Float>,
-            confirmStateChange: (BpkBottomSheetValue) -> Boolean,
-        ): Saver<BpkBottomSheetState, *> = Saver(
-            save = { it.currentValue },
-            restore = {
-                BpkBottomSheetState(
-                    initialValue = it,
-                    animationSpec = animationSpec,
-                    confirmStateChange = confirmStateChange,
-                )
-            },
-        )
-    }
+    suspend fun collapse() = delegate.partialExpand()
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+private fun SheetValue.toBpkBottomSheetValue(): BpkBottomSheetValue =
+    when (this) {
+        SheetValue.PartiallyExpanded -> BpkBottomSheetValue.Collapsed
+        SheetValue.Expanded -> BpkBottomSheetValue.Expanded
+        SheetValue.Hidden -> error("Hidden state is not supported")
+    }
+
+@OptIn(ExperimentalMaterial3Api::class)
+private fun BpkBottomSheetValue.toBottomSheetValue(): SheetValue =
+    when (this) {
+        BpkBottomSheetValue.Collapsed -> SheetValue.PartiallyExpanded
+        BpkBottomSheetValue.Expanded -> SheetValue.Expanded
+    }

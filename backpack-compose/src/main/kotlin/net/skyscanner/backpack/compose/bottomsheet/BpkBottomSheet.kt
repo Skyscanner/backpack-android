@@ -19,147 +19,100 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffoldDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Surface
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.semantics.collapse
-import androidx.compose.ui.semantics.expand
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.nestedScrollFixedSwipeable
-import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkBottomSheet(
     sheetContent: @Composable ColumnScope.(PaddingValues) -> Unit,
     modifier: Modifier = Modifier,
-    state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
+    state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
     peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
     content: @Composable (PaddingValues) -> Unit,
 ) {
+    var contentHeight by remember { mutableStateOf(0) }
+    val totalSheetHeight = peekHeight + HandleHeight
 
-    BoxWithConstraints(modifier) {
-        val fullHeight = constraints.maxHeight.toFloat()
-        val peekHeightWithHandle = peekHeight + HandleHeight
-        val peekHeightPx = with(LocalDensity.current) { peekHeightWithHandle.toPx() }
-        var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
-        val progress = state.wrapped.progress
-        val openingPercent = when (progress.to) {
-            BpkBottomSheetValue.Expanded -> (1f - progress.fraction)
-            BpkBottomSheetValue.Collapsed -> progress.fraction
+    var openingPercent = if (state.currentValue == BpkBottomSheetValue.Collapsed) 1f else 0f
+    // requireOffset may throw an IllegalStateException if called before 1st layout pass
+    // we bypass it with an if statement here – the content height will only be set after the layout is measured
+    if (contentHeight > 0) {
+        val total = contentHeight - with(LocalDensity.current) { totalSheetHeight.toPx() }
+        // try-catch statement just in case something changes in the implementation of requireOffset/onSizeChanged
+        val currentPosition = try {
+            state.delegate.requireOffset()
+        } catch (e: IllegalStateException) {
+            0f
         }
-
-        val radius = BpkBorderRadius.Lg * openingPercent
-
-        content(PaddingValues(bottom = peekHeightWithHandle))
-
-        Surface(
-            modifier = Modifier
-                .bottomSheetSwipeable(state, fullHeight, peekHeightPx, bottomSheetHeight, sheetGesturesEnabled)
-                .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
-                .fillMaxWidth()
-                .requiredHeightIn(min = peekHeightWithHandle)
-                .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
-                .offset { IntOffset(0, state.wrapped.offset.value.roundToInt()) },
-            shape = RoundedCornerShape(topStart = radius, topEnd = radius),
-            elevation = BpkElevation.Lg,
-            color = BpkTheme.colors.surfaceElevated,
-            contentColor = BpkTheme.colors.textPrimary,
-            content = {
-                Box {
-                    BpkBottomSheetHandle(
-                        modifier = Modifier
-                            .align(Alignment.TopCenter)
-                            .alpha(openingPercent),
-                    )
-                    Column {
-                        sheetContent(PaddingValues(top = HandleHeight * openingPercent))
-                    }
-                }
-            },
-        )
+        openingPercent = (currentPosition / total).coerceIn(0f, 1f)
     }
-}
 
-@OptIn(ExperimentalMaterialApi::class)
-private fun Modifier.bottomSheetSwipeable(
-    state: BpkBottomSheetState,
-    fullHeight: Float,
-    peekHeightPx: Float,
-    bottomSheetHeight: Float,
-    sheetGesturesEnabled: Boolean,
-): Modifier =
-    nestedScrollFixedSwipeable(
-        state = state.wrapped,
-        anchors = mapOf(
-            fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
-            fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded,
-        ),
-        orientation = Orientation.Vertical,
-        enabled = sheetGesturesEnabled,
-        resistance = null,
-    )
+    val radius = BpkBorderRadius.Lg * openingPercent
 
-private fun Modifier.bottomSheetSemantics(
-    state: BpkBottomSheetState,
-    peekHeightPx: Float,
-    bottomSheetHeight: Float,
-): Modifier = composed {
-    val scope = rememberCoroutineScope()
-    semantics {
-        if (peekHeightPx != bottomSheetHeight) {
-            if (state.isCollapsed) {
-                expand {
-                    if (state.confirmStateChange(BpkBottomSheetValue.Expanded)) {
-                        scope.launch { state.expand() }
-                    }
-                    true
-                }
-            } else {
-                collapse {
-                    if (state.confirmStateChange(BpkBottomSheetValue.Collapsed)) {
-                        scope.launch { state.collapse() }
-                    }
-                    true
+    BottomSheetScaffold(
+        sheetContent = {
+            Box {
+                BpkBottomSheetHandle(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .alpha(openingPercent),
+                )
+                Column {
+                    sheetContent(PaddingValues(top = HandleHeight * openingPercent))
                 }
             }
-        }
+        },
+        modifier = modifier,
+        scaffoldState = rememberBottomSheetScaffoldState(
+            bottomSheetState = state.delegate,
+        ),
+        sheetPeekHeight = totalSheetHeight,
+        sheetShape = RoundedCornerShape(topStart = radius, topEnd = radius),
+        sheetContainerColor = BpkTheme.colors.surfaceElevated,
+        sheetContentColor = BpkTheme.colors.textPrimary,
+        sheetTonalElevation = 0.dp,
+        sheetShadowElevation = BpkElevation.Lg,
+        sheetDragHandle = null,
+        sheetSwipeEnabled = sheetGesturesEnabled,
+        topBar = null,
+        snackbarHost = { Box(Modifier) },
+        containerColor = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textPrimary,
+    ) {
+        Box(
+            modifier = Modifier.onSizeChanged { contentHeight = it.height },
+            content = { content(it) },
+        )
     }
 }
 
