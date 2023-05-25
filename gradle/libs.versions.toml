@@ -7,7 +7,7 @@ destinations = "1.8.41-beta" # update this alongside with compiler version
 accompanist = "0.30.1" # update this alongside with compiler version
 
 androidPlugin = "7.4.2"
-lint = "30.4.2"  # android plugin, lint and sdk-common need to be updated together
+lint = "31.0.2"  # android plugin, lint and sdk-common need to be updated together
 androidSdkCommon = "30.4.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.22.0"
