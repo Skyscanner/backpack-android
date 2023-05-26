@@ -38,10 +38,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.ChevronLeft
+import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PageIndicatorComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -76,7 +80,11 @@ fun PageIndicatorStory(modifier: Modifier = Modifier) {
                 contentDescription = "",
                 contentScale = ContentScale.FillWidth,
             )
-            PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
+            PageIndicatorSample(
+                totalIndicators = 8,
+                style = BpkPageIndicatorStyle.OverImage,
+                buttonType = BpkButtonType.LinkOnDark,
+            )
         }
     }
 }
@@ -86,6 +94,7 @@ private fun PageIndicatorSample(
     totalIndicators: Int,
     style: BpkPageIndicatorStyle,
     modifier: Modifier = Modifier,
+    buttonType: BpkButtonType = BpkButtonType.Link,
 ) {
     var currentIndex by remember { mutableStateOf(0) }
 
@@ -94,7 +103,10 @@ private fun PageIndicatorSample(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BpkButton(text = stringResource(id = R.string.page_indicator_prev)) {
+        BpkButton(icon = BpkIcon.ChevronLeft,
+            type = buttonType,
+            contentDescription = stringResource(R.string.page_indicator_prev),
+        ) {
             currentIndex = (currentIndex - 1).coerceIn(0 until totalIndicators)
         }
         BpkPageIndicator(
@@ -102,7 +114,11 @@ private fun PageIndicatorSample(
             totalIndicators = totalIndicators,
             style = style,
         )
-        BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
+        BpkButton(
+            icon = BpkIcon.ChevronRight,
+            type = buttonType,
+            contentDescription = stringResource(R.string.page_indicator_next),
+        ) {
             currentIndex = (currentIndex + 1).coerceIn(0 until totalIndicators)
         }
     }
