@@ -297,7 +297,7 @@ private fun toInternalCompose(
                     .addCode(buildCodeBlock {
                         val dynamicColorOf = MemberName("net.skyscanner.backpack.compose.utils", "dynamicColorOf")
                         add("return %M(%T(%L), %T(%L))", dynamicColorOf, ColorClass, defaultValue.toHexColor(), ColorClass, darkValue.toHexColor())
-                    },)
+                    })
                     .build(),
                 )
             } else {
@@ -329,7 +329,7 @@ private fun toXml(source: BpkColors, isLight: Boolean): String {
 
     return source.joinToString("\n") { model ->
         "    <color name=\"${model.name()}\">#${
-        model.value(isLight).toArgb()
+            model.value(isLight).toArgb()
         }</color>"
     }
 }

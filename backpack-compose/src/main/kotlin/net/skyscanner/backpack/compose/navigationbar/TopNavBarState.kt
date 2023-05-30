@@ -42,7 +42,9 @@ fun Modifier.nestedScroll(state: TopNavBarState): Modifier =
 
 @Composable
 fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
-    val offsetRange = with(LocalDensity.current) { (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx() }
+    val offsetRange = with(LocalDensity.current) {
+        (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx()
+    }
     val flingBehavior = ScrollableDefaults.flingBehavior()
     return rememberSaveable(
         offsetRange, flingBehavior,

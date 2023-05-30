@@ -236,6 +236,7 @@ formatting:
   PackageName:
     active: true
     autoCorrect: true
+    excludes: [ '**/compose/tokens/**' ]
   ParameterListWrapping:
     active: true
     autoCorrect: true

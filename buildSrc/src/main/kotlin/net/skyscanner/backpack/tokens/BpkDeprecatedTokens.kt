@@ -95,7 +95,7 @@ private fun toKotlin(source: BpkDeprecatedTokens, className: String): TypeSpec {
                     }
                     unindent()
                     addStatement(")")
-                },)
+                })
                 .build(),
         )
         .build()
