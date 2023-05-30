@@ -3,7 +3,7 @@ kotlin = "1.8.21"
 ksp = "1.8.21-1.0.11" # depends on Kotlin version
 composeCompiler = "1.4.7" # depends on Kotlin version
 compilerTesting = "1.5.0"
-destinations = "1.8.41-beta" # update this alongside with compiler version
+destinations = "1.8.42-beta" # update this alongside with compiler version
 accompanist = "0.30.1" # update this alongside with compiler version
 
 androidPlugin = "7.4.2"
