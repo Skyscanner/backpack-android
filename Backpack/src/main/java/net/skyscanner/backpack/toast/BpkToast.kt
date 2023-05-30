@@ -28,6 +28,7 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.BpkText.Companion.getFont
 import net.skyscanner.backpack.text.BpkText.FontDefinition
 
+@Deprecated("Use BpkFloatingNotification from Compose instead")
 object BpkToast {
     const val LENGTH_SHORT = Toast.LENGTH_SHORT
     const val LENGTH_LONG = Toast.LENGTH_LONG
