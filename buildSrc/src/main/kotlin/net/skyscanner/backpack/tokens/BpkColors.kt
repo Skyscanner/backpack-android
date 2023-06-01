@@ -245,6 +245,7 @@ private fun toSemanticCompose(
 
         return FunSpec.builder(functionName)
             .addParameters(map(BpkColorModel::toParameter))
+            .returns(ClassName.bestGuess(className))
             .addStatement(
                 joinToString(
                     separator = ",\n    ",

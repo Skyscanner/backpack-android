@@ -123,7 +123,7 @@ public class BpkColors private constructor(
             textQuaternary: Color = Color(0x33000000),
             textSecondary: Color = Color(0xFF545860),
             textTertiary: Color = Color(0x33000000),
-        ) = BpkColors(
+        ): BpkColors = BpkColors(
             isLight = true,
             background = background,
             backgroundAlternative = backgroundAlternative,
@@ -206,7 +206,7 @@ public class BpkColors private constructor(
             textQuaternary: Color = Color(0x33FFFFFF),
             textSecondary: Color = Color(0xFFBDC4CB),
             textTertiary: Color = Color(0x33FFFFFF),
-        ) = BpkColors(
+        ): BpkColors = BpkColors(
             isLight = false,
             background = background,
             backgroundAlternative = backgroundAlternative,
