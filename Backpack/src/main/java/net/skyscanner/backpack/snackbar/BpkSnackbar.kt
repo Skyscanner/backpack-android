@@ -57,6 +57,7 @@ import net.skyscanner.backpack.util.use
  * @see BpkSnackbar.show
  */
 @Suppress("MemberVisibilityCanBePrivate")
+@Deprecated("Use BpkFloatingNotification from Compose instead")
 class BpkSnackbar private constructor(
     private val context: Context,
     view: View,

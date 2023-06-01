@@ -16,6 +16,8 @@ Backpack Android is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
+> **_NOTE:_**  This component is deprecated. Please replace it with [BpkFloatingNotification](https://github.com/Skyscanner/backpack-android/blob/main/docs/compose/FloatingNotification/README.md) from backpack-compose.
+
 The Toast component can be used in Kotlin/Java
 
 ```Kotlin
