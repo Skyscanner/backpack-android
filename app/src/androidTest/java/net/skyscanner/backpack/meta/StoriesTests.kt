@@ -35,15 +35,15 @@ class StoriesTests {
     fun assertNoScreenshotOnlyStoriesInDemos() {
         assertTrue(repository.uiComponents.none {
             repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
-        },)
+        })
         assertTrue(repository.uiComponents.none {
             repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
-        },)
+        })
         assertTrue(repository.tokenComponents.none {
             repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
-        },)
+        })
         assertTrue(repository.tokenComponents.none {
             repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
-        },)
+        })
     }
 }

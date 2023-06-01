@@ -138,10 +138,10 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
                     "    fontWeight = %fontWeight:T.${fontWeight.toName().let { if (it == "Book") "Normal" else it }},\n" +
                     "    fontSize = %fontSize:T.${fontSize.toName()},\n" +
                     "    lineHeight = %lineHeight:T.${lineHeight.toName()},\n" + if (letterSpacing != null) {
-                    "    letterSpacing = %letterSpacing:T.${letterSpacing.toName()},\n"
-                } else {
-                    ""
-                } +
+                        "    letterSpacing = %letterSpacing:T.${letterSpacing.toName()},\n"
+                    } else {
+                        ""
+                    } +
                     "    fontFamily = $defaultFontFamily,\n" +
                     "  )"
 

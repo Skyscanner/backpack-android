@@ -121,7 +121,7 @@ private fun toCompose(
                         } else {
                             add("%L.%M", value, extension)
                         }
-                    },)
+                    })
                     .build()
             },
         )
