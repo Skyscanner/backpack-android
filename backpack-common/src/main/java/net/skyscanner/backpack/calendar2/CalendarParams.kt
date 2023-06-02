@@ -62,7 +62,7 @@ data class CalendarParams(
     internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 
     internal val daysFormatter = DateTimeFormatterBuilder()
-        .appendLocalized(FormatStyle.FULL, null)
+        .appendLocalized(contentDescriptionText, null)
         .toFormatter(locale)
         .withChronology(IsoChronology.INSTANCE)
 
