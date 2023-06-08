@@ -56,6 +56,7 @@ internal fun BpkCalendarHeader(
                     color = BpkTheme.colors.textSecondary,
                     textAlign = TextAlign.Center,
                     maxLines = 1,
+                    modifier = Modifier.semantics { invisibleToUser() },
                 )
                 current += 1
             } while (current != params.weekFields.firstDayOfWeek)

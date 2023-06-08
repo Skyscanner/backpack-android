@@ -61,6 +61,7 @@ sealed class CalendarCell {
         val selection: Selection?,
         val text: CharSequence,
         val outOfRange: Boolean,
+        val contentDescription: String,
         override val yearMonth: YearMonth,
     ) : CalendarCell() {
 
@@ -102,10 +103,12 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
+    contentDescription = date.format(params.dateContentDescriptionFormatter),
     text = buildSpannedString {
         val span = TtsSpan.DateBuilder()
             .setDay(date.dayOfMonth)
             .setMonth(date.month.ordinal)
+            .setYear(date.year)
             .setWeekday(date.dayOfWeek.value)
             .build()
         append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

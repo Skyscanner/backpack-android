@@ -23,6 +23,9 @@ import androidx.compose.runtime.Stable
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
+import org.threeten.bp.chrono.IsoChronology
+import org.threeten.bp.format.DateTimeFormatterBuilder
+import org.threeten.bp.format.FormatStyle
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
 import java.text.SimpleDateFormat
@@ -48,6 +51,7 @@ data class CalendarParams(
     val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
     val locale: Locale = Locale.getDefault(),
     val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
+    val dateContentDescriptionStyle: FormatStyle = FormatStyle.FULL,
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
@@ -56,6 +60,11 @@ data class CalendarParams(
     val weekFields = WeekFields.of(locale)
 
     internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
+
+    internal val dateContentDescriptionFormatter = DateTimeFormatterBuilder()
+        .appendLocalized(dateContentDescriptionStyle, null)
+        .toFormatter(locale)
+        .withChronology(IsoChronology.INSTANCE)
 
     /**
      * Describes the selection behaviour

@@ -37,6 +37,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -92,6 +94,9 @@ internal fun BpkCalendarDayCell(
 
             BpkText(
                 text = model.text.toString(),
+                modifier = Modifier.semantics {
+                    contentDescription = model.contentDescription
+                },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = BpkTheme.typography.heading5,
