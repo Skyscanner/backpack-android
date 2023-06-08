@@ -103,7 +103,7 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
-    contentDescription = date.format(params.daysFormatter),
+    contentDescription = date.format(params.dateContentDescriptionFormatter),
     text = buildSpannedString {
         val span = TtsSpan.DateBuilder()
             .setDay(date.dayOfMonth)

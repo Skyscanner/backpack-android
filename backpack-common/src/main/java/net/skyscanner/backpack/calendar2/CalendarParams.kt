@@ -51,7 +51,7 @@ data class CalendarParams(
     val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
     val locale: Locale = Locale.getDefault(),
     val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
-    val contentDescriptionText: FormatStyle = FormatStyle.FULL,
+    val dateContentDescriptionStyle: FormatStyle = FormatStyle.FULL,
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
@@ -61,8 +61,8 @@ data class CalendarParams(
 
     internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 
-    internal val daysFormatter = DateTimeFormatterBuilder()
-        .appendLocalized(contentDescriptionText, null)
+    internal val dateContentDescriptionFormatter = DateTimeFormatterBuilder()
+        .appendLocalized(dateContentDescriptionStyle, null)
         .toFormatter(locale)
         .withChronology(IsoChronology.INSTANCE)
 
