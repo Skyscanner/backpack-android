@@ -108,6 +108,7 @@ internal fun CalendarCellDay(
         val span = TtsSpan.DateBuilder()
             .setDay(date.dayOfMonth)
             .setMonth(date.month.ordinal)
+            .setYear(date.year)
             .setWeekday(date.dayOfWeek.value)
             .build()
         append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
