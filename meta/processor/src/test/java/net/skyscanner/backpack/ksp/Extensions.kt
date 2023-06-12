@@ -37,7 +37,7 @@ internal fun testKsp(
     }
     val result = compilation.compile()
     require(result.exitCode == KotlinCompilation.ExitCode.OK) { result.messages }
-    val generatedStories = compilation.kspSourcesDir.walkTopDown().first { it.name == "GeneratedStories.kt" }
+    val generatedStories = compilation.kspSourcesDir.walkTopDown().first { it.name == "KspGeneratedStories.kt" }
     evaluate(result, generatedStories.readText())
 }
 

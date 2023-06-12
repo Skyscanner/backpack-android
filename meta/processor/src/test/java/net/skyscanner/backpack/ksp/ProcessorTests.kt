@@ -50,18 +50,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Default",
-        kind = StoryKind.StoryAndScreenshot,
-        isCompose = false,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = false,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Default",
+          kind = StoryKind.StoryAndScreenshot,
+          isCompose = false,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = false,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)
@@ -95,18 +97,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Default",
-        kind = StoryKind.StoryAndScreenshot,
-        isCompose = true,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = false,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Default",
+          kind = StoryKind.StoryAndScreenshot,
+          isCompose = true,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = false,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)
@@ -140,18 +144,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Custom name",
-        kind = StoryKind.StoryAndScreenshot,
-        isCompose = true,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = false,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Custom name",
+          kind = StoryKind.StoryAndScreenshot,
+          isCompose = true,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = false,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)
@@ -185,18 +191,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Default",
-        kind = StoryKind.DemoOnly,
-        isCompose = true,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = false,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Default",
+          kind = StoryKind.DemoOnly,
+          isCompose = true,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = false,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)
@@ -230,18 +238,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Default",
-        kind = StoryKind.ScreenshotOnly,
-        isCompose = true,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = false,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Default",
+          kind = StoryKind.ScreenshotOnly,
+          isCompose = true,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = false,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)
@@ -275,18 +285,20 @@ class ProcessorTests {
     import kotlin.collections.List
     import net.skyscanner.backpack.meta.StoryKind
 
-    public fun Story.Companion.all(): List<Story> = listOf(
-      Story(
-        name = "Default",
-        kind = StoryKind.StoryAndScreenshot,
-        isCompose = true,
-        component = Component(
-          name = "Floating Action Button",
-          isToken = true,
+    internal object KspGeneratedStories {
+      public fun list(): List<Story> = listOf(
+        Story(
+          name = "Default",
+          kind = StoryKind.StoryAndScreenshot,
+          isCompose = true,
+          component = Component(
+            name = "Floating Action Button",
+            isToken = true,
+          ),
+          content = { FabStory() },
         ),
-        content = { FabStory() },
-      ),
-    )
+      )
+    }
     """
 
         testKsp(input, output)

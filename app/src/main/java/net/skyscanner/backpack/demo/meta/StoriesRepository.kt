@@ -45,7 +45,7 @@ interface StoriesRepository {
 private object StoriesRepositoryImpl : StoriesRepository {
 
     private val stories = Story
-        .all()
+        .all
         .asSequence()
 
     private val visibleStories = stories

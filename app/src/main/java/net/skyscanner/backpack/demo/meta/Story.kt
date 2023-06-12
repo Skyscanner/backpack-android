@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.meta
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.meta.StoryKind
+import kotlin.reflect.full.memberFunctions
 
 @Immutable
 data class Story(
@@ -31,6 +32,16 @@ data class Story(
     val content: @Composable () -> Unit,
 ) {
 
-    // used for code-generated extensions
-    companion object
+    companion object {
+
+        val all: List<Story> by lazy {
+            val kclass = try {
+                Class.forName("net.skyscanner.backpack.demo.meta.KspGeneratedStories").kotlin
+            } catch (e: ClassNotFoundException) {
+                null
+            }
+            val listFunction = kclass?.memberFunctions?.find { it.name == "list" }
+            listFunction?.call(kclass.objectInstance) as? List<Story> ?: emptyList()
+        }
+    }
 }

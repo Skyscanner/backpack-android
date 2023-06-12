@@ -18,48 +18,57 @@
 
 package net.skyscanner.backpack.ksp.writer
 
-import androidx.room.compiler.processing.XFiler
-import androidx.room.compiler.processing.writeTo
+import com.google.devtools.ksp.processing.CodeGenerator
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
+import com.squareup.kotlinpoet.ksp.writeTo
 import net.skyscanner.backpack.ksp.ComponentDefinition
 import net.skyscanner.backpack.ksp.StoryDefinition
 
 private const val MetaPackage = "net.skyscanner.backpack.demo.meta"
 private val StoryClass = ClassName(MetaPackage, "Story")
-private val StoryCompanion = ClassName(MetaPackage, "Story.Companion")
 private val ComponentClass = ClassName(MetaPackage, "Component")
 private val StoriesClass = List::class.asClassName().parameterizedBy(StoryClass)
 
-fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
-    FunSpec
-        .builder("all")
-        .receiver(StoryCompanion)
-        .returns(StoriesClass)
-        .addCode(CodeBlock
-            .builder()
-            .add("return listOf(\n")
-            .indent()
-            .apply {
-                stories.forEach {
-                    writeStoryCreator(it)
-                }
-            }
-            .unindent()
-            .add(")")
-            .build(),
+fun writeListOfStories(stories: List<StoryDefinition>, output: CodeGenerator) {
+    if (stories.isEmpty()) return
+
+    TypeSpec
+        .objectBuilder("KspGeneratedStories")
+        .addModifiers(KModifier.INTERNAL)
+        .addFunction(
+            FunSpec
+                .builder("list")
+                .returns(StoriesClass)
+                .addCode(
+                    CodeBlock
+                        .builder()
+                        .add("return listOf(\n")
+                        .indent()
+                        .apply {
+                            stories.forEach {
+                                writeStoryCreator(it)
+                            }
+                        }
+                        .unindent()
+                        .add(")")
+                        .build(),
+                )
+                .build(),
         )
         .build()
         .let {
             FileSpec
-                .builder(MetaPackage, "GeneratedStories")
-                .addFunction(it)
+                .builder(MetaPackage, "KspGeneratedStories")
+                .addType(it)
                 .build()
-                .writeTo(output, mode = XFiler.Mode.Aggregating)
+                .writeTo(codeGenerator = output, aggregating = true)
         }
 }
 
