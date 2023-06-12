@@ -18,14 +18,14 @@
 
 package net.skyscanner.backpack.ksp.writer
 
-import androidx.room.compiler.processing.XFiler
-import androidx.room.compiler.processing.writeTo
+import com.google.devtools.ksp.processing.CodeGenerator
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.asClassName
+import com.squareup.kotlinpoet.ksp.writeTo
 import net.skyscanner.backpack.ksp.ComponentDefinition
 import net.skyscanner.backpack.ksp.StoryDefinition
 
@@ -35,7 +35,7 @@ private val StoryCompanion = ClassName(MetaPackage, "Story.Companion")
 private val ComponentClass = ClassName(MetaPackage, "Component")
 private val StoriesClass = List::class.asClassName().parameterizedBy(StoryClass)
 
-fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
+fun writeListOfStories(stories: List<StoryDefinition>, output: CodeGenerator) {
     FunSpec
         .builder("all")
         .receiver(StoryCompanion)
@@ -59,7 +59,7 @@ fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
                 .builder(MetaPackage, "GeneratedStories")
                 .addFunction(it)
                 .build()
-                .writeTo(output, mode = XFiler.Mode.Aggregating)
+                .writeTo(codeGenerator = output, aggregating = true)
         }
 }
 

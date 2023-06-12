@@ -3,7 +3,7 @@ apply plugin: 'kotlin'
 dependencies {
     implementation libs.google.kspApi
     implementation libs.square.kotlinPoet
-    implementation libs.androidx.roomCompilerProcessing
+    implementation libs.square.kotlinPoetKsp
     implementation project(":meta:annotations")
     testImplementation libs.test.junit
     testImplementation libs.kotlin.compilerTesting

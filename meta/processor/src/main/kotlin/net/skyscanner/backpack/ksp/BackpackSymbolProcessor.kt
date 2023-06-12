@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.ksp
 
-import androidx.room.compiler.processing.ExperimentalProcessingApi
-import androidx.room.compiler.processing.XProcessingEnv
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
@@ -33,7 +31,6 @@ import net.skyscanner.backpack.ksp.writer.writeListOfStories
 import net.skyscanner.backpack.meta.ComponentMarker
 import net.skyscanner.backpack.meta.StoryMarker
 
-@OptIn(ExperimentalProcessingApi::class)
 class BackpackSymbolProcessor(
     private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
@@ -42,8 +39,6 @@ class BackpackSymbolProcessor(
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         if (invoked) return emptyList()
-
-        val filer = XProcessingEnv.create(environment.options, resolver, environment.codeGenerator, environment.logger).filer
 
         val components = resolver
             .getSymbolsWithAnnotation(ComponentMarker::class.qualifiedName!!)
@@ -65,7 +60,7 @@ class BackpackSymbolProcessor(
                     .mapNotNull { it.accept(StoriesVisitor(annotation), components) }
             }
 
-        writeListOfStories(stories.toList(), filer)
+        writeListOfStories(stories.toList(), environment.codeGenerator)
 
         invoked = true
         return emptyList()

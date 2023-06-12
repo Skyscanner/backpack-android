@@ -15,6 +15,7 @@ lifecycle = "2.6.1"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.1"
+kotlinPoet = "1.14.2"
 
 [libraries]
 
@@ -36,8 +37,6 @@ androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 androidx-coreKts = "androidx.core:core-ktx:1.10.1"
-
-androidx-roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.1"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -66,7 +65,8 @@ google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", vers
 google-guava = "com.google.guava:guava:32.0.1-jre"
 
 square-picasso = "com.squareup.picasso:picasso:2.71828"
-square-kotlinPoet = "com.squareup:kotlinpoet:1.14.2"
+square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoet" }
+square-kotlinPoetKsp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlinPoet" }
 
 kotlin-reflection = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
