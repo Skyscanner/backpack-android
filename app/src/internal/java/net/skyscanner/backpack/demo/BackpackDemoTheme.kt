@@ -30,8 +30,8 @@ fun BackpackDemoTheme(
 ) {
     BpkTheme(
         fontFamily = FontFamily(
-            Font(R.font.skyscanner_relative_android_book),
-            Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold),
+            Font(R.font.shadows_into_light),
+            Font(R.font.shadows_into_light, weight = FontWeight.Bold),
         ),
         content = content,
     )

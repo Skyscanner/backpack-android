@@ -41,7 +41,7 @@ class BpkSingleSelectChipGroupTest(private val type: ChipGroupType) : BpkSnapsho
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun default_selected() = snap {
-        SingleSelectChipGroupSample(type = type, selectedIndex = 2)
+        SingleSelectChipGroupSample(type = type, defaultIndex = 2)
     }
 
     @Test
@@ -56,7 +56,7 @@ class BpkSingleSelectChipGroupTest(private val type: ChipGroupType) : BpkSnapsho
         SingleSelectChipGroupSample(
             type = type,
             style = BpkChipStyle.OnDark,
-            selectedIndex = 2,
+            defaultIndex = 2,
         )
     }
 
@@ -72,7 +72,7 @@ class BpkSingleSelectChipGroupTest(private val type: ChipGroupType) : BpkSnapsho
         SingleSelectChipGroupSample(
             type = type,
             style = BpkChipStyle.OnImage,
-            selectedIndex = 2,
+            defaultIndex = 2,
         )
     }
 

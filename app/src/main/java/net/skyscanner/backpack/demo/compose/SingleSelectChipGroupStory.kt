@@ -41,6 +41,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.singleselectchipgroup.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipGroupType
 import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipItem
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
@@ -85,6 +86,10 @@ internal fun SingleSelectChipGroupDemo(style: BpkChipStyle, modifier: Modifier =
             BpkChipStyle.OnDark -> BpkTheme.colors.surfaceContrast
             BpkChipStyle.OnImage -> Color.Transparent
         }
+        val textColor = when (style) {
+            BpkChipStyle.Default -> BpkTheme.colors.textPrimary
+            BpkChipStyle.OnDark, BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -92,8 +97,10 @@ internal fun SingleSelectChipGroupDemo(style: BpkChipStyle, modifier: Modifier =
                 .padding(BpkSpacing.Base),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         ) {
+            BpkText(text = ChipGroupType.RAIL.name, color = textColor, style = BpkTheme.typography.subheading)
             SingleSelectChipGroupSample(type = ChipGroupType.RAIL, style = style)
             Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+            BpkText(text = ChipGroupType.WRAP.name, color = textColor, style = BpkTheme.typography.subheading)
             SingleSelectChipGroupSample(type = ChipGroupType.WRAP, style = style)
         }
     }
@@ -105,7 +112,7 @@ internal fun SingleSelectChipGroupDemo(style: BpkChipStyle, modifier: Modifier =
 internal fun SingleSelectChipGroupSample(
     type: ChipGroupType,
     modifier: Modifier = Modifier,
-    selectedIndex: Int = -1,
+    defaultIndex: Int = -1,
     style: BpkChipStyle = BpkChipStyle.Default,
 ) {
     val chips = listOf(
@@ -129,13 +136,13 @@ internal fun SingleSelectChipGroupSample(
         ChipItem("A city with long name in mars"),
         ChipItem("Rio de janeiro"),
     )
-    var selectedIndexForRailGroup by remember { mutableStateOf(selectedIndex) }
+    var selectedIndex by remember { mutableStateOf(defaultIndex) }
 
     BpkSingleSelectChipGroup(
         modifier = modifier,
         chips = chips,
-        selectedIndex = selectedIndexForRailGroup,
-        onItemClicked = { selectedIndexForRailGroup = chips.indexOf(it) },
+        selectedIndex = selectedIndex,
+        onItemClicked = { selectedIndex = chips.indexOf(it) },
         style = style,
         type = type,
     )

@@ -28,12 +28,36 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a SingleSelectChipGroup:
+Example of a Rail SingleSelectChipGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.singleselectchipgroup.BpkSingleSelectChipGroup
+import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipGroupType
+import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipItem
+
+var selectedIndex by remember { mutableStateOf(-1) }
 
 BpkSingleSelectChipGroup(
-    // TODO
+    chips = listOf(ChipItem("City", BpkIcon.Deals)),
+    selectedIndex = selectedIndex,
+    onItemClicked = {/*on click */},
+    type = ChipGroupType.WRAP,
+)
+```
+
+Example of a WRAP SingleSelectChipGroup:
+
+```Kotlin
+import net.skyscanner.backpack.compose.singleselectchipgroup.BpkSingleSelectChipGroup
+import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipGroupType
+import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipItem
+
+var selectedIndex by remember { mutableStateOf(-1) }
+
+BpkSingleSelectChipGroup(
+    chips = listOf(ChipItem("City", BpkIcon.Deals)),
+    selectedIndex = selectedIndex,
+    onItemClicked = {/*on click */},
+    type = ChipGroupType.WRAP,
 )
 ```
