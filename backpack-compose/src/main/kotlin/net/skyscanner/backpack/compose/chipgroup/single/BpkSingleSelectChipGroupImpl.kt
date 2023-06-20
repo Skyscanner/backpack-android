@@ -45,7 +45,7 @@ data class BpkSingleChipItem(val text: String, val icon: BpkIcon? = null)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun BpkSingleSelectChipGroupImpl(
+internal fun BpkSingleSelectChipGroupImpl(
     chips: List<BpkSingleChipItem>,
     selectedIndex: Int,
     onItemClicked: (BpkSingleChipItem) -> Unit,
