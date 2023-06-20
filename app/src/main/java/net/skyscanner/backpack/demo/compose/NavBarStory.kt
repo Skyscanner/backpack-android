@@ -100,7 +100,7 @@ fun CollapsibleNavBarStory(
                 IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
             ) else emptyList(),
         )
-        NavBarSampleBody()
+        NavBarSampleBody(showList)
     }
 }
 
@@ -145,12 +145,12 @@ fun TransparentNavBarStory(
                 )
             }
         }
-        NavBarSampleBody()
+        NavBarSampleBody(showList)
     }
 }
 
 @Composable
-private fun NavBarSampleBody(showList: Boolean = true) {
+private fun NavBarSampleBody(showList: Boolean) {
     if (showList) {
         LazyColumn {
             items(count = 2) {
