@@ -37,8 +37,8 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkSingleChipGroupType {
-    RAIL,
-    WRAP,
+    Rail,
+    Wrap,
 }
 
 data class BpkSingleChipItem(val text: String, val icon: BpkIcon? = null)
@@ -54,7 +54,7 @@ internal fun BpkSingleSelectChipGroupImpl(
     modifier: Modifier = Modifier,
 ) {
     when (type) {
-        BpkSingleChipGroupType.RAIL -> {
+        BpkSingleChipGroupType.Rail -> {
             LazyRow(
                 modifier = modifier.selectableGroup(),
                 state = rememberLazyListState(),
@@ -67,7 +67,7 @@ internal fun BpkSingleSelectChipGroupImpl(
             }
         }
 
-        BpkSingleChipGroupType.WRAP -> {
+        BpkSingleChipGroupType.Wrap -> {
             FlowRow(
                 modifier = modifier.selectableGroup(),
             ) {
@@ -82,9 +82,15 @@ internal fun BpkSingleSelectChipGroupImpl(
 }
 
 @Composable
-private fun ChipItem(chip: BpkSingleChipItem, selected: Boolean, style: BpkChipStyle, onSelectedChange: () -> Unit) {
+private fun ChipItem(
+    chip: BpkSingleChipItem,
+    selected: Boolean,
+    style: BpkChipStyle,
+    modifier: Modifier = Modifier,
+    onSelectedChange: () -> Unit,
+) {
     BpkChip(
-        modifier = Modifier
+        modifier = modifier
             .padding(PaddingValues(BpkSpacing.Sm))
             .semantics { role = Role.RadioButton },
         text = chip.text,

@@ -36,11 +36,11 @@ BpkSingleSelectChipGroup(
     chips = listOf(BpkSingleChipItem("City", BpkIcon.Deals)),
     selectedIndex = selectedIndex,
     onItemClicked = {/*on click */},
-    type = BpkSingleChipGroupType.RAIL,
+    type = BpkSingleChipGroupType.Rail,
 )
 ```
 
-Example of a WRAP SingleSelectChipGroup:
+Example of a Wrap SingleSelectChipGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
@@ -53,6 +53,6 @@ BpkSingleSelectChipGroup(
     chips = listOf(BpkSingleChipItem("City", BpkIcon.Deals)),
     selectedIndex = selectedIndex,
     onItemClicked = {/*on click */},
-    type = BpkSingleChipGroupType.WRAP,
+    type = BpkSingleChipGroupType.Wrap,
 )
 ```

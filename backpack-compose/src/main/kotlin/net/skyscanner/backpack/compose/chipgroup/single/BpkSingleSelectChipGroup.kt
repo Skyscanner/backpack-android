@@ -32,7 +32,7 @@ fun BpkSingleSelectChipGroup(
     onItemClicked: (BpkSingleChipItem) -> Unit,
     modifier: Modifier = Modifier,
     style: BpkChipStyle = BpkChipStyle.Default,
-    type: BpkSingleChipGroupType = BpkSingleChipGroupType.RAIL,
+    type: BpkSingleChipGroupType = BpkSingleChipGroupType.Rail,
 ) {
     BpkSingleSelectChipGroupImpl(
         chips = chips, selectedIndex = selectedIndex,

@@ -52,13 +52,13 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ChipGroupComponent
 @ComposeStory("Single Select Rail")
 fun SingleSelectChipGroupStoryRail(modifier: Modifier = Modifier) =
-    SingleSelectChipGroupDemo(BpkSingleChipGroupType.RAIL, modifier)
+    SingleSelectChipGroupDemo(BpkSingleChipGroupType.Rail, modifier)
 
 @Composable
 @ChipGroupComponent
 @ComposeStory("Single Select Wrap")
 fun SingleSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
-    SingleSelectChipGroupDemo(BpkSingleChipGroupType.WRAP, modifier)
+    SingleSelectChipGroupDemo(BpkSingleChipGroupType.Wrap, modifier)
 
 @Composable
 private fun SingleSelectChipGroupDemo(type: BpkSingleChipGroupType, modifier: Modifier = Modifier) {
