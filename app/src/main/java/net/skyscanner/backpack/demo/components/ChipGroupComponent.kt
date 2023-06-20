@@ -20,5 +20,5 @@ package net.skyscanner.backpack.demo.components
 
 import net.skyscanner.backpack.meta.ComponentMarker
 
-@ComponentMarker("SingleSelectChipGroup")
-annotation class SingleSelectChipGroupComponent
+@ComponentMarker("Chip Group")
+annotation class ChipGroupComponent

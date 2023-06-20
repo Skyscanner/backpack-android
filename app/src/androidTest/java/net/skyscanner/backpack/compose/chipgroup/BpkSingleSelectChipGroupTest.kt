@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.singleselectchipgroup
+package net.skyscanner.backpack.compose.chipgroup
 
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.SingleSelectChipGroupSample
 import org.junit.Test
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class BpkSingleSelectChipGroupTest(private val type: ChipGroupType) : BpkSnapshotTest(listOf(type)) {
+class BpkSingleSelectChipGroupTest(private val type: BpkSingleChipGroupType) : BpkSnapshotTest(listOf(type)) {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
@@ -80,6 +80,6 @@ class BpkSingleSelectChipGroupTest(private val type: ChipGroupType) : BpkSnapsho
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun types(): List<ChipGroupType> = ChipGroupType.values().toList()
+        fun types(): List<BpkSingleChipGroupType> = BpkSingleChipGroupType.values().toList()
     }
 }

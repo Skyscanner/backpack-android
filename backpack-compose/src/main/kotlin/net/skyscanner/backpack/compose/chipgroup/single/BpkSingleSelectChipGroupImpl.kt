@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.singleselectchipgroup
+package net.skyscanner.backpack.compose.chipgroup.single
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
@@ -32,24 +33,30 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipGroupType
-import net.skyscanner.backpack.compose.singleselectchipgroup.SingleSelectChipGroupData.ChipItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+
+enum class BpkSingleChipGroupType {
+    RAIL,
+    WRAP,
+}
+
+data class BpkSingleChipItem(val text: String, val icon: BpkIcon? = null)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun BpkSingleSelectChipGroup(
-    chips: List<ChipItem>,
+fun BpkSingleSelectChipGroupImpl(
+    chips: List<BpkSingleChipItem>,
     selectedIndex: Int,
-    onItemClicked: (ChipItem) -> Unit,
+    onItemClicked: (BpkSingleChipItem) -> Unit,
+    style: BpkChipStyle,
+    type: BpkSingleChipGroupType,
     modifier: Modifier = Modifier,
-    style: BpkChipStyle = BpkChipStyle.Default,
-    type: ChipGroupType = ChipGroupType.RAIL,
 ) {
     when (type) {
-        ChipGroupType.RAIL -> {
+        BpkSingleChipGroupType.RAIL -> {
             LazyRow(
-                modifier = modifier,
+                modifier = modifier.selectableGroup(),
                 state = rememberLazyListState(),
             ) {
                 itemsIndexed(items = chips) { index, chip ->
@@ -60,9 +67,9 @@ fun BpkSingleSelectChipGroup(
             }
         }
 
-        ChipGroupType.WRAP -> {
+        BpkSingleChipGroupType.WRAP -> {
             FlowRow(
-                modifier = modifier,
+                modifier = modifier.selectableGroup(),
             ) {
                 chips.forEachIndexed { index, chip ->
                     ChipItem(chip, index == selectedIndex, style) {
@@ -75,7 +82,7 @@ fun BpkSingleSelectChipGroup(
 }
 
 @Composable
-private fun ChipItem(chip: ChipItem, selected: Boolean, style: BpkChipStyle, onSelectedChange: () -> Unit) {
+private fun ChipItem(chip: BpkSingleChipItem, selected: Boolean, style: BpkChipStyle, onSelectedChange: () -> Unit) {
     BpkChip(
         modifier = Modifier
             .padding(PaddingValues(BpkSpacing.Sm))

@@ -293,4 +293,17 @@
     <string name="compose">Compose</string>
     <string name="image_sea_content_description">Image of surface of a wavy sea</string>
 
+    <string name="city_london">London</string>
+    <string name="city_paris">Paris</string>
+    <string name="city_algiers">Algiers</string>
+    <string name="city_madrid">Madrid</string>
+    <string name="city_new_york">New York</string>
+    <string name="city_shenzhen">Shenzhen</string>
+    <string name="city_tokyo">Tokyo</string>
+    <string name="city_rome">Rome</string>
+    <string name="city_cairo">Cairo</string>
+    <string name="city_berlin">Berlin</string>
+    <string name="city_dubai">Dubai</string>
+    <string name="city_long_name">A city with long name in mars</string>
+    <string name="city_rio">Rio de janeiro</string>
 </resources>
