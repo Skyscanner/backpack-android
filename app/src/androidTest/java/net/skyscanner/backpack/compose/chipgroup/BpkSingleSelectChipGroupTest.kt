@@ -40,40 +40,14 @@ class BpkSingleSelectChipGroupTest(private val type: BpkSingleChipGroupType) : B
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun default_selected() = snap {
-        SingleSelectChipGroupSample(type = type, defaultIndex = 2)
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun onDark() = snap(background = { BpkTheme.colors.surfaceContrast }) {
         SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnDark)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onDark_selected() = snap(background = { BpkTheme.colors.surfaceContrast }) {
-        SingleSelectChipGroupSample(
-            type = type,
-            style = BpkChipStyle.OnDark,
-            defaultIndex = 2,
-        )
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun onImage() = snap(background = { BpkTheme.colors.coreAccent }) {
         SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnImage)
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onImage_selected() = snap(background = { BpkTheme.colors.coreAccent }) {
-        SingleSelectChipGroupSample(
-            type = type,
-            style = BpkChipStyle.OnImage,
-            defaultIndex = 2,
-        )
     }
 
     companion object {

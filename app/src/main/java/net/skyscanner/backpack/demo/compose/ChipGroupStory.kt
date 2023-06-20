@@ -36,9 +36,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.compose.chipgroup.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
-import net.skyscanner.backpack.compose.chipgroup.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -112,7 +112,6 @@ private fun SingleSelectChipGroupDemo(type: BpkSingleChipGroupType, modifier: Mo
 internal fun SingleSelectChipGroupSample(
     type: BpkSingleChipGroupType,
     modifier: Modifier = Modifier,
-    defaultIndex: Int = -1,
     style: BpkChipStyle = BpkChipStyle.Default,
 ) {
     val chips = listOf(
@@ -131,7 +130,7 @@ internal fun SingleSelectChipGroupSample(
         BpkSingleChipItem(stringResource(R.string.city_rio)),
 
     )
-    var selectedIndex by remember { mutableStateOf(defaultIndex) }
+    var selectedIndex by remember { mutableStateOf(0) }
 
     BpkSingleSelectChipGroup(
         modifier = modifier,
