@@ -83,6 +83,7 @@ fun BpkTopNavBar(
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
+    transparent: Boolean = false,
 ) {
     BpkTopNavBarImpl(
         fraction = state.asInternalState().fraction,
@@ -91,6 +92,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
+        transparent = transparent,
     )
 }
 
@@ -102,6 +104,7 @@ fun BpkTopNavBar(
     action: TextAction,
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
+    transparent: Boolean = false,
 ) {
     BpkTopNavBarImpl(
         fraction = state.asInternalState().fraction,
@@ -110,5 +113,6 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
+        transparent = transparent,
     )
 }

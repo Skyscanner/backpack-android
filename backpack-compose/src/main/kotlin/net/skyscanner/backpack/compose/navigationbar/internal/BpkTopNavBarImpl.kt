@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.lerp
@@ -60,10 +61,12 @@ internal fun BpkTopNavBarImpl(
     insets: WindowInsets? = null,
     navIcon: IconAction? = null,
     actions: List<Action> = emptyList(),
+    transparent: Boolean = false,
 ) {
+    val backgroudColor = if (fraction == 0f) BpkTheme.colors.surfaceDefault else (if (transparent) Color.Transparent else BpkTheme.colors.canvas)
     Surface(
-        color = animateColorAsState(targetValue = if (fraction == 0f) BpkTheme.colors.surfaceDefault else BpkTheme.colors.canvas).value,
-        contentColor = BpkTheme.colors.textPrimary,
+        color = animateColorAsState(targetValue = backgroudColor).value,
+        contentColor = if (transparent && fraction > 0f) BpkTheme.colors.textOnDark else BpkTheme.colors.textPrimary,
         elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
         shape = RectangleShape,
         modifier = modifier.zIndex(1f),

@@ -30,6 +30,7 @@ import net.skyscanner.backpack.demo.compose.ActionsTopNavBar
 import net.skyscanner.backpack.demo.compose.BackTopNavBar
 import net.skyscanner.backpack.demo.compose.CloseTopNavBar
 import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
+import net.skyscanner.backpack.demo.compose.TransparentNavBarStory
 import net.skyscanner.backpack.demo.compose.NoNavIconTopNavBar
 import net.skyscanner.backpack.demo.compose.TextActionTopNavBar
 import org.junit.Test
@@ -94,6 +95,42 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
     fun windowInsets() {
         snap {
             CollapsibleNavBarStory(
+                initialStatus = TopNavBarStatus.Expanded,
+                showActions = false,
+                showList = false,
+                insets = WindowInsets(top = BpkSpacing.Md),
+            )
+        }
+    }
+
+    @Test
+    fun expandedTransparentNavBar() = snap {
+        TransparentNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsedTransparentNavBar() = snap {
+        TransparentNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun expandedNoNavIconTransparentNavBar() = snap {
+        TransparentNavBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun expandedNoActionsTransparentNavBar() = snap {
+        TransparentNavBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun windowInsetsTransparentNavBar() {
+        snap {
+            TransparentNavBarStory(
                 initialStatus = TopNavBarStatus.Expanded,
                 showActions = false,
                 showList = false,
