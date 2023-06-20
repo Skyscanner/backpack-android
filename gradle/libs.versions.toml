@@ -99,7 +99,7 @@ accompanist-pager = { module = "com.google.accompanist:accompanist-pager", versi
 protocol-gson = "com.google.code.gson:gson:2.10.1"
 protocol-dadb = "dev.mobile:dadb:1.2.6"
 
-http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "4.48.0.0" }
+http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "5.0.0.0" }
 http4k-core = { group = "org.http4k", name = "http4k-core" }
 http4k-serverUnderflow = { group = "org.http4k", name = "http4k-server-undertow" }
 http4k-clientApache = { group = "org.http4k", name = "http4k-client-apache" }
