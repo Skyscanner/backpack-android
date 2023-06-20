@@ -141,7 +141,7 @@ Column(modifier.nestedScroll(state)) {
 }
 ```
 
-By default, The navigation bar is solid style, but you can specify the transparent param to make it transparent while in expanded state.
+By default, The navigation bar is solid style, but you can specify the OnImage style to make it transparent while in expanded state.
 Example of a collapsible transparent navigation bar:
 
 ```Kotlin
@@ -175,7 +175,7 @@ Column(modifier.nestedScroll(state)) {
         contentDescription = stringResource(R.string.navigation_account)
       ) { /** onClick **/ },
     ),
-    transparent = true,
+      style = NavBarStyle.OnImage,
   )
 
   LazyColumn {

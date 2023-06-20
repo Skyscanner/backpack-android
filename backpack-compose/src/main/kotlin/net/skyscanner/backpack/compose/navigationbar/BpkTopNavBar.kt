@@ -32,6 +32,11 @@ sealed interface NavIcon {
     data class Close(val contentDescription: String, val onClick: () -> Unit) : NavIcon
 }
 
+enum class NavBarStyle {
+    Default,
+    OnImage,
+}
+
 internal sealed interface Action {
     val onClick: () -> Unit
 }
@@ -83,7 +88,7 @@ fun BpkTopNavBar(
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
-    transparent: Boolean = false,
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         fraction = state.asInternalState().fraction,
@@ -92,7 +97,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
-        transparent = transparent,
+        style = style,
     )
 }
 
@@ -104,7 +109,7 @@ fun BpkTopNavBar(
     action: TextAction,
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
-    transparent: Boolean = false,
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         fraction = state.asInternalState().fraction,
@@ -113,6 +118,6 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
-        transparent = transparent,
+        style = style,
     )
 }

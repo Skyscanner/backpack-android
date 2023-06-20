@@ -44,6 +44,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.navigationbar.Action
 import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.text.BpkText
@@ -61,12 +62,25 @@ internal fun BpkTopNavBarImpl(
     insets: WindowInsets? = null,
     navIcon: IconAction? = null,
     actions: List<Action> = emptyList(),
-    transparent: Boolean = false,
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
-    val backgroudColor = if (fraction == 0f) BpkTheme.colors.surfaceDefault else (if (transparent) Color.Transparent else BpkTheme.colors.canvas)
+    val backgroundColor = if (fraction == 0f) {
+        BpkTheme.colors.surfaceDefault
+    } else if (style == NavBarStyle.OnImage) {
+        Color.Transparent
+    } else {
+        BpkTheme.colors.canvas
+    }
+
+    val contentColor = if (fraction > 0f && style == NavBarStyle.OnImage) {
+        BpkTheme.colors.textOnDark
+    } else {
+        BpkTheme.colors.textPrimary
+    }
+
     Surface(
-        color = animateColorAsState(targetValue = backgroudColor).value,
-        contentColor = if (transparent && fraction > 0f) BpkTheme.colors.textOnDark else BpkTheme.colors.textPrimary,
+        color = animateColorAsState(targetValue = backgroundColor).value,
+        contentColor = contentColor,
         elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
         shape = RectangleShape,
         modifier = modifier.zIndex(1f),

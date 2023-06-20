@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
@@ -113,7 +114,7 @@ fun TransparentNavBarStory(
     showActions: Boolean = true,
     showNav: Boolean = true,
     insets: WindowInsets? = null,
-    transparent: Boolean = true,
+    style: NavBarStyle = NavBarStyle.OnImage,
 ) {
     val state = rememberTopAppBarState(initialStatus)
     Column(modifier.nestedScroll(state)) {
@@ -140,7 +141,7 @@ fun TransparentNavBarStory(
                         ) {},
                         IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
                     ) else emptyList(),
-                    transparent = transparent,
+                    style = style,
                 )
             }
         }
