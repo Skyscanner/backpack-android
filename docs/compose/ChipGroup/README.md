@@ -26,11 +26,11 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Rail SingleSelectChipGroup:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.chipgroup.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
 
-var selectedIndex by remember { mutableStateOf(-1) }
+var selectedIndex by remember { mutableStateOf(0) }
 
 BpkSingleSelectChipGroup(
     chips = listOf(BpkSingleChipItem("City", BpkIcon.Deals)),
@@ -43,11 +43,11 @@ BpkSingleSelectChipGroup(
 Example of a WRAP SingleSelectChipGroup:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.chipgroup.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
 
-var selectedIndex by remember { mutableStateOf(-1) }
+var selectedIndex by remember { mutableStateOf(0) }
 
 BpkSingleSelectChipGroup(
     chips = listOf(BpkSingleChipItem("City", BpkIcon.Deals)),

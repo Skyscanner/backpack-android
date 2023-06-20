@@ -36,9 +36,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chipgroup.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -63,47 +63,53 @@ fun SingleSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
 @Composable
 private fun SingleSelectChipGroupDemo(type: BpkSingleChipGroupType, modifier: Modifier = Modifier) {
     Column(modifier) {
-        Box(modifier = Modifier.weight(1f)) {
+        SingleSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(Color.Transparent),
+            style = BpkChipStyle.Default,
+        ) {}
+        SingleSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(BpkTheme.colors.surfaceContrast),
+            style = BpkChipStyle.OnDark,
+        ) {}
+        SingleSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(Color.Transparent),
+            style = BpkChipStyle.OnImage,
+        ) {
             Image(
                 painter = painterResource(R.drawable.city),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize(),
             )
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(BpkSpacing.Base)
-                    .background(Color.Transparent),
-                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-            ) {
-
-                SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnImage)
-            }
         }
-        Box(modifier = Modifier.weight(1f)) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(BpkTheme.colors.surfaceContrast)
-                    .padding(BpkSpacing.Base),
-                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-            ) {
+    }
+}
 
-                SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnDark)
-            }
-        }
-        Box(modifier = Modifier.weight(1f)) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Transparent)
-                    .padding(BpkSpacing.Base),
-                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-            ) {
-
-                SingleSelectChipGroupSample(type = type, style = BpkChipStyle.Default)
-            }
+@Composable
+private fun SingleSelectChipGroupBox(
+    type: BpkSingleChipGroupType,
+    modifier: Modifier = Modifier,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    contentImage: @Composable () -> Unit,
+) {
+    Box(modifier = modifier) {
+        contentImage()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            SingleSelectChipGroupSample(type = type, style = style)
         }
     }
 }

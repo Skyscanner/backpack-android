@@ -16,14 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.chipgroup
+package net.skyscanner.backpack.compose.chipgroup.single
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
-import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroupImpl
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleSelectChipGroupImpl
 
 @Composable
 fun BpkSingleSelectChipGroup(
