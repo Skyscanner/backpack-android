@@ -18,21 +18,27 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
@@ -94,23 +100,73 @@ fun CollapsibleNavBarStory(
                 IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
             ) else emptyList(),
         )
-        if (showList) {
-            LazyColumn {
-                items(count = 2) {
-                    BpkCard(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = BpkDimension.Spacing.Lg),
-                    ) {
-                        Column {
-                            BpkText(text = stringResource(R.string.generic_scroll_the_list))
-                        }
+        NavBarSampleBody(showList)
+    }
+}
+
+@Composable
+@NavBarComponent
+@ComposeStory("Transparent")
+fun TransparentNavBarStory(
+    modifier: Modifier = Modifier,
+    initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
+    showList: Boolean = true,
+    showActions: Boolean = true,
+    showNav: Boolean = true,
+    insets: WindowInsets? = null,
+    style: NavBarStyle = NavBarStyle.OnImage,
+) {
+    val state = rememberTopAppBarState(initialStatus)
+    Column(modifier.nestedScroll(state)) {
+        Box(modifier = Modifier.padding(vertical = BpkSpacing.Base)) {
+            Image(
+                painter = painterResource(id = R.drawable.swimming),
+                modifier = Modifier.fillMaxWidth(),
+                contentDescription = "",
+                contentScale = ContentScale.FillWidth,
+            )
+            Column(modifier = Modifier.align(Alignment.BottomEnd)) {
+                BpkTopNavBar(
+                    state = state,
+                    title = stringResource(R.string.navigation_bar_title),
+                    insets = insets,
+                    navIcon = when {
+                        showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
+                        else -> NavIcon.None
+                    },
+                    actions = if (showActions) listOf(
+                        IconAction(
+                            icon = BpkIcon.Accessibility,
+                            contentDescription = stringResource(R.string.navigation_accessibility),
+                        ) {},
+                        IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+                    ) else emptyList(),
+                    style = style,
+                )
+            }
+        }
+        NavBarSampleBody(showList)
+    }
+}
+
+@Composable
+private fun NavBarSampleBody(showList: Boolean) {
+    if (showList) {
+        LazyColumn {
+            items(count = 2) {
+                BpkCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = BpkDimension.Spacing.Lg),
+                ) {
+                    Column {
+                        BpkText(text = stringResource(R.string.generic_scroll_the_list))
                     }
-                    BpkDivider(Modifier.alpha(0f))
                 }
-                items(100) {
-                    ListItem(title = stringResource(R.string.generic_scroll_the_list))
-                }
+                BpkDivider(Modifier.alpha(0f))
+            }
+            items(100) {
+                ListItem(title = stringResource(R.string.generic_scroll_the_list))
             }
         }
     }

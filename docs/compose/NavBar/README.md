@@ -16,6 +16,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible.png" alt="Collapsible NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible_dm.png" alt="Collapsible NavBar component - dark mode" width="375" /> |
 
+## Transparent
+
+| Day                                                                                                                                                                             | Night                                                                                                                                                                                          |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/transparent.png" alt="Transparent NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/transparent_dm.png" alt="Transparent NavBar component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available
@@ -131,6 +137,51 @@ Column(modifier.nestedScroll(state)) {
         contentDescription = stringResource(R.string.navigation_account)
       ) { /** onClick **/ },
     ),
+  )
+
+  LazyColumn {
+    items(10) {
+      BpkText(text = "Item #$it")
+    }
+  }
+}
+```
+
+By default, The navigation bar is solid style, but you can specify the OnImage style to make it transparent while in expanded state.
+Example of a collapsible transparent navigation bar:
+
+```Kotlin
+import androidx.compose.foundation.lazy.LazyColumn
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.nestedScroll
+import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.text.BpkText
+
+val state = rememberTopAppBarState()
+
+Column(modifier.nestedScroll(state)) {
+  BpkTopNavBar(
+    state = state,
+    title = stringResource(R.string.navigation_bar_title),
+    navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
+    actions = listOf(
+      IconAction(
+        icon = BpkIcon.AccountIdCard,
+        contentDescription = stringResource(R.string.navigation_id_card)
+      ) { /** onClick **/ },
+      IconAction(
+        icon = BpkIcon.Accessibility,
+        contentDescription = stringResource(R.string.navigation_accessibility)
+      ) { /** onClick **/ },
+      IconAction(
+        icon = BpkIcon.Account,
+        contentDescription = stringResource(R.string.navigation_account)
+      ) { /** onClick **/ },
+    ),
+      style = NavBarStyle.OnImage,
   )
 
   LazyColumn {
