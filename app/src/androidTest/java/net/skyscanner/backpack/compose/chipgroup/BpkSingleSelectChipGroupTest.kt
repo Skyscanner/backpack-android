@@ -20,7 +20,7 @@ package net.skyscanner.backpack.compose.chipgroup
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.SingleSelectChipGroupSample
 import org.junit.Test

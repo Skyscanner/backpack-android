@@ -36,9 +36,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing

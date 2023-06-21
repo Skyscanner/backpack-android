@@ -21,9 +21,15 @@ package net.skyscanner.backpack.compose.chipgroup.single
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleSelectChipGroupImpl
+import net.skyscanner.backpack.compose.icon.BpkIcon
+
+enum class BpkSingleChipGroupType {
+    Rail,
+    Wrap,
+}
+
+data class BpkSingleChipItem(val text: String, val icon: BpkIcon? = null)
 
 @Composable
 fun BpkSingleSelectChipGroup(

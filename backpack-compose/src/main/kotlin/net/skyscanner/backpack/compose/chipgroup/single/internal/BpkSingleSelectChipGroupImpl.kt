@@ -33,15 +33,9 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-
-enum class BpkSingleChipGroupType {
-    Rail,
-    Wrap,
-}
-
-data class BpkSingleChipItem(val text: String, val icon: BpkIcon? = null)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

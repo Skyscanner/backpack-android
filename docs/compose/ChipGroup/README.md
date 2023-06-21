@@ -27,8 +27,8 @@ Example of a Rail SingleSelectChipGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 
 var selectedIndex by remember { mutableStateOf(0) }
 
@@ -44,8 +44,8 @@ Example of a Wrap SingleSelectChipGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 
 var selectedIndex by remember { mutableStateOf(0) }
 
