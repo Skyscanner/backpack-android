@@ -1,15 +1,14 @@
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    from android.sourceSets.main.kotlin.srcDirs
-    classifier "source"
+android {
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
-artifacts {
-    archives sourceJar
-}
 
 afterEvaluate { project ->
     publishing {
@@ -20,7 +19,6 @@ afterEvaluate { project ->
                 version project.version
 
                 from components.release
-                artifact sourceJar
 
                 pom {
                     name = project.artifactId
