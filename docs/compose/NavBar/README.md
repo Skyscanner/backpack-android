@@ -16,6 +16,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible.png" alt="Collapsible NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible_dm.png" alt="Collapsible NavBar component - dark mode" width="375" /> |
 
+## Transparent
+
+| Day                                                                                                                                                                             | Night                                                                                                                                                                                          |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/transparent.png" alt="Transparent NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/transparent_dm.png" alt="Transparent NavBar component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available
