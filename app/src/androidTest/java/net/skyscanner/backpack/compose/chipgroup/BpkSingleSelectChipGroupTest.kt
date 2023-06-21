@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.compose.chipgroup
 
-import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleChipGroupType
@@ -33,19 +31,16 @@ import org.junit.runners.Parameterized
 class BpkSingleSelectChipGroupTest(private val type: BpkSingleChipGroupType) : BpkSnapshotTest(listOf(type)) {
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun default() = snap {
         SingleSelectChipGroupSample(type = type)
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun onDark() = snap(background = { BpkTheme.colors.surfaceContrast }) {
         SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnDark)
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun onImage() = snap(background = { BpkTheme.colors.coreAccent }) {
         SingleSelectChipGroupSample(type = type, style = BpkChipStyle.OnImage)
     }
