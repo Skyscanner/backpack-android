@@ -18,15 +18,11 @@
 
 package net.skyscanner.backpack.compose.chip
 
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.chip.internal.BpkChipImpl
+import net.skyscanner.backpack.compose.chip.internal.BpkDismissibleChipImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.utils.applyIf
 
 enum class BpkChipStyle {
     Default,
@@ -92,20 +88,11 @@ fun BpkDismissibleChip(
     style: BpkChipStyle = BpkChipStyle.Default,
     icon: BpkIcon? = null,
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    BpkChipImpl(
+    BpkDismissibleChipImpl(
         text = text,
-        selected = true,
-        enabled = true,
         style = style,
         icon = icon,
-        type = BpkChipType.Dismiss,
-        interactionSource = interactionSource,
-        modifier = modifier.applyIf(onClick != null) {
-            clickable(
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-            ) { onClick!!.invoke() }
-        },
+        modifier = modifier,
+        onClick = onClick,
     )
 }

@@ -1,5 +1,8 @@
 package net.skyscanner.backpack.compose.chipgroup.multiple.internal
 
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -14,23 +17,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chip.BpkChipType.Dismiss
-import net.skyscanner.backpack.compose.chip.BpkChipType.Dropdown
-import net.skyscanner.backpack.compose.chip.BpkChipType.Selectable
-import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
-import net.skyscanner.backpack.compose.chip.BpkDropdownChip
+import net.skyscanner.backpack.compose.chip.BpkChipType
+import net.skyscanner.backpack.compose.chip.internal.BpkChipImpl
+import net.skyscanner.backpack.compose.chip.internal.BpkDismissibleChipImpl
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
 import net.skyscanner.backpack.compose.divider.BpkDivider
@@ -94,16 +91,15 @@ private fun StickyChip(
             .padding(PaddingValues(BpkSpacing.Sm))
             .height(IntrinsicSize.Min),
     ) {
-        ChipItem(
+        StickyChipItem(
             chip = chip,
             style = style,
             modifier = Modifier
                 .padding(PaddingValues(end = BpkSpacing.Md))
                 .semantics {
-                    role = Role.RadioButton
+                    role = Role.Button
                     contentDescription = chip.text
                 },
-            isStickyChip = true,
         )
         BpkDivider(
             modifier = Modifier
@@ -115,51 +111,61 @@ private fun StickyChip(
 }
 
 @Composable
+private fun StickyChipItem(
+    chip: BpkMultiChipItem,
+    style: BpkChipStyle,
+    modifier: Modifier = Modifier,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    when (chip.type) {
+        BpkChipType.Selectable, BpkChipType.Dropdown -> BpkChipImpl(
+            modifier = modifier.clickable(
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+            ) { chip.onClick.invoke() },
+            text = null,
+            type = chip.type,
+            selected = chip.selected,
+            onSelectedChange = null,
+            enabled = true,
+            style = style,
+            icon = chip.icon,
+        )
+
+        BpkChipType.Dismiss -> BpkDismissibleChipImpl(
+            text = null,
+            style = style,
+            icon = chip.icon,
+            modifier = modifier,
+            onClick = chip.onClick,
+        )
+    }
+}
+
+@Composable
 private fun ChipItem(
     chip: BpkMultiChipItem,
     style: BpkChipStyle,
     modifier: Modifier = Modifier,
-    isStickyChip: Boolean = false,
 ) {
-    var selectedState by remember { mutableStateOf(chip.selected) }
-    val text = if (isStickyChip) "" else chip.text
     when (chip.type) {
-        Selectable -> {
-            BpkChip(
-                text = text,
-                icon = chip.icon,
-                style = style,
-                onSelectedChange = {
-                    selectedState = it
-                    chip.onClick.invoke()
-                },
-                modifier = modifier,
-                selected = selectedState,
-            )
-        }
+        BpkChipType.Selectable, BpkChipType.Dropdown -> BpkChipImpl(
+            modifier = modifier,
+            text = chip.text,
+            type = chip.type,
+            selected = chip.selected,
+            onSelectedChange = { chip.onClick() },
+            enabled = true,
+            style = style,
+            icon = chip.icon,
+        )
 
-        Dropdown -> {
-            BpkDropdownChip(
-                text = text,
-                icon = chip.icon,
-                style = style,
-                onSelectedChange = {
-                    selectedState = it
-                    chip.onClick.invoke()
-                },
-                modifier = modifier,
-                selected = selectedState,
-            )
-        }
-
-        Dismiss -> {
-            BpkDismissibleChip(
-                text = text,
-                icon = chip.icon,
-                style = style,
-                modifier = modifier,
-                onClick = chip.onClick,
-            )
-        }
+        BpkChipType.Dismiss -> BpkDismissibleChipImpl(
+            text = chip.text,
+            style = style,
+            icon = chip.icon,
+            modifier = modifier,
+            onClick = chip.onClick,
+        )
     }
 }

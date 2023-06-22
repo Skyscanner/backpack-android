@@ -23,6 +23,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -60,7 +61,7 @@ import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 internal fun BpkChipImpl(
-    text: String,
+    text: String?,
     type: BpkChipType,
     selected: Boolean,
     onSelectedChange: ((Boolean) -> Unit)?,
@@ -90,8 +91,34 @@ internal fun BpkChipImpl(
 }
 
 @Composable
+internal fun BpkDismissibleChipImpl(
+    text: String?,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    icon: BpkIcon? = null,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    BpkChipImpl(
+        text = text,
+        selected = true,
+        enabled = true,
+        style = style,
+        icon = icon,
+        type = BpkChipType.Dismiss,
+        interactionSource = interactionSource,
+        modifier = modifier.applyIf(onClick != null) {
+            clickable(
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+            ) { onClick!!.invoke() }
+        },
+    )
+}
+
+@Composable
 internal fun BpkChipImpl(
-    text: String,
+    text: String?,
     selected: Boolean,
     enabled: Boolean,
     style: BpkChipStyle,
@@ -138,8 +165,13 @@ internal fun BpkChipImpl(
             .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, ChipShape)
             .background(backgroundColor, ChipShape)
             .clip(ChipShape)
-            .padding(start = BpkSpacing.Base, end = BpkSpacing.Md),
+            .padding(horizontal = BpkSpacing.Md),
     ) {
+
+        if (text != null) {
+            // due to the vertical spacing this ends up with 8dp again
+            Spacer(modifier = Modifier.width(0.dp))
+        }
 
         if (icon != null) {
             BpkIcon(
@@ -149,15 +181,15 @@ internal fun BpkChipImpl(
                 tint = contentColor,
             )
         }
-
-        BpkText(
-            text = text,
-            color = contentColor,
-            style = BpkTheme.typography.footnote,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-
+        text?.let {
+            BpkText(
+                text = text,
+                color = contentColor,
+                style = BpkTheme.typography.footnote,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
         val trailingIcon = type.icon
         if (trailingIcon != null) {
             val trailingIconColor by animateColorAsState(
@@ -181,7 +213,7 @@ internal fun BpkChipImpl(
                 contentDescription = null,
                 tint = trailingIconColor,
             )
-        } else {
+        } else if (text != null) {
             // due to the vertical spacing this ends up with 8dp again
             Spacer(modifier = Modifier.width(0.dp))
         }
