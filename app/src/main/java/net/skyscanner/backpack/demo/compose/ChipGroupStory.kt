@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,9 +34,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.compose.chip.BpkChipType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
@@ -43,10 +49,12 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
+import net.skyscanner.backpack.compose.tokens.Filter
 import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ChipGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @ChipGroupComponent
@@ -59,6 +67,40 @@ fun SingleSelectChipGroupStoryRail(modifier: Modifier = Modifier) =
 @ComposeStory("Single Select Wrap")
 fun SingleSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
     SingleSelectChipGroupDemo(BpkSingleChipGroupType.Wrap, modifier)
+
+@Composable
+@ChipGroupComponent
+@ComposeStory("Multi Select Rail")
+fun MultiSelectChipGroupStoryRail(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    MultiSelectChipGroupDemo(
+        BpkMultiChipGroupType.Rail(
+            BpkMultiChipItem(
+                text = stringResource(R.string.sticky_chip),
+                icon = BpkIcon.Filter,
+            ) {
+                Toast.makeText(context, context.getString(R.string.sticky_chip_action), Toast.LENGTH_SHORT).show()
+            },
+        ),
+        modifier,
+    )
+}
+
+@Composable
+@ChipGroupComponent
+@ComposeStory("Multi Select Rail With No Sticky Chip", StoryKind.DemoOnly)
+fun MultiSelectChipGroupStoryRailNoStickyChip(modifier: Modifier = Modifier) {
+    MultiSelectChipGroupDemo(
+        BpkMultiChipGroupType.Rail(),
+        modifier,
+    )
+}
+
+@Composable
+@ChipGroupComponent
+@ComposeStory("Multi Select Wrap")
+fun MultiSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
+    MultiSelectChipGroupDemo(BpkMultiChipGroupType.Wrap, modifier)
 
 @Composable
 private fun SingleSelectChipGroupDemo(type: BpkSingleChipGroupType, modifier: Modifier = Modifier) {
@@ -95,6 +137,40 @@ private fun SingleSelectChipGroupDemo(type: BpkSingleChipGroupType, modifier: Mo
 }
 
 @Composable
+private fun MultiSelectChipGroupDemo(type: BpkMultiChipGroupType, modifier: Modifier = Modifier) {
+    Column(modifier) {
+        MultiSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(Color.Transparent),
+            style = BpkChipStyle.Default,
+        ) {}
+        MultiSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(BpkTheme.colors.surfaceContrast),
+            style = BpkChipStyle.OnDark,
+        ) {}
+        MultiSelectChipGroupBox(
+            type = type,
+            modifier = Modifier
+                .weight(1f)
+                .background(Color.Transparent),
+            style = BpkChipStyle.OnImage,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.city),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
+        }
+    }
+}
+
+@Composable
 private fun SingleSelectChipGroupBox(
     type: BpkSingleChipGroupType,
     modifier: Modifier = Modifier,
@@ -112,6 +188,61 @@ private fun SingleSelectChipGroupBox(
             SingleSelectChipGroupSample(type = type, style = style)
         }
     }
+}
+
+@Composable
+private fun MultiSelectChipGroupBox(
+    type: BpkMultiChipGroupType,
+    modifier: Modifier = Modifier,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    contentImage: @Composable () -> Unit,
+) {
+    Box(modifier = modifier) {
+        contentImage()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            MultiSelectChipGroupSample(type = type, style = style)
+        }
+    }
+}
+
+@Composable
+internal fun MultiSelectChipGroupSample(
+    type: BpkMultiChipGroupType,
+    modifier: Modifier = Modifier,
+    style: BpkChipStyle = BpkChipStyle.Default,
+) {
+    val context = LocalContext.current
+    val chips = listOf(
+        BpkMultiChipItem(text = stringResource(R.string.city_london), selected = true) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_paris)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_algiers)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_madrid), type = BpkChipType.Dropdown) {
+            Toast.makeText(context, context.getString(R.string.drop_down_action), Toast.LENGTH_SHORT).show()
+        },
+        BpkMultiChipItem(text = stringResource(R.string.city_new_york)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_shenzhen)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_tokyo), type = BpkChipType.Dismiss) {
+            Toast.makeText(context, context.getString(R.string.dismiss_action), Toast.LENGTH_SHORT).show()
+        },
+        BpkMultiChipItem(text = stringResource(R.string.city_rome), BpkIcon.Deals) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_cairo)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_berlin)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_dubai), BpkIcon.Heart) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_long_name)) {},
+        BpkMultiChipItem(text = stringResource(R.string.city_rio)) {},
+
+    )
+    BpkMultiSelectChipGroup(
+        chips = chips,
+        type = type,
+        modifier = modifier,
+        style = style,
+    )
 }
 
 @Composable

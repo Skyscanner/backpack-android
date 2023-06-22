@@ -306,4 +306,9 @@
     <string name="city_dubai">Dubai</string>
     <string name="city_long_name">A city with long name in mars</string>
     <string name="city_rio">Rio de janeiro</string>
+
+    <string name="drop_down_action">Drop down action invoked</string>
+    <string name="dismiss_action">Dismiss action invoked</string>
+    <string name="sticky_chip_action">Sticky Chip action invoked</string>
+    <string name="sticky_chip">Filter</string>
 </resources>

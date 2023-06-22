@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -56,12 +57,6 @@ import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.internal.BpkChipColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
-
-internal enum class BpkChipType {
-    Selectable,
-    Dropdown,
-    Dismiss,
-}
 
 @Composable
 internal fun BpkChipImpl(

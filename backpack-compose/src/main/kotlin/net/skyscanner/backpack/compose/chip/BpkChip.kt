@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.chip.internal.BpkChipImpl
-import net.skyscanner.backpack.compose.chip.internal.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.utils.applyIf
 
@@ -33,6 +32,12 @@ enum class BpkChipStyle {
     Default,
     OnDark,
     OnImage,
+}
+
+enum class BpkChipType {
+    Selectable,
+    Dropdown,
+    Dismiss,
 }
 
 @Composable
