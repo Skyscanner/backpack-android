@@ -19,12 +19,48 @@
 package net.skyscanner.backpack.compose.chipgroup
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Filter
+import net.skyscanner.backpack.demo.compose.MultiSelectChipGroupSample
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-class BpkMultiSelectChipGroupTest : BpkSnapshotTest() {
+@RunWith(Parameterized::class)
+class BpkMultiSelectChipGroupTest(private val permutation: Permutation) : BpkSnapshotTest(listOf(permutation.type)) {
 
     @Test
     fun default() = snap {
-        MultiSelectChipGroupStory()
+        MultiSelectChipGroupSample(permutation.type)
+    }
+
+    @Test
+    fun on_dark() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        MultiSelectChipGroupSample(type = permutation.type, style = BpkChipStyle.OnDark)
+    }
+
+    @Test
+    fun on_image() = snap(background = { BpkTheme.colors.coreAccent }) {
+        MultiSelectChipGroupSample(type = permutation.type, style = BpkChipStyle.OnImage)
+    }
+
+    companion object {
+        enum class Permutation(
+            val type: BpkMultiChipGroupType,
+        ) {
+            RAIL_WITHOUT_STICKY_CHIP(type = BpkMultiChipGroupType.Rail()),
+            RAIL_WITH_STICKY_CHIP(
+                type = BpkMultiChipGroupType.Rail(BpkMultiChipItem(text = "Sticky Chip", icon = BpkIcon.Filter) {}),
+            ),
+            WRAP(type = BpkMultiChipGroupType.Wrap),
+        }
+
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun types() = Permutation.values()
     }
 }
