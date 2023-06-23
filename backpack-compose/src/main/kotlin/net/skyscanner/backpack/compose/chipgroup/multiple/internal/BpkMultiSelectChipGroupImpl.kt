@@ -140,7 +140,8 @@ private fun StickyChipItem(
             modifier = modifier.clickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
-            ) { chip.onClick.invoke() },
+                onClick = chip.onClick,
+            ),
             text = null,
             type = chip.type,
             selected = chip.selected,
