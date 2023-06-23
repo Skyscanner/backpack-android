@@ -213,6 +213,7 @@ internal fun MultiSelectChipGroupSample(
     modifier: Modifier = Modifier,
     style: BpkChipStyle = BpkChipStyle.Default,
 ) {
+    // This is just for demonstration purposes, you should not create view model manually :)
     val scope = rememberCoroutineScope()
     val resources = LocalContext.current.resources
     val viewModel = remember { MultiChipViewModel(scope, resources = resources) }
