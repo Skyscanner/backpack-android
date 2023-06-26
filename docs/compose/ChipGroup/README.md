@@ -96,6 +96,7 @@ Example of a Rail MultiSelectChipGroup With Sticky Chip:
 ```Kotlin
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -104,7 +105,7 @@ val state = viewModel.uiState.collectAsStateWithLifecycle()
 BpkMultiSelectChipGroup(
     chips = state.value,
     type =  BpkMultiChipGroupType.Rail(
-        BpkMultiChipItem(
+        BpkStickyChipItem(
             text = stringResource(R.string.sticky_chip),
             icon = BpkIcon.Filter,
         ) {
