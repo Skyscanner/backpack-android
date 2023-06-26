@@ -81,12 +81,23 @@ Example of a Rail MultiSelectChipGroup Without Sticky Chip:
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-val state = viewModel.uiState.collectAsStateWithLifecycle()
+// This is just for demonstration purposes, You should get this list from ViewModel
 
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
 BpkMultiSelectChipGroup(
-    chips = state.value,
+    chips = chips,
     type = BpkMultiChipGroupType.Rail(),
 )
 ```
@@ -98,13 +109,26 @@ import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import net.skyscanner.backpack.compose.chip.BpkChipType
 
-val state = viewModel.uiState.collectAsStateWithLifecycle()
+// This is just for demonstration purposes, You should get this list from ViewModel
+
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
 
 BpkMultiSelectChipGroup(
-    chips = state.value,
-    type =  BpkMultiChipGroupType.Rail(
+    chips = chips,
+    type = BpkMultiChipGroupType.Rail(
         BpkStickyChipItem(
             text = stringResource(R.string.sticky_chip),
             icon = BpkIcon.Filter,
@@ -123,10 +147,23 @@ import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-val state = viewModel.uiState.collectAsStateWithLifecycle()
+// This is just for demonstration purposes, You should get this list from ViewModel
+
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
 
 BpkMultiSelectChipGroup(
-    chips = state.value,
+    chips = chips,
     type = BpkMultiChipGroupType.Wrap,
 )
 ```
