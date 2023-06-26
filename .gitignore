@@ -54,7 +54,7 @@ captures/
 .idea/markdown-navigator.xml
 .idea/markdown-navigator-*.xml
 .idea/deploymentTargetDropDown.xml
-
+/.idea/ktfmt.xml
 
 # Keystore files
 *.jks

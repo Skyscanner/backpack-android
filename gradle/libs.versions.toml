@@ -41,6 +41,7 @@ androidx-coreKts = "androidx.core:core-ktx:1.10.1"
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycleRuntimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 threeTenAbp-base = { module = "org.threeten:threetenbp", version.ref = "threeTenAbp" }
 threeTenAbp-android = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeTenAbp" }

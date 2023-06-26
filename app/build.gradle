@@ -101,6 +101,7 @@ dependencies {
     implementation libs.square.picasso
     implementation libs.accompanist.flowLayout
     implementation libs.androidx.lifecycleKtx
+    implementation libs.androidx.lifecycleRuntimeCompose
     implementation libs.compose.activity
     implementation libs.kotlin.reflection
     implementation libs.destinations.core

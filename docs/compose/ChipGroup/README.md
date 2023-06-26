@@ -16,6 +16,24 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/single-select-wrap.png" alt="SingleSelect Wrap Chip Group component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/single-select-wrap_dm.png" alt="SingleSelect Wrap Chip Group component - dark mode" width="375" /> |
 
+## Multi Select Rail
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-rail.png" alt="MultiSelect Rail Chip Group component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-rail_dm.png" alt="MultiSelect Rail Chip Group component - dark mode" width="375" /> |
+
+## Multi Select Rail Without Sticky Chip
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-rail-with-no-sticky-chip.png" alt="MultiSelect Rail Chip Group with no Sticky Chip component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-rail-with-no-sticky-chip_dm.png" alt="MultiSelect Rail Chip Group with no Sticky Chip component - dark mode" width="375" /> |
+
+## Multi Select Wrap
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-wrap.png" alt="Multi Select Wrap Chip Group component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ChipGroup/screenshots/multi-select-wrap_dm.png" alt="MultiSelect Wrap Chip Group component - dark mode" width="375" /> |
+
 
 ## Installation
 
@@ -54,5 +72,98 @@ BpkSingleSelectChipGroup(
     selectedIndex = selectedIndex,
     onItemClicked = {/*on click */},
     type = BpkSingleChipGroupType.Wrap,
+)
+```
+
+Example of a Rail MultiSelectChipGroup Without Sticky Chip:
+
+```Kotlin
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
+
+// This is just for demonstration purposes, You should get this list from ViewModel
+
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
+BpkMultiSelectChipGroup(
+    chips = chips,
+    type = BpkMultiChipGroupType.Rail(),
+)
+```
+
+Example of a Rail MultiSelectChipGroup With Sticky Chip:
+
+```Kotlin
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
+import net.skyscanner.backpack.compose.chip.BpkChipType
+
+// This is just for demonstration purposes, You should get this list from ViewModel
+
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
+
+BpkMultiSelectChipGroup(
+    chips = chips,
+    type = BpkMultiChipGroupType.Rail(
+        BpkStickyChipItem(
+            text = stringResource(R.string.sticky_chip),
+            icon = BpkIcon.Filter,
+        ) {
+            /*on click */
+        },
+    ),
+)
+```
+
+Example of a Wrap MultiSelectChipGroup:
+
+```Kotlin
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
+// This is just for demonstration purposes, You should get this list from ViewModel
+
+val chips = listOf(
+    BpkMultiChipItem(
+        text = "City1",
+        type = BpkChipType.Selectable
+    ) { /* handle click*/ },
+    BpkMultiChipItem(
+        text = "City2",
+        type = BpkChipType.Selectable,
+        selected = true,
+        icon = BpkIcon.Heart
+    ) { /* handle click*/ }
+)
+
+BpkMultiSelectChipGroup(
+    chips = chips,
+    type = BpkMultiChipGroupType.Wrap,
 )
 ```
