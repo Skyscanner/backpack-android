@@ -26,7 +26,7 @@ import net.skyscanner.backpack.compose.chipgroup.multiple.internal.BpkMultiSelec
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
 sealed class BpkMultiChipGroupType {
-    class Rail(val stickyChip: BpkMultiChipItem? = null) : BpkMultiChipGroupType()
+    class Rail(val stickyChip: BpkStickyChipItem? = null) : BpkMultiChipGroupType()
     object Wrap : BpkMultiChipGroupType()
 }
 
@@ -34,6 +34,13 @@ data class BpkMultiChipItem(
     val text: String,
     val icon: BpkIcon? = null,
     val type: BpkChipType = BpkChipType.Selectable,
+    val selected: Boolean = false,
+    val onClick: () -> Unit,
+)
+
+data class BpkStickyChipItem(
+    val text: String,
+    val icon: BpkIcon? = null,
     val selected: Boolean = false,
     val onClick: () -> Unit,
 )

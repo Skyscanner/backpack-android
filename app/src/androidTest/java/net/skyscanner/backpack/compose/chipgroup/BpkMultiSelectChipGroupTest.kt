@@ -21,7 +21,7 @@ package net.skyscanner.backpack.compose.chipgroup
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
-import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Filter
@@ -31,7 +31,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class BpkMultiSelectChipGroupTest(private val permutation: Permutation) : BpkSnapshotTest(listOf(permutation.type)) {
+class BpkMultiSelectChipGroupTest(private val permutation: Permutation) : BpkSnapshotTest(listOf(permutation)) {
 
     @Test
     fun default() = snap {
@@ -52,15 +52,17 @@ class BpkMultiSelectChipGroupTest(private val permutation: Permutation) : BpkSna
         enum class Permutation(
             val type: BpkMultiChipGroupType,
         ) {
-            RAIL_WITHOUT_STICKY_CHIP(type = BpkMultiChipGroupType.Rail()),
-            RAIL_WITH_STICKY_CHIP(
-                type = BpkMultiChipGroupType.Rail(BpkMultiChipItem(text = "Sticky Chip", icon = BpkIcon.Filter) {}),
+            RailWithoutStickyChip(type = BpkMultiChipGroupType.Rail()),
+            RailWithStickyChip(
+                type = BpkMultiChipGroupType.Rail(BpkStickyChipItem(text = "Sticky Chip", icon = BpkIcon.Filter) {}),
             ),
-            WRAP(type = BpkMultiChipGroupType.Wrap),
+            Wrap(type = BpkMultiChipGroupType.Wrap),
         }
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun types() = Permutation.values()
+        fun data(): Collection<Array<Any>> {
+            return Permutation.values().map { arrayOf(it) }
+        }
     }
 }

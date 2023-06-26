@@ -48,6 +48,7 @@ import net.skyscanner.backpack.compose.chip.internal.BpkChipImpl
 import net.skyscanner.backpack.compose.chip.internal.BpkDismissibleChipImpl
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
@@ -100,50 +101,30 @@ internal fun BpkMultiSelectChipGroupImpl(
 
 @Composable
 private fun StickyChip(
-    chip: BpkMultiChipItem,
+    chip: BpkStickyChipItem,
     style: BpkChipStyle,
     modifier: Modifier = Modifier,
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier = modifier
             .padding(PaddingValues(BpkSpacing.Sm))
             .height(IntrinsicSize.Min),
     ) {
-        StickyChipItem(
-            chip = chip,
-            style = style,
+        BpkChipImpl(
             modifier = Modifier
                 .padding(PaddingValues(end = BpkSpacing.Md))
                 .semantics {
                     role = Role.Button
                     contentDescription = chip.text
-                },
-        )
-        BpkDivider(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(1.dp),
-
-        )
-    }
-}
-
-@Composable
-private fun StickyChipItem(
-    chip: BpkMultiChipItem,
-    style: BpkChipStyle,
-    modifier: Modifier = Modifier,
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    when (chip.type) {
-        BpkChipType.Selectable, BpkChipType.Dropdown -> BpkChipImpl(
-            modifier = modifier.clickable(
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-                onClick = chip.onClick,
-            ),
+                }
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = LocalIndication.current,
+                    onClick = chip.onClick,
+                ),
             text = null,
-            type = chip.type,
+            type = BpkChipType.Selectable,
             selected = chip.selected,
             onSelectedChange = null,
             enabled = true,
@@ -151,12 +132,10 @@ private fun StickyChipItem(
             icon = chip.icon,
         )
 
-        BpkChipType.Dismiss -> BpkDismissibleChipImpl(
-            text = null,
-            style = style,
-            icon = chip.icon,
-            modifier = modifier,
-            onClick = chip.onClick,
+        BpkDivider(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp),
         )
     }
 }

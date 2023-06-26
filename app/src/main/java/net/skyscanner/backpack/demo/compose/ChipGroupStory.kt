@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.res.Resources
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -49,6 +48,7 @@ import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiChipItem
 import net.skyscanner.backpack.compose.chipgroup.multiple.BpkMultiSelectChipGroup
+import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
@@ -63,6 +63,7 @@ import net.skyscanner.backpack.compose.tokens.View
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ChipGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
 @ChipGroupComponent
@@ -85,17 +86,21 @@ fun SingleSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
 @ComposeStory("Multi Select Rail")
 fun MultiSelectChipGroupStoryRail(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val floatingNotification = LocalFloatingNotification.current
+    val scope = rememberCoroutineScope()
     ChipGroupDemo(
         modifier,
     ) { style ->
         MultiSelectChipGroupSample(
             type =
             BpkMultiChipGroupType.Rail(
-                BpkMultiChipItem(
+                BpkStickyChipItem(
                     text = stringResource(R.string.sticky_chip),
                     icon = BpkIcon.Filter,
                 ) {
-                    Toast.makeText(context, context.getString(R.string.sticky_chip_action), Toast.LENGTH_SHORT).show()
+                    scope.launch {
+                        floatingNotification.show(context.getString(R.string.sticky_chip_action))
+                    }
                 },
             ),
             style = style,
