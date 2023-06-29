@@ -24,6 +24,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
@@ -34,6 +35,37 @@ import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 fun BpkTextField(
     value: String,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
+    placeholder: String? = null,
+    icon: BpkIcon? = null,
+    status: BpkFieldStatus = LocalFieldStatus.current,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    maxLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    BpkTextFieldImpl(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        readOnly = readOnly,
+        placeholder = placeholder,
+        icon = icon,
+        status = status,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        maxLines = maxLines,
+        interactionSource = interactionSource,
+    )
+}
+
+@Composable
+fun BpkTextField(
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,

@@ -20,16 +20,9 @@ package net.skyscanner.backpack.compose.select
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.select.internal.BpkSelectImpl
-
-sealed interface BpkSelectState {
-
-    object Default : BpkSelectState
-
-    object Disabled : BpkSelectState
-
-    data class Error(val message: String) : BpkSelectState
-}
 
 @Composable
 fun BpkSelect(
@@ -37,7 +30,7 @@ fun BpkSelect(
     placeHolder: String,
     selectedIndex: Int,
     modifier: Modifier = Modifier,
-    state: BpkSelectState = BpkSelectState.Default,
+    state: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     BpkSelectImpl(options, selectedIndex, placeHolder, modifier, state, onSelectionChange)

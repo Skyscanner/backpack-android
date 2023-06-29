@@ -32,23 +32,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.fieldset.BpkFieldSet
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.select.BpkSelectState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-
-private fun mapSelectState(state: BpkSelectState): BpkFieldStatus {
-    return when (state) {
-        is BpkSelectState.Disabled -> BpkFieldStatus.Disabled
-        is BpkSelectState.Error -> BpkFieldStatus.Error(state.message)
-        else -> BpkFieldStatus.Default
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,36 +48,33 @@ internal fun BpkSelectImpl(
     selectedIndex: Int,
     placeholder: String,
     modifier: Modifier = Modifier,
-    state: BpkSelectState = BpkSelectState.Default,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedOptionIndex by remember { mutableStateOf(selectedIndex) }
-    val initialText = if (selectedOptionIndex > -1 && options.size >= selectedOptionIndex) options[selectedOptionIndex] else ""
+    val initialText = if (selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
     var selectedText by remember { mutableStateOf(initialText) }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
     ) {
-        BpkFieldSet(status = mapSelectState(state)) {
-            BpkTextFieldImpl(
-                modifier = modifier.menuAnchor(),
-                value = selectedText,
-                onValueChange = {},
-                readOnly = true,
-                placeholder = placeholder,
-                status = mapSelectState(state),
-                trailingIcon = BpkIcon.ArrowDown,
-            )
-        }
+        BpkTextFieldImpl(
+            modifier = modifier.menuAnchor(),
+            value = selectedText,
+            onValueChange = {},
+            readOnly = true,
+            placeholder = placeholder,
+            status = status,
+            trailingIcon = BpkIcon.ArrowDown,
+        )
         ExposedDropdownMenu(
-            expanded = if (state != BpkSelectState.Disabled) expanded else false,
+            expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
             modifier = Modifier.background(BpkTheme.colors.surfaceDefault).fillMaxWidth(),
             onDismissRequest = { expanded = false },
         ) {
             options.forEachIndexed { index, option ->
-                val itemBackgroundColor = if (index == selectedOptionIndex) BpkTheme.colors.surfaceHighlight else BpkTheme.colors.surfaceDefault
+                val itemBackgroundColor = if (index == selectedIndex) BpkTheme.colors.surfaceHighlight else BpkTheme.colors.surfaceDefault
                 DropdownMenuItem(
                     modifier = Modifier
                         .height(BpkSpacing.Lg.times(2))
@@ -95,8 +83,7 @@ internal fun BpkSelectImpl(
                     onClick = {
                         selectedText = option
                         expanded = false
-                        if (index != selectedOptionIndex) {
-                            selectedOptionIndex = index
+                        if (index != selectedIndex) {
                             onSelectionChange?.let { it(index) }
                         }
                     },

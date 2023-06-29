@@ -25,8 +25,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.select.BpkSelect
-import net.skyscanner.backpack.compose.select.BpkSelectState
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.components.SelectComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -64,7 +64,7 @@ internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
         options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
         selectedIndex = -1,
         placeHolder = "Select",
-        state = BpkSelectState.Default,
+        state = BpkFieldStatus.Default,
     )
 }
 
@@ -75,7 +75,7 @@ internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
         options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
         selectedIndex = 0,
         placeHolder = "Select",
-        state = BpkSelectState.Disabled,
+        state = BpkFieldStatus.Disabled,
     )
 }
 
@@ -86,6 +86,6 @@ internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
         options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
         selectedIndex = 0,
         placeHolder = "Select",
-        state = BpkSelectState.Error("This option not supported yet."),
+        state = BpkFieldStatus.Error("This option not supported yet."),
     )
 }

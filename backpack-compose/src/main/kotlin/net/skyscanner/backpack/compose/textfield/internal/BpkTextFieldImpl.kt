@@ -109,7 +109,7 @@ internal fun BpkTextFieldImpl(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-private fun BpkTextFieldImpl(
+fun BpkTextFieldImpl(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,

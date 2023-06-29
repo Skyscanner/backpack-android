@@ -18,8 +18,12 @@
 
 package net.skyscanner.backpack.compose.select
 
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.SelectStory
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,5 +34,13 @@ class BpkSelectTest : BpkSnapshotTest() {
     @Test
     fun default() = snap {
         SelectStory()
+    }
+
+    @Test
+    fun dropdownlist() = snap(assertion = {
+        onNodeWithText("Select").performClick()
+        onNodeWithText("Faisalabad").assertIsDisplayed()
+    }) {
+        DefaultSelectSample()
     }
 }
