@@ -63,7 +63,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 google-material = "com.google.android.material:material:1.9.0"
 google-maps = "com.google.android.gms:play-services-maps:18.1.0"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
-google-guava = "com.google.guava:guava:32.0.1-jre"
+google-guava = "com.google.guava:guava:32.1.0-jre"
 
 square-picasso = "com.squareup.picasso:picasso:2.71828"
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoet" }
