@@ -28,6 +28,7 @@ BpkSelect(
     selectedIndex = -1,
     placeHolder = "Select",
     state = BpkSelectState.Default,
+    onSelectionChange = {},
 )
 ```
 or
@@ -42,6 +43,7 @@ BpkSelect(
     selectedIndex = 2,
     placeHolder = "Select",
     state = BpkFieldStatus.Disabled,
+    onSelectionChange = {},
 )
 ```
 or
@@ -56,6 +58,7 @@ BpkSelect(
     selectedIndex = 0,
     placeHolder = "Select",
     state = BpkFieldStatus.Error("Error text"),
+    onSelectionChange = {},
 )
 ```
 if you want to use select component and a custom container instead of dropdown list for options, then you can use another api without options.

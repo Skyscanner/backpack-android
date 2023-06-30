@@ -93,6 +93,7 @@ internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
         selectedIndex = -1,
         placeHolder = stringResource(id = R.string.input_placeholder),
         state = BpkFieldStatus.Default,
+        onSelectionChange = {},
     )
 }
 
@@ -104,6 +105,7 @@ internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
         selectedIndex = 0,
         placeHolder = stringResource(id = R.string.input_placeholder),
         state = BpkFieldStatus.Disabled,
+        onSelectionChange = {},
     )
 }
 
@@ -115,6 +117,7 @@ internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
         selectedIndex = 0,
         placeHolder = stringResource(id = R.string.input_placeholder),
         state = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
+        onSelectionChange = {},
     )
 }
 
