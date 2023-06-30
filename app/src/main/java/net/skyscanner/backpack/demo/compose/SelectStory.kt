@@ -61,26 +61,26 @@ fun SelectStory(modifier: Modifier = Modifier) {
 
 @Composable
 @SelectComponent
-@ComposeStory("TextBox")
-fun SelectTextBoxStory(modifier: Modifier = Modifier) {
+@ComposeStory("Select box only")
+fun SelectBoxOnlyStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         Row(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalArrangement = Arrangement.Start,
         ) {
-            DefaultSelectTextBoxSample()
+            DefaultSelectTextOnlySample()
         }
         Row(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalArrangement = Arrangement.Start,
         ) {
-            DisabledSelectTextBoxSample()
+            DisabledSelectTextOnlySample()
         }
         Row(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalArrangement = Arrangement.Start,
         ) {
-            ErrorSelectTextBoxSample()
+            ErrorSelectTextOnlySample()
         }
     }
 }
@@ -91,8 +91,8 @@ internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
         selectedIndex = -1,
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Default,
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Default,
         onSelectionChange = {},
     )
 }
@@ -103,8 +103,8 @@ internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
         selectedIndex = 0,
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Disabled,
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Disabled,
         onSelectionChange = {},
     )
 }
@@ -115,41 +115,41 @@ internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
         selectedIndex = 0,
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
         onSelectionChange = {},
     )
 }
 
 @Composable
-internal fun DefaultSelectTextBoxSample(modifier: Modifier = Modifier) {
+internal fun DefaultSelectTextOnlySample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         text = stringResource(R.string.city_london),
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Default,
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Default,
         onClick = {},
     )
 }
 
 @Composable
-internal fun DisabledSelectTextBoxSample(modifier: Modifier = Modifier) {
+internal fun DisabledSelectTextOnlySample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         text = stringResource(R.string.city_london),
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Disabled,
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Disabled,
         onClick = {},
     )
 }
 
 @Composable
-internal fun ErrorSelectTextBoxSample(modifier: Modifier = Modifier) {
+internal fun ErrorSelectTextOnlySample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         text = stringResource(R.string.city_london),
-        placeHolder = stringResource(id = R.string.input_placeholder),
-        state = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
+        placeholder = stringResource(id = R.string.input_placeholder),
+        status = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
         onClick = {},
     )
 }

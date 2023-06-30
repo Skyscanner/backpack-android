@@ -209,7 +209,7 @@ fun BpkTextFieldImpl(
                 tint = animateColorAsState(
                     when (status) {
                         is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                        else -> BpkTheme.colors.textSecondary
+                        else -> BpkTheme.colors.textPrimary
                     },
                 ).value,
             )

@@ -18,14 +18,17 @@
 
 package net.skyscanner.backpack.compose.select
 
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
-import net.skyscanner.backpack.demo.compose.DefaultSelectTextBoxSample
+import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.DisabledSelectSample
-import net.skyscanner.backpack.demo.compose.DisabledSelectTextBoxSample
+import net.skyscanner.backpack.demo.compose.DisabledSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.ErrorSelectSample
-import net.skyscanner.backpack.demo.compose.ErrorSelectTextBoxSample
+import net.skyscanner.backpack.demo.compose.ErrorSelectTextOnlySample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -48,17 +51,25 @@ class BpkSelectTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultTextBox() = snap {
-        DefaultSelectTextBoxSample()
+    fun defaultSelectTextOnly() = snap {
+        DefaultSelectTextOnlySample()
     }
 
     @Test
-    fun disabledTextBox() = snap {
-        DisabledSelectTextBoxSample()
+    fun disabledSelectTextOnly() = snap {
+        DisabledSelectTextOnlySample()
     }
 
     @Test
-    fun errorTextBox() = snap {
-        ErrorSelectTextBoxSample()
+    fun errorSelectTextOnly() = snap {
+        ErrorSelectTextOnlySample()
+    }
+
+    @Test
+    fun dropdownlist() = snap(assertion = {
+        onNodeWithText("Placeholder").performClick()
+        onNodeWithText("London").assertIsDisplayed()
+    }) {
+        DefaultSelectSample()
     }
 }

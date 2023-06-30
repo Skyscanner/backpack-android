@@ -127,7 +127,7 @@ private fun BpkFieldSetWithSelectExample(status: BpkFieldStatus = BpkFieldStatus
         BpkSelect(
             options = options(),
             selectedIndex = -1,
-            placeHolder = stringResource(id = R.string.input_placeholder),
+            placeholder = stringResource(id = R.string.input_placeholder),
         )
     }
 }

@@ -27,22 +27,22 @@ import net.skyscanner.backpack.compose.select.internal.BpkSelectImpl
 @Composable
 fun BpkSelect(
     options: List<String>,
-    placeHolder: String,
+    placeholder: String,
     selectedIndex: Int,
     modifier: Modifier = Modifier,
-    state: BpkFieldStatus = LocalFieldStatus.current,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
-    BpkSelectImpl(options, selectedIndex, placeHolder, modifier, state, onSelectionChange)
+    BpkSelectImpl(options, selectedIndex, placeholder, modifier, status, onSelectionChange)
 }
 
 @Composable
 fun BpkSelect(
-    placeHolder: String,
+    placeholder: String,
     text: String,
     modifier: Modifier = Modifier,
-    state: BpkFieldStatus = LocalFieldStatus.current,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     onClick: (() -> Unit)? = null,
 ) {
-    BpkSelectImpl(placeHolder, text, modifier, state, onClick)
+    BpkSelectImpl(placeholder, text, modifier, status, onClick)
 }

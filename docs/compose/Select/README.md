@@ -26,8 +26,8 @@ BpkSelect(
     modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
     options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item"),
     selectedIndex = -1,
-    placeHolder = "Select",
-    state = BpkSelectState.Default,
+    placeholder = "Select",
+    status = BpkSelectState.Default,
     onSelectionChange = {},
 )
 ```
@@ -41,8 +41,8 @@ BpkSelect(
     modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
     options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item"),
     selectedIndex = 2,
-    placeHolder = "Select",
-    state = BpkFieldStatus.Disabled,
+    placeholder = "Select",
+    status = BpkFieldStatus.Disabled,
     onSelectionChange = {},
 )
 ```
@@ -56,8 +56,8 @@ BpkSelect(
     modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
     options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item"),
     selectedIndex = 0,
-    placeHolder = "Select",
-    state = BpkFieldStatus.Error("Error text"),
+    placeholder = "Select",
+    status = BpkFieldStatus.Error("Error text"),
     onSelectionChange = {},
 )
 ```
@@ -70,8 +70,8 @@ import net.skyscanner.backpack.compose.select.BpkSelect
 BpkSelect(
     modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
     text = "Menu item",
-    placeHolder = "Select",
-    state = BpkFieldStatus.Default,
+    placeholder = "Select",
+    status = BpkFieldStatus.Default,
     onClick = {}
 )
 ```

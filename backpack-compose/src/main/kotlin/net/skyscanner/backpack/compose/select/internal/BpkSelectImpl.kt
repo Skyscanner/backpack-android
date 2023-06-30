@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
@@ -49,12 +50,11 @@ internal fun BpkSelectImpl(
     selectedIndex: Int,
     placeholder: String,
     modifier: Modifier = Modifier,
-    state: BpkFieldStatus = LocalFieldStatus.current,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val initialText = if (selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
-    var selectedText by remember { mutableStateOf(initialText) }
+    val selectText = if (selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -62,15 +62,15 @@ internal fun BpkSelectImpl(
     ) {
         BpkTextFieldImpl(
             modifier = modifier.menuAnchor(),
-            value = selectedText,
+            value = selectText,
             onValueChange = {},
             readOnly = true,
             placeholder = placeholder,
-            status = state,
+            status = status,
             trailingIcon = BpkIcon.ArrowDown,
         )
         ExposedDropdownMenu(
-            expanded = if (state != BpkFieldStatus.Disabled) expanded else false,
+            expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
             modifier = Modifier.background(BpkTheme.colors.surfaceDefault).fillMaxWidth(),
             onDismissRequest = { expanded = false },
         ) {
@@ -82,7 +82,6 @@ internal fun BpkSelectImpl(
                         .background(itemBackgroundColor),
                     text = { BpkText(text = option, color = BpkTheme.colors.textPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                     onClick = {
-                        selectedText = option
                         expanded = false
                         if (index != selectedIndex) {
                             onSelectionChange?.let { it(index) }
@@ -97,24 +96,22 @@ internal fun BpkSelectImpl(
 
 @Composable
 internal fun BpkSelectImpl(
-    placeHolder: String,
+    placeholder: String,
     text: String,
     modifier: Modifier = Modifier,
-    state: BpkFieldStatus = LocalFieldStatus.current,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     onClick: (() -> Unit)? = null,
 ) {
-    var selectText by remember { mutableStateOf(text) }
-
     BpkTextFieldImpl(
-        modifier = if (state == BpkFieldStatus.Disabled) modifier else modifier.clickable(bounded = true, role = null) {
+        modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickable(bounded = true, role = Role.Button) {
             onClick?.let {
                 it()
             } },
-        value = selectText,
+        value = text,
         onValueChange = {},
         readOnly = true,
-        placeholder = placeHolder,
-        status = state,
+        placeholder = placeholder,
+        status = status,
         trailingIcon = BpkIcon.ArrowDown,
     )
 }
