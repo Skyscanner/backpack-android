@@ -9,7 +9,6 @@
 | Day                                                                                                                                                              | Night                                                                                                                                                                                       |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/default.png" alt="Select component" width="375" />  | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/default_dm.png" alt="Select component - dark mode" width="375" />              |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/dropdownlist.png" alt="Select component dropdownlist" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/dropdownlist_dm.png" alt="Select component dropdownlist - dark mode" width="375" /> |
 
 ## Installation
 
@@ -20,6 +19,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Select:
 
 ```Kotlin
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.select.BpkSelect
 
 BpkSelect(
@@ -33,6 +33,7 @@ BpkSelect(
 or
 
 ```Kotlin
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.select.BpkSelect
 
 BpkSelect(
@@ -40,12 +41,13 @@ BpkSelect(
     options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item"),
     selectedIndex = 2,
     placeHolder = "Select",
-    state = BpkSelectState.Disabled,
+    state = BpkFieldStatus.Disabled,
 )
 ```
 or
 
 ```Kotlin
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.select.BpkSelect
 
 BpkSelect(
@@ -53,6 +55,20 @@ BpkSelect(
     options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item"),
     selectedIndex = 0,
     placeHolder = "Select",
-    state = BpkSelectState.Error("This option not supported yet."),
+    state = BpkFieldStatus.Error("Error text"),
+)
+```
+if you want to use select component and a custom container instead of dropdown list for options, then you can use another api without options.
+
+```Kotlin
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.select.BpkSelect
+
+BpkSelect(
+    modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
+    text = "Menu item",
+    placeHolder = "Select",
+    state = BpkFieldStatus.Default,
+    onClick = {}
 )
 ```

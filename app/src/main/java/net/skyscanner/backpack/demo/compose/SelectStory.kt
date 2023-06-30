@@ -25,9 +25,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.select.BpkSelect
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SelectComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
@@ -58,12 +60,38 @@ fun SelectStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@SelectComponent
+@ComposeStory("TextBox")
+fun SelectTextBoxStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        Row(
+            modifier = Modifier.padding(BpkSpacing.Base),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            DefaultSelectTextBoxSample()
+        }
+        Row(
+            modifier = Modifier.padding(BpkSpacing.Base),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            DisabledSelectTextBoxSample()
+        }
+        Row(
+            modifier = Modifier.padding(BpkSpacing.Base),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            ErrorSelectTextBoxSample()
+        }
+    }
+}
+
+@Composable
 internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
-        options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
+        options = options(),
         selectedIndex = -1,
-        placeHolder = "Select",
+        placeHolder = stringResource(id = R.string.input_placeholder),
         state = BpkFieldStatus.Default,
     )
 }
@@ -72,9 +100,9 @@ internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
 internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
-        options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
+        options = options(),
         selectedIndex = 0,
-        placeHolder = "Select",
+        placeHolder = stringResource(id = R.string.input_placeholder),
         state = BpkFieldStatus.Disabled,
     )
 }
@@ -83,9 +111,61 @@ internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
 internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
-        options = arrayListOf("Karachi", "Lahore", "Faisalabad", "Islamabad", "Quetta", "Peshawar", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item", "Menu item"),
+        options = options(),
         selectedIndex = 0,
-        placeHolder = "Select",
-        state = BpkFieldStatus.Error("This option not supported yet."),
+        placeHolder = stringResource(id = R.string.input_placeholder),
+        state = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
+    )
+}
+
+@Composable
+internal fun DefaultSelectTextBoxSample(modifier: Modifier = Modifier) {
+    BpkSelect(
+        modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
+        text = stringResource(R.string.city_london),
+        placeHolder = stringResource(id = R.string.input_placeholder),
+        state = BpkFieldStatus.Default,
+        onClick = {},
+    )
+}
+
+@Composable
+internal fun DisabledSelectTextBoxSample(modifier: Modifier = Modifier) {
+    BpkSelect(
+        modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
+        text = stringResource(R.string.city_london),
+        placeHolder = stringResource(id = R.string.input_placeholder),
+        state = BpkFieldStatus.Disabled,
+        onClick = {},
+    )
+}
+
+@Composable
+internal fun ErrorSelectTextBoxSample(modifier: Modifier = Modifier) {
+    BpkSelect(
+        modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
+        text = stringResource(R.string.city_london),
+        placeHolder = stringResource(id = R.string.input_placeholder),
+        state = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
+        onClick = {},
+    )
+}
+
+@Composable
+internal fun options(): List<String> {
+    return arrayListOf(
+        stringResource(R.string.city_london),
+        stringResource(R.string.city_paris),
+        stringResource(R.string.city_algiers),
+        stringResource(R.string.city_madrid),
+        stringResource(R.string.city_new_york),
+        stringResource(R.string.city_shenzhen),
+        stringResource(R.string.city_tokyo),
+        stringResource(R.string.city_rome),
+        stringResource(R.string.city_cairo),
+        stringResource(R.string.city_berlin),
+        stringResource(R.string.city_dubai),
+        stringResource(R.string.city_rio),
+        stringResource(R.string.city_long_name),
     )
 }

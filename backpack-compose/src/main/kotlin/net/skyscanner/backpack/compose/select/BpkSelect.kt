@@ -35,3 +35,14 @@ fun BpkSelect(
 ) {
     BpkSelectImpl(options, selectedIndex, placeHolder, modifier, state, onSelectionChange)
 }
+
+@Composable
+fun BpkSelect(
+    placeHolder: String,
+    text: String,
+    modifier: Modifier = Modifier,
+    state: BpkFieldStatus = LocalFieldStatus.current,
+    onClick: (() -> Unit)? = null,
+) {
+    BpkSelectImpl(placeHolder, text, modifier, state, onClick)
+}

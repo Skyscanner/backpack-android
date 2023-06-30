@@ -40,6 +40,7 @@ import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.clickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,7 @@ internal fun BpkSelectImpl(
     selectedIndex: Int,
     placeholder: String,
     modifier: Modifier = Modifier,
-    status: BpkFieldStatus = LocalFieldStatus.current,
+    state: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -65,11 +66,11 @@ internal fun BpkSelectImpl(
             onValueChange = {},
             readOnly = true,
             placeholder = placeholder,
-            status = status,
+            status = state,
             trailingIcon = BpkIcon.ArrowDown,
         )
         ExposedDropdownMenu(
-            expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
+            expanded = if (state != BpkFieldStatus.Disabled) expanded else false,
             modifier = Modifier.background(BpkTheme.colors.surfaceDefault).fillMaxWidth(),
             onDismissRequest = { expanded = false },
         ) {
@@ -92,4 +93,28 @@ internal fun BpkSelectImpl(
             }
         }
     }
+}
+
+@Composable
+internal fun BpkSelectImpl(
+    placeHolder: String,
+    text: String,
+    modifier: Modifier = Modifier,
+    state: BpkFieldStatus = LocalFieldStatus.current,
+    onClick: (() -> Unit)? = null,
+) {
+    var selectText by remember { mutableStateOf(text) }
+
+    BpkTextFieldImpl(
+        modifier = if (state == BpkFieldStatus.Disabled) modifier else modifier.clickable(bounded = true, role = null) {
+            onClick?.let {
+                it()
+            } },
+        value = selectText,
+        onValueChange = {},
+        readOnly = true,
+        placeholder = placeHolder,
+        status = state,
+        trailingIcon = BpkIcon.ArrowDown,
+    )
 }
