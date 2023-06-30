@@ -86,11 +86,11 @@ fun SelectBoxOnlyStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun DefaultSelectSample(modifier: Modifier = Modifier) {
+internal fun DefaultSelectSample(modifier: Modifier = Modifier, selectedIndex: Int = -1) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
-        selectedIndex = -1,
+        selectedIndex = selectedIndex,
         placeholder = stringResource(id = R.string.input_placeholder),
         status = BpkFieldStatus.Default,
         onSelectionChange = {},

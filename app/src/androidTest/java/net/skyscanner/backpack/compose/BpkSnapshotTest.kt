@@ -63,6 +63,30 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
         assertion: ComposeTestRule.() -> Unit = {},
         content: @Composable () -> Unit,
     ) {
+        snap(
+            background = background,
+            width = width,
+            height = height,
+            padding = padding,
+            providers = providers,
+            comparison = { name ->
+                assertion()
+
+                compareScreenshot(composeTestRule, name)
+            },
+            content = content,
+        )
+    }
+
+    protected fun snap(
+        background: @Composable () -> Color = { Color.Unspecified },
+        width: Dp = Dp.Unspecified,
+        height: Dp = Dp.Unspecified,
+        padding: Dp = BpkSpacing.Md,
+        vararg providers: ProvidedValue<*>,
+        comparison: ComposeTestRule.(String?) -> Unit,
+        content: @Composable () -> Unit,
+    ) {
         val scenario = launchActivity<AppCompatActivity>()
         scenario.onActivity { activity ->
             activity.setContent {
@@ -86,9 +110,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
                 }
             }
         }
-        composeTestRule.assertion()
-
-        compareScreenshot(composeTestRule, screenshotName(tags))
+        comparison(composeTestRule, screenshotName(tags))
 
         scenario.close()
     }

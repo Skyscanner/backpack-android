@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.select
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -66,10 +67,12 @@ class BpkSelectTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun dropdownlist() = snap(assertion = {
+    fun dropdownlist() = snap(comparison = { name ->
         onNodeWithText("Placeholder").performClick()
-        onNodeWithText("London").assertIsDisplayed()
+        onNode(isPopup()).assertIsDisplayed()
+
+        compareScreenshot(onNode(isPopup()), name)
     }) {
-        DefaultSelectSample()
+        DefaultSelectSample(selectedIndex = 0)
     }
 }
