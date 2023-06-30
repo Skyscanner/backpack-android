@@ -29,13 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.fieldset.BpkFieldSet
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.select.BpkSelect
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FieldSetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @FieldSetComponent
@@ -52,6 +53,7 @@ fun FieldSetStory(
         FieldSetWithDescriptionExample(status)
         BpkFieldSetWithoutDescriptionExample(status)
         BpkFieldSetNoLabelExample(status)
+        BpkFieldSetWithSelectExample(status)
     }
 
 @Composable
@@ -113,6 +115,19 @@ private fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.De
             value = value,
             onValueChange = { value = it },
             placeholder = stringResource(R.string.generic_no_label),
+        )
+    }
+}
+
+@Composable
+private fun BpkFieldSetWithSelectExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+    BpkFieldSet(
+        status = status,
+    ) {
+        BpkSelect(
+            options = options(),
+            selectedIndex = -1,
+            placeholder = stringResource(id = R.string.input_placeholder),
         )
     }
 }
