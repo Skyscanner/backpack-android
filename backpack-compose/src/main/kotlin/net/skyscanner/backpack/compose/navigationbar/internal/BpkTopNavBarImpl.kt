@@ -58,11 +58,11 @@ import net.skyscanner.backpack.compose.utils.clickable
 internal fun BpkTopNavBarImpl(
     fraction: Float,
     title: String,
+    insets: WindowInsets?,
+    navIcon: IconAction?,
+    actions: List<Action>,
+    style: NavBarStyle,
     modifier: Modifier = Modifier,
-    insets: WindowInsets? = null,
-    navIcon: IconAction? = null,
-    actions: List<Action> = emptyList(),
-    style: NavBarStyle = NavBarStyle.Default,
 ) {
     val backgroundColor = if (fraction == 0f) {
         BpkTheme.colors.surfaceDefault

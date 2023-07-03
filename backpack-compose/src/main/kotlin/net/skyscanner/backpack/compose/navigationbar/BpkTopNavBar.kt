@@ -41,8 +41,16 @@ internal sealed interface Action {
     val onClick: () -> Unit
 }
 
-data class IconAction(val icon: BpkIcon, val contentDescription: String, override val onClick: () -> Unit) : Action
-data class TextAction(val text: String, override val onClick: () -> Unit) : Action
+data class IconAction(
+    val icon: BpkIcon,
+    val contentDescription: String,
+    override val onClick: () -> Unit,
+) : Action
+
+data class TextAction(
+    val text: String,
+    override val onClick: () -> Unit,
+) : Action
 
 @Composable
 fun BpkTopNavBar(
@@ -51,6 +59,7 @@ fun BpkTopNavBar(
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         fraction = 0f,
@@ -59,6 +68,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
+        style = style,
     )
 }
 
@@ -69,6 +79,7 @@ fun BpkTopNavBar(
     action: TextAction,
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         fraction = 0f,
@@ -77,6 +88,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
+        style = style,
     )
 }
 
