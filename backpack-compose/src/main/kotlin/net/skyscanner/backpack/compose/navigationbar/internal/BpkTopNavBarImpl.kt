@@ -64,12 +64,13 @@ internal fun BpkTopNavBarImpl(
     style: NavBarStyle,
     modifier: Modifier = Modifier,
 ) {
-    val backgroundColor = if (fraction == 0f) {
-        BpkTheme.colors.surfaceDefault
-    } else if (style == NavBarStyle.OnImage) {
-        Color.Transparent
-    } else {
-        BpkTheme.colors.canvas
+
+    val backgroundColor = when (fraction) {
+        0f -> BpkTheme.colors.surfaceDefault
+        else -> when (style) {
+            NavBarStyle.OnImage -> Color.Transparent
+            NavBarStyle.Default -> BpkTheme.colors.canvas
+        }
     }
 
     val contentColor = if (fraction > 0f && style == NavBarStyle.OnImage) {
