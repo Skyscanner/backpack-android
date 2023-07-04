@@ -62,7 +62,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = 0f,
+        scrollBehavior = rememberFixedTopAppBarState(),
         title = title,
         modifier = modifier,
         insets = insets,
@@ -82,7 +82,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = 0f,
+        scrollBehavior = rememberFixedTopAppBarState(),
         title = title,
         modifier = modifier,
         insets = insets,
@@ -103,7 +103,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = state.asInternalState().fraction,
+        scrollBehavior = state,
         title = title,
         modifier = modifier,
         insets = insets,
@@ -124,7 +124,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = state.asInternalState().fraction,
+        scrollBehavior = state,
         title = title,
         modifier = modifier,
         insets = insets,

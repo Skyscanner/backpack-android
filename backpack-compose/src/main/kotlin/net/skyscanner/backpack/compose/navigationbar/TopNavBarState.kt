@@ -61,7 +61,7 @@ fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expa
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun rememberPinnedTopAppBarState(): TopNavBarState {
+internal fun rememberFixedTopAppBarState(): TopNavBarState {
     val behaviour = TopAppBarDefaults.pinnedScrollBehavior(
         canScroll = { false },
         state = androidx.compose.material3.rememberTopAppBarState(
