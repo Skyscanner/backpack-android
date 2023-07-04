@@ -18,16 +18,14 @@
 
 package net.skyscanner.backpack.compose.navigationbar
 
-import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalDensity
-import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarStateImpl
-import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarSizes
 
 enum class TopNavBarStatus {
     Expanded,
@@ -41,25 +39,46 @@ fun Modifier.nestedScroll(state: TopNavBarState): Modifier =
     nestedScroll(state.asInternalState().nestedScrollConnection)
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
-    val offsetRange = with(LocalDensity.current) {
-        (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx()
-    }
-    val flingBehavior = ScrollableDefaults.flingBehavior()
-    return rememberSaveable(
-        offsetRange, flingBehavior,
-        saver = TopNavBarStateImpl.saver(offsetRange, flingBehavior),
-        init = { TopNavBarStateImpl(initialStatus, offsetRange = offsetRange, flingBehavior = flingBehavior) },
+    val behaviour = TopAppBarDefaults.enterAlwaysScrollBehavior(
+        state = when (initialStatus) {
+            TopNavBarStatus.Expanded -> androidx.compose.material3.rememberTopAppBarState(
+                initialHeightOffset = 0f,
+                initialContentOffset = 0f,
+            )
+
+            TopNavBarStatus.Collapsed -> androidx.compose.material3.rememberTopAppBarState(
+                initialHeightOffset = -Float.MAX_VALUE,
+                initialContentOffset = -Float.MAX_VALUE,
+            )
+        },
     )
+    return remember(behaviour) {
+        TopNavBarInternalState(behaviour)
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun rememberPinnedTopAppBarState(): TopNavBarState {
+    val behaviour = TopAppBarDefaults.pinnedScrollBehavior(
+        canScroll = { false },
+        state = androidx.compose.material3.rememberTopAppBarState(
+            initialHeightOffset = -Float.MAX_VALUE,
+            initialContentOffset = -Float.MAX_VALUE,
+        ),
+    )
+    return remember(behaviour) {
+        TopNavBarInternalState(behaviour)
+    }
 }
 
 @Stable
-internal interface TopNavBarInternalState : TopNavBarState {
-
-    val fraction: Float
-
-    val nestedScrollConnection: NestedScrollConnection
-}
+@OptIn(ExperimentalMaterial3Api::class)
+internal class TopNavBarInternalState(
+    private val scrollingBehavior: TopAppBarScrollBehavior,
+) : TopNavBarState, TopAppBarScrollBehavior by scrollingBehavior
 
 internal fun TopNavBarState.asInternalState(): TopNavBarInternalState =
     when (this) {
