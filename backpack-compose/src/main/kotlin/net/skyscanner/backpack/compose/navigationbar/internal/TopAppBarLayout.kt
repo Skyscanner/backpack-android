@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.navigationbar.internal
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.DecayAnimationSpec
@@ -44,7 +43,6 @@ import androidx.compose.material3.TopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -101,7 +99,6 @@ internal fun TwoRowsTopAppBar(
     // This will potentially animate or interpolate a transition between the container color and the
     // container's scrolled color according to the app bar's scroll state.
     val colorTransitionFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
-    val appBarContainerColor by animateColorAsState(targetValue = backgroundColor)
 
     // Wrap the given actions in a Row.
     val actionsRow = @Composable {
@@ -140,7 +137,7 @@ internal fun TwoRowsTopAppBar(
 
     Surface(
         modifier = modifier.then(appBarDragModifier),
-        color = appBarContainerColor,
+        color = backgroundColor,
         shadowElevation = elevation,
     ) {
         Column {
