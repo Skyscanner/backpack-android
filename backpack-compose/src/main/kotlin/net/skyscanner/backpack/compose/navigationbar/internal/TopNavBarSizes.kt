@@ -27,7 +27,7 @@ internal object TopNavBarSizes {
     val CollapsedHeight = 56.dp
     val ExpandedTitlePaddingEnd = BpkSpacing.Base
     val IconActionSize = 40.dp
-    val TopAppBarHorizontalPadding = BpkSpacing.Sm
+    val TopAppBarHorizontalPadding = BpkSpacing.Md
     val TopAppBarTitleInset = BpkSpacing.Base - TopAppBarHorizontalPadding
 }
 
