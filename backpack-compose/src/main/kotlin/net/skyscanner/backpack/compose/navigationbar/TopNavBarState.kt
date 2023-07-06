@@ -24,7 +24,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 
@@ -68,9 +67,7 @@ internal fun rememberFixedTopAppBarState(): TopNavBarState {
             initialContentOffset = -Float.MAX_VALUE,
         ),
     )
-    return remember(behaviour) {
-        TopNavBarInternalState(behaviour)
-    }
+    return TopNavBarInternalState(behaviour)
 }
 
 @Stable
