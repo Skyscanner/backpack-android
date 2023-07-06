@@ -70,10 +70,12 @@ internal fun BpkTopNavBarImpl(
         }
     }
 
-    val contentColor = if (fraction > 0f && style == NavBarStyle.OnImage) {
-        BpkTheme.colors.textOnDark
-    } else {
-        BpkTheme.colors.textPrimary
+    val contentColor = when (fraction) {
+        0f -> BpkTheme.colors.textPrimary
+        else -> when (style) {
+            NavBarStyle.OnImage -> BpkTheme.colors.textOnDark
+            NavBarStyle.Default -> BpkTheme.colors.textPrimary
+        }
     }
 
     TwoRowsTopAppBar(
