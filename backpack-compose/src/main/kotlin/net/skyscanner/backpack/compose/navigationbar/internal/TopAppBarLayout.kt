@@ -65,7 +65,7 @@ import kotlin.math.roundToInt
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun TwoRowsTopAppBar(
-    scrollBehavior: TopAppBarScrollBehavior?,
+    scrollBehavior: TopAppBarScrollBehavior,
     windowInsets: WindowInsets,
     backgroundColor: Color,
     contentColor: Color,
@@ -82,14 +82,14 @@ internal fun TwoRowsTopAppBar(
     LocalDensity.current.run {
         pinnedHeightPx = TopNavBarSizes.CollapsedHeight.toPx()
         maxHeightPx = TopNavBarSizes.ExpandedHeight.toPx()
-        titleBottomPaddingPx = TopNavBarSizes.ExpandedTitlePaddingEnd.roundToPx()
+        titleBottomPaddingPx = TopNavBarSizes.ExpandedTitlePaddingBottom.roundToPx()
     }
 
     // Sets the app bar's height offset limit to hide just the bottom title area and keep top title
     // visible when collapsed.
     SideEffect {
-        if (scrollBehavior?.state?.heightOffsetLimit != pinnedHeightPx - maxHeightPx) {
-            scrollBehavior?.state?.heightOffsetLimit = pinnedHeightPx - maxHeightPx
+        if (scrollBehavior.state.heightOffsetLimit != pinnedHeightPx - maxHeightPx) {
+            scrollBehavior.state.heightOffsetLimit = pinnedHeightPx - maxHeightPx
         }
     }
 
@@ -98,7 +98,7 @@ internal fun TwoRowsTopAppBar(
     // collapse.
     // This will potentially animate or interpolate a transition between the container color and the
     // container's scrolled color according to the app bar's scroll state.
-    val colorTransitionFraction = scrollBehavior?.state?.collapsedFraction ?: 0f
+    val colorTransitionFraction = scrollBehavior.state.collapsedFraction
 
     // Wrap the given actions in a Row.
     val actionsRow = @Composable {
@@ -116,7 +116,7 @@ internal fun TwoRowsTopAppBar(
     val hideBottomRowSemantics = !hideTopRowSemantics
 
     // Set up support for resizing the top app bar when vertically dragging the bar itself.
-    val appBarDragModifier = if (scrollBehavior != null && !scrollBehavior.isPinned) {
+    val appBarDragModifier = if (!scrollBehavior.isPinned) {
         Modifier.draggable(
             orientation = Orientation.Vertical,
             state = rememberDraggableState { delta ->
@@ -163,8 +163,7 @@ internal fun TwoRowsTopAppBar(
                         // padding will always be applied by the layout above
                         .windowInsetsPadding(windowInsets.only(WindowInsetsSides.Horizontal))
                         .clipToBounds(),
-                    heightPx = maxHeightPx - pinnedHeightPx + (scrollBehavior?.state?.heightOffset
-                        ?: 0f),
+                    heightPx = maxHeightPx - pinnedHeightPx + scrollBehavior.state.heightOffset,
                     title = title,
                     titleAlpha = bottomTitleAlpha,
                     titleVerticalArrangement = Arrangement.Bottom,

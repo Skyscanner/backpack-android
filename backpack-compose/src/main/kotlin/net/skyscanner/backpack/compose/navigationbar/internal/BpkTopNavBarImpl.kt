@@ -81,7 +81,7 @@ internal fun BpkTopNavBarImpl(
     TwoRowsTopAppBar(
         backgroundColor = backgroundColor,
         contentColor = contentColor,
-        elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
+        elevation = animateDpAsState(targetValue = if (fraction == 0f || internalState.isPinned) BpkDimension.Elevation.Sm else 0.dp).value,
         title = {
             BpkText(
                 text = title,

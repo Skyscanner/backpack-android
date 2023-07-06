@@ -25,7 +25,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 internal object TopNavBarSizes {
     val ExpandedHeight = 112.dp
     val CollapsedHeight = 56.dp
-    val ExpandedTitlePaddingEnd = BpkSpacing.Base
+    val ExpandedTitlePaddingBottom = 20.dp // check this when updating to compose version that disables font padding
     val IconActionSize = 40.dp
     val TopAppBarHorizontalPadding = BpkSpacing.Md
     val TopAppBarTitleInset = BpkSpacing.Base - TopAppBarHorizontalPadding
