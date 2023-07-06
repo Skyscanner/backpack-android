@@ -62,26 +62,31 @@ internal fun BpkTopNavBarImpl(
     val internalState = scrollBehavior.asInternalState()
     val fraction = 1f - internalState.state.collapsedFraction
 
-    val backgroundColor = when (fraction) {
-        0f -> BpkTheme.colors.surfaceDefault
+    val backgroundColor = when {
+        fraction <= 0f -> BpkTheme.colors.surfaceDefault
         else -> when (style) {
             NavBarStyle.OnImage -> Color.Transparent
             NavBarStyle.Default -> BpkTheme.colors.canvas
         }
     }
 
-    val contentColor = when (fraction) {
-        0f -> BpkTheme.colors.textPrimary
+    val contentColor = when {
+        fraction <= 0f -> BpkTheme.colors.textPrimary
         else -> when (style) {
             NavBarStyle.OnImage -> BpkTheme.colors.textOnDark
             NavBarStyle.Default -> BpkTheme.colors.textPrimary
         }
     }
 
+    val elevation = when {
+        fraction <= 0f -> BpkDimension.Elevation.Sm
+        else -> 0.dp
+    }
+
     TwoRowsTopAppBar(
         backgroundColor = backgroundColor,
         contentColor = contentColor,
-        elevation = animateDpAsState(targetValue = if (fraction == 0f || internalState.isPinned) BpkDimension.Elevation.Sm else 0.dp).value,
+        elevation = animateDpAsState(targetValue = elevation, label = "NavBar elevation").value,
         title = {
             BpkText(
                 text = title,
