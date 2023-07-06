@@ -59,7 +59,6 @@ fun BpkTopNavBar(
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
-    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         scrollBehavior = rememberFixedTopAppBarState(),
@@ -68,7 +67,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
-        style = style,
+        style = NavBarStyle.Default,
     )
 }
 
@@ -79,7 +78,6 @@ fun BpkTopNavBar(
     action: TextAction,
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
-    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         scrollBehavior = rememberFixedTopAppBarState(),
@@ -88,7 +86,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
-        style = style,
+        style = NavBarStyle.Default,
     )
 }
 
