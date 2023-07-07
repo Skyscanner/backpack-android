@@ -42,7 +42,7 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
 
     init {
         setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading2Appearance))
-        setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading5Appearance))
+        setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading4Appearance))
 
         expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal)
         expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal)

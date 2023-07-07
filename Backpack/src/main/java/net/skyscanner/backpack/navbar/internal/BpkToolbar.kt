@@ -42,6 +42,8 @@ internal class BpkToolbar @JvmOverloads constructor(
 
     init {
         background = null
+        setTitleTextAppearance(context, R.style.bpkTextHeading4)
+        setTitleMargin(0, 0, 0, 0)
     }
 
     private var titleTextColor: Int = 0
