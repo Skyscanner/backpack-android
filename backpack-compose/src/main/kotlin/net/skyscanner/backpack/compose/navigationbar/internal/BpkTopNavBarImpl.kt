@@ -18,28 +18,20 @@
 
 package net.skyscanner.backpack.compose.navigationbar.internal
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.Surface
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.lerp
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.navigationbar.Action
@@ -47,6 +39,8 @@ import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarState
+import net.skyscanner.backpack.compose.navigationbar.asInternalState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
@@ -55,70 +49,77 @@ import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun BpkTopNavBarImpl(
-    fraction: Float,
+    scrollBehavior: TopNavBarState,
     title: String,
+    insets: WindowInsets?,
+    navIcon: IconAction?,
+    actions: List<Action>,
+    style: NavBarStyle,
     modifier: Modifier = Modifier,
-    insets: WindowInsets? = null,
-    navIcon: IconAction? = null,
-    actions: List<Action> = emptyList(),
-    style: NavBarStyle = NavBarStyle.Default,
 ) {
-    val backgroundColor = if (fraction == 0f) {
-        BpkTheme.colors.surfaceDefault
-    } else if (style == NavBarStyle.OnImage) {
-        Color.Transparent
-    } else {
-        BpkTheme.colors.canvas
-    }
+    val internalState = scrollBehavior.asInternalState()
+    val fraction = 1f - internalState.state.collapsedFraction
 
-    val contentColor = if (fraction > 0f && style == NavBarStyle.OnImage) {
-        BpkTheme.colors.textOnDark
-    } else {
-        BpkTheme.colors.textPrimary
-    }
-
-    Surface(
-        color = animateColorAsState(targetValue = backgroundColor).value,
-        contentColor = contentColor,
-        elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
-        shape = RectangleShape,
-        modifier = modifier.zIndex(1f),
-    ) {
-
-        val titleStyle = lerp(
-            start = BpkTheme.typography.heading4,
-            stop = BpkTheme.typography.heading2,
-            fraction = fraction,
-        )
-
-        CompositionLocalProvider(
-            LocalContentAlpha provides 1f,
-            LocalTextStyle provides titleStyle,
-        ) {
-
-            TopAppBarLayout(
-                fraction = fraction,
-                modifier = if (insets != null) Modifier.windowInsetsPadding(insets) else Modifier,
-                navIcon = {
-                    if (navIcon != null) {
-                        IconAction(action = navIcon)
-                    }
-                },
-                title = {
-                    BpkText(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                },
-                actions = {
-                    actions.forEach { action ->
-                        when (action) {
-                            is IconAction -> IconAction(action)
-                            is TextAction -> TextAction(action)
-                        }
-                    }
-                },
-            )
+    val backgroundColor = when {
+        fraction <= 0f -> BpkTheme.colors.surfaceDefault
+        else -> when (style) {
+            NavBarStyle.OnImage -> Color.Transparent
+            NavBarStyle.Default -> BpkTheme.colors.canvas
         }
     }
+
+    val contentColor = when {
+        fraction <= 0f -> BpkTheme.colors.textPrimary
+        else -> when (style) {
+            NavBarStyle.OnImage -> BpkTheme.colors.textOnDark
+            NavBarStyle.Default -> BpkTheme.colors.textPrimary
+        }
+    }
+
+    val elevation = when {
+        fraction <= 0f -> BpkDimension.Elevation.Sm
+        else -> 0.dp
+    }
+
+    TwoRowsTopAppBar(
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
+        elevation = animateDpAsState(targetValue = elevation, label = "NavBar elevation").value,
+        title = {
+            BpkText(
+                text = title,
+                maxLines = 1,
+                style = BpkTheme.typography.heading2,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
+        smallTitle = {
+            BpkText(
+                text = title,
+                maxLines = 1,
+                style = BpkTheme.typography.heading4,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
+        modifier = modifier,
+        navigationIcon = {
+            if (navIcon != null) {
+                IconAction(action = navIcon)
+            }
+        },
+        actions = {
+            actions.forEach { action ->
+                when (action) {
+                    is IconAction -> IconAction(action)
+                    is TextAction -> TextAction(action)
+                }
+            }
+        },
+        scrollBehavior = internalState,
+        windowInsets = insets ?: WindowInsets(0),
+    )
 }
 
 @Composable

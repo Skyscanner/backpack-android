@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
@@ -121,29 +120,27 @@ fun TransparentNavBarStory(
         Box(modifier = Modifier.padding(vertical = BpkSpacing.Base)) {
             Image(
                 painter = painterResource(id = R.drawable.swimming),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.matchParentSize(),
                 contentDescription = "",
                 contentScale = ContentScale.FillWidth,
             )
-            Column(modifier = Modifier.align(Alignment.BottomEnd)) {
-                BpkTopNavBar(
-                    state = state,
-                    title = stringResource(R.string.navigation_bar_title),
-                    insets = insets,
-                    navIcon = when {
-                        showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
-                        else -> NavIcon.None
-                    },
-                    actions = if (showActions) listOf(
-                        IconAction(
-                            icon = BpkIcon.Accessibility,
-                            contentDescription = stringResource(R.string.navigation_accessibility),
-                        ) {},
-                        IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
-                    ) else emptyList(),
-                    style = style,
-                )
-            }
+            BpkTopNavBar(
+                state = state,
+                title = stringResource(R.string.navigation_bar_title),
+                insets = insets,
+                navIcon = when {
+                    showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
+                    else -> NavIcon.None
+                },
+                actions = if (showActions) listOf(
+                    IconAction(
+                        icon = BpkIcon.Accessibility,
+                        contentDescription = stringResource(R.string.navigation_accessibility),
+                    ) {},
+                    IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+                ) else emptyList(),
+                style = style,
+            )
         }
         NavBarSampleBody(showList)
     }

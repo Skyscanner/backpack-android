@@ -41,8 +41,16 @@ internal sealed interface Action {
     val onClick: () -> Unit
 }
 
-data class IconAction(val icon: BpkIcon, val contentDescription: String, override val onClick: () -> Unit) : Action
-data class TextAction(val text: String, override val onClick: () -> Unit) : Action
+data class IconAction(
+    val icon: BpkIcon,
+    val contentDescription: String,
+    override val onClick: () -> Unit,
+) : Action
+
+data class TextAction(
+    val text: String,
+    override val onClick: () -> Unit,
+) : Action
 
 @Composable
 fun BpkTopNavBar(
@@ -53,12 +61,13 @@ fun BpkTopNavBar(
     actions: List<IconAction> = emptyList(),
 ) {
     BpkTopNavBarImpl(
-        fraction = 0f,
+        scrollBehavior = rememberFixedTopAppBarState(),
         title = title,
         modifier = modifier,
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
+        style = NavBarStyle.Default,
     )
 }
 
@@ -71,12 +80,13 @@ fun BpkTopNavBar(
     insets: WindowInsets? = WindowInsets.statusBars,
 ) {
     BpkTopNavBarImpl(
-        fraction = 0f,
+        scrollBehavior = rememberFixedTopAppBarState(),
         title = title,
         modifier = modifier,
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
+        style = NavBarStyle.Default,
     )
 }
 
@@ -91,7 +101,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = state.asInternalState().fraction,
+        scrollBehavior = state,
         title = title,
         modifier = modifier,
         insets = insets,
@@ -112,7 +122,7 @@ fun BpkTopNavBar(
     style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
-        fraction = state.asInternalState().fraction,
+        scrollBehavior = state,
         title = title,
         modifier = modifier,
         insets = insets,
