@@ -52,10 +52,13 @@ class BpkNavBar @JvmOverloads constructor(
 ) {
 
     private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
+        it.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
+        it.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextPrimary))
         addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
 
     private val toolbar: Toolbar = BpkToolbar(context).also {
+        it.setTitleTextColor(context.getColor(R.color.bpkTextPrimary))
         val toolbarHeight = resolveThemeDimen(context, android.R.attr.actionBarSize, R.dimen.bpk_nav_bar_toolbar_height)
         val params = CollapsingToolbarLayout.LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight).apply {
             collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
@@ -65,19 +68,12 @@ class BpkNavBar @JvmOverloads constructor(
     }
 
     @ColorInt
+    @Deprecated("This customisation is no longer supported")
     var expandedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
-        set(value) {
-            field = value
-            collapsingLayout.setExpandedTitleColor(value)
-        }
 
     @ColorInt
+    @Deprecated("This customisation is no longer supported")
     var collapsedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
-        set(value) {
-            field = value
-            toolbar.setTitleTextColor(value)
-            collapsingLayout.setCollapsedTitleTextColor(value)
-        }
 
     var title: CharSequence?
         get() = toolbar.title
@@ -92,10 +88,7 @@ class BpkNavBar @JvmOverloads constructor(
                 field = value
                 toolbar.navigationIcon = value
                 collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(
-                    when (field) {
-                        null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
-                        else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
-                    },
+                    R.dimen.bpk_nav_bar_expanded_spacing_horizontal,
                 )
             }
         }
@@ -131,8 +124,6 @@ class BpkNavBar @JvmOverloads constructor(
         }
 
     init {
-        var expandedTitleColor = expandedTitleColor
-        var collapsedTextColor = collapsedTitleColor
         var title: CharSequence?
         var navIcon: Drawable?
         var menu = 0
@@ -142,15 +133,11 @@ class BpkNavBar @JvmOverloads constructor(
             R.styleable.BpkNavBar,
             defStyleAttr, 0,
         ).use {
-            expandedTitleColor = it.getColor(R.styleable.BpkNavBar_navBarExpandedTextColor, expandedTitleColor)
-            collapsedTextColor = it.getColor(R.styleable.BpkNavBar_navBarCollapsedTextColor, collapsedTextColor)
             title = it.getString(R.styleable.BpkNavBar_navBarTitle)
             navIcon = it.getDrawable(R.styleable.BpkNavBar_navBarIcon)
             menu = it.getResourceId(R.styleable.BpkNavBar_navBarMenu, menu)
         }
 
-        this.expandedTitleColor = expandedTitleColor
-        this.collapsedTitleColor = collapsedTextColor
         this.background = ColorDrawable(context.getColor(R.color.bpkCanvas))
         this.title = title
         this.icon = navIcon
