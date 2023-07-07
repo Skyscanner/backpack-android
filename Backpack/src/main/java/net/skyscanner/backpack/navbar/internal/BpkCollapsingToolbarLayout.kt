@@ -23,13 +23,22 @@ import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.resolveThemeId
 
 internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : CollapsingToolbarLayout(context, attrs, defStyleAttr) {
+) : CollapsingToolbarLayout(
+    createContextThemeWrapper(
+        androidx.appcompat.view.ContextThemeWrapper(context, R.style.Widget_Material3_CollapsingToolbar_Medium),
+        attrs,
+        0,
+    ),
+    attrs,
+    defStyleAttr,
+) {
 
     init {
         setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading2Appearance))

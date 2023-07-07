@@ -41,7 +41,15 @@ class BpkNavBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : AppBarLayout(context, attrs) {
+) : AppBarLayout(
+    createContextThemeWrapper(
+        androidx.appcompat.view.ContextThemeWrapper(context, R.style.Widget_Material3_AppBarLayout),
+        attrs,
+        0,
+    ),
+    attrs,
+    defStyleAttr,
+) {
 
     private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
         addView(it, COLLAPSING_LAYOUT_PARAMS)
