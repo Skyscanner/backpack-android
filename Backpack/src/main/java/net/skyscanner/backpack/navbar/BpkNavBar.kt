@@ -27,7 +27,6 @@ import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.AppBarLayout
@@ -60,14 +59,6 @@ class BpkNavBar @JvmOverloads constructor(
 
         collapsingLayout.addView(it, params)
     }
-
-    @ColorInt
-    @Deprecated("This customisation is no longer supported")
-    var expandedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
-
-    @ColorInt
-    @Deprecated("This customisation is no longer supported")
-    var collapsedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
 
     var title: CharSequence?
         get() = toolbar.title

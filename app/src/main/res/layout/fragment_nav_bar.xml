@@ -8,8 +8,7 @@
     <net.skyscanner.backpack.navbar.BpkNavBar
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navBarExpandedTextColor="@color/bpkStatusWarningSpot" />
+        android:layout_height="wrap_content" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/navBarScrollView"
