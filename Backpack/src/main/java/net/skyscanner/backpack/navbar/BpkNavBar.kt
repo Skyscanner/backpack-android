@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.navbar
 
+import android.animation.ObjectAnimator
+import android.animation.StateListAnimator
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -41,15 +43,7 @@ class BpkNavBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : AppBarLayout(
-    createContextThemeWrapper(
-        androidx.appcompat.view.ContextThemeWrapper(context, R.style.Widget_Material3_AppBarLayout),
-        attrs,
-        0,
-    ),
-    attrs,
-    defStyleAttr,
-) {
+) : AppBarLayout(context, attrs) {
 
     private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
         it.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
@@ -143,6 +137,7 @@ class BpkNavBar @JvmOverloads constructor(
         this.icon = navIcon
         this.navAction = navAction
         this.menu = menu
+        this.stateListAnimator = shadowStateListAnimator()
     }
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
@@ -153,6 +148,25 @@ class BpkNavBar @JvmOverloads constructor(
         }
         super.setLayoutParams(params)
     }
+
+    private fun shadowStateListAnimator(): StateListAnimator =
+        StateListAnimator().apply {
+            val duration = 150L
+            addState(
+                intArrayOf(android.R.attr.state_enabled, R.attr.state_liftable, -R.attr.state_lifted),
+                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", 0f).setDuration(duration),
+            )
+
+            // Default enabled state
+            addState(
+                intArrayOf(android.R.attr.state_enabled),
+                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", resources.getDimension(R.dimen.bpkElevationSm))
+                    .setDuration(duration),
+            )
+
+            // Disabled state
+            addState(IntArray(0), ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", 0f).setDuration(0))
+        }
 
     private companion object {
 
