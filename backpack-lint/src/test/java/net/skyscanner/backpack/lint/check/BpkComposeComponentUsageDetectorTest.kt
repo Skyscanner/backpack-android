@@ -33,10 +33,10 @@ class BpkComposeComponentUsageDetectorTest {
         lint()
             .files(
                 kotlin(
-                    """import androidx.compose.material.Button
+                    """import androidx.compose.ui.window.Dialog
 
 @Composable
-fun CustomButton() { Button() }""",
+fun CustomDialog() { Dialog() }""",
                 ),
                 button(),
             )
@@ -44,8 +44,8 @@ fun CustomButton() { Button() }""",
             .expectWarningCount(1)
             .expect(
                 """
-src/test.kt:4: Warning: Backpack component available for androidx.compose.material.Button. Use net.skyscanner.backpack.compose.button.BpkButton instead. More info at https://skyscanner.design/latest/components/button/compose.html [BpkComposeComponentUsage]
-fun CustomButton() { Button() }
+src/test.kt:4: Warning: Backpack component available for androidx.compose.ui.window.Dialog. Use net.skyscanner.backpack.compose.dialog.BpkDialog instead. More info at https://skyscanner.design/latest/components/dialog/compose.html [BpkComposeComponentUsage]
+fun CustomDialog() { Dialog() }
                      ~~~~~~~~
 0 errors, 1 warnings
       """,
@@ -57,10 +57,10 @@ fun CustomButton() { Button() }
         lint()
             .files(
                 kotlin(
-                    """import net.skyscanner.backpack.compose.button.BpkButton
+                    """import net.skyscanner.backpack.compose.dialog.BpkDialog
 
 @Composable
-fun CustomButton() { BpkButton() }""",
+fun CustomDialog() { BpkDialog() }""",
                 ),
                 bpkButton(),
             )
@@ -70,18 +70,18 @@ fun CustomButton() { BpkButton() }""",
 
     private fun bpkButton(): TestFile =
         kotlin(
-            """package net.skyscanner.backpack.compose.button
+            """package net.skyscanner.backpack.compose.dialog
 
 @Composable
-fun BpkButton() {}""",
+fun BpkDialog() {}""",
         )
 
     private fun button(): TestFile =
         kotlin(
-            """package androidx.compose.material
+            """package androidx.compose.ui.window
 
 @Composable
-fun Button() {}""",
+fun Dialog() {}""",
         )
 
     private fun TestLintTask.runCheck(): TestLintResult =
