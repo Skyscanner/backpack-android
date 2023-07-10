@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffoldDefaults
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -57,7 +56,7 @@ fun BpkBottomSheet(
     modifier: Modifier = Modifier,
     state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
-    peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
+    peekHeight: Dp = DefaultSheetPeekHeight,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     var contentHeight by remember { mutableStateOf(0) }
@@ -131,3 +130,4 @@ private fun BpkBottomSheetHandle(
 
 private val HandleWidth = 36.dp
 private val HandleHeight = 20.dp
+private val DefaultSheetPeekHeight = 56.dp
