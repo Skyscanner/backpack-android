@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.navbar
 
+import android.animation.ObjectAnimator
+import android.animation.StateListAnimator
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -25,7 +27,6 @@ import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.AppBarLayout
@@ -44,10 +45,13 @@ class BpkNavBar @JvmOverloads constructor(
 ) : AppBarLayout(context, attrs) {
 
     private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
+        it.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
+        it.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextPrimary))
         addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
 
     private val toolbar: Toolbar = BpkToolbar(context).also {
+        it.setTitleTextColor(context.getColor(R.color.bpkTextPrimary))
         val toolbarHeight = resolveThemeDimen(context, android.R.attr.actionBarSize, R.dimen.bpk_nav_bar_toolbar_height)
         val params = CollapsingToolbarLayout.LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight).apply {
             collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
@@ -55,21 +59,6 @@ class BpkNavBar @JvmOverloads constructor(
 
         collapsingLayout.addView(it, params)
     }
-
-    @ColorInt
-    var expandedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
-        set(value) {
-            field = value
-            collapsingLayout.setExpandedTitleColor(value)
-        }
-
-    @ColorInt
-    var collapsedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
-        set(value) {
-            field = value
-            toolbar.setTitleTextColor(value)
-            collapsingLayout.setCollapsedTitleTextColor(value)
-        }
 
     var title: CharSequence?
         get() = toolbar.title
@@ -84,10 +73,7 @@ class BpkNavBar @JvmOverloads constructor(
                 field = value
                 toolbar.navigationIcon = value
                 collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(
-                    when (field) {
-                        null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
-                        else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
-                    },
+                    R.dimen.bpk_nav_bar_expanded_spacing_horizontal,
                 )
             }
         }
@@ -123,8 +109,6 @@ class BpkNavBar @JvmOverloads constructor(
         }
 
     init {
-        var expandedTitleColor = expandedTitleColor
-        var collapsedTextColor = collapsedTitleColor
         var title: CharSequence?
         var navIcon: Drawable?
         var menu = 0
@@ -134,20 +118,17 @@ class BpkNavBar @JvmOverloads constructor(
             R.styleable.BpkNavBar,
             defStyleAttr, 0,
         ).use {
-            expandedTitleColor = it.getColor(R.styleable.BpkNavBar_navBarExpandedTextColor, expandedTitleColor)
-            collapsedTextColor = it.getColor(R.styleable.BpkNavBar_navBarCollapsedTextColor, collapsedTextColor)
             title = it.getString(R.styleable.BpkNavBar_navBarTitle)
             navIcon = it.getDrawable(R.styleable.BpkNavBar_navBarIcon)
             menu = it.getResourceId(R.styleable.BpkNavBar_navBarMenu, menu)
         }
 
-        this.expandedTitleColor = expandedTitleColor
-        this.collapsedTitleColor = collapsedTextColor
         this.background = ColorDrawable(context.getColor(R.color.bpkCanvas))
         this.title = title
         this.icon = navIcon
         this.navAction = navAction
         this.menu = menu
+        this.stateListAnimator = shadowStateListAnimator()
     }
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
@@ -158,6 +139,25 @@ class BpkNavBar @JvmOverloads constructor(
         }
         super.setLayoutParams(params)
     }
+
+    private fun shadowStateListAnimator(): StateListAnimator =
+        StateListAnimator().apply {
+            val duration = 150L
+            addState(
+                intArrayOf(android.R.attr.state_enabled, R.attr.state_liftable, -R.attr.state_lifted),
+                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", 0f).setDuration(duration),
+            )
+
+            // Default enabled state
+            addState(
+                intArrayOf(android.R.attr.state_enabled),
+                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", resources.getDimension(R.dimen.bpkElevationSm))
+                    .setDuration(duration),
+            )
+
+            // Disabled state
+            addState(IntArray(0), ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", 0f).setDuration(0))
+        }
 
     private companion object {
 

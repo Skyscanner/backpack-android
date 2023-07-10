@@ -38,9 +38,7 @@ Example of a `NavBar` in XML
   android:layout_height="wrap_content"
   app:navBarTitle="Nav Bar"
   app:navBarIcon="@drawable/bpk_native_android__back"
-  app:navBarMenu="@menu/settings"
-  app:navBarExpandedTextColor="@color/bpkSkyGray"
-  app:navBarCollapsedTextColor="@color/bpkSkyGray"/>
+  app:navBarMenu="@menu/settings"/>
 ```
 
 Example of a `NavBar` in Kotlin
@@ -52,8 +50,6 @@ BpkNavBar(context).apply {
   title = "Nav Bar"
   menu = R.menu.settings
   icon = AppCompatResources.getDrawable(context, R.drawable.bpk_native_android__back)
-  expandedTitleColor = context.getColor(R.color.bpkSkyGray)
-  collapsedTitleColor = context.getColor(R.color.bpkSkyGray)
 }
 ```
 
@@ -64,7 +60,5 @@ The scrolling child of [`CoordinatorLayout`](https://developer.android.com/refer
 `app:layout_behavior="@string/appbar_scrolling_view_behavior"` attribute.
 
 ## Theme Props
-
-- `navBarCollapsedTextColor` - `bpkTextPrimary` by default.
 
 Styles can be changed globally through `bpkNavBarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/view/THEMING.md) for more information.
