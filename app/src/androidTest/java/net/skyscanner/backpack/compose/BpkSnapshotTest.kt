@@ -71,7 +71,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
             providers = providers,
             comparison = { name ->
                 assertion()
-
+                waitForIdle()
                 compareScreenshot(composeTestRule, name)
             },
             content = content,
@@ -110,6 +110,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
                 }
             }
         }
+        composeTestRule.waitForIdle()
         comparison(composeTestRule, screenshotName(tags))
 
         scenario.close()
