@@ -31,12 +31,6 @@ else:
     package = sys.argv[2]
 
 print('')
-print(f'Create compose component structure for {package}.Bpk{name}?')
-confirmation = input("[Y/n]: ").lower()
-if confirmation != "" and confirmation != "y" and confirmation != "yes":
-    sys.exit("Component creation cancelled")
-
-print('')
 print('Creating compose component structure...')
 print('')
 
