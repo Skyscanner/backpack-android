@@ -52,7 +52,6 @@ fun BpkFab(
             icon = icon,
             contentDescription = contentDescription,
             size = BpkIconSize.Large,
-            tint = androidx.compose.material3.LocalContentColor.current,
         )
     }
 }
