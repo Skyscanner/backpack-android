@@ -31,7 +31,7 @@ else:
     package = sys.argv[2]
 
 print('')
-print('Creating compose component structure...')
+print('Creating component structure...')
 print('')
 
 mapping = {
