@@ -30,6 +30,8 @@ if len(sys.argv) < 3:
 else:
     package = sys.argv[2]
 
+
+
 print('')
 print(f'Create compose component structure for {package}.Bpk{name}?')
 confirmation = input("[Y/n]: ").lower()
