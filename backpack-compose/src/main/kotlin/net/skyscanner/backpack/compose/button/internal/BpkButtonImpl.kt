@@ -85,7 +85,6 @@ internal fun BpkButtonImpl(
             content = {
                 CompositionLocalProvider(
                     LocalTextStyle provides size.textStyle(),
-                    LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
                 ) {
                     Box {
                         Row(

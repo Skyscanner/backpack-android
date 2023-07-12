@@ -33,11 +33,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -62,41 +60,37 @@ internal fun BpkFloatingNotificationImpl(
         color = BpkTheme.colors.corePrimary,
         contentColor = BpkTheme.colors.textOnDark,
     ) {
-        CompositionLocalProvider(
-            LocalContentColor provides androidx.compose.material3.LocalContentColor.current,
+        Row(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(horizontal = BpkSpacing.Base),
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(horizontal = BpkSpacing.Base),
-                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
 
-                data.icon?.let { icon ->
-                    BpkIcon(
-                        icon = icon,
-                        contentDescription = null,
-                        size = BpkIconSize.Small,
-                    )
-                }
-
-                BpkText(
-                    modifier = Modifier.weight(1f),
-                    text = data.text,
-                    maxLines = 2,
-                    style = BpkTheme.typography.footnote,
-                    overflow = TextOverflow.Ellipsis,
+            data.icon?.let { icon ->
+                BpkIcon(
+                    icon = icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Small,
                 )
+            }
 
-                data.cta?.let { cta ->
-                    BpkButton(
-                        text = cta,
-                        type = BpkButtonType.LinkOnDark,
-                        onClick = { data.performAction() },
-                        size = BpkButtonSize.Default,
-                    )
-                }
+            BpkText(
+                modifier = Modifier.weight(1f),
+                text = data.text,
+                maxLines = 2,
+                style = BpkTheme.typography.footnote,
+                overflow = TextOverflow.Ellipsis,
+            )
+
+            data.cta?.let { cta ->
+                BpkButton(
+                    text = cta,
+                    type = BpkButtonType.LinkOnDark,
+                    onClick = { data.performAction() },
+                    size = BpkButtonSize.Default,
+                )
             }
         }
     }
