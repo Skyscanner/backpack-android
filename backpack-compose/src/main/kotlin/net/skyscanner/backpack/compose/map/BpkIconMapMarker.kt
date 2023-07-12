@@ -31,7 +31,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -65,7 +65,7 @@ fun BpkIconMapMarker(
         IconMarkerLayout(status = status, icon = icon)
     }
 
-    Marker(
+    MarkerInfoWindow(
         state = state,
         tag = tag,
         title = contentDescription,
@@ -73,7 +73,7 @@ fun BpkIconMapMarker(
         zIndex = zIndex,
         icon = iconBitmap,
         onClick = onClick,
-    )
+    ) {}
 }
 
 @Composable

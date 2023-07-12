@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
@@ -70,7 +70,7 @@ fun BpkPriceMapMarker(
         PriceMarkerLayout(title = title, status = status)
     }
 
-    Marker(
+    MarkerInfoWindow(
         state = state,
         tag = tag,
         title = title,
@@ -78,7 +78,7 @@ fun BpkPriceMapMarker(
         zIndex = zIndex,
         icon = icon,
         onClick = onClick,
-    )
+    ) {}
 }
 
 @Composable
