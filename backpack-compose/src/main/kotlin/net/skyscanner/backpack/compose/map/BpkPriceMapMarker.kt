@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -36,7 +37,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
-import net.skyscanner.backpack.compose.map.internal.composableToBitmapDescriptor
+import net.skyscanner.backpack.compose.map.internal.BitmapManager
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -62,7 +63,10 @@ fun BpkPriceMapMarker(
     zIndex: Float = 0.0f,
     onClick: (Marker) -> Boolean = { false },
 ) {
-    val icon = composableToBitmapDescriptor {
+    val bitmapManager = remember {
+        BitmapManager()
+    }
+    val icon = bitmapManager.getBitmapDescriptor(key = listOf(title, status, "price").toString()) {
         PriceMarkerLayout(title = title, status = status)
     }
 

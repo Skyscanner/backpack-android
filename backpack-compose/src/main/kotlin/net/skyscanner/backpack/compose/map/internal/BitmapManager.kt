@@ -31,8 +31,23 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
+class BitmapManager {
+
+    private val cache = mutableMapOf<String, BitmapDescriptor>()
+    @Composable
+    fun getBitmapDescriptor(key: String, content: @Composable () -> Unit): BitmapDescriptor {
+        return if (cache.containsKey(key)) {
+            cache[key]!!
+        } else {
+            val bitmap = composableToBitmapDescriptor(content)
+            cache[key] = bitmap
+            return bitmap
+        }
+    }
+}
+
 @Composable
-internal fun composableToBitmapDescriptor(content: @Composable () -> Unit): BitmapDescriptor {
+private fun composableToBitmapDescriptor(content: @Composable () -> Unit): BitmapDescriptor {
     val view = ComposeView(LocalContext.current).apply {
         setContent {
             BpkTheme {
