@@ -28,6 +28,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkMap
+import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.tokens.Landmark
@@ -94,6 +95,31 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
             contentDescription = "Landmark",
             icon = BpkIcon.Landmark,
             status = BpkIconMarkerStatus.Disabled,
+            state = rememberMarkerState(position = LatLng(51.532108, -0.389376)),
+        )
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(name = "Pointer")
+fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(LatLng(51.528308, -0.381776), 14f)
+    }
+    BpkMap(cameraPositionState = cameraPositionState) {
+        BpkPointerMapMarker(
+            title = "£295",
+            state = rememberMarkerState(position = LatLng(51.528308, -0.381776)),
+        )
+
+        BpkPointerMapMarker(
+            title = "£195",
+            state = rememberMarkerState(position = LatLng(51.526508, -0.384476)),
+        )
+
+        BpkPointerMapMarker(
+            title = "£149",
             state = rememberMarkerState(position = LatLng(51.532108, -0.389376)),
         )
     }
