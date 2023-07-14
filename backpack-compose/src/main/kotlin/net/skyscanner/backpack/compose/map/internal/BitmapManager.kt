@@ -23,13 +23,16 @@ import android.graphics.Canvas
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.applyCanvas
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import net.skyscanner.backpack.compose.theme.BpkTheme
 
 class BitmapManager {
 
@@ -48,9 +51,10 @@ class BitmapManager {
 
 @Composable
 private fun composableToBitmapDescriptor(content: @Composable () -> Unit): BitmapDescriptor {
+    val compositionLocalContext by rememberUpdatedState(currentCompositionLocalContext)
     val view = ComposeView(LocalContext.current).apply {
         setContent {
-            BpkTheme {
+            CompositionLocalProvider(compositionLocalContext) {
                 content()
             }
         }
