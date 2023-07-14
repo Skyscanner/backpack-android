@@ -56,7 +56,7 @@ fun BpkIconMapMarker(
     tag: Any? = null,
     visible: Boolean = true,
     zIndex: Float = 0.0f,
-    onClick: (Marker) -> Boolean = { false },
+    onClick: (Marker) -> Unit = {},
 ) {
     val bitmapManager = remember {
         BitmapManager()
@@ -72,7 +72,7 @@ fun BpkIconMapMarker(
         visible = visible,
         zIndex = zIndex,
         icon = iconBitmap,
-        onClick = onClick,
+        onClick = { onClick(it); false },
     ) {}
 }
 

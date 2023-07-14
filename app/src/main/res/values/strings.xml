@@ -290,6 +290,13 @@
     <string name="maps_markers_badges">Badges</string>
     <string name="maps_markers_badges_with_icons">With icons</string>
     <string name="map_markers">Map markers</string>
+    <string name="map_marker_price_1">£195</string>
+    <string name="map_marker_price_2">£145</string>
+    <string name="map_marker_price_3">£236</string>
+    <string name="map_marker_price_4">£99</string>
+    <string name="map_marker_icon_landmark">Landmark</string>
+    <string name="map_marker_icon_cafe">Cafe</string>
+
     <string name="compose">Compose</string>
     <string name="image_sea_content_description">Image of surface of a wavy sea</string>
 
