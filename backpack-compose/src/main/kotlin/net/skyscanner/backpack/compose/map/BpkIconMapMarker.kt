@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -36,8 +35,8 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.map.internal.BitmapManager
 import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
+import net.skyscanner.backpack.compose.map.internal.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 
@@ -58,10 +57,7 @@ fun BpkIconMapMarker(
     zIndex: Float = 0.0f,
     onClick: (Marker) -> Unit = {},
 ) {
-    val bitmapManager = remember {
-        BitmapManager()
-    }
-    val iconBitmap = bitmapManager.getBitmapDescriptor(key = listOf(icon, status, "icon").toString()) {
+    val iconBitmap = rememberCapturedComposeBitmapDescriptor(key = listOf(icon, status, "icon").toString()) {
         IconMarkerLayout(status = status, icon = icon)
     }
 

@@ -22,9 +22,11 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalContext
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
@@ -33,48 +35,66 @@ import androidx.core.graphics.applyCanvas
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
-class BitmapManager {
-
-    private val cache = mutableMapOf<String, BitmapDescriptor>()
-    @Composable
-    fun getBitmapDescriptor(key: String, content: @Composable () -> Unit): BitmapDescriptor {
-        return if (cache.containsKey(key)) {
-            cache[key]!!
-        } else {
-            val bitmap = composableToBitmapDescriptor(content)
-            cache[key] = bitmap
-            return bitmap
-        }
-    }
+@Composable
+internal fun rememberCapturedComposeBitmapDescriptor(
+    key: Any,
+    content: @Composable () -> Unit,
+): BitmapDescriptor {
+    val bitmap = rememberCapturedComposeBitmap(key, content)
+    return remember(bitmap) { BitmapDescriptorFactory.fromBitmap(bitmap) }
 }
 
 @Composable
-private fun composableToBitmapDescriptor(content: @Composable () -> Unit): BitmapDescriptor {
-    val compositionLocalContext by rememberUpdatedState(currentCompositionLocalContext)
-    val view = ComposeView(LocalContext.current).apply {
-        setContent {
-            CompositionLocalProvider(compositionLocalContext) {
-                content()
-            }
+internal fun rememberCapturedComposeBitmap(
+    key: Any,
+    content: @Composable () -> Unit,
+): Bitmap {
+    val androidContext = LocalContext.current
+    val helperView = remember(content) { ComposeView(androidContext) }
+    val parentView = LocalView.current as ViewGroup
+
+    val content by rememberUpdatedState(content)
+    val compositionContext by rememberUpdatedState(currentCompositionLocalContext)
+
+    val bitmap = remember(parentView, helperView, compositionContext, compositionContext, key) {
+        renderComposeToBitmap(parentView, helperView, compositionContext, content)
+    }
+    return bitmap
+}
+
+private fun renderComposeToBitmap(
+    parent: ViewGroup,
+    view: ComposeView,
+    compositionContext: CompositionLocalContext,
+    content: @Composable () -> Unit,
+): Bitmap {
+
+    view.setContent {
+        CompositionLocalProvider(compositionContext) {
+            content()
         }
     }
-    val currentView = LocalView.current as ViewGroup
-    currentView.addView(view)
+
+    parent.addView(view)
+
     view.measure(
         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
     )
+
     view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+
     val bitmap = Bitmap.createBitmap(
         view.measuredWidth,
         view.measuredHeight,
         Bitmap.Config.ARGB_8888,
     )
+
     bitmap.applyCanvas {
         view.draw(this)
     }
 
-    currentView.removeView(view)
+    parent.removeView(view)
 
-    return BitmapDescriptorFactory.fromBitmap(bitmap)
+    return bitmap
 }
