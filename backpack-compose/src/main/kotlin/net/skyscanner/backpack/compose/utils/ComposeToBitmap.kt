@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.map.internal
+package net.skyscanner.backpack.compose.utils
 
 import android.graphics.Bitmap
 import android.view.View
@@ -26,8 +26,10 @@ import androidx.compose.runtime.CompositionLocalContext
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -55,10 +57,12 @@ internal fun rememberCapturedComposeBitmap(
 
     val content by rememberUpdatedState(content)
     val compositionContext by rememberUpdatedState(currentCompositionLocalContext)
+    var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val bitmap = remember(parentView, helperView, compositionContext, compositionContext, key) {
-        renderComposeToBitmap(parentView, helperView, compositionContext, content)
+    val bitmap = remember(parentView, helperView, compositionContext, content, key) {
+        renderComposeToBitmap(parentView, helperView, compositionContext, cachedBitmap, content)
     }
+    cachedBitmap = bitmap
     return bitmap
 }
 
@@ -66,6 +70,7 @@ private fun renderComposeToBitmap(
     parent: ViewGroup,
     view: ComposeView,
     compositionContext: CompositionLocalContext,
+    cachedBitmap: Bitmap?,
     content: @Composable () -> Unit,
 ): Bitmap {
 
@@ -84,11 +89,17 @@ private fun renderComposeToBitmap(
 
     view.layout(0, 0, view.measuredWidth, view.measuredHeight)
 
-    val bitmap = Bitmap.createBitmap(
-        view.measuredWidth,
-        view.measuredHeight,
-        Bitmap.Config.ARGB_8888,
-    )
+    val bitmap = when {
+        cachedBitmap == null ||
+            cachedBitmap.width != view.measuredWidth ||
+            cachedBitmap.height != view.measuredHeight ->
+            Bitmap.createBitmap(
+                view.measuredWidth,
+                view.measuredHeight,
+                Bitmap.Config.ARGB_8888,
+            )
+        else -> cachedBitmap
+    }
 
     bitmap.applyCanvas {
         view.draw(this)

@@ -36,7 +36,7 @@ import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
-import net.skyscanner.backpack.compose.map.internal.rememberCapturedComposeBitmapDescriptor
+import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 
