@@ -57,7 +57,7 @@ fun BpkIconMapMarker(
     zIndex: Float = 0.0f,
     onClick: (Marker) -> Unit = {},
 ) {
-    val iconBitmap = rememberCapturedComposeBitmapDescriptor(key = listOf(icon, status, "icon").toString()) {
+    val iconBitmap = rememberCapturedComposeBitmapDescriptor(icon, status) {
         IconMarkerLayout(status = status, icon = icon)
     }
 

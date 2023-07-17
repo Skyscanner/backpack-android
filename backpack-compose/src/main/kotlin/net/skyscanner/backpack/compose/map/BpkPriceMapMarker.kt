@@ -62,7 +62,7 @@ fun BpkPriceMapMarker(
     zIndex: Float = 0.0f,
     onClick: (Marker) -> Unit = {},
 ) {
-    val icon = rememberCapturedComposeBitmapDescriptor(key = listOf(title, status, "price").toString()) {
+    val icon = rememberCapturedComposeBitmapDescriptor(title, status) {
         PriceMarkerLayout(title = title, status = status)
     }
 

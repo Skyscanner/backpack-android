@@ -39,16 +39,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 @Composable
 internal fun rememberCapturedComposeBitmapDescriptor(
-    key: Any,
+    vararg keys: Any,
     content: @Composable () -> Unit,
 ): BitmapDescriptor {
-    val bitmap = rememberCapturedComposeBitmap(key, content)
+    val bitmap = rememberCapturedComposeBitmap(*keys, content = content)
     return remember(bitmap) { BitmapDescriptorFactory.fromBitmap(bitmap) }
 }
 
 @Composable
 internal fun rememberCapturedComposeBitmap(
-    key: Any,
+    vararg keys: Any,
     content: @Composable () -> Unit,
 ): Bitmap {
     val androidContext = LocalContext.current
@@ -59,7 +59,7 @@ internal fun rememberCapturedComposeBitmap(
     val compositionContext by rememberUpdatedState(currentCompositionLocalContext)
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val bitmap = remember(parentView, helperView, compositionContext, content, key) {
+    val bitmap = remember(parentView, helperView, compositionContext, content, *keys) {
         renderComposeToBitmap(parentView, helperView, compositionContext, cachedBitmap, content)
     }
     cachedBitmap = bitmap
