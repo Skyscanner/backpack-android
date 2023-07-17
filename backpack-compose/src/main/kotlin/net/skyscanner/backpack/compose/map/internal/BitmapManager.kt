@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.map.internal
 
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
@@ -61,8 +60,6 @@ private fun composableToBitmapDescriptor(content: @Composable () -> Unit): Bitma
     }
     val currentView = LocalView.current as ViewGroup
     currentView.addView(view)
-    val fakeCanvas = Canvas()
-    view.draw(fakeCanvas)
     view.measure(
         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
