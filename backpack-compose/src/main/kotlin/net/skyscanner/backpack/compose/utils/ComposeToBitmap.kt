@@ -22,7 +22,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,7 +30,6 @@ import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.applyCanvas
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -50,25 +49,27 @@ internal fun rememberCapturedComposeBitmap(
     vararg keys: Any,
     content: @Composable () -> Unit,
 ): Bitmap {
-    val composeView = rememberComposeView()
     val parent = LocalView.current as ViewGroup
-
+    val currentContext = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val bitmap = remember(parent, composeView, currentContent, currentCompositionLocalContext, *keys) {
-        renderComposeToBitmap(parent, composeView, cachedBitmap, currentContent)
+    val newBitmap = remember(parent, currentContext, currentContent, *keys) {
+        renderComposeToBitmap(parent, currentContext, cachedBitmap, currentContent)
     }
-    cachedBitmap = bitmap
-    return bitmap
+    cachedBitmap = newBitmap
+    return cachedBitmap ?: newBitmap
 }
 
 private fun renderComposeToBitmap(
     parent: ViewGroup,
-    composeView: ComposeView,
+    compositionContext: CompositionContext,
     cachedBitmap: Bitmap?,
     content: @Composable () -> Unit,
 ): Bitmap {
+
+    val composeView = ComposeView(parent.context)
+    composeView.setParentCompositionContext(compositionContext)
 
     composeView.setContent(content)
 
@@ -101,15 +102,4 @@ private fun renderComposeToBitmap(
     parent.removeView(composeView)
 
     return bitmap
-}
-
-@Composable
-private fun rememberComposeView(): ComposeView {
-    val androidContext = LocalContext.current
-    val compositionContext = rememberCompositionContext()
-    return remember(androidContext, compositionContext) {
-        ComposeView(androidContext).apply {
-            setParentCompositionContext(compositionContext)
-        }
-    }
 }
