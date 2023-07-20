@@ -59,7 +59,7 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
         headerContent = {
             Column() {
                 BpkText(
-                    modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
+                    modifier = Modifier.fillMaxWidth().padding(BpkSpacing.Base, BpkSpacing.Md),
                     text = stringResource(id = R.string.card_wrapper_title),
                     style = BpkTheme.typography.bodyDefault,
                     textAlign = TextAlign.Left,
