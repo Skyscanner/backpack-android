@@ -62,7 +62,7 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
                     text = stringResource(id = R.string.card_wrapper_title),
                     style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Left,
                 )
             }
         },
@@ -74,7 +74,7 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                         .height(BpkSpacing.Xxl),
                     text = stringResource(id = R.string.lets_explore_title),
                     style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Left,
                 )
                 BpkText(
                     modifier = Modifier
@@ -82,7 +82,7 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                         .height(BpkSpacing.Xxl),
                     text = stringResource(id = R.string.lets_explore_text),
                     style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Left,
                 )
             }
         },
