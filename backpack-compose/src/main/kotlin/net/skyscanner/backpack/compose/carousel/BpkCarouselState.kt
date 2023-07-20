@@ -20,13 +20,13 @@ package net.skyscanner.backpack.compose.carousel
 
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.interaction.InteractionSource
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
 
 sealed interface BpkCarouselState : ScrollableState {
 
@@ -38,7 +38,7 @@ sealed interface BpkCarouselState : ScrollableState {
     @get:IntRange(from = 0)
     val currentPage: Int
 
-    val currentPageOffset: Float
+    val currentPageOffsetFraction: Float
 
     suspend fun animateScrollToPage(
         @IntRange(from = 0) page: Int,
@@ -51,7 +51,7 @@ sealed interface BpkCarouselState : ScrollableState {
     )
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun rememberBpkCarouselState(
     totalImages: Int,
@@ -64,13 +64,13 @@ fun rememberBpkCarouselState(
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 fun BpkCarouselState(
     totalImages: Int,
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    return BpkCarouselInternalState(delegate = PagerState(currentPage = initialPage), totalImages = totalImages)
+    return BpkCarouselInternalState(delegate = PagerState(initialPage = initialPage), totalImages = totalImages)
 }
 
 internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
@@ -78,7 +78,7 @@ internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
         is BpkCarouselInternalState -> this
     }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 internal class BpkCarouselInternalState constructor(
     val delegate: PagerState,
     val totalImages: Int,
@@ -93,8 +93,8 @@ internal class BpkCarouselInternalState constructor(
     override val currentPage: Int
         get() = getModdedPageNumber(delegate.currentPage, totalImages)
 
-    override val currentPageOffset: Float
-        get() = delegate.currentPageOffset
+    override val currentPageOffsetFraction: Float
+        get() = delegate.currentPageOffsetFraction
 
     override suspend fun animateScrollToPage(page: Int, pageOffset: Float) =
         delegate.animateScrollToPage(getTargetPage(page), pageOffset)

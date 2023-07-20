@@ -105,7 +105,6 @@ dependencies {
     implementation libs.compose.activity
     implementation libs.kotlin.reflection
     implementation libs.destinations.core
-    implementation libs.accompanist.pager
     testImplementation libs.test.junit
     debugImplementation libs.compose.uiToolingTestManifest
     androidTestImplementation libs.compose.foundation
