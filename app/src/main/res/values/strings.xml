@@ -312,4 +312,5 @@
     <string name="sticky_chip_action">Sticky Chip action invoked</string>
     <string name="sticky_chip">Filter</string>
     <string name="card_wrapper_title">Wrapper title</string>
+    <string name="lets_explore_title">Let\'s explore</string>
 </resources>
