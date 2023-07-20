@@ -18,14 +18,22 @@
 package net.skyscanner.backpack.screenshots
 
 import dadb.Dadb
-import org.http4k.client.JavaHttpClient
-import org.http4k.core.Method
-import org.http4k.core.Request
-import org.http4k.core.Response
-import org.http4k.core.Status
-import org.http4k.server.Http4kServer
-import org.http4k.server.Undertow
-import org.http4k.server.asServer
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.get
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import io.ktor.server.response.respond
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import java.io.File
 
 class ScreenshotTestsServer @JvmOverloads constructor(
@@ -34,42 +42,50 @@ class ScreenshotTestsServer @JvmOverloads constructor(
     private val tmpRemoteFile: String = "/data/local/tmp/screenshot.png",
 ) : AutoCloseable {
 
+    private val scope = CoroutineScope(Dispatchers.IO)
+
     fun start() {
         require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
 
         try {
             startServer()
         } catch (t: Throwable) {
-            // port is already taken: gradle didn't finalise the previous run properly
-            // if we just send an empty ping request, the server will close itself due the request being invalid
-            JavaHttpClient().invoke(Request(Method.GET, "http://localhost:$serverPort"))
-            // sleeping for 3 seconds to make sure the server is closed
-            Thread.sleep(3000L)
+            runBlocking {
+                // port is already taken: gradle didn't finalise the previous run properly
+                // if we just send an empty ping request, the server will close itself due the request being invalid
+                HttpClient(CIO).get("http://localhost:$serverPort")
+                // sleeping for 3 seconds to make sure the server is closed
+                delay(3000L)
+            }
             // another attempt
             startServer()
         }
     }
 
-    private var server: Http4kServer? = null
+    private var server = scope.embeddedServer(Netty, serverPort) {
+        routing {
+            get("/") {
+                app(call)
+            }
+        }
+    }
 
     private fun startServer() {
-        close()
-        server = ::app.asServer(Undertow(serverPort))
-        server?.start()
+        server.start()
     }
 
     override fun close() {
-        server?.close()
-        server = null
+        scope.cancel("The server was stopped")
     }
 
     private val adb by lazy { Dadb.discover()!!.apply { setup() } }
 
-    private fun app(request: Request): Response =
+    private suspend fun app(call: ApplicationCall): Unit =
         try {
-            val component = request.query("component")!!
-            val type = request.query("type")!!
-            val file = request.query("file")!!
+            val request = call.request
+            val component = request.queryParameters["component"]
+            val type = request.queryParameters["type"]
+            val file = request.queryParameters["file"]
 
             val folder = outDir.resolve("$type/$component/screenshots")
             if (!folder.exists()) {
@@ -84,8 +100,9 @@ class ScreenshotTestsServer @JvmOverloads constructor(
             adb.requireShell("screencap -p $tmpRemoteFile")
             adb.pull(outFile, tmpRemoteFile)
 
-            Response(Status.OK)
+            call.respond(HttpStatusCode.OK)
         } catch (t: Throwable) {
+            call.respond(HttpStatusCode.InternalServerError)
             close()
             throw t
         }
