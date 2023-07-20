@@ -314,4 +314,11 @@
     <string name="card_wrapper_title">Wrapper title</string>
     <string name="lets_explore_title">Let\'s explore</string>
     <string name="lets_explore_text">It\'s your world and we\'ll help you explore it. Find the best prices across millions of flights, hotels and car hire options to create your perfect trip.</string>
+
+    <string name="progress_bar_small">Small</string>
+    <string name="progress_bar_small_stepped">Small stepped</string>
+    <string name="progress_bar_large">Large</string>
+    <string name="progress_bar_large_stepped">Large stepped</string>
+    <string name="progress_bar_decrease">Decrease</string>
+    <string name="progress_bar_increase">Increase</string>
 </resources>
