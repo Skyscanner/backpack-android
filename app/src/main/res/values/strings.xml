@@ -311,4 +311,5 @@
     <string name="dismiss_action">Dismiss action invoked</string>
     <string name="sticky_chip_action">Sticky Chip action invoked</string>
     <string name="sticky_chip">Filter</string>
+    <string name="card_wrapper_title">Wrapper title</string>
 </resources>
