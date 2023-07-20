@@ -55,7 +55,7 @@ fun CardWrapperStory(modifier: Modifier = Modifier) {
 private fun CardWrapperExample(modifier: Modifier = Modifier) {
     BpkCardWrapper(
         modifier = modifier.fillMaxWidth(),
-        backgroundColor = BpkTheme.colors.coreEco,
+        backgroundColor = BpkTheme.colors.coreAccent,
         headerContent = {
             Column() {
                 BpkText(
