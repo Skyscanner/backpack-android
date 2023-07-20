@@ -22,7 +22,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -70,16 +69,14 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
             Column() {
                 BpkText(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(BpkSpacing.Xxl),
+                        .fillMaxWidth(),
                     text = stringResource(id = R.string.lets_explore_title),
                     style = BpkTheme.typography.bodyDefault,
                     textAlign = TextAlign.Left,
                 )
                 BpkText(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(BpkSpacing.Xxl),
+                        .fillMaxWidth(),
                     text = stringResource(id = R.string.lets_explore_text),
                     style = BpkTheme.typography.bodyDefault,
                     textAlign = TextAlign.Left,
