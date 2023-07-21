@@ -27,12 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
-import net.skyscanner.backpack.compose.map.BpkMap
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
@@ -61,7 +61,7 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
         }
     }
 
-    BpkMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = cameraPositionState) {
         BpkPriceMapMarker(
             title = stringResource(R.string.map_marker_price_1),
             status = markerStatus(0),
@@ -100,7 +100,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
     }
 
     var focusedMarker by remember { mutableStateOf(0) }
-    BpkMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = cameraPositionState) {
         BpkIconMapMarker(
             contentDescription = stringResource(R.string.map_marker_icon_landmark),
             icon = BpkIcon.Landmark,
@@ -141,7 +141,7 @@ fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
     val cameraPositionState = rememberCameraPositionState {
         position = MAP_POSITION
     }
-    BpkMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = cameraPositionState) {
         BpkPointerMapMarker(
             title = stringResource(R.string.map_marker_price_1),
             state = rememberMarkerState(position = MARKER_POSITION_1),
