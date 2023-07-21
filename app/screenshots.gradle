@@ -23,7 +23,7 @@ android {
             managedDevices.devices {
                 Docs(ManagedVirtualDevice) {
                     device = "Pixel"
-                    apiLevel = 30
+                    apiLevel = 31
                     systemImageSource = "aosp"
                 }
             }
