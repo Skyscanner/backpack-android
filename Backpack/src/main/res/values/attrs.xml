@@ -252,8 +252,6 @@
     </declare-styleable>
 
     <declare-styleable name="BpkNavBar">
-        <attr name="navBarExpandedTextColor" format="color" />
-        <attr name="navBarCollapsedTextColor" format="color" />
         <attr name="navBarTitle" format="string" />
         <attr name="navBarIcon" format="reference" />
         <attr name="navBarMenu" format="reference" />

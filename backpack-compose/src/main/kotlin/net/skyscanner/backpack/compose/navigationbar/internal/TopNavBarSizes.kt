@@ -18,15 +18,17 @@
 
 package net.skyscanner.backpack.compose.navigationbar.internal
 
+import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 internal object TopNavBarSizes {
-    val ExpandedHeight = 92.dp
+    val ExpandedHeight = 112.dp
     val CollapsedHeight = 56.dp
-    val InternalSpacing = BpkSpacing.Md
-    val ExpandedTitlePaddingStartWithoutNavIcon = BpkSpacing.Md
-    val ExpandedTitlePaddingStartWithNavIcon = BpkSpacing.Base
-    val ExpandedTitlePaddingEnd = BpkSpacing.Base
+    val ExpandedTitlePaddingBottom = 20.dp // check this when updating to compose version that disables font padding
     val IconActionSize = 40.dp
+    val TopAppBarHorizontalPadding = BpkSpacing.Md
+    val TopAppBarTitleInset = BpkSpacing.Base - TopAppBarHorizontalPadding
 }
+
+internal val TopTitleAlphaEasing = CubicBezierEasing(.8f, 0f, .8f, .15f)

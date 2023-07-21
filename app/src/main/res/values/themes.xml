@@ -151,7 +151,6 @@
     </style>
 
     <style name="LondonThemeNavBar">
-        <item name="navBarCollapsedTextColor">#6392ce</item>
     </style>
 
     <style name="LondonThemeSlider">
@@ -285,7 +284,6 @@
     </style>
 
     <style name="DohaThemeNavBar">
-        <item name="navBarCollapsedTextColor">#ffd677</item>
     </style>
 
     <style name="DohaThemeBarChart">
