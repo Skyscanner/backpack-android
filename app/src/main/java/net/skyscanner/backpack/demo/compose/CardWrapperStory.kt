@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -45,7 +44,6 @@ fun CardWrapperStory(modifier: Modifier = Modifier) {
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-
         CardWrapperExample(Modifier.fillMaxWidth())
     }
 }
@@ -58,11 +56,12 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
         headerContent = {
             Column() {
                 BpkText(
-                    modifier = Modifier.fillMaxWidth().padding(BpkSpacing.Base, BpkSpacing.Md),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(BpkSpacing.Base, BpkSpacing.Md),
                     color = BpkTheme.colors.textPrimaryInverse,
                     text = stringResource(id = R.string.card_wrapper_title),
                     style = BpkTheme.typography.label1,
-                    textAlign = TextAlign.Left,
                 )
             }
         },
@@ -74,14 +73,12 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                         .padding(bottom = BpkSpacing.Md),
                     text = stringResource(id = R.string.lets_explore_title),
                     style = BpkTheme.typography.heading5,
-                    textAlign = TextAlign.Left,
                 )
                 BpkText(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = stringResource(id = R.string.lets_explore_text),
                     style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Left,
                 )
             }
         },
