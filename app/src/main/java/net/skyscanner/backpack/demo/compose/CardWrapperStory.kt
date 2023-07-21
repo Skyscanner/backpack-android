@@ -61,7 +61,7 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxWidth().padding(BpkSpacing.Base, BpkSpacing.Md),
                     color = BpkTheme.colors.textPrimaryInverse,
                     text = stringResource(id = R.string.card_wrapper_title),
-                    style = BpkTheme.typography.bodyDefault,
+                    style = BpkTheme.typography.label1,
                     textAlign = TextAlign.Left,
                 )
             }
