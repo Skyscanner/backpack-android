@@ -41,10 +41,11 @@ import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @MapMarkersComponent
-@ComposeStory(name = "Price")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Price")
 fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
     val cameraPositionState = rememberCameraPositionState {
         position = MAP_POSITION
@@ -93,7 +94,7 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 
 @Composable
 @MapMarkersComponent
-@ComposeStory(name = "Icon")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
 fun IconMapMarkerStory(modifier: Modifier = Modifier) {
     val cameraPositionState = rememberCameraPositionState {
         position = MAP_POSITION
@@ -136,7 +137,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
 
 @Composable
 @MapMarkersComponent
-@ComposeStory(name = "Pointer")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Pointer")
 fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
     val cameraPositionState = rememberCameraPositionState {
         position = MAP_POSITION
