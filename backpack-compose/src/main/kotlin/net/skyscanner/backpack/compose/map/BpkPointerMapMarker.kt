@@ -22,13 +22,13 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import androidx.annotation.RestrictTo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
@@ -36,6 +36,8 @@ import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkPointerMapMarker(
@@ -47,13 +49,7 @@ fun BpkPointerMapMarker(
     onClick: (Marker) -> Boolean = { false },
     onInfoWindowClick: (Marker) -> Unit = {},
 ) {
-    val size = with(LocalDensity.current) { 16.dp.toPx() }
-    val strokeWidth = with(LocalDensity.current) { 2.dp.toPx() }
-    val fillColor = BpkTheme.colors.coreAccent
-    val strokeColor = BpkTheme.colors.surfaceDefault
-    val iconBitmap = remember {
-        createPointer(size, strokeWidth, fillColor, strokeColor)
-    }
+    val iconBitmap = rememberPointer()
 
     MarkerInfoWindow(
         state = state,
@@ -70,7 +66,28 @@ fun BpkPointerMapMarker(
     }
 }
 
-private fun createPointer(size: Float, strokeWidth: Float, fillColor: Color, strokeColor: Color): BitmapDescriptor {
+@Composable
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun rememberPointer(): BitmapDescriptor {
+    val bm = rememberPointerBitmap()
+    return remember(bm) {
+        BitmapDescriptorFactory.fromBitmap(bm)
+    }
+}
+
+@Composable
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun rememberPointerBitmap(): Bitmap {
+    val size = with(LocalDensity.current) { BpkSpacing.Base.toPx() }
+    val strokeWidth = with(LocalDensity.current) { BpkBorderSize.Lg.toPx() }
+    val fillColor = BpkTheme.colors.coreAccent
+    val strokeColor = BpkTheme.colors.surfaceDefault
+    return remember {
+        createPointer(size, strokeWidth, fillColor, strokeColor)
+    }
+}
+
+private fun createPointer(size: Float, strokeWidth: Float, fillColor: Color, strokeColor: Color): Bitmap {
     val radius = size / 2
     val strokePath = Path().apply {
         addCircle(radius, radius, radius, Path.Direction.CW)
@@ -96,5 +113,5 @@ private fun createPointer(size: Float, strokeWidth: Float, fillColor: Color, str
     }
     canvas.drawPath(strokePath, strokePaint)
     canvas.drawPath(fillPath, fillPaint)
-    return BitmapDescriptorFactory.fromBitmap(bm)
+    return bm
 }

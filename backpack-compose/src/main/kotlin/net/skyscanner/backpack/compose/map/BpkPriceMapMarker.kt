@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.map
 
+import androidx.annotation.RestrictTo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -78,6 +79,7 @@ fun BpkPriceMapMarker(
 }
 
 @Composable
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Modifier = Modifier) {
     val textColor = when (status) {
         BpkPriceMarkerStatus.Default -> BpkTheme.colors.textPrimaryInverse

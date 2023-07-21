@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.map
 
+import androidx.annotation.RestrictTo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -73,6 +74,7 @@ fun BpkIconMapMarker(
 }
 
 @Composable
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modifier = Modifier) {
     val iconColor = when (status) {
         BpkIconMarkerStatus.Default -> BpkTheme.colors.surfaceDefault
