@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,7 +39,6 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun CardWrapperStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .background(BpkTheme.colors.line)
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
