@@ -81,7 +81,6 @@ fun PreViewWithButton(modifier: Modifier = Modifier) {
     locale = "en",
     device = Devices.TABLET,
 )
-
 @Preview(
     name = "Tablet - Light Mode RTL",
     uiMode = Configuration.UI_MODE_NIGHT_NO,

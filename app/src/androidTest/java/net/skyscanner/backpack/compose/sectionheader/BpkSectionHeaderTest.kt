@@ -18,14 +18,38 @@
 
 package net.skyscanner.backpack.compose.sectionheader
 
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.SectionHeaderStory
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Test
 
 class BpkSectionHeaderTest : BpkSnapshotTest() {
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun default() = snap {
-        SectionHeaderStory()
+        BpkSectionHeader(
+            title = "Section title",
+            description = "Description about this section (optional)",
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun defaultWithButton() = snap {
+        BpkSectionHeader(
+            title = "Section title",
+            description = "Description about this section (optional)",
+            button = BpkSectionHeaderButton(
+                icon = BpkSectionHeaderIcon(
+                    bpkIcon = BpkIcon.Heart,
+                    contentDescription = "heart icon",
+                ),
+                buttonText = "Action",
+                onClickAction = {},
+            ),
+        )
     }
 }
