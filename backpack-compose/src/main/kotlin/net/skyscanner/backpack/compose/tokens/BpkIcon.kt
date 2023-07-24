@@ -118,6 +118,15 @@ public val BpkIcon.Companion.Adult: BpkIcon by Delegates.singleton(
 )
 
 
+public val BpkIcon.Companion.Ai: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "ai",
+        small = R.drawable.bpk_ai_sm,
+        large = R.drawable.bpk_ai,
+    )
+)
+
+
 public val BpkIcon.Companion.Aircon: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "aircon",
@@ -2480,7 +2489,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
     listOf(
         BpkIcon.Accessibility, BpkIcon.Account, BpkIcon.AccountAdd, BpkIcon.AccountCircle,
                 BpkIcon.AccountFemale, BpkIcon.AccountIdCard, BpkIcon.AccountName,
-                BpkIcon.AccountPermit, BpkIcon.AddCircle, BpkIcon.Adult, BpkIcon.Aircon,
+                BpkIcon.AccountPermit, BpkIcon.AddCircle, BpkIcon.Adult, BpkIcon.Ai, BpkIcon.Aircon,
                 BpkIcon.Aircraft, BpkIcon.Airline, BpkIcon.AirlineMultiple, BpkIcon.Airports,
                 BpkIcon.AlertActive, BpkIcon.AlertAdd, BpkIcon.AlertExpired, BpkIcon.AlertRemove,
                 BpkIcon.ArrowDown, BpkIcon.ArrowLeft, BpkIcon.ArrowRight, BpkIcon.ArrowUp,
