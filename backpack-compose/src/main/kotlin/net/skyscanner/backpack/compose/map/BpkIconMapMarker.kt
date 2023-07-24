@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.map
 
 import androidx.annotation.RestrictTo
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -26,7 +27,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
@@ -38,7 +38,6 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkElevation
 
 enum class BpkIconMarkerStatus {
     Default,
@@ -107,7 +106,7 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
     Box(
         contentAlignment = Alignment.TopCenter,
         modifier = modifier
-            .shadow(elevation = BpkElevation.Sm, shape = shape)
+            .background(color = backgroundColor, shape = shape)
             .border(
                 width = 1.dp,
                 color = strokeColor,
