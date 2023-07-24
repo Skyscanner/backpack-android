@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2023 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,26 @@ package net.skyscanner.backpack.compose.sectionheader
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.sectionheader.internal.BpkSectionHeaderImpl
 
 @Composable
-fun BpkSectionHeader(modifier: Modifier = Modifier) {
+fun BpkSectionHeader(
+    title: String,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+    button: BpkSectionHeaderButton? = null,
+) {
+    BpkSectionHeaderImpl(modifier = modifier, title = title, description = description, button = button)
 }
+
+class BpkSectionHeaderButton(
+    val icon: BpkSectionHeaderIcon,
+    val buttonText: String,
+    val onClickAction: () -> Unit,
+)
+
+class BpkSectionHeaderIcon(
+    val bpkIcon: BpkIcon,
+    val contentDescription: String,
+)

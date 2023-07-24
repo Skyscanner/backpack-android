@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2023 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,11 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderIcon
+import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
@@ -38,5 +42,15 @@ fun SectionHeaderStory(modifier: Modifier = Modifier) {
 internal fun DefaultSectionHeaderSample(modifier: Modifier = Modifier) {
     BpkSectionHeader(
         modifier = modifier,
+        title = "Section title",
+        description = "Description about this section",
+        button = BpkSectionHeaderButton(
+            icon = BpkSectionHeaderIcon(
+                bpkIcon = BpkIcon.Heart,
+                contentDescription = "heart icon",
+            ),
+            buttonText = "Action",
+            onClickAction = {},
+        ),
     )
 }
