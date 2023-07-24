@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
@@ -96,12 +97,8 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
 fun IconMapMarkerStory(modifier: Modifier = Modifier) {
-    val cameraPositionState = rememberCameraPositionState {
-        position = MAP_POSITION
-    }
-
     var focusedMarker by remember { mutableStateOf(0) }
-    GoogleMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = CameraPositionState(position = MAP_POSITION)) {
         BpkIconMapMarker(
             contentDescription = stringResource(R.string.map_marker_icon_landmark),
             icon = BpkIcon.Landmark,
