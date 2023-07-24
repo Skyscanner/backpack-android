@@ -22,6 +22,15 @@ Example of a SectionHeader:
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 
 BpkSectionHeader(
-    // TODO
+    title = "Section title",
+    description = "Description about this section (optional)",
+    button = BpkSectionHeaderButton(
+        icon = BpkSectionHeaderIcon(
+            bpkIcon = BpkIcon.Heart,
+            contentDescription = "heart icon",
+        ),
+        buttonText = "Action",
+        onClickAction = {},
+    ),
 )
 ```
