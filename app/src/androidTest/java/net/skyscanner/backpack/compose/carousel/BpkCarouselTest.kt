@@ -19,7 +19,11 @@
 package net.skyscanner.backpack.compose.carousel
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
@@ -32,39 +36,59 @@ import net.skyscanner.backpack.demo.R
 class BpkCarouselTest : BpkSnapshotTest() {
 
     @Test
-    fun singleImageDefault() = snap {
+    fun singleImageDefault() = snap(width = 320.dp, height = 240.dp) {
         BpkCarousel(
             state = rememberBpkCarouselState(totalImages = 1),
         ) {
-            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+            Image(
+                painter = painterResource(id = imageResAtIndex(it)),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 
     @Test
-    fun multipleImageDefault() = snap {
+    fun multipleImageDefault() = snap(width = 320.dp, height = 240.dp) {
         BpkCarousel(
             state = BpkCarouselState(totalImages = 3),
         ) {
-            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+            Image(
+                painter = painterResource(id = imageResAtIndex(it)),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 
     @Test
-    fun setCurrentImage() = snap {
+    fun setCurrentImage() = snap(width = 320.dp, height = 240.dp) {
         BpkCarousel(
             state = rememberBpkCarouselState(totalImages = 3, initialImage = 1),
         ) {
-            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+            Image(
+                painter = painterResource(id = imageResAtIndex(it)),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun multipleImageDarkMode() = snap {
+    fun multipleImageDarkMode() = snap(width = 320.dp, height = 240.dp) {
         BpkCarousel(
             state = rememberBpkCarouselState(totalImages = 2),
         ) {
-            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+            Image(
+                painter = painterResource(id = imageResAtIndex(it)),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 

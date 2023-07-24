@@ -59,7 +59,6 @@ dependencies {
     implementation libs.androidx.lifecycleViewmodel
     implementation libs.androidx.lifecycleViewmodelKtx
     implementation libs.androidx.coreKts
-    implementation libs.accompanist.pager
 
     androidTestImplementation libs.test.junitAndroid
     androidTestImplementation libs.test.rules
