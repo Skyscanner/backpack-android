@@ -15,6 +15,7 @@ threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.2"
 kotlinPoet = "1.14.2"
+ktor = "2.3.2"
 
 [libraries]
 
@@ -95,9 +96,9 @@ destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", ve
 protocol-gson = "com.google.code.gson:gson:2.10.1"
 protocol-dadb = "dev.mobile:dadb:1.2.6"
 
-http4k-bom = { group = "org.http4k", name = "http4k-bom", version = "5.2.0.0" }
-http4k-core = { group = "org.http4k", name = "http4k-core" }
-http4k-serverUnderflow = { group = "org.http4k", name = "http4k-server-undertow" }
-http4k-clientApache = { group = "org.http4k", name = "http4k-client-apache" }
+ktor-serverCore = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
+ktor-serverNetty = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-clientCore = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-clientCio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
 
 android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "androidSdkCommon" }

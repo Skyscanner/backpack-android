@@ -18,30 +18,32 @@
 
 package net.skyscanner.backpack.docs
 
-import okhttp3.HttpUrl
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.URLProtocol
+import kotlinx.coroutines.runBlocking
 
 object RemoteScreenGrab {
 
-    private val serverIp: String = "10.0.2.2"
-    private val serverPort = 8888
-    private val okHttp = OkHttpClient()
+    private const val serverIp: String = "10.0.2.2"
+    private const val serverPort = 8888
+    private val client = HttpClient(CIO)
 
-    fun takeScreenshot(component: String, type: String, file: String) {
-        val response = okHttp.newCall(
-            Request.Builder().url(
-                HttpUrl.Builder()
-                    .scheme("http")
-                    .host(serverIp)
-                    .port(serverPort)
-                    .setQueryParameter("component", component)
-                    .setQueryParameter("type", type)
-                    .setQueryParameter("file", file)
-                    .build(),
-            ).build(),
-        ).execute()
+    fun takeScreenshot(component: String, type: String, file: String) = runBlocking {
+        val response = client.get {
+            url {
+                protocol = URLProtocol.HTTP
+                host = serverIp
+                port = serverPort
+                parameter("component", component)
+                parameter("type", type)
+                parameter("file", file)
+            }
+        }
 
-        require(response.code() == 200) { "Unable to take screenshot for $component. Error code: ${response.code()}" }
+        require(response.status == HttpStatusCode.OK) { "Unable to take screenshot for $component. Error code: ${response.status}" }
     }
 }

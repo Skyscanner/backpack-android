@@ -116,6 +116,8 @@ dependencies {
     androidTestImplementation libs.test.coroutines
     androidTestImplementation libs.test.compose
     androidTestImplementation libs.test.facebookSnapshotTestingCore
+    androidTestImplementation libs.ktor.clientCore
+    androidTestImplementation libs.ktor.clientCio
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     implementation project(":meta:annotations")
