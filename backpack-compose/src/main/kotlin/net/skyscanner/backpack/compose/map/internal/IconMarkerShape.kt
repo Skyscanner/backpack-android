@@ -30,12 +30,12 @@ internal fun IconMarkerShape(): Shape =
         override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
             Outline.Generic(
                 path = Path().apply {
-                    addPath(size)
+                    addIconOutlinePath(size)
                 },
             )
     }
 
-private fun Path.addPath(
+private fun Path.addIconOutlinePath(
     size: Size,
 ) {
     val scale = size.height / ICON_HEIGHT
