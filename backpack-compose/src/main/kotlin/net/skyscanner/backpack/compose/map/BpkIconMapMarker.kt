@@ -130,5 +130,5 @@ private val DefaultIconOffset = 5.dp
 private val FocusedMarkerWidth = 32.dp
 private val FocusedMarkerHeight = 40.dp
 
-private val DefaultMarkerWidth = 24.dp
+private val DefaultMarkerWidth = 26.dp
 private val DefaultMarkerHeight = 32.dp
