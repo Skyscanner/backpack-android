@@ -60,7 +60,7 @@ fun BpkSectionHeaderImpl(
                     BpkButton(
                         icon = button.icon.bpkIcon,
                         contentDescription = button.icon.contentDescription,
-                        onClick = {},
+                        onClick = button.onClickAction,
                     )
                 }
             }
