@@ -40,6 +40,7 @@ import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescri
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
@@ -97,7 +98,7 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
     }
 
     val borderRadius = when (status) {
-        BpkPriceMarkerStatus.Focused -> 6.dp
+        BpkPriceMarkerStatus.Focused -> FocusedPadding
         else -> BpkBorderRadius.Xs
     }
 
@@ -112,18 +113,18 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
                 color = flareColor,
                 shape = FlareShape(
                     borderRadius = borderRadius,
-                    flareHeight = 6.dp,
+                    flareHeight = FlareHeight,
                     pointerDirection = BpkFlarePointerDirection.Down,
                 ),
             )
-            .padding(bottom = 6.dp),
+            .padding(bottom = FlareHeight),
     ) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .height(if (status == BpkPriceMarkerStatus.Focused) 32.dp else 24.dp)
+                .height(if (status == BpkPriceMarkerStatus.Focused) FocusedMarkerHeight else DefaultMarkerHeight)
                 .border(
-                    width = 2.dp,
+                    width = BpkBorderSize.Lg,
                     color = flareColor,
                     shape = RoundedCornerShape(borderRadius),
                 )
@@ -143,3 +144,9 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
         }
     }
 }
+
+private val FocusedMarkerHeight = 32.dp
+private val DefaultMarkerHeight = 24.dp
+
+private val FocusedPadding = 6.dp
+private val FlareHeight = 6.dp

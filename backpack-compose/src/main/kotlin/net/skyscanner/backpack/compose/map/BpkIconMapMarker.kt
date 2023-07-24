@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkIconMarkerStatus {
     Default,
@@ -92,13 +93,13 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
     }
 
     val markerSize = when (status) {
-        BpkIconMarkerStatus.Focused -> DpSize(32.dp, 40.dp)
-        else -> DpSize(26.dp, 32.dp)
+        BpkIconMarkerStatus.Focused -> DpSize(FocusedMarkerWidth, FocusedMarkerHeight)
+        else -> DpSize(DefaultMarkerWidth, DefaultMarkerHeight)
     }
 
     val iconOffset = when (status) {
-        BpkIconMarkerStatus.Focused -> 8.dp
-        else -> 5.dp
+        BpkIconMarkerStatus.Focused -> BpkSpacing.Md
+        else -> DefaultIconOffset
     }
 
     val shape = IconMarkerShape()
@@ -123,3 +124,11 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
         )
     }
 }
+
+private val DefaultIconOffset = 5.dp
+
+private val FocusedMarkerWidth = 32.dp
+private val FocusedMarkerHeight = 40.dp
+
+private val DefaultMarkerWidth = 24.dp
+private val DefaultMarkerHeight = 32.dp
