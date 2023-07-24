@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.map
 
 import androidx.annotation.RestrictTo
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -109,7 +108,6 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
         contentAlignment = Alignment.TopCenter,
         modifier = modifier
             .shadow(elevation = BpkElevation.Sm, shape = shape)
-            .background(color = backgroundColor, shape = shape)
             .border(
                 width = 1.dp,
                 color = strokeColor,
@@ -119,7 +117,7 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
     ) {
         BpkIcon(
             icon = icon,
-            contentDescription = "",
+            contentDescription = null,
             size = BpkIconSize.Small,
             tint = iconColor,
             modifier = Modifier.padding(top = iconOffset),

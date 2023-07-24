@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.map
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -42,7 +43,7 @@ class BpkPriceMapMarkerTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun disabled() = snap {
+    fun disabled() = snap(background = { BpkTheme.colors.canvasContrast }) {
         PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Disabled)
     }
 }

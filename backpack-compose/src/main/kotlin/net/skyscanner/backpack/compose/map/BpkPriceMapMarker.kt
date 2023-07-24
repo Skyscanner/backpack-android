@@ -28,7 +28,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,7 +40,6 @@ import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescri
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
@@ -103,12 +101,6 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
         else -> BpkBorderRadius.Xs
     }
 
-    val flareShape = FlareShape(
-        borderRadius = borderRadius,
-        flareHeight = 6.dp,
-        pointerDirection = BpkFlarePointerDirection.Down,
-    )
-
     val labelStyle = when (status) {
         BpkPriceMarkerStatus.Focused -> BpkTheme.typography.label1
         else -> BpkTheme.typography.label2
@@ -116,8 +108,14 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
 
     Box(
         modifier = modifier
-            .shadow(elevation = BpkElevation.Sm, shape = flareShape)
-            .background(color = flareColor, shape = flareShape)
+            .background(
+                color = flareColor,
+                shape = FlareShape(
+                    borderRadius = borderRadius,
+                    flareHeight = 6.dp,
+                    pointerDirection = BpkFlarePointerDirection.Down,
+                ),
+            )
             .padding(bottom = 6.dp),
     ) {
         Box(
@@ -133,9 +131,7 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
                     color = backgroundFillColor,
                     shape = RoundedCornerShape(borderRadius),
                 )
-                .padding(
-                    horizontal = BpkSpacing.Md,
-                ),
+                .padding(horizontal = BpkSpacing.Md),
         ) {
             BpkText(
                 text = title,
