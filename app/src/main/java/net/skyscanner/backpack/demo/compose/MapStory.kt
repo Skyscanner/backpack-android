@@ -29,7 +29,6 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
@@ -48,10 +47,6 @@ import net.skyscanner.backpack.meta.StoryKind
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Price")
 fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
-    val cameraPositionState = rememberCameraPositionState {
-        position = MAP_POSITION
-    }
-
     var focusedMarker by remember { mutableStateOf(0) }
     var viewedMarkers by remember { mutableStateOf(setOf(1)) }
 
@@ -63,32 +58,32 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
         }
     }
 
-    GoogleMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
         BpkPriceMapMarker(
             title = stringResource(R.string.map_marker_price_1),
             status = markerStatus(0),
-            state = rememberMarkerState(position = MARKER_POSITION_1),
+            state = rememberMarkerState(position = MarkerPosition1),
             onClick = { focusedMarker = 0; viewedMarkers += 0 },
         )
 
         BpkPriceMapMarker(
             title = stringResource(R.string.map_marker_price_2),
             status = markerStatus(1),
-            state = rememberMarkerState(position = MARKER_POSITION_2),
+            state = rememberMarkerState(position = MarkerPosition2),
             onClick = { focusedMarker = 1; viewedMarkers += 1 },
         )
 
         BpkPriceMapMarker(
             title = stringResource(R.string.map_marker_price_3),
             status = markerStatus(2),
-            state = rememberMarkerState(position = MARKER_POSITION_3),
+            state = rememberMarkerState(position = MarkerPosition3),
             onClick = { focusedMarker = 2; viewedMarkers += 2 },
         )
 
         BpkPriceMapMarker(
             title = stringResource(R.string.map_marker_price_4),
             status = BpkPriceMarkerStatus.Disabled,
-            state = rememberMarkerState(position = MARKER_POSITION_4),
+            state = rememberMarkerState(position = MarkerPosition4),
         )
     }
 }
@@ -98,12 +93,12 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
 fun IconMapMarkerStory(modifier: Modifier = Modifier) {
     var focusedMarker by remember { mutableStateOf(0) }
-    GoogleMap(cameraPositionState = CameraPositionState(position = MAP_POSITION)) {
+    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
         BpkIconMapMarker(
             contentDescription = stringResource(R.string.map_marker_icon_landmark),
             icon = BpkIcon.Landmark,
             status = if (focusedMarker == 0) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MARKER_POSITION_1),
+            state = rememberMarkerState(position = MarkerPosition1),
             onClick = { focusedMarker = 0 },
         )
 
@@ -111,7 +106,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
             contentDescription = stringResource(R.string.map_marker_icon_landmark),
             icon = BpkIcon.Landmark,
             status = if (focusedMarker == 1) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MARKER_POSITION_2),
+            state = rememberMarkerState(position = MarkerPosition2),
             onClick = { focusedMarker = 1 },
         )
 
@@ -119,7 +114,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
             contentDescription = stringResource(R.string.map_marker_icon_cafe),
             icon = BpkIcon.Cafe,
             status = if (focusedMarker == 2) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MARKER_POSITION_3),
+            state = rememberMarkerState(position = MarkerPosition3),
             onClick = { focusedMarker = 2 },
         )
 
@@ -127,7 +122,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
             contentDescription = stringResource(R.string.map_marker_icon_landmark),
             icon = BpkIcon.Landmark,
             status = BpkIconMarkerStatus.Disabled,
-            state = rememberMarkerState(position = MARKER_POSITION_4),
+            state = rememberMarkerState(position = MarkerPosition4),
         )
     }
 }
@@ -136,34 +131,31 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Pointer")
 fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
-    val cameraPositionState = rememberCameraPositionState {
-        position = MAP_POSITION
-    }
-    GoogleMap(cameraPositionState = cameraPositionState) {
+    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
         BpkPointerMapMarker(
             title = stringResource(R.string.map_marker_price_1),
-            state = rememberMarkerState(position = MARKER_POSITION_1),
+            state = rememberMarkerState(position = MarkerPosition1),
         )
 
         BpkPointerMapMarker(
             title = stringResource(R.string.map_marker_price_2),
-            state = rememberMarkerState(position = MARKER_POSITION_2),
+            state = rememberMarkerState(position = MarkerPosition2),
         )
 
         BpkPointerMapMarker(
             title = stringResource(R.string.map_marker_price_3),
-            state = rememberMarkerState(position = MARKER_POSITION_3),
+            state = rememberMarkerState(position = MarkerPosition3),
         )
 
         BpkPointerMapMarker(
             title = stringResource(R.string.map_marker_price_4),
-            state = rememberMarkerState(position = MARKER_POSITION_4),
+            state = rememberMarkerState(position = MarkerPosition4),
         )
     }
 }
 
-private val MAP_POSITION = CameraPosition.fromLatLngZoom(LatLng(51.528308, -0.381776), 14f)
-private val MARKER_POSITION_1 = LatLng(51.528308, -0.381776)
-private val MARKER_POSITION_2 = LatLng(51.531626, -0.376539)
-private val MARKER_POSITION_3 = LatLng(51.524563, -0.379421)
-private val MARKER_POSITION_4 = LatLng(51.532181, -0.389347)
+private val MapPosition = CameraPosition.fromLatLngZoom(LatLng(51.528308, -0.381776), 14f)
+private val MarkerPosition1 = LatLng(51.528308, -0.381776)
+private val MarkerPosition2 = LatLng(51.531626, -0.376539)
+private val MarkerPosition3 = LatLng(51.524563, -0.379421)
+private val MarkerPosition4 = LatLng(51.532181, -0.389347)
