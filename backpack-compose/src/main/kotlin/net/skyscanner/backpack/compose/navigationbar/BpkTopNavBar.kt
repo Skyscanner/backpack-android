@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.navigationbar.internal.BpkTopNavBarImpl
 import net.skyscanner.backpack.compose.navigationbar.internal.toAction
 
 sealed interface NavIcon {
-    data object None : NavIcon
+    object None : NavIcon
     data class Back(val contentDescription: String, val onClick: () -> Unit) : NavIcon
     data class Close(val contentDescription: String, val onClick: () -> Unit) : NavIcon
 }

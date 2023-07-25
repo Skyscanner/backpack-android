@@ -40,7 +40,7 @@ sealed class CalendarSelection : Serializable {
     /**
      * No dates are selected
      */
-    data object None : CalendarSelection() {
+    object None : CalendarSelection() {
         override fun contains(date: LocalDate): Boolean =
             false
     }
