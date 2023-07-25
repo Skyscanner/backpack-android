@@ -74,17 +74,17 @@ data class CalendarParams(
         /**
          * No date can be selected
          */
-        object Disabled : SelectionMode
+        data object Disabled : SelectionMode
 
         /**
          * Only a single, non-disabled date can be selected.
          */
-        object Single : SelectionMode
+        data object Single : SelectionMode
 
         /**
          * A range of dates can be selected.
          */
-        object Range : SelectionMode
+        data object Range : SelectionMode
     }
 
     /**
@@ -95,7 +95,7 @@ data class CalendarParams(
         /**
          * No whole month selection is allowed.
          */
-        object Disabled : MonthSelectionMode
+        data object Disabled : MonthSelectionMode
 
         /**
          * Only an entire month can be selected, by tapping on the [label] next to its name.

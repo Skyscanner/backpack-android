@@ -79,7 +79,7 @@ internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
     }
 
 @OptIn(ExperimentalFoundationApi::class)
-internal class BpkCarouselInternalState constructor(
+internal class BpkCarouselInternalState(
     val delegate: PagerState,
     val totalImages: Int,
 ) : BpkCarouselState, ScrollableState by delegate {

@@ -82,18 +82,18 @@ sealed class BpkCircleSizeType {
     /**
      * Small size: 32.dp
      */
-    object Small : BpkCircleSizeType()
+    data object Small : BpkCircleSizeType()
 
     /**
      * Large size: 48.dp
      */
-    object Large : BpkCircleSizeType()
+    data object Large : BpkCircleSizeType()
 
     /**
      * Custom size width dimension.
      * @param diameter unit: Dp
      */
-    class Custom(val diameter: Dp) : BpkCircleSizeType()
+    data class Custom(val diameter: Dp) : BpkCircleSizeType()
 }
 
 enum class BpkSkeletonCornerType {

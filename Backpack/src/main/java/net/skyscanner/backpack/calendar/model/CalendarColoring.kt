@@ -62,7 +62,7 @@ sealed class CalendarCellStyle {
      * the calendar.
      */
     @Deprecated("Use Calendar2 instead")
-    object Positive : CalendarCellStyle() {
+    data object Positive : CalendarCellStyle() {
         override fun color(context: Context) =
             context.getColor(R.color.bpkStatusSuccessSpot)
     }
@@ -73,7 +73,7 @@ sealed class CalendarCellStyle {
      * the calendar.
      */
     @Deprecated("Use Calendar2 instead")
-    object Neutral : CalendarCellStyle() {
+    data object Neutral : CalendarCellStyle() {
         override fun color(context: Context) =
             context.getColor(R.color.bpkStatusWarningSpot)
     }
@@ -84,7 +84,7 @@ sealed class CalendarCellStyle {
      * the calendar.
      */
     @Deprecated("Use Calendar2 instead")
-    object Negative : CalendarCellStyle() {
+    data object Negative : CalendarCellStyle() {
         override fun color(context: Context) =
             context.getColor(R.color.bpkStatusDangerSpot)
 
@@ -107,7 +107,7 @@ sealed class CalendarCellStyle {
      * @see HighlightedDaysAdapter
      */
     @Deprecated("Use Calendar2 instead")
-    object Hightlight : CalendarCellStyle() {
+    data object Hightlight : CalendarCellStyle() {
         override fun color(context: Context) =
             context.getColor(R.color.bpkLine)
     }
