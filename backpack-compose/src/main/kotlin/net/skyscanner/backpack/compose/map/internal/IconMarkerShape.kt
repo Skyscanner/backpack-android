@@ -38,11 +38,10 @@ internal fun IconMarkerShape(): Shape =
 private fun Path.addIconOutlinePath(
     size: Size,
 ) {
-    val scale = size.height / ICON_HEIGHT
-
+    val scale = size.height / IconHeight
     moveTo(32.0f * scale, 16.2575f * scale)
     lineTo(31.9995f * scale, 16.3817f * scale)
-    cubicTo(32.0032f * scale, 167936f * scale, 31.9852f * scale, 17.2038f * scale, 31.9455f * scale, 17.6093f * scale)
+    cubicTo(32.0032f * scale, 16.7936f * scale, 31.9852f * scale, 17.2038f * scale, 31.9455f * scale, 17.6093f * scale)
     cubicTo(31.7127f * scale, 20.4826f * scale, 30.7446f * scale, 23.1441f * scale, 29.2328f * scale, 25.3991f * scale)
     cubicTo(26.2125f * scale, 30.7416f * scale, 21.1896f * scale, 35.9609f * scale, 17.2875f * scale, 39.5f * scale)
     cubicTo(16.5525f * scale, 40.1667f * scale, 15.4475f * scale, 40.1667f * scale, 14.7125f * scale, 39.5f * scale)
@@ -55,4 +54,4 @@ private fun Path.addIconOutlinePath(
     close()
 }
 
-private const val ICON_HEIGHT = 40f
+private const val IconHeight = 40f

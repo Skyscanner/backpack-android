@@ -36,9 +36,10 @@ import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
-import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
 enum class BpkIconMarkerStatus {
     Default,
@@ -109,7 +110,7 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
         modifier = modifier
             .background(color = backgroundColor, shape = shape)
             .border(
-                width = 1.dp,
+                width = BpkBorderSize.Sm,
                 color = strokeColor,
                 shape = shape,
             )
