@@ -98,7 +98,7 @@ private fun LoadingButtonDemo(
 }
 
 private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
-    for (i in 0..<parent.childCount) {
+    for (i in 0 until parent.childCount) {
         val child = parent.getChildAt(i)
         when (child) {
             is ViewGroup -> makeButtonsLoadeable(child, scope)
@@ -115,7 +115,7 @@ private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
 
 private fun setButtonType(view: View, type: BpkButton.Type) {
     view.findViewById<ViewGroup>(R.id.buttonsContainer).run {
-        for (i in 0..<childCount) {
+        for (i in 0 until childCount) {
             (getChildAt(i) as? BpkButton?)?.type = type
         }
     }

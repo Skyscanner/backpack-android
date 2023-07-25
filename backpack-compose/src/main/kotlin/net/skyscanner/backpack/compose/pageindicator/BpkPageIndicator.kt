@@ -58,7 +58,7 @@ fun BpkPageIndicator(
 ) {
 
     require(totalIndicators > 1) { "totalIndicators must be greater than 1" }
-    require(currentIndex in 0..<totalIndicators) { "currentIndex must be between 0 and $totalIndicators" }
+    require(currentIndex in 0 until totalIndicators) { "currentIndex must be between 0 and $totalIndicators" }
     val indicatorSize = BpkSpacing.Md
     val indicatorBoxWidth = indicatorSize * 2
     val indicatorBoxHeight = indicatorSize * 3
@@ -95,7 +95,7 @@ fun BpkPageIndicator(
         userScrollEnabled = false,
     ) {
         itemsIndexed(
-            items = (0..<totalIndicators).toList(),
+            items = (0 until totalIndicators).toList(),
             key = { index, _ -> index.hashCode() },
         ) { index, _ ->
             PageIndicatorDot(

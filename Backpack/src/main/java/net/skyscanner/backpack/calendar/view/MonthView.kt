@@ -268,7 +268,7 @@ internal class MonthView @JvmOverloads constructor(
         monthHeaderString = controller?.getLocalizedDate(localDate, MONTH_HEADLINE_PATTERN) ?: ""
 
         numberOfDaysInMonth = getDaysInMonth(params.month, params.year)
-        for (i in 0..<numberOfDaysInMonth - getNonDrawnDaysOffset()) {
+        for (i in 0 until numberOfDaysInMonth - getNonDrawnDaysOffset()) {
             val day = i + 1
             if (controller?.isToday(params.year, params.month, day) == true) {
                 this.today = day

@@ -107,7 +107,7 @@ private fun PageIndicatorSample(
             type = buttonType,
             contentDescription = stringResource(R.string.page_indicator_prev),
         ) {
-            currentIndex = (currentIndex - 1).coerceIn(0..<totalIndicators)
+            currentIndex = (currentIndex - 1).coerceIn(0 until totalIndicators)
         }
         BpkPageIndicator(
             currentIndex = currentIndex,
@@ -119,7 +119,7 @@ private fun PageIndicatorSample(
             type = buttonType,
             contentDescription = stringResource(R.string.page_indicator_next),
         ) {
-            currentIndex = (currentIndex + 1).coerceIn(0..<totalIndicators)
+            currentIndex = (currentIndex + 1).coerceIn(0 until totalIndicators)
         }
     }
 }

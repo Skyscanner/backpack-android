@@ -158,7 +158,7 @@ internal class MonthAdapter(
         // be we want to show all three here.
         val totalMonths = Period.between(controller.startDate, controller.endDate).toTotalMonths().toInt() + 1
 
-        return (0..<totalMonths).fold(mutableListOf()) { acc, position ->
+        return (0 until totalMonths).fold(mutableListOf()) { acc, position ->
             val positionWithStart = position + controller.startDate.month.value - 1
             val month = positionWithStart % MONTHS_IN_YEAR + 1
             val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year

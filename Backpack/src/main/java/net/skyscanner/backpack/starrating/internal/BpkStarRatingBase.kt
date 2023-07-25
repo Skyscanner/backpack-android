@@ -123,13 +123,13 @@ open class BpkStarRatingBase internal constructor(
 
         val diff = maxRating - childCount
         if (diff > 0) {
-            for (i in 0..<diff) {
+            for (i in 0 until diff) {
                 val view = View(context)
                 view.background = BpkStar(empty, half, full)
                 addView(view, starSize, starSize)
             }
         } else if (diff < 0) {
-            for (i in 0..<-diff) {
+            for (i in 0 until -diff) {
                 removeViewAt(0)
             }
         }
@@ -140,7 +140,7 @@ open class BpkStarRatingBase internal constructor(
             RoundingType.Nearest -> round(rating * 2) / 2
         }
 
-        for (i in 0..<maxRating) {
+        for (i in 0 until maxRating) {
             val child = getChildAt(i)
             val background = child.background as BpkStar
             val value = (roundedRating - i).coerceIn(0f, 1f)

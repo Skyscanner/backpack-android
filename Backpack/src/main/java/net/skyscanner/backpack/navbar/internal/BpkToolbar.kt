@@ -62,7 +62,7 @@ internal class BpkToolbar @JvmOverloads constructor(
     }
 
     private fun tintMenu(menu: Menu) {
-        for (i in 0..<menu.size()) {
+        for (i in 0 until menu.size()) {
             val item = menu.getItem(i)
             val icon = item.icon
             if (icon != null) {

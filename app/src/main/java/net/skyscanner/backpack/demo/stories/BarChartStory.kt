@@ -55,7 +55,7 @@ private val random = Random(18735)
 private fun createMonth(month: Int) = BpkBarChart.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
     items = mutableListOf<BpkBarChart.Column>().apply {
-        for (dayOfTheMonth in 0..<30) {
+        for (dayOfTheMonth in 0 until 30) {
             add(createBar(month * 30 + dayOfTheMonth))
         }
     },

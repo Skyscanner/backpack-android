@@ -34,7 +34,7 @@ import net.skyscanner.backpack.toast.BpkToast
 fun InteractiveStarRatingStory(modifier: Modifier = Modifier) =
     AndroidLayout(R.layout.fragment_star_rating_interactive, modifier) {
         this as ViewGroup
-        (0..<childCount).forEach { idx ->
+        (0 until childCount).forEach { idx ->
             val child = getChildAt(idx)
             if (child is BpkInteractiveStarRating) {
                 child.onRatingChangedListener = { current, max ->

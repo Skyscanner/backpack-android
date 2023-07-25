@@ -119,7 +119,7 @@ class CalendarCellsLayoutTests {
                 val numDaysInJan = 31
                 val firstIndex = 7
                 val lastDayIndex = firstIndex + numDaysInJan
-                for (i in firstIndex..<lastDayIndex) {
+                for (i in firstIndex until lastDayIndex) {
                     val cell = state.cells[i] as CalendarCell.Day
                     assertEquals(i - firstIndex + 1, cell.date.dayOfMonth)
                     assertEquals(Month.JANUARY, cell.date.month)

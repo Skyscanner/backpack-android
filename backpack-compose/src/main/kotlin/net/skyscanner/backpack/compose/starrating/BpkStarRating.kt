@@ -141,7 +141,7 @@ private fun BpkStarRating(
             contentDescription = contentDescription,
         ),
     ) {
-        for (item in 0..<numberOfStars) {
+        for (item in 0 until numberOfStars) {
             key(item) {
                 val value = (roundedRating - item).coerceIn(0f, 1f)
                 val starModifier = Modifier
