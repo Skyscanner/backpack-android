@@ -147,7 +147,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         setTabTextColors(textColor, textSelectedColor)
         setSelectedTabIndicatorColor(indicatorColor)
         isInlineLabel = true
-        for (i in 0 until tabCount) {
+        for (i in 0..<tabCount) {
             updateTab(i)
         }
     }

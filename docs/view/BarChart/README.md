@@ -48,7 +48,7 @@ Here's some basic example in Kotlin:
 fun createGroup() = BpkBarChart.Group(
   title = "Group Title",
   items = mutableListOf<BpkBarChart.Column>().apply {
-    for (i in 0 until 10) {
+    for (i in 0 ..< 10) {
       add(BpkBarChart.Column(
         title = "Bar Title",
         subtitle = "Bar Subtitle",
