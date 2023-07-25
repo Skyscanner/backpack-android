@@ -1,13 +1,13 @@
 [versions]
-kotlin = "1.8.21"
-ksp = "1.8.21-1.0.11" # depends on Kotlin version
-composeCompiler = "1.4.7" # depends on Kotlin version
+kotlin = "1.9.0"
+ksp = "1.9.0-1.0.12" # depends on Kotlin version
+composeCompiler = "1.5.0" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.8.42-beta" # update this alongside with compiler version
 
-androidPlugin = "7.4.2"
-lint = "30.4.2"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "30.4.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.0.2"
+lint = "31.0.2"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.0.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.0"
 lifecycle = "2.6.1"
