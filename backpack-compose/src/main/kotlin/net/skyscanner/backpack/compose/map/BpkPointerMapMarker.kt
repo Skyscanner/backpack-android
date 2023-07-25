@@ -18,19 +18,16 @@
 
 package net.skyscanner.backpack.compose.map
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
 import androidx.annotation.RestrictTo
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalDensity
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
@@ -38,6 +35,7 @@ import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
 @Composable
 fun BpkPointerMapMarker(
@@ -49,7 +47,9 @@ fun BpkPointerMapMarker(
     onClick: (Marker) -> Boolean = { false },
     onInfoWindowClick: (Marker) -> Unit = {},
 ) {
-    val iconBitmap = rememberPointer()
+    val iconBitmap = rememberCapturedComposeBitmapDescriptor {
+        PointerMarkerLayout()
+    }
 
     MarkerInfoWindow(
         state = state,
@@ -68,50 +68,14 @@ fun BpkPointerMapMarker(
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun rememberPointer(): BitmapDescriptor {
-    val bm = rememberPointerBitmap()
-    return remember(bm) {
-        BitmapDescriptorFactory.fromBitmap(bm)
-    }
-}
-
-@Composable
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun rememberPointerBitmap(): Bitmap {
-    val size = with(LocalDensity.current) { BpkSpacing.Base.toPx() }
-    val strokeWidth = with(LocalDensity.current) { BpkBorderSize.Lg.toPx() }
-    val fillColor = BpkTheme.colors.coreAccent
-    val strokeColor = BpkTheme.colors.surfaceDefault
-    return remember {
-        createPointer(size, strokeWidth, fillColor, strokeColor)
-    }
-}
-
-private fun createPointer(size: Float, strokeWidth: Float, fillColor: Color, strokeColor: Color): Bitmap {
-    val radius = size / 2
-    val strokePath = Path().apply {
-        addCircle(radius, radius, radius, Path.Direction.CW)
-    }
-
-    val fillPath = Path().apply {
-        addCircle(radius, radius, radius - strokeWidth, Path.Direction.CW)
-    }
-
-    val bm = Bitmap.createBitmap(size.toInt(), size.toInt(), Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(bm)
-
-    val fillPaint = Paint().apply {
-        style = Paint.Style.FILL
-        isAntiAlias = true
-        color = fillColor.toArgb()
-    }
-
-    val strokePaint = Paint().apply {
-        style = Paint.Style.FILL
-        isAntiAlias = true
-        color = strokeColor.toArgb()
-    }
-    canvas.drawPath(strokePath, strokePaint)
-    canvas.drawPath(fillPath, fillPaint)
-    return bm
+fun PointerMarkerLayout(modifier: Modifier = Modifier) {
+    Box(
+        modifier
+            .size(BpkSpacing.Base)
+            .border(
+                border = BorderStroke(BpkBorderSize.Lg, BpkTheme.colors.surfaceDefault),
+                shape = CircleShape,
+            )
+            .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
+    )
 }

@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.compose.map
 
-import androidx.compose.foundation.Image
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -31,6 +29,6 @@ class BpkPointerMapMarkerTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap(background = { BpkTheme.colors.canvasContrast }) {
-        Image(rememberPointerBitmap().asImageBitmap(), contentDescription = null)
+        PointerMarkerLayout()
     }
 }
