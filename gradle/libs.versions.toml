@@ -22,7 +22,7 @@ ktor = "2.3.2"
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.8.20"
-plugin-shot = "com.karumi:shot:5.14.1"
+plugin-shot = "com.karumi:shot:6.0.0"
 plugin-nexusPublishing = "io.github.gradle-nexus:publish-plugin:1.3.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
