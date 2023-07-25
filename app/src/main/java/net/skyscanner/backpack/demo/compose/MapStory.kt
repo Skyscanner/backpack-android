@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -50,41 +51,22 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
     var focusedMarker by remember { mutableStateOf(0) }
     var viewedMarkers by remember { mutableStateOf(setOf(1)) }
 
-    fun markerStatus(index: Int): BpkPriceMarkerStatus {
-        return when {
-            index == focusedMarker -> BpkPriceMarkerStatus.Focused
-            viewedMarkers.contains(index) -> BpkPriceMarkerStatus.Viewed
-            else -> BpkPriceMarkerStatus.Default
-        }
+    fun markerStatus(index: Int): BpkPriceMarkerStatus = when {
+        index == 3 -> BpkPriceMarkerStatus.Disabled
+        index == focusedMarker -> BpkPriceMarkerStatus.Focused
+        viewedMarkers.contains(index) -> BpkPriceMarkerStatus.Viewed
+        else -> BpkPriceMarkerStatus.Default
     }
 
-    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
-        BpkPriceMapMarker(
-            title = stringResource(R.string.map_marker_price_1),
-            status = markerStatus(0),
-            state = rememberMarkerState(position = MarkerPosition1),
-            onClick = { focusedMarker = 0; viewedMarkers += 0 },
-        )
-
-        BpkPriceMapMarker(
-            title = stringResource(R.string.map_marker_price_2),
-            status = markerStatus(1),
-            state = rememberMarkerState(position = MarkerPosition2),
-            onClick = { focusedMarker = 1; viewedMarkers += 1 },
-        )
-
-        BpkPriceMapMarker(
-            title = stringResource(R.string.map_marker_price_3),
-            status = markerStatus(2),
-            state = rememberMarkerState(position = MarkerPosition3),
-            onClick = { focusedMarker = 2; viewedMarkers += 2 },
-        )
-
-        BpkPriceMapMarker(
-            title = stringResource(R.string.map_marker_price_4),
-            status = BpkPriceMarkerStatus.Disabled,
-            state = rememberMarkerState(position = MarkerPosition4),
-        )
+    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkPriceMapMarker(
+                title = stringArrayResource(R.array.map_marker_prices)[index],
+                status = markerStatus(index),
+                state = rememberMarkerState(position = latLng),
+                onClick = { focusedMarker = index; viewedMarkers += index },
+            )
+        }
     }
 }
 
@@ -93,37 +75,22 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
 fun IconMapMarkerStory(modifier: Modifier = Modifier) {
     var focusedMarker by remember { mutableStateOf(0) }
-    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
-        BpkIconMapMarker(
-            contentDescription = stringResource(R.string.map_marker_icon_landmark),
-            icon = BpkIcon.Landmark,
-            status = if (focusedMarker == 0) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MarkerPosition1),
-            onClick = { focusedMarker = 0 },
-        )
 
-        BpkIconMapMarker(
-            contentDescription = stringResource(R.string.map_marker_icon_landmark),
-            icon = BpkIcon.Landmark,
-            status = if (focusedMarker == 1) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MarkerPosition2),
-            onClick = { focusedMarker = 1 },
-        )
-
-        BpkIconMapMarker(
-            contentDescription = stringResource(R.string.map_marker_icon_cafe),
-            icon = BpkIcon.Cafe,
-            status = if (focusedMarker == 2) BpkIconMarkerStatus.Focused else BpkIconMarkerStatus.Default,
-            state = rememberMarkerState(position = MarkerPosition3),
-            onClick = { focusedMarker = 2 },
-        )
-
-        BpkIconMapMarker(
-            contentDescription = stringResource(R.string.map_marker_icon_landmark),
-            icon = BpkIcon.Landmark,
-            status = BpkIconMarkerStatus.Disabled,
-            state = rememberMarkerState(position = MarkerPosition4),
-        )
+    fun markerStatus(index: Int): BpkIconMarkerStatus = when {
+        index == 3 -> BpkIconMarkerStatus.Disabled
+        index == focusedMarker -> BpkIconMarkerStatus.Focused
+        else -> BpkIconMarkerStatus.Default
+    }
+    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkIconMapMarker(
+                contentDescription = stringResource(if (index == 2) R.string.map_marker_icon_cafe else R.string.map_marker_icon_landmark),
+                status = markerStatus(index),
+                icon = if (index == 2) BpkIcon.Cafe else BpkIcon.Landmark,
+                state = rememberMarkerState(position = latLng),
+                onClick = { focusedMarker = index },
+            )
+        }
     }
 }
 
@@ -131,31 +98,20 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Pointer")
 fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
-    GoogleMap(cameraPositionState = CameraPositionState(position = MapPosition)) {
-        BpkPointerMapMarker(
-            title = stringResource(R.string.map_marker_price_1),
-            state = rememberMarkerState(position = MarkerPosition1),
-        )
-
-        BpkPointerMapMarker(
-            title = stringResource(R.string.map_marker_price_2),
-            state = rememberMarkerState(position = MarkerPosition2),
-        )
-
-        BpkPointerMapMarker(
-            title = stringResource(R.string.map_marker_price_3),
-            state = rememberMarkerState(position = MarkerPosition3),
-        )
-
-        BpkPointerMapMarker(
-            title = stringResource(R.string.map_marker_price_4),
-            state = rememberMarkerState(position = MarkerPosition4),
-        )
+    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkPointerMapMarker(
+                title = stringArrayResource(R.array.map_marker_prices)[index],
+                state = rememberMarkerState(position = latLng),
+            )
+        }
     }
 }
 
 private val MapPosition = CameraPosition.fromLatLngZoom(LatLng(51.528308, -0.381776), 14f)
-private val MarkerPosition1 = LatLng(51.528308, -0.381776)
-private val MarkerPosition2 = LatLng(51.531626, -0.376539)
-private val MarkerPosition3 = LatLng(51.524563, -0.379421)
-private val MarkerPosition4 = LatLng(51.532181, -0.389347)
+private val MarkerPositions = listOf(
+    LatLng(51.528308, -0.381776),
+    LatLng(51.531626, -0.376539),
+    LatLng(51.524563, -0.379421),
+    LatLng(51.532181, -0.389347),
+)

@@ -290,10 +290,12 @@
     <string name="maps_markers_badges">Badges</string>
     <string name="maps_markers_badges_with_icons">With icons</string>
     <string name="map_markers">Map markers</string>
-    <string name="map_marker_price_1">£195</string>
-    <string name="map_marker_price_2">£145</string>
-    <string name="map_marker_price_3">£236</string>
-    <string name="map_marker_price_4">£99</string>
+    <array name="map_marker_prices">
+        <item>£195</item>
+        <item>£145</item>
+        <item>£236</item>
+        <item>£99</item>
+    </array>
     <string name="map_marker_icon_landmark">Landmark</string>
     <string name="map_marker_icon_cafe">Cafe</string>
 
