@@ -6,7 +6,7 @@
             <corners
                 android:topLeftRadius="@dimen/bpkBorderRadiusLg"
                 android:topRightRadius="@dimen/bpkBorderRadiusLg" />
-            <padding android:top="@dimen/bpkSpacingLg" />
+            <padding android:top="@dimen/bpkBorderRadiusSm" />
         </shape>
     </item>
     <item
@@ -16,8 +16,8 @@
             <solid android:color="@color/bpkLine" />
             <corners android:radius="@dimen/bpkBorderRadiusSm" />
             <size
-                android:width="35dp"
-                android:height="2dp" />
+                android:width="40dp"
+                android:height="4dp" />
             <padding android:top="12dp" />
         </shape>
     </item>

@@ -37,11 +37,11 @@ internal fun BpkBottomSheetHandle(
     Spacer(
         modifier = modifier
             .height(HandleHeight)
-            .padding(BpkSpacing.Md)
+            .padding(top = BpkSpacing.Md, bottom = 12.dp)
             .width(HandleWidth)
             .background(BpkTheme.colors.line, CircleShape),
     )
 }
 
-private val HandleWidth = 36.dp
-internal val HandleHeight = 20.dp
+private val HandleWidth = 40.dp
+internal val HandleHeight = 24.dp
