@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.sectionheader
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.internal.BpkSectionHeaderImpl
 
 @Composable
@@ -28,18 +27,18 @@ fun BpkSectionHeader(
     title: String,
     modifier: Modifier = Modifier,
     description: String? = null,
-    button: BpkSectionHeaderButton? = null,
+    buttonText: String? = null,
+    onClick: (() -> Unit)? = null,
+    type: BpkSectionHeaderType = BpkSectionHeaderType.Default,
 ) {
-    BpkSectionHeaderImpl(modifier = modifier, title = title, description = description, button = button)
+    BpkSectionHeaderImpl(
+        title = title,
+        modifier = modifier,
+        description = description,
+        buttonText = buttonText,
+        onClick = onClick ?: {},
+        type = type,
+    )
 }
 
-class BpkSectionHeaderButton(
-    val icon: BpkSectionHeaderIcon,
-    val buttonText: String,
-    val onClickAction: () -> Unit,
-)
-
-class BpkSectionHeaderIcon(
-    val bpkIcon: BpkIcon,
-    val contentDescription: String,
-)
+enum class BpkSectionHeaderType { Default, OnDark }

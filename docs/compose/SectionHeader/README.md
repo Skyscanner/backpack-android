@@ -10,27 +10,77 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SectionHeader/screenshots/default.png" alt="SectionHeader component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SectionHeader/screenshots/default_dm.png" alt="SectionHeader component - dark mode" width="375" /> |
 
+## On Dark
+
+| Day | Night |
+| --- | --- |
+
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
 ## Usage
 
-Example of a SectionHeader:
+### Basic section header with a title.
+If you don't specify a `style` parameter it will use the `.default` type
+
+### Basic section header with a title.
 
 ```Kotlin
-import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
-
 BpkSectionHeader(
-    title = "Section title",
-    description = "Description about this section (optional)",
-    button = BpkSectionHeaderButton(
-        icon = BpkSectionHeaderIcon(
-            bpkIcon = BpkIcon.Heart,
-            contentDescription = "heart icon",
-        ),
-        buttonText = "Action",
-        onClickAction = {},
-    ),
-)
+        modifier = modifier
+            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
+        title = stringResource(R.string.section_header_title),
+    )
+```
+
+### Section header with a title and description.
+
+```Kotlin
+fun SectionHeaderWithDescriptionStory(modifier: Modifier = Modifier) {
+    BpkSectionHeader(
+        modifier = modifier
+            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+    )
+}
+```
+
+### Section header with a title, description and trailing button.
+
+```Kotlin
+fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    BpkSectionHeader(
+        modifier = modifier
+            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+        buttonText = stringResource(R.string.section_header_button_text),
+        onClick = {
+            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+        },
+    )
+}
+```
+
+### Section header with a title, description, trailing button and onDark style.
+
+```Kotlin
+fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    BpkSectionHeader(
+        modifier = modifier
+            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+        buttonText = stringResource(R.string.section_header_button_text),
+        onClick = {
+            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+        },
+        type = OnDark,
+    )
+}
 ```

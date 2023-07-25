@@ -26,8 +26,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 fun isTablet(): Boolean {
     val configuration = LocalConfiguration.current
     return if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        configuration.screenWidthDp > 840
+        configuration.screenWidthDp > 768
     } else {
-        configuration.screenWidthDp > 600
+        configuration.screenWidthDp > 513
     }
 }

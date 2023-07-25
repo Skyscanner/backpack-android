@@ -22,55 +22,88 @@ import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
-import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
-import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderIcon
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Heart
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @SectionHeaderComponent
 @ComposeStory("Default")
-fun PreViewDefault(modifier: Modifier = Modifier) {
+fun SectionHeaderStory(modifier: Modifier = Modifier) {
     BpkSectionHeader(
-        modifier = modifier
-            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
-        title = "Section title",
-        description = "Description about this section (optional)",
+        title = stringResource(R.string.section_header_title),
     )
 }
 
 @Composable
 @SectionHeaderComponent
-@ComposeStory("Default with Button")
-fun PreViewWithButton(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
-
+@ComposeStory("OnDark")
+fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
     BpkSectionHeader(
-        modifier = modifier
-            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
-        title = "Section title",
-        description = "Description about this section (optional)",
-        button = BpkSectionHeaderButton(
-            icon = BpkSectionHeaderIcon(
-                bpkIcon = BpkIcon.Heart,
-                contentDescription = "heart icon",
-            ),
-            buttonText = "Action",
-            onClickAction = {
-                Toast.makeText(context, "Click!", Toast.LENGTH_SHORT).show()
-            },
-        ),
+        title = stringResource(R.string.section_header_title),
+        type = OnDark,
+    )
+}
+
+@Composable
+@SectionHeaderComponent
+@ComposeStory("Default with Description")
+fun SectionHeaderWithDescriptionStory(modifier: Modifier = Modifier) {
+    BpkSectionHeader(
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+    )
+}
+
+@Composable
+@SectionHeaderComponent
+@ComposeStory("OnDark with Description")
+fun SectionHeaderOnDarkWithDescriptionStory(modifier: Modifier = Modifier) {
+    BpkSectionHeader(
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+        type = OnDark,
+    )
+}
+
+@Composable
+@SectionHeaderComponent
+@ComposeStory("Default with Description and Button")
+fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    BpkSectionHeader(
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+        buttonText = stringResource(R.string.section_header_button_text),
+        onClick = {
+            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+        },
+    )
+}
+
+@Composable
+@SectionHeaderComponent
+@ComposeStory("OnDark with Description and Button")
+fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    BpkSectionHeader(
+        title = stringResource(R.string.section_header_title),
+        description = stringResource(R.string.section_header_description),
+        buttonText = stringResource(R.string.section_header_button_text),
+        onClick = {
+            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+        },
+        type = OnDark,
     )
 }
 
@@ -100,26 +133,33 @@ fun PreViewWithButton(modifier: Modifier = Modifier) {
 private fun PreViewTablet(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Column(
-        modifier = modifier
-            .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Md),
-        verticalArrangement = Arrangement.spacedBy(16.dp),) {
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
         BpkSectionHeader(
-            title = "Section title",
-            description = "Description about this section (optional)",
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
         )
         BpkSectionHeader(
-            title = "Section title",
-            description = "Description about this section (optional)",
-            button = BpkSectionHeaderButton(
-                icon = BpkSectionHeaderIcon(
-                    bpkIcon = BpkIcon.Heart,
-                    contentDescription = "heart icon",
-                ),
-                buttonText = "Action",
-                onClickAction = {
-                    Toast.makeText(context, "Click!", Toast.LENGTH_SHORT).show()
-                },
-            ),
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            type = OnDark,
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {
+                BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+            },
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {
+                BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
+            },
+            type = OnDark,
         )
     }
 }

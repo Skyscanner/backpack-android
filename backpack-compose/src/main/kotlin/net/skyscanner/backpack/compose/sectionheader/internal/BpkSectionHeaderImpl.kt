@@ -18,32 +18,40 @@
 
 package net.skyscanner.backpack.compose.sectionheader.internal
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
+import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.Default
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.ArrowRight
 import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
 fun BpkSectionHeaderImpl(
     title: String,
+    type: BpkSectionHeaderType,
     description: String?,
-    button: BpkSectionHeaderButton?,
+    onClick: (() -> Unit)?,
+    buttonText: String?,
     modifier: Modifier = Modifier,
 ) {
     val isTablet = isTablet()
-
     Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+        modifier = modifier
+            .background(getBackgroundColor(type = type)),
+        horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,
     ) {
         Column(
@@ -57,31 +65,62 @@ fun BpkSectionHeaderImpl(
                 } else {
                     BpkTheme.typography.heading3
                 },
-                color = BpkTheme.colors.textPrimary,
+                color = getTextColor(type),
             )
             if (!description.isNullOrBlank()) {
                 BpkText(
                     text = description,
                     style = BpkTheme.typography.bodyDefault,
-                    color = BpkTheme.colors.textPrimary,
+                    color = getTextColor(type),
                 )
             }
         }
-        button?.let {
+        buttonText?.let {
             Row {
-                if (isTablet && it.buttonText.isNotBlank()) {
+                if (isTablet && buttonText.isNotBlank()) {
                     BpkButton(
-                        text = button.buttonText,
-                        onClick = button.onClickAction,
+                        text = buttonText,
+                        onClick = { onClick?.invoke() },
+                        type = getButtonType(type),
                     )
                 } else {
                     BpkButton(
-                        icon = button.icon.bpkIcon,
-                        contentDescription = button.icon.contentDescription,
-                        onClick = button.onClickAction,
+                        icon = BpkIcon.ArrowRight,
+                        contentDescription = buttonText,
+                        onClick = { onClick?.invoke() },
+                        type = getButtonType(type),
                     )
                 }
             }
         }
     }
 }
+
+fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
+    val size = if (tablet) {
+        48.dp
+    } else {
+        24.dp
+    }
+    return Arrangement.spacedBy(size)
+}
+
+@Composable
+fun getTextColor(type: BpkSectionHeaderType): Color =
+    when (type) {
+        Default -> BpkTheme.colors.textPrimary
+        OnDark -> BpkTheme.colors.textOnDark
+    }
+
+fun getButtonType(type: BpkSectionHeaderType): BpkButtonType =
+    when (type) {
+        Default -> BpkButtonType.Primary
+        OnDark -> BpkButtonType.PrimaryOnDark
+    }
+
+@Composable
+fun getBackgroundColor(type: BpkSectionHeaderType): Color =
+    when (type) {
+        Default -> BpkTheme.colors.canvas
+        OnDark -> BpkTheme.colors.surfaceContrast
+    }

@@ -330,4 +330,10 @@
     <string name="progress_bar_large_stepped">Large stepped</string>
     <string name="progress_bar_decrease">Decrease</string>
     <string name="progress_bar_increase">Increase</string>
+
+    <string name="section_header_title">Section title</string>
+    <string name="section_header_description">Description about this section (optional)</string>
+    <string name="section_header_button_text">Action</string>
+    <string name="section_header_icon_content_description">heart icon</string>
+    <string name="section_header_button_click_feedback_msg">Click!</string>
 </resources>

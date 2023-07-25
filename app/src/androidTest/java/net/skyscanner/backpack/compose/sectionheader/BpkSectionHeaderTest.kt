@@ -18,38 +18,82 @@
 
 package net.skyscanner.backpack.compose.sectionheader
 
-import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.Variants
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.Heart
+import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
 class BpkSectionHeaderTest : BpkSnapshotTest() {
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun default() = snap {
         BpkSectionHeader(
-            title = "Section title",
-            description = "Description about this section (optional)",
+            title = stringResource(R.string.section_header_title),
         )
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun defaultWithDescription() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+        )
+    }
+
+    @Test
     fun defaultWithButton() = snap {
         BpkSectionHeader(
-            title = "Section title",
-            description = "Description about this section (optional)",
-            button = BpkSectionHeaderButton(
-                icon = BpkSectionHeaderIcon(
-                    bpkIcon = BpkIcon.Heart,
-                    contentDescription = "heart icon",
-                ),
-                buttonText = "Action",
-                onClickAction = {},
-            ),
+            title = stringResource(R.string.section_header_title),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {},
+        )
+    }
+
+    @Test
+    fun defaultWithDescriptionAndButton() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {},
+        )
+    }
+
+    @Test
+    fun onDark() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            type = BpkSectionHeaderType.OnDark,
+        )
+    }
+
+    @Test
+    fun onDarkWithDescription() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            type = BpkSectionHeaderType.OnDark,
+        )
+    }
+
+    @Test
+    fun onDarkWithButton() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {},
+            type = BpkSectionHeaderType.OnDark,
+        )
+    }
+
+    @Test
+    fun onDarkWithDescriptionAndButton() = snap {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            buttonText = stringResource(R.string.section_header_button_text),
+            onClick = {},
+            type = BpkSectionHeaderType.OnDark,
         )
     }
 }
