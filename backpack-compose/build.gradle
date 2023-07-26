@@ -54,8 +54,10 @@ dependencies {
     api libs.compose.foundation
     api libs.compose.uiToolingPreview
     api libs.compose.uiUtil
-    implementation libs.compose.material3
+    api libs.google.maps
+    api libs.google.mapsCompose
 
+    implementation libs.compose.material3
     implementation libs.androidx.lifecycleViewmodel
     implementation libs.androidx.lifecycleViewmodelKtx
     implementation libs.androidx.coreKts
