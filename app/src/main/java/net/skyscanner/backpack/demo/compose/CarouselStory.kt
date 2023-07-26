@@ -53,7 +53,6 @@ fun CarouselStory(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        BpkText(text = stringResource(id = R.string.carousel_multiple_items))
         CarouselSample(totalImages = 4)
     }
 }
