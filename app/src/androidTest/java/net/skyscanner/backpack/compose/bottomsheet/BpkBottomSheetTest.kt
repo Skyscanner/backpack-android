@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
@@ -48,7 +49,9 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
     @Test
     fun modal() {
-        snap(height = 400.dp, padding = 0.dp) {
+        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
             ModalBottomSheetStory()
         }
     }
