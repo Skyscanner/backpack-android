@@ -37,7 +37,7 @@ fun rememberBpkBottomSheetState(
         confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
         skipHiddenState = true,
     )
-    return remember { BpkBottomSheetState(delegate) }
+    return remember(delegate) { BpkBottomSheetState(delegate) }
 }
 
 enum class BpkBottomSheetValue {

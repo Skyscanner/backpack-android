@@ -36,7 +36,7 @@ fun rememberBpkModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
         confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
     )
-    return remember { BpkModalBottomSheetState(delegate) }
+    return remember(delegate) { BpkModalBottomSheetState(delegate) }
 }
 
 enum class BpkModalBottomSheetValue {
