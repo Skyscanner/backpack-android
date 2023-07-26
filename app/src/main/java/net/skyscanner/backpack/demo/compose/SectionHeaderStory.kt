@@ -21,15 +21,16 @@ package net.skyscanner.backpack.demo.compose
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -38,69 +39,55 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @SectionHeaderComponent
 @ComposeStory("Default")
 fun SectionHeaderStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-    )
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
+        )
+    }
 }
 
 @Composable
 @SectionHeaderComponent
 @ComposeStory("OnDark")
 fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-        type = OnDark,
-    )
-}
-
-@Composable
-@SectionHeaderComponent
-@ComposeStory("Default with Description")
-fun SectionHeaderWithDescriptionStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-        description = stringResource(R.string.section_header_description),
-    )
-}
-
-@Composable
-@SectionHeaderComponent
-@ComposeStory("OnDark with Description")
-fun SectionHeaderOnDarkWithDescriptionStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-        description = stringResource(R.string.section_header_description),
-        type = OnDark,
-    )
-}
-
-@Composable
-@SectionHeaderComponent
-@ComposeStory("Default with Description and Button")
-fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-        description = stringResource(R.string.section_header_description),
-        button = BpkSectionHeaderButton(
-            text = stringResource(R.string.section_header_button_text),
-            onClick = {},
-        ),
-    )
-}
-
-@Composable
-@SectionHeaderComponent
-@ComposeStory("OnDark with Description and Button")
-fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
-    BpkSectionHeader(
-        title = stringResource(R.string.section_header_title),
-        description = stringResource(R.string.section_header_description),
-        button = BpkSectionHeaderButton(
-            text = stringResource(R.string.section_header_button_text),
-            onClick = {},
-        ),
-        type = OnDark,
-    )
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            type = OnDark,
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            type = OnDark,
+        )
+        BpkSectionHeader(
+            title = stringResource(R.string.section_header_title),
+            description = stringResource(R.string.section_header_description),
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
+            type = OnDark,
+        )
+    }
 }
 
 @Preview(
@@ -128,7 +115,8 @@ fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifi
 @Composable
 private fun PreViewTablet(modifier: Modifier = Modifier) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),

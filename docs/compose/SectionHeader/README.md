@@ -25,8 +25,6 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 ### Basic section header with a title.
 If you don't specify a `style` parameter it will use the `.default` type
 
-### Basic section header with a title.
-
 ```Kotlin
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
