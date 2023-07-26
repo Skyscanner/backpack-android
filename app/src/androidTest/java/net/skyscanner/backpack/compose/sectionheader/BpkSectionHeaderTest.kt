@@ -44,8 +44,10 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     fun defaultWithButton() = snap {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
-            buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {},
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
         )
     }
 
@@ -54,8 +56,10 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
-            buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {},
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
         )
     }
 
@@ -80,8 +84,10 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     fun onDarkWithButton() = snap {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
-            buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {},
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
             type = BpkSectionHeaderType.OnDark,
         )
     }
@@ -91,8 +97,10 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
-            buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {},
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
             type = BpkSectionHeaderType.OnDark,
         )
     }
