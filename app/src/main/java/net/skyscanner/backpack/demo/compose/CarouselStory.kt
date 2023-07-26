@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,6 +53,7 @@ fun CarouselStory(
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
         CarouselSample(totalImages = 4)
     }
