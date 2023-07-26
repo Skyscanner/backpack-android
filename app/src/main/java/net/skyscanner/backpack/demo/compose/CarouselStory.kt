@@ -48,7 +48,10 @@ fun CarouselStory(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base),
+            .padding(
+                horizontal = BpkSpacing.Base,
+                vertical = BpkSpacing.Base,
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
