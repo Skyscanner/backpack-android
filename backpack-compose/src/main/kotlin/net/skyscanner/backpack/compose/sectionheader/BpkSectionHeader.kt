@@ -27,18 +27,21 @@ fun BpkSectionHeader(
     title: String,
     modifier: Modifier = Modifier,
     description: String? = null,
-    buttonText: String? = null,
-    onClick: (() -> Unit)? = null,
+    button: BpkSectionHeaderButton? = null,
     type: BpkSectionHeaderType = BpkSectionHeaderType.Default,
 ) {
     BpkSectionHeaderImpl(
         title = title,
         modifier = modifier,
         description = description,
-        buttonText = buttonText,
-        onClick = onClick ?: {},
+        button = button,
         type = type,
     )
 }
+
+class BpkSectionHeaderButton(
+    val text: String,
+    val onClick: (() -> Unit),
+)
 
 enum class BpkSectionHeaderType { Default, OnDark }

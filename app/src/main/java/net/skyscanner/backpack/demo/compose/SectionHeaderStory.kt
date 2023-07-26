@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
@@ -80,7 +81,10 @@ fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
-        buttonText = stringResource(R.string.section_header_button_text),
+        button = BpkSectionHeaderButton(
+            text = stringResource(R.string.section_header_button_text),
+            onClick = {},
+        ),
     )
 }
 
@@ -91,7 +95,10 @@ fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifi
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
-        buttonText = stringResource(R.string.section_header_button_text),
+        button = BpkSectionHeaderButton(
+            text = stringResource(R.string.section_header_button_text),
+            onClick = {},
+        ),
         type = OnDark,
     )
 }
@@ -135,12 +142,18 @@ private fun PreViewTablet(modifier: Modifier = Modifier) {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
-            buttonText = stringResource(R.string.section_header_button_text),
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
         )
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
-            buttonText = stringResource(R.string.section_header_button_text),
+            button = BpkSectionHeaderButton(
+                text = stringResource(R.string.section_header_button_text),
+                onClick = {},
+            ),
             type = OnDark,
         )
     }

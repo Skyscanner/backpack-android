@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.Default
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
@@ -43,8 +44,7 @@ fun BpkSectionHeaderImpl(
     title: String,
     type: BpkSectionHeaderType,
     description: String?,
-    onClick: (() -> Unit)?,
-    buttonText: String?,
+    button: BpkSectionHeaderButton?,
     modifier: Modifier = Modifier,
 ) {
     val isTablet = isTablet()
@@ -75,19 +75,19 @@ fun BpkSectionHeaderImpl(
                 )
             }
         }
-        buttonText?.let {
+        button?.let {
             Row {
-                if (isTablet && buttonText.isNotBlank()) {
+                if (isTablet) {
                     BpkButton(
-                        text = buttonText,
-                        onClick = { onClick?.invoke() },
+                        text = it.text,
+                        onClick = { it.onClick.invoke() },
                         type = getButtonType(type),
                     )
                 } else {
                     BpkButton(
                         icon = BpkIcon.ArrowRight,
-                        contentDescription = buttonText,
-                        onClick = { onClick?.invoke() },
+                        contentDescription = it.text,
+                        onClick = { it.onClick.invoke() },
                         type = getButtonType(type),
                     )
                 }
