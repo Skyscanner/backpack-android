@@ -84,10 +84,11 @@ private fun CarouselSample(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(
                 id = when (it) {
-                    0 -> R.drawable.canadian_rockies_canada
-                    1 -> R.drawable.beach
-                    2 -> R.drawable.city
-                    else -> R.drawable.canadian_rockies_canada
+                    0 -> R.drawable.carousel_placeholder_1
+                    1 -> R.drawable.carousel_placeholder_2
+                    2 -> R.drawable.carousel_placeholder_3
+                    3 -> R.drawable.carousel_placeholder_4
+                    else -> R.drawable.carousel_placeholder_1
                 },
             ),
             contentDescription = "Image $it",
