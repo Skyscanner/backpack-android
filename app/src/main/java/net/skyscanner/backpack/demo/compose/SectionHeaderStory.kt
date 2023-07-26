@@ -19,12 +19,10 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.res.Configuration
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +32,6 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @SectionHeaderComponent
@@ -80,14 +77,10 @@ fun SectionHeaderOnDarkWithDescriptionStory(modifier: Modifier = Modifier) {
 @SectionHeaderComponent
 @ComposeStory("Default with Description and Button")
 fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
         buttonText = stringResource(R.string.section_header_button_text),
-        onClick = {
-            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
-        },
     )
 }
 
@@ -95,14 +88,10 @@ fun SectionHeaderWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
 @SectionHeaderComponent
 @ComposeStory("OnDark with Description and Button")
 fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
         buttonText = stringResource(R.string.section_header_button_text),
-        onClick = {
-            BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
-        },
         type = OnDark,
     )
 }
@@ -131,7 +120,6 @@ fun SectionHeaderOnDarkWithDescriptionAndButtonStory(modifier: Modifier = Modifi
 @SectionHeaderComponent
 @Composable
 private fun PreViewTablet(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -148,17 +136,11 @@ private fun PreViewTablet(modifier: Modifier = Modifier) {
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
             buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {
-                BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
-            },
         )
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
             buttonText = stringResource(R.string.section_header_button_text),
-            onClick = {
-                BpkToast.makeText(context, R.string.section_header_button_click_feedback_msg, Toast.LENGTH_SHORT).show()
-            },
             type = OnDark,
         )
     }
