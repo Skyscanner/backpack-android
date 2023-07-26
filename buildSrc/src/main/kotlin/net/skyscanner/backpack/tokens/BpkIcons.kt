@@ -72,7 +72,7 @@ data class BpkIcon(
                     }
                     folder.listFiles()!!.map { file ->
                         val stream = ByteArrayOutputStream()
-                        Svg2Vector.parseSvgToXml(file, stream)
+                        Svg2Vector.parseSvgToXml(file.toPath(), stream)
                         BpkIcon(
                             name = transformIconName(file.name),
                             type = type,
