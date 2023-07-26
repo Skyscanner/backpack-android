@@ -111,21 +111,19 @@ fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
     locale = "en",
     device = Devices.TABLET,
 )
-@SectionHeaderComponent
 @Composable
-private fun PreViewTablet(modifier: Modifier = Modifier) {
+@SectionHeaderComponent
+private fun SectionHeaderTabletStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
-            description = stringResource(R.string.section_header_description),
         )
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
-            type = OnDark,
         )
         BpkSectionHeader(
             title = stringResource(R.string.section_header_title),

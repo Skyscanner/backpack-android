@@ -12,8 +12,10 @@
 
 ## On Dark
 
-| Day | Night |
-| --- | --- |
+| Day                                                                                                                                                                          | Night                                                                                                                                                                                       |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SectionHeader/screenshots/ondark.png" alt="SectionHeader component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SectionHeader/screenshots/ondark_dm.png" alt="SectionHeader component - dark mode" width="375" /> |
+
 
 
 ## Installation
