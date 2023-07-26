@@ -54,7 +54,7 @@ fun CarouselStory(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         BpkText(text = stringResource(id = R.string.carousel_multiple_items))
-        CarouselSample(totalImages = 3)
+        CarouselSample(totalImages = 4)
     }
 }
 
