@@ -66,11 +66,17 @@ private fun CarouselSample(
     initialImage: Int = 0,
     showCurrentPageLabel: Boolean = false,
 ) {
-    val pagerState = rememberBpkCarouselState(totalImages = totalImages, initialImage = initialImage)
+    val pagerState = rememberBpkCarouselState(
+        totalImages = totalImages,
+        initialImage = initialImage,
+    )
 
     if (showCurrentPageLabel) {
         BpkText(
-            text = stringResource(R.string.carousel_current_image, pagerState.currentPage),
+            text = stringResource(
+                R.string.carousel_current_image,
+                pagerState.currentPage,
+            ),
             style = BpkTheme.typography.caption,
         )
     }
