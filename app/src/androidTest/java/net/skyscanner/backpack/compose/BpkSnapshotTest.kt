@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.compose
 
 import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
@@ -91,11 +89,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
         scenario.onActivity { activity ->
             activity.setContent {
                 @Suppress("DEPRECATION")
-                activity.window.clearFlags(
-                    FLAG_TRANSLUCENT_STATUS or
-                        SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                        SYSTEM_UI_FLAG_LAYOUT_STABLE,
-                )
+                activity.window.addFlags(SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
                 BackpackDemoTheme {
                     CompositionLocalProvider(*providers) {
                         Box(

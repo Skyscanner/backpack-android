@@ -21,70 +21,78 @@ package net.skyscanner.backpack.compose.bottomsheet
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberStandardBottomSheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun rememberBpkBottomSheetState(
-    initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
-    confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
-): BpkBottomSheetState {
-    val delegate = rememberStandardBottomSheetState(
-        initialValue = initialValue.toBottomSheetValue(),
+fun rememberBpkModalBottomSheetState(
+    skipPartiallyExpanded: Boolean = false,
+    confirmStateChange: (BpkModalBottomSheetValue) -> Boolean = { true },
+): BpkModalBottomSheetState {
+    val delegate = rememberModalBottomSheetState(
+        skipPartiallyExpanded = skipPartiallyExpanded,
         confirmValueChange = { confirmStateChange(it.toBpkBottomSheetValue()) },
-        skipHiddenState = true,
     )
-    return remember(delegate) { BpkBottomSheetState(delegate) }
+    return remember(delegate) { BpkModalBottomSheetState(delegate) }
 }
 
-enum class BpkBottomSheetValue {
+enum class BpkModalBottomSheetValue {
     Collapsed,
     Expanded,
+    Hidden,
 }
 
 @Stable
 @OptIn(ExperimentalMaterial3Api::class)
-class BpkBottomSheetState internal constructor(
+class BpkModalBottomSheetState internal constructor(
     internal val delegate: SheetState,
 ) {
 
     constructor(
-        initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
-        confirmValueChange: (BpkBottomSheetValue) -> Boolean = { true },
+        initialValue: BpkModalBottomSheetValue = BpkModalBottomSheetValue.Hidden,
+        confirmValueChange: (BpkModalBottomSheetValue) -> Boolean = { true },
     ) : this(
         SheetState(
             skipPartiallyExpanded = false,
-            skipHiddenState = true,
+            skipHiddenState = false,
             initialValue = initialValue.toBottomSheetValue(),
             confirmValueChange = { confirmValueChange(it.toBpkBottomSheetValue()) },
         ),
     )
 
-    val currentValue: BpkBottomSheetValue
+    val currentValue: BpkModalBottomSheetValue
         get() = delegate.currentValue.toBpkBottomSheetValue()
 
-    val targetValue: BpkBottomSheetValue
+    val targetValue: BpkModalBottomSheetValue
         get() = delegate.targetValue.toBpkBottomSheetValue()
+
+    val isVisible: Boolean
+        get() = delegate.isVisible
 
     suspend fun expand() = delegate.expand()
 
     suspend fun collapse() = delegate.partialExpand()
+
+    suspend fun show() = delegate.show()
+
+    suspend fun hide() = delegate.hide()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-private fun SheetValue.toBpkBottomSheetValue(): BpkBottomSheetValue =
+private fun SheetValue.toBpkBottomSheetValue(): BpkModalBottomSheetValue =
     when (this) {
-        SheetValue.PartiallyExpanded -> BpkBottomSheetValue.Collapsed
-        SheetValue.Expanded -> BpkBottomSheetValue.Expanded
-        SheetValue.Hidden -> error("Hidden state is not supported")
+        SheetValue.PartiallyExpanded -> BpkModalBottomSheetValue.Collapsed
+        SheetValue.Expanded -> BpkModalBottomSheetValue.Expanded
+        SheetValue.Hidden -> BpkModalBottomSheetValue.Hidden
     }
 
 @OptIn(ExperimentalMaterial3Api::class)
-private fun BpkBottomSheetValue.toBottomSheetValue(): SheetValue =
+private fun BpkModalBottomSheetValue.toBottomSheetValue(): SheetValue =
     when (this) {
-        BpkBottomSheetValue.Collapsed -> SheetValue.PartiallyExpanded
-        BpkBottomSheetValue.Expanded -> SheetValue.Expanded
+        BpkModalBottomSheetValue.Collapsed -> SheetValue.PartiallyExpanded
+        BpkModalBottomSheetValue.Expanded -> SheetValue.Expanded
+        BpkModalBottomSheetValue.Hidden -> SheetValue.Hidden
     }
