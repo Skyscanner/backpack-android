@@ -218,6 +218,7 @@
     <string name="generic_no_price">No Price</string>
     <string name="generic_price">Price</string>
     <string name="generic_departures">Departures</string>
+    <string name="generic_show">Show</string>
 
     <string name="nudger_minus_disabled">Minus Disabled</string>
     <string name="nudger_plus_disabled">Plus Disabled</string>

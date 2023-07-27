@@ -19,18 +19,28 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
+import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BottomSheetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -48,13 +58,7 @@ fun BottomSheetStory(
         modifier = modifier,
         state = state,
         peekHeight = 56.dp * 3,
-        sheetContent = { contentPadding ->
-            LazyColumn(contentPadding = contentPadding) {
-                items(100) {
-                    ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
-                }
-            }
-        },
+        sheetContent = { SheetContent() },
         content = { contentPadding ->
             Spacer(
                 modifier = Modifier
@@ -64,4 +68,40 @@ fun BottomSheetStory(
             )
         },
     )
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(name = "Modal")
+fun ModalBottomSheetStory(
+    modifier: Modifier = Modifier,
+) {
+    var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+    val state = rememberBpkModalBottomSheetState()
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = BpkSpacing.Xxl),
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkButton(text = stringResource(R.string.generic_show)) {
+            openBottomSheet = true
+        }
+    }
+    if (openBottomSheet) {
+        BpkModalBottomSheet(
+            state = state,
+            content = { SheetContent() },
+            onDismissRequest = { openBottomSheet = false },
+        )
+    }
+}
+
+@Composable
+fun SheetContent(modifier: Modifier = Modifier) {
+    LazyColumn(modifier) {
+        items(100) {
+            ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
+        }
+    }
 }
