@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowRight
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
@@ -80,14 +81,14 @@ fun BpkSectionHeaderImpl(
                 if (isTablet) {
                     BpkButton(
                         text = it.text,
-                        onClick = { it.onClick.invoke() },
+                        onClick = { it.onClick },
                         type = getButtonType(type),
                     )
                 } else {
                     BpkButton(
                         icon = BpkIcon.ArrowRight,
                         contentDescription = it.text,
-                        onClick = { it.onClick.invoke() },
+                        onClick = { it.onClick },
                         type = getButtonType(type),
                     )
                 }
@@ -98,9 +99,9 @@ fun BpkSectionHeaderImpl(
 
 fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
     val size = if (tablet) {
-        48.dp
+        BpkSpacing.Lg.times(2)
     } else {
-        24.dp
+        BpkSpacing.Lg
     }
     return Arrangement.spacedBy(size)
 }

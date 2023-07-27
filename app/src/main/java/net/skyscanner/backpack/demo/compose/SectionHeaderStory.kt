@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -30,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SectionHeaderComponent
@@ -66,7 +68,9 @@ fun SectionHeaderStory(modifier: Modifier = Modifier) {
 @ComposeStory("OnDark")
 fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .background(BpkTheme.colors.surfaceContrast)
+            .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkSectionHeader(
@@ -132,15 +136,6 @@ private fun SectionHeaderTabletStory(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.section_header_button_text),
                 onClick = {},
             ),
-        )
-        BpkSectionHeader(
-            title = stringResource(R.string.section_header_title),
-            description = stringResource(R.string.section_header_description),
-            button = BpkSectionHeaderButton(
-                text = stringResource(R.string.section_header_button_text),
-                onClick = {},
-            ),
-            type = OnDark,
         )
     }
 }
