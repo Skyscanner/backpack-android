@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -56,7 +55,7 @@ fun BpkSectionHeaderImpl(
         verticalAlignment = Alignment.Top,
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm, Alignment.Top),
             horizontalAlignment = Alignment.Start,
         ) {
             BpkText(
@@ -97,7 +96,20 @@ fun BpkSectionHeaderImpl(
     }
 }
 
-fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
+@Composable
+private fun getBackgroundColor(type: BpkSectionHeaderType): Color =
+    when (type) {
+        Default -> BpkTheme.colors.canvas
+        OnDark -> BpkTheme.colors.surfaceContrast
+    }
+
+private fun getButtonType(type: BpkSectionHeaderType): BpkButtonType =
+    when (type) {
+        Default -> BpkButtonType.Primary
+        OnDark -> BpkButtonType.PrimaryOnDark
+    }
+
+private fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
     val size = if (tablet) {
         BpkSpacing.Lg.times(2)
     } else {
@@ -107,21 +119,8 @@ fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical 
 }
 
 @Composable
-fun getTextColor(type: BpkSectionHeaderType): Color =
+private fun getTextColor(type: BpkSectionHeaderType): Color =
     when (type) {
         Default -> BpkTheme.colors.textPrimary
         OnDark -> BpkTheme.colors.textOnDark
-    }
-
-fun getButtonType(type: BpkSectionHeaderType): BpkButtonType =
-    when (type) {
-        Default -> BpkButtonType.Primary
-        OnDark -> BpkButtonType.PrimaryOnDark
-    }
-
-@Composable
-fun getBackgroundColor(type: BpkSectionHeaderType): Color =
-    when (type) {
-        Default -> BpkTheme.colors.canvas
-        OnDark -> BpkTheme.colors.surfaceContrast
     }

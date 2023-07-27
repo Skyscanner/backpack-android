@@ -24,5 +24,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 @Composable
 fun isTablet(): Boolean {
     val configuration = LocalConfiguration.current
-    return configuration.screenWidthDp > 513
+    return configuration.screenWidthDp > SMALL_TABLET_WIDTH
 }
+
+const val SMALL_TABLET_WIDTH = 513

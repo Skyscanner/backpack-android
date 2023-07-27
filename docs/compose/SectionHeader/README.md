@@ -28,6 +28,8 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 If you don't specify a `style` parameter it will use the `.default` type
 
 ```Kotlin
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
     )
@@ -36,6 +38,8 @@ If you don't specify a `style` parameter it will use the `.default` type
 ### Section header with a title and description.
 
 ```Kotlin
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
@@ -45,6 +49,8 @@ If you don't specify a `style` parameter it will use the `.default` type
 ### Section header with a title, description and trailing button.
 
 ```Kotlin
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
@@ -58,6 +64,8 @@ If you don't specify a `style` parameter it will use the `.default` type
 ### Section header with a title, description, trailing button and onDark style.
 
 ```Kotlin
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
         description = stringResource(R.string.section_header_description),
