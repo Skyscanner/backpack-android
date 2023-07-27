@@ -25,7 +25,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import net.skyscanner.backpack.demo.compose.ModalBottomSheetStory
+import net.skyscanner.backpack.demo.compose.SheetContent
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -52,7 +52,10 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
-            ModalBottomSheetStory()
+            BpkModalBottomSheet(
+                content = { SheetContent() },
+                onDismissRequest = {},
+            )
         }
     }
 }
