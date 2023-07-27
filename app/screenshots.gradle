@@ -48,7 +48,7 @@ task stopScreenshotsServer() {
 
 // disable gradle caching for recording screenshots
 tasks.withType(ManagedDeviceInstrumentationTestTask) {
-    outputs.upToDateWhen { deviceName.get() != "Docs" }
+    outputs.upToDateWhen { device.get().name != "Docs" }
 }
 
 task recordScreenshots() {

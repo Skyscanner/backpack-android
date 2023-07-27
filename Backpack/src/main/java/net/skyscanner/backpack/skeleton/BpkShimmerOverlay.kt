@@ -56,11 +56,11 @@ class BpkShimmerOverlay @JvmOverloads constructor(
 
     private fun startShimmer() {
         // Use ObjectAnimator to draw the animation for translationX, translate the position from left to right.
-        ObjectAnimator.ofFloat(findViewById(R.id.bpk_skeleton_shimmer), "translationX", -500f, 500f).apply {
-            duration = 1000 // Per specification.
-            repeatCount = ObjectAnimator.INFINITE
-            startDelay = 200 // Per specification.
-            start()
-        }
+        ObjectAnimator.ofFloat(findViewById(R.id.bpk_skeleton_shimmer), "translationX", -500f, 500f)
+            .apply {
+                duration = 1000 // Per specification.
+                repeatCount = ObjectAnimator.INFINITE
+                startDelay = 200 // Per specification.
+            }.start()
     }
 }
