@@ -81,14 +81,14 @@ fun BpkSectionHeaderImpl(
                 if (isTablet) {
                     BpkButton(
                         text = it.text,
-                        onClick = { it.onClick },
+                        onClick = it.onClick,
                         type = getButtonType(type),
                     )
                 } else {
                     BpkButton(
                         icon = BpkIcon.ArrowRight,
                         contentDescription = it.text,
-                        onClick = { it.onClick },
+                        onClick = it.onClick,
                         type = getButtonType(type),
                     )
                 }
