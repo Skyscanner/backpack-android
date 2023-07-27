@@ -16,9 +16,9 @@ dependencies {
     implementation(libs.google.guava)
     implementation(libs.protocol.gson)
 
-    implementation(platform(libs.http4k.bom))
-    implementation(libs.http4k.core)
-    implementation(libs.http4k.serverUnderflow)
-    implementation(libs.http4k.clientApache)
+    implementation(libs.ktor.serverCore)
+    implementation(libs.ktor.serverNetty)
+    implementation(libs.ktor.clientCore)
+    implementation(libs.ktor.clientCio)
     implementation(libs.protocol.dadb)
 }

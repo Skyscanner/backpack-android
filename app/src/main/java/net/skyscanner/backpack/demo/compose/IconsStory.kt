@@ -23,6 +23,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
@@ -43,7 +45,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -60,6 +61,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @Composable
 @IconComponent
 @ComposeStory
+@OptIn(ExperimentalLayoutApi::class)
 fun IconsStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.padding(BpkSpacing.Base),

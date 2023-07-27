@@ -18,16 +18,13 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -42,11 +39,9 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun CardWrapperStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .background(BpkTheme.colors.line)
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-
         CardWrapperExample(Modifier.fillMaxWidth())
     }
 }
@@ -55,14 +50,16 @@ fun CardWrapperStory(modifier: Modifier = Modifier) {
 private fun CardWrapperExample(modifier: Modifier = Modifier) {
     BpkCardWrapper(
         modifier = modifier.fillMaxWidth(),
-        backgroundColor = BpkTheme.colors.coreEco,
+        backgroundColor = BpkTheme.colors.coreAccent,
         headerContent = {
             Column() {
                 BpkText(
-                    modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
-                    text = stringResource(id = R.string.card_wrapper_header),
-                    style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(BpkSpacing.Base, BpkSpacing.Md),
+                    color = BpkTheme.colors.textPrimaryInverse,
+                    text = stringResource(id = R.string.card_wrapper_title),
+                    style = BpkTheme.typography.label1,
                 )
             }
         },
@@ -71,18 +68,15 @@ private fun CardWrapperExample(modifier: Modifier = Modifier) {
                 BpkText(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(BpkSpacing.Xxl),
-                    text = stringResource(id = R.string.card_wrapper_card),
-                    style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
+                        .padding(bottom = BpkSpacing.Md),
+                    text = stringResource(id = R.string.lets_explore_title),
+                    style = BpkTheme.typography.heading5,
                 )
                 BpkText(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(BpkSpacing.Xxl),
-                    text = stringResource(id = R.string.card_wrapper_card),
+                        .fillMaxWidth(),
+                    text = stringResource(id = R.string.lets_explore_text),
                     style = BpkTheme.typography.bodyDefault,
-                    textAlign = TextAlign.Center,
                 )
             }
         },

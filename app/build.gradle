@@ -31,6 +31,7 @@ if (rootProject.file("local.properties").exists()) {
 }
 
 android {
+    namespace 'net.skyscanner.backpack'
     defaultConfig {
         applicationId 'net.skyscanner.backpack'
         versionCode 1
@@ -99,13 +100,11 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libs.square.picasso
-    implementation libs.accompanist.flowLayout
     implementation libs.androidx.lifecycleKtx
     implementation libs.androidx.lifecycleRuntimeCompose
     implementation libs.compose.activity
     implementation libs.kotlin.reflection
     implementation libs.destinations.core
-    implementation libs.accompanist.pager
     testImplementation libs.test.junit
     debugImplementation libs.compose.uiToolingTestManifest
     androidTestImplementation libs.compose.foundation
@@ -118,6 +117,8 @@ dependencies {
     androidTestImplementation libs.test.coroutines
     androidTestImplementation libs.test.compose
     androidTestImplementation libs.test.facebookSnapshotTestingCore
+    androidTestImplementation libs.ktor.clientCore
+    androidTestImplementation libs.ktor.clientCio
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     implementation project(":meta:annotations")
