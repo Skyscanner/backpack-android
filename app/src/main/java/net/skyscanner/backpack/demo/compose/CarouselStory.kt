@@ -19,12 +19,11 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,22 +48,14 @@ fun CarouselStory(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base)
-            .verticalScroll(rememberScrollState()),
+            .padding(
+                horizontal = BpkSpacing.Base,
+                vertical = BpkSpacing.Base,
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
-
-        BpkText(text = stringResource(id = R.string.carousel_only_1_item))
-        CarouselSample(totalImages = 1)
-
-        BpkText(text = stringResource(id = R.string.carousel_multiple_items))
-        CarouselSample(totalImages = 3)
-
-        BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
-        CarouselSample(totalImages = 3, initialImage = 2)
-
-        BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
-        CarouselSample(totalImages = 3, initialImage = 1, showCurrentPageLabel = true)
+        CarouselSample(totalImages = 4)
     }
 }
 
@@ -75,11 +66,17 @@ private fun CarouselSample(
     initialImage: Int = 0,
     showCurrentPageLabel: Boolean = false,
 ) {
-    val pagerState = rememberBpkCarouselState(totalImages = totalImages, initialImage = initialImage)
+    val pagerState = rememberBpkCarouselState(
+        totalImages = totalImages,
+        initialImage = initialImage,
+    )
 
     if (showCurrentPageLabel) {
         BpkText(
-            text = stringResource(R.string.carousel_current_image, pagerState.currentPage),
+            text = stringResource(
+                R.string.carousel_current_image,
+                pagerState.currentPage,
+            ),
             style = BpkTheme.typography.caption,
         )
     }
@@ -94,10 +91,11 @@ private fun CarouselSample(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(
                 id = when (it) {
-                    0 -> R.drawable.canadian_rockies_canada
-                    1 -> R.drawable.beach
-                    2 -> R.drawable.city
-                    else -> R.drawable.canadian_rockies_canada
+                    0 -> R.drawable.carousel_placeholder_1
+                    1 -> R.drawable.carousel_placeholder_2
+                    2 -> R.drawable.carousel_placeholder_3
+                    3 -> R.drawable.carousel_placeholder_4
+                    else -> R.drawable.carousel_placeholder_1
                 },
             ),
             contentDescription = "Image $it",

@@ -274,9 +274,6 @@
     <string name="card_wrapper_header">Card Wrapper header</string>
     <string name="card_wrapper_card">Card Wrapper card</string>
 
-    <string name="carousel_only_1_item">Single Image</string>
-    <string name="carousel_multiple_items">Multiple Images</string>
-    <string name="carousel_start_at_different_index">Start at the end</string>
     <string name="carousel_image_change_callback">Image change callback</string>
     <string name="carousel_current_image">Current Image: %s</string>
 
