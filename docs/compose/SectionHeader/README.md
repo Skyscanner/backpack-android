@@ -50,6 +50,7 @@ If you don't specify a `style` parameter it will use the `.default` type
 
 ```Kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
@@ -65,6 +66,7 @@ If you don't specify a `style` parameter it will use the `.default` type
 
 ```Kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),

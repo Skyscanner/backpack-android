@@ -40,7 +40,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
-fun BpkSectionHeaderImpl(
+internal fun BpkSectionHeaderImpl(
     title: String,
     type: BpkSectionHeaderType,
     description: String?,

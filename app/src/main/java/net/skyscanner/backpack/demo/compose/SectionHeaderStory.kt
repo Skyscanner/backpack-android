@@ -22,6 +22,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -42,7 +43,9 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory("Default")
 fun SectionHeaderStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkSectionHeader(
@@ -70,6 +73,7 @@ fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .background(BpkTheme.colors.surfaceContrast)
+            .fillMaxSize()
             .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
