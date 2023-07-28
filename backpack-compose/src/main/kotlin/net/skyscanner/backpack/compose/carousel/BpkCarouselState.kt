@@ -38,7 +38,7 @@ sealed interface BpkCarouselState : ScrollableState {
     @get:IntRange(from = 0)
     val currentPage: Int
 
-    val currentPageOffset: Float
+    val currentPageOffsetFraction: Float
 
     suspend fun animateScrollToPage(
         @IntRange(from = 0) page: Int,
@@ -93,7 +93,7 @@ internal class BpkCarouselInternalState constructor(
     override val currentPage: Int
         get() = getModdedPageNumber(delegate.currentPage, totalImages)
 
-    override val currentPageOffset: Float
+    override val currentPageOffsetFraction: Float
         get() = delegate.currentPageOffsetFraction
 
     override suspend fun animateScrollToPage(page: Int, pageOffset: Float) =

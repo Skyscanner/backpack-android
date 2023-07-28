@@ -10,6 +10,12 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
+## Modal
+
+| Day                                                                                                                                                                           | Night                                                                                                                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal.png" alt="Modal BottomSheet component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal_dm.png" alt="Modal BottomSheet component - dark mode" width="375" /> |
+
 
 ## Installation
 
@@ -29,14 +35,7 @@ val state = rememberBpkBottomSheetState()
 BpkBottomSheet(
   state = state,
   peekHeight = HeightOfCollapsedBottomSheet,
-  sheetContent = { contentPadding ->
-    // content of the bottom sheet
-    // you need to apply content padding to avoid displaying content behind the handle
-    // here's an example:
-    Box(Modifier.padding(contentPadding)) {
-      // this content will respect the paddings
-    }
-  },
+  sheetContent = { /* content of the bottom sheet */ },
   content = { contentPadding ->
     // content displayed behind bottom sheet
     // you should apply content padding to avoid displaying content behind collapsed bottom sheet
@@ -50,4 +49,23 @@ BpkBottomSheet(
     }
   }
 )
+```
+
+Example of a Modal Bottom Sheet:
+
+```Kotlin
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
+
+var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+val state = rememberBpkModalBottomSheetState()
+
+if (openBottomSheet) {
+    BpkModalBottomSheet(
+        state = state,
+        content = { /* content of the bottom sheet */ },
+        onDismissRequest = { openBottomSheet = false },
+    )
+}
 ```

@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
+import net.skyscanner.backpack.demo.compose.SheetContent
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -42,6 +44,18 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     fun expanded() {
         snap(height = 400.dp, padding = 0.dp) {
             BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
+        }
+    }
+
+    @Test
+    fun modal() {
+        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
+            BpkModalBottomSheet(
+                content = { SheetContent() },
+                onDismissRequest = {},
+            )
         }
     }
 }
