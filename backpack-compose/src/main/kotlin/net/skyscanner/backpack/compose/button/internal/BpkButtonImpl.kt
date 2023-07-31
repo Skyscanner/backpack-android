@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.button.internal
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
@@ -52,6 +56,7 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -63,15 +68,31 @@ internal fun BpkButtonImpl(
     enabled: Boolean = true,
     loading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    contentDescription: String? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
+    val clickable = enabled && !loading
+
     CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
         Button(
             onClick = onClick,
-            enabled = enabled && !loading,
+            enabled = clickable,
             modifier = modifier
                 .defaultMinSize(BpkSpacing.Sm, size.minHeight)
-                .requiredHeight(size.minHeight),
+                .requiredHeight(size.minHeight)
+                .applyIf(contentDescription != null) {
+                    then(
+                        Modifier
+                            .clickable(
+                                enabled = clickable,
+                                onClick = onClick,
+                                role = Role.Button,
+                            )
+                            .clearAndSetSemantics {
+                                this.contentDescription = contentDescription!!
+                            },
+                    )
+                },
             interactionSource = interactionSource,
             colors = ButtonDefaults.buttonColors(
                 containerColor = type.backgroundColor(interactionSource),
