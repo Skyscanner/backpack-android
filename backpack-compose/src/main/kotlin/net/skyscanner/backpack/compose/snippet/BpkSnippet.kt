@@ -24,9 +24,25 @@ import net.skyscanner.backpack.compose.snippet.internal.BpkSnippetImpl
 
 @Composable
 fun BpkSnippet(
+    imageOrientation: ImageOrientation,
     modifier: Modifier = Modifier,
+    headline: String? = null,
+    description: String? = null,
+    bodyText: String? = null,
+    onClick: (() -> Unit)? = null,
+    content: @Composable (() -> Unit),
 ) {
     BpkSnippetImpl(
         modifier = modifier,
+        content = content,
+        imageOrientation = imageOrientation,
+        headline = headline,
+        description = description,
+        bodyText = bodyText,
+        onClick = onClick,
     )
+}
+
+enum class ImageOrientation {
+    Landscape, Square, Portrait
 }

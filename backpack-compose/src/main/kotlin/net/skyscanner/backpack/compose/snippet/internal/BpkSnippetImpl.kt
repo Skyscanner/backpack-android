@@ -18,11 +18,78 @@
 
 package net.skyscanner.backpack.compose.snippet.internal
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.snippet.ImageOrientation
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkSnippetImpl(
+    content: @Composable (() -> Unit),
+    imageOrientation: ImageOrientation,
+    headline: String?,
+    description: String?,
+    bodyText: String?,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)?,
 ) {
+    Column(
+        modifier = modifier
+            .apply {
+                padding(horizontal = BpkSpacing.Lg)
+                if (onClick != null) {
+                    clickable(onClick = onClick)
+                }
+            },
+    ) {
+        Box(
+            modifier = Modifier
+                .aspectRatio(getAspectRatio(imageOrientation)),
+        ) {
+            content()
+        }
+        if (!headline.isNullOrBlank()) {
+            BpkText(
+                text = headline,
+                style = BpkTheme.typography.heading4,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
+        if (!description.isNullOrBlank()) {
+            BpkText(
+                text = description,
+                style = BpkTheme.typography.subheading,
+                color = BpkTheme.colors.textPrimary,
+            )
+            Spacer(modifier = Modifier.height(BpkSpacing.Xl))
+        }
+        if (!bodyText.isNullOrBlank()) {
+            BpkText(
+                text = bodyText,
+                style = BpkTheme.typography.bodyDefault,
+                color = BpkTheme.colors.textPrimary,
+            )
+            Spacer(modifier = Modifier.height(BpkSpacing.Base))
+        }
+    }
 }
+
+fun getAspectRatio(imageOrientation: ImageOrientation): Float =
+    when (imageOrientation) {
+        ImageOrientation.Landscape -> IMAGE_RATIO_LANDSCAPE
+        ImageOrientation.Square -> IMAGE_RATIO_SQUARE
+        ImageOrientation.Portrait -> IMAGE_RATIO_PORTRAIT
+    }
+
+const val IMAGE_RATIO_LANDSCAPE: Float = 3 / 2f
+const val IMAGE_RATIO_SQUARE: Float = 1f
+const val IMAGE_RATIO_PORTRAIT: Float = 5 / 7f
