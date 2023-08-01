@@ -328,4 +328,11 @@
     <string name="progress_bar_large_stepped">Large stepped</string>
     <string name="progress_bar_decrease">Decrease</string>
     <string name="progress_bar_increase">Increase</string>
+
+    <string name="snippet_headline">Headline Text</string>
+    <string name="snippet_description">Description</string>
+    <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
+                "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti." +
+                "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."</string>
+    <string name="snippet_image_content_description">Image</string>
 </resources>
