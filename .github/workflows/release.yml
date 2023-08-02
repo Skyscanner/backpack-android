@@ -91,7 +91,6 @@ jobs:
           token: ${{secrets.APP_CENTER_TOKEN}}
           group: Everyone
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
-          silent: true
           releaseNotes: Version ${{github.event.release.tag_name}}
 
   SupernovaPublish:
