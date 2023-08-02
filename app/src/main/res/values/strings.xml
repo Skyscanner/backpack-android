@@ -115,6 +115,7 @@
     <string name="button_increased">%s increased</string>
     <string name="button_short_text">Short Text</string>
     <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
+    <string name="button_custom_content_description">Custom Content Description</string>
 
     <string name="toggle_default">Default</string>
     <string name="toggle_indeterminate">Indeterminate</string>
