@@ -222,6 +222,7 @@ private fun ButtonsRow(
                 enabled = enabled,
                 loading = loading,
                 onClick = ::load,
+                contentDescription = stringResource(R.string.button_custom_content_description),
             )
         }
 

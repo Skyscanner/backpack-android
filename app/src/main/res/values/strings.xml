@@ -115,6 +115,7 @@
     <string name="button_increased">%s increased</string>
     <string name="button_short_text">Short Text</string>
     <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
+    <string name="button_custom_content_description">Custom Content Description</string>
 
     <string name="toggle_default">Default</string>
     <string name="toggle_indeterminate">Indeterminate</string>
@@ -328,7 +329,13 @@
     <string name="progress_bar_large_stepped">Large stepped</string>
     <string name="progress_bar_decrease">Decrease</string>
     <string name="progress_bar_increase">Increase</string>
-
+    
+    <string name="section_header_title">Section title</string>
+    <string name="section_header_description">Description about this section (optional)</string>
+    <string name="section_header_button_text">Action</string>
+    <string name="section_header_icon_content_description">heart icon</string>
+    <string name="section_header_button_click_feedback_msg">Click!</string>
+  
     <string name="snippet_headline">Headline Text</string>
     <string name="snippet_description">Description</string>
     <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
