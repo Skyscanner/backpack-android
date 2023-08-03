@@ -22,11 +22,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -36,11 +38,12 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @SnippetComponent
-@ComposeStory("Portrait")
-fun SnippetPortraitStory(modifier: Modifier = Modifier) {
+@ComposeStory("Landscape")
+fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier,
-        imageOrientation = ImageOrientation.Portrait,
+        modifier = modifier
+            .width(MOBILE_WIDTH.dp),
+        imageOrientation = ImageOrientation.Landscape,
         headline = stringResource(R.string.snippet_headline),
         description = stringResource(R.string.snippet_description),
         bodyText = stringResource(R.string.snippet_body),
@@ -52,7 +55,8 @@ fun SnippetPortraitStory(modifier: Modifier = Modifier) {
 @ComposeStory("Square")
 fun SnippetSquareStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier,
+        modifier = modifier
+            .width(MOBILE_WIDTH.dp),
         imageOrientation = ImageOrientation.Square,
         headline = stringResource(R.string.snippet_headline),
         description = stringResource(R.string.snippet_description),
@@ -62,11 +66,12 @@ fun SnippetSquareStory(modifier: Modifier = Modifier) {
 
 @Composable
 @SnippetComponent
-@ComposeStory("Landscape")
-fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
+@ComposeStory("Portrait")
+fun SnippetPortraitStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier,
-        imageOrientation = ImageOrientation.Landscape,
+        modifier = modifier
+            .width(MOBILE_WIDTH.dp),
+        imageOrientation = ImageOrientation.Portrait,
         headline = stringResource(R.string.snippet_headline),
         description = stringResource(R.string.snippet_description),
         bodyText = stringResource(R.string.snippet_body),
@@ -81,9 +86,10 @@ internal fun DefaultSnippetSample(
     description: String? = null,
     bodyText: String? = null,
 ) {
-    Column(modifier
-        .fillMaxSize()
-        .padding(BpkSpacing.Base),
+    Column(
+        modifier
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
     ) {
         BpkSnippet(
             imageOrientation = imageOrientation,
@@ -99,3 +105,5 @@ internal fun DefaultSnippetSample(
         }
     }
 }
+
+const val MOBILE_WIDTH = 300

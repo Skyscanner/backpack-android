@@ -332,7 +332,6 @@
     <string name="snippet_headline">Headline Text</string>
     <string name="snippet_description">Description</string>
     <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti." +
-                "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."</string>
+                "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti."</string>
     <string name="snippet_image_content_description">Image</string>
 </resources>

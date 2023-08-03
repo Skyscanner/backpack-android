@@ -29,10 +29,8 @@ import org.junit.Test
 class BpkSnippetTest : BpkSnapshotTest() {
 
     @Test
-    fun defaultLandscape() = snap {
-        BpkSnippet(
-            imageOrientation = ImageOrientation.Landscape,
-        ) {
+    fun default() = snap {
+        BpkSnippet {
             Image(
                 painter = painterResource(R.drawable.snippet_placeholder_1),
                 contentDescription = stringResource(R.string.snippet_image_content_description),
@@ -42,7 +40,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultLandscapeHeadline() = snap {
+    fun defaultHeadline() = snap {
         BpkSnippet(
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
@@ -56,7 +54,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultLandscapeHeadlineDescription() = snap {
+    fun defaultHeadlineDescription() = snap {
         BpkSnippet(
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
@@ -71,7 +69,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultLandscapeHeadlineDescriptionBody() = snap {
+    fun defaultHeadlineDescriptionBody() = snap {
         BpkSnippet(
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
@@ -87,7 +85,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultSquare() = snap {
+    fun squareHeadlineDescriptionBody() = snap {
         BpkSnippet(
             imageOrientation = ImageOrientation.Square,
             headline = stringResource(R.string.snippet_headline),
@@ -103,7 +101,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultPortrait() = snap {
+    fun portraitHeadlineDescriptionBody() = snap {
         BpkSnippet(
             imageOrientation = ImageOrientation.Portrait,
             headline = stringResource(R.string.snippet_headline),

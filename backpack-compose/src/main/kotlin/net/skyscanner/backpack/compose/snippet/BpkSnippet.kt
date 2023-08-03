@@ -24,8 +24,8 @@ import net.skyscanner.backpack.compose.snippet.internal.BpkSnippetImpl
 
 @Composable
 fun BpkSnippet(
-    imageOrientation: ImageOrientation,
     modifier: Modifier = Modifier,
+    imageOrientation: ImageOrientation = ImageOrientation.Landscape,
     headline: String? = null,
     description: String? = null,
     bodyText: String? = null,
