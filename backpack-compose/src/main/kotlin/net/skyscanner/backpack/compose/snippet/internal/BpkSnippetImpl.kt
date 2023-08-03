@@ -18,17 +18,21 @@
 
 package net.skyscanner.backpack.compose.snippet.internal
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.clickable
 
@@ -42,6 +46,7 @@ internal fun BpkSnippetImpl(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)?,
 ) {
+    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Sm)
     Column(
         modifier = modifier
             .apply {
@@ -53,7 +58,10 @@ internal fun BpkSnippetImpl(
     ) {
         Box(
             modifier = Modifier
-                .aspectRatio(getAspectRatio(imageOrientation)),
+                .padding(bottom = BpkSpacing.Base)
+                .aspectRatio(getAspectRatio(imageOrientation))
+                .background(BpkTheme.colors.surfaceHighlight, roundedCornerShape)
+                .clip(roundedCornerShape),
         ) {
             content()
         }

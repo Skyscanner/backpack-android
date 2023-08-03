@@ -20,8 +20,18 @@ Example of a Snippet:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
+import net.skyscanner.backpack.compose.snippet.ImageOrientation
 
-BpkSnippet(
-    // TODO
-)
+    BpkSnippet(
+        bodyText = bodyText,
+        description = description,
+        headline = headline,
+        imageOrientation = imageOrientation,
+    ) {
+        Image(
+            contentDescription = stringResource(R.string.snippet_image_content_description),
+            contentScale = ContentScale.Crop,
+            painter = painterResource(R.drawable.snippet_placeholder_1),
+        )
+    }
 ```

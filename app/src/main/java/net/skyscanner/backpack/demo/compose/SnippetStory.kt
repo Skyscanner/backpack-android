@@ -18,25 +18,84 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
+import net.skyscanner.backpack.compose.snippet.ImageOrientation
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SnippetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @SnippetComponent
-@ComposeStory
-fun SnippetStory(modifier: Modifier = Modifier) {
-    Column(modifier) {
-        DefaultSnippetSample()
-    }
+@ComposeStory("Portrait")
+fun SnippetPortraitStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Portrait,
+        headline = stringResource(R.string.snippet_headline),
+        description = stringResource(R.string.snippet_description),
+        bodyText = stringResource(R.string.snippet_body),
+    )
 }
 
 @Composable
-internal fun DefaultSnippetSample(modifier: Modifier = Modifier) {
-    BpkSnippet(
+@SnippetComponent
+@ComposeStory("Square")
+fun SnippetSquareStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
         modifier = modifier,
+        imageOrientation = ImageOrientation.Square,
+        headline = stringResource(R.string.snippet_headline),
+        description = stringResource(R.string.snippet_description),
+        bodyText = stringResource(R.string.snippet_body),
     )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape")
+fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        headline = stringResource(R.string.snippet_headline),
+        description = stringResource(R.string.snippet_description),
+        bodyText = stringResource(R.string.snippet_body),
+    )
+}
+
+@Composable
+internal fun DefaultSnippetSample(
+    imageOrientation: ImageOrientation,
+    modifier: Modifier = Modifier,
+    headline: String? = null,
+    description: String? = null,
+    bodyText: String? = null,
+) {
+    Column(modifier
+        .fillMaxSize()
+        .padding(BpkSpacing.Base),
+    ) {
+        BpkSnippet(
+            imageOrientation = imageOrientation,
+            headline = headline,
+            description = description,
+            bodyText = bodyText,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
 }
