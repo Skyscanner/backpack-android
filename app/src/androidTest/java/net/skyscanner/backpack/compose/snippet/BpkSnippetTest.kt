@@ -18,14 +18,103 @@
 
 package net.skyscanner.backpack.compose.snippet
 
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.SnippetStory
+import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
 class BpkSnippetTest : BpkSnapshotTest() {
 
     @Test
-    fun default() = snap {
-        SnippetStory()
+    fun defaultLandscape() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Landscape,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultLandscapeHeadline() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Landscape,
+            headline = stringResource(R.string.snippet_headline),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultLandscapeHeadlineDescription() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Landscape,
+            headline = stringResource(R.string.snippet_headline),
+            description = stringResource(R.string.snippet_description),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultLandscapeHeadlineDescriptionBody() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Landscape,
+            headline = stringResource(R.string.snippet_headline),
+            description = stringResource(R.string.snippet_description),
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultSquare() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Square,
+            headline = stringResource(R.string.snippet_headline),
+            description = stringResource(R.string.snippet_description),
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultPortrait() = snap {
+        BpkSnippet(
+            imageOrientation = ImageOrientation.Portrait,
+            headline = stringResource(R.string.snippet_headline),
+            description = stringResource(R.string.snippet_description),
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
     }
 }
