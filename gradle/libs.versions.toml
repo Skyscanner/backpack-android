@@ -15,7 +15,7 @@ threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.3"
 kotlinPoet = "1.14.2"
-ktor = "2.3.2"
+ktor = "2.3.3"
 
 [libraries]
 
