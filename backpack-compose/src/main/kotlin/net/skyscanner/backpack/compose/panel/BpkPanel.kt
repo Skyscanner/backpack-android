@@ -35,9 +35,9 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 sealed interface BpkPanelPadding {
 
-    object None : BpkPanelPadding
+    data object None : BpkPanelPadding
 
-    object Base : BpkPanelPadding
+    data object Base : BpkPanelPadding
 }
 
 @Composable
