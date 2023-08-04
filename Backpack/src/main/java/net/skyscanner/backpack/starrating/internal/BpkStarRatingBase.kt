@@ -98,7 +98,7 @@ open class BpkStarRatingBase internal constructor(
             _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
             _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
             _rounding = it.getInt(R.styleable.BpkStarRating_rounding, rounding.ordinal)
-                .let { id -> RoundingType.values().find { it.id == id } }!!
+                .let { id -> RoundingType.entries.find { it.id == id } }!!
             starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
             starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
             accessibilityStatusRes = it.getResourceId(R.styleable.BpkStarRating_accessibilityStatus, 0).takeIf { it != 0 }

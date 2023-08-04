@@ -36,7 +36,7 @@ internal class RatingSelectors(
     defStyleAttr: Int = 0,
 ) {
 
-    private val scoresCount = BpkRating.Score.values().size
+    private val scoresCount = BpkRating.Score.entries.size
 
     private var icons: Drawable? = null
     var icon: (BpkRating.Score) -> Drawable? = {

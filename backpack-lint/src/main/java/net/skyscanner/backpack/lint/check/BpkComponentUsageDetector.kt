@@ -52,8 +52,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
             ),
         )
 
-        private val APPLICABLE_TYPES = Component.values().flatMap { it.componentsToReplace }
-        private val APPLICABLE_METHODS = Component.values().flatMap { it.staticMethodsToReplace }
+        private val APPLICABLE_TYPES = Component.entries.flatMap { it.componentsToReplace }
+        private val APPLICABLE_METHODS = Component.entries.flatMap { it.staticMethodsToReplace }
     }
 
     private val classCache = mutableListOf<String>()

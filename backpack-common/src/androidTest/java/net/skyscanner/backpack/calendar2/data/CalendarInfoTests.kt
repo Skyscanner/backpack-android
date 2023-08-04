@@ -78,7 +78,7 @@ class CalendarInfoTests {
 
     @Test
     fun if_date_with_status_as_label_cell_has_correct_state() {
-        val statuses = CellStatus.values()
+        val statuses = CellStatus.entries
         val params = CalendarSettings.Default.copy(
             cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
                 CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)

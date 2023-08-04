@@ -121,9 +121,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
             0,
         ).use {
             _appearance = it.getInt(R.styleable.BpkHorizontalNav_horizontalNavAppearance, appearance.id)
-                .let { id -> Appearance.values().find { it.id == id } }!!
+                .let { id -> Appearance.entries.find { it.id == id } }!!
             _size = it.getInt(R.styleable.BpkHorizontalNav_horizontalNavSize, size.id)
-                .let { id -> Size.values().find { it.id == id } }!!
+                .let { id -> Size.entries.find { it.id == id } }!!
         }
     }
 

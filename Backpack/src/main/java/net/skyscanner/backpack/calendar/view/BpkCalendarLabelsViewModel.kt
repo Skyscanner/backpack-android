@@ -40,7 +40,7 @@ internal class BpkCalendarLabelsViewModel(
 ) {
 
     private val paints: Map<CalendarLabel.Style, TextPaint> =
-        CalendarLabel.Style.values().associateWith { it.createTextPaint(context) }
+        CalendarLabel.Style.entries.associateWith { it.createTextPaint(context) }
 
     private var labels: Map<LocalDate, BpkCalendarLabelViewModel> = emptyMap()
 

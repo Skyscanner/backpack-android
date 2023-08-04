@@ -113,7 +113,7 @@ open class BpkSpinner @JvmOverloads constructor(
         wrappedContext.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0).use {
             themePrimaryColor = it.getColor(R.styleable.BpkSpinner_spinnerColor, INVALID_RES)
             this.small = it.getBoolean(R.styleable.BpkSpinner_small, false)
-            this.type = Type.values()[it.getInt(R.styleable.BpkSpinner_type, 0)]
+            this.type = Type.entries[it.getInt(R.styleable.BpkSpinner_type, 0)]
         }
     }
 

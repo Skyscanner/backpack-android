@@ -44,7 +44,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun BadgeStory(modifier: Modifier = Modifier) {
     Column(modifier) {
-        BpkBadgeType.values().forEach { type ->
+        BpkBadgeType.entries.forEach { type ->
             BadgeRow(type = type)
         }
     }

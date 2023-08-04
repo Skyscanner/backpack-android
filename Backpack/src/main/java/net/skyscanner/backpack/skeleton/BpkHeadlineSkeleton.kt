@@ -102,7 +102,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
     private companion object {
         private fun parseHeightTypeAttribute(it: TypedArray, fallback: SkeletonHeightSizeType) =
             it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonHeadlineHeightSize, fallback.id).let { id ->
-                SkeletonHeightSizeType.values().find { it.id == id } ?: fallback
+                SkeletonHeightSizeType.entries.find { it.id == id } ?: fallback
             }
     }
 }

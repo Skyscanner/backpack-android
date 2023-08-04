@@ -273,13 +273,13 @@ open class BpkFlare @JvmOverloads constructor(
     }
 
     private fun mapXmlToPointerPosition(id: Int) =
-        PointerPosition.values().find { it.id == id }
+        PointerPosition.entries.find { it.id == id }
 
     private fun mapXmlToPointerDirection(id: Int) =
-        PointerDirection.values().find { it.id == id }
+        PointerDirection.entries.find { it.id == id }
 
     private fun mapXmlToInsetPaddingMode(id: Int) =
-        InsetPaddingMode.values().find { it.id == id }
+        InsetPaddingMode.entries.find { it.id == id }
 
     private fun setPaddingVertical(child: View, paddingTop: Int, paddingBottom: Int) {
         if (child.paddingStart > 0 || child.paddingEnd > 0) {

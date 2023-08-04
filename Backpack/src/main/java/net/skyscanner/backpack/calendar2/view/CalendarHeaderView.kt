@@ -47,7 +47,7 @@ internal class CalendarHeaderView @JvmOverloads constructor(
 
     init {
         orientation = HORIZONTAL
-        repeat(DayOfWeek.values().size) {
+        repeat(DayOfWeek.entries.size) {
             val text = BpkText(context)
             text.textStyle = BpkText.TextStyle.Label2
             text.setTextColor(context.getColorStateList(R.color.bpkTextSecondary))

@@ -120,7 +120,7 @@ open class BpkText @JvmOverloads constructor(
             defStyleAttr, 0,
         ).use {
             _textStyle = it.getInt(R.styleable.BpkText_textStyle, TextStyle.BodyDefault.id)
-                .let { textStyleArg -> TextStyle.values().first { it.id == textStyleArg } }
+                .let { textStyleArg -> TextStyle.entries.first { it.id == textStyleArg } }
 
             if (it.hasValue(R.styleable.BpkText_android_textColor)) {
                 _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)

@@ -36,6 +36,6 @@ class BpkOverlayTest(private val overlayType: BpkOverlayType) : BpkSnapshotTest(
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
         fun overlayTypes(): List<BpkOverlayType> =
-            BpkOverlayType.values().toList()
+            BpkOverlayType.entries.toList()
     }
 }
