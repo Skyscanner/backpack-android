@@ -63,7 +63,7 @@ internal class RatingScore(
     }
 
     private fun mapXmlToScale(id: Int) =
-        BpkRating.Scale.values().find { it.xmlId == id }
+        BpkRating.Scale.entries.find { it.xmlId == id }
 
     private val BpkRating.Scale.xmlId
         get() = when (this) {

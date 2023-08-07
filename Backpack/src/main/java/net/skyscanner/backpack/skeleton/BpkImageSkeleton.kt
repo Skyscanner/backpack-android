@@ -64,7 +64,7 @@ class BpkImageSkeleton @JvmOverloads constructor(
     private companion object {
         private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
             it.getInt(R.styleable.BpkImageSkeleton_skeletonCornerType, fallback.id).let { id ->
-                CornerType.values().find { it.id == id } ?: fallback
+                CornerType.entries.find { it.id == id } ?: fallback
             }
     }
 }

@@ -146,7 +146,7 @@ open class BpkCardView @JvmOverloads constructor(
                 @Suppress("DEPRECATION")
                 focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
             }
-            cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
+            cornerStyle = CornerStyle.entries[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
         }
     }
 }

@@ -46,7 +46,7 @@ class CalendarInfoTests {
         )
         testCalendarWith(params) {
             verify {
-                for (i in 0 until state.cells.size) {
+                for (i in 0..<state.cells.size) {
                     val cell = state.cells[i]
                     if (cell is CalendarCell.Day) {
                         assertTrue(cell.info.disabled)
@@ -66,7 +66,7 @@ class CalendarInfoTests {
 
         testCalendarWith(params) {
             verify {
-                for (i in 0 until state.cells.size) {
+                for (i in 0..<state.cells.size) {
                     val cell = state.cells[i]
                     if (cell is CalendarCell.Day) {
                         assertEquals(cell.date.dayOfMonth.toString(), cell.info.label)
@@ -78,7 +78,7 @@ class CalendarInfoTests {
 
     @Test
     fun if_date_with_status_as_label_cell_has_correct_state() {
-        val statuses = CellStatus.values()
+        val statuses = CellStatus.entries
         val params = CalendarSettings.Default.copy(
             cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
                 CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)
@@ -87,7 +87,7 @@ class CalendarInfoTests {
 
         testCalendarWith(params) {
             verify {
-                for (i in 0 until state.cells.size) {
+                for (i in 0..<state.cells.size) {
                     val cell = state.cells[i]
                     if (cell is CalendarCell.Day) {
                         assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)

@@ -22,13 +22,13 @@ import android.view.View
 import android.view.ViewGroup
 
 internal inline fun ViewGroup.forEachIndexed(block: (Int, View) -> Unit) {
-    for (i in 0 until childCount) {
+    for (i in 0..<childCount) {
         block(i, getChildAt(i))
     }
 }
 
 internal inline fun ViewGroup.forEach(block: (View) -> Unit) {
-    for (i in 0 until childCount) {
+    for (i in 0..<childCount) {
         block(getChildAt(i))
     }
 }

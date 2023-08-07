@@ -23,7 +23,7 @@ import net.skyscanner.backpack.R
 
 internal sealed class ButtonStyles : (Context) -> ButtonStyle {
 
-    object Primary : ButtonStyles() {
+    data object Primary : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryStyle,
@@ -33,7 +33,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object Secondary : ButtonStyles() {
+    data object Secondary : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonSecondaryStyle,
@@ -43,7 +43,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object Featured : ButtonStyles() {
+    data object Featured : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonFeaturedStyle,
@@ -53,7 +53,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object Destructive : ButtonStyles() {
+    data object Destructive : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonDestructiveStyle,
@@ -64,7 +64,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object PrimaryOnDark : ButtonStyles() {
+    data object PrimaryOnDark : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryOnDarkStyle,
@@ -77,7 +77,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object PrimaryOnLight : ButtonStyles() {
+    data object PrimaryOnLight : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryOnLightStyle,
@@ -90,7 +90,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object SecondaryOnDark : ButtonStyles() {
+    data object SecondaryOnDark : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonSecondaryOnDarkStyle,
@@ -103,7 +103,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object Link : ButtonStyles() {
+    data object Link : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonLinkStyle,
@@ -115,7 +115,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         )
     }
 
-    object LinkOnDark : ButtonStyles() {
+    data object LinkOnDark : ButtonStyles() {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonLinkOnDarkStyle,

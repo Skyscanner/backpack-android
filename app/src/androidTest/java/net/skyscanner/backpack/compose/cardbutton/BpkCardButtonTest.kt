@@ -72,8 +72,8 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<Flavor> = BpkCardButtonSize.values().map { size ->
-            BpkCardButtonStyle.values().map { style -> Flavor(size, style) }
+        fun flavours(): List<Flavor> = BpkCardButtonSize.entries.map { size ->
+            BpkCardButtonStyle.entries.map { style -> Flavor(size, style) }
         }.flatten()
     }
 }

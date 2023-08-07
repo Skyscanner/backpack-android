@@ -98,7 +98,7 @@ open class BpkStarRatingBase internal constructor(
             _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
             _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
             _rounding = it.getInt(R.styleable.BpkStarRating_rounding, rounding.ordinal)
-                .let { id -> RoundingType.values().find { it.id == id } }!!
+                .let { id -> RoundingType.entries.find { it.id == id } }!!
             starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
             starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
             accessibilityStatusRes = it.getResourceId(R.styleable.BpkStarRating_accessibilityStatus, 0).takeIf { it != 0 }
@@ -123,13 +123,13 @@ open class BpkStarRatingBase internal constructor(
 
         val diff = maxRating - childCount
         if (diff > 0) {
-            for (i in 0 until diff) {
+            for (i in 0..<diff) {
                 val view = View(context)
                 view.background = BpkStar(empty, half, full)
                 addView(view, starSize, starSize)
             }
         } else if (diff < 0) {
-            for (i in 0 until -diff) {
+            for (i in 0..<-diff) {
                 removeViewAt(0)
             }
         }
@@ -140,7 +140,7 @@ open class BpkStarRatingBase internal constructor(
             RoundingType.Nearest -> round(rating * 2) / 2
         }
 
-        for (i in 0 until maxRating) {
+        for (i in 0..<maxRating) {
             val child = getChildAt(i)
             val background = child.background as BpkStar
             val value = (roundedRating - i).coerceIn(0f, 1f)

@@ -178,7 +178,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
     ) = BpkBarChart.Group(
         title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
         items = ArrayList<BpkBarChart.Column>(10).apply {
-            for (dayOfTheMonth in 0 until 30) {
+            for (dayOfTheMonth in 0..<30) {
                 add(
                     createBar(
                         month * 30 + dayOfTheMonth,

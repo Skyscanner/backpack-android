@@ -47,7 +47,7 @@ fun SpinnerStory(modifier: Modifier = Modifier) {
         modifier = modifier.padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-        BpkSpinnerStyle.values().forEach { style ->
+        BpkSpinnerStyle.entries.forEach { style ->
             SpinnersRow(style = style)
         }
     }
@@ -67,7 +67,7 @@ private fun SpinnersRow(
                 if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
             ),
         ) {
-            BpkSpinnerSize.values().forEach { size ->
+            BpkSpinnerSize.entries.forEach { size ->
 
                 Column(
                     modifier = Modifier.weight(1f),

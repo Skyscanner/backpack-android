@@ -118,7 +118,7 @@ class BpkCircleSkeleton @JvmOverloads constructor(
 
         private fun parseCircleSizeAttribute(it: TypedArray, fallback: CircleSize) =
             it.getInt(R.styleable.BpkCircleSkeleton_skeletonCircleSize, fallback.id).let { id ->
-                CircleSize.values().find { it.id == id } ?: fallback
+                CircleSize.entries.find { it.id == id } ?: fallback
             }
     }
 }

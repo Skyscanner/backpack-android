@@ -90,7 +90,7 @@ open class BpkBadge @JvmOverloads constructor(
         internal companion object {
 
             internal fun fromId(id: Int): Type {
-                for (f in values()) {
+                for (f in entries) {
                     if (f.id == id) return f
                 }
                 throw IllegalArgumentException()

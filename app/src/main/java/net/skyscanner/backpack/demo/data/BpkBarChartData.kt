@@ -45,7 +45,7 @@ object BpkBarChartData {
 
         return BpkBarChartModel(
             caption = context.getString(R.string.generic_departures),
-            items = Month.values().flatMap { month ->
+            items = Month.entries.flatMap { month ->
                 createMonth(month, context.resources) { date ->
                     val values = random.nextFloat().let {
                         BpkBarChartModel.Values(

@@ -46,7 +46,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         )
 
         private val APPLICABLE_TYPES =
-            Component.values().flatMap { it.componentsToReplace.map { component -> component.substringAfterLast('.') } }
+            Component.entries.flatMap { it.componentsToReplace.map { component -> component.substringAfterLast('.') } }
     }
 
     override fun getApplicableMethodNames(): List<String> {

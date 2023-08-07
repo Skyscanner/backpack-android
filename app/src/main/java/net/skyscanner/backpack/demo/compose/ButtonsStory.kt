@@ -101,7 +101,7 @@ fun ButtonDrawableIconStory(modifier: Modifier = Modifier) {
             .padding(top = BpkDimension.Spacing.Md),
     ) {
 
-        BpkButtonSize.values().map { size ->
+        BpkButtonSize.entries.map { size ->
             item {
                 BpkText(
                     text = stringResource(size.labelResource()),
@@ -118,7 +118,7 @@ fun ButtonDrawableIconStory(modifier: Modifier = Modifier) {
                     enabled = false,
                 )
             }
-            items(BpkButtonType.values().filter { !it.linkType() }) {
+            items(BpkButtonType.entries.filter { !it.linkType() }) {
                 DrawableButtonsRow(
                     type = it,
                     size = size,
@@ -146,7 +146,7 @@ private fun ButtonsTypesDemo(
                 enabled = false,
             )
         }
-        items(BpkButtonType.values().filter { !it.linkType() }) {
+        items(BpkButtonType.entries.filter { !it.linkType() }) {
             ButtonsRow(
                 type = it,
                 size = size,
@@ -157,7 +157,7 @@ private fun ButtonsTypesDemo(
 }
 
 private fun LazyListScope.LinkRows(size: BpkButtonSize) {
-    items(BpkButtonType.values().filter { it.linkType() }) {
+    items(BpkButtonType.entries.filter { it.linkType() }) {
         Column {
             ButtonsRow(
                 type = it,

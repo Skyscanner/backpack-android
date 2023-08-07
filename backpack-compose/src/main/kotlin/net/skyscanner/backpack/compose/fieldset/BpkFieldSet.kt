@@ -45,13 +45,13 @@ internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFi
 
 sealed interface BpkFieldStatus {
 
-    object Default : BpkFieldStatus
+    data object Default : BpkFieldStatus
 
-    object Disabled : BpkFieldStatus
+    data object Disabled : BpkFieldStatus
 
     data class Error(val text: String) : BpkFieldStatus
 
-    object Validated : BpkFieldStatus
+    data object Validated : BpkFieldStatus
 }
 
 @Composable

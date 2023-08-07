@@ -123,7 +123,7 @@ open class BpkBottomNav @JvmOverloads constructor(
         }
 
         private fun findIndexOf(item: MenuItem): Int {
-            for (i in 0 until menu.size()) {
+            for (i in 0..<menu.size()) {
                 if (menu.getItem(i) == item) {
                     return i
                 }

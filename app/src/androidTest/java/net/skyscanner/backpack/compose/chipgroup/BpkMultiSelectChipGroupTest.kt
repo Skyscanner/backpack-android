@@ -62,7 +62,7 @@ class BpkMultiSelectChipGroupTest(private val permutation: Permutation) : BpkSna
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
         fun data(): Collection<Array<Any>> {
-            return Permutation.values().map { arrayOf(it) }
+            return Permutation.entries.map { arrayOf(it) }
         }
     }
 }

@@ -49,6 +49,6 @@ class BpkSingleSelectChipGroupTest(private val type: BpkSingleChipGroupType) : B
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun types(): List<BpkSingleChipGroupType> = BpkSingleChipGroupType.values().toList()
+        fun types(): List<BpkSingleChipGroupType> = BpkSingleChipGroupType.entries.toList()
     }
 }

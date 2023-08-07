@@ -93,6 +93,6 @@ class BpkProgressBarTest(val size: BpkProgressBarSize) : BpkSnapshotTest(listOf(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<BpkProgressBarSize> = BpkProgressBarSize.values().toList()
+        fun flavours(): List<BpkProgressBarSize> = BpkProgressBarSize.entries.toList()
     }
 }

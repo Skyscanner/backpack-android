@@ -84,8 +84,8 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<Flavor> = BpkPriceSize.values().flatMap { size ->
-            BpkPriceAlign.values().map { align ->
+        fun flavours(): List<Flavor> = BpkPriceSize.entries.flatMap { size ->
+            BpkPriceAlign.entries.map { align ->
                 Flavor(size = size, align = align)
             }
         }

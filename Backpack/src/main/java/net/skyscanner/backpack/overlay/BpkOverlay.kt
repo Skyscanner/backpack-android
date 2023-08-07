@@ -119,12 +119,12 @@ open class BpkOverlay @JvmOverloads constructor(
 
         private fun parseOverlayAttribute(it: TypedArray, fallback: OverlayType) =
             it.getInt(R.styleable.BpkOverlay_overlayType, fallback.id).let { id ->
-                OverlayType.values().find { it.id == id } ?: fallback
+                OverlayType.entries.find { it.id == id } ?: fallback
             }
 
         private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
             it.getInt(R.styleable.BpkOverlay_overlayCornerType, fallback.id).let { id ->
-                CornerType.values().find { it.id == id } ?: fallback
+                CornerType.entries.find { it.id == id } ?: fallback
             }
     }
 }

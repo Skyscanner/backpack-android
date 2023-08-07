@@ -138,8 +138,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<Flavor> = BpkButtonType.values().flatMap { type ->
-            BpkButtonSize.values().mapNotNull { size ->
+        fun flavours(): List<Flavor> = BpkButtonType.entries.flatMap { type ->
+            BpkButtonSize.entries.mapNotNull { size ->
                 if (type == BpkButtonType.Primary || size == BpkButtonSize.Default) {
                     Flavor(type, size)
                 } else {

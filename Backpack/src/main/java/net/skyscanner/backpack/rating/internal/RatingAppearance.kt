@@ -100,7 +100,7 @@ internal class RatingAppearance(
         }
 
     private fun mapXmlToStyle(id: Int) =
-        BpkRating.Style.values().find { it.xmlId == id }
+        BpkRating.Style.entries.find { it.xmlId == id }
 
     private val BpkRating.Size.xmlId
         get() = when (this) {
@@ -112,7 +112,7 @@ internal class RatingAppearance(
         }
 
     private fun mapXmlToSize(id: Int) =
-        BpkRating.Size.values().find { it.xmlId == id }
+        BpkRating.Size.entries.find { it.xmlId == id }
 
     private val BpkRating.Size.style
         get() = when (this) {
