@@ -45,7 +45,7 @@ fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
             .width(MOBILE_WIDTH.dp),
         imageOrientation = ImageOrientation.Landscape,
         headline = stringResource(R.string.snippet_headline),
-        description = stringResource(R.string.snippet_description),
+        subHeading = stringResource(R.string.snippet_sub_heading),
         bodyText = stringResource(R.string.snippet_body),
     )
 }
@@ -59,7 +59,7 @@ fun SnippetSquareStory(modifier: Modifier = Modifier) {
             .width(MOBILE_WIDTH.dp),
         imageOrientation = ImageOrientation.Square,
         headline = stringResource(R.string.snippet_headline),
-        description = stringResource(R.string.snippet_description),
+        subHeading = stringResource(R.string.snippet_sub_heading),
         bodyText = stringResource(R.string.snippet_body),
     )
 }
@@ -73,7 +73,7 @@ fun SnippetPortraitStory(modifier: Modifier = Modifier) {
             .width(MOBILE_WIDTH.dp),
         imageOrientation = ImageOrientation.Portrait,
         headline = stringResource(R.string.snippet_headline),
-        description = stringResource(R.string.snippet_description),
+        subHeading = stringResource(R.string.snippet_sub_heading),
         bodyText = stringResource(R.string.snippet_body),
     )
 }
@@ -83,7 +83,7 @@ internal fun DefaultSnippetSample(
     imageOrientation: ImageOrientation,
     modifier: Modifier = Modifier,
     headline: String? = null,
-    description: String? = null,
+    subHeading: String? = null,
     bodyText: String? = null,
 ) {
     Column(
@@ -94,7 +94,7 @@ internal fun DefaultSnippetSample(
         BpkSnippet(
             imageOrientation = imageOrientation,
             headline = headline,
-            description = description,
+            subHeading = subHeading,
             bodyText = bodyText,
         ) {
             Image(

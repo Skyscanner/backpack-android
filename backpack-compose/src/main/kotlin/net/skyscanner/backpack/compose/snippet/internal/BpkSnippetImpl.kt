@@ -41,7 +41,7 @@ internal fun BpkSnippetImpl(
     content: @Composable (() -> Unit),
     imageOrientation: ImageOrientation,
     headline: String?,
-    description: String?,
+    subHeading: String?,
     bodyText: String?,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)?,
@@ -73,9 +73,9 @@ internal fun BpkSnippetImpl(
             )
             Spacer(modifier = Modifier.height(BpkSpacing.Sm))
         }
-        if (!description.isNullOrBlank()) {
+        if (!subHeading.isNullOrBlank()) {
             BpkText(
-                text = description,
+                text = subHeading,
                 style = BpkTheme.typography.subheading,
                 color = BpkTheme.colors.textPrimary,
             )

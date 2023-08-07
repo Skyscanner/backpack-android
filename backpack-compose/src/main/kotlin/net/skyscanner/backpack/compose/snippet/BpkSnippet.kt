@@ -27,7 +27,7 @@ fun BpkSnippet(
     modifier: Modifier = Modifier,
     imageOrientation: ImageOrientation = ImageOrientation.Landscape,
     headline: String? = null,
-    description: String? = null,
+    subHeading: String? = null,
     bodyText: String? = null,
     onClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit),
@@ -37,7 +37,7 @@ fun BpkSnippet(
         content = content,
         imageOrientation = imageOrientation,
         headline = headline,
-        description = description,
+        subHeading = subHeading,
         bodyText = bodyText,
         onClick = onClick,
     )

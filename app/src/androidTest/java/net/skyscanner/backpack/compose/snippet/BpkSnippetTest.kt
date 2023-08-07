@@ -58,7 +58,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
         BpkSnippet(
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
-            description = stringResource(R.string.snippet_description),
+            subHeading = stringResource(R.string.snippet_sub_heading),
         ) {
             Image(
                 painter = painterResource(R.drawable.snippet_placeholder_1),
@@ -73,7 +73,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
         BpkSnippet(
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
-            description = stringResource(R.string.snippet_description),
+            subHeading = stringResource(R.string.snippet_sub_heading),
             bodyText = stringResource(R.string.snippet_body),
         ) {
             Image(
@@ -89,7 +89,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
         BpkSnippet(
             imageOrientation = ImageOrientation.Square,
             headline = stringResource(R.string.snippet_headline),
-            description = stringResource(R.string.snippet_description),
+            subHeading = stringResource(R.string.snippet_sub_heading),
             bodyText = stringResource(R.string.snippet_body),
         ) {
             Image(
@@ -105,7 +105,7 @@ class BpkSnippetTest : BpkSnapshotTest() {
         BpkSnippet(
             imageOrientation = ImageOrientation.Portrait,
             headline = stringResource(R.string.snippet_headline),
-            description = stringResource(R.string.snippet_description),
+            subHeading = stringResource(R.string.snippet_sub_heading),
             bodyText = stringResource(R.string.snippet_body),
         ) {
             Image(
