@@ -71,6 +71,7 @@ internal fun BpkSnippetImpl(
                 style = BpkTheme.typography.heading4,
                 color = BpkTheme.colors.textPrimary,
             )
+            Spacer(modifier = Modifier.height(BpkSpacing.Sm))
         }
         if (!description.isNullOrBlank()) {
             BpkText(
