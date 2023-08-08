@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -86,23 +84,19 @@ internal fun DefaultSnippetSample(
     subHeading: String? = null,
     bodyText: String? = null,
 ) {
-    Column(
-        modifier
-            .fillMaxSize()
+    BpkSnippet(
+        modifier = modifier
             .padding(BpkSpacing.Base),
+        imageOrientation = imageOrientation,
+        headline = headline,
+        subHeading = subHeading,
+        bodyText = bodyText,
     ) {
-        BpkSnippet(
-            imageOrientation = imageOrientation,
-            headline = headline,
-            subHeading = subHeading,
-            bodyText = bodyText,
-        ) {
-            Image(
-                painter = painterResource(R.drawable.snippet_placeholder_1),
-                contentDescription = stringResource(R.string.snippet_image_content_description),
-                contentScale = ContentScale.Crop,
-            )
-        }
+        Image(
+            painter = painterResource(R.drawable.snippet_placeholder_1),
+            contentDescription = stringResource(R.string.snippet_image_content_description),
+            contentScale = ContentScale.Crop,
+        )
     }
 }
 
