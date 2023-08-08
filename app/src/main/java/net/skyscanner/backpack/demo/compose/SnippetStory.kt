@@ -106,4 +106,4 @@ internal fun DefaultSnippetSample(
     }
 }
 
-const val MOBILE_WIDTH = 300
+private const val MOBILE_WIDTH = 300
