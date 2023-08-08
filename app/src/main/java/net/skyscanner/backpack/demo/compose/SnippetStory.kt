@@ -39,8 +39,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory("Landscape")
 fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier
-            .width(MOBILE_WIDTH.dp),
+        modifier = modifier,
         imageOrientation = ImageOrientation.Landscape,
         headline = stringResource(R.string.snippet_headline),
         subHeading = stringResource(R.string.snippet_sub_heading),
@@ -53,8 +52,7 @@ fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
 @ComposeStory("Square")
 fun SnippetSquareStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier
-            .width(MOBILE_WIDTH.dp),
+        modifier = modifier,
         imageOrientation = ImageOrientation.Square,
         headline = stringResource(R.string.snippet_headline),
         subHeading = stringResource(R.string.snippet_sub_heading),
@@ -67,8 +65,7 @@ fun SnippetSquareStory(modifier: Modifier = Modifier) {
 @ComposeStory("Portrait")
 fun SnippetPortraitStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(
-        modifier = modifier
-            .width(MOBILE_WIDTH.dp),
+        modifier = modifier,
         imageOrientation = ImageOrientation.Portrait,
         headline = stringResource(R.string.snippet_headline),
         subHeading = stringResource(R.string.snippet_sub_heading),
@@ -86,6 +83,7 @@ internal fun DefaultSnippetSample(
 ) {
     BpkSnippet(
         modifier = modifier
+            .width(MOBILE_WIDTH.dp)
             .padding(BpkSpacing.Base),
         imageOrientation = imageOrientation,
         headline = headline,

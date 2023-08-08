@@ -19,10 +19,15 @@
 package net.skyscanner.backpack.compose.snippet
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
@@ -30,7 +35,11 @@ class BpkSnippetTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        BpkSnippet {
+        BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
+        ) {
             Image(
                 painter = painterResource(R.drawable.snippet_placeholder_1),
                 contentDescription = stringResource(R.string.snippet_image_content_description),
@@ -42,6 +51,9 @@ class BpkSnippetTest : BpkSnapshotTest() {
     @Test
     fun defaultHeadline() = snap {
         BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
         ) {
@@ -56,6 +68,9 @@ class BpkSnippetTest : BpkSnapshotTest() {
     @Test
     fun defaultHeadlineDescription() = snap {
         BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
             subHeading = stringResource(R.string.snippet_sub_heading),
@@ -71,6 +86,9 @@ class BpkSnippetTest : BpkSnapshotTest() {
     @Test
     fun defaultHeadlineDescriptionBody() = snap {
         BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
             imageOrientation = ImageOrientation.Landscape,
             headline = stringResource(R.string.snippet_headline),
             subHeading = stringResource(R.string.snippet_sub_heading),
@@ -87,6 +105,9 @@ class BpkSnippetTest : BpkSnapshotTest() {
     @Test
     fun squareHeadlineDescriptionBody() = snap {
         BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
             imageOrientation = ImageOrientation.Square,
             headline = stringResource(R.string.snippet_headline),
             subHeading = stringResource(R.string.snippet_sub_heading),
@@ -103,6 +124,9 @@ class BpkSnippetTest : BpkSnapshotTest() {
     @Test
     fun portraitHeadlineDescriptionBody() = snap {
         BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp)
+                .padding(BpkSpacing.Base),
             imageOrientation = ImageOrientation.Portrait,
             headline = stringResource(R.string.snippet_headline),
             subHeading = stringResource(R.string.snippet_sub_heading),
@@ -116,3 +140,5 @@ class BpkSnippetTest : BpkSnapshotTest() {
         }
     }
 }
+
+private const val MOBILE_WIDTH = 300
