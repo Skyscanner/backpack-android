@@ -50,7 +50,6 @@ internal fun BpkSnippetImpl(
     Column(
         modifier = modifier
             .apply {
-                padding(horizontal = BpkSpacing.Lg)
                 if (onClick != null) {
                     clickable(onClick = onClick)
                 }
