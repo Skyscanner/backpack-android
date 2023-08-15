@@ -31,6 +31,7 @@ enum class BpkPriceAlign {
 enum class BpkPriceSize {
     Large,
     Small,
+    ExtraSmall,
 }
 
 @Composable

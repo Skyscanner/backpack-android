@@ -49,6 +49,12 @@ fun PriceLargeStory(modifier: Modifier = Modifier) =
     PriceDemo(BpkPriceSize.Large, modifier)
 
 @Composable
+@PriceComponent
+@ComposeStory("Extra Small")
+fun PriceXSStory(modifier: Modifier = Modifier) =
+    PriceDemo(BpkPriceSize.ExtraSmall, modifier)
+
+@Composable
 private fun PriceDemo(
     size: BpkPriceSize,
     modifier: Modifier = Modifier,
