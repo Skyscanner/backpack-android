@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,10 +27,12 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.internal.HandleHeight
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -43,10 +46,22 @@ fun BpkBottomSheet(
     state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
     peekHeight: Dp = DefaultSheetPeekHeight,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     BottomSheetScaffold(
-        sheetContent = sheetContent,
+        sheetContent = {
+            when (dragHandleStyle) {
+                BpkDragHandleStyle.Default -> sheetContent()
+                is BpkDragHandleStyle.OnImage -> Box {
+                    Column { sheetContent() }
+                    BpkBottomSheetHandle(
+                        modifier = Modifier.align(Alignment.TopCenter),
+                        dragHandleStyle,
+                    )
+                }
+            }
+        },
         modifier = modifier,
         scaffoldState = rememberBottomSheetScaffoldState(
             bottomSheetState = state.delegate,
@@ -57,7 +72,7 @@ fun BpkBottomSheet(
         sheetContentColor = BpkTheme.colors.textPrimary,
         sheetTonalElevation = 0.dp,
         sheetShadowElevation = BpkElevation.Lg,
-        sheetDragHandle = { BpkBottomSheetHandle() },
+        sheetDragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
         sheetSwipeEnabled = sheetGesturesEnabled,
         topBar = null,
         snackbarHost = { Box(Modifier) },
