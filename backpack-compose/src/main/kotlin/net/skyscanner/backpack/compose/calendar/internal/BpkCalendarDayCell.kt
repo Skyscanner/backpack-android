@@ -122,13 +122,13 @@ private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = 
     when (selection) {
         Selection.Start,
         Selection.StartMonth,
-        -> background(BpkTheme.colors.surfaceHighlight, EndSemiRect)
+        -> background(BpkTheme.colors.surfaceSubtle, EndSemiRect)
 
         Selection.End,
         Selection.EndMonth,
-        -> background(BpkTheme.colors.surfaceHighlight, StartSemiRect)
+        -> background(BpkTheme.colors.surfaceSubtle, StartSemiRect)
 
-        Selection.Middle -> background(BpkTheme.colors.surfaceHighlight, RectangleShape)
+        Selection.Middle -> background(BpkTheme.colors.surfaceSubtle, RectangleShape)
 
         Selection.Single,
         Selection.Double,
@@ -154,7 +154,7 @@ private fun Modifier.cellDayBackground(
                 Selection.StartMonth,
                 Selection.Middle,
                 Selection.EndMonth,
-                -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
+                -> background(BpkTheme.colors.surfaceSubtle, CircleShape)
 
                 Selection.Single,
                 Selection.Start,
