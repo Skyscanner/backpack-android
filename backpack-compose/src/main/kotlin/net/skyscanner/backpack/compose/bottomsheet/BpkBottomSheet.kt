@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,13 +26,13 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.internal.HandleHeight
+import net.skyscanner.backpack.compose.bottomsheet.internal.bottomSheetContent
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
@@ -50,18 +49,7 @@ fun BpkBottomSheet(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     BottomSheetScaffold(
-        sheetContent = {
-            when (dragHandleStyle) {
-                BpkDragHandleStyle.Default -> sheetContent()
-                is BpkDragHandleStyle.OnImage -> Box {
-                    Column { sheetContent() }
-                    BpkBottomSheetHandle(
-                        modifier = Modifier.align(Alignment.TopCenter),
-                        dragHandleStyle,
-                    )
-                }
-            }
-        },
+        sheetContent = bottomSheetContent(dragHandleStyle, sheetContent),
         modifier = modifier,
         scaffoldState = rememberBottomSheetScaffoldState(
             bottomSheetState = state.delegate,

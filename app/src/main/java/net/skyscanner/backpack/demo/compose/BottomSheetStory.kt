@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -52,6 +53,7 @@ import net.skyscanner.backpack.demo.ui.ListItem
 fun BottomSheetStory(
     modifier: Modifier = Modifier,
     initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
 ) {
     val state = rememberBpkBottomSheetState(initialValue)
     BpkBottomSheet(
@@ -59,6 +61,7 @@ fun BottomSheetStory(
         state = state,
         peekHeight = 56.dp * 3,
         sheetContent = { SheetContent() },
+        dragHandleStyle = dragHandleStyle,
         content = { contentPadding ->
             Spacer(
                 modifier = Modifier
@@ -75,6 +78,7 @@ fun BottomSheetStory(
 @ComposeStory(name = "Modal")
 fun ModalBottomSheetStory(
     modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     val state = rememberBpkModalBottomSheetState()
@@ -92,6 +96,7 @@ fun ModalBottomSheetStory(
         BpkModalBottomSheet(
             state = state,
             content = { SheetContent() },
+            dragHandleStyle = dragHandleStyle,
             onDismissRequest = { openBottomSheet = false },
         )
     }

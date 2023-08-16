@@ -24,6 +24,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.SheetContent
 import org.junit.Test
@@ -48,12 +49,56 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun lightDragHandleOnImage() {
+        snap(height = 400.dp, padding = 0.dp) {
+            BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded, dragHandleStyle = BpkDragHandleStyle.OnImage())
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun darkDragHandleOnImage() {
+        snap(height = 400.dp, padding = 0.dp) {
+            BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded, dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark))
+        }
+    }
+
+    @Test
     fun modal() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
             BpkModalBottomSheet(
                 content = { SheetContent() },
+                onDismissRequest = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun lightDragHandleOnImageModal() {
+        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
+            BpkModalBottomSheet(
+                content = { SheetContent() },
+                dragHandleStyle = BpkDragHandleStyle.OnImage(),
+                onDismissRequest = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun darkDragHandleOnImageModal() {
+        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
+            BpkModalBottomSheet(
+                content = { SheetContent() },
+                dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 onDismissRequest = {},
             )
         }

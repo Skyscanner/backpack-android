@@ -36,6 +36,7 @@ BpkBottomSheet(
   state = state,
   peekHeight = HeightOfCollapsedBottomSheet,
   sheetContent = { /* content of the bottom sheet */ },
+  dragHandleStyle = BpkDragHandleStyle.Default,
   content = { contentPadding ->
     // content displayed behind bottom sheet
     // you should apply content padding to avoid displaying content behind collapsed bottom sheet
@@ -65,6 +66,7 @@ if (openBottomSheet) {
     BpkModalBottomSheet(
         state = state,
         content = { /* content of the bottom sheet */ },
+        dragHandleStyle = BpkDragHandleStyle.OnImage(),
         onDismissRequest = { openBottomSheet = false },
     )
 }

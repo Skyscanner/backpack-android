@@ -18,17 +18,15 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
+import net.skyscanner.backpack.compose.bottomsheet.internal.bottomSheetContent
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
@@ -44,15 +42,7 @@ fun BpkModalBottomSheet(
 ) {
     ModalBottomSheet(
         sheetState = state.delegate,
-        content = {
-            when (dragHandleStyle) {
-                BpkDragHandleStyle.Default -> content()
-                is BpkDragHandleStyle.OnImage -> Box {
-                    Column { content() }
-                    BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
-                }
-            }
-        },
+        content = bottomSheetContent(dragHandleStyle, content),
         modifier = modifier,
         dragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
         shape = RoundedCornerShape(topStart = BpkBorderRadius.Lg, topEnd = BpkBorderRadius.Lg),
