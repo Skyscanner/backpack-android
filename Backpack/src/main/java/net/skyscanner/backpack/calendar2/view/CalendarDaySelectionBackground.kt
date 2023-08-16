@@ -74,7 +74,7 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
 
             rangeBackgroundColor = it.getColorStateList(
                 R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-            ) ?: context.getColorStateList(R.color.bpkSurfaceHighlight)
+            ) ?: context.getColorStateList(R.color.bpkSurfaceSubtle)
         }
         paint.strokeWidth = context.resources.getDimension(R.dimen.bpk_calendar_border_width)
     }
