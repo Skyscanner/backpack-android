@@ -25,8 +25,8 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import net.skyscanner.backpack.demo.compose.ImageBottomSheetDarkStory
 import net.skyscanner.backpack.demo.compose.ImageBottomSheetStory
 import net.skyscanner.backpack.demo.compose.ImageContent
 import net.skyscanner.backpack.demo.compose.SheetContent
@@ -58,13 +58,6 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
             ImageBottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
         }
     }
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onImageDark() {
-        snap(height = 400.dp, padding = 0.dp) {
-            ImageBottomSheetDarkStory(initialValue = BpkBottomSheetValue.Expanded)
-        }
-    }
 
     @Test
     fun modal() {
@@ -80,26 +73,12 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun imageModalLight() {
-        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
-            compareScreenshot(onNode(isPopup()), name)
-        }) {
-            BpkModalBottomSheet(
-                content = { ImageContent() },
-                dragHandleStyle = BpkDragHandleStyle.OnImage(),
-                onDismissRequest = {},
-            )
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun imageModelDark() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
             BpkModalBottomSheet(
-                content = { ImageContent() },
+                content = { ImageContent(imageRes = R.drawable.beach) },
                 dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 onDismissRequest = {},
             )

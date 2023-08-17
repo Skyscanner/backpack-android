@@ -24,9 +24,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
-import net.skyscanner.backpack.compose.bottomsheet.internal.bottomSheetContent
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
@@ -42,7 +42,7 @@ fun BpkModalBottomSheet(
 ) {
     ModalBottomSheet(
         sheetState = state.delegate,
-        content = bottomSheetContent(dragHandleStyle, content),
+        content = { BottomSheetContent(dragHandleStyle = dragHandleStyle, content = content) },
         modifier = modifier,
         dragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
         shape = RoundedCornerShape(topStart = BpkBorderRadius.Lg, topEnd = BpkBorderRadius.Lg),

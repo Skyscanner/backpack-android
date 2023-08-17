@@ -10,17 +10,11 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
-## ImageBottomSheetLightHandle
+## BottomSheet with Light Drag Handle over Image content
 
-| Day                                                                                                                                                                          | Night |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagesheet.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagesheet_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
-
-## ImageBottomSheetDarkHandle
-
-| Day                                                                                                                                                                              | Night |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagesheetdark.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagesheetdark_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
+| Day                                                                                                                                                                                                         | Night |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-content-sheet-with-light-draghandle.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-content-sheet-with-light-draghandle_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
 ## Modal
 
@@ -28,17 +22,11 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal.png" alt="Modal BottomSheet component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal_dm.png" alt="Modal BottomSheet component - dark mode" width="375" /> |
 
-## ImageModalSheetLightHandle
+## Modal with Dark Drag Handle over Image content
 
-| Day                                                                                                                                                                          | Night |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagemodal.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagemodal_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
-
-## ImageModalSheetDarkHandle
-
-| Day                                                                                                                                                                              | Night |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagemodaldark.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/imagemodaldark_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
+| Day                                                                                                                                                                                                | Night |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
 
 ## Installation
@@ -96,7 +84,7 @@ if (openBottomSheet) {
 }
 ```
 
-Example of a Modal Bottom Sheet With Image And Custom DragHandle:
+By default the Bottom sheet content starts below the drag handle. In cases where you need to show an image at the top you can set the `dragHandleStyle` property to `OnImage` to remove the safe area, like this:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet

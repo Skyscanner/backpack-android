@@ -26,15 +26,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun bottomSheetContent(
+internal fun BottomSheetContent(
     dragHandleStyle: BpkDragHandleStyle,
+    modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit),
-): @Composable (ColumnScope.() -> Unit) = {
-    when (dragHandleStyle) {
-        BpkDragHandleStyle.Default -> content()
-        is BpkDragHandleStyle.OnImage -> Box {
-            Column { content() }
-            BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
+) {
+    Column(modifier) {
+        when (dragHandleStyle) {
+            BpkDragHandleStyle.Default -> content()
+            is BpkDragHandleStyle.OnImage -> Box {
+                Column { content() }
+                BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
+            }
         }
     }
 }

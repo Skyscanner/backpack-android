@@ -29,10 +29,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.internal.HandleHeight
-import net.skyscanner.backpack.compose.bottomsheet.internal.bottomSheetContent
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
@@ -49,7 +49,7 @@ fun BpkBottomSheet(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     BottomSheetScaffold(
-        sheetContent = bottomSheetContent(dragHandleStyle, sheetContent),
+        sheetContent = { BottomSheetContent(dragHandleStyle = dragHandleStyle, content = sheetContent) },
         modifier = modifier,
         scaffoldState = rememberBottomSheetScaffoldState(
             bottomSheetState = state.delegate,
