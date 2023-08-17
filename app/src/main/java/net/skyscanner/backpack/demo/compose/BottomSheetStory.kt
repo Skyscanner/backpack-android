@@ -18,10 +18,13 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -31,11 +34,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -59,6 +65,32 @@ fun BottomSheetStory(
         state = state,
         peekHeight = 56.dp * 3,
         sheetContent = { SheetContent() },
+        content = { contentPadding ->
+            Spacer(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BpkTheme.colors.canvasContrast)
+                    .padding(contentPadding),
+            )
+        },
+    )
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(name = "Image content sheet with Light drag handle")
+fun ImageBottomSheetStory(
+    modifier: Modifier = Modifier,
+    initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(),
+) {
+    val state = rememberBpkBottomSheetState(initialValue)
+    BpkBottomSheet(
+        modifier = modifier,
+        state = state,
+        peekHeight = 96.dp * 3,
+        sheetContent = { ImageContent(imageRes = R.drawable.swimming) },
+        dragHandleStyle = dragHandleStyle,
         content = { contentPadding ->
             Spacer(
                 modifier = Modifier
@@ -98,10 +130,49 @@ fun ModalBottomSheetStory(
 }
 
 @Composable
+@BottomSheetComponent
+@ComposeStory(name = "Modal sheet with Dark drag handle")
+fun ImageModalDarkBottomSheetStory(
+    modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+) {
+    var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+    val state = rememberBpkModalBottomSheetState()
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = BpkSpacing.Xxl),
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkButton(text = stringResource(R.string.generic_show)) {
+            openBottomSheet = true
+        }
+    }
+    if (openBottomSheet) {
+        BpkModalBottomSheet(
+            state = state,
+            content = { ImageContent(imageRes = R.drawable.beach) },
+            dragHandleStyle = dragHandleStyle,
+            onDismissRequest = { openBottomSheet = false },
+        )
+    }
+}
+
+@Composable
 fun SheetContent(modifier: Modifier = Modifier) {
     LazyColumn(modifier) {
         items(100) {
             ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
         }
     }
+}
+
+@Composable
+fun ImageContent(@DrawableRes imageRes: Int, modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier
+            .fillMaxWidth(),
+        painter = painterResource(id = imageRes),
+        contentScale = ContentScale.Crop,
+        contentDescription = "",)
 }

@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -33,14 +34,34 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkBottomSheetHandle(
     modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
 ) {
+    val dragHandleColor: Color =
+        when (dragHandleStyle) {
+            BpkDragHandleStyle.Default -> BpkTheme.colors.line
+            is BpkDragHandleStyle.OnImage -> {
+                if (dragHandleStyle.type == BpkDragHandleStyle.OnImage.Type.Dark)
+                    BpkTheme.colors.line
+                else
+                    BpkTheme.colors.lineOnDark
+            }
+        }
     Spacer(
         modifier = modifier
             .height(HandleHeight)
             .padding(top = BpkSpacing.Md, bottom = 12.dp)
             .width(HandleWidth)
-            .background(BpkTheme.colors.line, CircleShape),
+            .background(dragHandleColor, CircleShape),
     )
+}
+
+sealed class BpkDragHandleStyle {
+    data object Default : BpkDragHandleStyle()
+    data class OnImage(val type: Type = Type.Light) : BpkDragHandleStyle() {
+        enum class Type {
+            Light, Dark
+        }
+    }
 }
 
 private val HandleWidth = 40.dp

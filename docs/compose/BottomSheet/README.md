@@ -10,11 +10,23 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/default_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
+## BottomSheet with Light Drag Handle over Image content
+
+| Day                                                                                                                                                                                                         | Night |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-content-sheet-with-light-draghandle.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-content-sheet-with-light-draghandle_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
+
 ## Modal
 
 | Day                                                                                                                                                                           | Night                                                                                                                                                                                        |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal.png" alt="Modal BottomSheet component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal_dm.png" alt="Modal BottomSheet component - dark mode" width="375" /> |
+
+## Modal with Dark Drag Handle over Image content
+
+| Day                                                                                                                                                                                                | Night |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
 
 
 ## Installation
@@ -36,6 +48,7 @@ BpkBottomSheet(
   state = state,
   peekHeight = HeightOfCollapsedBottomSheet,
   sheetContent = { /* content of the bottom sheet */ },
+  dragHandleStyle = BpkDragHandleStyle.Default,
   content = { contentPadding ->
     // content displayed behind bottom sheet
     // you should apply content padding to avoid displaying content behind collapsed bottom sheet
@@ -65,6 +78,27 @@ if (openBottomSheet) {
     BpkModalBottomSheet(
         state = state,
         content = { /* content of the bottom sheet */ },
+        dragHandleStyle = BpkDragHandleStyle.Default,
+        onDismissRequest = { openBottomSheet = false },
+    )
+}
+```
+
+By default the Bottom sheet content starts below the drag handle. In cases where you need to show an image at the top you can set the `dragHandleStyle` property to `OnImage` to remove the safe area, like this:
+
+```Kotlin
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
+
+var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+val state = rememberBpkModalBottomSheetState()
+
+if (openBottomSheet) {
+    BpkModalBottomSheet(
+        state = state,
+        content = { /* image content of the bottom sheet */ },
+        dragHandleStyle = BpkDragHandleStyle.OnImage(Type.Light), // use Type.Dark for Dark dragHandle on Image
         onDismissRequest = { openBottomSheet = false },
     )
 }

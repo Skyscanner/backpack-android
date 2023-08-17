@@ -29,7 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.internal.HandleHeight
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -43,10 +45,11 @@ fun BpkBottomSheet(
     state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
     peekHeight: Dp = DefaultSheetPeekHeight,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     BottomSheetScaffold(
-        sheetContent = sheetContent,
+        sheetContent = { BottomSheetContent(dragHandleStyle = dragHandleStyle, content = sheetContent) },
         modifier = modifier,
         scaffoldState = rememberBottomSheetScaffoldState(
             bottomSheetState = state.delegate,
@@ -57,7 +60,7 @@ fun BpkBottomSheet(
         sheetContentColor = BpkTheme.colors.textPrimary,
         sheetTonalElevation = 0.dp,
         sheetShadowElevation = BpkElevation.Lg,
-        sheetDragHandle = { BpkBottomSheetHandle() },
+        sheetDragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
         sheetSwipeEnabled = sheetGesturesEnabled,
         topBar = null,
         snackbarHost = { Box(Modifier) },

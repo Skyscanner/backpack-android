@@ -24,7 +24,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
+import net.skyscanner.backpack.demo.compose.ImageBottomSheetStory
+import net.skyscanner.backpack.demo.compose.ImageContent
 import net.skyscanner.backpack.demo.compose.SheetContent
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,12 +52,34 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onImageLight() {
+        snap(height = 400.dp, padding = 0.dp) {
+            ImageBottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
+        }
+    }
+
+    @Test
     fun modal() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
             BpkModalBottomSheet(
                 content = { SheetContent() },
+                onDismissRequest = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun imageModelDark() {
+        snap(height = 400.dp, padding = 0.dp, comparison = { name ->
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
+            BpkModalBottomSheet(
+                content = { ImageContent(imageRes = R.drawable.beach) },
+                dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 onDismissRequest = {},
             )
         }
