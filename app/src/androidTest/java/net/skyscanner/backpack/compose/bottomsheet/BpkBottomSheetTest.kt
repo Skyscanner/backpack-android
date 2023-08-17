@@ -26,6 +26,9 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
+import net.skyscanner.backpack.demo.compose.ImageBottomSheetDarkStory
+import net.skyscanner.backpack.demo.compose.ImageBottomSheetStory
+import net.skyscanner.backpack.demo.compose.ImageContent
 import net.skyscanner.backpack.demo.compose.SheetContent
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,17 +53,16 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun lightDragHandleOnImage() {
+    fun onImageLight() {
         snap(height = 400.dp, padding = 0.dp) {
-            BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded, dragHandleStyle = BpkDragHandleStyle.OnImage())
+            ImageBottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
         }
     }
-
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun darkDragHandleOnImage() {
+    fun onImageDark() {
         snap(height = 400.dp, padding = 0.dp) {
-            BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded, dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark))
+            ImageBottomSheetDarkStory(initialValue = BpkBottomSheetValue.Expanded)
         }
     }
 
@@ -78,12 +80,12 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun lightDragHandleOnImageModal() {
+    fun imageModalLight() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
             BpkModalBottomSheet(
-                content = { SheetContent() },
+                content = { ImageContent() },
                 dragHandleStyle = BpkDragHandleStyle.OnImage(),
                 onDismissRequest = {},
             )
@@ -92,12 +94,12 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun darkDragHandleOnImageModal() {
+    fun imageModelDark() {
         snap(height = 400.dp, padding = 0.dp, comparison = { name ->
             compareScreenshot(onNode(isPopup()), name)
         }) {
             BpkModalBottomSheet(
-                content = { SheetContent() },
+                content = { ImageContent() },
                 dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 onDismissRequest = {},
             )
