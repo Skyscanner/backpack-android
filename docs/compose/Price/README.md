@@ -4,6 +4,12 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.price)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/price)
 
+## Extra Small
+
+| Day                                                                                                                                                               | Night                                                                                                                                                                            |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/extra-small.png" alt="Price component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/extra-small_dm.png" alt="Price component - dark mode" width="375" /> |
+
 ## Small
 
 | Day                                                                                                                                                         | Night                                                                                                                                                                      |
