@@ -191,15 +191,15 @@ fun TextAreaStory(
             .padding(BpkSpacing.Base),
     ) { status ->
         CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
+            BpkText(text = stringResource(R.string.generic_default))
+            TextAreaDefaultExample(status = status)
+
+            BpkText(stringResource(R.string.generic_read_only))
+            TextAreaReadOnlyExample(status = status)
+
+            BpkText(stringResource(R.string.generic_multiline))
+            TextAreaMultilineExample(status = status)
         }
-        BpkText(text = stringResource(R.string.generic_default))
-        TextAreaDefaultExample(status = status)
-
-        BpkText(stringResource(R.string.generic_read_only))
-        TextAreaReadOnlyExample(status = status)
-
-        BpkText(stringResource(R.string.generic_multiline))
-        TextAreaMultilineExample(status = status)
     }
 
 @Composable
