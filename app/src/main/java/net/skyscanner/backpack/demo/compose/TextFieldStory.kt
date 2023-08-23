@@ -34,6 +34,7 @@ import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.textarea.BpkTextArea
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -172,5 +173,95 @@ private fun TextFieldMultilineExample(
         icon = BpkIcon.Accessibility,
         status = status,
         maxLines = Int.MAX_VALUE,
+    )
+}
+
+@Composable
+@TextFieldComponent
+@ComposeStory(name = "Text Area")
+fun TextAreaStory(
+    modifier: Modifier = Modifier,
+    initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+) =
+    FieldStatusSwitcher(
+        initialStatus = initialStatus,
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(BpkSpacing.Base),
+    ) { status ->
+        CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
+            BpkText(text = stringResource(R.string.generic_default))
+            TextAreaDefaultExample(status = status)
+
+            BpkText(stringResource(R.string.generic_read_only))
+            TextAreaReadOnlyExample(status = status)
+
+            BpkText(stringResource(R.string.generic_multiline))
+            TextAreaMultilineExample(status = status)
+        }
+    }
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Text Area Disabled", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotDisabled(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Disabled)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Text Area Validated", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotValidated(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Validated)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Text Area Error", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotError(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+
+@Composable
+fun TextAreaDefaultExample(
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+) {
+    var value by remember { mutableStateOf("") }
+    BpkTextArea(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
+    )
+}
+
+@Composable
+private fun TextAreaReadOnlyExample(
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+) {
+    BpkTextArea(
+        modifier = modifier,
+        readOnly = true,
+        value = stringResource(R.string.generic_read_only_value),
+        onValueChange = { },
+        placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
+    )
+}
+
+@Composable
+private fun TextAreaMultilineExample(
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+) {
+    val loremIpsum = stringResource(R.string.stub)
+    var value by remember { mutableStateOf(loremIpsum) }
+    BpkTextArea(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
     )
 }
