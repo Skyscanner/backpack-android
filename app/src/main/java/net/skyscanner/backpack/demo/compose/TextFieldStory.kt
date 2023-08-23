@@ -204,6 +204,23 @@ fun TextAreaStory(
 
 @Composable
 @TextFieldComponent
+@ComposeStory("Text Area Disabled", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotDisabled(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Disabled)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Text Area Validated", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotValidated(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Validated)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Text Area Error", StoryKind.ScreenshotOnly)
+internal fun TextAreaScreenshotError(modifier: Modifier = Modifier) =
+    TextAreaStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+
+@Composable
 fun TextAreaDefaultExample(
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = BpkFieldStatus.Default,
