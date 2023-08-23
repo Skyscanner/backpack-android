@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -34,6 +35,7 @@ import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.textarea.BpkTextArea
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -172,5 +174,68 @@ private fun TextFieldMultilineExample(
         icon = BpkIcon.Accessibility,
         status = status,
         maxLines = Int.MAX_VALUE,
+    )
+}
+
+@Composable
+@TextFieldComponent
+@ComposeStory(name = "Text Area")
+fun TextAreaStory(
+    modifier: Modifier = Modifier,
+) =
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(BpkSpacing.Base),
+    ) {
+        BpkText(text = stringResource(R.string.generic_default))
+        TextAreaDefaultExample()
+
+        BpkText(stringResource(R.string.generic_read_only))
+        TextAreaReadOnlyExample()
+
+        BpkText(stringResource(R.string.generic_multiline))
+        TextAreaMultilineExample()
+    }
+
+@Composable
+@TextFieldComponent
+fun TextAreaDefaultExample(
+    modifier: Modifier = Modifier,
+) {
+    var value by remember { mutableStateOf("") }
+    BpkTextArea(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+    )
+}
+
+@Composable
+private fun TextAreaReadOnlyExample(
+    modifier: Modifier = Modifier,
+) {
+    BpkTextArea(
+        modifier = modifier,
+        readOnly = true,
+        value = stringResource(R.string.generic_read_only_value),
+        onValueChange = { },
+        placeholder = stringResource(R.string.generic_placeholder),
+    )
+}
+
+@Composable
+private fun TextAreaMultilineExample(
+    modifier: Modifier = Modifier,
+) {
+    val loremIpsum = stringResource(R.string.stub)
+    var value by remember { mutableStateOf(loremIpsum) }
+    BpkTextArea(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
     )
 }

@@ -77,6 +77,7 @@ internal fun BpkTextFieldImpl(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions(),
+    minLines: Int = 1,
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
@@ -101,6 +102,7 @@ internal fun BpkTextFieldImpl(
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
+        minLines = minLines,
         maxLines = maxLines,
         interactionSource = interactionSource,
         trailingIcon = trailingIcon,
@@ -109,7 +111,7 @@ internal fun BpkTextFieldImpl(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun BpkTextFieldImpl(
+internal fun BpkTextFieldImpl(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
@@ -120,6 +122,7 @@ fun BpkTextFieldImpl(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions(),
+    minLines: Int = 1,
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
@@ -193,6 +196,7 @@ fun BpkTextFieldImpl(
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
                 singleLine = maxLines == 1,
+                minLines = minLines,
                 maxLines = maxLines,
                 visualTransformation = visualTransformation,
                 interactionSource = interactionSource,
