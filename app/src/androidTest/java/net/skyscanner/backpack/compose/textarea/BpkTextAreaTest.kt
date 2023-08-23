@@ -23,6 +23,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -35,6 +36,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
             value = "Value",
             onValueChange = {},
             placeholder = "Placeholder",
+            status = BpkFieldStatus.Default,
         )
     }
 
@@ -47,6 +49,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 onValueChange = {},
                 placeholder = "Placeholder",
                 readOnly = true,
+                status = BpkFieldStatus.Default,
             )
         }
     }
@@ -59,6 +62,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 value = "",
                 onValueChange = {},
                 placeholder = "Placeholder",
+                status = BpkFieldStatus.Default,
             )
         }
     }
@@ -71,6 +75,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 value = "Value ".repeat(20),
                 onValueChange = {},
                 placeholder = "Placeholder ".repeat(20),
+                status = BpkFieldStatus.Default,
             )
         }
     }
@@ -83,6 +88,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 value = "",
                 onValueChange = {},
                 placeholder = "Placeholder ".repeat(20),
+                status = BpkFieldStatus.Default,
             )
         }
     }
@@ -95,6 +101,7 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 value = "Value",
                 onValueChange = {},
                 placeholder = "Placeholder",
+                status = BpkFieldStatus.Disabled,
             )
         }
     }
@@ -107,6 +114,30 @@ class BpkTextAreaTest : BpkSnapshotTest() {
                 value = "",
                 onValueChange = {},
                 placeholder = "Placeholder",
+            )
+        }
+    }
+
+    @Test
+    fun validated() {
+        snap {
+            BpkTextArea(
+                value = "Value",
+                onValueChange = {},
+                placeholder = "Placeholder",
+                status = BpkFieldStatus.Validated,
+            )
+        }
+    }
+
+    @Test
+    fun error() {
+        snap {
+            BpkTextArea(
+                value = "Value",
+                onValueChange = {},
+                placeholder = "Placeholder",
+                status = BpkFieldStatus.Error("Error text"),
             )
         }
     }

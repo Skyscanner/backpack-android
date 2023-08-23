@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -182,27 +181,32 @@ private fun TextFieldMultilineExample(
 @ComposeStory(name = "Text Area")
 fun TextAreaStory(
     modifier: Modifier = Modifier,
+    initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
 ) =
-    Column(
+    FieldStatusSwitcher(
+        initialStatus = initialStatus,
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(BpkSpacing.Base),
-    ) {
+    ) { status ->
+        CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
+        }
         BpkText(text = stringResource(R.string.generic_default))
-        TextAreaDefaultExample()
+        TextAreaDefaultExample(status = status)
 
         BpkText(stringResource(R.string.generic_read_only))
-        TextAreaReadOnlyExample()
+        TextAreaReadOnlyExample(status = status)
 
         BpkText(stringResource(R.string.generic_multiline))
-        TextAreaMultilineExample()
+        TextAreaMultilineExample(status = status)
     }
 
 @Composable
 @TextFieldComponent
 fun TextAreaDefaultExample(
     modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
     var value by remember { mutableStateOf("") }
     BpkTextArea(
@@ -210,12 +214,14 @@ fun TextAreaDefaultExample(
         value = value,
         onValueChange = { value = it },
         placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
     )
 }
 
 @Composable
 private fun TextAreaReadOnlyExample(
     modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
     BpkTextArea(
         modifier = modifier,
@@ -223,12 +229,14 @@ private fun TextAreaReadOnlyExample(
         value = stringResource(R.string.generic_read_only_value),
         onValueChange = { },
         placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
     )
 }
 
 @Composable
 private fun TextAreaMultilineExample(
     modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
     val loremIpsum = stringResource(R.string.stub)
     var value by remember { mutableStateOf(loremIpsum) }
@@ -237,5 +245,6 @@ private fun TextAreaMultilineExample(
         value = value,
         onValueChange = { value = it },
         placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
     )
 }

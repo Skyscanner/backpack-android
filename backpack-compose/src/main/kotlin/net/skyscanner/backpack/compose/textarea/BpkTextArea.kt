@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 
 private const val LINES_COUNT = 3
@@ -36,6 +38,7 @@ fun BpkTextArea(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     placeholder: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -47,6 +50,7 @@ fun BpkTextArea(
         onValueChange = onValueChange,
         modifier = modifier,
         readOnly = readOnly,
+        status = status,
         placeholder = placeholder,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
@@ -63,6 +67,7 @@ fun BpkTextArea(
     onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
+    status: BpkFieldStatus = LocalFieldStatus.current,
     placeholder: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -74,6 +79,7 @@ fun BpkTextArea(
         onValueChange = onValueChange,
         modifier = modifier,
         readOnly = readOnly,
+        status = status,
         placeholder = placeholder,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,

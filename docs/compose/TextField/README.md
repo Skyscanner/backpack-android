@@ -107,3 +107,16 @@ BpkTextArea(
   placeholder = "Placeholder",
 )
 ```
+Example of a TextArea with error status:
+
+```Kotlin
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.textfield.BpkTextArea
+
+BpkTextArea(
+  value = value,
+  onValueChange = { value -> },
+  placeholder = "Placeholder",
+  status = BpkFieldStatus.Error("Error text"),
+)
+```
