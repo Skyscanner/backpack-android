@@ -85,7 +85,7 @@ jobs:
           publish_branch: main
 
       - name: Publish Release APK to AppCenter
-        uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
+        uses: devussy/AppCenter-Distribute-Github-Action@v1.3.4
         with:
           app: Backpack/Backpack-Android
           token: ${{secrets.APP_CENTER_TOKEN}}
