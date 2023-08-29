@@ -55,7 +55,7 @@ internal fun TextContentModalExample(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .padding(BpkSpacing.Base),
                 text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.heading3,
+                style = BpkTheme.typography.bodyDefault,
                 color = BpkTheme.colors.textPrimary,
             )
         }
@@ -79,7 +79,7 @@ internal fun TextContentWithoutActionModalExample(modifier: Modifier = Modifier)
                     .fillMaxWidth()
                     .padding(BpkSpacing.Base),
                 text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.heading3,
+                style = BpkTheme.typography.bodyDefault,
                 color = BpkTheme.colors.textPrimary,
             )
         }

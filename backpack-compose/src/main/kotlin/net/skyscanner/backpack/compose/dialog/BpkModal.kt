@@ -18,55 +18,93 @@
 
 package net.skyscanner.backpack.compose.dialog
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
+import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+
+private const val ANIMATION_DURATION_MS = 400
 
 @Composable
 fun BpkModal(
     closeButtonAccessibilityLabel: String,
     modifier: Modifier = Modifier,
-    title: String? = null,
     action: TextAction? = null,
+    title: String? = null,
     onDismiss: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Dialog(
-        properties = DialogProperties(usePlatformDefaultWidth = false),
-        onDismissRequest = { onDismiss?.invoke() },
+    var visible by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(visible) {
+        visible = true
+    }
+
+    var dismissed by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(dismissed) {
+        if (dismissed) {
+            visible = false
+            delay(ANIMATION_DURATION_MS.toLong())
+            onDismiss?.invoke()
+        }
+    }
+
+    Popup(
+        properties = PopupProperties(
+            focusable = true,
+            dismissOnBackPress = false,
+        ),
     ) {
-        Surface(modifier = modifier) {
-            Column {
-                if (action != null) {
-                    BpkTopNavBar(
-                        navIcon = NavIcon.Close(
-                            contentDescription = closeButtonAccessibilityLabel,
-                            onClick = { onDismiss?.invoke() },
-                        ),
-                        title = title.orEmpty(),
-                        action = TextAction(text = action.text, onClick = { action.onClick.invoke() }),
-                    )
-                } else {
-                    BpkTopNavBar(
-                        navIcon = NavIcon.Close(
-                            contentDescription = closeButtonAccessibilityLabel,
-                            onClick = { onDismiss?.invoke() },
-                        ),
-                        title = title.orEmpty(),
+        AnimatedVisibility(
+            visible = visible,
+            enter = slideInVertically(tween(ANIMATION_DURATION_MS)) { it },
+            exit = slideOutVertically(tween(ANIMATION_DURATION_MS)) { it },
+        ) {
+            Surface {
+                Column {
+                    if (action != null) {
+                        BpkTopNavBar(
+                            navIcon = NavIcon.Close(
+                                contentDescription = closeButtonAccessibilityLabel,
+                                onClick = { dismissed = true },
+                            ),
+                            title = title.orEmpty(),
+                            action = TextAction(text = action.text, onClick = { action.onClick.invoke() }),
+                        )
+                    } else {
+                        BpkTopNavBar(
+                            navIcon = NavIcon.Close(
+                                contentDescription = closeButtonAccessibilityLabel,
+                                onClick = { dismissed = true },
+                            ),
+                            title = title.orEmpty(),
+                        )
+                    }
+                    Box(
+                        content = content,
                     )
                 }
-
-                Box(
-                    content = content,
-                )
             }
         }
     }
