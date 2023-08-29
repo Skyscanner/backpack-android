@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -38,7 +37,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @ModalComponent
 @ComposeStory("Text Content Modal Dialog")
-internal fun TextContentModalExample(modifier: Modifier = Modifier) {
+internal fun TextContentModalExample() {
     DialogDemo { onDismiss ->
         BpkModal(
             title = stringResource(id = R.string.dialog_title),
@@ -48,7 +47,6 @@ internal fun TextContentModalExample(modifier: Modifier = Modifier) {
                 onClick = onDismiss,
             ),
             onDismiss = onDismiss,
-            modifier = modifier.fillMaxSize(),
         ) {
             BpkText(
                 modifier = Modifier
@@ -65,14 +63,13 @@ internal fun TextContentModalExample(modifier: Modifier = Modifier) {
 @Composable
 @ModalComponent
 @ComposeStory("Text Content Modal Dialog Without Action Button")
-internal fun TextContentWithoutActionModalExample(modifier: Modifier = Modifier) {
+internal fun TextContentWithoutActionModalExample() {
     DialogDemo { onDismiss ->
         BpkModal(
             title = stringResource(id = R.string.dialog_title),
             closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
             action = null,
             onDismiss = onDismiss,
-            modifier = modifier.fillMaxSize(),
         ) {
             BpkText(
                 modifier = Modifier

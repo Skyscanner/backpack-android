@@ -25,6 +25,7 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import kotlinx.coroutines.delay
@@ -42,6 +44,7 @@ import net.skyscanner.backpack.compose.navigationbar.TextAction
 private const val ANIMATION_DURATION_MS = 400
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkModal(
     closeButtonAccessibilityLabel: String,
     action: TextAction? = null,
@@ -53,17 +56,13 @@ fun BpkModal(
         mutableStateOf(false)
     }
 
-    LaunchedEffect(visible) {
-        visible = true
-    }
-
     var dismissed by remember {
         mutableStateOf(false)
     }
 
     LaunchedEffect(dismissed) {
+        visible = !dismissed
         if (dismissed) {
-            visible = false
             delay(ANIMATION_DURATION_MS.toLong())
             onDismiss?.invoke()
         }
@@ -79,6 +78,7 @@ fun BpkModal(
             visible = visible,
             enter = slideInVertically(tween(ANIMATION_DURATION_MS)) { it },
             exit = slideOutVertically(tween(ANIMATION_DURATION_MS)) { it },
+            modifier = Modifier.fillMaxSize(),
         ) {
             Surface {
                 Column {
