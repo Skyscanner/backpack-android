@@ -44,7 +44,6 @@ private const val ANIMATION_DURATION_MS = 400
 @Composable
 fun BpkModal(
     closeButtonAccessibilityLabel: String,
-    modifier: Modifier = Modifier,
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
