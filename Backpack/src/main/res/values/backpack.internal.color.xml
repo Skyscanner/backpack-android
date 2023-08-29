@@ -51,6 +51,7 @@
     <color name="__privateChipOnDarkOnBackground">#ffffffff</color>
     <color name="__privateChipOnDarkOnDismissIcon">#ff545860</color>
     <color name="__privateChipOnDarkPressedStroke">#ffffffff</color>
+    <color name="__privateMapMarkerViewedForeground">#ccffffff</color>
     <color name="__privateSkeletonShimmerCenter">#99ffffff</color>
     <color name="__privateSkeletonShimmerStartEnd">#00ffffff</color>
 </resources>
