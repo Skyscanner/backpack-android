@@ -23,11 +23,11 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -53,8 +53,7 @@ fun BpkModal(
         MutableTransitionState(false).apply { targetState = true }
     }
 
-    if (!animVisibleState.targetState &&
-        !animVisibleState.currentState) {
+    if (!animVisibleState.targetState && !animVisibleState.currentState) {
         onDismiss?.invoke()
         return
     }
@@ -69,33 +68,31 @@ fun BpkModal(
             exit = slideOutVertically(tween(ANIMATION_DURATION_MS)) { it },
             modifier = Modifier.fillMaxSize(),
         ) {
-            Surface(color = BpkTheme.colors.surfaceDefault) {
-                Column {
-                    if (action != null) {
-                        BpkTopNavBar(
-                            navIcon = NavIcon.Close(
-                                contentDescription = closeButtonAccessibilityLabel,
-                                onClick = { animVisibleState.targetState = false },
-                            ),
-                            title = title.orEmpty(),
-                            action = TextAction(text = action.text, onClick = {
-                                animVisibleState.targetState = false
-                                action.onClick.invoke()
-                            }),
-                        )
-                    } else {
-                        BpkTopNavBar(
-                            navIcon = NavIcon.Close(
-                                contentDescription = closeButtonAccessibilityLabel,
-                                onClick = { animVisibleState.targetState = false },
-                            ),
-                            title = title.orEmpty(),
-                        )
-                    }
-                    Box(
-                        content = content,
+            Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {
+                if (action != null) {
+                    BpkTopNavBar(
+                        navIcon = NavIcon.Close(
+                            contentDescription = closeButtonAccessibilityLabel,
+                            onClick = { animVisibleState.targetState = false },
+                        ),
+                        title = title.orEmpty(),
+                        action = TextAction(text = action.text, onClick = {
+                            animVisibleState.targetState = false
+                            action.onClick.invoke()
+                        }),
+                    )
+                } else {
+                    BpkTopNavBar(
+                        navIcon = NavIcon.Close(
+                            contentDescription = closeButtonAccessibilityLabel,
+                            onClick = { animVisibleState.targetState = false },
+                        ),
+                        title = title.orEmpty(),
                     )
                 }
+                Box(
+                    content = content,
+                )
             }
         }
     }
