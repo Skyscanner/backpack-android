@@ -53,7 +53,7 @@ fun BpkModal(
         MutableTransitionState(false).apply { targetState = true }
     }
 
-    if (!animVisibleState.targetState && !animVisibleState.currentState) {
+    if (animVisibleState.isIdle && !animVisibleState.currentState) {
         onDismiss?.invoke()
         return
     }
@@ -76,10 +76,7 @@ fun BpkModal(
                             onClick = { animVisibleState.targetState = false },
                         ),
                         title = title.orEmpty(),
-                        action = TextAction(text = action.text, onClick = {
-                            animVisibleState.targetState = false
-                            action.onClick.invoke()
-                        }),
+                        action = TextAction(text = action.text, onClick = { action.onClick.invoke() }),
                     )
                 } else {
                     BpkTopNavBar(
@@ -90,9 +87,7 @@ fun BpkModal(
                         title = title.orEmpty(),
                     )
                 }
-                Box(
-                    content = content,
-                )
+                Box(content = content)
             }
         }
     }

@@ -55,7 +55,9 @@ class BpkModalTest : BpkSnapshotTest() {
     }
 
     private fun record(content: @Composable () -> Unit) {
+        rule.mainClock.autoAdvance = true
         rule.setContent { BpkTheme { content() } }
+        rule.mainClock.advanceTimeBy(1000) // for skipping the animation
         rule.waitForIdle()
         compareScreenshot(rule.onNode(isPopup()))
     }
