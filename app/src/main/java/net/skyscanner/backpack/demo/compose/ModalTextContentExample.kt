@@ -37,8 +37,8 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @ModalComponent
 @ComposeStory("Text Content Modal Dialog")
-internal fun TextContentModalExample() {
-    DialogDemo { onDismiss ->
+internal fun ModalTextContentExample() {
+    ModalDemo { onDismiss ->
         BpkModal(
             title = stringResource(id = R.string.dialog_title),
             closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
@@ -63,8 +63,8 @@ internal fun TextContentModalExample() {
 @Composable
 @ModalComponent
 @ComposeStory("Text Content Modal Dialog Without Action Button")
-internal fun TextContentWithoutActionModalExample() {
-    DialogDemo { onDismiss ->
+internal fun ModalTextContentWithoutActionExample() {
+    ModalDemo { onDismiss ->
         BpkModal(
             title = stringResource(id = R.string.dialog_title),
             closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
@@ -84,7 +84,30 @@ internal fun TextContentWithoutActionModalExample() {
 }
 
 @Composable
-private fun DialogDemo(
+@ModalComponent
+@ComposeStory("Text Content Modal Dialog Without Action and Title Button")
+internal fun ModalTextContentWithoutActionAndTitleExample() {
+    ModalDemo { onDismiss ->
+        BpkModal(
+            title = null,
+            closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
+            action = null,
+            onDismiss = onDismiss,
+        ) {
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(BpkSpacing.Base),
+                text = stringResource(R.string.dialog_text),
+                style = BpkTheme.typography.bodyDefault,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ModalDemo(
     content: @Composable (onDismiss: () -> Unit) -> Unit,
 ) {
     val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher

@@ -40,6 +40,7 @@ import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.theme.BpkTheme
 
 private const val ANIMATION_DURATION_MS = 400
 
@@ -80,7 +81,9 @@ fun BpkModal(
             exit = slideOutVertically(tween(ANIMATION_DURATION_MS)) { it },
             modifier = Modifier.fillMaxSize(),
         ) {
-            Surface {
+            Surface(
+                color = BpkTheme.colors.surfaceDefault,
+            ) {
                 Column {
                     if (action != null) {
                         BpkTopNavBar(

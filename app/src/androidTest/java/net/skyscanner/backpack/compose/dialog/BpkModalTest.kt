@@ -19,14 +19,15 @@
 package net.skyscanner.backpack.compose.dialog
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.test.isDialog
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.junit4.createComposeRule
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.demo.compose.TextContentModalExample
-import net.skyscanner.backpack.demo.compose.TextContentWithoutActionModalExample
+import net.skyscanner.backpack.demo.compose.ModalTextContentExample
+import net.skyscanner.backpack.demo.compose.ModalTextContentWithoutActionAndTitleExample
+import net.skyscanner.backpack.demo.compose.ModalTextContentWithoutActionExample
 import org.junit.Rule
 import org.junit.Test
 
@@ -37,19 +38,25 @@ class BpkModalTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun textContentModal() = record {
-        TextContentModalExample()
+    fun modalWithTextContent() = record {
+        ModalTextContentExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun textContentWithoutActionModal() = record {
-        TextContentWithoutActionModalExample()
+    fun modalWithTextContentNoAction() = record {
+        ModalTextContentWithoutActionExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun modalWithTextContentNoActionAndNoTitle() = record {
+        ModalTextContentWithoutActionAndTitleExample()
     }
 
     private fun record(content: @Composable () -> Unit) {
         rule.setContent { BpkTheme { content() } }
-
-        compareScreenshot(rule.onNode(isDialog()))
+        rule.waitForIdle()
+        compareScreenshot(rule.onNode(isPopup()))
     }
 }
