@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.modal
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -29,7 +28,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
@@ -43,27 +41,25 @@ private const val ANIMATION_DURATION_MS = 400
 @Composable
 @Suppress("ModifierMissing")
 fun BpkModal(
-    closeButtonAccessibilityLabel: String,
+    navIcon: NavIcon,
+    state: BpkModalState = rememberBpkModalState(),
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    val animVisibleState = remember {
-        MutableTransitionState(false).apply { targetState = true }
-    }
-
-    if (animVisibleState.isIdle && !animVisibleState.currentState) {
+    val isVisible = state.isVisible
+    if (state.isVisible.isIdle && !isVisible.currentState) {
         onDismiss?.invoke()
         return
     }
 
     Popup(
         properties = PopupProperties(focusable = true),
-        onDismissRequest = { animVisibleState.targetState = false },
+        onDismissRequest = { isVisible.targetState = false },
     ) {
         AnimatedVisibility(
-            visibleState = animVisibleState,
+            visibleState = isVisible,
             enter = slideInVertically(tween(ANIMATION_DURATION_MS)) { it },
             exit = slideOutVertically(tween(ANIMATION_DURATION_MS)) { it },
             modifier = Modifier.fillMaxSize(),
@@ -71,19 +67,13 @@ fun BpkModal(
             Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {
                 if (action != null) {
                     BpkTopNavBar(
-                        navIcon = NavIcon.Close(
-                            contentDescription = closeButtonAccessibilityLabel,
-                            onClick = { animVisibleState.targetState = false },
-                        ),
+                        navIcon = navIcon,
                         title = title.orEmpty(),
-                        action = TextAction(text = action.text, onClick = { action.onClick.invoke() }),
+                        action = action,
                     )
                 } else {
                     BpkTopNavBar(
-                        navIcon = NavIcon.Close(
-                            contentDescription = closeButtonAccessibilityLabel,
-                            onClick = { animVisibleState.targetState = false },
-                        ),
+                        navIcon = navIcon,
                         title = title.orEmpty(),
                     )
                 }

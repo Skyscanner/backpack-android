@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.modal.rememberBpkModalState
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -38,60 +40,18 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ModalComponent
 @ComposeStory("Text Content Modal Dialog")
 internal fun ModalTextContentExample() {
+    val modalState = rememberBpkModalState()
     ModalDemo { onDismiss ->
         BpkModal(
+            navIcon = NavIcon.Close(
+                contentDescription = stringResource(id = R.string.navigation_accessibility),
+                onClick = { modalState.isVisible.targetState = false },
+            ),
             title = stringResource(id = R.string.dialog_title),
-            closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
             action = TextAction(
                 text = stringResource(R.string.navigation_text_action),
                 onClick = onDismiss,
             ),
-            onDismiss = onDismiss,
-        ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
-        }
-    }
-}
-
-@Composable
-@ModalComponent
-@ComposeStory("Text Content Modal Dialog Without Action Button")
-internal fun ModalTextContentWithoutActionExample() {
-    ModalDemo { onDismiss ->
-        BpkModal(
-            title = stringResource(id = R.string.dialog_title),
-            closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
-            action = null,
-            onDismiss = onDismiss,
-        ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
-        }
-    }
-}
-
-@Composable
-@ModalComponent
-@ComposeStory("Text Content Modal Dialog Without Action and Title Button")
-internal fun ModalTextContentWithoutActionAndTitleExample() {
-    ModalDemo { onDismiss ->
-        BpkModal(
-            title = null,
-            closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
-            action = null,
             onDismiss = onDismiss,
         ) {
             BpkText(
