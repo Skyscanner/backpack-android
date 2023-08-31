@@ -43,14 +43,71 @@ internal fun ModalTextContentExample() {
     val modalState = rememberBpkModalState()
     ModalDemo { onDismiss ->
         BpkModal(
+            state = modalState,
             navIcon = NavIcon.Close(
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { modalState.isVisible.targetState = false },
+                onClick = { modalState.hide() },
             ),
             title = stringResource(id = R.string.dialog_title),
             action = TextAction(
                 text = stringResource(R.string.navigation_text_action),
-                onClick = onDismiss,
+                onClick = {
+                    modalState.hide()
+                    onDismiss()
+                },
+            ),
+            onDismiss = onDismiss,
+        ) {
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(BpkSpacing.Base),
+                text = stringResource(R.string.dialog_text),
+                style = BpkTheme.typography.bodyDefault,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
+    }
+}
+
+@Composable
+@ModalComponent
+@ComposeStory("Text Content Modal Dialog Without Action Button")
+internal fun ModalTextContentWithoutActionExample() {
+    val modalState = rememberBpkModalState()
+    ModalDemo { onDismiss ->
+        BpkModal(
+            state = modalState,
+            navIcon = NavIcon.Close(
+                contentDescription = stringResource(id = R.string.navigation_accessibility),
+                onClick = { modalState.hide() },
+            ),
+            title = stringResource(id = R.string.dialog_title),
+            onDismiss = onDismiss,
+        ) {
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(BpkSpacing.Base),
+                text = stringResource(R.string.dialog_text),
+                style = BpkTheme.typography.bodyDefault,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
+    }
+}
+
+@Composable
+@ModalComponent
+@ComposeStory("Text Content Modal Dialog Without Action and Title Button")
+internal fun ModalTextContentWithoutActionAndTitleExample() {
+    val modalState = rememberBpkModalState()
+    ModalDemo { onDismiss ->
+        BpkModal(
+            state = modalState,
+            navIcon = NavIcon.Close(
+                contentDescription = stringResource(id = R.string.navigation_accessibility),
+                onClick = { modalState.hide() },
             ),
             onDismiss = onDismiss,
         ) {

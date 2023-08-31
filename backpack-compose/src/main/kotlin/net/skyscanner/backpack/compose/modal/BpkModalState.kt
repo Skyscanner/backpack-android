@@ -5,15 +5,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
 @Composable
-fun rememberBpkModalState() = remember {
-    BpkModalState()
+fun rememberBpkModalState(): BpkModalState {
+    val isVisible = remember {
+        MutableTransitionState(false).apply { targetState = true }
+    }
+
+    return remember(isVisible) {
+        BpkModalState(isVisible)
+    }
 }
 
 class BpkModalState(
-    val isVisible: MutableTransitionState<Boolean> =
-        MutableTransitionState(false).apply { targetState = true },
+    internal val isVisible: MutableTransitionState<Boolean>,
 ) {
-    suspend fun hide() {
+    fun hide() {
         isVisible.targetState = false
     }
 }

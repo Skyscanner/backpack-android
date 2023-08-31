@@ -49,9 +49,8 @@ fun BpkModal(
     content: @Composable BoxScope.() -> Unit,
 ) {
     val isVisible = state.isVisible
-    if (state.isVisible.isIdle && !isVisible.currentState) {
+    if (isVisible.isIdle && !isVisible.currentState) {
         onDismiss?.invoke()
-        return
     }
 
     Popup(
