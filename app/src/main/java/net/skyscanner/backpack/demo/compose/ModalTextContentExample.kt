@@ -25,7 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.dialog.BpkModal
+import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme

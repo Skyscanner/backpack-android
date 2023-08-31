@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.dialog
+package net.skyscanner.backpack.compose.modal
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
