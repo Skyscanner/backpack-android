@@ -99,7 +99,7 @@ internal fun NudgerExample(
 }
 
 @Composable
-private fun NudgerRowExample(
+internal fun NudgerRowExample(
     modifier: Modifier = Modifier,
     title: String = stringResource(R.string.generic_title),
     subtitle: String? = stringResource(R.string.generic_subtitle),
