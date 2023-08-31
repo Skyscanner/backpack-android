@@ -329,16 +329,18 @@
     <string name="progress_bar_large_stepped">Large stepped</string>
     <string name="progress_bar_decrease">Decrease</string>
     <string name="progress_bar_increase">Increase</string>
-    
+
     <string name="section_header_title">Section title</string>
     <string name="section_header_description">Description about this section (optional)</string>
     <string name="section_header_button_text">Action</string>
     <string name="section_header_icon_content_description">heart icon</string>
     <string name="section_header_button_click_feedback_msg">Click!</string>
-  
+
     <string name="snippet_headline">Headline Text</string>
     <string name="snippet_sub_heading">Description</string>
     <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti."</string>
     <string name="snippet_image_content_description">Image</string>
+    <string name="generic_title">Title</string>
+    <string name="generic_subtitle">Subtitle</string>
 </resources>
