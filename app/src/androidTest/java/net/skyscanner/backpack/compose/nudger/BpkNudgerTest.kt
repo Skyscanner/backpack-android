@@ -81,19 +81,19 @@ class BpkNudgerTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultRow() {
+    fun defaultRow() = snap {
         NudgerRowExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun withNoSubtitle() {
+    fun withNoSubtitle() = snap {
         NudgerRowExample(subtitle = null)
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun withIcon() {
+    fun withIcon() = snap {
         NudgerRowExample(icon = BpkIcon.Account)
     }
 }
