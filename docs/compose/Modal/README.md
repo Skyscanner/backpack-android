@@ -4,11 +4,23 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.net.skyscanner.backpack.compose.dialog)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/net.skyscanner.backpack.compose.dialog)
 
-## Default
+## TextContentModal
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/default.png" alt="Modal component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/default_dm.png" alt="Modal component - dark mode" width="375" /> |
+| Day | Night | Right to Left |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content.png" alt="TextContentModal" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content_dm.png" alt="TextContentModal - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content_rtl.png" alt="TextContentModal - rtl mode" width="375" /> |
+
+## TextContentModalWithoutAction
+
+| Day | Night | Right to Left |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content.png" alt="TextContentModalWithoutAction" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content_dm.png" alt="TextContentModalWithoutAction - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content_rtl.png" alt="TextContentModalWithoutAction - rtl mode" width="375" /> |
+
+## TextContentModalWithoutTitleAndAction
+
+| Day | Night | Right to Left |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content.png" alt="TextContentModalWithoutTitleAndAction" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content_dm.png" alt="TextContentModalWithoutTitleAndAction - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content_rtl.png" alt="TextContentModalWithoutTitleAndAction - rtl mode" width="375" /> |
 
 ## Installation
 
@@ -16,12 +28,71 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a Modal:
+Example of a Modal with title, text action and text content:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.net.skyscanner.backpack.compose.dialog.BpkModal
 
 BpkModal(
-    // TODO
-)
+    title = stringResource(id = R.string.dialog_title),
+    closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
+    action = TextAction(
+        text = stringResource(R.string.navigation_text_action),
+        onClick = { /** onActionClick **/ },
+    ),
+    onDismiss = { /** onDismiss **/ },
+) {
+    BpkText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base),
+        text = stringResource(R.string.dialog_text),
+        style = BpkTheme.typography.bodyDefault,
+        color = BpkTheme.colors.textPrimary,
+    )
+}
+```
+
+Example of a Modal with title and text content:
+
+```Kotlin
+import net.skyscanner.backpack.compose.net.skyscanner.backpack.compose.dialog.BpkModal
+
+BpkModal(
+    title = stringResource(id = R.string.dialog_title),
+    closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
+    action = null,
+    onDismiss = { /** onDismiss **/ },
+) {
+    BpkText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base),
+        text = stringResource(R.string.dialog_text),
+        style = BpkTheme.typography.bodyDefault,
+        color = BpkTheme.colors.textPrimary,
+    )
+}
+```
+
+Example of a Modal with text content only:
+
+```Kotlin
+import net.skyscanner.backpack.compose.net.skyscanner.backpack.compose.dialog.BpkModal
+
+BpkModal(
+    title = null,
+    closeButtonAccessibilityLabel = stringResource(id = R.string.navigation_accessibility),
+    action = null,
+    onDismiss = { /** onDismiss **/ },
+) {
+    BpkText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base),
+        text = stringResource(R.string.dialog_text),
+        style = BpkTheme.typography.bodyDefault,
+        color = BpkTheme.colors.textPrimary,
+    )
+}
 ```
