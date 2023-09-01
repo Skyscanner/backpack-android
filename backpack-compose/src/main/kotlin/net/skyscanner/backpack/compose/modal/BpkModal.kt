@@ -36,7 +36,7 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-internal const val ModalAnimationDuration = 300
+internal const val ModalAnimationDurationMs = 300
 
 @Composable
 @Suppress("ModifierMissing")
@@ -59,8 +59,8 @@ fun BpkModal(
     ) {
         AnimatedVisibility(
             visibleState = isVisible,
-            enter = slideInVertically(tween(ModalAnimationDuration)) { it },
-            exit = slideOutVertically(tween(ModalAnimationDuration)) { it },
+            enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
+            exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
             modifier = Modifier.fillMaxSize(),
         ) {
             Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {

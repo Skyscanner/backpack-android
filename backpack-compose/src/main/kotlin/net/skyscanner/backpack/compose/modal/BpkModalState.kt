@@ -13,13 +13,13 @@ fun rememberBpkModalState() = remember {
 class BpkModalState internal constructor(
     internal val isVisible: MutableTransitionState<Boolean>,
 ) {
-
     suspend fun show() {
         isVisible.targetState = true
-        delay(ModalAnimationDuration.toLong())
+        delay(ModalAnimationDurationMs.toLong())
     }
+
     suspend fun hide() {
         isVisible.targetState = false
-        delay(ModalAnimationDuration.toLong())
+        delay(ModalAnimationDurationMs.toLong())
     }
 }
