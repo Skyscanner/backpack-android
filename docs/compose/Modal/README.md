@@ -62,7 +62,7 @@ if (showModal.value) {
         ),
         onDismiss = { showModal.value = false },
     ) {
-        TextContent()
+        // modal content
     }
 }
 ```
