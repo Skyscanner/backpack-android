@@ -51,6 +51,13 @@ internal fun ModalStory() {
 
 @Composable
 @ModalComponent
+@ComposeStory("With Back")
+internal fun ModalTextContentWithBack() {
+    ModalDemo(title = stringResource(R.string.dialog_title), navActionType = ActionType.Back)
+}
+
+@Composable
+@ModalComponent
 @ComposeStory("Without Action")
 internal fun ModalTextContentWithoutActionExample() {
     ModalDemo(title = stringResource(R.string.dialog_title))
@@ -63,17 +70,24 @@ internal fun ModalTextContentWithoutActionAndTitleExample() {
     ModalDemo()
 }
 
+enum class ActionType {
+    Close,
+    Back,
+}
+
 @Composable
 private fun ModalDemo(
     title: String? = null,
     actionText: String? = null,
+    navActionType: ActionType = ActionType.Close,
 ) {
     val showModal = rememberSaveable { mutableStateOf(true) }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
             text = stringResource(R.string.generic_show),
-            onClick = { showModal.value = true },)
+            onClick = { showModal.value = true },
+        )
     }
 
     if (showModal.value) {
@@ -82,10 +96,17 @@ private fun ModalDemo(
         BpkModal(
             state = modalState,
             title = title,
-            navIcon = NavIcon.Close(
-                contentDescription = stringResource(id = R.string.navigation_back),
-                onClick = { coroutineScope.launch { modalState.hide() } },
-            ),
+            navIcon = when (navActionType) {
+                ActionType.Close -> NavIcon.Close(
+                    contentDescription = stringResource(id = R.string.navigation_back),
+                    onClick = { coroutineScope.launch { modalState.hide() } },
+                )
+
+                ActionType.Back -> NavIcon.Back(
+                    contentDescription = stringResource(id = R.string.navigation_back),
+                    onClick = { coroutineScope.launch { modalState.hide() } },
+                )
+            },
             action = actionText?.let {
                 TextAction(
                     text = it,
