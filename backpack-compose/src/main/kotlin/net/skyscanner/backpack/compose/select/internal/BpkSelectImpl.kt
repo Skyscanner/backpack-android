@@ -45,16 +45,17 @@ import net.skyscanner.backpack.compose.utils.clickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@Suppress("ModifierNotUsedAtRoot")
 internal fun BpkSelectImpl(
     options: List<String>,
-    selectedIndex: Int,
+    selectedIndex: Int?,
     placeholder: String,
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val selectText = if (selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
+    val selectText = if (selectedIndex != null && selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
 
     ExposedDropdownMenuBox(
         expanded = expanded,

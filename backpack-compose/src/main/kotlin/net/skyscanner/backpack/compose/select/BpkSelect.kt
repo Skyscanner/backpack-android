@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.select.internal.BpkSelectImpl
 fun BpkSelect(
     options: List<String>,
     placeholder: String,
-    selectedIndex: Int,
+    selectedIndex: Int?,
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
