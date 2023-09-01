@@ -19,21 +19,16 @@
 package net.skyscanner.backpack.compose.modal
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.isPopup
-import androidx.compose.ui.test.junit4.createComposeRule
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.ModalStory
 import net.skyscanner.backpack.demo.compose.ModalWithBackIcon
 import net.skyscanner.backpack.demo.compose.ModalWithoutAction
 import net.skyscanner.backpack.demo.compose.ModalWithoutActionAndTitle
-import org.junit.Rule
 import org.junit.Test
 
 class BpkModalTest : BpkSnapshotTest() {
-
-    @get:Rule
-    val rule = createComposeRule()
 
     @Test
     fun modalDefault() = record {
@@ -56,10 +51,12 @@ class BpkModalTest : BpkSnapshotTest() {
     }
 
     private fun record(content: @Composable () -> Unit) {
-        rule.mainClock.autoAdvance = true
-        rule.setContent { BpkTheme { content() } }
-        rule.mainClock.advanceTimeBy(1000) // for skipping the animation
-        rule.waitForIdle()
-        compareScreenshot(rule.onNode(isPopup()))
+        snap(comparison = { name ->
+            onNode(isPopup()).assertIsDisplayed()
+
+            compareScreenshot(onNode(isPopup()), name)
+        }) {
+            content()
+        }
     }
 }
