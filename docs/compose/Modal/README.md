@@ -4,23 +4,29 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.net.skyscanner.backpack.compose.dialog)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/net.skyscanner.backpack.compose.dialog)
 
-## TextContentModal
+## DefaultModal
 
 | Day | Night | Right to Left |
 | --- | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content.png" alt="TextContentModal" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content_dm.png" alt="TextContentModal - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action-text-content_rtl.png" alt="TextContentModal - rtl mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action.png" alt="DefaultModal" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action_dm.png" alt="DefaultModal - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-action_rtl.png" alt="DefaultModal - rtl mode" width="375" /> |
 
-## TextContentModalWithoutAction
-
-| Day | Night | Right to Left |
-| --- | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content.png" alt="TextContentModalWithoutAction" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content_dm.png" alt="TextContentModalWithoutAction - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action-text-content_rtl.png" alt="TextContentModalWithoutAction - rtl mode" width="375" /> |
-
-## TextContentModalWithoutTitleAndAction
+## ModalWithoutAction
 
 | Day | Night | Right to Left |
 | --- | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content.png" alt="TextContentModalWithoutTitleAndAction" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content_dm.png" alt="TextContentModalWithoutTitleAndAction - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action-text-content_rtl.png" alt="TextContentModalWithoutTitleAndAction - rtl mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action.png" alt="ModalWithoutAction" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action_dm.png" alt="ModalWithoutAction - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-title-no-action_rtl.png" alt="ModalWithoutAction - rtl mode" width="375" /> |
+
+## ModalWithoutActionAndTitle
+
+| Day | Night | Right to Left |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action.png" alt="ModalWithoutActionAndTitle" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action_dm.png" alt="ModalWithoutActionAndTitle - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-title-no-action_rtl.png" alt="ModalWithoutActionAndTitle - rtl mode" width="375" /> |
+
+## ModalWithoutIconActionAndTitle
+
+| Day | Night | Right to Left |
+| --- | --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-icon-no-title-no-action.png" alt="ModalWithoutIconActionAndTitle" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-icon-no-title-no-action_dm.png" alt="ModalWithoutIconActionAndTitle - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/modal-no-icon-no-title-no-action_rtl.png" alt="ModalWithoutIconActionAndTitle - rtl mode" width="375" /> |
 
 ## Installation
 
