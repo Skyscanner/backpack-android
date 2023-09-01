@@ -21,8 +21,6 @@ package net.skyscanner.backpack.compose.modal
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.junit4.createComposeRule
-import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.ModalStory
@@ -38,33 +36,27 @@ class BpkModalTest : BpkSnapshotTest() {
     val rule = createComposeRule()
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun modalDefault() = record {
         ModalStory()
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun modalWithBackIcon() = record {
         ModalWithBackIcon()
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun modalWithoutAction() = record {
         ModalWithoutAction()
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun modalWithoutActionAndTitle() = record {
         ModalWithoutActionAndTitle()
     }
 
     private fun record(content: @Composable () -> Unit) {
-        rule.mainClock.autoAdvance = true
         rule.setContent { BpkTheme { content() } }
-        rule.mainClock.advanceTimeBy(1000) // for skipping the animation
         rule.waitForIdle()
         compareScreenshot(rule.onNode(isPopup()))
     }
