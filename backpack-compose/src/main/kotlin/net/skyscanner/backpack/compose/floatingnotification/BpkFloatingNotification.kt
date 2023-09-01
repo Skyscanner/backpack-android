@@ -62,13 +62,15 @@ fun BpkFloatingNotification(
             currentData.dismiss()
         }
     }
-    val componentHeight = if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
+    val componentHeight =
+        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
 
     AnimatedContent(
         targetState = currentData,
         modifier = modifier,
         transitionSpec = floatingNotificationTransforms(slideDistancePx),
+        label = "Floating Notification",
     ) { data ->
 
         Box(
@@ -81,7 +83,8 @@ fun BpkFloatingNotification(
             if (data != null) {
                 BpkFloatingNotificationImpl(
                     data = data,
-                    modifier = Modifier.requiredHeight(componentHeight)
+                    modifier = Modifier
+                        .requiredHeight(componentHeight)
                         .widthIn(max = DefaultTabletSize.width),
                 )
             }
