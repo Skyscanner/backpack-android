@@ -52,21 +52,21 @@ internal fun ModalStory() {
 @Composable
 @ModalComponent
 @ComposeStory("With Back")
-internal fun ModalTextContentWithBack() {
+internal fun ModalWithBackIcon() {
     ModalDemo(title = stringResource(R.string.dialog_title), navActionType = ActionType.Back)
 }
 
 @Composable
 @ModalComponent
 @ComposeStory("Without Action")
-internal fun ModalTextContentWithoutActionExample() {
+internal fun ModalWithoutAction() {
     ModalDemo(title = stringResource(R.string.dialog_title))
 }
 
 @Composable
 @ModalComponent
 @ComposeStory("Without Action and Title")
-internal fun ModalTextContentWithoutActionAndTitleExample() {
+internal fun ModalWithoutActionAndTitle() {
     ModalDemo()
 }
 
