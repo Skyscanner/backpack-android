@@ -18,13 +18,19 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
@@ -40,90 +46,59 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ModalComponent
 @ComposeStory
 internal fun ModalStory() {
-    val modalState = rememberBpkModalState()
-    ModalDemo { onDismiss ->
-        BpkModal(
-            state = modalState,
-            navIcon = NavIcon.Close(
-                contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { modalState.hide() },
-            ),
-            title = stringResource(id = R.string.dialog_title),
-            action = TextAction(
-                text = stringResource(R.string.navigation_text_action),
-                onClick = { modalState.hide() },
-            ),
-            onDismiss = onDismiss,
-        ) {
-            TextContent()
-        }
-    }
+    ModalDemo(title = stringResource(R.string.dialog_title), stringResource(R.string.navigation_text_action))
 }
 
 @Composable
 @ModalComponent
-@ComposeStory("Back Icon Without Action Button")
-internal fun ModalWithoutActionStory() {
-    val modalState = rememberBpkModalState()
-    ModalDemo { onDismiss ->
-        BpkModal(
-            state = modalState,
-            navIcon = NavIcon.Back(
-                contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { modalState.hide() },
-            ),
-            title = stringResource(id = R.string.dialog_title),
-            onDismiss = onDismiss,
-        ) {
-            TextContent()
-        }
-    }
+@ComposeStory("Without Action")
+internal fun ModalTextContentWithoutActionExample() {
+    ModalDemo(title = stringResource(R.string.dialog_title))
 }
 
 @Composable
 @ModalComponent
 @ComposeStory("Without Action and Title")
-internal fun ModalWithoutActionAndTitleStory() {
-    val modalState = rememberBpkModalState()
-    ModalDemo { onDismiss ->
-        BpkModal(
-            state = modalState,
-            navIcon = NavIcon.Close(
-                contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { modalState.hide() },
-            ),
-            onDismiss = onDismiss,
-        ) {
-            TextContent()
-        }
-    }
-}
-
-@Composable
-@ModalComponent
-@ComposeStory("Without Icon, Action and Title")
-internal fun ModalWithoutIconActionAndTitleStory() {
-    val modalState = rememberBpkModalState()
-    ModalDemo { onDismiss ->
-        BpkModal(
-            state = modalState,
-            navIcon = NavIcon.None,
-            onDismiss = onDismiss,
-        ) {
-            TextContent()
-        }
-    }
+internal fun ModalTextContentWithoutActionAndTitleExample() {
+    ModalDemo()
 }
 
 @Composable
 private fun ModalDemo(
-    content: @Composable (onDismiss: () -> Unit) -> Unit,
+    title: String? = null,
+    actionText: String? = null,
 ) {
-    val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
+    val showModal = rememberSaveable { mutableStateOf(true) }
 
-    @Suppress("SuspiciousCallableReferenceInLambda")
-    val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
-    content(onDismiss)
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        BpkButton(
+            text = stringResource(R.string.generic_show),
+            onClick = { showModal.value = true },)
+    }
+
+    if (showModal.value) {
+        val modalState = rememberBpkModalState()
+        val coroutineScope = rememberCoroutineScope()
+        BpkModal(
+            state = modalState,
+            title = title,
+            navIcon = NavIcon.Close(
+                contentDescription = stringResource(id = R.string.navigation_back),
+                onClick = { coroutineScope.launch { modalState.hide() } },
+            ),
+            action = actionText?.let {
+                TextAction(
+                    text = it,
+                    onClick = {
+                        coroutineScope.launch { modalState.hide() }
+                    },
+                )
+            },
+            onDismiss = { showModal.value = false },
+        ) {
+            TextContent()
+        }
+    }
 }
 
 @Composable
