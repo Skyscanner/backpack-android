@@ -69,13 +69,13 @@ internal fun ModalStory() {
 
 @Composable
 @ModalComponent
-@ComposeStory("Without Action Button")
+@ComposeStory("Back Icon Without Action Button")
 internal fun ModalWithoutActionStory() {
     val modalState = rememberBpkModalState()
     ModalDemo { onDismiss ->
         BpkModal(
             state = modalState,
-            navIcon = NavIcon.Close(
+            navIcon = NavIcon.Back(
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
                 onClick = { modalState.hide() },
             ),
@@ -106,6 +106,29 @@ internal fun ModalWithoutActionAndTitleStory() {
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
                 onClick = { modalState.hide() },
             ),
+            onDismiss = onDismiss,
+        ) {
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(BpkSpacing.Base),
+                text = stringResource(R.string.dialog_text),
+                style = BpkTheme.typography.bodyDefault,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
+    }
+}
+
+@Composable
+@ModalComponent
+@ComposeStory("Without Icon, Action and Title")
+internal fun ModalWithoutIconActionAndTitleStory() {
+    val modalState = rememberBpkModalState()
+    ModalDemo { onDismiss ->
+        BpkModal(
+            state = modalState,
+            navIcon = NavIcon.None,
             onDismiss = onDismiss,
         ) {
             BpkText(
