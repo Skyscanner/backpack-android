@@ -55,14 +55,7 @@ internal fun ModalStory() {
             ),
             onDismiss = onDismiss,
         ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
+            TextContent()
         }
     }
 }
@@ -82,14 +75,7 @@ internal fun ModalWithoutActionStory() {
             title = stringResource(id = R.string.dialog_title),
             onDismiss = onDismiss,
         ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
+            TextContent()
         }
     }
 }
@@ -108,14 +94,7 @@ internal fun ModalWithoutActionAndTitleStory() {
             ),
             onDismiss = onDismiss,
         ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
+            TextContent()
         }
     }
 }
@@ -131,14 +110,7 @@ internal fun ModalWithoutIconActionAndTitleStory() {
             navIcon = NavIcon.None,
             onDismiss = onDismiss,
         ) {
-            BpkText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-                text = stringResource(R.string.dialog_text),
-                style = BpkTheme.typography.bodyDefault,
-                color = BpkTheme.colors.textPrimary,
-            )
+            TextContent()
         }
     }
 }
@@ -152,4 +124,16 @@ private fun ModalDemo(
     @Suppress("SuspiciousCallableReferenceInLambda")
     val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
     content(onDismiss)
+}
+
+@Composable
+private fun TextContent() {
+    BpkText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base),
+        text = stringResource(R.string.dialog_text),
+        style = BpkTheme.typography.bodyDefault,
+        color = BpkTheme.colors.textPrimary,
+    )
 }

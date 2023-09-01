@@ -28,6 +28,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.ModalStory
 import net.skyscanner.backpack.demo.compose.ModalWithoutActionAndTitleStory
 import net.skyscanner.backpack.demo.compose.ModalWithoutActionStory
+import net.skyscanner.backpack.demo.compose.ModalWithoutIconActionAndTitleStory
 import org.junit.Rule
 import org.junit.Test
 
@@ -38,20 +39,26 @@ class BpkModalTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun modalWithTextContent() = record {
+    fun modalDefault() = record {
         ModalStory()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun modalWithTextContentNoAction() = record {
+    fun modalWithoutAction() = record {
         ModalWithoutActionStory()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun modalWithTextContentNoActionAndNoTitle() = record {
+    fun modalWithoutActionAndTitle() = record {
         ModalWithoutActionAndTitleStory()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun modalWithoutIconActionAndTitle() = record {
+        ModalWithoutIconActionAndTitleStory()
     }
 
     private fun record(content: @Composable () -> Unit) {
