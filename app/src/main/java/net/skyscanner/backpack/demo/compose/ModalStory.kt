@@ -23,10 +23,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
@@ -43,20 +41,17 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 internal fun ModalStory() {
     val modalState = rememberBpkModalState()
-    val coroutineScope = rememberCoroutineScope()
     ModalDemo { onDismiss ->
         BpkModal(
             state = modalState,
             navIcon = NavIcon.Close(
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { coroutineScope.launch { modalState.hide() } },
+                onClick = { modalState.hide() },
             ),
             title = stringResource(id = R.string.dialog_title),
             action = TextAction(
                 text = stringResource(R.string.navigation_text_action),
-                onClick = {
-                    coroutineScope.launch { modalState.hide() }
-                },
+                onClick = { modalState.hide() },
             ),
             onDismiss = onDismiss,
         ) {
@@ -75,15 +70,14 @@ internal fun ModalStory() {
 @Composable
 @ModalComponent
 @ComposeStory("Without Action Button")
-internal fun ModalTextContentWithoutActionExample() {
+internal fun ModalWithoutActionStory() {
     val modalState = rememberBpkModalState()
-    val coroutineScope = rememberCoroutineScope()
     ModalDemo { onDismiss ->
         BpkModal(
             state = modalState,
             navIcon = NavIcon.Close(
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { coroutineScope.launch { modalState.hide() } },
+                onClick = { modalState.hide() },
             ),
             title = stringResource(id = R.string.dialog_title),
             onDismiss = onDismiss,
@@ -103,15 +97,14 @@ internal fun ModalTextContentWithoutActionExample() {
 @Composable
 @ModalComponent
 @ComposeStory("Without Action and Title")
-internal fun ModalTextContentWithoutActionAndTitleExample() {
+internal fun ModalWithoutActionAndTitleStory() {
     val modalState = rememberBpkModalState()
-    val coroutineScope = rememberCoroutineScope()
     ModalDemo { onDismiss ->
         BpkModal(
             state = modalState,
             navIcon = NavIcon.Close(
                 contentDescription = stringResource(id = R.string.navigation_accessibility),
-                onClick = { coroutineScope.launch { modalState.hide() } },
+                onClick = { modalState.hide() },
             ),
             onDismiss = onDismiss,
         ) {
