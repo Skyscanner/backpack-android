@@ -58,19 +58,11 @@ fun rememberBpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    val pagerState = rememberPagerState(initialPage = initialPage)
+    val pageCount = if (totalImages > 1) Int.MAX_VALUE else 1 // if count > 1, set to Int.MAX_VALUE for infinite looping
+    val pagerState = rememberPagerState(initialPage = initialPage) { pageCount }
     return remember(pagerState, totalImages) {
         BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
     }
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-fun BpkCarouselState(
-    totalImages: Int,
-    initialImage: Int = 0,
-): BpkCarouselState {
-    val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    return BpkCarouselInternalState(delegate = PagerState(initialPage = initialPage), totalImages = totalImages)
 }
 
 internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =

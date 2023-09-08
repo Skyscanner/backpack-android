@@ -52,7 +52,7 @@ class BpkCarouselTest : BpkSnapshotTest() {
     @Test
     fun multipleImageDefault() = snap(width = 320.dp, height = 240.dp) {
         BpkCarousel(
-            state = BpkCarouselState(totalImages = 3),
+            state = rememberBpkCarouselState(totalImages = 3),
         ) {
             Image(
                 painter = painterResource(id = imageResAtIndex(it)),

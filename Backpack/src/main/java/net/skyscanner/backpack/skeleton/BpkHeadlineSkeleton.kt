@@ -94,9 +94,9 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
         setMeasuredDimension(widthMeasureSpec, heightSize)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val borderRadius = context.resources.getDimensionPixelSize(R.dimen.bpkBorderRadiusXs)
-        canvas?.drawRoundRect(0f, 0f, width.toFloat(), height.toFloat(), borderRadius.toFloat(), borderRadius.toFloat(), paint)
+        canvas.drawRoundRect(0f, 0f, width.toFloat(), height.toFloat(), borderRadius.toFloat(), borderRadius.toFloat(), paint)
     }
 
     private companion object {

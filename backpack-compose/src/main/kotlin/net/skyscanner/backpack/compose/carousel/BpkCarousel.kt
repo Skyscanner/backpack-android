@@ -43,7 +43,6 @@ fun BpkCarousel(
             modifier = Modifier
                 .testTag("pager")
                 .fillMaxSize(),
-            pageCount = if (internalState.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
             state = internalState.delegate,
         ) {
             content(internalState.getModdedPageNumber(it, internalState.pageCount))
