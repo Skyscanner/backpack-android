@@ -42,6 +42,7 @@ internal const val ModalAnimationDurationMs = 300
 @Suppress("ModifierMissing")
 fun BpkModal(
     navIcon: NavIcon,
+    modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
     action: TextAction? = null,
     title: String? = null,
@@ -61,7 +62,7 @@ fun BpkModal(
             visibleState = isVisible,
             enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
         ) {
             Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {
                 if (action != null) {
