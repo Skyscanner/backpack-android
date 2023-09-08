@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.nudger
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -130,43 +131,45 @@ fun BpkNudger(
             }
             .nudgerSemantics(value, onValueChange, min..max, enabled),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
     ) {
-
-        if (icon != null) {
-            BpkIcon(
-                icon = icon,
-                size = BpkIconSize.Large,
-                contentDescription = null, // handled by semantics modifier
-                modifier = Modifier
-                    .align(Alignment.Top)
-                    .padding(end = BpkSpacing.Md),
-            )
-        }
-        Column(modifier =
-            Modifier.weight(1f)
-                .padding(end = BpkSpacing.Md),
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         ) {
-            BpkText(
-                text = title,
-                style = BpkTheme.typography.heading5.copy(
-                    platformStyle = PlatformTextStyle(includeFontPadding = false),
-                ),
-                color = BpkTheme.colors.textPrimary,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.invisibleSemantic(),
-            )
-            if (subtitle != null) {
+
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon,
+                    size = BpkIconSize.Large,
+                    contentDescription = null, // handled by semantics modifier
+                )
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
                 BpkText(
-                    text = subtitle,
-                    style = BpkTheme.typography.bodyDefault.copy(
+                    text = title,
+                    style = BpkTheme.typography.heading5.copy(
                         platformStyle = PlatformTextStyle(includeFontPadding = false),
                     ),
-                    color = BpkTheme.colors.textSecondary,
+                    color = BpkTheme.colors.textPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.invisibleSemantic(),
                 )
+                if (subtitle != null) {
+                    BpkText(
+                        text = subtitle,
+                        style = BpkTheme.typography.bodyDefault.copy(
+                            platformStyle = PlatformTextStyle(includeFontPadding = false),
+                        ),
+                        color = BpkTheme.colors.textSecondary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.invisibleSemantic(),
+                    )
+                }
             }
         }
         BpkNudger(
