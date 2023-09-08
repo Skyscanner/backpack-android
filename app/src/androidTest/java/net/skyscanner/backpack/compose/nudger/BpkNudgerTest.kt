@@ -82,7 +82,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
 
     @Test
     fun defaultRow() = snap {
-        NudgerRowExample()
+        NudgerRowExample(icon = BpkIcon.Account)
     }
 
     @Test
@@ -93,8 +93,8 @@ class BpkNudgerTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun withIcon() = snap {
-        NudgerRowExample(icon = BpkIcon.Account)
+    fun withNoIcon() = snap {
+        NudgerRowExample()
     }
 
     @Test
