@@ -29,8 +29,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupProperties
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
@@ -54,8 +54,8 @@ fun BpkModal(
         onDismiss?.invoke()
     }
 
-    Popup(
-        properties = PopupProperties(focusable = true),
+    Dialog(
+        properties = DialogProperties(decorFitsSystemWindows = false, usePlatformDefaultWidth = false),
         onDismissRequest = { isVisible.targetState = false },
     ) {
         AnimatedVisibility(
