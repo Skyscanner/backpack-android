@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,9 +32,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.nudger.BpkNudger
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NudgerComponent
@@ -43,7 +47,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun NudgerStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().padding(BpkSpacing.Base),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
     ) {
@@ -63,6 +67,16 @@ fun NudgerStory(modifier: Modifier = Modifier) {
         NudgerExample(name = stringResource(R.string.generic_disabled)) {
             NudgerExample(enabled = false)
         }
+
+        NudgerRowExample(
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        NudgerRowExample(
+            modifier = Modifier.fillMaxWidth(),
+            title = stringResource(R.string.generic_with_leading_icon),
+            icon = BpkIcon.Account,
+        )
     }
 }
 
@@ -75,6 +89,30 @@ internal fun NudgerExample(
     var value by remember { mutableStateOf(initialValue) }
 
     BpkNudger(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        min = NudgerStoryMin,
+        max = NudgerStoryMax,
+        enabled = enabled,
+    )
+}
+
+@Composable
+internal fun NudgerRowExample(
+    modifier: Modifier = Modifier,
+    title: String = stringResource(R.string.generic_title),
+    subtitle: String? = stringResource(R.string.generic_subtitle),
+    icon: BpkIcon? = null,
+    initialValue: Int = NudgerStoryAvg,
+    enabled: Boolean = true,
+) {
+    var value by remember { mutableStateOf(initialValue) }
+
+    BpkNudger(
+        title = title,
+        subtitle = subtitle,
+        icon = icon,
         modifier = modifier,
         value = value,
         onValueChange = { value = it },
