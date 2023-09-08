@@ -35,6 +35,7 @@ import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -43,6 +44,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -129,9 +131,11 @@ fun BpkNudger(
             .nudgerSemantics(value, onValueChange, min..max, enabled),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+
         if (icon != null) {
             BpkIcon(
                 icon = icon,
+                size = BpkIconSize.Large,
                 contentDescription = null, // handled by semantics modifier
                 modifier = Modifier
                     .align(Alignment.Top)
@@ -144,7 +148,9 @@ fun BpkNudger(
         ) {
             BpkText(
                 text = title,
-                style = BpkTheme.typography.heading5,
+                style = BpkTheme.typography.heading5.copy(
+                    platformStyle = PlatformTextStyle(includeFontPadding = false),
+                ),
                 color = BpkTheme.colors.textPrimary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -153,7 +159,9 @@ fun BpkNudger(
             if (subtitle != null) {
                 BpkText(
                     text = subtitle,
-                    style = BpkTheme.typography.bodyDefault,
+                    style = BpkTheme.typography.bodyDefault.copy(
+                        platformStyle = PlatformTextStyle(includeFontPadding = false),
+                    ),
                     color = BpkTheme.colors.textSecondary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

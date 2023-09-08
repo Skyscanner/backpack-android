@@ -91,5 +91,5 @@ internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment): Modifier = 
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
-internal fun Modifier.invisibleSemantic(): Modifier =
+fun Modifier.invisibleSemantic(): Modifier =
     semantics { invisibleToUser() }
