@@ -98,7 +98,9 @@ internal fun BpkFloatingNotificationImpl(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-internal fun floatingNotificationTransforms(slideDistancePx: Int): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
+internal fun floatingNotificationTransforms(
+    slideDistancePx: Int,
+): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
     {
         ContentTransform(
             targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },

@@ -32,6 +32,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SelectComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @SelectComponent
@@ -61,7 +62,7 @@ fun SelectStory(modifier: Modifier = Modifier) {
 
 @Composable
 @SelectComponent
-@ComposeStory("Select box only")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Select box only")
 fun SelectBoxOnlyStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         Row(
@@ -86,7 +87,7 @@ fun SelectBoxOnlyStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun DefaultSelectSample(modifier: Modifier = Modifier, selectedIndex: Int = -1) {
+internal fun DefaultSelectSample(modifier: Modifier = Modifier, selectedIndex: Int? = null) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),

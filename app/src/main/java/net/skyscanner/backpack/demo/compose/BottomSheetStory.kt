@@ -51,6 +51,7 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BottomSheetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.ListItem
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @BottomSheetComponent
@@ -78,7 +79,7 @@ fun BottomSheetStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(name = "Image content sheet with Light drag handle")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image content sheet with Light drag handle")
 fun ImageBottomSheetStory(
     modifier: Modifier = Modifier,
     initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
@@ -131,7 +132,7 @@ fun ModalBottomSheetStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(name = "Modal sheet with Dark drag handle")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Modal sheet with Dark drag handle")
 fun ImageModalDarkBottomSheetStory(
     modifier: Modifier = Modifier,
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),

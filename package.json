@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "@skyscanner/bpk-foundations-android": "^7.0.0",
-    "@skyscanner/bpk-svgs": "^18.0.0"
+    "@skyscanner/bpk-foundations-android": "^7.2.0",
+    "@skyscanner/bpk-svgs": "^18.1.0"
   }
 }

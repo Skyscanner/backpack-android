@@ -28,7 +28,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
@@ -36,14 +35,14 @@ import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
-import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.internal.BpkMapMarkerColors
 import net.skyscanner.backpack.compose.utils.FlareShape
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
 enum class BpkPriceMarkerStatus {
     Default,
@@ -71,7 +70,7 @@ fun BpkPriceMapMarker(
         tag = tag,
         title = title,
         visible = visible,
-        zIndex = zIndex,
+        zIndex = if (status == BpkPriceMarkerStatus.Focused && zIndex == 0.0f) 1.0f else zIndex,
         icon = icon,
         onClick = { onClick(it); false },
     ) {}
@@ -83,7 +82,7 @@ fun PriceMarkerLayout(title: String, status: BpkPriceMarkerStatus, modifier: Mod
     val textColor = when (status) {
         BpkPriceMarkerStatus.Default -> BpkTheme.colors.textPrimaryInverse
         BpkPriceMarkerStatus.Focused -> BpkTheme.colors.coreAccent
-        BpkPriceMarkerStatus.Viewed -> dynamicColorOf(Color.White.copy(alpha = 0.8f), Color.Black.copy(alpha = 0.8f))
+        BpkPriceMarkerStatus.Viewed -> BpkMapMarkerColors.viewedForeground
         BpkPriceMarkerStatus.Disabled -> BpkTheme.colors.textDisabled
     }
 
