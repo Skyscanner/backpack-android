@@ -13,6 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
 import net.skyscanner.backpack.compose.graphicpromotion.Variant
@@ -45,18 +49,24 @@ internal fun BpkGraphicPromoImpl(
         Variant.OnLight -> BpkTheme.colors.textOnLight
     }
 
+    val contentDescription = listOfNotNull(kicker, headline, subHeadline, sponsor?.accessibilityLabel)
+        .joinToString(separator = ", ")
+
     Box(
-        modifier = Modifier
-            .padding(BpkSpacing.Lg)
+        modifier = modifier
             .aspectRatio(RATIO_PORTRAIT)
             .clip(roundedCornerShape)
-            .clickable { tapAction() },
+            .clickable { tapAction() }
+            .semantics(mergeDescendants = true) {
+                role = Role.Button
+                this.contentDescription = contentDescription
+            },
     ) {
         BpkOverlay(
             modifier = Modifier.fillMaxSize(),
             overlayType = overlayType,
             foregroundContent = {
-                Column(modifier = modifier) {
+                Column(modifier = Modifier.padding(BpkSpacing.Lg)) {
                     when (verticalAlignment) {
                         VerticalAlignment.Top -> {
                             MessageOverlay(
