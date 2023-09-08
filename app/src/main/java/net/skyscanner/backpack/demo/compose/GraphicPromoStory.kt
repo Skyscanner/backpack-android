@@ -37,60 +37,11 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @GraphicPromoComponent
-@ComposeStory(name = "Top aligned")
-internal fun GraphicPromoStoryTopAligned(modifier: Modifier = Modifier) {
-    Column(modifier) {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            headline = "Three Parks Challenge",
-            subHeadline = "How to complete the climb in 3 days",
-        )
-    }
-}
-
-@Composable
-@GraphicPromoComponent
-@ComposeStory(name = "Bottom aligned")
-internal fun GraphicPromoStoryBottomAligned(modifier: Modifier = Modifier) {
+@ComposeStory
+internal fun GraphicPromoStoryDefault(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkGraphicPromoSample(
             headline = "Three Parks Challenge",
-            subHeadline = "How to complete the climb in 3 days",
-        )
-    }
-}
-
-@Composable
-@GraphicPromoComponent
-@ComposeStory(name = "Top aligned - Sponsored")
-internal fun GraphicPromoStoryTopAlignedSponsored(modifier: Modifier = Modifier) {
-    Column(modifier) {
-        BpkGraphicPromoSample(
-            headline = "Three Parks Challenge",
-            subHeadline = "How to complete the climb in 3 days",
-            sponsor = Sponsor(
-                accessibilityLabel = "Sponsored",
-                logo = "https://images.kiwi.com/airlines/64/FR.png",
-                title = "Sponsored",
-            ),
-        )
-    }
-}
-
-@Composable
-@GraphicPromoComponent
-@ComposeStory(name = "Bottom aligned - Sponsored")
-internal fun GraphicPromoStoryBottomAlignedSponsored(modifier: Modifier = Modifier) {
-    Column(modifier) {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            headline = "Three Parks Challenge",
-            subHeadline = "How to complete the climb in 3 days",
-            sponsor = Sponsor(
-                accessibilityLabel = "Sponsored",
-                logo = "https://images.kiwi.com/airlines/64/FR.png",
-                title = "Sponsored",
-            ),
         )
     }
 }
@@ -102,7 +53,7 @@ internal fun BpkGraphicPromoSample(
     subHeadline: String? = null,
     kicker: String? = null,
     verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
-    overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
+    overlayType: BpkOverlayType? = null,
     sponsor: Sponsor? = null,
 ) {
     BpkGraphicPromo(

@@ -41,7 +41,7 @@ fun BpkGraphicPromo(
     modifier: Modifier = Modifier,
     kicker: String? = null,
     subHeadline: String? = null,
-    overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
+    overlayType: BpkOverlayType? = null,
     variant: Variant = Variant.OnDark,
     verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
     sponsor: Sponsor? = null,

@@ -36,7 +36,7 @@ internal fun BpkGraphicPromoImpl(
     modifier: Modifier = Modifier,
     kicker: String? = null,
     subHeadline: String? = null,
-    overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
+    overlayType: BpkOverlayType? = null,
     variant: Variant = Variant.OnDark,
     verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
     sponsor: Sponsor? = null,
@@ -44,11 +44,6 @@ internal fun BpkGraphicPromoImpl(
     tapAction: () -> Unit = {},
 ) {
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Sm)
-    val textColor: Color = when (variant) {
-        Variant.OnDark -> BpkTheme.colors.textOnDark
-        Variant.OnLight -> BpkTheme.colors.textOnLight
-    }
-
     val contentDescription = listOfNotNull(kicker, headline, subHeadline, sponsor?.accessibilityLabel)
         .joinToString(separator = ", ")
 
@@ -62,49 +57,35 @@ internal fun BpkGraphicPromoImpl(
                 this.contentDescription = contentDescription
             },
     ) {
-        BpkOverlay(
-            modifier = Modifier.fillMaxSize(),
-            overlayType = overlayType,
-            foregroundContent = {
-                Column(modifier = Modifier.padding(BpkSpacing.Lg)) {
-                    when (verticalAlignment) {
-                        VerticalAlignment.Top -> {
-                            MessageOverlay(
-                                headline = headline,
-                                kicker = kicker,
-                                subHeadline = subHeadline,
-                                textColor = textColor,
-                            )
-
-                            Spacer(Modifier.weight(1f))
-
-                            SponsorOverlayView(
-                                sponsor = sponsor,
-                                textColor = textColor,
-                                sponsorLogo = sponsorLogo,
-                            )
-                        }
-                        VerticalAlignment.Bottom -> {
-                            SponsorOverlayView(
-                                sponsor = sponsor,
-                                textColor = textColor,
-                                sponsorLogo = sponsorLogo,
-                            )
-
-                            Spacer(Modifier.weight(1f))
-
-                            MessageOverlay(
-                                headline = headline,
-                                kicker = kicker,
-                                subHeadline = subHeadline,
-                                textColor = textColor,
-                            )
-                        }
-                    }
-                }
-            },
-        ) {
+        overlayType?.let {
+            BpkOverlay(
+                modifier = Modifier.fillMaxSize(),
+                overlayType = it,
+                foregroundContent = {
+                    ForegroundContent(
+                        headline = headline,
+                        kicker = kicker,
+                        subHeadline = subHeadline,
+                        variant = variant,
+                        verticalAlignment = verticalAlignment,
+                        sponsor = sponsor,
+                        sponsorLogo = sponsorLogo,
+                    )
+                },
+            ) {
+                image()
+            }
+        } ?: run {
             image()
+            ForegroundContent(
+                headline = headline,
+                kicker = kicker,
+                subHeadline = subHeadline,
+                variant = variant,
+                verticalAlignment = verticalAlignment,
+                sponsor = sponsor,
+                sponsorLogo = sponsorLogo,
+            )
         }
     }
 }
@@ -157,6 +138,59 @@ private fun MessageOverlay(
             style = BpkTheme.typography.heading5,
             color = textColor,
         )
+    }
+}
+
+@Composable
+private fun ForegroundContent(
+    headline: String,
+    kicker: String? = null,
+    subHeadline: String? = null,
+    variant: Variant = Variant.OnDark,
+    verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
+    sponsor: Sponsor? = null,
+    sponsorLogo: @Composable () -> Unit? = {},
+) {
+    val textColor: Color = when (variant) {
+        Variant.OnDark -> BpkTheme.colors.textOnDark
+        Variant.OnLight -> BpkTheme.colors.textOnLight
+    }
+
+    Column(modifier = Modifier.padding(BpkSpacing.Lg)) {
+        when (verticalAlignment) {
+            VerticalAlignment.Top -> {
+                MessageOverlay(
+                    headline = headline,
+                    kicker = kicker,
+                    subHeadline = subHeadline,
+                    textColor = textColor,
+                )
+
+                Spacer(Modifier.weight(1f))
+
+                SponsorOverlayView(
+                    sponsor = sponsor,
+                    textColor = textColor,
+                    sponsorLogo = sponsorLogo,
+                )
+            }
+            VerticalAlignment.Bottom -> {
+                SponsorOverlayView(
+                    sponsor = sponsor,
+                    textColor = textColor,
+                    sponsorLogo = sponsorLogo,
+                )
+
+                Spacer(Modifier.weight(1f))
+
+                MessageOverlay(
+                    headline = headline,
+                    kicker = kicker,
+                    subHeadline = subHeadline,
+                    textColor = textColor,
+                )
+            }
+        }
     }
 }
 

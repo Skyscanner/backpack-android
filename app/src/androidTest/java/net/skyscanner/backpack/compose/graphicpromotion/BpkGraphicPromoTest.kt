@@ -19,13 +19,88 @@
 package net.skyscanner.backpack.compose.graphicpromotion
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.GraphicPromoStoryTopAligned
+import net.skyscanner.backpack.compose.overlay.BpkOverlayType
+import net.skyscanner.backpack.demo.compose.BpkGraphicPromoSample
+import net.skyscanner.backpack.demo.compose.GraphicPromoStoryDefault
 import org.junit.Test
 
 class BpkGraphicPromoTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        GraphicPromoStoryTopAligned()
+        GraphicPromoStoryDefault()
+    }
+
+    @Test
+    fun defaultWithOverlay() = snap {
+        BpkGraphicPromoSample(
+            headline = "Three Parks Challenge",
+            overlayType = BpkOverlayType.SolidHigh,
+        )
+    }
+
+    @Test
+    fun topAlignedKickerAvailable() = snap {
+        BpkGraphicPromoSample(
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+        )
+    }
+
+    @Test
+    fun topAlignedKickerSubHeadlineAvailable() = snap {
+        BpkGraphicPromoSample(
+            kicker = "Travel tips",
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+        )
+    }
+
+    @Test
+    fun topAlignedKickerSubHeadlineSponsoredAvailable() = snap {
+        BpkGraphicPromoSample(
+            kicker = "Travel tips",
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+            sponsor = Sponsor(
+                accessibilityLabel = "Sponsored",
+                logo = "https://images.kiwi.com/airlines/64/FR.png",
+                title = "Sponsored",
+            ),
+        )
+    }
+
+    @Test
+    fun bottomAlignedKickerAvailable() = snap {
+        BpkGraphicPromoSample(
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+            verticalAlignment = VerticalAlignment.Bottom,
+        )
+    }
+
+    @Test
+    fun bottomAlignedKickerSubHeadlineAvailable() = snap {
+        BpkGraphicPromoSample(
+            kicker = "Travel tips",
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+            verticalAlignment = VerticalAlignment.Bottom,
+        )
+    }
+
+    @Test
+    fun bottomAlignedKickerSubHeadlineSponsoredAvailable() = snap {
+        BpkGraphicPromoSample(
+            kicker = "Travel tips",
+            headline = "Three Parks Challenge",
+            subHeadline = "How to complete the climb in 3 days",
+            sponsor = Sponsor(
+                accessibilityLabel = "Sponsored",
+                logo = "https://images.kiwi.com/airlines/64/FR.png",
+                title = "Sponsored",
+            ),
+            verticalAlignment = VerticalAlignment.Bottom,
+        )
     }
 }
