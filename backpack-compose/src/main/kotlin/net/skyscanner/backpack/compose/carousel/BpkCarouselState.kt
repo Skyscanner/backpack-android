@@ -58,7 +58,9 @@ fun rememberBpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    val pagerState = rememberPagerState(initialPage = initialPage)
+    // if count > 1, set to Int.MAX_VALUE for infinite looping
+    val pagerState =
+        rememberPagerState(initialPage = initialPage, pageCount = { if (totalImages > 1) Int.MAX_VALUE else 1 })
     return remember(pagerState, totalImages) {
         BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
     }
@@ -70,7 +72,10 @@ fun BpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    return BpkCarouselInternalState(delegate = PagerState(initialPage = initialPage), totalImages = totalImages)
+    return BpkCarouselInternalState(
+        delegate = PagerStateImpl(initialPage = initialPage, totalPages = totalImages),
+        totalImages = totalImages,
+    )
 }
 
 internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
@@ -112,4 +117,16 @@ internal class BpkCarouselInternalState constructor(
         0 -> this
         else -> this - floorDiv(other) * other
     }
+}
+
+// We cannot create PagerState with new pageCount parameter without remember functions so we temporarily fork it
+@OptIn(ExperimentalFoundationApi::class)
+private class PagerStateImpl(
+    initialPage: Int,
+    initialPageOffsetFraction: Float = 0f,
+    totalPages: Int,
+) : PagerState(initialPage, initialPageOffsetFraction) {
+
+    override val pageCount: Int =
+        if (totalPages > 1) Int.MAX_VALUE else 1 // if count > 1, set to Int.MAX_VALUE for infinite looping
 }
