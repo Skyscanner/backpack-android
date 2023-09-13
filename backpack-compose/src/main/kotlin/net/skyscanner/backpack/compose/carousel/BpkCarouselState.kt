@@ -61,8 +61,8 @@ fun rememberBpkCarouselState(
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
 
-    val pagerState = rememberSaveable(saver = PagerStateImpl.Saver) {
-        PagerStateImpl(
+    val pagerState = rememberSaveable(saver = InfinitePagerState.Saver) {
+        InfinitePagerState(
             initialPage,
             totalImages,
         )
@@ -80,7 +80,7 @@ fun BpkCarouselState(
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
     return BpkCarouselInternalState(
-        delegate = PagerStateImpl(initialPage = initialPage, totalPages = totalImages),
+        delegate = InfinitePagerState(initialPage = initialPage, totalPages = totalImages),
         totalImages = totalImages,
     )
 }
@@ -126,18 +126,18 @@ internal class BpkCarouselInternalState(
     }
 }
 
-// We cannot create PagerState with new pageCount parameter without remember functions so we temporarily fork it
 @OptIn(ExperimentalFoundationApi::class)
-private class PagerStateImpl(
+private class InfinitePagerState(
     initialPage: Int,
     private val totalPages: Int,
 ) : PagerState(initialPage, initialPageOffsetFraction = 0f) {
 
     override val pageCount: Int
-        get() = if (totalPages > 1) Int.MAX_VALUE else 1 // if count > 1, set to Int.MAX_VALUE for infinite looping
+        // if count > 1, set to Int.MAX_VALUE for infinite looping
+        get() = if (totalPages > 1) Int.MAX_VALUE else 1
 
     companion object {
-        val Saver: Saver<PagerStateImpl, *> = listSaver(
+        val Saver: Saver<InfinitePagerState, *> = listSaver(
             save = {
                 listOf(
                     it.currentPage,
@@ -145,7 +145,7 @@ private class PagerStateImpl(
                 )
             },
             restore = {
-                PagerStateImpl(
+                InfinitePagerState(
                     initialPage = it[0],
                     totalPages = it[1],
                 )
