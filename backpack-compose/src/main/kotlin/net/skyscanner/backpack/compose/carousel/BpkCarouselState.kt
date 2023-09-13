@@ -24,9 +24,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 
 sealed interface BpkCarouselState : ScrollableState {
 
@@ -58,9 +60,14 @@ fun rememberBpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    // if count > 1, set to Int.MAX_VALUE for infinite looping
-    val pagerState =
-        rememberPagerState(initialPage = initialPage, pageCount = { if (totalImages > 1) Int.MAX_VALUE else 1 })
+
+    val pagerState = rememberSaveable(saver = PagerStateImpl.Saver) {
+        PagerStateImpl(
+            initialPage,
+            totalImages,
+        )
+    }
+
     return remember(pagerState, totalImages) {
         BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
     }
@@ -84,7 +91,7 @@ internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
     }
 
 @OptIn(ExperimentalFoundationApi::class)
-internal class BpkCarouselInternalState constructor(
+internal class BpkCarouselInternalState(
     val delegate: PagerState,
     val totalImages: Int,
 ) : BpkCarouselState, ScrollableState by delegate {
@@ -123,10 +130,26 @@ internal class BpkCarouselInternalState constructor(
 @OptIn(ExperimentalFoundationApi::class)
 private class PagerStateImpl(
     initialPage: Int,
-    initialPageOffsetFraction: Float = 0f,
-    totalPages: Int,
-) : PagerState(initialPage, initialPageOffsetFraction) {
+    private val totalPages: Int,
+) : PagerState(initialPage, initialPageOffsetFraction = 0f) {
 
-    override val pageCount: Int =
-        if (totalPages > 1) Int.MAX_VALUE else 1 // if count > 1, set to Int.MAX_VALUE for infinite looping
+    override val pageCount: Int
+        get() = if (totalPages > 1) Int.MAX_VALUE else 1 // if count > 1, set to Int.MAX_VALUE for infinite looping
+
+    companion object {
+        val Saver: Saver<PagerStateImpl, *> = listSaver(
+            save = {
+                listOf(
+                    it.currentPage,
+                    it.totalPages,
+                )
+            },
+            restore = {
+                PagerStateImpl(
+                    initialPage = it[0],
+                    totalPages = it[1],
+                )
+            },
+        )
+    }
 }
