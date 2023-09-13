@@ -35,7 +35,6 @@ import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
-import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -43,6 +42,7 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkMapMarkerColors
 import net.skyscanner.backpack.compose.utils.FlareShape
+import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
 enum class BpkPriceMarkerStatus {
     Default,
@@ -70,7 +70,7 @@ fun BpkPriceMapMarker(
         tag = tag,
         title = title,
         visible = visible,
-        zIndex = zIndex,
+        zIndex = if (status == BpkPriceMarkerStatus.Focused && zIndex == 0.0f) 1.0f else zIndex,
         icon = icon,
         onClick = { onClick(it); false },
     ) {}

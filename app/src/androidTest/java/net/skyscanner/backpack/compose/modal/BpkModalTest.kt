@@ -19,8 +19,7 @@
 package net.skyscanner.backpack.compose.modal
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.isPopup
+import androidx.compose.ui.test.isDialog
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.ModalStory
 import net.skyscanner.backpack.demo.compose.ModalWithBackIcon
@@ -52,9 +51,7 @@ class BpkModalTest : BpkSnapshotTest() {
 
     private fun record(content: @Composable () -> Unit) {
         snap(comparison = { name ->
-            onNode(isPopup()).assertIsDisplayed()
-
-            compareScreenshot(onNode(isPopup()), name)
+            compareScreenshot(onNode(isDialog()), name)
         }) {
             content()
         }

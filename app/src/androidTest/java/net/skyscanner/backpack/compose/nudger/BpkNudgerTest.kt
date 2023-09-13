@@ -21,8 +21,11 @@ package net.skyscanner.backpack.compose.nudger
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.NudgerExample
+import net.skyscanner.backpack.demo.compose.NudgerRowExample
 import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
 import net.skyscanner.backpack.demo.compose.NudgerStoryMax
 import net.skyscanner.backpack.demo.compose.NudgerStoryMin
@@ -75,5 +78,28 @@ class BpkNudgerTest : BpkSnapshotTest() {
         snap {
             NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
         }
+    }
+
+    @Test
+    fun defaultRow() = snap {
+        NudgerRowExample(icon = BpkIcon.Account)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withNoSubtitle() = snap {
+        NudgerRowExample(subtitle = null)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withNoIcon() = snap {
+        NudgerRowExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withIconNoSubtitle() = snap {
+        NudgerRowExample(icon = BpkIcon.Account, subtitle = null)
     }
 }
