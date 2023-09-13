@@ -55,7 +55,7 @@ internal fun BpkSelectImpl(
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val selectText = if (selectedIndex != null && selectedIndex > -1 && options.size >= selectedIndex) options[selectedIndex] else ""
+    val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -72,16 +72,27 @@ internal fun BpkSelectImpl(
         )
         ExposedDropdownMenu(
             expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
-            modifier = Modifier.background(BpkTheme.colors.surfaceDefault).fillMaxWidth(),
+            modifier = Modifier
+                .background(BpkTheme.colors.surfaceDefault)
+                .fillMaxWidth(),
             onDismissRequest = { expanded = false },
         ) {
             options.forEachIndexed { index, option ->
-                val itemBackgroundColor = if (index == selectedIndex) BpkTheme.colors.surfaceHighlight else BpkTheme.colors.surfaceDefault
+                val itemBackgroundColor =
+                    if (index == selectedIndex) BpkTheme.colors.surfaceHighlight else BpkTheme.colors.surfaceDefault
                 DropdownMenuItem(
                     modifier = Modifier
                         .height(BpkSpacing.Lg.times(2))
                         .background(itemBackgroundColor),
-                    text = { BpkText(text = option, color = BpkTheme.colors.textPrimary, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                    text = {
+                        BpkText(
+                            text = option,
+                            color = BpkTheme.colors.textPrimary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = BpkTheme.typography.label1,
+                        )
+                    },
                     onClick = {
                         expanded = false
                         if (index != selectedIndex) {
@@ -104,10 +115,12 @@ internal fun BpkSelectImpl(
     onClick: (() -> Unit)? = null,
 ) {
     BpkTextFieldImpl(
-        modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickable(bounded = true, role = Role.Button) {
-            onClick?.let {
-                it()
-            } },
+        modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickable(
+            bounded = true,
+            role = Role.Button,
+        ) {
+            onClick?.let { it() }
+        },
         value = text,
         onValueChange = {},
         readOnly = true,
