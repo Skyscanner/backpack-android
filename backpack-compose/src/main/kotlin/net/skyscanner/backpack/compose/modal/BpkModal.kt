@@ -29,8 +29,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupProperties
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
@@ -42,6 +42,7 @@ internal const val ModalAnimationDurationMs = 300
 @Suppress("ModifierMissing")
 fun BpkModal(
     navIcon: NavIcon,
+    modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
     action: TextAction? = null,
     title: String? = null,
@@ -53,15 +54,15 @@ fun BpkModal(
         onDismiss?.invoke()
     }
 
-    Popup(
-        properties = PopupProperties(focusable = true),
+    Dialog(
+        properties = DialogProperties(decorFitsSystemWindows = false, usePlatformDefaultWidth = false),
         onDismissRequest = { isVisible.targetState = false },
     ) {
         AnimatedVisibility(
             visibleState = isVisible,
             enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
         ) {
             Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {
                 if (action != null) {

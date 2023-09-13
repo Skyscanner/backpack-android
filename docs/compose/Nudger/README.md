@@ -19,6 +19,21 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Nudger:
 
 ```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.nudger.BpkNudger
+import net.skyscanner.backpack.compose.tokens.Account
+
+BpkNudger(
+  value = currentValue,
+  onValueChange = { /* update the value */ },
+  min = minValue,
+  max = maxValue,
+)
+```
+
+Example of a Nudger with title, subtitle and icon:
+
+```Kotlin
 import net.skyscanner.backpack.compose.nudger.BpkNudger
 
 BpkNudger(
@@ -26,5 +41,8 @@ BpkNudger(
   onValueChange = { /* update the value */ },
   min = minValue,
   max = maxValue,
+  title = "Title",
+  subtitle = "Subtitle",
+  icon = BpkIcon.Account,
 )
 ```

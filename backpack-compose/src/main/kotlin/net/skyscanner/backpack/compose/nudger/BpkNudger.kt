@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.nudger
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -32,18 +34,24 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.text
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Minus
 import net.skyscanner.backpack.compose.tokens.Plus
+import net.skyscanner.backpack.compose.utils.invisibleSemantic
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -100,6 +108,77 @@ fun BpkNudger(
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
             onClick = { setValue(coerced + 1) },
+        )
+    }
+}
+
+@Composable
+fun BpkNudger(
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    min: Int,
+    max: Int,
+    title: String,
+    modifier: Modifier = Modifier,
+    subtitle: String? = null,
+    icon: BpkIcon? = null,
+    enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
+) {
+    Row(
+        modifier = modifier
+            .semantics {
+                text = listOfNotNull(title, subtitle).joinToString(separator = " ").let(::AnnotatedString)
+            }
+            .nudgerSemantics(value, onValueChange, min..max, enabled),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        ) {
+
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon,
+                    size = BpkIconSize.Large,
+                    contentDescription = null, // handled by semantics modifier
+                )
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                BpkText(
+                    text = title,
+                    style = BpkTheme.typography.heading5.copy(
+                        platformStyle = PlatformTextStyle(includeFontPadding = false),
+                    ),
+                    color = BpkTheme.colors.textPrimary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.invisibleSemantic(),
+                )
+                if (subtitle != null) {
+                    BpkText(
+                        text = subtitle,
+                        style = BpkTheme.typography.bodyDefault.copy(
+                            platformStyle = PlatformTextStyle(includeFontPadding = false),
+                        ),
+                        color = BpkTheme.colors.textSecondary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.invisibleSemantic(),
+                    )
+                }
+            }
+        }
+        BpkNudger(
+            value = value,
+            onValueChange = onValueChange,
+            min = min,
+            max = max,
+            enabled = enabled,
+            modifier = Modifier.invisibleSemantic(),
         )
     }
 }

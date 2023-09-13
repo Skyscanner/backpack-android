@@ -23,12 +23,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
@@ -86,3 +89,7 @@ internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(size: IntSiz
 internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment): Modifier = offsetWithSize { size ->
     anchor.round() - alignment.align(IntSize.Zero, size, layoutDirection)
 }
+
+@OptIn(ExperimentalComposeUiApi::class)
+fun Modifier.invisibleSemantic(): Modifier =
+    semantics { invisibleToUser() }
