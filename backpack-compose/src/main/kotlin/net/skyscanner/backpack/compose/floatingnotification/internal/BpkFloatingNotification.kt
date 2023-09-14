@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.compose.floatingnotification.internal
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -100,7 +100,7 @@ internal fun BpkFloatingNotificationImpl(
 @Composable
 internal fun floatingNotificationTransforms(
     slideDistancePx: Int,
-): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
+): AnimatedContentTransitionScope<BpkFloatingNotificationData?>.() -> ContentTransform =
     {
         ContentTransform(
             targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },

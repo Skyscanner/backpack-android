@@ -105,10 +105,10 @@ class BpkCircleSkeleton @JvmOverloads constructor(
         super.onLayout(changed, 0, 0, internalSize, internalSize)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val internalSize = getInternalSize()
         val radius = internalSize.toFloat().div(2)
-        canvas?.drawCircle(radius, radius, radius, paint)
+        canvas.drawCircle(radius, radius, radius, paint)
     }
 
     private companion object {

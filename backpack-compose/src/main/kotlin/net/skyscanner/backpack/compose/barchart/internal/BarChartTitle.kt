@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.compose.barchart.internal
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
@@ -62,14 +62,14 @@ internal fun BarChartTitle(
             when (scrollingDirection) {
                 ScrollingDirection.Forward ->
                     ContentTransform(
-                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.Start),
-                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.Start),
+                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start),
+                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Start),
                     )
 
                 ScrollingDirection.Backward ->
                     ContentTransform(
-                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.End),
-                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.End),
+                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.End),
+                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End),
                     )
             }
         },
