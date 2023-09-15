@@ -61,7 +61,7 @@ open class BpkBottomNav @JvmOverloads constructor(
             Menu.NONE,
             id,
             menu.size(),
-            SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE),
+            wrapFontSpan(title),
         )
             .setIcon(icon)
 
@@ -99,6 +99,13 @@ open class BpkBottomNav @JvmOverloads constructor(
     override fun setOnItemReselectedListener(listener: OnItemReselectedListener?) {
         throw UnsupportedOperationException("Not supported")
     }
+
+    private fun wrapFontSpan(text: CharSequence): CharSequence =
+        if (resources.configuration.layoutDirection == LAYOUT_DIRECTION_LTR) {
+            SpannableStringBuilder().append(text, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        } else {
+            text
+        }
 
     private class ListenersDelegate(
         private val menu: Menu,
