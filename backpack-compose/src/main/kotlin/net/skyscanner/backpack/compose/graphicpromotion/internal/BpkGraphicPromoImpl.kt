@@ -1,5 +1,12 @@
 package net.skyscanner.backpack.compose.graphicpromotion.internal
 
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -10,9 +17,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
@@ -27,7 +37,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkGraphicPromoImpl(
@@ -43,15 +52,22 @@ internal fun BpkGraphicPromoImpl(
     sponsorLogo: @Composable () -> Unit? = {},
     tapAction: () -> Unit = {},
 ) {
-    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Sm)
+    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     val contentDescription = listOfNotNull(kicker, headline, subHeadline, sponsor?.accessibilityLabel)
         .joinToString(separator = ", ")
+
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
 
     Box(
         modifier = modifier
             .aspectRatio(RATIO_PORTRAIT)
             .clip(roundedCornerShape)
-            .clickable { tapAction() }
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = tapAction,
+            )
             .semantics(mergeDescendants = true) {
                 role = Role.Button
                 this.contentDescription = contentDescription
@@ -73,10 +89,10 @@ internal fun BpkGraphicPromoImpl(
                     )
                 },
             ) {
-                image()
+                InteractiveBackground(image, isPressed)
             }
         } ?: run {
-            image()
+            InteractiveBackground(image, isPressed)
             ForegroundContent(
                 headline = headline,
                 kicker = kicker,
@@ -90,6 +106,36 @@ internal fun BpkGraphicPromoImpl(
     }
 }
 
+@Composable
+private fun InteractiveBackground(
+    image: @Composable BoxScope.() -> Unit,
+    isPressed: Boolean,
+) {
+    val animationSpec: AnimationSpec<Float> = tween(durationMillis = 120)
+
+    val scale = animateFloatAsState(
+        targetValue = if (isPressed) 1.05f else 1.0f,
+        animationSpec = animationSpec,
+        label = "background scale",
+    )
+
+    val imageAlpha: Float by animateFloatAsState(
+        targetValue = if (isPressed) 0.8f else 1.0f,
+        animationSpec = animationSpec,
+        label = "background alpha",
+    )
+    Box(modifier = Modifier.background(Color.Black)) {
+        Box(modifier = Modifier
+            .graphicsLayer {
+                scaleX = scale.value
+                scaleY = scale.value
+                alpha = imageAlpha
+            }
+            .fillMaxSize()) {
+            image()
+        }
+    }
+}
 @Composable
 private fun SponsorOverlayView(
     textColor: Color,
