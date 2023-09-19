@@ -24,9 +24,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 
 sealed interface BpkCarouselState : ScrollableState {
 
@@ -58,7 +60,14 @@ fun rememberBpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    val pagerState = rememberPagerState(initialPage = initialPage)
+
+    val pagerState = rememberSaveable(saver = InfinitePagerState.Saver) {
+        InfinitePagerState(
+            initialPage,
+            totalImages,
+        )
+    }
+
     return remember(pagerState, totalImages) {
         BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
     }
@@ -70,7 +79,10 @@ fun BpkCarouselState(
     initialImage: Int = 0,
 ): BpkCarouselState {
     val initialPage = (Int.MAX_VALUE / 2) + initialImage
-    return BpkCarouselInternalState(delegate = PagerState(initialPage = initialPage), totalImages = totalImages)
+    return BpkCarouselInternalState(
+        delegate = InfinitePagerState(initialPage = initialPage, totalPages = totalImages),
+        totalImages = totalImages,
+    )
 }
 
 internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
@@ -79,7 +91,7 @@ internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
     }
 
 @OptIn(ExperimentalFoundationApi::class)
-internal class BpkCarouselInternalState constructor(
+internal class BpkCarouselInternalState(
     val delegate: PagerState,
     val totalImages: Int,
 ) : BpkCarouselState, ScrollableState by delegate {
@@ -111,5 +123,33 @@ internal class BpkCarouselInternalState constructor(
     private fun Int.floorMod(other: Int): Int = when (other) {
         0 -> this
         else -> this - floorDiv(other) * other
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+private class InfinitePagerState(
+    initialPage: Int,
+    private val totalPages: Int,
+) : PagerState(initialPage, initialPageOffsetFraction = 0f) {
+
+    override val pageCount: Int
+        // if count > 1, set to Int.MAX_VALUE for infinite looping
+        get() = if (totalPages > 1) Int.MAX_VALUE else 1
+
+    companion object {
+        val Saver: Saver<InfinitePagerState, *> = listSaver(
+            save = {
+                listOf(
+                    it.currentPage,
+                    it.totalPages,
+                )
+            },
+            restore = {
+                InfinitePagerState(
+                    initialPage = it[0],
+                    totalPages = it[1],
+                )
+            },
+        )
     }
 }
