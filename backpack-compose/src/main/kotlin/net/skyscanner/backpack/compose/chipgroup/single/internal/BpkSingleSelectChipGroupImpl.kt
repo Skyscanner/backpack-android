@@ -18,10 +18,9 @@
 
 package net.skyscanner.backpack.compose.chipgroup.single.internal
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -52,6 +51,7 @@ internal fun BpkSingleSelectChipGroupImpl(
             LazyRow(
                 modifier = modifier.selectableGroup(),
                 state = rememberLazyListState(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
                 itemsIndexed(items = chips) { index, chip ->
                     ChipItem(chip, index == selectedIndex, style) {
@@ -64,6 +64,8 @@ internal fun BpkSingleSelectChipGroupImpl(
         BpkSingleChipGroupType.Wrap -> {
             FlowRow(
                 modifier = modifier.selectableGroup(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
                 chips.forEachIndexed { index, chip ->
                     ChipItem(chip, index == selectedIndex, style) {
@@ -85,7 +87,6 @@ private fun ChipItem(
 ) {
     BpkChip(
         modifier = modifier
-            .padding(PaddingValues(BpkSpacing.Sm))
             .semantics { role = Role.RadioButton },
         text = chip.text,
         icon = chip.icon,
