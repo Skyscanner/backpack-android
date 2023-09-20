@@ -64,7 +64,7 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
                 title = stringArrayResource(R.array.map_marker_prices)[index],
                 status = markerStatus(index),
                 state = rememberMarkerState(position = latLng),
-                onClick = { focusedMarker = index; viewedMarkers += index },
+                onClick = { focusedMarker = index; viewedMarkers += index; false },
             )
         }
     }
@@ -88,7 +88,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
                 status = markerStatus(index),
                 icon = if (index == 2) BpkIcon.Cafe else BpkIcon.Landmark,
                 state = rememberMarkerState(position = latLng),
-                onClick = { focusedMarker = index },
+                onClick = { focusedMarker = index; false },
             )
         }
     }

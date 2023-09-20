@@ -47,6 +47,9 @@ enum class BpkIconMarkerStatus {
     Disabled,
 }
 
+/**
+ * @param onClick Callback invoked when the marker is clicked. Return true to consume the event, for example to disable the default centre map on marker behaviour.
+ */
 @Composable
 fun BpkIconMapMarker(
     contentDescription: String,
@@ -55,8 +58,8 @@ fun BpkIconMapMarker(
     state: MarkerState = rememberMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
-    zIndex: Float = 0.0f,
-    onClick: (Marker) -> Unit = {},
+    zIndex: Float? = null,
+    onClick: (Marker) -> Boolean = { false },
 ) {
     val iconBitmap = rememberCapturedComposeBitmapDescriptor(icon, status) {
         IconMarkerLayout(status = status, icon = icon)
@@ -67,9 +70,9 @@ fun BpkIconMapMarker(
         tag = tag,
         title = contentDescription,
         visible = visible,
-        zIndex = zIndex,
+        zIndex = if (status == BpkIconMarkerStatus.Focused && zIndex == null) 1.0f else zIndex ?: 0.0f,
         icon = iconBitmap,
-        onClick = { onClick(it); false },
+        onClick = onClick,
     ) {}
 }
 
