@@ -10,7 +10,7 @@ lint = "31.1.1"  # android plugin, lint and sdk-common need to be updated togeth
 androidSdkCommon = "31.1.1" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.1"
-lifecycle = "2.6.1"
+lifecycle = "2.6.2"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.3"
@@ -27,7 +27,7 @@ plugin-nexusPublishing = "io.github.gradle-nexus:publish-plugin:1.3.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.2.2"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.2.3"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
@@ -36,7 +36,7 @@ androidx-annotations = "androidx.annotation:annotation:1.7.0"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-androidx-coreKts = "androidx.core:core-ktx:1.10.1"
+androidx-coreKts = "androidx.core:core-ktx:1.12.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -80,7 +80,7 @@ kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.09.00" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.09.01" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
