@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,12 +30,14 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBanner
 import net.skyscanner.backpack.compose.sponsoredbanner.CallToAction
 import net.skyscanner.backpack.compose.sponsoredbanner.Variant
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.components.SponsoredBannerComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("On Dark")
 fun SponsoredBannerStoryOnDark(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -46,7 +50,7 @@ fun SponsoredBannerStoryOnDark(modifier: Modifier = Modifier) {
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("On Light")
 fun SponsoredBannerStoryOnLight(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnLight,
@@ -59,7 +63,7 @@ fun SponsoredBannerStoryOnLight(modifier: Modifier = Modifier) {
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("Without Title")
 fun SponsoredBannerStoryWithoutTitle(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -71,7 +75,7 @@ fun SponsoredBannerStoryWithoutTitle(modifier: Modifier = Modifier) {
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("Without Subheadline")
 fun SponsoredBannerStoryWithoutSubheadline(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -83,7 +87,7 @@ fun SponsoredBannerStoryWithoutSubheadline(modifier: Modifier = Modifier) {
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("Without Title and Subheadline")
 fun SponsoredBannerStoryWithoutTitleAndSubheadline(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -94,7 +98,7 @@ fun SponsoredBannerStoryWithoutTitleAndSubheadline(modifier: Modifier = Modifier
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("Without Call to Action")
 fun SponsoredBannerStoryWithoutCallToAction(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -105,7 +109,7 @@ fun SponsoredBannerStoryWithoutCallToAction(modifier: Modifier = Modifier) {
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory(kind = StoryKind.ScreenshotOnly)
 fun SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
@@ -114,37 +118,36 @@ fun SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction(modifier: Modifi
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory
+@ComposeStory("Without Logo")
 fun SponsoredBannerStoryWithoutLogo(modifier: Modifier = Modifier) {
-    EmptySponsoredBannerSample(
+    DefaultSponsoredBannerSample(
         variant = Variant.OnDark,
         title = "Title",
         subheadline = "Subheadline",
         callToAction = CallToAction("Sponsored", ""),
         body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        showImage = false,
     )
 }
 
-@Composable
-internal fun EmptySponsoredBannerSample(
-    variant: Variant,
-    modifier: Modifier = Modifier,
-    title: String? = null,
-    subheadline: String? = null,
-    callToAction: CallToAction? = null,
-    body: String? = null,
-) {
-    BpkSponsoredBanner(
-        variant = variant,
-        backgroundColor = if (variant == Variant.OnDark) Color(0xFFFF6601) else Color(0xFFFFE300),
-        modifier = modifier,
-        title = title,
-        subheadline = subheadline,
-        callToAction = callToAction,
-        body = body,
-    ) {
-    }
-}
+private fun getPartnerLogo(pred: Boolean, variant: Variant): @Composable (() -> Unit)? =
+    if (pred) {
+        {
+            if (variant == Variant.OnDark) {
+                Image(
+                    painter = painterResource(R.drawable.easyjet_horizontal_logo),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.Fit,
+                )
+            } else {
+                Image(
+                    painter = painterResource(R.drawable.spirit_horizontal_logo),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.Fit,
+                )
+            }
+        }
+    } else null
 
 @Composable
 internal fun DefaultSponsoredBannerSample(
@@ -153,23 +156,18 @@ internal fun DefaultSponsoredBannerSample(
     title: String? = null,
     subheadline: String? = null,
     callToAction: CallToAction? = null,
+    showImage: Boolean = true,
     body: String? = null,
 ) {
-    BpkSponsoredBanner(
-        variant = variant,
-        backgroundColor = if (variant == Variant.OnDark) Color(0xFFFF6601) else Color(0xFFFFE300),
-        modifier = modifier,
-        title = title,
-        subheadline = subheadline,
-        callToAction = callToAction,
-        body = body,
-    ) {
-        Image(
-            painter = if (variant == Variant.OnDark) painterResource(R.drawable.easyjet_horizontal_logo) else painterResource(
-                R.drawable.spirit_horizontal_logo,
-            ),
-            contentDescription = "image description",
-            contentScale = ContentScale.Fit,
+    Box(modifier = Modifier.padding(BpkSpacing.Lg)) {
+        BpkSponsoredBanner(
+            variant = variant,
+            backgroundColor = if (variant == Variant.OnDark) Color(0xFFFF6601) else Color(0xFFFFE300),
+            title = title,
+            subheadline = subheadline,
+            callToAction = callToAction,
+            body = body,
+            content = getPartnerLogo(showImage, variant),
         )
     }
 }

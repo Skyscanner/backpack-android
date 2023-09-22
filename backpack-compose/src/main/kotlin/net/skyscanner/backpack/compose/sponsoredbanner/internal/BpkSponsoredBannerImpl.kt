@@ -31,7 +31,7 @@ import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
-internal fun BpkSponsoredBannerHeaderImpl(
+internal fun BpkSponsoredBannerImpl(
     backgroundColor: Color,
     variant: Variant,
     title: String?,
@@ -39,18 +39,18 @@ internal fun BpkSponsoredBannerHeaderImpl(
     callToAction: CallToAction?,
     body: String?,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+    content: @Composable (() -> Unit)?,
 ) {
-    var showBody by remember { mutableStateOf(false) }
+    var isBodyVisible by remember { mutableStateOf(false) }
     val toggleShowBody = {
-        showBody = !showBody
+        isBodyVisible = !isBodyVisible
     }
     val modifier = modifier.background(color = backgroundColor, shape = RoundedCornerShape(BpkSpacing.Md))
 
     @Composable
-    fun header(modifier: Modifier = Modifier) = BpkSponsoredBannerHeader(
+    fun header(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) = BpkSponsoredBannerHeader(
         variant = variant,
-        onClick = toggleShowBody,
+        onClick = onClick,
         modifier = modifier,
         title = title,
         subheadline = subheadline,
@@ -64,9 +64,9 @@ internal fun BpkSponsoredBannerHeaderImpl(
         Column(
             modifier = modifier,
         ) {
-            header()
+            header(onClick = toggleShowBody)
             AnimatedVisibility(
-                visible = showBody,
+                visible = isBodyVisible,
             ) {
                 Box(
                     modifier = Modifier
@@ -95,27 +95,32 @@ internal fun BpkSponsoredBannerHeaderImpl(
 @Composable
 private fun BpkSponsoredBannerHeader(
     variant: Variant,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     title: String? = null,
     subheadline: String? = null,
     callToAction: CallToAction? = null,
-    content: @Composable () -> Unit,
+    content: @Composable (() -> Unit)?,
 ) {
     Row(
-        modifier
+        modifier = modifier
             .padding(BpkSpacing.Base)
-            .clickable(onClick = onClick),
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.End),
+//            .let { if (onClick != null) it.clickable(onClick = onClick) else it },
+            .clickable { onClick },
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
-            modifier = Modifier.heightIn(max = 22.dp),
-        ) {
-            content()
+        content?.let {
+            Box(
+                modifier = Modifier.heightIn(max = 22.dp),
+            ) {
+                content()
+            }
+            Spacer(modifier = Modifier.size(BpkSpacing.Md))
         }
-        Spacer(modifier = Modifier.size(BpkSpacing.Md))
-        Column {
+        Column(
+            modifier = Modifier.weight(1f).fillMaxWidth(),
+        ) {
             if (!title.isNullOrBlank()) {
                 BpkText(
                     text = title,
@@ -131,16 +136,16 @@ private fun BpkSponsoredBannerHeader(
                 )
             }
         }
-        Spacer(modifier = Modifier.weight(1f))
-        if (!callToAction?.text.isNullOrBlank()) {
+//        Spacer(modifier = Modifier.weight(1f))
+        callToAction?.let {
             BpkText(
-                text = "Sponsored",
+                text = callToAction.text,
                 style = BpkTheme.typography.caption,
                 color = if (variant == Variant.OnDark) BpkTheme.colors.textOnDark else BpkTheme.colors.textOnLight,
             )
             BpkIcon(
                 icon = BpkIcon.InformationCircle,
-                contentDescription = "More information",
+                contentDescription = callToAction.accessibilityLabel,
                 tint = if (variant == Variant.OnDark) BpkTheme.colors.textOnDark else BpkTheme.colors.textOnLight,
             )
         }

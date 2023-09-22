@@ -35,7 +35,7 @@ import net.skyscanner.backpack.compose.R
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.sponsoredbanner.internal.BpkSponsoredBannerHeaderImpl
+import net.skyscanner.backpack.compose.sponsoredbanner.internal.BpkSponsoredBannerImpl
 
 @Composable
 fun BpkSponsoredBanner(
@@ -46,9 +46,9 @@ fun BpkSponsoredBanner(
     subheadline: String? = null,
     callToAction: CallToAction? = null,
     body: String? = null,
-    content: @Composable () -> Unit,
+    content: @Composable (() -> Unit)? = null,
 ) {
-    BpkSponsoredBannerHeaderImpl(
+    BpkSponsoredBannerImpl(
         backgroundColor = backgroundColor,
         variant = variant,
         title = title,
