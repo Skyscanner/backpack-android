@@ -21,7 +21,7 @@ package net.skyscanner.backpack.compose.sponsoredbanner
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryOnDark
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryOnLight
-import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutCallToAction
+import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutCTA
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutSubHeadline
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitle
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction
@@ -57,7 +57,7 @@ class BpkSponsoredBannerTest : BpkSnapshotTest() {
 
     @Test
     fun sponsoredBannerWithoutCallToAction() = snap {
-        SponsoredBannerStoryWithoutCallToAction()
+        SponsoredBannerStoryWithoutCTA()
     }
 
     @Test
