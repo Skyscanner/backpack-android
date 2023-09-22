@@ -26,38 +26,45 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import net.skyscanner.backpack.demo.R
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBanner
-import net.skyscanner.backpack.compose.sponsoredbanner.CallToAction
-import net.skyscanner.backpack.compose.sponsoredbanner.Variant
+import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerCTA
+import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SponsoredBannerComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory("On Dark")
-fun SponsoredBannerStoryOnDark(modifier: Modifier = Modifier) {
+@ComposeStory("OnLight")
+fun SponsoredBannerStoryOnLight() {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        title = "Title",
-        subheadline = "Subheadline",
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnLight,
+        title = stringResource(R.string.sponsored_banner_title),
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
     )
 }
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory("On Light")
-fun SponsoredBannerStoryOnLight(modifier: Modifier = Modifier) {
+@ComposeStory("OnDark")
+fun SponsoredBannerStoryOnDark() {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnLight,
-        title = "Title",
-        subheadline = "Subheadline",
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        title = stringResource(R.string.sponsored_banner_title),
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
     )
 }
 
@@ -66,44 +73,65 @@ fun SponsoredBannerStoryOnLight(modifier: Modifier = Modifier) {
 @ComposeStory("Without Title")
 fun SponsoredBannerStoryWithoutTitle(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        subheadline = "subheadline",
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
     )
 }
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory("Without Subheadline")
-fun SponsoredBannerStoryWithoutSubheadline(modifier: Modifier = Modifier) {
+@ComposeStory("Without subHeadline")
+fun SponsoredBannerStoryWithoutSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        title = "Title",
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        title = stringResource(R.string.sponsored_banner_title),
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
     )
 }
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory("Without Title and Subheadline")
-fun SponsoredBannerStoryWithoutTitleAndSubheadline(modifier: Modifier = Modifier) {
+@ComposeStory("Without Title and subHeadline")
+fun SponsoredBannerStoryWithoutTitleAndSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
     )
 }
 
 @Composable
 @SponsoredBannerComponent
-@ComposeStory("Without Call to Action")
-fun SponsoredBannerStoryWithoutCallToAction(modifier: Modifier = Modifier) {
+@ComposeStory("Without CTA")
+fun SponsoredBannerStoryWithoutCTA(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        title = "Title",
-        subheadline = "Subheadline",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        title = stringResource(R.string.sponsored_banner_title),
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
+        body = stringResource(R.string.sponsored_banner_body),
+    )
+}
+
+@Composable
+@SponsoredBannerComponent
+@ComposeStory("Without Body")
+fun SponsoredBannerStoryWithoutBody(modifier: Modifier = Modifier) {
+    DefaultSponsoredBannerSample(
+        variant = BpkSponsoredBannerVariant.OnDark,
+        title = stringResource(R.string.sponsored_banner_title),
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
     )
 }
 
@@ -112,7 +140,7 @@ fun SponsoredBannerStoryWithoutCallToAction(modifier: Modifier = Modifier) {
 @ComposeStory(kind = StoryKind.ScreenshotOnly)
 fun SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
+        variant = BpkSponsoredBannerVariant.OnDark,
     )
 }
 
@@ -121,28 +149,31 @@ fun SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction(modifier: Modifi
 @ComposeStory("Without Logo")
 fun SponsoredBannerStoryWithoutLogo(modifier: Modifier = Modifier) {
     DefaultSponsoredBannerSample(
-        variant = Variant.OnDark,
-        title = "Title",
-        subheadline = "Subheadline",
-        callToAction = CallToAction("Sponsored", ""),
-        body = "You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.",
+        variant = BpkSponsoredBannerVariant.OnDark,
+        title = stringResource(R.string.sponsored_banner_title),
+        subHeadline = stringResource(R.string.sponsored_banner_sub_headline),
+        callToAction = BpkSponsoredBannerCTA(
+            stringResource(R.string.sponsored_banner_cta_text),
+            stringResource(R.string.sponsored_banner_cta_accessibility_label),
+        ),
+        body = stringResource(R.string.sponsored_banner_body),
         showImage = false,
     )
 }
 
-private fun getPartnerLogo(pred: Boolean, variant: Variant): @Composable (() -> Unit)? =
+private fun getPartnerLogo(pred: Boolean, variant: BpkSponsoredBannerVariant): @Composable (() -> Unit)? =
     if (pred) {
         {
-            if (variant == Variant.OnDark) {
+            if (variant == BpkSponsoredBannerVariant.OnDark) {
                 Image(
                     painter = painterResource(R.drawable.easyjet_horizontal_logo),
-                    contentDescription = "image description",
+                    contentDescription = stringResource(R.string.sponsored_banner_cta_accessibility_label),
                     contentScale = ContentScale.Fit,
                 )
             } else {
                 Image(
                     painter = painterResource(R.drawable.spirit_horizontal_logo),
-                    contentDescription = "image description",
+                    contentDescription = stringResource(R.string.sponsored_banner_cta_accessibility_label),
                     contentScale = ContentScale.Fit,
                 )
             }
@@ -151,23 +182,28 @@ private fun getPartnerLogo(pred: Boolean, variant: Variant): @Composable (() -> 
 
 @Composable
 internal fun DefaultSponsoredBannerSample(
-    variant: Variant,
+    variant: BpkSponsoredBannerVariant,
     modifier: Modifier = Modifier,
     title: String? = null,
-    subheadline: String? = null,
-    callToAction: CallToAction? = null,
+    subHeadline: String? = null,
+    callToAction: BpkSponsoredBannerCTA? = null,
     showImage: Boolean = true,
     body: String? = null,
 ) {
-    Box(modifier = Modifier.padding(BpkSpacing.Lg)) {
+    Box(modifier = modifier.padding(BpkSpacing.Lg)) {
         BpkSponsoredBanner(
             variant = variant,
-            backgroundColor = if (variant == Variant.OnDark) Color(0xFFFF6601) else Color(0xFFFFE300),
+            backgroundColor = if (variant == BpkSponsoredBannerVariant.OnDark) Color(EASY_JET_COLOR_HEX) else Color(
+                SPIRIT_COLOR_HEX,
+            ),
             title = title,
-            subheadline = subheadline,
+            subHeadline = subHeadline,
             callToAction = callToAction,
             body = body,
             content = getPartnerLogo(showImage, variant),
         )
     }
 }
+
+const val EASY_JET_COLOR_HEX = 0xFFFF6601
+const val SPIRIT_COLOR_HEX = 0xFFFFE300

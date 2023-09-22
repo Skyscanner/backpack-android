@@ -22,10 +22,10 @@ import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryOnDark
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryOnLight
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutCallToAction
-import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutSubheadline
+import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutSubHeadline
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitle
 import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction
-import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitleAndSubheadline
+import net.skyscanner.backpack.demo.compose.SponsoredBannerStoryWithoutTitleAndSubHeadline
 import org.junit.Test
 
 class BpkSponsoredBannerTest : BpkSnapshotTest() {
@@ -42,7 +42,7 @@ class BpkSponsoredBannerTest : BpkSnapshotTest() {
 
     @Test
     fun sponsoredBannerWithoutSubheadline() = snap {
-        SponsoredBannerStoryWithoutSubheadline()
+        SponsoredBannerStoryWithoutSubHeadline()
     }
 
     @Test
@@ -52,7 +52,7 @@ class BpkSponsoredBannerTest : BpkSnapshotTest() {
 
     @Test
     fun sponsoredBannerWithoutTitleAndSubheadline() = snap {
-        SponsoredBannerStoryWithoutTitleAndSubheadline()
+        SponsoredBannerStoryWithoutTitleAndSubHeadline()
     }
 
     @Test
@@ -61,7 +61,7 @@ class BpkSponsoredBannerTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun sponsoredBannerWithoutTitleAndSubheadlineAndCallToAction() = snap {
+    fun sponsoredBannerWithoutTitleAndSubHeadlineAndCallToAction() = snap {
         SponsoredBannerStoryWithoutTitleAndSubHeaderAndCallToAction()
     }
 }
