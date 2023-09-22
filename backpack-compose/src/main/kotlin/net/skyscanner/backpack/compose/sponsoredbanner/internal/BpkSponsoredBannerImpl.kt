@@ -86,7 +86,7 @@ internal fun BpkSponsoredBannerImpl(
                     ) {
                         BpkText(
                             text = body,
-                            style = BpkTheme.typography.bodyDefault,
+                            color = BpkTheme.colors.textPrimary
                         )
                     }
                 }
