@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -136,6 +137,8 @@ internal fun BpkGraphicPromoSample(
                 )
             }
         },
-        tapAction = {},
+        tapAction = {
+            Log.d("BpkGraphicPromo", "Tap on graphic promo")
+        },
     )
 }
