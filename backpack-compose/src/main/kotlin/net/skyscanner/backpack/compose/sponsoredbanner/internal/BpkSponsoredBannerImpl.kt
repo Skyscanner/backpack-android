@@ -40,7 +40,7 @@ internal fun BpkSponsoredBannerImpl(
     content: @Composable (() -> Unit)?,
 ) {
     val showBody = !body.isNullOrBlank()
-    var isBodyVisible by remember { mutableStateOf(showBody) }
+    var isBodyVisible by remember { mutableStateOf(false) }
     val toggleShowBody = {
         isBodyVisible = !isBodyVisible
     }
@@ -86,7 +86,7 @@ internal fun BpkSponsoredBannerImpl(
                     ) {
                         BpkText(
                             text = body,
-                            color = BpkTheme.colors.textPrimary
+                            color = BpkTheme.colors.textPrimary,
                         )
                     }
                 }
