@@ -19,9 +19,40 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a GraphicPromo:
 
 ```Kotlin
+import android.util.Log
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
+import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
+import net.skyscanner.backpack.compose.graphicpromotion.VerticalAlignment
+import net.skyscanner.backpack.compose.overlay.BpkOverlayType
+
 
 BpkGraphicPromo(
-    // TODO
+    kicker = "Travel tips",
+    headline = "Three Parks Challenge",
+    subHeadline = "How to complete the climb in 3 days",
+    verticalAlignment = VerticalAlignment.Bottom,
+    overlayType = BpkOverlayType.SolidHigh,
+    sponsor = Sponsor(
+        accessibilityLabel = "Sponsored",
+        logo = "https://images.kiwi.com/airlines/64/FR.png",
+        title = "Sponsored",
+    ),
+    image = {
+        Image(
+            modifier = Modifier.matchParentSize(),
+            painter = painterResource(id = R.drawable.graphic_promo),
+            contentDescription = "Image",
+            contentScale = ContentScale.Crop,
+        )
+    }, sponsorLogo = {
+        Image(
+            painter = painterResource(id = R.drawable.skyland,),
+            contentDescription = "Image",
+            contentScale = ContentScale.Fit,
+        )
+    },
+    tapAction = {
+        Log.d("TAG", "Tap on graphic promo")
+    },
 )
 ```
