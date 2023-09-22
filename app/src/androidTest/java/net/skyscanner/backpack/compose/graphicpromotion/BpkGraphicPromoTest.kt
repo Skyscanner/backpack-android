@@ -42,7 +42,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     @Test
     fun topAlignedKickerAvailable() = snap {
         BpkGraphicPromoSample(
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
         )
     }
@@ -51,7 +50,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     fun topAlignedKickerSubHeadlineAvailable() = snap {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
         )
     }
@@ -60,7 +58,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     fun topAlignedKickerSubHeadlineSponsoredAvailable() = snap {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
             sponsor = Sponsor(
                 accessibilityLabel = "Sponsored",
@@ -73,7 +70,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     @Test
     fun bottomAlignedKickerAvailable() = snap {
         BpkGraphicPromoSample(
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
             verticalAlignment = VerticalAlignment.Bottom,
         )
@@ -83,7 +79,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     fun bottomAlignedKickerSubHeadlineAvailable() = snap {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
             verticalAlignment = VerticalAlignment.Bottom,
         )
@@ -93,7 +88,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     fun bottomAlignedKickerSubHeadlineSponsoredAvailable() = snap {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
-            headline = "Three Parks Challenge",
             subHeadline = "How to complete the climb in 3 days",
             sponsor = Sponsor(
                 accessibilityLabel = "Sponsored",

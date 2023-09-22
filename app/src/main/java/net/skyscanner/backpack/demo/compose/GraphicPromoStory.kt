@@ -40,16 +40,66 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 internal fun GraphicPromoStoryDefault(modifier: Modifier = Modifier) {
     Column(modifier) {
-        BpkGraphicPromoSample(
-            headline = "Three Parks Challenge",
-        )
+        BpkGraphicPromoSample()
     }
 }
 
 @Composable
+@GraphicPromoComponent
+@ComposeStory("Top align with text")
+internal fun GraphicPromoStoryAlignmentTopWithKicker() {
+    BpkGraphicPromoSample(
+        kicker = "Travel tips",
+        subHeadline = "How to complete the climb in 3 days",
+    )
+}
+
+@Composable
+@GraphicPromoComponent
+@ComposeStory("Bottom align with text")
+internal fun GraphicPromoStoryAlignmentBottomWithText() {
+    BpkGraphicPromoSample(
+        kicker = "Travel tips",
+        subHeadline = "How to complete the climb in 3 days",
+        verticalAlignment = VerticalAlignment.Bottom,
+    )
+}
+
+@Composable
+@GraphicPromoComponent
+@ComposeStory("Top align Sponsored")
+internal fun GraphicPromoStoryAlignmentTopSponsored() {
+    BpkGraphicPromoSample(
+        kicker = "Travel tips",
+        subHeadline = "How to complete the climb in 3 days",
+        sponsor = Sponsor(
+            accessibilityLabel = "Sponsored",
+            logo = "https://images.kiwi.com/airlines/64/FR.png",
+            title = "Sponsored",
+        ),
+    )
+}
+
+@Composable
+@GraphicPromoComponent
+@ComposeStory("Bottom align Sponsored")
+internal fun GraphicPromoStoryAlignmentBottomSponsored() {
+    BpkGraphicPromoSample(
+        kicker = "Travel tips",
+        subHeadline = "How to complete the climb in 3 days",
+        verticalAlignment = VerticalAlignment.Bottom,
+        sponsor = Sponsor(
+            accessibilityLabel = "Sponsored",
+            logo = "https://images.kiwi.com/airlines/64/FR.png",
+            title = "Sponsored",
+        ),
+    )
+}
+
+@Composable
 internal fun BpkGraphicPromoSample(
-    headline: String,
     modifier: Modifier = Modifier,
+    headline: String = "Three Parks Challenge",
     subHeadline: String? = null,
     kicker: String? = null,
     verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
@@ -70,7 +120,7 @@ internal fun BpkGraphicPromoSample(
             Image(
                 modifier = Modifier.matchParentSize(),
                 painter = painterResource(
-                    id = R.drawable.carousel_placeholder_1,
+                    id = R.drawable.graphic_promo,
                 ),
                 contentDescription = "Image",
                 contentScale = ContentScale.Crop,

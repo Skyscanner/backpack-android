@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -143,17 +145,21 @@ private fun SponsorOverlayView(
     sponsorLogo: @Composable () -> Unit? = {},
 ) {
     if (sponsor != null) {
-        BpkText(
-            text = sponsor.title,
-            style = BpkTheme.typography.heading5,
-            color = textColor,
-        )
-
-        Box(
-            modifier = Modifier
-                .heightIn(0.dp, SPONSOR_LOGO_HEIGHT.dp),
+        Column(
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
         ) {
-            sponsorLogo()
+            BpkText(
+                text = sponsor.title,
+                style = BpkTheme.typography.label1,
+                color = textColor,
+            )
+
+            Box(
+                modifier = Modifier
+                    .heightIn(0.dp, SPONSOR_LOGO_HEIGHT.dp),
+            ) {
+                sponsorLogo()
+            }
         }
     }
 }
@@ -165,25 +171,29 @@ private fun MessageOverlay(
     subHeadline: String?,
     textColor: Color,
 ) {
-    if (!kicker.isNullOrBlank()) {
-        BpkText(
-            text = kicker,
-            style = BpkTheme.typography.label1,
-            color = textColor,
-        )
-    }
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
+    ) {
+        if (!kicker.isNullOrBlank()) {
+            BpkText(
+                text = kicker,
+                style = BpkTheme.typography.subheading,
+                color = textColor,
+            )
+        }
 
-    BpkText(
-        text = headline,
-        style = BpkTheme.typography.heading2,
-        color = textColor,
-    )
-    if (!subHeadline.isNullOrBlank()) {
         BpkText(
-            text = subHeadline,
-            style = BpkTheme.typography.heading5,
+            text = headline,
+            style = BpkTheme.typography.heading2,
             color = textColor,
         )
+        if (!subHeadline.isNullOrBlank()) {
+            BpkText(
+                text = subHeadline,
+                style = BpkTheme.typography.heading5,
+                color = textColor,
+            )
+        }
     }
 }
 
