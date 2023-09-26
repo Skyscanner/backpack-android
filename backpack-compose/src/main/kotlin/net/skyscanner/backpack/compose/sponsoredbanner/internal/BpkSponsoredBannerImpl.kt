@@ -55,7 +55,7 @@ internal fun BpkSponsoredBannerImpl(
     callToAction: BpkSponsoredBannerCTA?,
     body: String?,
     modifier: Modifier = Modifier,
-    content: @Composable (() -> Unit)?,
+    logo: @Composable (() -> Unit)?,
 ) {
     val showBody = !body.isNullOrBlank()
     var isBodyVisible by remember { mutableStateOf(false) }
@@ -90,7 +90,7 @@ internal fun BpkSponsoredBannerImpl(
             title = title,
             subHeadline = subHeadline,
             callToAction = callToAction,
-            content = content,
+            logo = logo,
         )
         if (showBody) {
             body?.let {
@@ -120,7 +120,7 @@ internal fun BpkSponsoredBannerHeader(
     title: String? = null,
     subHeadline: String? = null,
     callToAction: BpkSponsoredBannerCTA? = null,
-    content: @Composable (() -> Unit)?,
+    logo: @Composable (() -> Unit)?,
 ) {
     Row(
         modifier = modifier
@@ -128,13 +128,13 @@ internal fun BpkSponsoredBannerHeader(
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        content?.let {
+        logo?.let {
             Box(
                 modifier = Modifier
                     .padding(vertical = BpkSpacing.Base)
                     .heightIn(0.dp, 36.dp),
             ) {
-                content()
+                logo()
             }
         }
         Column(

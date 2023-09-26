@@ -62,7 +62,7 @@ import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
         body = body,
     ) {
         Image(
-            painter = painter,
+            painter = painterResource(R.drawable.sponsored_banner_easyjet_logo),
             contentDescription = contentDescription,
             contentScale = ContentScale.Fit,
         )
@@ -70,4 +70,4 @@ import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
 }
 ```
 
-Note: The Sponsored Banner is clickable depending on the body. It's expandible if there is body provided different than an empty string.
+Note: The Sponsored Banner is clickable/expandable if a body text is provided.

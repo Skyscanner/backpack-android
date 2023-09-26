@@ -32,7 +32,7 @@ fun BpkSponsoredBanner(
     subHeadline: String? = null,
     callToAction: BpkSponsoredBannerCTA? = null,
     body: String? = null,
-    content: @Composable (() -> Unit)? = null,
+    logo: @Composable (() -> Unit)? = null,
 ) {
     BpkSponsoredBannerImpl(
         backgroundColor = backgroundColor,
@@ -42,7 +42,7 @@ fun BpkSponsoredBanner(
         callToAction = callToAction,
         body = body,
         modifier = modifier,
-        content = content,
+        logo = logo,
     )
 }
 
