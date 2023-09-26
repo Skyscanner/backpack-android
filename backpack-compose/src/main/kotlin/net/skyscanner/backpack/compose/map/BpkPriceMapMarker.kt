@@ -58,8 +58,8 @@ fun BpkPriceMapMarker(
     state: MarkerState = rememberMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
-    zIndex: Float = 0.0f,
-    onClick: (Marker) -> Unit = {},
+    zIndex: Float? = null,
+    onClick: (Marker) -> Boolean = { false },
 ) {
     val icon = rememberCapturedComposeBitmapDescriptor(title, status) {
         PriceMarkerLayout(title = title, status = status)
@@ -70,9 +70,9 @@ fun BpkPriceMapMarker(
         tag = tag,
         title = title,
         visible = visible,
-        zIndex = if (status == BpkPriceMarkerStatus.Focused && zIndex == 0.0f) 1.0f else zIndex,
+        zIndex = if (status == BpkPriceMarkerStatus.Focused && zIndex == null) 1.0f else zIndex ?: 0.0f,
         icon = icon,
-        onClick = { onClick(it); false },
+        onClick = onClick,
     ) {}
 }
 

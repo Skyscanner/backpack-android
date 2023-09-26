@@ -21,10 +21,10 @@ package net.skyscanner.backpack.compose.chipgroup.multiple.internal
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -69,13 +69,13 @@ internal fun BpkMultiSelectChipGroupImpl(
                 LazyRow(
                     modifier = Modifier.selectableGroup(),
                     state = rememberLazyListState(),
+                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
                 ) {
                     items(items = chips) { chip ->
                         ChipItem(
                             chip = chip,
                             style = style,
                             modifier = Modifier
-                                .padding(PaddingValues(BpkSpacing.Sm))
                                 .semantics { role = Role.Checkbox },)
                     }
                 }
@@ -85,13 +85,14 @@ internal fun BpkMultiSelectChipGroupImpl(
         BpkMultiChipGroupType.Wrap -> {
             FlowRow(
                 modifier = modifier.selectableGroup(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
                 chips.forEach { chip ->
                     ChipItem(
                         chip = chip,
                         style = style,
                         modifier = Modifier
-                            .padding(PaddingValues(BpkSpacing.Sm))
                             .semantics { role = Role.Checkbox },)
                 }
             }
@@ -108,12 +109,12 @@ private fun StickyChip(
     val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier = modifier
-            .padding(PaddingValues(BpkSpacing.Sm))
+            .padding(end = BpkSpacing.Md)
             .height(IntrinsicSize.Min),
     ) {
         BpkChipImpl(
             modifier = Modifier
-                .padding(PaddingValues(end = BpkSpacing.Md))
+                .padding(end = BpkSpacing.Md)
                 .semantics {
                     role = Role.Button
                     contentDescription = chip.text
