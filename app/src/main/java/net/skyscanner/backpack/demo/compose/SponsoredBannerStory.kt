@@ -166,13 +166,13 @@ private fun getPartnerLogo(pred: Boolean, variant: BpkSponsoredBannerVariant): @
         {
             if (variant == BpkSponsoredBannerVariant.OnDark) {
                 Image(
-                    painter = painterResource(R.drawable.easyjet_horizontal_logo),
+                    painter = painterResource(R.drawable.sponsored_banner_easyjet_logo),
                     contentDescription = stringResource(R.string.sponsored_banner_cta_accessibility_label),
                     contentScale = ContentScale.Fit,
                 )
             } else {
                 Image(
-                    painter = painterResource(R.drawable.spirit_horizontal_logo),
+                    painter = painterResource(R.drawable.sponsored_banner_spirit_logo),
                     contentDescription = stringResource(R.string.sponsored_banner_cta_accessibility_label),
                     contentScale = ContentScale.Fit,
                 )
