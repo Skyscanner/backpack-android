@@ -20,8 +20,11 @@ package net.skyscanner.backpack.compose.graphicpromotion.internal
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.IndicationInstance
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +33,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,7 +43,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
@@ -76,7 +79,6 @@ internal fun BpkGraphicPromoImpl(
         .joinToString(separator = ", ")
 
     val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
 
     Box(
         modifier = modifier
@@ -94,7 +96,9 @@ internal fun BpkGraphicPromoImpl(
     ) {
         overlayType?.let {
             BpkOverlay(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .matchParentSize()
+                    .indication(interactionSource, InteractiveBackgroundIndication),
                 overlayType = it,
                 foregroundContent = {
                     ForegroundContent(
@@ -107,11 +111,15 @@ internal fun BpkGraphicPromoImpl(
                         sponsorLogo = sponsorLogo,
                     )
                 },
-            ) {
-                InteractiveBackground(image, isPressed)
-            }
+                content = image,
+            )
         } ?: run {
-            InteractiveBackground(image, isPressed)
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .indication(interactionSource, InteractiveBackgroundIndication),
+                content = image,
+            )
             ForegroundContent(
                 headline = headline,
                 kicker = kicker,
@@ -125,36 +133,6 @@ internal fun BpkGraphicPromoImpl(
     }
 }
 
-@Composable
-private fun InteractiveBackground(
-    image: @Composable BoxScope.() -> Unit,
-    isPressed: Boolean,
-) {
-    val animationSpec: AnimationSpec<Float> = tween(durationMillis = 120)
-
-    val scale = animateFloatAsState(
-        targetValue = if (isPressed) 1.05f else 1.0f,
-        animationSpec = animationSpec,
-        label = "background scale",
-    )
-
-    val imageAlpha: Float by animateFloatAsState(
-        targetValue = if (isPressed) 0.8f else 1.0f,
-        animationSpec = animationSpec,
-        label = "background alpha",
-    )
-    Box(modifier = Modifier.background(Color.Black)) {
-        Box(modifier = Modifier
-            .graphicsLayer {
-                scaleX = scale.value
-                scaleY = scale.value
-                alpha = imageAlpha
-            }
-            .fillMaxSize()) {
-            image()
-        }
-    }
-}
 @Composable
 private fun SponsorOverlayView(
     textColor: Color,
@@ -267,5 +245,38 @@ private fun ForegroundContent(
     }
 }
 
+private object InteractiveBackgroundIndication : Indication {
+
+    @Composable
+    override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
+        val isPressed by interactionSource.collectIsPressedAsState()
+
+        val scale by animateFloatAsState(
+            targetValue = if (isPressed) 1.05f else 1.0f,
+            animationSpec = interactiveBackgroundAnimationSpec,
+            label = "background scale",
+        )
+
+        val overlayAlpha by animateFloatAsState(
+            targetValue = if (isPressed) 0.2f else 0f,
+            animationSpec = interactiveBackgroundAnimationSpec,
+            label = "overlay alpha",
+        )
+
+        return remember(interactionSource) {
+            object : IndicationInstance {
+                override fun ContentDrawScope.drawIndication() {
+                    scale(scale, scale) {
+                        this@drawIndication.drawContent()
+                    }
+                    drawRect(Color.Black, alpha = overlayAlpha)
+                }
+            }
+        }
+    }
+}
+
 const val RATIO_PORTRAIT: Float = 3 / 4f
 const val SPONSOR_LOGO_HEIGHT = 60
+
+private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = tween(durationMillis = 120)
