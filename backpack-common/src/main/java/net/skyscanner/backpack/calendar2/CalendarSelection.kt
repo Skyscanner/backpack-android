@@ -76,10 +76,11 @@ sealed class CalendarSelection : Serializable {
      * A whole [month] is selected.
      */
     @Immutable
-    data class Month(val month: YearMonth) : Range() {
-        override val start: LocalDate = month.firstDay()
-        override val end: LocalDate = month.lastDay()
-    }
+    data class Month(
+        val month: YearMonth,
+        override val start: LocalDate = month.firstDay(),
+        override val end: LocalDate = month.lastDay(),
+    ) : Range()
 
     /**
      * A range of dates is selected.
