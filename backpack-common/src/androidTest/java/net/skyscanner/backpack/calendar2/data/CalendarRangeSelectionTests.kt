@@ -32,6 +32,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
 
 class CalendarRangeSelectionTests {
 
@@ -193,6 +195,27 @@ class CalendarRangeSelectionTests {
 
             verify {
                 assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+            }
+        }
+    }
+
+    @Test
+    fun given_whole_month_is_selected_and_month_is_partly_in_range_only_in_range_selected() {
+        val mSelection = monthSelection.copy(
+            range = LocalDate.of(2000, Month.JANUARY, 15)..LocalDate.of(2001, Month.JANUARY, 14),
+        )
+        testCalendarWith(mSelection) {
+            stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
+
+            verify {
+                assertEquals(
+                    CalendarSelection.Month(
+                        month = header.yearMonth,
+                        start = mSelection.range.start,
+                        end = LocalDate.of(2000, monthSelection.range.start.month, 31),
+                    ),
+                    state.selection,
+                )
             }
         }
     }
