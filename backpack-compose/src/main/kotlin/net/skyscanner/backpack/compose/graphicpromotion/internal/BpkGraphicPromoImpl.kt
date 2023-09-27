@@ -19,7 +19,7 @@ package net.skyscanner.backpack.compose.graphicpromotion.internal
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.IndicationInstance
 import androidx.compose.foundation.clickable
@@ -279,4 +279,7 @@ private object InteractiveBackgroundIndication : Indication {
 const val RATIO_PORTRAIT: Float = 3 / 4f
 const val SPONSOR_LOGO_HEIGHT = 60
 
-private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = tween(durationMillis = 120)
+private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
+    stiffness = 800f,
+    dampingRatio = 1f,
+)
