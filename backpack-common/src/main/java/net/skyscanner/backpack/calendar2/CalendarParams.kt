@@ -21,8 +21,10 @@ package net.skyscanner.backpack.calendar2
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
+import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 import org.threeten.bp.chrono.IsoChronology
 import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.format.FormatStyle
@@ -48,6 +50,7 @@ import java.util.Locale
 data class CalendarParams(
     val selectionMode: SelectionMode,
     val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
+    val selectableMonthRange: ClosedRange<YearMonth> = range.start.yearMonth()..range.endInclusive.yearMonth(),
     val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
     val locale: Locale = Locale.getDefault(),
     val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
