@@ -75,7 +75,8 @@ internal fun CalendarCells(
         .groupBy { date -> date.yearMonth() }
         .toSortedMap()
         .map { entry ->
-            val monthSelectionMode = if (entry.key in params.selectableMonthRange) {
+            val monthSelectionMode = if (params.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth &&
+                entry.key in params.monthSelectionMode.selectableMonthRange) {
                 params.monthSelectionMode
             } else {
                 CalendarParams.MonthSelectionMode.Disabled

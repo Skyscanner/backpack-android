@@ -143,7 +143,12 @@ class CalendarCellsLayoutTests {
 
     @Test
     fun select_whole_month_button_is_shown_when_whole_month_selection_is_enabled() {
-        val monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
+        val selectableRange =
+            with(CalendarSettings.Default.range) { this.start.yearMonth()..this.endInclusive.yearMonth() }
+        val monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
+            label = "Select whole month",
+            selectableMonthRange = selectableRange,
+        )
         val calendarParams = CalendarSettings.Default.copy(
             monthSelectionMode = monthSelectionMode,
         )
@@ -171,10 +176,12 @@ class CalendarCellsLayoutTests {
 
     @Test
     fun given_selectableMonthRange_parameter_is_set_months_outside_are_not_selectable() {
-        val monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
+        val monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
+            label = "Select whole month",
+            selectableMonthRange = YearMonth.of(2000, Month.FEBRUARY)..YearMonth.of(2000, Month.OCTOBER),
+        )
         val calendarParams = CalendarSettings.Default.copy(
             range = LocalDate.of(2000, Month.JANUARY, 15)..LocalDate.of(2001, Month.JANUARY, 14),
-            selectableMonthRange = YearMonth.of(2000, Month.FEBRUARY)..YearMonth.of(2000, Month.OCTOBER),
             monthSelectionMode = monthSelectionMode,
         )
         testCalendarWith(calendarParams) {
