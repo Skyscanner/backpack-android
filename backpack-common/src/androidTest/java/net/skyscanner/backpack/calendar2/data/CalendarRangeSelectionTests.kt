@@ -34,6 +34,7 @@ import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
 
 class CalendarRangeSelectionTests {
 
@@ -42,7 +43,10 @@ class CalendarRangeSelectionTests {
     )
 
     private val monthSelection = CalendarSettings.Default.copy(
-        monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+        monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
+            "Select whole month",
+            selectableMonthRange = YearMonth.of(2000, 1)..YearMonth.of(2000, 12),
+        ),
         selectionMode = CalendarParams.SelectionMode.Range,
     )
 
