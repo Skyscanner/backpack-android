@@ -25,24 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
-internal object BpkMapMarkerColors {
-    internal val mapClusterPin: Color
+internal object BpkSponsoredBannerColors {
+    internal val background: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF05203C), Color(0xFFFFFFFF))
-
-    internal val mapClusterPinPreviousSelection: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFF94C3FF), Color(0xFF94C3FF))
-
-    internal val viewedForeground: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xCCFFFFFF), Color(0xCC000000))
-
-    internal val mapPoiPin: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFF8E47BA), Color(0xFF8E47BA))
-
-    internal val mapPreviousSelection: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFFCFE4FF), Color(0xFFCFE4FF))
+        get() = dynamicColorOf(Color(0xFFEFF1F2), Color(0xFF243346))
 }
