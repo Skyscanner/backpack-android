@@ -16,21 +16,17 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.meta
+// Auto-generated: do not edit
+@file:Suppress("RedundantVisibilityModifier", "unused")
 
-import androidx.compose.runtime.Immutable
-import net.skyscanner.backpack.compose.annotation.BpkPreviews
-import net.skyscanner.backpack.meta.StoryKind
-import net.skyscanner.backpack.meta.StoryKindMarker
-import net.skyscanner.backpack.meta.StoryMarker
-import net.skyscanner.backpack.meta.StoryNameMarker
+package net.skyscanner.backpack.compose.tokens.`internal`
 
-@Immutable
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.BINARY)
-@BpkPreviews
-@StoryMarker(isCompose = true)
-annotation class ComposeStory(
-    @StoryNameMarker val name: String = "Default",
-    @StoryKindMarker val kind: StoryKind = StoryKind.StoryAndScreenshot,
-)
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import net.skyscanner.backpack.compose.utils.dynamicColorOf
+
+internal object BpkSponsoredBannerColors {
+    internal val background: Color
+        @Composable
+        get() = dynamicColorOf(Color(0xFFEFF1F2), Color(0xFF243346))
+}

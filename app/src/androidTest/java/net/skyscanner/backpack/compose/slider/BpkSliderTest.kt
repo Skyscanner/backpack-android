@@ -26,6 +26,7 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultSliderSample
 import net.skyscanner.backpack.demo.compose.RangeSliderSample
+import net.skyscanner.backpack.demo.compose.RangeSliderWithLabelsSample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,5 +42,11 @@ class BpkSliderTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun range() = snap(width = 200.dp) {
         RangeSliderSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun rangeWithLabel() = snap(width = 200.dp) {
+        RangeSliderWithLabelsSample()
     }
 }

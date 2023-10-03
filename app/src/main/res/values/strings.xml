@@ -235,6 +235,8 @@
     <string name="rating_subtitle">1532 reviews</string>
 
     <string name="slider_range">Range</string>
+    <string name="slider_range_with_label">Range With Label</string>
+    <string name="gbp_formatter">£%.1f</string>
     <string name="slider_standard">Standard</string>
     <string name="slider_stepped">Stepped</string>
 

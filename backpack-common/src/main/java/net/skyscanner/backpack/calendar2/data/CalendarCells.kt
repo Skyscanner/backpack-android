@@ -75,6 +75,12 @@ internal fun CalendarCells(
         .groupBy { date -> date.yearMonth() }
         .toSortedMap()
         .map { entry ->
+            val monthSelectionMode = if (params.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth &&
+                entry.key in params.monthSelectionMode.selectableMonthRange) {
+                params.monthSelectionMode
+            } else {
+                CalendarParams.MonthSelectionMode.Disabled
+            }
             CalendarMonth(
                 days = entry.value.sortedBy { date -> date.dayOfMonth },
                 yearMonth = entry.key,
@@ -82,7 +88,7 @@ internal fun CalendarCells(
                 monthsFormatter = params.monthsFormatter,
                 weekFields = params.weekFields,
                 selection = selection,
-                monthSelectionMode = params.monthSelectionMode,
+                monthSelectionMode = monthSelectionMode,
                 calendarSelectionMode = params.selectionMode,
             ) { yearMonth, date ->
                 CalendarCellDay(
