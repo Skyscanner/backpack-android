@@ -429,6 +429,13 @@ potential-bugs:
 
 style:
   active: false
+  BracesOnIfStatements:
+    active: false
+    singleLine: 'never'
+    multiLine: 'always'
+  BracesOnWhenStatements:
+    active: false
+    singleLine: 'necessary'
   CanBeNonNullable:
     active: false
   CascadingCallWrapping:
@@ -469,8 +476,6 @@ style:
     active: false
   MagicNumber:
     active: false
-  MandatoryBracesIfStatements:
-    active: false
   MandatoryBracesLoops:
     active: false
   MaxChainedCallsOnSameLine:
@@ -497,8 +502,6 @@ style:
   OptionalAbstractKeyword:
     active: false
   OptionalUnit:
-    active: false
-  OptionalWhenBraces:
     active: false
   PreferToOverPairSyntax:
     active: false
