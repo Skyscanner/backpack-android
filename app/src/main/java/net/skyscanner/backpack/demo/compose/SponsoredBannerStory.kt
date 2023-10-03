@@ -168,8 +168,8 @@ fun SponsoredBannerStoryWithoutLogo(modifier: Modifier = Modifier) {
 private fun getPartnerLogo(variant: BpkSponsoredBannerVariant): @Composable () -> Unit = {
     Image(
         painter = when (variant) {
-            OnDark -> painterResource(R.drawable.sponsored_banner_easyjet_logo)
-            OnLight -> painterResource(R.drawable.sponsored_banner_spirit_logo)
+            OnDark -> painterResource(R.drawable.sponsored_banner_skyland_white)
+            OnLight -> painterResource(R.drawable.sponsored_banner_skyland_black)
         },
         contentDescription = stringResource(R.string.sponsored_banner_cta_accessibility_label),
         contentScale = ContentScale.Fit,
@@ -190,8 +190,8 @@ internal fun DefaultSponsoredBannerSample(
         BpkSponsoredBanner(
             variant = variant,
             backgroundColor = when (variant) {
-                OnDark -> Color(EASY_JET_COLOR_HEX)
-                OnLight -> Color(SPIRIT_COLOR_HEX)
+                OnDark -> Color(BACKGROUND_ONDARK_COLOR_HEX)
+                OnLight -> Color(BACKGROUND_ONLIGHT_COLOR_HEX)
             },
             title = title,
             subHeadline = subHeadline,
@@ -202,5 +202,5 @@ internal fun DefaultSponsoredBannerSample(
     }
 }
 
-const val EASY_JET_COLOR_HEX = 0xFFFF6601
-const val SPIRIT_COLOR_HEX = 0xFFFFE300
+const val BACKGROUND_ONDARK_COLOR_HEX = 0xFFFF6601
+const val BACKGROUND_ONLIGHT_COLOR_HEX = 0xFFFFE300
