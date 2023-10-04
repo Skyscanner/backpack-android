@@ -62,7 +62,7 @@ import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
         body = body,
     ) {
         Image(
-            painter = painterResource(R.drawable.sponsored_banner_easyjet_logo),
+            painter = painterResource(R.drawable.sponsored_banner_skyland_white),
             contentDescription = contentDescription,
             contentScale = ContentScale.Fit,
         )
