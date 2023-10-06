@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -132,7 +133,8 @@ internal fun BpkSponsoredBannerHeader(
             Box(
                 modifier = Modifier
                     .padding(vertical = BpkSpacing.Base)
-                    .heightIn(0.dp, 36.dp),
+                    .widthIn(max = LOGO_WIDTH)
+                    .heightIn(max = LOGO_HEIGHT),
             ) {
                 logo()
             }
@@ -172,6 +174,9 @@ internal fun BpkSponsoredBannerHeader(
         }
     }
 }
+
+val LOGO_WIDTH = 88.dp
+val LOGO_HEIGHT = 22.dp
 
 @Composable
 private fun getTextColor(variant: BpkSponsoredBannerVariant): Color =
