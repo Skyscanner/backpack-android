@@ -114,6 +114,7 @@ private val FontWeightClass = ClassName("androidx.compose.ui.text.font", "FontWe
 private val BpkFontSizeClass = ClassName("net.skyscanner.backpack.compose.tokens", "BpkFontSize")
 private val BpkLineHeightClass = ClassName("net.skyscanner.backpack.compose.tokens", "BpkLineHeight")
 private val BpkLetterSpacingClass = ClassName("net.skyscanner.backpack.compose.tokens", "BpkLetterSpacing")
+private val PlatformTextStyleClass = ClassName("androidx.compose.ui.text", "PlatformTextStyle")
 
 private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
     val defaultFontFamily = "defaultFontFamily"
@@ -143,6 +144,7 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
                         ""
                     } +
                     "    fontFamily = $defaultFontFamily,\n" +
+                    "    platformStyle = %platformTextStyle:T(includeFontPadding = false),\n" +
                     "  )"
 
             return FunSpec.constructorBuilder()
@@ -167,6 +169,7 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
                             "fontSize" to BpkFontSizeClass,
                             "lineHeight" to BpkLineHeightClass,
                             "letterSpacing" to BpkLetterSpacingClass,
+                            "platformTextStyle" to PlatformTextStyleClass,
                         ),
                     ).build(),
                 )
