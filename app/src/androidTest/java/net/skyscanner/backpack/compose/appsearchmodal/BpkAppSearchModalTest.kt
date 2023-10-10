@@ -18,15 +18,55 @@
 
 package net.skyscanner.backpack.compose.appsearchmodal
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.isDialog
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContent
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryError
+import net.skyscanner.backpack.demo.compose.AppSearchModalStoryLoading
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-class BpkAppSearchModalTest : BpkSnapshotTest() {
+@RunWith(Parameterized::class)
+class BpkAppSearchModalTest(private val permutation: Permutation) : BpkSnapshotTest(listOf(permutation)) {
 
-    // TODO: ADD TESTS
     @Test
-    fun error() = snap {
-        AppSearchModalStoryError()
+    fun default() = record {
+        permutation.composable()
+    }
+
+    @Test
+    fun on_dark() = record(background = { BpkTheme.colors.surfaceContrast }) {
+        permutation.composable()
+    }
+
+    private fun record(
+        background: @Composable () -> Color = { Color.Unspecified },
+        content: @Composable () -> Unit,
+    ) {
+        snap(background, comparison = { name ->
+            compareScreenshot(onNode(isDialog()), name)
+        }) {
+            content()
+        }
+    }
+
+    companion object {
+        enum class Permutation(
+            val composable: @Composable () -> Unit,
+        ) {
+            Content(composable = { AppSearchModalStoryContent() }),
+            Error(composable = { AppSearchModalStoryError() }),
+            Loading(composable = { AppSearchModalStoryLoading() }),
+        }
+
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun data(): Collection<Array<Any>> {
+            return Permutation.entries.map { arrayOf(it) }
+        }
     }
 }

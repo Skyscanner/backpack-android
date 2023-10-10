@@ -26,6 +26,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.appsearchmodal.AppSearchModalResult
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -79,7 +81,8 @@ internal fun BpkAppSearchModalImpl(
                             BpkBodyTextSkeleton(
                                 modifier = Modifier
                                     .padding(BpkSpacing.Base)
-                                    .width(SkeletonItemWidth.dp),
+                                    .width(SkeletonItemWidth.dp)
+                                    .semantics { contentDescription = results.accessibilityLabel },
                             )
                         }
                     }
