@@ -178,8 +178,8 @@ internal fun BpkSponsoredBannerHeader(
     }
 }
 
-val LOGO_WIDTH = 88.dp
-val LOGO_HEIGHT = 22.dp
+private val LOGO_WIDTH = 88.dp
+private val LOGO_HEIGHT = 22.dp
 
 @Composable
 private fun getTextColor(variant: BpkSponsoredBannerVariant): Color =
