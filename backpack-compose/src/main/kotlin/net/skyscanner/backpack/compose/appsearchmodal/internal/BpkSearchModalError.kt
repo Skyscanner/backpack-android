@@ -19,20 +19,27 @@
 package net.skyscanner.backpack.compose.appsearchmodal.internal
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+
+private const val ImageHeight = 200
+private const val ImageWidth = 277
 
 @Composable
 internal fun BpkSearchModalError(
@@ -46,7 +53,13 @@ internal fun BpkSearchModalError(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        results.image()
+        Box(
+            modifier = Modifier
+                .height(ImageHeight.dp)
+                .width(ImageWidth.dp),
+        ) {
+            results.image()
+        }
 
         BpkText(
             text = results.title,

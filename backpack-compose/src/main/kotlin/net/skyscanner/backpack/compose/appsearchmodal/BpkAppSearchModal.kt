@@ -52,7 +52,7 @@ data class BpkSection(val headings: BpkSectionHeading? = null, val items: List<B
 
 data class BpkItem(
     val title: AnnotatedString,
-    val subTitle: String,
+    val subtitle: String,
     val icon: BpkIcon,
     val onItemSelected: () -> Unit,
 )

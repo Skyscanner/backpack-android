@@ -77,7 +77,7 @@ internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier) {
         )
         Column {
             BpkText(text = item.title)
-            BpkText(text = item.subTitle)
+            BpkText(text = item.subtitle)
         }
     }
 }
