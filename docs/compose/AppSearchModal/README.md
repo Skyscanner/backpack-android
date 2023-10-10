@@ -4,11 +4,25 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.appsearchmodal)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/appsearchmodal)
 
-## Default
+## Content
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/default.png" alt="AppSearchModal component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/default_dm.png" alt="AppSearchModal component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content.png" alt="AppSearchModal component in Content state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content_dm.png" alt="AppSearchModal component in Content state - dark mode" width="375" /> |
+
+
+## Loading
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading.png" alt="AppSearchModal component in Loading state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading_dm.png" alt="AppSearchModal component in Loading state - dark mode" width="375" /> |
+
+
+## Error
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/error.png" alt="AppSearchModal component in Error state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/error_dm.png" alt="AppSearchModal component in Error state - dark mode" width="375" /> |
 
 ## Installation
 
@@ -16,12 +30,53 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a AppSearchModal:
+Example of a AppSearchModal in Content state:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
 
 BpkAppSearchModal(
-    // TODO Add Documentation
+    title = stringResource(id = R.string.destination),
+    inputText = "",
+    inputHint = stringResource(id = R.string.text_field_hint),
+    results = BpkAppSearchModalResult.Content(
+        sections = listOf(BpkSection(...)),
+        shortcuts = listOf(BpkShortcut(...)),
+    ),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+)
+```
+
+Example of a AppSearchModal in Loading state:
+
+```Kotlin
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+
+BpkAppSearchModal(
+    title = stringResource(id = R.string.destination),
+    inputText = "",
+    inputHint = stringResource(id = R.string.text_field_hint),
+    results = BpkAppSearchModalResult.Loading(accessibilityLabel = stringResource(id = R.string.content_is_loading)),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+)
+```
+
+Example of a AppSearchModal in Error state:
+
+```Kotlin
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+
+BpkAppSearchModal(
+    title = stringResource(id = R.string.destination),
+    inputText = "",
+    inputHint = stringResource(id = R.string.text_field_hint),
+    results = BpkAppSearchModalResult.Error(...),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
 )
 ```
