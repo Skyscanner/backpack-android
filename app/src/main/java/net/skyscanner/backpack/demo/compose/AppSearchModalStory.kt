@@ -18,22 +18,33 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import android.content.res.Resources
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.appsearchmodal.Action
-import net.skyscanner.backpack.compose.appsearchmodal.AppSearchModalResult
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAction
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
-import net.skyscanner.backpack.compose.appsearchmodal.Item
-import net.skyscanner.backpack.compose.appsearchmodal.Section
-import net.skyscanner.backpack.compose.appsearchmodal.SectionHeading
-import net.skyscanner.backpack.compose.appsearchmodal.Shortcut
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
+import net.skyscanner.backpack.compose.appsearchmodal.BpkItem
+import net.skyscanner.backpack.compose.appsearchmodal.BpkSection
+import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
+import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Airports
@@ -48,26 +59,26 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @AppSearchModalComponent
 @ComposeStory("Content")
 fun AppSearchModalStoryContent(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = contentResult)
+    AppSearchModalStory(result = contentResult(LocalContext.current.resources))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = loadingResult)
+    AppSearchModalStory(result = loadingResult(LocalContext.current.resources))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Error")
 fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = errorResult)
+    AppSearchModalStory(result = errorResult(LocalContext.current.resources))
 }
 
 @Composable
 private fun AppSearchModalStory(
-    result: AppSearchModalResult,
+    result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.fillMaxSize()) {
@@ -77,7 +88,7 @@ private fun AppSearchModalStory(
 
 @Composable
 internal fun DefaultAppSearchModalSample(
-    result: AppSearchModalResult,
+    result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
 ) {
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -90,86 +101,93 @@ internal fun DefaultAppSearchModalSample(
     if (showModal.value) {
         BpkAppSearchModal(
             modifier = modifier,
-            title = "Destination",
+            title = stringResource(id = R.string.destination),
             inputText = "",
-            inputHint = "Enter your next destination",
+            inputHint = stringResource(id = R.string.text_field_hint),
             results = result,
-            closeAccessibilityLabel = "",
+            closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = {},
         )
     }
 }
 
-internal val contentResult = AppSearchModalResult.Content(
+internal fun contentResult(resources: Resources) = BpkAppSearchModalResult.Content(
     sections = listOf(
-        Section(
+        BpkSection(
             items = listOf(
-                Item(
-                    title = "Current Location",
-                    subTitle = "Use current location",
+                BpkItem(
+                    title = buildAnnotatedString {
+                        append(resources.getString(R.string.current_location_title))
+                    },
+                    subTitle = resources.getString(R.string.current_location_subtitle),
                     icon = BpkIcon.UseLocation,
                 ) {},
             ),
         ),
-        Section(
-            headings = SectionHeading(
-                title = "Recent Searches",
-                action = Action(text = "View More") {},
+        BpkSection(
+            headings = BpkSectionHeading(
+                title = resources.getString(R.string.recent_searches),
+                action = BpkAction(text = resources.getString(R.string.view_more)) {},
             ),
             items = listOf(
-                Item(
-                    title = "London",
-                    subTitle = "City, United Kingdom",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_london)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
-                Item(
-                    title = "London Heathrow",
-                    subTitle = "Airport, United Kingdom",
+                BpkItem(
+                    title = buildAnnotatedString {
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append(resources.getString(R.string.city_london))
+                        }
+                        append(" Heathrow")
+                    },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
 
                 ),
-                Item(
-                    title = "Cardiff",
-                    subTitle = "City, United Kingdom",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_rome)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
 
                 ),
             ),
         ),
-        Section(
-            headings = SectionHeading(
-                title = "Popular Destination",
+        BpkSection(
+            headings = BpkSectionHeading(
+                title = resources.getString(R.string.popular_destinations),
             ),
             items = listOf(
-                Item(
-                    title = "Shenzhen",
-                    subTitle = "City, China",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_shenzhen)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
-                Item(
-                    title = "Paris",
-                    subTitle = "City, France",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_paris)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
-                Item(
-                    title = "Algiers",
-                    subTitle = "City, Algeria",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_algiers)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
-                Item(
-                    title = "Madrid",
-                    subTitle = "City, Spain",
+                BpkItem(
+                    title = buildAnnotatedString { append(resources.getString(R.string.city_madrid)) },
+                    subTitle = resources.getString(R.string.search_modal_item_subtitle),
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
@@ -178,27 +196,37 @@ internal val contentResult = AppSearchModalResult.Content(
         ),
     ),
     shortcuts = listOf(
-        Shortcut(
-            "Natural History Museum",
+        BpkShortcut(
+            resources.getString(R.string.city_tokyo),
             icon = BpkIcon.Landmark,
         ) {},
-        Shortcut(
-            "Big Ben",
+        BpkShortcut(
+            resources.getString(R.string.city_cairo),
             icon = BpkIcon.Landmark,
         ) {},
-        Shortcut(
-            "London Eye",
+        BpkShortcut(
+            resources.getString(R.string.city_long_name),
             icon = BpkIcon.Landmark,
         ) {},
     ),
 )
 
-internal val errorResult = AppSearchModalResult.Error(
-    title = "Looks like you drifted away",
-    description = "Please check your internet connection to find your way back",
-    image = R.drawable.ic_launcher_foreground,
-    action = Action(text = "Try Again", onActionSelected = {}),
+private const val ImageHeight = 200
+private const val ImageWidth = 277
+
+internal fun errorResult(resource: Resources) = BpkAppSearchModalResult.Error(
+    title = resource.getString(R.string.error_view_title),
+    description = resource.getString(R.string.error_view_subtitle),
+    image = {
+        Image(
+            modifier = Modifier
+                .height(ImageHeight.dp)
+                .width(ImageWidth.dp),
+            painter = painterResource(id = R.drawable.ic_launcher_foreground), contentDescription = null,
+        )
+    },
+    action = BpkAction(text = resource.getString(R.string.try_again), onActionSelected = {}),
 
 )
 
-internal val loadingResult = AppSearchModalResult.Loading(accessibilityLabel = "Content is Loading ")
+internal fun loadingResult(resource: Resources) = BpkAppSearchModalResult.Loading(accessibilityLabel = resource.getString(R.string.content_is_loading))

@@ -18,55 +18,55 @@
 
 package net.skyscanner.backpack.compose.appsearchmodal
 
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import net.skyscanner.backpack.compose.appsearchmodal.internal.BpkAppSearchModalImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 
-sealed class AppSearchModalResult {
+sealed class BpkAppSearchModalResult {
     data class Content(
-        val sections: List<Section>,
-        val shortcuts: List<Shortcut>? = null,
-    ) : AppSearchModalResult()
+        val sections: List<BpkSection>,
+        val shortcuts: List<BpkShortcut>? = null,
+    ) : BpkAppSearchModalResult()
 
-    data class Loading(val accessibilityLabel: String) : AppSearchModalResult()
+    data class Loading(val accessibilityLabel: String) : BpkAppSearchModalResult()
     data class Error(
         val title: String,
         val description: String,
-        @DrawableRes val image: Int,
-        val action: Action,
-    ) : AppSearchModalResult()
+        val image: @Composable () -> Unit,
+        val action: BpkAction,
+    ) : BpkAppSearchModalResult()
 }
 
-data class Shortcut(
+data class BpkShortcut(
     val text: String,
     val icon: BpkIcon,
     val onShortcutSelected: () -> Unit,
 )
 
-data class Section(val headings: SectionHeading? = null, val items: List<Item>)
+data class BpkSection(val headings: BpkSectionHeading? = null, val items: List<BpkItem>)
 
-data class Item(
-    val title: String,
+data class BpkItem(
+    val title: AnnotatedString,
     val subTitle: String,
     val icon: BpkIcon,
     val onItemSelected: () -> Unit,
 )
 
-data class SectionHeading(val title: String, val action: Action? = null)
+data class BpkSectionHeading(val title: String, val action: BpkAction? = null)
 
-data class Action(val text: String, val onActionSelected: () -> Unit)
+data class BpkAction(val text: String, val onActionSelected: () -> Unit)
 
 @Composable
 fun BpkAppSearchModal(
     title: String,
     inputText: String,
     inputHint: String,
-    results: AppSearchModalResult,
+    results: BpkAppSearchModalResult,
     closeAccessibilityLabel: String,
     onInputChanged: (String) -> Unit,
     onClose: () -> Unit,

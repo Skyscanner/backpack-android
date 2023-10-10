@@ -316,7 +316,18 @@
     <string name="city_dubai">Dubai</string>
     <string name="city_long_name">A city with long name in mars</string>
     <string name="city_rio">Rio de janeiro</string>
-
+    <string name="recent_searches">Recent Searches</string>
+    <string name="popular_destinations">Popular Destinations</string>
+    <string name="search_modal_item_subtitle">City, United Kingdom</string>
+    <string name="view_more">View More</string>
+    <string name="try_again">Try Again</string>
+    <string name="destination">Destination</string>
+    <string name="text_field_hint">Enter your next destination</string>
+    <string name="current_location_title">Current Location</string>
+    <string name="current_location_subtitle">Use current location</string>
+    <string name="content_is_loading">Content is Loading</string>
+    <string name="error_view_title">Looks like you drifted away</string>
+    <string name="error_view_subtitle">Please check your internet connection to find your way back</string>
     <string name="drop_down_action">Drop down action invoked</string>
     <string name="dismiss_action">Dismiss action invoked</string>
     <string name="sticky_chip_action">Sticky Chip action invoked</string>

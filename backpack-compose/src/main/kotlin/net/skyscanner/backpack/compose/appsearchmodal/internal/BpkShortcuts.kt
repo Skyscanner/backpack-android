@@ -23,30 +23,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.appsearchmodal.Shortcut
+import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkShortcuts(
-    shortcuts: List<Shortcut>,
+    shortcuts: List<BpkShortcut>,
     modifier: Modifier = Modifier,
 ) {
-    val selectedChip = remember { mutableIntStateOf(-1) }
     val singleSelectChips = shortcuts.map {
         BpkSingleChipItem(text = it.text, icon = it.icon)
     }
     BpkSingleSelectChipGroup(
         modifier = modifier.padding(
-            top = BpkSpacing.Lg,
+            top = BpkSpacing.Md,
             start = BpkSpacing.Base,
+            bottom = BpkSpacing.Base,
         ),
         chips = singleSelectChips,
-        selectedIndex = selectedChip.intValue,
+        selectedIndex = remember { mutableIntStateOf(-1) }.intValue,
         onItemClicked = {
-            selectedChip.intValue = singleSelectChips.indexOf(it)
-            shortcuts[selectedChip.intValue].onShortcutSelected()
+            shortcuts[singleSelectChips.indexOf(it)].onShortcutSelected()
         },
     )
 }
