@@ -31,7 +31,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 private const val SkeletonCount = 10
 private const val SkeletonItemWidth = 200
-
 @Composable
 internal fun BpkSearchModalLoading(results: BpkAppSearchModalResult.Loading) {
     Column(modifier = Modifier.semantics(mergeDescendants = true) {
