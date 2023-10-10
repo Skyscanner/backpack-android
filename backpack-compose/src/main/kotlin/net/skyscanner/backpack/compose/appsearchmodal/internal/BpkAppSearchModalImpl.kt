@@ -63,8 +63,8 @@ internal fun BpkAppSearchModalImpl(
                     placeholder = inputHint,
                     onValueChange = onInputChanged,
                 )
-                LazyColumn {
-                    if (results is AppSearchModalResult.Content) {
+                if (results is AppSearchModalResult.Content) {
+                    LazyColumn {
                         results.shortcuts?.let {
                             item {
                                 BpkShortcuts(it)
@@ -76,13 +76,16 @@ internal fun BpkAppSearchModalImpl(
                                 Modifier.padding(BpkSpacing.Base),
                             )
                         }
-                    } else if (results is AppSearchModalResult.Loading) {
-                        items(SkeletonCount) {
+                    }
+                } else if (results is AppSearchModalResult.Loading) {
+                    Column(modifier = Modifier.semantics(mergeDescendants = true) {
+                        contentDescription = results.accessibilityLabel
+                    }) {
+                        for (i in 0..SkeletonCount) {
                             BpkBodyTextSkeleton(
                                 modifier = Modifier
                                     .padding(BpkSpacing.Base)
-                                    .width(SkeletonItemWidth.dp)
-                                    .semantics { contentDescription = results.accessibilityLabel },
+                                    .width(SkeletonItemWidth.dp),
                             )
                         }
                     }
