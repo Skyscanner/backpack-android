@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -73,8 +74,7 @@ internal fun BpkSponsoredBannerImpl(
     ) {
         BpkSponsoredBannerHeader(
             modifier = Modifier
-                .background(
-                    color = backgroundColor,
+                .clip(
                     shape = if (isBodyVisible) {
                         RoundedCornerShape(
                             topStart = BpkSpacing.Md,
@@ -85,6 +85,9 @@ internal fun BpkSponsoredBannerImpl(
                     } else {
                         RoundedCornerShape(BpkSpacing.Md)
                     },
+                )
+                .background(
+                    color = backgroundColor,
                 )
                 .clickable(enabled = showBody, onClick = toggleShowBody),
             variant = variant,
