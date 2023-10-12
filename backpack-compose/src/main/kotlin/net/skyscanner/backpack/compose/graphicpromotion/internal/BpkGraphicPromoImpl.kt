@@ -51,8 +51,8 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
-import net.skyscanner.backpack.compose.graphicpromotion.Variant
-import net.skyscanner.backpack.compose.graphicpromotion.VerticalAlignment
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVariant
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.text.BpkText
@@ -68,18 +68,16 @@ internal fun BpkGraphicPromoImpl(
     kicker: String? = null,
     subHeadline: String? = null,
     overlayType: BpkOverlayType? = null,
-    variant: Variant = Variant.OnDark,
-    verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
+    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     sponsor: Sponsor? = null,
-    sponsorLogo: @Composable () -> Unit? = {},
+    sponsorLogo: (@Composable () -> Unit)? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
 ) {
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     val contentDescription = listOfNotNull(kicker, headline, subHeadline, sponsor?.accessibilityLabel)
         .joinToString(separator = ", ")
-
-    val interactionSource = remember { MutableInteractionSource() }
-
     Box(
         modifier = modifier
             .aspectRatio(RATIO_PORTRAIT)
@@ -94,26 +92,26 @@ internal fun BpkGraphicPromoImpl(
                 this.contentDescription = contentDescription
             },
     ) {
-        overlayType?.let {
+        if (overlayType != null) {
             BpkOverlay(
                 modifier = Modifier
                     .matchParentSize()
                     .indication(interactionSource, InteractiveBackgroundIndication),
-                overlayType = it,
+                overlayType = overlayType,
                 foregroundContent = {
                     ForegroundContent(
                         headline = headline,
                         kicker = kicker,
                         subHeadline = subHeadline,
-                        variant = variant,
-                        verticalAlignment = verticalAlignment,
+                        bpkGraphicPromoVariant = bpkGraphicPromoVariant,
+                        bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
                         sponsor = sponsor,
                         sponsorLogo = sponsorLogo,
                     )
                 },
                 content = image,
             )
-        } ?: run {
+        } else {
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -124,8 +122,8 @@ internal fun BpkGraphicPromoImpl(
                 headline = headline,
                 kicker = kicker,
                 subHeadline = subHeadline,
-                variant = variant,
-                verticalAlignment = verticalAlignment,
+                bpkGraphicPromoVariant = bpkGraphicPromoVariant,
+                bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
                 sponsor = sponsor,
                 sponsorLogo = sponsorLogo,
             )
@@ -137,7 +135,7 @@ internal fun BpkGraphicPromoImpl(
 private fun SponsorOverlayView(
     textColor: Color,
     sponsor: Sponsor?,
-    sponsorLogo: @Composable () -> Unit? = {},
+    sponsorLogo: (@Composable () -> Unit)? = null,
 ) {
     if (sponsor != null) {
         Column(
@@ -152,9 +150,8 @@ private fun SponsorOverlayView(
             Box(
                 modifier = Modifier
                     .heightIn(0.dp, SPONSOR_LOGO_HEIGHT.dp),
-            ) {
-                sponsorLogo()
-            }
+                content = { sponsorLogo?.let { it() } },
+            )
         }
     }
 }
@@ -197,19 +194,19 @@ private fun ForegroundContent(
     headline: String,
     kicker: String? = null,
     subHeadline: String? = null,
-    variant: Variant = Variant.OnDark,
-    verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
+    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     sponsor: Sponsor? = null,
-    sponsorLogo: @Composable () -> Unit? = {},
+    sponsorLogo: (@Composable () -> Unit)? = null,
 ) {
-    val textColor: Color = when (variant) {
-        Variant.OnDark -> BpkTheme.colors.textOnDark
-        Variant.OnLight -> BpkTheme.colors.textOnLight
+    val textColor: Color = when (bpkGraphicPromoVariant) {
+        BpkGraphicPromoVariant.OnDark -> BpkTheme.colors.textOnDark
+        BpkGraphicPromoVariant.OnLight -> BpkTheme.colors.textOnLight
     }
 
     Column(modifier = Modifier.padding(BpkSpacing.Lg)) {
-        when (verticalAlignment) {
-            VerticalAlignment.Top -> {
+        when (bpkGraphicPromoVerticalAlignment) {
+            BpkGraphicPromoVerticalAlignment.Top -> {
                 MessageOverlay(
                     headline = headline,
                     kicker = kicker,
@@ -225,7 +222,7 @@ private fun ForegroundContent(
                     sponsorLogo = sponsorLogo,
                 )
             }
-            VerticalAlignment.Bottom -> {
+            BpkGraphicPromoVerticalAlignment.Bottom -> {
                 SponsorOverlayView(
                     sponsor = sponsor,
                     textColor = textColor,
@@ -276,8 +273,8 @@ private object InteractiveBackgroundIndication : Indication {
     }
 }
 
-const val RATIO_PORTRAIT: Float = 3 / 4f
-const val SPONSOR_LOGO_HEIGHT = 60
+private const val RATIO_PORTRAIT: Float = 3 / 4f
+private const val SPONSOR_LOGO_HEIGHT = 60
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,

@@ -24,9 +24,8 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.graphicpromotion.internal.BpkGraphicPromoImpl
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 
-enum class Variant { OnDark, OnLight, }
-enum class VerticalAlignment { Top, Bottom, }
-enum class Type { Button, Link, }
+enum class BpkGraphicPromoVariant { OnDark, OnLight, }
+enum class BpkGraphicPromoVerticalAlignment { Top, Bottom, }
 
 data class Sponsor(
     val title: String,
@@ -42,10 +41,10 @@ fun BpkGraphicPromo(
     kicker: String? = null,
     subHeadline: String? = null,
     overlayType: BpkOverlayType? = null,
-    variant: Variant = Variant.OnDark,
-    verticalAlignment: VerticalAlignment = VerticalAlignment.Top,
+    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     sponsor: Sponsor? = null,
-    sponsorLogo: @Composable () -> Unit? = {},
+    sponsorLogo: (@Composable () -> Unit)? = null,
     tapAction: () -> Unit = {},
 ) {
     BpkGraphicPromoImpl(
@@ -54,8 +53,8 @@ fun BpkGraphicPromo(
         kicker = kicker,
         subHeadline = subHeadline,
         overlayType = overlayType,
-        variant = variant,
-        verticalAlignment = verticalAlignment,
+        bpkGraphicPromoVariant = bpkGraphicPromoVariant,
+        bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
         sponsor = sponsor,
         image = image,
         sponsorLogo = sponsorLogo,
