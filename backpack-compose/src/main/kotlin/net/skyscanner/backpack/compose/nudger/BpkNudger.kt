@@ -150,9 +150,7 @@ fun BpkNudger(
             Column(modifier = Modifier.weight(1f)) {
                 BpkText(
                     text = title,
-                    style = BpkTheme.typography.heading5.copy(
-                        platformStyle = PlatformTextStyle(includeFontPadding = false),
-                    ),
+                    style = BpkTheme.typography.heading5,
                     color = BpkTheme.colors.textPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -161,9 +159,7 @@ fun BpkNudger(
                 if (subtitle != null) {
                     BpkText(
                         text = subtitle,
-                        style = BpkTheme.typography.bodyDefault.copy(
-                            platformStyle = PlatformTextStyle(includeFontPadding = false),
-                        ),
+                        style = BpkTheme.typography.bodyDefault,
                         color = BpkTheme.colors.textSecondary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
