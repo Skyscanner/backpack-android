@@ -25,6 +25,7 @@ Example of a success type badge in XML
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   android:layout_margin="@dimen/bpkSpacingBase"
+  app:badgeIcon="@drawable/bpk_tick_circle_sm"
   app:message="Message"
   app:badgeType="success"/>
 ```
@@ -37,6 +38,7 @@ import net.skyscanner.backpack.badge.BpkBadge
 BpkBadge(context).apply {
    message = 'Message'
    type = 'success'
+   icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
 }
 ```
 
