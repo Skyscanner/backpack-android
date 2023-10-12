@@ -21,6 +21,7 @@
 
 package net.skyscanner.backpack.compose.tokens
 
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -51,54 +52,63 @@ public data class BpkTypography internal constructor(
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.Base,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       bodyLongform = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Lg,
         lineHeight = BpkLineHeight.Lg,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       caption = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Xs,
         lineHeight = BpkLineHeight.Xs,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       footnote = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Sm,
         lineHeight = BpkLineHeight.Sm,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       heading1 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxxl,
         lineHeight = BpkLineHeight.Xxxl,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       heading2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxl,
         lineHeight = BpkLineHeight.Xxl,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       heading3 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.XlTight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       heading4 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Lg,
         lineHeight = BpkLineHeight.LgTight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       heading5 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.BaseTight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       hero1 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -106,6 +116,7 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`8xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       hero2 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -113,6 +124,7 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`7xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       hero3 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -120,6 +132,7 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`6xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       hero4 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -127,6 +140,7 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`5xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       hero5 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -134,30 +148,35 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.Xxxxl,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       label1 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.Base,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       label2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Sm,
         lineHeight = BpkLineHeight.Sm,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       label3 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xs,
         lineHeight = BpkLineHeight.Xs,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
       subheading = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.Xl,
         fontFamily = defaultFontFamily,
+        platformStyle = PlatformTextStyle(includeFontPadding = false),
       ),
     )
 }
