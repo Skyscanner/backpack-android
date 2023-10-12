@@ -193,12 +193,12 @@ open class BpkBadge @JvmOverloads constructor(
         this.gravity = Gravity.CENTER
 
         compoundDrawablePadding = iconPadding
-        icon?.setTint(context.getColor(type.iconColor))
     }
 
     private fun updateIcon() {
         setCompoundDrawablesRelative(icon, null, null, null)
         setPadding(iconPadding, 0, iconPadding, 0)
+        icon?.setTint(context.getColor(type.iconColor))
     }
 
     internal fun setBackground(
