@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.navigationbar.Action
@@ -83,6 +84,11 @@ internal fun BpkTopNavBarImpl(
         else -> 0.dp
     }
 
+    val zIndex = when {
+        fraction <= 0f -> 1f
+        else -> 0f
+    }
+
     TwoRowsTopAppBar(
         backgroundColor = backgroundColor,
         contentColor = contentColor,
@@ -103,7 +109,8 @@ internal fun BpkTopNavBarImpl(
                 overflow = TextOverflow.Ellipsis,
             )
         },
-        modifier = modifier,
+        modifier = modifier
+            .zIndex(zIndex),
         navigationIcon = {
             if (navIcon != null) {
                 IconAction(action = navIcon)

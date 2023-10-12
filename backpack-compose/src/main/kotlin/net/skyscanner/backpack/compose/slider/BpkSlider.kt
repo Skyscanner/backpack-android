@@ -20,14 +20,12 @@
 package net.skyscanner.backpack.compose.slider
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.slider.internal.BpkRangeSliderImpl
+import net.skyscanner.backpack.compose.slider.internal.sliderColors
 
 @Composable
 fun BpkSlider(
@@ -54,7 +52,6 @@ fun BpkSlider(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkRangeSlider(
     value: ClosedFloatingPointRange<Float>,
@@ -66,23 +63,41 @@ fun BpkRangeSlider(
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
 ) {
-    RangeSlider(
+    BpkRangeSliderImpl(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier,
         enabled = enabled,
-        valueRange = minValue..maxValue,
+        minValue = minValue,
+        maxValue = maxValue,
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
-        colors = sliderColors(),
     )
 }
 
 @Composable
-private fun sliderColors() = SliderDefaults.colors(
-    thumbColor = BpkTheme.colors.coreAccent,
-    activeTrackColor = BpkTheme.colors.coreAccent,
-    inactiveTrackColor = BpkTheme.colors.line,
-    activeTickColor = BpkTheme.colors.coreAccent,
-    inactiveTickColor = BpkTheme.colors.line,
-)
+fun BpkRangeSlider(
+    value: ClosedFloatingPointRange<Float>,
+    onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
+    lowerThumbLabel: String,
+    upperThumbLabel: String,
+    modifier: Modifier = Modifier,
+    maxValue: Float = 1f,
+    enabled: Boolean = true,
+    minValue: Float = 0f,
+    steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
+) {
+    BpkRangeSliderImpl(
+        modifier = modifier,
+        value = value,
+        onValueChange = onValueChange,
+        enabled = enabled,
+        minValue = minValue,
+        maxValue = maxValue,
+        steps = steps,
+        lowerThumbLabel = lowerThumbLabel,
+        upperThumbLabel = upperThumbLabel,
+        onValueChangeFinished = onValueChangeFinished,
+    )
+}

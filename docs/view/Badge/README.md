@@ -26,7 +26,7 @@ Example of a success type badge in XML
   android:layout_height="wrap_content"
   android:layout_margin="@dimen/bpkSpacingBase"
   app:message="Message"
-  app:type="success"/>
+  app:badgeType="success"/>
 ```
 
 Example of a success type badge in Kotlin

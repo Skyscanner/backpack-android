@@ -37,3 +37,17 @@ BpkRangeSlider(
   onValueChange = { newValue -> } // Handle update
 )
 ```
+
+Example of a `BpkRangeSlider` with Label:
+
+```Kotlin
+import net.skyscanner.backpack.compose.slider.BpkSlider
+
+var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
+BpkRangeSlider(
+    value = rangeSliderValue,
+    lowerThumbLabel = stringResource(id = R.string.gbp_formatter, rangeSliderValue.start),
+    upperThumbLabel = stringResource(id = R.string.gbp_formatter, rangeSliderValue.endInclusive),
+    onValueChange = { newValue -> } // Handle update
+)
+```

@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.textfield.internal
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -109,7 +108,6 @@ internal fun BpkTextFieldImpl(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun BpkTextFieldImpl(
     value: TextFieldValue,
@@ -127,7 +125,56 @@ internal fun BpkTextFieldImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
 ) {
+    BasicTextField(
+        value = value,
+        onValueChange = onValueChange,
+        enabled = status != BpkFieldStatus.Disabled,
+        readOnly = readOnly,
+        textStyle = BpkTheme.typography.bodyDefault.copy(
+            color = animateColorAsState(
+                when (status) {
+                    is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                    else -> BpkTheme.colors.textPrimary
+                },
+            ).value,
+        ),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        singleLine = maxLines == 1,
+        minLines = minLines,
+        maxLines = maxLines,
+        visualTransformation = visualTransformation,
+        interactionSource = interactionSource,
+        cursorBrush = SolidColor(BpkTheme.colors.coreAccent),
+        modifier = modifier,
+        decorationBox = {
+            TextFieldBox(
+                value = value,
+                modifier = Modifier,
+                placeholder = placeholder,
+                icon = icon,
+                status = status,
+                maxLines = maxLines,
+                interactionSource = interactionSource,
+                trailingIcon = trailingIcon,
+                textFieldContent = it,
+            )
+        },
+    )
+}
 
+@Composable
+private fun TextFieldBox(
+    value: TextFieldValue,
+    modifier: Modifier = Modifier,
+    placeholder: String? = null,
+    icon: BpkIcon? = null,
+    status: BpkFieldStatus = LocalFieldStatus.current,
+    maxLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    trailingIcon: BpkIcon? = null,
+    textFieldContent: @Composable () -> Unit,
+) {
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     Row(
@@ -180,28 +227,7 @@ internal fun BpkTextFieldImpl(
                 overflow = TextOverflow.Ellipsis,
             )
 
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                enabled = status != BpkFieldStatus.Disabled,
-                readOnly = readOnly,
-                textStyle = BpkTheme.typography.bodyDefault.copy(
-                    color = animateColorAsState(
-                        when (status) {
-                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                            else -> BpkTheme.colors.textPrimary
-                        },
-                    ).value,
-                ),
-                keyboardOptions = keyboardOptions,
-                keyboardActions = keyboardActions,
-                singleLine = maxLines == 1,
-                minLines = minLines,
-                maxLines = maxLines,
-                visualTransformation = visualTransformation,
-                interactionSource = interactionSource,
-                cursorBrush = SolidColor(BpkTheme.colors.coreAccent),
-            )
+            textFieldContent()
         }
 
         var lastIcon by remember { mutableStateOf<Pair<BpkIcon, Color>?>(null) }

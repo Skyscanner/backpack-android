@@ -102,6 +102,7 @@ jobs:
           api-level: ${{ env.api-level }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          avd-name: avd-x86-default-28
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -112,6 +113,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
+          avd-name: avd-x86-default-28
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
@@ -171,6 +173,7 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          avd-name: avd-x86-default-28
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -183,6 +186,7 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          avd-name: avd-x86-default-28
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true

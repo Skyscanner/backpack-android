@@ -62,6 +62,11 @@ fun SliderStory(modifier: Modifier = Modifier) {
             style = BpkTheme.typography.label2,
         )
         RangeSliderSample()
+        BpkText(
+            text = stringResource(R.string.slider_range_with_label),
+            style = BpkTheme.typography.label2,
+        )
+        RangeSliderWithLabelsSample()
     }
 }
 
@@ -71,6 +76,19 @@ internal fun RangeSliderSample(modifier: Modifier = Modifier) {
     BpkRangeSlider(
         modifier = modifier,
         value = rangeSliderValue,
+        onValueChange = { newValue -> rangeSliderValue = newValue },
+    )
+}
+
+@Composable
+internal fun RangeSliderWithLabelsSample(modifier: Modifier = Modifier) {
+    var rangeSliderValue by remember { mutableStateOf(12f..80f) }
+    BpkRangeSlider(
+        modifier = modifier,
+        maxValue = 100f,
+        value = rangeSliderValue,
+        lowerThumbLabel = stringResource(id = R.string.gbp_formatter, rangeSliderValue.start),
+        upperThumbLabel = stringResource(id = R.string.gbp_formatter, rangeSliderValue.endInclusive),
         onValueChange = { newValue -> rangeSliderValue = newValue },
     )
 }

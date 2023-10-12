@@ -26,7 +26,6 @@ import net.skyscanner.backpack.meta.StoryMarker
 import net.skyscanner.backpack.meta.StoryNameMarker
 
 @Immutable
-@Suppress("Detekt.PreviewNaming")
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @BpkPreviews
