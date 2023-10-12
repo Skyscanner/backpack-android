@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.internal.BpkAppSearchModalImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 
@@ -73,14 +74,14 @@ fun BpkAppSearchModal(
     onInputChanged: (String) -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
+    state: BpkModalState = rememberBpkModalState(),
 ) {
-    val state = rememberBpkModalState()
-    val scope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     BpkModal(
         navIcon = NavIcon.Close(
             contentDescription = closeAccessibilityLabel,
             onClick = {
-                scope.launch { state.hide() }
+                coroutineScope.launch { state.hide() }
             },
         ),
         modifier = modifier,
