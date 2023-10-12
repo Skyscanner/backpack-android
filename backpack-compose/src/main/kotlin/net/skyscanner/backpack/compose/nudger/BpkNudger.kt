@@ -36,7 +36,6 @@ import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButton
