@@ -16,6 +16,8 @@
         </attr>
         <!-- message to be displayed -->
         <attr name="message" format="string" />
+        <!-- leading icon to be displayed -->
+        <attr name="badgeIcon" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="BpkCalendar">

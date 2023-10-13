@@ -22,10 +22,12 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
+import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
@@ -37,6 +39,9 @@ open class BpkBadge @JvmOverloads constructor(
 
     private var initialized = false
 
+    private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
+
     init {
         initialize(attrs, defStyleAttr)
         initialized = true
@@ -46,41 +51,50 @@ open class BpkBadge @JvmOverloads constructor(
         internal var id: Int,
         @ColorRes internal var bgColor: Int,
         @ColorRes internal var textColor: Int,
+        @ColorRes internal var iconColor: Int = textColor,
     ) {
         /**
          * Style for badges with positive messages
          */
         Success(1, R.color.bpkStatusSuccessFill, R.color.bpkTextOnLight),
+
         /**
          *  Style for badges with warning messages
          */
         Warning(2, R.color.bpkStatusWarningFill, R.color.bpkTextOnLight),
+
         /**
          * Style for badges with error messages
          */
         Destructive(3, R.color.bpkStatusDangerFill, R.color.bpkTextOnLight),
+
         /**
          *  Light themed style for badges
          */
         @Deprecated("Switch to a different badge style")
         Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyBlueShade03),
+
         /**
          *  Style for badges on dark themes
          */
         Inverse(5, R.color.bpkSurfaceDefault, R.color.bpkTextPrimary),
+
         /**
          * Style for badges with a thin white outline
          */
         Outline(6, R.color.bpkTextOnDark, R.color.bpkTextOnDark),
+
         /**
          * Style for badges with a dark background
          */
         @Deprecated("Switch to a different badge style")
         Dark(7, R.color.bpkSkyGray, R.color.bpkWhite),
+
         /**
          * Style for badges
          */
         Normal(8, R.color.bpkSurfaceHighlight, R.color.bpkTextPrimary),
+
         /**
          * Style for badges with emphasis
          */
@@ -107,6 +121,7 @@ open class BpkBadge @JvmOverloads constructor(
             field = value
             if (initialized) setup()
         }
+
     /**
      * @property message
      * message on the badge
@@ -115,6 +130,20 @@ open class BpkBadge @JvmOverloads constructor(
         set(value) {
             field = value
             this.text = message
+        }
+
+    /**
+     * @property icon
+     * leading icon of the badge
+     */
+    var icon: Drawable? = null
+        set(value) {
+            field = value
+                ?.mutate()
+                ?.apply {
+                    setBounds(0, 0, iconSize, iconSize)
+                }
+            updateIcon()
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -128,6 +157,11 @@ open class BpkBadge @JvmOverloads constructor(
 
         type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
         message = a.getString(R.styleable.BpkBadge_message)
+        a.getResourceId(R.styleable.BpkBadge_badgeIcon, 0).let { iconID ->
+            if (iconID != 0) {
+                icon = AppCompatResources.getDrawable(context, iconID)
+            }
+        }
 
         a.recycle()
 
@@ -139,6 +173,7 @@ open class BpkBadge @JvmOverloads constructor(
         this.textStyle = TextStyle.Caption
         this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
         this.text = message
+        this.icon = icon
 
         // set padding
         val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
@@ -156,6 +191,14 @@ open class BpkBadge @JvmOverloads constructor(
             setBackground(bgColor)
         }
         this.gravity = Gravity.CENTER
+
+        compoundDrawablePadding = iconPadding
+    }
+
+    private fun updateIcon() {
+        setCompoundDrawablesRelative(icon, null, null, null)
+        setPadding(iconPadding, 0, iconPadding, 0)
+        icon?.setTint(context.getColor(type.iconColor))
     }
 
     internal fun setBackground(
