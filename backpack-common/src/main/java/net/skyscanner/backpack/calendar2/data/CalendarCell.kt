@@ -173,7 +173,7 @@ private fun onClickLabel(date: LocalDate, selectionMode: CalendarParams.Selectio
         is CalendarSelection.None -> when (selectionMode) {
             CalendarParams.SelectionMode.Disabled -> null
             is CalendarParams.SelectionMode.Range -> selectionMode.startSelectionHint
-            CalendarParams.SelectionMode.Single -> "Select as departure date"
+            is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
         }
         is CalendarSelection.Single -> when (date) {
             selection.date -> "Current selection"
