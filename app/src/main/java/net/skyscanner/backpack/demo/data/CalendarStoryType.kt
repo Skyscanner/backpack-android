@@ -71,20 +71,20 @@ enum class CalendarStoryType {
                 SelectionRange -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
                 )
 
                 SelectionWholeMonth -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
                     monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
                 )
 
                 WithDisabledDates -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
                     cellsInfo = range
                         .toIterable()
                         .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
@@ -93,7 +93,7 @@ enum class CalendarStoryType {
                 WithLabels -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
                     cellsInfo = range
                         .toIterable()
                         .associateWith {
@@ -119,7 +119,7 @@ enum class CalendarStoryType {
                 PreselectedRange -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
                 )
             }
     }
