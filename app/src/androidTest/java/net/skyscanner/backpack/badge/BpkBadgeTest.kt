@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.badge
 
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
@@ -47,10 +48,30 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun successWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Success
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        snap(badge)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun destructive() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Destructive
         badge.text = "Message"
+        snap(badge)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun destructiveWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Destructive
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -65,10 +86,30 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun inverseWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Inverse
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        snap(badge, background = R.color.bpkCorePrimary)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun normal() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Normal
         badge.text = "Message"
+        snap(badge)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun normalWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Normal
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -83,6 +124,16 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun strongWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Strong
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        snap(badge)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun warning() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Warning
@@ -92,10 +143,30 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun warningWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Warning
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        snap(badge)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun outline() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Outline
         badge.text = "Message"
+        snap(badge, background = R.color.bpkCorePrimary)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun outlineWithIcon() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Outline
+        badge.text = "Message"
+        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
         snap(badge, background = R.color.bpkCorePrimary)
     }
 }
