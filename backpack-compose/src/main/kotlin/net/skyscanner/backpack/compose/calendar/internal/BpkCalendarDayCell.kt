@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +29,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -70,15 +71,20 @@ internal fun BpkCalendarDayCell(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .padding(bottom = BpkSpacing.Lg)
-            .selectable(
+            .clickable(
                 indication = null,
-                selected = selection != null,
+//                selected = selection != null,
                 enabled = !inactive,
                 onClick = { onClick(model) },
+                onClickLabel = model.onClickLabel, // this is announced as the action to take when clicking (ie double tap to select end date)
                 interactionSource = remember { MutableInteractionSource() },
-            ),
+            ).semantics {
+                if (model.stateDescription != null) {
+                    // this is announced whenever the state of a cell changes (ie when you make a selection) AND when you enter the cell (ie start date)
+                    stateDescription = model.stateDescription!!
+                }
+            },
     ) {
-
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -95,7 +101,7 @@ internal fun BpkCalendarDayCell(
             BpkText(
                 text = model.text.toString(),
                 modifier = Modifier.semantics {
-                    contentDescription = model.contentDescription
+                    contentDescription = model.contentDescription // this is announced when entering the cell AFTER the state description
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
@@ -107,7 +113,8 @@ internal fun BpkCalendarDayCell(
         if (!inactive && !label.isNullOrEmpty()) {
             BpkText(
                 text = label,
-                modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
+                modifier = Modifier
+                    .padding(horizontal = BpkSpacing.Sm),
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
                 maxLines = 2,
