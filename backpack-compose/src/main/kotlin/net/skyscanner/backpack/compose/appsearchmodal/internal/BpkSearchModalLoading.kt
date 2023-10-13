@@ -27,21 +27,28 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
+import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 private const val SkeletonCount = 10
 private const val SkeletonItemWidth = 200
+
 @Composable
-internal fun BpkSearchModalLoading(results: BpkAppSearchModalResult.Loading) {
-    Column(modifier = Modifier.semantics(mergeDescendants = true) {
-        contentDescription = results.accessibilityLabel
-    }) {
-        for (i in 0..SkeletonCount) {
-            BpkBodyTextSkeleton(
-                modifier = Modifier
-                    .padding(BpkSpacing.Base)
-                    .width(SkeletonItemWidth.dp),
-            )
+internal fun BpkSearchModalLoading(
+    results: BpkAppSearchModalResult.Loading,
+    modifier: Modifier = Modifier,
+) {
+    BpkShimmerOverlay(modifier = modifier) {
+        Column(modifier = Modifier.semantics(mergeDescendants = true) {
+            contentDescription = results.accessibilityLabel
+        }) {
+            for (i in 0..SkeletonCount) {
+                BpkBodyTextSkeleton(
+                    modifier = Modifier
+                        .padding(BpkSpacing.Base)
+                        .width(SkeletonItemWidth.dp),
+                )
+            }
         }
     }
 }
