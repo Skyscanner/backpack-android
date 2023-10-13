@@ -20,6 +20,8 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import java.text.SimpleDateFormat
+import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
@@ -28,8 +30,6 @@ import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.format.FormatStyle
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 /**
  * Describes the calendar configuration.
@@ -79,12 +79,14 @@ data class CalendarParams(
         /**
          * Only a single, non-disabled date can be selected.
          */
-        data object Single : SelectionMode
+        data object Single : SelectionMode // add accessibility labels
 
         /**
          * A range of dates can be selected.
          */
-        data object Range : SelectionMode
+        data class Range(
+            val startSelectionHint: String? = null,
+        ) : SelectionMode // add accessibility labels
     }
 
     /**
@@ -100,7 +102,7 @@ data class CalendarParams(
         /**
          * Only an entire month can be selected, by tapping on the [label] next to its name.
          */
-        data class SelectWholeMonth(val label: String) : MonthSelectionMode
+        data class SelectWholeMonth(val label: String) : MonthSelectionMode // add accessibility labels
     }
 }
 
@@ -170,6 +172,5 @@ private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
             "mo", "hk", "tw", "sg" -> TextStyle.SHORT
             else -> TextStyle.NARROW
         }
-
         else -> TextStyle.NARROW
     }
