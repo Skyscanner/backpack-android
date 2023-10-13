@@ -62,6 +62,8 @@ sealed class CalendarCell {
         val text: CharSequence,
         val outOfRange: Boolean,
         val contentDescription: String,
+        val stateDescription: String?,
+        val onClickLabel: String?,
         override val yearMonth: YearMonth,
     ) : CalendarCell() {
 
@@ -98,40 +100,96 @@ internal fun CalendarCellDay(
     yearMonth: YearMonth,
     selection: CalendarSelection,
     params: CalendarParams,
-): CalendarCell.Day = CalendarCell.Day(
-    date = date,
-    yearMonth = yearMonth,
-    info = params.cellsInfo[date] ?: CellInfo.Default,
-    outOfRange = date !in params.range,
-    contentDescription = date.format(params.dateContentDescriptionFormatter),
-    text = buildSpannedString {
-        val span = TtsSpan.DateBuilder()
-            .setDay(date.dayOfMonth)
-            .setMonth(date.month.ordinal)
-            .setYear(date.year)
-            .setWeekday(date.dayOfWeek.value)
-            .build()
-        append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-    },
-    selection = when (selection) {
-        is CalendarSelection.None -> null
+): CalendarCell.Day {
+    return CalendarCell.Day(
+        date = date,
+        yearMonth = yearMonth,
+        info = params.cellsInfo[date] ?: CellInfo.Default,
+        outOfRange = date !in params.range,
+        contentDescription = date.format(params.dateContentDescriptionFormatter),
+        stateDescription = stateDescription(date, selection),
+        onClickLabel = onClickLabel(date, params.selectionMode, selection),
+        text = buildSpannedString {
+            val span = TtsSpan.DateBuilder()
+                .setDay(date.dayOfMonth)
+                .setMonth(date.month.ordinal)
+                .setYear(date.year)
+                .setWeekday(date.dayOfWeek.value)
+                .build()
+            append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        },
+        selection = when (selection) {
+            is CalendarSelection.None -> null
+            is CalendarSelection.Single -> when (date) {
+                selection.date -> CalendarCell.Selection.Single
+                else -> null
+            }
+            is CalendarSelection.Dates -> when {
+                selection.start == date && selection.end == date -> CalendarCell.Selection.Double
+                selection.start == date && selection.end == null -> CalendarCell.Selection.Single
+                selection.start == date && selection.end != null -> CalendarCell.Selection.Start
+                selection.end == date -> CalendarCell.Selection.End
+                selection.end != null && date in selection -> CalendarCell.Selection.Middle
+                else -> null
+            }
+            is CalendarSelection.Month -> when {
+                selection.start == date -> CalendarCell.Selection.StartMonth
+                selection.end == date -> CalendarCell.Selection.EndMonth
+                date in selection -> CalendarCell.Selection.Middle
+                else -> null
+            }
+        },
+    )
+}
+
+private fun stateDescription(date: LocalDate, selection: CalendarSelection): String {
+    return when (selection) {
+        is CalendarSelection.None -> "No selection"
         is CalendarSelection.Single -> when (date) {
-            selection.date -> CalendarCell.Selection.Single
-            else -> null
+            selection.date -> "Current selection"
+            else -> "Not selected"
         }
+
         is CalendarSelection.Dates -> when {
-            selection.start == date && selection.end == date -> CalendarCell.Selection.Double
-            selection.start == date && selection.end == null -> CalendarCell.Selection.Single
-            selection.start == date && selection.end != null -> CalendarCell.Selection.Start
-            selection.end == date -> CalendarCell.Selection.End
-            selection.end != null && date in selection -> CalendarCell.Selection.Middle
-            else -> null
+            selection.start == date && selection.end == date -> "Selected as departure and return date"
+            selection.start == date && selection.end == null -> "Selected as departure date"
+            selection.start == date && selection.end != null -> "Selected as departure date"
+            selection.end == date -> "Selected as return date"
+            selection.end != null && date in selection -> "Between departure and return dates"
+            else -> "Not selected"
         }
+
         is CalendarSelection.Month -> when {
-            selection.start == date -> CalendarCell.Selection.StartMonth
-            selection.end == date -> CalendarCell.Selection.EndMonth
-            date in selection -> CalendarCell.Selection.Middle
-            else -> null
+            selection.start == date -> "Current month"
+            selection.end == date -> "Current month"
+            date in selection -> "Current month"
+            else -> "Not selected"
         }
-    },
-)
+    }
+}
+
+private fun onClickLabel(date: LocalDate, selectionMode: CalendarParams.SelectionMode, selection: CalendarSelection): String? {
+    return when (selection) {
+        is CalendarSelection.None -> when (selectionMode) {
+            CalendarParams.SelectionMode.Disabled -> null
+            is CalendarParams.SelectionMode.Range -> selectionMode.startSelectionHint
+            CalendarParams.SelectionMode.Single -> "Select as departure date"
+        }
+        is CalendarSelection.Single -> when (date) {
+            selection.date -> "Current selection"
+            else -> "Select Date"
+        }
+
+        is CalendarSelection.Dates -> when (selection.end) {
+            null -> "Select as return date"
+            else -> "Select as departure date"
+        }
+
+        is CalendarSelection.Month -> when {
+            selection.start == date -> "Current month"
+            selection.end == date -> "Current month"
+            date in selection -> "Current month"
+            else -> "Not selected"
+        }
+    }
+}
