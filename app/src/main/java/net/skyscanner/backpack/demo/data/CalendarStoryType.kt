@@ -65,13 +65,13 @@ enum class CalendarStoryType {
                 SelectionSingle -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Single,
+                    selectionMode = CalendarParams.SelectionMode.Single(),
                 )
 
                 SelectionRange -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range(),
+                    selectionMode = CalendarParams.SelectionMode.Range("Select as departure date"),
                 )
 
                 SelectionWholeMonth -> CalendarParams(
