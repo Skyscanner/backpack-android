@@ -52,7 +52,7 @@ class BpkCalendar private constructor(
         scope = scope,
         initialParams = CalendarParams(
             range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
         ),
     ),
 ) : ConstraintLayout(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
