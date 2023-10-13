@@ -79,7 +79,9 @@ data class CalendarParams(
         /**
          * Only a single, non-disabled date can be selected.
          */
-        data object Single : SelectionMode // add accessibility labels
+        data class Single(
+            val startSelectionHint: String? = null,
+        ) : SelectionMode // add accessibility labels
 
         /**
          * A range of dates can be selected.
@@ -172,5 +174,6 @@ private fun findBestWeekdayStyleForLocale(locale: Locale): TextStyle =
             "mo", "hk", "tw", "sg" -> TextStyle.SHORT
             else -> TextStyle.NARROW
         }
+
         else -> TextStyle.NARROW
     }
