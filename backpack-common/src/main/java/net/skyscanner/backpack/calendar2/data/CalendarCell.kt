@@ -124,6 +124,7 @@ internal fun CalendarCellDay(
                 selection.date -> CalendarCell.Selection.Single
                 else -> null
             }
+
             is CalendarSelection.Dates -> when {
                 selection.start == date && selection.end == date -> CalendarCell.Selection.Double
                 selection.start == date && selection.end == null -> CalendarCell.Selection.Single
@@ -132,6 +133,7 @@ internal fun CalendarCellDay(
                 selection.end != null && date in selection -> CalendarCell.Selection.Middle
                 else -> null
             }
+
             is CalendarSelection.Month -> when {
                 selection.start == date -> CalendarCell.Selection.StartMonth
                 selection.end == date -> CalendarCell.Selection.EndMonth
@@ -168,28 +170,29 @@ private fun stateDescription(date: LocalDate, selection: CalendarSelection): Str
     }
 }
 
-private fun onClickLabel(date: LocalDate, selectionMode: CalendarParams.SelectionMode, selection: CalendarSelection): String? {
-    return when (selection) {
-        is CalendarSelection.None -> when (selectionMode) {
-            CalendarParams.SelectionMode.Disabled -> null
-            is CalendarParams.SelectionMode.Range -> selectionMode.startSelectionHint
-            is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
-        }
-        is CalendarSelection.Single -> when (date) {
-            selection.date -> "Current selection"
-            else -> "Select Date"
-        }
-
-        is CalendarSelection.Dates -> when (selection.end) {
-            null -> "Select as return date"
-            else -> "Select as departure date"
+private fun onClickLabel(
+    date: LocalDate,
+    selectionMode: CalendarParams.SelectionMode,
+    selection: CalendarSelection,
+): String? {
+    return when (selectionMode) {
+        is CalendarParams.SelectionMode.Single -> when (selection) {
+            CalendarSelection.None -> selectionMode.startSelectionHint
+            CalendarSelection.Single(date) -> selectionMode.startSelectionHint
+            else -> null
         }
 
-        is CalendarSelection.Month -> when {
-            selection.start == date -> "Current month"
-            selection.end == date -> "Current month"
-            date in selection -> "Current month"
-            else -> "Not selected"
+        is CalendarParams.SelectionMode.Range -> when (selection) {
+            is CalendarSelection.None -> selectionMode.startSelectionHint
+            is CalendarSelection.Dates ->
+                when {
+                    selection.start == null || selection.end != null -> selectionMode.startSelectionHint
+                    else -> selectionMode.endSelectionHint
+                }
+
+            else -> null
         }
+
+        is CalendarParams.SelectionMode.Disabled -> null
     }
 }
