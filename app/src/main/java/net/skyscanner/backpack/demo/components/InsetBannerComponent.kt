@@ -16,17 +16,9 @@
  * limitations under the License.
  */
 
-// Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier", "unused")
+package net.skyscanner.backpack.demo.components
 
-package net.skyscanner.backpack.compose.tokens.`internal`
+import net.skyscanner.backpack.meta.ComponentMarker
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
-
-internal object BpkSponsoredBannerColors {
-    internal val background: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFFEFF1F2), Color(0xFF243346))
-}
+@ComponentMarker("Inset Banner")
+annotation class InsetBannerComponent

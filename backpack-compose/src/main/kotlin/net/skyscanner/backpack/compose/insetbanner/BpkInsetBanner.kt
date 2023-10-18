@@ -16,25 +16,25 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.sponsoredbanner
+package net.skyscanner.backpack.compose.insetbanner
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import net.skyscanner.backpack.compose.sponsoredbanner.internal.BpkSponsoredBannerImpl
+import net.skyscanner.backpack.compose.insetbanner.internal.BpkInsetBannerImpl
 
 @Composable
-fun BpkSponsoredBanner(
-    variant: BpkSponsoredBannerVariant,
+fun BpkInsetBanner(
+    variant: BpkInsetBannerVariant,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
     title: String? = null,
     subHeadline: String? = null,
-    callToAction: BpkSponsoredBannerCTA? = null,
+    callToAction: BpkInsetBannerCTA? = null,
     body: String? = null,
     logo: @Composable (() -> Unit)? = null,
 ) {
-    BpkSponsoredBannerImpl(
+    BpkInsetBannerImpl(
         backgroundColor = backgroundColor,
         variant = variant,
         title = title,
@@ -46,5 +46,5 @@ fun BpkSponsoredBanner(
     )
 }
 
-data class BpkSponsoredBannerCTA(val text: String, val accessibilityLabel: String)
-enum class BpkSponsoredBannerVariant { OnLight, OnDark }
+data class BpkInsetBannerCTA(val text: String, val accessibilityLabel: String)
+enum class BpkInsetBannerVariant { OnLight, OnDark }
