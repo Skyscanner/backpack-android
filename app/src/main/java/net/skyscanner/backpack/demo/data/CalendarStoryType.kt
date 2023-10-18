@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.data
 
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -29,7 +30,6 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.Period
 import org.threeten.bp.YearMonth
-import kotlin.math.roundToInt
 
 private val now = LocalDate.of(2019, 1, 1)
 private val range = now..(now + Period.ofYears(2))
@@ -65,13 +65,16 @@ enum class CalendarStoryType {
                 SelectionSingle -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Single(),
+                    selectionMode = CalendarParams.SelectionMode.Single("Select as departure date"),
                 )
 
                 SelectionRange -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range("Select as departure date"),
+                    selectionMode = CalendarParams.SelectionMode.Range(
+                        startSelectionHint = "Select as departure date",
+                        endSelectionHint = "Select as return date",
+                    ),
                 )
 
                 SelectionWholeMonth -> CalendarParams(
