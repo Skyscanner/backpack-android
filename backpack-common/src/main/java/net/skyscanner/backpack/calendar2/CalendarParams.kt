@@ -88,6 +88,7 @@ data class CalendarParams(
          */
         data class Range(
             val startSelectionHint: String? = null,
+            val endSelectionHint: String? = null,
         ) : SelectionMode // add accessibility labels
     }
 
