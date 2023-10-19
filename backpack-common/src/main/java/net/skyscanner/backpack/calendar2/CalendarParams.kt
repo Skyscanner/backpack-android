@@ -81,7 +81,9 @@ data class CalendarParams(
          */
         data class Single(
             val startSelectionHint: String? = null,
-        ) : SelectionMode // add accessibility labels
+            val noSelectionState: String? = null,
+            val startSelectionState: String? = null,
+        ) : SelectionMode
 
         /**
          * A range of dates can be selected.
@@ -89,7 +91,12 @@ data class CalendarParams(
         data class Range(
             val startSelectionHint: String? = null,
             val endSelectionHint: String? = null,
-        ) : SelectionMode // add accessibility labels
+            val noSelectionState: String? = null,
+            val startSelectionState: String? = null,
+            val startAndEndSelectionState: String? = null,
+            val endSelectionState: String? = null,
+            val betweenSelectionState: String? = null,
+        ) : SelectionMode
     }
 
     /**
@@ -105,7 +112,7 @@ data class CalendarParams(
         /**
          * Only an entire month can be selected, by tapping on the [label] next to its name.
          */
-        data class SelectWholeMonth(val label: String) : MonthSelectionMode // add accessibility labels
+        data class SelectWholeMonth(val label: String) : MonthSelectionMode
     }
 }
 
