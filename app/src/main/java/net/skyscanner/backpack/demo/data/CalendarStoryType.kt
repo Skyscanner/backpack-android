@@ -65,7 +65,11 @@ enum class CalendarStoryType {
                 SelectionSingle -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Single("Select as departure date"),
+                    selectionMode = CalendarParams.SelectionMode.Single(
+                        "Select as departure date",
+                        "No selection",
+                        "Selected as departure date",
+                    ),
                 )
 
                 SelectionRange -> CalendarParams(
@@ -74,6 +78,11 @@ enum class CalendarStoryType {
                     selectionMode = CalendarParams.SelectionMode.Range(
                         startSelectionHint = "Select as departure date",
                         endSelectionHint = "Select as return date",
+                        startSelectionState = "Selected as departure date",
+                        endSelectionState = "Selected as return date",
+                        betweenSelectionState = "Between departure and return date",
+                        noSelectionState = "No selection",
+                        returnDatePrompt = "Now please select a return date",
                     ),
                 )
 
