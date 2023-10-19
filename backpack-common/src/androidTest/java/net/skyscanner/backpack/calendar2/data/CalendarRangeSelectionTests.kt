@@ -36,12 +36,12 @@ import org.junit.Test
 class CalendarRangeSelectionTests {
 
     private val rangeSelection = CalendarSettings.Default.copy(
-        selectionMode = CalendarParams.SelectionMode.Range,
+        selectionMode = CalendarParams.SelectionMode.Range(),
     )
 
     private val monthSelection = CalendarSettings.Default.copy(
         monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
-        selectionMode = CalendarParams.SelectionMode.Range,
+        selectionMode = CalendarParams.SelectionMode.Range(),
     )
 
     @Before
