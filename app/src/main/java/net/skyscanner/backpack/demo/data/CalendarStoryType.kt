@@ -80,9 +80,9 @@ enum class CalendarStoryType {
                         endSelectionHint = "Select as return date",
                         startSelectionState = "Selected as departure date",
                         endSelectionState = "Selected as return date",
+                        startAndEndSelectionState = "Selected as departure and return  date",
                         betweenSelectionState = "Between departure and return date",
                         noSelectionState = "No selection",
-                        returnDatePrompt = "Now please select a return date",
                     ),
                 )
 
