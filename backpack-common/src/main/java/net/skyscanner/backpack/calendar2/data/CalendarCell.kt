@@ -107,7 +107,7 @@ internal fun CalendarCellDay(
         info = params.cellsInfo[date] ?: CellInfo.Default,
         outOfRange = date !in params.range,
         contentDescription = date.format(params.dateContentDescriptionFormatter),
-        stateDescription = stateDescription(date, selection),
+        stateDescription = stateDescription(date, params.selectionMode, selection),
         onClickLabel = onClickLabel(date, params.selectionMode, selection),
         text = buildSpannedString {
             val span = TtsSpan.DateBuilder()
@@ -144,29 +144,33 @@ internal fun CalendarCellDay(
     )
 }
 
-private fun stateDescription(date: LocalDate, selection: CalendarSelection): String {
-    return when (selection) {
-        is CalendarSelection.None -> "No selection"
-        is CalendarSelection.Single -> when (date) {
-            selection.date -> "Current selection"
-            else -> "Not selected"
+private fun stateDescription(
+    date: LocalDate,
+    selectionMode: CalendarParams.SelectionMode,
+    selection: CalendarSelection,
+): String? {
+    return when (selectionMode) {
+        is CalendarParams.SelectionMode.Single -> when (selection) {
+            CalendarSelection.None -> selectionMode.noSelectionState
+            CalendarSelection.Single(date) -> selectionMode.startSelectionState
+            else -> null
         }
 
-        is CalendarSelection.Dates -> when {
-            selection.start == date && selection.end == date -> "Selected as departure and return date"
-            selection.start == date && selection.end == null -> "Selected as departure date"
-            selection.start == date && selection.end != null -> "Selected as departure date"
-            selection.end == date -> "Selected as return date"
-            selection.end != null && date in selection -> "Between departure and return dates"
-            else -> "Not selected"
+        is CalendarParams.SelectionMode.Range -> when (selection) {
+            is CalendarSelection.Dates ->
+                when {
+                    selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
+                    selection.start == date && selection.end == null -> selectionMode.startSelectionState
+                    selection.start == date && selection.end != null -> selectionMode.startSelectionState
+                    selection.end == date -> selectionMode.endSelectionState
+                    selection.end != null && date in selection -> selectionMode.betweenSelectionState
+                    else -> null
+                }
+
+            else -> null
         }
 
-        is CalendarSelection.Month -> when {
-            selection.start == date -> "Current month"
-            selection.end == date -> "Current month"
-            date in selection -> "Current month"
-            else -> "Not selected"
-        }
+        is CalendarParams.SelectionMode.Disabled -> null
     }
 }
 
