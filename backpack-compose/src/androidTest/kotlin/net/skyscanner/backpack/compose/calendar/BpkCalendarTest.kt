@@ -18,7 +18,12 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -87,12 +92,13 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionEquals("Selected as departure and return date")
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionEquals("Selected as departure and return date")
+            .assertOnClickLabelEquals("endSelectionHint")
+            .assertStateDescriptionEquals("startSelectionState")
             .performClick()
 
         val state = controller.state.first()
@@ -173,6 +179,12 @@ class BpkCalendarTest {
         BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
 }
 
-// fun SemanticsNodeInteraction.assertStateDescriptionEquals(
-//    vararg values: String
-// ): SemanticsNodeInteraction = assert(SemanticsMatcher())
+fun SemanticsNodeInteraction.assertOnClickLabelEquals(value: String): SemanticsNodeInteraction = assert(
+    SemanticsMatcher("${SemanticsActions.OnClick.name} = [$value]") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label == value
+    })
+
+fun SemanticsNodeInteraction.assertStateDescriptionEquals(value: String): SemanticsNodeInteraction = assert(
+    SemanticsMatcher("${SemanticsProperties.StateDescription.name} = [$value]") {
+        it.config.getOrNull(SemanticsProperties.StateDescription) == value
+    })
