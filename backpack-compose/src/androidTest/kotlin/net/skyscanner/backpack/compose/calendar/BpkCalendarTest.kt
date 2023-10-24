@@ -118,10 +118,12 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("13")
             .onLast()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
 
         composeTestRule.onAllNodesWithText("14")
             .onLast()
+            .assertStateDescriptionEquals("startSelectionState")
             .performClick()
 
         val state = controller.state.first()
