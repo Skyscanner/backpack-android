@@ -152,7 +152,7 @@ private fun stateDescription(
     return when (selectionMode) {
         is CalendarParams.SelectionMode.Single -> when (selection) {
             CalendarSelection.None -> selectionMode.noSelectionState
-            CalendarSelection.Single(date) -> selectionMode.startSelectionState
+            is CalendarSelection.Single -> selectionMode.startSelectionState
             else -> null
         }
 
