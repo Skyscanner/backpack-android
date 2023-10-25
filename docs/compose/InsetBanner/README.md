@@ -1,38 +1,38 @@
-# SponsoredBanner
+# InsetBanner
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-compose)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose)
-[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.sponsoredbanner)
-[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/sponsoredbanner)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.insetbanner)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/insetbanner)
 
 ## OnLight
 
 | Day                                                                                                                                                                               | Night                                                                                                                                                                                            |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/onlight.png" alt="SponsoredBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/onlight_dm.png" alt="SponsoredBanner component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/onlight.png" alt="InsetBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/onlight_dm.png" alt="InsetBanner component - dark mode" width="375" /> |
 
 ## OnDark
 
 | Day                                                                                                                                                                              | Night                                                                                                                                                                                           |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/ondark.png" alt="SponsoredBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/ondark_dm.png" alt="SponsoredBanner component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/ondark.png" alt="InsetBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/ondark_dm.png" alt="InsetBanner component - dark mode" width="375" /> |
 
 ## Without Title and SubHeadline
 
 | Day                                                                                                                                                                                                     | Night                                                                                                                                                                                                                  |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-title-and-subheadline.png" alt="SponsoredBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-title-and-subheadline_dm.png" alt="SponsoredBanner component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-title-and-subheadline.png" alt="InsetBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-title-and-subheadline_dm.png" alt="InsetBanner component - dark mode" width="375" /> |
 
 ## Without Logo
 
 | Day                                                                                                                                                                                    | Night                                                                                                                                                                                                 |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-logo.png" alt="SponsoredBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-logo_dm.png" alt="SponsoredBanner component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-logo.png" alt="InsetBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-logo_dm.png" alt="InsetBanner component - dark mode" width="375" /> |
 
 ## Without Call To Action (CTA)
 
 | Day                                                                                                                                                                                   | Night                                                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-cta.png" alt="SponsoredBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SponsoredBanner/screenshots/without-cta_dm.png" alt="SponsoredBanner component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-cta.png" alt="InsetBanner component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/InsetBanner/screenshots/without-cta_dm.png" alt="InsetBanner component - dark mode" width="375" /> |
 
 ## Installation
 
@@ -42,27 +42,27 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
-Example of a SponsoredBanner:
+Example of a InsetBanner:
 
 ```Kotlin
 
-import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBanner
-import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerCTA
-import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
+import net.skyscanner.backpack.compose.insetbanner.BpkInsetBanner
+import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerCTA
+import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerVariant
 
 {
-    BpkSponsoredBanner(
-        variant = BpkSponsoredBannerVariant.OnLight,
+    BpkInsetBanner(
+        variant = BpkInsetBannerVariant.OnLight,
         title = title,
         subHeadline = subHeadline,
-        callToAction = BpkSponsoredBannerCTA(
+        callToAction = BpkInsetBannerCTA(
             ctaText,
             ctaAccessibilityLabel,
         ),
         body = body,
     ) {
         Image(
-            painter = painterResource(R.drawable.sponsored_banner_skyland_white),
+            painter = painterResource(R.drawable.inset_banner_skyland_white),
             contentDescription = contentDescription,
             contentScale = ContentScale.Fit,
         )
@@ -70,4 +70,4 @@ import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
 }
 ```
 
-Note: The Sponsored Banner is clickable/expandable if a body text is provided.
+Note: The Inset Banner is clickable/expandable if a body text is provided.

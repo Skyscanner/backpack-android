@@ -20,5 +20,5 @@ package net.skyscanner.backpack.demo.components
 
 import net.skyscanner.backpack.meta.ComponentMarker
 
-@ComponentMarker("Sponsored Banner")
-annotation class SponsoredBannerComponent
+@ComponentMarker("Inset Banner")
+annotation class InsetBannerComponent

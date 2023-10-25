@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.sponsoredbanner.internal
+package net.skyscanner.backpack.compose.insetbanner.internal
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -40,8 +40,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerCTA
-import net.skyscanner.backpack.compose.sponsoredbanner.BpkSponsoredBannerVariant
+import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerCTA
+import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerVariant
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -49,12 +49,12 @@ import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
-internal fun BpkSponsoredBannerImpl(
+internal fun BpkInsetBannerImpl(
     backgroundColor: Color,
-    variant: BpkSponsoredBannerVariant,
+    variant: BpkInsetBannerVariant,
     title: String?,
     subHeadline: String?,
-    callToAction: BpkSponsoredBannerCTA?,
+    callToAction: BpkInsetBannerCTA?,
     body: String?,
     modifier: Modifier = Modifier,
     logo: @Composable (() -> Unit)?,
@@ -72,7 +72,7 @@ internal fun BpkSponsoredBannerImpl(
                 shape = RoundedCornerShape(BpkSpacing.Md),
             ),
     ) {
-        BpkSponsoredBannerHeader(
+        BpkInsetBannerHeader(
             modifier = Modifier
                 .clip(
                     shape = if (isBodyVisible) {
@@ -118,12 +118,12 @@ internal fun BpkSponsoredBannerImpl(
 }
 
 @Composable
-internal fun BpkSponsoredBannerHeader(
-    variant: BpkSponsoredBannerVariant,
+internal fun BpkInsetBannerHeader(
+    variant: BpkInsetBannerVariant,
     modifier: Modifier = Modifier,
     title: String? = null,
     subHeadline: String? = null,
-    callToAction: BpkSponsoredBannerCTA? = null,
+    callToAction: BpkInsetBannerCTA? = null,
     logo: @Composable (() -> Unit)?,
 ) {
     Row(
@@ -182,15 +182,15 @@ private val LOGO_WIDTH = 88.dp
 private val LOGO_HEIGHT = 22.dp
 
 @Composable
-private fun getTextColor(variant: BpkSponsoredBannerVariant): Color =
+private fun getTextColor(variant: BpkInsetBannerVariant): Color =
     when (variant) {
-        BpkSponsoredBannerVariant.OnLight -> BpkTheme.colors.textOnLight
-        BpkSponsoredBannerVariant.OnDark -> BpkTheme.colors.textOnDark
+        BpkInsetBannerVariant.OnLight -> BpkTheme.colors.textOnLight
+        BpkInsetBannerVariant.OnDark -> BpkTheme.colors.textOnDark
     }
 
 @Composable
-private fun getTintColor(variant: BpkSponsoredBannerVariant): Color =
+private fun getTintColor(variant: BpkInsetBannerVariant): Color =
     when (variant) {
-        BpkSponsoredBannerVariant.OnLight -> BpkTheme.colors.textOnLight
-        BpkSponsoredBannerVariant.OnDark -> BpkTheme.colors.textOnDark
+        BpkInsetBannerVariant.OnLight -> BpkTheme.colors.textOnLight
+        BpkInsetBannerVariant.OnDark -> BpkTheme.colors.textOnDark
     }
