@@ -55,7 +55,7 @@ data class BpkSection(val headings: BpkSectionHeading? = null, val items: List<B
 
 data class BpkItem(
     val title: AnnotatedString,
-    val subtitle: String,
+    val subtitle: AnnotatedString,
     val icon: BpkIcon,
     val onItemSelected: () -> Unit,
 )

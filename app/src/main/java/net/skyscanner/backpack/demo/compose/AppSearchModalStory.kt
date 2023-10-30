@@ -128,7 +128,7 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     title = buildAnnotatedString {
                         append(stringResource(id = R.string.current_location_title))
                     },
-                    subtitle = stringResource(id = R.string.current_location_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.current_location_subtitle)) },
                     icon = BpkIcon.UseLocation,
                 ) {},
             ),
@@ -141,7 +141,7 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
             items = listOf(
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_london)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
@@ -153,14 +153,14 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                         }
                         append(" Heathrow")
                     },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
 
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_rome)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
 
@@ -174,28 +174,28 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
             items = listOf(
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_shenzhen)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_paris)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_algiers)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_madrid)) },
-                    subtitle = stringResource(id = R.string.search_modal_item_subtitle),
+                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
 
