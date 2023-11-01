@@ -76,11 +76,10 @@ internal fun BpkCalendarDayCell(
 //                selected = selection != null,
                 enabled = !inactive,
                 onClick = { onClick(model) },
-                onClickLabel = model.onClickLabel, // this is announced as the action to take when clicking (ie double tap to select end date)
+                onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             ).semantics {
                 if (model.stateDescription != null) {
-                    // this is announced whenever the state of a cell changes (ie when you make a selection) AND when you enter the cell (ie start date)
                     stateDescription = model.stateDescription!!
                 }
             },
@@ -101,7 +100,7 @@ internal fun BpkCalendarDayCell(
             BpkText(
                 text = model.text.toString(),
                 modifier = Modifier.semantics {
-                    contentDescription = model.contentDescription // this is announced when entering the cell AFTER the state description
+                    contentDescription = model.contentDescription
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
