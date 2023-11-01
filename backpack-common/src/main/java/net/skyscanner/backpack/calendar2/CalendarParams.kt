@@ -79,6 +79,10 @@ data class CalendarParams(
         /**
          * Only a single, non-disabled date can be selected.
          */
+
+        /**
+         * Accessibility labels are NOT supported in the view version
+         * */
         data class Single(
             val startSelectionHint: String? = null,
             val noSelectionState: String? = null,
