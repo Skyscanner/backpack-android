@@ -117,34 +117,21 @@ Example of a Card Wrapper:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
-import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
+import net.skyscanner.backpack.compose.card.BpkCardElevation
+import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.card.BpkCardCorner
 
 BpkCardWrapper(
   modifier = Modifier.fillMaxWidth(),
   backgroundColor = BpkTheme.colors.coreEco,
+  cardPadding = BpkCardPadding.None,
+  corner = BpkCardCorner.Large,
+  elevation = BpkCardElevation.Focus,
   headerContent = {
-    BpkText(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(BpkSpacing.Xxl),
-      text = stringResource("BpkCardWrapper header sample"),
-    )
+    // header content
   },
   cardContent = {
-    Image(
-      modifier = Modifier
-        .height(BpkSpacing.Xxl * 2)
-        .fillMaxWidth(),
-      painter = painterResource(id = R.drawable.canadian_rockies_canada),
-      contentDescription = "",
-      contentScale = ContentScale.Crop
-    )
-    BpkText(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource("BpkCardWrapper card sample"),
-      style = BpkTheme.typography.bodyDefault,
-      textAlign = TextAlign.Center
-    )
+    // card content
   },
   onClick = {}
 )
