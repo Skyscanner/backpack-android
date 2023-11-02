@@ -20,9 +20,7 @@ package net.skyscanner.backpack.compose.slider.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,16 +31,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
+import net.skyscanner.backpack.compose.utils.applyIf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,6 +96,15 @@ internal fun BpkRangeSliderImpl(
                 enabled = enabled,
             )
         },
+        track = {
+            SliderDefaults.Track(
+                colors = sliderColors(),
+                sliderPositions = it,
+                modifier = Modifier.applyIf(upperThumbLabel != null || lowerThumbLabel != null) {
+                    padding(top = LabelOffset)
+                },
+            )
+        },
         colors = sliderColors(),
     )
 }
@@ -108,43 +117,68 @@ private fun SlideRangeLabel(
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .semantics { stateDescription = label }
-            .padding(bottom = BpkSpacing.Xl),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        BpkText(
-            text = label,
-            color = BpkTheme.colors.textPrimaryInverse,
-            style = BpkTheme.typography.label2,
-            textAlign = TextAlign.Center,
+    LabelLayout(modifier) {
+        Box(
             modifier = Modifier
                 .background(
                     color = BpkTheme.colors.coreAccent,
                     shape = FlareShape(
-                        borderRadius = BpkBorderRadius.Sm,
-                        flareHeight = BpkSpacing.Sm,
+                        borderRadius = BorderRadius,
+                        flareHeight = FlareHeight,
                         pointerDirection = BpkFlarePointerDirection.Down,
                     ),
                 )
-                .padding(top = BpkSpacing.Sm)
-                .padding(bottom = BpkSpacing.Md)
-                .padding(horizontal = BpkSpacing.Md)
-                .semantics { invisibleToUser() },
-
-        )
-        Spacer(
-            modifier = Modifier.height(BpkSpacing.Sm),
-        )
+                .padding(bottom = FlareHeight)
+                .height(BpkSpacing.Lg)
+                .padding(horizontal = BpkSpacing.Md),
+            contentAlignment = Alignment.Center,
+        ) {
+            BpkText(
+                text = label,
+                color = BpkTheme.colors.textPrimaryInverse,
+                style = BpkTheme.typography.label2,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                modifier = Modifier
+                    .semantics { invisibleToUser() },
+            )
+        }
         SliderDefaults.Thumb(
+            modifier = Modifier.padding(top = LabelOffset)
+                .semantics { stateDescription = label },
             interactionSource = interactionSource,
             colors = sliderColors(),
             enabled = enabled,
         )
     }
 }
+
+@Composable
+private fun LabelLayout(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    Layout(
+        modifier = modifier,
+        content = content,
+    ) { measurables, constraints ->
+        val labelMeasurable = measurables[0]
+        val thumbMeasurable = measurables[1]
+        val thumbPlaceable = thumbMeasurable.measure(constraints)
+        val labelPlaceable = labelMeasurable.measure(constraints)
+
+        // ignore the label width as it'll be drawn outside the bounds of the range slider to avoid jumping around
+        layout(thumbPlaceable.width, thumbPlaceable.height) {
+            // ensure the label is centred on the thumb
+            labelPlaceable.placeRelative(x = (thumbPlaceable.width - labelPlaceable.width) / 2, y = 0)
+            thumbPlaceable.placeRelative(x = 0, y = 0)
+        }
+    }
+}
+
+private val LabelOffset = 34.dp
+private val FlareHeight = 6.dp
+private val BorderRadius = 6.dp
 
 @Composable
 internal fun sliderColors() = SliderDefaults.colors(
