@@ -59,6 +59,7 @@ fun BpkCardWrapper(
         Column {
             headerContent.invoke()
             BpkCard(
+                modifier = Modifier.padding(BpkBorderSize.Lg),
                 corner = corner,
                 padding = cardPadding,
                 elevation = BpkCardElevation.None,
