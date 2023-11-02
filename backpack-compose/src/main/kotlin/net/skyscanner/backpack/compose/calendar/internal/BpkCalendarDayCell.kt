@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -51,6 +50,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
+import net.skyscanner.backpack.compose.utils.selectable
 
 @Composable
 internal fun BpkCalendarDayCell(
@@ -71,9 +71,9 @@ internal fun BpkCalendarDayCell(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .padding(bottom = BpkSpacing.Lg)
-            .clickable(
+            .selectable(
                 indication = null,
-//                selected = selection != null,
+                selected = selection != null,
                 enabled = !inactive,
                 onClick = { onClick(model) },
                 onClickLabel = model.onClickLabel,

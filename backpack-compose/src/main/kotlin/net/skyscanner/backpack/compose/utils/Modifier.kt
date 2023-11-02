@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.utils
 
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
@@ -29,8 +30,11 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.platform.inspectable
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
@@ -66,6 +70,41 @@ internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onC
         onClick = onClick,
     )
 }
+
+internal fun Modifier.selectable(
+    selected: Boolean,
+    interactionSource: MutableInteractionSource,
+    indication: Indication?,
+    enabled: Boolean = true,
+    onClickLabel: String? = null,
+    role: Role? = null,
+    onClick: () -> Unit,
+) = inspectable(
+    inspectorInfo = debugInspectorInfo {
+        name = "selectable"
+        properties["selected"] = selected
+        properties["interactionSource"] = interactionSource
+        properties["indication"] = indication
+        properties["enabled"] = enabled
+        properties["onClickLabel"] = onClickLabel
+        properties["role"] = role
+        properties["onClick"] = onClick
+    },
+    factory = {
+        Modifier
+            .clickable(
+                enabled = enabled,
+                role = role,
+                interactionSource = interactionSource,
+                indication = indication,
+                onClickLabel = onClickLabel,
+                onClick = onClick,
+            )
+            .semantics {
+                this.selected = selected
+            }
+    },
+)
 
 internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
     layout { measurable, constraints ->
