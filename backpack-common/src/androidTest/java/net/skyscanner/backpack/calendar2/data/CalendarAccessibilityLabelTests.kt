@@ -145,6 +145,7 @@ class CalendarAccessibilityLabelTests {
                 assertEquals("startSelectionState", startDate.stateDescription)
                 assertEquals("startSelectionHint", endDate.onClickLabel)
                 assertEquals("endSelectionState", endDate.stateDescription)
+                assertEquals("startSelectionHint", (state.cells[9] as CalendarCell.Day).onClickLabel)
                 assertEquals(null, (state.cells[9] as CalendarCell.Day).stateDescription)
             }
         }
