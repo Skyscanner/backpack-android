@@ -48,5 +48,4 @@ import androidx.compose.ui.tooling.preview.Preview
     showBackground = true,
     backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
 )
-
 annotation class BpkPreviews

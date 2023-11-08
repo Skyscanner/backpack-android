@@ -25,6 +25,7 @@ import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 import org.threeten.bp.chrono.IsoChronology
 import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.format.FormatStyle
@@ -116,7 +117,10 @@ data class CalendarParams(
         /**
          * Only an entire month can be selected, by tapping on the [label] next to its name.
          */
-        data class SelectWholeMonth(val label: String) : MonthSelectionMode
+        data class SelectWholeMonth(
+            val label: String,
+            val selectableMonthRange: ClosedRange<YearMonth>,
+        ) : MonthSelectionMode
     }
 }
 

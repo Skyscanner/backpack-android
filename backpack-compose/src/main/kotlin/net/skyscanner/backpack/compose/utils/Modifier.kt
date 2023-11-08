@@ -62,8 +62,9 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     return if (predicate) block() else this
 }
 
-internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier = composed {
+internal fun Modifier.clickable(enabled: Boolean = true, bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier = composed {
     clickable(
+        enabled = enabled,
         interactionSource = remember { MutableInteractionSource() },
         indication = rememberRipple(bounded = bounded),
         role = role,

@@ -36,7 +36,6 @@ import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -150,9 +149,7 @@ fun BpkNudger(
             Column(modifier = Modifier.weight(1f)) {
                 BpkText(
                     text = title,
-                    style = BpkTheme.typography.heading5.copy(
-                        platformStyle = PlatformTextStyle(includeFontPadding = false),
-                    ),
+                    style = BpkTheme.typography.heading5,
                     color = BpkTheme.colors.textPrimary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -161,9 +158,7 @@ fun BpkNudger(
                 if (subtitle != null) {
                     BpkText(
                         text = subtitle,
-                        style = BpkTheme.typography.bodyDefault.copy(
-                            platformStyle = PlatformTextStyle(includeFontPadding = false),
-                        ),
+                        style = BpkTheme.typography.bodyDefault,
                         color = BpkTheme.colors.textSecondary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

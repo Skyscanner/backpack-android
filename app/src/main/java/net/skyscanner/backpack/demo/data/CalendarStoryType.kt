@@ -90,7 +90,10 @@ enum class CalendarStoryType {
                     now = now,
                     range = range,
                     selectionMode = CalendarParams.SelectionMode.Range(),
-                    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+                    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
+                        label = "Select whole month",
+                        selectableMonthRange = YearMonth.now().plusMonths(1)..YearMonth.now().plusMonths(3),
+                    ),
                 )
 
                 WithDisabledDates -> CalendarParams(

@@ -235,6 +235,8 @@
     <string name="rating_subtitle">1532 reviews</string>
 
     <string name="slider_range">Range</string>
+    <string name="slider_range_with_label">Range With Label</string>
+    <string name="gbp_formatter">£%.1f</string>
     <string name="slider_standard">Standard</string>
     <string name="slider_stepped">Stepped</string>
 
@@ -314,7 +316,18 @@
     <string name="city_dubai">Dubai</string>
     <string name="city_long_name">A city with long name in mars</string>
     <string name="city_rio">Rio de janeiro</string>
-
+    <string name="recent_searches">Recent Searches</string>
+    <string name="popular_destinations">Popular Destinations</string>
+    <string name="search_modal_item_subtitle">City, United Kingdom</string>
+    <string name="view_more">View More</string>
+    <string name="try_again">Try Again</string>
+    <string name="destination">Destination</string>
+    <string name="text_field_hint">Enter your next destination</string>
+    <string name="current_location_title">Current Location</string>
+    <string name="current_location_subtitle">Use current location</string>
+    <string name="content_is_loading">Content is Loading</string>
+    <string name="error_view_title">Looks like you drifted away</string>
+    <string name="error_view_subtitle">Please check your internet connection to find your way back</string>
     <string name="drop_down_action">Drop down action invoked</string>
     <string name="dismiss_action">Dismiss action invoked</string>
     <string name="sticky_chip_action">Sticky Chip action invoked</string>
@@ -341,6 +354,13 @@
     <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti."</string>
     <string name="snippet_image_content_description">Image</string>
+
     <string name="generic_title">Title</string>
     <string name="generic_subtitle">Subtitle</string>
+
+    <string name="inset_banner_title">Title</string>
+    <string name="inset_banner_sub_headline">SubHeadline</string>
+    <string name="inset_banner_cta_text">Sponsored</string>
+    <string name="inset_banner_cta_accessibility_label">Acessibility Label</string>
+    <string name="inset_banner_body">You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.</string>
 </resources>

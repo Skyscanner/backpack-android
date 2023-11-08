@@ -31,4 +31,7 @@
     <!-- We don't support the monochrome launcher icon -->
     <issue id="MonochromeLauncherIcon" severity="ignore" />
 
+    <!-- We already have dependabot checks for this and don't want to fail CI when this isn't merged yet -->
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+
 </lint>
