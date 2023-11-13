@@ -100,103 +100,101 @@ internal fun CalendarCellDay(
     yearMonth: YearMonth,
     selection: CalendarSelection,
     params: CalendarParams,
-): CalendarCell.Day =
-    CalendarCell.Day(
-        date = date,
-        yearMonth = yearMonth,
-        info = params.cellsInfo[date] ?: CellInfo.Default,
-        outOfRange = date !in params.range,
-        contentDescription = date.format(params.dateContentDescriptionFormatter),
-        stateDescription = stateDescription(date, params.selectionMode, selection),
-        onClickLabel = onClickLabel(date, params.selectionMode, selection),
-        text = buildSpannedString {
-            val span = TtsSpan.DateBuilder()
-                .setDay(date.dayOfMonth)
-                .setMonth(date.month.ordinal)
-                .setYear(date.year)
-                .setWeekday(date.dayOfWeek.value)
-                .build()
-            append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        },
-        selection = when (selection) {
-            is CalendarSelection.None -> null
-            is CalendarSelection.Single -> when (date) {
-                selection.date -> CalendarCell.Selection.Single
-                else -> null
-            }
+): CalendarCell.Day = CalendarCell.Day(
+    date = date,
+    yearMonth = yearMonth,
+    info = params.cellsInfo[date] ?: CellInfo.Default,
+    outOfRange = date !in params.range,
+    contentDescription = date.format(params.dateContentDescriptionFormatter),
+    stateDescription = stateDescription(date, params.selectionMode, selection),
+    onClickLabel = onClickLabel(date, params.selectionMode, selection),
+    text = buildSpannedString {
+        val span = TtsSpan.DateBuilder()
+            .setDay(date.dayOfMonth)
+            .setMonth(date.month.ordinal)
+            .setYear(date.year)
+            .setWeekday(date.dayOfWeek.value)
+            .build()
+        append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    },
+    selection = when (selection) {
+        is CalendarSelection.None -> null
+        is CalendarSelection.Single -> when (date) {
+            selection.date -> CalendarCell.Selection.Single
+            else -> null
+        }
 
-            is CalendarSelection.Dates -> when {
-                selection.start == date && selection.end == date -> CalendarCell.Selection.Double
-                selection.start == date && selection.end == null -> CalendarCell.Selection.Single
-                selection.start == date && selection.end != null -> CalendarCell.Selection.Start
-                selection.end == date -> CalendarCell.Selection.End
-                selection.end != null && date in selection -> CalendarCell.Selection.Middle
-                else -> null
-            }
+        is CalendarSelection.Dates -> when {
+            selection.start == date && selection.end == date -> CalendarCell.Selection.Double
+            selection.start == date && selection.end == null -> CalendarCell.Selection.Single
+            selection.start == date && selection.end != null -> CalendarCell.Selection.Start
+            selection.end == date -> CalendarCell.Selection.End
+            selection.end != null && date in selection -> CalendarCell.Selection.Middle
+            else -> null
+        }
 
-            is CalendarSelection.Month -> when {
-                selection.start == date -> CalendarCell.Selection.StartMonth
-                selection.end == date -> CalendarCell.Selection.EndMonth
-                date in selection -> CalendarCell.Selection.Middle
-                else -> null
-            }
-        },
-    )
+        is CalendarSelection.Month -> when {
+            selection.start == date -> CalendarCell.Selection.StartMonth
+            selection.end == date -> CalendarCell.Selection.EndMonth
+            date in selection -> CalendarCell.Selection.Middle
+            else -> null
+        }
+    },
+)
 
 private fun stateDescription(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
-): String? =
-    when (selectionMode) {
-        is CalendarParams.SelectionMode.Single -> when (selection) {
-            is CalendarSelection.None -> selectionMode.noSelectionState
-            is CalendarSelection.Single -> selectionMode.startSelectionState
-            else -> null
-        }
-
-        is CalendarParams.SelectionMode.Range -> when (selection) {
-            is CalendarSelection.Dates ->
-                when {
-                    selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
-                    selection.start == date && selection.end == null -> selectionMode.startSelectionState
-                    selection.start == date && selection.end != null -> selectionMode.startSelectionState
-                    selection.end == date -> selectionMode.endSelectionState
-                    selection.end != null && date in selection -> selectionMode.betweenSelectionState
-                    else -> null
-                }
-
-            else -> null
-        }
-
-        is CalendarParams.SelectionMode.Disabled -> null
+): String? = when (selectionMode) {
+    is CalendarParams.SelectionMode.Single -> when (selection) {
+        is CalendarSelection.None -> selectionMode.noSelectionState
+        is CalendarSelection.Single -> selectionMode.startSelectionState
+        else -> null
     }
+
+    is CalendarParams.SelectionMode.Range -> when (selection) {
+        is CalendarSelection.Dates ->
+            when {
+                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
+                selection.start == date && selection.end == null -> selectionMode.startSelectionState
+                selection.start == date && selection.end != null -> selectionMode.startSelectionState
+                selection.end == date -> selectionMode.endSelectionState
+                selection.end != null && date in selection -> selectionMode.betweenSelectionState
+                else -> null
+            }
+
+        else -> null
+    }
+
+    is CalendarParams.SelectionMode.Disabled -> null
+}
 
 private fun onClickLabel(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
-): String? =
-    when (selectionMode) {
-        is CalendarParams.SelectionMode.Single -> when (selection) {
-            is CalendarSelection.None -> selectionMode.startSelectionHint
-            is CalendarSelection.Single -> when (selection.date) {
-                date -> selectionMode.startSelectionHint
-                else -> null
-            }
+): String? = when (selectionMode) {
+    is CalendarParams.SelectionMode.Single -> when (selection) {
+        is CalendarSelection.None -> selectionMode.startSelectionHint
+        is CalendarSelection.Single -> when (selection.date) {
+            date -> selectionMode.startSelectionHint
             else -> null
         }
 
-        is CalendarParams.SelectionMode.Range -> when (selection) {
-            is CalendarSelection.None -> selectionMode.startSelectionHint
-            is CalendarSelection.Dates ->
-                when {
-                    selection.start == null || selection.end != null -> selectionMode.startSelectionHint
-                    else -> selectionMode.endSelectionHint
-                }
-
-            else -> null
-        }
-
-        is CalendarParams.SelectionMode.Disabled -> null
+        else -> null
     }
+
+    is CalendarParams.SelectionMode.Range -> when (selection) {
+        is CalendarSelection.None -> selectionMode.startSelectionHint
+        is CalendarSelection.Dates ->
+            when {
+                selection.start == null || selection.end != null -> selectionMode.startSelectionHint
+                else -> selectionMode.endSelectionHint
+            }
+
+        else -> null
+    }
+
+    is CalendarParams.SelectionMode.Disabled -> null
+}
