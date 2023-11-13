@@ -100,8 +100,8 @@ internal fun CalendarCellDay(
     yearMonth: YearMonth,
     selection: CalendarSelection,
     params: CalendarParams,
-): CalendarCell.Day {
-    return CalendarCell.Day(
+): CalendarCell.Day =
+    CalendarCell.Day(
         date = date,
         yearMonth = yearMonth,
         info = params.cellsInfo[date] ?: CellInfo.Default,
@@ -142,16 +142,15 @@ internal fun CalendarCellDay(
             }
         },
     )
-}
 
 private fun stateDescription(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
-): String? {
-    return when (selectionMode) {
+): String? =
+    when (selectionMode) {
         is CalendarParams.SelectionMode.Single -> when (selection) {
-            CalendarSelection.None -> selectionMode.noSelectionState
+            is CalendarSelection.None -> selectionMode.noSelectionState
             is CalendarSelection.Single -> selectionMode.startSelectionState
             else -> null
         }
@@ -172,17 +171,19 @@ private fun stateDescription(
 
         is CalendarParams.SelectionMode.Disabled -> null
     }
-}
 
 private fun onClickLabel(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
-): String? {
-    return when (selectionMode) {
+): String? =
+    when (selectionMode) {
         is CalendarParams.SelectionMode.Single -> when (selection) {
-            CalendarSelection.None -> selectionMode.startSelectionHint
-            CalendarSelection.Single(date) -> selectionMode.startSelectionHint
+            is CalendarSelection.None -> selectionMode.startSelectionHint
+            is CalendarSelection.Single -> when (selection.date) {
+                date -> selectionMode.startSelectionHint
+                else -> null
+            }
             else -> null
         }
 
@@ -199,4 +200,3 @@ private fun onClickLabel(
 
         is CalendarParams.SelectionMode.Disabled -> null
     }
-}
