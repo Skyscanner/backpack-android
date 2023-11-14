@@ -149,7 +149,11 @@ private fun stateDescription(
 ): String? = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> when (selection) {
         is CalendarSelection.None -> selectionMode.noSelectionState
-        is CalendarSelection.Single -> selectionMode.startSelectionState
+        is CalendarSelection.Single ->
+            when (selection.date) {
+                date -> selectionMode.startSelectionState
+                else -> null
+            }
         else -> null
     }
 
@@ -175,16 +179,7 @@ private fun onClickLabel(
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
 ): String? = when (selectionMode) {
-    is CalendarParams.SelectionMode.Single -> when (selection) {
-        is CalendarSelection.None -> selectionMode.startSelectionHint
-        is CalendarSelection.Single -> when (selection.date) {
-            date -> selectionMode.startSelectionHint
-            else -> null
-        }
-
-        else -> null
-    }
-
+    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.None -> selectionMode.startSelectionHint
         is CalendarSelection.Dates ->
