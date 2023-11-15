@@ -30,8 +30,6 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.debugInspectorInfo
-import androidx.compose.ui.platform.inspectable
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.selected
@@ -62,7 +60,12 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     return if (predicate) block() else this
 }
 
-internal fun Modifier.clickable(enabled: Boolean = true, bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier = composed {
+internal fun Modifier.clickable(
+    enabled: Boolean = true,
+    bounded: Boolean = true,
+    role: Role? = null,
+    onClick: () -> Unit,
+): Modifier = composed {
     clickable(
         enabled = enabled,
         interactionSource = remember { MutableInteractionSource() },
@@ -80,32 +83,17 @@ internal fun Modifier.selectable(
     onClickLabel: String? = null,
     role: Role? = null,
     onClick: () -> Unit,
-) = inspectable(
-    inspectorInfo = debugInspectorInfo {
-        name = "selectable"
-        properties["selected"] = selected
-        properties["interactionSource"] = interactionSource
-        properties["indication"] = indication
-        properties["enabled"] = enabled
-        properties["onClickLabel"] = onClickLabel
-        properties["role"] = role
-        properties["onClick"] = onClick
-    },
-    factory = {
-        Modifier
-            .clickable(
-                enabled = enabled,
-                role = role,
-                interactionSource = interactionSource,
-                indication = indication,
-                onClickLabel = onClickLabel,
-                onClick = onClick,
-            )
-            .semantics {
-                this.selected = selected
-            }
-    },
+) = clickable(
+    enabled = enabled,
+    role = role,
+    interactionSource = interactionSource,
+    indication = indication,
+    onClickLabel = onClickLabel,
+    onClick = onClick,
 )
+    .semantics {
+        this.selected = selected
+    }
 
 internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
     layout { measurable, constraints ->
