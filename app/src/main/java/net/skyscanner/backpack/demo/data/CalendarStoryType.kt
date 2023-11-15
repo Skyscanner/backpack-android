@@ -65,31 +65,19 @@ enum class CalendarStoryType {
                 SelectionSingle -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Single(
-                        "Select as departure date",
-                        "No selection",
-                        "Selected as departure date",
-                    ),
+                    selectionMode = singleSelectionModeWithAccessibilityLabels(),
                 )
 
                 SelectionRange -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range(
-                        startSelectionHint = "Select as departure date",
-                        endSelectionHint = "Select as return date",
-                        startSelectionState = "Selected as departure date",
-                        endSelectionState = "Selected as return date",
-                        startAndEndSelectionState = "Selected as departure and return  date",
-                        betweenSelectionState = "Between departure and return date",
-                        noSelectionState = "No selection",
-                    ),
+                    selectionMode = rangeSelectionModeWithAccessibilityLabels(),
                 )
 
                 SelectionWholeMonth -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range(),
+                    selectionMode = rangeSelectionModeWithAccessibilityLabels(),
                     monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
                         label = "Select whole month",
                         selectableMonthRange = YearMonth.now().plusMonths(1)..YearMonth.now().plusMonths(3),
@@ -99,7 +87,7 @@ enum class CalendarStoryType {
                 WithDisabledDates -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range(),
+                    selectionMode = rangeSelectionModeWithAccessibilityLabels(),
                     cellsInfo = range
                         .toIterable()
                         .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
@@ -108,7 +96,7 @@ enum class CalendarStoryType {
                 WithLabels -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = CalendarParams.SelectionMode.Range(),
+                    selectionMode = rangeSelectionModeWithAccessibilityLabels(),
                     cellsInfo = range
                         .toIterable()
                         .associateWith {
@@ -137,6 +125,22 @@ enum class CalendarStoryType {
                     selectionMode = CalendarParams.SelectionMode.Range(),
                 )
             }
+
+        private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(
+            startSelectionHint = "Select as departure date",
+            endSelectionHint = "Select as return date",
+            startSelectionState = "Selected as departure date",
+            endSelectionState = "Selected as return date",
+            startAndEndSelectionState = "Selected as departure and return date",
+            betweenSelectionState = "Between departure and return date",
+            noSelectionState = "No selection",
+        )
+
+        private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
+            startSelectionHint = "Select as departure date",
+            startSelectionState = "Selected as departure date",
+            noSelectionState = "No selection",
+        )
     }
 }
 
