@@ -75,6 +75,7 @@ internal fun Modifier.clickable(
     )
 }
 
+// We need this custom modifier as the selectable() modifier from Foundation does not invoke clickable() with onClickLabel support
 internal fun Modifier.selectable(
     selected: Boolean,
     interactionSource: MutableInteractionSource,
