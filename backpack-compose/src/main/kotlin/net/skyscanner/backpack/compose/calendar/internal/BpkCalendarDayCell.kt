@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
@@ -50,7 +52,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
-import net.skyscanner.backpack.compose.utils.selectable
 
 @Composable
 internal fun BpkCalendarDayCell(
@@ -71,9 +72,8 @@ internal fun BpkCalendarDayCell(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .padding(bottom = BpkSpacing.Lg)
-            .selectable(
+            .clickable(
                 indication = null,
-                selected = selection != null,
                 enabled = !inactive,
                 onClick = { onClick(model) },
                 onClickLabel = model.onClickLabel,
@@ -81,6 +81,8 @@ internal fun BpkCalendarDayCell(
             ).semantics {
                 if (model.stateDescription != null) {
                     stateDescription = model.stateDescription!!
+                } else {
+                    selected = selection != null && selection != Selection.Middle
                 }
             },
     ) {
