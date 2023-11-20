@@ -184,7 +184,7 @@ private fun onClickLabel(
         is CalendarSelection.None -> selectionMode.startSelectionHint
         is CalendarSelection.Dates ->
             when {
-                selection.start == null || selection.end != null -> selectionMode.startSelectionHint
+                selection.end != null -> selectionMode.startSelectionHint
                 else -> selectionMode.endSelectionHint
             }
 
