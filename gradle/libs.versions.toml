@@ -14,7 +14,7 @@ lifecycle = "2.6.2"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.3"
-kotlinPoet = "1.14.2"
+kotlinPoet = "1.15.1"
 ktor = "2.3.6"
 
 [libraries]
