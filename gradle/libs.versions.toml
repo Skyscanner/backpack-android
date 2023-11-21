@@ -7,7 +7,7 @@ destinations = "1.8.42-beta" # update this alongside with compiler version
 
 androidPlugin = "8.1.4"
 lint = "31.1.2"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.1.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidSdkCommon = "31.1.4" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.1"
 lifecycle = "2.6.2"
