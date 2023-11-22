@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content.png" alt="AppSearchModal component in Content state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content_dm.png" alt="AppSearchModal component in Content state - dark mode" width="375" /> |
 
+## ClearAction
+
+| Day                                                                                                                                                                                                                    | Night                                                                                                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/clearaction.png" alt="AppSearchModal component with clear action in Content state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/clearaction_dm.png" alt="AppSearchModal component with clear action in Content state - dark mode" width="375" /> |
+
 
 ## Loading
 
@@ -46,6 +52,28 @@ BpkAppSearchModal(
     closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
+)
+```
+
+Example of a AppSearchModal with clearAction:
+
+```Kotlin
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
+
+val destination = remember { mutableStateOf(inputText) }
+BpkAppSearchModal(
+    title = stringResource(id = R.string.destination),
+    inputText = "",
+    inputHint = stringResource(id = R.string.text_field_hint),
+    results = BpkAppSearchModalResult.Content(
+        sections = listOf(BpkSection(...)),
+        shortcuts = listOf(BpkShortcut(...)),
+    ),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear"){ destination.value = "" }
 )
 ```
 

@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.isDialog
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContent
+import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContentClearAction
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContentInputText
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryError
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryLoading
@@ -37,6 +38,11 @@ class BpkAppSearchModalTest : BpkSnapshotTest() {
     @Test
     fun content_inputText() = record {
         AppSearchModalStoryContentInputText()
+    }
+
+    @Test
+    fun content_clearButton() = record {
+        AppSearchModalStoryContentClearAction()
     }
 
     @Test

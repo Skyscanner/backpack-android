@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Search
@@ -36,6 +37,7 @@ internal fun BpkAppSearchModalImpl(
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
+    clearAction: BpkClearAction? = null,
 ) {
     when (results) {
         is BpkAppSearchModalResult.Error -> {
@@ -52,6 +54,7 @@ internal fun BpkAppSearchModalImpl(
                     value = inputText,
                     placeholder = inputHint,
                     onValueChange = onInputChanged,
+                    clearAction = clearAction,
                 )
                 if (results is BpkAppSearchModalResult.Content) {
                     BpkSearchModalContent(results)

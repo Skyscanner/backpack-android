@@ -87,6 +87,23 @@ BpkTextField(
 )
 ```
 
+Example of a TextField with clear action:
+
+```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.textfield.BpkTextField
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.tokens.Accessibility
+
+BpkTextField(
+  value = value,
+  onValueChange = { value -> },
+  placeholder = "Placeholder",
+  icon = BpkIcon.Accessibility,
+  clearAction = BpkClearAction("Clear"){ value = "" }
+)
+```
+
 Example of a multiline TextField:
 
 ```Kotlin

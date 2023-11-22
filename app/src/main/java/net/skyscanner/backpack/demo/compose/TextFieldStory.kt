@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textarea.BpkTextArea
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -69,6 +70,11 @@ fun TextFieldStory(
 
             BpkText(stringResource(R.string.generic_with_leading_icon))
             TextFieldLeadingIconExample(status = status)
+
+            if (status == BpkFieldStatus.Default) {
+                BpkText(stringResource(R.string.with_clear_action_title))
+                TextFieldClearActionExample(status = status)
+            }
 
             BpkText(stringResource(R.string.generic_single_line))
             TextFieldSingleLineExample(status = status)
@@ -139,6 +145,24 @@ private fun TextFieldLeadingIconExample(
         placeholder = stringResource(R.string.generic_placeholder),
         icon = BpkIcon.Accessibility,
         status = status,
+    )
+}
+
+@Composable
+private fun TextFieldClearActionExample(
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+) {
+    val initialValue = stringResource(R.string.city_shenzhen)
+    var value by remember { mutableStateOf(initialValue) }
+    BpkTextField(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        icon = BpkIcon.Accessibility,
+        status = status,
+        clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) { value = "" },
     )
 }
 

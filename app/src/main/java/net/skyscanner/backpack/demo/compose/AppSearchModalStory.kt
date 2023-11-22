@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
 import net.skyscanner.backpack.compose.tokens.Landmark
@@ -68,6 +69,13 @@ fun AppSearchModalStoryContentInputText(modifier: Modifier = Modifier) {
 
 @Composable
 @AppSearchModalComponent
+@ComposeStory("ClearAction")
+fun AppSearchModalStoryContentClearAction(modifier: Modifier = Modifier) {
+    AppSearchModalStory(result = contentResult(), inputText = stringResource(id = R.string.city_rio), withClearAction = true)
+}
+
+@Composable
+@AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
     AppSearchModalStory(result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
@@ -85,9 +93,10 @@ private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
     inputText: String = "",
+    withClearAction: Boolean = false,
 ) {
     Column(modifier.fillMaxSize()) {
-        DefaultAppSearchModalSample(result = result, inputText)
+        DefaultAppSearchModalSample(result = result, inputText, withClearAction = withClearAction)
     }
 }
 
@@ -96,6 +105,7 @@ internal fun DefaultAppSearchModalSample(
     result: BpkAppSearchModalResult,
     inputText: String,
     modifier: Modifier = Modifier,
+    withClearAction: Boolean = false,
 ) {
     val destination = remember { mutableStateOf(inputText) }
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -115,6 +125,9 @@ internal fun DefaultAppSearchModalSample(
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
+            clearAction = if (withClearAction) {
+                BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" }
+            } else null,
         )
     }
 }
