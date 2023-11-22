@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
+import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
@@ -41,6 +42,7 @@ fun BpkCardWrapper(
     headerContent: @Composable () -> Unit,
     cardContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    cardPadding: BpkCardPadding = BpkCardPadding.Small,
     corner: BpkCardCorner = BpkCardCorner.Small,
     elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
@@ -57,8 +59,9 @@ fun BpkCardWrapper(
         Column {
             headerContent.invoke()
             BpkCard(
-                corner = corner,
                 modifier = Modifier.padding(BpkBorderSize.Lg),
+                corner = corner,
+                padding = cardPadding,
                 elevation = BpkCardElevation.None,
             ) {
                 cardContent.invoke()

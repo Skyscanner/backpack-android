@@ -5,29 +5,29 @@ composeCompiler = "1.5.3" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.8.42-beta" # update this alongside with compiler version
 
-androidPlugin = "8.1.2"
-lint = "31.1.2"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.1.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.1.4"
+lint = "31.1.4"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.1.4" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
-detekt = "1.23.1"
+detekt = "1.23.3"
 lifecycle = "2.6.2"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.3"
-kotlinPoet = "1.14.2"
-ktor = "2.3.5"
+kotlinPoet = "1.15.1"
+ktor = "2.3.6"
 
 [libraries]
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.9.0"
+plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.9.10"
 plugin-shot = "com.karumi:shot:6.0.0"
 plugin-nexusPublishing = "io.github.gradle-nexus:publish-plugin:1.3.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.0"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.3"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
@@ -55,14 +55,14 @@ test-espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0
 test-rules = "androidx.test:rules:1.5.0"
 test-facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.15.0"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-test-mockitoAndroid = "org.mockito:mockito-android:5.6.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.7.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.10.0"
-google-maps = "com.google.android.gms:play-services-maps:18.1.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:3.1.0"
+google-maps = "com.google.android.gms:play-services-maps:18.2.0"
+google-mapsCompose = "com.google.maps.android:maps-compose:4.3.0"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:32.1.3-jre"
 
@@ -80,7 +80,7 @@ kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.10.00" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.10.01" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
@@ -89,7 +89,7 @@ compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-compose-activity = "androidx.activity:activity-compose:1.8.0"
+compose-activity = "androidx.activity:activity-compose:1.8.1"
 
 destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
 destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }

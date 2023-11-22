@@ -76,7 +76,7 @@ fun BpkFloatingNotification(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = BpkSpacing.Lg, end = BpkSpacing.Lg, bottom = BpkSpacing.Lg),
+                .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg),
             contentAlignment = Alignment.BottomCenter,
         ) {
 

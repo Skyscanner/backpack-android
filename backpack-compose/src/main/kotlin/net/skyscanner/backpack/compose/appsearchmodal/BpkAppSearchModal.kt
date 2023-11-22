@@ -19,11 +19,14 @@
 package net.skyscanner.backpack.compose.appsearchmodal
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.internal.BpkAppSearchModalImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 
@@ -52,7 +55,7 @@ data class BpkSection(val headings: BpkSectionHeading? = null, val items: List<B
 
 data class BpkItem(
     val title: AnnotatedString,
-    val subtitle: String,
+    val subtitle: AnnotatedString,
     val icon: BpkIcon,
     val onItemSelected: () -> Unit,
 )
@@ -71,15 +74,18 @@ fun BpkAppSearchModal(
     onInputChanged: (String) -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
+    state: BpkModalState = rememberBpkModalState(),
 ) {
-
+    val coroutineScope = rememberCoroutineScope()
     BpkModal(
         navIcon = NavIcon.Close(
             contentDescription = closeAccessibilityLabel,
-            onClick = onClose,
+            onClick = {
+                coroutineScope.launch { state.hide() }
+            },
         ),
         modifier = modifier,
-        state = rememberBpkModalState(),
+        state = state,
         action = null,
         title = title,
         onDismiss = onClose,

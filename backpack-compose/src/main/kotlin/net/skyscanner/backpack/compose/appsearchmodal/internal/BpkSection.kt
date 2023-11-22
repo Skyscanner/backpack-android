@@ -25,6 +25,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.appsearchmodal.BpkItem
 import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -49,6 +51,7 @@ internal fun BpkSectionHeading(
         BpkText(
             text = sectionHeading.title,
             style = BpkTheme.typography.label1,
+            modifier = Modifier.semantics { heading() },
         )
         sectionHeading.action?.let {
             BpkButton(
