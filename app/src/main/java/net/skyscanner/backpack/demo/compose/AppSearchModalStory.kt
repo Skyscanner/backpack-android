@@ -69,13 +69,6 @@ fun AppSearchModalStoryContentInputText(modifier: Modifier = Modifier) {
 
 @Composable
 @AppSearchModalComponent
-@ComposeStory("ClearAction")
-fun AppSearchModalStoryContentClearAction(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = contentResult(), inputText = stringResource(id = R.string.city_rio), withClearAction = true)
-}
-
-@Composable
-@AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
     AppSearchModalStory(result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
@@ -96,7 +89,7 @@ private fun AppSearchModalStory(
     withClearAction: Boolean = false,
 ) {
     Column(modifier.fillMaxSize()) {
-        DefaultAppSearchModalSample(result = result, inputText, withClearAction = withClearAction)
+        DefaultAppSearchModalSample(result = result, inputText)
     }
 }
 
@@ -105,7 +98,6 @@ internal fun DefaultAppSearchModalSample(
     result: BpkAppSearchModalResult,
     inputText: String,
     modifier: Modifier = Modifier,
-    withClearAction: Boolean = false,
 ) {
     val destination = remember { mutableStateOf(inputText) }
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -125,9 +117,7 @@ internal fun DefaultAppSearchModalSample(
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
-            clearAction = if (withClearAction) {
-                BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" }
-            } else null,
+            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" },
         )
     }
 }

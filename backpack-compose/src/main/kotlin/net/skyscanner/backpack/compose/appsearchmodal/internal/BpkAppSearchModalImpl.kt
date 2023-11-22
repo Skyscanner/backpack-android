@@ -36,8 +36,8 @@ internal fun BpkAppSearchModalImpl(
     inputHint: String,
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
+    clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
-    clearAction: BpkClearAction? = null,
 ) {
     when (results) {
         is BpkAppSearchModalResult.Error -> {

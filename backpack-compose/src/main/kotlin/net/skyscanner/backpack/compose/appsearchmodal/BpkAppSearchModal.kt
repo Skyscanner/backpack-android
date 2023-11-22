@@ -74,9 +74,9 @@ fun BpkAppSearchModal(
     closeAccessibilityLabel: String,
     onInputChanged: (String) -> Unit,
     onClose: () -> Unit,
+    clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
-    clearAction: BpkClearAction? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
     BpkModal(
