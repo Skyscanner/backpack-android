@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -106,7 +107,6 @@ internal fun BpkGraphicPromoImpl(
                         verticalAlignment = verticalAlignment,
                         sponsor = sponsor,
                         sponsorLogo = sponsorLogo,
-                        modifier = Modifier.matchParentSize(),
                     )
                 },
                 content = image,
@@ -126,7 +126,6 @@ internal fun BpkGraphicPromoImpl(
                 verticalAlignment = verticalAlignment,
                 sponsor = sponsor,
                 sponsorLogo = sponsorLogo,
-                modifier = Modifier.matchParentSize(),
             )
         }
     }
@@ -220,6 +219,8 @@ private fun ForegroundContent(
                     textColor = textColor,
                 )
 
+                Spacer(Modifier.weight(1f))
+
                 SponsorOverlayView(
                     sponsor = sponsor,
                     textColor = textColor,
@@ -232,6 +233,8 @@ private fun ForegroundContent(
                     textColor = textColor,
                     sponsorLogo = sponsorLogo,
                 )
+
+                Spacer(Modifier.weight(1f))
 
                 MessageOverlay(
                     headline = headline,
