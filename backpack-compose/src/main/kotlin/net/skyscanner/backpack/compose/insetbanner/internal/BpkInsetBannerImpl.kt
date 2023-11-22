@@ -46,6 +46,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.InformationCircle
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
@@ -88,8 +89,7 @@ internal fun BpkInsetBannerImpl(
                 )
                 .background(
                     color = backgroundColor,
-                )
-                .clickable(enabled = showBody, onClick = toggleShowBody),
+                ).applyIf(showBody) { clickable { toggleShowBody() } },
             variant = variant,
             title = title,
             subHeadline = subHeadline,
