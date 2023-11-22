@@ -59,7 +59,7 @@ BpkGraphicPromo(
     subHeadline = "How to complete the climb in 3 days",
     verticalAlignment = VerticalAlignment.Bottom,
     overlayType = BpkOverlayType.SolidHigh,
-    sponsor = Sponsor(
+    sponsor = BpkGraphicsPromoSponsor(
         accessibilityLabel = "Sponsored",
         logo = "https://images.kiwi.com/airlines/64/FR.png",
         title = "Sponsored",

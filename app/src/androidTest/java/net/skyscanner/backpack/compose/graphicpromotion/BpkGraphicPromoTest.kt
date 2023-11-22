@@ -59,7 +59,7 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
             subHeadline = "How to complete the climb in 3 days",
-            sponsor = Sponsor(
+            sponsor = BpkGraphicsPromoSponsor(
                 accessibilityLabel = "Sponsored",
                 logo = "https://images.kiwi.com/airlines/64/FR.png",
                 title = "Sponsored",
@@ -71,7 +71,7 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     fun bottomAlignedKickerAvailable() = snap {
         BpkGraphicPromoSample(
             subHeadline = "How to complete the climb in 3 days",
-            bpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
         )
     }
 
@@ -80,7 +80,7 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
             subHeadline = "How to complete the climb in 3 days",
-            bpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
         )
     }
 
@@ -89,12 +89,12 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
         BpkGraphicPromoSample(
             kicker = "Travel tips",
             subHeadline = "How to complete the climb in 3 days",
-            sponsor = Sponsor(
+            sponsor = BpkGraphicsPromoSponsor(
                 accessibilityLabel = "Sponsored",
                 logo = "https://images.kiwi.com/airlines/64/FR.png",
                 title = "Sponsored",
             ),
-            bpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
         )
     }
 }

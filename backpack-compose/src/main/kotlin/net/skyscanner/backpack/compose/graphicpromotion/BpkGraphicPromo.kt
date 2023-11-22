@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 enum class BpkGraphicPromoVariant { OnDark, OnLight, }
 enum class BpkGraphicPromoVerticalAlignment { Top, Bottom, }
 
-data class Sponsor(
+data class BpkGraphicsPromoSponsor(
     val title: String,
     val logo: String,
     val accessibilityLabel: String,
@@ -41,9 +41,9 @@ fun BpkGraphicPromo(
     kicker: String? = null,
     subHeadline: String? = null,
     overlayType: BpkOverlayType? = null,
-    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
-    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
-    sponsor: Sponsor? = null,
+    variant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
+    sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
     tapAction: () -> Unit = {},
 ) {
@@ -53,8 +53,8 @@ fun BpkGraphicPromo(
         kicker = kicker,
         subHeadline = subHeadline,
         overlayType = overlayType,
-        bpkGraphicPromoVariant = bpkGraphicPromoVariant,
-        bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
+        variant = variant,
+        verticalAlignment = verticalAlignment,
         sponsor = sponsor,
         image = image,
         sponsorLogo = sponsorLogo,

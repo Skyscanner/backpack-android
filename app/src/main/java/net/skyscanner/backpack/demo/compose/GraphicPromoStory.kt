@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
-import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -62,7 +62,7 @@ internal fun GraphicPromoStoryAlignmentBottomWithText() {
     BpkGraphicPromoSample(
         kicker = "Travel tips",
         subHeadline = "How to complete the climb in 3 days",
-        bpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+        verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
     )
 }
 
@@ -73,7 +73,7 @@ internal fun GraphicPromoStoryAlignmentTopSponsored() {
     BpkGraphicPromoSample(
         kicker = "Travel tips",
         subHeadline = "How to complete the climb in 3 days",
-        sponsor = Sponsor(
+        sponsor = BpkGraphicsPromoSponsor(
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "Sponsored",
@@ -88,8 +88,8 @@ internal fun GraphicPromoStoryAlignmentBottomSponsored() {
     BpkGraphicPromoSample(
         kicker = "Travel tips",
         subHeadline = "How to complete the climb in 3 days",
-        bpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
-        sponsor = Sponsor(
+        verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+        sponsor = BpkGraphicsPromoSponsor(
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "Sponsored",
@@ -103,9 +103,9 @@ internal fun BpkGraphicPromoSample(
     headline: String = "Three Parks Challenge",
     subHeadline: String? = null,
     kicker: String? = null,
-    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
+    verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     overlayType: BpkOverlayType? = null,
-    sponsor: Sponsor? = null,
+    sponsor: BpkGraphicsPromoSponsor? = null,
 ) {
     BpkGraphicPromo(
         modifier = modifier
@@ -114,7 +114,7 @@ internal fun BpkGraphicPromoSample(
         kicker = kicker,
         headline = headline,
         subHeadline = subHeadline,
-        bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
+        verticalAlignment = verticalAlignment,
         overlayType = overlayType,
         sponsor = sponsor,
         image = {

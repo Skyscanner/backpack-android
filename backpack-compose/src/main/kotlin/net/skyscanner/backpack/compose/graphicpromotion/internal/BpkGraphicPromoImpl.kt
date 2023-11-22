@@ -50,7 +50,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVariant
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
@@ -68,9 +68,9 @@ internal fun BpkGraphicPromoImpl(
     kicker: String? = null,
     subHeadline: String? = null,
     overlayType: BpkOverlayType? = null,
-    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
-    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
-    sponsor: Sponsor? = null,
+    variant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
+    sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
@@ -103,8 +103,8 @@ internal fun BpkGraphicPromoImpl(
                         headline = headline,
                         kicker = kicker,
                         subHeadline = subHeadline,
-                        bpkGraphicPromoVariant = bpkGraphicPromoVariant,
-                        bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
+                        variant = variant,
+                        verticalAlignment = verticalAlignment,
                         sponsor = sponsor,
                         sponsorLogo = sponsorLogo,
                     )
@@ -122,8 +122,8 @@ internal fun BpkGraphicPromoImpl(
                 headline = headline,
                 kicker = kicker,
                 subHeadline = subHeadline,
-                bpkGraphicPromoVariant = bpkGraphicPromoVariant,
-                bpkGraphicPromoVerticalAlignment = bpkGraphicPromoVerticalAlignment,
+                variant = variant,
+                verticalAlignment = verticalAlignment,
                 sponsor = sponsor,
                 sponsorLogo = sponsorLogo,
             )
@@ -134,11 +134,13 @@ internal fun BpkGraphicPromoImpl(
 @Composable
 private fun SponsorOverlayView(
     textColor: Color,
-    sponsor: Sponsor?,
+    sponsor: BpkGraphicsPromoSponsor?,
+    modifier: Modifier = Modifier,
     sponsorLogo: (@Composable () -> Unit)? = null,
 ) {
     if (sponsor != null) {
         Column(
+            modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
         ) {
             BpkText(
@@ -162,8 +164,10 @@ private fun MessageOverlay(
     kicker: String?,
     subHeadline: String?,
     textColor: Color,
+    modifier: Modifier = Modifier,
 ) {
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
     ) {
         if (!kicker.isNullOrBlank()) {
@@ -192,20 +196,21 @@ private fun MessageOverlay(
 @Composable
 private fun ForegroundContent(
     headline: String,
+    modifier: Modifier = Modifier,
     kicker: String? = null,
     subHeadline: String? = null,
-    bpkGraphicPromoVariant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
-    bpkGraphicPromoVerticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
-    sponsor: Sponsor? = null,
+    variant: BpkGraphicPromoVariant = BpkGraphicPromoVariant.OnDark,
+    verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
+    sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
 ) {
-    val textColor: Color = when (bpkGraphicPromoVariant) {
+    val textColor: Color = when (variant) {
         BpkGraphicPromoVariant.OnDark -> BpkTheme.colors.textOnDark
         BpkGraphicPromoVariant.OnLight -> BpkTheme.colors.textOnLight
     }
 
     Column(modifier = Modifier.padding(BpkSpacing.Lg)) {
-        when (bpkGraphicPromoVerticalAlignment) {
+        when (verticalAlignment) {
             BpkGraphicPromoVerticalAlignment.Top -> {
                 MessageOverlay(
                     headline = headline,
