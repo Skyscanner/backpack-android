@@ -21,6 +21,10 @@ package net.skyscanner.backpack.compose.graphicpromotion
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.demo.compose.BpkGraphicPromoSample
+import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentBottomSponsored
+import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentBottomWithText
+import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentTopSponsored
+import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentTopWithKicker
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryDefault
 import org.junit.Test
 
@@ -48,23 +52,12 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
 
     @Test
     fun topAlignedKickerSubHeadlineAvailable() = snap {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            subHeadline = "How to complete the climb in 3 days",
-        )
+        GraphicPromoStoryAlignmentTopWithKicker()
     }
 
     @Test
     fun topAlignedKickerSubHeadlineSponsoredAvailable() = snap {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            subHeadline = "How to complete the climb in 3 days",
-            sponsor = BpkGraphicsPromoSponsor(
-                accessibilityLabel = "Sponsored",
-                logo = "https://images.kiwi.com/airlines/64/FR.png",
-                title = "Sponsored",
-            ),
-        )
+        GraphicPromoStoryAlignmentTopSponsored()
     }
 
     @Test
@@ -77,24 +70,11 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
 
     @Test
     fun bottomAlignedKickerSubHeadlineAvailable() = snap {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            subHeadline = "How to complete the climb in 3 days",
-            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
-        )
+        GraphicPromoStoryAlignmentBottomWithText()
     }
 
     @Test
     fun bottomAlignedKickerSubHeadlineSponsoredAvailable() = snap {
-        BpkGraphicPromoSample(
-            kicker = "Travel tips",
-            subHeadline = "How to complete the climb in 3 days",
-            sponsor = BpkGraphicsPromoSponsor(
-                accessibilityLabel = "Sponsored",
-                logo = "https://images.kiwi.com/airlines/64/FR.png",
-                title = "Sponsored",
-            ),
-            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
-        )
+        GraphicPromoStoryAlignmentBottomSponsored()
     }
 }
