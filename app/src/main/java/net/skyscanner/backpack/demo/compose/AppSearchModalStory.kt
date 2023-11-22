@@ -86,7 +86,6 @@ private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
     inputText: String = "",
-    withClearAction: Boolean = false,
 ) {
     Column(modifier.fillMaxSize()) {
         DefaultAppSearchModalSample(result = result, inputText)
