@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.slider.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
-import net.skyscanner.backpack.compose.utils.applyIf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,6 +60,10 @@ internal fun BpkRangeSliderImpl(
 ) {
     val startInteractionSource = remember { MutableInteractionSource() }
     val endInteractionSource = remember { MutableInteractionSource() }
+
+    val isLowerThumbBeingTouched = startInteractionSource.collectIsDraggedAsState().value
+    val isUpperThumbBeingTouched = endInteractionSource.collectIsDraggedAsState().value
+
     RangeSlider(
         value = value,
         onValueChange = onValueChange,
@@ -71,38 +75,39 @@ internal fun BpkRangeSliderImpl(
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
         startThumb = {
-            lowerThumbLabel?.let {
+            if (isLowerThumbBeingTouched && lowerThumbLabel != null) {
                 SlideRangeLabel(
-                    label = it,
+                    label = lowerThumbLabel,
                     enabled = enabled,
                     interactionSource = startInteractionSource,
                 )
-            } ?: SliderDefaults.Thumb(
-                interactionSource = startInteractionSource,
-                colors = sliderColors(),
-                enabled = enabled,
-            )
+            } else {
+                SliderDefaults.Thumb(
+                    interactionSource = startInteractionSource,
+                    colors = sliderColors(),
+                    enabled = enabled,
+                )
+            }
         },
         endThumb = {
-            upperThumbLabel?.let {
+            if (isUpperThumbBeingTouched && upperThumbLabel != null) {
                 SlideRangeLabel(
-                    label = it,
+                    label = upperThumbLabel,
                     enabled = enabled,
                     interactionSource = endInteractionSource,
                 )
-            } ?: SliderDefaults.Thumb(
-                interactionSource = endInteractionSource,
-                colors = sliderColors(),
-                enabled = enabled,
-            )
+            } else {
+                SliderDefaults.Thumb(
+                    interactionSource = endInteractionSource,
+                    colors = sliderColors(),
+                    enabled = enabled,
+                )
+            }
         },
         track = {
             SliderDefaults.Track(
                 colors = sliderColors(),
                 sliderPositions = it,
-                modifier = Modifier.applyIf(upperThumbLabel != null || lowerThumbLabel != null) {
-                    padding(top = LabelOffset)
-                },
             )
         },
         colors = sliderColors(),
@@ -144,7 +149,7 @@ private fun SlideRangeLabel(
             )
         }
         SliderDefaults.Thumb(
-            modifier = Modifier.padding(top = LabelOffset)
+            modifier = Modifier
                 .semantics { stateDescription = label },
             interactionSource = interactionSource,
             colors = sliderColors(),
@@ -170,13 +175,15 @@ private fun LabelLayout(
         // ignore the label width as it'll be drawn outside the bounds of the range slider to avoid jumping around
         layout(thumbPlaceable.width, thumbPlaceable.height) {
             // ensure the label is centred on the thumb
-            labelPlaceable.placeRelative(x = (thumbPlaceable.width - labelPlaceable.width) / 2, y = 0)
+            labelPlaceable.placeRelative(
+                x = (thumbPlaceable.width - labelPlaceable.width) / 2,
+                y = -(thumbPlaceable.width + labelPlaceable.height / 2),
+            )
             thumbPlaceable.placeRelative(x = 0, y = 0)
         }
     }
 }
 
-private val LabelOffset = 34.dp
 private val FlareHeight = 6.dp
 private val BorderRadius = 6.dp
 
