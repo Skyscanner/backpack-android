@@ -19,17 +19,21 @@
 package net.skyscanner.backpack.compose.cardwrapper
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
+import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardElevation
+import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -39,102 +43,88 @@ import org.junit.Test
 class BpkCardWrapperTest : BpkSnapshotTest() {
 
     @Test
-    fun wrapperWidthSmallerThanMinimum() {
+    fun default() {
         snap {
             BpkCardWrapper(
-                modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
+                modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
-                headerContent = {
-                    BpkText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(BpkSpacing.Xxl),
-                        text = stringResource(id = R.string.card_wrapper_header),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
-                cardContent = {
-                    Image(
-                        modifier = Modifier
-                            .height(BpkSpacing.Xxl * 2)
-                            .fillMaxWidth(),
-                        painter = painterResource(id = R.drawable.canadian_rockies_canada),
-                        contentDescription = "",
-                        contentScale = ContentScale.Crop,
-                    )
-                    BpkText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.card_wrapper_card),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
+                headerContent = { HeaderContent() },
+                cardContent = { CardContent() },
             )
         }
     }
 
     @Test
-    fun wrapperWidthGreaterThanMinimum() {
+    @Variants(BpkTestVariant.Default)
+    fun largeRadius() {
         snap {
             BpkCardWrapper(
-                modifier = Modifier.width(400.dp),
+                modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
-                headerContent = {
-                    BpkText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(BpkSpacing.Xxl),
-                        text = stringResource(id = R.string.card_wrapper_header),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
-                cardContent = {
-                    Image(
-                        modifier = Modifier
-                            .height(BpkSpacing.Xxl * 2)
-                            .fillMaxWidth(),
-                        painter = painterResource(id = R.drawable.canadian_rockies_canada),
-                        contentDescription = "",
-                        contentScale = ContentScale.Crop,
-                    )
-                    BpkText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.card_wrapper_card),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
+                corner = BpkCardCorner.Large,
+                headerContent = { HeaderContent() },
+                cardContent = { CardContent() },
             )
         }
     }
 
     @Test
-    fun emptyWrapper() {
+    @Variants(BpkTestVariant.Default)
+    fun noPadding() {
         snap {
             BpkCardWrapper(
-                modifier = Modifier.width(400.dp),
+                modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
-                headerContent = {
-                    BpkText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(BpkSpacing.Xxl),
-                        text = stringResource(id = R.string.card_wrapper_header),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
-                cardContent = {
-                    BpkText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.card_wrapper_card),
-                        style = BpkTheme.typography.bodyDefault,
-                        textAlign = TextAlign.Center,
-                    )
-                },
+                cardPadding = BpkCardPadding.None,
+                headerContent = { HeaderContent() },
+                cardContent = { CardContent() },
             )
         }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun focus() {
+        snap {
+            BpkCardWrapper(
+                modifier = Modifier.fillMaxWidth(),
+                backgroundColor = BpkTheme.colors.coreEco,
+                elevation = BpkCardElevation.Focus,
+                headerContent = { HeaderContent() },
+                cardContent = { CardContent() },
+            )
+        }
+    }
+
+    @Composable
+    private fun CardContent(modifier: Modifier = Modifier) {
+        Box(modifier) {
+            Image(
+                modifier = Modifier
+                    .height(BpkSpacing.Xxl * 2)
+                    .fillMaxWidth(),
+                painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+            )
+            BpkText(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(id = R.string.card_wrapper_card),
+                style = BpkTheme.typography.bodyDefault,
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+
+    @Composable
+    private fun HeaderContent(modifier: Modifier = Modifier) {
+        BpkText(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(BpkSpacing.Xxl),
+            text = stringResource(id = R.string.card_wrapper_header),
+            style = BpkTheme.typography.bodyDefault,
+            textAlign = TextAlign.Center,
+        )
     }
 }

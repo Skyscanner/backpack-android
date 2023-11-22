@@ -30,6 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -99,6 +101,7 @@ internal fun BpkTopNavBarImpl(
                 maxLines = 1,
                 style = BpkTheme.typography.heading2,
                 overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.semantics { heading() },
             )
         },
         smallTitle = {
@@ -107,6 +110,7 @@ internal fun BpkTopNavBarImpl(
                 maxLines = 1,
                 style = BpkTheme.typography.heading4,
                 overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.semantics { heading() },
             )
         },
         modifier = modifier
