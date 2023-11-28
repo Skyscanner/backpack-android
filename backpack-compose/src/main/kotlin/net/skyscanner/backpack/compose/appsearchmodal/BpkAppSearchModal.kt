@@ -58,7 +58,7 @@ data class BpkItem(
     val subtitle: AnnotatedString,
     val icon: BpkIcon,
     val onItemSelected: () -> Unit,
-    val type: String,
+    val tertiaryLabel: String? = null,
 )
 
 data class BpkSectionHeading(val title: String, val action: BpkAction? = null)
