@@ -130,7 +130,9 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.current_location_subtitle)) },
                     icon = BpkIcon.UseLocation,
-                ) {},
+                    onItemSelected = {},
+                    type = "",
+                ),
             ),
         ),
         BpkSection(
@@ -144,7 +146,7 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
-
+                    type = "",
                 ),
                 BpkItem(
                     title = buildAnnotatedString {
@@ -156,14 +158,14 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
-
+                    type = "",
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_rome)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
-
+                    type = "",
                 ),
             ),
         ),
@@ -177,28 +179,28 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
-
+                    type = "City",
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_paris)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
-
+                    type = "City",
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_algiers)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
-
+                    type = "City",
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_madrid)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
                     onItemSelected = {},
-
+                    type = "City",
                 ),
             ),
         ),

@@ -19,9 +19,11 @@
 package net.skyscanner.backpack.compose.appsearchmodal.internal
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,17 +72,32 @@ internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .clickable(onClick = item.onItemSelected),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        BpkIcon(
-            icon = item.icon,
-            contentDescription = null,
-            size = BpkIconSize.Large,
-
-        )
-        Column {
-            BpkText(text = item.title)
-            BpkText(text = item.subtitle)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            BpkIcon(
+                icon = item.icon,
+                contentDescription = null,
+                size = BpkIconSize.Large,
+            )
+            Column {
+                BpkText(text = item.title)
+                BpkText(
+                    style = BpkTheme.typography.footnote,
+                    text = item.subtitle,
+                )
+            }
+        }
+        Box(
+            modifier = Modifier.padding(BpkSpacing.Base),
+        ) {
+            BpkText(
+                style = BpkTheme.typography.footnote,
+                text = item.type,
+            )
         }
     }
 }
