@@ -8,7 +8,7 @@ In this document we describe how to set up this repository for development and t
 
 Please ensure you have push rights to this repository, rather than forking the repository for contributions. Follow the "Engineering Contribution" guide in the Backpack space in confluence to get access.
 
-## Environment
+## Environmen
 
 To set up the Android environment, install Android Studio. Make sure that "Android SDK Command-line Tools (latest)" are installed as well (in Android SDK manager). Once installed, use the following commands to set up the Android SDK:
 
