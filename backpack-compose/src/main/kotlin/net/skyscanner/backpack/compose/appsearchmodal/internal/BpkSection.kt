@@ -89,6 +89,7 @@ internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier) {
         item.tertiaryLabel?.let {
             BpkText(
                 style = BpkTheme.typography.footnote,
+                color = BpkTheme.colors.textSecondary,
                 text = it,
             )
         }

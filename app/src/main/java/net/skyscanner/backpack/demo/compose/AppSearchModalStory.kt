@@ -157,12 +157,6 @@ internal fun contentResult() = BpkAppSearchModalResult.Content(
                     icon = BpkIcon.Airports,
                     onItemSelected = {},
                 ),
-                BpkItem(
-                    title = buildAnnotatedString { append(stringResource(id = R.string.city_rome)) },
-                    subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
-                    icon = BpkIcon.Airports,
-                    onItemSelected = {},
-                ),
             ),
         ),
         BpkSection(
