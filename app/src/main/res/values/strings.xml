@@ -319,6 +319,7 @@
     <string name="recent_searches">Recent Searches</string>
     <string name="popular_destinations">Popular Destinations</string>
     <string name="search_modal_item_subtitle">City, United Kingdom</string>
+    <string name="search_modal_item_tertiary_label">City</string>
     <string name="view_more">View More</string>
     <string name="try_again">Try Again</string>
     <string name="destination">Destination</string>
