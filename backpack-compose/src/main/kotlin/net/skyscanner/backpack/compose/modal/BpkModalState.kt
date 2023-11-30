@@ -21,7 +21,8 @@ package net.skyscanner.backpack.compose.modal
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun rememberBpkModalState() = remember {
@@ -32,12 +33,22 @@ class BpkModalState internal constructor(
     internal val isVisible: MutableTransitionState<Boolean>,
 ) {
     suspend fun show() {
-        isVisible.targetState = true
-        delay(ModalAnimationDurationMs.toLong())
+        animateState(true)
     }
 
     suspend fun hide() {
-        isVisible.targetState = false
-        delay(ModalAnimationDurationMs.toLong())
+        animateState(false)
+    }
+
+    private suspend fun animateState(newVisibility: Boolean) {
+        isVisible.targetState = newVisibility
+        if (isVisible.currentState == newVisibility) {
+            return
+        }
+        withContext(Dispatchers.IO) {
+            while (!isVisible.isIdle) {
+                // continue until the animation is finished
+            }
+        }
     }
 }
