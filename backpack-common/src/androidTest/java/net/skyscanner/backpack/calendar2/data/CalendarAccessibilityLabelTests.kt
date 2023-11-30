@@ -107,15 +107,17 @@ class CalendarAccessibilityLabelTests {
             ),
         )
         testCalendarWith(calendarParams) {
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+            stateMachine.onClick(CalendarInteraction.DateClicked(state.cells[8] as CalendarCell.Day))
 
             verify {
 
-                assertEquals(LocalDate.of(2000, Month.JANUARY, 1), (state.cells[7] as CalendarCell.Day).date)
-                assertEquals("endSelectionHint", (state.cells[7] as CalendarCell.Day).onClickLabel)
-                assertEquals("startSelectionState", (state.cells[7] as CalendarCell.Day).stateDescription)
+                assertEquals(LocalDate.of(2000, Month.JANUARY, 2), (state.cells[8] as CalendarCell.Day).date)
                 assertEquals("endSelectionHint", (state.cells[8] as CalendarCell.Day).onClickLabel)
-                assertEquals(null, (state.cells[8] as CalendarCell.Day).stateDescription)
+                assertEquals("startSelectionState", (state.cells[8] as CalendarCell.Day).stateDescription)
+                assertEquals("endSelectionHint", (state.cells[9] as CalendarCell.Day).onClickLabel)
+                assertEquals(null, (state.cells[9] as CalendarCell.Day).stateDescription)
+                assertEquals("startSelectionHint", (state.cells[7] as CalendarCell.Day).onClickLabel)
+                assertEquals(null, (state.cells[7] as CalendarCell.Day).stateDescription)
             }
         }
     }
