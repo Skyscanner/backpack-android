@@ -52,12 +52,12 @@ class BpkCalendarTest {
 
     private val DefaultSingle = CalendarParams(
         locale = Locale.UK,
-        selectionMode = CalendarParams.SelectionMode.Single,
+        selectionMode = CalendarParams.SelectionMode.Single(),
         range = initialRange,
         now = now,
     )
 
-    private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
+    private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range())
 
     private val context = TestContext
 

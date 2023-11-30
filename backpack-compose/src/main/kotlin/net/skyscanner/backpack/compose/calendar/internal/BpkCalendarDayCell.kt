@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +29,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -38,7 +38,9 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -70,15 +72,20 @@ internal fun BpkCalendarDayCell(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .padding(bottom = BpkSpacing.Lg)
-            .selectable(
+            .clickable(
                 indication = null,
-                selected = selection != null,
                 enabled = !inactive,
                 onClick = { onClick(model) },
+                onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
-            ),
+            ).semantics {
+                if (model.stateDescription != null) {
+                    stateDescription = model.stateDescription!!
+                } else {
+                    selected = selection != null && selection != Selection.Middle
+                }
+            },
     ) {
-
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -107,7 +114,8 @@ internal fun BpkCalendarDayCell(
         if (!inactive && !label.isNullOrEmpty()) {
             BpkText(
                 text = label,
-                modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
+                modifier = Modifier
+                    .padding(horizontal = BpkSpacing.Sm),
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
                 maxLines = 2,

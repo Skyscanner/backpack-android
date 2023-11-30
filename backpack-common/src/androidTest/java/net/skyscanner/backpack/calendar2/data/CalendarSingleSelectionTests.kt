@@ -34,7 +34,7 @@ import org.junit.Test
 class CalendarSingleSelectionTests {
 
     private val singleSelection = CalendarSettings.Default.copy(
-        selectionMode = CalendarParams.SelectionMode.Single,
+        selectionMode = CalendarParams.SelectionMode.Single(),
     )
 
     @Before

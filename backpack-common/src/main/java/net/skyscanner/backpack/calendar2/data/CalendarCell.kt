@@ -62,6 +62,8 @@ sealed class CalendarCell {
         val text: CharSequence,
         val outOfRange: Boolean,
         val contentDescription: String,
+        val stateDescription: String?,
+        val onClickLabel: String?,
         override val yearMonth: YearMonth,
     ) : CalendarCell() {
 
@@ -104,6 +106,8 @@ internal fun CalendarCellDay(
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
     contentDescription = date.format(params.dateContentDescriptionFormatter),
+    stateDescription = stateDescription(date, params.selectionMode, selection),
+    onClickLabel = onClickLabel(date, params.selectionMode, selection),
     text = buildSpannedString {
         val span = TtsSpan.DateBuilder()
             .setDay(date.dayOfMonth)
@@ -119,6 +123,7 @@ internal fun CalendarCellDay(
             selection.date -> CalendarCell.Selection.Single
             else -> null
         }
+
         is CalendarSelection.Dates -> when {
             selection.start == date && selection.end == date -> CalendarCell.Selection.Double
             selection.start == date && selection.end == null -> CalendarCell.Selection.Single
@@ -127,6 +132,7 @@ internal fun CalendarCellDay(
             selection.end != null && date in selection -> CalendarCell.Selection.Middle
             else -> null
         }
+
         is CalendarSelection.Month -> when {
             selection.start == date -> CalendarCell.Selection.StartMonth
             selection.end == date -> CalendarCell.Selection.EndMonth
@@ -135,3 +141,55 @@ internal fun CalendarCellDay(
         }
     },
 )
+
+private fun stateDescription(
+    date: LocalDate,
+    selectionMode: CalendarParams.SelectionMode,
+    selection: CalendarSelection,
+): String? = when (selectionMode) {
+    is CalendarParams.SelectionMode.Single -> when (selection) {
+        is CalendarSelection.None -> selectionMode.noSelectionState
+        is CalendarSelection.Single ->
+            when (selection.date) {
+                date -> selectionMode.startSelectionState
+                else -> null
+            }
+        else -> null
+    }
+
+    is CalendarParams.SelectionMode.Range -> when (selection) {
+        is CalendarSelection.Dates ->
+            when {
+                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
+                selection.start == date && selection.end == null -> selectionMode.startSelectionState
+                selection.start == date && selection.end != null -> selectionMode.startSelectionState
+                selection.end == date -> selectionMode.endSelectionState
+                selection.end != null && date in selection -> selectionMode.betweenSelectionState
+                else -> null
+            }
+
+        else -> null
+    }
+
+    is CalendarParams.SelectionMode.Disabled -> null
+}
+
+private fun onClickLabel(
+    date: LocalDate,
+    selectionMode: CalendarParams.SelectionMode,
+    selection: CalendarSelection,
+): String? = when (selectionMode) {
+    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
+    is CalendarParams.SelectionMode.Range -> when (selection) {
+        is CalendarSelection.None -> selectionMode.startSelectionHint
+        is CalendarSelection.Dates ->
+            when {
+                selection.end != null || date < selection.start -> selectionMode.startSelectionHint
+                else -> selectionMode.endSelectionHint
+            }
+
+        else -> null
+    }
+
+    is CalendarParams.SelectionMode.Disabled -> null
+}
