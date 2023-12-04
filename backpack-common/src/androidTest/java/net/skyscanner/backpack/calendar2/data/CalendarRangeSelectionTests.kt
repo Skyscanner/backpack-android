@@ -39,7 +39,7 @@ import org.threeten.bp.YearMonth
 class CalendarRangeSelectionTests {
 
     private val rangeSelection = CalendarSettings.Default.copy(
-        selectionMode = CalendarParams.SelectionMode.Range,
+        selectionMode = CalendarParams.SelectionMode.Range(),
     )
 
     private val monthSelection = CalendarSettings.Default.copy(
@@ -47,7 +47,7 @@ class CalendarRangeSelectionTests {
             "Select whole month",
             selectableMonthRange = YearMonth.of(2000, 1)..YearMonth.of(2000, 12),
         ),
-        selectionMode = CalendarParams.SelectionMode.Range,
+        selectionMode = CalendarParams.SelectionMode.Range(),
     )
 
     @Before

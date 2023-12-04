@@ -9,12 +9,12 @@ androidPlugin = "8.1.4"
 lint = "31.1.4"  # android plugin, lint and sdk-common need to be updated together
 androidSdkCommon = "31.1.4" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
-detekt = "1.23.3"
+detekt = "1.23.4"
 lifecycle = "2.6.2"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.7.3"
-kotlinPoet = "1.15.1"
+kotlinPoet = "1.15.2"
 ktor = "2.3.6"
 
 [libraries]
@@ -27,7 +27,7 @@ plugin-nexusPublishing = "io.github.gradle-nexus:publish-plugin:1.3.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.3"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.4"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 

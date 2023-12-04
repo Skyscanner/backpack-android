@@ -18,6 +18,12 @@
 
 package net.skyscanner.backpack.compose.calendar
 
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -25,6 +31,7 @@ import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
+import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestScope
@@ -38,7 +45,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.LocalDate
-import java.util.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BpkCalendarTest {
@@ -50,12 +56,26 @@ class BpkCalendarTest {
 
     private val DefaultSingle = CalendarParams(
         locale = Locale.UK,
-        selectionMode = CalendarParams.SelectionMode.Single,
+        selectionMode = CalendarParams.SelectionMode.Single(
+            startSelectionHint = "startSelectionHint",
+            noSelectionState = "noSelectionState",
+            startSelectionState = "startSelectionState",
+        ),
         range = initialRange,
         now = now,
     )
 
-    private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
+    private val DefaultRange = DefaultSingle.copy(
+        selectionMode = CalendarParams.SelectionMode.Range(
+            startSelectionHint = "startSelectionHint",
+            endSelectionHint = "endSelectionHint",
+            noSelectionState = "noSelectionState",
+            startSelectionState = "startSelectionState",
+            startAndEndSelectionState = "startAndEndSelectionState",
+            endSelectionState = "endSelectionState",
+            betweenSelectionState = "betweenSelectionState",
+        ),
+    )
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -72,10 +92,13 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
+            .assertOnClickLabelEquals("endSelectionHint")
+            .assertStateDescriptionEquals("startSelectionState")
             .performClick()
 
         val state = controller.state.first()
@@ -95,11 +118,15 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("13")
             .onLast()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
+            .assertStateDescriptionEquals("startSelectionState")
 
         composeTestRule.onAllNodesWithText("14")
             .onLast()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
+            .assertStateDescriptionEquals("startSelectionState")
 
         val state = controller.state.first()
 
@@ -121,11 +148,15 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
+            .assertStateDescriptionEquals("startSelectionState")
 
         composeTestRule.onAllNodesWithText("14")
             .onLast()
+            .assertOnClickLabelEquals("endSelectionHint")
             .performClick()
+            .assertStateDescriptionEquals("endSelectionState")
 
         val state = controller.state.first()
 
@@ -145,7 +176,9 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
+            .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
+            .assertStateDescriptionEquals("startSelectionState")
 
         val state = controller.state.first()
 
@@ -155,3 +188,13 @@ class BpkCalendarTest {
     private fun createController(params: CalendarParams): BpkCalendarController =
         BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
 }
+
+fun SemanticsNodeInteraction.assertOnClickLabelEquals(value: String): SemanticsNodeInteraction = assert(
+    SemanticsMatcher("${SemanticsActions.OnClick.name} = [$value]") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label == value
+    })
+
+fun SemanticsNodeInteraction.assertStateDescriptionEquals(value: String): SemanticsNodeInteraction = assert(
+    SemanticsMatcher("${SemanticsProperties.StateDescription.name} = [$value]") {
+        it.config.getOrNull(SemanticsProperties.StateDescription) == value
+    })

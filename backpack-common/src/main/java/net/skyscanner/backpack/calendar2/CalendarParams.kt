@@ -20,6 +20,8 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import java.text.SimpleDateFormat
+import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
@@ -29,8 +31,6 @@ import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.format.FormatStyle
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 /**
  * Describes the calendar configuration.
@@ -80,12 +80,28 @@ data class CalendarParams(
         /**
          * Only a single, non-disabled date can be selected.
          */
-        data object Single : SelectionMode
+
+        /**
+         * Accessibility labels are NOT supported in the view version
+         */
+        data class Single(
+            val startSelectionHint: String? = null,
+            val noSelectionState: String? = null,
+            val startSelectionState: String? = null,
+        ) : SelectionMode
 
         /**
          * A range of dates can be selected.
          */
-        data object Range : SelectionMode
+        data class Range(
+            val startSelectionHint: String? = null,
+            val endSelectionHint: String? = null,
+            val noSelectionState: String? = null,
+            val startSelectionState: String? = null,
+            val startAndEndSelectionState: String? = null,
+            val endSelectionState: String? = null,
+            val betweenSelectionState: String? = null,
+        ) : SelectionMode
     }
 
     /**
