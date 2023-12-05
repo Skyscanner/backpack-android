@@ -46,6 +46,7 @@
     <color name="bpkSurfaceContrast">#ff05203c</color>
     <color name="bpkSurfaceDefault">#ffffffff</color>
     <color name="bpkSurfaceElevated">#ffffffff</color>
+    <color name="bpkSurfaceHero">#ff0062e3</color>
     <color name="bpkSurfaceHighlight">#ffe0e3e5</color>
     <color name="bpkSurfaceSubtle">#ffe3f0ff</color>
     <color name="bpkTextDisabled">#33000000</color>
