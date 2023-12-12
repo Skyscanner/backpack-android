@@ -60,7 +60,7 @@ internal fun BpkRatingLayout(
                     BpkRatingTitle(Modifier.alignByBaseline(), title)
                 }
                 if (subtitle != null) {
-                    BpkRatingSubtitle(subtitle, Modifier.alignByBaseline())
+                    BpkRatingSubtitle(subtitle, size, Modifier.alignByBaseline())
                 }
             }
 
@@ -72,7 +72,7 @@ internal fun BpkRatingLayout(
                         BpkRatingTitle(content = title)
                     }
                     if (subtitle != null) {
-                        BpkRatingSubtitle(subtitle)
+                        BpkRatingSubtitle(subtitle, size)
                     }
                 }
         }
