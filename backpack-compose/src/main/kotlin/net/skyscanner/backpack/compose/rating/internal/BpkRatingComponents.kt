@@ -110,12 +110,16 @@ internal fun BpkRatingTitle(
 @Composable
 internal fun BpkRatingSubtitle(
     subtitle: String,
+    size: BpkRatingSize,
     modifier: Modifier = Modifier,
 ) {
     BpkText(
         modifier = modifier,
         text = subtitle,
-        style = BpkTheme.typography.bodyDefault,
+        style = when (size) {
+            BpkRatingSize.Base -> BpkTheme.typography.caption
+            BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
+        },
         color = BpkTheme.colors.textSecondary,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
