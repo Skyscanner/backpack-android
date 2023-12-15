@@ -38,7 +38,7 @@ BpkRangeSlider(
 )
 ```
 
-Example of a `BpkRangeSlider` with Label:
+Example of a `BpkRangeSlider` with Label displayed when thumb is dragged:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.slider.BpkSlider

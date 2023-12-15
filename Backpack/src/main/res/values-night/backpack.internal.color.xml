@@ -20,6 +20,7 @@
 
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
+    <color name="__privateBadgeBackgroundNormal">#ff243346</color>
     <color name="__privateButtonDestructiveNormalBackground">#ff243346</color>
     <color name="__privateButtonDestructiveNormalForeground">#ffff649c</color>
     <color name="__privateButtonDestructivePressedBackground">#ffff649c</color>
@@ -51,6 +52,12 @@
     <color name="__privateChipOnDarkOnBackground">#ff054184</color>
     <color name="__privateChipOnDarkOnDismissIcon">#80ffffff</color>
     <color name="__privateChipOnDarkPressedStroke">#ff054184</color>
+    <color name="__privateInfoBannerDefault">#ff131d2b</color>
+    <color name="__privateInfoBannerError">#ffff649c</color>
+    <color name="__privateInfoBannerInfo">#ffbdc4cb</color>
+    <color name="__privateInfoBannerOnContrast">#ff131d2b</color>
+    <color name="__privateInfoBannerSuccess">#ff62f1c6</color>
+    <color name="__privateInfoBannerWarning">#fffeeb87</color>
     <color name="__privateMapClusterPin">#ffffffff</color>
     <color name="__privateMapClusterPinPreviousSelection">#ff94c3ff</color>
     <color name="__privateMapMarkerViewedForeground">#cc000000</color>

@@ -76,11 +76,22 @@ internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier) {
             icon = item.icon,
             contentDescription = null,
             size = BpkIconSize.Large,
-
         )
-        Column {
+        Column(
+            modifier = Modifier.weight(1f),
+        ) {
             BpkText(text = item.title)
-            BpkText(text = item.subtitle)
+            BpkText(
+                style = BpkTheme.typography.footnote,
+                text = item.subtitle,
+            )
+        }
+        item.tertiaryLabel?.let {
+            BpkText(
+                style = BpkTheme.typography.footnote,
+                color = BpkTheme.colors.textSecondary,
+                text = it,
+            )
         }
     }
 }
