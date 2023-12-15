@@ -211,7 +211,7 @@ jobs:
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
           path: app/build/reports/shot/
@@ -219,7 +219,7 @@ jobs:
 
       - name: Upload Logcat Logs
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
           path: logcat.log
