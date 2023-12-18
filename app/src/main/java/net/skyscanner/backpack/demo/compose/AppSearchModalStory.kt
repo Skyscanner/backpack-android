@@ -42,8 +42,8 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSection
 import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.fieldset.BpkClearAction
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
 import net.skyscanner.backpack.compose.tokens.Landmark

@@ -43,6 +43,11 @@ import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 
 internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFieldStatus.Default }
 
+data class BpkClearAction(
+    val contentDescription: String,
+    val onClick: () -> Unit,
+)
+
 sealed interface BpkFieldStatus {
 
     data object Default : BpkFieldStatus
@@ -53,7 +58,7 @@ sealed interface BpkFieldStatus {
 
     data object Validated : BpkFieldStatus
 
-    data object Clear : BpkFieldStatus
+    data class Clear(val action: BpkClearAction) : BpkFieldStatus
 }
 
 @Composable

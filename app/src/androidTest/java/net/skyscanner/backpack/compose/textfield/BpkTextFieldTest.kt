@@ -23,6 +23,7 @@ import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.fieldset.BpkClearAction
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -85,15 +86,14 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    fun withClearAction() {
+    fun withClearStatus() {
         snap {
             BpkTextField(
                 value = "Value",
                 onValueChange = {},
                 placeholder = "Placeholder",
-                status = BpkFieldStatus.Clear,
+                status = BpkFieldStatus.Clear(action = BpkClearAction("Clear") {}),
                 icon = BpkIcon.Accessibility,
-                clearAction = BpkClearAction("Clear") {},
             )
         }
     }

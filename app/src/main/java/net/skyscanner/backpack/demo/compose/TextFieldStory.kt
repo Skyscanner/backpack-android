@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -31,15 +32,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.LocalTextStyle
+import net.skyscanner.backpack.compose.fieldset.BpkClearAction
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textarea.BpkTextArea
-import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextFieldComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -71,9 +73,6 @@ fun TextFieldStory(
             BpkText(stringResource(R.string.generic_with_leading_icon))
             TextFieldLeadingIconExample(status = status)
 
-            BpkText(stringResource(R.string.with_clear_action_title))
-            TextFieldClearActionExample(status = status)
-
             BpkText(stringResource(R.string.generic_single_line))
             TextFieldSingleLineExample(status = status)
 
@@ -81,6 +80,30 @@ fun TextFieldStory(
             TextFieldMultilineExample(status = status)
         }
     }
+
+@Composable
+@TextFieldComponent
+@ComposeStory(name = "Clear")
+fun TextClearActionStory(modifier: Modifier = Modifier) {
+    val initialValue = stringResource(R.string.city_shenzhen)
+    var value by remember { mutableStateOf(initialValue) }
+
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkText(stringResource(R.string.with_clear_action_title))
+        BpkTextField(
+            value = value,
+            onValueChange = { value = it },
+            placeholder = stringResource(R.string.generic_placeholder),
+            icon = BpkIcon.Search,
+            status = BpkFieldStatus.Clear(action = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
+                value = ""
+            }),
+        )
+    }
+}
 
 @Composable
 @TextFieldComponent
@@ -99,13 +122,6 @@ internal fun TextFieldScreenshotValidated(modifier: Modifier = Modifier) =
 @ComposeStory("Error", StoryKind.ScreenshotOnly)
 internal fun TextFieldScreenshotError(modifier: Modifier = Modifier) =
     TextFieldStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
-
-@Composable
-@TextFieldComponent
-@ComposeStory("Clear", StoryKind.ScreenshotOnly)
-internal fun TextFieldScreenshotClear(modifier: Modifier = Modifier) {
-    TextFieldStory(modifier, BpkFieldStatus.Clear)
-}
 
 @Composable
 private fun TextFieldDefaultExample(
@@ -150,24 +166,6 @@ private fun TextFieldLeadingIconExample(
         placeholder = stringResource(R.string.generic_placeholder),
         icon = BpkIcon.Accessibility,
         status = status,
-    )
-}
-
-@Composable
-private fun TextFieldClearActionExample(
-    modifier: Modifier = Modifier,
-    status: BpkFieldStatus = BpkFieldStatus.Default,
-) {
-    val initialValue = stringResource(R.string.city_shenzhen)
-    var value by remember { mutableStateOf(initialValue) }
-    BpkTextField(
-        modifier = modifier,
-        value = value,
-        onValueChange = { value = it },
-        placeholder = stringResource(R.string.generic_placeholder),
-        icon = BpkIcon.Accessibility,
-        status = status,
-        clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) { value = "" },
     )
 }
 

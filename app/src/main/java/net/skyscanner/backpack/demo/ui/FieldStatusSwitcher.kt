@@ -67,9 +67,6 @@ internal fun FieldStatusSwitcher(
             BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
                 status = BpkFieldStatus.Error(errorText)
             }
-            BpkButton(text = BpkFieldStatus.Clear::class.simpleName!!, type = BpkButtonType.Featured) {
-                status = BpkFieldStatus.Clear
-            }
         }
 
         content(status)

@@ -59,7 +59,6 @@ import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -85,7 +84,6 @@ internal fun BpkTextFieldImpl(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
-    clearAction: BpkClearAction? = null,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -111,7 +109,6 @@ internal fun BpkTextFieldImpl(
         maxLines = maxLines,
         interactionSource = interactionSource,
         trailingIcon = trailingIcon,
-        clearAction = clearAction,
     )
 }
 
@@ -131,7 +128,6 @@ internal fun BpkTextFieldImpl(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
-    clearAction: BpkClearAction? = null,
 ) {
     BasicTextField(
         value = value,
@@ -166,7 +162,7 @@ internal fun BpkTextFieldImpl(
                 interactionSource = interactionSource,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
-                clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
+                readOnly = readOnly,
             )
         },
     )
@@ -182,7 +178,7 @@ private fun TextFieldBox(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
-    clearAction: BpkClearAction? = null,
+    readOnly: Boolean = false,
     textFieldContent: @Composable () -> Unit,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -252,19 +248,16 @@ private fun TextFieldBox(
                         else -> BpkTheme.colors.textPrimary
                     },
                 ).value,
-                modifier = Modifier
-                    .padding(end = BpkSpacing.Sm),
             )
-        } else if (status == BpkFieldStatus.Clear && clearAction != null && value.text.isNotEmpty()) {
+        } else if (status is BpkFieldStatus.Clear && !readOnly && value.text.isNotEmpty()) {
             BpkIcon(
                 icon = BpkIcon.CloseCircle,
-                contentDescription = clearAction.contentDescription,
+                contentDescription = status.action.contentDescription,
                 size = BpkIconSize.Small,
                 tint = BpkTheme.colors.textSecondary,
                 modifier = Modifier
-                    .padding(end = BpkSpacing.Sm)
                     .clickable(bounded = false, role = Role.Button) {
-                        clearAction.onClick()
+                        status.action.onClick()
                     }
                     .testTag("textFieldClearButton"),
             )
