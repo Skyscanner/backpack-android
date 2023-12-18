@@ -91,7 +91,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
                 value = "Value",
                 onValueChange = {},
                 placeholder = "Placeholder",
-                status = BpkFieldStatus.Default,
+                status = BpkFieldStatus.Clear,
                 icon = BpkIcon.Accessibility,
                 clearAction = BpkClearAction("Clear") {},
             )

@@ -28,6 +28,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled.png" alt="Disabled TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png" alt="Disabled TextField component - dark mode" width="375" /> |
 
+## Clear
+
+| Day                                                                                                                                                                       | Night                                                                                                                                                                                       |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/clear.png" alt="Clear TextField component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png" alt="Clear TextField component - dark mode" width="375" /> |
+
 ## TextArea
 
 | Day | Night |

@@ -71,10 +71,8 @@ fun TextFieldStory(
             BpkText(stringResource(R.string.generic_with_leading_icon))
             TextFieldLeadingIconExample(status = status)
 
-            if (status == BpkFieldStatus.Default) {
-                BpkText(stringResource(R.string.with_clear_action_title))
-                TextFieldClearActionExample(status = status)
-            }
+            BpkText(stringResource(R.string.with_clear_action_title))
+            TextFieldClearActionExample(status = status)
 
             BpkText(stringResource(R.string.generic_single_line))
             TextFieldSingleLineExample(status = status)
@@ -101,6 +99,13 @@ internal fun TextFieldScreenshotValidated(modifier: Modifier = Modifier) =
 @ComposeStory("Error", StoryKind.ScreenshotOnly)
 internal fun TextFieldScreenshotError(modifier: Modifier = Modifier) =
     TextFieldStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Clear", StoryKind.ScreenshotOnly)
+internal fun TextFieldScreenshotClear(modifier: Modifier = Modifier) {
+    TextFieldStory(modifier, BpkFieldStatus.Clear)
+}
 
 @Composable
 private fun TextFieldDefaultExample(

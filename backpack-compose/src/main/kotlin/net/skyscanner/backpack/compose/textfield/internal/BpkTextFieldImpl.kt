@@ -48,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
@@ -165,7 +166,7 @@ internal fun BpkTextFieldImpl(
                 interactionSource = interactionSource,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
-                clearAction = clearAction,
+                clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
             )
         },
     )
@@ -251,14 +252,21 @@ private fun TextFieldBox(
                         else -> BpkTheme.colors.textPrimary
                     },
                 ).value,
+                modifier = Modifier
+                    .padding(end = BpkSpacing.Sm),
             )
-        } else if (clearAction != null) {
+        } else if (status == BpkFieldStatus.Clear && clearAction != null && value.text.isNotEmpty()) {
             BpkIcon(
                 icon = BpkIcon.CloseCircle,
                 contentDescription = clearAction.contentDescription,
                 size = BpkIconSize.Small,
                 tint = BpkTheme.colors.textSecondary,
-                modifier = Modifier.clickable(bounded = false, role = Role.Button) { clearAction.onClick() },
+                modifier = Modifier
+                    .padding(end = BpkSpacing.Sm)
+                    .clickable(bounded = false, role = Role.Button) {
+                        clearAction.onClick()
+                    }
+                    .testTag("textFieldClearButton"),
             )
         } else {
             when (status) {
