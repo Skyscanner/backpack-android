@@ -29,6 +29,7 @@ import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 
 sealed class BpkAppSearchModalResult {
     data class Content(
@@ -74,6 +75,7 @@ fun BpkAppSearchModal(
     closeAccessibilityLabel: String,
     onInputChanged: (String) -> Unit,
     onClose: () -> Unit,
+    clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
 ) {
@@ -96,6 +98,7 @@ fun BpkAppSearchModal(
             inputHint = inputHint,
             results = results,
             onInputChanged = onInputChanged,
+            clearAction = clearAction,
         )
     }
 }

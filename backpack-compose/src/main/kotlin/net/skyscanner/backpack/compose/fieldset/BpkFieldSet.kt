@@ -74,8 +74,7 @@ fun BpkFieldSet(
                     when (status) {
                         is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
                         is BpkFieldStatus.Error -> BpkTheme.colors.textError
-                        is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
-                        is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
+                        else -> BpkTheme.colors.textPrimary
                     },
                 ).value,
             )

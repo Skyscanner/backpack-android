@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
 import net.skyscanner.backpack.compose.tokens.Landmark
@@ -115,6 +116,7 @@ internal fun DefaultAppSearchModalSample(
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
+            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" },
         )
     }
 }

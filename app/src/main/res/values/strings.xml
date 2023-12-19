@@ -364,4 +364,6 @@
     <string name="inset_banner_cta_text">Sponsored</string>
     <string name="inset_banner_cta_accessibility_label">Acessibility Label</string>
     <string name="inset_banner_body">You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.</string>
+    <string name="text_field_clear_action_description">Clear</string>
+    <string name="with_clear_action_title">With clear action</string>
 </resources>

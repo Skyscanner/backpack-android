@@ -84,6 +84,21 @@ class BpkTextFieldTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun withClearStatus() {
+        snap {
+            BpkTextField(
+                value = "Value",
+                onValueChange = {},
+                placeholder = "Placeholder",
+                status = BpkFieldStatus.Default,
+                icon = BpkIcon.Accessibility,
+                clearAction = BpkClearAction("Clear") {},
+            )
+        }
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default)
     fun singleLine() {
         snap(width = 200.dp) {

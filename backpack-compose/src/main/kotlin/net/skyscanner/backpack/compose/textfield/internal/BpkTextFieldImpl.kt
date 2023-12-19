@@ -48,6 +48,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,11 +59,14 @@ import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
+import net.skyscanner.backpack.compose.utils.clickable
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -80,6 +85,7 @@ internal fun BpkTextFieldImpl(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
+    clearAction: BpkClearAction? = null,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -105,6 +111,7 @@ internal fun BpkTextFieldImpl(
         maxLines = maxLines,
         interactionSource = interactionSource,
         trailingIcon = trailingIcon,
+        clearAction = clearAction,
     )
 }
 
@@ -124,6 +131,7 @@ internal fun BpkTextFieldImpl(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
+    clearAction: BpkClearAction? = null,
 ) {
     BasicTextField(
         value = value,
@@ -158,6 +166,7 @@ internal fun BpkTextFieldImpl(
                 interactionSource = interactionSource,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
+                clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
             )
         },
     )
@@ -173,6 +182,7 @@ private fun TextFieldBox(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
+    clearAction: BpkClearAction? = null,
     textFieldContent: @Composable () -> Unit,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -230,7 +240,6 @@ private fun TextFieldBox(
             textFieldContent()
         }
 
-        var lastIcon by remember { mutableStateOf<Pair<BpkIcon, Color>?>(null) }
         if (trailingIcon != null) {
             BpkIcon(
                 icon = trailingIcon,
@@ -244,23 +253,48 @@ private fun TextFieldBox(
                 ).value,
             )
         } else {
-            when (status) {
-                is BpkFieldStatus.Validated -> lastIcon = Pair(BpkIcon.TickCircle, BpkTheme.colors.statusSuccessSpot)
-                is BpkFieldStatus.Error -> lastIcon = Pair(BpkIcon.ExclamationCircle, BpkTheme.colors.statusDangerSpot)
-                else -> Unit // do nothing
+            var lastIcon by remember { mutableStateOf<Icon?>(null) }
+            when {
+                status is BpkFieldStatus.Validated -> lastIcon =
+                    Icon(icon = BpkIcon.TickCircle, size = BpkIconSize.Large, color = BpkTheme.colors.statusSuccessSpot)
+
+                status is BpkFieldStatus.Error -> lastIcon = Icon(
+                    icon = BpkIcon.ExclamationCircle,
+                    size = BpkIconSize.Large,
+                    color = BpkTheme.colors.statusDangerSpot,
+                )
+
+                status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty() -> lastIcon = Icon(
+                    icon = BpkIcon.CloseCircle,
+                    contentDescription = clearAction.contentDescription,
+                    size = BpkIconSize.Small,
+                    color = BpkTheme.colors.textSecondary,
+                    modifier = Modifier
+                        .clickable(bounded = false, role = Role.Button) {
+                            clearAction.onClick()
+                        }
+                        .testTag("textFieldClearButton"),
+                )
+
+                else -> Unit
             }
+
+            val isAnimationVisible =
+                status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error ||
+                    (status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty())
             AnimatedVisibility(
-                visible = status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error,
+                visible = isAnimationVisible,
                 enter = fadeIn() + scaleIn(),
                 exit = scaleOut() + fadeOut(),
             ) {
-                lastIcon?.let {
-                    Crossfade(it) { (icon, color) ->
+                lastIcon?.let { it ->
+                    Crossfade(it, label = "textFieldTrailingIcon") {
                         BpkIcon(
-                            icon = icon,
-                            contentDescription = null,
-                            size = BpkIconSize.Large,
-                            tint = color,
+                            icon = it.icon,
+                            contentDescription = it.contentDescription,
+                            size = it.size,
+                            tint = it.color,
+                            modifier = it.modifier,
                         )
                     }
                 }
@@ -270,3 +304,11 @@ private fun TextFieldBox(
 }
 
 private val Shape = RoundedCornerShape(BpkBorderRadius.Sm)
+
+private data class Icon(
+    val icon: BpkIcon,
+    val size: BpkIconSize,
+    val color: Color,
+    val contentDescription: String? = null,
+    val modifier: Modifier = Modifier,
+)

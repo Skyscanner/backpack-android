@@ -10,13 +10,11 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content.png" alt="AppSearchModal component in Content state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content_dm.png" alt="AppSearchModal component in Content state - dark mode" width="375" /> |
 
-
 ## Loading
 
 | Day | Night |
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading.png" alt="AppSearchModal component in Loading state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading_dm.png" alt="AppSearchModal component in Loading state - dark mode" width="375" /> |
-
 
 ## Error
 
@@ -34,10 +32,12 @@ Example of a AppSearchModal in Content state:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 
+val destination = remember { mutableStateOf(inputText) }
 BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
-    inputText = "",
+    inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
     results = BpkAppSearchModalResult.Content(
         sections = listOf(BpkSection(...)),
@@ -46,6 +46,7 @@ BpkAppSearchModal(
     closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear"){ destination.value = "" },
 )
 ```
 
@@ -53,15 +54,18 @@ Example of a AppSearchModal in Loading state:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 
+val destination = remember { mutableStateOf(inputText) }
 BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
-    inputText = "",
+    inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
     results = BpkAppSearchModalResult.Loading(accessibilityLabel = stringResource(id = R.string.content_is_loading)),
     closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear"){ destination.value = "" },
 )
 ```
 
@@ -69,14 +73,17 @@ Example of a AppSearchModal in Error state:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 
+val destination = remember { mutableStateOf(inputText) }
 BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
-    inputText = "",
+    inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
     results = BpkAppSearchModalResult.Error(...),
     closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear"){ destination.value = "" },
 )
 ```

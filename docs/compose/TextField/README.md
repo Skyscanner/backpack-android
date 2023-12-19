@@ -28,6 +28,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled.png" alt="Disabled TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png" alt="Disabled TextField component - dark mode" width="375" /> |
 
+## Clear
+
+| Day                                                                                                                                                                       | Night                                                                                                                                                                                       |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/clear.png" alt="Clear TextField component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png" alt="Clear TextField component - dark mode" width="375" /> |
+
 ## TextArea
 
 | Day | Night |
@@ -84,6 +90,23 @@ BpkTextField(
   onValueChange = { value -> },
   placeholder = "Placeholder",
   icon = BpkIcon.Accessibility,
+)
+```
+
+Example of a TextField with clear action:
+
+```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.textfield.BpkTextField
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.tokens.Accessibility
+
+BpkTextField(
+  value = value,
+  onValueChange = { value -> },
+  placeholder = "Placeholder",
+  icon = BpkIcon.Accessibility,
+  clearAction = BpkClearAction("Clear"){ value = "" }
 )
 ```
 
