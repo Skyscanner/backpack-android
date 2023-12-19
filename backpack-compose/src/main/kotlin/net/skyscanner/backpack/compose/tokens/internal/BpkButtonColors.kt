@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 internal object BpkButtonColors {
     internal val destructiveNormalBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF243346))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF243346))
 
     internal val destructiveNormalForeground: Color
         @Composable
@@ -40,7 +40,7 @@ internal object BpkButtonColors {
 
     internal val disabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF0B121D))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF0B121D))
 
     internal val featuredNormalBackground: Color
         @Composable
@@ -76,7 +76,7 @@ internal object BpkButtonColors {
 
     internal val primaryOnDarkDisabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFFE0E3E5))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFFE0E4E9))
 
     internal val primaryOnDarkDisabledForeground: Color
         @Composable
@@ -88,11 +88,11 @@ internal object BpkButtonColors {
 
     internal val primaryOnDarkPressedBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFC2C9CD), Color(0xFFC2C9CD))
+        get() = dynamicColorOf(Color(0xFFC1C7CF), Color(0xFFC1C7CF))
 
     internal val primaryOnLightDisabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFFE0E3E5))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFFE0E4E9))
 
     internal val primaryOnLightDisabledForeground: Color
         @Composable
@@ -112,7 +112,7 @@ internal object BpkButtonColors {
 
     internal val secondaryNormalBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF243346))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF243346))
 
     internal val secondaryOnDarkDisabledBackground: Color
         @Composable
@@ -132,5 +132,5 @@ internal object BpkButtonColors {
 
     internal val secondaryPressedBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFC2C9CD), Color(0xFF010913))
+        get() = dynamicColorOf(Color(0xFFC1C7CF), Color(0xFF010913))
 }

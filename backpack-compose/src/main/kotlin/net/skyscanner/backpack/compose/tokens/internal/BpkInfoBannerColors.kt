@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 internal object BpkInfoBannerColors {
     internal val default: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFEFF1F2), Color(0xFF131D2B))
+        get() = dynamicColorOf(Color(0xFFEFF3F8), Color(0xFF131D2B))
 
     internal val error: Color
         @Composable
@@ -36,7 +36,7 @@ internal object BpkInfoBannerColors {
 
     internal val info: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF545860), Color(0xFFBDC4CB))
+        get() = dynamicColorOf(Color(0xFF626971), Color(0xFFBDC4CB))
 
     internal val onContrast: Color
         @Composable
