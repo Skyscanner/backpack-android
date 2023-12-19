@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 internal object BpkChipColors {
     internal val disabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF0B121D))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF0B121D))
 
     internal val onDarkOnBackground: Color
         @Composable
@@ -36,7 +36,7 @@ internal object BpkChipColors {
 
     internal val onDarkOnDismissIcon: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF545860), Color(0x80FFFFFF))
+        get() = dynamicColorOf(Color(0xFF626971), Color(0x80FFFFFF))
 
     internal val onDarkPressedStroke: Color
         @Composable

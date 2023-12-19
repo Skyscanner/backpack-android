@@ -21,19 +21,19 @@
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
     <color name="bpkBackground">#ffffffff</color>
-    <color name="bpkBackgroundAlternative">#ffeff1f2</color>
+    <color name="bpkBackgroundAlternative">#ffeff3f8</color>
     <color name="bpkBackgroundAlternativeSecondary">#ffffffff</color>
     <color name="bpkBackgroundElevation01">#ffffffff</color>
     <color name="bpkBackgroundElevation02">#ffffffff</color>
     <color name="bpkBackgroundElevation03">#ffffffff</color>
-    <color name="bpkBackgroundSecondary">#ffeff1f2</color>
+    <color name="bpkBackgroundSecondary">#ffeff3f8</color>
     <color name="bpkBackgroundTertiary">#ffffffff</color>
     <color name="bpkCanvas">#ffffffff</color>
-    <color name="bpkCanvasContrast">#ffeff1f2</color>
+    <color name="bpkCanvasContrast">#ffeff3f8</color>
     <color name="bpkCoreAccent">#ff0062e3</color>
     <color name="bpkCoreEco">#ff0fa1a9</color>
     <color name="bpkCorePrimary">#ff05203c</color>
-    <color name="bpkLine">#ffc2c9cd</color>
+    <color name="bpkLine">#ffc1c7cf</color>
     <color name="bpkLineOnDark">#80ffffff</color>
     <color name="bpkPrimary">#ff0062e3</color>
     <color name="bpkScrim">#b3000000</color>
@@ -47,17 +47,18 @@
     <color name="bpkSurfaceDefault">#ffffffff</color>
     <color name="bpkSurfaceElevated">#ffffffff</color>
     <color name="bpkSurfaceHero">#ff0062e3</color>
-    <color name="bpkSurfaceHighlight">#ffe0e3e5</color>
+    <color name="bpkSurfaceHighlight">#ffe0e4e9</color>
     <color name="bpkSurfaceSubtle">#ffe3f0ff</color>
     <color name="bpkTextDisabled">#33000000</color>
     <color name="bpkTextDisabledOnDark">#80ffffff</color>
     <color name="bpkTextError">#ffe70866</color>
+    <color name="bpkTextHero">#ff0062e3</color>
     <color name="bpkTextLink">#ff0062e3</color>
     <color name="bpkTextOnDark">#ffffffff</color>
     <color name="bpkTextOnLight">#ff161616</color>
     <color name="bpkTextPrimary">#ff161616</color>
     <color name="bpkTextPrimaryInverse">#ffffffff</color>
     <color name="bpkTextQuaternary">#33000000</color>
-    <color name="bpkTextSecondary">#ff545860</color>
+    <color name="bpkTextSecondary">#ff626971</color>
     <color name="bpkTextTertiary">#33000000</color>
 </resources>

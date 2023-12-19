@@ -28,5 +28,5 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 internal object BpkBadgeColors {
     internal val backgroundNormal: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFEFF1F2), Color(0xFF243346))
+        get() = dynamicColorOf(Color(0xFFEFF3F8), Color(0xFF243346))
 }
