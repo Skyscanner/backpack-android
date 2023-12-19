@@ -31,6 +31,11 @@ import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 
+data class BpkClearAction(
+    val contentDescription: String,
+    val onClick: () -> Unit,
+)
+
 @Composable
 fun BpkTextField(
     value: String,
@@ -45,6 +50,7 @@ fun BpkTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    clearAction: BpkClearAction? = null,
 ) {
     BpkTextFieldImpl(
         value = value,
@@ -59,6 +65,7 @@ fun BpkTextField(
         keyboardActions = keyboardActions,
         maxLines = maxLines,
         interactionSource = interactionSource,
+        clearAction = clearAction,
     )
 }
 
@@ -76,6 +83,7 @@ fun BpkTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    clearAction: BpkClearAction? = null,
 ) {
     BpkTextFieldImpl(
         value = value,
@@ -90,5 +98,6 @@ fun BpkTextField(
         keyboardActions = keyboardActions,
         maxLines = maxLines,
         interactionSource = interactionSource,
+        clearAction = clearAction,
     )
 }

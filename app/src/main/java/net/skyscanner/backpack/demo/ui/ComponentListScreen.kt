@@ -39,14 +39,13 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.fieldset.BpkClearAction
-import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -101,9 +100,9 @@ fun ComponentListScreen(
                 .fillMaxWidth()
                 .padding(BpkSpacing.Base),
             icon = BpkIcon.Search,
-            status = BpkFieldStatus.Clear(action = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
+            clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
                 searchQuery = ""
-            }),
+            },
         )
         val filteredTokens = repository.tokenComponents.filter {
             it.name.contains(searchQuery, ignoreCase = true)

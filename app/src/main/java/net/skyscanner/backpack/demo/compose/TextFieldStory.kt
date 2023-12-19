@@ -32,11 +32,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.LocalTextStyle
-import net.skyscanner.backpack.compose.fieldset.BpkClearAction
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textarea.BpkTextArea
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -98,9 +98,9 @@ fun TextClearActionStory(modifier: Modifier = Modifier) {
             onValueChange = { value = it },
             placeholder = stringResource(R.string.generic_placeholder),
             icon = BpkIcon.Search,
-            status = BpkFieldStatus.Clear(action = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
+            clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
                 value = ""
-            }),
+            },
         )
     }
 }
