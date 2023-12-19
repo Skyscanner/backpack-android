@@ -276,11 +276,14 @@ private fun TextFieldBox(
                         .testTag("textFieldClearButton"),
                 )
 
-                else -> lastIcon = null // reset it to null
+                else -> Unit
             }
 
+            val isAnimationVisible =
+                status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error ||
+                    (status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty())
             AnimatedVisibility(
-                visible = status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error || status is BpkFieldStatus.Default,
+                visible = isAnimationVisible,
                 enter = fadeIn() + scaleIn(),
                 exit = scaleOut() + fadeOut(),
             ) {
