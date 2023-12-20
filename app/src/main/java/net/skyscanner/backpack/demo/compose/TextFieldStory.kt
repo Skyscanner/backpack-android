@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -57,7 +56,7 @@ fun TextFieldStory(
 ) =
     FieldStatusSwitcher(
         initialStatus = initialStatus,
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(BpkSpacing.Base),
@@ -78,32 +77,13 @@ fun TextFieldStory(
 
             BpkText(stringResource(R.string.generic_multiline))
             TextFieldMultilineExample(status = status)
+
+            if (status == BpkFieldStatus.Default) {
+                BpkText(stringResource(R.string.with_clear_action_title))
+                TextFieldClearExample(status = status)
+            }
         }
     }
-
-@Composable
-@TextFieldComponent
-@ComposeStory(name = "Clear")
-fun TextClearActionStory(modifier: Modifier = Modifier) {
-    val initialValue = stringResource(R.string.city_shenzhen)
-    var value by remember { mutableStateOf(initialValue) }
-
-    Column(
-        modifier = modifier.padding(BpkSpacing.Base),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
-        BpkText(stringResource(R.string.with_clear_action_title))
-        BpkTextField(
-            value = value,
-            onValueChange = { value = it },
-            placeholder = stringResource(R.string.generic_placeholder),
-            icon = BpkIcon.Search,
-            clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
-                value = ""
-            },
-        )
-    }
-}
 
 @Composable
 @TextFieldComponent
@@ -182,6 +162,27 @@ private fun TextFieldSingleLineExample(
         onValueChange = { value = it },
         placeholder = loremIpsum,
         status = status,
+    )
+}
+
+@Composable
+private fun TextFieldClearExample(
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+) {
+    val initialValue = stringResource(R.string.city_shenzhen)
+    var value by remember { mutableStateOf(initialValue) }
+
+    BpkTextField(
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        icon = BpkIcon.Search,
+        clearAction = BpkClearAction(stringResource(R.string.text_field_clear_action_description)) {
+            value = ""
+        },
+        status = status,
+        modifier = modifier,
     )
 }
 

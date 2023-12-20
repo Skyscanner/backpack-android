@@ -32,6 +32,7 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.width
@@ -240,65 +241,73 @@ private fun TextFieldBox(
             textFieldContent()
         }
 
-        if (trailingIcon != null) {
-            BpkIcon(
-                icon = trailingIcon,
-                contentDescription = null,
-                size = BpkIconSize.Small,
-                tint = animateColorAsState(
-                    when (status) {
-                        is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                        else -> BpkTheme.colors.textPrimary
-                    },
-                ).value,
+        TrailingIcon(trailingIcon, status, clearAction, value)
+    }
+}
+
+@Composable
+private fun RowScope.TrailingIcon(
+    trailingIcon: BpkIcon?,
+    status: BpkFieldStatus,
+    clearAction: BpkClearAction?,
+    value: TextFieldValue,
+) {
+    var lastIcon by remember { mutableStateOf<Icon?>(null) }
+    val currentIcon = if (trailingIcon != null) {
+        Icon(
+            icon = trailingIcon,
+            contentDescription = null,
+            color = animateColorAsState(
+                when (status) {
+                    is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                    else -> BpkTheme.colors.textPrimary
+                },
+                label = "Trailing icon color",
+            ).value,
+        )
+    } else {
+        when {
+            status is BpkFieldStatus.Validated -> Icon(
+                icon = BpkIcon.TickCircle,
+                color = BpkTheme.colors.statusSuccessSpot,
             )
-        } else {
-            var lastIcon by remember { mutableStateOf<Icon?>(null) }
-            when {
-                status is BpkFieldStatus.Validated -> lastIcon =
-                    Icon(icon = BpkIcon.TickCircle, size = BpkIconSize.Large, color = BpkTheme.colors.statusSuccessSpot)
 
-                status is BpkFieldStatus.Error -> lastIcon = Icon(
-                    icon = BpkIcon.ExclamationCircle,
-                    size = BpkIconSize.Large,
-                    color = BpkTheme.colors.statusDangerSpot,
-                )
+            status is BpkFieldStatus.Error -> Icon(
+                icon = BpkIcon.ExclamationCircle,
+                color = BpkTheme.colors.statusDangerSpot,
+            )
 
-                status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty() -> lastIcon = Icon(
-                    icon = BpkIcon.CloseCircle,
-                    contentDescription = clearAction.contentDescription,
-                    size = BpkIconSize.Small,
-                    color = BpkTheme.colors.textSecondary,
-                    modifier = Modifier
-                        .clickable(bounded = false, role = Role.Button) {
-                            clearAction.onClick()
-                        }
-                        .testTag("textFieldClearButton"),
-                )
-
-                else -> Unit
-            }
-
-            val isAnimationVisible =
-                status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error ||
-                    (status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty())
-            AnimatedVisibility(
-                visible = isAnimationVisible,
-                enter = fadeIn() + scaleIn(),
-                exit = scaleOut() + fadeOut(),
-            ) {
-                lastIcon?.let { it ->
-                    Crossfade(it, label = "textFieldTrailingIcon") {
-                        BpkIcon(
-                            icon = it.icon,
-                            contentDescription = it.contentDescription,
-                            size = it.size,
-                            tint = it.color,
-                            modifier = it.modifier,
-                        )
+            status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty() -> Icon(
+                icon = BpkIcon.CloseCircle,
+                contentDescription = clearAction.contentDescription,
+                color = BpkTheme.colors.textSecondary,
+                modifier = Modifier
+                    .clickable(bounded = false, role = Role.Button) {
+                        clearAction.onClick()
                     }
-                }
-            }
+                    .testTag("textFieldClearButton"),
+            )
+
+            else -> null
+        }
+    }
+    if (currentIcon != null) {
+        lastIcon = currentIcon
+    }
+    AnimatedVisibility(
+        visible = currentIcon != null,
+        enter = fadeIn() + scaleIn(),
+        exit = scaleOut() + fadeOut(),
+    ) {
+        Crossfade(lastIcon!!.icon, label = "textFieldTrailingIcon") {
+            val icon = lastIcon!!
+            BpkIcon(
+                icon = it,
+                contentDescription = icon.contentDescription,
+                size = BpkIconSize.Small,
+                tint = icon.color,
+                modifier = icon.modifier,
+            )
         }
     }
 }
@@ -307,7 +316,6 @@ private val Shape = RoundedCornerShape(BpkBorderRadius.Sm)
 
 private data class Icon(
     val icon: BpkIcon,
-    val size: BpkIconSize,
     val color: Color,
     val contentDescription: String? = null,
     val modifier: Modifier = Modifier,
