@@ -54,18 +54,21 @@ internal fun FieldStatusSwitcher(
         horizontalAlignment = horizontalAlignment,
     ) {
 
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            BpkButton(text = BpkFieldStatus.Default::class.simpleName!!, type = BpkButtonType.Featured) {
-                status = BpkFieldStatus.Default
-            }
-            BpkButton(text = BpkFieldStatus.Disabled::class.simpleName!!, type = BpkButtonType.Secondary) {
-                status = BpkFieldStatus.Disabled
-            }
-            BpkButton(text = BpkFieldStatus.Validated::class.simpleName!!, type = BpkButtonType.Primary) {
-                status = BpkFieldStatus.Validated
-            }
-            BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
-                status = BpkFieldStatus.Error(errorText)
+        val automationMode = LocalAutomationMode.current
+        if (!automationMode) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                BpkButton(text = BpkFieldStatus.Default::class.simpleName!!, type = BpkButtonType.Featured) {
+                    status = BpkFieldStatus.Default
+                }
+                BpkButton(text = BpkFieldStatus.Disabled::class.simpleName!!, type = BpkButtonType.Secondary) {
+                    status = BpkFieldStatus.Disabled
+                }
+                BpkButton(text = BpkFieldStatus.Validated::class.simpleName!!, type = BpkButtonType.Primary) {
+                    status = BpkFieldStatus.Validated
+                }
+                BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
+                    status = BpkFieldStatus.Error(errorText)
+                }
             }
         }
 
