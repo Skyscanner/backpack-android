@@ -71,7 +71,7 @@ dialog.apply {
     title = "You are going to Tokyo!"
     description = "Your flight is all booked. Why not check out some hotels now?"
 
-    Picasso.get().load(url).into(image)
+    image!!.setImageResource(dialogImage)
 
     addActionButton(
       BpkDialog.Button("Continue") {

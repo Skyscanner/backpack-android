@@ -28,7 +28,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
-import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
@@ -183,8 +182,6 @@ class BpkDialogTest : BpkSnapshotTest() {
 
     @Test
     fun flare() {
-        val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
-
         var dialog: BpkDialog? = null
         rule.scenario.onActivity { activity ->
             runOnUi {
@@ -193,7 +190,7 @@ class BpkDialogTest : BpkSnapshotTest() {
                     description = "Your flight is all booked."
                     icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
-                    image!!.setImageBitmap(bitmap)
+                    image!!.setImageResource(R.drawable.dialog_sample)
 
                     addActionButton(
                         BpkDialog.Button("Continue") { },

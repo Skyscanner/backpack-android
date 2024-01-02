@@ -99,7 +99,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation libs.square.picasso
     implementation libs.androidx.lifecycleKtx
     implementation libs.androidx.lifecycleRuntimeCompose
     implementation libs.compose.activity
