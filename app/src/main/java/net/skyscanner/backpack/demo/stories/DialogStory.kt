@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
 import net.skyscanner.backpack.meta.StoryKind
@@ -209,7 +208,7 @@ internal fun FlareDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Flare).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        Picasso.get().load("file:///android_asset/dialog_sample.jpg").noFade().into(image)
+        image!!.setImageResource(R.drawable.dialog_sample)
 
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_confirmation)) {
