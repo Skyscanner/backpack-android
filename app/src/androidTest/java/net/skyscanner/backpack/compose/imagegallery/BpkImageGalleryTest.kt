@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.imagegallery
+package net.skyscanner.backpack.compose.imagegallery
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.ImageGalleryCarouselStory
