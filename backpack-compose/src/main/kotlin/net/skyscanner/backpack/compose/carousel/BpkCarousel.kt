@@ -30,12 +30,27 @@ import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BpkCarousel(
     state: BpkCarouselState,
     modifier: Modifier = Modifier,
     content: @Composable (BoxScope.(Int) -> Unit),
+) {
+    BpkCarousel(
+        state = state,
+        modifier = modifier,
+        content = content,
+        overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+internal fun BpkCarousel(
+    state: BpkCarouselState,
+    content: @Composable (BoxScope.(Int) -> Unit),
+    overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
+    modifier: Modifier = Modifier,
 ) {
     val internalState = state.asInternalState()
     Box(modifier = modifier) {
@@ -49,15 +64,17 @@ fun BpkCarousel(
         }
 
         // if there is more than one image, display the page indicator
-        if (internalState.pageCount > 1) {
-            BpkPageIndicator(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .testTag("pageIndicator"),
-                totalIndicators = internalState.pageCount,
-                currentIndex = internalState.currentPage,
-                style = BpkPageIndicatorStyle.OverImage,
-            )
+        overlayContent {
+            if (internalState.pageCount > 1) {
+                BpkPageIndicator(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .testTag("pageIndicator"),
+                    totalIndicators = internalState.pageCount,
+                    currentIndex = internalState.currentPage,
+                    style = BpkPageIndicatorStyle.OverImage,
+                )
+            }
         }
     }
 }
