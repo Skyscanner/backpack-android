@@ -60,6 +60,7 @@ test-mockitoAndroid = "org.mockito:mockito-android:5.8.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 
 google-material = "com.google.android.material:material:1.11.0"
 google-maps = "com.google.android.gms:play-services-maps:18.2.0"

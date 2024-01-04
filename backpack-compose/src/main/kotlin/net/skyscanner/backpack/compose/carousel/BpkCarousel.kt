@@ -48,9 +48,9 @@ fun BpkCarousel(
 @Composable
 internal fun BpkCarousel(
     state: BpkCarouselState,
-    content: @Composable (BoxScope.(Int) -> Unit),
     overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
     modifier: Modifier = Modifier,
+    content: @Composable (BoxScope.(Int) -> Unit),
 ) {
     val internalState = state.asInternalState()
     Box(modifier = modifier) {
