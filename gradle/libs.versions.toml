@@ -6,7 +6,7 @@ compilerTesting = "1.5.0"
 destinations = "1.9.55" # update this alongside with compiler version
 
 androidPlugin = "8.2.0"
-lint = "31.2.0"  # android plugin, lint and sdk-common need to be updated together
+lint = "31.2.1"  # android plugin, lint and sdk-common need to be updated together
 androidSdkCommon = "31.2.0" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.4"
