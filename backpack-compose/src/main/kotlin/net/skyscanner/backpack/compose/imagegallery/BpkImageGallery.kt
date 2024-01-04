@@ -29,12 +29,12 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 @Composable
 fun BpkImageGallery(
     images: List<BpkImageGalleryImage>,
-    currentImage: Int,
+    initialImage: Int,
     closeContentDescription: String,
-    onImageChanged: (Int) -> Unit,
     onCloseClicked: () -> Unit,
     onDismiss: (() -> Unit),
     modifier: Modifier = Modifier,
+    onImageChanged: ((Int) -> Unit)? = null,
     state: BpkModalState = rememberBpkModalState(),
 ) {
     BpkModal(
@@ -45,7 +45,7 @@ fun BpkImageGallery(
     ) {
         BpkImageGallerySlideshow(
             images = images,
-            currentImage = currentImage,
+            initialImage = initialImage,
             onImageChanged = onImageChanged,
         )
     }

@@ -42,16 +42,15 @@ import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 
 val modalState = rememberBpkModalState()
 val coroutineScope = rememberCoroutineScope()
-var currentImage by remember { mutableIntStateOf(initialPage) }
 
 BpkImageGallery(
             modifier = modifier,
             state = modalState,
             closeContentDescription = "",
-            currentImage = currentImage,
-            onImageChanged = { currentImage = it },
+            initialImage = 0,
             onCloseClicked = { coroutineScope.launch { modalState.hide() } },
             onDismiss = { /* handle dismiss */ },
+            onImageChanged = { /* Handle on image change  if needed (ie logging) */ },
             images = listOf(
                 BpkImageGalleryImage(
                     title = "",

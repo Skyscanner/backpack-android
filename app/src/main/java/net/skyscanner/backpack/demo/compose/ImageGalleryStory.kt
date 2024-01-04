@@ -23,13 +23,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -98,13 +94,11 @@ fun ImageGallerySlideshowStory(
         val modalState = rememberBpkModalState()
         val coroutineScope = rememberCoroutineScope()
 
-        var currentImage by remember { mutableIntStateOf(initialPage) }
         BpkImageGallery(
             modifier = modifier,
             state = modalState,
             closeContentDescription = stringResource(R.string.navigation_close),
-            currentImage = currentImage,
-            onImageChanged = { currentImage = it },
+            initialImage = initialPage,
             onCloseClicked = { coroutineScope.launch { modalState.hide() } },
             onDismiss = { showModal.value = false },
             images = listOf(

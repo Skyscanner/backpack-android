@@ -60,13 +60,15 @@ import net.skyscanner.backpack.compose.utils.invisibleSemantic
 @Composable
 internal fun BpkImageGallerySlideshow(
     images: List<BpkImageGalleryImage>,
-    currentImage: Int,
-    onImageChanged: (Int) -> Unit,
+    initialImage: Int,
     modifier: Modifier = Modifier,
+    onImageChanged: ((Int) -> Unit)? = null,
 ) {
-    val pagerState = rememberBpkCarouselState(totalImages = images.size, initialImage = currentImage)
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { onImageChanged(it) }
+    val pagerState = rememberBpkCarouselState(totalImages = images.size, initialImage = initialImage)
+    if (onImageChanged != null) {
+        LaunchedEffect(pagerState) {
+            snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { onImageChanged(it) }
+        }
     }
     val current = images[pagerState.currentPage]
 
