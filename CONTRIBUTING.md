@@ -122,13 +122,13 @@ generated on the local machine will be different, and the CI will fail. You shou
 
 ### Debugging individual test classes
 
-While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
+While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that within Android Studio for the default variant or with the following command:
 
 ```
-./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
+./gradlew recordRoborazziOssDebug -Dvariant=default --tests '*Bpk[component]Test'
 ```
 
-You can replace the `directorySuffix` property with `dm`, `rtl` or `themed` depending on what you're trying to test.
+You can replace the `variant` property with `dm`, `rtl` or `themed` depending on what you're trying to test.
 
 ### Verifying the snapshot tests with the CI
 
@@ -290,7 +290,7 @@ Any follow-up changes to experimental components will not be considered breaking
 Each Bpk component has a corresponding README file which contains information about the component such as usage examples and API documentation. Our components' full documentation is at [skyscanner.design](https://www.skyscanner.design). New experimental components should have a README file, but don’t need to be published to [skyscanner.design](https://www.skyscanner.design). Make sure the README file reflects the component is experimental! When an experiment has run and is considered successful and so the change is stable, documentation can be published.
 
 For changes to existing components, make sure the API documentation is updated to indicate if something is experimental.
-    
+
 Major changes will often require a migration guide. If an experiment is considered succesful, you should add a migration guide within the docs folder located in the respective component folder.
 
 </details>
