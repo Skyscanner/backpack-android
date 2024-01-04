@@ -118,6 +118,7 @@ dependencies {
     androidTestImplementation libs.test.facebookSnapshotTestingCore
     androidTestImplementation libs.ktor.clientCore
     androidTestImplementation libs.ktor.clientCio
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     implementation project(":meta:annotations")
