@@ -19,8 +19,8 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of an image gallery carousel:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
 
 val state = rememberBpkCarouselState(totalImages = totalImages)
 
@@ -31,4 +31,35 @@ BpkImageGalleryCarousel(
 ) { index ->
     Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
+```
+
+Example of an image gallery without categories:
+
+```Kotlin
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGallery
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
+
+val modalState = rememberBpkModalState()
+val coroutineScope = rememberCoroutineScope()
+
+BpkImageGallery(
+            modifier = modifier,
+            state = modalState,
+            closeContentDescription = "",
+            initialImage = 0,
+            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+            onDismiss = { /* handle dismiss */ },
+            onImageChanged = { /* Handle on image change  if needed (ie logging) */ },
+            images = listOf(
+                BpkImageGalleryImage(
+                    title = "",
+                    description = "",
+                    credit =  "",
+                    content = { contentDescription ->
+                        // Image content
+                    },
+                ),
+            )
+        )
 ```

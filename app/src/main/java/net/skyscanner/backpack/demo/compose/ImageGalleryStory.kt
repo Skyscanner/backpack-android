@@ -19,15 +19,26 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGallery
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
+import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ImageGalleryComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -59,6 +70,81 @@ fun ImageGalleryCarouselStory(
             ),
             contentDescription = "Image $it",
             contentScale = ContentScale.Crop,
+        )
+    }
+}
+
+@Composable
+@ImageGalleryComponent
+@ComposeStory(name = "Slideshow")
+fun ImageGallerySlideshowStory(
+    modifier: Modifier = Modifier,
+    initialPage: Int = 0,
+) {
+    val showModal = rememberSaveable { mutableStateOf(true) }
+
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        BpkButton(
+            text = stringResource(R.string.generic_show),
+            onClick = { showModal.value = true },
+        )
+    }
+
+    if (showModal.value) {
+        val modalState = rememberBpkModalState()
+        val coroutineScope = rememberCoroutineScope()
+
+        BpkImageGallery(
+            modifier = modifier,
+            state = modalState,
+            closeContentDescription = stringResource(R.string.navigation_close),
+            initialImage = initialPage,
+            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+            onDismiss = { showModal.value = false },
+            images = listOf(
+                BpkImageGalleryImage(
+                    title = stringResource(R.string.image_gallery_title_1),
+                    description = stringResource(R.string.image_gallery_description_1),
+                    credit = stringResource(R.string.image_gallery_photographer_1),
+                    content = { contentDescription ->
+                        Image(
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(R.drawable.carousel_placeholder_1),
+                            contentDescription = contentDescription,
+                        )
+                    },
+                ),
+                BpkImageGalleryImage(
+                    title = stringResource(R.string.image_gallery_title_x, 2),
+                    content = { contentDescription ->
+                        Image(
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(R.drawable.carousel_placeholder_2),
+                            contentDescription = contentDescription,
+                        )
+                    },
+                ),
+                BpkImageGalleryImage(
+                    title = stringResource(R.string.image_gallery_title_x, 3),
+                    content = { contentDescription ->
+                        Image(
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(R.drawable.carousel_placeholder_3),
+                            contentDescription = contentDescription,
+                        )
+                    },
+                ),
+                BpkImageGalleryImage(
+                    title = stringResource(R.string.image_gallery_title_x, 4),
+                    content = { contentDescription ->
+                        Image(
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(R.drawable.carousel_placeholder_4),
+                            contentDescription = contentDescription,
+                        )
+                    },
+                ),
+            ),
         )
     }
 }

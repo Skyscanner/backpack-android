@@ -18,8 +18,13 @@
 
 package net.skyscanner.backpack.compose.imagegallery
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.test.isDialog
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.ImageGalleryCarouselStory
+import net.skyscanner.backpack.demo.compose.ImageGallerySlideshowStory
 import org.junit.Test
 
 class BpkImageGalleryTest : BpkSnapshotTest() {
@@ -27,5 +32,31 @@ class BpkImageGalleryTest : BpkSnapshotTest() {
     @Test
     fun carousel() {
         snap { ImageGalleryCarouselStory() }
+    }
+
+    @Test
+    fun slideshow() {
+        recordModal { ImageGallerySlideshowStory() }
+    }
+
+    @Test
+    fun slideshow_landscape() {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.setOrientationLeft()
+        recordModal { ImageGallerySlideshowStory() }
+        device.setOrientationNatural()
+    }
+
+    @Test
+    fun slideshow_second_page() {
+        recordModal { ImageGallerySlideshowStory(initialPage = 2) }
+    }
+
+    private fun recordModal(content: @Composable () -> Unit) {
+        snap(comparison = { name ->
+            compareScreenshot(onNode(isDialog()), name)
+        }) {
+            content()
+        }
     }
 }
