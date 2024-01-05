@@ -132,16 +132,6 @@ jobs:
       pull-requests: write
       contents: write
     timeout-minutes: 20
-
-    strategy:
-      fail-fast: false
-      matrix:
-        variant:
-          - default
-          - themed
-          - rtl
-          - dm
-
     steps:
 
       - name: Checkout
@@ -154,13 +144,10 @@ jobs:
           distribution: 'adopt'
           cache: gradle
 
-      - name: Delete existing snapshots
-        run: rm -rf app/screenshots/${{ env.flavour }}/${{ env.config }}/${{ matrix.variant }}
-
       - name: Screenshot Tests
         id: screenshotTests
         run: |
-          ./gradlew app:recordRoborazzi${{ env.flavour }}${{ env.config }} -Dvariant=${{ matrix.variant }}
+          ./scripts/record_screenshot_tests.sh
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
@@ -180,5 +167,5 @@ jobs:
           git fetch origin $GITHUB_HEAD_REF
           git checkout $GITHUB_HEAD_REF
           git add app/screenshots/*
-          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots"
           git push
