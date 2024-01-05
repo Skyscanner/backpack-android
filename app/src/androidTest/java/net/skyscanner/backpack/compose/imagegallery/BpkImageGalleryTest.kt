@@ -44,6 +44,7 @@ class BpkImageGalleryTest : BpkSnapshotTest() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         device.setOrientationLeft()
         recordModal { ImageGallerySlideshowStory() }
+        device.setOrientationNatural()
     }
 
     @Test
