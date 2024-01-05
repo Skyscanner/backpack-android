@@ -86,10 +86,7 @@ internal fun BpkImageGallerySlideshow(
                 image = current,
                 overlayContent = {
                     CarouselBadge(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .invisibleSemantic()
-                            .padding(bottom = BpkSpacing.Base),
+                        modifier = Modifier.align(Alignment.BottomEnd),
                         pagerState = pagerState,
                     )
 
@@ -123,8 +120,7 @@ internal fun BpkImageGallerySlideshow(
                     image = current,
                     overlayContent = {
                         CarouselBadge(
-                            modifier = Modifier
-                                .align(Alignment.BottomCenter),
+                            modifier = Modifier.align(Alignment.BottomCenter),
                             pagerState = pagerState,
                         )
                     },
@@ -208,8 +204,7 @@ private fun ImageDescription(image: BpkImageGalleryImage, modifier: Modifier = M
             )
 
             Row(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
             ) {
                 image.credit?.let {
