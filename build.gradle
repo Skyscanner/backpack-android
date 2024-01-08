@@ -31,6 +31,7 @@ buildscript {
         classpath libs.plugin.nexusPublishing
         classpath libs.plugin.detekt
         classpath libs.plugin.ksp
+        classpath libs.plugin.roborazzi
     }
 }
 
