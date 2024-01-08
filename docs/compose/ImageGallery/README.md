@@ -10,6 +10,24 @@
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/carousel.png" alt="Image Gallery Carousel component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/carousel_dm.png" alt="Image Gallery Carousel component - dark mode" width="375" /> |
 
+## Slideshow
+
+| Day                                                                                                                                                                                     | Night                                                                                                                                                                                                   |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/slideshow.png" alt="Image Gallery Slideshow component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/slideshow_dm.png" alt="Image Gallery Slideshow component - dark mode" width="375" /> |
+
+## Image Grid
+
+| Day                                                                                                                                                                                        | Night                                                                                                                                                                                                     |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/image-grid.png" alt="Image Gallery Image Grid component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/image-grid_dm.png" alt="Image Gallery Image Grid component - dark mode" width="375" /> |
+
+## Chip Grid
+
+| Day                                                                                                                                                                                      | Night                                                                                                                                                                                                   |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/chip-grid.png" alt="Image Gallery Chip Grid component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/chip-grid_dm.png" alt="Image Gallery Chip Grid component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
