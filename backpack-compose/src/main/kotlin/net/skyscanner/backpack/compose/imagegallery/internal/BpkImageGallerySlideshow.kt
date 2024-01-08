@@ -36,6 +36,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.SpanStyle
@@ -148,7 +149,7 @@ private fun ImageCarousel(
         state = pagerState,
         overlayContent = overlayContent,
     ) {
-        image.content("${image.title}. ${image.description}. ${image.credit}")
+        image.content(image.contentDescription(), ContentScale.Fit)
     }
 }
 

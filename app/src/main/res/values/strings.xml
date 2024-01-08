@@ -371,4 +371,8 @@
     <string name="image_gallery_description_1">Walk deep into the fjord-like surrounds of Lake St Clair, explore the giant myrtle forests, tread softly on the moss-covered understory and forget the world you left behind</string>
     <string name="image_gallery_photographer_1">\@PhotographerName</string>
     <string name="image_gallery_title_x">Image %d</string>
+    <string name="image_gallery_category_1">Traveller photos (31)</string>
+    <string name="image_gallery_category_2">All photos (59)</string>
+    <string name="image_gallery_category_3">Official photos (43)</string>
+    <string name="image_gallery_category_4">Bedroom (13)</string>
 </resources>

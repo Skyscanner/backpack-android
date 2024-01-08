@@ -24,6 +24,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.ImageGalleryCarouselStory
+import net.skyscanner.backpack.demo.compose.ImageGalleryChipGridStory
+import net.skyscanner.backpack.demo.compose.ImageGalleryImageGridStory
 import net.skyscanner.backpack.demo.compose.ImageGallerySlideshowStory
 import org.junit.Test
 
@@ -48,8 +50,13 @@ class BpkImageGalleryTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun slideshow_second_page() {
-        recordModal { ImageGallerySlideshowStory(initialPage = 2) }
+    fun image_grid() {
+        recordModal { ImageGalleryImageGridStory() }
+    }
+
+    @Test
+    fun chip_grid() {
+        recordModal { ImageGalleryChipGridStory() }
     }
 
     private fun recordModal(content: @Composable () -> Unit) {

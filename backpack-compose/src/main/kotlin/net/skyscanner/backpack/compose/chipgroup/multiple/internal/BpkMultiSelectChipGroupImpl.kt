@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -59,6 +60,7 @@ internal fun BpkMultiSelectChipGroupImpl(
     type: BpkMultiChipGroupType,
     style: BpkChipStyle,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     when (type) {
         is BpkMultiChipGroupType.Rail -> {
@@ -68,6 +70,7 @@ internal fun BpkMultiSelectChipGroupImpl(
                 }
                 LazyRow(
                     modifier = Modifier.selectableGroup(),
+                    contentPadding = contentPadding,
                     state = rememberLazyListState(),
                     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
                 ) {
@@ -84,7 +87,7 @@ internal fun BpkMultiSelectChipGroupImpl(
 
         BpkMultiChipGroupType.Wrap -> {
             FlowRow(
-                modifier = modifier.selectableGroup(),
+                modifier = modifier.selectableGroup().padding(contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
                 verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {

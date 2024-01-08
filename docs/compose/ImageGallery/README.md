@@ -37,29 +37,114 @@ Example of an image gallery without categories:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGallery
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGallerySlideshow
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 
 val modalState = rememberBpkModalState()
 val coroutineScope = rememberCoroutineScope()
 
-BpkImageGallery(
-            modifier = modifier,
-            state = modalState,
-            closeContentDescription = "",
-            initialImage = 0,
-            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
-            onDismiss = { /* handle dismiss */ },
-            onImageChanged = { /* Handle on image change  if needed (ie logging) */ },
+BpkImageGallerySlideshow(
+    modifier = modifier,
+    state = modalState,
+    closeContentDescription = "",
+    initialImage = 0,
+    onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+    onDismiss = { /* handle dismiss */ },
+    onImageChanged = { /* Handle on image change if needed (ie logging) */ },
+    images = listOf(
+        BpkImageGalleryImage(
+            title = "",
+            description = "",
+            credit =  "",
+            content = { contentDescription, contentScale ->
+                // Image content
+            },
+        ),
+    )
+)
+```
+
+Example of an image gallery with categories and chips:
+
+
+```kotlin
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipCategory
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipGrid
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
+
+val modalState = rememberBpkModalState()
+val coroutineScope = rememberCoroutineScope()
+
+BpkImageGalleryChipGrid(
+    modifier = modifier,
+    state = modalState,
+    initialCategory = 0,
+    closeContentDescription = "",
+    onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+    onDismiss = { /* handle dismiss */ },
+    onImageChanged = { /* Handle on image change if needed (ie logging) */ },
+    onCategoryChanged = { /* Handle on category change if needed (ie logging) */ },
+    onImageClicked = { /* Handle on image clicked if needed (ie logging) */ },
+    categories =  listOf(
+        BpkImageGalleryChipCategory(
+            title = title,
             images = listOf(
                 BpkImageGalleryImage(
                     title = "",
                     description = "",
                     credit =  "",
-                    content = { contentDescription ->
+                    content = { contentDescription, contentScale ->
                         // Image content
                     },
                 ),
-            )
-        )
+                // more images
+            ),
+        ),
+        // more categories
+    ),
+)
+```
+
+Example of an image gallery with categories and image chips:
+
+
+```kotlin
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageCategory
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageGrid
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
+
+val modalState = rememberBpkModalState()
+val coroutineScope = rememberCoroutineScope()
+
+BpkImageGalleryImageGrid(
+    modifier = modifier,
+    state = modalState,
+    initialCategory = 0,
+    closeContentDescription = "",
+    onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+    onDismiss = { /* handle dismiss */ },
+    onImageChanged = { /* Handle on image change if needed (ie logging) */ },
+    onCategoryChanged = { /* Handle on category change if needed (ie logging) */ },
+    onImageClicked = { /* Handle on image clicked if needed (ie logging) */ },
+    categories =  listOf(
+        BpkImageGalleryImageCategory(
+            title = title,
+            images = listOf(
+                BpkImageGalleryImage(
+                    title = "",
+                    description = "",
+                    credit =  "",
+                    content = { contentDescription, contentScale ->
+                        // Image content
+                    },
+                ),
+                // more images
+            ),
+            content = {  /* Category image content */ },
+        ),
+        // more categories
+    ),
+)
 ```
