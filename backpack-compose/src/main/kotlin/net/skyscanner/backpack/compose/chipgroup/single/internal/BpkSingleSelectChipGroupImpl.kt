@@ -21,6 +21,8 @@ package net.skyscanner.backpack.compose.chipgroup.single.internal
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -30,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
@@ -45,11 +48,13 @@ internal fun BpkSingleSelectChipGroupImpl(
     style: BpkChipStyle,
     type: BpkSingleChipGroupType,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     when (type) {
         BpkSingleChipGroupType.Rail -> {
             LazyRow(
                 modifier = modifier.selectableGroup(),
+                contentPadding = contentPadding,
                 state = rememberLazyListState(),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
@@ -63,7 +68,7 @@ internal fun BpkSingleSelectChipGroupImpl(
 
         BpkSingleChipGroupType.Wrap -> {
             FlowRow(
-                modifier = modifier.selectableGroup(),
+                modifier = modifier.selectableGroup().padding(contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
                 verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
