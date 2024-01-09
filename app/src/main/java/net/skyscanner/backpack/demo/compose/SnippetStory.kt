@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -91,6 +92,7 @@ internal fun DefaultSnippetSample(
         bodyText = bodyText,
     ) {
         Image(
+            modifier = Modifier.fillMaxSize(),
             painter = painterResource(R.drawable.snippet_placeholder_1),
             contentDescription = stringResource(R.string.snippet_image_content_description),
             contentScale = ContentScale.Crop,

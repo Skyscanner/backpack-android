@@ -18,8 +18,10 @@
 
 package net.skyscanner.backpack.compose.chipgroup.multiple
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.chipgroup.multiple.internal.BpkMultiSelectChipGroupImpl
@@ -51,11 +53,13 @@ fun BpkMultiSelectChipGroup(
     type: BpkMultiChipGroupType,
     modifier: Modifier = Modifier,
     style: BpkChipStyle = BpkChipStyle.Default,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     BpkMultiSelectChipGroupImpl(
         chips = chips,
         type = type,
         modifier = modifier,
         style = style,
+        contentPadding = contentPadding,
     )
 }

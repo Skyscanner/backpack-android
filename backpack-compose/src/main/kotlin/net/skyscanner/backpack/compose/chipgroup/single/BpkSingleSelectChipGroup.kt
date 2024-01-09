@@ -18,8 +18,10 @@
 
 package net.skyscanner.backpack.compose.chipgroup.single
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleSelectChipGroupImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -39,6 +41,7 @@ fun BpkSingleSelectChipGroup(
     modifier: Modifier = Modifier,
     style: BpkChipStyle = BpkChipStyle.Default,
     type: BpkSingleChipGroupType = BpkSingleChipGroupType.Rail,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     BpkSingleSelectChipGroupImpl(
         chips = chips, selectedIndex = selectedIndex,
@@ -46,5 +49,6 @@ fun BpkSingleSelectChipGroup(
         modifier = modifier,
         style = style,
         type = type,
+        contentPadding = contentPadding,
     )
 }

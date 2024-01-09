@@ -18,60 +18,148 @@
 
 package net.skyscanner.backpack.compose.imagegallery
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.badge.BpkBadge
-import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.carousel.BpkCarousel
-import net.skyscanner.backpack.compose.carousel.BpkCarouselState
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import androidx.compose.ui.layout.ContentScale
+import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGalleryGridModal
+import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGallerySlideshow
+import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.modal.BpkModalState
+import net.skyscanner.backpack.compose.modal.rememberBpkModalState
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
 
 @Composable
-fun BpkImageGalleryCarousel(
-    state: BpkCarouselState,
+fun BpkImageGallerySlideshow(
+    images: List<BpkImageGalleryImage>,
+    closeContentDescription: String,
+    onCloseClicked: () -> Unit,
+    onDismiss: (() -> Unit),
     modifier: Modifier = Modifier,
-    onImageClicked: ((Int) -> Unit)? = null,
-    content: @Composable (BoxScope.(Int) -> Unit),
+    initialImage: Int = 0,
+    onImageChanged: ((Int) -> Unit)? = null,
+    state: BpkModalState = rememberBpkModalState(),
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
+    BpkModal(
+        navIcon = NavIcon.Close(closeContentDescription, onCloseClicked),
+        onDismiss = onDismiss,
+        state = state,
+        modifier = modifier,
+    ) {
+        BpkImageGallerySlideshow(
+            images = images,
+            initialImage = initialImage,
+            onImageChanged = onImageChanged,
+        )
+    }
+}
 
-    BpkCarousel(
-        modifier = modifier.clickable(interactionSource = interactionSource, indication = null) {
+@Composable
+fun BpkImageGalleryChipGrid(
+    categories: List<BpkImageGalleryChipCategory>,
+    closeContentDescription: String,
+    onCloseClicked: () -> Unit,
+    onDismiss: (() -> Unit),
+    modifier: Modifier = Modifier,
+    initialCategory: Int = 0,
+    onCategoryChanged: ((BpkImageGalleryChipCategory) -> Unit)? = null,
+    onImageClicked: ((BpkImageGalleryChipCategory, BpkImageGalleryImage) -> Unit)? = null,
+    onImageChanged: ((BpkImageGalleryChipCategory, BpkImageGalleryImage) -> Unit)? = null,
+    state: BpkModalState = rememberBpkModalState(),
+) {
+    BpkImageGalleryGridModal(
+        categories = BpkImageGalleryCategories.Chip(categories),
+        initialCategory = initialCategory,
+        closeContentDescription = closeContentDescription,
+        onCloseClicked = onCloseClicked,
+        onDismiss = onDismiss,
+        modifier = modifier,
+        onCategoryChanged = { category -> onCategoryChanged?.invoke(category as BpkImageGalleryChipCategory) },
+        onImageClicked = { category, image ->
             onImageClicked?.invoke(
-                state.currentPage,
+                category as BpkImageGalleryChipCategory,
+                image,
+            )
+        },
+        onImageChanged = { category, image ->
+            onImageChanged?.invoke(
+                category as BpkImageGalleryChipCategory,
+                image,
             )
         },
         state = state,
-        content = content,
-        overlayContent = { pageIndicator ->
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = BpkSpacing.Base,
-                        vertical = ImageGalleryPreviewVerticalSpacing,
-                    ),
-            ) {
-                pageIndicator?.invoke()
-                BpkBadge(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd),
-                    text = "${state.currentPage + 1}/${state.pageCount}",
-                    type = BpkBadgeType.Inverse,
-                )
-            }
-        },
     )
 }
 
-private val ImageGalleryPreviewVerticalSpacing = 48.dp
+@Composable
+fun BpkImageGalleryImageGrid(
+    categories: List<BpkImageGalleryImageCategory>,
+    closeContentDescription: String,
+    onCloseClicked: () -> Unit,
+    onDismiss: (() -> Unit),
+    modifier: Modifier = Modifier,
+    initialCategory: Int = 0,
+    onCategoryChanged: ((BpkImageGalleryImageCategory) -> Unit)? = null,
+    onImageClicked: ((BpkImageGalleryImageCategory, BpkImageGalleryImage) -> Unit)? = null,
+    onImageChanged: ((BpkImageGalleryImageCategory, BpkImageGalleryImage) -> Unit)? = null,
+    state: BpkModalState = rememberBpkModalState(),
+) {
+    BpkImageGalleryGridModal(
+        categories = BpkImageGalleryCategories.Image(categories),
+        initialCategory = initialCategory,
+        closeContentDescription = closeContentDescription,
+        onCloseClicked = onCloseClicked,
+        onDismiss = onDismiss,
+        modifier = modifier,
+        onCategoryChanged = { category -> onCategoryChanged?.invoke(category as BpkImageGalleryImageCategory) },
+        onImageClicked = { category, image ->
+            onImageClicked?.invoke(
+                category as BpkImageGalleryImageCategory,
+                image,
+            )
+        },
+        onImageChanged = { category, image ->
+            onImageChanged?.invoke(
+                category as BpkImageGalleryImageCategory,
+                image,
+            )
+        },
+        state = state,
+    )
+}
+
+data class BpkImageGalleryImage(
+    val title: String,
+    val description: String? = null,
+    val credit: String? = null,
+    val content: @Composable (contentDescription: String, contentScale: ContentScale) -> Unit,
+) {
+    internal fun contentDescription() = "$title. ${description ?: ""}. ${credit ?: ""}"
+}
+
+data class BpkImageGalleryChipCategory(
+    override val title: String,
+    override val images: List<BpkImageGalleryImage>,
+) : BpkImageGalleryCategories.Category
+
+data class BpkImageGalleryImageCategory(
+    override val title: String,
+    override val images: List<BpkImageGalleryImage>,
+    val content: @Composable () -> Unit,
+) : BpkImageGalleryCategories.Category
+
+internal sealed interface BpkImageGalleryCategories {
+    val categories: List<Category>
+
+    data class Chip(
+        override val categories: List<BpkImageGalleryChipCategory>,
+    ) : BpkImageGalleryCategories
+
+    data class Image(
+        override val categories: List<BpkImageGalleryImageCategory>,
+    ) : BpkImageGalleryCategories
+
+    sealed interface Category {
+        val title: String
+        val images: List<BpkImageGalleryImage>
+    }
+}
