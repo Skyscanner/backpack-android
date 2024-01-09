@@ -1,4 +1,4 @@
-/**
+/*
  * Backpack for Android - Skyscanner's Design System
  *
  * Copyright 2018 Skyscanner Ltd
@@ -14,6 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package net.skyscanner.backpack.compose.ratingbar
@@ -51,6 +52,11 @@ class BpkRatingBarTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default)
     fun onContrast_zero_to_10() {
-        snap { RatingBarSample(style = BpkRatingBarStyle.OnContrast, scale = BpkRatingScale.ZeroToTen) }
+        snap {
+            RatingBarSample(
+                style = BpkRatingBarStyle.OnContrast,
+                scale = BpkRatingScale.ZeroToTen,
+            )
+        }
     }
 }
