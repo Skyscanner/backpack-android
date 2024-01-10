@@ -48,7 +48,7 @@ dirname = os.path.dirname(__file__)
 generate_file(os.path.join(dirname, '../templates/component/Component.kt'), os.path.join(dirname, f'../backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/ComponentAnnotation.kt'), os.path.join(dirname, f'../app/src/main/java/net/skyscanner/backpack/demo/components/'), f'{name}Component.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/Story.kt'), os.path.join(dirname, f'../app/src/main/java/net/skyscanner/backpack/demo/compose/'), f'{name}Story.kt', mapping)
-generate_file(os.path.join(dirname, '../templates/component/Test.kt'), os.path.join(dirname, f'../app/src/androidTest/java/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}Test.kt', mapping)
+generate_file(os.path.join(dirname, '../templates/component/Test.kt'), os.path.join(dirname, f'../app/src/test/java/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}Test.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/README.md'), os.path.join(dirname, f'../docs/compose/{name}/'), 'README.md', mapping)
 
 print('')
