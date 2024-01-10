@@ -21,6 +21,8 @@
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
     <color name="__privateBadgeBackgroundNormal">#ffeff3f8</color>
+    <color name="__privateBarTrackDefault">#ffe0e4e9</color>
+    <color name="__privateBarTrackOnContrast">#ffffffff</color>
     <color name="__privateButtonDestructiveNormalBackground">#ffe0e4e9</color>
     <color name="__privateButtonDestructiveNormalForeground">#ffc80456</color>
     <color name="__privateButtonDestructivePressedBackground">#ffc80456</color>
