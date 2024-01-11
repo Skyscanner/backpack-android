@@ -58,13 +58,19 @@ internal fun RatingBarSection(style: BpkRatingBarStyle, modifier: Modifier = Mod
             style = BpkTheme.typography.heading5,
             modifier = Modifier.padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
         )
-        RatingBarSample(style = style, scale = BpkRatingScale.ZeroToFive)
+        RatingBarSample(style = style)
         RatingBarSample(style = style, scale = BpkRatingScale.ZeroToTen)
+        RatingBarSample(style = style, showScale = false)
     }
 }
 
 @Composable
-internal fun RatingBarSample(style: BpkRatingBarStyle, scale: BpkRatingScale, modifier: Modifier = Modifier) {
+internal fun RatingBarSample(
+    modifier: Modifier = Modifier,
+    style: BpkRatingBarStyle = BpkRatingBarStyle.Default,
+    scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
+    showScale: Boolean = true,
+) {
     BpkRatingBar(
         modifier = modifier
             .background(
@@ -78,5 +84,6 @@ internal fun RatingBarSample(style: BpkRatingBarStyle, scale: BpkRatingScale, mo
         rating = 4.7f,
         style = style,
         scale = scale,
+        showScale = showScale,
     )
 }

@@ -29,18 +29,23 @@ class BpkRatingBarTest : BpkSnapshotTest() {
 
     @Test
     fun default() {
-        snap { RatingBarSample(style = BpkRatingBarStyle.Default, scale = BpkRatingScale.ZeroToFive) }
+        snap { RatingBarSample() }
     }
 
     @Test
     fun onContrast() {
-        snap { RatingBarSample(style = BpkRatingBarStyle.OnContrast, scale = BpkRatingScale.ZeroToFive) }
+        snap { RatingBarSample(style = BpkRatingBarStyle.OnContrast) }
+    }
+
+    @Test
+    fun noScale() {
+        snap { RatingBarSample(showScale = false) }
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
     fun zero_to_10() {
-        snap { RatingBarSample(style = BpkRatingBarStyle.Default, scale = BpkRatingScale.ZeroToTen) }
+        snap { RatingBarSample(scale = BpkRatingScale.ZeroToTen) }
     }
 
     @Test
