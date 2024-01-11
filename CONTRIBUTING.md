@@ -47,38 +47,6 @@ Note: This currently is not supported for creating components using the view sys
 ### Snapshot testing
 We use snapshot testing to ensure there are no unintended changes to UI components.
 
-#### Setup
-
-> Note: Currently, snapshot tests run on Apple chips will result in a different snapshot to Intel-based laptops or CI.
-> You should use it for debug purposes only.
-
-Install system images & create an AVD
-```
-# x86
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;google_apis;x86"
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-28;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
-
-# ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;google_apis;arm64-v8a"
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-28;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
-```
-
-Create an SD card for the snapshot tests
-
-```
-# Linux
-$ANDROID_HOME/emulator/mksdcard -l e 512M sd.img
-# OSX
-hdiutil create -megabytes 512 -fs MS-DOS -layout NONE -o sd && mv sd.dmg sd.img
-```
-
-Make sure no emulator or physical devices are attached, otherwise tests will fail.
-To start the emulator and attach an SD card to it, run
-
-```
-$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd -sdcard sd.img &
-```
-
 #### Creating tests
 
 Snapshot tests live in the `app` module. For a new test class extend from `BpkSnapshotTest`.
@@ -110,25 +78,24 @@ For some more complex components with many different types you may want to make 
 To ensure snapshots get saved for all parameters pass the `tags` property in the `BpkSnapshotTest` constructor. For an example look at `BpkButtonTest`.
 
 #### Debugging snapshot tests
-After adding new snapshot tests or making UI changes, run
+
+Snapshot tests will run on CI and will generate new snapshots automatically, however if you want to debug or verify your tests locally you can run tests as usual via Android Studio for the default variant and check the output.
+
+Alternatively you can run the following command to run all tests across all variants:
 
 ```
  ./scripts/record_screenshot_tests.sh
 ```
 
+Or for individual tests use the following command, replacing the `variant` property with `dm`, `rtl` or `themed` depending on what you're trying to test.:
+
+```
+./gradlew recordRoborazziOssDebug -Dvariant=default --tests '*Bpk[component]Test'
+```
+
 This will generate the snapshots. Verify the changes & generated snapshots are as expected,
 but don't commit the snapshot files – our CI uses different emulator environment to validate snapshots. Therefore, snapshots,
 generated on the local machine will be different, and the CI will fail. You should only use it for debugging purposes.
-
-### Debugging individual test classes
-
-While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
-
-```
-./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
-```
-
-You can replace the `directorySuffix` property with `dm`, `rtl` or `themed` depending on what you're trying to test.
 
 ### Verifying the snapshot tests with the CI
 
@@ -145,7 +112,7 @@ git commit --allow-empty -m "Trigger CI" && git push
 ```
 
 ### Espresso tests
-If your component contains logic that can't be verified via snapshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
+If your component contains logic that can't be verified via snapshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module.
 
 To run connected tests run
 
@@ -201,7 +168,7 @@ fun MyViewStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.my_layout, modifier)
 ```
 
-In a case you have multiple sections for the component, you need to specify the name of each story in the annotation:
+In case you have multiple sections for the component, you need to specify the name of each story in the annotation:
 
 ```kotlin
 @ComposeStory("Story name") // note this name will also be used for the screenshot
@@ -217,7 +184,7 @@ set `kind` attribute to `DemoOnly`: `@ComposeStory(kind = StoryKind.DemoOnly)`.
 If you want to create a screenshot for a story that is not included in the demo app,
 set `kind` attribute to `ScreenshotOnly`: `@ViewStory(kind = StoryKind.ScreenshotOnly)`.
 
-Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory.
+Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory. Please only use this command for updating snapshots - do not manually store docs screenshots as this will cause inconsistencies across components and result in unrelated screenshot changes for the next person.
 
 > Note: Python is required.
 
@@ -226,7 +193,7 @@ By default, the screenshots will be named `default.png` and `default_dm.png` for
 If you specified the story name, it'll be converted to lowercase with spaces replaced with dashes:
 `Test story name` -> `test-story-name.png`.
 
-To include it to readme, you can use the following syntax (for Compose, for View replace the path):
+To include it in the readme, you can use the following syntax (for Compose, for View replace the path):
 
 ```md
 
@@ -290,7 +257,7 @@ Any follow-up changes to experimental components will not be considered breaking
 Each Bpk component has a corresponding README file which contains information about the component such as usage examples and API documentation. Our components' full documentation is at [skyscanner.design](https://www.skyscanner.design). New experimental components should have a README file, but don’t need to be published to [skyscanner.design](https://www.skyscanner.design). Make sure the README file reflects the component is experimental! When an experiment has run and is considered successful and so the change is stable, documentation can be published.
 
 For changes to existing components, make sure the API documentation is updated to indicate if something is experimental.
-    
+
 Major changes will often require a migration guide. If an experiment is considered succesful, you should add a migration guide within the docs folder located in the respective component folder.
 
 </details>

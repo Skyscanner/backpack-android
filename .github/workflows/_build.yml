@@ -127,21 +127,11 @@ jobs:
 
   Screenshots:
     name: Screenshots tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: write
-    timeout-minutes: 40
-
-    strategy:
-      fail-fast: false
-      matrix:
-        variant:
-          - default
-          - themed
-          - rtl
-          - dm
-
+    timeout-minutes: 20
     steps:
 
       - name: Checkout
@@ -154,76 +144,17 @@ jobs:
           distribution: 'adopt'
           cache: gradle
 
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ env.api-level }}
-
-      - name: Delete existing snapshots
-        run: rm -rf app/screenshots/oss/${{ env.config }}/${{ matrix.variant }}
-
-      - name: create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
-          avd-name: avd-x86-default-28
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
-
       - name: Screenshot Tests
         id: screenshotTests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
-          avd-name: avd-x86-default-28
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: |
-            # uninstall first to avoid signature error. see https://github.com/ReactiveCircus/android-emulator-runner/issues/319
-            adb uninstall net.skyscanner.backpack || :
-            adb uninstall net.skyscanner.backpack.test || :
+        run: |
+          ./scripts/record_screenshot_tests.sh
 
-            adb shell settings put global hidden_api_policy_pre_p_apps 1
-            adb shell settings put global hidden_api_policy_p_apps 1
-            touch logcat.log
-            chmod 777 logcat.log
-            adb logcat > logcat.log &
-            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -PdirectorySuffix=${{ matrix.variant }}
-
-            changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
+          changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
       - name: Check snapshot changes
         id: checkSnapshotChanges
         if: ${{ github.event_name != 'pull_request' }}
         run: ./scripts/check-no-changes.sh
-
-      - name: Upload Screenshot Tests Artifact
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
-          path: app/build/reports/shot/
-          retention-days: 5
-
-      - name: Upload Logcat Logs
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
-          path: logcat.log
-          retention-days: 5
 
       - name: Commit changes
         if: ${{ github.event_name == 'pull_request' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
@@ -236,5 +167,5 @@ jobs:
           git fetch origin $GITHUB_HEAD_REF
           git checkout $GITHUB_HEAD_REF
           git add app/screenshots/*
-          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots"
           git push

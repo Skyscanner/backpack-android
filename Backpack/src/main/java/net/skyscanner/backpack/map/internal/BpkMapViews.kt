@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.map.internal
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
@@ -34,11 +35,15 @@ internal fun createBpkMarkerView(
     val root: View
     if (icon != 0) {
         root = View.inflate(context, R.layout.view_bpk_map_marker_label_with_icon, null)
-        root.findViewById<ImageView>(R.id.icon).setImageDrawable(AppCompatResources.getDrawable(context, icon))
+        root.findViewById<ImageView>(R.id.icon).apply {
+            setImageDrawable(AppCompatResources.getDrawable(context, icon))
+            imageTintList = context.getColorStateList(R.color.bpk_map_marker_content_color)
+        }
     } else {
         root = View.inflate(context, R.layout.view_bpk_map_marker_label, null)
     }
     root.findViewById<BpkText>(R.id.text).text = title
     root.findViewById<View>(R.id.pointer).visibility = if (showPointer) View.VISIBLE else View.GONE
+    root.findViewById<ImageView>(R.id.flare).imageTintList = ColorStateList.valueOf(context.getColor(R.color.bpkCoreAccent))
     return root
 }
