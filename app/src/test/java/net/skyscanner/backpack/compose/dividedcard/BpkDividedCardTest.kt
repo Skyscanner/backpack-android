@@ -41,7 +41,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
 
     @Test
     fun cardWidthSmallerThanMinimum() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkDividedCard(
                 modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
                 primaryContent = {
@@ -69,7 +69,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
 
     @Test
     fun cardWidthGreaterThanMinimum() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkDividedCard(
                 modifier = Modifier.width(400.dp),
                 primaryContent = {
@@ -97,7 +97,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
 
     @Test
     fun emptyCard() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkDividedCard(
                 modifier = Modifier.width(400.dp),
                 primaryContent = {
@@ -124,7 +124,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
 
     @Test
     fun noShadowCard() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkDividedCard(
                 modifier = Modifier.width(400.dp),
                 elevation = BpkCardElevation.None,

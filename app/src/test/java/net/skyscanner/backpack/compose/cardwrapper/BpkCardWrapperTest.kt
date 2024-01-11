@@ -44,7 +44,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
 
     @Test
     fun default() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
@@ -57,7 +57,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default)
     fun largeRadius() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
@@ -71,7 +71,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default)
     fun noPadding() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
@@ -85,7 +85,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default)
     fun focus() {
-        snap {
+        snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,

@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.card
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.FocusableCardExample
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
 import net.skyscanner.backpack.demo.compose.NoElevationCardExample
@@ -32,37 +33,37 @@ import org.junit.Test
 class BpkCardTest : BpkSnapshotTest() {
 
     @Test
-    fun smallCorner() = snap {
+    fun smallCorner() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         SmallCornersCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun largeCorner() = snap {
+    fun largeCorner() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         LargeCornersCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun noPadding() = snap {
+    fun noPadding() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         NoPaddingCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun unfocused() = snap {
+    fun unfocused() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         NonClickableCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun focused() = snap {
+    fun focused() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         FocusableCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun noElevation() = snap {
+    fun noElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         NoElevationCardExample()
     }
 }
