@@ -24,31 +24,8 @@ import net.skyscanner.backpack.compose.ratingbar.BpkRatingBar
 BpkRatingBar(
     label = "Label",
     rating = 4.5f,
-)
-```
-
-Example of a rating bar on contrast:
-
-```Kotlin
-import net.skyscanner.backpack.compose.ratingbar.BpkRatingBar
-import net.skyscanner.backpack.compose.ratingbar.BpkRatingBarStyle
-
-BpkRatingBar(
-    label = "Label",
-    rating = 4.5f,
     style = BpkRatingBarStyle.OnContrast,
-)
-```
-
-Example of a rating bar with zero to 10 scale:
-
-```Kotlin
-import net.skyscanner.backpack.compose.ratingbar.BpkRatingBar
-import net.skyscanner.backpack.compose.rating.BpkRatingScale
-
-BpkRatingBar(
-    label = "Label",
-    rating = 4.5f,
     scale = BpkRatingScale.ZeroToTen,
+    showScale = false,
 )
 ```

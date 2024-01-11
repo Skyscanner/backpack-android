@@ -45,6 +45,7 @@ fun BpkRatingBar(
     modifier: Modifier = Modifier,
     style: BpkRatingBarStyle = BpkRatingBarStyle.Default,
     scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
+    showScale: Boolean = true,
 ) {
     Column(modifier = modifier.semantics(mergeDescendants = true) { }, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md)) {
         Row(verticalAlignment = Alignment.Bottom) {
@@ -53,7 +54,7 @@ fun BpkRatingBar(
                 style = BpkTheme.typography.footnote,
                 modifier = Modifier.weight(1f),
             )
-            BpkRatingNumbers(value = rating, scale = scale, size = BpkRatingSize.Base, showScale = true)
+            BpkRatingNumbers(value = rating, scale = scale, size = BpkRatingSize.Base, showScale = showScale)
         }
         LinearProgressIndicator(
             progress = when (scale) {
