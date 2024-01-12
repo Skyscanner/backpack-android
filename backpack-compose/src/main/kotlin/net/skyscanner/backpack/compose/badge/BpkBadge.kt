@@ -23,7 +23,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -60,7 +59,7 @@ fun BpkBadge(
     Row(
         modifier = modifier
             .semantics(mergeDescendants = true) { }
-            .requiredHeight(BpkSpacing.Lg)
+//            .requiredHeight(BpkSpacing.Lg)
             .border(1.dp, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
             .padding(horizontal = BpkSpacing.Md),
@@ -79,7 +78,7 @@ fun BpkBadge(
         BpkText(
             text = text,
             color = contentColor,
-            style = BpkTheme.typography.caption,
+            style = BpkTheme.typography.footnote,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
