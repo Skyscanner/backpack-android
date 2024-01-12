@@ -34,7 +34,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.HelpCircle
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.components.BadgeComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -80,7 +80,7 @@ private fun BadgeRow(
             modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
             type = type,
             icon = when (type) {
-                BpkBadgeType.Warning -> BpkIcon.HelpCircle
+                BpkBadgeType.Warning -> BpkIcon.InformationCircle
                 BpkBadgeType.Destructive -> BpkIcon.CloseCircle
                 else -> BpkIcon.TickCircle
             },
