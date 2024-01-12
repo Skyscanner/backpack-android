@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.20"
+kotlin = "1.9.22"
 ksp = "1.9.20-1.0.14" # depends on Kotlin version
 composeCompiler = "1.5.4" # depends on Kotlin version
 compilerTesting = "1.5.0"
