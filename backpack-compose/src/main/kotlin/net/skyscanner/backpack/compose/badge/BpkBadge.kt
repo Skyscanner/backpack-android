@@ -59,10 +59,9 @@ fun BpkBadge(
     Row(
         modifier = modifier
             .semantics(mergeDescendants = true) { }
-//            .requiredHeight(BpkSpacing.Lg)
             .border(1.dp, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
-            .padding(horizontal = BpkSpacing.Md),
+            .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
