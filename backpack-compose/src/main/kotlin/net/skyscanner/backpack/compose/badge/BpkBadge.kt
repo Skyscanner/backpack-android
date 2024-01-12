@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.internal.BpkBadgeColors
 
 enum class BpkBadgeType {
     Normal,
@@ -71,7 +72,14 @@ fun BpkBadge(
                 icon = icon,
                 contentDescription = null,
                 size = BpkIconSize.Small,
-                tint = contentColor,
+                tint = when (type) {
+                    BpkBadgeType.Warning -> BpkTheme.colors.statusWarningSpot
+                    BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerSpot
+                    BpkBadgeType.Success -> BpkTheme.colors.statusSuccessSpot
+                    else -> {
+                        contentColor
+                    }
+                },
             )
         }
         BpkText(
@@ -100,11 +108,11 @@ private val BpkBadgeType.contentColor: Color
 private val BpkBadgeType.backgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkBadgeType.Normal -> BpkTheme.colors.surfaceHighlight
+        BpkBadgeType.Normal -> BpkBadgeColors.backgroundNormal
         BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
-        BpkBadgeType.Success -> BpkTheme.colors.statusSuccessFill
-        BpkBadgeType.Warning -> BpkTheme.colors.statusWarningFill
-        BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerFill
+        BpkBadgeType.Success -> BpkBadgeColors.backgroundNormal
+        BpkBadgeType.Warning -> BpkBadgeColors.backgroundNormal
+        BpkBadgeType.Destructive -> BpkBadgeColors.backgroundNormal
         BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
         BpkBadgeType.Outline -> Color.Transparent
         BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
