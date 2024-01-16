@@ -37,6 +37,9 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Exclamation
+import net.skyscanner.backpack.compose.tokens.InformationCircle
+import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.compose.tokens.internal.BpkBadgeColors
 
 enum class BpkBadgeType {
@@ -67,6 +70,12 @@ fun BpkBadge(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val contentColor = type.contentColor
+        val icon = when (type) {
+            BpkBadgeType.Warning -> BpkIcon.InformationCircle
+            BpkBadgeType.Destructive -> BpkIcon.Exclamation
+            BpkBadgeType.Success -> BpkIcon.TickCircle
+            else -> icon
+        }
         if (icon != null) {
             BpkIcon(
                 icon = icon,
