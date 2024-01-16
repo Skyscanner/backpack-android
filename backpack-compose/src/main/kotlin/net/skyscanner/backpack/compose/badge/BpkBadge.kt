@@ -106,9 +106,9 @@ private val BpkBadgeType.contentColor: Color
     get() = when (this) {
         BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
         BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
-        BpkBadgeType.Success -> BpkTheme.colors.textOnLight
-        BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
-        BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
+        BpkBadgeType.Success -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Warning -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Destructive -> BpkTheme.colors.textPrimary
         BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
         BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
         BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
