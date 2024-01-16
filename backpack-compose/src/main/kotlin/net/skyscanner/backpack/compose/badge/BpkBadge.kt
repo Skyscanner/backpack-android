@@ -81,14 +81,7 @@ fun BpkBadge(
                 icon = badgeIcon,
                 contentDescription = null,
                 size = BpkIconSize.Small,
-                tint = when (type) {
-                    BpkBadgeType.Warning -> BpkTheme.colors.statusWarningSpot
-                    BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerSpot
-                    BpkBadgeType.Success -> BpkTheme.colors.statusSuccessSpot
-                    else -> {
-                        contentColor
-                    }
-                },
+                tint = type.iconColor,
             )
         }
         BpkText(
@@ -100,6 +93,17 @@ fun BpkBadge(
         )
     }
 }
+
+private val BpkBadgeType.iconColor: Color
+    @Composable
+    get() = when (this) {
+        BpkBadgeType.Warning -> BpkTheme.colors.statusWarningSpot
+        BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerSpot
+        BpkBadgeType.Success -> BpkTheme.colors.statusSuccessSpot
+        else -> {
+            contentColor
+        }
+    }
 
 private val BpkBadgeType.contentColor: Color
     @Composable
