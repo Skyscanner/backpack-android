@@ -70,15 +70,15 @@ fun BpkBadge(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val contentColor = type.contentColor
-        val icon = when (type) {
+        val badgeIcon = when (type) {
             BpkBadgeType.Warning -> BpkIcon.InformationCircle
             BpkBadgeType.Destructive -> BpkIcon.Exclamation
             BpkBadgeType.Success -> BpkIcon.TickCircle
             else -> icon
         }
-        if (icon != null) {
+        if (badgeIcon != null) {
             BpkIcon(
-                icon = icon,
+                icon = badgeIcon,
                 contentDescription = null,
                 size = BpkIconSize.Small,
                 tint = when (type) {
