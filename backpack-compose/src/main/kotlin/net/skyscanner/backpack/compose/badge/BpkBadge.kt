@@ -56,8 +56,8 @@ enum class BpkBadgeType {
 @Composable
 fun BpkBadge(
     text: String,
-    type: BpkBadgeType,
     modifier: Modifier = Modifier,
+    type: BpkBadgeType = BpkBadgeType.Normal,
     icon: BpkIcon? = null,
 ) {
     Row(
