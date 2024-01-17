@@ -30,13 +30,13 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        BpkBadge(text = "Default", type = BpkBadgeType.Destructive)
+        BpkBadge(text = "Default")
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun withIcon() = snap {
-        BpkBadge(text = "Default", type = BpkBadgeType.Destructive, icon = BpkIcon.CloseCircle)
+        BpkBadge(text = "Default", icon = BpkIcon.CloseCircle)
     }
 
     @Test

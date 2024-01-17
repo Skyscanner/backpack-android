@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -33,8 +34,6 @@ import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.HelpCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.components.BadgeComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -69,21 +68,33 @@ private fun BadgeRow(
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
     ) {
 
-        BpkBadge(
-            text = type.toString(),
-            type = type,
-            modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
-        )
+        if (type !in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive)) {
+            BpkBadge(
+                text = type.toString(),
+                type = type,
+                modifier = Modifier
+                    .weight(1f)
+                    .wrapContentWidth(align = Alignment.CenterHorizontally),
+            )
+        } else {
+            Spacer(modifier = Modifier.weight(1F))
+        }
 
         BpkBadge(
             text = type.toString(),
-            modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
+            modifier = Modifier
+                .weight(1f)
+                .wrapContentWidth(align = Alignment.CenterHorizontally),
             type = type,
             icon = when (type) {
-                BpkBadgeType.Warning -> BpkIcon.HelpCircle
-                BpkBadgeType.Destructive -> BpkIcon.CloseCircle
+                BpkBadgeType.Success,
+                BpkBadgeType.Warning,
+                BpkBadgeType.Destructive,
+                -> null
+
                 else -> BpkIcon.TickCircle
             },
         )
     }
 }
+// }
