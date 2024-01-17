@@ -86,7 +86,15 @@ private fun BadgeRow(
                 .weight(1f)
                 .wrapContentWidth(align = Alignment.CenterHorizontally),
             type = type,
-            icon = BpkIcon.TickCircle,
+            icon = when (type) {
+                BpkBadgeType.Success,
+                BpkBadgeType.Warning,
+                BpkBadgeType.Destructive,
+                -> null
+
+                else -> BpkIcon.TickCircle
+            },
         )
     }
 }
+// }
