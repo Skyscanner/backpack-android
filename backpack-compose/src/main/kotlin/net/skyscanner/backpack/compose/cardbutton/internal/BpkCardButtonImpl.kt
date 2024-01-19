@@ -50,7 +50,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.HeartOutline
-import net.skyscanner.backpack.compose.tokens.ShareIos
+import net.skyscanner.backpack.compose.tokens.ShareAndroid
 import net.skyscanner.backpack.compose.utils.clickable
 
 private enum class BpkCardButtonState {
@@ -164,7 +164,7 @@ internal fun BpkShareCardButtonImpl(
         ) {
             BpkIcon(
                 modifier = Modifier,
-                icon = BpkIcon.ShareIos,
+                icon = BpkIcon.ShareAndroid,
                 contentDescription = contentDescription,
                 size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
                 tint = when (style) {
