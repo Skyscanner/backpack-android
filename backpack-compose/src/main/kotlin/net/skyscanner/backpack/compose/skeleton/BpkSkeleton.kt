@@ -214,10 +214,15 @@ fun BpkHeadlineSkeleton(
     modifier: Modifier = Modifier,
     skeletonHeightSize: BpkSkeletonHeightSizeType = BpkSkeletonHeightSizeType.Small,
 ) {
+    val cornerRadius = if (skeletonHeightSize === BpkSkeletonHeightSizeType.Small) {
+        BpkSkeletonBorderRadiusXXS
+    } else {
+        BpkBorderRadius.Xs
+    }
     Box(
         modifier = modifier
             .enhanceHeadlineHeight(skeletonHeightSize)
-            .background(shimmerBackgroundColor(), RoundedCornerShape(BpkBorderRadius.Xs)),
+            .background(shimmerBackgroundColor(), RoundedCornerShape(cornerRadius)),
     )
 }
 
