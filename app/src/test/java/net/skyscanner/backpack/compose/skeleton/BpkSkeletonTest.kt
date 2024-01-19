@@ -25,13 +25,6 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
-import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
-import net.skyscanner.backpack.compose.sleketon.BpkCircleSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkHeadlineSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkImageSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkSkeletonCornerType
-import net.skyscanner.backpack.compose.sleketon.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Test
 

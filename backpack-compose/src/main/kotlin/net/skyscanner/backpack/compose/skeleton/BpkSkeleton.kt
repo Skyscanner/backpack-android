@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.sleketon
+package net.skyscanner.backpack.compose.skeleton
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.VectorConverter
@@ -214,10 +214,15 @@ fun BpkHeadlineSkeleton(
     modifier: Modifier = Modifier,
     skeletonHeightSize: BpkSkeletonHeightSizeType = BpkSkeletonHeightSizeType.Small,
 ) {
+    val cornerRadius = if (skeletonHeightSize === BpkSkeletonHeightSizeType.Small) {
+        BpkSkeletonBorderRadiusXXS
+    } else {
+        BpkBorderRadius.Xs
+    }
     Box(
         modifier = modifier
             .enhanceHeadlineHeight(skeletonHeightSize)
-            .background(shimmerBackgroundColor(), RoundedCornerShape(BpkBorderRadius.Sm)),
+            .background(shimmerBackgroundColor(), RoundedCornerShape(cornerRadius)),
     )
 }
 

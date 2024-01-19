@@ -26,8 +26,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
-import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
+import net.skyscanner.backpack.compose.skeleton.BpkBodyTextSkeleton
+import net.skyscanner.backpack.compose.skeleton.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 private const val SkeletonCount = 10
