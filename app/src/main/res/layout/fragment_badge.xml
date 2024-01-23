@@ -11,7 +11,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:layout_marginStart="@dimen/bpkSpacingSm"
             android:layout_marginTop="@dimen/bpkSpacingSm"
             android:layout_marginEnd="@dimen/bpkSpacingSm"
@@ -53,7 +52,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
 
@@ -91,7 +89,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
 
@@ -118,7 +115,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
 
@@ -145,7 +141,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
 
@@ -173,7 +168,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:background="@color/bpkCorePrimary"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
@@ -213,7 +207,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:background="@color/bpkCorePrimary"
             android:orientation="horizontal"
             android:padding="@dimen/bpkSpacingMd">
@@ -252,7 +245,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/bpkSpacingSm"
             android:layout_marginStart="@dimen/bpkSpacingSm"
             android:layout_marginTop="@dimen/bpkSpacingSm"
             android:layout_marginEnd="@dimen/bpkSpacingSm"
