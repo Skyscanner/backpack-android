@@ -103,7 +103,7 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          * Style for badges with brand
          */
-        Brand(10, R.color.bpkCoreAccent, R.color.bpkTextOnDark),
+        Brand(10, R.color.bpkCoreAccent, R.color.bpkTextPrimaryInverse),
         ;
 
         internal companion object {
