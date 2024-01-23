@@ -12,8 +12,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bpkSpacingSm"
+            android:layout_marginStart="@dimen/bpkSpacingSm"
+            android:layout_marginTop="@dimen/bpkSpacingSm"
+            android:layout_marginEnd="@dimen/bpkSpacingSm"
+            android:layout_marginBottom="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_normal"
@@ -51,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_strong"
@@ -91,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_success"
@@ -119,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_warning"
@@ -146,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bpkSpacingSm"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_destructive"
@@ -176,7 +180,7 @@
             android:layout_margin="@dimen/bpkSpacingSm"
             android:background="@color/bpkCorePrimary"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_inverse"
@@ -218,7 +222,7 @@
             android:layout_margin="@dimen/bpkSpacingSm"
             android:background="@color/bpkCorePrimary"
             android:orientation="horizontal"
-            android:padding="@dimen/bpkSpacingSm">
+            android:padding="@dimen/bpkSpacingMd">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_outline"
