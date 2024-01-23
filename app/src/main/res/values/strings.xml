@@ -161,6 +161,7 @@
     <string name="badge_strong">Strong</string>
     <string name="badge_inverse">Inverse</string>
     <string name="badge_outline">Outline</string>
+    <string name="badge_brand">Brand</string>
     <string name="badge_apples">Apples</string>
     <string name="badge_bananas">Bananas</string>
     <string name="badge_strawberries">Strawberries</string>
