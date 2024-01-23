@@ -99,6 +99,11 @@ open class BpkBadge @JvmOverloads constructor(
          * Style for badges with emphasis
          */
         Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+
+        /**
+         * Style for badges with brand
+         */
+        Brand(10, R.color.bpkCoreAccent, R.color.bpkTextOnDark),
         ;
 
         internal companion object {
