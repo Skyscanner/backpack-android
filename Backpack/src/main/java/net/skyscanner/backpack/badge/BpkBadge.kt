@@ -39,7 +39,7 @@ open class BpkBadge @JvmOverloads constructor(
 
     private var initialized = false
 
-    private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
     private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
     init {
@@ -56,17 +56,17 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          * Style for badges with positive messages
          */
-        Success(1, R.color.bpkStatusSuccessFill, R.color.bpkTextOnLight),
+        Success(1, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusSuccessSpot),
 
         /**
          *  Style for badges with warning messages
          */
-        Warning(2, R.color.bpkStatusWarningFill, R.color.bpkTextOnLight),
+        Warning(2, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusWarningSpot),
 
         /**
          * Style for badges with error messages
          */
-        Destructive(3, R.color.bpkStatusDangerFill, R.color.bpkTextOnLight),
+        Destructive(3, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusDangerSpot),
 
         /**
          *  Light themed style for badges
@@ -93,12 +93,17 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          * Style for badges
          */
-        Normal(8, R.color.bpkSurfaceHighlight, R.color.bpkTextPrimary),
+        Normal(8, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary),
 
         /**
          * Style for badges with emphasis
          */
         Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+
+        /**
+         * Style for badges with brand
+         */
+        Brand(10, R.color.bpkCoreAccent, R.color.bpkTextPrimaryInverse),
         ;
 
         internal companion object {
@@ -158,8 +163,15 @@ open class BpkBadge @JvmOverloads constructor(
         type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
         message = a.getString(R.styleable.BpkBadge_message)
         a.getResourceId(R.styleable.BpkBadge_badgeIcon, 0).let { iconID ->
-            if (iconID != 0) {
-                icon = AppCompatResources.getDrawable(context, iconID)
+            icon = if (iconID != 0) {
+                AppCompatResources.getDrawable(context, iconID)
+            } else {
+                when (type) {
+                    Type.Success -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick_circle)
+                    Type.Warning -> AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle)
+                    Type.Destructive -> AppCompatResources.getDrawable(context, R.drawable.bpk_exclamation)
+                    else -> null
+                }
             }
         }
 
@@ -170,7 +182,7 @@ open class BpkBadge @JvmOverloads constructor(
 
     private fun setup() {
         this.includeFontPadding = true
-        this.textStyle = TextStyle.Caption
+        this.textStyle = TextStyle.Footnote
         this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
         this.text = message
         this.icon = icon
