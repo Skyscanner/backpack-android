@@ -17,7 +17,7 @@ coroutines = "1.7.3"
 espresso = "3.5.1"
 kotlinPoet = "1.16.0"
 ktor = "2.3.7"
-roborazzi = "1.9.0-alpha-4"
+roborazzi = "1.9.0"
 
 [libraries]
 
