@@ -160,7 +160,7 @@ open class BpkBadge @JvmOverloads constructor(
             0,
         )
 
-        type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
+        type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 8))
         message = a.getString(R.styleable.BpkBadge_message)
         a.getResourceId(R.styleable.BpkBadge_badgeIcon, 0).let { iconID ->
             icon = if (iconID != 0) {
