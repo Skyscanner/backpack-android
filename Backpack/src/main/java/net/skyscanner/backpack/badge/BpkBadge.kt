@@ -121,7 +121,7 @@ open class BpkBadge @JvmOverloads constructor(
      * @property type
      * Type of badge. Default Type.Success
      */
-    var type: Type = Type.Success
+    var type: Type = Type.Normal
         set(value) {
             field = value
             if (initialized) setup()
