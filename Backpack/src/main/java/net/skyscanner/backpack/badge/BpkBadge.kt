@@ -121,7 +121,7 @@ open class BpkBadge @JvmOverloads constructor(
      * @property type
      * Type of badge. Default Type.Success
      */
-    var type: Type = Type.Success
+    var type: Type = Type.Normal
         set(value) {
             field = value
             if (initialized) setup()
@@ -144,10 +144,6 @@ open class BpkBadge @JvmOverloads constructor(
     var icon: Drawable? = null
         set(value) {
             field = value
-                ?.mutate()
-                ?.apply {
-                    setBounds(0, 0, iconSize, iconSize)
-                }
             updateIcon()
         }
 
@@ -160,18 +156,13 @@ open class BpkBadge @JvmOverloads constructor(
             0,
         )
 
-        type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
+        type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 8))
         message = a.getString(R.styleable.BpkBadge_message)
         a.getResourceId(R.styleable.BpkBadge_badgeIcon, 0).let { iconID ->
             icon = if (iconID != 0) {
                 AppCompatResources.getDrawable(context, iconID)
             } else {
-                when (type) {
-                    Type.Success -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick_circle)
-                    Type.Warning -> AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle)
-                    Type.Destructive -> AppCompatResources.getDrawable(context, R.drawable.bpk_exclamation)
-                    else -> null
-                }
+                null
             }
         }
 
@@ -208,9 +199,23 @@ open class BpkBadge @JvmOverloads constructor(
     }
 
     private fun updateIcon() {
-        setCompoundDrawablesRelative(icon, null, null, null)
-        setPadding(iconPadding, 0, iconPadding, 0)
-        icon?.setTint(context.getColor(type.iconColor))
+        val currentIcon = if (icon == null) {
+            when (type) {
+                Type.Success -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick_circle)
+                Type.Warning -> AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle)
+                Type.Destructive -> AppCompatResources.getDrawable(context, R.drawable.bpk_exclamation)
+                else -> null
+            }
+        } else {
+            icon
+        }
+        currentIcon
+            ?.mutate()
+            ?.apply {
+                setBounds(0, 0, iconSize, iconSize)
+                setTint(context.getColor(type.iconColor))
+                setCompoundDrawablesRelative(this, null, null, null)
+            }
     }
 
     internal fun setBackground(
