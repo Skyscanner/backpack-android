@@ -27,8 +27,10 @@ import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.util.Consumer
+import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
+@OptIn(InternalBackpackApi::class)
 internal class CalendarCellHeaderHolder(
     parent: ViewGroup,
     private val output: Consumer<CalendarInteraction>,

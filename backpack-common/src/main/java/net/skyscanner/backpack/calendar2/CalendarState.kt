@@ -28,6 +28,7 @@ import net.skyscanner.backpack.util.InternalBackpackApi
  * @param selection the current Calendar selection
  */
 @Immutable
+@OptIn(InternalBackpackApi::class)
 data class CalendarState internal constructor(
     val params: CalendarParams,
     val selection: CalendarSelection = CalendarSelection.None,
