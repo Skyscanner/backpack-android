@@ -18,76 +18,18 @@
 
 package net.skyscanner.backpack.compose.price.internal
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
-
-@Composable
-internal fun BpkPriceAlignStart(
-    price: String,
-    modifier: Modifier = Modifier,
-    leadingText: String? = null,
-    previousPrice: String? = null,
-    trailingText: String? = null,
-    size: BpkPriceSize = BpkPriceSize.Small,
-) {
-    Column(modifier = modifier) {
-        Row {
-            previousPrice?.let {
-                BpkText(
-                    text = it,
-                    color = BpkTheme.colors.textSecondary,
-                    style = size.secondaryTextStyle(),
-                    textDecoration = TextDecoration.LineThrough,
-                )
-            }
-            leadingText?.let {
-                val builder = StringBuilder()
-                previousPrice?.let { builder.append(" • ") }
-                builder.append(it)
-                BpkText(
-                    text = builder.toString(),
-                    color = BpkTheme.colors.textSecondary,
-                    style = size.secondaryTextStyle(),
-                )
-            }
-        }
-        Row(verticalAlignment = Alignment.Bottom) {
-            BpkText(
-                modifier = Modifier.alignByBaseline(),
-                text = price,
-                color = BpkTheme.colors.textPrimary,
-                style = size.mainTextStyle(),
-            )
-            trailingText?.let {
-                Box(
-                    modifier = Modifier
-                        .padding(start = BpkSpacing.Sm)
-                        .alignByBaseline(),
-                ) {
-                    BpkText(
-                        text = it,
-                        color = BpkTheme.colors.textSecondary,
-                        style = size.secondaryTextStyle(),
-                    )
-                }
-            }
-        }
-    }
-}
 
 @Composable
 internal fun BpkPriceAlignEnd(
@@ -139,18 +81,3 @@ internal fun BpkPriceAlignEnd(
         }
     }
 }
-
-@Composable
-private fun BpkPriceSize.mainTextStyle(): TextStyle =
-    when (this) {
-        BpkPriceSize.Large -> BpkTheme.typography.heading2
-        BpkPriceSize.Small -> BpkTheme.typography.heading4
-        BpkPriceSize.ExtraSmall -> BpkTheme.typography.heading5
-    }
-
-@Composable
-private fun BpkPriceSize.secondaryTextStyle(): TextStyle =
-    when (this) {
-        BpkPriceSize.Large -> BpkTheme.typography.footnote
-        BpkPriceSize.Small, BpkPriceSize.ExtraSmall -> BpkTheme.typography.caption
-    }
