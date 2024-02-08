@@ -130,7 +130,7 @@ internal class BpkCarouselInternalState(
 private class InfinitePagerState(
     initialPage: Int,
     private val totalPages: Int,
-) : PagerState(initialPage, initialPageOffsetFraction = 0f) {
+) : PagerState(initialPage, currentPageOffsetFraction = 0f) {
 
     override val pageCount: Int
         // if count > 1, set to Int.MAX_VALUE for infinite looping
