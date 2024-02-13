@@ -27,7 +27,6 @@ buildscript {
         classpath libs.plugin.android
         classpath libs.plugin.kotlin
         classpath libs.plugin.dokka
-        classpath libs.plugin.shot
         classpath libs.plugin.nexusPublishing
         classpath libs.plugin.detekt
         classpath libs.plugin.ksp

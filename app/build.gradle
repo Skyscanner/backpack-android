@@ -18,7 +18,6 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'shot'
 apply plugin: 'com.google.devtools.ksp'
 apply plugin: 'io.github.takahirom.roborazzi'
 
