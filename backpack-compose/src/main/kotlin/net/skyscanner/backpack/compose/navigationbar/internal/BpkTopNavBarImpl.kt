@@ -67,22 +67,23 @@ internal fun BpkTopNavBarImpl(
 
     val backgroundColor = when {
         fraction <= 0f -> when(style) {
-            NavBarStyle.OnDark -> BpkTheme.colors.surfaceContrast
+            NavBarStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
             else -> BpkTheme.colors.surfaceDefault
         }
         else -> when (style) {
-            NavBarStyle.OnImage, NavBarStyle.OnDark -> Color.Transparent
+            NavBarStyle.OnImage -> Color.Transparent
             NavBarStyle.Default -> BpkTheme.colors.canvas
+            NavBarStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
         }
     }
 
     val contentColor = when {
         fraction <= 0f -> when(style) {
-            NavBarStyle.OnDark -> BpkTheme.colors.textOnDark
+            NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
             else -> BpkTheme.colors.textPrimary
         }
         else -> when (style) {
-            NavBarStyle.OnImage, NavBarStyle.OnDark -> BpkTheme.colors.textOnDark
+            NavBarStyle.OnImage, NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
             NavBarStyle.Default -> BpkTheme.colors.textPrimary
         }
     }

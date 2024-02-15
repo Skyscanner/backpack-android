@@ -148,15 +148,15 @@ fun TransparentNavBarStory(
 
 @Composable
 @NavBarComponent
-@ComposeStory("OnDark")
-fun OnDarkNavBarStory(
+@ComposeStory("SurfaceContrast")
+fun SurfaceContrastNavBarStory(
     modifier: Modifier = Modifier,
     initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
     showList: Boolean = true,
     showActions: Boolean = true,
     showNav: Boolean = true,
     insets: WindowInsets? = null,
-    style: NavBarStyle = NavBarStyle.OnDark,
+    style: NavBarStyle = NavBarStyle.SurfaceContrast,
 ) {
     val state = rememberTopAppBarState(initialStatus)
     Column(modifier.nestedScroll(state)) {

@@ -35,7 +35,7 @@ sealed interface NavIcon {
 enum class NavBarStyle {
     Default,
     OnImage,
-    OnDark
+    SurfaceContrast,
 }
 
 internal sealed interface Action {
@@ -60,6 +60,8 @@ fun BpkTopNavBar(
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
+    style: NavBarStyle = NavBarStyle.Default,
+
 ) {
     BpkTopNavBarImpl(
         scrollBehavior = rememberFixedTopAppBarState(),
@@ -68,7 +70,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = actions,
-        style = NavBarStyle.Default,
+        style = style,
     )
 }
 
@@ -79,6 +81,7 @@ fun BpkTopNavBar(
     action: TextAction,
     modifier: Modifier = Modifier,
     insets: WindowInsets? = WindowInsets.statusBars,
+    style: NavBarStyle = NavBarStyle.Default,
 ) {
     BpkTopNavBarImpl(
         scrollBehavior = rememberFixedTopAppBarState(),
@@ -87,7 +90,7 @@ fun BpkTopNavBar(
         insets = insets,
         navIcon = navIcon.toAction(),
         actions = listOf(action),
-        style = NavBarStyle.Default,
+        style = style,
     )
 }
 
