@@ -32,11 +32,11 @@ internal object BpkButtonColors {
 
     internal val destructiveNormalForeground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFC80456), Color(0xFFFF649C))
+        get() = dynamicColorOf(Color(0xFFE70866), Color(0xFFFF649C))
 
     internal val destructivePressedBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFC80456), Color(0xFFFF649C))
+        get() = dynamicColorOf(Color(0xFFE70866), Color(0xFFFF649C))
 
     internal val disabledBackground: Color
         @Composable
@@ -68,19 +68,19 @@ internal object BpkButtonColors {
 
     internal val linkPressedForeground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF154679), Color(0xFFD1F7FF))
+        get() = dynamicColorOf(Color(0xFF024DAF), Color(0xFFD1F7FF))
 
     internal val primaryNormalBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF054184))
+        get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF024DAF))
 
     internal val primaryOnDarkDisabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFFE0E4E9))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF0B121D))
 
     internal val primaryOnDarkDisabledForeground: Color
         @Composable
-        get() = dynamicColorOf(Color(0x33000000), Color(0x33000000))
+        get() = dynamicColorOf(Color(0x33000000), Color(0x33FFFFFF))
 
     internal val primaryOnDarkNormalBackground: Color
         @Composable
@@ -92,23 +92,23 @@ internal object BpkButtonColors {
 
     internal val primaryOnLightDisabledBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFFE0E4E9))
+        get() = dynamicColorOf(Color(0xFFE0E4E9), Color(0xFF0B121D))
 
     internal val primaryOnLightDisabledForeground: Color
         @Composable
-        get() = dynamicColorOf(Color(0x33000000), Color(0x33000000))
+        get() = dynamicColorOf(Color(0x33000000), Color(0x33FFFFFF))
 
     internal val primaryOnLightNormalBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF05203C))
+        get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF024DAF))
 
     internal val primaryOnLightPressedBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF154679), Color(0xFF154679))
+        get() = dynamicColorOf(Color(0xFF154679), Color(0xFF054184))
 
     internal val primaryPressedBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF154679), Color(0xFF002B5B))
+        get() = dynamicColorOf(Color(0xFF154679), Color(0xFF054184))
 
     internal val secondaryNormalBackground: Color
         @Composable
@@ -124,7 +124,7 @@ internal object BpkButtonColors {
 
     internal val secondaryOnDarkNormalBackground: Color
         @Composable
-        get() = dynamicColorOf(Color(0xFF243346), Color(0xFF243346))
+        get() = dynamicColorOf(Color(0x1AFFFFFF), Color(0x1AFFFFFF))
 
     internal val secondaryOnDarkPressedBackground: Color
         @Composable

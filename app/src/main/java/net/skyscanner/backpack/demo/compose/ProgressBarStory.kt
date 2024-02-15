@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ProgressBarComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import java.lang.Float.max
 import java.lang.Float.min
 
@@ -105,20 +106,23 @@ private fun ProgressBarSample(
             stepped = stepped,
         )
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-        ) {
-            BpkButton(
-                modifier = Modifier.weight(1F),
-                text = stringResource(id = R.string.progress_bar_decrease),
-                onClick = { progress = max(0F, progress - interval) },
-            )
+        val automationMode = LocalAutomationMode.current
+        if (!automationMode) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            ) {
+                BpkButton(
+                    modifier = Modifier.weight(1F),
+                    text = stringResource(id = R.string.progress_bar_decrease),
+                    onClick = { progress = max(0F, progress - interval) },
+                )
 
-            BpkButton(
-                modifier = Modifier.weight(1F),
-                text = stringResource(id = R.string.progress_bar_increase),
-                onClick = { progress = min(max.toFloat(), progress + interval) },
-            )
+                BpkButton(
+                    modifier = Modifier.weight(1F),
+                    text = stringResource(id = R.string.progress_bar_increase),
+                    onClick = { progress = min(max.toFloat(), progress + interval) },
+                )
+            }
         }
     }
 }
