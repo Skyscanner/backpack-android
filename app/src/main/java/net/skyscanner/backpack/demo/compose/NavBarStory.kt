@@ -147,6 +147,49 @@ fun TransparentNavBarStory(
 }
 
 @Composable
+@NavBarComponent
+@ComposeStory("OnDark")
+fun OnDarkNavBarStory(
+    modifier: Modifier = Modifier,
+    initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
+    showList: Boolean = true,
+    showActions: Boolean = true,
+    showNav: Boolean = true,
+    insets: WindowInsets? = null,
+    style: NavBarStyle = NavBarStyle.OnDark,
+) {
+    val state = rememberTopAppBarState(initialStatus)
+    Column(modifier.nestedScroll(state)) {
+        Box(modifier = Modifier.padding(vertical = BpkSpacing.Base)) {
+            Image(
+                painter = painterResource(id = R.drawable.swimming),
+                modifier = Modifier.matchParentSize(),
+                contentDescription = "",
+                contentScale = ContentScale.FillWidth,
+            )
+            BpkTopNavBar(
+                state = state,
+                title = stringResource(R.string.navigation_bar_title),
+                insets = insets,
+                navIcon = when {
+                    showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
+                    else -> NavIcon.None
+                },
+                actions = if (showActions) listOf(
+                    IconAction(
+                        icon = BpkIcon.Accessibility,
+                        contentDescription = stringResource(R.string.navigation_accessibility),
+                    ) {},
+                    IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+                ) else emptyList(),
+                style = style,
+            )
+        }
+        NavBarSampleBody(showList)
+    }
+}
+
+@Composable
 private fun NavBarSampleBody(showList: Boolean) {
     if (showList) {
         LazyColumn {

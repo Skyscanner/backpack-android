@@ -35,6 +35,7 @@ sealed interface NavIcon {
 enum class NavBarStyle {
     Default,
     OnImage,
+    OnDark
 }
 
 internal sealed interface Action {
