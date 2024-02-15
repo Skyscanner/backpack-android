@@ -66,7 +66,7 @@ internal fun BpkTopNavBarImpl(
     val fraction = 1f - internalState.state.collapsedFraction
 
     val backgroundColor = when {
-        fraction <= 0f -> when(style) {
+        fraction <= 0f -> when (style) {
             NavBarStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
             else -> BpkTheme.colors.surfaceDefault
         }
@@ -78,7 +78,7 @@ internal fun BpkTopNavBarImpl(
     }
 
     val contentColor = when {
-        fraction <= 0f -> when(style) {
+        fraction <= 0f -> when (style) {
             NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
             else -> BpkTheme.colors.textPrimary
         }
