@@ -53,46 +53,48 @@ fun FloatingNotificationStory(modifier: Modifier = Modifier) {
         val text = stringResource(R.string.floating_notification_saved)
         val cta = stringResource(R.string.floating_notification_view)
 
-        Column(
-            modifier = Modifier.padding(BpkSpacing.Base),
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-        ) {
+        val automationMode = LocalAutomationMode.current
+        if (!automationMode) {
+            Column(
+                modifier = Modifier.padding(BpkSpacing.Base),
+                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            ) {
 
-            BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
-                scope.launch {
-                    state.show(
-                        text = text,
-                    )
+                BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
+                    scope.launch {
+                        state.show(
+                            text = text,
+                        )
+                    }
                 }
-            }
 
-            BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
-                scope.launch {
-                    state.show(
-                        text = text,
-                        icon = BpkIcon.Heart,
-                    )
+                BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
+                    scope.launch {
+                        state.show(
+                            text = text,
+                            icon = BpkIcon.Heart,
+                        )
+                    }
                 }
-            }
 
-            BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
-                scope.launch {
-                    state.show(
-                        text = text,
-                        cta = cta,
-                        onClick = {},
-                    )
+                BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
+                    scope.launch {
+                        state.show(
+                            text = text,
+                            cta = cta,
+                            onClick = {},
+                        )
+                    }
                 }
-            }
 
-            BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
-                scope.showNotificationWithIconAndAction(state, text, cta)
+                BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
+                    scope.showNotificationWithIconAndAction(state, text, cta)
+                }
             }
         }
 
         BpkFloatingNotification(state)
 
-        val automationMode = LocalAutomationMode.current
         LaunchedEffect(scope, state, automationMode) {
             if (automationMode) {
                 scope.showNotificationWithIconAndAction(state, text, cta)

@@ -24,8 +24,8 @@
     <color name="__privateBarTrackDefault">#ffe0e4e9</color>
     <color name="__privateBarTrackOnContrast">#ffffffff</color>
     <color name="__privateButtonDestructiveNormalBackground">#ffe0e4e9</color>
-    <color name="__privateButtonDestructiveNormalForeground">#ffc80456</color>
-    <color name="__privateButtonDestructivePressedBackground">#ffc80456</color>
+    <color name="__privateButtonDestructiveNormalForeground">#ffe70866</color>
+    <color name="__privateButtonDestructivePressedBackground">#ffe70866</color>
     <color name="__privateButtonDisabledBackground">#ffe0e4e9</color>
     <color name="__privateButtonFeaturedNormalBackground">#ff0062e3</color>
     <color name="__privateButtonFeaturedPressedBackground">#ff024daf</color>
@@ -33,7 +33,7 @@
     <color name="__privateButtonLinkOnDarkDisabledForeground">#33ffffff</color>
     <color name="__privateButtonLinkOnDarkNormalForeground">#ffffffff</color>
     <color name="__privateButtonLinkOnDarkPressedForeground">#80ffffff</color>
-    <color name="__privateButtonLinkPressedForeground">#ff154679</color>
+    <color name="__privateButtonLinkPressedForeground">#ff024daf</color>
     <color name="__privateButtonPrimaryNormalBackground">#ff05203c</color>
     <color name="__privateButtonPrimaryOnDarkDisabledBackground">#ffe0e4e9</color>
     <color name="__privateButtonPrimaryOnDarkDisabledForeground">#33000000</color>
@@ -47,7 +47,7 @@
     <color name="__privateButtonSecondaryNormalBackground">#ffe0e4e9</color>
     <color name="__privateButtonSecondaryOnDarkDisabledBackground">#ff0b121d</color>
     <color name="__privateButtonSecondaryOnDarkDisabledForeground">#33ffffff</color>
-    <color name="__privateButtonSecondaryOnDarkNormalBackground">#ff243346</color>
+    <color name="__privateButtonSecondaryOnDarkNormalBackground">#1affffff</color>
     <color name="__privateButtonSecondaryOnDarkPressedBackground">#ff010913</color>
     <color name="__privateButtonSecondaryPressedBackground">#ffc1c7cf</color>
     <color name="__privateChipDisabledBackground">#ffe0e4e9</color>
