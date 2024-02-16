@@ -31,6 +31,7 @@ import net.skyscanner.backpack.demo.compose.CloseTopNavBar
 import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
 import net.skyscanner.backpack.demo.compose.TransparentNavBarStory
 import net.skyscanner.backpack.demo.compose.NoNavIconTopNavBar
+import net.skyscanner.backpack.demo.compose.SurfaceContrastNavBarStory
 import net.skyscanner.backpack.demo.compose.TextActionTopNavBar
 import org.junit.Test
 
@@ -134,5 +135,16 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
                 insets = WindowInsets(top = BpkSpacing.Md),
             )
         }
+    }
+
+    @Test
+    fun expandedSurfaceContrastNavBar() = snap {
+        SurfaceContrastNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsedSurfaceContrastNavBar() = snap {
+        SurfaceContrastNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
     }
 }
