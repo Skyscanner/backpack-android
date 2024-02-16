@@ -84,7 +84,7 @@ internal fun BpkImageGallerySlideshow(
                     .fillMaxHeight()
                     .aspectRatio(1f),
                 pagerState = pagerState,
-                image = current,
+                images = images,
                 overlayContent = {
                     CarouselBadge(
                         modifier = Modifier.align(Alignment.BottomEnd),
@@ -118,7 +118,7 @@ internal fun BpkImageGallerySlideshow(
                         .fillMaxWidth()
                         .aspectRatio(1f),
                     pagerState = pagerState,
-                    image = current,
+                    images = images,
                     overlayContent = {
                         CarouselBadge(
                             modifier = Modifier.align(Alignment.BottomCenter),
@@ -140,7 +140,7 @@ internal fun BpkImageGallerySlideshow(
 @Composable
 private fun ImageCarousel(
     pagerState: BpkCarouselState,
-    image: BpkImageGalleryImage,
+    images: List<BpkImageGalleryImage>,
     modifier: Modifier = Modifier,
     overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
 ) {
@@ -148,8 +148,8 @@ private fun ImageCarousel(
         modifier = modifier,
         state = pagerState,
         overlayContent = overlayContent,
-    ) {
-        image.content(image.contentDescription(), ContentScale.Fit)
+    ) { currentIndex ->
+        images[currentIndex].content(images[currentIndex].contentDescription(), ContentScale.Fit)
     }
 }
 
