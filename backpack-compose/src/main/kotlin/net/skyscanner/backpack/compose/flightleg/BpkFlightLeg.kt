@@ -33,7 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.contentDescription
@@ -84,11 +83,14 @@ fun BpkFlightLeg(
                     modifier = Modifier
                         .padding(top = BpkSpacing.Sm)
                         .size(BpkSpacing.Lg)
-                        .clip(RoundedCornerShape(BpkBorderRadius.Xs))
-                        // FIXME: Workarounds case when `carrierLogoContent` should fill the whole space
-                        // of the box, but the background still shines through as a few pixels wide border.
-                        // See https://issuetracker.google.com/issues/228985905 for reference.
-                        .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+                        .graphicsLayer(
+                            clip = true,
+                            shape = RoundedCornerShape(BpkBorderRadius.Xs),
+                            // Workarounds case when `carrierLogoContent` should fill the whole space
+                            // of the box, but the background still shines through as a few pixels wide border.
+                            // See https://issuetracker.google.com/issues/258962926#comment2 for reference.
+                            compositingStrategy = CompositingStrategy.Offscreen,
+                        )
                         .background(BpkTheme.colors.textOnDark),
                     content = it,
                     contentAlignment = Alignment.Center,
