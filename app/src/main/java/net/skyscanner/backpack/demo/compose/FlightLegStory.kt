@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -79,6 +80,13 @@ internal fun BasicFlightLegSample(modifier: Modifier = Modifier) {
         contentDescription = null,
         carrierLogoContent = {
             Image(
+                // Simulating carrier logo with filled background to
+                // test the blending with required white background
+                // NB: The white frame is still visible on snapshot testing
+                // unfortunately
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BpkTheme.colors.canvas),
                 painter = painterResource(id = R.drawable.sample_icon),
                 contentDescription = null,
             )
