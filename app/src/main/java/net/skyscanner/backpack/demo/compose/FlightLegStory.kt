@@ -80,6 +80,10 @@ internal fun BasicFlightLegSample(modifier: Modifier = Modifier) {
         contentDescription = null,
         carrierLogoContent = {
             Image(
+                // Simulating carrier logo with filled background to
+                // test the blending with required white background
+                // NB: The white frame is still visible on snapshot testing
+                // unfortunately
                 modifier = Modifier
                     .fillMaxSize()
                     .background(BpkTheme.colors.canvas),
