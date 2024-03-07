@@ -13,10 +13,10 @@ detekt = "1.23.5"
 lifecycle = "2.7.0"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
-coroutines = "1.7.3"
+coroutines = "1.8.0"
 espresso = "3.5.1"
 kotlinPoet = "1.16.0"
-ktor = "2.3.8"
+ktor = "2.3.9"
 roborazzi = "1.9.0"
 
 [libraries]
@@ -56,7 +56,7 @@ test-espressoCore = { module = "androidx.test.espresso:espresso-core", version.r
 test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 test-rules = "androidx.test:rules:1.5.0"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-test-mockitoAndroid = "org.mockito:mockito-android:5.10.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.11.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
