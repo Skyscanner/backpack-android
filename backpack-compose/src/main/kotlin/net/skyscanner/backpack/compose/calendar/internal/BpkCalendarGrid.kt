@@ -34,7 +34,6 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 
 @SuppressLint("RestrictedApi")
 @Composable
-@OptIn(InternalBackpackApi::class)
 internal fun BpkCalendarGrid(
     state: CalendarState,
     lazyGridState: LazyGridState,

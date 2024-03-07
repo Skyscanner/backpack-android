@@ -29,10 +29,8 @@ import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionContentColor
 import net.skyscanner.backpack.util.Consumer
-import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
-@OptIn(InternalBackpackApi::class)
 internal class CalendarCellDayHolder(
     parent: ViewGroup,
     output: Consumer<CalendarInteraction>,
