@@ -377,4 +377,9 @@
     <string name="image_gallery_category_2">All photos (59)</string>
     <string name="image_gallery_category_3">Official photos (43)</string>
     <string name="image_gallery_category_4">Bedroom (13)</string>
+
+    <string name="navigation_tabs_explore">Explore</string>
+    <string name="navigation_tabs_flights">Flights</string>
+    <string name="navigation_tabs_hotels">Hotels</string>
+    <string name="navigation_tabs_carhire">Car hire</string>
 </resources>
