@@ -59,7 +59,7 @@ fun rememberBpkCarouselState(
     totalImages: Int,
     initialImage: Int = 0,
 ): BpkCarouselState {
-    val initialPage = (Int.MAX_VALUE / 2) + initialImage
+    val initialPage = (getModdedPageCount(totalImages) / 2) + initialImage
 
     val pagerState = rememberSaveable(saver = InfinitePagerState.Saver) {
         InfinitePagerState(
@@ -78,7 +78,7 @@ fun BpkCarouselState(
     totalImages: Int,
     initialImage: Int = 0,
 ): BpkCarouselState {
-    val initialPage = (Int.MAX_VALUE / 2) + initialImage
+    val initialPage = (getModdedPageCount(totalImages) / 2) + initialImage
     return BpkCarouselInternalState(
         delegate = InfinitePagerState(initialPage = initialPage, totalPages = totalImages),
         totalImages = totalImages,
@@ -118,7 +118,7 @@ internal class BpkCarouselInternalState(
         return delegate.currentPage - (currentPage - page)
     }
 
-    fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
+    fun getModdedPageNumber(index: Int, count: Int) = (index - (getModdedPageCount(totalImages) / 2)).floorMod(count)
 
     private fun Int.floorMod(other: Int): Int = when (other) {
         0 -> this
@@ -130,11 +130,10 @@ internal class BpkCarouselInternalState(
 private class InfinitePagerState(
     initialPage: Int,
     private val totalPages: Int,
-) : PagerState(initialPage, initialPageOffsetFraction = 0f) {
+) : PagerState(initialPage, currentPageOffsetFraction = 0f) {
 
     override val pageCount: Int
-        // if count > 1, set to Int.MAX_VALUE for infinite looping
-        get() = if (totalPages > 1) Int.MAX_VALUE else 1
+        get() = getModdedPageCount(totalPages)
 
     companion object {
         val Saver: Saver<InfinitePagerState, *> = listSaver(
@@ -153,3 +152,7 @@ private class InfinitePagerState(
         )
     }
 }
+
+// if count > 1, set to (totalPages * 1000) for "infinite" looping
+// revert this change and use Int.MAX_VALUE when https://issuetracker.google.com/issues/311414925 fix is released
+private fun getModdedPageCount(count: Int) = if (count > 1) count * 100 else 1

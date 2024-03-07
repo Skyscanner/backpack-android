@@ -297,7 +297,7 @@ private fun TopAppBarLayout(
 
         val layoutHeight = heightPx.roundToInt()
 
-        layout(constraints.maxWidth, layoutHeight) {
+        layout(constraints.maxWidth, max(0, layoutHeight)) {
             navigationIconPlaceable.placeRelative(
                 x = 0,
                 y = (layoutHeight - navigationIconPlaceable.height) / 2,

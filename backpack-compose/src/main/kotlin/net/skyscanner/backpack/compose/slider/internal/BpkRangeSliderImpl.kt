@@ -107,7 +107,7 @@ internal fun BpkRangeSliderImpl(
         track = {
             SliderDefaults.Track(
                 colors = sliderColors(),
-                sliderPositions = it,
+                rangeSliderState = it,
             )
         },
         colors = sliderColors(),

@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.22"
 ksp = "1.9.22-1.0.17" # depends on Kotlin version
-composeCompiler = "1.5.8" # depends on Kotlin version
+composeCompiler = "1.5.9" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.9.55" # update this alongside with compiler version
 
@@ -80,7 +80,7 @@ kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.10.01" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2024.02.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
