@@ -31,4 +31,7 @@
     <!-- We already have dependabot checks for this and don't want to fail CI when this isn't merged yet -->
     <issue id="AndroidGradlePluginVersion" severity="ignore" />
 
+    <issue id="UnsafeOptInUsageError">
+        <option name="opt-in" value="net.skyscanner.backpack.util.InternalBackpackApi" />
+    </issue>
 </lint>
