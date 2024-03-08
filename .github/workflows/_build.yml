@@ -153,6 +153,7 @@ jobs:
       - name: Screenshot Tests
         id: screenshotTests
         run: |
+          set -e
           ./scripts/record_screenshot_tests.sh
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
