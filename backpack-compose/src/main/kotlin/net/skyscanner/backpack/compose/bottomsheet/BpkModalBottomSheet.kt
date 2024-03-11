@@ -23,10 +23,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkModalBottomSheetImpl
+import net.skyscanner.backpack.compose.navigationbar.TextAction
 
 sealed class BpkModalBottomSheetCloseAction {
     data object None : BpkModalBottomSheetCloseAction()
-    data class Default(val contentDescription: String) : BpkModalBottomSheetCloseAction()
+    data class Close(
+        val contentDescription: String,
+    ) : BpkModalBottomSheetCloseAction()
 }
 
 @Composable
@@ -36,7 +39,8 @@ fun BpkModalBottomSheet(
     state: BpkModalBottomSheetState = rememberBpkModalBottomSheetState(),
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
     title: String? = null,
-    isClosable: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
+    action: TextAction? = null,
+    closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     BpkModalBottomSheetImpl(
@@ -44,8 +48,9 @@ fun BpkModalBottomSheet(
         modifier = modifier,
         onDismissRequest = onDismissRequest,
         state = state,
+        action = action,
         dragHandleStyle = dragHandleStyle,
         title = title,
-        isClosable = isClosable,
+        closeButton = closeButton,
     )
 }

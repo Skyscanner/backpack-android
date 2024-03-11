@@ -1,6 +1,5 @@
 package net.skyscanner.backpack.compose.bottomsheet.internal
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -27,7 +26,9 @@ import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseActio
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.internal.IconAction
+import net.skyscanner.backpack.compose.navigationbar.internal.TextAction
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -60,7 +61,8 @@ internal fun BpkModalBottomSheetImpl(
     state: BpkModalBottomSheetState,
     dragHandleStyle: BpkDragHandleStyle,
     title: String?,
-    isClosable: BpkModalBottomSheetCloseAction,
+    action: TextAction?,
+    closeButton: BpkModalBottomSheetCloseAction,
     content: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -70,8 +72,9 @@ internal fun BpkModalBottomSheetImpl(
             ModalBottomSheetContent(
                 dragHandleStyle = dragHandleStyle,
                 title = title,
-                isClosable = isClosable,
+                closeButton = closeButton,
                 state = state,
+                action = action,
                 onDismissRequest = onDismissRequest,
                 content = content,
             )
@@ -91,25 +94,26 @@ internal fun BpkModalBottomSheetImpl(
 private fun ModalBottomSheetContent(
     dragHandleStyle: BpkDragHandleStyle,
     title: String?,
-    isClosable: BpkModalBottomSheetCloseAction,
+    action: TextAction?,
+    closeButton: BpkModalBottomSheetCloseAction,
     state: BpkModalBottomSheetState,
     onDismissRequest: () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable() (ColumnScope.() -> Unit),
     modifier: Modifier = Modifier,
 ) {
-    if (isClosable is BpkModalBottomSheetCloseAction.Default || !title.isNullOrEmpty()) {
+    if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
         when (dragHandleStyle) {
             BpkDragHandleStyle.Default -> {
                 Column(
                     modifier = modifier,
-                    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
                 ) {
                     BpkModalBottomSheetHeader(
                         modifier = Modifier.height(BpkSpacing.Lg),
                         title = title,
+                        action = action,
                         state = state,
                         dragHandleStyle = dragHandleStyle,
-                        isClosable = isClosable,
+                        closeButton = closeButton,
                         onDismissRequest = onDismissRequest,
                     )
                     content()
@@ -121,10 +125,11 @@ private fun ModalBottomSheetContent(
                     Column { content() }
                     BpkModalBottomSheetHeader(
                         title = title,
+                        closeButton = closeButton,
+                        action = action,
                         state = state,
-                        dragHandleStyle = dragHandleStyle,
-                        isClosable = isClosable,
                         onDismissRequest = onDismissRequest,
+                        dragHandleStyle = dragHandleStyle,
                     )
                     BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
                 }
@@ -139,7 +144,8 @@ private fun ModalBottomSheetContent(
 @OptIn(ExperimentalMaterial3Api::class)
 private fun BpkModalBottomSheetHeader(
     title: String?,
-    isClosable: BpkModalBottomSheetCloseAction,
+    action: TextAction?,
+    closeButton: BpkModalBottomSheetCloseAction,
     state: BpkModalBottomSheetState,
     onDismissRequest: () -> Unit,
     dragHandleStyle: BpkDragHandleStyle,
@@ -169,8 +175,8 @@ private fun BpkModalBottomSheetHeader(
             }
         },
         navigationIcon = {
-            when (isClosable) {
-                is BpkModalBottomSheetCloseAction.Default -> {
+            when (closeButton) {
+                is BpkModalBottomSheetCloseAction.Close -> {
                     IconAction(
                         action = IconAction(
                             BpkIcon.NativeAndroidClose,
@@ -179,13 +185,16 @@ private fun BpkModalBottomSheetHeader(
                                     onDismissRequest()
                                 }
                             },
-                            contentDescription = isClosable.contentDescription,
+                            contentDescription = closeButton.contentDescription,
                         ),
                     )
                 }
 
                 BpkModalBottomSheetCloseAction.None -> {}
             }
+        },
+        actions = {
+            action?.let { TextAction(action = it) }
         },
         windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
         colors = TopAppBarColors(

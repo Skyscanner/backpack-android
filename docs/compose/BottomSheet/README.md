@@ -98,7 +98,8 @@ if (openBottomSheet) {
     BpkModalBottomSheet(
         state = state,
         title = stringResource(id = R.string.generic_title),
-        isClosable = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
+        closeButton = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
         content = { /* content of the bottom sheet */ },
         dragHandleStyle = BpkDragHandleStyle.Default,
         onDismissRequest = { openBottomSheet = false },

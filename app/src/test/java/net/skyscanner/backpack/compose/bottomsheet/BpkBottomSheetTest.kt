@@ -24,6 +24,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
+import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.ImageBottomSheetStory
@@ -59,7 +60,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     @Test
     fun modal() {
         snap(height = 400.dp, padding = 0.dp, captureFullScreen = true) {
-            ModalBottomSheetStory()
+            ModalBottomSheetStory(action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}))
         }
     }
 
@@ -68,7 +69,8 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
         snap(height = 400.dp, padding = 0.dp, captureFullScreen = true) {
             ModalBottomSheetStory(
                 title = stringResource(id = R.string.generic_title),
-                isClosable = BpkModalBottomSheetCloseAction.Default("text"),
+                closeButton = BpkModalBottomSheetCloseAction.Close("text"),
+                action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
             )
         }
     }
@@ -92,7 +94,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
                 content = { ImageContent(imageRes = R.drawable.beach) },
                 dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 title = stringResource(id = R.string.generic_title),
-                isClosable = BpkModalBottomSheetCloseAction.Default("text"),
+                closeButton = BpkModalBottomSheetCloseAction.Close("text"),
                 onDismissRequest = {},
             )
         }
