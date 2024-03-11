@@ -88,7 +88,7 @@ internal fun BpkModalBottomSheetImpl(
 }
 
 @Composable
-fun ModalBottomSheetContent(
+private fun ModalBottomSheetContent(
     dragHandleStyle: BpkDragHandleStyle,
     title: String?,
     isClosable: BpkModalBottomSheetCloseAction,
