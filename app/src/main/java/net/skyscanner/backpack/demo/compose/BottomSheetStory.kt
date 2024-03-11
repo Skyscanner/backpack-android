@@ -121,8 +121,8 @@ fun ModalBottomSheetWithTopBarStory(
 ) {
     ModalBottomSheetStory(
         modifier = modifier,
-        title = stringResource(id = R.string.generic_title),
-        isClosable = BpkModalBottomSheetCloseAction.Default("text"),
+        title = stringResource(id = R.string.modal_bottom_sheet_title),
+        isClosable = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
     )
 }
 
@@ -178,7 +178,7 @@ fun ImageModalDarkBottomSheetWithTopBarStory(
     ImageModalDarkBottomSheetStory(
         modifier = modifier,
         dragHandleStyle = dragHandleStyle,
-        title = stringResource(id = R.string.generic_title),
+        title = stringResource(id = R.string.modal_bottom_sheet_title),
         isClosable = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
     )
 }

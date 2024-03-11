@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.compose.bottomsheet.internal
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -100,9 +101,11 @@ fun ColumnScope.BpkModalBottomSheetContent(
     if (isClosable is BpkModalBottomSheetCloseAction.Default || !title.isNullOrEmpty()) {
         when (dragHandleStyle) {
             BpkDragHandleStyle.Default -> {
-                Column(modifier = modifier) {
+                Column(modifier = modifier,
+                    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+                ) {
                     BpkModalBottomSheetHeader(
-                        modifier = Modifier.height(BpkSpacing.Base),
+                        modifier = Modifier.height(BpkSpacing.Lg),
                         title = title,
                         state = state,
                         dragHandleStyle = dragHandleStyle,

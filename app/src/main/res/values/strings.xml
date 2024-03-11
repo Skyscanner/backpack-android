@@ -1,4 +1,11 @@
 <resources>
+    <array name="map_marker_prices">
+        <item>£195</item>
+        <item>£145</item>
+        <item>£236</item>
+        <item>£99</item>
+    </array>
+
     <string name="app_name">Backpack</string>
 
     <string name="stub" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -16,32 +23,21 @@
     Aenean massa.</string>
 
     <string name="stub_xs" translatable="false">Lorem ipsum dolor sit amet.</string>
-
     <string name="txt_lorem_ipsum">Lorem ipsum</string>
     <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://skyscanner.design">Click me!</a></string>
-    <string name="preference_file_key">bpk_preferences</string>
 
+    <string name="preference_file_key">bpk_preferences</string>
     <string name="calendar_colored_switch">Shift colors</string>
     <string name="calendar_disabled_switch">Shift dates</string>
     <string name="calendar_single">Single</string>
     <string name="calendar_range">Range</string>
-
+    <string name="modal_bottom_sheet_title">Modal Bottom Sheet Title</string>
     <string name="rating_sample_const_title">Constant Title</string>
+
     <string name="rating_sample_const_subtitle">Constant Subtitle</string>
 
-    <string-array name="rating_sample_titles">
-        <item>Low Title</item>
-        <item>Medium Title</item>
-        <item>High Title</item>
-    </string-array>
-
-    <string-array name="rating_sample_subtitles">
-        <item>Low Subtitle</item>
-        <item>Medium Subtitle</item>
-        <item>High Subtitle</item>
-    </string-array>
-
     <string name="star_rating_description">Rating</string>
+
     <string name="star_rating_accessibility_status">%.0f out of %d</string>
     <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
     <string name="star_rating_0_5">0 out of 5</string>
@@ -50,49 +46,49 @@
     <string name="star_rating_5_5">5 out of 5</string>
     <string name="star_rating_2_5_rtl">2 out of 5 RTL</string>
     <string name="star_rating_5_8">5 out of 8</string>
-
     <string name="bottom_nav_home">Home</string>
+
     <string name="bottom_nav_explore">Explore</string>
     <string name="bottom_nav_trips">Trips</string>
     <string name="bottom_nav_profile">Profile</string>
-
     <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+
     <string name="image_sunset_content_description">Image of man floating on water watching sunset</string>
-
     <string name="overlay_rounded_corners">Rounded corners</string>
-    <string name="overlay_no_rounded_corners">No rounded corners</string>
 
+    <string name="overlay_no_rounded_corners">No rounded corners</string>
     <string name="icons_small">Small</string>
+
     <string name="icons_large">Large</string>
     <string name="icons_color">In color</string>
     <string name="icons_flight">Flight icon</string>
     <string name="icons_car">Car icon</string>
     <string name="icons_hotel">Hotel icon</string>
-
     <string name="input_placeholder">Placeholder</string>
+
     <string name="input_entering">Entering…</string>
     <string name="input_disabled">Disabled</string>
     <string name="input_label">Label</string>
     <string name="input_error">Error message</string>
     <string name="input_helper">Help text</string>
-
     <string name="settings_title">Settings</string>
+
     <string name="settings_selected">Selected</string>
     <string name="settings_section_theme">Component Themes</string>
     <string name="settings_option_theme_title">Enable themes</string>
     <string name="settings_option_theme_description">This will enable themes for compatible components</string>
     <string name="settings_theme_doha">Doha</string>
     <string name="settings_theme_london">London</string>
-
     <string name="snackbar_title">Title</string>
+
     <string name="snackbar_message">Message</string>
     <string name="snackbar_icon_content_description">Close</string>
     <string name="snackbar_action">Action!</string>
-
     <string name="story_badge_compose">Compose-only</string>
-    <string name="story_badge_view">View-only</string>
 
+    <string name="story_badge_view">View-only</string>
     <string name="text_subheading">Subheading</string>
+
     <string name="text_body_default">Body Default</string>
     <string name="text_body_longform">Body Longform</string>
     <string name="text_footnote">Footnote</string>
@@ -110,14 +106,14 @@
     <string name="text_hero3">Hero 3</string>
     <string name="text_hero4">Hero 4</string>
     <string name="text_hero5">Hero 5</string>
-
     <string name="button">Button</string>
+
     <string name="button_increased">%s increased</string>
     <string name="button_short_text">Short Text</string>
     <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
     <string name="button_custom_content_description">Custom Content Description</string>
-
     <string name="toggle_default">Default</string>
+
     <string name="toggle_indeterminate">Indeterminate</string>
     <string name="toggle_default_unchecked">Default Unchecked</string>
     <string name="toggle_default_checked">Default Checked</string>
@@ -126,11 +122,11 @@
     <string name="toggle_disabled_checked">Disabled Checked</string>
     <string name="toggle_custom_title">Custom</string>
     <string name="toggle_custom_subtitle">Content</string>
-
     <string name="panel_default">Default</string>
-    <string name="panel_no_padding">No padding</string>
 
+    <string name="panel_no_padding">No padding</string>
     <string name="dialog_title">Title in here</string>
+
     <string name="dialog_text">Description that goes two lines ideally, but sometimes it can go longer</string>
     <string name="dialog_text_one_line">Description in here</string>
     <string name="dialog_confirmation">Confirmation</string>
@@ -144,8 +140,8 @@
     <string name="icons_story_content_description">Icon \'%s\'</string>
     <string name="icons_force_rtl">Force RTL</string>
     <string name="with_icon">With icon</string>
-
     <string name="navigation_bar_title">Page title</string>
+
     <string name="navigation_back">Back</string>
     <string name="navigation_close">Close</string>
     <string name="navigation_id_card">ID Card</string>
@@ -153,8 +149,8 @@
     <string name="navigation_account">Account</string>
     <string name="navigation_text_action">Text</string>
     <string name="navigation_search">Search</string>
-
     <string name="badge_success">Success</string>
+
     <string name="badge_warning">Warning</string>
     <string name="badge_destructive">Destructive</string>
     <string name="badge_normal">Normal</string>
@@ -166,36 +162,36 @@
     <string name="badge_bananas">Bananas</string>
     <string name="badge_strawberries">Strawberries</string>
     <string name="badge_pears">Pears</string>
-
     <string name="chip_option">Option</string>
+
     <string name="chip_dropdown">Dropdown</string>
     <string name="chip_dismiss">Dismiss</string>
-
     <string name="tabs_small">Small</string>
+
     <string name="tabs_small_with_icon">Small with icon</string>
     <string name="tabs_large">Large</string>
     <string name="tabs_large_with_icon">Large with icon</string>
     <string name="tabs_one">One</string>
     <string name="tabs_two">Two</string>
-
     <string name="image_skeleton_title">Image Skeleton</string>
+
     <string name="circle_skeleton_title">Circle Skeleton</string>
     <string name="body_text_skeleton_title">Body Text Skeleton</string>
     <string name="headline_skeleton_title">Headline Skeleton</string>
-
     <string name="shimmer_overlay_title">Shimmer Overlay</string>
+
     <string name="tokens_title">Tokens</string>
     <string name="token_placeholder">%1$s = %2$s</string>
-
     <string name="components_title">Components</string>
 
     <string name="spinner_textPrimary">TextPrimary</string>
+
     <string name="spinner_disabled">Disabled</string>
     <string name="spinner_onDarkSurface">OnDarkSurface</string>
-
     <string name="content_description">Content description</string>
 
     <string name="generic_default">Default</string>
+
     <string name="generic_with_description">With description</string>
     <string name="generic_description">Description</string>
     <string name="generic_placeholder">Placeholder</string>
@@ -222,30 +218,30 @@
     <string name="generic_departures">Departures</string>
     <string name="generic_show">Show</string>
     <string name="generic_leading_text">Leading text</string>
-
     <string name="nudger_minus_disabled">Minus Disabled</string>
-    <string name="nudger_plus_disabled">Plus Disabled</string>
 
+    <string name="nudger_plus_disabled">Plus Disabled</string>
     <string name="floating_notification_just_text">Just text</string>
+
     <string name="floating_notification_text_with_icon">Text with icon</string>
     <string name="floating_notification_with_action">With action</string>
     <string name="floating_notification_with_icon_and_action">With icon and action</string>
     <string name="floating_notification_saved">Saved</string>
     <string name="floating_notification_view">View</string>
-
     <string name="rating_title">Excellent</string>
-    <string name="rating_subtitle">1532 reviews</string>
 
+    <string name="rating_subtitle">1532 reviews</string>
     <string name="slider_range">Range</string>
+
     <string name="slider_range_with_label">Range With Label</string>
     <string name="gbp_formatter">£%.1f</string>
     <string name="slider_standard">Standard</string>
     <string name="slider_stepped">Stepped</string>
-
     <string name="toast_long">Long Toast</string>
-    <string name="toast_short">Short Toast</string>
 
+    <string name="toast_short">Short Toast</string>
     <string name="snackbar_short">Message (Duration Short)</string>
+
     <string name="snackbar_long">Message (Duration Long)</string>
     <string name="snackbar_indefinite">Message (Duration Indefinite)</string>
     <string name="snackbar_title_message">Title + Message</string>
@@ -270,43 +266,37 @@
     <string name="price_leading_text">App only deal</string>
     <string name="hotel_star_rating_title">Hotel star rating</string>
     <string name="static_default_rating_title">Static (default)</string>
-
     <string name="page_indicator_less_than_5">Less than 5 pages</string>
+
     <string name="page_indicator_more_than_5">More than 5 pages</string>
     <string name="page_indicator_over_image">Over Image</string>
     <string name="page_indicator_next">Next</string>
     <string name="page_indicator_prev">Prev</string>
     <string name="card_wrapper_header">Card Wrapper header</string>
     <string name="card_wrapper_card">Card Wrapper card</string>
-
     <string name="carousel_image_change_callback">Image change callback</string>
+
     <string name="carousel_current_image">Current Image: %s</string>
-
     <string name="tab_view">View</string>
-    <string name="tab_compose">Compose</string>
 
+    <string name="tab_compose">Compose</string>
     <string name="flight_leg_basic_example">Basic Flight Leg</string>
+
     <string name="flight_leg_complete_long_stops_example">Complete Flight Leg(long stops info)</string>
     <string name="flight_leg_complete_short_stops_example">Complete Flight Leg(short stops info)</string>
-
     <string name="maps_markers_pointers_only">Pointers</string>
+
     <string name="maps_markers_badges">Badges</string>
     <string name="maps_markers_badges_with_icons">With icons</string>
     <string name="map_markers">Map markers</string>
-    <array name="map_marker_prices">
-        <item>£195</item>
-        <item>£145</item>
-        <item>£236</item>
-        <item>£99</item>
-    </array>
     <string name="map_marker_icon_landmark">Landmark</string>
     <string name="map_marker_icon_cafe">Cafe</string>
-
     <string name="compose">Compose</string>
     <string name="image_sea_content_description">Image of surface of a wavy sea</string>
 
     <string name="city_london">London</string>
     <string name="city_paris">Paris</string>
+
     <string name="city_algiers">Algiers</string>
     <string name="city_madrid">Madrid</string>
     <string name="city_new_york">New York</string>
@@ -338,43 +328,53 @@
     <string name="card_wrapper_title">Wrapper title</string>
     <string name="lets_explore_title">Let\'s explore</string>
     <string name="lets_explore_text">It\'s your world and we\'ll help you explore it. Find the best prices across millions of flights, hotels and car hire options to create your perfect trip.</string>
-
     <string name="progress_bar_small">Small</string>
     <string name="progress_bar_small_stepped">Small stepped</string>
+
     <string name="progress_bar_large">Large</string>
     <string name="progress_bar_large_stepped">Large stepped</string>
     <string name="progress_bar_decrease">Decrease</string>
     <string name="progress_bar_increase">Increase</string>
-
     <string name="section_header_title">Section title</string>
     <string name="section_header_description">Description about this section (optional)</string>
+
     <string name="section_header_button_text">Action</string>
     <string name="section_header_icon_content_description">heart icon</string>
     <string name="section_header_button_click_feedback_msg">Click!</string>
-
     <string name="snippet_headline">Headline Text</string>
     <string name="snippet_sub_heading">Description</string>
+
     <string name="snippet_body">"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 "Nulla tempus nec velit sit amet volutpat. Suspendisse potenti."</string>
     <string name="snippet_image_content_description">Image</string>
-
     <string name="generic_title">Title</string>
     <string name="generic_subtitle">Subtitle</string>
 
     <string name="inset_banner_title">Title</string>
     <string name="inset_banner_sub_headline">SubHeadline</string>
+
     <string name="inset_banner_cta_text">Sponsored</string>
     <string name="inset_banner_cta_accessibility_label">Acessibility Label</string>
     <string name="inset_banner_body">You can change your destination, date of travel, or both, with no change fee. Valid for all new bookings made up to 31 May for travel between now and 31 December 2020.</string>
     <string name="text_field_clear_action_description">Clear</string>
     <string name="with_clear_action_title">With clear action</string>
-
     <string name="image_gallery_title_1">Pumphouse Point</string>
     <string name="image_gallery_description_1">Walk deep into the fjord-like surrounds of Lake St Clair, explore the giant myrtle forests, tread softly on the moss-covered understory and forget the world you left behind</string>
+
     <string name="image_gallery_photographer_1">\@PhotographerName</string>
     <string name="image_gallery_title_x">Image %d</string>
     <string name="image_gallery_category_1">Traveller photos (31)</string>
     <string name="image_gallery_category_2">All photos (59)</string>
     <string name="image_gallery_category_3">Official photos (43)</string>
     <string name="image_gallery_category_4">Bedroom (13)</string>
+    <string-array name="rating_sample_titles">
+        <item>Low Title</item>
+        <item>Medium Title</item>
+        <item>High Title</item>
+    </string-array>
+    <string-array name="rating_sample_subtitles">
+        <item>Low Subtitle</item>
+        <item>Medium Subtitle</item>
+        <item>High Subtitle</item>
+    </string-array>
 </resources>
