@@ -15,6 +15,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.heading
@@ -66,16 +67,14 @@ internal fun BpkModalBottomSheetImpl(
     ModalBottomSheet(
         sheetState = state.delegate,
         content = {
-            BottomSheetContent(dragHandleStyle = dragHandleStyle, content = {
-                BpkModalBottomSheetContent(
-                    dragHandleStyle = dragHandleStyle,
-                    title = title,
-                    isClosable = isClosable,
-                    state = state,
-                    onDismissRequest = onDismissRequest,
-                    content = content,
-                )
-            })
+            ModalBottomSheetContent(
+                dragHandleStyle = dragHandleStyle,
+                title = title,
+                isClosable = isClosable,
+                state = state,
+                onDismissRequest = onDismissRequest,
+                content = content,
+            )
         },
         modifier = modifier,
         dragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
@@ -89,7 +88,7 @@ internal fun BpkModalBottomSheetImpl(
 }
 
 @Composable
-fun ColumnScope.BpkModalBottomSheetContent(
+fun ModalBottomSheetContent(
     dragHandleStyle: BpkDragHandleStyle,
     title: String?,
     isClosable: BpkModalBottomSheetCloseAction,
@@ -101,7 +100,8 @@ fun ColumnScope.BpkModalBottomSheetContent(
     if (isClosable is BpkModalBottomSheetCloseAction.Default || !title.isNullOrEmpty()) {
         when (dragHandleStyle) {
             BpkDragHandleStyle.Default -> {
-                Column(modifier = modifier,
+                Column(
+                    modifier = modifier,
                     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
                 ) {
                     BpkModalBottomSheetHeader(
@@ -126,11 +126,12 @@ fun ColumnScope.BpkModalBottomSheetContent(
                         isClosable = isClosable,
                         onDismissRequest = onDismissRequest,
                     )
+                    BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
                 }
             }
         }
     } else {
-        content()
+        BottomSheetContent(dragHandleStyle = dragHandleStyle, content = content)
     }
 }
 
