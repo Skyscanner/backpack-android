@@ -141,7 +141,7 @@ internal fun BpkTopNavBarImpl(
 }
 
 @Composable
-private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
+internal fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .size(TopNavBarSizes.IconActionSize)

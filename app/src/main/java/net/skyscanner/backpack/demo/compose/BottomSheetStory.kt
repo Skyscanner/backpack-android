@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
@@ -106,8 +107,30 @@ fun ImageBottomSheetStory(
 @Composable
 @BottomSheetComponent
 @ComposeStory(name = "Modal")
-fun ModalBottomSheetStory(
+fun ModalBottomSheetNoTopBarStory(
     modifier: Modifier = Modifier,
+) {
+    ModalBottomSheetStory(modifier = modifier)
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Modal with TopBar")
+fun ModalBottomSheetWithTopBarStory(
+    modifier: Modifier = Modifier,
+) {
+    ModalBottomSheetStory(
+        modifier = modifier,
+        title = stringResource(id = R.string.generic_title),
+        isClosable = BpkModalBottomSheetCloseAction.Default("text"),
+    )
+}
+
+@Composable
+internal fun ModalBottomSheetStory(
+    modifier: Modifier = Modifier,
+    title: String? = null,
+    isClosable: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     val state = rememberBpkModalBottomSheetState()
@@ -123,6 +146,8 @@ fun ModalBottomSheetStory(
     }
     if (openBottomSheet) {
         BpkModalBottomSheet(
+            title = title,
+            isClosable = isClosable,
             state = state,
             content = { SheetContent() },
             onDismissRequest = { openBottomSheet = false },
@@ -132,10 +157,38 @@ fun ModalBottomSheetStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Modal sheet with Dark drag handle")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Modal sheet with Dark drag handle")
+fun ImageModalDarkBottomSheetNoTopBarStory(
+    modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+) {
+    ImageModalDarkBottomSheetStory(
+        modifier = modifier,
+        dragHandleStyle = dragHandleStyle,
+    )
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Modal sheet with TopBar and Dark drag handle")
+fun ImageModalDarkBottomSheetWithTopBarStory(
+    modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+) {
+    ImageModalDarkBottomSheetStory(
+        modifier = modifier,
+        dragHandleStyle = dragHandleStyle,
+        title = stringResource(id = R.string.generic_title),
+        isClosable = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
+    )
+}
+
+@Composable
 fun ImageModalDarkBottomSheetStory(
     modifier: Modifier = Modifier,
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+    title: String? = null,
+    isClosable: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     val state = rememberBpkModalBottomSheetState()
@@ -152,7 +205,11 @@ fun ImageModalDarkBottomSheetStory(
     if (openBottomSheet) {
         BpkModalBottomSheet(
             state = state,
-            content = { ImageContent(imageRes = R.drawable.beach) },
+            title = title,
+            isClosable = isClosable,
+            content = {
+                ImageContent(imageRes = R.drawable.beach)
+            },
             dragHandleStyle = dragHandleStyle,
             onDismissRequest = { openBottomSheet = false },
         )
@@ -175,5 +232,6 @@ fun ImageContent(@DrawableRes imageRes: Int, modifier: Modifier = Modifier) {
             .fillMaxWidth(),
         painter = painterResource(id = imageRes),
         contentScale = ContentScale.Crop,
-        contentDescription = "",)
+        contentDescription = "",
+    )
 }

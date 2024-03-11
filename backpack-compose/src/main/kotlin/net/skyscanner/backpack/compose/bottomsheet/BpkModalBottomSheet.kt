@@ -19,37 +19,33 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
-import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkElevation
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkModalBottomSheetImpl
 
-@OptIn(ExperimentalMaterial3Api::class)
+sealed class BpkModalBottomSheetCloseAction {
+    data object None : BpkModalBottomSheetCloseAction()
+    data class Default(val contentDescription: String) : BpkModalBottomSheetCloseAction()
+}
+
 @Composable
 fun BpkModalBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     state: BpkModalBottomSheetState = rememberBpkModalBottomSheetState(),
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
+    title: String? = null,
+    isClosable: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    ModalBottomSheet(
-        sheetState = state.delegate,
-        content = { BottomSheetContent(dragHandleStyle = dragHandleStyle, content = content) },
+    BpkModalBottomSheetImpl(
+        content = content,
         modifier = modifier,
-        dragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
-        shape = RoundedCornerShape(topStart = BpkBorderRadius.Lg, topEnd = BpkBorderRadius.Lg),
-        containerColor = BpkTheme.colors.surfaceElevated,
-        contentColor = BpkTheme.colors.textPrimary,
-        scrimColor = BpkTheme.colors.scrim,
-        tonalElevation = BpkElevation.Lg,
         onDismissRequest = onDismissRequest,
+        state = state,
+        dragHandleStyle = dragHandleStyle,
+        title = title,
+        isClosable = isClosable,
     )
 }
