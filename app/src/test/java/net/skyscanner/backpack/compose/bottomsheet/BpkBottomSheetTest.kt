@@ -60,7 +60,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     @Test
     fun modal() {
         snap(height = 400.dp, padding = 0.dp, captureFullScreen = true) {
-            ModalBottomSheetStory(action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}))
+            ModalBottomSheetStory()
         }
     }
 
@@ -70,7 +70,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
             ModalBottomSheetStory(
                 title = stringResource(id = R.string.generic_title),
                 closeButton = BpkModalBottomSheetCloseAction.Close("text"),
-                action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
+                action = TextAction(text = stringResource(id = R.string.section_header_button_text)) {},
             )
         }
     }
@@ -94,6 +94,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
                 content = { ImageContent(imageRes = R.drawable.beach) },
                 dragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
                 title = stringResource(id = R.string.generic_title),
+                action = TextAction(text = stringResource(id = R.string.section_header_button_text)) {},
                 closeButton = BpkModalBottomSheetCloseAction.Close("text"),
                 onDismissRequest = {},
             )

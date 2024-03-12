@@ -113,19 +113,18 @@ fun ModalBottomSheetNoTopBarStory(
 ) {
     ModalBottomSheetStory(
         modifier = modifier,
-        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
     )
 }
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Modal with TopBar")
+@ComposeStory(name = "Modal with TopBar")
 fun ModalBottomSheetWithTopBarStory(
     modifier: Modifier = Modifier,
 ) {
     ModalBottomSheetStory(
         modifier = modifier,
-        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text)) {},
         title = stringResource(id = R.string.modal_bottom_sheet_title),
         closeButton = BpkModalBottomSheetCloseAction.Close(stringResource(id = R.string.navigation_close)),
     )
@@ -177,7 +176,7 @@ fun ImageModalDarkBottomSheetNoTopBarStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Modal sheet with TopBar and Dark drag handle")
+@ComposeStory(name = "Image Modal sheet with TopBar and Dark drag handle")
 fun ImageModalDarkBottomSheetWithTopBarStory(
     modifier: Modifier = Modifier,
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
