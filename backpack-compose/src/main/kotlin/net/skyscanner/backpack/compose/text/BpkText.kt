@@ -23,14 +23,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 
 @Composable
@@ -80,7 +78,7 @@ fun BpkText(
     Text(
         text = text,
         modifier = modifier,
-        color = color.takeOrElse { LocalContentColor.current }, // todo: remove once we fully migrate to Material3
+        color = color,
         textDecoration = textDecoration,
         textAlign = textAlign,
         overflow = overflow,
