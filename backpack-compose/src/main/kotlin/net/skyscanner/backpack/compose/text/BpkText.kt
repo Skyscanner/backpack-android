@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.text
 
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -74,6 +75,7 @@ fun BpkText(
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
+    inlineContent: Map<String, InlineTextContent> = mapOf(),
 ) {
     Text(
         text = text,
@@ -86,5 +88,6 @@ fun BpkText(
         maxLines = maxLines,
         onTextLayout = onTextLayout,
         style = style,
+        inlineContent = inlineContent,
     )
 }
