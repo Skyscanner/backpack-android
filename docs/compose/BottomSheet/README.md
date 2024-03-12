@@ -22,11 +22,23 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal.png" alt="Modal BottomSheet component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal_dm.png" alt="Modal BottomSheet component - dark mode" width="375" /> |
 
+## Modal With TopBar
+
+| Day                                                                                                                                                                                                   | Night                                                                                                                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-with-topbar.png" alt="Modal With TopBar BottomSheet component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-with-topbar_dm.png" alt="Modal With TopBar BottomSheet component - dark mode" width="375" /> |
+
 ## Modal with Dark Drag Handle over Image content
 
 | Day                                                                                                                                                                                                | Night |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle.png" alt="BottomSheet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/modal-sheet-with-dark-draghandle_dm.png" alt="BottomSheet component - dark mode" width="375" /> |
+
+## Modal with TopBar and Dark Drag Handle over Image content
+
+| Day                                                                                                                                                                                                                             | Night |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-modal-sheet-with-topbar-and-dark-drag-handle.png" alt="Modal with TopBar BottomSheet over image component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomSheet/screenshots/image-modal-sheet-with-topbar-and-dark-drag-handle_dm.png" alt="Modal with TopBar BottomSheet over image component - dark mode" width="375" /> |
 
 
 ## Installation
@@ -84,6 +96,28 @@ if (openBottomSheet) {
 }
 ```
 
+Example of a Modal Bottom Sheet With Title and Close NavAction:
+
+```Kotlin
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
+
+var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+val state = rememberBpkModalBottomSheetState()
+
+if (openBottomSheet) {
+    BpkModalBottomSheet(
+        state = state,
+        title = stringResource(id = R.string.generic_title),
+        closeButton = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
+        content = { /* content of the bottom sheet */ },
+        dragHandleStyle = BpkDragHandleStyle.Default,
+        onDismissRequest = { openBottomSheet = false },
+    )
+}
+```
 By default the Bottom sheet content starts below the drag handle. In cases where you need to show an image at the top you can set the `dragHandleStyle` property to `OnImage` to remove the safe area, like this:
 
 ```Kotlin

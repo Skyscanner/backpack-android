@@ -41,10 +41,12 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
 import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -106,8 +108,34 @@ fun ImageBottomSheetStory(
 @Composable
 @BottomSheetComponent
 @ComposeStory(name = "Modal")
-fun ModalBottomSheetStory(
+fun ModalBottomSheetNoTopBarStory(
     modifier: Modifier = Modifier,
+) {
+    ModalBottomSheetStory(
+        modifier = modifier,
+    )
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(name = "Modal with TopBar")
+fun ModalBottomSheetWithTopBarStory(
+    modifier: Modifier = Modifier,
+) {
+    ModalBottomSheetStory(
+        modifier = modifier,
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text)) {},
+        title = stringResource(id = R.string.modal_bottom_sheet_title),
+        closeButton = BpkModalBottomSheetCloseAction.Close(stringResource(id = R.string.navigation_close)),
+    )
+}
+
+@Composable
+internal fun ModalBottomSheetStory(
+    modifier: Modifier = Modifier,
+    title: String? = null,
+    action: TextAction? = null,
+    closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     val state = rememberBpkModalBottomSheetState()
@@ -123,6 +151,9 @@ fun ModalBottomSheetStory(
     }
     if (openBottomSheet) {
         BpkModalBottomSheet(
+            title = title,
+            closeButton = closeButton,
+            action = action,
             state = state,
             content = { SheetContent() },
             onDismissRequest = { openBottomSheet = false },
@@ -132,10 +163,40 @@ fun ModalBottomSheetStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Modal sheet with Dark drag handle")
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Image Modal sheet with Dark drag handle")
+fun ImageModalDarkBottomSheetNoTopBarStory(
+    modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+) {
+    ImageModalDarkBottomSheetStory(
+        modifier = modifier,
+        dragHandleStyle = dragHandleStyle,
+    )
+}
+
+@Composable
+@BottomSheetComponent
+@ComposeStory(name = "Image Modal sheet with TopBar and Dark drag handle")
+fun ImageModalDarkBottomSheetWithTopBarStory(
+    modifier: Modifier = Modifier,
+    dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+) {
+    ImageModalDarkBottomSheetStory(
+        modifier = modifier,
+        dragHandleStyle = dragHandleStyle,
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
+        title = stringResource(id = R.string.modal_bottom_sheet_title),
+        closeButton = BpkModalBottomSheetCloseAction.Close(stringResource(id = R.string.navigation_close)),
+    )
+}
+
+@Composable
 fun ImageModalDarkBottomSheetStory(
     modifier: Modifier = Modifier,
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.OnImage(BpkDragHandleStyle.OnImage.Type.Dark),
+    title: String? = null,
+    action: TextAction? = null,
+    closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
 ) {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     val state = rememberBpkModalBottomSheetState()
@@ -145,14 +206,17 @@ fun ImageModalDarkBottomSheetStory(
             .padding(top = BpkSpacing.Xxl),
         contentAlignment = Alignment.Center,
     ) {
-        BpkButton(text = stringResource(R.string.generic_show)) {
-            openBottomSheet = true
-        }
+        BpkButton(text = stringResource(R.string.generic_show)) { openBottomSheet = true }
     }
     if (openBottomSheet) {
         BpkModalBottomSheet(
             state = state,
-            content = { ImageContent(imageRes = R.drawable.beach) },
+            title = title,
+            closeButton = closeButton,
+            action = action,
+            content = {
+                ImageContent(imageRes = R.drawable.beach)
+            },
             dragHandleStyle = dragHandleStyle,
             onDismissRequest = { openBottomSheet = false },
         )
@@ -175,5 +239,6 @@ fun ImageContent(@DrawableRes imageRes: Int, modifier: Modifier = Modifier) {
             .fillMaxWidth(),
         painter = painterResource(id = imageRes),
         contentScale = ContentScale.Crop,
-        contentDescription = "",)
+        contentDescription = "",
+    )
 }
