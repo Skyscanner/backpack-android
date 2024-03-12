@@ -65,6 +65,8 @@
     <color name="__privateMapMarkerViewedForeground">#cc000000</color>
     <color name="__privateMapPoiPin">#ff8e47ba</color>
     <color name="__privateMapPreviousSelection">#ffcfe4ff</color>
+    <color name="__privateNavigationTabHover">#ffd1f7ff</color>
+    <color name="__privateNavigationTabOutline">#ffffffff</color>
     <color name="__privateSkeletonShimmerCenter">#33000000</color>
     <color name="__privateSkeletonShimmerStartEnd">#00000000</color>
     <color name="__privateSponsoredBannerBackground">#ff243346</color>
