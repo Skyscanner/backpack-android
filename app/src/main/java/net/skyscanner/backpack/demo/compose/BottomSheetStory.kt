@@ -206,9 +206,7 @@ fun ImageModalDarkBottomSheetStory(
             .padding(top = BpkSpacing.Xxl),
         contentAlignment = Alignment.Center,
     ) {
-        BpkButton(text = stringResource(R.string.generic_show)) {
-            openBottomSheet = true
-        }
+        BpkButton(text = stringResource(R.string.generic_show)) { openBottomSheet = true }
     }
     if (openBottomSheet) {
         BpkModalBottomSheet(
