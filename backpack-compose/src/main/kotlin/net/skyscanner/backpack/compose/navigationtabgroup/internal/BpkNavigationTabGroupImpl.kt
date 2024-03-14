@@ -29,7 +29,7 @@ internal fun BpkNavigationTabGroupImpl(
         modifier = modifier.selectableGroup(),
         contentPadding = contentPadding,
         state = rememberLazyListState(),
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
     ) {
         itemsIndexed(items = tabs) { index, tab ->
             NavigationTabItem(

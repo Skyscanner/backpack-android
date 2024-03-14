@@ -2,25 +2,21 @@ package net.skyscanner.backpack.compose.navigationtabgroup.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -56,11 +52,12 @@ internal fun BpkNavigationTab(
         icon = icon,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onClick != null) {
-            selectable(
-                selected = selected,
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-            ) { onClick!!.invoke() }
+            clip(CircleShape)
+                .selectable(
+                    selected = selected,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                ) { onClick!!.invoke() }
         },
     )
 }
@@ -107,20 +104,17 @@ private fun BpkNavigationTabImpl(
         label = "",
     )
 
+    val navigationTabHeight = 36.dp
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         modifier = modifier
-            .height(BpkSpacing.Xl)
-            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
-            .shadow(0.dp, CircleShape)
-            .background(backgroundColor, CircleShape)
+            .height(navigationTabHeight)
             .clip(CircleShape)
-            .padding(horizontal = BpkSpacing.Md),
+            .background(backgroundColor)
+            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
+            .padding(horizontal = BpkSpacing.Base),
     ) {
-
-        Spacer(modifier = Modifier.width(0.dp))
-
         if (icon != null) {
             BpkIcon(
                 icon = icon,
@@ -133,12 +127,11 @@ private fun BpkNavigationTabImpl(
         BpkText(
             text = text,
             color = contentColor,
-            style = BpkTheme.typography.footnote,
+            style = BpkTheme.typography.label2,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(start = if (icon != null) BpkSpacing.Md else 0.dp),
         )
-
-        Spacer(modifier = Modifier.width(0.dp))
     }
 }
 
