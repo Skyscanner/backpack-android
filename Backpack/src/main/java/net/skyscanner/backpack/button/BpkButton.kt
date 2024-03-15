@@ -41,7 +41,6 @@ import net.skyscanner.backpack.button.internal.horizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
-import net.skyscanner.backpack.button.internal.textStyle
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -154,6 +153,7 @@ open class BpkButton(
         this.type = type
         updateSize()
         applyStyle(style)
+        BpkText.getFont(context, BpkText.TextStyle.Label1).applyTo(this)
     }
 
     override fun setEnabled(enabled: Boolean) {
@@ -222,7 +222,6 @@ open class BpkButton(
         minHeight = resources.getDimensionPixelSize(size.minHeight)
         iconSize = resources.getDimensionPixelSize(size.iconSize)
         progress.centerRadius = iconSize / 2f - progress.strokeWidth
-        BpkText.getFont(context, size.textStyle).applyTo(this)
     }
 
     enum class Type {

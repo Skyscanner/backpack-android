@@ -19,22 +19,12 @@
 package net.skyscanner.backpack.compose.button.internal
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-
-@Composable
-internal fun BpkButtonSize.textStyle(): TextStyle =
-    when (this) {
-        BpkButtonSize.Default -> BpkTheme.typography.label2
-        BpkButtonSize.Large -> BpkTheme.typography.label1
-    }
 
 internal val BpkButtonSize.iconSize: BpkIconSize
     get() =
