@@ -20,8 +20,19 @@ Example of a NavigationTabGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroup
+import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
+
+val tabs = listOf(
+    BpkNavigationTabItem("Flights", BpkIcon.Flight),
+    BpkNavigationTabItem("Hotels", BpkIcon.Hotels),
+    BpkNavigationTabItem("Cars", BpkIcon.Cars),
+)
+var selectedIndex by remember { mutableStateOf(0) }
 
 BpkNavigationTabGroup(
-    // TODO
+    tabs = tabs,
+    selectedIndex = selectedIndex,
+    onItemClicked = { selectedIndex = tabs.indexOf(it) },
+    style = BpkNavigationTabGroupStyle.CanvasDefault,
 )
 ```
