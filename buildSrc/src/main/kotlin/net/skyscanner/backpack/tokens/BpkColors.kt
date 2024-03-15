@@ -18,7 +18,6 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
-import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
@@ -75,7 +74,7 @@ object BpkColor {
 
         data class SemanticCompose(val className: String) : Format<BpkColors, TypeSpec>() {
             override fun invoke(source: BpkColors): TypeSpec =
-                toSemanticCompose(source, className)
+                toSemanticCompose(source.filter { !it.deprecated }.toBpkColors(), className)
         }
 
         object InternalCompose : Format<BpkColors, List<TypeSpec>>() {
@@ -104,7 +103,6 @@ object BpkColor {
     private fun BpkColorModel.isSemanticColor(): Boolean =
         darkValue != null && !hasSemanticSuffix() && !isMarcomms()
 
-    @OptIn(ExperimentalStdlibApi::class)
     private fun BpkColorModel.hasSemanticSuffix(suffixes: List<String> = semanticSuffixes): Boolean {
         val name = name.lowercase()
         return suffixes.any { name.endsWith("_$it") && !name.endsWith("_on_$it") }
@@ -164,27 +162,9 @@ private fun parseColors(
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 
 private const val isLightProperty = "isLight"
-private const val deprecationMessageProperty = "DEPRECATION_MESSAGE"
 
 private fun String.toHexColorBlock() =
     buildCodeBlock { add("%T(%L)", ColorClass, toHexColor()) }
-
-private fun PropertySpec.Builder.withDeprecation(model: BpkColorModel): PropertySpec.Builder {
-    return if (model.deprecated) {
-        addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember(deprecationMessageProperty).build())
-    } else {
-        this
-    }
-}
-
-private fun deprecationProperty(): PropertySpec =
-    PropertySpec.builder(deprecationMessageProperty, String::class)
-        .initializer(
-            "%S",
-            "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation",
-        )
-        .addModifiers(KModifier.CONST, KModifier.PRIVATE)
-        .build()
 
 private fun String.toArgb() = substring(7) + substring(1, 7)
 
@@ -210,7 +190,6 @@ private fun toSemanticCompose(
             PropertySpec
                 .builder(name.toSemanticName(), ColorClass)
                 .initializer(name.toSemanticName())
-                .withDeprecation(this)
                 .build()
 
         return TypeSpec.classBuilder(className)
@@ -268,7 +247,6 @@ private fun toSemanticCompose(
                 .addModifiers(KModifier.INTERNAL)
                 .addFunction(source.toFactoryFunction(isLight = true))
                 .addFunction(source.toFactoryFunction(isLight = false))
-                .addProperty(deprecationProperty())
                 .build(),
         )
         .build()
@@ -293,13 +271,21 @@ private fun toInternalCompose(
 
         fun PropertySpec.Builder.addColorContent(): PropertySpec.Builder =
             if (darkValue != null) {
-                getter(FunSpec.getterBuilder()
-                    .addAnnotation(ClassName("androidx.compose.runtime", "Composable"))
-                    .addCode(buildCodeBlock {
-                        val dynamicColorOf = MemberName("net.skyscanner.backpack.compose.utils", "dynamicColorOf")
-                        add("return %M(%T(%L), %T(%L))", dynamicColorOf, ColorClass, defaultValue.toHexColor(), ColorClass, darkValue.toHexColor())
-                    })
-                    .build(),
+                getter(
+                    FunSpec.getterBuilder()
+                        .addAnnotation(ClassName("androidx.compose.runtime", "Composable"))
+                        .addCode(buildCodeBlock {
+                            val dynamicColorOf = MemberName("net.skyscanner.backpack.compose.utils", "dynamicColorOf")
+                            add(
+                                "return %M(%T(%L), %T(%L))",
+                                dynamicColorOf,
+                                ColorClass,
+                                defaultValue.toHexColor(),
+                                ColorClass,
+                                darkValue.toHexColor(),
+                            )
+                        })
+                        .build(),
                 )
             } else {
                 initializer(defaultValue.toHexColorBlock())

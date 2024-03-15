@@ -23,27 +23,9 @@ package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
 import kotlin.Boolean
-import kotlin.Deprecated
-import kotlin.String
 
 public class BpkColors private constructor(
     public val isLight: Boolean,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val background: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundAlternative: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundAlternativeSecondary: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundElevation01: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundElevation02: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundElevation03: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundSecondary: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val backgroundTertiary: Color,
     public val canvas: Color,
     public val canvasContrast: Color,
     public val coreAccent: Color,
@@ -51,8 +33,6 @@ public class BpkColors private constructor(
     public val corePrimary: Color,
     public val line: Color,
     public val lineOnDark: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val primary: Color,
     public val scrim: Color,
     public val statusDangerFill: Color,
     public val statusDangerSpot: Color,
@@ -75,25 +55,10 @@ public class BpkColors private constructor(
     public val textOnLight: Color,
     public val textPrimary: Color,
     public val textPrimaryInverse: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val textQuaternary: Color,
     public val textSecondary: Color,
-    @Deprecated(DEPRECATION_MESSAGE)
-    public val textTertiary: Color,
 ) {
     internal companion object {
-        private const val DEPRECATION_MESSAGE: String =
-                "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
-
         public fun light(
-            background: Color = Color(0xFFFFFFFF),
-            backgroundAlternative: Color = Color(0xFFEFF3F8),
-            backgroundAlternativeSecondary: Color = Color(0xFFFFFFFF),
-            backgroundElevation01: Color = Color(0xFFFFFFFF),
-            backgroundElevation02: Color = Color(0xFFFFFFFF),
-            backgroundElevation03: Color = Color(0xFFFFFFFF),
-            backgroundSecondary: Color = Color(0xFFEFF3F8),
-            backgroundTertiary: Color = Color(0xFFFFFFFF),
             canvas: Color = Color(0xFFFFFFFF),
             canvasContrast: Color = Color(0xFFEFF3F8),
             coreAccent: Color = Color(0xFF0062E3),
@@ -101,7 +66,6 @@ public class BpkColors private constructor(
             corePrimary: Color = Color(0xFF05203C),
             line: Color = Color(0xFFC1C7CF),
             lineOnDark: Color = Color(0x80FFFFFF),
-            primary: Color = Color(0xFF0062E3),
             scrim: Color = Color(0xB3000000),
             statusDangerFill: Color = Color(0xFFFFE9F9),
             statusDangerSpot: Color = Color(0xFFE70866),
@@ -124,19 +88,9 @@ public class BpkColors private constructor(
             textOnLight: Color = Color(0xFF161616),
             textPrimary: Color = Color(0xFF161616),
             textPrimaryInverse: Color = Color(0xFFFFFFFF),
-            textQuaternary: Color = Color(0x33000000),
             textSecondary: Color = Color(0xFF626971),
-            textTertiary: Color = Color(0x33000000),
         ): BpkColors = BpkColors(
             isLight = true,
-            background = background,
-            backgroundAlternative = backgroundAlternative,
-            backgroundAlternativeSecondary = backgroundAlternativeSecondary,
-            backgroundElevation01 = backgroundElevation01,
-            backgroundElevation02 = backgroundElevation02,
-            backgroundElevation03 = backgroundElevation03,
-            backgroundSecondary = backgroundSecondary,
-            backgroundTertiary = backgroundTertiary,
             canvas = canvas,
             canvasContrast = canvasContrast,
             coreAccent = coreAccent,
@@ -144,7 +98,6 @@ public class BpkColors private constructor(
             corePrimary = corePrimary,
             line = line,
             lineOnDark = lineOnDark,
-            primary = primary,
             scrim = scrim,
             statusDangerFill = statusDangerFill,
             statusDangerSpot = statusDangerSpot,
@@ -167,20 +120,10 @@ public class BpkColors private constructor(
             textOnLight = textOnLight,
             textPrimary = textPrimary,
             textPrimaryInverse = textPrimaryInverse,
-            textQuaternary = textQuaternary,
             textSecondary = textSecondary,
-            textTertiary = textTertiary,
         )
 
         public fun dark(
-            background: Color = Color(0xFF010913),
-            backgroundAlternative: Color = Color(0xFF131D2B),
-            backgroundAlternativeSecondary: Color = Color(0xFF010913),
-            backgroundElevation01: Color = Color(0xFF131D2B),
-            backgroundElevation02: Color = Color(0xFF243346),
-            backgroundElevation03: Color = Color(0xFF243346),
-            backgroundSecondary: Color = Color(0xFF131D2B),
-            backgroundTertiary: Color = Color(0xFF010913),
             canvas: Color = Color(0xFF010913),
             canvasContrast: Color = Color(0xFF010913),
             coreAccent: Color = Color(0xFF84E9FF),
@@ -188,7 +131,6 @@ public class BpkColors private constructor(
             corePrimary: Color = Color(0xFF054184),
             line: Color = Color(0xFF44505F),
             lineOnDark: Color = Color(0xFF44505F),
-            primary: Color = Color(0xFF84E9FF),
             scrim: Color = Color(0xB3000000),
             statusDangerFill: Color = Color(0xFFFFCADD),
             statusDangerSpot: Color = Color(0xFFFF649C),
@@ -211,19 +153,9 @@ public class BpkColors private constructor(
             textOnLight: Color = Color(0xFF010913),
             textPrimary: Color = Color(0xFFFFFFFF),
             textPrimaryInverse: Color = Color(0xFF010913),
-            textQuaternary: Color = Color(0x33FFFFFF),
             textSecondary: Color = Color(0xFFBDC4CB),
-            textTertiary: Color = Color(0x33FFFFFF),
         ): BpkColors = BpkColors(
             isLight = false,
-            background = background,
-            backgroundAlternative = backgroundAlternative,
-            backgroundAlternativeSecondary = backgroundAlternativeSecondary,
-            backgroundElevation01 = backgroundElevation01,
-            backgroundElevation02 = backgroundElevation02,
-            backgroundElevation03 = backgroundElevation03,
-            backgroundSecondary = backgroundSecondary,
-            backgroundTertiary = backgroundTertiary,
             canvas = canvas,
             canvasContrast = canvasContrast,
             coreAccent = coreAccent,
@@ -231,7 +163,6 @@ public class BpkColors private constructor(
             corePrimary = corePrimary,
             line = line,
             lineOnDark = lineOnDark,
-            primary = primary,
             scrim = scrim,
             statusDangerFill = statusDangerFill,
             statusDangerSpot = statusDangerSpot,
@@ -254,9 +185,7 @@ public class BpkColors private constructor(
             textOnLight = textOnLight,
             textPrimary = textPrimary,
             textPrimaryInverse = textPrimaryInverse,
-            textQuaternary = textQuaternary,
             textSecondary = textSecondary,
-            textTertiary = textTertiary,
         )
     }
 }
