@@ -23,7 +23,6 @@ import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.text.BpkText
 
 internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: AttributeSet?): BpkButton.Size {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkBaseButton, 0, 0)
@@ -33,13 +32,6 @@ internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: Attribu
         else -> throw IllegalArgumentException()
     }
 }
-
-internal val BpkButton.Size.textStyle: BpkText.TextStyle
-    get() =
-        when (this) {
-            BpkButton.Size.Standard -> BpkText.TextStyle.Label2
-            BpkButton.Size.Large -> BpkText.TextStyle.Label1
-        }
 
 @get:DimenRes
 internal val BpkButton.Size.iconSize: Int

@@ -54,6 +54,7 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -105,7 +106,7 @@ internal fun BpkButtonImpl(
             elevation = null,
             content = {
                 CompositionLocalProvider(
-                    LocalTextStyle provides size.textStyle(),
+                    LocalTextStyle provides BpkTheme.typography.label1,
                 ) {
                     Box {
                         Row(
@@ -186,6 +187,6 @@ private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 
 private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {
-        BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
-        BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+        BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+        BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
     }
