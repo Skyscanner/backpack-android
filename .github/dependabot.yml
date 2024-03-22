@@ -6,6 +6,18 @@ updates:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
+  groups:
+    kotlin-ksp-compose:
+      patterns:
+      - "org.jetbrains.kotlin:*"
+      - "org.jetbrains.kotlin.*"
+      - "com.google.devtools.ksp"
+      - "androidx.compose.compiler:compiler"
+    android-gradle-plugin:
+      patterns:
+      - "com.android.tools:*"
+      - "com.android.tools.*"
+
 - package-ecosystem: npm
   directory: "/"
   schedule:
