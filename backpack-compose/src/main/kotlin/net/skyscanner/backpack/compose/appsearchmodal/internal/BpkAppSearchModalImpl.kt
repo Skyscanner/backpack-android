@@ -31,6 +31,7 @@ import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Search
+import net.skyscanner.backpack.compose.utils.BehaviouralCallback
 
 @Composable
 internal fun BpkAppSearchModalImpl(
@@ -39,6 +40,7 @@ internal fun BpkAppSearchModalImpl(
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
+    behaviouralCallback: BehaviouralCallback?,
     modifier: Modifier = Modifier,
 ) {
     when (results) {
@@ -61,7 +63,7 @@ internal fun BpkAppSearchModalImpl(
                     clearAction = clearAction,
                 )
                 if (results is BpkAppSearchModalResult.Content) {
-                    BpkSearchModalContent(results)
+                    BpkSearchModalContent(results = results, behaviouralCallback = behaviouralCallback)
                 } else if (results is BpkAppSearchModalResult.Loading) {
                     BpkSearchModalLoading(results)
                 }
