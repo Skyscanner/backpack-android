@@ -88,6 +88,84 @@ class BpkAppSearchModalTest {
         assertTrue(didReceiveRegularOnClickCallback)
     }
 
+    @Test
+    fun withOnlyBehaviouralCallbackAdded() = runTest {
+        var didReceiveBehaviouralOnDrawnCallback = false
+        var didReceiveBehaviouralOnClickCallback = false
+
+        val testLabel = "TestLabel"
+
+        composeTestRule.setContent {
+            BpkTheme {
+                BpkAppSearchModal(
+                    title = "Title",
+                    inputText = "Input",
+                    inputHint = "Hint",
+                    results = contentResult(label = testLabel, onClickAction = { }),
+                    closeAccessibilityLabel = "Close",
+                    onClose = { },
+                    onInputChanged = { },
+                    clearAction = BpkClearAction("Clear") { },
+                    behaviouralCallback = object : BehaviouralCallback {
+                        override fun onDrawn(element: Any) {
+                            didReceiveBehaviouralOnDrawnCallback = true
+                        }
+
+                        override fun onClick(element: Any) {
+                            didReceiveBehaviouralOnClickCallback = true
+                        }
+                    },
+                )
+            }
+        }
+
+        // assert the correct state pre-click
+        assertTrue(didReceiveBehaviouralOnDrawnCallback)
+        assertFalse(didReceiveBehaviouralOnClickCallback)
+
+        // perform a click action
+        composeTestRule.onNodeWithText(testLabel).performClick()
+
+        // assert the correct state post-click
+        assertTrue(didReceiveBehaviouralOnClickCallback)
+    }
+
+    @Test
+    fun withOnlyClickActionAdded() = runTest {
+        var didReceiveRegularOnClickCallback = false
+
+        val onClickAction: () -> Unit = {
+            didReceiveRegularOnClickCallback = true
+        }
+
+        val testLabel = "TestLabel"
+
+        composeTestRule.setContent {
+            BpkTheme {
+                BpkAppSearchModal(
+                    title = "Title",
+                    inputText = "Input",
+                    inputHint = "Hint",
+                    results = contentResult(label = testLabel, onClickAction = onClickAction),
+                    closeAccessibilityLabel = "Close",
+                    onClose = { },
+                    onInputChanged = { },
+                    clearAction = BpkClearAction("Clear") { },
+                    /* no behavioural callback added- the default value is null */
+                )
+            }
+        }
+
+        // assert the correct state pre-click
+        assertFalse(didReceiveRegularOnClickCallback)
+
+        // perform a click action
+        composeTestRule.onNodeWithText(testLabel).performClick()
+
+        // assert the correct state post-click
+        assertTrue(didReceiveRegularOnClickCallback)
+    }
+
     @Composable
     internal fun contentResult(label: String, onClickAction: () -> Unit) = BpkAppSearchModalResult.Content(
         sections = listOf(
