@@ -37,7 +37,7 @@ danger(args) {
         )
         val packageFilesCreated = createdFiles.any { it.startsWith("Backpack/src/main/java") }
         if (packageFilesCreated && !usageDetector && !isTrivial) {
-            warn("One or more package files were created, but `BpkComponentUsageDetector.kt` wasn't updated.")
+            warn("One or more package files were created, but `BpkComponentUsageDetector.kt` wasn't updated. If your component is an equivalent of a material or core component please add it to the detector.")
         }
 
         // If any files were created, the BpkComposeComponentUsageDetector should have been updated.
@@ -46,16 +46,28 @@ danger(args) {
         )
         val composePackageFilesCreated = createdFiles.any { it.startsWith("backpack-compose/src/main/kotlin") }
         if (composePackageFilesCreated && !composeUsageDetector && !isTrivial) {
-            warn("One or more package files were created, but `BpkComposeComponentUsageDetector.kt` wasn't updated.")
+            warn("One or more package files were created, but `BpkComposeComponentUsageDetector.kt` wasn't updated. If your component is an equivalent of a core component please add it to the detector.")
         }
 
         // If any screenshots were created, README should"ve updated.
         val screenshotsCreated = createdFiles.any { it.startsWith("docs") && it.contains("/screenshots/") }
-        if (screenshotsCreated) {
-            val readmeUpdated = allSourceFiles.any { it.startsWith("docs") && it.endsWith("README.md") }
-            if (!readmeUpdated) {
-                warn("One or more screenshot created, but `README.md` wasn't updated. Please include screenshots in README")
-            }
+        val readmeUpdated = allSourceFiles.any { it.startsWith("docs") && it.endsWith("README.md") }
+        if (screenshotsCreated && !readmeUpdated) {
+            warn("One or more screenshot created, but `README.md` wasn't updated. Please include screenshots in README")
+        }
+
+        // If a component was updated, the corresponding README, tests and screenshots should have been updated.
+        val componentFilesUpdated = allSourceFiles.any { it.startsWith("Backpack/src/main/java") || it.startsWith("backpack-compose/src/main/kotlin") }
+        val screenshotsUpdated = allSourceFiles.any { it.startsWith("docs") && it.contains("/screenshots/") }
+        val testsUpdated = allSourceFiles.any { it.startsWith("app/src/test") }
+        if (componentFilesUpdated && !readmeUpdated) {
+            warn("One or more component files were updated, but `README.md` wasn't updated. If your change contains API changes/additions or a new component please update the relevant component README.")
+        }
+        if (componentFilesUpdated && !screenshotsUpdated) {
+            warn("One or more component files were updated, but the docs screenshots weren't updated. If the changes are visual or it is a new component please regenerate the screenshots via `./gradlew recordScreenshots`.")
+        }
+        if (componentFilesUpdated && !testsUpdated) {
+            warn("One or more component files were updated, but the tests weren't updated. If your change is not covered by existing tests please add snapshot tests.")
         }
 
         // New files should include the Backpack license heading.

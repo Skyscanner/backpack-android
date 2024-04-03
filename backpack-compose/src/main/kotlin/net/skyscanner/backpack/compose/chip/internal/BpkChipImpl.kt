@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.chip.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,6 +32,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -80,12 +80,13 @@ internal fun BpkChipImpl(
         type = type,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onSelectedChange != null) {
-            selectable(
-                selected = selected,
-                enabled = enabled,
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-            ) { onSelectedChange!!.invoke(!selected) }
+            clip(ChipShape)
+                .selectable(
+                    selected = selected,
+                    enabled = enabled,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                ) { onSelectedChange!!.invoke(!selected) }
         },
     )
 }
@@ -108,10 +109,11 @@ internal fun BpkDismissibleChipImpl(
         type = BpkChipType.Dismiss,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onClick != null) {
-            clickable(
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-            ) { onClick!!.invoke() }
+            clip(ChipShape)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                ) { onClick!!.invoke() }
         },
     )
 }
@@ -199,6 +201,7 @@ internal fun BpkChipImpl(
                         default = style.dismissibleTrailingIconColor,
                         pressed = style.dismissibleTrailingIconPressedColor,
                     )
+
                     selected -> style.selectedContentColor
                     else -> interactionSource.animateAsColor(
                         default = style.contentColor,

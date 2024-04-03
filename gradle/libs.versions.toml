@@ -1,15 +1,15 @@
 [versions]
-kotlin = "1.9.22"
-ksp = "1.9.22-1.0.18" # depends on Kotlin version
-composeCompiler = "1.5.9" # depends on Kotlin version
+kotlin = "1.9.23"
+ksp = "1.9.23-1.0.19" # depends on Kotlin version
+composeCompiler = "1.5.11" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.10.2" # update this alongside with compiler version
 
-androidPlugin = "8.3.0"
-lint = "31.3.0"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.3.0" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.3.1"
+lint = "31.3.1"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.3.1" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
-detekt = "1.23.5"
+detekt = "1.23.6"
 lifecycle = "2.7.0"
 threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
@@ -17,7 +17,7 @@ coroutines = "1.8.0"
 espresso = "3.5.1"
 kotlinPoet = "1.16.0"
 ktor = "2.3.9"
-roborazzi = "1.10.1"
+roborazzi = "1.11.0"
 
 [libraries]
 
@@ -63,9 +63,9 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.11.0"
 google-maps = "com.google.android.gms:play-services-maps:18.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:4.3.2"
+google-mapsCompose = "com.google.maps.android:maps-compose:4.3.3"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
-google-guava = "com.google.guava:guava:33.0.0-jre"
+google-guava = "com.google.guava:guava:33.1.0-jre"
 
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoet" }
 square-kotlinPoetKsp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlinPoet" }
@@ -80,7 +80,8 @@ kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2024.02.02" }
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" } # dummy library reference for dependabot updates
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2024.03.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
