@@ -24,10 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.BehaviouralCallback
 
 @Composable
 internal fun BpkSearchModalContent(
     results: BpkAppSearchModalResult.Content,
+    behaviouralCallback: BehaviouralCallback?,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier = modifier) {
@@ -51,6 +53,7 @@ internal fun BpkSearchModalContent(
                 BpkSectionItem(
                     item = it,
                     modifier = Modifier.padding(BpkSpacing.Base),
+                    behaviouralCallback = behaviouralCallback,
                 )
             }
         }
