@@ -25,6 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 
+/**
+ * This registers the component for Behavioural Events.
+ * Right now the two supported types are "onDrawn" and "onClick" events.
+ *
+ * @param item the component that was clicked on. Any handling of types must be by the consumer.
+ * @param behaviouralCallback the callback to use for events.
+ * @param onClick the additional callback to use for click events. This is to allow wrapping of existing onClick behaviour
+ * without duplicating code in the consumer.
+ */
 internal fun Modifier.registerForBehaviouralEvents(
     item: Any,
     behaviouralCallback: BehaviouralCallback?,
