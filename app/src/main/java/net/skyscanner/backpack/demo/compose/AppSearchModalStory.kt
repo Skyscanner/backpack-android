@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,7 +48,6 @@ import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.compose.tokens.UseLocation
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.AppSearchModalComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -119,15 +117,6 @@ internal fun DefaultAppSearchModalSample(
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
             clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" },
-            behaviouralCallback = object : BehaviouralCallback {
-                override fun onDrawn(element: Any) {
-                    Log.i("AppSearchModalStory", "onDrawn $element")
-                }
-
-                override fun onClick(element: Any) {
-                    Log.i("AppSearchModalStory", "onClick $element")
-                }
-            },
         )
     }
 }

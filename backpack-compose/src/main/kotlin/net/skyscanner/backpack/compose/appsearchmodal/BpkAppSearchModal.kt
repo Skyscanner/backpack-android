@@ -30,7 +30,7 @@ import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 sealed class BpkAppSearchModalResult {
     data class Content(
@@ -79,7 +79,7 @@ fun BpkAppSearchModal(
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
-    behaviouralCallback: BehaviouralCallback? = null,
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
     BpkModal(
@@ -101,7 +101,7 @@ fun BpkAppSearchModal(
             results = results,
             onInputChanged = onInputChanged,
             clearAction = clearAction,
-            behaviouralCallback = behaviouralCallback,
+            behaviouralEventWrapper = behaviouralEventWrapper,
         )
     }
 }
