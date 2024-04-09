@@ -19,13 +19,14 @@
 package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 /**
  * This is used for registering components for behavioural events. Right now this supports `onClick` events, while any other
  * events must be handled by the consumer.
  */
 
-typealias BpkBehaviouralEventWrapper = @Composable (item: Any, content: @Composable BpkClickHandleScope.() -> Unit) -> Unit
+typealias BpkBehaviouralEventWrapper = @Composable (item: Any, modifier: Modifier, content: @Composable BpkClickHandleScope.() -> Unit) -> Unit
 
 interface BpkClickHandleScope {
     fun notifyClick()

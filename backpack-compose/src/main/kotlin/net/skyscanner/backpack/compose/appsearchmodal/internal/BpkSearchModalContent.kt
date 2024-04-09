@@ -51,7 +51,7 @@ internal fun BpkSearchModalContent(
             }
             items(section.items) {
                 if (behaviouralEventWrapper != null) {
-                    behaviouralEventWrapper(it) {
+                    behaviouralEventWrapper(it, Modifier) {
                         BpkSectionItem(
                             item = it,
                             modifier = Modifier.padding(BpkSpacing.Base),
