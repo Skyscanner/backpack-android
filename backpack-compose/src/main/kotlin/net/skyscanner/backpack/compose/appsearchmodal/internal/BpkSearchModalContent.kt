@@ -23,14 +23,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
+import net.skyscanner.backpack.compose.appsearchmodal.BpkItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 
 @Composable
 internal fun BpkSearchModalContent(
     results: BpkAppSearchModalResult.Content,
-    behaviouralCallback: BehaviouralCallback?,
     modifier: Modifier = Modifier,
+    behaviouralEventWrapper: (@Composable (BpkItem, content: @Composable BpkClickHandleScope.() -> Unit) -> Unit)? = null,
 ) {
     LazyColumn(modifier = modifier) {
         results.shortcuts?.let {
@@ -50,11 +51,20 @@ internal fun BpkSearchModalContent(
                 }
             }
             items(section.items) {
-                BpkSectionItem(
-                    item = it,
-                    modifier = Modifier.padding(BpkSpacing.Base),
-                    behaviouralCallback = behaviouralCallback,
-                )
+                if (behaviouralEventWrapper != null) {
+                    behaviouralEventWrapper(it) {
+                        BpkSectionItem(
+                            item = it,
+                            modifier = Modifier.padding(BpkSpacing.Base),
+                            clickHandleScope = this,
+                        )
+                    }
+                } else {
+                    BpkSectionItem(
+                        item = it,
+                        modifier = Modifier.padding(BpkSpacing.Base),
+                    )
+                }
             }
         }
     }

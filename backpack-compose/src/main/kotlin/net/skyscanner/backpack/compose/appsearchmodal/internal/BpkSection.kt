@@ -36,8 +36,8 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
-import net.skyscanner.backpack.compose.utils.registerForBehaviouralEvents
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
+import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkSectionHeading(
@@ -65,11 +65,14 @@ internal fun BpkSectionHeading(
 }
 
 @Composable
-internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier, behaviouralCallback: BehaviouralCallback? = null) {
+internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier, clickHandleScope: BpkClickHandleScope? = null) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .registerForBehaviouralEvents(item = item, behaviouralCallback = behaviouralCallback, onClick = item.onItemSelected),
+            .clickable {
+                item.onItemSelected()
+                clickHandleScope?.notifyClick()
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {

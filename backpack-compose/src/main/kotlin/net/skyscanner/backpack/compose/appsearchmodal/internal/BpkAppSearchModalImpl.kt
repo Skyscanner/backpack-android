@@ -25,13 +25,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
+import net.skyscanner.backpack.compose.appsearchmodal.BpkItem
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Search
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 
 @Composable
 internal fun BpkAppSearchModalImpl(
@@ -40,8 +41,8 @@ internal fun BpkAppSearchModalImpl(
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
-    behaviouralCallback: BehaviouralCallback?,
     modifier: Modifier = Modifier,
+    behaviouralEventWrapper: (@Composable (BpkItem, content: @Composable BpkClickHandleScope.() -> Unit) -> Unit)? = null,
 ) {
     when (results) {
         is BpkAppSearchModalResult.Error -> {
@@ -63,7 +64,7 @@ internal fun BpkAppSearchModalImpl(
                     clearAction = clearAction,
                 )
                 if (results is BpkAppSearchModalResult.Content) {
-                    BpkSearchModalContent(results = results, behaviouralCallback = behaviouralCallback)
+                    BpkSearchModalContent(results = results, behaviouralEventWrapper = behaviouralEventWrapper)
                 } else if (results is BpkAppSearchModalResult.Loading) {
                     BpkSearchModalLoading(results)
                 }

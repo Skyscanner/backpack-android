@@ -24,13 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.internal.BpkAppSearchModalImpl
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
-import net.skyscanner.backpack.compose.utils.BehaviouralCallback
 
 sealed class BpkAppSearchModalResult {
     data class Content(
@@ -79,7 +79,7 @@ fun BpkAppSearchModal(
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
-    behaviouralCallback: BehaviouralCallback? = null,
+    behaviouralEventWrapper: (@Composable (BpkItem, content: @Composable BpkClickHandleScope.() -> Unit) -> Unit)? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
     BpkModal(
@@ -101,7 +101,7 @@ fun BpkAppSearchModal(
             results = results,
             onInputChanged = onInputChanged,
             clearAction = clearAction,
-            behaviouralCallback = behaviouralCallback,
+            behaviouralEventWrapper = behaviouralEventWrapper,
         )
     }
 }
