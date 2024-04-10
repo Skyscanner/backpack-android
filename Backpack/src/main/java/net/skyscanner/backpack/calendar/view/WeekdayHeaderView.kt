@@ -39,9 +39,9 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.temporal.WeekFields
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
 import java.util.Locale
 
 internal class WeekdayHeaderView @JvmOverloads constructor(

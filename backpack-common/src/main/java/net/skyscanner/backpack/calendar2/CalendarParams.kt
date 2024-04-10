@@ -24,13 +24,13 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.chrono.IsoChronology
-import org.threeten.bp.format.DateTimeFormatterBuilder
-import org.threeten.bp.format.FormatStyle
-import org.threeten.bp.format.TextStyle
-import org.threeten.bp.temporal.WeekFields
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.chrono.IsoChronology
+import java.time.format.DateTimeFormatterBuilder
+import java.time.format.FormatStyle
+import java.time.format.TextStyle
+import java.time.temporal.WeekFields
 
 /**
  * Describes the calendar configuration.

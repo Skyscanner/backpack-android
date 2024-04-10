@@ -24,7 +24,6 @@ import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarLabel
@@ -38,10 +37,9 @@ import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
 import org.hamcrest.CoreMatchers
-import org.junit.Before
 import org.junit.Test
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.util.Locale
 
 private val today = LocalDate.of(2019, 1, 2)
@@ -76,11 +74,6 @@ private class BpkCalendarControllerImpl(
 }
 
 class BpkCalendarTest : BpkSnapshotTest() {
-
-    @Before
-    fun setup() {
-        AndroidThreeTen.init(testContext)
-    }
 
     @Test
     fun default() {

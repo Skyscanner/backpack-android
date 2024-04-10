@@ -21,7 +21,6 @@
 package net.skyscanner.backpack.compose.calendar
 
 import androidx.compose.ui.unit.dp
-import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -30,15 +29,9 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
-import org.junit.Before
 import org.junit.Test
 
 class BpkCalendarTest : BpkSnapshotTest() {
-
-    @Before
-    fun setup() {
-        AndroidThreeTen.init(testContext)
-    }
 
     @Test
     fun default() {

@@ -26,7 +26,7 @@ import net.skyscanner.backpack.calendar2.extension.lastDay
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.util.InternalBackpackApi
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 @Immutable
 @InternalBackpackApi

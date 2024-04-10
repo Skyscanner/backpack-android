@@ -55,9 +55,9 @@ import net.skyscanner.backpack.calendar.model.ColoredBucket
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ResourcesUtil
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.WeekFields
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.temporal.WeekFields
 
 /**
  * A calendar-like view displaying a specified month and the appropriate selectable day numbers

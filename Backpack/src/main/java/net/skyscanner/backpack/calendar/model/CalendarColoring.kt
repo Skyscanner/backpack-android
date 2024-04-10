@@ -28,7 +28,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Dark
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Light
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 @Deprecated("Use Calendar2 instead")
 data class CalendarColoring(

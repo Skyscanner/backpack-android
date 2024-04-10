@@ -23,12 +23,10 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.lastDay
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 
 class CalendarSingleSelectionTests {
@@ -36,11 +34,6 @@ class CalendarSingleSelectionTests {
     private val singleSelection = CalendarSettings.Default.copy(
         selectionMode = CalendarParams.SelectionMode.Single(),
     )
-
-    @Before
-    fun setup() {
-        initAndroidThreeTen()
-    }
 
     @Test
     fun date_can_be_selected() {

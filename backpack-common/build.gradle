@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-    api libs.threeTenAbp.android
     implementation libs.compose.runtime
     androidTestImplementation libs.test.espressoCore
     androidTestImplementation libs.test.junit

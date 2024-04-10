@@ -19,7 +19,7 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import org.threeten.bp.YearMonth
+import java.time.YearMonth
 
 /**
  * Describes any side effects from the calendar.

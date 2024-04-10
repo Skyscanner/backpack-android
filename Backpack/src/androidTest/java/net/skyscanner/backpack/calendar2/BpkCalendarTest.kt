@@ -26,7 +26,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -34,11 +33,10 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.TestActivity
 import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -63,11 +61,6 @@ class BpkCalendarTest {
 
     @get:Rule
     val rule = activityScenarioRule<TestActivity>()
-
-    @Before
-    fun setup() {
-        AndroidThreeTen.init(context)
-    }
 
     @Test
     fun withStartDateSelected() = runTest {

@@ -22,12 +22,10 @@ package net.skyscanner.backpack.calendar.view
 
 import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Locale
@@ -36,11 +34,6 @@ import java.util.Locale
 class WeekdayViewHeaderTest {
 
     private val context = TestContext
-
-    @Before
-    fun setUp() {
-        AndroidThreeTen.init(context)
-    }
 
     @Test
     fun test_initializeWithLocale() {

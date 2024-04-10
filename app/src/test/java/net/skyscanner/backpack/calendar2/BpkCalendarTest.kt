@@ -18,19 +18,12 @@
 
 package net.skyscanner.backpack.calendar2
 
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
-import org.junit.Before
 import org.junit.Test
 
 class BpkCalendarTest : BpkSnapshotTest() {
-
-    @Before
-    fun setup() {
-        AndroidThreeTen.init(testContext)
-    }
 
     @Test
     fun default() {

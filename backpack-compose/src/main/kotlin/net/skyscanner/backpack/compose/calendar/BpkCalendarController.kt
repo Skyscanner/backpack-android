@@ -32,7 +32,7 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import java.io.Serializable
 
 @Stable
