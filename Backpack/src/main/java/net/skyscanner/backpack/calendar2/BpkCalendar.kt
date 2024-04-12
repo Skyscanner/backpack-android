@@ -39,9 +39,9 @@ import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.list.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Period
-import org.threeten.bp.YearMonth
+import java.time.LocalDate
+import java.time.Period
+import java.time.YearMonth
 
 class BpkCalendar private constructor(
     context: Context,

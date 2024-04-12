@@ -11,7 +11,6 @@ androidSdkCommon = "31.3.2" # if the Gradle plugin version is X.Y.Z, then the li
 
 detekt = "1.23.6"
 lifecycle = "2.7.0"
-threeTenAbp = "1.4.5"
 androidXJunit = "1.1.5"
 coroutines = "1.8.0"
 espresso = "3.5.1"
@@ -44,9 +43,6 @@ androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", v
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycleRuntimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
-
-threeTenAbp-base = { module = "org.threeten:threetenbp", version.ref = "threeTenAbp" }
-threeTenAbp-android = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "threeTenAbp" }
 
 test-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidXJunit" }
 test-junitAndroid = { module = "androidx.test.ext:junit", version.ref = "androidXJunit" }

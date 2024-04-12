@@ -18,15 +18,13 @@
 
 package net.skyscanner.backpack.calendar2
 
-import androidx.test.platform.app.InstrumentationRegistry
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.util.TestStateMachineResult
 import net.skyscanner.backpack.util.TestStateMachineScope
 import net.skyscanner.backpack.util.testStateMachine
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
+import java.time.LocalDate
+import java.time.Month
 import java.util.Locale
 
 internal typealias CalendarTestScope = TestStateMachineScope<CalendarStateMachine, CalendarState>
@@ -50,10 +48,6 @@ internal fun CalendarTestScope.rangeOf(start: CalendarCell.Day, end: CalendarCel
     val indexOfFirst = state.cells.indexOf(start.date)
     val indexOfLast = state.cells.indexOf(end.date)
     return indexOfFirst..indexOfLast
-}
-
-internal fun initAndroidThreeTen() {
-    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().context)
 }
 
 internal fun testCalendarWith(

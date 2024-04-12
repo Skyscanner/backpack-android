@@ -31,7 +31,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
-import org.threeten.bp.DayOfWeek
+import java.time.DayOfWeek
 
 internal class CalendarHeaderView @JvmOverloads constructor(
     context: Context,

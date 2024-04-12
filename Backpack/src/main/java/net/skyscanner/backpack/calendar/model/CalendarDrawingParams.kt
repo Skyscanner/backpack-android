@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.calendar.model
 
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 @Suppress("DEPRECATION")
 internal data class CalendarDrawingParams(

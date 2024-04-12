@@ -24,17 +24,15 @@ import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
 import net.skyscanner.backpack.calendar2.header
-import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.lastDay
 import net.skyscanner.backpack.calendar2.rangeOf
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
-import org.threeten.bp.YearMonth
+import java.time.LocalDate
+import java.time.Month
+import java.time.YearMonth
 
 class CalendarRangeSelectionTests {
 
@@ -49,11 +47,6 @@ class CalendarRangeSelectionTests {
         ),
         selectionMode = CalendarParams.SelectionMode.Range(),
     )
-
-    @Before
-    fun setup() {
-        initAndroidThreeTen()
-    }
 
     @Test
     fun when_range_is_opened_selection_is_correct() {

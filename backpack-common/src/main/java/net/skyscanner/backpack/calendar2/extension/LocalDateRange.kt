@@ -19,9 +19,9 @@
 package net.skyscanner.backpack.calendar2.extension
 
 import androidx.compose.runtime.Stable
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.ChronoUnit
-import org.threeten.bp.temporal.TemporalUnit
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalUnit
 
 /**
  * Converts range of local dates to [Iterable].

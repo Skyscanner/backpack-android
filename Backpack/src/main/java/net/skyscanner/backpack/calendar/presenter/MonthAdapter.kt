@@ -43,8 +43,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.view.MonthView
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Period
+import java.time.LocalDate
+import java.time.Period
 
 internal class MonthAdapter(
     private val context: Context,

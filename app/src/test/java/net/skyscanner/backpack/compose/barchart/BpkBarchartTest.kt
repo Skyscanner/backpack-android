@@ -25,7 +25,7 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Test
-import org.threeten.bp.Month
+import java.time.Month
 import kotlin.math.roundToInt
 
 class BpkBarchartTest : BpkSnapshotTest() {

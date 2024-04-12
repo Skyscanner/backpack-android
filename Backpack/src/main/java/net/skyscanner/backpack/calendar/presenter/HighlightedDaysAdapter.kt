@@ -25,8 +25,8 @@ import android.view.View
 import androidx.annotation.ColorInt
 import net.skyscanner.backpack.calendar.view.HighlightedDaysMonthFooter
 import net.skyscanner.backpack.util.unsafeLazy
-import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Deprecated("Use Calendar2 instead")

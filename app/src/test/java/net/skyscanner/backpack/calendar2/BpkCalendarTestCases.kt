@@ -19,11 +19,11 @@
 package net.skyscanner.backpack.calendar2
 
 import net.skyscanner.backpack.calendar2.extension.toIterable
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
-import org.threeten.bp.Period
-import org.threeten.bp.YearMonth
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.Month
+import java.time.Period
+import java.time.YearMonth
 import java.util.Locale
 
 object BpkCalendarTestCases {

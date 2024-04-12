@@ -20,7 +20,7 @@
 
 package net.skyscanner.backpack.calendar.model
 
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import java.io.Serializable
 
 @Deprecated("Use Calendar2 instead")

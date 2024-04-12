@@ -22,7 +22,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
-import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
  * Application class registered in AndroidManifest.xml
@@ -46,7 +45,6 @@ class BackpackDemoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AndroidThreeTen.init(this)
         instance = applicationContext!! as BackpackDemoApplication
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }

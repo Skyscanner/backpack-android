@@ -21,28 +21,21 @@
 package net.skyscanner.backpack.calendar.view
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 class NonDrawnDaysOffset {
 
     private val context = TestContext
-
-    @Before
-    fun setUp() {
-        AndroidThreeTen.init(context)
-    }
 
     @Test
     fun givenFirstFewDaysInMonth_whenGetOffset_thenNoOffset() {

@@ -24,10 +24,10 @@ import android.icu.text.NumberFormat
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.demo.R
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.TextStyle
+import java.time.LocalDate
+import java.time.Month
+import java.time.YearMonth
+import java.time.format.TextStyle
 import java.util.Random
 
 object BpkBarChartData {

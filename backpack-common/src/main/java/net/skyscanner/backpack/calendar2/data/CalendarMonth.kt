@@ -27,9 +27,9 @@ import net.skyscanner.backpack.calendar2.extension.lastDayOfWeek
 import net.skyscanner.backpack.calendar2.extension.nextMonth
 import net.skyscanner.backpack.calendar2.extension.prevMonth
 import net.skyscanner.backpack.util.InternalBackpackApi
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.temporal.WeekFields
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.temporal.WeekFields
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -89,7 +89,6 @@ internal inline fun CalendarMonth(
     return CalendarMonth(yearMonth = yearMonth, cells = cells)
 }
 
-// see https://github.com/ThreeTen/threetenbp/issues/55
 @Suppress("DEPRECATION")
 internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, locale: Locale): String {
     val date = Date(

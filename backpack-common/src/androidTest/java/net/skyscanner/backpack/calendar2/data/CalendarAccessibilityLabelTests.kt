@@ -21,20 +21,13 @@ package net.skyscanner.backpack.calendar2.data
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
+import java.time.LocalDate
+import java.time.Month
 
 class CalendarAccessibilityLabelTests {
-
-    @Before
-    fun setup() {
-        initAndroidThreeTen()
-    }
 
     @Test
     fun accessibility_labels_are_correct_when_single_selection_mode_and_no_date_selected() {

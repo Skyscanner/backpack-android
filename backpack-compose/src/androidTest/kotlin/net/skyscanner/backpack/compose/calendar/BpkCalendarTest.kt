@@ -44,7 +44,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BpkCalendarTest {

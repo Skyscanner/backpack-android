@@ -21,7 +21,6 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.HighlightedDay
 import net.skyscanner.backpack.calendar.view.HighlightedDaysMonthFooter
@@ -38,7 +37,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
@@ -51,7 +50,6 @@ class HighlightedDaysAdapterTest {
 
     @Before
     fun setup() {
-        AndroidThreeTen.init(context)
 
         holidays = mapOf(
             "2020-1" to setOf(

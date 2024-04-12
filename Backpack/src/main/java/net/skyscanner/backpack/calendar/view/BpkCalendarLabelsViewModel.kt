@@ -32,7 +32,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.withSave
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 import kotlin.math.roundToInt
 
 internal class BpkCalendarLabelsViewModel(
