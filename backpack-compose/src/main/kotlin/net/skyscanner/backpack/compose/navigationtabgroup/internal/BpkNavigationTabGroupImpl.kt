@@ -34,7 +34,6 @@ import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupS
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
-import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 
 @Composable
 internal fun BpkNavigationTabGroupImpl(
@@ -59,9 +58,9 @@ internal fun BpkNavigationTabGroupImpl(
                         tab = tab,
                         selected = index == selectedIndex,
                         style = style,
-                        clickHandleScope = this,
                     ) {
                         onItemClicked.invoke(tabs[index])
+                        notifyClick()
                     }
                 }
             } else {
@@ -83,7 +82,6 @@ private fun NavigationTabItem(
     selected: Boolean,
     style: BpkNavigationTabGroupStyle,
     modifier: Modifier = Modifier,
-    clickHandleScope: BpkClickHandleScope? = null,
     onClick: () -> Unit,
 ) {
     val tabStyle = when (style) {
@@ -97,6 +95,5 @@ private fun NavigationTabItem(
         selected = selected,
         style = tabStyle,
         onClick = onClick,
-        clickHandleScope = clickHandleScope,
     )
 }
