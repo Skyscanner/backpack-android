@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationtabgroup.internal.BpkNavigationTabGroupImpl
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 data class BpkNavigationTabItem(val text: String, val icon: BpkIcon? = null)
 
@@ -40,6 +41,7 @@ fun BpkNavigationTabGroup(
     modifier: Modifier = Modifier,
     style: BpkNavigationTabGroupStyle = BpkNavigationTabGroupStyle.CanvasDefault,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     BpkNavigationTabGroupImpl(
         tabs = tabs,
@@ -48,5 +50,6 @@ fun BpkNavigationTabGroup(
         modifier = modifier,
         style = style,
         contentPadding = contentPadding,
+        behaviouralEventWrapper = behaviouralEventWrapper,
     )
 }
