@@ -45,6 +45,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkNavigationTabColors
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
 
@@ -61,6 +62,7 @@ internal fun BpkNavigationTab(
     modifier: Modifier = Modifier,
     style: BpkNavigationTabStyle = BpkNavigationTabStyle.CanvasDefault,
     icon: BpkIcon? = null,
+    clickHandleScope: BpkClickHandleScope? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     BpkNavigationTabImpl(
@@ -75,7 +77,10 @@ internal fun BpkNavigationTab(
                     selected = selected,
                     interactionSource = interactionSource,
                     indication = rememberRipple(),
-                ) { onClick!!.invoke() }
+                ) {
+                    onClick!!.invoke()
+                    clickHandleScope?.notifyClick()
+                }
         },
     )
 }

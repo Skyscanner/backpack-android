@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
+import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
 
 @Composable
 internal fun BpkNavigationTabGroupImpl(
@@ -42,6 +44,7 @@ internal fun BpkNavigationTabGroupImpl(
     style: BpkNavigationTabGroupStyle,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     LazyRow(
         modifier = modifier.selectableGroup(),
@@ -50,12 +53,25 @@ internal fun BpkNavigationTabGroupImpl(
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
     ) {
         itemsIndexed(items = tabs) { index, tab ->
-            NavigationTabItem(
-                tab = tab,
-                selected = index == selectedIndex,
-                style = style,
-            ) {
-                onItemClicked.invoke(tabs[index])
+            if (behaviouralEventWrapper != null) {
+                behaviouralEventWrapper(tab, Modifier) {
+                    NavigationTabItem(
+                        tab = tab,
+                        selected = index == selectedIndex,
+                        style = style,
+                        clickHandleScope = this,
+                    ) {
+                        onItemClicked.invoke(tabs[index])
+                    }
+                }
+            } else {
+                NavigationTabItem(
+                    tab = tab,
+                    selected = index == selectedIndex,
+                    style = style,
+                ) {
+                    onItemClicked.invoke(tabs[index])
+                }
             }
         }
     }
@@ -67,6 +83,7 @@ private fun NavigationTabItem(
     selected: Boolean,
     style: BpkNavigationTabGroupStyle,
     modifier: Modifier = Modifier,
+    clickHandleScope: BpkClickHandleScope? = null,
     onClick: () -> Unit,
 ) {
     val tabStyle = when (style) {
@@ -80,5 +97,6 @@ private fun NavigationTabItem(
         selected = selected,
         style = tabStyle,
         onClick = onClick,
+        clickHandleScope = clickHandleScope,
     )
 }
