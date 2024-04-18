@@ -37,7 +37,7 @@ androidx-annotations = "androidx.annotation:annotation:1.7.1"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-androidx-coreKts = "androidx.core:core-ktx:1.12.0"
+androidx-coreKts = "androidx.core:core-ktx:1.13.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
