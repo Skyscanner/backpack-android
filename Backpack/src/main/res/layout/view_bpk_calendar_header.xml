@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginRight="@dimen/bpkSpacingBase"
+        android:layout_marginEnd="@dimen/bpkSpacingBase"
         android:accessibilityHeading="true"
         android:singleLine="true"
         app:buttonType="link" />
