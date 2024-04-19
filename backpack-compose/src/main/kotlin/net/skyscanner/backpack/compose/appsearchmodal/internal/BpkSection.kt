@@ -68,11 +68,11 @@ internal fun BpkSectionHeading(
 internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier, clickHandleScope: BpkClickHandleScope? = null) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
             .clickable {
                 item.onItemSelected()
                 clickHandleScope?.notifyClick()
-            },
+            }
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
