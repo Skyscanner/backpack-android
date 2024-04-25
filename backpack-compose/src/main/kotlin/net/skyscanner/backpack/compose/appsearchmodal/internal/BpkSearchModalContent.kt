@@ -35,7 +35,7 @@ internal fun BpkSearchModalContent(
     LazyColumn(modifier = modifier) {
         results.shortcuts?.let {
             item {
-                BpkShortcuts(it)
+                BpkShortcuts(shortcuts = it, behaviouralEventWrapper = behaviouralEventWrapper)
             }
         }
         results.sections.forEach { section ->

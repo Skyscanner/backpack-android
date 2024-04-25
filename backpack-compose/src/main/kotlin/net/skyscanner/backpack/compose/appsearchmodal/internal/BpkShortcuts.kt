@@ -27,11 +27,13 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 @Composable
 internal fun BpkShortcuts(
     shortcuts: List<BpkShortcut>,
     modifier: Modifier = Modifier,
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     val singleSelectChips = shortcuts.map {
         BpkSingleChipItem(text = it.text, icon = it.icon)
@@ -47,5 +49,6 @@ internal fun BpkShortcuts(
         onItemClicked = {
             shortcuts[singleSelectChips.indexOf(it)].onShortcutSelected()
         },
+        behaviouralEventWrapper = behaviouralEventWrapper,
     )
 }
