@@ -45,6 +45,11 @@ class BpkImageGalleryTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun slideshow_short_text() {
+        snap(captureFullScreen = true) { ImageGallerySlideshowStory(initialPage = 1) }
+    }
+
+    @Test
     fun image_grid() {
         snap(captureFullScreen = true) { ImageGalleryImageGridStory() }
     }

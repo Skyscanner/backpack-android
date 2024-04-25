@@ -187,6 +187,7 @@ private fun ImageDescription(image: BpkImageGalleryImage, modifier: Modifier = M
     Crossfade(targetState = image, label = "Text crossfade", modifier = modifier.padding(BpkSpacing.Lg)) { image ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth(),
         ) {
             BpkText(
                 modifier = Modifier
