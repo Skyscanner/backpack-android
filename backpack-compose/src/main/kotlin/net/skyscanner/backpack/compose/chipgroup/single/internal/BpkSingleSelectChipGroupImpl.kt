@@ -104,9 +104,8 @@ private fun BehaviouralChipItem(
     modifier: Modifier = Modifier,
 ) {
     if (behaviouralEventWrapper != null) {
-        behaviouralEventWrapper(chip, Modifier) {
+        behaviouralEventWrapper(chip, modifier) {
             ChipItem(
-                modifier = modifier,
                 chip = chip,
                 selected = selected,
                 style = style,
