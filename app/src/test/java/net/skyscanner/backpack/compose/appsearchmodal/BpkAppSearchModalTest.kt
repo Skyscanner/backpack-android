@@ -23,6 +23,7 @@ import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContent
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryContentInputText
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryError
 import net.skyscanner.backpack.demo.compose.AppSearchModalStoryLoading
+import net.skyscanner.backpack.demo.compose.AppSearchModalStoryPrefixText
 import org.junit.Test
 
 class BpkAppSearchModalTest : BpkSnapshotTest() {
@@ -45,5 +46,10 @@ class BpkAppSearchModalTest : BpkSnapshotTest() {
     @Test
     fun error() = snap(captureFullScreen = true) {
         AppSearchModalStoryError()
+    }
+
+    @Test
+    fun prefixText() = snap(captureFullScreen = true) {
+        AppSearchModalStoryPrefixText()
     }
 }

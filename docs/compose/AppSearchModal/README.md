@@ -6,21 +6,27 @@
 
 ## Content
 
-| Day | Night |
-| --- | --- |
+| Day                                                                                                                                                                                              | Night                                                                                                                                                                                                           |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content.png" alt="AppSearchModal component in Content state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/content_dm.png" alt="AppSearchModal component in Content state - dark mode" width="375" /> |
 
 ## Loading
 
-| Day | Night |
-| --- | --- |
+| Day                                                                                                                                                                                              | Night                                                                                                                                                                                                           |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading.png" alt="AppSearchModal component in Loading state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/loading_dm.png" alt="AppSearchModal component in Loading state - dark mode" width="375" /> |
 
 ## Error
 
-| Day | Night |
-| --- | --- |
+| Day                                                                                                                                                                                          | Night                                                                                                                                                                                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/error.png" alt="AppSearchModal component in Error state" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/error_dm.png" alt="AppSearchModal component in Error state - dark mode" width="375" /> |
+
+## Search Prefix - Text
+
+| Day                                                                                                                                                                                                                 | Night                                                                                                                                                                                                                           |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/prefix---text.png" alt="AppSearchModal component with text before search field" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AppSearchModal/screenshots/prefix---text.png" alt="AppSearchModal component with text before search field - dark mode" width="375" /> |
 
 ## Installation
 
@@ -40,13 +46,15 @@ BpkAppSearchModal(
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
     results = BpkAppSearchModalResult.Content(
-        sections = listOf(BpkSection(...)),
-        shortcuts = listOf(BpkShortcut(...)),
+        sections = listOf(BpkSection(...)
     ),
-    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-    onClose = {/* close modal*/ },
-    onInputChanged = {/* update input*/ },
-    clearAction = BpkClearAction("Clear"){ destination.value = "" },
+    shortcuts = listOf(BpkShortcut(...)
+),
+),
+closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+onClose = {/* close modal*/ },
+onInputChanged = {/* update input*/ },
+clearAction = BpkClearAction("Clear") { destination.value = "" },
 )
 ```
 
@@ -65,7 +73,7 @@ BpkAppSearchModal(
     closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
-    clearAction = BpkClearAction("Clear"){ destination.value = "" },
+    clearAction = BpkClearAction("Clear") { destination.value = "" },
 )
 ```
 
@@ -80,10 +88,11 @@ BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
-    results = BpkAppSearchModalResult.Error(...),
-    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-    onClose = {/* close modal*/ },
-    onInputChanged = {/* update input*/ },
-    clearAction = BpkClearAction("Clear"){ destination.value = "" },
+    results = BpkAppSearchModalResult.Error(...
+),
+closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+onClose = {/* close modal*/ },
+onInputChanged = {/* update input*/ },
+clearAction = BpkClearAction("Clear") { destination.value = "" },
 )
 ```

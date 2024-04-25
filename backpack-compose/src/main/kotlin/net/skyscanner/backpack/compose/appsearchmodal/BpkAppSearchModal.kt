@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.appsearchmodal
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.searchinputsummary.SearchInputSummary
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
@@ -70,8 +72,7 @@ data class BpkAction(val text: String, val onActionSelected: () -> Unit)
 @Composable
 fun BpkAppSearchModal(
     title: String,
-    inputText: String,
-    inputHint: String,
+    inputSummary: SearchInputSummary,
     results: BpkAppSearchModalResult,
     closeAccessibilityLabel: String,
     onInputChanged: (String) -> Unit,
@@ -95,13 +96,14 @@ fun BpkAppSearchModal(
         title = title,
         onDismiss = onClose,
     ) {
-        BpkAppSearchModalImpl(
-            inputText = inputText,
-            inputHint = inputHint,
-            results = results,
-            onInputChanged = onInputChanged,
-            clearAction = clearAction,
-            behaviouralEventWrapper = behaviouralEventWrapper,
-        )
+        Column {
+            BpkAppSearchModalImpl(
+                summary = inputSummary,
+                results = results,
+                onInputChanged = onInputChanged,
+                clearAction = clearAction,
+                behaviouralEventWrapper = behaviouralEventWrapper,
+            )
+        }
     }
 }

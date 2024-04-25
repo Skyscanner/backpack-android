@@ -77,7 +77,7 @@ internal fun BpkTextFieldImpl(
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,
-    icon: BpkIcon? = null,
+    prefix: @Composable () -> Unit = {},
     status: BpkFieldStatus = LocalFieldStatus.current,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -103,7 +103,7 @@ internal fun BpkTextFieldImpl(
         modifier = modifier,
         readOnly = readOnly,
         placeholder = placeholder,
-        icon = icon,
+        prefix = prefix,
         status = status,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
@@ -123,7 +123,7 @@ internal fun BpkTextFieldImpl(
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,
-    icon: BpkIcon? = null,
+    prefix: @Composable () -> Unit = {},
     status: BpkFieldStatus = LocalFieldStatus.current,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -161,8 +161,8 @@ internal fun BpkTextFieldImpl(
                 value = value,
                 modifier = Modifier,
                 placeholder = placeholder,
-                icon = icon,
                 status = status,
+                prefix = prefix,
                 maxLines = maxLines,
                 interactionSource = interactionSource,
                 trailingIcon = trailingIcon,
@@ -178,8 +178,8 @@ private fun TextFieldBox(
     value: TextFieldValue,
     modifier: Modifier = Modifier,
     placeholder: String? = null,
-    icon: BpkIcon? = null,
     status: BpkFieldStatus = LocalFieldStatus.current,
+    prefix: @Composable () -> Unit = {},
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
@@ -208,20 +208,7 @@ private fun TextFieldBox(
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
-        if (icon != null) {
-            BpkIcon(
-                icon = icon,
-                contentDescription = null,
-                size = BpkIconSize.Large,
-                modifier = Modifier.padding(start = BpkSpacing.Sm),
-                tint = animateColorAsState(
-                    when (status) {
-                        is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                        else -> BpkTheme.colors.textSecondary
-                    },
-                ).value,
-            )
-        }
+        prefix()
 
         Box(
             modifier = Modifier
