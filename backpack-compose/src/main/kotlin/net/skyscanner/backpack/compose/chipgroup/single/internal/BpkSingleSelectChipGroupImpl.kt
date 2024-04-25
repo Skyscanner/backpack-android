@@ -101,18 +101,24 @@ private fun BehaviouralChipItem(
     selected: Boolean,
     style: BpkChipStyle,
     onItemClicked: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     if (behaviouralEventWrapper != null) {
         behaviouralEventWrapper(chip, Modifier) {
             ChipItem(
+                modifier = modifier,
                 chip = chip,
                 selected = selected,
                 style = style,
-                onSelectedChange = onItemClicked,
+                onSelectedChange = {
+                    this.notifyClick()
+                    onItemClicked()
+                },
             )
         }
     } else {
         ChipItem(
+            modifier = modifier,
             chip = chip,
             selected = selected,
             style = style,
