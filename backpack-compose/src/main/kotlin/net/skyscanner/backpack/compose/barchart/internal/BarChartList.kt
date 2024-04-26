@@ -95,6 +95,7 @@ internal fun BarChartList(
     }
 }
 
+@Suppress("ModifierComposed")
 private fun Modifier.drawSelectionLine(
     selected: BpkBarChartModel.Item?,
     badgeOffset: Offset,

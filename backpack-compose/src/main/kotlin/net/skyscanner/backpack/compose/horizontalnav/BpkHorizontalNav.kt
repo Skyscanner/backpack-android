@@ -137,6 +137,7 @@ private fun TabRow(
     }
 }
 
+@Suppress("ModifierComposed")
 private fun Modifier.drawDivider(): Modifier =
     composed {
         val dividerColor = if (isSystemInDarkTheme()) Color.Transparent else BpkTheme.colors.line
@@ -150,6 +151,7 @@ private fun Modifier.drawDivider(): Modifier =
         }
     }
 
+@Suppress("ModifierComposed")
 private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modifier =
     composed {
         val indicatorColor = BpkTheme.colors.textLink

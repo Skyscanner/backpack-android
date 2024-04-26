@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,7 +49,7 @@ import net.skyscanner.backpack.meta.StoryKind
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Price")
 fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableStateOf(0) }
+    var focusedMarker by remember { mutableIntStateOf(0) }
     var viewedMarkers by remember { mutableStateOf(setOf(1)) }
 
     fun markerStatus(index: Int): BpkPriceMarkerStatus = when {
@@ -74,11 +75,11 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
 fun IconMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableStateOf(0) }
+    var focusedMarker by remember { mutableIntStateOf(0) }
 
-    fun markerStatus(index: Int): BpkIconMarkerStatus = when {
-        index == 3 -> BpkIconMarkerStatus.Disabled
-        index == focusedMarker -> BpkIconMarkerStatus.Focused
+    fun markerStatus(index: Int): BpkIconMarkerStatus = when (index) {
+        3 -> BpkIconMarkerStatus.Disabled
+        focusedMarker -> BpkIconMarkerStatus.Focused
         else -> BpkIconMarkerStatus.Default
     }
     GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {

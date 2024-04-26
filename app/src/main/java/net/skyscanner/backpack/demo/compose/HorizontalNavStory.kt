@@ -25,7 +25,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -80,7 +80,7 @@ internal fun HorizontalNav_Small_Sample(modifier: Modifier = Modifier) {
         ),
     )
 
-    var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableIntStateOf(0) }
 
     BpkHorizontalNav(
         modifier = modifier,
@@ -104,7 +104,7 @@ internal fun HorizontalNav_SmallWithIcon_Sample(modifier: Modifier = Modifier) {
         ),
     )
 
-    var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableIntStateOf(0) }
 
     BpkHorizontalNav(
         modifier = modifier,
@@ -126,7 +126,7 @@ internal fun HorizontalNav_Large_Sample(modifier: Modifier = Modifier) {
         ),
     )
 
-    var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableIntStateOf(0) }
 
     BpkHorizontalNav(
         modifier = modifier,
@@ -149,7 +149,7 @@ internal fun HorizontalNav_LargeWithIcon_Sample(modifier: Modifier = Modifier) {
         ),
     )
 
-    var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableIntStateOf(0) }
 
     BpkHorizontalNav(
         modifier = modifier,
