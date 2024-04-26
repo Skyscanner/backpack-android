@@ -29,7 +29,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -96,7 +96,7 @@ private fun PageIndicatorSample(
     modifier: Modifier = Modifier,
     buttonType: BpkButtonType = BpkButtonType.Link,
 ) {
-    var currentIndex by remember { mutableStateOf(0) }
+    var currentIndex by remember { mutableIntStateOf(0) }
 
     Row(
         modifier = modifier.fillMaxWidth(),

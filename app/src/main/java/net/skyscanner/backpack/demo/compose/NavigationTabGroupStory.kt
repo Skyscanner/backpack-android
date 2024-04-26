@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -66,7 +66,7 @@ internal fun NavigationTabGroupSample(
         BpkNavigationTabItem(stringResource(R.string.navigation_tabs_hotels), BpkIcon.Hotels),
         BpkNavigationTabItem(stringResource(R.string.navigation_tabs_carhire), BpkIcon.Cars),
     )
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
 
     BpkNavigationTabGroup(
         modifier = modifier,

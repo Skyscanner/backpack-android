@@ -96,7 +96,7 @@ internal fun BpkCalendarDayCell(
             Spacer(
                 Modifier
                     .size(BpkCalendarSizes.SelectionHeight)
-                    .cellDayBackground(selection, status, inactive, style),
+                    .cellDayBackground(selection),
             )
 
             BpkText(
@@ -126,6 +126,7 @@ internal fun BpkCalendarDayCell(
     }
 }
 
+@Suppress("ModifierComposed")
 private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = composed {
     when (selection) {
         Selection.Start,
@@ -145,11 +146,9 @@ private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = 
     }
 }
 
+@Suppress("ModifierComposed")
 private fun Modifier.cellDayBackground(
     selection: Selection?,
-    status: CellStatus?,
-    inactive: Boolean,
-    style: CellStatusStyle?,
 ): Modifier = composed {
     when {
         selection != null ->

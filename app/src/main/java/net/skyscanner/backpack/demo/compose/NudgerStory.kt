@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -86,7 +86,7 @@ internal fun NudgerExample(
     initialValue: Int = NudgerStoryAvg,
     enabled: Boolean = true,
 ) {
-    var value by remember { mutableStateOf(initialValue) }
+    var value by remember { mutableIntStateOf(initialValue) }
 
     BpkNudger(
         modifier = modifier,
@@ -107,7 +107,7 @@ internal fun NudgerRowExample(
     initialValue: Int = NudgerStoryAvg,
     enabled: Boolean = true,
 ) {
-    var value by remember { mutableStateOf(initialValue) }
+    var value by remember { mutableIntStateOf(initialValue) }
 
     BpkNudger(
         title = title,

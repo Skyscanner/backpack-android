@@ -25,7 +25,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -88,7 +88,7 @@ private fun ProgressBarSample(
     interval: Float = 0.1F,
     size: BpkProgressBarSize = BpkProgressBarSize.Small,
 ) {
-    var progress by remember { mutableStateOf(value) }
+    var progress by remember { mutableFloatStateOf(value) }
 
     Column(
         modifier = Modifier
