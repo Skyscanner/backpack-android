@@ -207,6 +207,7 @@ private enum class BpkRatingStarType {
     Full,
 }
 
+@Suppress("ModifierComposed")
 private fun Modifier.starRatingSemantics(
     rating: Float,
     maxRating: Int,

@@ -33,6 +33,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,8 +69,9 @@ internal fun BpkImageGallerySlideshow(
 ) {
     val pagerState = rememberBpkCarouselState(totalImages = images.size, initialImage = initialImage)
     if (onImageChanged != null) {
+        val latestOnImageChanged by rememberUpdatedState(onImageChanged)
         LaunchedEffect(pagerState) {
-            snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { onImageChanged(it) }
+            snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { latestOnImageChanged(it) }
         }
     }
     val current = images[pagerState.currentPage]
@@ -187,6 +190,7 @@ private fun ImageDescription(image: BpkImageGalleryImage, modifier: Modifier = M
     Crossfade(targetState = image, label = "Text crossfade", modifier = modifier.padding(BpkSpacing.Lg)) { image ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth(),
         ) {
             BpkText(
                 modifier = Modifier

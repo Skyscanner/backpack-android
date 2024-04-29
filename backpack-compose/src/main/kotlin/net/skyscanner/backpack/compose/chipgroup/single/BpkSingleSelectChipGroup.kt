@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleSelectChipGroupImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 enum class BpkSingleChipGroupType {
     Rail,
@@ -42,6 +43,7 @@ fun BpkSingleSelectChipGroup(
     style: BpkChipStyle = BpkChipStyle.Default,
     type: BpkSingleChipGroupType = BpkSingleChipGroupType.Rail,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     BpkSingleSelectChipGroupImpl(
         chips = chips, selectedIndex = selectedIndex,
@@ -50,5 +52,6 @@ fun BpkSingleSelectChipGroup(
         style = style,
         type = type,
         contentPadding = contentPadding,
+        behaviouralEventWrapper = behaviouralEventWrapper,
     )
 }

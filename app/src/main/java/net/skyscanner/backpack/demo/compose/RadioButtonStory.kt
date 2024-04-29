@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -45,7 +46,7 @@ fun RadioButtonStory(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
 
-        var selectedIndex by remember { mutableStateOf(1) }
+        var selectedIndex by remember { mutableIntStateOf(1) }
         DefaultUncheckedRadioButtonExample(selected = selectedIndex == 0, onClick = { selectedIndex = 0 })
         DefaultCheckedRadioButtonExample(selected = selectedIndex == 1, onClick = { selectedIndex = 1 })
 

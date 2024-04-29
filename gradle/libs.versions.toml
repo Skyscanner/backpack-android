@@ -28,7 +28,7 @@ plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", v
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.12"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.3.18"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
@@ -59,7 +59,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.11.0"
 google-maps = "com.google.android.gms:play-services-maps:18.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:4.4.0"
+google-mapsCompose = "com.google.maps.android:maps-compose:4.4.1"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.1.0-jre"
 

@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -95,7 +96,7 @@ internal fun RangeSliderWithLabelsSample(modifier: Modifier = Modifier) {
 
 @Composable
 internal fun DefaultSliderSample(modifier: Modifier = Modifier) {
-    var sliderValue by remember { mutableStateOf(0.5f) }
+    var sliderValue by remember { mutableFloatStateOf(0.5f) }
     BpkSlider(
         modifier = modifier,
         value = sliderValue,
@@ -105,7 +106,7 @@ internal fun DefaultSliderSample(modifier: Modifier = Modifier) {
 
 @Composable
 internal fun SteppedSliderSample(modifier: Modifier = Modifier) {
-    var sliderValue by remember { mutableStateOf(0.5f) }
+    var sliderValue by remember { mutableFloatStateOf(0.5f) }
     BpkSlider(
         modifier = modifier,
         value = sliderValue,

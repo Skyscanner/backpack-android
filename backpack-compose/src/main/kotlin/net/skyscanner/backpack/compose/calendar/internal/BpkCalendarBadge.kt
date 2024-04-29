@@ -25,7 +25,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,7 +40,7 @@ internal fun BpkCalendarBadge(
     modifier: Modifier = Modifier,
 ) {
 
-    var yearToBadge by remember { mutableStateOf(firstVisibleItemYear) }
+    var yearToBadge by remember { mutableIntStateOf(firstVisibleItemYear) }
     if (firstVisibleItemYear != params.now.year) {
         yearToBadge = firstVisibleItemYear
     }

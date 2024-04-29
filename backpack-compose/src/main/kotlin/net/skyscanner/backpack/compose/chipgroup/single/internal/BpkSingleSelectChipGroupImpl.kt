@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -49,6 +50,7 @@ internal fun BpkSingleSelectChipGroupImpl(
     type: BpkSingleChipGroupType,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     when (type) {
         BpkSingleChipGroupType.Rail -> {
@@ -59,26 +61,68 @@ internal fun BpkSingleSelectChipGroupImpl(
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
                 itemsIndexed(items = chips) { index, chip ->
-                    ChipItem(chip, index == selectedIndex, style) {
-                        onItemClicked.invoke(chips[index])
-                    }
+                    BehaviouralChipItem(
+                        behaviouralEventWrapper = behaviouralEventWrapper,
+                        chip = chip,
+                        selected = selectedIndex == index,
+                        style = style,
+                        onItemClicked = { onItemClicked(chips[index]) },
+                    )
                 }
             }
         }
 
         BpkSingleChipGroupType.Wrap -> {
             FlowRow(
-                modifier = modifier.selectableGroup().padding(contentPadding),
+                modifier = modifier
+                    .selectableGroup()
+                    .padding(contentPadding),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
                 verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
             ) {
                 chips.forEachIndexed { index, chip ->
-                    ChipItem(chip, index == selectedIndex, style) {
-                        onItemClicked.invoke(chips[index])
-                    }
+                    BehaviouralChipItem(
+                        behaviouralEventWrapper = behaviouralEventWrapper,
+                        chip = chip,
+                        selected = selectedIndex == index,
+                        style = style,
+                        onItemClicked = { onItemClicked(chips[index]) },
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun BehaviouralChipItem(
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper?,
+    chip: BpkSingleChipItem,
+    selected: Boolean,
+    style: BpkChipStyle,
+    onItemClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    if (behaviouralEventWrapper != null) {
+        behaviouralEventWrapper(chip, modifier) {
+            ChipItem(
+                chip = chip,
+                selected = selected,
+                style = style,
+                onSelectedChange = {
+                    this.notifyClick()
+                    onItemClicked()
+                },
+            )
+        }
+    } else {
+        ChipItem(
+            modifier = modifier,
+            chip = chip,
+            selected = selected,
+            style = style,
+            onSelectedChange = onItemClicked,
+        )
     }
 }
 
