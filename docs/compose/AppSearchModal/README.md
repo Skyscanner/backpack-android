@@ -45,11 +45,9 @@ BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
-    results = BpkAppSearchModalResult.Content(
-        sections = listOf(BpkSection(...)
-    ),
-    shortcuts = listOf(BpkShortcut(...)
-        closeAccessibilityLabel = stringResource (id = R.string.navigation_close),
+    results = BpkAppSearchModalResult.Content(...),
+    shortcuts = listOf(BpkShortcut(...)),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
     clearAction = BpkClearAction("Clear") { destination.value = "" },
@@ -87,13 +85,12 @@ BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
-    results = BpkAppSearchModalResult.Error(...
-),
-closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-onClose = {/* close modal*/ },
-onInputChanged = {/* update input*/ },
-clearAction = BpkClearAction("Clear") { destination.value = "" },
-prefix = prefix,
+    results = BpkAppSearchModalResult.Error(...),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear") { destination.value = "" },
+    prefix = prefix,
 )
 ```
 
@@ -108,11 +105,9 @@ BpkAppSearchModal(
     title = stringResource(id = R.string.destination),
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
-    results = BpkAppSearchModalResult.Content(
-        sections = listOf(BpkSection(...)
-    ),
-    shortcuts = listOf(BpkShortcut(...)
-        closeAccessibilityLabel = stringResource (id = R.string.navigation_close),
+    results = BpkAppSearchModalResult.Content(...),
+    shortcuts = listOf(BpkShortcut(...)),
+    closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
     onClose = {/* close modal*/ },
     onInputChanged = {/* update input*/ },
     clearAction = BpkClearAction("Clear") {/* clear input*/ },
