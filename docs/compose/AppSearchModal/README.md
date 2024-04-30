@@ -49,12 +49,10 @@ BpkAppSearchModal(
         sections = listOf(BpkSection(...)
     ),
     shortcuts = listOf(BpkShortcut(...)
-),
-),
-closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-onClose = {/* close modal*/ },
-onInputChanged = {/* update input*/ },
-clearAction = BpkClearAction("Clear") { destination.value = "" },
+        closeAccessibilityLabel = stringResource (id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear") { destination.value = "" },
 )
 ```
 
@@ -85,6 +83,7 @@ import net.skyscanner.backpack.compose.textfield.BpkClearAction
 
 val destination = remember { mutableStateOf(inputText) }
 BpkAppSearchModal(
+    modifier = modifier,
     title = stringResource(id = R.string.destination),
     inputText = destination.value,
     inputHint = stringResource(id = R.string.text_field_hint),
@@ -94,5 +93,29 @@ closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
 onClose = {/* close modal*/ },
 onInputChanged = {/* update input*/ },
 clearAction = BpkClearAction("Clear") { destination.value = "" },
+prefix = prefix,
+)
+```
+
+Example of a AppSearchModal with text prefix in search bar
+
+```Kotlin
+import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModal
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
+
+val destination = remember { mutableStateOf(inputText) }
+BpkAppSearchModal(
+    title = stringResource(id = R.string.destination),
+    inputText = destination.value,
+    inputHint = stringResource(id = R.string.text_field_hint),
+    results = BpkAppSearchModalResult.Content(
+        sections = listOf(BpkSection(...)
+    ),
+    shortcuts = listOf(BpkShortcut(...)
+        closeAccessibilityLabel = stringResource (id = R.string.navigation_close),
+    onClose = {/* close modal*/ },
+    onInputChanged = {/* update input*/ },
+    clearAction = BpkClearAction("Clear") {/* clear input*/ },
+    prefix = Prefix.Text("Your text here")
 )
 ```

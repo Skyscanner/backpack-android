@@ -59,6 +59,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -77,7 +78,7 @@ internal fun BpkTextFieldImpl(
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,
-    prefix: @Composable () -> Unit = {},
+    prefix: Prefix? = null,
     status: BpkFieldStatus = LocalFieldStatus.current,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -123,7 +124,7 @@ internal fun BpkTextFieldImpl(
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
     placeholder: String? = null,
-    prefix: @Composable () -> Unit = {},
+    prefix: Prefix? = null,
     status: BpkFieldStatus = LocalFieldStatus.current,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -179,7 +180,7 @@ private fun TextFieldBox(
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     status: BpkFieldStatus = LocalFieldStatus.current,
-    prefix: @Composable () -> Unit = {},
+    prefix: Prefix? = null,
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
@@ -208,7 +209,30 @@ private fun TextFieldBox(
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
-        prefix()
+        when (prefix) {
+            is Prefix.Text ->
+                BpkText(
+                    text = prefix.prefixText,
+                    modifier = Modifier.padding(start = BpkSpacing.Sm),
+                    color = BpkTheme.colors.textSecondary,
+                )
+
+            is Prefix.Icon ->
+                BpkIcon(
+                    icon = prefix.icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Large,
+                    modifier = Modifier.padding(start = BpkSpacing.Sm),
+                    tint = animateColorAsState(
+                        when (status) {
+                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                            else -> BpkTheme.colors.textSecondary
+                        },
+                    ).value,
+                )
+
+            else -> {}
+        }
 
         Box(
             modifier = Modifier

@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.appsearchmodal
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -30,7 +29,7 @@ import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
-import net.skyscanner.backpack.compose.searchinputsummary.SearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
@@ -72,7 +71,8 @@ data class BpkAction(val text: String, val onActionSelected: () -> Unit)
 @Composable
 fun BpkAppSearchModal(
     title: String,
-    inputSummary: SearchInputSummary,
+    inputText: String,
+    inputHint: String,
     results: BpkAppSearchModalResult,
     closeAccessibilityLabel: String,
     onInputChanged: (String) -> Unit,
@@ -80,6 +80,7 @@ fun BpkAppSearchModal(
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
+    prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -96,14 +97,14 @@ fun BpkAppSearchModal(
         title = title,
         onDismiss = onClose,
     ) {
-        Column {
-            BpkAppSearchModalImpl(
-                summary = inputSummary,
-                results = results,
-                onInputChanged = onInputChanged,
-                clearAction = clearAction,
-                behaviouralEventWrapper = behaviouralEventWrapper,
-            )
-        }
+        BpkAppSearchModalImpl(
+            inputText = inputText,
+            inputHint = inputHint,
+            results = results,
+            onInputChanged = onInputChanged,
+            clearAction = clearAction,
+            prefix = prefix,
+            behaviouralEventWrapper = behaviouralEventWrapper,
+        )
     }
 }

@@ -19,19 +19,13 @@
 package net.skyscanner.backpack.compose.searchinputsummary
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.PrefixIconSearchInputSummary
-import net.skyscanner.backpack.demo.compose.PrefixTextSearchInputSummary
+import net.skyscanner.backpack.demo.compose.SearchInputSummaryStory
 import org.junit.Test
 
 class BpkSearchInputSummaryTest : BpkSnapshotTest() {
 
     @Test
-    fun prefixText() = snap {
-        PrefixTextSearchInputSummary()
-    }
-
-    @Test
-    fun prefixIcon() = snap {
-        PrefixIconSearchInputSummary()
+    fun searchInputSummary() = snap {
+        SearchInputSummaryStory()
     }
 }

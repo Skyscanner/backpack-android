@@ -23,11 +23,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -45,7 +43,7 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.searchinputsummary.SearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
@@ -67,26 +65,14 @@ fun AppSearchModalStoryContent(modifier: Modifier = Modifier) {
 @AppSearchModalComponent
 @ComposeStory("Content-InputText", kind = StoryKind.DemoOnly)
 fun AppSearchModalStoryContentInputText(modifier: Modifier = Modifier) {
-    AppSearchModalStory(
-        result = contentResult(),
-        inputSummary = SearchInputSummary(
-            inputText = stringResource(id = R.string.city_rio),
-            inputHint = stringResource(id = R.string.text_field_hint),
-        ),
-    )
+    AppSearchModalStory(result = contentResult(), inputText = stringResource(id = R.string.city_rio))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
-    AppSearchModalStory(
-        result = loadingResult(),
-        inputSummary = SearchInputSummary(
-            inputText = stringResource(id = R.string.city_dubai),
-            inputHint = stringResource(id = R.string.text_field_hint),
-        ),
-    )
+    AppSearchModalStory(result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
 }
 
 @Composable
@@ -102,12 +88,9 @@ fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
 fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
     AppSearchModalStory(
         result = contentResult(),
-        inputSummary = SearchInputSummary(
-            inputText = stringResource(id = R.string.city_dubai),
-            inputHint = stringResource(id = R.string.text_field_hint),
-            prefix = SearchInputSummary.Prefix.Text(
-                stringResource(id = R.string.text_field_prefix),
-            ),
+        inputText = stringResource(id = R.string.city_dubai),
+        prefix = Prefix.Text(
+            stringResource(id = R.string.text_field_prefix),
         ),
     )
 }
@@ -116,23 +99,22 @@ fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
 private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
-    inputSummary: SearchInputSummary = SearchInputSummary(
-        inputText = "",
-        inputHint = stringResource(id = R.string.text_field_hint),
-    ),
+    inputText: String = "",
+    prefix: Prefix = Prefix.Icon(),
 ) {
     Column(modifier.fillMaxSize()) {
-        DefaultAppSearchModalSample(result = result, summary = inputSummary)
+        DefaultAppSearchModalSample(result = result, inputText = inputText, prefix = prefix)
     }
 }
 
 @Composable
 internal fun DefaultAppSearchModalSample(
-    summary: SearchInputSummary,
     result: BpkAppSearchModalResult,
+    inputText: String,
     modifier: Modifier = Modifier,
+    prefix: Prefix = Prefix.Icon(),
 ) {
-    var state by remember { mutableStateOf(summary) }
+    val destination = remember { mutableStateOf(inputText) }
     val showModal = rememberSaveable { mutableStateOf(true) }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
@@ -144,14 +126,16 @@ internal fun DefaultAppSearchModalSample(
         BpkAppSearchModal(
             modifier = modifier,
             title = stringResource(id = R.string.destination),
-            inputSummary = state,
+            inputText = destination.value,
+            inputHint = stringResource(id = R.string.text_field_hint),
             results = result,
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
-            onInputChanged = { state = state.copy(inputText = it) },
+            onInputChanged = { destination.value = it },
             clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
-                state = state.copy(inputText = "")
+                destination.value = ""
             },
+            prefix = prefix,
         )
     }
 }

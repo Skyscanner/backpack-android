@@ -18,68 +18,90 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
-import net.skyscanner.backpack.compose.searchinputsummary.SearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Hotels
+import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SearchInputSummaryComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @SearchInputSummaryComponent
-@ComposeStory("Prefix Text")
-fun PrefixTextSearchInputSummary(modifier: Modifier = Modifier) {
-    SearchInputSummaryStory(
-        inputSummary = SearchInputSummary(
-            inputText = stringResource(id = R.string.city_rio),
+@ComposeStory
+fun SearchInputSummary(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        SearchInputSummaryStory(
+            inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
-            prefix = SearchInputSummary.Prefix.Text(stringResource(id = R.string.text_field_prefix)),
-        ),
-    )
-}
+        )
 
-@Composable
-@SearchInputSummaryComponent
-@ComposeStory("Prefix Icon")
-fun PrefixIconSearchInputSummary(modifier: Modifier = Modifier) {
-    SearchInputSummaryStory(
-        inputSummary = SearchInputSummary(
+        SearchInputSummaryStory(
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
-            prefix = SearchInputSummary.Prefix.Icon(BpkIcon.Hotels),
-        ),
-    )
+        )
+
+        SearchInputSummaryStory(
+            inputText = "",
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
+        )
+
+        SearchInputSummaryStory(
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
+        )
+
+        SearchInputSummaryStory(
+            inputText = "",
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Icon(BpkIcon.Hotels),
+        )
+
+        SearchInputSummaryStory(
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Icon(BpkIcon.Hotels),
+        )
+    }
 }
 
 @Composable
 internal fun SearchInputSummaryStory(
-    inputSummary: SearchInputSummary,
+    inputText: String = stringResource(id = R.string.city_rome),
+    inputHint: String = stringResource(id = R.string.text_field_hint),
+    prefix: Prefix = Prefix.Icon(BpkIcon.Search),
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter,
-    ) {
-        var state by remember { mutableStateOf(inputSummary) }
-        BpkSearchInputSummary(
-            summary = state,
-            onInputChanged = {
-                state = state.copy(inputText = it)
-            },
-            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
-                state = state.copy(inputText = "")
-            },
-        )
-    }
+
+    var state by remember { mutableStateOf(inputText) }
+    BpkSearchInputSummary(
+        inputText = inputText,
+        inputHint = inputHint,
+        prefix = prefix,
+        onInputChanged = {
+            state = it
+        },
+        clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
+            state = ""
+        },
+        modifier = Modifier.fillMaxWidth(),
+    )
 }

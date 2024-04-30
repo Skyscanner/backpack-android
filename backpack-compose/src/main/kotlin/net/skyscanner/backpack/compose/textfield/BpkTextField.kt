@@ -18,9 +18,7 @@
 
 package net.skyscanner.backpack.compose.textfield
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
@@ -31,10 +29,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 data class BpkClearAction(
     val contentDescription: String,
@@ -63,56 +59,8 @@ fun BpkTextField(
         modifier = modifier,
         readOnly = readOnly,
         placeholder = placeholder,
-        prefix = {
-            if (icon != null) {
-                BpkIcon(
-                    icon = icon,
-                    contentDescription = null,
-                    size = BpkIconSize.Large,
-                    modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = animateColorAsState(
-                        when (status) {
-                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                            else -> BpkTheme.colors.textSecondary
-                        },
-                    ).value,
-                )
-            }
-        },
         status = status,
-        visualTransformation = visualTransformation,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        maxLines = maxLines,
-        interactionSource = interactionSource,
-        clearAction = clearAction,
-    )
-}
-
-@Composable
-fun BpkTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    prefix: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    readOnly: Boolean = false,
-    placeholder: String? = null,
-    status: BpkFieldStatus = LocalFieldStatus.current,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions(),
-    maxLines: Int = 1,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    clearAction: BpkClearAction? = null,
-) {
-    BpkTextFieldImpl(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        readOnly = readOnly,
-        placeholder = placeholder,
-        prefix = prefix,
-        status = status,
+        prefix = icon?.let { Prefix.Icon(it) },
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -144,22 +92,7 @@ fun BpkTextField(
         modifier = modifier,
         readOnly = readOnly,
         placeholder = placeholder,
-        prefix = {
-            if (icon != null) {
-                BpkIcon(
-                    icon = icon,
-                    contentDescription = null,
-                    size = BpkIconSize.Large,
-                    modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = animateColorAsState(
-                        when (status) {
-                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                            else -> BpkTheme.colors.textSecondary
-                        },
-                    ).value,
-                )
-            }
-        },
+        prefix = icon?.let { Prefix.Icon(it) },
         status = status,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,

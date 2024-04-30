@@ -26,18 +26,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
-import net.skyscanner.backpack.compose.searchinputsummary.SearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 @Composable
 internal fun BpkAppSearchModalImpl(
-    summary: SearchInputSummary,
+    inputText: String,
+    inputHint: String,
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
+    prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     when (results) {
@@ -48,7 +50,9 @@ internal fun BpkAppSearchModalImpl(
         else -> {
             Column(modifier = modifier) {
                 BpkSearchInputSummary(
-                    summary = summary,
+                    inputText = inputText,
+                    inputHint = inputHint,
+                    prefix = prefix,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(BpkSpacing.Base)
