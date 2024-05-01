@@ -327,6 +327,7 @@
     <string name="try_again">Try Again</string>
     <string name="destination">Destination</string>
     <string name="text_field_hint">Enter your next destination</string>
+    <string name="text_field_prefix">From</string>
     <string name="current_location_title">Current Location</string>
     <string name="current_location_subtitle">Use current location</string>
     <string name="content_is_loading">Content is Loading</string>

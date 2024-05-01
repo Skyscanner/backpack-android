@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.City
@@ -82,13 +83,27 @@ fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@AppSearchModalComponent
+@ComposeStory("Prefix - Text")
+fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
+    AppSearchModalStory(
+        result = contentResult(),
+        inputText = stringResource(id = R.string.city_dubai),
+        prefix = Prefix.Text(
+            stringResource(id = R.string.text_field_prefix),
+        ),
+    )
+}
+
+@Composable
 private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
     inputText: String = "",
+    prefix: Prefix = Prefix.Icon(),
 ) {
     Column(modifier.fillMaxSize()) {
-        DefaultAppSearchModalSample(result = result, inputText)
+        DefaultAppSearchModalSample(result = result, inputText = inputText, prefix = prefix)
     }
 }
 
@@ -97,6 +112,7 @@ internal fun DefaultAppSearchModalSample(
     result: BpkAppSearchModalResult,
     inputText: String,
     modifier: Modifier = Modifier,
+    prefix: Prefix = Prefix.Icon(),
 ) {
     val destination = remember { mutableStateOf(inputText) }
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -116,7 +132,10 @@ internal fun DefaultAppSearchModalSample(
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
-            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { destination.value = "" },
+            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
+                destination.value = ""
+            },
+            prefix = prefix,
         )
     }
 }
@@ -225,7 +244,6 @@ internal fun errorResult() = BpkAppSearchModalResult.Error(
         )
     },
     action = BpkAction(text = stringResource(id = R.string.try_again), onActionSelected = {}),
-
 )
 
 @Composable

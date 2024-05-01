@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 
 data class BpkClearAction(
@@ -58,8 +59,8 @@ fun BpkTextField(
         modifier = modifier,
         readOnly = readOnly,
         placeholder = placeholder,
-        icon = icon,
         status = status,
+        prefix = icon?.let { Prefix.Icon(it) },
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -91,7 +92,7 @@ fun BpkTextField(
         modifier = modifier,
         readOnly = readOnly,
         placeholder = placeholder,
-        icon = icon,
+        prefix = icon?.let { Prefix.Icon(it) },
         status = status,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
