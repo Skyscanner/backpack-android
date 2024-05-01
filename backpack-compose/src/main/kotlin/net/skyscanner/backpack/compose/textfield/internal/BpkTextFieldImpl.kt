@@ -88,6 +88,7 @@ internal fun BpkTextFieldImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
+    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -114,6 +115,7 @@ internal fun BpkTextFieldImpl(
         interactionSource = interactionSource,
         trailingIcon = trailingIcon,
         clearAction = clearAction,
+        type = type,
     )
 }
 
@@ -134,6 +136,7 @@ internal fun BpkTextFieldImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
+    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
 ) {
     BasicTextField(
         value = value,
@@ -169,6 +172,7 @@ internal fun BpkTextFieldImpl(
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
                 clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
+                type = type,
             )
         },
     )
@@ -185,6 +189,7 @@ private fun TextFieldBox(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
+    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
     textFieldContent: @Composable () -> Unit,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -195,7 +200,7 @@ private fun TextFieldBox(
             .width(IntrinsicSize.Max)
             .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
             .border(
-                width = 1.dp, shape = Shape,
+                width = 1.dp, shape = textFieldShape(type = type),
                 color = animateColorAsState(
                     when {
                         status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
@@ -205,7 +210,7 @@ private fun TextFieldBox(
                     },
                 ).value,
             )
-            .background(BpkTheme.colors.surfaceDefault, Shape)
+            .background(BpkTheme.colors.surfaceDefault, textFieldShape(type = type))
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
@@ -252,7 +257,7 @@ private fun TextFieldBox(
             textFieldContent()
         }
 
-        TrailingIcon(trailingIcon, status, clearAction, value)
+        TrailingIcon(trailingIcon, status, clearAction, value, type)
     }
 }
 
@@ -262,6 +267,7 @@ private fun RowScope.TrailingIcon(
     status: BpkFieldStatus,
     clearAction: BpkClearAction?,
     value: TextFieldValue,
+    type: BpkTextFieldType,
 ) {
     var lastIcon by remember { mutableStateOf<Icon?>(null) }
     val currentIcon = if (trailingIcon != null) {
@@ -315,15 +321,23 @@ private fun RowScope.TrailingIcon(
             BpkIcon(
                 icon = it,
                 contentDescription = icon.contentDescription,
-                size = BpkIconSize.Small,
+                size = if (type == BpkTextFieldType.SEARCH) BpkIconSize.Medium else BpkIconSize.Small,
                 tint = icon.color,
-                modifier = icon.modifier,
+                modifier = icon.modifier.padding(if (type == BpkTextFieldType.SEARCH) BpkSpacing.Sm else 0.dp),
             )
         }
     }
 }
 
-private val Shape = RoundedCornerShape(BpkBorderRadius.Sm)
+internal enum class BpkTextFieldType {
+    DEFAULT,
+    SEARCH,
+}
+
+@Composable
+private fun textFieldShape(
+    type: BpkTextFieldType,
+) = RoundedCornerShape(if (type == BpkTextFieldType.SEARCH) BpkBorderRadius.Md else BpkBorderRadius.Sm)
 
 private data class Icon(
     val icon: BpkIcon,

@@ -24,6 +24,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
+import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
 import net.skyscanner.backpack.compose.tokens.Search
 
 sealed class Prefix {
@@ -53,5 +54,6 @@ fun BpkSearchInputSummary(
         prefix = prefix,
         status = BpkFieldStatus.Default,
         clearAction = clearAction,
+        type = BpkTextFieldType.SEARCH,
     )
 }

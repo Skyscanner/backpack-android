@@ -84,6 +84,12 @@ fun IconsStory(modifier: Modifier = Modifier) {
             )
 
             BpkRadioButton(
+                text = BpkIconSize.Medium.toString(),
+                selected = size == BpkIconSize.Medium,
+                onClick = { size = BpkIconSize.Medium },
+            )
+
+            BpkRadioButton(
                 text = BpkIconSize.Large.toString(),
                 selected = size == BpkIconSize.Large,
                 onClick = { size = BpkIconSize.Large },
@@ -121,11 +127,13 @@ fun IconsStory(modifier: Modifier = Modifier) {
                             .border(Dp.Hairline, BpkTheme.colors.line)
                             .clickable {
                                 clipboardManager.setText(AnnotatedString(icon.name))
-                                BpkToast.makeText(
-                                    context,
-                                    context.getString(R.string.copied_to_clipboard, icon.name),
-                                    BpkToast.LENGTH_SHORT,
-                                ).show()
+                                BpkToast
+                                    .makeText(
+                                        context,
+                                        context.getString(R.string.copied_to_clipboard, icon.name),
+                                        BpkToast.LENGTH_SHORT,
+                                    )
+                                    .show()
                             }
                             .requiredSize(BpkSpacing.Lg),
                     ) {

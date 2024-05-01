@@ -45,6 +45,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.button.BpkButtonSize
@@ -188,5 +189,6 @@ private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {
         BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+        BpkIconSize.Medium -> this.requiredSize(20.dp, 20.dp)
         BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
     }
