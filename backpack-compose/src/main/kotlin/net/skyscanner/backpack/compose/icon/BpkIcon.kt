@@ -26,7 +26,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.values
@@ -52,7 +51,6 @@ class BpkIcon internal constructor(
 
 enum class BpkIconSize {
     Small,
-    Medium,
     Large,
 }
 
@@ -81,13 +79,11 @@ fun BpkIcon.Companion.findByName(name: String): BpkIcon? =
 private operator fun BpkIcon.get(size: BpkIconSize): Int =
     when (size) {
         BpkIconSize.Small -> small
-        BpkIconSize.Medium -> small
         BpkIconSize.Large -> large
     }
 
 private fun Modifier.defaultMinSize(size: BpkIconSize): Modifier =
     when (size) {
         BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
-        BpkIconSize.Medium -> requiredSize(20.dp, 20.dp)
         BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
     }

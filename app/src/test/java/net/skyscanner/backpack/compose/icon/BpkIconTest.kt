@@ -45,14 +45,6 @@ class BpkIconTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun medium() {
-        snap {
-            BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Medium)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default)
     fun large() {
         snap {
             BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Large)

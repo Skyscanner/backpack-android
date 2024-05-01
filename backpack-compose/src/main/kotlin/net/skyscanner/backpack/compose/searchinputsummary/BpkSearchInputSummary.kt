@@ -54,6 +54,6 @@ fun BpkSearchInputSummary(
         prefix = prefix,
         status = BpkFieldStatus.Default,
         clearAction = clearAction,
-        type = BpkTextFieldType.SEARCH,
+        type = BpkTextFieldType.Search,
     )
 }

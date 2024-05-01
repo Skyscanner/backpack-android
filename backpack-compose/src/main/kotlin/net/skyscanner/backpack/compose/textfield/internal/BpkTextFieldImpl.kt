@@ -88,7 +88,7 @@ internal fun BpkTextFieldImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
-    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
+    type: BpkTextFieldType = BpkTextFieldType.Default,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -136,7 +136,7 @@ internal fun BpkTextFieldImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
-    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
+    type: BpkTextFieldType = BpkTextFieldType.Default,
 ) {
     BasicTextField(
         value = value,
@@ -189,7 +189,7 @@ private fun TextFieldBox(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
-    type: BpkTextFieldType = BpkTextFieldType.DEFAULT,
+    type: BpkTextFieldType = BpkTextFieldType.Default,
     textFieldContent: @Composable () -> Unit,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -321,23 +321,23 @@ private fun RowScope.TrailingIcon(
             BpkIcon(
                 icon = it,
                 contentDescription = icon.contentDescription,
-                size = if (type == BpkTextFieldType.SEARCH) BpkIconSize.Medium else BpkIconSize.Small,
+                size = if (type == BpkTextFieldType.Search) BpkIconSize.Large else BpkIconSize.Small,
                 tint = icon.color,
-                modifier = icon.modifier.padding(if (type == BpkTextFieldType.SEARCH) BpkSpacing.Sm else 0.dp),
+                modifier = icon.modifier.padding(if (type == BpkTextFieldType.Search) BpkSpacing.Sm else 0.dp),
             )
         }
     }
 }
 
 internal enum class BpkTextFieldType {
-    DEFAULT,
-    SEARCH,
+    Default,
+    Search,
 }
 
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-) = RoundedCornerShape(if (type == BpkTextFieldType.SEARCH) BpkBorderRadius.Md else BpkBorderRadius.Sm)
+) = RoundedCornerShape(if (type == BpkTextFieldType.Search) BpkBorderRadius.Md else BpkBorderRadius.Sm)
 
 private data class Icon(
     val icon: BpkIcon,

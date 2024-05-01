@@ -84,12 +84,6 @@ fun IconsStory(modifier: Modifier = Modifier) {
             )
 
             BpkRadioButton(
-                text = BpkIconSize.Medium.toString(),
-                selected = size == BpkIconSize.Medium,
-                onClick = { size = BpkIconSize.Medium },
-            )
-
-            BpkRadioButton(
                 text = BpkIconSize.Large.toString(),
                 selected = size == BpkIconSize.Large,
                 onClick = { size = BpkIconSize.Large },
