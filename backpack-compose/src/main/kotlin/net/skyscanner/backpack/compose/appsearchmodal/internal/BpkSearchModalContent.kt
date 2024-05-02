@@ -54,14 +54,12 @@ internal fun BpkSearchModalContent(
                     behaviouralEventWrapper(it, Modifier) {
                         BpkSectionItem(
                             item = it,
-                            modifier = Modifier.padding(BpkSpacing.Base),
                             clickHandleScope = this,
                         )
                     }
                 } else {
                     BpkSectionItem(
                         item = it,
-                        modifier = Modifier.padding(BpkSpacing.Base),
                     )
                 }
             }
