@@ -133,14 +133,12 @@ private fun ChipGroupDemo(modifier: Modifier = Modifier, content: @Composable (B
                 .weight(1f)
                 .background(Color.Transparent),
             content = { content.invoke(BpkChipStyle.Default) },
-            contentImage = {},
         )
         ChipGroupBox(
             modifier = Modifier
                 .weight(1f)
                 .background(BpkTheme.colors.surfaceContrast),
             content = { content.invoke(BpkChipStyle.OnDark) },
-            contentImage = {},
         )
         ChipGroupBox(
             modifier = Modifier
@@ -161,9 +159,9 @@ private fun ChipGroupDemo(modifier: Modifier = Modifier, content: @Composable (B
 
 @Composable
 private fun ChipGroupBox(
-    content: @Composable () -> Unit,
-    contentImage: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    contentImage: @Composable () -> Unit = {},
+    content: @Composable () -> Unit,
 ) {
     Box(modifier = modifier) {
         contentImage()

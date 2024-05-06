@@ -100,8 +100,8 @@ private fun NavigationTabGroupDemo(
 
 @Composable
 private fun NavigationTabGroupBox(
-    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
     Box(modifier = modifier) {
         Column(
