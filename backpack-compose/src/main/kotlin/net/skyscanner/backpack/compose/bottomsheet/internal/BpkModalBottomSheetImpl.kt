@@ -63,8 +63,8 @@ internal fun BpkModalBottomSheetImpl(
     title: String?,
     action: TextAction?,
     closeButton: BpkModalBottomSheetCloseAction,
-    content: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
         sheetState = state.delegate,
@@ -98,8 +98,8 @@ private fun ModalBottomSheetContent(
     closeButton: BpkModalBottomSheetCloseAction,
     state: BpkModalBottomSheetState,
     onDismissRequest: () -> Unit,
-    content: @Composable() (ColumnScope.() -> Unit),
     modifier: Modifier = Modifier,
+    content: @Composable() (ColumnScope.() -> Unit),
 ) {
     if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
         when (dragHandleStyle) {

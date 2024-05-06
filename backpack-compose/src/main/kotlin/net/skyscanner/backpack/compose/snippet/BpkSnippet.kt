@@ -34,12 +34,12 @@ fun BpkSnippet(
 ) {
     BpkSnippetImpl(
         modifier = modifier,
-        content = content,
         imageOrientation = imageOrientation,
         headline = headline,
         subHeading = subHeading,
         bodyText = bodyText,
         onClick = onClick,
+        content = content,
     )
 }
 

@@ -38,13 +38,13 @@ import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkSnippetImpl(
-    content: @Composable (() -> Unit),
     imageOrientation: ImageOrientation,
     headline: String?,
     subHeading: String?,
     bodyText: String?,
-    modifier: Modifier = Modifier,
     onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    content: @Composable (() -> Unit),
 ) {
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Sm)
     Column(
