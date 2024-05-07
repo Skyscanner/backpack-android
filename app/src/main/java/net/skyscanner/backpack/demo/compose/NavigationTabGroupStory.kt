@@ -48,7 +48,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @NavigationTabGroupComponent
-@ComposeStory("Navigation Tab Group")
+@ComposeStory
 fun NavigationTabGroupStory(modifier: Modifier = Modifier) {
     NavigationTabGroupDemo(
         modifier,

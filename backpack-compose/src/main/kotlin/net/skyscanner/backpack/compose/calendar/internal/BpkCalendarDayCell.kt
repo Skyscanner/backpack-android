@@ -106,7 +106,7 @@ internal fun BpkCalendarDayCell(
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                style = BpkTheme.typography.heading5,
+                style = BpkTheme.typography.label1,
                 color = dateColor(selection, status, inactive, style),
             )
         }
