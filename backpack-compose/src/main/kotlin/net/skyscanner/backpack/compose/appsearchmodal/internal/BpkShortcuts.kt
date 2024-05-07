@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.appsearchmodal.internal
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
@@ -41,9 +42,9 @@ internal fun BpkShortcuts(
     BpkSingleSelectChipGroup(
         modifier = modifier.padding(
             top = BpkSpacing.Md,
-            start = BpkSpacing.Base,
             bottom = BpkSpacing.Base,
         ),
+        contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
         chips = singleSelectChips,
         selectedIndex = remember { mutableIntStateOf(-1) }.intValue,
         onItemClicked = {

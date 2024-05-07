@@ -21,10 +21,10 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 
 public data class BpkTypography internal constructor(
     public val bodyDefault: TextStyle,
@@ -52,63 +52,90 @@ public data class BpkTypography internal constructor(
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.Base,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       bodyLongform = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Lg,
         lineHeight = BpkLineHeight.Lg,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       caption = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Xs,
         lineHeight = BpkLineHeight.Xs,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       footnote = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Sm,
         lineHeight = BpkLineHeight.Sm,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       heading1 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxxl,
         lineHeight = BpkLineHeight.Xxxl,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       heading2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxl,
         lineHeight = BpkLineHeight.Xxl,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       heading3 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.XlTight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       heading4 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Lg,
         lineHeight = BpkLineHeight.LgTight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       heading5 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.BaseTight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       hero1 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -116,7 +143,10 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`8xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       hero2 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -124,7 +154,10 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`7xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       hero3 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -132,7 +165,10 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`6xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       hero4 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -140,7 +176,10 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.`5xl`,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       hero5 = TextStyle(
         fontWeight = FontWeight.Bold,
@@ -148,35 +187,50 @@ public data class BpkTypography internal constructor(
         lineHeight = BpkLineHeight.Xxxxl,
         letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       label1 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.Base,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       label2 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Sm,
         lineHeight = BpkLineHeight.Sm,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       label3 = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xs,
         lineHeight = BpkLineHeight.Xs,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
       subheading = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.Xl,
         fontFamily = defaultFontFamily,
-        platformStyle = PlatformTextStyle(includeFontPadding = false),
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
       ),
     )
 }
