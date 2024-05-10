@@ -15,7 +15,7 @@ androidXJunit = "1.1.5"
 coroutines = "1.8.0"
 espresso = "3.5.1"
 kotlinPoet = "1.16.0"
-ktor = "2.3.10"
+ktor = "2.3.11"
 roborazzi = "1.15.0"
 
 [libraries]
