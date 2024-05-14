@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.semantics.contentDescription
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonDrawable
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
@@ -131,7 +130,7 @@ fun BpkButton(
                 ButtonText(text)
             }
             BpkButtonIconPosition.End -> {
-                ButtonText(text)
+                ButtonText(text, modifier = Modifier.weight(1f, fill = false))
                 ButtonIcon(icon, null, size)
             }
         }
@@ -190,7 +189,7 @@ fun BpkButton(
                 ButtonText(text)
             }
             BpkButtonIconPosition.End -> {
-                ButtonText(text)
+                ButtonText(text, modifier = Modifier.weight(1f, fill = false))
                 ButtonDrawable(icon, null, size)
             }
         }
