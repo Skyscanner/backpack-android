@@ -88,6 +88,40 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun longTextWithIconAtEnd() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton(
+                "From: Toronto Pearson Internation Airport",
+                icon,
+                BpkButtonIconPosition.End,
+                type = type,
+                size = size,
+                onClick = {},)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun longTextWithIconAtStart() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton(
+                "From: Toronto Pearson Internation Airport",
+                icon,
+                BpkButtonIconPosition.Start,
+                type = type,
+                size = size,
+                onClick = {},)
+        }
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default)
     fun iconOnly() {
         assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
