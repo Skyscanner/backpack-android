@@ -100,7 +100,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
                 BpkButtonIconPosition.End,
                 type = type,
                 size = size,
-                onClick = {},)
+                onClick = {},
+            )
         }
     }
 
@@ -117,7 +118,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
                 BpkButtonIconPosition.Start,
                 type = type,
                 size = size,
-                onClick = {},)
+                onClick = {},
+            )
         }
     }
 
