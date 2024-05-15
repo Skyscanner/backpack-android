@@ -33,7 +33,7 @@ detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatti
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
 androidx-appCompat = "androidx.appcompat:appcompat:1.6.1"
-androidx-annotations = "androidx.annotation:annotation:1.7.1"
+androidx-annotations = "androidx.annotation:annotation:1.8.0"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
