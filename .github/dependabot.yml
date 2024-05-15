@@ -11,7 +11,8 @@ updates:
       patterns:
       - "org.jetbrains.kotlin:*"
       - "org.jetbrains.kotlin.*"
-      - "com.google.devtools.ksp"
+      - "com.google.devtools.ksp:*"
+      - "com.google.devtools.ksp.*"
       - "androidx.compose.compiler:compiler"
     android-gradle-plugin:
       patterns:
