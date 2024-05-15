@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.textfield.internal
 
+import SearchTextFieldShape
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
@@ -36,6 +37,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -89,6 +91,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    shape: SearchTextFieldShape = SearchTextFieldShape.Float,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -116,6 +119,7 @@ internal fun BpkTextFieldImpl(
         trailingIcon = trailingIcon,
         clearAction = clearAction,
         type = type,
+        shape = shape,
     )
 }
 
@@ -137,6 +141,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    shape: SearchTextFieldShape = SearchTextFieldShape.Float,
 ) {
     BasicTextField(
         value = value,
@@ -173,6 +178,7 @@ internal fun BpkTextFieldImpl(
                 textFieldContent = it,
                 clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
                 type = type,
+                shape = shape,
             )
         },
     )
@@ -190,6 +196,7 @@ private fun TextFieldBox(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    shape: SearchTextFieldShape = SearchTextFieldShape.Float,
     textFieldContent: @Composable () -> Unit,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -200,17 +207,25 @@ private fun TextFieldBox(
             .width(IntrinsicSize.Max)
             .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
             .border(
-                width = 1.dp, shape = textFieldShape(type = type),
+                width = 1.dp, shape = textFieldShape(type = type, shape = shape),
                 color = animateColorAsState(
                     when {
-                        status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
+                        status is BpkFieldStatus.Disabled && type != BpkTextFieldType.SearchContrast -> BpkTheme.colors.surfaceHighlight
+                        status is BpkFieldStatus.Disabled && type == BpkTextFieldType.SearchContrast -> BpkTheme.colors.canvasContrast
+                        !isFocused && type == BpkTextFieldType.SearchContrast -> BpkTheme.colors.canvasContrast
                         status is BpkFieldStatus.Error -> BpkTheme.colors.textError
                         isFocused -> BpkTheme.colors.coreAccent
                         else -> BpkTheme.colors.line
                     },
                 ).value,
             )
-            .background(BpkTheme.colors.surfaceDefault, textFieldShape(type = type))
+            .background(
+                color = when {
+                    type == BpkTextFieldType.SearchContrast -> BpkTheme.colors.canvasContrast
+                    else -> BpkTheme.colors.surfaceDefault
+                },
+                shape = textFieldShape(type = type, shape = shape),
+            )
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
@@ -321,7 +336,7 @@ private fun RowScope.TrailingIcon(
             BpkIcon(
                 icon = it,
                 contentDescription = icon.contentDescription,
-                size = if (type == BpkTextFieldType.Search) BpkIconSize.Large else BpkIconSize.Small,
+                size = if (type != BpkTextFieldType.Default) BpkIconSize.Large else BpkIconSize.Small,
                 tint = icon.color,
                 modifier = icon.modifier.padding(if (type == BpkTextFieldType.Search) BpkSpacing.Sm else 0.dp),
             )
@@ -332,12 +347,22 @@ private fun RowScope.TrailingIcon(
 internal enum class BpkTextFieldType {
     Default,
     Search,
+    SearchContrast,
 }
 
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-) = RoundedCornerShape(if (type == BpkTextFieldType.Search) BpkBorderRadius.Md else BpkBorderRadius.Sm)
+    shape: SearchTextFieldShape,
+): RoundedCornerShape {
+    val radius = if (type != BpkTextFieldType.Default) BpkBorderRadius.Md else BpkBorderRadius.Sm
+    return RoundedCornerShape(
+        topStart = if (shape.topLeft) CornerSize(radius) else CornerSize(0.dp),
+        topEnd = if (shape.topRight) CornerSize(radius) else CornerSize(0.dp),
+        bottomStart = if (shape.bottomLeft) CornerSize(radius) else CornerSize(0.dp),
+        bottomEnd = if (shape.bottomRight) CornerSize(radius) else CornerSize(0.dp),
+    )
+}
 
 private data class Icon(
     val icon: BpkIcon,

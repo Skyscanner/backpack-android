@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.textfield
 
+import SearchTextFieldShape
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -52,6 +53,7 @@ fun BpkTextField(
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     clearAction: BpkClearAction? = null,
+    shape: SearchTextFieldShape = SearchTextFieldShape.Float,
 ) {
     BpkTextFieldImpl(
         value = value,
@@ -67,6 +69,7 @@ fun BpkTextField(
         maxLines = maxLines,
         interactionSource = interactionSource,
         clearAction = clearAction,
+        shape = shape,
     )
 }
 
