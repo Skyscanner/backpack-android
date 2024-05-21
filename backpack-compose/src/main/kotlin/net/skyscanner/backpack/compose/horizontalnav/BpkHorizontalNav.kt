@@ -19,9 +19,7 @@
 package net.skyscanner.backpack.compose.horizontalnav
 
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -48,10 +46,9 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -151,31 +148,32 @@ private fun Modifier.drawDivider(): Modifier =
         }
     }
 
-@Suppress("ModifierComposed")
-private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modifier =
-    composed {
-        val indicatorColor = BpkTheme.colors.textLink
-        val indicatorHeight = with(LocalDensity.current) { 2.dp.toPx() }
+private fun Modifier.drawIndicator(
+    tabsCount: Int,
+    selectedTabIndex: Int,
+) = this then DrawIndicatorElement(
+    tabsCount = tabsCount,
+    selectedTabIndex = selectedTabIndex,
+)
 
-        val indicatorOffset by animateFloatAsState(
-            targetValue = selectedTabIndex.toFloat(),
-            animationSpec = tween(durationMillis = IndicatorAnimationDuration, easing = FastOutSlowInEasing),
-            label = "HorizontalNav indicator offset",
-        )
+private data class DrawIndicatorElement(
+    private val tabsCount: Int,
+    private val selectedTabIndex: Int,
+) : ModifierNodeElement<DrawIndicatorNode>() {
+    override fun create() = DrawIndicatorNode(tabsCount, selectedTabIndex)
 
-        drawBehind {
-            val tabWidth = size.width / tabsCount
-            val left = tabWidth * indicatorOffset
-
-            scale(scaleX = if (layoutDirection == LayoutDirection.Rtl) -1f else 1f, scaleY = 1f) {
-                drawRect(
-                    color = indicatorColor,
-                    topLeft = Offset(left, size.height - indicatorHeight),
-                    size = Size(tabWidth, indicatorHeight),
-                )
-            }
+    override fun update(node: DrawIndicatorNode) {
+        node.apply {
+            this.tabsCount = node.tabsCount
+            this.selectedTabIndex = node.selectedTabIndex
         }
     }
+}
+
+private class DrawIndicatorNode(
+    var tabsCount: Int,
+    var selectedTabIndex: Int,
+) : Modifier.Node()
 
 @Composable
 private fun Tab(
