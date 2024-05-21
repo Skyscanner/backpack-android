@@ -34,7 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.contentDescription
@@ -78,7 +77,8 @@ internal fun BpkCalendarDayCell(
                 onClick = { onClick(model) },
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
-            ).semantics {
+            )
+            .semantics {
                 if (model.stateDescription != null) {
                     stateDescription = model.stateDescription!!
                 } else {
@@ -90,13 +90,20 @@ internal fun BpkCalendarDayCell(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .cellSelectionBackground(selection),
+                .cellSelectionBackground(
+                    surfaceSubtle = BpkTheme.colors.surfaceSubtle,
+                    selection = selection,
+                ),
         ) {
 
             Spacer(
                 Modifier
                     .size(BpkCalendarSizes.SelectionHeight)
-                    .cellDayBackground(selection),
+                    .cellDayBackground(
+                        coreAccent = BpkTheme.colors.coreAccent,
+                        surfaceSubtle = BpkTheme.colors.surfaceSubtle,
+                        selection = selection,
+                    ),
             )
 
             BpkText(
@@ -126,52 +133,53 @@ internal fun BpkCalendarDayCell(
     }
 }
 
-@Suppress("ModifierComposed")
-private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = composed {
+private fun Modifier.cellSelectionBackground(
+    surfaceSubtle: Color,
+    selection: Selection?,
+): Modifier =
     when (selection) {
         Selection.Start,
         Selection.StartMonth,
-        -> background(BpkTheme.colors.surfaceSubtle, EndSemiRect)
+        -> background(surfaceSubtle, EndSemiRect)
 
         Selection.End,
         Selection.EndMonth,
-        -> background(BpkTheme.colors.surfaceSubtle, StartSemiRect)
+        -> background(surfaceSubtle, StartSemiRect)
 
-        Selection.Middle -> background(BpkTheme.colors.surfaceSubtle, RectangleShape)
+        Selection.Middle -> background(surfaceSubtle, RectangleShape)
 
         Selection.Single,
         Selection.Double,
         null,
         -> this
     }
-}
 
-@Suppress("ModifierComposed")
 private fun Modifier.cellDayBackground(
+    coreAccent: Color,
+    surfaceSubtle: Color,
     selection: Selection?,
-): Modifier = composed {
+): Modifier =
     when {
         selection != null ->
             when (selection) {
                 Selection.Double -> this
-                    .border(1.dp, BpkTheme.colors.coreAccent, CircleShape)
+                    .border(1.dp, coreAccent, CircleShape)
                     .padding(3.dp)
-                    .background(BpkTheme.colors.coreAccent, CircleShape)
+                    .background(coreAccent, CircleShape)
 
                 Selection.StartMonth,
                 Selection.Middle,
                 Selection.EndMonth,
-                -> background(BpkTheme.colors.surfaceSubtle, CircleShape)
+                -> background(surfaceSubtle, CircleShape)
 
                 Selection.Single,
                 Selection.Start,
                 Selection.End,
-                -> background(BpkTheme.colors.coreAccent, CircleShape)
+                -> background(coreAccent, CircleShape)
             }
 
         else -> this
     }
-}
 
 @Composable
 private fun dateColor(

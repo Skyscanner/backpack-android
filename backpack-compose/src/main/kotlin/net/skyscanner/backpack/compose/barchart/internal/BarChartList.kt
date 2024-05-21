@@ -32,10 +32,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.isSpecified
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
@@ -61,7 +61,11 @@ internal fun BarChartList(
 
         LazyRow(
             state = state,
-            modifier = Modifier.drawSelectionLine(selected, badgeAnchor),
+            modifier = Modifier.drawSelectionLine(
+                color = BpkTheme.colors.coreAccent,
+                y = if (badgeAnchor.isSpecified) animateFloatAsState(badgeAnchor.y).value else 0f,
+                alpha = animateFloatAsState(if (selected != null) 1f else 0f).value,
+            ),
             contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
         ) {
             items(
@@ -95,21 +99,15 @@ internal fun BarChartList(
     }
 }
 
-@Suppress("ModifierComposed")
 private fun Modifier.drawSelectionLine(
-    selected: BpkBarChartModel.Item?,
-    badgeOffset: Offset,
+    color: Color,
+    y: Float,
+    alpha: Float,
     strokeWidth: Dp = 1.dp,
 ): Modifier =
-    composed {
-        val y = if (badgeOffset.isSpecified) animateFloatAsState(badgeOffset.y).value else 0f
-        val alpha by animateFloatAsState(if (selected != null) 1f else 0f)
-        val color = BpkTheme.colors.coreAccent
-
-        drawWithContent {
-            drawContent()
-            drawLine(color.copy(alpha = alpha), start = Offset(0f, y), end = Offset(size.width, y), strokeWidth.toPx())
-        }
+    drawWithContent {
+        drawContent()
+        drawLine(color.copy(alpha = alpha), start = Offset(0f, y), end = Offset(size.width, y), strokeWidth.toPx())
     }
 
 private val ItemWidth = 32.dp

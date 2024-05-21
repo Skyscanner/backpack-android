@@ -19,12 +19,13 @@
 
 package net.skyscanner.backpack.compose.starrating
 
+import android.content.res.Resources
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
@@ -41,7 +42,6 @@ import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickable
-import net.skyscanner.backpack.compose.utils.rememberContentDescriptionScope
 
 enum class BpkStarRatingSize {
     Large,
@@ -134,6 +134,7 @@ private fun BpkStarRating(
     }
     Row(
         modifier = modifier.starRatingSemantics(
+            resources = LocalContext.current.resources,
             rating = rating,
             maxRating = maxRating,
             numberOfStars = numberOfStars,
@@ -207,17 +208,17 @@ private enum class BpkRatingStarType {
     Full,
 }
 
-@Suppress("ModifierComposed")
 private fun Modifier.starRatingSemantics(
+    resources: Resources,
     rating: Float,
     maxRating: Int,
     numberOfStars: Int,
     onRatingChanged: ((Int) -> Unit)?,
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
-): Modifier = composed {
+): Modifier {
     val range = 0f..numberOfStars.toFloat()
-    val scope = rememberContentDescriptionScope()
-    semantics(mergeDescendants = true) {
+    val scope = ContentDescriptionScope(resources)
+    return semantics(mergeDescendants = true) {
 
         // this is needed to use volume keys
         if (onRatingChanged != null) {
