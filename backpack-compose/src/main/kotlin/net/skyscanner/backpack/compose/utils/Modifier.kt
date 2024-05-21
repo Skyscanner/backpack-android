@@ -18,17 +18,13 @@
 
 package net.skyscanner.backpack.compose.utils
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
@@ -57,22 +53,43 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     }
     return if (predicate) block() else this
 }
-
-@Suppress("ModifierComposed")
-internal fun Modifier.clickable(
+fun Modifier.clickable(
     enabled: Boolean = true,
     bounded: Boolean = true,
     role: Role? = null,
     onClick: () -> Unit,
-): Modifier = composed {
-    clickable(
-        enabled = enabled,
-        interactionSource = remember { MutableInteractionSource() },
-        indication = rememberRipple(bounded = bounded),
-        role = role,
-        onClick = onClick,
-    )
+) = this then if (enabled) ClickableElement(
+    enabled = enabled,
+    bounded = bounded,
+    role = role,
+    onClick = onClick,
+) else Modifier
+
+private data class ClickableElement(
+    val enabled: Boolean,
+    val bounded: Boolean,
+    val role: Role?,
+    val onClick: () -> Unit,
+) : ModifierNodeElement<ClickableNode>() {
+
+    override fun create() = ClickableNode(enabled, bounded, role, onClick)
+
+    override fun update(node: ClickableNode) {
+        node.apply {
+            this.enabled = node.enabled
+            this.bounded = node.bounded
+            this.role = node.role
+            this.onClick = node.onClick
+        }
+    }
 }
+
+private class ClickableNode(
+    var enabled: Boolean,
+    var bounded: Boolean,
+    var role: Role?,
+    var onClick: () -> Unit,
+) : Modifier.Node()
 
 internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
     layout { measurable, constraints ->
