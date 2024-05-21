@@ -34,6 +34,10 @@ buildscript {
     }
 }
 
+plugins {
+    alias(libs.plugins.compose.compiler) apply false
+}
+
 apply plugin: 'io.github.gradle-nexus.publish-plugin'
 apply from: 'publish-root.gradle'
 apply plugin: 'org.jetbrains.dokka'

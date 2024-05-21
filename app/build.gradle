@@ -16,6 +16,10 @@
  * limitations under the License.
  */
 
+plugins {
+    alias(libs.plugins.compose.compiler)
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.google.devtools.ksp'
@@ -90,9 +94,6 @@ android {
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
     }
     packagingOptions {
         exclude "**/attach_hotspot_windows.dll"
