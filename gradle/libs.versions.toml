@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.0"
-ksp = "2.0.0-RC3-1.0.20" # depends on Kotlin version
+ksp = "2.0.0-1.0.21" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.10.2" # update this alongside with compiler version
 
