@@ -1,7 +1,6 @@
 [versions]
-kotlin = "1.9.24"
-ksp = "1.9.24-1.0.20" # depends on Kotlin version
-composeCompiler = "1.5.14" # depends on Kotlin version
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21" # depends on Kotlin version
 compilerTesting = "1.5.0"
 destinations = "1.10.2" # update this alongside with compiler version
 
@@ -17,6 +16,9 @@ espresso = "3.5.1"
 kotlinPoet = "1.16.0"
 ktor = "2.3.11"
 roborazzi = "1.16.1"
+
+[plugins]
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [libraries]
 
@@ -76,7 +78,6 @@ kotlin-compilerTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" } # dummy library reference for dependabot updates
 compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2024.05.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
