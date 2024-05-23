@@ -19,6 +19,7 @@
 
 package net.skyscanner.backpack.compose.utils
 
+import android.content.res.Resources
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -33,17 +34,20 @@ interface ContentDescriptionScope {
     fun stringResource(@StringRes id: Int, vararg formatArgs: Any): String
 }
 
+internal fun ContentDescriptionScope(resources: Resources): ContentDescriptionScope =
+    object : ContentDescriptionScope {
+
+        override fun stringResource(id: Int): String =
+            resources.getString(id)
+
+        override fun stringResource(id: Int, vararg formatArgs: Any): String =
+            resources.getString(id, *formatArgs)
+    }
+
 @Composable
 internal fun rememberContentDescriptionScope(): ContentDescriptionScope {
     val resources = LocalContext.current.resources
     return remember(resources) {
-        object : ContentDescriptionScope {
-
-            override fun stringResource(id: Int): String =
-                resources.getString(id)
-
-            override fun stringResource(id: Int, vararg formatArgs: Any): String =
-                resources.getString(id, *formatArgs)
-        }
+        ContentDescriptionScope(resources)
     }
 }

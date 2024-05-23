@@ -34,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.semantics.contentDescription
@@ -85,7 +84,7 @@ internal fun BarChartColumn(
                             bounds.copy(top = bounds.height - BpkSpacing.Lg.roundToPx())
                         }
 
-                        else -> composed {
+                        else -> {
                             val value by animateFloatAsState(model.values.percent)
                             inset { bounds ->
                                 bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width))

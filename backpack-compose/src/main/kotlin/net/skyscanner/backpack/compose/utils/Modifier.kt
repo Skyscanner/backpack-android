@@ -58,6 +58,8 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     return if (predicate) block() else this
 }
 
+// todo: in Compose 1.6, there's no way to provide an indication using the Node-like API.
+// It will be added in Compose 1.7, so we'll migrate it after that
 @Suppress("ModifierComposed")
 internal fun Modifier.clickable(
     enabled: Boolean = true,

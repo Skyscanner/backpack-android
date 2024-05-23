@@ -43,14 +43,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
@@ -121,8 +120,20 @@ private fun TabRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .drawDivider()
-                .drawIndicator(tabs.size, selectedTabIndex),
+                .drawDivider(
+                    dividerColor = if (isSystemInDarkTheme()) Color.Transparent else BpkTheme.colors.line,
+                    dividerThickness = 1.dp,
+                )
+                .drawIndicator(
+                    indicatorColor = BpkTheme.colors.textLink,
+                    indicatorHeight = 2.dp,
+                    tabsCount = tabs.size,
+                    indicatorOffset = animateFloatAsState(
+                        targetValue = selectedTabIndex.toFloat(),
+                        animationSpec = tween(durationMillis = IndicatorAnimationDuration, easing = FastOutSlowInEasing),
+                        label = "HorizontalNav indicator offset",
+                    ).value,
+                ),
         ) {
             tabs.forEachIndexed { index, tab ->
                 Tab(
@@ -137,43 +148,35 @@ private fun TabRow(
     }
 }
 
-@Suppress("ModifierComposed")
-private fun Modifier.drawDivider(): Modifier =
-    composed {
-        val dividerColor = if (isSystemInDarkTheme()) Color.Transparent else BpkTheme.colors.line
-        val dividerThickness = with(LocalDensity.current) { 1.dp.toPx() }
-        drawBehind {
-            drawRect(
-                color = dividerColor,
-                topLeft = Offset(0f, size.height - dividerThickness),
-                size = Size(size.width, dividerThickness),
-            )
-        }
+private fun Modifier.drawDivider(
+    dividerColor: Color,
+    dividerThickness: Dp,
+): Modifier =
+    drawBehind {
+        val dividerThicknessPx = dividerThickness.toPx()
+        drawRect(
+            color = dividerColor,
+            topLeft = Offset(0f, size.height - dividerThicknessPx),
+            size = Size(size.width, dividerThicknessPx),
+        )
     }
 
-@Suppress("ModifierComposed")
-private fun Modifier.drawIndicator(tabsCount: Int, selectedTabIndex: Int): Modifier =
-    composed {
-        val indicatorColor = BpkTheme.colors.textLink
-        val indicatorHeight = with(LocalDensity.current) { 2.dp.toPx() }
-
-        val indicatorOffset by animateFloatAsState(
-            targetValue = selectedTabIndex.toFloat(),
-            animationSpec = tween(durationMillis = IndicatorAnimationDuration, easing = FastOutSlowInEasing),
-            label = "HorizontalNav indicator offset",
-        )
-
-        drawBehind {
-            val tabWidth = size.width / tabsCount
-            val left = tabWidth * indicatorOffset
-
-            scale(scaleX = if (layoutDirection == LayoutDirection.Rtl) -1f else 1f, scaleY = 1f) {
-                drawRect(
-                    color = indicatorColor,
-                    topLeft = Offset(left, size.height - indicatorHeight),
-                    size = Size(tabWidth, indicatorHeight),
-                )
-            }
+private fun Modifier.drawIndicator(
+    indicatorColor: Color,
+    indicatorHeight: Dp,
+    tabsCount: Int,
+    indicatorOffset: Float,
+): Modifier =
+    drawBehind {
+        val tabWidth = size.width / tabsCount
+        val left = tabWidth * indicatorOffset
+        val indicatorHeightPx = indicatorHeight.toPx()
+        scale(scaleX = if (layoutDirection == LayoutDirection.Rtl) -1f else 1f, scaleY = 1f) {
+            drawRect(
+                color = indicatorColor,
+                topLeft = Offset(left, size.height - indicatorHeightPx),
+                size = Size(tabWidth, indicatorHeightPx),
+            )
         }
     }
 
