@@ -27,6 +27,7 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
@@ -37,28 +38,40 @@ internal fun <T> BpkCardListImpl(
     title: String,
     description: String,
     layout: BpkCardListLayout,
-    sectionHeaderButton: BpkSectionHeaderButton?,
     dataList: List<T>,
     modifier: Modifier = Modifier,
     elements: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     Column(
-        modifier = modifier
-            .padding(horizontal = BpkSpacing.Base),
+        modifier = modifier,
     ) {
 
         BpkSectionHeader(
             title = title,
             description = description,
-            button = sectionHeaderButton,
+            modifier = Modifier.padding(end = BpkSpacing.Base),
+            button = bpkSectionHeaderButton(layout.button),
         )
 
         Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
         when (layout) {
             is BpkCardListLayout.Rail -> RailLayout(dataList = dataList, elements = elements)
+            else -> {}
         }
     }
+}
+
+@Composable
+private fun bpkSectionHeaderButton(button: BpkCardListButtonAccessory?) = when (button) {
+    is BpkCardListButtonAccessory.SectionHeaderButton -> {
+        BpkSectionHeaderButton(
+            text = button.text,
+            onClick = button.onClick,
+        )
+    }
+
+    else -> null
 }
 
 @Composable
@@ -68,6 +81,7 @@ fun <T> RailLayout(
     elements: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     LazyRow(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         items(

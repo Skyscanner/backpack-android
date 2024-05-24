@@ -21,16 +21,20 @@ package net.skyscanner.backpack.demo.compose
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.cardlist.BpkCardList
+import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
-import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.snippet.BpkSnippet
+import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardListComponent
@@ -42,12 +46,16 @@ private val dataList = cardListSamples()
 @CardListComponent
 @ComposeStory("Rail")
 fun CardListDefaultStory(modifier: Modifier = Modifier) {
-    Column(modifier) {
+    Column(modifier
+        .padding(start = BpkSpacing.Base, top = BpkSpacing.Base)) {
         BpkCardList(
-            title = "Section Title",
-            description = "Description about this section",
-            layout = BpkCardListLayout.Rail,
-            sectionHeaderButton = null,
+            title = "Must-visit spots",
+            description = "Check out these world-famous destinations perfect for visiting in spring.",
+            layout = BpkCardListLayout.Rail(
+                button = BpkCardListButtonAccessory.SectionHeaderButton(
+                    text = "Text",
+                    onClick = {},
+                )),
             modifier = Modifier,
             dataList = dataList,
         ) { position ->
@@ -58,44 +66,67 @@ fun CardListDefaultStory(modifier: Modifier = Modifier) {
 
 @Composable
 private fun CardLayout(data: CardListSample) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
+    BpkSnippet(
+        modifier = Modifier
+            .width(281.dp),
+        imageOrientation = ImageOrientation.Landscape,
+        headline = data.headline,
+        bodyText = data.bodyText,
     ) {
         Image(
-            painter = painterResource(
-                id = data.image,
-            ),
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(data.image),
             contentDescription = stringResource(R.string.snippet_image_content_description),
-        )
-
-        Spacer(modifier = Modifier.height(BpkSpacing.Base))
-
-        BpkText(
-            text = data.description,
+            contentScale = ContentScale.Crop,
         )
     }
 }
 
 data class CardListSample(
     @DrawableRes val image: Int,
-    val description: String,
+    val headline: String,
+    val bodyText: String? = null,
 )
 
 private fun cardListSamples() = listOf(
     CardListSample(
-        image = R.drawable.carousel_placeholder_1,
-        description = "Title 1",
+        image = R.drawable.amsterdam,
+        headline = "Amsterdam",
+        bodyText = "Fall in love with this artistic metropolis by boat or foot.",
     ),
     CardListSample(
-        image = R.drawable.carousel_placeholder_2,
-        description = "Title 2",
+        image = R.drawable.london_towerbridge,
+        headline = "London",
+        bodyText = "Watch the city come alive in bloom as the warmer climes approach.",
     ),
     CardListSample(
-        image = R.drawable.carousel_placeholder_3,
-        description = "Title 3",
+        image = R.drawable.dublin,
+        headline = "Dublin",
+        bodyText = "Immerse yourself in the rich history and culture of the Irish capital.",
     ),
     CardListSample(
-        image = R.drawable.carousel_placeholder_4,
-        description = "Title 4",
+        image = R.drawable.paris,
+        headline = "Paris",
+    ),
+    CardListSample(
+        image = R.drawable.mallorca,
+        headline = "Mallorca",
+    ),
+    CardListSample(
+        image = R.drawable.alicante,
+        headline = "Alicante",
+    ),
+    CardListSample(
+        image = R.drawable.barcelona,
+        headline = "Barcelona",
+    ),
+    CardListSample(
+        image = R.drawable.berlin,
+        headline = "Berlin",
+    ),
+    CardListSample(
+        image = R.drawable.london_saintpancrasstation,
+        headline = "London",
+        bodyText = "Watch the city come alive in bloom as the warmer climes approach.",
     ),
 )

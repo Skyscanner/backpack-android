@@ -40,8 +40,12 @@ class BpkCardListTest : BpkSnapshotTest() {
         BpkCardList(
             title = "Section Title",
             description = "Description about this section",
-            layout = BpkCardListLayout.Rail,
-            sectionHeaderButton = null,
+            layout = BpkCardListLayout.Rail(
+                button = BpkCardListButtonAccessory.SectionHeaderButton(
+                    text = "View All",
+                    onClick = {},
+                ),
+            ),
             modifier = Modifier,
             dataList = dataList,
         ) { position ->
