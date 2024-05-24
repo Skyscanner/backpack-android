@@ -42,11 +42,8 @@ fun <T> BpkCardList(
     )
 }
 
-sealed class BpkCardListLayout(
-    open val button: BpkCardListButtonAccessory?,
-) {
-    data class Rail(override val button: BpkCardListButtonAccessory? = null) : BpkCardListLayout(button)
-    data class Stack(override val button: BpkCardListButtonAccessory? = null) : BpkCardListLayout(button)
+sealed class BpkCardListLayout {
+    data class Rail(val headerButton: BpkCardListButtonAccessory.SectionHeaderButton? = null) : BpkCardListLayout()
 }
 
 sealed class BpkCardListButtonAccessory {

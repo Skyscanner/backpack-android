@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.cardlist.internal
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,10 +28,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
@@ -50,41 +52,46 @@ internal fun <T> BpkCardListImpl(
         BpkSectionHeader(
             title = title,
             description = description,
-            modifier = Modifier.padding(BpkSpacing.Base),
-            button = bpkSectionHeaderButton(layout.button),
+            modifier = Modifier.padding(horizontal = BpkSpacing.Base),
+            button = bpkSectionHeaderButton(layout),
         )
 
         Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
         when (layout) {
             is BpkCardListLayout.Rail -> RailLayout(dataList = dataList, elements = elements)
-            else -> {}
         }
     }
 }
 
-@Composable
-private fun bpkSectionHeaderButton(button: BpkCardListButtonAccessory?) = when (button) {
-    is BpkCardListButtonAccessory.SectionHeaderButton -> {
-        BpkSectionHeaderButton(
-            text = button.text,
-            onClick = button.onClick,
-        )
+private fun bpkSectionHeaderButton(
+    layout: BpkCardListLayout,
+): BpkSectionHeaderButton? =
+    when (layout) {
+        is BpkCardListLayout.Rail -> {
+            layout.headerButton?.let {
+                BpkSectionHeaderButton(
+                    text = it.text,
+                    onClick = it.onClick,
+                )
+            }
+        }
     }
 
-    else -> null
-}
-
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T> RailLayout(
     dataList: List<T>,
     modifier: Modifier = Modifier,
     elements: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
+    val lazyListState = rememberLazyListState()
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+        state = lazyListState,
+        flingBehavior = rememberSnapFlingBehavior(lazyListState = lazyListState),
     ) {
         items(
             count = dataList.size,

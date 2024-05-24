@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,14 +44,31 @@ private val dataList = cardListSamples()
 @Composable
 @CardListComponent
 @ComposeStory("Rail")
-fun CardListDefaultStory(modifier: Modifier = Modifier) {
+fun CardListRailStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkCardList(
-            title = "Must-visit spots",
-            description = "Check out these world-famous destinations perfect for visiting in spring.",
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            layout = BpkCardListLayout.Rail(),
+            modifier = Modifier,
+            dataList = dataList,
+        ) { position ->
+            CardLayout(dataList[position])
+        }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("RailWithHeaderButton")
+fun CardListRailWithHewStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
             layout = BpkCardListLayout.Rail(
-                button = BpkCardListButtonAccessory.SectionHeaderButton(
-                    text = "Text",
+                headerButton = BpkCardListButtonAccessory.SectionHeaderButton(
+                    text = stringResource(R.string.card_list_header_button_text),
                     onClick = {},
                 )),
             modifier = Modifier,
@@ -64,11 +82,10 @@ fun CardListDefaultStory(modifier: Modifier = Modifier) {
 @Composable
 private fun CardLayout(data: CardListSample) {
     BpkSnippet(
-        modifier = Modifier
-            .width(281.dp),
+        modifier = Modifier.width(CARD_LAYOUT_WIDTH.dp),
         imageOrientation = ImageOrientation.Landscape,
-        headline = data.headline,
-        bodyText = data.bodyText,
+        headline = stringResource(data.headline),
+        bodyText = data.bodyText?.let { stringResource(it) },
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -81,49 +98,54 @@ private fun CardLayout(data: CardListSample) {
 
 data class CardListSample(
     @DrawableRes val image: Int,
-    val headline: String,
-    val bodyText: String? = null,
+    @StringRes val headline: Int,
+    @StringRes val bodyText: Int? = null,
 )
 
-private fun cardListSamples() = listOf(
-    CardListSample(
-        image = R.drawable.amsterdam,
-        headline = "Amsterdam",
-        bodyText = "Fall in love with this artistic metropolis by boat or foot.",
-    ),
-    CardListSample(
-        image = R.drawable.london_towerbridge,
-        headline = "London",
-        bodyText = "Watch the city come alive in bloom as the warmer climes approach.",
-    ),
-    CardListSample(
-        image = R.drawable.dublin,
-        headline = "Dublin",
-        bodyText = "Immerse yourself in the rich history and culture of the Irish capital.",
-    ),
-    CardListSample(
-        image = R.drawable.paris,
-        headline = "Paris",
-    ),
-    CardListSample(
-        image = R.drawable.mallorca,
-        headline = "Mallorca",
-    ),
-    CardListSample(
-        image = R.drawable.alicante,
-        headline = "Alicante",
-    ),
-    CardListSample(
-        image = R.drawable.barcelona,
-        headline = "Barcelona",
-    ),
-    CardListSample(
-        image = R.drawable.berlin,
-        headline = "Berlin",
-    ),
-    CardListSample(
-        image = R.drawable.london_saintpancrasstation,
-        headline = "London",
-        bodyText = "Watch the city come alive in bloom as the warmer climes approach.",
-    ),
-)
+private fun cardListSamples(): List<CardListSample> {
+    val listOf = listOf(
+        CardListSample(
+            image = R.drawable.amsterdam,
+            headline = R.string.card_list_item_1_headline,
+            bodyText = R.string.card_list_item_1_body_text,
+        ),
+        CardListSample(
+            image = R.drawable.london_towerbridge,
+            headline = R.string.card_list_item_2_headline,
+            bodyText = R.string.card_list_item_2_body_text,
+        ),
+        CardListSample(
+            image = R.drawable.dublin,
+            headline = R.string.card_list_item_3_headline,
+            bodyText = R.string.card_list_item_3_body_text,
+        ),
+        CardListSample(
+            image = R.drawable.paris,
+            headline = R.string.card_list_item_4_headline,
+        ),
+        CardListSample(
+            image = R.drawable.mallorca,
+            headline = R.string.card_list_item_5_headline,
+        ),
+        CardListSample(
+            image = R.drawable.alicante,
+            headline = R.string.card_list_item_6_headline,
+        ),
+        CardListSample(
+            image = R.drawable.barcelona,
+            headline = R.string.card_list_item_7_headline,
+        ),
+        CardListSample(
+            image = R.drawable.berlin,
+            headline = R.string.card_list_item_8_headline,
+        ),
+        CardListSample(
+            image = R.drawable.london_saintpancrasstation,
+            headline = R.string.card_list_item_9_headline,
+            bodyText = R.string.card_list_item_9_body_text,
+        ),
+    )
+    return listOf
+}
+
+private const val CARD_LAYOUT_WIDTH = 281

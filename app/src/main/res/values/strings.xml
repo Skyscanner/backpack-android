@@ -384,4 +384,21 @@
     <string name="navigation_tabs_flights">Flights</string>
     <string name="navigation_tabs_hotels">Hotels</string>
     <string name="navigation_tabs_carhire">Car hire</string>
+
+    <string name="card_list_title">Must-visit spots</string>
+    <string name="card_list_description">Check out these world-famous destinations perfect for visiting in spring.</string>
+    <string name="card_list_header_button_text">Action</string>
+    <string name="card_list_item_1_headline">Amsterdam</string>
+    <string name="card_list_item_2_headline">London</string>
+    <string name="card_list_item_3_headline">Dublin</string>
+    <string name="card_list_item_4_headline">Paris</string>
+    <string name="card_list_item_5_headline">Mallorca</string>
+    <string name="card_list_item_6_headline">Alicante</string>
+    <string name="card_list_item_7_headline">Barcelona</string>
+    <string name="card_list_item_8_headline">Berlin</string>
+    <string name="card_list_item_9_headline">London</string>
+    <string name="card_list_item_1_body_text">Fall in love with this artistic metropolis by boat or foot.</string>
+    <string name="card_list_item_2_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
+    <string name="card_list_item_3_body_text">Immerse yourself in the rich history and culture of the Irish capital.</string>
+    <string name="card_list_item_9_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
 </resources>
