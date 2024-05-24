@@ -35,8 +35,8 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.Defaul
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.ArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
@@ -49,12 +49,12 @@ internal fun BpkSectionHeaderImpl(
 ) {
     val isTablet = isTablet()
     Row(
-        modifier = modifier
-            .background(getBackgroundColor(type = type)),
+        modifier = modifier.background(getBackgroundColor(type = type)),
         horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,
     ) {
         Column(
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm, Alignment.Top),
             horizontalAlignment = Alignment.Start,
         ) {
@@ -85,7 +85,7 @@ internal fun BpkSectionHeaderImpl(
                     )
                 } else {
                     BpkButton(
-                        icon = BpkIcon.ArrowRight,
+                        icon = BpkIcon.LongArrowRight,
                         contentDescription = it.text,
                         onClick = it.onClick,
                         type = getButtonType(type),
@@ -97,17 +97,15 @@ internal fun BpkSectionHeaderImpl(
 }
 
 @Composable
-private fun getBackgroundColor(type: BpkSectionHeaderType): Color =
-    when (type) {
-        Default -> BpkTheme.colors.canvas
-        OnDark -> BpkTheme.colors.surfaceContrast
-    }
+private fun getBackgroundColor(type: BpkSectionHeaderType): Color = when (type) {
+    Default -> BpkTheme.colors.canvas
+    OnDark -> BpkTheme.colors.surfaceContrast
+}
 
-private fun getButtonType(type: BpkSectionHeaderType): BpkButtonType =
-    when (type) {
-        Default -> BpkButtonType.Primary
-        OnDark -> BpkButtonType.PrimaryOnDark
-    }
+private fun getButtonType(type: BpkSectionHeaderType): BpkButtonType = when (type) {
+    Default -> BpkButtonType.Primary
+    OnDark -> BpkButtonType.PrimaryOnDark
+}
 
 private fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
     val size = if (tablet) {
@@ -119,8 +117,7 @@ private fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrV
 }
 
 @Composable
-private fun getTextColor(type: BpkSectionHeaderType): Color =
-    when (type) {
-        Default -> BpkTheme.colors.textPrimary
-        OnDark -> BpkTheme.colors.textOnDark
-    }
+private fun getTextColor(type: BpkSectionHeaderType): Color = when (type) {
+    Default -> BpkTheme.colors.textPrimary
+    OnDark -> BpkTheme.colors.textOnDark
+}
