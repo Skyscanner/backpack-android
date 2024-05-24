@@ -22,7 +22,6 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,7 +34,6 @@ import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardListComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -46,8 +44,7 @@ private val dataList = cardListSamples()
 @CardListComponent
 @ComposeStory("Rail")
 fun CardListDefaultStory(modifier: Modifier = Modifier) {
-    Column(modifier
-        .padding(start = BpkSpacing.Base, top = BpkSpacing.Base)) {
+    Column(modifier) {
         BpkCardList(
             title = "Must-visit spots",
             description = "Check out these world-famous destinations perfect for visiting in spring.",

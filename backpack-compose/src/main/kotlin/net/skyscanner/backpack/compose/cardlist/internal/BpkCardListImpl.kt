@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.cardlist.internal
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,7 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
@@ -45,11 +47,10 @@ internal fun <T> BpkCardListImpl(
     Column(
         modifier = modifier,
     ) {
-
         BpkSectionHeader(
             title = title,
             description = description,
-            modifier = Modifier.padding(end = BpkSpacing.Base),
+            modifier = Modifier.padding(BpkSpacing.Base),
             button = bpkSectionHeaderButton(layout.button),
         )
 
@@ -83,6 +84,7 @@ fun <T> RailLayout(
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
     ) {
         items(
             count = dataList.size,
