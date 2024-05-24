@@ -60,7 +60,7 @@ fun CardListRailStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("RailWithHeaderButton")
+@ComposeStory("Rail with HeaderButton")
 fun CardListRailWithHewStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkCardList(

@@ -14,7 +14,7 @@
 
 | Day                                                                                                                                                                              | Night                                                                                                                                                                                           |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/railWithHeaderButton.png" alt="CardList component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/railWithHeaderButton_dm.png" alt="CardList component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/rail-with-headerbutton.png" alt="CardList component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/rail-with-headerbutton_dm.png" alt="CardList component - dark mode" width="375" /> |
 
 ## Installation
 
