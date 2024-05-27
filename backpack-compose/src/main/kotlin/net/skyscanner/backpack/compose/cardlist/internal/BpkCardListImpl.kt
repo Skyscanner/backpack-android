@@ -31,20 +31,20 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
-internal fun <T> BpkCardListImpl(
+internal fun BpkCardListImpl(
     title: String,
     description: String,
     layout: BpkCardListLayout,
-    dataList: List<T>,
+    headerButton: BpkSectionHeaderButton?,
+    initiallyShownCards: Int,
     modifier: Modifier = Modifier,
-    elements: @Composable (LazyItemScope.(Int) -> Unit),
+    content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     Column(
         modifier = modifier,
@@ -53,52 +53,35 @@ internal fun <T> BpkCardListImpl(
             title = title,
             description = description,
             modifier = Modifier.padding(horizontal = BpkSpacing.Base),
-            button = bpkSectionHeaderButton(layout),
+            button = headerButton,
         )
 
         Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
         when (layout) {
-            is BpkCardListLayout.Rail -> RailLayout(dataList = dataList, elements = elements)
+            is BpkCardListLayout.Rail -> RailLayout(content = content, initiallyShownCards = initiallyShownCards)
         }
     }
 }
 
-private fun bpkSectionHeaderButton(
-    layout: BpkCardListLayout,
-): BpkSectionHeaderButton? =
-    when (layout) {
-        is BpkCardListLayout.Rail -> {
-            layout.headerButton?.let {
-                BpkSectionHeaderButton(
-                    text = it.text,
-                    onClick = it.onClick,
-                )
-            }
-        }
-    }
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun <T> RailLayout(
-    dataList: List<T>,
+fun RailLayout(
+    initiallyShownCards: Int,
     modifier: Modifier = Modifier,
-    elements: @Composable (LazyItemScope.(Int) -> Unit),
+    content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     val lazyListState = rememberLazyListState()
     LazyRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
+        contentPadding = PaddingValues(start = BpkSpacing.Base, end = BpkSpacing.Base),
         state = lazyListState,
         flingBehavior = rememberSnapFlingBehavior(lazyListState = lazyListState),
     ) {
         items(
-            count = dataList.size,
-            key = { position ->
-                dataList[position].hashCode()
-            },
-            itemContent = elements,
+            count = initiallyShownCards,
+            itemContent = content,
         )
     }
 }

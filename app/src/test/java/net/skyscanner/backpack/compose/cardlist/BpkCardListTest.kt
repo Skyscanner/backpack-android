@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.cardlist
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -44,12 +45,10 @@ class BpkCardListTest : BpkSnapshotTest() {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            layout = BpkCardListLayout.Rail(),
+            layout = BpkCardListLayout.Rail,
             modifier = Modifier,
-            dataList = dataList,
-        ) { position ->
-            CardLayout(dataList[position])
-        }
+            content = { index -> Column { CardLayout(dataList[index]) } },
+        )
     }
 
     @Test
@@ -57,16 +56,10 @@ class BpkCardListTest : BpkSnapshotTest() {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            layout = BpkCardListLayout.Rail(
-                headerButton = BpkCardListButtonAccessory.SectionHeaderButton(
-                    text = stringResource(R.string.card_list_header_button_text),
-                    onClick = {},
-                )),
+            layout = BpkCardListLayout.Rail,
             modifier = Modifier,
-            dataList = dataList,
-        ) { position ->
-            CardLayout(dataList[position])
-        }
+            content = { index -> Column { CardLayout(dataList[index]) } },
+        )
     }
 }
 

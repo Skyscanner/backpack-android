@@ -22,33 +22,29 @@ import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.cardlist.internal.BpkCardListImpl
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
 @Composable
-fun <T> BpkCardList(
+fun BpkCardList(
     title: String,
     description: String,
     layout: BpkCardListLayout,
-    dataList: List<T>,
     modifier: Modifier = Modifier,
-    elements: @Composable (LazyItemScope.(Int) -> Unit),
+    headerButton: BpkSectionHeaderButton? = null,
+    initiallyShownCards: Int = 3,
+    content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     BpkCardListImpl(
         title = title,
         description = description,
+        headerButton = headerButton,
+        initiallyShownCards = initiallyShownCards,
         layout = layout,
         modifier = modifier,
-        dataList = dataList,
-        elements = elements,
+        content = content,
     )
 }
 
 sealed class BpkCardListLayout {
-    data class Rail(val headerButton: BpkCardListButtonAccessory.SectionHeaderButton? = null) : BpkCardListLayout()
-}
-
-sealed class BpkCardListButtonAccessory {
-    class SectionHeaderButton(
-        val text: String,
-        val onClick: (() -> Unit),
-    ) : BpkCardListButtonAccessory()
+    data object Rail : BpkCardListLayout()
 }

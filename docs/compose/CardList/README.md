@@ -37,13 +37,15 @@ import net.skyscanner.backpack.compose.snippet.BpkSnippet
 
 private val dataList = cardListSamples()
 private const val CARD_LAYOUT_WIDTH = 281
+private const val INITIALLY_SHOWN_CARDS = 12
 
 BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
-    layout = BpkCardListLayout.Rail(),
+    layout = BpkCardListLayout.Rail,
+    initiallyShownCards = INITIALLY_SHOWN_CARDS,
     modifier = Modifier,
-    dataList = dataList,
+    content = dataList,
 ) { position ->
     CardLayout(dataList[position])
 }
@@ -81,24 +83,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import net.skyscanner.backpack.compose.cardlist.BpkCardList
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 
 private val dataList = cardListSamples()
 private const val CARD_LAYOUT_WIDTH = 281
+private const val INITIALLY_SHOWN_CARDS = 12
 
 BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
-    layout = BpkCardListLayout.Rail(
-        headerButton = BpkCardListButtonAccessory.SectionHeaderButton(
-            text = stringResource(R.string.card_list_header_button_text),
-            onClick = {},
-        )),
-    modifier = Modifier,
-    dataList = dataList,
-) { position ->
-    CardLayout(dataList[position])
-}
+    layout = BpkCardListLayout.Rail,
+    initiallyShownCards = INITIALLY_SHOWN_CARDS,
+    content = { index -> Column { CardLayout(dataList[index]) } }
+)
 
 @Composable
 private fun CardLayout(data: CardListSample) {

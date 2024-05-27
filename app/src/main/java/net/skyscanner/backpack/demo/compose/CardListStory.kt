@@ -31,8 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.cardlist.BpkCardList
-import net.skyscanner.backpack.compose.cardlist.BpkCardListButtonAccessory
 import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.demo.R
@@ -49,33 +49,30 @@ fun CardListRailStory(modifier: Modifier = Modifier) {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            layout = BpkCardListLayout.Rail(),
-            modifier = Modifier,
-            dataList = dataList,
-        ) { position ->
-            CardLayout(dataList[position])
-        }
+            layout = BpkCardListLayout.Rail,
+            initiallyShownCards = INITIALLY_SHOWN_CARDS,
+            content = { index -> Column { CardLayout(dataList[index]) } },
+        )
     }
 }
 
 @Composable
 @CardListComponent
 @ComposeStory("Rail with HeaderButton")
-fun CardListRailWithHewStory(modifier: Modifier = Modifier) {
+fun CardListRailWithHeaderButtonStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            layout = BpkCardListLayout.Rail(
-                headerButton = BpkCardListButtonAccessory.SectionHeaderButton(
-                    text = stringResource(R.string.card_list_header_button_text),
-                    onClick = {},
-                )),
+            layout = BpkCardListLayout.Rail,
             modifier = Modifier,
-            dataList = dataList,
-        ) { position ->
-            CardLayout(dataList[position])
-        }
+            headerButton = BpkSectionHeaderButton(
+                text = stringResource(R.string.card_list_header_button_text),
+                onClick = {},
+            ),
+            initiallyShownCards = INITIALLY_SHOWN_CARDS,
+            content = { index -> Column { CardLayout(dataList[index]) } },
+        )
     }
 }
 
@@ -144,8 +141,21 @@ private fun cardListSamples(): List<CardListSample> {
             headline = R.string.card_list_item_9_headline,
             bodyText = R.string.card_list_item_9_body_text,
         ),
+        CardListSample(
+            image = R.drawable.paris,
+            headline = R.string.card_list_item_4_headline,
+        ),
+        CardListSample(
+            image = R.drawable.mallorca,
+            headline = R.string.card_list_item_5_headline,
+        ),
+        CardListSample(
+            image = R.drawable.alicante,
+            headline = R.string.card_list_item_6_headline,
+        ),
     )
     return listOf
 }
 
 private const val CARD_LAYOUT_WIDTH = 281
+private const val INITIALLY_SHOWN_CARDS = 12
