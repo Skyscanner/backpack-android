@@ -25,6 +25,8 @@ Compose:
     active: true
   ComposableParamOrder:
     active: true
+  ParameterNaming:
+    active: false
   PreviewAnnotationNaming:
     active: false
   PreviewPublic:
