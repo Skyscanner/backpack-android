@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalCompilerApi::class)
+
 package net.skyscanner.backpack.ksp
 
 import com.tschuchort.compiletesting.KotlinCompilation
@@ -23,6 +25,7 @@ import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspSourcesDir
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import org.intellij.lang.annotations.Language
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Assert.assertEquals
 
 internal fun testKsp(
