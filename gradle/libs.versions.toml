@@ -13,7 +13,7 @@ lifecycle = "2.7.0"
 androidXJunit = "1.1.5"
 coroutines = "1.8.1"
 espresso = "3.5.1"
-kotlinPoet = "1.16.0"
+kotlinPoet = "1.17.0"
 ktor = "2.3.11"
 roborazzi = "1.18.0"
 

@@ -104,5 +104,4 @@ internal object BpkDeprecatedTokens {
         "bpkBackgroundAlternative",
         "bpkPrimary",
     )
-
 }
