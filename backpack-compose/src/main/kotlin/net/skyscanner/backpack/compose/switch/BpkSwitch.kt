@@ -39,6 +39,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
@@ -83,10 +84,12 @@ fun BpkSwitch(
                     interactionSource = interactionSource,
                     indication = null,
                     onValueChange = onCheckedChange!!,
+                    enabled = enabled,
                 )
             }.applyIf(!enabled) {
                 semantics(mergeDescendants = true) {
                     disabled()
+                    stateDescription = if (checked) "on" else "off"
                 }.focusable()
             },
     ) {
