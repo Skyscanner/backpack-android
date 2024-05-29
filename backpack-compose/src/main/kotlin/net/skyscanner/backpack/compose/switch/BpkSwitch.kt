@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.switch
 
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -35,6 +36,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
@@ -73,15 +75,20 @@ fun BpkSwitch(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier.applyIf(onCheckedChange != null) {
-            toggleable(
-                value = checked,
-                role = Role.Switch,
-                interactionSource = interactionSource,
-                indication = null,
-                onValueChange = onCheckedChange!!,
-            )
-        },
+        modifier = modifier
+            .applyIf(onCheckedChange != null) {
+                toggleable(
+                    value = checked,
+                    role = Role.Switch,
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onValueChange = onCheckedChange!!,
+                )
+            }.applyIf(!enabled) {
+                semantics(mergeDescendants = true) {
+                    disabled()
+                }.focusable()
+            },
     ) {
 
         BpkToggleableContent(
