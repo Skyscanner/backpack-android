@@ -51,8 +51,7 @@ fun CardListRailStory(modifier: Modifier = Modifier) {
             description = stringResource(R.string.card_list_description),
             layout = BpkCardListLayout.Rail,
             initiallyShownCards = INITIALLY_SHOWN_CARDS,
-            content = { index -> Column { CardLayout(dataList[index]) } },
-        )
+        ) { index -> Column { CardLayout(dataList[index]) } }
     }
 }
 
@@ -71,8 +70,7 @@ fun CardListRailWithHeaderButtonStory(modifier: Modifier = Modifier) {
                 onClick = {},
             ),
             initiallyShownCards = INITIALLY_SHOWN_CARDS,
-            content = { index -> Column { CardLayout(dataList[index]) } },
-        )
+        ) { index -> Column { CardLayout(dataList[index]) } },
     }
 }
 

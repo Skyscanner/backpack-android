@@ -27,97 +27,34 @@ Example of a CardList:
 ## Rail
 
 ```Kotlin
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
 import net.skyscanner.backpack.compose.cardlist.BpkCardList
-import net.skyscanner.backpack.compose.snippet.BpkSnippet
-
-private val dataList = cardListSamples()
-private const val CARD_LAYOUT_WIDTH = 281
-private const val INITIALLY_SHOWN_CARDS = 12
 
 BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
-    layout = BpkCardListLayout.Rail,
-    initiallyShownCards = INITIALLY_SHOWN_CARDS,
-    modifier = Modifier,
-    content = dataList,
-) { position ->
-    CardLayout(dataList[position])
+    layout = BpkCardListLayout.Rail) { index ->
+    // content
 }
-
-@Composable
-private fun CardLayout(data: CardListSample) {
-    BpkSnippet(
-        modifier = Modifier.width(CARD_LAYOUT_WIDTH.dp),
-        imageOrientation = ImageOrientation.Landscape,
-        headline = stringResource(data.headline),
-        bodyText = stringResource(data.bodyText),
-    ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(data.image),
-            contentDescription = stringResource(R.string.snippet_image_content_description),
-            contentScale = ContentScale.Crop,
-        )
-    }
-}
-
-data class CardListSample(
-    @DrawableRes val image: Int,
-    @StringRes val headline: Int,
-    @StringRes val bodyText: Int,
-)
 ```
 
 ## Rail with section header button
 
 ```Kotlin
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
 import net.skyscanner.backpack.compose.cardlist.BpkCardList
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
-import net.skyscanner.backpack.compose.snippet.BpkSnippet
 
-private val dataList = cardListSamples()
-private const val CARD_LAYOUT_WIDTH = 281
 private const val INITIALLY_SHOWN_CARDS = 12
 
 BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
     layout = BpkCardListLayout.Rail,
-    initiallyShownCards = INITIALLY_SHOWN_CARDS,
-    content = { index -> Column { CardLayout(dataList[index]) } }
-)
-
-@Composable
-private fun CardLayout(data: CardListSample) {
-    BpkSnippet(
-        modifier = Modifier.width(CARD_LAYOUT_WIDTH.dp),
-        imageOrientation = ImageOrientation.Landscape,
-        headline = stringResource(data.headline),
-        bodyText = stringResource(data.bodyText),
-    ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(data.image),
-            contentDescription = stringResource(R.string.snippet_image_content_description),
-            contentScale = ContentScale.Crop,
-        )
-    }
+    headerButton = BpkSectionHeaderButton(
+        text = stringResource(R.string.card_list_header_button_text),
+        onClick = {},
+    )) { index ->
+    // content
 }
-
-data class CardListSample(
-    @DrawableRes val image: Int,
-    @StringRes val headline: Int,
-    @StringRes val bodyText: Int,
-)
 ```
