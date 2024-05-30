@@ -35,8 +35,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties.ToggleableState
+import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
@@ -73,15 +78,25 @@ fun BpkSwitch(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier.applyIf(onCheckedChange != null) {
-            toggleable(
-                value = checked,
-                role = Role.Switch,
-                interactionSource = interactionSource,
-                indication = null,
-                onValueChange = onCheckedChange!!,
-            )
-        },
+        modifier = modifier
+            .applyIf(onCheckedChange != null) {
+                toggleable(
+                    value = checked,
+                    role = Role.Switch,
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onValueChange = onCheckedChange!!,
+                    enabled = enabled,
+                )
+            }.applyIf(onCheckedChange == null) {
+                semantics(mergeDescendants = true) {
+                    role = Role.Switch
+                    toggleableState = ToggleableState(checked)
+                    if (!enabled) {
+                        disabled()
+                    }
+                }
+            },
     ) {
 
         BpkToggleableContent(

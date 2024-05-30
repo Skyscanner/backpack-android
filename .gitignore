@@ -55,6 +55,7 @@ captures/
 .idea/markdown-navigator.xml
 .idea/markdown-navigator-*.xml
 .idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetSelector.xml
 /.idea/ktfmt.xml
 .kotlin/*
 
