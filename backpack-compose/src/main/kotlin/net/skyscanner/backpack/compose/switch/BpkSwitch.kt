@@ -92,9 +92,9 @@ fun BpkSwitch(
             }.applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {
                     role = Role.Switch
+                    toggleableState = ToggleableState(checked)
                     if (!enabled) {
                         disabled()
-                        toggleableState = ToggleableState(checked)
                     }
                 }.focusable()
             },
