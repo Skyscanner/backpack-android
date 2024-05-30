@@ -30,8 +30,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.cardlist.BpkCardList
-import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
+import net.skyscanner.backpack.compose.cardlist.rail.BpkRailCardList
+import net.skyscanner.backpack.compose.cardlist.rail.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
@@ -46,7 +46,7 @@ private val dataList = cardListSamples()
 @ComposeStory("Rail")
 fun CardListRailStory(modifier: Modifier = Modifier) {
     Column(modifier) {
-        BpkCardList(
+        BpkRailCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             layout = BpkCardListLayout.Rail,
@@ -60,7 +60,7 @@ fun CardListRailStory(modifier: Modifier = Modifier) {
 @ComposeStory("Rail with HeaderButton")
 fun CardListRailWithHeaderButtonStory(modifier: Modifier = Modifier) {
     Column(modifier) {
-        BpkCardList(
+        BpkRailCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             layout = BpkCardListLayout.Rail,

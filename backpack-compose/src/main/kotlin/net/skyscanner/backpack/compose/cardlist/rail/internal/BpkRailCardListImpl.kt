@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.cardlist.internal
+package net.skyscanner.backpack.compose.cardlist.rail.internal
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -31,13 +31,13 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.cardlist.BpkCardListLayout
+import net.skyscanner.backpack.compose.cardlist.rail.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
-internal fun BpkCardListImpl(
+internal fun BpkRailCardListImpl(
     title: String,
     description: String,
     layout: BpkCardListLayout,

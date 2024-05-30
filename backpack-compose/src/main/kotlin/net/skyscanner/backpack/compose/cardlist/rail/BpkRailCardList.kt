@@ -16,16 +16,16 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.cardlist
+package net.skyscanner.backpack.compose.cardlist.rail
 
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.cardlist.internal.BpkCardListImpl
+import net.skyscanner.backpack.compose.cardlist.rail.internal.BpkRailCardListImpl
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
 @Composable
-fun BpkCardList(
+fun BpkRailCardList(
     title: String,
     description: String,
     layout: BpkCardListLayout,
@@ -34,7 +34,7 @@ fun BpkCardList(
     headerButton: BpkSectionHeaderButton? = null,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
-    BpkCardListImpl(
+    BpkRailCardListImpl(
         title = title,
         description = description,
         headerButton = headerButton,

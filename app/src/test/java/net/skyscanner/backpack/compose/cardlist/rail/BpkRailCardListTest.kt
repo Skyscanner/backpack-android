@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.cardlist
+package net.skyscanner.backpack.compose.cardlist.rail
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -36,13 +36,13 @@ import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
-class BpkCardListTest : BpkSnapshotTest() {
+class BpkRailCardListTest : BpkSnapshotTest() {
 
     private val dataList = cardListSamples()
 
     @Test
     fun defaultRail() = snap {
-        BpkCardList(
+        BpkRailCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCards = TOTAL_CARDS,
@@ -54,7 +54,7 @@ class BpkCardListTest : BpkSnapshotTest() {
 
     @Test
     fun defaultRailWithHeaderButton() = snap {
-        BpkCardList(
+        BpkRailCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCards = TOTAL_CARDS,
