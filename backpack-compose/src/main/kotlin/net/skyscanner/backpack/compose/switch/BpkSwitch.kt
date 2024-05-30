@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.switch
 
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -96,7 +95,7 @@ fun BpkSwitch(
                     if (!enabled) {
                         disabled()
                     }
-                }.focusable()
+                }
             },
     ) {
 
