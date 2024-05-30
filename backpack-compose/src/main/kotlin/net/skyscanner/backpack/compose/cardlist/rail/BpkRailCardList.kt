@@ -28,7 +28,6 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 fun BpkRailCardList(
     title: String,
     description: String,
-    layout: BpkCardListLayout,
     totalCards: Int,
     modifier: Modifier = Modifier,
     headerButton: BpkSectionHeaderButton? = null,
@@ -39,12 +38,7 @@ fun BpkRailCardList(
         description = description,
         headerButton = headerButton,
         totalCards = totalCards,
-        layout = layout,
         modifier = modifier,
         content = content,
     )
-}
-
-sealed class BpkCardListLayout {
-    data object Rail : BpkCardListLayout()
 }

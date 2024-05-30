@@ -31,7 +31,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.cardlist.rail.BpkCardListLayout
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -40,7 +39,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 internal fun BpkRailCardListImpl(
     title: String,
     description: String,
-    layout: BpkCardListLayout,
     headerButton: BpkSectionHeaderButton?,
     totalCards: Int,
     modifier: Modifier = Modifier,
@@ -58,9 +56,7 @@ internal fun BpkRailCardListImpl(
 
         Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
-        when (layout) {
-            is BpkCardListLayout.Rail -> RailLayout(content = content, totalCards = totalCards)
-        }
+        RailLayout(content = content, totalCards = totalCards)
     }
 }
 

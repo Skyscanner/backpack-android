@@ -33,8 +33,7 @@ import net.skyscanner.backpack.compose.cardlist.BpkCardList
 BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
-    totalCards = 3,
-    layout = BpkCardListLayout.Rail) { index ->
+    totalCards = 3) { index ->
     // content
 }
 ```
@@ -52,7 +51,6 @@ BpkCardList(
     title = stringResource(R.string.card_list_title),
     description = stringResource(R.string.card_list_description),
     totalCards = 3,
-    layout = BpkCardListLayout.Rail,
     headerButton = BpkSectionHeaderButton(
         text = stringResource(R.string.card_list_header_button_text),
         onClick = {},

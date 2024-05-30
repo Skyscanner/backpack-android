@@ -46,7 +46,6 @@ class BpkRailCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCards = TOTAL_CARDS,
-            layout = BpkCardListLayout.Rail,
             modifier = Modifier,
             content = { index -> Column { CardLayout(dataList[index]) } },
         )
@@ -58,7 +57,6 @@ class BpkRailCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCards = TOTAL_CARDS,
-            layout = BpkCardListLayout.Rail,
             modifier = Modifier,
             content = { index -> Column { CardLayout(dataList[index]) } },
         )
