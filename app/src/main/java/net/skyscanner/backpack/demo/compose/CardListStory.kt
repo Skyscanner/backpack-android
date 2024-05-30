@@ -50,7 +50,7 @@ fun CardListRailStory(modifier: Modifier = Modifier) {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             layout = BpkCardListLayout.Rail,
-            initiallyShownCards = INITIALLY_SHOWN_CARDS,
+            totalCards = TOTAL_CARDS,
         ) { index -> Column { CardLayout(dataList[index]) } }
     }
 }
@@ -69,8 +69,8 @@ fun CardListRailWithHeaderButtonStory(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.card_list_header_button_text),
                 onClick = {},
             ),
-            initiallyShownCards = INITIALLY_SHOWN_CARDS,
-        ) { index -> Column { CardLayout(dataList[index]) } },
+            totalCards = TOTAL_CARDS,
+        ) { index -> Column { CardLayout(dataList[index]) } }
     }
 }
 
@@ -156,4 +156,4 @@ private fun cardListSamples(): List<CardListSample> {
 }
 
 private const val CARD_LAYOUT_WIDTH = 281
-private const val INITIALLY_SHOWN_CARDS = 12
+private const val TOTAL_CARDS = 12

@@ -45,6 +45,7 @@ class BpkCardListTest : BpkSnapshotTest() {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
+            totalCards = TOTAL_CARDS,
             layout = BpkCardListLayout.Rail,
             modifier = Modifier,
             content = { index -> Column { CardLayout(dataList[index]) } },
@@ -56,6 +57,7 @@ class BpkCardListTest : BpkSnapshotTest() {
         BpkCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
+            totalCards = TOTAL_CARDS,
             layout = BpkCardListLayout.Rail,
             modifier = Modifier,
             content = { index -> Column { CardLayout(dataList[index]) } },
@@ -133,3 +135,4 @@ private fun cardListSamples(): List<CardListSample> {
 }
 
 private const val CARD_LAYOUT_WIDTH = 281
+private const val TOTAL_CARDS = 9

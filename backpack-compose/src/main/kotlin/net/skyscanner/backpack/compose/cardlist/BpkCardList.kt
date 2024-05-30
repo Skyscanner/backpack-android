@@ -29,16 +29,16 @@ fun BpkCardList(
     title: String,
     description: String,
     layout: BpkCardListLayout,
+    totalCards: Int,
     modifier: Modifier = Modifier,
     headerButton: BpkSectionHeaderButton? = null,
-    initiallyShownCards: Int = 3,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
     BpkCardListImpl(
         title = title,
         description = description,
         headerButton = headerButton,
-        initiallyShownCards = initiallyShownCards,
+        totalCards = totalCards,
         layout = layout,
         modifier = modifier,
         content = content,

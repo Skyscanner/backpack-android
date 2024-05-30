@@ -42,7 +42,7 @@ internal fun BpkCardListImpl(
     description: String,
     layout: BpkCardListLayout,
     headerButton: BpkSectionHeaderButton?,
-    initiallyShownCards: Int,
+    totalCards: Int,
     modifier: Modifier = Modifier,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
@@ -59,7 +59,7 @@ internal fun BpkCardListImpl(
         Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
         when (layout) {
-            is BpkCardListLayout.Rail -> RailLayout(content = content, initiallyShownCards = initiallyShownCards)
+            is BpkCardListLayout.Rail -> RailLayout(content = content, totalCards = totalCards)
         }
     }
 }
@@ -67,7 +67,7 @@ internal fun BpkCardListImpl(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RailLayout(
-    initiallyShownCards: Int,
+    totalCards: Int,
     modifier: Modifier = Modifier,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
@@ -80,7 +80,7 @@ fun RailLayout(
         flingBehavior = rememberSnapFlingBehavior(lazyListState = lazyListState),
     ) {
         items(
-            count = initiallyShownCards,
+            count = totalCards,
             itemContent = content,
         )
     }
