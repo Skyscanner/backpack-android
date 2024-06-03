@@ -68,6 +68,9 @@
     <color name="__privateMapPreviousSelection">#ffcfe4ff</color>
     <color name="__privateNavigationTabHover">#ffd1f7ff</color>
     <color name="__privateNavigationTabOutline">#ffffffff</color>
+    <color name="__privateSegmentedControlCanvasDefault">#ff131d2b</color>
+    <color name="__privateSegmentedControlSurfaceContrast">#ff131d2b</color>
+    <color name="__privateSegmentedControlSurfaceContrastOn">#ff054184</color>
     <color name="__privateSkeletonShimmerCenter">#33000000</color>
     <color name="__privateSkeletonShimmerStartEnd">#00000000</color>
     <color name="__privateSponsoredBannerBackground">#ff243346</color>

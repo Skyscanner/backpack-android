@@ -61,6 +61,8 @@
     <color name="bpkPrimaryGradientLight">#ff0062e3</color>
     <color name="bpkPrimaryLight">#ff0062e3</color>
     <color name="bpkSagano">#ffd4fff2</color>
+    <color name="__privateSegmentedControlSurfaceContrastOnDay">#ff024daf</color>
+    <color name="__privateSegmentedControlSurfaceContrastOnNight">#ff054184</color>
     <color name="bpkSkyBlue">#ff0062e3</color>
     <color name="bpkSkyBlueShade01">#ff0062e3</color>
     <color name="bpkSkyBlueShade02">#ff05203c</color>
