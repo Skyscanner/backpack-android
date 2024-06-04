@@ -29,14 +29,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.invisibleToUser
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.BpkCarouselState
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.invisibleSemantic
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -69,7 +68,7 @@ fun BpkImageGalleryCarousel(
                 pageIndicator?.invoke()
                 BpkBadge(
                     modifier = Modifier
-                        .align(Alignment.BottomEnd).semantics { this.invisibleToUser() },
+                        .align(Alignment.BottomEnd).invisibleSemantic(),
                     text = "${state.currentPage + 1}/${state.pageCount}",
                     type = BpkBadgeType.Inverse,
 
