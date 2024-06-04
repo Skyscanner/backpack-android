@@ -29,6 +29,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -69,6 +71,8 @@ internal fun BpkSnippetImpl(
                 text = headline,
                 style = BpkTheme.typography.heading4,
                 color = BpkTheme.colors.textPrimary,
+                modifier = Modifier.semantics { heading() },
+
             )
             Spacer(modifier = Modifier.height(BpkSpacing.Sm))
         }
