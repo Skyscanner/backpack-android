@@ -26,6 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -66,6 +68,7 @@ internal fun BpkSectionHeaderImpl(
                     BpkTheme.typography.heading3
                 },
                 color = getTextColor(type),
+                modifier = Modifier.semantics { heading() },
             )
             if (!description.isNullOrBlank()) {
                 BpkText(
