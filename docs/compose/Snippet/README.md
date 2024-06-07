@@ -52,9 +52,9 @@ import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 
     BpkSnippet(
-        bodyText = bodyText,
-        description = description,
         headline = headline,
+        subHeading = subHeading,
+        bodyText = bodyText,
         imageOrientation = imageOrientation,
     ) {
         Image(
@@ -73,9 +73,9 @@ import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 
     BpkSnippet(
-        bodyText = bodyText,
         description = description,
-        headline = headline,
+        subHeading = subHeading,
+        bodyText = bodyText,
         imageOrientation = imageOrientation,
         onClick = {}
     ) {

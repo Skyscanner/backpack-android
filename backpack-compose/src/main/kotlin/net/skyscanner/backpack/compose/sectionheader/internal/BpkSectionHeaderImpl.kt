@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.sectionheader.internal
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,7 +50,6 @@ internal fun BpkSectionHeaderImpl(
 ) {
     val isTablet = isTablet()
     Row(
-        modifier = modifier.background(getBackgroundColor(type = type)),
         horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,
     ) {
@@ -97,12 +95,6 @@ internal fun BpkSectionHeaderImpl(
             }
         }
     }
-}
-
-@Composable
-private fun getBackgroundColor(type: BpkSectionHeaderType): Color = when (type) {
-    Default -> BpkTheme.colors.canvas
-    OnDark -> BpkTheme.colors.surfaceContrast
 }
 
 private fun getButtonType(type: BpkSectionHeaderType): BpkButtonType = when (type) {
