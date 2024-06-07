@@ -38,8 +38,6 @@ import org.junit.Test
 
 class BpkRailCardListTest : BpkSnapshotTest() {
 
-    private val dataList = cardListSamples()
-
     @Test
     fun defaultRail() = snap {
         BpkRailCardList(
@@ -86,51 +84,48 @@ data class CardListSample(
     @StringRes val bodyText: Int? = null,
 )
 
-private fun cardListSamples(): List<CardListSample> {
-    val listOf = listOf(
-        CardListSample(
-            image = R.drawable.amsterdam,
-            headline = R.string.card_list_item_1_headline,
-            bodyText = R.string.card_list_item_1_body_text,
-        ),
-        CardListSample(
-            image = R.drawable.london_towerbridge,
-            headline = R.string.card_list_item_2_headline,
-            bodyText = R.string.card_list_item_2_body_text,
-        ),
-        CardListSample(
-            image = R.drawable.dublin,
-            headline = R.string.card_list_item_3_headline,
-            bodyText = R.string.card_list_item_3_body_text,
-        ),
-        CardListSample(
-            image = R.drawable.paris,
-            headline = R.string.card_list_item_4_headline,
-        ),
-        CardListSample(
-            image = R.drawable.mallorca,
-            headline = R.string.card_list_item_5_headline,
-        ),
-        CardListSample(
-            image = R.drawable.alicante,
-            headline = R.string.card_list_item_6_headline,
-        ),
-        CardListSample(
-            image = R.drawable.barcelona,
-            headline = R.string.card_list_item_7_headline,
-        ),
-        CardListSample(
-            image = R.drawable.berlin,
-            headline = R.string.card_list_item_8_headline,
-        ),
-        CardListSample(
-            image = R.drawable.london_saintpancrasstation,
-            headline = R.string.card_list_item_9_headline,
-            bodyText = R.string.card_list_item_9_body_text,
-        ),
-    )
-    return listOf
-}
+private val dataList = listOf(
+    CardListSample(
+        image = R.drawable.amsterdam,
+        headline = R.string.card_list_item_1_headline,
+        bodyText = R.string.card_list_item_1_body_text,
+    ),
+    CardListSample(
+        image = R.drawable.london_towerbridge,
+        headline = R.string.card_list_item_2_headline,
+        bodyText = R.string.card_list_item_2_body_text,
+    ),
+    CardListSample(
+        image = R.drawable.dublin,
+        headline = R.string.card_list_item_3_headline,
+        bodyText = R.string.card_list_item_3_body_text,
+    ),
+    CardListSample(
+        image = R.drawable.paris,
+        headline = R.string.card_list_item_4_headline,
+    ),
+    CardListSample(
+        image = R.drawable.mallorca,
+        headline = R.string.card_list_item_5_headline,
+    ),
+    CardListSample(
+        image = R.drawable.alicante,
+        headline = R.string.card_list_item_6_headline,
+    ),
+    CardListSample(
+        image = R.drawable.barcelona,
+        headline = R.string.card_list_item_7_headline,
+    ),
+    CardListSample(
+        image = R.drawable.berlin,
+        headline = R.string.card_list_item_8_headline,
+    ),
+    CardListSample(
+        image = R.drawable.london_saintpancrasstation,
+        headline = R.string.card_list_item_9_headline,
+        bodyText = R.string.card_list_item_9_body_text,
+    ),
+)
 
 private const val CARD_LAYOUT_WIDTH = 281
 private const val TOTAL_CARDS = 9

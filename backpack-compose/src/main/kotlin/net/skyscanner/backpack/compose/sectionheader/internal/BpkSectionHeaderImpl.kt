@@ -52,6 +52,7 @@ internal fun BpkSectionHeaderImpl(
     Row(
         horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,
+        modifier = modifier,
     ) {
         Column(
             modifier = Modifier.weight(1f),
