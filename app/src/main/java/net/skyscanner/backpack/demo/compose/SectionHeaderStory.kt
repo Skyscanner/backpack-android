@@ -44,6 +44,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun SectionHeaderStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
+            .background(BpkTheme.colors.canvas)
             .fillMaxSize()
             .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
