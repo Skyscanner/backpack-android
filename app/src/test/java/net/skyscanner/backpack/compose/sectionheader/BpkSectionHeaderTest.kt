@@ -18,8 +18,11 @@
 
 package net.skyscanner.backpack.compose.sectionheader
 
+import androidx.compose.foundation.background
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
@@ -28,6 +31,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun default() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.canvas),
             title = stringResource(R.string.section_header_title),
         )
     }
@@ -35,6 +39,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun defaultWithDescription() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.canvas),
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
         )
@@ -43,6 +48,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun defaultWithButton() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.canvas),
             title = stringResource(R.string.section_header_title),
             button = BpkSectionHeaderButton(
                 text = stringResource(R.string.section_header_button_text),
@@ -54,6 +60,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun defaultWithDescriptionAndButton() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.canvas),
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
             button = BpkSectionHeaderButton(
@@ -66,6 +73,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun onDark() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.surfaceContrast),
             title = stringResource(R.string.section_header_title),
             type = BpkSectionHeaderType.OnDark,
         )
@@ -74,6 +82,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun onDarkWithDescription() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.surfaceContrast),
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
             type = BpkSectionHeaderType.OnDark,
@@ -83,6 +92,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun onDarkWithButton() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.surfaceContrast),
             title = stringResource(R.string.section_header_title),
             button = BpkSectionHeaderButton(
                 text = stringResource(R.string.section_header_button_text),
@@ -95,6 +105,7 @@ class BpkSectionHeaderTest : BpkSnapshotTest() {
     @Test
     fun onDarkWithDescriptionAndButton() = snap {
         BpkSectionHeader(
+            modifier = Modifier.background(BpkTheme.colors.surfaceContrast),
             title = stringResource(R.string.section_header_title),
             description = stringResource(R.string.section_header_description),
             button = BpkSectionHeaderButton(

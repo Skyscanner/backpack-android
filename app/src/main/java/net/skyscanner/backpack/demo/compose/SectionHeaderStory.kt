@@ -44,6 +44,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun SectionHeaderStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
+            .background(BpkTheme.colors.canvas)
             .fillMaxSize()
             .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -119,11 +120,14 @@ fun SectionHeaderOnDarkStory(modifier: Modifier = Modifier) {
     locale = "en",
     device = Devices.TABLET,
 )
+
 @Composable
 @SectionHeaderComponent
 private fun SectionHeaderTabletStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .background(BpkTheme.colors.canvas)
+            .padding(BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkSectionHeader(
