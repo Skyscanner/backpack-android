@@ -18,34 +18,30 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.carousel.BpkCarouselState
+import net.skyscanner.backpack.compose.carousel.asInternalState
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.ChevronLeft
-import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PageIndicatorComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -54,72 +50,132 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @PageIndicatorComponent
 @ComposeStory
 fun PageIndicatorStory(modifier: Modifier = Modifier) {
+    val pagerState = rememberBpkCarouselState(
+        totalImages = 3,
+        initialImage = 0,
+    )
+
+    val pagerState2 = rememberBpkCarouselState(
+        totalImages = 6,
+        initialImage = 0,
+    )
+
+    val pagerState3 = rememberBpkCarouselState(
+        totalImages = 1,
+        initialImage = 0,
+    )
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(BpkSpacing.Base),
+            .padding(
+                horizontal = BpkSpacing.Base,
+                vertical = BpkSpacing.Base,
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        verticalArrangement = Arrangement.Center,
     ) {
         BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
-        PageIndicatorSample(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
-
-        BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
-        PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
-
-        BpkText(text = stringResource(id = R.string.page_indicator_over_image))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(BpkSpacing.Xxl * 2),
-            contentAlignment = Alignment.BottomCenter,
+        PageIndicatorSample(
+            state = pagerState,
+            modifier = Modifier.aspectRatio(1.9f)
+                .padding(vertical = BpkSpacing.Base),
+            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
         ) {
             Image(
-                painter = painterResource(id = R.drawable.canadian_rockies_canada),
-                contentDescription = "",
-                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(
+                    id = when (it) {
+                        0 -> R.drawable.carousel_placeholder_1
+                        1 -> R.drawable.carousel_placeholder_2
+                        2 -> R.drawable.carousel_placeholder_3
+                        3 -> R.drawable.carousel_placeholder_4
+                        else -> R.drawable.carousel_placeholder_1
+                    },
+                ),
+                contentDescription = "Image $it",
+                contentScale = ContentScale.Crop,
             )
-            PageIndicatorSample(
-                totalIndicators = 8,
-                style = BpkPageIndicatorStyle.OverImage,
-                buttonType = BpkButtonType.LinkOnDark,
+        }
+
+        BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
+        PageIndicatorSample(
+            state = pagerState2,
+            modifier = Modifier.aspectRatio(1.9f)
+                .padding(vertical = BpkSpacing.Base),
+            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
+        ) {
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(
+                    id = when (it) {
+                        0 -> R.drawable.carousel_placeholder_1
+                        1 -> R.drawable.carousel_placeholder_2
+                        2 -> R.drawable.carousel_placeholder_3
+                        3 -> R.drawable.carousel_placeholder_4
+                        4 -> R.drawable.london_saintpancrasstation
+                        5 -> R.drawable.canadian_rockies_canada
+                        else -> R.drawable.carousel_placeholder_1
+                    },
+                ),
+                contentDescription = "Image $it",
+                contentScale = ContentScale.Crop,
+            )
+        }
+
+        BpkText(text = stringResource(id = R.string.page_indicator_only_1))
+        PageIndicatorSample(
+            state = pagerState3,
+            modifier = Modifier.aspectRatio(1.9f)
+                .padding(vertical = BpkSpacing.Base),
+            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
+        ) {
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(
+                    id = when (it) {
+                        0 -> R.drawable.carousel_placeholder_1
+                        else -> R.drawable.carousel_placeholder_1
+                    },
+                ),
+                contentDescription = "Image $it",
+                contentScale = ContentScale.Crop,
             )
         }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PageIndicatorSample(
-    totalIndicators: Int,
-    style: BpkPageIndicatorStyle,
+    state: BpkCarouselState,
+    overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
     modifier: Modifier = Modifier,
-    buttonType: BpkButtonType = BpkButtonType.Link,
+    content: @Composable (BoxScope.(Int) -> Unit),
 ) {
-    var currentIndex by remember { mutableIntStateOf(0) }
-
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        BpkButton(icon = BpkIcon.ChevronLeft,
-            type = buttonType,
-            contentDescription = stringResource(R.string.page_indicator_prev),
+    val internalState = state.asInternalState()
+    Box(modifier = modifier) {
+        HorizontalPager(
+            modifier = Modifier
+                .testTag("pager")
+                .fillMaxSize(),
+            state = internalState.delegate,
         ) {
-            currentIndex = (currentIndex - 1).coerceIn(0..<totalIndicators)
+            content(internalState.getModdedPageNumber(it, internalState.pageCount))
         }
-        BpkPageIndicator(
-            currentIndex = currentIndex,
-            totalIndicators = totalIndicators,
-            style = style,
-        )
-        BpkButton(
-            icon = BpkIcon.ChevronRight,
-            type = buttonType,
-            contentDescription = stringResource(R.string.page_indicator_next),
-        ) {
-            currentIndex = (currentIndex + 1).coerceIn(0..<totalIndicators)
+
+        // if there is more than one image, display the page indicator
+        overlayContent {
+            if (internalState.pageCount > 1) {
+                BpkPageIndicator(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .testTag("pageIndicator"),
+                    totalIndicators = internalState.pageCount,
+                    currentIndex = internalState.currentPage,
+                    style = BpkPageIndicatorStyle.OverImage,
+                )
+            }
         }
     }
 }

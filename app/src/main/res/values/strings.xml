@@ -272,6 +272,7 @@
     <string name="hotel_star_rating_title">Hotel star rating</string>
     <string name="static_default_rating_title">Static (default)</string>
 
+    <string name="page_indicator_only_1">Only 1 page</string>
     <string name="page_indicator_less_than_5">Less than 5 pages</string>
     <string name="page_indicator_more_than_5">More than 5 pages</string>
     <string name="page_indicator_over_image">Over Image</string>
