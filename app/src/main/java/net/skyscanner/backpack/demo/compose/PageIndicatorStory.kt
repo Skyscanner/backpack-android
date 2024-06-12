@@ -35,9 +35,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.carousel.BpkCarouselState
-import net.skyscanner.backpack.compose.carousel.asInternalState
-import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 import net.skyscanner.backpack.compose.text.BpkText
@@ -45,101 +42,43 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PageIndicatorComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 @PageIndicatorComponent
 @ComposeStory
 fun PageIndicatorStory(modifier: Modifier = Modifier) {
-    val pagerState = rememberBpkCarouselState(
-        totalImages = 3,
-        initialImage = 0,
-    )
 
-    val pagerState2 = rememberBpkCarouselState(
-        totalImages = 6,
-        initialImage = 0,
-    )
-
-    val pagerState3 = rememberBpkCarouselState(
-        totalImages = 1,
-        initialImage = 0,
-    )
-
+    val pagerState1 = rememberPagerState(pageCount = { 3 })
+    val pagerState2 = rememberPagerState(pageCount = { 8 })
+    val pagerState3 = rememberPagerState(pageCount = { 8 })
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(
-                horizontal = BpkSpacing.Base,
-                vertical = BpkSpacing.Base,
+                BpkSpacing.Base,
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
-        PageIndicatorSample(
-            state = pagerState,
-            modifier = Modifier.aspectRatio(1.9f)
-                .padding(vertical = BpkSpacing.Base),
-            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
-        ) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(
-                    id = when (it) {
-                        0 -> R.drawable.carousel_placeholder_1
-                        1 -> R.drawable.carousel_placeholder_2
-                        2 -> R.drawable.carousel_placeholder_3
-                        3 -> R.drawable.carousel_placeholder_4
-                        else -> R.drawable.carousel_placeholder_1
-                    },
-                ),
-                contentDescription = "Image $it",
-                contentScale = ContentScale.Crop,
-            )
-        }
+        PageIndicatorSample(style = BpkPageIndicatorStyle.Default, state = pagerState1)
 
         BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
-        PageIndicatorSample(
-            state = pagerState2,
-            modifier = Modifier.aspectRatio(1.9f)
-                .padding(vertical = BpkSpacing.Base),
-            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
-        ) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(
-                    id = when (it) {
-                        0 -> R.drawable.carousel_placeholder_1
-                        1 -> R.drawable.carousel_placeholder_2
-                        2 -> R.drawable.carousel_placeholder_3
-                        3 -> R.drawable.carousel_placeholder_4
-                        4 -> R.drawable.london_saintpancrasstation
-                        5 -> R.drawable.canadian_rockies_canada
-                        else -> R.drawable.carousel_placeholder_1
-                    },
-                ),
-                contentDescription = "Image $it",
-                contentScale = ContentScale.Crop,
-            )
-        }
+        PageIndicatorSample(style = BpkPageIndicatorStyle.Default, state = pagerState2)
 
-        BpkText(text = stringResource(id = R.string.page_indicator_only_1))
+        BpkText(text = stringResource(id = R.string.page_indicator_over_image))
         PageIndicatorSample(
             state = pagerState3,
-            modifier = Modifier.aspectRatio(1.9f)
-                .padding(vertical = BpkSpacing.Base),
-            overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
+            style = BpkPageIndicatorStyle.OverImage,
         ) {
             Image(
+                painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                contentDescription = "",
+                contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxSize(),
-                painter = painterResource(
-                    id = when (it) {
-                        0 -> R.drawable.carousel_placeholder_1
-                        else -> R.drawable.carousel_placeholder_1
-                    },
-                ),
-                contentDescription = "Image $it",
-                contentScale = ContentScale.Crop,
             )
         }
     }
@@ -148,34 +87,27 @@ fun PageIndicatorStory(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PageIndicatorSample(
-    state: BpkCarouselState,
-    overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
+    style: BpkPageIndicatorStyle,
+    state: PagerState,
     modifier: Modifier = Modifier,
-    content: @Composable (BoxScope.(Int) -> Unit),
+    content: @Composable (BoxScope.(Int) -> Unit) = {},
 ) {
-    val internalState = state.asInternalState()
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+            .aspectRatio(1.9f)
+            .padding(vertical = BpkSpacing.Base),
+        contentAlignment = Alignment.BottomCenter,
+    ) {
         HorizontalPager(
             modifier = Modifier
                 .testTag("pager")
                 .fillMaxSize(),
-            state = internalState.delegate,
+            state = state,
         ) {
-            content(internalState.getModdedPageNumber(it, internalState.pageCount))
+            content(state.currentPage)
         }
-
-        // if there is more than one image, display the page indicator
-        overlayContent {
-            if (internalState.pageCount > 1) {
-                BpkPageIndicator(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .testTag("pageIndicator"),
-                    totalIndicators = internalState.pageCount,
-                    currentIndex = internalState.currentPage,
-                    style = BpkPageIndicatorStyle.OverImage,
-                )
-            }
-        }
+        BpkPageIndicator(currentIndex = state.currentPage, totalIndicators = state.pageCount, style = style, modifier =
+            Modifier.align(Alignment.BottomCenter)
+                .testTag("pageIndicator"))
     }
 }
