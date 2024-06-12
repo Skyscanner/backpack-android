@@ -85,13 +85,13 @@ fun BpkCarouselState(
     )
 }
 
-fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
+internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
     when (this) {
         is BpkCarouselInternalState -> this
     }
 
 @OptIn(ExperimentalFoundationApi::class)
-class BpkCarouselInternalState(
+internal class BpkCarouselInternalState(
     val delegate: PagerState,
     val totalImages: Int,
 ) : BpkCarouselState, ScrollableState by delegate {
