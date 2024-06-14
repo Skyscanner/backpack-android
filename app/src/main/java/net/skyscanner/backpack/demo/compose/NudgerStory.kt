@@ -74,6 +74,11 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 
         NudgerRowExample(
             modifier = Modifier.fillMaxWidth(),
+            subtitle = "subtitle is an example of long text that can be wrapped",
+        )
+
+        NudgerRowExample(
+            modifier = Modifier.fillMaxWidth(),
             title = stringResource(R.string.generic_with_leading_icon),
             icon = BpkIcon.Account,
         )

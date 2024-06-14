@@ -160,8 +160,6 @@ fun BpkNudger(
                         text = subtitle,
                         style = BpkTheme.typography.bodyDefault,
                         color = BpkTheme.colors.textSecondary,
-                        maxLines = Int.MAX_VALUE,
-                        overflow = TextOverflow.Clip,
                         modifier = Modifier.invisibleSemantic(),
                     )
                 }
