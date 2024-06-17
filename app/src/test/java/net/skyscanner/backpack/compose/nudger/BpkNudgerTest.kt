@@ -18,11 +18,13 @@
 
 package net.skyscanner.backpack.compose.nudger
 
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.NudgerExample
 import net.skyscanner.backpack.demo.compose.NudgerRowExample
 import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
@@ -86,6 +88,12 @@ class BpkNudgerTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default)
     fun withNoSubtitle() = snap {
         NudgerRowExample(subtitle = null)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withLongSubtitle() = snap {
+        NudgerRowExample(subtitle = stringResource(R.string.generic_subtitle_long_case))
     }
 
     @Test

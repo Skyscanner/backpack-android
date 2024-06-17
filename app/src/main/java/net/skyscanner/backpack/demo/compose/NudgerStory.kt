@@ -74,7 +74,7 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 
         NudgerRowExample(
             modifier = Modifier.fillMaxWidth(),
-            subtitle = "subtitle is an example of long text that can be wrapped",
+            subtitle = stringResource(R.string.generic_subtitle_long_case),
         )
 
         NudgerRowExample(

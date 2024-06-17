@@ -362,6 +362,7 @@
 
     <string name="generic_title">Title</string>
     <string name="generic_subtitle">Subtitle</string>
+    <string name="generic_subtitle_long_case">Subtitle is an example of long text that can be wrapped</string>
 
     <string name="inset_banner_title">Title</string>
     <string name="inset_banner_sub_headline">SubHeadline</string>
