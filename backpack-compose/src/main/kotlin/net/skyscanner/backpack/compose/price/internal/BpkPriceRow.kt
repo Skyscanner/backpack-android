@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -35,6 +36,7 @@ internal fun BpkPriceRow(
     leadingText: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
+    previousPriceColor: Color = BpkTheme.colors.textSecondary,
     size: BpkPriceSize = BpkPriceSize.Small,
 ) {
     Row(
@@ -45,7 +47,7 @@ internal fun BpkPriceRow(
             BpkText(
                 modifier = Modifier.alignByBaseline(),
                 text = it,
-                color = BpkTheme.colors.textSecondary,
+                color = previousPriceColor,
                 style = size.secondaryTextStyle(),
                 textDecoration = TextDecoration.LineThrough,
             )

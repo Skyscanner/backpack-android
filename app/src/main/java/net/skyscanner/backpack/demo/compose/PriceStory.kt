@@ -26,10 +26,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PriceComponent
@@ -48,6 +50,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
         PriceExample(
             size = BpkPriceSize.Large,
             align = BpkPriceAlign.Start,
+            previousPriceColor = null,
+        )
+        PriceExample(
+            size = BpkPriceSize.Large,
+            align = BpkPriceAlign.Start,
+            previousPriceColor = BpkTheme.colors.statusDangerSpot,
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -56,10 +64,27 @@ fun PriceStory(modifier: Modifier = Modifier) {
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.Start,
+                previousPriceColor = null,
             )
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.End,
+                previousPriceColor = null,
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.Start,
+                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+            )
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.End,
+                previousPriceColor = BpkTheme.colors.statusDangerSpot,
             )
         }
         Row(
@@ -69,25 +94,54 @@ fun PriceStory(modifier: Modifier = Modifier) {
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
                 align = BpkPriceAlign.Start,
+                previousPriceColor = null,
             )
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
                 align = BpkPriceAlign.End,
+                previousPriceColor = null,
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PriceExample(
+                size = BpkPriceSize.ExtraSmall,
+                align = BpkPriceAlign.Start,
+                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+            )
+            PriceExample(
+                size = BpkPriceSize.ExtraSmall,
+                align = BpkPriceAlign.End,
+                previousPriceColor = BpkTheme.colors.statusDangerSpot,
             )
         }
         PriceExample(
             size = BpkPriceSize.Small,
             align = BpkPriceAlign.Row,
+            previousPriceColor = null,
         )
         PriceExample(
             size = BpkPriceSize.ExtraSmall,
             align = BpkPriceAlign.Row,
+            previousPriceColor = null,
+        )
+        PriceExample(
+            size = BpkPriceSize.Small,
+            align = BpkPriceAlign.Row,
+            previousPriceColor = BpkTheme.colors.statusDangerSpot,
+        )
+        PriceExample(
+            size = BpkPriceSize.ExtraSmall,
+            align = BpkPriceAlign.Row,
+            previousPriceColor = BpkTheme.colors.statusDangerSpot,
         )
     }
 }
 
 @Composable
-private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign) {
+private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign, previousPriceColor: Color?) {
     BpkPrice(
         price = stringResource(id = R.string.price_price),
         previousPrice = stringResource(id = R.string.price_line_through_text),
@@ -95,5 +149,6 @@ private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign) {
         trailingText = stringResource(id = R.string.price_trailing_text),
         size = size,
         align = align,
+        previousPriceColor = previousPriceColor ?: BpkTheme.colors.textSecondary,
     )
 }
