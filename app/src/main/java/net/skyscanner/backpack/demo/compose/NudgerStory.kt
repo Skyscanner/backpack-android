@@ -74,6 +74,11 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 
         NudgerRowExample(
             modifier = Modifier.fillMaxWidth(),
+            subtitle = stringResource(R.string.generic_subtitle_long_case),
+        )
+
+        NudgerRowExample(
+            modifier = Modifier.fillMaxWidth(),
             title = stringResource(R.string.generic_with_leading_icon),
             icon = BpkIcon.Account,
         )
