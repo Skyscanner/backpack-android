@@ -92,7 +92,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
-                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+                previousPriceColor = BpkTheme.colors.textError,
             )
         }
     }

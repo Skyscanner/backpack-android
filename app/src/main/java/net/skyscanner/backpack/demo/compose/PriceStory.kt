@@ -55,7 +55,7 @@ fun PriceStory(modifier: Modifier = Modifier) {
         PriceExample(
             size = BpkPriceSize.Large,
             align = BpkPriceAlign.Start,
-            previousPriceColor = BpkTheme.colors.statusDangerSpot,
+            previousPriceColor = BpkTheme.colors.textError,
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -79,12 +79,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.Start,
-                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+                previousPriceColor = BpkTheme.colors.textError,
             )
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.End,
-                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+                previousPriceColor = BpkTheme.colors.textError,
             )
         }
         Row(
@@ -109,12 +109,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
                 align = BpkPriceAlign.Start,
-                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+                previousPriceColor = BpkTheme.colors.textError,
             )
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
                 align = BpkPriceAlign.End,
-                previousPriceColor = BpkTheme.colors.statusDangerSpot,
+                previousPriceColor = BpkTheme.colors.textError,
             )
         }
         PriceExample(
@@ -130,12 +130,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
         PriceExample(
             size = BpkPriceSize.Small,
             align = BpkPriceAlign.Row,
-            previousPriceColor = BpkTheme.colors.statusDangerSpot,
+            previousPriceColor = BpkTheme.colors.textError,
         )
         PriceExample(
             size = BpkPriceSize.ExtraSmall,
             align = BpkPriceAlign.Row,
-            previousPriceColor = BpkTheme.colors.statusDangerSpot,
+            previousPriceColor = BpkTheme.colors.textError,
         )
     }
 }
