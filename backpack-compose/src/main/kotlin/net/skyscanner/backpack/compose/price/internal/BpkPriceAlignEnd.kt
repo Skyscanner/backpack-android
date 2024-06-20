@@ -58,7 +58,7 @@ internal fun BpkPriceAlignEnd(
             previousPrice?.let {
                 BpkText(
                     text = it,
-                    color = BpkTheme.colors.textSecondary,
+                    color = BpkTheme.colors.textError,
                     style = size.secondaryTextStyle(),
                     textDecoration = TextDecoration.LineThrough,
                 )

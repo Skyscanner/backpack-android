@@ -45,7 +45,7 @@ internal fun BpkPriceRow(
             BpkText(
                 modifier = Modifier.alignByBaseline(),
                 text = it,
-                color = BpkTheme.colors.textSecondary,
+                color = BpkTheme.colors.textError,
                 style = size.secondaryTextStyle(),
                 textDecoration = TextDecoration.LineThrough,
             )
