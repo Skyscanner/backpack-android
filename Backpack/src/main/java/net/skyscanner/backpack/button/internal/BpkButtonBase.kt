@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.button.internal
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.text.TextUtils
@@ -44,12 +45,14 @@ abstract class BpkButtonBase internal constructor(
                 else -> ICON_GRAVITY_TEXT_END
             }
             if (value == ICON_POSITION_ICON_ONLY) {
+                @SuppressLint("SetTextI18n")
                 text = ""
             }
         }
 
     abstract var iconPosition: Int
 
+    @SuppressLint("SetTextI18n")
     override fun setText(text: CharSequence, type: BufferType) {
         if (iconDrawablePosition == ICON_POSITION_ICON_ONLY) {
             super.setText("", type)
