@@ -30,6 +30,5 @@ BpkPrice(
   trailingText = "per day",
   size = BpkPriceSize.Large,
   align = BpkPriceAlign.End,
-  previousPriceColor = BpkTheme.colors.textError,
 )
 ```

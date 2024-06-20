@@ -20,11 +20,9 @@ package net.skyscanner.backpack.compose.price
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignEnd
 import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignStart
 import net.skyscanner.backpack.compose.price.internal.BpkPriceRow
-import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkPriceAlign {
     Start,
@@ -45,7 +43,6 @@ fun BpkPrice(
     leadingText: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
-    previousPriceColor: Color? = BpkTheme.colors.textSecondary,
     align: BpkPriceAlign = BpkPriceAlign.Start,
     size: BpkPriceSize = BpkPriceSize.Small,
 ) {
@@ -58,7 +55,6 @@ fun BpkPrice(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
-                previousPriceColor = previousPriceColor ?: BpkTheme.colors.textSecondary,
             )
         }
 
@@ -70,7 +66,6 @@ fun BpkPrice(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
-                previousPriceColor = previousPriceColor ?: BpkTheme.colors.textSecondary,
             )
         }
 
@@ -82,7 +77,6 @@ fun BpkPrice(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
-                previousPriceColor = previousPriceColor ?: BpkTheme.colors.textSecondary,
             )
         }
     }
