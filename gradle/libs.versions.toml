@@ -10,7 +10,7 @@ androidSdkCommon = "31.5.0" # if the Gradle plugin version is X.Y.Z, then the li
 
 detekt = "1.23.6"
 lifecycle = "2.7.0"
-androidXJunit = "1.1.5"
+androidXJunit = "1.2.0"
 coroutines = "1.8.1"
 espresso = "3.5.1"
 kotlinPoet = "1.17.0"
