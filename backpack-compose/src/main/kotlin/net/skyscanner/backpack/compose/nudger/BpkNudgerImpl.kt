@@ -79,7 +79,7 @@ fun BpkNudgerImpl(
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
             onClick = { setValue(coerced - 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Minus"),
+            modifier = Modifier.generateNudgerTestTag(testTag, "Decrement"),
         )
 
         BpkText(
@@ -106,7 +106,7 @@ fun BpkNudgerImpl(
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
             onClick = { setValue(coerced + 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Plus"),
+            modifier = Modifier.generateNudgerTestTag(testTag, "Increment"),
         )
     }
 }
@@ -146,12 +146,12 @@ internal fun Modifier.nudgerSemantics(
         )
 
 @OptIn(ExperimentalComposeUiApi::class)
-private fun Modifier.generateNudgerTestTag(testTag: String?, buttonType: String): Modifier {
+private fun Modifier.generateNudgerTestTag(testTag: String?, action: String): Modifier {
     return testTag?.let {
         semantics {
             contentDescription = ""
             stateDescription = ""
             testTagsAsResourceId = true
-        }.testTag("${testTag}$buttonType")
+        }.testTag("${testTag}$action")
     } ?: this
 }
