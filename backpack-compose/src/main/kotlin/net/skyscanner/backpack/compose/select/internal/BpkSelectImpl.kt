@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
@@ -56,7 +57,7 @@ internal fun BpkSelectImpl(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
-
+    val focusManager = LocalFocusManager.current
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
@@ -75,7 +76,10 @@ internal fun BpkSelectImpl(
             modifier = Modifier
                 .background(BpkTheme.colors.surfaceDefault)
                 .fillMaxWidth(),
-            onDismissRequest = { expanded = false },
+            onDismissRequest = {
+                expanded = false
+                focusManager.clearFocus()
+            },
         ) {
             options.forEachIndexed { index, option ->
                 val itemBackgroundColor =
@@ -95,6 +99,7 @@ internal fun BpkSelectImpl(
                     },
                     onClick = {
                         expanded = false
+                        focusManager.clearFocus()
                         if (index != selectedIndex) {
                             onSelectionChange?.let { it(index) }
                         }
