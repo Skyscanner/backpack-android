@@ -149,8 +149,8 @@ internal fun Modifier.nudgerSemantics(
 private fun Modifier.generateNudgerTestTag(testTag: String?, action: String): Modifier {
     return testTag?.let {
         semantics {
-            contentDescription = ""
-            stateDescription = ""
+            contentDescription = "" // handled by semantics modifier
+            stateDescription = "" // handled by semantics modifier
             testTagsAsResourceId = true
         }.testTag("${testTag}$action")
     } ?: this
