@@ -29,11 +29,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -61,6 +64,8 @@ fun BpkNudger(
     min: Int,
     max: Int,
     modifier: Modifier = Modifier,
+    testTag: String? = null,
+    allowSemantics: Boolean = true,
     enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
 ) {
     val range = min..max
@@ -70,7 +75,7 @@ fun BpkNudger(
         onValueChange(value.coerceIn(range))
 
     Row(
-        modifier = modifier.nudgerSemantics(value, ::setValue, range, enabled),
+        modifier = if (allowSemantics) modifier.nudgerSemantics(value, ::setValue, range, enabled) else modifier,
         verticalAlignment = Alignment.CenterVertically,
     ) {
 
@@ -81,6 +86,7 @@ fun BpkNudger(
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
             onClick = { setValue(coerced - 1) },
+            modifier = Modifier.generateNudgerTestTag(testTag, "Minus"),
         )
 
         BpkText(
@@ -107,8 +113,20 @@ fun BpkNudger(
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
             onClick = { setValue(coerced + 1) },
+            modifier = Modifier.generateNudgerTestTag(testTag, "Plus"),
         )
     }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+private fun Modifier.generateNudgerTestTag(testTag: String?, buttonType: String): Modifier {
+    return testTag?.let {
+        semantics {
+            contentDescription = ""
+            stateDescription = ""
+            testTagsAsResourceId = true
+        }.testTag("${testTag}$buttonType")
+    } ?: this
 }
 
 @Composable
@@ -119,6 +137,7 @@ fun BpkNudger(
     max: Int,
     title: String,
     modifier: Modifier = Modifier,
+    testTag: String? = null,
     subtitle: String? = null,
     icon: BpkIcon? = null,
     enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
@@ -126,7 +145,9 @@ fun BpkNudger(
     Row(
         modifier = modifier
             .semantics {
-                text = listOfNotNull(title, subtitle).joinToString(separator = " ").let(::AnnotatedString)
+                text = listOfNotNull(title, subtitle)
+                    .joinToString(separator = " ")
+                    .let(::AnnotatedString)
             }
             .nudgerSemantics(value, onValueChange, min..max, enabled),
         verticalAlignment = Alignment.CenterVertically,
@@ -171,7 +192,8 @@ fun BpkNudger(
             min = min,
             max = max,
             enabled = enabled,
-            modifier = Modifier.invisibleSemantic(),
+            testTag = testTag,
+            allowSemantics = false,
         )
     }
 }
