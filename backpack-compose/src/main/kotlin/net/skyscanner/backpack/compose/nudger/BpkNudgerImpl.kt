@@ -51,7 +51,7 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun BpkNudgerImpl(
+internal fun BpkNudgerImpl(
     value: Int,
     onValueChange: (Int) -> Unit,
     min: Int,
