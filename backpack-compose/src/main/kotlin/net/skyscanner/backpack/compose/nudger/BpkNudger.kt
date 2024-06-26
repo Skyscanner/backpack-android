@@ -18,32 +18,16 @@
 
 package net.skyscanner.backpack.compose.nudger
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.disabled
-import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.setProgress
-import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.button.BpkButtonSize
-import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -51,12 +35,8 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Minus
-import net.skyscanner.backpack.compose.tokens.Plus
 import net.skyscanner.backpack.compose.utils.invisibleSemantic
-import kotlin.math.roundToInt
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkNudger(
     value: Int,
@@ -65,68 +45,17 @@ fun BpkNudger(
     max: Int,
     modifier: Modifier = Modifier,
     testTag: String? = null,
-    allowSemantics: Boolean = true,
     enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
 ) {
-    val range = min..max
-    val coerced = value.coerceIn(range)
-
-    fun setValue(value: Int) =
-        onValueChange(value.coerceIn(range))
-
-    Row(
-        modifier = if (allowSemantics) modifier.nudgerSemantics(value, ::setValue, range, enabled) else modifier,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-
-        BpkButton(
-            icon = BpkIcon.Minus,
-            contentDescription = "", // handled by semantics modifier
-            enabled = enabled && coerced > range.first,
-            size = BpkButtonSize.Default,
-            type = BpkButtonType.Secondary,
-            onClick = { setValue(coerced - 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Minus"),
-        )
-
-        BpkText(
-            text = coerced.toString(),
-            style = BpkTheme.typography.heading5,
-            maxLines = 1,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .semantics { invisibleToUser() }
-                .padding(horizontal = BpkSpacing.Md)
-                .widthIn(min = BpkSpacing.Lg),
-            color = animateColorAsState(
-                when {
-                    enabled -> BpkTheme.colors.textPrimary
-                    else -> BpkTheme.colors.textDisabled
-                },
-            ).value,
-        )
-
-        BpkButton(
-            icon = BpkIcon.Plus,
-            contentDescription = "", // handled by semantics modifier
-            enabled = enabled && coerced < range.last,
-            size = BpkButtonSize.Default,
-            type = BpkButtonType.Secondary,
-            onClick = { setValue(coerced + 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Plus"),
-        )
-    }
-}
-
-@OptIn(ExperimentalComposeUiApi::class)
-private fun Modifier.generateNudgerTestTag(testTag: String?, buttonType: String): Modifier {
-    return testTag?.let {
-        semantics {
-            contentDescription = ""
-            stateDescription = ""
-            testTagsAsResourceId = true
-        }.testTag("${testTag}$buttonType")
-    } ?: this
+    BpkNudgerImpl(
+        value = value,
+        onValueChange = onValueChange,
+        min = min,
+        max = max,
+        enabled = enabled,
+        testTag = testTag,
+        modifier = modifier,
+    )
 }
 
 @Composable
@@ -186,7 +115,7 @@ fun BpkNudger(
                 }
             }
         }
-        BpkNudger(
+        BpkNudgerImpl(
             value = value,
             onValueChange = onValueChange,
             min = min,
@@ -197,37 +126,3 @@ fun BpkNudger(
         )
     }
 }
-
-private fun Modifier.nudgerSemantics(
-    value: Int,
-    onValueChange: (Int) -> Unit,
-    range: IntRange,
-    enabled: Boolean,
-): Modifier =
-    semantics(mergeDescendants = true) {
-
-        // this is needed to use volume keys
-        setProgress { targetValue ->
-            // without this rounding the values will only decrease
-            val newValue = targetValue
-                .roundToInt()
-                .coerceIn(range)
-            if (newValue != value) {
-                onValueChange(newValue)
-                true
-            } else {
-                false
-            }
-        }
-
-        // override describing percents
-        stateDescription = value.toString()
-
-        if (!enabled) disabled()
-    }
-        .progressSemantics(
-            // this is needed to use volume keys
-            value = value.toFloat(),
-            valueRange = range.first.toFloat()..range.last.toFloat(),
-            steps = range.last - range.first,
-        )
