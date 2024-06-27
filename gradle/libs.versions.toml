@@ -52,7 +52,7 @@ test-coreKtx = "androidx.test:core-ktx:1.6.1"
 test-junit = "junit:junit:4.13.2"
 test-espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
-test-rules = "androidx.test:rules:1.5.0"
+test-rules = "androidx.test:rules:1.6.1"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 test-mockitoAndroid = "org.mockito:mockito-android:5.12.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
