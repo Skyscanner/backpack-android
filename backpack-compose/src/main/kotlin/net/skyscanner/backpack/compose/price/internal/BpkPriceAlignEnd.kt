@@ -45,22 +45,22 @@ internal fun BpkPriceAlignEnd(
         horizontalAlignment = Alignment.End,
     ) {
         Row {
-            leadingText?.let {
-                val builder = StringBuilder()
-                builder.append(it)
-                previousPrice?.let { builder.append(" • ") }
-                BpkText(
-                    text = builder.toString(),
-                    color = BpkTheme.colors.textSecondary,
-                    style = size.secondaryTextStyle(),
-                )
-            }
             previousPrice?.let {
                 BpkText(
                     text = it,
                     color = BpkTheme.colors.textError,
                     style = size.secondaryTextStyle(),
                     textDecoration = TextDecoration.LineThrough,
+                )
+            }
+            leadingText?.let {
+                val builder = StringBuilder()
+                previousPrice?.let { builder.append(" • ") }
+                builder.append(it)
+                BpkText(
+                    text = builder.toString(),
+                    color = BpkTheme.colors.textSecondary,
+                    style = size.secondaryTextStyle(),
                 )
             }
         }
