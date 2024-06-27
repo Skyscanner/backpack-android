@@ -22,12 +22,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignEnd
 import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignStart
+import net.skyscanner.backpack.compose.price.internal.BpkPriceRight
 import net.skyscanner.backpack.compose.price.internal.BpkPriceRow
 
 enum class BpkPriceAlign {
     Start,
     End,
     Row,
+    Right,
 }
 
 enum class BpkPriceSize {
@@ -71,6 +73,17 @@ fun BpkPrice(
 
         BpkPriceAlign.Row -> {
             BpkPriceRow(
+                price = price,
+                modifier = modifier,
+                leadingText = leadingText,
+                previousPrice = previousPrice,
+                trailingText = trailingText,
+                size = size,
+            )
+        }
+
+        BpkPriceAlign.Right -> {
+            BpkPriceRight(
                 price = price,
                 modifier = modifier,
                 leadingText = leadingText,

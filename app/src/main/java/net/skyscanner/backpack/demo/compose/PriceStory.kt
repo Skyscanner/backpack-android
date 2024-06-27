@@ -75,6 +75,19 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 align = BpkPriceAlign.End,
             )
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PriceExample(
+                size = BpkPriceSize.ExtraSmall,
+                align = BpkPriceAlign.Right,
+            )
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.Right,
+            )
+        }
         PriceExample(
             size = BpkPriceSize.Small,
             align = BpkPriceAlign.Row,
