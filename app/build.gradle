@@ -110,6 +110,8 @@ dependencies {
     implementation libs.compose.activity
     implementation libs.kotlin.reflection
     implementation libs.destinations.core
+    implementation libs.androidx.tracing
+
     testImplementation libs.test.junit
     testImplementation libs.roborazzi.compose
     testImplementation libs.roborazzi.core
@@ -128,9 +130,11 @@ dependencies {
     androidTestImplementation libs.test.compose
     androidTestImplementation libs.ktor.clientCore
     androidTestImplementation libs.ktor.clientCio
+
     implementation project(':Backpack')
     implementation project(':backpack-compose')
     implementation project(":meta:annotations")
+
     ksp project(":meta:processor")
     ksp libs.destinations.ksp
 
