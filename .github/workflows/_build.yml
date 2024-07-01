@@ -17,7 +17,7 @@ jobs:
 
   Build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     permissions:
       statuses: write
@@ -99,7 +99,7 @@ jobs:
 
   Android:
     name: Android tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
 
     steps:
@@ -163,7 +163,7 @@ jobs:
 
   Screenshots:
     name: Screenshots tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       pull-requests: write
       contents: write
