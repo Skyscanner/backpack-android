@@ -23,7 +23,7 @@ jobs:
 
   Deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: Publishing
     needs: [Build]
     timeout-minutes: 30
@@ -94,7 +94,7 @@ jobs:
           releaseNotes: Version ${{github.event.release.tag_name}}
 
   SupernovaPublish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: Publishing
     steps:
       - name: Update Supernova docs

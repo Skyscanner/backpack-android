@@ -23,7 +23,7 @@ jobs:
     uses: ./.github/workflows/_build.yml
 
   Dependabot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       pull-requests: write
     if: ${{ github.actor == 'dependabot[bot]' }}
