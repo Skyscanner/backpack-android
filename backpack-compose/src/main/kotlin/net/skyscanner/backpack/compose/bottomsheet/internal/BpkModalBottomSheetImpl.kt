@@ -17,6 +17,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -64,6 +65,7 @@ internal fun BpkModalBottomSheetImpl(
     action: TextAction?,
     closeButton: BpkModalBottomSheetCloseAction,
     modifier: Modifier = Modifier,
+    titleContentDescription: String? = title,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
@@ -72,6 +74,7 @@ internal fun BpkModalBottomSheetImpl(
             ModalBottomSheetContent(
                 dragHandleStyle = dragHandleStyle,
                 title = title,
+                titleContentDescription = titleContentDescription,
                 closeButton = closeButton,
                 state = state,
                 action = action,
@@ -99,6 +102,7 @@ private fun ModalBottomSheetContent(
     state: BpkModalBottomSheetState,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
+    titleContentDescription: String? = title,
     content: @Composable() (ColumnScope.() -> Unit),
 ) {
     if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
@@ -110,6 +114,7 @@ private fun ModalBottomSheetContent(
                     BpkModalBottomSheetHeader(
                         modifier = Modifier.height(BpkSpacing.Lg),
                         title = title,
+                        titleContentDescription = titleContentDescription,
                         action = action,
                         state = state,
                         dragHandleStyle = dragHandleStyle,
@@ -150,6 +155,7 @@ private fun BpkModalBottomSheetHeader(
     onDismissRequest: () -> Unit,
     dragHandleStyle: BpkDragHandleStyle,
     modifier: Modifier = Modifier,
+    titleContentDescription: String? = title,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val backgroundColor = when (dragHandleStyle) {
@@ -170,7 +176,11 @@ private fun BpkModalBottomSheetHeader(
                     text = it,
                     style = BpkTheme.typography.heading5,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.semantics { heading() },
+                    modifier = Modifier
+                        .semantics {
+                            heading()
+                            contentDescription = titleContentDescription ?: ""
+                        },
                 )
             }
         },
