@@ -131,9 +131,25 @@ fun ModalBottomSheetWithTopBarStory(
 }
 
 @Composable
+@BottomSheetComponent
+@ComposeStory(name = "Modal with TopBar and custom title content description")
+fun ModalBottomSheetWithTopBarStoryTitleContentDesc(
+    modifier: Modifier = Modifier,
+) {
+    ModalBottomSheetStory(
+        modifier = modifier,
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text)) {},
+        title = stringResource(id = R.string.modal_bottom_sheet_title),
+        titleContentDescription = stringResource(id = R.string.modal_bottom_sheet_title_content_desc),
+        closeButton = BpkModalBottomSheetCloseAction.Close(stringResource(id = R.string.navigation_close)),
+    )
+}
+
+@Composable
 internal fun ModalBottomSheetStory(
     modifier: Modifier = Modifier,
     title: String? = null,
+    titleContentDescription: String? = null,
     action: TextAction? = null,
     closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
 ) {
@@ -152,6 +168,7 @@ internal fun ModalBottomSheetStory(
     if (openBottomSheet) {
         BpkModalBottomSheet(
             title = title,
+            titleContentDescription = titleContentDescription,
             closeButton = closeButton,
             action = action,
             state = state,
