@@ -36,6 +36,7 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
+import net.skyscanner.backpack.compose.utils.applyIf
 
 /**
  * Backpack for Android - Skyscanner's Design System
@@ -65,7 +66,7 @@ internal fun BpkModalBottomSheetImpl(
     action: TextAction?,
     closeButton: BpkModalBottomSheetCloseAction,
     modifier: Modifier = Modifier,
-    titleContentDescription: String? = title,
+    titleContentDescription: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     ModalBottomSheet(
@@ -102,7 +103,7 @@ private fun ModalBottomSheetContent(
     state: BpkModalBottomSheetState,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    titleContentDescription: String? = title,
+    titleContentDescription: String? = null,
     content: @Composable() (ColumnScope.() -> Unit),
 ) {
     if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
@@ -155,7 +156,7 @@ private fun BpkModalBottomSheetHeader(
     onDismissRequest: () -> Unit,
     dragHandleStyle: BpkDragHandleStyle,
     modifier: Modifier = Modifier,
-    titleContentDescription: String? = title,
+    titleContentDescription: String? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val backgroundColor = when (dragHandleStyle) {
@@ -179,7 +180,11 @@ private fun BpkModalBottomSheetHeader(
                     modifier = Modifier
                         .semantics {
                             heading()
-                            contentDescription = titleContentDescription ?: ""
+                        }
+                        .applyIf(titleContentDescription != null) {
+                            semantics {
+                                contentDescription = titleContentDescription ?: ""
+                            }
                         },
                 )
             }

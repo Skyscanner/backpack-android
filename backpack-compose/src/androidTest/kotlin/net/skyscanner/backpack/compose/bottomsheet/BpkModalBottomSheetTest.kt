@@ -33,32 +33,15 @@ class BpkModalBottomSheetTest {
     private val customTitleContentDesc = "Custom content desc"
 
     @Test
-    fun givenTitleContentDescriptionNotSet_whenBpkModalBottomSheet_thenSemanticsSet() {
-        composeTestRule.setContent {
-            BpkTheme {
-                BpkModalBottomSheet(
-                    onDismissRequest = { },
-                    title = title,
-                ) {
-                }
-            }
-        }
-
-        composeTestRule
-            .onNodeWithContentDescription(title)
-            .assertExists()
-    }
-
-    @Test
-    fun givenTitleContentDescriptionSet_whenBpkModalBottomSheet_thenSemanticsSet() {
+    fun givenTitleContentDescriptionNotNull_whenBpkModalBottomSheet_thenSemanticsSet() {
         composeTestRule.setContent {
             BpkTheme {
                 BpkModalBottomSheet(
                     onDismissRequest = { },
                     title = title,
                     titleContentDescription = customTitleContentDesc,
-                ) {
-                }
+                    content = {},
+                )
             }
         }
 

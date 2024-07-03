@@ -39,7 +39,7 @@ fun BpkModalBottomSheet(
     state: BpkModalBottomSheetState = rememberBpkModalBottomSheetState(),
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
     title: String? = null,
-    titleContentDescription: String? = title,
+    titleContentDescription: String? = null,
     action: TextAction? = null,
     closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
     content: @Composable ColumnScope.() -> Unit,
