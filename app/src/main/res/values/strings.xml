@@ -29,6 +29,7 @@
     <string name="rating_sample_const_title">Constant Title</string>
     <string name="rating_sample_const_subtitle">Constant Subtitle</string>
     <string name="modal_bottom_sheet_title">Bottom Sheet Title</string>
+    <string name="modal_bottom_sheet_title_content_desc">Custom title content description</string>
 
     <string-array name="rating_sample_titles">
         <item>Low Title</item>

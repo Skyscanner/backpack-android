@@ -118,6 +118,28 @@ if (openBottomSheet) {
     )
 }
 ```
+By default, the Bottom sheet's `title` text serves as its content description for accessibility purposes. However, if you wish to customize the content description of the title, you can do so by passing a `titleContentDescription` argument, as shown below:
+```Kotlin
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
+
+var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+val state = rememberBpkModalBottomSheetState()
+
+if (openBottomSheet) {
+    BpkModalBottomSheet(
+        state = state,
+        title = stringResource(id = R.string.generic_title),
+        titleContentDescription = stringResource(id = R.string.generic_title_custom_content_description),
+        closeButton = BpkModalBottomSheetCloseAction.Default(stringResource(id = R.string.navigation_close)),
+        action = TextAction(text = stringResource(id = R.string.section_header_button_text), {}),
+        content = { /* content of the bottom sheet */ },
+        dragHandleStyle = BpkDragHandleStyle.Default,
+        onDismissRequest = { openBottomSheet = false },
+    )
+}
+```
 By default the Bottom sheet content starts below the drag handle. In cases where you need to show an image at the top you can set the `dragHandleStyle` property to `OnImage` to remove the safe area, like this:
 
 ```Kotlin
