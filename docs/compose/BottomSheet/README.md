@@ -118,7 +118,7 @@ if (openBottomSheet) {
     )
 }
 ```
-By default the Bottom sheet `title` text will act as its content description also for accessibility needs, but in case you want to customise the content description of the title it can be done by passing a `titleContentDescription` argument, like this:
+By default, the Bottom sheet's `title` text serves as its content description for accessibility purposes. However, if you wish to customize the content description of the title, you can do so by passing a `titleContentDescription` argument, as shown below:
 ```Kotlin
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
