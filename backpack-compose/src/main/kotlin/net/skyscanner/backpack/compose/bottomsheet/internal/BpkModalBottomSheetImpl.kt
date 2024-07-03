@@ -183,7 +183,7 @@ private fun BpkModalBottomSheetHeader(
                         }
                         .applyIf(titleContentDescription != null) {
                             semantics {
-                                contentDescription = titleContentDescription ?: ""
+                                contentDescription = titleContentDescription!!
                             }
                         },
                 )
