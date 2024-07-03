@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -44,6 +47,10 @@ class BpkModalBottomSheetTest {
                 )
             }
         }
+
+        composeTestRule
+            .onNode(SemanticsMatcher.expectValue(key = SemanticsProperties.Heading, expectedValue = Unit))
+            .assertTextEquals(title)
 
         composeTestRule
             .onNodeWithContentDescription(customTitleContentDesc)
