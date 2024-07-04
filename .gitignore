@@ -57,6 +57,7 @@ captures/
 .idea/deploymentTargetDropDown.xml
 .idea/deploymentTargetSelector.xml
 /.idea/ktfmt.xml
+.idea/other.xml
 .kotlin/*
 
 # Keystore files

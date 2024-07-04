@@ -36,8 +36,6 @@ implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
 
 ## Usage
 
-> **_NOTE:_**  The docs for the previous version of Calendar is available [here](https://github.com/Skyscanner/backpack-android/blob/main/docs/Calendar/README.md).
-
 Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
 
 ```Kotlin
