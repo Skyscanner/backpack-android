@@ -21,11 +21,6 @@
     <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://skyscanner.design">Click me!</a></string>
     <string name="preference_file_key">bpk_preferences</string>
 
-    <string name="calendar_colored_switch">Shift colors</string>
-    <string name="calendar_disabled_switch">Shift dates</string>
-    <string name="calendar_single">Single</string>
-    <string name="calendar_range">Range</string>
-
     <string name="rating_sample_const_title">Constant Title</string>
     <string name="rating_sample_const_subtitle">Constant Subtitle</string>
     <string name="modal_bottom_sheet_title">Bottom Sheet Title</string>
