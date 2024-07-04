@@ -43,9 +43,9 @@ Here's an example which generates a model for one single month in Kotlin:
 
 ```kotlin
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.TextStyle
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.TextStyle
 import java.util.Locale
 
 fun createBarChartModel(locale: Locale, yearMonth: YearMonth) =
