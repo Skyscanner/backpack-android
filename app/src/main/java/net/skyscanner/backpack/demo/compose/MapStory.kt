@@ -29,8 +29,8 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
@@ -59,7 +59,7 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
         else -> BpkPriceMarkerStatus.Default
     }
 
-    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+    GoogleMap(modifier = modifier, cameraPositionState = rememberCameraPositionState { MapPosition }) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkPriceMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
@@ -82,7 +82,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
         focusedMarker -> BpkIconMarkerStatus.Focused
         else -> BpkIconMarkerStatus.Default
     }
-    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+    GoogleMap(modifier = modifier, cameraPositionState = rememberCameraPositionState { MapPosition }) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkIconMapMarker(
                 contentDescription = stringResource(if (index == 2) R.string.map_marker_icon_cafe else R.string.map_marker_icon_landmark),
@@ -99,7 +99,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Pointer")
 fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
-    GoogleMap(modifier = modifier, cameraPositionState = CameraPositionState(position = MapPosition)) {
+    GoogleMap(modifier = modifier, cameraPositionState = rememberCameraPositionState { MapPosition }) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkPointerMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
