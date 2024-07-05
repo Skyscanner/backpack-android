@@ -18,7 +18,9 @@
 
 package net.skyscanner.backpack.calendar2.list
 
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
@@ -37,7 +39,8 @@ internal class CalendarCellDayHolder(
 ) : ItemHolder<CalendarCell.Day>(parent, R.layout.view_bpk_calendar_day) {
 
     private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
-    private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
+    private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label_text)
+    private val icon = findViewById<ImageView>(R.id.bpk_calendar_cell_label_icon)
 
     private val selectionBackground = CalendarDaySelectionBackground(context)
 
@@ -58,7 +61,11 @@ internal class CalendarCellDayHolder(
         view.isSelected = model.selection != null
 
         day.text = model.text
-        label.text = model.info.label
+
+        val cellLabel = model.info.label
+        label.text = cellLabel?.text
+        cellLabel?.icon?.let { icon.setImageResource(it) }
+        cellLabel?.iconTint?.let { icon.imageTintList = context.getColorStateList(it) }
 
         when {
             model.selection != null -> {
@@ -78,14 +85,23 @@ internal class CalendarCellDayHolder(
         when {
             model.inactive -> {
                 label.isVisible = false
+                icon.visibility = View.GONE
             }
             model.info.style == CellStatusStyle.Label -> {
-                label.isVisible = !model.info.label.isNullOrEmpty()
-                label.setTextColor(labelColor(model.info.status))
+                if (!cellLabel?.text.isNullOrEmpty()) {
+                    label.visibility = View.VISIBLE
+                    label.text = cellLabel?.text
+                    label.setTextColor(labelColor(model.info.status))
+                    icon.visibility = View.GONE
+                } else {
+                    icon.visibility = View.VISIBLE
+                    label.visibility = View.GONE
+                }
             }
             else -> {
-                label.isVisible = !model.info.label.isNullOrEmpty()
+                label.isVisible = !model.info.label?.text.isNullOrEmpty()
                 label.setTextColor(labelColor(null))
+                icon.visibility = View.GONE
             }
         }
     }

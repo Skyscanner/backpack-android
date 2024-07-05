@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.icon
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -75,6 +76,9 @@ fun BpkIcon(
 
 fun BpkIcon.Companion.findByName(name: String): BpkIcon? =
     BpkIcon.values.find { it.name == name }
+
+fun BpkIcon.Companion.findBySmall(@DrawableRes resId: Int): BpkIcon? =
+    BpkIcon.values.find { it.small == resId }
 
 private operator fun BpkIcon.get(size: BpkIconSize): Int =
     when (size) {

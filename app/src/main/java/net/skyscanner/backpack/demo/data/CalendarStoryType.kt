@@ -22,6 +22,7 @@ import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
@@ -41,6 +42,7 @@ enum class CalendarStoryType {
     SelectionWholeMonth,
     WithDisabledDates,
     WithLabels,
+    WithIconAsLabels,
     PreselectedRange,
     ;
 
@@ -102,10 +104,12 @@ enum class CalendarStoryType {
                         .associateWith {
                             val price = it.dayOfMonth % maxPrice
                             CellInfo(
-                                label = when (price) {
-                                    in minPrice..noPriceThreshold -> "-"
-                                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
-                                },
+                                label = CellLabel(
+                                    text = when (price) {
+                                        in minPrice..noPriceThreshold -> "-"
+                                        else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                    },
+                                ),
                                 status = when (price) {
                                     noPriceThreshold -> null
                                     emptyPriceThreshold -> CellStatus.Empty
@@ -124,6 +128,37 @@ enum class CalendarStoryType {
                     range = range,
                     selectionMode = CalendarParams.SelectionMode.Range(),
                 )
+
+                WithIconAsLabels ->
+                    CalendarParams(
+                        now = now,
+                        range = range,
+                        selectionMode = rangeSelectionModeWithAccessibilityLabels(),
+                        cellsInfo = range
+                            .toIterable()
+                            .associateWith {
+                                val price = it.dayOfMonth % maxPrice
+                                CellInfo(
+                                    label = CellLabel(
+                                        text = when (price) {
+                                            in minPrice..noPriceThreshold -> null
+                                            else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                        },
+                                        icon = net.skyscanner.backpack.R.drawable.bpk_search_sm,
+                                        iconTint = net.skyscanner.backpack.R.color.bpkCoreAccent,
+                                    ),
+                                    status = when (price) {
+                                        noPriceThreshold -> null
+                                        emptyPriceThreshold -> CellStatus.Empty
+                                        positivePriceThreshold -> CellStatus.Positive
+                                        neutralPriceThreshold -> CellStatus.Neutral
+                                        negativePriceThreshold -> CellStatus.Negative
+                                        else -> CellStatus.Empty
+                                    },
+                                    style = CellStatusStyle.Label,
+                                )
+                            },
+                    )
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(
