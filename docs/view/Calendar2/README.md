@@ -26,26 +26,7 @@
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
-The calendar implementation relies on the Android adaptation of the `JSR-310` backport for dealing with dates: [`ThreeTenABP`](https://github.com/JakeWharton/ThreeTenABP)
-
-Add the following line in your base module's Gradle script:
-
-```groovy
-implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
-```
-
 ## Usage
-
-> **_NOTE:_**  The docs for the previous version of Calendar is available [here](https://github.com/Skyscanner/backpack-android/blob/main/docs/Calendar/README.md).
-
-Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
-
-```Kotlin
-override fun onCreate() {
-  super.onCreate()
-  AndroidThreeTen.init(this)
-}
-```
 
 BpkCalendar uses coroutines under the hood.
 Since it designed with coroutines, the API is designed primarily for Kotlin language and may not be interoperable with Java.
