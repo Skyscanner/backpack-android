@@ -36,7 +36,8 @@
         android:id="@+id/bpk_calendar_cell_label_icon"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:visibility="gone"
+        android:layout_marginTop="2dp"
+        android:visibility="visible"
         tools:src="@drawable/bpk_search"
         tools:ignore="ContentDescription" />
 </LinearLayout>
