@@ -23,7 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
@@ -33,12 +35,14 @@ import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 @Composable
 internal fun BpkShortcuts(
     shortcuts: List<BpkShortcut>,
+    onHideModal: suspend () -> Unit,
     modifier: Modifier = Modifier,
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     val singleSelectChips = shortcuts.map {
         BpkSingleChipItem(text = it.text, icon = it.icon)
     }
+    val coroutineScope = rememberCoroutineScope()
     BpkSingleSelectChipGroup(
         modifier = modifier.padding(
             top = BpkSpacing.Md,
@@ -47,8 +51,9 @@ internal fun BpkShortcuts(
         contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
         chips = singleSelectChips,
         selectedIndex = remember { mutableIntStateOf(-1) }.intValue,
-        onItemClicked = {
-            shortcuts[singleSelectChips.indexOf(it)].onShortcutSelected()
+        onItemClicked = { item ->
+            coroutineScope.launch { onHideModal() }
+                .invokeOnCompletion { shortcuts[singleSelectChips.indexOf(item)].onShortcutSelected() }
         },
         behaviouralEventWrapper = behaviouralEventWrapper,
     )

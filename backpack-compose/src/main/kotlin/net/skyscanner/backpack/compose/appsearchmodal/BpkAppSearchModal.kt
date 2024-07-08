@@ -104,6 +104,7 @@ fun BpkAppSearchModal(
             onInputChanged = onInputChanged,
             clearAction = clearAction,
             prefix = prefix,
+            onHideModal = { state.hide() },
             behaviouralEventWrapper = behaviouralEventWrapper,
         )
     }

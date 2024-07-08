@@ -38,6 +38,7 @@ internal fun BpkAppSearchModalImpl(
     results: BpkAppSearchModalResult,
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
+    onHideModal: suspend () -> Unit,
     modifier: Modifier = Modifier,
     prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
@@ -61,7 +62,11 @@ internal fun BpkAppSearchModalImpl(
                     clearAction = clearAction,
                 )
                 if (results is BpkAppSearchModalResult.Content) {
-                    BpkSearchModalContent(results = results, behaviouralEventWrapper = behaviouralEventWrapper)
+                    BpkSearchModalContent(
+                        results = results,
+                        onHideModal = onHideModal,
+                        behaviouralEventWrapper = behaviouralEventWrapper,
+                    )
                 } else if (results is BpkAppSearchModalResult.Loading) {
                     BpkSearchModalLoading(results)
                 }
