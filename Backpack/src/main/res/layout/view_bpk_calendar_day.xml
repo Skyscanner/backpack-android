@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal|top"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/bpkSpacingLg">
 
     <net.skyscanner.backpack.text.BpkText
@@ -16,6 +15,9 @@
         android:gravity="center"
         android:maxLines="1"
         android:singleLine="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:textStyle="heading5"
         tools:text="11" />
 
@@ -29,15 +31,20 @@
         android:paddingStart="@dimen/bpkSpacingSm"
         android:paddingEnd="@dimen/bpkSpacingSm"
         android:singleLine="false"
+        app:layout_constraintTop_toBottomOf="@id/bpk_calendar_cell_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:textStyle="caption"
         tools:text="£29" />
 
     <ImageView
         android:id="@+id/bpk_calendar_cell_label_icon"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginTop="2dp"
-        android:visibility="visible"
+        android:layout_height="14dp"
+        android:visibility="gone"
         tools:src="@drawable/bpk_search"
-        tools:ignore="ContentDescription" />
-</LinearLayout>
+        tools:ignore="ContentDescription"
+        app:layout_constraintTop_toBottomOf="@id/bpk_calendar_cell_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

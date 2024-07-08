@@ -82,26 +82,22 @@ internal class CalendarCellDayHolder(
             }
         }
 
+        val shouldShowTextLabel = !model.info.label?.text.isNullOrEmpty()
+        val iconVisibility = if (!shouldShowTextLabel && model.info.label?.icon != null) View.VISIBLE else View.GONE
         when {
             model.inactive -> {
                 label.isVisible = false
                 icon.visibility = View.GONE
             }
             model.info.style == CellStatusStyle.Label -> {
-                if (!cellLabel?.text.isNullOrEmpty()) {
-                    label.visibility = View.VISIBLE
-                    label.text = cellLabel?.text
-                    label.setTextColor(labelColor(model.info.status))
-                    icon.visibility = View.GONE
-                } else {
-                    icon.visibility = View.VISIBLE
-                    label.visibility = View.GONE
-                }
+                label.isVisible = shouldShowTextLabel
+                label.setTextColor(labelColor(model.info.status))
+                icon.visibility = iconVisibility
             }
             else -> {
-                label.isVisible = !model.info.label?.text.isNullOrEmpty()
+                label.isVisible = shouldShowTextLabel
                 label.setTextColor(labelColor(null))
-                icon.visibility = View.GONE
+                icon.visibility = iconVisibility
             }
         }
     }
