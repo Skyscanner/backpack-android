@@ -18,11 +18,12 @@
 
 package net.skyscanner.backpack.demo.data
 
+import net.skyscanner.backpack.R
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.CellIcon
 import net.skyscanner.backpack.calendar2.CellInfo
-import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
@@ -104,12 +105,10 @@ enum class CalendarStoryType {
                         .associateWith {
                             val price = it.dayOfMonth % maxPrice
                             CellInfo(
-                                label = CellLabel(
-                                    text = when (price) {
-                                        in minPrice..noPriceThreshold -> "-"
-                                        else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
-                                    },
-                                ),
+                                label = when (price) {
+                                    in minPrice..noPriceThreshold -> "-"
+                                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                },
                                 status = when (price) {
                                     noPriceThreshold -> null
                                     emptyPriceThreshold -> CellStatus.Empty
@@ -139,13 +138,13 @@ enum class CalendarStoryType {
                             .associateWith {
                                 val price = it.dayOfMonth % maxPrice
                                 CellInfo(
-                                    label = CellLabel(
-                                        text = when (price) {
-                                            in minPrice..noPriceThreshold -> null
-                                            else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
-                                        },
-                                        icon = net.skyscanner.backpack.R.drawable.bpk_search_sm,
-                                        iconTint = net.skyscanner.backpack.R.color.bpkCoreAccent,
+                                    label = when (price) {
+                                        in minPrice..noPriceThreshold -> null
+                                        else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                    },
+                                    icon = CellIcon(
+                                        resId = R.drawable.bpk_search_sm,
+                                        tint = R.color.bpkCoreAccent,
                                     ),
                                     status = when (price) {
                                         noPriceThreshold -> null

@@ -123,8 +123,8 @@ internal fun BpkCalendarDayCell(
             )
         }
 
-        if (!inactive && label != null) {
-            label.text?.let {
+        if (!inactive) {
+            model.info.label?.let {
                 BpkText(
                     text = it,
                     modifier = Modifier
@@ -135,9 +135,9 @@ internal fun BpkCalendarDayCell(
                     style = BpkTheme.typography.caption,
                     color = labelColor(status, style),
                 )
-            } ?: label.icon?.let { resId ->
-                BpkIcon.findBySmall(resId)?.let { bpkIcon ->
-                    val iconTint = label.iconTint
+            } ?: model.info.icon?.resId?.let { icon ->
+                BpkIcon.findBySmall(icon)?.let { bpkIcon ->
+                    val iconTint = model.info.icon?.tint
                         ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
                         ?.let { Color(it) } ?: LocalContentColor.current
                     BpkIcon(

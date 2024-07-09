@@ -136,7 +136,8 @@ data class CalendarParams(
 data class CellInfo(
     val disabled: Boolean = false,
     val status: CellStatus? = null,
-    val label: CellLabel? = null,
+    val label: String? = null,
+    val icon: CellIcon? = null,
     val style: CellStatusStyle = CellStatusStyle.Label,
 ) {
 
@@ -146,16 +147,14 @@ data class CellInfo(
 }
 
 /**
- * Describes the label to be added to the cell
+ * Describes the icon to be displayed in the cell
  *
- * @param text the text to be displayed
- * @param icon the icon to be displayed
- * @param iconTint the tint of the icon
+ * @param resId the icon to be displayed
+ * @param tint the tint of the icon
  */
-data class CellLabel(
-    val text: String? = null,
-    val icon: Int? = null,
-    val iconTint: Int? = null,
+data class CellIcon(
+    val resId: Int? = null,
+    val tint: Int? = null,
 )
 
 /**

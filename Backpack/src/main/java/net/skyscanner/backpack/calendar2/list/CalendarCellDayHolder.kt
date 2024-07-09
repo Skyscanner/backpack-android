@@ -62,11 +62,11 @@ internal class CalendarCellDayHolder(
 
         day.text = model.text
 
-        val cellLabel = model.info.label
-        label.text = cellLabel?.text
-        cellLabel?.icon?.let { icon.setImageResource(it) }
-        cellLabel?.iconTint?.let { icon.imageTintList = context.getColorStateList(it) }
-
+        label.text = model.info.label
+        model.info.icon?.let {
+            it.resId?.let { resId -> icon.setImageResource(resId) }
+            it.tint?.let { tint -> icon.imageTintList = context.getColorStateList(tint) }
+        }
         when {
             model.selection != null -> {
                 day.setTextColor(selectionContentColor(model.selection))
@@ -82,8 +82,8 @@ internal class CalendarCellDayHolder(
             }
         }
 
-        val shouldShowTextLabel = !model.info.label?.text.isNullOrEmpty()
-        val iconVisibility = if (!shouldShowTextLabel && model.info.label?.icon != null) View.VISIBLE else View.GONE
+        val shouldShowTextLabel = !model.info.label.isNullOrEmpty()
+        val iconVisibility = if (!shouldShowTextLabel && model.info.icon != null) View.VISIBLE else View.GONE
         when {
             model.inactive -> {
                 label.isVisible = false
