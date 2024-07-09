@@ -50,24 +50,19 @@ object BpkCalendarTestCases {
         val Labeled = DefaultRange.copy(
             cellsInfo = mapOf(
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
-                    CellInfo(style = CellStatusStyle.Label, label = "£10", status = CellStatus.Negative),
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£10"), status = CellStatus.Negative),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
-                    CellInfo(style = CellStatusStyle.Label, label = "£11", status = CellStatus.Neutral),
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£11"), status = CellStatus.Neutral),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
-                    CellInfo(style = CellStatusStyle.Label, label = "£12", status = CellStatus.Positive),
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£12"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
-                    CellInfo(style = CellStatusStyle.Label, label = "£900000000000000", status = CellStatus.Positive),
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000000000000"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
-                    CellInfo(style = CellStatusStyle.Label, label = "£900000", status = CellStatus.Positive),
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
                     CellInfo(
                         style = CellStatusStyle.Label,
-                        label = null,
-                        status = null,
-                        icon = CellIcon(
-                            resId = R.drawable.bpk_search_sm,
-                            tint = R.color.bpkCoreAccent,
-                        ),
+                        label = CellLabel.Icon(resId = R.drawable.bpk_search_sm, tint = R.color.bpkCoreAccent),
                     ),
             ),
         )

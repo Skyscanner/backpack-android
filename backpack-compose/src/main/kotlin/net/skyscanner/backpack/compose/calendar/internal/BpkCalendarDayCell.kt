@@ -45,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
@@ -124,27 +125,34 @@ internal fun BpkCalendarDayCell(
         }
 
         if (!inactive) {
-            model.info.label?.let {
-                BpkText(
-                    text = it,
-                    modifier = Modifier
-                        .padding(horizontal = BpkSpacing.Sm),
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Center,
-                    maxLines = 2,
-                    style = BpkTheme.typography.caption,
-                    color = labelColor(status, style),
-                )
-            } ?: model.info.icon?.resId?.let { icon ->
-                BpkIcon.findBySmall(icon)?.let { bpkIcon ->
-                    val iconTint = model.info.icon?.tint
-                        ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
-                        ?.let { Color(it) } ?: LocalContentColor.current
-                    BpkIcon(
-                        icon = bpkIcon,
-                        tint = iconTint,
-                        contentDescription = null,
-                    )
+            when (val cellLabel = model.info.label) {
+                is CellLabel.Text -> {
+                    if (cellLabel.text.isNotBlank()) {
+                        BpkText(
+                            text = cellLabel.text,
+                            modifier = Modifier
+                                .padding(horizontal = BpkSpacing.Sm),
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                            style = BpkTheme.typography.caption,
+                            color = labelColor(status, style),
+                        )
+                    }
+                }
+                is CellLabel.Icon -> {
+                    cellLabel.resId?.let { resId ->
+                        BpkIcon.findBySmall(resId)?.let { bpkIcon ->
+                            val iconTint = cellLabel.tint
+                                ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
+                                ?.let { Color(it) } ?: LocalContentColor.current
+                            BpkIcon(
+                                icon = bpkIcon,
+                                tint = iconTint,
+                                contentDescription = null,
+                            )
+                        }
+                    }
                 }
             }
         }

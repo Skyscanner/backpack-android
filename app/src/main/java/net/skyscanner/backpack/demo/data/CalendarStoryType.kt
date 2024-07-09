@@ -22,8 +22,8 @@ import net.skyscanner.backpack.R
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.CellIcon
 import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
@@ -106,8 +106,8 @@ enum class CalendarStoryType {
                             val price = it.dayOfMonth % maxPrice
                             CellInfo(
                                 label = when (price) {
-                                    in minPrice..noPriceThreshold -> "-"
-                                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                    in minPrice..noPriceThreshold -> CellLabel.Text(text = "-")
+                                    else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
                                 },
                                 status = when (price) {
                                     noPriceThreshold -> null
@@ -139,13 +139,12 @@ enum class CalendarStoryType {
                                 val price = it.dayOfMonth % maxPrice
                                 CellInfo(
                                     label = when (price) {
-                                        in minPrice..noPriceThreshold -> null
-                                        else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                        in minPrice..noPriceThreshold -> CellLabel.Icon(
+                                            resId = R.drawable.bpk_search_sm,
+                                            tint = R.color.bpkCoreAccent,
+                                        )
+                                        else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
                                     },
-                                    icon = CellIcon(
-                                        resId = R.drawable.bpk_search_sm,
-                                        tint = R.color.bpkCoreAccent,
-                                    ),
                                     status = when (price) {
                                         noPriceThreshold -> null
                                         emptyPriceThreshold -> CellStatus.Empty

@@ -20,6 +20,7 @@ package net.skyscanner.backpack.calendar2.data
 
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
@@ -53,7 +54,7 @@ class CalendarInfoTests {
     fun if_date_with_label_cell_has_correct_state() {
         val params = CalendarSettings.Default.copy(
             cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
-                CellInfo(label = it.dayOfMonth.toString())
+                CellInfo(label = CellLabel.Text(it.dayOfMonth.toString()))
             },
         )
 
