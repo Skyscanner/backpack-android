@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -58,6 +59,16 @@ object BpkCalendarTestCases {
                     CellInfo(style = CellStatusStyle.Label, label = "£900000000000000", status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
                     CellInfo(style = CellStatusStyle.Label, label = "£900000", status = CellStatus.Positive),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
+                    CellInfo(
+                        style = CellStatusStyle.Label,
+                        label = null,
+                        status = null,
+                        icon = CellIcon(
+                            resId = R.drawable.bpk_search_sm,
+                            tint = R.color.bpkCoreAccent,
+                        ),
+                    ),
             ),
         )
 
