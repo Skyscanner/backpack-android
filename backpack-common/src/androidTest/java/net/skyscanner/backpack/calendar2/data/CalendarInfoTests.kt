@@ -63,7 +63,27 @@ class CalendarInfoTests {
                 for (i in 0..<state.cells.size) {
                     val cell = state.cells[i]
                     if (cell is CalendarCell.Day) {
-                        assertEquals(cell.date.dayOfMonth.toString(), cell.info.label)
+                        assertEquals(cell.date.dayOfMonth.toString(), (cell.info.label as CellLabel.Text).text)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun if_date_with_icon_label_cell_has_correct_state() {
+        val params = CalendarSettings.Default.copy(
+            cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
+                CellInfo(label = CellLabel.Icon(resId = 1, tint = 2))
+            },
+        )
+
+        testCalendarWith(params) {
+            verify {
+                for (i in 0..<state.cells.size) {
+                    val cell = state.cells[i]
+                    if (cell is CalendarCell.Day) {
+                        assertEquals(1, (cell.info.label as CellLabel.Icon).resId)
                     }
                 }
             }
