@@ -66,7 +66,7 @@ internal class CalendarCellDayHolder(
         when (val cellLabel = model.info.label) {
             is CellLabel.Text -> label.text = cellLabel.text
             is CellLabel.Icon -> {
-                cellLabel.resId.let { resId -> icon.setImageResource(resId) }
+                icon.setImageResource(cellLabel.resId)
                 cellLabel.tint?.let { tint -> icon.imageTintList = context.getColorStateList(tint) }
             }
         }
