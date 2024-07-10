@@ -66,7 +66,7 @@ internal class CalendarCellDayHolder(
         when (val cellLabel = model.info.label) {
             is CellLabel.Text -> label.text = cellLabel.text
             is CellLabel.Icon -> {
-                cellLabel.resId?.let { resId -> icon.setImageResource(resId) }
+                cellLabel.resId.let { resId -> icon.setImageResource(resId) }
                 cellLabel.tint?.let { tint -> icon.imageTintList = context.getColorStateList(tint) }
             }
         }
@@ -96,13 +96,13 @@ internal class CalendarCellDayHolder(
                         label.isVisible = cellLabel.text.isNotEmpty()
                         label.setTextColor(labelColor(model.info.status))
                     }
-                    is CellLabel.Icon -> icon.visibility = if (cellLabel.resId != null) View.VISIBLE else View.GONE
+                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
                 }
             }
             else -> {
                 when (val cellLabel = model.info.label) {
                     is CellLabel.Text -> label.isVisible = cellLabel.text.isNotEmpty()
-                    is CellLabel.Icon -> icon.visibility = if (cellLabel.resId != null) View.VISIBLE else View.GONE
+                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
                 }
             }
         }

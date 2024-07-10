@@ -151,7 +151,7 @@ data class CellInfo(
 sealed class CellLabel {
     data class Text(val text: String) : CellLabel()
     data class Icon(
-        val resId: Int? = null,
+        val resId: Int,
         val tint: Int? = null,
     ) : CellLabel()
 }

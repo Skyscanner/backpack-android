@@ -141,7 +141,7 @@ internal fun BpkCalendarDayCell(
                     }
                 }
                 is CellLabel.Icon -> {
-                    cellLabel.resId?.let { resId ->
+                    cellLabel.resId.let { resId ->
                         BpkIcon.findBySmall(resId)?.let { bpkIcon ->
                             val iconTint = cellLabel.tint
                                 ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
