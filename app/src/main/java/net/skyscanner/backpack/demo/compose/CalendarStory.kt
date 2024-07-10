@@ -78,6 +78,12 @@ fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
     CalendarDemo(CalendarStoryType.PreselectedRange, modifier)
 
 @Composable
+@Calendar2Component
+@ComposeStory("Day icon as labels")
+fun CalendarSelectionIconLabelStory(modifier: Modifier = Modifier) =
+    CalendarDemo(CalendarStoryType.WithIconAsLabels, modifier)
+
+@Composable
 private fun CalendarDemo(
     type: CalendarStoryType,
     modifier: Modifier = Modifier,

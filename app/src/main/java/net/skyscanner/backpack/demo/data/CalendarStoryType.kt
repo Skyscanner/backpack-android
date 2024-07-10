@@ -18,10 +18,12 @@
 
 package net.skyscanner.backpack.demo.data
 
+import net.skyscanner.backpack.R
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
@@ -41,6 +43,7 @@ enum class CalendarStoryType {
     SelectionWholeMonth,
     WithDisabledDates,
     WithLabels,
+    WithIconAsLabels,
     PreselectedRange,
     ;
 
@@ -103,8 +106,8 @@ enum class CalendarStoryType {
                             val price = it.dayOfMonth % maxPrice
                             CellInfo(
                                 label = when (price) {
-                                    in minPrice..noPriceThreshold -> "-"
-                                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                    in minPrice..noPriceThreshold -> CellLabel.Text(text = "-")
+                                    else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
                                 },
                                 status = when (price) {
                                     noPriceThreshold -> null
@@ -124,6 +127,36 @@ enum class CalendarStoryType {
                     range = range,
                     selectionMode = CalendarParams.SelectionMode.Range(),
                 )
+
+                WithIconAsLabels ->
+                    CalendarParams(
+                        now = now,
+                        range = range,
+                        selectionMode = rangeSelectionModeWithAccessibilityLabels(),
+                        cellsInfo = range
+                            .toIterable()
+                            .associateWith {
+                                val price = it.dayOfMonth % maxPrice
+                                CellInfo(
+                                    label = when (price) {
+                                        in minPrice..noPriceThreshold -> CellLabel.Icon(
+                                            resId = R.drawable.bpk_search_sm,
+                                            tint = R.color.bpkCoreAccent,
+                                        )
+                                        else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
+                                    },
+                                    status = when (price) {
+                                        noPriceThreshold -> null
+                                        emptyPriceThreshold -> CellStatus.Empty
+                                        positivePriceThreshold -> CellStatus.Positive
+                                        neutralPriceThreshold -> CellStatus.Neutral
+                                        negativePriceThreshold -> CellStatus.Negative
+                                        else -> CellStatus.Empty
+                                    },
+                                    style = CellStatusStyle.Label,
+                                )
+                            },
+                    )
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(

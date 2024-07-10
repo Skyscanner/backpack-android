@@ -18,10 +18,13 @@
 
 package net.skyscanner.backpack.calendar2.list
 
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
@@ -37,7 +40,8 @@ internal class CalendarCellDayHolder(
 ) : ItemHolder<CalendarCell.Day>(parent, R.layout.view_bpk_calendar_day) {
 
     private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
-    private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
+    private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label_text)
+    private val icon = findViewById<ImageView>(R.id.bpk_calendar_cell_label_icon)
 
     private val selectionBackground = CalendarDaySelectionBackground(context)
 
@@ -58,8 +62,14 @@ internal class CalendarCellDayHolder(
         view.isSelected = model.selection != null
 
         day.text = model.text
-        label.text = model.info.label
 
+        when (val cellLabel = model.info.label) {
+            is CellLabel.Text -> label.text = cellLabel.text
+            is CellLabel.Icon -> {
+                icon.setImageResource(cellLabel.resId)
+                cellLabel.tint?.let { tint -> icon.imageTintList = context.getColorStateList(tint) }
+            }
+        }
         when {
             model.selection != null -> {
                 day.setTextColor(selectionContentColor(model.selection))
@@ -78,14 +88,22 @@ internal class CalendarCellDayHolder(
         when {
             model.inactive -> {
                 label.isVisible = false
+                icon.visibility = View.GONE
             }
             model.info.style == CellStatusStyle.Label -> {
-                label.isVisible = !model.info.label.isNullOrEmpty()
-                label.setTextColor(labelColor(model.info.status))
+                when (val cellLabel = model.info.label) {
+                    is CellLabel.Text -> {
+                        label.isVisible = cellLabel.text.isNotEmpty()
+                        label.setTextColor(labelColor(model.info.status))
+                    }
+                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
+                }
             }
             else -> {
-                label.isVisible = !model.info.label.isNullOrEmpty()
-                label.setTextColor(labelColor(null))
+                when (val cellLabel = model.info.label) {
+                    is CellLabel.Text -> label.isVisible = cellLabel.text.isNotEmpty()
+                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
+                }
             }
         }
     }

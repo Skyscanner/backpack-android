@@ -136,13 +136,24 @@ data class CalendarParams(
 data class CellInfo(
     val disabled: Boolean = false,
     val status: CellStatus? = null,
-    val label: String? = null,
+    val label: CellLabel = CellLabel.Text(""), // Default is empty text
     val style: CellStatusStyle = CellStatusStyle.Label,
 ) {
 
     internal companion object {
         val Default = CellInfo()
     }
+}
+
+/**
+ * Describes the label of the cell
+ */
+sealed class CellLabel {
+    data class Text(val text: String) : CellLabel()
+    data class Icon(
+        val resId: Int,
+        val tint: Int? = null,
+    ) : CellLabel()
 }
 
 /**

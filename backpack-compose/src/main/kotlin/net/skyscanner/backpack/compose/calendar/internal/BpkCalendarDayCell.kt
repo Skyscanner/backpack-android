@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -43,10 +44,15 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import net.skyscanner.backpack.calendar2.CellLabel
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
+import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.findBySmall
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -118,17 +124,37 @@ internal fun BpkCalendarDayCell(
             )
         }
 
-        if (!inactive && !label.isNullOrEmpty()) {
-            BpkText(
-                text = label,
-                modifier = Modifier
-                    .padding(horizontal = BpkSpacing.Sm),
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                style = BpkTheme.typography.caption,
-                color = labelColor(status, style),
-            )
+        if (!inactive) {
+            when (val cellLabel = model.info.label) {
+                is CellLabel.Text -> {
+                    if (cellLabel.text.isNotBlank()) {
+                        BpkText(
+                            text = cellLabel.text,
+                            modifier = Modifier
+                                .padding(horizontal = BpkSpacing.Sm),
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                            style = BpkTheme.typography.caption,
+                            color = labelColor(status, style),
+                        )
+                    }
+                }
+                is CellLabel.Icon -> {
+                    cellLabel.resId.let { resId ->
+                        BpkIcon.findBySmall(resId)?.let { bpkIcon ->
+                            val iconTint = cellLabel.tint
+                                ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
+                                ?.let { Color(it) } ?: LocalContentColor.current
+                            BpkIcon(
+                                icon = bpkIcon,
+                                tint = iconTint,
+                                contentDescription = null,
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
