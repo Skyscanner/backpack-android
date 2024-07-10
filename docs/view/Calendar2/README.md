@@ -10,6 +10,13 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/day-labels.png" alt="Labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/day-labels_dm.png" alt="Labeled Calendar2 component - dark mode" width="375" /> |
 
+## Icon as labeled
+
+| Day                                                                                                                                                                                                  | Night                                                                                                                                                                                                            |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-icon-as-labels.png" alt="Day icon as labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-icon-as-labels_dm.png" alt="Day icon labeled Calendar2 component - dark mode" width="375" /> |
+
+
 ## Month
 
 | Day | Night |
@@ -103,7 +110,25 @@ calendar.setParams(
       LocalDate.of(2019, 1, 2) to CellInfo(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
-        label = "£30", // adds label below the date
+        label = CellLabel.Text("£30"), // adds label below the date
+      ),
+    )
+  )
+)
+```
+
+You can also use icons as the cell info:
+
+```Kotlin
+controller.setParams(
+  CalendarParams(
+    range = range,
+    selectionMode = selectionMode,
+    cellsInfo = mapOf(
+      LocalDate.of(2019, 1, 2) to CellInfo(
+        disabled = true, // marks date as disabled
+        status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
+        label = CellLabel.Icon(resId = R.drawable.bpk_search_sm, tint = R.color.bpkCoreAccent), // adds icon below the date
       ),
     )
   )
