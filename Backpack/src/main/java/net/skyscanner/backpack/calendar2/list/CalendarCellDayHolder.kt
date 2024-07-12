@@ -95,8 +95,12 @@ internal class CalendarCellDayHolder(
                     is CellLabel.Text -> {
                         label.isVisible = cellLabel.text.isNotEmpty()
                         label.setTextColor(labelColor(model.info.status))
+                        icon.visibility = View.GONE
                     }
-                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
+                    is CellLabel.Icon -> {
+                        icon.visibility = View.VISIBLE
+                        label.visibility = View.GONE
+                    }
                 }
             }
             else -> {
