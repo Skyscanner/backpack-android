@@ -24,12 +24,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.BpkItem
 import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -68,19 +66,11 @@ internal fun BpkSectionHeading(
 }
 
 @Composable
-internal fun BpkSectionItem(
-    item: BpkItem,
-    onHideModal: suspend () -> Unit,
-    modifier: Modifier = Modifier,
-    clickHandleScope: BpkClickHandleScope? = null,
-) {
-    val coroutineScope = rememberCoroutineScope()
+internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier, clickHandleScope: BpkClickHandleScope? = null) {
     Row(
         modifier = modifier
             .clickable {
-                coroutineScope
-                    .launch { onHideModal() }
-                    .invokeOnCompletion { item.onItemSelected() }
+                item.onItemSelected()
                 clickHandleScope?.notifyClick()
             }
             .fillMaxWidth()

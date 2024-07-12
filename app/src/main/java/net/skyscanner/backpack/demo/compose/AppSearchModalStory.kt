@@ -58,28 +58,28 @@ import net.skyscanner.backpack.meta.StoryKind
 @AppSearchModalComponent
 @ComposeStory("Content")
 fun AppSearchModalStoryContent(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = { contentResult(it) })
+    AppSearchModalStory(result = contentResult())
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Content-InputText", kind = StoryKind.DemoOnly)
 fun AppSearchModalStoryContentInputText(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = { contentResult(it) }, inputText = stringResource(id = R.string.city_rio))
+    AppSearchModalStory(result = contentResult(), inputText = stringResource(id = R.string.city_rio))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = { loadingResult() }, inputText = stringResource(id = R.string.city_dubai))
+    AppSearchModalStory(result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Error")
 fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = { errorResult() })
+    AppSearchModalStory(result = errorResult())
 }
 
 @Composable
@@ -87,7 +87,7 @@ fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
 @ComposeStory("Prefix - Text")
 fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
     AppSearchModalStory(
-        result = { contentResult(it) },
+        result = contentResult(),
         inputText = stringResource(id = R.string.city_dubai),
         prefix = Prefix.Text(
             stringResource(id = R.string.text_field_prefix),
@@ -97,7 +97,7 @@ fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
 
 @Composable
 private fun AppSearchModalStory(
-    result: @Composable (() -> Unit) -> BpkAppSearchModalResult,
+    result: BpkAppSearchModalResult,
     modifier: Modifier = Modifier,
     inputText: String = "",
     prefix: Prefix = Prefix.Icon(),
@@ -109,7 +109,7 @@ private fun AppSearchModalStory(
 
 @Composable
 internal fun DefaultAppSearchModalSample(
-    result: @Composable (() -> Unit) -> BpkAppSearchModalResult,
+    result: BpkAppSearchModalResult,
     inputText: String,
     modifier: Modifier = Modifier,
     prefix: Prefix = Prefix.Icon(),
@@ -128,7 +128,7 @@ internal fun DefaultAppSearchModalSample(
             title = stringResource(id = R.string.destination),
             inputText = destination.value,
             inputHint = stringResource(id = R.string.text_field_hint),
-            results = result { showModal.value = false },
+            results = result,
             closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
             onClose = { showModal.value = false },
             onInputChanged = { destination.value = it },
@@ -141,7 +141,7 @@ internal fun DefaultAppSearchModalSample(
 }
 
 @Composable
-internal fun contentResult(onItemSelected: () -> Unit) = BpkAppSearchModalResult.Content(
+internal fun contentResult() = BpkAppSearchModalResult.Content(
     sections = listOf(
         BpkSection(
             items = listOf(
@@ -151,7 +151,7 @@ internal fun contentResult(onItemSelected: () -> Unit) = BpkAppSearchModalResult
                     },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.current_location_subtitle)) },
                     icon = BpkIcon.UseLocation,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                 ),
             ),
         ),
@@ -165,7 +165,7 @@ internal fun contentResult(onItemSelected: () -> Unit) = BpkAppSearchModalResult
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_london)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                 ),
                 BpkItem(
                     title = buildAnnotatedString {
@@ -176,7 +176,7 @@ internal fun contentResult(onItemSelected: () -> Unit) = BpkAppSearchModalResult
                     },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.Airports,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                 ),
             ),
         ),
@@ -189,28 +189,28 @@ internal fun contentResult(onItemSelected: () -> Unit) = BpkAppSearchModalResult
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_shenzhen)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                     tertiaryLabel = stringResource(id = R.string.search_modal_item_tertiary_label),
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_paris)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                     tertiaryLabel = stringResource(id = R.string.search_modal_item_tertiary_label),
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_algiers)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                     tertiaryLabel = stringResource(id = R.string.search_modal_item_tertiary_label),
                 ),
                 BpkItem(
                     title = buildAnnotatedString { append(stringResource(id = R.string.city_madrid)) },
                     subtitle = buildAnnotatedString { append(stringResource(id = R.string.search_modal_item_subtitle)) },
                     icon = BpkIcon.City,
-                    onItemSelected = { onItemSelected() },
+                    onItemSelected = {},
                     tertiaryLabel = stringResource(id = R.string.search_modal_item_tertiary_label),
                 ),
             ),
