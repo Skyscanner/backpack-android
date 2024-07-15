@@ -29,18 +29,13 @@ import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 @Composable
 internal fun BpkSearchModalContent(
     results: BpkAppSearchModalResult.Content,
-    onHideModal: suspend () -> Unit,
     modifier: Modifier = Modifier,
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
     LazyColumn(modifier = modifier) {
         results.shortcuts?.let {
             item {
-                BpkShortcuts(
-                    shortcuts = it,
-                    onHideModal = onHideModal,
-                    behaviouralEventWrapper = behaviouralEventWrapper,
-                )
+                BpkShortcuts(shortcuts = it, behaviouralEventWrapper = behaviouralEventWrapper)
             }
         }
         results.sections.forEach { section ->
@@ -59,14 +54,12 @@ internal fun BpkSearchModalContent(
                     behaviouralEventWrapper(it, Modifier) {
                         BpkSectionItem(
                             item = it,
-                            onHideModal = onHideModal,
                             clickHandleScope = this,
                         )
                     }
                 } else {
                     BpkSectionItem(
                         item = it,
-                        onHideModal = onHideModal,
                     )
                 }
             }
