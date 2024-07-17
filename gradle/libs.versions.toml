@@ -15,7 +15,7 @@ coroutines = "1.8.1"
 espresso = "3.6.1"
 kotlinPoet = "1.18.1"
 ktor = "2.3.12"
-roborazzi = "1.21.0"
+roborazzi = "1.22.2"
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
