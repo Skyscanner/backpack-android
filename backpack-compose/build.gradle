@@ -44,10 +44,6 @@ android {
         exclude "META-INF/AL2.0"
         exclude "META-INF/LGPL2.1"
     }
-    kotlinOptions {
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
-    }
 }
 
 dependencies {

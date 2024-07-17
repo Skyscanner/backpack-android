@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         minSdkVersion 28
-        targetSdkVersion 33
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -31,7 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.majorVersion
         freeCompilerArgs += [
-            "-Xopt-in=kotlin.RequiresOptIn",
+            "-opt-in=kotlin.RequiresOptIn",
+            "-opt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi",
+            "-opt-in=net.skyscanner.backpack.util.InternalBackpackApi"
         ]
     }
     lintOptions {
