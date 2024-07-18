@@ -79,6 +79,7 @@ android {
         unitTests.all {
             test {
                 systemProperty 'variant', System.getProperty('variant') ?: "default"
+                systemProperty 'robolectric.pixelCopyRenderMode', "hardware"
             }
 
         }

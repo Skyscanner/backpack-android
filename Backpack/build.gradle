@@ -30,10 +30,6 @@ apply from: "tokens.gradle.kts"
 
 android {
     namespace 'net.skyscanner.backpack'
-    kotlinOptions {
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
-    }
 }
 
 dependencies {
