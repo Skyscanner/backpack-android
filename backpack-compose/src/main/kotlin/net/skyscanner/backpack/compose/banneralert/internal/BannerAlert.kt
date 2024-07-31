@@ -1,7 +1,11 @@
 package net.skyscanner.backpack.compose.banneralert.internal
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -52,29 +56,36 @@ internal fun BannerAlert(
         BPKBannerAlertType.Error -> BpkTheme.colors.statusDangerSpot
     }
 
-    Row(
+    Box(
         modifier = modifier
-            .background(background)
-            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(BpkBorderRadius.Sm)),
     ) {
-        BpkIcon(
-            modifier = Modifier.padding(horizontal = BpkSpacing.Md),
-            icon = iconFinal,
-            tint = tint,
-            contentDescription = iconContentDescription,
-        )
-        BpkText(
-            text = message,
-            textAlign = TextAlign.Start,
-            color = BpkTheme.colors.textPrimary,
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(background)
+                .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
+        ) {
+            BpkIcon(
+                icon = iconFinal,
+                tint = tint,
+                contentDescription = iconContentDescription,
+            )
+            BpkText(
+                modifier = Modifier.fillMaxWidth().padding(start = BpkSpacing.Md),
+                text = message,
+                textAlign = TextAlign.Start,
+                color = BpkTheme.colors.textPrimary,
+            )
+        }
     }
 }
 
-@Preview
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
-private fun BannerAlertPreviewOnContrast(
+private fun BannerAlertPreview(
     @PreviewParameter(BannerAlertPreviewParamsProvider::class) preview: Pair<BPKBannerAlertType, BPKBannerAlertStyle>,
 ) {
     BannerAlert(
