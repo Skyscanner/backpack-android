@@ -6,9 +6,16 @@
 
 ## Default
 
-| Day | Night |
-|-----|-------|
-|     |       |
+| Day                                                   | Night                                                 |
+|-------------------------------------------------------|-------------------------------------------------------|
+|<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/chai/AI-632-contribute_info_banner/docs/compose/BannerAlert/screenshots/banner-alert-default-light.png" alt="ComponentName component" width="375"/> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/chai/AI-632-contribute_info_banner/docs/compose/BannerAlert/screenshots/banner-alert-default-dark.png" alt="ComponentName component" width="375"/>|
+
+
+## OnContrast
+
+| Day                                                   | Night                                                 |
+|-------------------------------------------------------|-------------------------------------------------------|
+|<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/chai/AI-632-contribute_info_banner/docs/compose/BannerAlert/screenshots/banner-alert-on-contrast-light.png" alt="ComponentName component" width="375"/> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/chai/AI-632-contribute_info_banner/docs/compose/BannerAlert/screenshots/banner-alert-on-contrast-dark.png" alt="ComponentName component" width="375"/>|
 
 ## Installation
 
