@@ -22,11 +22,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.banneralert.BPKBannerAlert
 import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertStyle
+import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.components.BannerAlertComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -41,9 +44,29 @@ fun BPKBannerAlertStoryDefault(modifier: Modifier = Modifier) =
     Column(
         modifier
             .fillMaxSize()
-            .background(BpkTheme.colors.surfaceDefault),
+            .background(BpkTheme.colors.surfaceDefault)
+            .verticalScroll(rememberScrollState()),
     ) {
-        BPKBannerAlert(message = message, modifier.padding(8.dp), style = BPKBannerAlertStyle.Default)
+        BPKBannerAlert(
+            type = BPKBannerAlertType.Info,
+            message = message,
+            modifier = Modifier.padding(4.dp),
+        )
+        BPKBannerAlert(
+            type = BPKBannerAlertType.Warning,
+            message = message,
+            modifier = Modifier.padding(4.dp),
+        )
+        BPKBannerAlert(
+            type = BPKBannerAlertType.Error,
+            message = message,
+            modifier = Modifier.padding(4.dp),
+        )
+        BPKBannerAlert(
+            type = BPKBannerAlertType.Success,
+            message = message,
+            modifier = Modifier.padding(4.dp),
+        )
     }
 
 @Composable
@@ -53,7 +76,31 @@ fun BPKBannerAlertStoryOnContrast(modifier: Modifier = Modifier) =
     Column(
         modifier
             .fillMaxSize()
-            .background(BpkTheme.colors.surfaceContrast),
+            .background(BpkTheme.colors.surfaceContrast)
+            .verticalScroll(rememberScrollState()),
     ) {
-        BPKBannerAlert(message = message, Modifier.padding(8.dp), style = BPKBannerAlertStyle.OnContrast)
+        BPKBannerAlert(
+            modifier = Modifier.padding(4.dp),
+            type = BPKBannerAlertType.Info,
+            message = message,
+            style = BPKBannerAlertStyle.OnContrast,
+        )
+        BPKBannerAlert(
+            modifier = Modifier.padding(4.dp),
+            type = BPKBannerAlertType.Warning,
+            message = message,
+            style = BPKBannerAlertStyle.OnContrast,
+        )
+        BPKBannerAlert(
+            modifier = Modifier.padding(4.dp),
+            type = BPKBannerAlertType.Error,
+            message = message,
+            style = BPKBannerAlertStyle.OnContrast,
+        )
+        BPKBannerAlert(
+            modifier = Modifier.padding(4.dp),
+            type = BPKBannerAlertType.Success,
+            message = message,
+            style = BPKBannerAlertStyle.OnContrast,
+        )
     }
