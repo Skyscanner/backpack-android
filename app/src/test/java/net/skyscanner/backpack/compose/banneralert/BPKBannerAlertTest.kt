@@ -22,7 +22,11 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.AccountAdd
+import net.skyscanner.backpack.compose.tokens.Ai
 import net.skyscanner.backpack.compose.tokens.Airline
+import net.skyscanner.backpack.compose.tokens.BaggageCabin
 import org.junit.Test
 
 private const val message =
@@ -31,57 +35,100 @@ private const val message =
 class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
     fun default() = snap {
         BPKBannerAlert(message = message)
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfo() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Info)
     }
 
     @Test
-    fun bannerInfoOnContrast() = snap {
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Info, style = BPKBannerAlertStyle.OnContrast)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerError() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Error)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerErrorOnContrast() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Error, style = BPKBannerAlertStyle.OnContrast)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerWarning() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Warning)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerWarningOnContrast() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Warning, style = BPKBannerAlertStyle.OnContrast)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerSuccess() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Success)
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerSuccessOnContrast() = snap {
         BPKBannerAlert(message = message, type = BPKBannerAlertType.Success, style = BPKBannerAlertStyle.OnContrast)
     }
 
     @Test
-    fun bannerInfoOnContrastCustomIcon() = snap {
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun bannerInfoOnContrastCustomIconInfo() = snap {
         BPKBannerAlert(
             message = message, type = BPKBannerAlertType.Info, icon = CustomIcon(
                 icon = BpkIcon.Airline,
+                accessibilityLabel = "Airline",
+            ),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun bannerInfoOnContrastCustomIconError() = snap {
+        BPKBannerAlert(
+            message = message, type = BPKBannerAlertType.Error,
+            icon = CustomIcon(
+                icon = BpkIcon.BaggageCabin,
+                accessibilityLabel = "Airline",
+            ),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun bannerInfoOnContrastCustomIconWarning() = snap {
+        BPKBannerAlert(
+            message = message, type = BPKBannerAlertType.Warning,
+            icon = CustomIcon(
+                icon = BpkIcon.AccountAdd,
+                accessibilityLabel = "Airline",
+            ),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun bannerInfoOnContrastCustomIconSuccess() = snap {
+        BPKBannerAlert(
+            message = message, type = BPKBannerAlertType.Success,
+            icon = CustomIcon(
+                icon = BpkIcon.Ai,
                 accessibilityLabel = "Airline",
             ),
         )
