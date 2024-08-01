@@ -41,7 +41,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 
@@ -63,7 +62,7 @@ internal fun BannerAlert(
     val iconFinal = icon ?: when (type) {
         BPKBannerAlertType.Info -> BpkIcon.InformationCircle
         BPKBannerAlertType.Success -> BpkIcon.TickCircle
-        BPKBannerAlertType.Warning -> BpkIcon.ExclamationCircle
+        BPKBannerAlertType.Warning -> BpkIcon.InformationCircle
         BPKBannerAlertType.Error -> BpkIcon.CloseCircle
     }
 
@@ -91,9 +90,12 @@ internal fun BannerAlert(
                 contentDescription = iconContentDescription,
             )
             BpkText(
-                modifier = Modifier.fillMaxWidth().padding(start = BpkSpacing.Md),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = BpkSpacing.Md),
                 text = message,
                 textAlign = TextAlign.Start,
+                style = BpkTheme.typography.footnote,
                 color = BpkTheme.colors.textPrimary,
             )
         }
