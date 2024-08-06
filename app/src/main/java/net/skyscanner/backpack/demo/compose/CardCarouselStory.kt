@@ -45,7 +45,6 @@ fun CardCarouselStory(
     modifier: Modifier = Modifier,
 ) {
     val configuration = LocalConfiguration.current
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -55,20 +54,28 @@ fun CardCarouselStory(
     ) {
         when (configuration.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> {
-                CardCarouselSample(imageAspectRatio = 3.5f)
+                CardCarouselMultiCardSample(imageAspectRatio = 3.5f)
             }
 
             else -> {
-                CardCarouselSample(modifier = Modifier.aspectRatio(ratio = 0.75f), imageAspectRatio = 0.85f)
+                CardCarouselMultiCardSample(
+                    imageAspectRatio = 0.85f,
+                    modifier = Modifier.aspectRatio(ratio = 0.75f),
+                )
             }
         }
     }
 }
 
 @Composable
-private fun CardCarouselSample(imageAspectRatio: Float, modifier: Modifier = Modifier) {
+internal fun CardCarouselMultiCardSample(
+    imageAspectRatio: Float,
+    modifier: Modifier = Modifier,
+    currentCard: Int = 0,
+) {
     BpkCardCarousel(
         modifier = modifier,
+        currentCard = currentCard,
         cards = listOf(
             {
                 BpkCardCarouselItem(
@@ -82,11 +89,13 @@ private fun CardCarouselSample(imageAspectRatio: Float, modifier: Modifier = Mod
                             painter = painterResource(id = R.drawable.carousel_placeholder_1),
                             contentDescription = null,
                         )
-                    },)
+                    },
+                )
             },
             {
                 BpkCardCarouselItem(
                     imageAccessibilityLabel = "imageAccessibilityLabel",
+
                     title = "A long card title that should wrap",
                     description = "Enim fugiat sunt quis culpa nostrud officia mollit.",
                     image = {
@@ -96,7 +105,8 @@ private fun CardCarouselSample(imageAspectRatio: Float, modifier: Modifier = Mod
                             painter = painterResource(id = R.drawable.carousel_placeholder_2),
                             contentDescription = null,
                         )
-                    },)
+                    },
+                )
             },
             {
                 BpkCardCarouselItem(
@@ -110,8 +120,31 @@ private fun CardCarouselSample(imageAspectRatio: Float, modifier: Modifier = Mod
                             painter = painterResource(id = R.drawable.carousel_placeholder_3),
                             contentDescription = null,
                         )
-                    },)
+                    },
+                )
             },
         ),
+    )
+}
+
+@Composable
+internal fun CardCarouselSingleCardSample(imageAspectRatio: Float, modifier: Modifier = Modifier) {
+    BpkCardCarousel(
+        modifier = modifier,
+        cards = listOf {
+            BpkCardCarouselItem(
+                imageAccessibilityLabel = "imageAccessibilityLabel",
+                title = "Card title",
+                description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
+                image = {
+                    Image(
+                        modifier = Modifier.aspectRatio(imageAspectRatio),
+                        contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.carousel_placeholder_1),
+                        contentDescription = null,
+                    )
+                },
+            )
+        },
     )
 }
