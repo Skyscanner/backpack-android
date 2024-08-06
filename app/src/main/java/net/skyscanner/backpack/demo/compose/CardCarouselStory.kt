@@ -71,11 +71,11 @@ fun CardCarouselStory(
 internal fun CardCarouselMultiCardSample(
     imageAspectRatio: Float,
     modifier: Modifier = Modifier,
-    currentCard: Int = 0,
+    currentCardIndex: Int = 0,
 ) {
     BpkCardCarousel(
         modifier = modifier,
-        currentCard = currentCard,
+        currentCard = currentCardIndex,
         cards = listOf(
             {
                 BpkCarouselCard(
