@@ -30,6 +30,7 @@ import org.junit.Test
 class BpkCardCarouselTest : BpkSnapshotTest() {
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun singleCard() = snap {
         CardCarouselSingleCardSample(
             imageAspectRatio = 0.85f,
@@ -38,6 +39,7 @@ class BpkCardCarouselTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun multipleCard() = snap {
         CardCarouselMultiCardSample(
             imageAspectRatio = 0.85f,
@@ -46,18 +48,10 @@ class BpkCardCarouselTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun setCurrentCard() = snap {
         CardCarouselMultiCardSample(
             currentCard = 1,
-            imageAspectRatio = 0.85f,
-            modifier = Modifier.aspectRatio(ratio = 0.75f),
-        )
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun multipleCardDarkMode() = snap {
-        CardCarouselMultiCardSample(
             imageAspectRatio = 0.85f,
             modifier = Modifier.aspectRatio(ratio = 0.75f),
         )
