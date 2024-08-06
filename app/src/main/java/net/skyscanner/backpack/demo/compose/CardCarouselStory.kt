@@ -32,7 +32,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarousel
-import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarouselItem
+import net.skyscanner.backpack.compose.cardcarousel.BpkCarouselCard
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardCarouselComponent
@@ -78,7 +78,7 @@ internal fun CardCarouselMultiCardSample(
         currentCard = currentCard,
         cards = listOf(
             {
-                BpkCardCarouselItem(
+                BpkCarouselCard(
                     imageAccessibilityLabel = "imageAccessibilityLabel",
                     title = "Card title",
                     description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
@@ -93,7 +93,7 @@ internal fun CardCarouselMultiCardSample(
                 )
             },
             {
-                BpkCardCarouselItem(
+                BpkCarouselCard(
                     imageAccessibilityLabel = "imageAccessibilityLabel",
 
                     title = "A long card title that should wrap",
@@ -109,7 +109,7 @@ internal fun CardCarouselMultiCardSample(
                 )
             },
             {
-                BpkCardCarouselItem(
+                BpkCarouselCard(
                     imageAccessibilityLabel = "imageAccessibilityLabel",
                     title = "Another card title",
                     description = "Voluptate anim occaecat cillum veniam sunt irure minim.",
@@ -132,7 +132,7 @@ internal fun CardCarouselSingleCardSample(imageAspectRatio: Float, modifier: Mod
     BpkCardCarousel(
         modifier = modifier,
         cards = listOf {
-            BpkCardCarouselItem(
+            BpkCarouselCard(
                 imageAccessibilityLabel = "imageAccessibilityLabel",
                 title = "Card title",
                 description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",

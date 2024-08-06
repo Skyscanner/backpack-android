@@ -107,7 +107,7 @@ fun BpkCardCarousel(
                     cards[page % totalCard]()
                 }
             }
-            if (true) {
+            if (totalCard > 1) {
                 BpkPageIndicator(
                     modifier = Modifier.testTag("pageIndicator"),
                     totalIndicators = totalCard,
@@ -120,7 +120,7 @@ fun BpkCardCarousel(
 }
 
 @Composable
-fun BpkCardCarouselItem(
+fun BpkCarouselCard(
     imageAccessibilityLabel: String,
     title: String,
     description: String,
