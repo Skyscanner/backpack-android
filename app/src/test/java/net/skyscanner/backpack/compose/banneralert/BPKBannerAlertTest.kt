@@ -35,61 +35,61 @@ import org.junit.Test
 class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
-    fun default() = snap {
+    fun default() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfo() = snap {
+    fun bannerInfo() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Info)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Info, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerError() = snap {
+    fun bannerError() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Error)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerErrorOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+    fun bannerErrorOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Error, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerWarning() = snap {
+    fun bannerWarning() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Warning)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerWarningOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+    fun bannerWarningOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Warning, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerSuccess() = snap {
+    fun bannerSuccess() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Success)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerSuccessOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+    fun bannerSuccessOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
         TestBannerAlert(type = BpkBannerAlertType.Success, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconInfo() = snap {
+    fun bannerInfoOnContrastCustomIconInfo() = snap(background = { BpkTheme.colors.coreAccent }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -100,7 +100,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconError() = snap {
+    fun bannerInfoOnContrastCustomIconError() = snap(background = { BpkTheme.colors.coreAccent }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -111,7 +111,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconWarning() = snap {
+    fun bannerInfoOnContrastCustomIconWarning() = snap(background = { BpkTheme.colors.coreAccent }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -122,7 +122,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun bannerInfoOnContrastCustomIconSuccess() = snap {
+    fun bannerInfoOnContrastCustomIconSuccess() = snap(background = { BpkTheme.colors.coreAccent }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
