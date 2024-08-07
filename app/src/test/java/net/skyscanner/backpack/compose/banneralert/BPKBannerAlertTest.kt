@@ -36,55 +36,55 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        GetBannerAlert()
+        TestBannerAlert()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfo() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Info)
+        TestBannerAlert(type = BpkBannerAlertType.Info)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
-        GetBannerAlert(type = BpkBannerAlertType.Info, style = BpkBannerAlertStyle.OnContrast)
+    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        TestBannerAlert(type = BpkBannerAlertType.Info, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerError() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Error)
+        TestBannerAlert(type = BpkBannerAlertType.Error)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerErrorOnContrast() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Error, style = BpkBannerAlertStyle.OnContrast)
+    fun bannerErrorOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        TestBannerAlert(type = BpkBannerAlertType.Error, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerWarning() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Warning)
+        TestBannerAlert(type = BpkBannerAlertType.Warning)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerWarningOnContrast() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Warning, style = BpkBannerAlertStyle.OnContrast)
+    fun bannerWarningOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        TestBannerAlert(type = BpkBannerAlertType.Warning, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerSuccess() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Success)
+        TestBannerAlert(type = BpkBannerAlertType.Success)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerSuccessOnContrast() = snap {
-        GetBannerAlert(type = BpkBannerAlertType.Success, style = BpkBannerAlertStyle.OnContrast)
+    fun bannerSuccessOnContrast() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        TestBannerAlert(type = BpkBannerAlertType.Success, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
@@ -132,7 +132,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
     }
 
     @Composable
-    fun GetBannerAlert(
+    private fun TestBannerAlert(
         type: BpkBannerAlertType = BpkBannerAlertType.Info,
         style: BpkBannerAlertStyle = BpkBannerAlertStyle.Default,
     ) {
