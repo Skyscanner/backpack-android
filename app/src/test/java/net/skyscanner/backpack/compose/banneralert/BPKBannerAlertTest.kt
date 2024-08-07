@@ -35,61 +35,61 @@ import org.junit.Test
 class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
-    fun default() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun default() = snap(background = { BpkTheme.colors.canvas }) {
         TestBannerAlert()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfo() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfo() = snap(background = { BpkTheme.colors.canvas }) {
         TestBannerAlert(type = BpkBannerAlertType.Info)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
         TestBannerAlert(type = BpkBannerAlertType.Info, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerError() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerError() = snap(background = { BpkTheme.colors.canvas }) {
         TestBannerAlert(type = BpkBannerAlertType.Error)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerErrorOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerErrorOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
         TestBannerAlert(type = BpkBannerAlertType.Error, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerWarning() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerWarning() = snap(background = { BpkTheme.colors.canvas }) {
         TestBannerAlert(type = BpkBannerAlertType.Warning)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerWarningOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerWarningOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
         TestBannerAlert(type = BpkBannerAlertType.Warning, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerSuccess() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerSuccess() = snap(background = { BpkTheme.colors.canvas }) {
         TestBannerAlert(type = BpkBannerAlertType.Success)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerSuccessOnContrast() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerSuccessOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
         TestBannerAlert(type = BpkBannerAlertType.Success, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconInfo() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfoOnContrastCustomIconInfo() = snap(background = { BpkTheme.colors.canvas }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -100,7 +100,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconError() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfoOnContrastCustomIconError() = snap(background = { BpkTheme.colors.canvas }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -111,7 +111,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun bannerInfoOnContrastCustomIconWarning() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfoOnContrastCustomIconWarning() = snap(background = { BpkTheme.colors.canvas }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),
@@ -122,7 +122,7 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun bannerInfoOnContrastCustomIconSuccess() = snap(background = { BpkTheme.colors.coreAccent }) {
+    fun bannerInfoOnContrastCustomIconSuccess() = snap(background = { BpkTheme.colors.canvas }) {
         BpkBannerAlert(
             message = stringResource(id = R.string.stub_md),
             alertTypeContentDescription = stringResource(id = R.string.content_description),

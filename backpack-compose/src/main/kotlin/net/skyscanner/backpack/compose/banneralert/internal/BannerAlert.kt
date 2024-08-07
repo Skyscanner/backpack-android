@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
+import net.skyscanner.backpack.compose.tokens.internal.BpkInfoBannerColors
 
 @Composable
 internal fun BannerAlert(
@@ -55,8 +56,8 @@ internal fun BannerAlert(
 ) {
 
     val background = when (style) {
-        BpkBannerAlertStyle.Default -> BpkTheme.colors.canvasContrast
-        BpkBannerAlertStyle.OnContrast -> BpkTheme.colors.canvas
+        BpkBannerAlertStyle.Default -> BpkInfoBannerColors.default
+        BpkBannerAlertStyle.OnContrast -> BpkInfoBannerColors.onContrast
     }
 
     val iconFinal = icon ?: when (type) {
@@ -67,10 +68,10 @@ internal fun BannerAlert(
     }
 
     val tint = when (type) {
-        BpkBannerAlertType.Info -> BpkTheme.colors.textSecondary
-        BpkBannerAlertType.Success -> BpkTheme.colors.statusSuccessSpot
-        BpkBannerAlertType.Warning -> BpkTheme.colors.statusWarningSpot
-        BpkBannerAlertType.Error -> BpkTheme.colors.statusDangerSpot
+        BpkBannerAlertType.Info -> BpkInfoBannerColors.info
+        BpkBannerAlertType.Success -> BpkInfoBannerColors.success
+        BpkBannerAlertType.Warning -> BpkInfoBannerColors.warning
+        BpkBannerAlertType.Error -> BpkInfoBannerColors.error
     }
 
     Box(

@@ -41,14 +41,14 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @BannerAlertComponent
 @ComposeStory("Default")
 fun BPKBannerAlertStoryDefault(modifier: Modifier = Modifier) {
-    StoryContent(style = BpkBannerAlertStyle.Default, background = BpkTheme.colors.coreAccent)
+    StoryContent(style = BpkBannerAlertStyle.Default, background = BpkTheme.colors.canvas)
 }
 
 @Composable
 @BannerAlertComponent
 @ComposeStory("OnContrast")
 fun BPKBannerAlertStoryOnContrast(modifier: Modifier = Modifier) {
-    StoryContent(style = BpkBannerAlertStyle.OnContrast, background = BpkTheme.colors.coreAccent)
+    StoryContent(style = BpkBannerAlertStyle.OnContrast, background = BpkTheme.colors.canvasContrast)
 }
 
 @Composable
