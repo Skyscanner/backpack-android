@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertStyle
-import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertType
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertStyle
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -46,31 +46,31 @@ import net.skyscanner.backpack.compose.tokens.TickCircle
 
 @Composable
 internal fun BannerAlert(
-    type: BPKBannerAlertType,
+    type: BpkBannerAlertType,
     message: String,
-    style: BPKBannerAlertStyle,
+    style: BpkBannerAlertStyle,
     modifier: Modifier = Modifier,
     icon: BpkIcon? = null,
-    iconContentDescription: String? = null,
+    alertTypeContentDescription: String? = null,
 ) {
 
     val background = when (style) {
-        BPKBannerAlertStyle.Default -> BpkTheme.colors.canvasContrast
-        BPKBannerAlertStyle.OnContrast -> BpkTheme.colors.canvas
+        BpkBannerAlertStyle.Default -> BpkTheme.colors.canvasContrast
+        BpkBannerAlertStyle.OnContrast -> BpkTheme.colors.canvas
     }
 
     val iconFinal = icon ?: when (type) {
-        BPKBannerAlertType.Info -> BpkIcon.InformationCircle
-        BPKBannerAlertType.Success -> BpkIcon.TickCircle
-        BPKBannerAlertType.Warning -> BpkIcon.InformationCircle
-        BPKBannerAlertType.Error -> BpkIcon.CloseCircle
+        BpkBannerAlertType.Info -> BpkIcon.InformationCircle
+        BpkBannerAlertType.Success -> BpkIcon.TickCircle
+        BpkBannerAlertType.Warning -> BpkIcon.InformationCircle
+        BpkBannerAlertType.Error -> BpkIcon.CloseCircle
     }
 
     val tint = when (type) {
-        BPKBannerAlertType.Info -> BpkTheme.colors.textSecondary
-        BPKBannerAlertType.Success -> BpkTheme.colors.statusSuccessSpot
-        BPKBannerAlertType.Warning -> BpkTheme.colors.statusWarningSpot
-        BPKBannerAlertType.Error -> BpkTheme.colors.statusDangerSpot
+        BpkBannerAlertType.Info -> BpkTheme.colors.textSecondary
+        BpkBannerAlertType.Success -> BpkTheme.colors.statusSuccessSpot
+        BpkBannerAlertType.Warning -> BpkTheme.colors.statusWarningSpot
+        BpkBannerAlertType.Error -> BpkTheme.colors.statusDangerSpot
     }
 
     Box(
@@ -87,7 +87,7 @@ internal fun BannerAlert(
             BpkIcon(
                 icon = iconFinal,
                 tint = tint,
-                contentDescription = iconContentDescription,
+                contentDescription = alertTypeContentDescription,
             )
             BpkText(
                 modifier = Modifier
@@ -106,7 +106,7 @@ internal fun BannerAlert(
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun BannerAlertPreview(
-    @PreviewParameter(BannerAlertPreviewParamsProvider::class) preview: Pair<BPKBannerAlertType, BPKBannerAlertStyle>,
+    @PreviewParameter(BannerAlertPreviewParamsProvider::class) preview: Pair<BpkBannerAlertType, BpkBannerAlertStyle>,
 ) {
     BannerAlert(
         type = preview.first,
@@ -116,19 +116,19 @@ private fun BannerAlertPreview(
     )
 }
 
-private class BannerAlertPreviewParamsProvider : PreviewParameterProvider<Pair<BPKBannerAlertType, BPKBannerAlertStyle>> {
-    override val values: Sequence<Pair<BPKBannerAlertType, BPKBannerAlertStyle>>
+private class BannerAlertPreviewParamsProvider : PreviewParameterProvider<Pair<BpkBannerAlertType, BpkBannerAlertStyle>> {
+    override val values: Sequence<Pair<BpkBannerAlertType, BpkBannerAlertStyle>>
         get() = sequenceOf(
-            Pair(BPKBannerAlertType.Info, BPKBannerAlertStyle.Default),
-            Pair(BPKBannerAlertType.Info, BPKBannerAlertStyle.OnContrast),
+            Pair(BpkBannerAlertType.Info, BpkBannerAlertStyle.Default),
+            Pair(BpkBannerAlertType.Info, BpkBannerAlertStyle.OnContrast),
 
-            Pair(BPKBannerAlertType.Success, BPKBannerAlertStyle.Default),
-            Pair(BPKBannerAlertType.Success, BPKBannerAlertStyle.OnContrast),
+            Pair(BpkBannerAlertType.Success, BpkBannerAlertStyle.Default),
+            Pair(BpkBannerAlertType.Success, BpkBannerAlertStyle.OnContrast),
 
-            Pair(BPKBannerAlertType.Warning, BPKBannerAlertStyle.Default),
-            Pair(BPKBannerAlertType.Warning, BPKBannerAlertStyle.OnContrast),
+            Pair(BpkBannerAlertType.Warning, BpkBannerAlertStyle.Default),
+            Pair(BpkBannerAlertType.Warning, BpkBannerAlertStyle.OnContrast),
 
-            Pair(BPKBannerAlertType.Error, BPKBannerAlertStyle.Default),
-            Pair(BPKBannerAlertType.Error, BPKBannerAlertStyle.OnContrast),
+            Pair(BpkBannerAlertType.Error, BpkBannerAlertStyle.Default),
+            Pair(BpkBannerAlertType.Error, BpkBannerAlertStyle.OnContrast),
         )
 }

@@ -32,8 +32,7 @@ import net.skyscanner.backpack.compose.banneralert.BPKBannerAlert
 
 BPKBannerAlert(
     type = BPKBannerAlertType.Success,
-    message = "Hello world!",
-    modifier = Modifier.padding(4.dp)
+    message = "Hello world!"
 )
 
 
@@ -42,7 +41,7 @@ BPKBannerAlert(
 Available types are
 
 ```kotlin
-enum class BPKBannerAlertType {
+enum class BpkBannerAlertType {
     Info,
     Success,
     Warning,
@@ -57,7 +56,6 @@ import net.skyscanner.backpack.compose.banneralert.BPKBannerAlert
 import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertStyle
 
 BPKBannerAlert(
-    modifier = Modifier.padding(4.dp),
     type = BPKBannerAlertType.Success,
     message = "Hello world!",
     style = BPKBannerAlertStyle.OnContrast

@@ -26,81 +26,84 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.banneralert.BPKBannerAlert
-import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertStyle
-import net.skyscanner.backpack.compose.banneralert.BPKBannerAlertType
+import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlert
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertStyle
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertType
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BannerAlertComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-
-private const val message =
-    """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt laborum."""
 
 @Composable
 @BannerAlertComponent
 @ComposeStory("Default")
-fun BPKBannerAlertStoryDefault(modifier: Modifier = Modifier) =
+fun BPKBannerAlertStoryDefault(modifier: Modifier = Modifier) {
+    val message = stringResource(id = R.string.stub_md)
     Column(
         modifier
             .fillMaxSize()
             .background(BpkTheme.colors.surfaceDefault)
             .verticalScroll(rememberScrollState()),
     ) {
-        BPKBannerAlert(
-            type = BPKBannerAlertType.Info,
+        BpkBannerAlert(
+            type = BpkBannerAlertType.Info,
             message = message,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(BpkSpacing.Sm),
         )
-        BPKBannerAlert(
-            type = BPKBannerAlertType.Warning,
+        BpkBannerAlert(
+            type = BpkBannerAlertType.Warning,
             message = message,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(BpkSpacing.Sm),
         )
-        BPKBannerAlert(
-            type = BPKBannerAlertType.Error,
+        BpkBannerAlert(
+            type = BpkBannerAlertType.Error,
             message = message,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(BpkSpacing.Sm),
         )
-        BPKBannerAlert(
-            type = BPKBannerAlertType.Success,
+        BpkBannerAlert(
+            type = BpkBannerAlertType.Success,
             message = message,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(BpkSpacing.Sm),
         )
     }
+}
 
 @Composable
 @BannerAlertComponent
 @ComposeStory("OnContrast")
-fun BPKBannerAlertStoryOnContrast(modifier: Modifier = Modifier) =
+fun BPKBannerAlertStoryOnContrast(modifier: Modifier = Modifier) {
+    val message = stringResource(id = R.string.stub_md)
     Column(
         modifier
             .fillMaxSize()
             .background(BpkTheme.colors.surfaceContrast)
             .verticalScroll(rememberScrollState()),
     ) {
-        BPKBannerAlert(
-            modifier = Modifier.padding(4.dp),
-            type = BPKBannerAlertType.Info,
+        BpkBannerAlert(
+            modifier = Modifier.padding(BpkSpacing.Sm),
+            type = BpkBannerAlertType.Info,
             message = message,
-            style = BPKBannerAlertStyle.OnContrast,
+            style = BpkBannerAlertStyle.OnContrast,
         )
-        BPKBannerAlert(
-            modifier = Modifier.padding(4.dp),
-            type = BPKBannerAlertType.Warning,
+        BpkBannerAlert(
+            modifier = Modifier.padding(BpkSpacing.Sm),
+            type = BpkBannerAlertType.Warning,
             message = message,
-            style = BPKBannerAlertStyle.OnContrast,
+            style = BpkBannerAlertStyle.OnContrast,
         )
-        BPKBannerAlert(
-            modifier = Modifier.padding(4.dp),
-            type = BPKBannerAlertType.Error,
+        BpkBannerAlert(
+            modifier = Modifier.padding(BpkSpacing.Sm),
+            type = BpkBannerAlertType.Error,
             message = message,
-            style = BPKBannerAlertStyle.OnContrast,
+            style = BpkBannerAlertStyle.OnContrast,
         )
-        BPKBannerAlert(
-            modifier = Modifier.padding(4.dp),
-            type = BPKBannerAlertType.Success,
+        BpkBannerAlert(
+            modifier = Modifier.padding(BpkSpacing.Sm),
+            type = BpkBannerAlertType.Success,
             message = message,
-            style = BPKBannerAlertStyle.OnContrast,
+            style = BpkBannerAlertStyle.OnContrast,
         )
     }
+}

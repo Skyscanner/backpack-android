@@ -23,37 +23,33 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.banneralert.internal.BannerAlert
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
-enum class BPKBannerAlertType {
+enum class BpkBannerAlertType {
     Info,
     Success,
     Warning,
     Error,
 }
 
-enum class BPKBannerAlertStyle {
+enum class BpkBannerAlertStyle {
     Default,
     OnContrast,
 }
 
-data class CustomIcon(
-    val icon: BpkIcon?,
-    val accessibilityLabel: String,
-)
-
 @Composable
-fun BPKBannerAlert(
+fun BpkBannerAlert(
     message: String,
     modifier: Modifier = Modifier,
-    type: BPKBannerAlertType = BPKBannerAlertType.Info,
-    icon: CustomIcon? = null,
-    style: BPKBannerAlertStyle = BPKBannerAlertStyle.Default,
+    type: BpkBannerAlertType = BpkBannerAlertType.Info,
+    icon: BpkIcon? = null,
+    alertTypeContentDescription: String? = null,
+    style: BpkBannerAlertStyle = BpkBannerAlertStyle.Default,
 ) {
     BannerAlert(
         modifier = modifier,
         type = type,
         message = message,
-        icon = icon?.icon,
-        iconContentDescription = icon?.accessibilityLabel,
+        icon = icon,
+        alertTypeContentDescription = alertTypeContentDescription,
         style = style,
     )
 }

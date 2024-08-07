@@ -36,62 +36,62 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        BPKBannerAlert(message = message)
+        BpkBannerAlert(message = message)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfo() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Info)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Info)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfoOnContrast() = snap(background = { BpkTheme.colors.canvasContrast }) {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Info, style = BPKBannerAlertStyle.OnContrast)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Info, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerError() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Error)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Error)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerErrorOnContrast() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Error, style = BPKBannerAlertStyle.OnContrast)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Error, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerWarning() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Warning)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Warning)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerWarningOnContrast() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Warning, style = BPKBannerAlertStyle.OnContrast)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Warning, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerSuccess() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Success)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Success)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerSuccessOnContrast() = snap {
-        BPKBannerAlert(message = message, type = BPKBannerAlertType.Success, style = BPKBannerAlertStyle.OnContrast)
+        BpkBannerAlert(message = message, type = BpkBannerAlertType.Success, style = BpkBannerAlertStyle.OnContrast)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfoOnContrastCustomIconInfo() = snap {
-        BPKBannerAlert(
-            message = message, type = BPKBannerAlertType.Info, icon = CustomIcon(
+        BpkBannerAlert(
+            message = message, type = BpkBannerAlertType.Info, icon = CustomIcon(
                 icon = BpkIcon.Airline,
                 accessibilityLabel = "Airline",
             ),
@@ -101,8 +101,8 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfoOnContrastCustomIconError() = snap {
-        BPKBannerAlert(
-            message = message, type = BPKBannerAlertType.Error,
+        BpkBannerAlert(
+            message = message, type = BpkBannerAlertType.Error,
             icon = CustomIcon(
                 icon = BpkIcon.BaggageCabin,
                 accessibilityLabel = "Airline",
@@ -113,8 +113,8 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun bannerInfoOnContrastCustomIconWarning() = snap {
-        BPKBannerAlert(
-            message = message, type = BPKBannerAlertType.Warning,
+        BpkBannerAlert(
+            message = message, type = BpkBannerAlertType.Warning,
             icon = CustomIcon(
                 icon = BpkIcon.AccountAdd,
                 accessibilityLabel = "Airline",
@@ -125,8 +125,8 @@ class BPKBannerAlertTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun bannerInfoOnContrastCustomIconSuccess() = snap {
-        BPKBannerAlert(
-            message = message, type = BPKBannerAlertType.Success,
+        BpkBannerAlert(
+            message = message, type = BpkBannerAlertType.Success,
             icon = CustomIcon(
                 icon = BpkIcon.Ai,
                 accessibilityLabel = "Airline",
