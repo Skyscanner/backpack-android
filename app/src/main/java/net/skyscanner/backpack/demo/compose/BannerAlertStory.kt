@@ -26,6 +26,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.banneralert.BpkBannerAlert
 import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertStyle
@@ -40,70 +41,57 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @BannerAlertComponent
 @ComposeStory("Default")
 fun BPKBannerAlertStoryDefault(modifier: Modifier = Modifier) {
-    val message = stringResource(id = R.string.stub_md)
-    Column(
-        modifier
-            .fillMaxSize()
-            .background(BpkTheme.colors.surfaceDefault)
-            .verticalScroll(rememberScrollState()),
-    ) {
-        BpkBannerAlert(
-            type = BpkBannerAlertType.Info,
-            message = message,
-            modifier = Modifier.padding(BpkSpacing.Sm),
-        )
-        BpkBannerAlert(
-            type = BpkBannerAlertType.Warning,
-            message = message,
-            modifier = Modifier.padding(BpkSpacing.Sm),
-        )
-        BpkBannerAlert(
-            type = BpkBannerAlertType.Error,
-            message = message,
-            modifier = Modifier.padding(BpkSpacing.Sm),
-        )
-        BpkBannerAlert(
-            type = BpkBannerAlertType.Success,
-            message = message,
-            modifier = Modifier.padding(BpkSpacing.Sm),
-        )
-    }
+    StoryContent(style = BpkBannerAlertStyle.Default, background = BpkTheme.colors.surfaceDefault)
 }
 
 @Composable
 @BannerAlertComponent
 @ComposeStory("OnContrast")
 fun BPKBannerAlertStoryOnContrast(modifier: Modifier = Modifier) {
+    StoryContent(style = BpkBannerAlertStyle.OnContrast, background = BpkTheme.colors.surfaceContrast)
+}
+
+@Composable
+private fun StoryContent(
+    style: BpkBannerAlertStyle,
+    background: Color,
+    modifier: Modifier = Modifier,
+) {
     val message = stringResource(id = R.string.stub_md)
+    val typeContentDescription = stringResource(id = R.string.content_description)
     Column(
         modifier
             .fillMaxSize()
-            .background(BpkTheme.colors.surfaceContrast)
+            .background(background)
             .verticalScroll(rememberScrollState()),
     ) {
         BpkBannerAlert(
             modifier = Modifier.padding(BpkSpacing.Sm),
             type = BpkBannerAlertType.Info,
             message = message,
-            style = BpkBannerAlertStyle.OnContrast,
+            alertTypeContentDescription = typeContentDescription,
+            style = style,
         )
         BpkBannerAlert(
             modifier = Modifier.padding(BpkSpacing.Sm),
             type = BpkBannerAlertType.Warning,
             message = message,
-            style = BpkBannerAlertStyle.OnContrast,
+            alertTypeContentDescription = typeContentDescription,
+            style = style,
         )
         BpkBannerAlert(
             modifier = Modifier.padding(BpkSpacing.Sm),
             type = BpkBannerAlertType.Error,
             message = message,
-            style = BpkBannerAlertStyle.OnContrast,
+            alertTypeContentDescription = typeContentDescription,
+            style = style,
         )
         BpkBannerAlert(
             modifier = Modifier.padding(BpkSpacing.Sm),
             type = BpkBannerAlertType.Success,
             message = message,
-            style = BpkBannerAlertStyle.OnContrast,
+            alertTypeContentDescription = typeContentDescription,
+            style = style,
         )
     }
 }

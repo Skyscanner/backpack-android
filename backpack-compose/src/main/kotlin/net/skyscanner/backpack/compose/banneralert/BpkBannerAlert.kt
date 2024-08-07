@@ -38,10 +38,10 @@ enum class BpkBannerAlertStyle {
 @Composable
 fun BpkBannerAlert(
     message: String,
+    alertTypeContentDescription: String,
     modifier: Modifier = Modifier,
     type: BpkBannerAlertType = BpkBannerAlertType.Info,
     icon: BpkIcon? = null,
-    alertTypeContentDescription: String? = null,
     style: BpkBannerAlertStyle = BpkBannerAlertStyle.Default,
 ) {
     BannerAlert(
