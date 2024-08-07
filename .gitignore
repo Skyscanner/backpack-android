@@ -40,6 +40,7 @@ captures/
 # Intellij
 *.iml
 .idea/workspace.xml
+.idea/migrations.xml
 .idea/kotlinc.xml
 .idea/tasks.xml
 .idea/gradle.xml
