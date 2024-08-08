@@ -73,21 +73,23 @@ internal fun CardCarouselMultiCardSample(
     modifier: Modifier = Modifier,
     initialImage: Int = 0,
 ) {
-    val carouselState = rememberBpkCarouselState(totalImages = 3, initialImage = initialImage)
+    val cards = getCards(imageAspectRatio)
+    val carouselState = rememberBpkCarouselState(totalImages = cards.size, initialImage = initialImage)
     BpkCardCarousel(
         state = carouselState,
         modifier = modifier,
-        cards = getCards(imageAspectRatio),
+        cards = cards,
     )
 }
 
 @Composable
 internal fun CardCarouselSingleCardSample(imageAspectRatio: Float, modifier: Modifier = Modifier) {
-    val carouselState = rememberBpkCarouselState(totalImages = 3)
+    val cards = getCards(imageAspectRatio)
+    val carouselState = rememberBpkCarouselState(1)
     BpkCardCarousel(
         state = carouselState,
         modifier = modifier,
-        cards = getCards(imageAspectRatio).subList(0, 1),
+        cards = cards.subList(0, 1),
     )
 }
 
@@ -95,36 +97,39 @@ private fun getCards(imageAspectRatio: Float) = listOf(
     BpkCardCarouselItem(
         title = "Card title",
         description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
-        content = {
+        contentDescription = "imageAccessibilityLabel",
+        content = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.carousel_placeholder_1),
-                contentDescription = "imageAccessibilityLabel",
+                contentDescription = contentDescription,
             )
         },
     ),
     BpkCardCarouselItem(
         title = "A long card title that should wrap",
         description = "Enim fugiat sunt quis culpa nostrud officia mollit.",
-        content = {
+        contentDescription = "imageAccessibilityLabel",
+        content = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.carousel_placeholder_2),
-                contentDescription = "imageAccessibilityLabel",
+                contentDescription = contentDescription,
             )
         },
     ),
     BpkCardCarouselItem(
         title = "Another card title",
         description = "Voluptate anim occaecat cillum veniam sunt irure minim.",
-        content = {
+        contentDescription = "imageAccessibilityLabel",
+        content = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.carousel_placeholder_3),
-                contentDescription = "imageAccessibilityLabel",
+                contentDescription = contentDescription,
             )
         },
     ),

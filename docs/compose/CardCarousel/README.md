@@ -20,49 +20,28 @@ Example of a Card Carousel:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarousel
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+
+val cards = listOf(
+    BpkCardCarouselItem(
+        title = "Card title 1",
+        description = "Description of card 1",
+        contentDescription = "imageAccessibilityLabel"
+        content = { contentDescription ->
+            Image(
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = R.drawable.image),
+                contentDescription = contentDescription,
+            )
+        },
+    )
+)
+
+val carouselState = rememberBpkCarouselState(totalImages = cards.size, initialImage = initialImage)
 
 BpkCardCarousel(
-    cards = listOf(
-        {
-            BpkCarouselCard(
-                imageAccessibilityLabel = "imageAccessibilityLabel",
-                title = "Card title 1",
-                description = "Description of card 1",
-                image = {
-                    Image(
-                        painter = painterResource(id = R.drawable.card_1),
-                        contentDescription = null,
-                    )
-                },
-            )
-        },
-        {
-            BpkCarouselCard(
-                imageAccessibilityLabel = "imageAccessibilityLabel",
-                title = "Card title 2",
-                description = "Description of card 2",
-                image = {
-                    Image(
-                        painter = painterResource(id = R.drawable.card_2),
-                        contentDescription = null,
-                    )
-                },
-            )
-        },
-        {
-            BpkCarouselCard(
-                imageAccessibilityLabel = "imageAccessibilityLabel",
-                title = "Card title 3",
-                description = "Description of card 3",
-                image = {
-                    Image(
-                        painter = painterResource(id = R.drawable.card_3),
-                        contentDescription = null,
-                    )
-                },
-            )
-        },
-    ),
+    state = carouselState,
+    cards = cards,
 )
 ```
 
@@ -70,13 +49,17 @@ Example of a card changed callback:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarousel
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+
+val carouselState = rememberBpkCarouselState(totalImages = cards.size, initialImage = initialImage)
+
+LaunchedEffect(state.currentPage) {
+    print("current page: ${state.currentPage}")
+}
 
 BpkCardCarousel(
-    currentCard = 1,
-    cards = listOf(...),
-    onCardChanged = { index ->
-        print("current card: $index")
-    }
+    state = carouselState,
+    cards = cards,
 )
 ```
 
@@ -84,10 +67,13 @@ Example of starting in a different image:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarousel
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
+
+val carouselState = rememberBpkCarouselState(totalImages = cards.size, initialImage = initialImage)
 
 // show card carousel with card index 1
 BpkCardCarousel(
-    currentCard = 1,
-    cards = listOf(...),
+    state = carouselState,
+    cards = cards,
 )
 ```

@@ -39,8 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.fontscaling.MathUtils.lerp
 import net.skyscanner.backpack.compose.card.BpkCard
@@ -99,9 +97,8 @@ fun BpkCardCarousel(
                         BpkCarouselCard(
                             title = this.title,
                             description = this.description,
-                            contentDescription = contentDescription,
                             image = {
-                                content()
+                                content(contentDescription)
                             },
                         )
                     }
@@ -120,19 +117,16 @@ fun BpkCardCarousel(
 }
 
 @Composable
-fun BpkCarouselCard(
+internal fun BpkCarouselCard(
     title: String,
     modifier: Modifier = Modifier,
     description: String? = null,
-    contentDescription: String? = null,
     image: @Composable (BoxScope.() -> Unit),
 ) {
     BpkCard(
         corner = BpkCardCorner.Small,
         padding = BpkCardPadding.None,
-        modifier = modifier
-            .fillMaxWidth()
-            .semantics { this.contentDescription = contentDescription ?: "" },
+        modifier = modifier.fillMaxWidth(),
     ) {
         Column(
             modifier = Modifier
@@ -163,5 +157,5 @@ data class BpkCardCarouselItem(
     val title: String,
     val description: String? = null,
     val contentDescription: String? = null,
-    val content: @Composable () -> Unit,
+    val content: @Composable (contentDescription: String?) -> Unit,
 )
