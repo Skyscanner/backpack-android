@@ -32,7 +32,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarousel
-import net.skyscanner.backpack.compose.cardcarousel.BpkCarouselCard
+import net.skyscanner.backpack.compose.cardcarousel.BpkCardCarouselItem
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardCarouselComponent
@@ -56,7 +57,6 @@ fun CardCarouselStory(
             Configuration.ORIENTATION_LANDSCAPE -> {
                 CardCarouselMultiCardSample(imageAspectRatio = 3.5f)
             }
-
             else -> {
                 CardCarouselMultiCardSample(
                     imageAspectRatio = 0.85f,
@@ -71,80 +71,61 @@ fun CardCarouselStory(
 internal fun CardCarouselMultiCardSample(
     imageAspectRatio: Float,
     modifier: Modifier = Modifier,
-    currentCardIndex: Int = 0,
+    initialImage: Int = 0,
 ) {
+    val carouselState = rememberBpkCarouselState(totalImages = 3, initialImage = initialImage)
     BpkCardCarousel(
+        state = carouselState,
         modifier = modifier,
-        currentCard = currentCardIndex,
-        cards = listOf(
-            {
-                BpkCarouselCard(
-                    imageAccessibilityLabel = "imageAccessibilityLabel",
-                    title = "Card title",
-                    description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
-                    image = {
-                        Image(
-                            modifier = Modifier.aspectRatio(imageAspectRatio),
-                            contentScale = ContentScale.Crop,
-                            painter = painterResource(id = R.drawable.carousel_placeholder_1),
-                            contentDescription = null,
-                        )
-                    },
-                )
-            },
-            {
-                BpkCarouselCard(
-                    imageAccessibilityLabel = "imageAccessibilityLabel",
-
-                    title = "A long card title that should wrap",
-                    description = "Enim fugiat sunt quis culpa nostrud officia mollit.",
-                    image = {
-                        Image(
-                            modifier = Modifier.aspectRatio(imageAspectRatio),
-                            contentScale = ContentScale.Crop,
-                            painter = painterResource(id = R.drawable.carousel_placeholder_2),
-                            contentDescription = null,
-                        )
-                    },
-                )
-            },
-            {
-                BpkCarouselCard(
-                    imageAccessibilityLabel = "imageAccessibilityLabel",
-                    title = "Another card title",
-                    description = "Voluptate anim occaecat cillum veniam sunt irure minim.",
-                    image = {
-                        Image(
-                            modifier = Modifier.aspectRatio(imageAspectRatio),
-                            contentScale = ContentScale.Crop,
-                            painter = painterResource(id = R.drawable.carousel_placeholder_3),
-                            contentDescription = null,
-                        )
-                    },
-                )
-            },
-        ),
+        cards = getCards(imageAspectRatio),
     )
 }
 
 @Composable
 internal fun CardCarouselSingleCardSample(imageAspectRatio: Float, modifier: Modifier = Modifier) {
+    val carouselState = rememberBpkCarouselState(totalImages = 3)
     BpkCardCarousel(
+        state = carouselState,
         modifier = modifier,
-        cards = listOf {
-            BpkCarouselCard(
-                imageAccessibilityLabel = "imageAccessibilityLabel",
-                title = "Card title",
-                description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
-                image = {
-                    Image(
-                        modifier = Modifier.aspectRatio(imageAspectRatio),
-                        contentScale = ContentScale.Crop,
-                        painter = painterResource(id = R.drawable.carousel_placeholder_1),
-                        contentDescription = null,
-                    )
-                },
-            )
-        },
+        cards = getCards(imageAspectRatio).subList(0, 1),
     )
 }
+
+private fun getCards(imageAspectRatio: Float) = listOf(
+    BpkCardCarouselItem(
+        title = "Card title",
+        description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
+        content = {
+            Image(
+                modifier = Modifier.aspectRatio(imageAspectRatio),
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = R.drawable.carousel_placeholder_1),
+                contentDescription = "imageAccessibilityLabel",
+            )
+        },
+    ),
+    BpkCardCarouselItem(
+        title = "A long card title that should wrap",
+        description = "Enim fugiat sunt quis culpa nostrud officia mollit.",
+        content = {
+            Image(
+                modifier = Modifier.aspectRatio(imageAspectRatio),
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = R.drawable.carousel_placeholder_2),
+                contentDescription = "imageAccessibilityLabel",
+            )
+        },
+    ),
+    BpkCardCarouselItem(
+        title = "Another card title",
+        description = "Voluptate anim occaecat cillum veniam sunt irure minim.",
+        content = {
+            Image(
+                modifier = Modifier.aspectRatio(imageAspectRatio),
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = R.drawable.carousel_placeholder_3),
+                contentDescription = "imageAccessibilityLabel",
+            )
+        },
+    ),
+)
