@@ -51,7 +51,7 @@ class BpkCardCarouselTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun setCurrentCard() = snap {
         CardCarouselMultiCardSample(
-            currentCardIndex = 1,
+            initialImage = 1,
             imageAspectRatio = 0.85f,
             modifier = Modifier.aspectRatio(ratio = 0.75f),
         )
