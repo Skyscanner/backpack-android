@@ -98,7 +98,7 @@ private fun getCards(imageAspectRatio: Float) = listOf(
         title = "Card title",
         description = "Cupidatat elit elit cupidatat quis consequat sunt anim do ullamco",
         contentDescription = "imageAccessibilityLabel",
-        content = { contentDescription ->
+        imageContent = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,
@@ -111,7 +111,7 @@ private fun getCards(imageAspectRatio: Float) = listOf(
         title = "A long card title that should wrap",
         description = "Enim fugiat sunt quis culpa nostrud officia mollit.",
         contentDescription = "imageAccessibilityLabel",
-        content = { contentDescription ->
+        imageContent = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,
@@ -124,7 +124,7 @@ private fun getCards(imageAspectRatio: Float) = listOf(
         title = "Another card title",
         description = "Voluptate anim occaecat cillum veniam sunt irure minim.",
         contentDescription = "imageAccessibilityLabel",
-        content = { contentDescription ->
+        imageContent = { contentDescription ->
             Image(
                 modifier = Modifier.aspectRatio(imageAspectRatio),
                 contentScale = ContentScale.Crop,

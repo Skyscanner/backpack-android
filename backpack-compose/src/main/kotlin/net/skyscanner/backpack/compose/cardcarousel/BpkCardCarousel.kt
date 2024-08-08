@@ -93,7 +93,7 @@ fun BpkCardCarousel(
                     }) {
 
                     with(cards[internalState.getModdedPageNumber(page, internalState.pageCount)]) {
-                        val content = this.content
+                        val content = this.imageContent
                         BpkCarouselCard(
                             title = this.title,
                             description = this.description,
@@ -157,5 +157,5 @@ data class BpkCardCarouselItem(
     val title: String,
     val description: String? = null,
     val contentDescription: String? = null,
-    val content: @Composable (contentDescription: String?) -> Unit,
+    val imageContent: @Composable (contentDescription: String?) -> Unit,
 )

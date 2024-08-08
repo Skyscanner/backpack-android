@@ -27,7 +27,7 @@ val cards = listOf(
         title = "Card title 1",
         description = "Description of card 1",
         contentDescription = "imageAccessibilityLabel"
-        content = { contentDescription ->
+        imageContent = { contentDescription ->
             Image(
                 contentScale = ContentScale.Crop,
                 painter = painterResource(id = R.drawable.image),
