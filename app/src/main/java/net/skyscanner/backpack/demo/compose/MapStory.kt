@@ -38,7 +38,9 @@ import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
+import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
+import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 import net.skyscanner.backpack.compose.tokens.Cafe
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
@@ -71,6 +73,35 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
                 status = markerStatus(index),
                 state = rememberMarkerState(position = latLng),
                 onClick = { focusedMarker = index; viewedMarkers += index; false },
+            )
+        }
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "PriceV2")
+fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
+    var focusedMarker by remember { mutableIntStateOf(0) }
+    var previousSelectedMarker by remember { mutableIntStateOf(1) }
+
+    fun markerStatus(index: Int): BpkPriceMarkerV2Status = when (index) {
+        focusedMarker -> BpkPriceMarkerV2Status.Selected
+        previousSelectedMarker -> BpkPriceMarkerV2Status.PreviousSelected
+        else -> BpkPriceMarkerV2Status.Unselected
+    }
+
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = rememberCameraPositionState { MapPosition },
+        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
+    ) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkPriceMapMarkerV2(
+                title = stringArrayResource(R.array.map_marker_prices)[index],
+                status = markerStatus(index),
+                state = rememberMarkerState(position = latLng),
+                onClick = { previousSelectedMarker = focusedMarker; focusedMarker = index; false },
             )
         }
     }

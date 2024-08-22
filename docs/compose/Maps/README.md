@@ -10,6 +10,12 @@
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/price.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/price_dm.png" alt="Maps component - dark mode" width="375" /> |
 
+## Price Marker V2
+
+| Day                                                                                                                                                         | Night                                                                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/pricev2.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/pricev2_dm.png" alt="Maps component - dark mode" width="375" /> |
+
 ## Icon Marker
 
 | Day                                                                                                                                                         | Night                                                                                                                                                                   |
@@ -37,6 +43,18 @@ import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 BpkPriceMapMarker(
     title = "£198",
     status = BpkPriceMarkerStatus.Focused,
+)
+```
+
+Example of an price marker v2:
+
+```Kotlin
+import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
+import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+
+BpkPriceMapMarkerV2(
+    title = "£198",
+    status = BpkPriceMarkerV2Status.Selected,
 )
 ```
 
