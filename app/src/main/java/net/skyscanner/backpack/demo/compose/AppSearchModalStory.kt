@@ -116,27 +116,26 @@ internal fun DefaultAppSearchModalSample(
 ) {
     val destination = remember { mutableStateOf(inputText) }
     val showModal = rememberSaveable { mutableStateOf(true) }
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
             text = stringResource(R.string.generic_show),
             onClick = { showModal.value = true },
         )
-    }
-    if (showModal.value) {
-        BpkAppSearchModal(
-            modifier = modifier,
-            title = stringResource(id = R.string.destination),
-            inputText = destination.value,
-            inputHint = stringResource(id = R.string.text_field_hint),
-            results = result,
-            closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-            onClose = { showModal.value = false },
-            onInputChanged = { destination.value = it },
-            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
-                destination.value = ""
-            },
-            prefix = prefix,
-        )
+        if (showModal.value) {
+            BpkAppSearchModal(
+                title = stringResource(id = R.string.destination),
+                inputText = destination.value,
+                inputHint = stringResource(id = R.string.text_field_hint),
+                results = result,
+                closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+                onClose = { showModal.value = false },
+                onInputChanged = { destination.value = it },
+                clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
+                    destination.value = ""
+                },
+                prefix = prefix,
+            )
+        }
     }
 }
 
@@ -247,4 +246,5 @@ internal fun errorResult() = BpkAppSearchModalResult.Error(
 )
 
 @Composable
-internal fun loadingResult() = BpkAppSearchModalResult.Loading(accessibilityLabel = stringResource(id = R.string.content_is_loading))
+internal fun loadingResult() =
+    BpkAppSearchModalResult.Loading(accessibilityLabel = stringResource(id = R.string.content_is_loading))
