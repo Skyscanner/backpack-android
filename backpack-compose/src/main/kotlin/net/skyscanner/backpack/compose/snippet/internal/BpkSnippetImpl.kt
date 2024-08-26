@@ -45,6 +45,7 @@ internal fun BpkSnippetImpl(
     subHeading: String?,
     bodyText: String?,
     onClick: (() -> Unit)?,
+    accessibilityHeaderTagEnabled: Boolean?,
     modifier: Modifier = Modifier,
     content: @Composable (() -> Unit),
 ) {
@@ -71,8 +72,11 @@ internal fun BpkSnippetImpl(
                 text = headline,
                 style = BpkTheme.typography.heading4,
                 color = BpkTheme.colors.textPrimary,
-                modifier = Modifier.semantics { heading() },
-
+                modifier = Modifier.semantics {
+                    if (accessibilityHeaderTagEnabled == true) {
+                        heading()
+                    }
+                },
             )
             Spacer(modifier = Modifier.height(BpkSpacing.Sm))
         }

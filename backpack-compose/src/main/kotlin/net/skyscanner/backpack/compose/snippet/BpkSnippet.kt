@@ -29,6 +29,7 @@ fun BpkSnippet(
     headline: String? = null,
     subHeading: String? = null,
     bodyText: String? = null,
+    accessibilityHeaderTagEnabled: Boolean? = true,
     onClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit),
 ) {
@@ -38,6 +39,7 @@ fun BpkSnippet(
         headline = headline,
         subHeading = subHeading,
         bodyText = bodyText,
+        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         onClick = onClick,
         content = content,
     )

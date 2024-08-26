@@ -46,6 +46,7 @@ internal fun BpkSectionHeaderImpl(
     type: BpkSectionHeaderType,
     description: String?,
     button: BpkSectionHeaderButton?,
+    accessibilityHeaderTagEnabled: Boolean?,
     modifier: Modifier = Modifier,
 ) {
     val isTablet = isTablet()
@@ -67,7 +68,11 @@ internal fun BpkSectionHeaderImpl(
                     BpkTheme.typography.heading3
                 },
                 color = getTextColor(type),
-                modifier = Modifier.semantics { heading() },
+                modifier = Modifier.semantics {
+                    if (accessibilityHeaderTagEnabled == true) {
+                        heading()
+                    }
+                },
             )
             if (!description.isNullOrBlank()) {
                 BpkText(

@@ -76,6 +76,7 @@ private fun CardLayout(data: CardListSample) {
         imageOrientation = ImageOrientation.Landscape,
         headline = stringResource(data.headline),
         bodyText = data.bodyText?.let { stringResource(it) },
+        accessibilityHeaderTagEnabled = false,
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),

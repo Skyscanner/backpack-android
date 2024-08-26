@@ -28,6 +28,7 @@ fun BpkSectionHeader(
     modifier: Modifier = Modifier,
     description: String? = null,
     button: BpkSectionHeaderButton? = null,
+    accessibilityHeaderTagEnabled: Boolean? = true,
     type: BpkSectionHeaderType = BpkSectionHeaderType.Default,
 ) {
     BpkSectionHeaderImpl(
@@ -35,6 +36,7 @@ fun BpkSectionHeader(
         modifier = modifier,
         description = description,
         button = button,
+        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         type = type,
     )
 }
