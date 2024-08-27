@@ -90,26 +90,25 @@ fun ImageGalleryImageGridStory(
     val context = LocalContext.current
     val showModal = rememberSaveable { mutableStateOf(true) }
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
             text = stringResource(R.string.generic_show),
             onClick = { showModal.value = true },
         )
-    }
 
-    if (showModal.value) {
-        val modalState = rememberBpkModalState()
-        val coroutineScope = rememberCoroutineScope()
+        if (showModal.value) {
+            val modalState = rememberBpkModalState()
+            val coroutineScope = rememberCoroutineScope()
 
-        BpkImageGalleryImageGrid(
-            modifier = modifier,
-            state = modalState,
-            initialCategory = initialPage,
-            closeContentDescription = stringResource(R.string.navigation_close),
-            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
-            onDismiss = { showModal.value = false },
-            categories = ImageGalleryData.imageCategories(context),
-        )
+            BpkImageGalleryImageGrid(
+                state = modalState,
+                initialCategory = initialPage,
+                closeContentDescription = stringResource(R.string.navigation_close),
+                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onDismiss = { showModal.value = false },
+                categories = ImageGalleryData.imageCategories(context),
+            )
+        }
     }
 }
 
@@ -123,26 +122,25 @@ fun ImageGalleryChipGridStory(
     val context = LocalContext.current
     val showModal = rememberSaveable { mutableStateOf(true) }
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
             text = stringResource(R.string.generic_show),
             onClick = { showModal.value = true },
         )
-    }
 
-    if (showModal.value) {
-        val modalState = rememberBpkModalState()
-        val coroutineScope = rememberCoroutineScope()
+        if (showModal.value) {
+            val modalState = rememberBpkModalState()
+            val coroutineScope = rememberCoroutineScope()
 
-        BpkImageGalleryChipGrid(
-            modifier = modifier,
-            state = modalState,
-            initialCategory = initialPage,
-            closeContentDescription = stringResource(R.string.navigation_close),
-            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
-            onDismiss = { showModal.value = false },
-            categories = ImageGalleryData.chipCategories(context),
-        )
+            BpkImageGalleryChipGrid(
+                state = modalState,
+                initialCategory = initialPage,
+                closeContentDescription = stringResource(R.string.navigation_close),
+                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onDismiss = { showModal.value = false },
+                categories = ImageGalleryData.chipCategories(context),
+            )
+        }
     }
 }
 
@@ -155,27 +153,26 @@ fun ImageGallerySlideshowStory(
 ) {
     val showModal = rememberSaveable { mutableStateOf(true) }
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         BpkButton(
             text = stringResource(R.string.generic_show),
             onClick = { showModal.value = true },
         )
-    }
 
-    if (showModal.value) {
-        val modalState = rememberBpkModalState()
-        val coroutineScope = rememberCoroutineScope()
-        val context = LocalContext.current
+        if (showModal.value) {
+            val modalState = rememberBpkModalState()
+            val coroutineScope = rememberCoroutineScope()
+            val context = LocalContext.current
 
-        BpkImageGallerySlideshow(
-            modifier = modifier,
-            state = modalState,
-            closeContentDescription = stringResource(R.string.navigation_close),
-            initialImage = initialPage,
-            onCloseClicked = { coroutineScope.launch { modalState.hide() } },
-            onDismiss = { showModal.value = false },
-            images = ImageGalleryData.slideshowImages(context),
-        )
+            BpkImageGallerySlideshow(
+                state = modalState,
+                closeContentDescription = stringResource(R.string.navigation_close),
+                initialImage = initialPage,
+                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onDismiss = { showModal.value = false },
+                images = ImageGalleryData.slideshowImages(context),
+            )
+        }
     }
 }
 
