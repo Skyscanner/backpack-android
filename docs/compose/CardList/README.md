@@ -26,6 +26,8 @@ Example of a CardList:
 
 ## Rail
 
+* `AccessibilityHeaderTagEnabled`: Used to disable `Heading()` accessibility tag from internal `BpkSectionHeader` - Optional, true by default.
+
 ```Kotlin
 import androidx.annotation.StringRes
 import net.skyscanner.backpack.compose.cardlist.BpkCardList

@@ -24,6 +24,8 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
+* `AccessibilityHeaderTagEnabled`: Used to disable `Heading()` accessibility tag - Optional, true by default.
+
 ### Basic section header with a title.
 If you don't specify a `style` parameter it will use the `.default` type
 

@@ -41,6 +41,7 @@ internal fun BpkRailCardListImpl(
     description: String,
     headerButton: BpkSectionHeaderButton?,
     totalCards: Int,
+    accessibilityHeaderTagEnabled: Boolean?,
     modifier: Modifier = Modifier,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
@@ -52,6 +53,7 @@ internal fun BpkRailCardListImpl(
             description = description,
             modifier = Modifier.padding(horizontal = BpkSpacing.Base),
             button = headerButton,
+            accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         )
 
         Spacer(modifier = Modifier.height(BpkSpacing.Base))

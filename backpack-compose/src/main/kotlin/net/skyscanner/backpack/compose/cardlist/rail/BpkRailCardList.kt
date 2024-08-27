@@ -30,6 +30,7 @@ fun BpkRailCardList(
     description: String,
     totalCards: Int,
     modifier: Modifier = Modifier,
+    accessibilityHeaderTagEnabled: Boolean? = true,
     headerButton: BpkSectionHeaderButton? = null,
     content: @Composable (LazyItemScope.(Int) -> Unit),
 ) {
@@ -38,6 +39,7 @@ fun BpkRailCardList(
         description = description,
         headerButton = headerButton,
         totalCards = totalCards,
+        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         modifier = modifier,
         content = content,
     )
