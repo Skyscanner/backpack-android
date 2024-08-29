@@ -36,6 +36,7 @@ import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
+import net.skyscanner.backpack.compose.map.BpkLocationMapMarker
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
@@ -146,6 +147,24 @@ fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
     ) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkPointerMapMarker(
+                title = stringArrayResource(R.array.map_marker_prices)[index],
+                state = rememberMarkerState(position = latLng),
+            )
+        }
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Location")
+fun LocationMapMarkerStory(modifier: Modifier = Modifier) {
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = rememberCameraPositionState { MapPosition },
+        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
+    ) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkLocationMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
                 state = rememberMarkerState(position = latLng),
             )
