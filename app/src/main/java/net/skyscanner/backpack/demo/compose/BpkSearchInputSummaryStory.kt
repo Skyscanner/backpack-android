@@ -81,6 +81,13 @@ fun SearchInputSummary(modifier: Modifier = Modifier) {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
         )
+
+        SearchInputSummaryStory(
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.None,
+            readOnly = true,
+        )
     }
 }
 
@@ -89,6 +96,7 @@ internal fun SearchInputSummaryStory(
     inputText: String = stringResource(id = R.string.city_rome),
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
+    readOnly: Boolean = false,
 ) {
 
     var state by remember { mutableStateOf(inputText) }
@@ -103,5 +111,6 @@ internal fun SearchInputSummaryStory(
             state = ""
         },
         modifier = Modifier.fillMaxWidth(),
+        readOnly = readOnly,
     )
 }

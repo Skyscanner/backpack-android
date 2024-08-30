@@ -35,6 +35,8 @@ sealed class Prefix {
     data class Text(
         val prefixText: String,
     ) : Prefix()
+
+    data object None : Prefix()
 }
 
 @Composable
@@ -45,11 +47,13 @@ fun BpkSearchInputSummary(
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
 ) {
     BpkTextFieldImpl(
         value = inputText,
         onValueChange = onInputChanged,
         modifier = modifier,
+        readOnly = readOnly,
         placeholder = inputHint,
         prefix = prefix,
         status = BpkFieldStatus.Default,

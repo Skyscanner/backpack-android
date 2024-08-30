@@ -171,7 +171,7 @@ internal fun BpkTextFieldImpl(
                 interactionSource = interactionSource,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
-                clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
+                clearAction = if (readOnly && prefix == null) null else clearAction, // Remove clearAction if readOnly enabled.
                 type = type,
             )
         },
