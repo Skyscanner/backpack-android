@@ -18,6 +18,8 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
+BpkSearchInputSummary is a specialised text field with larger corners and support for a Prefix that can be None/Text/Icon.
+
 Example of a BpkSearchInputSummary showing a text prefix before the search query:
 
 ```Kotlin
