@@ -42,6 +42,7 @@ import net.skyscanner.backpack.util.unsafeLazy
 import java.time.LocalDate
 import java.time.Period
 import java.time.YearMonth
+import java.util.Locale
 
 class BpkCalendar private constructor(
     context: Context,
@@ -102,7 +103,7 @@ class BpkCalendar private constructor(
         }.launchIn(scope)
 
         scrollListeners += {
-            badge.text = it.year.toString()
+            badge.text = String.format(Locale.getDefault(), "%d", it.year)
             badge.isVisible = it.year != state.value.params.now.year
         }
     }
