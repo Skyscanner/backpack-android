@@ -23,15 +23,15 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Landmark
 import org.junit.Test
 
-class BpkPOIMapMarkerTest : BpkSnapshotTest() {
+class BpkPoiMapMarkerTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        POIMarkerLayout(icon = BpkIcon.Landmark, status = BpkPOIMarkerStatus.Unselected)
+        PoiMarkerLayout(icon = BpkIcon.Landmark, status = BpkPoiMarkerStatus.Unselected)
     }
 
     @Test
     fun focused() = snap {
-        POIMarkerLayout(icon = BpkIcon.Landmark, status = BpkPOIMarkerStatus.Selected)
+        PoiMarkerLayout(icon = BpkIcon.Landmark, status = BpkPoiMarkerStatus.Selected)
     }
 }

@@ -34,11 +34,11 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/location.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/location_dm.png" alt="Maps component - dark mode" width="375" /> |
 
-## POI Marker
+## Poi Marker
 
 | Day                                                                                                                                                     | Night                                                                                                                                                                  |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/POI.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/POI_dm.png" alt="Maps component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/poi.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/poi_dm.png" alt="Maps component - dark mode" width="375" /> |
 
 ## Hotel Marker
 
@@ -112,10 +112,10 @@ BpkLocationMapMarker(
 Example of a poi marker:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.map.BpkPOIMapMarker
+import net.skyscanner.backpack.compose.map.BpkPoiMapMarker
 
-BpkPOIMapMarker(
-    title = "POI",
+BpkPoiMapMarker(
+    title = "Poi",
 )
 ```
 

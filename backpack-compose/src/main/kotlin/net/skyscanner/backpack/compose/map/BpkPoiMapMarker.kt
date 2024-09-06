@@ -35,13 +35,13 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.map.internal.POIMarkerShape
+import net.skyscanner.backpack.compose.map.internal.PoiMarkerShape
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 import net.skyscanner.backpack.compose.tokens.internal.BpkMapMarkerColors
 
-enum class BpkPOIMarkerStatus {
+enum class BpkPoiMarkerStatus {
     Unselected,
     Selected,
 }
@@ -50,10 +50,10 @@ enum class BpkPOIMarkerStatus {
  * @param onClick Callback invoked when the marker is clicked. Return true to consume the event, for example to disable the default centre map on marker behaviour.
  */
 @Composable
-fun BpkPOIMapMarker(
+fun BpkPoiMapMarker(
     contentDescription: String,
     icon: BpkIcon,
-    status: BpkPOIMarkerStatus = BpkPOIMarkerStatus.Unselected,
+    status: BpkPoiMarkerStatus = BpkPoiMarkerStatus.Unselected,
     state: MarkerState = rememberMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
@@ -61,7 +61,7 @@ fun BpkPOIMapMarker(
     onClick: (Marker) -> Boolean = { false },
 ) {
     val iconBitmap = rememberCapturedComposeBitmapDescriptor(icon, status) {
-        POIMarkerLayout(status = status, icon = icon)
+        PoiMarkerLayout(status = status, icon = icon)
     }
 
     MarkerInfoWindow(
@@ -69,7 +69,7 @@ fun BpkPOIMapMarker(
         tag = tag,
         title = contentDescription,
         visible = visible,
-        zIndex = if (status == BpkPOIMarkerStatus.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
+        zIndex = if (status == BpkPoiMarkerStatus.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
         icon = iconBitmap,
         onClick = onClick,
     ) {}
@@ -77,25 +77,25 @@ fun BpkPOIMapMarker(
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun POIMarkerLayout(status: BpkPOIMarkerStatus, icon: BpkIcon, modifier: Modifier = Modifier) {
+fun PoiMarkerLayout(status: BpkPoiMarkerStatus, icon: BpkIcon, modifier: Modifier = Modifier) {
     val iconColor = BpkTheme.colors.textOnDark
 
     val backgroundColor = when (status) {
-        BpkPOIMarkerStatus.Unselected -> BpkMapMarkerColors.mapPoiPin
-        BpkPOIMarkerStatus.Selected -> BpkTheme.colors.corePrimary
+        BpkPoiMarkerStatus.Unselected -> BpkMapMarkerColors.mapPoiPin
+        BpkPoiMarkerStatus.Selected -> BpkTheme.colors.corePrimary
     }
 
     val markerSize = when (status) {
-        BpkPOIMarkerStatus.Selected -> DpSize(SelectedMarkerWidth, SelectedMarkerHeight)
+        BpkPoiMarkerStatus.Selected -> DpSize(SelectedMarkerWidth, SelectedMarkerHeight)
         else -> DpSize(DefaultMarkerWidth, DefaultMarkerHeight)
     }
 
     val iconOffset = when (status) {
-        BpkPOIMarkerStatus.Selected -> BpkSpacing.Sm
+        BpkPoiMarkerStatus.Selected -> BpkSpacing.Sm
         else -> DefaultIconOffset
     }
 
-    val shape = POIMarkerShape()
+    val shape = PoiMarkerShape()
 
     Box(
         contentAlignment = Alignment.TopCenter,

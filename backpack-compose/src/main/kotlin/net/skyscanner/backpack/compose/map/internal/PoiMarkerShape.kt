@@ -25,17 +25,17 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
-internal fun POIMarkerShape(): Shape =
+internal fun PoiMarkerShape(): Shape =
     object : Shape {
         override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
             Outline.Generic(
                 path = Path().apply {
-                    addPOIOutlinePath(size)
+                    addPoiOutlinePath(size)
                 },
             )
     }
 
-private fun Path.addPOIOutlinePath(
+private fun Path.addPoiOutlinePath(
     size: Size,
 ) {
     val scale = size.height / IconHeight

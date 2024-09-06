@@ -39,8 +39,8 @@ import net.skyscanner.backpack.compose.map.BpkHotelMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkLocationMapMarker
-import net.skyscanner.backpack.compose.map.BpkPOIMapMarker
-import net.skyscanner.backpack.compose.map.BpkPOIMarkerStatus
+import net.skyscanner.backpack.compose.map.BpkPoiMapMarker
+import net.skyscanner.backpack.compose.map.BpkPoiMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
@@ -179,13 +179,13 @@ fun LocationMapMarkerStory(modifier: Modifier = Modifier) {
 
 @Composable
 @MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "POI")
-fun POIMapMarkerStory(modifier: Modifier = Modifier) {
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Poi")
+fun PoiMapMarkerStory(modifier: Modifier = Modifier) {
     var focusedMarker by remember { mutableIntStateOf(0) }
 
-    fun markerStatus(index: Int): BpkPOIMarkerStatus = when (index) {
-        focusedMarker -> BpkPOIMarkerStatus.Selected
-        else -> BpkPOIMarkerStatus.Unselected
+    fun markerStatus(index: Int): BpkPoiMarkerStatus = when (index) {
+        focusedMarker -> BpkPoiMarkerStatus.Selected
+        else -> BpkPoiMarkerStatus.Unselected
     }
     GoogleMap(
         modifier = modifier,
@@ -193,7 +193,7 @@ fun POIMapMarkerStory(modifier: Modifier = Modifier) {
         mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
     ) {
         MarkerPositions.forEachIndexed { index, latLng ->
-            BpkPOIMapMarker(
+            BpkPoiMapMarker(
                 contentDescription = stringResource(R.string.map_marker_icon_landmark),
                 status = markerStatus(index),
                 icon = BpkIcon.Landmark,

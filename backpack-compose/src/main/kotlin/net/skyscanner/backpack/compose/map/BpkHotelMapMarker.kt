@@ -35,7 +35,7 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.map.internal.POIMarkerShape
+import net.skyscanner.backpack.compose.map.internal.PoiMarkerShape
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
@@ -78,7 +78,10 @@ fun BpkHotelMapMarker(
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun HotelMarkerLayout(status: BpkHotelMarkerStatus, icon: BpkIcon, modifier: Modifier = Modifier) {
-    val iconColor = BpkTheme.colors.textOnDark
+    val iconColor = when (status) {
+        BpkHotelMarkerStatus.Unselected -> BpkTheme.colors.corePrimary
+        BpkHotelMarkerStatus.Selected -> BpkTheme.colors.textOnDark
+    }
 
     val backgroundColor = when (status) {
         BpkHotelMarkerStatus.Unselected -> BpkMapMarkerColors.mapPreviousSelection
@@ -95,7 +98,7 @@ fun HotelMarkerLayout(status: BpkHotelMarkerStatus, icon: BpkIcon, modifier: Mod
         else -> DefaultIconOffset
     }
 
-    val shape = POIMarkerShape()
+    val shape = PoiMarkerShape()
 
     Box(
         contentAlignment = Alignment.TopCenter,
