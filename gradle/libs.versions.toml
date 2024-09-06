@@ -4,9 +4,9 @@ ksp = "2.0.20-1.0.24" # depends on Kotlin version
 compilerTesting = "1.6.0"
 destinations = "1.10.2" # update this alongside with compiler version
 
-androidPlugin = "8.5.2"
-lint = "31.5.2"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.5.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.6.0"
+lint = "31.6.0"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.6.0" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.6"
 lifecycle = "2.8.4"
@@ -30,7 +30,7 @@ plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", v
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.4.10"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.4.11"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
@@ -54,7 +54,7 @@ test-espressoCore = { module = "androidx.test.espresso:espresso-core", version.r
 test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 test-rules = "androidx.test:rules:1.6.1"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-test-mockitoAndroid = "org.mockito:mockito-android:5.12.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.13.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }

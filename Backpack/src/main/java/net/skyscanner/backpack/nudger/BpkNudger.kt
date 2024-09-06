@@ -27,6 +27,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import java.util.Locale
 import kotlin.math.max
 import kotlin.math.min
 
@@ -103,6 +104,6 @@ open class BpkNudger @JvmOverloads constructor(
     private fun update() {
         decrementButton.isEnabled = value > minValue
         incrementButton.isEnabled = value < maxValue
-        label.text = value.toString()
+        label.text = String.format(Locale.getDefault(), "%d", value)
     }
 }

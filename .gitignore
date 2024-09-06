@@ -47,6 +47,7 @@ captures/
 .idea/modules.xml
 .idea/vcs.xml
 .idea/libraries
+.idea/appInsightsSettings.xml
 .idea/assetWizardSettings.xml
 .idea/dictionaries/
 .idea/caches/
