@@ -34,14 +34,20 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.map.BpkHotelMapMarker
+import net.skyscanner.backpack.compose.map.BpkHotelMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
 import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
+import net.skyscanner.backpack.compose.map.BpkLocationMapMarker
+import net.skyscanner.backpack.compose.map.BpkPoiMapMarker
+import net.skyscanner.backpack.compose.map.BpkPoiMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 import net.skyscanner.backpack.compose.tokens.Cafe
+import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
@@ -148,6 +154,78 @@ fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
             BpkPointerMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
                 state = rememberMarkerState(position = latLng),
+            )
+        }
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Location")
+fun LocationMapMarkerStory(modifier: Modifier = Modifier) {
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = rememberCameraPositionState { MapPosition },
+        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
+    ) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkLocationMapMarker(
+                title = stringArrayResource(R.array.map_marker_prices)[index],
+                state = rememberMarkerState(position = latLng),
+            )
+        }
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Poi")
+fun PoiMapMarkerStory(modifier: Modifier = Modifier) {
+    var focusedMarker by remember { mutableIntStateOf(0) }
+
+    fun markerStatus(index: Int): BpkPoiMarkerStatus = when (index) {
+        focusedMarker -> BpkPoiMarkerStatus.Selected
+        else -> BpkPoiMarkerStatus.Unselected
+    }
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = rememberCameraPositionState { MapPosition },
+        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
+    ) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkPoiMapMarker(
+                contentDescription = stringResource(R.string.map_marker_icon_landmark),
+                status = markerStatus(index),
+                icon = BpkIcon.Landmark,
+                state = rememberMarkerState(position = latLng),
+                onClick = { focusedMarker = index; false },
+            )
+        }
+    }
+}
+
+@Composable
+@MapMarkersComponent
+@ComposeStory(kind = StoryKind.DemoOnly, name = "Hotel")
+fun HotelMapMarkerStory(modifier: Modifier = Modifier) {
+    var focusedMarker by remember { mutableIntStateOf(0) }
+
+    fun markerStatus(index: Int): BpkHotelMarkerStatus = when (index) {
+        focusedMarker -> BpkHotelMarkerStatus.Selected
+        else -> BpkHotelMarkerStatus.Unselected
+    }
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = rememberCameraPositionState { MapPosition },
+        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
+    ) {
+        MarkerPositions.forEachIndexed { index, latLng ->
+            BpkHotelMapMarker(
+                contentDescription = stringResource(R.string.navigation_tabs_hotels),
+                status = markerStatus(index),
+                icon = BpkIcon.Hotels,
+                state = rememberMarkerState(position = latLng),
+                onClick = { focusedMarker = index; false },
             )
         }
     }
