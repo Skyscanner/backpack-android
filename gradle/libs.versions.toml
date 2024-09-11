@@ -30,7 +30,7 @@ plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", v
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.4.11"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.4.12"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
