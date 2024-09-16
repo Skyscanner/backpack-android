@@ -9,7 +9,7 @@ lint = "31.6.0"  # android plugin, lint and sdk-common need to be updated togeth
 androidSdkCommon = "31.6.0" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.7"
-lifecycle = "2.8.4"
+lifecycle = "2.8.5"
 androidXJunit = "1.2.1"
 coroutines = "1.8.1"
 espresso = "3.6.1"
