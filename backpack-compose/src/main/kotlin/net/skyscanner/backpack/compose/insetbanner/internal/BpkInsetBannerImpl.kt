@@ -47,7 +47,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 internal fun BpkInsetBannerImpl(
@@ -89,7 +89,7 @@ internal fun BpkInsetBannerImpl(
                 )
                 .background(
                     color = backgroundColor,
-                ).applyIf(showBody) { clickable { toggleShowBody() } },
+                ).applyIf(showBody) { clickableWithRipple { toggleShowBody() } },
             variant = variant,
             title = title,
             subHeadline = subHeadline,

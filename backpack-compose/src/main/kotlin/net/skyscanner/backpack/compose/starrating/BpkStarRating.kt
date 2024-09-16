@@ -41,7 +41,7 @@ import net.skyscanner.backpack.compose.tokens.StarHalf
 import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
 import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 enum class BpkStarRatingSize {
     Large,
@@ -147,7 +147,7 @@ private fun BpkStarRating(
                 val value = (roundedRating - item).coerceIn(0f, 1f)
                 val starModifier = Modifier
                     .applyIf(onRatingChanged != null) {
-                        clickable(bounded = false) { onRatingChanged?.invoke(item + 1) }
+                        clickableWithRipple(bounded = false) { onRatingChanged?.invoke(item + 1) }
                     }
                 when {
                     (value >= 0.0f && value < 0.5f) -> BpkStar(

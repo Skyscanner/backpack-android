@@ -51,7 +51,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.HeartOutline
 import net.skyscanner.backpack.compose.tokens.ShareAndroid
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 private enum class BpkCardButtonState {
     Rest,
@@ -159,7 +159,7 @@ internal fun BpkShareCardButtonImpl(
                         else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
                     },
                 )
-                .clickable(onClick = onClick),
+                .clickableWithRipple(onClick = onClick),
             contentAlignment = Alignment.Center,
         ) {
             BpkIcon(

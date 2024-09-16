@@ -20,12 +20,11 @@ package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.round
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -58,23 +58,23 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     return if (predicate) block() else this
 }
 
-// todo: in Compose 1.6, there's no way to provide an indication using the Node-like API.
-// It will be added in Compose 1.7, so we'll migrate it after that
-@Suppress("ModifierComposed")
-internal fun Modifier.clickable(
+@Suppress("ModifierComposable")
+@Composable
+fun Modifier.clickableWithRipple(
     enabled: Boolean = true,
     bounded: Boolean = true,
+    onClickLabel: String? = null,
     role: Role? = null,
     onClick: () -> Unit,
-): Modifier = composed {
+): Modifier =
     clickable(
         enabled = enabled,
         interactionSource = remember { MutableInteractionSource() },
-        indication = rememberRipple(bounded = bounded),
+        indication = bpkRipple(bounded = bounded),
+        onClickLabel = onClickLabel,
         role = role,
         onClick = onClick,
     )
-}
 
 internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
     layout { measurable, constraints ->

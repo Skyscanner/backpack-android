@@ -42,7 +42,7 @@ import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -120,7 +120,7 @@ internal fun BpkSelectImpl(
     onClick: (() -> Unit)? = null,
 ) {
     BpkTextFieldImpl(
-        modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickable(
+        modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickableWithRipple(
             bounded = true,
             role = Role.Button,
         ) {

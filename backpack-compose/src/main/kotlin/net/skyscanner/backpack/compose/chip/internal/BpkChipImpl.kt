@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -49,6 +48,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkElevation
@@ -85,7 +85,7 @@ internal fun BpkChipImpl(
                     selected = selected,
                     enabled = enabled,
                     interactionSource = interactionSource,
-                    indication = rememberRipple(),
+                    indication = bpkRipple(),
                 ) { onSelectedChange!!.invoke(!selected) }
         },
     )
@@ -112,7 +112,7 @@ internal fun BpkDismissibleChipImpl(
             clip(ChipShape)
                 .clickable(
                     interactionSource = interactionSource,
-                    indication = rememberRipple(),
+                    indication = bpkRipple(),
                 ) { onClick!!.invoke() }
         },
     )

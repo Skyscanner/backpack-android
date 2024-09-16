@@ -39,9 +39,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -124,7 +124,7 @@ private fun RowScope.BottomNavigationItem(
     modifier: Modifier = Modifier,
 ) {
 
-    val ripple = rememberRipple(bounded = false, color = BpkTheme.colors.textLink)
+    val ripple = ripple(bounded = false, color = BpkTheme.colors.textLink)
 
     val contentColor by animateColorAsState(
         label = "BottomNavItem content color",

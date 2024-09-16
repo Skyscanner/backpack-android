@@ -56,7 +56,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 internal fun BpkImageGalleryGrid(
@@ -194,7 +194,7 @@ private fun CategoryGrid(
                     .fillMaxWidth()
                     .height(ImageHeight)
                     .clip(RoundedCornerShape(BpkBorderRadius.Md))
-                    .clickable { onImageClicked(category, image) },
+                    .clickableWithRipple { onImageClicked(category, image) },
             ) {
                 image.content(image.contentDescription(), ContentScale.Crop)
             }

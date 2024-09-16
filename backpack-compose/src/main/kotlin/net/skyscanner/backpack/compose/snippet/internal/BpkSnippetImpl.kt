@@ -36,7 +36,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 internal fun BpkSnippetImpl(
@@ -54,7 +54,7 @@ internal fun BpkSnippetImpl(
         modifier = modifier
             .apply {
                 if (onClick != null) {
-                    clickable(onClick = onClick)
+                    clickableWithRipple(onClick = onClick)
                 }
             },
     ) {

@@ -68,7 +68,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -299,7 +299,7 @@ private fun RowScope.TrailingIcon(
                 contentDescription = clearAction.contentDescription,
                 color = BpkTheme.colors.textSecondary,
                 modifier = Modifier
-                    .clickable(bounded = false, role = Role.Button) {
+                    .clickableWithRipple(bounded = false, role = Role.Button) {
                         clearAction.onClick()
                     }
                     .testTag("textFieldClearButton"),
