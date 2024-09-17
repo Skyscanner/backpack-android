@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -35,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
@@ -82,9 +80,8 @@ internal fun BpkRangeSliderImpl(
                     interactionSource = startInteractionSource,
                 )
             } else {
-                SliderDefaults.Thumb(
+                SliderThumb(
                     interactionSource = startInteractionSource,
-                    colors = sliderColors(),
                     enabled = enabled,
                 )
             }
@@ -97,17 +94,16 @@ internal fun BpkRangeSliderImpl(
                     interactionSource = endInteractionSource,
                 )
             } else {
-                SliderDefaults.Thumb(
+                SliderThumb(
                     interactionSource = endInteractionSource,
-                    colors = sliderColors(),
                     enabled = enabled,
                 )
             }
         },
-        track = {
-            SliderDefaults.Track(
-                colors = sliderColors(),
-                rangeSliderState = it,
+        track = { rangeSliderState ->
+            RangeSliderTrack(
+                enabled = enabled,
+                rangeSliderState = rangeSliderState,
             )
         },
         colors = sliderColors(),
@@ -148,11 +144,8 @@ private fun SlideRangeLabel(
                     .semantics { invisibleToUser() },
             )
         }
-        SliderDefaults.Thumb(
-            modifier = Modifier
-                .semantics { stateDescription = label },
+        SliderThumb(
             interactionSource = interactionSource,
-            colors = sliderColors(),
             enabled = enabled,
         )
     }
@@ -186,12 +179,3 @@ private fun LabelLayout(
 
 private val FlareHeight = 6.dp
 private val BorderRadius = 6.dp
-
-@Composable
-internal fun sliderColors() = SliderDefaults.colors(
-    thumbColor = BpkTheme.colors.coreAccent,
-    activeTrackColor = BpkTheme.colors.coreAccent,
-    inactiveTrackColor = BpkTheme.colors.line,
-    activeTickColor = BpkTheme.colors.coreAccent,
-    inactiveTickColor = BpkTheme.colors.line,
-)

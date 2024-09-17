@@ -20,12 +20,11 @@
 package net.skyscanner.backpack.compose.slider
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.slider.internal.BpkRangeSliderImpl
-import net.skyscanner.backpack.compose.slider.internal.sliderColors
+import net.skyscanner.backpack.compose.slider.internal.BpkSliderImpl
 
 @Composable
 fun BpkSlider(
@@ -39,16 +38,16 @@ fun BpkSlider(
     onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    Slider(
+    BpkSliderImpl(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier,
         enabled = enabled,
-        valueRange = minValue..maxValue,
+        minValue = minValue,
+        maxValue = maxValue,
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
         interactionSource = interactionSource,
-        colors = sliderColors(),
     )
 }
 
