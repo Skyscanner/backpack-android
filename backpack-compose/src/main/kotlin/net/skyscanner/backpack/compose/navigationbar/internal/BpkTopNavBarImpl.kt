@@ -49,7 +49,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.NativeAndroidBack
 import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -145,7 +145,7 @@ internal fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .size(TopNavBarSizes.IconActionSize)
-            .clickable(bounded = false, role = Role.Button) { action.onClick() },
+            .clickableWithRipple(bounded = false, role = Role.Button) { action.onClick() },
         contentAlignment = Alignment.Center,
     ) {
         BpkIcon(icon = action.icon, contentDescription = action.contentDescription, size = BpkIconSize.Large)
@@ -158,7 +158,7 @@ internal fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxHeight()
             .padding(horizontal = BpkDimension.Spacing.Md)
-            .clickable(bounded = false, role = Role.Button) { action.onClick() },
+            .clickableWithRipple(bounded = false, role = Role.Button) { action.onClick() },
         contentAlignment = Alignment.Center,
     ) {
         BpkText(

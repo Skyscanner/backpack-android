@@ -38,7 +38,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkClickHandleScope
-import net.skyscanner.backpack.compose.utils.clickable
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 internal fun BpkSectionHeading(
@@ -69,7 +69,7 @@ internal fun BpkSectionHeading(
 internal fun BpkSectionItem(item: BpkItem, modifier: Modifier = Modifier, clickHandleScope: BpkClickHandleScope? = null) {
     Row(
         modifier = modifier
-            .clickable {
+            .clickableWithRipple {
                 item.onItemSelected()
                 clickHandleScope?.notifyClick()
             }

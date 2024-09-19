@@ -51,18 +51,6 @@ class BpkBottomSheetState internal constructor(
     internal val delegate: SheetState,
 ) {
 
-    constructor(
-        initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
-        confirmValueChange: (BpkBottomSheetValue) -> Boolean = { true },
-    ) : this(
-        SheetState(
-            skipPartiallyExpanded = false,
-            skipHiddenState = true,
-            initialValue = initialValue.toBottomSheetValue(),
-            confirmValueChange = { confirmValueChange(it.toBpkBottomSheetValue()) },
-        ),
-    )
-
     val currentValue: BpkBottomSheetValue
         get() = delegate.currentValue.toBpkBottomSheetValue()
 

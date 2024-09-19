@@ -43,6 +43,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -265,7 +266,7 @@ fun BpkShimmerOverlay(
             modifier = Modifier
                 .fillMaxSize()
                 .clipToBounds()
-                .offset(Dp(offsetX.value), 0.dp),
+                .offset { IntOffset(offsetX.roundToPx(), 0) },
         )
     }
 }

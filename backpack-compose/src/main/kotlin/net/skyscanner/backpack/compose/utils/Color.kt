@@ -22,6 +22,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -49,3 +50,5 @@ internal fun InteractionSource.animateAsColor(
 @Composable
 internal fun dynamicColorOf(light: Color, dark: Color): Color =
     if (BpkTheme.colors.isLight) light else dark
+
+internal fun Color.toRippleAlpha(): RippleAlpha = RippleAlpha(alpha, alpha, alpha, alpha)

@@ -29,17 +29,16 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -59,7 +58,9 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
+import net.skyscanner.backpack.compose.utils.toRippleAlpha
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun BpkButtonImpl(
     onClick: () -> Unit,
@@ -74,7 +75,12 @@ internal fun BpkButtonImpl(
 ) {
     val clickable = enabled && !loading
 
-    CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
+    CompositionLocalProvider(
+        LocalRippleConfiguration provides RippleConfiguration(
+            type.rippleColor(),
+            type.rippleColor().toRippleAlpha(),
+        ),
+    ) {
         Button(
             onClick = onClick,
             enabled = clickable,
@@ -166,21 +172,6 @@ internal fun ButtonDrawable(
         contentDescription = contentDescription,
         modifier = modifier.defaultIconSize(size.iconSize),
     )
-}
-
-private class ButtonRippleTheme(
-    private val color: Color = Color.Black,
-) : RippleTheme {
-
-    private val alpha = RippleAlpha(color.alpha, color.alpha, color.alpha, color.alpha)
-
-    @Composable
-    override fun defaultColor(): Color =
-        color
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha =
-        alpha
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)

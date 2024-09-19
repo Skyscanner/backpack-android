@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,6 +52,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.values
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.IconComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -119,7 +119,7 @@ fun IconsStory(modifier: Modifier = Modifier) {
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .border(Dp.Hairline, BpkTheme.colors.line)
-                            .clickable {
+                            .clickableWithRipple {
                                 clipboardManager.setText(AnnotatedString(icon.name))
                                 BpkToast
                                     .makeText(

@@ -34,8 +34,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Surface
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -189,7 +189,7 @@ private fun Tab(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
-    val ripple = rememberRipple(bounded = true, color = BpkTheme.colors.textLink)
+    val ripple = ripple(bounded = true, color = BpkTheme.colors.textLink)
     val transition = updateTransition(targetState = selected, label = "HorizontalNav.Tab transition")
     val color by transition.animateColor(
         transitionSpec = {

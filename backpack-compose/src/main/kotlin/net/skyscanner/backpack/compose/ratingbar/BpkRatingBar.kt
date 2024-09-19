@@ -22,13 +22,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.semantics.semantics
+import net.skyscanner.backpack.compose.progressbar.internal.BpkProgressBarImpl
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
 import net.skyscanner.backpack.compose.rating.internal.BpkRatingNumbers
@@ -47,7 +46,10 @@ fun BpkRatingBar(
     scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
     showScale: Boolean = true,
 ) {
-    Column(modifier = modifier.semantics(mergeDescendants = true) { }, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md)) {
+    Column(
+        modifier = modifier.semantics(mergeDescendants = true) { },
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
         Row(verticalAlignment = Alignment.Bottom) {
             BpkText(
                 text = label,
@@ -56,10 +58,12 @@ fun BpkRatingBar(
             )
             BpkRatingNumbers(value = rating, scale = scale, size = BpkRatingSize.Base, showScale = showScale)
         }
-        LinearProgressIndicator(
-            progress = when (scale) {
-                BpkRatingScale.ZeroToFive -> rating / 5F
-                BpkRatingScale.ZeroToTen -> rating / 10F
+        BpkProgressBarImpl(
+            progress = {
+                when (scale) {
+                    BpkRatingScale.ZeroToFive -> rating / 5F
+                    BpkRatingScale.ZeroToTen -> rating / 10F
+                }
             },
             color = BpkTheme.colors.corePrimary,
             trackColor = when (style) {
@@ -69,7 +73,6 @@ fun BpkRatingBar(
             strokeCap = StrokeCap.Round,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(BpkSpacing.Md)
                 .invisibleSemantic(),
         )
     }

@@ -17,16 +17,15 @@
  */
 package net.skyscanner.backpack.compose.graphicpromotion.internal
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.IndicationInstance
+import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -37,7 +36,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,14 +43,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.node.DelegatableNode
+import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVariant
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.text.BpkText
@@ -96,7 +98,7 @@ internal fun BpkGraphicPromoImpl(
             BpkOverlay(
                 modifier = Modifier
                     .matchParentSize()
-                    .indication(interactionSource, InteractiveBackgroundIndication),
+                    .indication(interactionSource, InteractiveBackgroundIndicationNodeFactory),
                 overlayType = overlayType,
                 foregroundContent = {
                     ForegroundContent(
@@ -115,7 +117,7 @@ internal fun BpkGraphicPromoImpl(
             Box(
                 modifier = Modifier
                     .matchParentSize()
-                    .indication(interactionSource, InteractiveBackgroundIndication),
+                    .indication(interactionSource, InteractiveBackgroundIndicationNodeFactory),
                 content = image,
             )
             ForegroundContent(
@@ -247,34 +249,49 @@ private fun ForegroundContent(
     }
 }
 
-private object InteractiveBackgroundIndication : Indication {
+private object InteractiveBackgroundIndicationNodeFactory : IndicationNodeFactory {
 
-    @Composable
-    override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
-        val isPressed by interactionSource.collectIsPressedAsState()
+    override fun create(interactionSource: InteractionSource): DelegatableNode {
+        return InteractiveBackgroundIndicationNode(interactionSource)
+    }
 
-        val scale by animateFloatAsState(
-            targetValue = if (isPressed) 1.05f else 1.0f,
-            animationSpec = interactiveBackgroundAnimationSpec,
-            label = "background scale",
-        )
+    override fun hashCode(): Int = -1
 
-        val overlayAlpha by animateFloatAsState(
-            targetValue = if (isPressed) 0.2f else 0f,
-            animationSpec = interactiveBackgroundAnimationSpec,
-            label = "overlay alpha",
-        )
+    override fun equals(other: Any?) = other === this
+}
 
-        return remember(interactionSource) {
-            object : IndicationInstance {
-                override fun ContentDrawScope.drawIndication() {
-                    scale(scale, scale) {
-                        this@drawIndication.drawContent()
-                    }
-                    drawRect(Color.Black, alpha = overlayAlpha)
+private class InteractiveBackgroundIndicationNode(private val interactionSource: InteractionSource) : Modifier.Node(), DrawModifierNode {
+
+    val animatedScalePercent = Animatable(1f)
+    val animatedOverlayAlpha = Animatable(0f)
+
+    private suspend fun animateToPressed() {
+        animatedScalePercent.animateTo(1.05f, interactiveBackgroundAnimationSpec)
+        animatedOverlayAlpha.animateTo(0.2f, interactiveBackgroundAnimationSpec)
+    }
+
+    private suspend fun animateToResting() {
+        animatedScalePercent.animateTo(1f, spring())
+        animatedOverlayAlpha.animateTo(0f, spring())
+    }
+
+    override fun onAttach() {
+        coroutineScope.launch {
+            interactionSource.interactions.collectLatest { interaction ->
+                when (interaction) {
+                    is PressInteraction.Press -> animateToPressed()
+                    is PressInteraction.Release -> animateToResting()
+                    is PressInteraction.Cancel -> animateToResting()
                 }
             }
         }
+    }
+
+    override fun ContentDrawScope.draw() {
+        scale(animatedScalePercent.value, animatedScalePercent.value) {
+            this@draw.drawContent()
+        }
+        drawRect(color = Color.Black, alpha = animatedOverlayAlpha.value)
     }
 }
 
