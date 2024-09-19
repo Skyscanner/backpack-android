@@ -2,7 +2,7 @@
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.25" # depends on Kotlin version
 compilerTesting = "1.6.0"
-destinations = "1.10.2" # update this alongside with compiler version
+destinations = "1.11.6" # update this alongside with compiler version
 
 androidPlugin = "8.6.0"
 lint = "31.6.0"  # android plugin, lint and sdk-common need to be updated together
