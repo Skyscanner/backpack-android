@@ -30,13 +30,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +56,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -136,28 +144,61 @@ internal fun BpkGraphicPromoImpl(
 @Composable
 private fun SponsorOverlayView(
     textColor: Color,
-    sponsor: BpkGraphicsPromoSponsor?,
-    modifier: Modifier = Modifier,
-    sponsorLogo: (@Composable () -> Unit)? = null,
+    sponsor: BpkGraphicsPromoSponsor,
+    sponsorLogo: (@Composable () -> Unit),
 ) {
-    if (sponsor != null) {
-        Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
+    var fitsInline by remember { mutableStateOf(true) }
+    if (fitsInline) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
         ) {
+            SponsoredLogo(sponsorLogo)
+            Spacer(Modifier.width(BpkSpacing.Md))
+            SponsoredMessage(sponsor, textColor, maxLines = 1) { textLayoutResult ->
+                if (fitsInline && textLayoutResult.hasVisualOverflow) {
+                    fitsInline = false
+                }
+            }
+        }
+    } else {
+        Column {
+            SponsoredLogo(sponsorLogo)
+            Spacer(Modifier.height(BpkSpacing.Md))
             BpkText(
                 text = sponsor.title,
-                style = BpkTheme.typography.label1,
+                style = BpkTheme.typography.bodyDefault,
                 color = textColor,
-            )
-
-            Box(
-                modifier = Modifier
-                    .heightIn(max = SPONSOR_LOGO_HEIGHT.dp),
-                content = { sponsorLogo?.let { it() } },
             )
         }
     }
+}
+
+@Composable
+private fun SponsoredMessage(
+    sponsor: BpkGraphicsPromoSponsor,
+    textColor: Color,
+    maxLines: Int = Int.MAX_VALUE,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+) {
+    BpkText(
+        text = sponsor.title,
+        style = BpkTheme.typography.bodyDefault,
+        color = textColor,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+    )
+}
+
+@Composable
+private fun SponsoredLogo(
+    sponsorLogo: @Composable (() -> Unit)?,
+) {
+    Box(
+        modifier = Modifier
+            .heightIn(max = SPONSOR_LOGO_HEIGHT.dp)
+            .widthIn(max = SPONSOR_LOGO_WIDTH.dp),
+        content = { sponsorLogo?.let { it() } },
+    )
 }
 
 @Composable
@@ -211,6 +252,27 @@ private fun ForegroundContent(
         BpkGraphicPromoVariant.OnLight -> BpkTheme.colors.textOnLight
     }
 
+    if (sponsor != null && sponsorLogo != null) {
+        Column(modifier = modifier.padding(BpkSpacing.Lg)) {
+            Spacer(Modifier.weight(1f))
+            MessageOverlay(
+                headline = headline,
+                textColor = textColor,
+                kicker = null,
+                subHeadline = null,
+            )
+
+            Spacer(Modifier.height(BpkSpacing.Md))
+
+            SponsorOverlayView(
+                sponsor = sponsor,
+                textColor = textColor,
+                sponsorLogo = sponsorLogo,
+            )
+        }
+        return
+    }
+
     Column(modifier = modifier.padding(BpkSpacing.Lg)) {
         when (verticalAlignment) {
             BpkGraphicPromoVerticalAlignment.Top -> {
@@ -222,20 +284,9 @@ private fun ForegroundContent(
                 )
 
                 Spacer(Modifier.weight(1f))
-
-                SponsorOverlayView(
-                    sponsor = sponsor,
-                    textColor = textColor,
-                    sponsorLogo = sponsorLogo,
-                )
             }
-            BpkGraphicPromoVerticalAlignment.Bottom -> {
-                SponsorOverlayView(
-                    sponsor = sponsor,
-                    textColor = textColor,
-                    sponsorLogo = sponsorLogo,
-                )
 
+            BpkGraphicPromoVerticalAlignment.Bottom -> {
                 Spacer(Modifier.weight(1f))
 
                 MessageOverlay(
@@ -296,7 +347,8 @@ private class InteractiveBackgroundIndicationNode(private val interactionSource:
 }
 
 private const val RATIO_PORTRAIT: Float = 3 / 4f
-private const val SPONSOR_LOGO_HEIGHT = 60
+private const val SPONSOR_LOGO_HEIGHT = 32
+private const val SPONSOR_LOGO_WIDTH = 160
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,
