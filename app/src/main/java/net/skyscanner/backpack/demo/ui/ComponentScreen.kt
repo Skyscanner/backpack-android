@@ -21,7 +21,11 @@ package net.skyscanner.backpack.demo.ui
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -115,6 +119,9 @@ fun ComponentScreen(
                         title = it.name,
                         onClick = { navigator.navigate(StoryScreenDestination(it.component.name, it.name, it.isCompose)) },
                     )
+                }
+                item {
+                    Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.systemBars))
                 }
             }
         }

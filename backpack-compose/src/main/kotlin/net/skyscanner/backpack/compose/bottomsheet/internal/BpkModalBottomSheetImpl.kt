@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -65,6 +66,7 @@ internal fun BpkModalBottomSheetImpl(
     title: String?,
     action: TextAction?,
     closeButton: BpkModalBottomSheetCloseAction,
+    contentWindowInsets: @Composable () -> WindowInsets,
     modifier: Modifier = Modifier,
     titleContentDescription: String? = null,
     content: @Composable ColumnScope.() -> Unit,
@@ -83,7 +85,7 @@ internal fun BpkModalBottomSheetImpl(
                 content = content,
             )
         },
-        modifier = modifier,
+        modifier = modifier.statusBarsPadding(),
         dragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
         shape = RoundedCornerShape(topStart = BpkBorderRadius.Lg, topEnd = BpkBorderRadius.Lg),
         containerColor = BpkTheme.colors.surfaceElevated,
@@ -91,6 +93,7 @@ internal fun BpkModalBottomSheetImpl(
         scrimColor = BpkTheme.colors.scrim,
         tonalElevation = BpkElevation.Lg,
         onDismissRequest = onDismissRequest,
+        contentWindowInsets = contentWindowInsets,
     )
 }
 

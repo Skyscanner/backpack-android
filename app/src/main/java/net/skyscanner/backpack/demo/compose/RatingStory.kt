@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -44,7 +45,8 @@ fun RatingStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
-            .padding(BpkSpacing.Base),
+            .padding(BpkSpacing.Base)
+            .navigationBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkRatingDefaultSample()
