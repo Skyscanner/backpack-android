@@ -18,6 +18,13 @@
 
 package net.skyscanner.backpack.compose.modal
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -28,9 +35,12 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
@@ -55,9 +65,23 @@ fun BpkModal(
     }
 
     Dialog(
-        properties = DialogProperties(decorFitsSystemWindows = false, usePlatformDefaultWidth = false),
+        properties = DialogProperties(decorFitsSystemWindows = false, usePlatformDefaultWidth = true),
         onDismissRequest = { isVisible.targetState = false },
     ) {
+        // workaround for bug with edge to edge https://issuetracker.google.com/issues/246909281
+        val activityWindow = getActivityWindow()
+        val dialogWindow = getDialogWindow()
+        val parentView = LocalView.current.parent as View
+        SideEffect {
+            if (activityWindow != null && dialogWindow != null) {
+                val attributes = WindowManager.LayoutParams()
+                attributes.copyFrom(activityWindow.attributes)
+                attributes.type = dialogWindow.attributes.type
+                dialogWindow.attributes = attributes
+                parentView.layoutParams = FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
+            }
+        }
+
         AnimatedVisibility(
             visibleState = isVisible,
             enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
@@ -82,3 +106,16 @@ fun BpkModal(
         }
     }
 }
+
+@Composable
+private fun getDialogWindow(): Window? = (LocalView.current.parent as? DialogWindowProvider)?.window
+
+@Composable
+private fun getActivityWindow(): Window? = LocalView.current.context.getActivityWindow()
+
+private tailrec fun Context.getActivityWindow(): Window? =
+    when (this) {
+        is Activity -> window
+        is ContextWrapper -> baseContext.getActivityWindow()
+        else -> null
+    }

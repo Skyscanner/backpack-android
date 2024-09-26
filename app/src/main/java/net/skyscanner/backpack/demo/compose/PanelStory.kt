@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,7 +42,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun PanelStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier.padding(BpkSpacing.Base).navigationBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
 

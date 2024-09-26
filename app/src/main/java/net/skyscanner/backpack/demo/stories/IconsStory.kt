@@ -28,6 +28,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.recyclerview.widget.GridLayoutManager
@@ -56,7 +57,7 @@ private fun IconsDemo(
     iconType: IconType,
     modifier: Modifier = Modifier,
 ) {
-    AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons, modifier.fillMaxSize()) {
+    AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons, modifier.fillMaxSize().navigationBarsPadding()) {
         layoutManager = GridLayoutManager(context, 10)
         adapter = IconsAdapter(
             fetchAllIcons(context, iconType),

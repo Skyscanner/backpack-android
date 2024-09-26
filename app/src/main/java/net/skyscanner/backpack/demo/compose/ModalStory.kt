@@ -20,7 +20,6 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -126,7 +125,7 @@ private fun ModalDemo(
 private fun TextContent() {
     BpkText(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(BpkSpacing.Base),
         text = stringResource(R.string.dialog_text),
         style = BpkTheme.typography.bodyDefault,

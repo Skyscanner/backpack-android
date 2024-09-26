@@ -19,6 +19,9 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
@@ -32,6 +35,7 @@ sealed class BpkModalBottomSheetCloseAction {
     ) : BpkModalBottomSheetCloseAction()
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkModalBottomSheet(
     onDismissRequest: () -> Unit,
@@ -42,6 +46,7 @@ fun BpkModalBottomSheet(
     titleContentDescription: String? = null,
     action: TextAction? = null,
     closeButton: BpkModalBottomSheetCloseAction = BpkModalBottomSheetCloseAction.None,
+    contentWindowInsets: @Composable () -> WindowInsets = { BottomSheetDefaults.windowInsets },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     BpkModalBottomSheetImpl(
@@ -54,5 +59,6 @@ fun BpkModalBottomSheet(
         title = title,
         titleContentDescription = titleContentDescription,
         closeButton = closeButton,
+        contentWindowInsets = contentWindowInsets,
     )
 }

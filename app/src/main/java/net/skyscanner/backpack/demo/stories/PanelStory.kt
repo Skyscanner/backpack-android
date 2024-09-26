@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.stories
 
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -29,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @PanelComponent
 @ViewStory
 fun PanelStory(modifier: Modifier = Modifier) =
-    AndroidLayout(R.layout.fragment_panel, modifier)
+    AndroidLayout(R.layout.fragment_panel, modifier.navigationBarsPadding())
