@@ -30,6 +30,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.view.WindowInsetsControllerCompat
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
@@ -72,8 +74,12 @@ fun BpkModal(
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
         val parentView = LocalView.current.parent as View
+        val isSystemInDarkTheme = isSystemInDarkTheme()
         SideEffect {
             if (activityWindow != null && dialogWindow != null) {
+                if (!isSystemInDarkTheme) {
+                    WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).isAppearanceLightStatusBars = true
+                }
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)
                 attributes.type = dialogWindow.attributes.type
