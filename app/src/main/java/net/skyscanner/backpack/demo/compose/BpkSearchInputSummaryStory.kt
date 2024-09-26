@@ -42,16 +42,32 @@ import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SearchInputSummaryComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @SearchInputSummaryComponent
-@ComposeStory
+@ComposeStory(kind = StoryKind.DemoOnly)
 fun SearchInputSummary(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .padding(BpkSpacing.Base)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        DefaultExample()
+        TextPrefixExample()
+        IconPrefixExample()
+        NoPrefixExample()
+        ReadOnlyExample()
+    }
+}
+
+@Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "Default prefix", kind = StoryKind.ScreenshotOnly)
+internal fun DefaultExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = Modifier.padding(BpkSpacing.Base),
     ) {
         SearchInputSummaryStory(
             name = "Default, empty",
@@ -64,7 +80,17 @@ fun SearchInputSummary(modifier: Modifier = Modifier) {
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
         )
+    }
+}
 
+@Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "Text prefix", kind = StoryKind.ScreenshotOnly)
+internal fun TextPrefixExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
         SearchInputSummaryStory(
             name = "Text prefix, empty",
             inputText = "",
@@ -78,7 +104,17 @@ fun SearchInputSummary(modifier: Modifier = Modifier) {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
         )
+    }
+}
 
+@Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "Icon prefix", kind = StoryKind.ScreenshotOnly)
+internal fun IconPrefixExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
         SearchInputSummaryStory(
             name = "Icon prefix, empty",
             inputText = "",
@@ -92,7 +128,17 @@ fun SearchInputSummary(modifier: Modifier = Modifier) {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
         )
+    }
+}
 
+@Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "No prefix", kind = StoryKind.ScreenshotOnly)
+internal fun NoPrefixExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
         SearchInputSummaryStory(
             name = "No prefix, empty",
             inputText = "",
@@ -106,7 +152,17 @@ fun SearchInputSummary(modifier: Modifier = Modifier) {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
         )
+    }
+}
 
+@Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "Read only", kind = StoryKind.ScreenshotOnly)
+internal fun ReadOnlyExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
         SearchInputSummaryStory(
             name = "Read only, unfocused",
             inputText = stringResource(id = R.string.city_rome),
