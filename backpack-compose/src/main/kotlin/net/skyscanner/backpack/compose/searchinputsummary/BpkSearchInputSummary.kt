@@ -39,6 +39,11 @@ sealed class Prefix {
     data object None : Prefix()
 }
 
+sealed class BpkSearchInputSummaryType {
+    data object TextInput : BpkSearchInputSummaryType()
+    data class ReadOnly(val isFocused: Boolean) : BpkSearchInputSummaryType()
+}
+
 @Composable
 fun BpkSearchInputSummary(
     inputText: String,
@@ -47,17 +52,18 @@ fun BpkSearchInputSummary(
     onInputChanged: (String) -> Unit,
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
-    readOnly: Boolean = false,
+    type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
 ) {
     BpkTextFieldImpl(
         value = inputText,
         onValueChange = onInputChanged,
         modifier = modifier,
-        readOnly = readOnly,
+        readOnly = type is BpkSearchInputSummaryType.ReadOnly,
         placeholder = inputHint,
         prefix = prefix,
         status = BpkFieldStatus.Default,
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
+        isFocused = type is BpkSearchInputSummaryType.ReadOnly && type.isFocused,
     )
 }

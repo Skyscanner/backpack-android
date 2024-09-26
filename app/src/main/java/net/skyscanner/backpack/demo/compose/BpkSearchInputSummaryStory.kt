@@ -22,17 +22,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryType
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Search
@@ -45,72 +48,110 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun SearchInputSummary(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .padding(BpkSpacing.Base)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         SearchInputSummaryStory(
+            name = "Default, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
         )
 
         SearchInputSummaryStory(
+            name = "Default, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
         )
 
         SearchInputSummaryStory(
+            name = "Text prefix, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
         )
 
         SearchInputSummaryStory(
+            name = "Text prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
         )
 
         SearchInputSummaryStory(
+            name = "Icon prefix, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
         )
 
         SearchInputSummaryStory(
+            name = "Icon prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
         )
 
         SearchInputSummaryStory(
+            name = "No prefix, empty",
+            inputText = "",
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.None,
+        )
+
+        SearchInputSummaryStory(
+            name = "No prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
-            readOnly = true,
+        )
+
+        SearchInputSummaryStory(
+            name = "Read only, unfocused",
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.None,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+        )
+
+        SearchInputSummaryStory(
+            name = "Read only, focused",
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.None,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = true),
         )
     }
 }
 
 @Composable
 internal fun SearchInputSummaryStory(
+    name: String,
     inputText: String = stringResource(id = R.string.city_rome),
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
-    readOnly: Boolean = false,
+    type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
 ) {
-
-    var state by remember { mutableStateOf(inputText) }
-    BpkSearchInputSummary(
-        inputText = inputText,
-        inputHint = inputHint,
-        prefix = prefix,
-        onInputChanged = {
-            state = it
-        },
-        clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
-            state = ""
-        },
-        modifier = Modifier.fillMaxWidth(),
-        readOnly = readOnly,
-    )
+    Column {
+        BpkText(
+            text = name,
+            style = BpkTheme.typography.heading4,
+            modifier = Modifier.padding(vertical = BpkSpacing.Base),
+        )
+        val state = remember { mutableStateOf(inputText) }
+        BpkSearchInputSummary(
+            inputText = inputText,
+            inputHint = inputHint,
+            prefix = prefix,
+            onInputChanged = {
+                state.value = it
+            },
+            clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
+                state.value = ""
+            },
+            modifier = Modifier.fillMaxWidth(),
+            type = type,
+        )
+    }
 }
