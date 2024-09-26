@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.view.View
 import android.widget.TextView
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -63,7 +64,7 @@ private fun SnackbarDemo(
     modifier: Modifier = Modifier,
     init: View.() -> Unit = {},
 ) =
-    AndroidLayout(R.layout.fragment_snackbar, modifier.fillMaxSize()) {
+    AndroidLayout(R.layout.fragment_snackbar, modifier.fillMaxSize().navigationBarsPadding()) {
 
         findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
             it as TextView

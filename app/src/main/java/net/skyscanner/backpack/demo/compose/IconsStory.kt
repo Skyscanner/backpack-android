@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.rememberScrollState
@@ -64,7 +65,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @OptIn(ExperimentalLayoutApi::class)
 fun IconsStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier.padding(BpkSpacing.Base).navigationBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

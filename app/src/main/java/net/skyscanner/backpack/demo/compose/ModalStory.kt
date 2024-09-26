@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,6 +36,7 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ModalComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -123,7 +125,8 @@ private fun ModalDemo(
 private fun TextContent() {
     BpkText(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
         text = stringResource(R.string.dialog_text),
         style = BpkTheme.typography.bodyDefault,
         color = BpkTheme.colors.textPrimary,

@@ -135,7 +135,7 @@ fun ModalBottomSheetWithTopBarStory(
 
 @Composable
 @BottomSheetComponent
-@ComposeStory(name = "Modal with TopBar and custom title content description")
+@ComposeStory(name = "Modal with TopBar and custom title content description", kind = StoryKind.DemoOnly)
 fun ModalBottomSheetWithTopBarStoryTitleContentDesc(
     modifier: Modifier = Modifier,
 ) {
