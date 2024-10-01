@@ -54,6 +54,7 @@ fun BpkSearchInputSummary(
     modifier: Modifier = Modifier,
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
 ) {
+    val isFocused = if (type is BpkSearchInputSummaryType.ReadOnly) type.isFocused else null
     BpkTextFieldImpl(
         value = inputText,
         onValueChange = onInputChanged,
@@ -64,6 +65,6 @@ fun BpkSearchInputSummary(
         status = BpkFieldStatus.Default,
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
-        isFocused = type is BpkSearchInputSummaryType.ReadOnly && type.isFocused,
+        isFocused = isFocused,
     )
 }
