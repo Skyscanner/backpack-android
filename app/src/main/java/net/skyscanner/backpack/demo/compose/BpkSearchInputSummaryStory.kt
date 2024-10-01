@@ -47,7 +47,7 @@ import net.skyscanner.backpack.meta.StoryKind
 @Composable
 @SearchInputSummaryComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
-fun SearchInputSummary(modifier: Modifier = Modifier) {
+fun SearchInputSummaryExamples(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState()),
