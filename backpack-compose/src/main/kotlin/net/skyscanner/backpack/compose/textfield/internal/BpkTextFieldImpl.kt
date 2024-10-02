@@ -86,6 +86,7 @@ internal fun BpkTextFieldImpl(
     minLines: Int = 1,
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    isFocused: Boolean? = null,
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
@@ -113,6 +114,7 @@ internal fun BpkTextFieldImpl(
         minLines = minLines,
         maxLines = maxLines,
         interactionSource = interactionSource,
+        isFocused = isFocused,
         trailingIcon = trailingIcon,
         clearAction = clearAction,
         type = type,
@@ -134,6 +136,7 @@ internal fun BpkTextFieldImpl(
     minLines: Int = 1,
     maxLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    isFocused: Boolean? = null,
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
@@ -168,10 +171,10 @@ internal fun BpkTextFieldImpl(
                 status = status,
                 prefix = prefix,
                 maxLines = maxLines,
-                interactionSource = interactionSource,
+                isFocused = isFocused ?: interactionSource.collectIsFocusedAsState().value,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
-                clearAction = if (readOnly) null else clearAction, // Remove clearAction if readOnly enabled.
+                clearAction = if (readOnly && prefix == null) null else clearAction, // Remove clearAction if readOnly enabled.
                 type = type,
             )
         },
@@ -186,14 +189,12 @@ private fun TextFieldBox(
     status: BpkFieldStatus = LocalFieldStatus.current,
     prefix: Prefix? = null,
     maxLines: Int = 1,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    isFocused: Boolean = false,
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
     textFieldContent: @Composable () -> Unit,
 ) {
-    val isFocused by interactionSource.collectIsFocusedAsState()
-
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier

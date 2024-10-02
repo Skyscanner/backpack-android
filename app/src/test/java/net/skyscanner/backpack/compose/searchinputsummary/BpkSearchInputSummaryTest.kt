@@ -19,13 +19,37 @@
 package net.skyscanner.backpack.compose.searchinputsummary
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.SearchInputSummaryStory
+import net.skyscanner.backpack.demo.compose.DefaultExample
+import net.skyscanner.backpack.demo.compose.IconPrefixExample
+import net.skyscanner.backpack.demo.compose.NoPrefixExample
+import net.skyscanner.backpack.demo.compose.ReadOnlyExample
+import net.skyscanner.backpack.demo.compose.TextPrefixExample
 import org.junit.Test
 
 class BpkSearchInputSummaryTest : BpkSnapshotTest() {
 
     @Test
-    fun searchInputSummary() = snap {
-        SearchInputSummaryStory()
+    fun defaultSearchInputSummary() = snap {
+        DefaultExample()
+    }
+
+    @Test
+    fun textSearchInputSummary() = snap {
+        TextPrefixExample()
+    }
+
+    @Test
+    fun iconSearchInputSummary() = snap {
+        IconPrefixExample()
+    }
+
+    @Test
+    fun noPrefixSearchInputSummary() = snap {
+        NoPrefixExample()
+    }
+
+    @Test
+    fun readOnlySearchInputSummary() = snap {
+        ReadOnlyExample()
     }
 }
