@@ -4,11 +4,7 @@
     <!-- Base application theme. -->
     <style name="AppThemeBase" parent="BpkTheme" />
 
-    <style name="AppTheme" parent="AppThemeBase">
-        <!-- Customize your theme here. -->
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
+    <style name="AppTheme" parent="AppThemeBase" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
