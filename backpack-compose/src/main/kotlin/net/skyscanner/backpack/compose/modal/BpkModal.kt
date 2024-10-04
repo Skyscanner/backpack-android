@@ -79,6 +79,7 @@ fun BpkModal(
             if (activityWindow != null && dialogWindow != null) {
                 if (!isSystemInDarkTheme) {
                     WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).isAppearanceLightStatusBars = true
+                    WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).isAppearanceLightNavigationBars = true
                 }
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)

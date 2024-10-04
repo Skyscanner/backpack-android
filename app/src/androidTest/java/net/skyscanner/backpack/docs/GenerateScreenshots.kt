@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.docs
 
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.Modifier
@@ -65,6 +66,7 @@ open class GenerateScreenshots(
 
     private fun setScreenshotContent() {
         composeTestRule.setContent {
+            composeTestRule.activity.enableEdgeToEdge()
             DemoScaffold(automationMode = true) {
                 StoryScreen(
                     component = story.component.name,
