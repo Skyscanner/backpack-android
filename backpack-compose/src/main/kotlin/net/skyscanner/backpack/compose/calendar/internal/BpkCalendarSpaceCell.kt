@@ -18,25 +18,16 @@
 
 package net.skyscanner.backpack.compose.calendar.internal
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 internal fun BpkCalendarSpaceCell(
-    model: CalendarCell.Space,
     modifier: Modifier = Modifier,
 ) {
     Spacer(
-        modifier = modifier
-            .height(BpkCalendarSizes.SelectionHeight)
-            .applyIf(model.selected) {
-                background(BpkTheme.colors.surfaceSubtle)
-            },
+        modifier = modifier.height(BpkCalendarSizes.SelectionHeight),
     )
 }
