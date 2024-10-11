@@ -25,6 +25,7 @@ import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentBottomWith
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentTopWithKicker
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryDefault
 import net.skyscanner.backpack.demo.compose.GraphicPromoStorySponsored
+import net.skyscanner.backpack.demo.compose.GraphicPromoStorySponsoredWithLongTitle
 import org.junit.Test
 
 class BpkGraphicPromoTest : BpkSnapshotTest() {
@@ -74,6 +75,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
 
     @Test
     fun longTitleSponsoredAvailable() = snap {
-        GraphicPromoStorySponsored()
+        GraphicPromoStorySponsoredWithLongTitle()
     }
 }
