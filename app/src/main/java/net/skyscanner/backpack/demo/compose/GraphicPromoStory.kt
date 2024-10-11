@@ -87,7 +87,7 @@ internal fun GraphicPromoStorySponsoredWithLongTitle() {
         sponsor = BpkGraphicsPromoSponsor(
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
-            title = "In partnership with the great Skyland",
+            title = "In partnership with the distinguished and extraordinary Skyland",
         ),
     )
 }
