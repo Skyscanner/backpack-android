@@ -58,19 +58,19 @@ internal fun BpkNavigationTabGroupImpl(
                         tab = tab,
                         selected = index == selectedIndex,
                         style = style,
-                    ) {
-                        onItemClicked.invoke(tabs[index])
-                        notifyClick()
-                    }
+                        onClick = {
+                            onItemClicked.invoke(tabs[index])
+                            notifyClick()
+                        },
+                    )
                 }
             } else {
                 NavigationTabItem(
                     tab = tab,
                     selected = index == selectedIndex,
                     style = style,
-                ) {
-                    onItemClicked.invoke(tabs[index])
-                }
+                    onClick = { onItemClicked.invoke(tabs[index]) },
+                )
             }
         }
     }
@@ -81,8 +81,8 @@ private fun NavigationTabItem(
     tab: BpkNavigationTabItem,
     selected: Boolean,
     style: BpkNavigationTabGroupStyle,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val tabStyle = when (style) {
         BpkNavigationTabGroupStyle.SurfaceContrast -> BpkNavigationTabStyle.SurfaceContrast

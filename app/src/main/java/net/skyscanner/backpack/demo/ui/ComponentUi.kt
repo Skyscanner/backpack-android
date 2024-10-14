@@ -48,10 +48,10 @@ fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
 @Composable
 fun ComponentItem(
     title: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     badgeText: String? = null,
     badgeType: BpkBadgeType? = null,
-    onClick: () -> Unit,
 ) {
     ListItem(
         title = title,

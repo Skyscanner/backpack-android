@@ -131,8 +131,8 @@ private fun ChipItem(
     chip: BpkSingleChipItem,
     selected: Boolean,
     style: BpkChipStyle,
-    modifier: Modifier = Modifier,
     onSelectedChange: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     BpkChip(
         modifier = modifier

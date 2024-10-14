@@ -53,6 +53,7 @@ enum class BpkButtonType {
     LinkOnDark,
 }
 
+@Suppress("LambdaParameterEventTrailing")
 @Composable
 fun BpkButton(
     text: String,
@@ -76,6 +77,7 @@ fun BpkButton(
     )
 }
 
+@Suppress("LambdaParameterEventTrailing")
 @Composable
 fun BpkButton(
     icon: BpkIcon,
@@ -137,6 +139,7 @@ fun BpkButton(
     }
 }
 
+@Suppress("LambdaParameterEventTrailing")
 @Composable
 fun BpkButton(
     icon: Painter,
@@ -161,6 +164,7 @@ fun BpkButton(
     )
 }
 
+@Suppress("LambdaParameterEventTrailing")
 @Composable
 fun BpkButton(
     text: String,
