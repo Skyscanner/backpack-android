@@ -37,8 +37,8 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 internal fun BpkCalendarGrid(
     state: CalendarState,
     lazyGridState: LazyGridState,
-    modifier: Modifier = Modifier,
     onClick: (CalendarInteraction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         modifier = modifier.testTag(CALENDAR_GRID_TEST_TAG),
@@ -70,8 +70,8 @@ internal fun BpkCalendarGrid(
             },
             itemContent = { index ->
                 when (val item = state.cells[index]) {
-                    is CalendarCell.Day -> BpkCalendarDayCell(item) { onClick(CalendarInteraction.DateClicked(it)) }
-                    is CalendarCell.Header -> BpkCalendarHeaderCell(item) { onClick(CalendarInteraction.SelectMonthClicked(it)) }
+                    is CalendarCell.Day -> BpkCalendarDayCell(item, { onClick(CalendarInteraction.DateClicked(it)) })
+                    is CalendarCell.Header -> BpkCalendarHeaderCell(item, { onClick(CalendarInteraction.SelectMonthClicked(it)) })
                     is CalendarCell.Space -> BpkCalendarSpaceCell()
                 }
             },
