@@ -303,7 +303,7 @@ private fun ForegroundContent(
 }
 
 @Composable
-fun getPadding(): Dp =
+private fun getPadding(): Dp =
     if (isDesktop()) {
         BpkSpacing.Xxl
     } else if (isTablet()) {
