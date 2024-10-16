@@ -22,9 +22,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 
 @Composable
-internal fun isTablet(): Boolean {
+internal fun isSmallTablet(): Boolean {
     val configuration = LocalConfiguration.current
     return configuration.screenWidthDp > SMALL_TABLET_WIDTH
 }
 
+@Composable
+internal fun isTablet(): Boolean {
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
+}
+
+@Composable
+internal fun isDesktop(): Boolean {
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
+}
+
 const val SMALL_TABLET_WIDTH = 513
+const val TABLET_WIDTH = 769
+const val DESKTOP_WIDTH = 1025

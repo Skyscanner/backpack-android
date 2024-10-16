@@ -17,12 +17,6 @@
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/top-align-with-text.png" alt="GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/top-align-with-text_dm.png" alt="GraphicPromo component - dark mode" width="375" /> |
 
 
-## Top aligned Sponsored
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/top-align-sponsored.png" alt="GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/top-align-sponsored_dm.png" alt="GraphicPromo component - dark mode" width="375" /> |
-
 ## Bottom aligned with kicker and sub headline
 
 | Day | Night |
@@ -30,11 +24,18 @@
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/bottom-align-with-text.png" alt="GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/bottom-align-with-text_dm.png" alt="GraphicPromo component - dark mode" width="375" /> |
 
 
-## Bottom aligned Sponsored
+## Sponsored
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/bottom-align-sponsored.png" alt="GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/bottom-align-sponsored_dm.png" alt="GraphicPromo component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/sponsored.png" alt="Sponsored GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/sponsored_dm.png" alt="Sponsored GraphicPromo component - dark mode" width="375" /> |
+
+
+## Sponsored with long title
+
+| Day                                                                                                                                                                                                     | Night |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/sponsored-with-long-title.png" alt="Sponsored GraphicPromo component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/GraphicPromo/screenshots/sponsored-with-long-title_dm.png" alt="Sponsored GraphicPromo component - dark mode" width="375" /> |
 
 
 ## Installation

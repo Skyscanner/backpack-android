@@ -30,13 +30,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +56,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -61,6 +70,9 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.isDesktop
+import net.skyscanner.backpack.compose.utils.isSmallTablet
+import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
 internal fun BpkGraphicPromoImpl(
@@ -77,12 +89,14 @@ internal fun BpkGraphicPromoImpl(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
 ) {
+    val (aspectRatio, maxHeight) = getDeviceConstrains()
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     val contentDescription = listOfNotNull(kicker, headline, subHeadline, sponsor?.accessibilityLabel)
         .joinToString(separator = ", ")
     Box(
         modifier = modifier
-            .aspectRatio(RATIO_PORTRAIT)
+            .aspectRatio(ratio = aspectRatio)
+            .heightIn(max = maxHeight.dp)
             .clip(roundedCornerShape)
             .clickable(
                 interactionSource = interactionSource,
@@ -136,28 +150,57 @@ internal fun BpkGraphicPromoImpl(
 @Composable
 private fun SponsorOverlayView(
     textColor: Color,
-    sponsor: BpkGraphicsPromoSponsor?,
-    modifier: Modifier = Modifier,
-    sponsorLogo: (@Composable () -> Unit)? = null,
+    sponsor: BpkGraphicsPromoSponsor,
+    sponsorLogo: (@Composable () -> Unit),
 ) {
-    if (sponsor != null) {
-        Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
+    var fitsInline by remember { mutableStateOf(true) }
+    if (fitsInline) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            BpkText(
-                text = sponsor.title,
-                style = BpkTheme.typography.label1,
-                color = textColor,
-            )
-
-            Box(
-                modifier = Modifier
-                    .heightIn(max = SPONSOR_LOGO_HEIGHT.dp),
-                content = { sponsorLogo?.let { it() } },
-            )
+            SponsoredLogo(sponsorLogo)
+            Spacer(Modifier.width(BpkSpacing.Md))
+            SponsoredMessage(sponsor, textColor, maxLines = 1) { textLayoutResult ->
+                if (fitsInline && textLayoutResult.hasVisualOverflow) {
+                    fitsInline = false
+                }
+            }
+        }
+    } else {
+        Column {
+            SponsoredLogo(sponsorLogo)
+            Spacer(Modifier.height(BpkSpacing.Md))
+            SponsoredMessage(sponsor, textColor)
         }
     }
+}
+
+@Composable
+private fun SponsoredMessage(
+    sponsor: BpkGraphicsPromoSponsor,
+    textColor: Color,
+    maxLines: Int = Int.MAX_VALUE,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+) {
+    BpkText(
+        text = sponsor.title,
+        style = BpkTheme.typography.caption,
+        color = textColor,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+    )
+}
+
+@Composable
+private fun SponsoredLogo(
+    sponsorLogo: @Composable (() -> Unit)?,
+) {
+    Box(
+        modifier = Modifier
+            .heightIn(max = SPONSOR_LOGO_HEIGHT.dp)
+            .widthIn(max = SPONSOR_LOGO_WIDTH.dp),
+        content = { sponsorLogo?.let { it() } },
+    )
 }
 
 @Composable
@@ -211,6 +254,27 @@ private fun ForegroundContent(
         BpkGraphicPromoVariant.OnLight -> BpkTheme.colors.textOnLight
     }
 
+    if (sponsor != null && sponsorLogo != null) {
+        Column(modifier = modifier.padding(getPadding())) {
+            Spacer(Modifier.weight(1f))
+            MessageOverlay(
+                headline = headline,
+                textColor = textColor,
+                kicker = null,
+                subHeadline = null,
+            )
+
+            Spacer(Modifier.height(BpkSpacing.Md))
+
+            SponsorOverlayView(
+                sponsor = sponsor,
+                textColor = textColor,
+                sponsorLogo = sponsorLogo,
+            )
+        }
+        return
+    }
+
     Column(modifier = modifier.padding(BpkSpacing.Lg)) {
         when (verticalAlignment) {
             BpkGraphicPromoVerticalAlignment.Top -> {
@@ -222,20 +286,9 @@ private fun ForegroundContent(
                 )
 
                 Spacer(Modifier.weight(1f))
-
-                SponsorOverlayView(
-                    sponsor = sponsor,
-                    textColor = textColor,
-                    sponsorLogo = sponsorLogo,
-                )
             }
-            BpkGraphicPromoVerticalAlignment.Bottom -> {
-                SponsorOverlayView(
-                    sponsor = sponsor,
-                    textColor = textColor,
-                    sponsorLogo = sponsorLogo,
-                )
 
+            BpkGraphicPromoVerticalAlignment.Bottom -> {
                 Spacer(Modifier.weight(1f))
 
                 MessageOverlay(
@@ -249,6 +302,29 @@ private fun ForegroundContent(
     }
 }
 
+@Composable
+private fun getPadding(): Dp =
+    if (isDesktop()) {
+        BpkSpacing.Xxl
+    } else if (isTablet()) {
+        BpkSpacing.Lg
+    } else if (isSmallTablet()) {
+        BpkSpacing.Xl
+    } else {
+        BpkSpacing.Lg
+    }
+
+@Composable
+private fun getDeviceConstrains(): Array<Float> = if (isDesktop()) {
+    arrayOf(RATIO_PORTRAIT_DESKTOP, 436f)
+} else if (isTablet()) {
+    arrayOf(RATIO_PORTRAIT_TABLET, 436f)
+} else if (isSmallTablet()) {
+    arrayOf(RATIO_PORTRAIT_SMALL_TABLET, 617f)
+} else {
+    arrayOf(RATIO_PORTRAIT, 360f)
+}
+
 private object InteractiveBackgroundIndicationNodeFactory : IndicationNodeFactory {
 
     override fun create(interactionSource: InteractionSource): DelegatableNode {
@@ -260,7 +336,8 @@ private object InteractiveBackgroundIndicationNodeFactory : IndicationNodeFactor
     override fun equals(other: Any?) = other === this
 }
 
-private class InteractiveBackgroundIndicationNode(private val interactionSource: InteractionSource) : Modifier.Node(), DrawModifierNode {
+private class InteractiveBackgroundIndicationNode(private val interactionSource: InteractionSource) : Modifier.Node(),
+    DrawModifierNode {
 
     val animatedScalePercent = Animatable(1f)
     val animatedOverlayAlpha = Animatable(0f)
@@ -296,7 +373,11 @@ private class InteractiveBackgroundIndicationNode(private val interactionSource:
 }
 
 private const val RATIO_PORTRAIT: Float = 3 / 4f
-private const val SPONSOR_LOGO_HEIGHT = 60
+private const val RATIO_PORTRAIT_SMALL_TABLET: Float = 464 / 617f
+private const val RATIO_PORTRAIT_TABLET: Float = 705 / 360f
+private const val RATIO_PORTRAIT_DESKTOP: Float = 1024 / 460f
+private const val SPONSOR_LOGO_HEIGHT = 32
+private const val SPONSOR_LOGO_WIDTH = 160
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,

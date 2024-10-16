@@ -38,7 +38,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
-import net.skyscanner.backpack.compose.utils.isTablet
+import net.skyscanner.backpack.compose.utils.isSmallTablet
 
 @Composable
 internal fun BpkSectionHeaderImpl(
@@ -49,7 +49,7 @@ internal fun BpkSectionHeaderImpl(
     accessibilityHeaderTagEnabled: Boolean?,
     modifier: Modifier = Modifier,
 ) {
-    val isTablet = isTablet()
+    val isTablet = isSmallTablet()
     Row(
         horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,

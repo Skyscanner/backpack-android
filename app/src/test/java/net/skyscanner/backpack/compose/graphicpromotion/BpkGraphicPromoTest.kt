@@ -21,11 +21,11 @@ package net.skyscanner.backpack.compose.graphicpromotion
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.demo.compose.BpkGraphicPromoSample
-import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentBottomSponsored
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentBottomWithText
-import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentTopSponsored
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryAlignmentTopWithKicker
 import net.skyscanner.backpack.demo.compose.GraphicPromoStoryDefault
+import net.skyscanner.backpack.demo.compose.GraphicPromoStorySponsored
+import net.skyscanner.backpack.demo.compose.GraphicPromoStorySponsoredWithLongTitle
 import org.junit.Test
 
 class BpkGraphicPromoTest : BpkSnapshotTest() {
@@ -56,11 +56,6 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun topAlignedKickerSubHeadlineSponsoredAvailable() = snap {
-        GraphicPromoStoryAlignmentTopSponsored()
-    }
-
-    @Test
     fun bottomAlignedKickerAvailable() = snap {
         BpkGraphicPromoSample(
             subHeadline = "How to complete the climb in 3 days",
@@ -74,7 +69,12 @@ class BpkGraphicPromoTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun bottomAlignedKickerSubHeadlineSponsoredAvailable() = snap {
-        GraphicPromoStoryAlignmentBottomSponsored()
+    fun defaultSponsoredAvailable() = snap {
+        GraphicPromoStorySponsored()
+    }
+
+    @Test
+    fun longTitleSponsoredAvailable() = snap {
+        GraphicPromoStorySponsoredWithLongTitle()
     }
 }

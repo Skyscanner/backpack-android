@@ -68,31 +68,26 @@ internal fun GraphicPromoStoryAlignmentBottomWithText() {
 
 @Composable
 @GraphicPromoComponent
-@ComposeStory("Top align Sponsored")
-internal fun GraphicPromoStoryAlignmentTopSponsored() {
+@ComposeStory("Sponsored")
+internal fun GraphicPromoStorySponsored() {
     BpkGraphicPromoSample(
-        kicker = "Travel tips",
-        subHeadline = "How to complete the climb in 3 days",
         sponsor = BpkGraphicsPromoSponsor(
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
-            title = "Sponsored",
+            title = "In partnership with Skyland",
         ),
     )
 }
 
 @Composable
 @GraphicPromoComponent
-@ComposeStory("Bottom align Sponsored")
-internal fun GraphicPromoStoryAlignmentBottomSponsored() {
+@ComposeStory("Sponsored with long title")
+internal fun GraphicPromoStorySponsoredWithLongTitle() {
     BpkGraphicPromoSample(
-        kicker = "Travel tips",
-        subHeadline = "How to complete the climb in 3 days",
-        verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
         sponsor = BpkGraphicsPromoSponsor(
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
-            title = "Sponsored",
+            title = "In partnership with the distinguished and extraordinary Skyland",
         ),
     )
 }
