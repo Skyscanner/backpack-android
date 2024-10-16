@@ -37,8 +37,8 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkCalendarHeaderCell(
     model: CalendarCell.Header,
-    modifier: Modifier = Modifier,
     onSelectWholeMonth: (CalendarCell.Header) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier.padding(horizontal = BpkSpacing.Base),

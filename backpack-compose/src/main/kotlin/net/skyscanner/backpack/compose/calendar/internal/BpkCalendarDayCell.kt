@@ -62,8 +62,8 @@ import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
 @Composable
 internal fun BpkCalendarDayCell(
     model: CalendarCell.Day,
-    modifier: Modifier = Modifier,
     onClick: (CalendarCell.Day) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     Crossfade(model, label = "Day cell selection transition") { mModel ->
