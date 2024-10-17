@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
@@ -32,10 +34,11 @@ internal fun BottomSheetContent(
     content: @Composable (ColumnScope.() -> Unit),
 ) {
     Column(modifier) {
+        val contentSlot = remember { movableContentOf { content() } }
         when (dragHandleStyle) {
-            BpkDragHandleStyle.Default -> content()
+            BpkDragHandleStyle.Default -> contentSlot()
             is BpkDragHandleStyle.OnImage -> Box {
-                Column { content() }
+                Column { contentSlot() }
                 BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
             }
         }
