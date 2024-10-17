@@ -14,6 +14,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -107,41 +109,42 @@ private fun ModalBottomSheetContent(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     titleContentDescription: String? = null,
-    content: @Composable() (ColumnScope.() -> Unit),
+    content: @Composable (ColumnScope.() -> Unit),
 ) {
     if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
-        when (dragHandleStyle) {
-            BpkDragHandleStyle.Default -> {
-                Column(
-                    modifier = modifier,
-                ) {
-                    BpkModalBottomSheetHeader(
-                        modifier = Modifier.height(BpkSpacing.Lg),
-                        title = title,
-                        titleContentDescription = titleContentDescription,
-                        action = action,
-                        state = state,
-                        dragHandleStyle = dragHandleStyle,
-                        closeButton = closeButton,
-                        onDismissRequest = onDismissRequest,
-                    )
-                    content()
+        Box(modifier = modifier) {
+            Column {
+                val contentSlot = remember { movableContentOf { content() } }
+                when (dragHandleStyle) {
+                    BpkDragHandleStyle.Default -> {
+                        BpkModalBottomSheetHeader(
+                            modifier = Modifier.height(BpkSpacing.Lg),
+                            title = title,
+                            titleContentDescription = titleContentDescription,
+                            action = action,
+                            state = state,
+                            dragHandleStyle = dragHandleStyle,
+                            closeButton = closeButton,
+                            onDismissRequest = onDismissRequest,
+                        )
+                        contentSlot()
+                    }
+
+                    is BpkDragHandleStyle.OnImage -> {
+                        contentSlot()
+                    }
                 }
             }
-
-            is BpkDragHandleStyle.OnImage -> {
-                Box(modifier = modifier) {
-                    Column { content() }
-                    BpkModalBottomSheetHeader(
-                        title = title,
-                        closeButton = closeButton,
-                        action = action,
-                        state = state,
-                        onDismissRequest = onDismissRequest,
-                        dragHandleStyle = dragHandleStyle,
-                    )
-                    BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
-                }
+            if (dragHandleStyle is BpkDragHandleStyle.OnImage) {
+                BpkModalBottomSheetHeader(
+                    title = title,
+                    closeButton = closeButton,
+                    action = action,
+                    state = state,
+                    onDismissRequest = onDismissRequest,
+                    dragHandleStyle = dragHandleStyle,
+                )
+                BpkBottomSheetHandle(modifier = Modifier.align(Alignment.TopCenter), dragHandleStyle)
             }
         }
     } else {
