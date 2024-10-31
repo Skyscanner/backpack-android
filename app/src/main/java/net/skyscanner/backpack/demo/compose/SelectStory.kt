@@ -48,7 +48,7 @@ import net.skyscanner.backpack.meta.StoryKind
 @ComposeStory
 fun SelectStory(modifier: Modifier = Modifier) {
     Column(modifier) {
-        var dropDownWidth by remember { mutableStateOf(BpkDropDownWidth.MAX_WIDTH) }
+        var dropDownWidth by remember { mutableStateOf(BpkDropDownWidth.MaxWidth) }
         Column(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalAlignment = Alignment.Start,

@@ -12,7 +12,7 @@
 
 ### Dropdown width
 
-The width of the dropdown can be one of either `MAX_WIDTH`, `MATCH_OPTION_WIDTH`, or `MATCH_SELECT_WIDTH`.
+The width of the dropdown can be one of either `MaxWidth`, `MatchOptionWidth`, or `MatchSelectWidth`.
 Max width allows the options to expand to the full width of the screen.
 Match Option width allows the options to expand as far as they need without ellipsis, which can be narrower than the Select
 it belongs to.

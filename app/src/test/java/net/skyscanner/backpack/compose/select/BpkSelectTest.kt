@@ -36,17 +36,17 @@ class BpkSelectTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        DefaultSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
+        DefaultSelectSample(dropDownWidth = BpkDropDownWidth.MaxWidth)
     }
 
     @Test
     fun disabled() = snap {
-        DisabledSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
+        DisabledSelectSample(dropDownWidth = BpkDropDownWidth.MaxWidth)
     }
 
     @Test
     fun error() = snap {
-        ErrorSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
+        ErrorSelectSample(dropDownWidth = BpkDropDownWidth.MaxWidth)
     }
 
     @Test
@@ -69,7 +69,7 @@ class BpkSelectTest : BpkSnapshotTest() {
         onNodeWithText("Placeholder").performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
-        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MaxWidth)
     }
 
     @Test
@@ -77,7 +77,7 @@ class BpkSelectTest : BpkSnapshotTest() {
         onNodeWithText("Placeholder").performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
-        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MATCH_OPTION_WIDTH)
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchOptionWidth)
     }
 
     @Test
@@ -85,6 +85,6 @@ class BpkSelectTest : BpkSnapshotTest() {
         onNodeWithText("Placeholder").performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
-        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MATCH_SELECT_WIDTH)
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchSelectWidth)
     }
 }

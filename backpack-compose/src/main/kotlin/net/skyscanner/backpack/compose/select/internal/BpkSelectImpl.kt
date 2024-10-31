@@ -48,7 +48,7 @@ import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 enum class BpkDropDownWidth {
-    MAX_WIDTH, MATCH_OPTION_WIDTH, MATCH_SELECT_WIDTH
+    MaxWidth, MatchOptionWidth, MatchSelectWidth
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +61,7 @@ internal fun BpkSelectImpl(
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
-    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MAX_WIDTH,
+    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MaxWidth,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
@@ -84,10 +84,10 @@ internal fun BpkSelectImpl(
             expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
             modifier = Modifier
                 .background(BpkTheme.colors.surfaceDefault)
-                .applyIf(dropDownWidth == BpkDropDownWidth.MAX_WIDTH) {
+                .applyIf(dropDownWidth == BpkDropDownWidth.MaxWidth) {
                     fillMaxWidth()
                 },
-            matchTextFieldWidth = dropDownWidth == BpkDropDownWidth.MATCH_SELECT_WIDTH,
+            matchTextFieldWidth = dropDownWidth == BpkDropDownWidth.MatchSelectWidth,
             onDismissRequest = {
                 expanded = false
                 focusManager.clearFocus()

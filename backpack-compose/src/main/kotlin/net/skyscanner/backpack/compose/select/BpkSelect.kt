@@ -33,7 +33,7 @@ fun BpkSelect(
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
-    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MAX_WIDTH,
+    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MaxWidth,
 ) {
     BpkSelectImpl(options, selectedIndex, placeholder, modifier, status, onSelectionChange, dropDownWidth)
 }
