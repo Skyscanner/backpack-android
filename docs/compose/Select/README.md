@@ -10,6 +10,14 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/default.png" alt="Select component" width="375" />  | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Select/screenshots/default_dm.png" alt="Select component - dark mode" width="375" />              |
 
+### Dropdown width
+
+The width of the dropdown can be one of either `MAX_WIDTH`, `MATCH_OPTION_WIDTH`, or `MATCH_SELECT_WIDTH`.
+Max width allows the options to expand to the full width of the screen.
+Match Option width allows the options to expand as far as they need without ellipsis, which can be narrower than the Select
+it belongs to.
+Match Select width means the options will be as wide as the parent Select's width which can lead to truncation.
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.

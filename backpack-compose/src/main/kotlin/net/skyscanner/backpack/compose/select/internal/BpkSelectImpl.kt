@@ -25,6 +25,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,10 +40,16 @@ import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
+import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+
+enum class BpkDropDownWidth {
+    MAX_WIDTH, MATCH_OPTION_WIDTH, MATCH_SELECT_WIDTH
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,6 +61,7 @@ internal fun BpkSelectImpl(
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
+    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MAX_WIDTH,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
@@ -63,9 +71,10 @@ internal fun BpkSelectImpl(
         onExpandedChange = { expanded = !expanded },
     ) {
         BpkTextFieldImpl(
-            modifier = modifier.menuAnchor(),
+            modifier = modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
             value = selectText,
             onValueChange = {},
+            type = BpkTextFieldType.Select,
             readOnly = true,
             placeholder = placeholder,
             status = status,
@@ -75,7 +84,10 @@ internal fun BpkSelectImpl(
             expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
             modifier = Modifier
                 .background(BpkTheme.colors.surfaceDefault)
-                .fillMaxWidth(),
+                .applyIf(dropDownWidth == BpkDropDownWidth.MAX_WIDTH) {
+                    fillMaxWidth()
+                },
+            matchTextFieldWidth = dropDownWidth == BpkDropDownWidth.MATCH_SELECT_WIDTH,
             onDismissRequest = {
                 expanded = false
                 focusManager.clearFocus()

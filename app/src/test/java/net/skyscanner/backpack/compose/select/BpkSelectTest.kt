@@ -23,6 +23,7 @@ import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.select.internal.BpkDropDownWidth
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.DisabledSelectSample
@@ -35,17 +36,17 @@ class BpkSelectTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        DefaultSelectSample()
+        DefaultSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
     }
 
     @Test
     fun disabled() = snap {
-        DisabledSelectSample()
+        DisabledSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
     }
 
     @Test
     fun error() = snap {
-        ErrorSelectSample()
+        ErrorSelectSample(dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
     }
 
     @Test
@@ -64,10 +65,26 @@ class BpkSelectTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun dropdownlist() = snap(assertion = {
+    fun dropdownlistMaxWidth() = snap(assertion = {
         onNodeWithText("Placeholder").performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
-        DefaultSelectSample(selectedIndex = 0)
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MAX_WIDTH)
+    }
+
+    @Test
+    fun dropdownlistMatchOptionWidth() = snap(assertion = {
+        onNodeWithText("Placeholder").performClick()
+        onNode(isPopup()).assertIsDisplayed()
+    }, captureFullScreen = true) {
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MATCH_OPTION_WIDTH)
+    }
+
+    @Test
+    fun dropdownlistMatchSelectWidth() = snap(assertion = {
+        onNodeWithText("Placeholder").performClick()
+        onNode(isPopup()).assertIsDisplayed()
+    }, captureFullScreen = true) {
+        DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MATCH_SELECT_WIDTH)
     }
 }
