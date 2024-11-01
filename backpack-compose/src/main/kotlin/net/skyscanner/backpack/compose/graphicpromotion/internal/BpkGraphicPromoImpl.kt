@@ -78,6 +78,7 @@ import net.skyscanner.backpack.compose.utils.isTablet
 internal fun BpkGraphicPromoImpl(
     headline: String,
     image: @Composable BoxScope.() -> Unit,
+    interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
     kicker: String? = null,
     subHeadline: String? = null,
@@ -86,7 +87,6 @@ internal fun BpkGraphicPromoImpl(
     verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
 ) {
     val (aspectRatio, maxHeight) = getDeviceConstrains()

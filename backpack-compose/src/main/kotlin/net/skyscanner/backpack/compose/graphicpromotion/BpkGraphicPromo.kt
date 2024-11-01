@@ -18,8 +18,10 @@
 
 package net.skyscanner.backpack.compose.graphicpromotion
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.graphicpromotion.internal.BpkGraphicPromoImpl
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
@@ -45,6 +47,7 @@ fun BpkGraphicPromo(
     verticalAlignment: BpkGraphicPromoVerticalAlignment = BpkGraphicPromoVerticalAlignment.Top,
     sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
 ) {
     BpkGraphicPromoImpl(
@@ -58,6 +61,7 @@ fun BpkGraphicPromo(
         sponsor = sponsor,
         image = image,
         sponsorLogo = sponsorLogo,
+        interactionSource = interactionSource,
         tapAction = tapAction,
     )
 }
