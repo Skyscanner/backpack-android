@@ -166,7 +166,7 @@ private fun toCompose(
                     .indent()
                     .apply {
                         source.map { it.name.toComposeName() }.distinct().forEach {
-                            add("%T.%N, ", BpkIconClass, it)
+                            add("%T.%N,\n", BpkIconClass, it)
                         }
                     }
                     .unindent()
