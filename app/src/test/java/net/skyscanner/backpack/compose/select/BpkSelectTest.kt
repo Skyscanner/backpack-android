@@ -23,7 +23,6 @@ import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.select.internal.BpkDropDownWidth
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.DisabledSelectSample

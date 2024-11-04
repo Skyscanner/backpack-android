@@ -22,8 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
-import net.skyscanner.backpack.compose.select.internal.BpkDropDownWidth
 import net.skyscanner.backpack.compose.select.internal.BpkSelectImpl
+
+enum class BpkDropDownWidth {
+    MaxWidth, MatchOptionWidth, MatchSelectWidth
+}
 
 @Composable
 fun BpkSelect(
