@@ -333,12 +333,13 @@ private fun RowScope.TrailingIcon(
 internal enum class BpkTextFieldType {
     Default,
     Search,
+    Select,
 }
 
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-) = RoundedCornerShape(if (type == BpkTextFieldType.Search) BpkBorderRadius.Md else BpkBorderRadius.Sm)
+) = RoundedCornerShape(if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) BpkBorderRadius.Md else BpkBorderRadius.Sm)
 
 private data class Icon(
     val icon: BpkIcon,

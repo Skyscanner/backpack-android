@@ -24,6 +24,10 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.select.internal.BpkSelectImpl
 
+enum class BpkDropDownWidth {
+    MaxWidth, MatchOptionWidth, MatchSelectWidth
+}
+
 @Composable
 fun BpkSelect(
     options: List<String>,
@@ -32,8 +36,9 @@ fun BpkSelect(
     modifier: Modifier = Modifier,
     status: BpkFieldStatus = LocalFieldStatus.current,
     onSelectionChange: ((selectedIndex: Int) -> Unit)? = null,
+    dropDownWidth: BpkDropDownWidth = BpkDropDownWidth.MaxWidth,
 ) {
-    BpkSelectImpl(options, selectedIndex, placeholder, modifier, status, onSelectionChange)
+    BpkSelectImpl(options, selectedIndex, placeholder, modifier, status, onSelectionChange, dropDownWidth)
 }
 
 @Composable

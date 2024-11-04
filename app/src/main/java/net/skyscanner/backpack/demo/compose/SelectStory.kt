@@ -21,13 +21,22 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.compose.select.BpkDropDownWidth
 import net.skyscanner.backpack.compose.select.BpkSelect
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SelectComponent
@@ -39,23 +48,47 @@ import net.skyscanner.backpack.meta.StoryKind
 @ComposeStory
 fun SelectStory(modifier: Modifier = Modifier) {
     Column(modifier) {
-        Row(
+        var dropDownWidth by remember { mutableStateOf(BpkDropDownWidth.MaxWidth) }
+        Column(
             modifier = Modifier.padding(BpkSpacing.Base),
-            horizontalArrangement = Arrangement.Start,
+            horizontalAlignment = Alignment.Start,
         ) {
-            DefaultSelectSample()
+            BpkText("Dropdown width")
+            BpkSelect(
+                modifier = Modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
+                options = BpkDropDownWidth.entries.map { it.toString() },
+                selectedIndex = BpkDropDownWidth.entries.indexOf(dropDownWidth),
+                placeholder = stringResource(id = R.string.input_placeholder),
+                status = BpkFieldStatus.Default,
+                onSelectionChange = {
+                    dropDownWidth = BpkDropDownWidth.entries[it]
+                },
+                dropDownWidth = dropDownWidth,
+            )
         }
         Row(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalArrangement = Arrangement.Start,
         ) {
-            DisabledSelectSample()
+            DefaultSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(1f))
+            Spacer(Modifier.width(BpkSpacing.Base))
+            DefaultSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(0.3f))
         }
         Row(
             modifier = Modifier.padding(BpkSpacing.Base),
             horizontalArrangement = Arrangement.Start,
         ) {
-            ErrorSelectSample()
+            DisabledSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(1f))
+            Spacer(Modifier.width(BpkSpacing.Base))
+            DisabledSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(0.3f))
+        }
+        Row(
+            modifier = Modifier.padding(BpkSpacing.Base),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            ErrorSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(1f))
+            Spacer(Modifier.width(BpkSpacing.Base))
+            ErrorSelectSample(dropDownWidth = dropDownWidth, modifier = Modifier.weight(0.3f))
         }
     }
 }
@@ -87,7 +120,11 @@ fun SelectBoxOnlyStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun DefaultSelectSample(modifier: Modifier = Modifier, selectedIndex: Int? = null) {
+internal fun DefaultSelectSample(
+    dropDownWidth: BpkDropDownWidth,
+    modifier: Modifier = Modifier,
+    selectedIndex: Int? = null,
+) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
@@ -95,11 +132,12 @@ internal fun DefaultSelectSample(modifier: Modifier = Modifier, selectedIndex: I
         placeholder = stringResource(id = R.string.input_placeholder),
         status = BpkFieldStatus.Default,
         onSelectionChange = {},
+        dropDownWidth = dropDownWidth,
     )
 }
 
 @Composable
-internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
+internal fun DisabledSelectSample(dropDownWidth: BpkDropDownWidth, modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
@@ -107,11 +145,12 @@ internal fun DisabledSelectSample(modifier: Modifier = Modifier) {
         placeholder = stringResource(id = R.string.input_placeholder),
         status = BpkFieldStatus.Disabled,
         onSelectionChange = {},
+        dropDownWidth = dropDownWidth,
     )
 }
 
 @Composable
-internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
+internal fun ErrorSelectSample(dropDownWidth: BpkDropDownWidth, modifier: Modifier = Modifier) {
     BpkSelect(
         modifier = modifier.widthIn(min = BpkSpacing.Xxl.times(5)),
         options = options(),
@@ -119,6 +158,7 @@ internal fun ErrorSelectSample(modifier: Modifier = Modifier) {
         placeholder = stringResource(id = R.string.input_placeholder),
         status = BpkFieldStatus.Error(stringResource(id = R.string.input_error)),
         onSelectionChange = {},
+        dropDownWidth = dropDownWidth,
     )
 }
 
