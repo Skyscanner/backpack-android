@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.calendar.internal
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -65,96 +64,91 @@ internal fun BpkCalendarDayCell(
     onClick: (CalendarCell.Day) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val selection = model.selection
+    val inactive = model.inactive
 
-    Crossfade(model, label = "Day cell selection transition") { mModel ->
-        val selection = mModel.selection
-        val inactive = mModel.inactive
-
-        val status = mModel.info.status
-        val style = mModel.info.style
-        val label = mModel.info.label
-
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-                .padding(bottom = BpkSpacing.Lg)
-                .clickable(
-                    indication = null,
-                    enabled = !inactive,
-                    onClick = { onClick(mModel) },
-                    onClickLabel = mModel.onClickLabel,
-                    interactionSource = remember { MutableInteractionSource() },
-                )
-                .semantics {
-                    if (mModel.stateDescription != null) {
-                        stateDescription = mModel.stateDescription!!
-                    } else {
-                        selected = selection != null && selection != Selection.Middle
-                    }
-                },
+    val status = model.info.status
+    val style = model.info.style
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(bottom = BpkSpacing.Lg)
+            .clickable(
+                indication = null,
+                enabled = !inactive,
+                onClick = { onClick(model) },
+                onClickLabel = model.onClickLabel,
+                interactionSource = remember { MutableInteractionSource() },
+            )
+            .semantics {
+                if (model.stateDescription != null) {
+                    stateDescription = model.stateDescription!!
+                } else {
+                    selected = selection != null && selection != Selection.Middle
+                }
+            },
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .cellSelectionBackground(
+                    surfaceSubtle = BpkTheme.colors.surfaceSubtle,
+                    selection = selection,
+                ),
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .cellSelectionBackground(
+
+            Spacer(
+                Modifier
+                    .size(BpkCalendarSizes.SelectionHeight)
+                    .cellDayBackground(
+                        coreAccent = BpkTheme.colors.coreAccent,
                         surfaceSubtle = BpkTheme.colors.surfaceSubtle,
                         selection = selection,
                     ),
-            ) {
+            )
 
-                Spacer(
-                    Modifier
-                        .size(BpkCalendarSizes.SelectionHeight)
-                        .cellDayBackground(
-                            coreAccent = BpkTheme.colors.coreAccent,
-                            surfaceSubtle = BpkTheme.colors.surfaceSubtle,
-                            selection = selection,
-                        ),
-                )
+            BpkText(
+                text = model.text.toString(),
+                modifier = Modifier.semantics {
+                    contentDescription = model.contentDescription
+                },
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                style = BpkTheme.typography.label1,
+                color = dateColor(selection, status, inactive, style),
+            )
+        }
 
-                BpkText(
-                    text = mModel.text.toString(),
-                    modifier = Modifier.semantics {
-                        contentDescription = mModel.contentDescription
-                    },
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                    style = BpkTheme.typography.label1,
-                    color = dateColor(selection, status, inactive, style),
-                )
-            }
-
-            if (!inactive) {
-                when (val cellLabel = mModel.info.label) {
-                    is CellLabel.Text -> {
-                        if (cellLabel.text.isNotBlank()) {
-                            BpkText(
-                                text = cellLabel.text,
-                                modifier = Modifier
-                                    .padding(horizontal = BpkSpacing.Sm),
-                                overflow = TextOverflow.Ellipsis,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2,
-                                style = BpkTheme.typography.caption,
-                                color = labelColor(status, style),
-                            )
-                        }
+        if (!inactive) {
+            when (val cellLabel = model.info.label) {
+                is CellLabel.Text -> {
+                    if (cellLabel.text.isNotBlank()) {
+                        BpkText(
+                            text = cellLabel.text,
+                            modifier = Modifier
+                                .padding(horizontal = BpkSpacing.Sm),
+                            overflow = TextOverflow.Ellipsis,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                            style = BpkTheme.typography.caption,
+                            color = labelColor(status, style),
+                        )
                     }
+                }
 
-                    is CellLabel.Icon -> {
-                        cellLabel.resId.let { resId ->
-                            BpkIcon.findBySmall(resId)?.let { bpkIcon ->
-                                val iconTint = cellLabel.tint
-                                    ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
-                                    ?.let { Color(it) } ?: LocalContentColor.current
-                                BpkIcon(
-                                    icon = bpkIcon,
-                                    tint = iconTint,
-                                    contentDescription = null,
-                                )
-                            }
+                is CellLabel.Icon -> {
+                    cellLabel.resId.let { resId ->
+                        BpkIcon.findBySmall(resId)?.let { bpkIcon ->
+                            val iconTint = cellLabel.tint
+                                ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
+                                ?.let { Color(it) } ?: LocalContentColor.current
+                            BpkIcon(
+                                icon = bpkIcon,
+                                tint = iconTint,
+                                contentDescription = null,
+                            )
                         }
                     }
                 }
