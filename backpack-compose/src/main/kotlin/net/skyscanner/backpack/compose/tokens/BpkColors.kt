@@ -22,7 +22,6 @@
 package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
-import kotlin.Boolean
 
 public class BpkColors private constructor(
     public val isLight: Boolean,
@@ -34,6 +33,7 @@ public class BpkColors private constructor(
     public val line: Color,
     public val lineOnDark: Color,
     public val scrim: Color,
+    public val overlay: Color,
     public val statusDangerFill: Color,
     public val statusDangerSpot: Color,
     public val statusSuccessFill: Color,
@@ -46,6 +46,7 @@ public class BpkColors private constructor(
     public val surfaceHero: Color,
     public val surfaceHighlight: Color,
     public val surfaceSubtle: Color,
+    public val surfaceLowContrast: Color,
     public val textDisabled: Color,
     public val textDisabledOnDark: Color,
     public val textError: Color,
@@ -67,6 +68,7 @@ public class BpkColors private constructor(
             line: Color = Color(0xFFC1C7CF),
             lineOnDark: Color = Color(0x80FFFFFF),
             scrim: Color = Color(0xB3000000),
+            overlay: Color = Color(0x33000000),
             statusDangerFill: Color = Color(0xFFFFE9F9),
             statusDangerSpot: Color = Color(0xFFE70866),
             statusSuccessFill: Color = Color(0xFFD4FFF2),
@@ -79,6 +81,7 @@ public class BpkColors private constructor(
             surfaceHero: Color = Color(0xFF0062E3),
             surfaceHighlight: Color = Color(0xFFE0E4E9),
             surfaceSubtle: Color = Color(0xFFE3F0FF),
+            surfaceLowContrast: Color = Color(0xFFEFF3F8),
             textDisabled: Color = Color(0x33000000),
             textDisabledOnDark: Color = Color(0x80FFFFFF),
             textError: Color = Color(0xFFE70866),
@@ -99,6 +102,7 @@ public class BpkColors private constructor(
             line = line,
             lineOnDark = lineOnDark,
             scrim = scrim,
+            overlay = overlay,
             statusDangerFill = statusDangerFill,
             statusDangerSpot = statusDangerSpot,
             statusSuccessFill = statusSuccessFill,
@@ -111,6 +115,7 @@ public class BpkColors private constructor(
             surfaceHero = surfaceHero,
             surfaceHighlight = surfaceHighlight,
             surfaceSubtle = surfaceSubtle,
+            surfaceLowContrast = surfaceLowContrast,
             textDisabled = textDisabled,
             textDisabledOnDark = textDisabledOnDark,
             textError = textError,
@@ -132,6 +137,7 @@ public class BpkColors private constructor(
             line: Color = Color(0xFF44505F),
             lineOnDark: Color = Color(0xFF44505F),
             scrim: Color = Color(0xB3000000),
+            overlay: Color = Color(0xCCFFFFFF),
             statusDangerFill: Color = Color(0xFFFFCADD),
             statusDangerSpot: Color = Color(0xFFFF649C),
             statusSuccessFill: Color = Color(0xFFB1FFE7),
@@ -144,6 +150,7 @@ public class BpkColors private constructor(
             surfaceHero: Color = Color(0xFF010913),
             surfaceHighlight: Color = Color(0xFF243346),
             surfaceSubtle: Color = Color(0xFF243346),
+            surfaceLowContrast: Color = Color(0xFF243346),
             textDisabled: Color = Color(0x33FFFFFF),
             textDisabledOnDark: Color = Color(0x80FFFFFF),
             textError: Color = Color(0xFFFF649C),
@@ -164,6 +171,7 @@ public class BpkColors private constructor(
             line = line,
             lineOnDark = lineOnDark,
             scrim = scrim,
+            overlay = overlay,
             statusDangerFill = statusDangerFill,
             statusDangerSpot = statusDangerSpot,
             statusSuccessFill = statusSuccessFill,
@@ -176,6 +184,7 @@ public class BpkColors private constructor(
             surfaceHero = surfaceHero,
             surfaceHighlight = surfaceHighlight,
             surfaceSubtle = surfaceSubtle,
+            surfaceLowContrast = surfaceLowContrast,
             textDisabled = textDisabled,
             textDisabledOnDark = textDisabledOnDark,
             textError = textError,
