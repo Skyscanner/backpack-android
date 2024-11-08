@@ -35,6 +35,7 @@
     <color name="bpkCorePrimary">#ff05203c</color>
     <color name="bpkLine">#ffc1c7cf</color>
     <color name="bpkLineOnDark">#80ffffff</color>
+    <color name="bpkOverlay">#33000000</color>
     <color name="bpkPrimary">#ff0062e3</color>
     <color name="bpkScrim">#b3000000</color>
     <color name="bpkStatusDangerFill">#ffffe9f9</color>
@@ -48,6 +49,7 @@
     <color name="bpkSurfaceElevated">#ffffffff</color>
     <color name="bpkSurfaceHero">#ff0062e3</color>
     <color name="bpkSurfaceHighlight">#ffe0e4e9</color>
+    <color name="bpkSurfaceLowContrast">#ffeff3f8</color>
     <color name="bpkSurfaceSubtle">#ffe3f0ff</color>
     <color name="bpkTextDisabled">#33000000</color>
     <color name="bpkTextDisabledOnDark">#80ffffff</color>
