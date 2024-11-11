@@ -25,6 +25,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -56,7 +57,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 private const val BpkAnimationDurationMs = 50
 private const val RowNumber = 1
 private val BpkSegmentedControlHeight = 32.dp
-private val DividerHeight = 16.dp
 
 private val ButtonShape = RoundedCornerShape(8.dp)
 
@@ -91,7 +91,7 @@ internal fun BpkSegmentedControlImpl(
             if (shouldShowDivider(index, buttonContents.lastIndex, selectedInt, isSelected)) {
                 BpkDivider(
                     modifier = Modifier
-                        .height(DividerHeight)
+                        .fillMaxHeight()
                         .width(1.dp),
                 )
             }
