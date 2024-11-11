@@ -23,6 +23,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,7 +46,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.segmentedcontrol.BpkSegmentedControlStyle
 import net.skyscanner.backpack.compose.text.BpkText
@@ -56,6 +56,8 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 private const val BpkAnimationDurationMs = 50
 private const val RowNumber = 1
 private val BpkSegmentedControlHeight = 32.dp
+private val DividerHeight = 16.dp
+
 private val ButtonShape = RoundedCornerShape(8.dp)
 
 @Composable
@@ -70,23 +72,29 @@ internal fun BpkSegmentedControlImpl(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .height(BpkSegmentedControlHeight)
-            .semantics { collectionInfo = CollectionInfo(rowCount = RowNumber, columnCount = buttonContents.size) }
+            .applyShadow(shadow)
             .clip(ButtonShape)
+            .height(BpkSegmentedControlHeight)
+            .fillMaxWidth()
             .background(type.toColor())
-            .requirePadding(shadow),
+            .semantics { collectionInfo = CollectionInfo(rowCount = RowNumber, columnCount = buttonContents.size) },
     ) {
         buttonContents.forEachIndexed { index, content ->
             val isSelected = selectedInt == index
             BpkSegmentedControlButton(
                 modifier = Modifier.weight(1f),
                 isSelected = isSelected,
-                shadow = shadow,
                 type = type,
                 content = content,
-                showDivider = shouldShowDivider(index, buttonContents.lastIndex, selectedInt, isSelected),
                 onItemClick = { onItemClick(index) },
             )
+            if (shouldShowDivider(index, buttonContents.lastIndex, selectedInt, isSelected)) {
+                BpkDivider(
+                    modifier = Modifier
+                        .height(DividerHeight)
+                        .width(1.dp),
+                )
+            }
         }
     }
 }
@@ -105,22 +113,19 @@ private fun shouldShowDivider(
 @Composable
 private fun BpkSegmentedControlButton(
     isSelected: Boolean,
-    shadow: Boolean,
     type: BpkSegmentedControlStyle,
     content: String,
-    showDivider: Boolean,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Box(
         modifier = modifier
             .fillMaxSize()
             .applyBackground(
                 selected = isSelected,
-                shadow = shadow,
                 background = getButtonColor(type),
             )
+            .padding(horizontal = BpkSpacing.Md)
             .selectable(
                 selected = isSelected,
                 role = Role.RadioButton,
@@ -131,9 +136,8 @@ private fun BpkSegmentedControlButton(
 
         BpkText(
             modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .padding(horizontal = BpkSpacing.Md),
+                .align(Alignment.Center)
+                .fillMaxWidth(),
             text = content,
             textAlign = TextAlign.Center,
             color = getTextColor(type, isSelected),
@@ -141,49 +145,26 @@ private fun BpkSegmentedControlButton(
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
         )
-        if (showDivider) {
-            BpkDivider(
-                modifier = Modifier
-                    .width(1.dp)
-                    .height(BpkSpacing.Base),
-            )
-        }
     }
 }
 
 private fun Modifier.applyBackground(
     selected: Boolean,
-    shadow: Boolean,
     background: Color,
 ): Modifier {
     return if (selected) {
-        this
-            .applyShadow(shadow)
-            .background(background)
-    } else
-        this
-}
-
-private fun Modifier.requirePadding(
-    shadow: Boolean,
-): Modifier {
-    return if (shadow) {
-        this.padding(2.dp)
-    } else
-        this
+        this.background(background)
+    } else this
 }
 
 private fun Modifier.applyShadow(
     shadow: Boolean,
 ): Modifier {
     return if (shadow)
-        this
-            .shadow(
-                elevation = BpkElevation.Xl,
-                shape = ButtonShape,
-            )
-            .zIndex(1f)
-            .clip(ButtonShape)
+        this.shadow(
+            elevation = BpkElevation.Sm,
+            shape = ButtonShape,
+        )
     else this
 }
 

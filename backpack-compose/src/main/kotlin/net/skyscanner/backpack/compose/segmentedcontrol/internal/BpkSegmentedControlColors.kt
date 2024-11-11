@@ -28,7 +28,7 @@ internal val surfaceContrastSegmentedControlOn: Color
 
 internal val surfaceContrastSegmentedControl: Color
     @Composable
-    get() = dynamicColorOf(Color(0X1AFFFFFF), Color(0xFF131D2B))
+    get() = dynamicColorOf(Color(0xFF24364D), Color(0xFF131D2B))
 
 internal val canvasDefaultSegmentedControl: Color
     @Composable
