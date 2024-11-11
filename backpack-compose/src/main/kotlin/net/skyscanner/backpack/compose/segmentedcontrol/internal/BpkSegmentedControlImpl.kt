@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -40,10 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.CollectionInfo
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.collectionInfo
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -51,11 +49,12 @@ import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.segmentedcontrol.BpkSegmentedControlStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.internal.BpkSegmentedControlColors
 
 private const val BpkAnimationDurationMs = 50
-private const val RowNumber = 1
 private val BpkSegmentedControlHeight = 32.dp
 
 private val ButtonShape = RoundedCornerShape(8.dp)
@@ -64,7 +63,7 @@ private val ButtonShape = RoundedCornerShape(8.dp)
 internal fun BpkSegmentedControlImpl(
     buttonContents: List<String>,
     onItemClick: (Int) -> Unit,
-    selectedInt: Int,
+    selectedIndex: Int,
     shadow: Boolean,
     type: BpkSegmentedControlStyle,
     modifier: Modifier = Modifier,
@@ -77,10 +76,10 @@ internal fun BpkSegmentedControlImpl(
             .height(BpkSegmentedControlHeight)
             .fillMaxWidth()
             .background(type.toColor())
-            .semantics { collectionInfo = CollectionInfo(rowCount = RowNumber, columnCount = buttonContents.size) },
+            .selectableGroup(),
     ) {
         buttonContents.forEachIndexed { index, content ->
-            val isSelected = selectedInt == index
+            val isSelected = selectedIndex == index
             BpkSegmentedControlButton(
                 modifier = Modifier.weight(1f),
                 isSelected = isSelected,
@@ -88,11 +87,11 @@ internal fun BpkSegmentedControlImpl(
                 content = content,
                 onItemClick = { onItemClick(index) },
             )
-            if (shouldShowDivider(index, buttonContents.lastIndex, selectedInt, isSelected)) {
+            if (shouldShowDivider(index, buttonContents.lastIndex, selectedIndex, isSelected)) {
                 BpkDivider(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(1.dp),
+                        .width(BpkBorderSize.Sm),
                 )
             }
         }
@@ -191,7 +190,7 @@ internal fun getButtonColor(
 ): Color {
     return animateColorAsState(
         targetValue = when (style) {
-            BpkSegmentedControlStyle.SurfaceContrast -> surfaceContrastSegmentedControlOn
+            BpkSegmentedControlStyle.SurfaceContrast -> BpkSegmentedControlColors.surfaceContrastOn
             else -> BpkTheme.colors.corePrimary
         },
         animationSpec = tween(
@@ -204,9 +203,9 @@ internal fun getButtonColor(
 @Composable
 private fun BpkSegmentedControlStyle.toColor(): Color {
     return when (this) {
-        BpkSegmentedControlStyle.CanvasDefault -> canvasDefaultSegmentedControl
+        BpkSegmentedControlStyle.CanvasDefault -> BpkSegmentedControlColors.canvasDefault
         BpkSegmentedControlStyle.CanvasContrast -> BpkTheme.colors.surfaceDefault
         BpkSegmentedControlStyle.SurfaceDefault -> BpkTheme.colors.canvasContrast
-        BpkSegmentedControlStyle.SurfaceContrast -> surfaceContrastSegmentedControl
+        BpkSegmentedControlStyle.SurfaceContrast -> BpkSegmentedControlColors.surfaceContrast
     }
 }

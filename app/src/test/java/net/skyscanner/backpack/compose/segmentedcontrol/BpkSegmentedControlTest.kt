@@ -34,17 +34,8 @@ class BpkSegmentedControlTest(private val permutation: Permutation) : BpkSnapsho
     fun regularValue() = snap({ permutation.type.toColor() }) {
         SegmentedControlsSample(
             type = permutation.type,
-            selectedInt = permutation.selectedInt,
-            numberOfButtons = permutation.numberOfButtons,
-        )
-    }
-
-    @Test
-    fun shadowEnabled() = snap({ permutation.type.toColor() }) {
-        SegmentedControlsSample(
-            type = permutation.type,
-            selectedInt = permutation.selectedInt,
-            shadow = true,
+            shadow = permutation.shadowEnabled,
+            selectedIndex = permutation.selectedInt,
             numberOfButtons = permutation.numberOfButtons,
         )
     }
@@ -53,7 +44,8 @@ class BpkSegmentedControlTest(private val permutation: Permutation) : BpkSnapsho
     fun longValue() = snap({ permutation.type.toColor() }) {
         SegmentedControlsSample(
             type = permutation.type,
-            selectedInt = permutation.selectedInt,
+            shadow = permutation.shadowEnabled,
+            selectedIndex = permutation.selectedInt,
             numberOfButtons = permutation.numberOfButtons,
             content = stringResource(R.string.button_long_text),
         )
@@ -62,25 +54,17 @@ class BpkSegmentedControlTest(private val permutation: Permutation) : BpkSnapsho
     companion object {
         enum class Permutation(
             val type: BpkSegmentedControlStyle,
-            val numberOfButtons: Int,
+            val shadowEnabled: Boolean = false,
+            val numberOfButtons: Int = 2,
             val selectedInt: Int = 0,
         ) {
-            CanvasDefaultTwoButtons(type = BpkSegmentedControlStyle.CanvasDefault, numberOfButtons = 2),
+            CanvasDefaultTwoButtons(type = BpkSegmentedControlStyle.CanvasDefault),
+            CanvasContrastTwoButtons(type = BpkSegmentedControlStyle.CanvasContrast),
+            SurfaceDefaultTwoButtons(type = BpkSegmentedControlStyle.SurfaceDefault),
+            SurfaceContrastTwoButtons(type = BpkSegmentedControlStyle.SurfaceContrast),
             CanvasDefaultThreeButtons(type = BpkSegmentedControlStyle.CanvasDefault, numberOfButtons = 3),
             CanvasDefaultFourButtons(type = BpkSegmentedControlStyle.CanvasDefault, numberOfButtons = 4),
-            CanvasDefaultFourButtonsSelectedMiddle(type = BpkSegmentedControlStyle.CanvasDefault, numberOfButtons = 4, selectedInt = 2),
-            CanvasContrastTwoButtons(type = BpkSegmentedControlStyle.CanvasContrast, numberOfButtons = 2),
-            CanvasContrastThreeButtons(type = BpkSegmentedControlStyle.CanvasContrast, numberOfButtons = 3),
-            CanvasContrastFourButtons(type = BpkSegmentedControlStyle.CanvasContrast, numberOfButtons = 4),
-            CanvasContrastFourButtonsSelectedMiddle(type = BpkSegmentedControlStyle.CanvasContrast, numberOfButtons = 4, selectedInt = 2),
-            SurfaceDefaultTwoButtons(type = BpkSegmentedControlStyle.SurfaceDefault, numberOfButtons = 2),
-            SurfaceDefaultThreeButtons(type = BpkSegmentedControlStyle.SurfaceDefault, numberOfButtons = 3),
-            SurfaceDefaultFourButtons(type = BpkSegmentedControlStyle.SurfaceDefault, numberOfButtons = 4),
-            SurfaceDefaultFourButtonsSelectedMiddle(type = BpkSegmentedControlStyle.SurfaceDefault, numberOfButtons = 4, selectedInt = 2),
-            SurfaceContrastTwoButtons(type = BpkSegmentedControlStyle.SurfaceContrast, numberOfButtons = 2),
-            SurfaceContrastThreeButtons(type = BpkSegmentedControlStyle.SurfaceContrast, numberOfButtons = 3),
-            SurfaceContrastFourButtons(type = BpkSegmentedControlStyle.SurfaceContrast, numberOfButtons = 4),
-            SurfaceContrastFourButtonsSelectedMiddle(type = BpkSegmentedControlStyle.SurfaceContrast, numberOfButtons = 4, selectedInt = 2),
+            CanvasDefaultTwoButtonsAndShadow(type = BpkSegmentedControlStyle.CanvasDefault, shadowEnabled = true),
         }
 
         @JvmStatic

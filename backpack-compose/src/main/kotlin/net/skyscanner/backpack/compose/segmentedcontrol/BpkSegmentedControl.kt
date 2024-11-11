@@ -35,7 +35,7 @@ private const val maxNumberOfButtons = 4
 fun BpkSegmentedControl(
     buttonContents: List<String>,
     onItemClick: (Int) -> Unit,
-    selectedInt: Int,
+    selectedIndex: Int,
     modifier: Modifier = Modifier,
     shadow: Boolean = false,
     type: BpkSegmentedControlStyle = BpkSegmentedControlStyle.CanvasDefault,
@@ -44,7 +44,7 @@ fun BpkSegmentedControl(
     BpkSegmentedControlImpl(
         buttonContents = limitedButtonContents,
         onItemClick = onItemClick,
-        selectedInt = selectedInt,
+        selectedIndex = selectedIndex,
         modifier = modifier,
         shadow = shadow,
         type = type,

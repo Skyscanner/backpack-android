@@ -166,19 +166,19 @@ internal fun SegmentedControlsSample(
     numberOfButtons: Int,
     type: BpkSegmentedControlStyle,
     modifier: Modifier = Modifier,
-    selectedInt: Int = 0,
+    selectedIndex: Int = 0,
     content: String = stringResource(R.string.value),
     shadow: Boolean = false,
 ) {
-    var selectedIndex by remember { mutableIntStateOf(selectedInt) }
+    var currentIndex by remember { mutableIntStateOf(selectedIndex) }
     val buttonContents = List(numberOfButtons) { content }
     BpkSegmentedControl(
         modifier = modifier,
         type = type,
         shadow = shadow,
         buttonContents = buttonContents,
-        onItemClick = { selectedIndex = it },
-        selectedInt = selectedIndex,
+        onItemClick = { currentIndex = it },
+        selectedIndex = selectedIndex,
     )
 }
 
