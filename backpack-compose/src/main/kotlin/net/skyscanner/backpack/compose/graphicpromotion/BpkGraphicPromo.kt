@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.graphicpromotion
 
+import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.graphicpromotion.internal.BpkGraphicPromoImpl
+import net.skyscanner.backpack.compose.graphicpromotion.internal.getInteractiveBackgroundIndicationNodeFactory
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 
 enum class BpkGraphicPromoVariant { OnDark, OnLight, }
@@ -49,6 +51,7 @@ fun BpkGraphicPromo(
     sponsorLogo: (@Composable () -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
+    animationIndicationNode: IndicationNodeFactory = getInteractiveBackgroundIndicationNodeFactory(),
 ) {
     BpkGraphicPromoImpl(
         headline = headline,
@@ -63,5 +66,6 @@ fun BpkGraphicPromo(
         sponsorLogo = sponsorLogo,
         interactionSource = interactionSource,
         tapAction = tapAction,
+        animationIndicationNode = animationIndicationNode,
     )
 }
