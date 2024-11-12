@@ -398,4 +398,8 @@
     <string name="card_list_item_2_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
     <string name="card_list_item_3_body_text">Immerse yourself in the rich history and culture of the Irish capital.</string>
     <string name="card_list_item_9_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
+    <string name="shadow_status" translatable="false">Shadow: %1$s</string>
+    <string name="on" translatable="false">On</string>
+    <string name="off" translatable="false">Off</string>
+    <string name="value" translatable="false">Value</string>
 </resources>
