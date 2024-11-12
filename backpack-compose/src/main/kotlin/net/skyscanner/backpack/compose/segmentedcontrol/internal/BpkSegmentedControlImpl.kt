@@ -49,6 +49,7 @@ import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.segmentedcontrol.BpkSegmentedControlStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -56,8 +57,7 @@ import net.skyscanner.backpack.compose.tokens.internal.BpkSegmentedControlColors
 
 private const val BpkAnimationDurationMs = 50
 private val BpkSegmentedControlHeight = 32.dp
-
-private val ButtonShape = RoundedCornerShape(8.dp)
+private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 
 @Composable
 internal fun BpkSegmentedControlImpl(
