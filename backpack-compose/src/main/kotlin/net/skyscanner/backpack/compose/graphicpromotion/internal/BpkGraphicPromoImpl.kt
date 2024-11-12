@@ -88,6 +88,7 @@ internal fun BpkGraphicPromoImpl(
     sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
     tapAction: () -> Unit = {},
+    animationIndicationNode: IndicationNodeFactory = InteractiveBackgroundIndicationNodeFactory,
 ) {
     val (aspectRatio, maxHeight) = getDeviceConstrains()
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
@@ -98,6 +99,7 @@ internal fun BpkGraphicPromoImpl(
             .aspectRatio(ratio = aspectRatio)
             .heightIn(max = maxHeight.dp)
             .clip(roundedCornerShape)
+            .indication(interactionSource, animationIndicationNode)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
@@ -111,8 +113,7 @@ internal fun BpkGraphicPromoImpl(
         if (overlayType != null) {
             BpkOverlay(
                 modifier = Modifier
-                    .matchParentSize()
-                    .indication(interactionSource, InteractiveBackgroundIndicationNodeFactory),
+                    .matchParentSize(),
                 overlayType = overlayType,
                 foregroundContent = {
                     ForegroundContent(
@@ -130,8 +131,7 @@ internal fun BpkGraphicPromoImpl(
         } else {
             Box(
                 modifier = Modifier
-                    .matchParentSize()
-                    .indication(interactionSource, InteractiveBackgroundIndicationNodeFactory),
+                    .matchParentSize(),
                 content = image,
             )
             ForegroundContent(
@@ -334,6 +334,10 @@ private object InteractiveBackgroundIndicationNodeFactory : IndicationNodeFactor
     override fun hashCode(): Int = -1
 
     override fun equals(other: Any?) = other === this
+}
+
+fun getInteractiveBackgroundIndicationNodeFactory(): IndicationNodeFactory {
+    return InteractiveBackgroundIndicationNodeFactory
 }
 
 private class InteractiveBackgroundIndicationNode(private val interactionSource: InteractionSource) : Modifier.Node(),
