@@ -98,6 +98,7 @@ internal fun BpkGraphicPromoImpl(
         modifier = modifier
             .aspectRatio(ratio = aspectRatio)
             .heightIn(max = maxHeight.dp)
+            .indication(interactionSource, animationIndicationNode)
             .clip(roundedCornerShape)
             .indication(interactionSource, animationIndicationNode)
             .clickable(
