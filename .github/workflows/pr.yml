@@ -21,6 +21,7 @@ jobs:
       pull-requests: write
       contents: write
     uses: ./.github/workflows/_build.yml
+    secrets: inherit
 
   Dependabot:
     runs-on: ubuntu-22.04

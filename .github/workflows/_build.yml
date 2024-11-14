@@ -61,6 +61,15 @@ jobs:
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
+      - name: Runway upload
+        run: |
+          set -e
+          curl -X POST -F "file=@app/build/outputs/apk/oss/debug/app-oss-debug.apk" -H "X-API-KEY:${RUNWAY_API_KEY}" https://upload-api.runway.team/v1/app/${RUNWAY_APP_ID}/bucket/${RUNWAY_BUCKET_ID}/build
+        env:
+          RUNWAY_API_KEY: ${{ secrets.RUNWAY_API_KEY }}
+          RUNWAY_APP_ID: ${{ secrets.RUNWAY_APP_ID }}
+          RUNWAY_BUCKET_ID: ${{ secrets.RUNWAY_BUCKET_ID }}
+
       - name: Tokens check
         if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
