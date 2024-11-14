@@ -84,18 +84,14 @@ jobs:
           external_repository: backpack/android
           publish_branch: main
 
-      - name: Publish Release APK to AppCenter
-        uses: wzieba/AppCenter-Github-Action@v1.3.4
-        with:
-          appName: Backpack/Backpack-Android
-          token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Everyone
-          file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
-          releaseNotes: Version ${{github.event.release.tag_name}}
-
-  SupernovaPublish:
-    runs-on: ubuntu-22.04
-    environment: Publishing
-    steps:
       - name: Update Supernova docs
         run: npx @supernovaio/cli publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemId=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
+
+      - name: Publish release to Runway
+        run: |
+          set -e
+          curl -X POST -F "file=@app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk" -H "X-API-KEY:${RUNWAY_API_KEY}" https://upload-api.runway.team/v1/app/${RUNWAY_APP_ID}/bucket/${RUNWAY_BUCKET_ID}/build
+        env:
+          RUNWAY_API_KEY: ${{ secrets.RUNWAY_API_KEY }}
+          RUNWAY_APP_ID: ${{ secrets.RUNWAY_APP_ID }}
+          RUNWAY_BUCKET_ID: ${{ secrets.RUNWAY_BUCKET_ID }}

@@ -39,7 +39,7 @@ android {
     defaultConfig {
         applicationId 'net.skyscanner.backpack'
         versionCode 1
-        versionName "🐨"
+        versionName "1.0.0"
 
         manifestPlaceholders = [MAPS_API_KEY: properties.getProperty("MAPS_API_KEY", "")]
     }
@@ -64,11 +64,9 @@ android {
     productFlavors {
         oss {
             dimension "version"
-            versionNameSuffix "-oss"
         }
         internal {
             dimension "version"
-            versionNameSuffix "-internal"
         }
     }
     testOptions {
