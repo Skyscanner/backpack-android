@@ -100,7 +100,6 @@ internal fun BpkGraphicPromoImpl(
             .heightIn(max = maxHeight.dp)
             .indication(interactionSource, animationIndicationNode)
             .clip(roundedCornerShape)
-            .indication(interactionSource, animationIndicationNode)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
