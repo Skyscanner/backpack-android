@@ -27,10 +27,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PriceComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -75,6 +77,21 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 align = BpkPriceAlign.End,
             )
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.Start,
+                icon = BpkIcon.NewWindow,
+            )
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.End,
+                icon = BpkIcon.NewWindow,
+            )
+        }
         PriceExample(
             size = BpkPriceSize.Small,
             align = BpkPriceAlign.Row,
@@ -83,11 +100,16 @@ fun PriceStory(modifier: Modifier = Modifier) {
             size = BpkPriceSize.ExtraSmall,
             align = BpkPriceAlign.Row,
         )
+        PriceExample(
+            size = BpkPriceSize.Small,
+            align = BpkPriceAlign.Row,
+            icon = BpkIcon.NewWindow,
+        )
     }
 }
 
 @Composable
-private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign) {
+private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign, icon: BpkIcon? = null) {
     BpkPrice(
         price = stringResource(id = R.string.price_price),
         previousPrice = stringResource(id = R.string.price_line_through_text),
@@ -95,5 +117,6 @@ private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign) {
         trailingText = stringResource(id = R.string.price_trailing_text),
         size = size,
         align = align,
+        icon = icon,
     )
 }

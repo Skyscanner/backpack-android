@@ -21,14 +21,18 @@ package net.skyscanner.backpack.compose.price.internal
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
@@ -39,6 +43,7 @@ internal fun BpkPriceAlignEnd(
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
+    icon: BpkIcon? = null,
 ) {
     Column(
         modifier = modifier,
@@ -64,11 +69,22 @@ internal fun BpkPriceAlignEnd(
                 )
             }
         }
-        BpkText(
-            text = price,
-            color = BpkTheme.colors.textPrimary,
-            style = size.mainTextStyle(),
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            BpkText(
+                text = price,
+                color = BpkTheme.colors.textPrimary,
+                style = size.mainTextStyle(),
+            )
+            icon?.let {
+                BpkIcon(
+                    icon = icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Small,
+                    modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
+                )
+            }
+        }
+
         trailingText?.let {
             BpkText(
                 text = it,
