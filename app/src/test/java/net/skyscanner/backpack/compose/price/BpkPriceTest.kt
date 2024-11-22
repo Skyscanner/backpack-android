@@ -20,6 +20,8 @@ package net.skyscanner.backpack.compose.price
 
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -77,6 +79,21 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
+            )
+        }
+    }
+
+    @Test
+    fun priceWithIcon() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                previousPrice = stringResource(id = R.string.price_line_through_text),
+                leadingText = stringResource(id = R.string.price_leading_text),
+                size = size,
+                align = align,
+                icon = BpkIcon.NewWindow,
             )
         }
     }
