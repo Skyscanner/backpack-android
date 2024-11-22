@@ -66,9 +66,8 @@ internal fun BpkPriceRow(
                 style = size.secondaryTextStyle(),
             )
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alignByBaseline()) {
             BpkText(
-                modifier = Modifier.alignByBaseline(),
                 text = price,
                 color = BpkTheme.colors.textPrimary,
                 style = size.mainTextStyle(),
