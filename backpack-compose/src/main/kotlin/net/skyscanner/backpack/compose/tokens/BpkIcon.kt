@@ -1820,6 +1820,14 @@ public val BpkIcon.Companion.Speaker: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.SpeakerMute: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "speaker-mute",
+        small = R.drawable.bpk_speaker_mute_sm,
+        large = R.drawable.bpk_speaker_mute,
+    )
+)
+
 public val BpkIcon.Companion.Star: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "star",
@@ -2446,6 +2454,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.SortDown,
         BpkIcon.SortUp,
         BpkIcon.Speaker,
+        BpkIcon.SpeakerMute,
         BpkIcon.Star,
         BpkIcon.StarHalf,
         BpkIcon.StarOutline,

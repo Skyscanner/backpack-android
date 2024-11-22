@@ -190,6 +190,7 @@ private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<
     fun BpkIcon.fileContent(metadata: Map<String, String?>) =
         value
             .replace("android:fillColor=\"#FF000000\"", "  android:fillColor=\"@color/bpkTextPrimary\"")
+            .replace("android:fillColor=\"#161616\"", "  android:fillColor=\"@color/bpkTextPrimary\"")
             .replace("<path", "  <path")
             .replace("android:pathData=", "  android:pathData=")
             .replace("\"/>", "\" />")
