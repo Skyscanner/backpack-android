@@ -116,6 +116,14 @@ private fun HotelRatingSample(
                 )
             }
         }
+        BpkHotelRating(
+            rating = 5,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = size,
+            color = BpkTheme.colors.textSecondary,
+        )
     }
 }
 
@@ -143,5 +151,14 @@ private fun StaticRatingSample(
                 )
             }
         }
+        BpkStarRating(
+            rating = 5.0f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_decimal_accessibility_status, value, max)
+            },
+            rounding = BpkRatingRounding.Up,
+            size = size,
+            color = BpkTheme.colors.textSecondary,
+        )
     }
 }

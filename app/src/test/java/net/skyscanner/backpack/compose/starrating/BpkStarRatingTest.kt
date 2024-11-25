@@ -20,6 +20,7 @@
 package net.skyscanner.backpack.compose.starrating
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
@@ -120,12 +121,34 @@ class BpkStarRatingTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun starWithColor() = snap {
+        BpkStarRating(
+            rating = 3f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            color = BpkTheme.colors.textSecondary,
+        )
+    }
+
+    @Test
     fun hotelStarRating4() = snap {
         BpkHotelRating(
             rating = 4,
             contentDescription = { value, max ->
                 stringResource(R.string.star_rating_accessibility_status, value, max)
             },
+        )
+    }
+
+    @Test
+    fun hotelStarRatingWithColor() = snap {
+        BpkHotelRating(
+            rating = 4,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            color = BpkTheme.colors.textSecondary,
         )
     }
 
@@ -137,6 +160,18 @@ class BpkStarRatingTest : BpkSnapshotTest() {
             contentDescription = { value, max ->
                 stringResource(R.string.star_rating_accessibility_status, value, max)
             },
+        )
+    }
+
+    @Test
+    fun interactiveStarRatingWithColor() = snap {
+        BpkInteractiveStarRating(
+            rating = 2,
+            onRatingChanged = { },
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            color = BpkTheme.colors.textSecondary,
         )
     }
 }

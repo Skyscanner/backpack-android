@@ -25,14 +25,11 @@ import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
-import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.round
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -42,6 +39,10 @@ import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 enum class BpkStarRatingSize {
     Large,
@@ -61,6 +62,7 @@ fun BpkStarRating(
     modifier: Modifier = Modifier,
     rounding: BpkRatingRounding = BpkRatingRounding.Down,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    color: Color? = null,
 ) {
     BpkStarRating(
         rating = rating,
@@ -70,6 +72,7 @@ fun BpkStarRating(
         modifier = modifier,
         contentDescription = contentDescription,
         size = size,
+        color = color,
     )
 }
 
@@ -79,6 +82,7 @@ fun BpkHotelRating(
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    color: Color? = null,
 ) {
     BpkStarRating(
         rating = rating.toFloat(),
@@ -88,6 +92,7 @@ fun BpkHotelRating(
         modifier = modifier,
         contentDescription = contentDescription,
         size = size,
+        color = color,
     )
 }
 
@@ -98,6 +103,7 @@ fun BpkInteractiveStarRating(
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    color: Color? = null,
 ) {
     BpkStarRating(
         rating = rating.toFloat(),
@@ -108,6 +114,7 @@ fun BpkInteractiveStarRating(
         onRatingChanged = onRatingChanged,
         contentDescription = contentDescription,
         size = size,
+        color = color,
     )
 }
 
@@ -121,6 +128,7 @@ private fun BpkStarRating(
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Large,
     onRatingChanged: ((Int) -> Unit)? = null,
+    color: Color? = null,
 ) {
     val iconSize = when (size) {
         BpkStarRatingSize.Large -> BpkIconSize.Large
@@ -159,11 +167,13 @@ private fun BpkStarRating(
                         icon = BpkRatingStarType.Half,
                         iconSize = iconSize,
                         modifier = starModifier,
+                        color = color,
                     )
                     else -> BpkStar(
                         icon = BpkRatingStarType.Full,
                         iconSize = iconSize,
                         modifier = starModifier,
+                        color = color,
                     )
                 }
             }
@@ -176,6 +186,7 @@ private fun BpkStar(
     icon: BpkRatingStarType,
     iconSize: BpkIconSize,
     modifier: Modifier = Modifier,
+    color: Color? = null,
 ) {
     when (icon) {
         BpkRatingStarType.Empty -> BpkIcon(
@@ -189,14 +200,14 @@ private fun BpkStar(
             icon = BpkIcon.StarHalf,
             contentDescription = null,
             size = iconSize,
-            tint = BpkTheme.colors.statusWarningSpot,
+            tint = color ?: BpkTheme.colors.statusWarningSpot,
             modifier = modifier,
         )
         BpkRatingStarType.Full -> BpkIcon(
             icon = BpkIcon.Star,
             contentDescription = null,
             size = iconSize,
-            tint = BpkTheme.colors.statusWarningSpot,
+            tint = color ?: BpkTheme.colors.statusWarningSpot,
             modifier = modifier,
         )
     }
