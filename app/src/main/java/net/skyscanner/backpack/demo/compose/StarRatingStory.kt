@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkHotelRating
+import net.skyscanner.backpack.compose.starrating.BpkRatingColor
 import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
@@ -116,6 +117,14 @@ private fun HotelRatingSample(
                 )
             }
         }
+        BpkHotelRating(
+            rating = 5,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = size,
+            color = BpkRatingColor.Gray,
+        )
     }
 }
 

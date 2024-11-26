@@ -130,6 +130,17 @@ class BpkStarRatingTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun hotelStarRatingWithColor() = snap {
+        BpkHotelRating(
+            rating = 4,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            color = BpkRatingColor.Gray,
+        )
+    }
+
+    @Test
     fun interactiveStarRating() = snap {
         BpkInteractiveStarRating(
             rating = 2,
