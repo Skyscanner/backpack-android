@@ -39,6 +39,7 @@ import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.round
@@ -55,6 +56,12 @@ enum class BpkRatingRounding {
     Nearest,
 }
 
+@ExperimentalBackpackApi
+enum class BpkRatingColor {
+    Yellow,
+    Gray,
+}
+
 @Composable
 fun BpkStarRating(
     rating: Float,
@@ -62,7 +69,6 @@ fun BpkStarRating(
     modifier: Modifier = Modifier,
     rounding: BpkRatingRounding = BpkRatingRounding.Down,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
-    color: Color? = null,
 ) {
     BpkStarRating(
         rating = rating,
@@ -72,7 +78,6 @@ fun BpkStarRating(
         modifier = modifier,
         contentDescription = contentDescription,
         size = size,
-        color = color,
     )
 }
 
@@ -82,7 +87,7 @@ fun BpkHotelRating(
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
-    color: Color? = null,
+    color: BpkRatingColor? = BpkRatingColor.Yellow,
 ) {
     BpkStarRating(
         rating = rating.toFloat(),
@@ -92,7 +97,7 @@ fun BpkHotelRating(
         modifier = modifier,
         contentDescription = contentDescription,
         size = size,
-        color = color,
+        color = starColor(color),
     )
 }
 
@@ -103,7 +108,6 @@ fun BpkInteractiveStarRating(
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
-    color: Color? = null,
 ) {
     BpkStarRating(
         rating = rating.toFloat(),
@@ -114,7 +118,6 @@ fun BpkInteractiveStarRating(
         onRatingChanged = onRatingChanged,
         contentDescription = contentDescription,
         size = size,
-        color = color,
     )
 }
 
@@ -255,4 +258,12 @@ private fun Modifier.starRatingSemantics(
                 steps = numberOfStars,
             )
         }
+}
+
+@Composable
+private fun starColor(color: BpkRatingColor?): Color {
+    return when (color) {
+        BpkRatingColor.Gray -> BpkTheme.colors.textSecondary
+        else -> BpkTheme.colors.statusWarningSpot
+    }
 }
