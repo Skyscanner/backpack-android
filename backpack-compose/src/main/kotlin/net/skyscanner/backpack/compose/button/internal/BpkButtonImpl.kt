@@ -176,7 +176,7 @@ internal fun ButtonDrawable(
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 
-internal fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
+private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {
         BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
         BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)

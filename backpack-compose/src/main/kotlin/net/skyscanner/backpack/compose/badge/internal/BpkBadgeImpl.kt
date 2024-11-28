@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -35,7 +36,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.button.internal.defaultIconSize
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -150,3 +150,9 @@ private val BpkBadgeType.borderColor: Color
     }
 
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)
+
+private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
+    when (size) {
+        BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+        BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+    }
