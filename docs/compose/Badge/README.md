@@ -42,3 +42,17 @@ BpkBadge(
   icon = BpkIcon.TickCircle,
 )
 ```
+
+Example of a Badge with custom icon:
+
+```Kotlin
+import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
+import androidx.compose.ui.res.painterResource
+
+BpkBadge(
+  text = "Badge text",
+  type = BpkBadgeType.Normal,
+  icon = painterResource(id = R.drawable.sample_icon),
+)
+```
