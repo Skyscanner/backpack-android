@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.PriceTag
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BadgeComponent
@@ -93,7 +94,7 @@ private fun BadgeRow(
                 BpkBadgeType.Warning,
                 BpkBadgeType.Destructive,
                 -> null
-
+                BpkBadgeType.Brand -> BpkIcon.PriceTag
                 else -> BpkIcon.TickCircle
             },
         )

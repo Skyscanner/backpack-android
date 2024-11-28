@@ -34,13 +34,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkBadgeColors
 
@@ -54,7 +53,7 @@ internal fun BpkBadgeImpl(
     Row(
         modifier = modifier
             .semantics(mergeDescendants = true) { }
-            .border(1.dp, type.borderColor, BadgeShape)
+            .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
             .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
@@ -77,14 +76,12 @@ internal fun BpkBadgeImpl(
 @Composable
 internal fun BadgeIcon(
     icon: BpkIcon,
-    size: BpkIconSize,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
 ) {
     BpkIcon(
         icon = icon,
         contentDescription = null,
-        size = size,
         modifier = modifier,
         tint = type.iconColor,
     )
@@ -93,7 +90,6 @@ internal fun BadgeIcon(
 @Composable
 internal fun BadgeDrawable(
     icon: Painter,
-    size: BpkIconSize,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
 ) {
@@ -101,7 +97,7 @@ internal fun BadgeDrawable(
         painter = icon,
         contentDescription = null,
         tint = type.iconColor,
-        modifier = modifier.defaultIconSize(size),
+        modifier = modifier.requiredSize(BpkSpacing.Base, BpkSpacing.Base),
     )
 }
 
@@ -150,9 +146,3 @@ private val BpkBadgeType.borderColor: Color
     }
 
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)
-
-private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
-    when (size) {
-        BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
-        BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
-    }

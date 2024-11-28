@@ -25,7 +25,6 @@ import net.skyscanner.backpack.compose.badge.internal.BadgeDrawable
 import net.skyscanner.backpack.compose.badge.internal.BadgeIcon
 import net.skyscanner.backpack.compose.badge.internal.BpkBadgeImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.Exclamation
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
@@ -62,7 +61,6 @@ fun BpkBadge(
             {
                 BadgeIcon(
                     icon = badgeIcon,
-                    size = BpkIconSize.Small,
                     type = type,
                 )
             }
@@ -84,7 +82,6 @@ fun BpkBadge(
         icon = {
             BadgeDrawable(
                 icon = icon,
-                size = BpkIconSize.Small,
                 type = type,
             )
         },
