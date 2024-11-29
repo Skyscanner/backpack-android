@@ -114,10 +114,9 @@ internal fun BpkCalendarDayCell(
 
             BpkText(
                 text = model.text.toString(),
-                modifier = Modifier
-                    .semantics {
-                        contentDescription = model.contentDescription
-                    },
+                modifier = Modifier.semantics {
+                    contentDescription = model.contentDescription
+                },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = BpkTheme.typography.label1,
