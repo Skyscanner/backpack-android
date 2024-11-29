@@ -33,14 +33,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -58,6 +61,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkCalendarDayCell(
     model: CalendarCell.Day,
@@ -81,7 +85,9 @@ internal fun BpkCalendarDayCell(
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )
+            .testTag(if (inactive) "inactive" else "active")
             .semantics {
+                testTagsAsResourceId = true
                 if (model.stateDescription != null) {
                     stateDescription = model.stateDescription!!
                 } else {
