@@ -84,6 +84,7 @@ internal fun BpkCalendarDayCell(
                 interactionSource = remember { MutableInteractionSource() },
             )
             .semantics {
+                text = AnnotatedString(if (inactive) "inactive" else "active")
                 if (model.stateDescription != null) {
                     stateDescription = model.stateDescription!!
                 } else {
@@ -115,7 +116,6 @@ internal fun BpkCalendarDayCell(
                 text = model.text.toString(),
                 modifier = Modifier
                     .semantics {
-                        text = AnnotatedString(if (inactive) "inactive" else "active")
                         contentDescription = model.contentDescription
                     },
                 overflow = TextOverflow.Ellipsis,
