@@ -42,6 +42,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.StarRatingComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @StarRatingComponent
@@ -95,6 +96,7 @@ fun StarRatingStory(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalBackpackApi::class)
 @Composable
 private fun HotelRatingSample(
     size: BpkStarRatingSize,

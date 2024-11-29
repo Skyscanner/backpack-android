@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.starrating
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.junit.Test
 
 class BpkStarRatingTest : BpkSnapshotTest() {
@@ -129,6 +130,7 @@ class BpkStarRatingTest : BpkSnapshotTest() {
         )
     }
 
+    @OptIn(ExperimentalBackpackApi::class)
     @Test
     fun hotelStarRatingWithColor() = snap {
         BpkHotelRating(
