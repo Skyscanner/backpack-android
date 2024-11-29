@@ -41,6 +41,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.semantics.text
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -111,9 +113,11 @@ internal fun BpkCalendarDayCell(
 
             BpkText(
                 text = model.text.toString(),
-                modifier = Modifier.semantics {
-                    contentDescription = model.contentDescription
-                },
+                modifier = Modifier
+                    .semantics {
+                        text = AnnotatedString(if (inactive) "inactive" else "active")
+                        contentDescription = model.contentDescription
+                    },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = BpkTheme.typography.label1,
