@@ -81,13 +81,31 @@ fun BpkStarRating(
     )
 }
 
+@OptIn(ExperimentalBackpackApi::class)
 @Composable
 fun BpkHotelRating(
     rating: Int,
     contentDescription: ContentDescriptionScope.(Float, Int) -> String,
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
-    color: BpkRatingColor? = BpkRatingColor.Yellow,
+) {
+    BpkHotelRating(
+        rating = rating,
+        contentDescription = contentDescription,
+        modifier = modifier,
+        size = size,
+        color = BpkRatingColor.Yellow,
+    )
+}
+
+@OptIn(ExperimentalBackpackApi::class)
+@Composable
+fun BpkHotelRating(
+    rating: Int,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    color: BpkRatingColor,
+    modifier: Modifier = Modifier,
+    size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
     BpkStarRating(
         rating = rating.toFloat(),
@@ -260,6 +278,7 @@ private fun Modifier.starRatingSemantics(
         }
 }
 
+@OptIn(ExperimentalBackpackApi::class)
 @Composable
 private fun starColor(color: BpkRatingColor?): Color {
     return when (color) {
