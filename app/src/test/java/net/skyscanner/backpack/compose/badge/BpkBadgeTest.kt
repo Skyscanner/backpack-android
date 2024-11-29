@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.badge
 
+import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.CloseCircle
+import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
 class BpkBadgeTest : BpkSnapshotTest() {
@@ -100,6 +102,18 @@ class BpkBadgeTest : BpkSnapshotTest() {
     fun brand() {
         snap {
             BpkBadge(text = BpkBadgeType.Brand.toString(), type = BpkBadgeType.Brand)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun customIcon() {
+        snap {
+            BpkBadge(
+                text = BpkBadgeType.Normal.toString(),
+                type = BpkBadgeType.Normal,
+                icon = painterResource(id = R.drawable.sample_icon),
+            )
         }
     }
 }
