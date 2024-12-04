@@ -21,12 +21,14 @@ package net.skyscanner.backpack.compose.select.internal
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +50,8 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
+private const val PIXEL_COUNT_100 = 100
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Suppress("ModifierNotUsedAtRoot")
@@ -63,6 +67,13 @@ internal fun BpkSelectImpl(
     var expanded by remember { mutableStateOf(false) }
     val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
     val focusManager = LocalFocusManager.current
+    val scrollState = rememberScrollState()
+
+    LaunchedEffect(expanded, selectedIndex) {
+        if (expanded && selectedIndex != null) {
+            scrollState.scrollTo(selectedIndex * PIXEL_COUNT_100)
+        }
+    }
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
@@ -79,6 +90,7 @@ internal fun BpkSelectImpl(
         )
         ExposedDropdownMenu(
             expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
+            scrollState = scrollState,
             modifier = Modifier
                 .background(BpkTheme.colors.surfaceDefault)
                 .applyIf(dropDownWidth == BpkDropDownWidth.MaxWidth) {
