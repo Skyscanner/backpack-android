@@ -49,6 +49,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -99,6 +100,8 @@ fun BpkHorizontalNav(
                 BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
                 BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
             },
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
     }
 }
