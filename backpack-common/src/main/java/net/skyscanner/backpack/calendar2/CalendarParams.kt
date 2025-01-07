@@ -20,10 +20,9 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import java.text.SimpleDateFormat
-import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.chrono.IsoChronology
@@ -31,6 +30,7 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
+import java.util.Locale
 
 /**
  * Describes the calendar configuration.
@@ -55,12 +55,13 @@ data class CalendarParams(
     val dateContentDescriptionStyle: FormatStyle = FormatStyle.FULL,
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
+    val yearLabelInMonthHeader: Boolean = false,
 ) {
 
     @InternalBackpackApi
     val weekFields = WeekFields.of(locale)
 
-    internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
+    internal val monthsFormatter = SimpleDateFormat(if (yearLabelInMonthHeader) "LLLL yyyy" else "LLLL", locale)
 
     internal val dateContentDescriptionFormatter = DateTimeFormatterBuilder()
         .appendLocalized(dateContentDescriptionStyle, null)

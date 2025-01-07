@@ -43,6 +43,19 @@ class CalendarCellsLayoutTests {
     }
 
     @Test
+    fun header_has_year() {
+        testCalendarWith(
+            CalendarSettings.Default.copy(
+                yearLabelInMonthHeader = true,
+            ),
+        ) {
+            verify {
+                assertEquals("January 2000", (state.cells[0] as CalendarCell.Header).title)
+            }
+        }
+    }
+
+    @Test
     fun there_are_leading_spaces_in_month() {
         testCalendarWith(CalendarSettings.Default) {
             verify {
@@ -130,6 +143,19 @@ class CalendarCellsLayoutTests {
         testCalendarWith(CalendarSettings.Default) {
             verify {
                 assertEquals("February", (state.cells[43] as CalendarCell.Header).title)
+            }
+        }
+    }
+
+    @Test
+    fun header_has_year_in_secondary_month() {
+        testCalendarWith(
+            CalendarSettings.Default.copy(
+                yearLabelInMonthHeader = true,
+            ),
+        ) {
+            verify {
+                assertEquals("February 2000", (state.cells[43] as CalendarCell.Header).title)
             }
         }
     }

@@ -57,13 +57,15 @@ fun BpkCalendar(
                 modifier = Modifier.fillMaxSize(),
             )
 
-            BpkCalendarBadge(
-                firstVisibleItemYear = controller.firstVisibleItemYear,
-                params = state.params,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = BpkSpacing.Base),
-            )
+            if (!state.params.yearLabelInMonthHeader) {
+                BpkCalendarBadge(
+                    firstVisibleItemYear = controller.firstVisibleItemYear,
+                    params = state.params,
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .padding(top = BpkSpacing.Base),
+                )
+            }
         }
     }
 }
