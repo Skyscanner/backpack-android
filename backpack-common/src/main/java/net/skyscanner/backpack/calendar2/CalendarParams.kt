@@ -44,6 +44,7 @@ import java.util.Locale
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header. Beware of the fact that some Chinese languages may require SHORT style instead of NARROW.
  * @param now [LocalDate] a date for the calendar to consider as current
  * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
+ * @param yearLabelInMonthHeader [Boolean] controls whether year is displayed inline with the month name or if the existing floating version is used
  */
 @Immutable
 data class CalendarParams(
