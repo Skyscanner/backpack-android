@@ -4,9 +4,9 @@ ksp = "2.0.21-1.0.28" # depends on Kotlin version
 compilerTesting = "1.6.0"
 destinations = "1.11.8" # update this alongside with compiler version
 
-androidPlugin = "8.7.3"
-lint = "31.7.3"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.7.3" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.8.0"
+lint = "31.8.0"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.8.0" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.7"
 lifecycle = "2.8.7"
