@@ -49,6 +49,8 @@ sealed interface BpkFieldStatus {
 
     data object Disabled : BpkFieldStatus
 
+    data object ReadOnly : BpkFieldStatus
+
     data class Error(val text: String) : BpkFieldStatus
 
     data object Validated : BpkFieldStatus

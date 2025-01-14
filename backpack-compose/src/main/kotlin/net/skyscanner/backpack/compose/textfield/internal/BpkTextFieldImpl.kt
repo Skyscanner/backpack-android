@@ -144,7 +144,7 @@ internal fun BpkTextFieldImpl(
     BasicTextField(
         value = value,
         onValueChange = onValueChange,
-        enabled = status != BpkFieldStatus.Disabled,
+        enabled = status != BpkFieldStatus.Disabled && status != BpkFieldStatus.ReadOnly,
         readOnly = readOnly,
         textStyle = BpkTheme.typography.bodyDefault.copy(
             color = animateColorAsState(
@@ -295,7 +295,7 @@ private fun RowScope.TrailingIcon(
                 color = BpkTheme.colors.statusDangerSpot,
             )
 
-            status is BpkFieldStatus.Default && clearAction != null && value.text.isNotEmpty() -> Icon(
+            (status is BpkFieldStatus.Default || status is BpkFieldStatus.ReadOnly) && clearAction != null && value.text.isNotEmpty() -> Icon(
                 icon = BpkIcon.CloseCircle,
                 contentDescription = clearAction.contentDescription,
                 color = BpkTheme.colors.textSecondary,

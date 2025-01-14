@@ -62,7 +62,7 @@ fun BpkSearchInputSummary(
         readOnly = type is BpkSearchInputSummaryType.ReadOnly,
         placeholder = inputHint,
         prefix = prefix,
-        status = BpkFieldStatus.Default,
+        status = if (type is BpkSearchInputSummaryType.ReadOnly) BpkFieldStatus.ReadOnly else BpkFieldStatus.Default,
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
         isFocused = isFocused,
