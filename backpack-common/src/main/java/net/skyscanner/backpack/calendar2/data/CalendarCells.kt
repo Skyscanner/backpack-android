@@ -64,7 +64,7 @@ data class CalendarCells(
     }
 }
 
-internal fun CalendarCells(
+fun CalendarCells(
     params: CalendarParams,
     selection: CalendarSelection,
 ): CalendarCells {

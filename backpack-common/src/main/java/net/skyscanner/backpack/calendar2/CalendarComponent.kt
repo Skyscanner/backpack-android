@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Stable
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -35,11 +34,6 @@ interface CalendarComponent {
      * The current state the calendar in.
      */
     val state: StateFlow<CalendarState>
-
-    /**
-     * The side effects the calendar emits.
-     */
-    val effects: SharedFlow<CalendarEffect>
 
     /**
      * Updates the params used to configure the calendar.

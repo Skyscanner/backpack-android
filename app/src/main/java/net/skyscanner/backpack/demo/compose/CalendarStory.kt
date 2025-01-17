@@ -22,8 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.flow.filter
-import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.components.Calendar2Component
@@ -31,9 +31,9 @@ import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @Calendar2Component
@@ -107,15 +107,11 @@ private fun CalendarDemo(
                     floatingNotification.show(it.selection.toString())
                 }
             }
-
-        controller.effects
-            .filter { it is CalendarEffect.MonthSelected }
-            .collect {
-                if (!automationMode) {
-                    floatingNotification.show(it.toString())
-                }
-            }
     }
 
-    BpkCalendar(controller = controller, modifier = modifier)
+    BpkCalendar(controller = controller, modifier = modifier, onClick = {
+        controller.setSelection(
+            CalendarSelection.Single((it as CalendarInteraction.DateClicked).day.date),
+        )
+    })
 }
