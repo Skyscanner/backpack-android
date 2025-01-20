@@ -20,6 +20,7 @@
 
 package net.skyscanner.backpack.ksp
 
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspSourcesDir
@@ -30,11 +31,12 @@ import org.junit.Assert.assertEquals
 
 internal fun testKsp(
     @Language("kotlin") vararg sourceFile: String,
-    evaluate: KotlinCompilation.Result.(String) -> Unit,
+    evaluate: JvmCompilationResult.(String) -> Unit,
 ) {
     val compilation = KotlinCompilation().apply {
+        languageVersion = "1.9"
         sources = sourceFile.mapIndexed { index, it -> SourceFile.kotlin("file$index.kt", it) }
-        symbolProcessorProviders = listOf(BackpackSymbolProcessorProvider())
+        symbolProcessorProviders += BackpackSymbolProcessorProvider()
         inheritClassPath = true
         verbose = false
     }
