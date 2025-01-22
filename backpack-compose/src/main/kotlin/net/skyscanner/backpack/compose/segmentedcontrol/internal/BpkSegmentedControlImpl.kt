@@ -53,9 +53,8 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkSegmentedControlColors
 
-private const val BpkAnimationDurationMs = 500
+private const val BpkAnimationDurationMs = 50
 private val BpkSegmentedControlHeight = 32.dp
-private val DividerThickness = 1.dp
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 
 @Composable
@@ -78,20 +77,18 @@ internal fun BpkSegmentedControlImpl(
             .selectableGroup(),
     ) {
         buttonContents.forEachIndexed { index, content ->
-            val isSelected = selectedIndex == index
+            if (index > 0) {
+                VerticalDivider(
+                    color = getDividerColor(index - 1, selectedIndex),
+                )
+            }
             BpkSegmentedControlButton(
                 modifier = Modifier.weight(1f),
-                isSelected = isSelected,
+                isSelected = selectedIndex == index,
                 type = type,
                 content = content,
                 onItemClick = { onItemClick(index) },
             )
-            if (index != buttonContents.lastIndex) {
-                VerticalDivider(
-                    thickness = DividerThickness,
-                    color = getDividerColor(isSelected),
-                )
-            }
         }
     }
 }
@@ -161,14 +158,20 @@ internal fun getTextColor(
 }
 
 @Composable
-internal fun getDividerColor(selected: Boolean): Color {
+internal fun getDividerColor(currentIndex: Int, selectedIndex: Int): Color {
     return animateColorAsState(
-        targetValue = if (selected) Color.Transparent else BpkTheme.colors.line,
+        targetValue = if (shouldHideDivider(currentIndex, selectedIndex)) {
+            Color.Transparent
+        } else BpkTheme.colors.line,
         animationSpec = tween(
             durationMillis = BpkAnimationDurationMs,
             easing = FastOutSlowInEasing,
         ),
     ).value
+}
+
+private fun shouldHideDivider(currentIndex: Int, selectedIndex: Int): Boolean {
+    return selectedIndex == currentIndex || selectedIndex == currentIndex + 1
 }
 
 @Composable
