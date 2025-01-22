@@ -79,7 +79,7 @@ internal fun BpkSegmentedControlImpl(
         buttonContents.forEachIndexed { index, content ->
             if (index > 0) {
                 VerticalDivider(
-                    color = getDividerColor(index - 1, selectedIndex),
+                    color = getDividerColor(index, selectedIndex),
                 )
             }
             BpkSegmentedControlButton(
@@ -171,7 +171,7 @@ internal fun getDividerColor(currentIndex: Int, selectedIndex: Int): Color {
 }
 
 private fun shouldHideDivider(currentIndex: Int, selectedIndex: Int): Boolean {
-    return selectedIndex == currentIndex || selectedIndex == currentIndex + 1
+    return selectedIndex == currentIndex || selectedIndex == currentIndex - 1
 }
 
 @Composable
