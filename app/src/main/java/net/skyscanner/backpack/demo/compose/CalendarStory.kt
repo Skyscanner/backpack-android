@@ -20,10 +20,15 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.flow.filter
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.components.Calendar2Component
@@ -31,9 +36,10 @@ import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+import net.skyscanner.backpack.meta.StoryKind
+import java.time.LocalDate
 
 @Composable
 @Calendar2Component
@@ -117,5 +123,28 @@ private fun CalendarDemo(
             }
     }
 
-    BpkCalendar(controller = controller, modifier = modifier)
+    var lastSelectedDate: LocalDate? by remember { mutableStateOf(null) }
+
+    BpkCalendar(
+        controller = controller,
+        customDateHandling = { // This would happen in the consumer
+            val dateClicked =
+                (it as CalendarInteraction.DateClicked) // This is currently internal to Backpack so would need to be exposed
+            val date = dateClicked.day.date
+            val lastDate = lastSelectedDate
+            if (lastDate == null) {
+                lastSelectedDate = date
+                controller.setSelection(CalendarSelection.Dates(dateClicked.day.date, null))
+            } else {
+                if (lastDate.isBefore(date)) {
+                    controller.setSelection(CalendarSelection.Dates(lastDate, date))
+                    lastSelectedDate = null
+                } else {
+                    controller.setSelection(CalendarSelection.Dates(date, lastDate))
+                    lastSelectedDate = null
+                }
+            }
+        },
+        modifier = modifier,
+    )
 }
