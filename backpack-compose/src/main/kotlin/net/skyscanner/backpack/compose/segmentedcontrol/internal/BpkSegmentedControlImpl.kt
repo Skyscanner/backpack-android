@@ -104,14 +104,15 @@ private fun BpkSegmentedControlButton(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(getButtonColor(isSelected, type))
-            .padding(horizontal = BpkSpacing.Md)
             .selectable(
                 selected = isSelected,
                 role = Role.RadioButton,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = bpkRipple(),
-            ) { onItemClick() },
+            ) { onItemClick() }
+            .background(getButtonColor(isSelected, type))
+            .padding(horizontal = BpkSpacing.Md),
+
     ) {
 
         BpkText(
