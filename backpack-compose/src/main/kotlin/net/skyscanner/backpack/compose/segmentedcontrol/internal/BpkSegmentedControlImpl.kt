@@ -25,15 +25,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,13 +44,11 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.segmentedcontrol.BpkSegmentedControlStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkSegmentedControlColors
@@ -80,34 +77,20 @@ internal fun BpkSegmentedControlImpl(
             .selectableGroup(),
     ) {
         buttonContents.forEachIndexed { index, content ->
-            val isSelected = selectedIndex == index
+            if (index > 0) {
+                VerticalDivider(
+                    color = getDividerColor(index, selectedIndex),
+                )
+            }
             BpkSegmentedControlButton(
                 modifier = Modifier.weight(1f),
-                isSelected = isSelected,
+                isSelected = selectedIndex == index,
                 type = type,
                 content = content,
                 onItemClick = { onItemClick(index) },
             )
-            if (shouldShowDivider(index, buttonContents.lastIndex, selectedIndex, isSelected)) {
-                BpkDivider(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(BpkBorderSize.Sm),
-                )
-            }
         }
     }
-}
-
-private fun shouldShowDivider(
-    index: Int,
-    lastIndex: Int,
-    selectedInt: Int,
-    isSelected: Boolean,
-): Boolean {
-    val isLastItem = index == lastIndex
-    val isNextSelected = index + 1 == selectedInt
-    return !isLastItem && !isNextSelected && !isSelected
 }
 
 @Composable
@@ -121,17 +104,15 @@ private fun BpkSegmentedControlButton(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .applyBackground(
-                selected = isSelected,
-                background = getButtonColor(type),
-            )
-            .padding(horizontal = BpkSpacing.Md)
             .selectable(
                 selected = isSelected,
                 role = Role.RadioButton,
                 interactionSource = remember { MutableInteractionSource() },
                 indication = bpkRipple(),
-            ) { onItemClick() },
+            ) { onItemClick() }
+            .background(getButtonColor(isSelected, type))
+            .padding(horizontal = BpkSpacing.Md),
+
     ) {
 
         BpkText(
@@ -148,15 +129,6 @@ private fun BpkSegmentedControlButton(
     }
 }
 
-private fun Modifier.applyBackground(
-    selected: Boolean,
-    background: Color,
-): Modifier {
-    return if (selected) {
-        this.background(background)
-    } else this
-}
-
 private fun Modifier.applyShadow(
     shadow: Boolean,
 ): Modifier {
@@ -170,12 +142,13 @@ private fun Modifier.applyShadow(
 
 @Composable
 internal fun getTextColor(
-    type: BpkSegmentedControlStyle,
+    style: BpkSegmentedControlStyle,
     selected: Boolean,
 ): Color {
+
     return animateColorAsState(
         targetValue = when {
-            type == BpkSegmentedControlStyle.SurfaceContrast || selected -> BpkTheme.colors.textOnDark
+            style == BpkSegmentedControlStyle.SurfaceContrast || selected -> BpkTheme.colors.textOnDark
             else -> BpkTheme.colors.textPrimary
         },
         animationSpec = tween(
@@ -186,14 +159,33 @@ internal fun getTextColor(
 }
 
 @Composable
+internal fun getDividerColor(currentIndex: Int, selectedIndex: Int): Color {
+    return animateColorAsState(
+        targetValue = if (shouldHideDivider(currentIndex, selectedIndex)) {
+            Color.Transparent
+        } else BpkTheme.colors.line,
+        animationSpec = tween(
+            durationMillis = BpkAnimationDurationMs,
+            easing = FastOutSlowInEasing,
+        ),
+    ).value
+}
+
+private fun shouldHideDivider(currentIndex: Int, selectedIndex: Int): Boolean {
+    return selectedIndex == currentIndex || selectedIndex == currentIndex - 1
+}
+
+@Composable
 internal fun getButtonColor(
+    selected: Boolean,
     style: BpkSegmentedControlStyle,
 ): Color {
     return animateColorAsState(
-        targetValue = when (style) {
-            BpkSegmentedControlStyle.SurfaceContrast -> BpkSegmentedControlColors.surfaceContrastOn
-            else -> BpkTheme.colors.corePrimary
-        },
+        targetValue = if (!selected) Color.Transparent else
+            when (style) {
+                BpkSegmentedControlStyle.SurfaceContrast -> BpkSegmentedControlColors.surfaceContrastOn
+                else -> BpkTheme.colors.corePrimary
+            },
         animationSpec = tween(
             durationMillis = BpkAnimationDurationMs,
             easing = FastOutSlowInEasing,

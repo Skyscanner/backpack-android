@@ -178,7 +178,7 @@ internal fun SegmentedControlsSample(
         shadow = shadow,
         buttonContents = buttonContents,
         onItemClick = { currentIndex = it },
-        selectedIndex = selectedIndex,
+        selectedIndex = currentIndex,
     )
 }
 
