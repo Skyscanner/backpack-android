@@ -81,7 +81,7 @@ public class BpkColors private constructor(
             surfaceElevated: Color = Color(0xFFFFFFFF),
             surfaceHero: Color = Color(0xFF0062E3),
             surfaceHighlight: Color = Color(0xFFE0E4E9),
-            surfaceLowContrast: Color = Color(0xFFEFF3F8),
+            surfaceLowContrast: Color = Color(0xFFF7F9FB),
             surfaceSubtle: Color = Color(0xFFE3F0FF),
             textDisabled: Color = Color(0x33000000),
             textDisabledOnDark: Color = Color(0x80FFFFFF),
