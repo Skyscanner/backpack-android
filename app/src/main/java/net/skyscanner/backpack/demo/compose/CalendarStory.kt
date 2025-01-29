@@ -31,9 +31,9 @@ import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @Calendar2Component
@@ -82,6 +82,12 @@ fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
 @ComposeStory("Day icon as labels")
 fun CalendarSelectionIconLabelStory(modifier: Modifier = Modifier) =
     CalendarDemo(CalendarStoryType.WithIconAsLabels, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Year in month label no floating year")
+fun CalendarNoFloatingYearLabel(modifier: Modifier = Modifier) =
+    CalendarDemo(CalendarStoryType.YearLabelInMonthHeader, modifier)
 
 @Composable
 private fun CalendarDemo(
