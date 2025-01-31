@@ -77,7 +77,7 @@ internal fun BpkCalendarDayCell(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .padding(bottom = BpkSpacing.Lg)
+            .padding(bottom = BpkSpacing.Base)
             .clickable(
                 indication = null,
                 enabled = !inactive,
