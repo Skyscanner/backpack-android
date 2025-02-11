@@ -21,6 +21,8 @@ jobs:
       pull-requests: write
       contents: write
     uses: ./.github/workflows/_build.yml
+    secrets:
+      GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
   Dependabot:
     runs-on: ubuntu-22.04

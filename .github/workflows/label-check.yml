@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - uses: docker://agilepathway/pull-request-label-checker:latest
         with:
           one_of: major,minor,patch,dependencies,skip-changelog
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ steps.app-token.outputs.token }}
