@@ -24,6 +24,7 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -179,6 +180,40 @@ class BpkCalendarTest {
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
+
+        val state = controller.state.first()
+
+        assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun withCustomSelectionHandling() = runTest {
+        val expected = CalendarSelection.Single(
+            date = LocalDate.of(2019, 1, 31),
+        )
+
+        val controller = createController(DefaultSingle)
+
+        composeTestRule.setContent {
+            BpkTheme {
+                BpkCalendar(controller, customDateHandling = {
+                    controller.setSelection(CalendarSelection.Single(LocalDate.of(2019, 1, 31)))
+                })
+            }
+        }
+
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .performClick()
+
+        composeTestRule.onAllNodesWithText("31")
+            .onFirst()
+            .assertOnClickLabelEquals("startSelectionHint")
+            .assertStateDescriptionEquals("startSelectionState")
+
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .assertIsNotSelected()
 
         val state = controller.state.first()
 

@@ -83,15 +83,12 @@ sealed class CalendarCell {
 }
 
 @Stable
-@InternalBackpackApi
 sealed interface CalendarInteraction {
 
     @Immutable
-    @InternalBackpackApi
     data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
 
     @Immutable
-    @InternalBackpackApi
     data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
