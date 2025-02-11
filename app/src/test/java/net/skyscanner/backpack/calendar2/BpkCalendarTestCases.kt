@@ -123,6 +123,10 @@ object BpkCalendarTestCases {
             ),
         )
 
+        val WithYearInMonthLabel = DefaultRange.copy(
+            yearLabelInMonthHeader = true,
+        )
+
         private fun disabledDayOfTheWeekInfo(
             range: ClosedRange<LocalDate>,
             disabledDayOfWeek: DayOfWeek,

@@ -10,7 +10,7 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels.png" alt="Labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels_dm.png" alt="Labeled Calendar2 component - dark mode" width="375" /> |
 
-## Icon as labeled
+## Icon as label
 
 | Day                                                                                                                                                                                                  | Night                                                                                                                                                                                                            |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,6 +28,12 @@
 | Day | Night |
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/pre-selected-range.png" alt="Range Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/pre-selected-range_dm.png" alt="Range Calendar2 component - dark mode" width="375" /> |
+
+## Year in Month Label, no floating year
+
+| Day                                                                                                                                                                                                                            | Night                                                                                                                                                                                                                                         |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/year-in-month-label-no-floating-year.png" alt="Calendar2 component showing year in month label" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/year-in-month-label-no-floating-year_dm.png" alt="Calendar2 component showing year in month label - dark mode" width="375" /> |
 
 ## Installation
 
@@ -77,6 +83,16 @@ controller
   }
   .launchIn(myCoroutineScope)
 ```
+
+### (Optional) Manual Selection handling
+
+To achieve behaviour that differs from the way the state machine handles things you can provide the optional
+`customDateHandling` property.
+This property is a lambda that will be called when a date is selected by the user.
+You can use it to handle the selection manually.
+You can then set the selection in the controller using the `setSelection` method.
+
+```Kotlin
 
 ### Advanced dates customisation
 

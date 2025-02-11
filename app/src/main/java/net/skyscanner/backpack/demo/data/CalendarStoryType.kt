@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.R
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -32,6 +31,7 @@ import java.time.LocalDate
 import java.time.Month
 import java.time.Period
 import java.time.YearMonth
+import kotlin.math.roundToInt
 
 private val now = LocalDate.of(2019, 1, 1)
 private val range = now..(now + Period.ofYears(2))
@@ -45,6 +45,7 @@ enum class CalendarStoryType {
     WithLabels,
     WithIconAsLabels,
     PreselectedRange,
+    YearLabelInMonthHeader,
     ;
 
     companion object {
@@ -143,6 +144,7 @@ enum class CalendarStoryType {
                                             resId = R.drawable.bpk_search_sm,
                                             tint = R.color.bpkCoreAccent,
                                         )
+
                                         else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
                                     },
                                     status = when (price) {
@@ -157,6 +159,13 @@ enum class CalendarStoryType {
                                 )
                             },
                     )
+
+                YearLabelInMonthHeader -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range(),
+                    yearLabelInMonthHeader = true,
+                )
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(

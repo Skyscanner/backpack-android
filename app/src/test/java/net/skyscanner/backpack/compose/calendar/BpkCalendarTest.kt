@@ -26,9 +26,9 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
-import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import org.junit.Test
 
 class BpkCalendarTest : BpkSnapshotTest() {
@@ -144,6 +144,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
     fun withWholeMonthSet() {
         val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
         controller.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
+        snap(controller)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withYearInMonthLabel() {
+        val controller = createController(BpkCalendarTestCases.Params.WithYearInMonthLabel)
         snap(controller)
     }
 

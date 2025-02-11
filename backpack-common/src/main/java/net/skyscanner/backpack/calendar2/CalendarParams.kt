@@ -20,10 +20,9 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import java.text.SimpleDateFormat
-import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.chrono.IsoChronology
@@ -31,6 +30,7 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
+import java.util.Locale
 
 /**
  * Describes the calendar configuration.
@@ -44,6 +44,7 @@ import java.time.temporal.WeekFields
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header. Beware of the fact that some Chinese languages may require SHORT style instead of NARROW.
  * @param now [LocalDate] a date for the calendar to consider as current
  * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
+ * @param yearLabelInMonthHeader [Boolean] controls whether year is displayed inline with the month name or if the existing floating version is used
  */
 @Immutable
 data class CalendarParams(
@@ -55,12 +56,13 @@ data class CalendarParams(
     val dateContentDescriptionStyle: FormatStyle = FormatStyle.FULL,
     val now: LocalDate = LocalDate.now(),
     val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
+    val yearLabelInMonthHeader: Boolean = false,
 ) {
 
     @InternalBackpackApi
     val weekFields = WeekFields.of(locale)
 
-    internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
+    internal val monthsFormatter = SimpleDateFormat(if (yearLabelInMonthHeader) "LLLL yyyy" else "LLLL", locale)
 
     internal val dateContentDescriptionFormatter = DateTimeFormatterBuilder()
         .appendLocalized(dateContentDescriptionStyle, null)
