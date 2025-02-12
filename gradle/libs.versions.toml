@@ -24,7 +24,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:2.0.0"
+plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.9.20"
 plugin-nexusPublishing = "io.github.gradle-nexus:publish-plugin:2.0.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
