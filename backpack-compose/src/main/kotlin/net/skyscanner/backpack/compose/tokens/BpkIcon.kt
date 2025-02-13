@@ -1292,6 +1292,14 @@ public val BpkIcon.Companion.Lounge: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.Loyalty: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "loyalty",
+        small = R.drawable.bpk_loyalty_sm,
+        large = R.drawable.bpk_loyalty,
+    )
+)
+
 public val BpkIcon.Companion.Luggageall: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "luggageall",
@@ -2388,6 +2396,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.LongArrowRight,
         BpkIcon.LongArrowUp,
         BpkIcon.Lounge,
+        BpkIcon.Loyalty,
         BpkIcon.Luggageall,
         BpkIcon.Mail,
         BpkIcon.Map,
