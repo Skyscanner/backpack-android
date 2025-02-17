@@ -20,12 +20,12 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import kotlinx.coroutines.flow.filter
-import net.skyscanner.backpack.calendar2.CalendarEffect
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
-import net.skyscanner.backpack.compose.calendar.rememberCalendarController
+import net.skyscanner.backpack.compose.calendar.rememberCalendarComposeController
 import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
@@ -96,7 +96,31 @@ private fun CalendarDemo(
 ) {
     val automationMode = LocalAutomationMode.current
     val floatingNotification = LocalFloatingNotification.current
-    val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
+    val coroutineScope = rememberCoroutineScope()
+    val controller = rememberCalendarComposeController(initialParams = CalendarStoryType.createInitialParams(type)) {
+        coroutineScope.launch {
+            if (!automationMode) {
+                when (it) {
+                    CalendarSelection.None -> {
+                        floatingNotification.show("No selection")
+                    }
+
+                    is CalendarSelection.Dates -> {
+                        floatingNotification.show("Range selected ${it.start} - ${it.end}")
+                    }
+
+                    is CalendarSelection.Month -> {
+                        floatingNotification.show("Month selected ${it.month}")
+                    }
+
+                    is CalendarSelection.Single -> {
+                        floatingNotification.show("Single date selected ${it.date}")
+                    }
+                }
+                floatingNotification.show(it.toString())
+            }
+        }
+    }
 
     LaunchedEffect(type, controller, automationMode) {
         when (type) {
@@ -105,22 +129,6 @@ private fun CalendarDemo(
             CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
             else -> Unit
         }
-
-        controller.state
-            .filter { it.selection !is CalendarSelection.None }
-            .collect {
-                if (!automationMode) {
-                    floatingNotification.show(it.selection.toString())
-                }
-            }
-
-        controller.effects
-            .filter { it is CalendarEffect.MonthSelected }
-            .collect {
-                if (!automationMode) {
-                    floatingNotification.show(it.toString())
-                }
-            }
     }
 
     BpkCalendar(controller = controller, modifier = modifier)

@@ -24,8 +24,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
@@ -36,12 +34,12 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkCalendar(
-    controller: BpkCalendarController,
+    controller: BpkCalendarComposeController,
     modifier: Modifier = Modifier,
     customDateHandling: ((CalendarInteraction) -> Unit)? = null,
 ) {
 
-    val state by controller.state.collectAsState()
+    val state = controller.state
 
     Column(modifier = modifier) {
 
@@ -55,7 +53,7 @@ fun BpkCalendar(
             BpkCalendarGrid(
                 state = state,
                 lazyGridState = controller.lazyGridState,
-                onClick = customDateHandling ?: controller.stateMachine::onClick,
+                onClick = customDateHandling ?: controller::onClick,
                 modifier = Modifier.fillMaxSize(),
             )
 
