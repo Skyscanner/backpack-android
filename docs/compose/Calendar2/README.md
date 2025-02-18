@@ -81,7 +81,7 @@ BpkCalendar(controller)
 ```
 
 
-### (Optional) Manual Selection handling
+### (Optional) Manual Selection Handling
 
 To achieve selection behaviour that differs from the default selection, you can provide the optional
 `customDateHandling` property.
@@ -89,11 +89,9 @@ This property is a lambda that will be called when a date is selected by the use
 You can use it to handle the selection manually.
 You can then set the selection in the controller using the `setSelection` method.
 
-```Kotlin
+### Advanced Dates Customisation
 
-### Advanced dates customisation
-
-You can attach some of the information to each date displayed in calendar.
+You can attach some information to each date displayed in the calendar.
 This information will update its appearance and behaviour.
 
 In order to do this, specify `cellInfo` parameters like shown here:

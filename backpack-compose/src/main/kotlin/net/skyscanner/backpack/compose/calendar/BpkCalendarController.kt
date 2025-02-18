@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.calendar
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
@@ -40,14 +41,15 @@ class BpkCalendarController(
     internal val lazyGridState: LazyGridState = LazyGridState(),
     internal val onSelectionChanged: (CalendarSelection) -> Unit,
 ) {
-    var state by mutableStateOf(CalendarState(initialParams))
-        private set
+    private var _state by mutableStateOf(CalendarState(initialParams))
+
+    val state by derivedStateOf { _state }
 
     /**
      * Sets the selection of a calendar.
      */
     fun setSelection(selection: CalendarSelection) {
-        updateState(state.dispatchSetSelection(selection))
+        updateState(_state.dispatchSetSelection(selection))
     }
 
     /**
@@ -55,7 +57,7 @@ class BpkCalendarController(
      * Does nothing if the date is out of range.
      */
     suspend fun scrollToDate(date: LocalDate) {
-        val index = state.cells.indexOf(date)
+        val index = _state.cells.indexOf(date)
         if (index >= 0) lazyGridState.scrollToItem(index)
     }
 
@@ -64,7 +66,7 @@ class BpkCalendarController(
      * Does nothing if the date is out of range.
      */
     suspend fun smoothScrollToDate(date: LocalDate) {
-        val index = state.cells.indexOf(date)
+        val index = _state.cells.indexOf(date)
         if (index >= 0) lazyGridState.animateScrollToItem(index)
     }
 
@@ -72,16 +74,16 @@ class BpkCalendarController(
      * Updates the parameters of the calendar.
      */
     fun setParams(value: CalendarParams) {
-        state = state.copy(params = value)
+        _state = _state.copy(params = value)
     }
 
     /**
      * Updates the state of the calendar.
      */
     private fun updateState(newState: CalendarState) {
-        if (newState != state) {
-            state = newState
-            onSelectionChanged(state.selection)
+        if (newState != _state) {
+            _state = newState
+            onSelectionChanged(_state.selection)
         }
     }
 
@@ -89,15 +91,15 @@ class BpkCalendarController(
      * Returns the first visible item year.
      */
     internal val firstVisibleItemYear: Int
-        get() = state.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
+        get() = _state.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
 
     /**
      * Handles the click events of a calendar.
      */
     internal fun onClick(calendarInteraction: CalendarInteraction) {
         when (calendarInteraction) {
-            is CalendarInteraction.DateClicked -> updateState(state.dispatchClick(calendarInteraction.day))
-            is CalendarInteraction.SelectMonthClicked -> updateState(state.dispatchClick(calendarInteraction.header))
+            is CalendarInteraction.DateClicked -> updateState(_state.dispatchClick(calendarInteraction.day))
+            is CalendarInteraction.SelectMonthClicked -> updateState(_state.dispatchClick(calendarInteraction.header))
         }
     }
 }

@@ -105,12 +105,13 @@ private fun CalendarDemo(
         rememberCalendarController(
             initialParams = CalendarStoryType.createInitialParams(type),
             onSelectionChanged = { selection ->
-                coroutineScope.launch {
-                    if (!automationMode) {
+                if (!automationMode) {
+                    coroutineScope.launch {
                         floatingNotification.show(context.getSelectionMessage(selection))
                     }
                 }
-            },)
+            },
+        )
 
     LaunchedEffect(type, controller, automationMode) {
         when (type) {
