@@ -16,14 +16,9 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalCoroutinesApi::class)
-
 package net.skyscanner.backpack.compose.calendar
 
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
@@ -160,5 +155,5 @@ class BpkCalendarTest : BpkSnapshotTest() {
         }
 
     private fun createController(params: CalendarParams): BpkCalendarController =
-        BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
+        BpkCalendarController(initialParams = params, onSelectionChanged = {})
 }

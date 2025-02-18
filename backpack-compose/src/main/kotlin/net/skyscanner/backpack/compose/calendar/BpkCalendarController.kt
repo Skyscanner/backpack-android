@@ -1,96 +1,93 @@
-/*
- * Backpack for Android - Skyscanner's Design System
- *
- * Copyright 2018 Skyscanner Ltd
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package net.skyscanner.backpack.compose.calendar
 
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import kotlinx.coroutines.CoroutineScope
-import net.skyscanner.backpack.calendar2.CalendarComponent
+import androidx.compose.runtime.setValue
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
-import java.time.LocalDate
+import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
+import net.skyscanner.backpack.calendar2.data.dispatchClick
+import net.skyscanner.backpack.calendar2.data.dispatchSetSelection
 import java.io.Serializable
+import java.time.LocalDate
 
-@Stable
-class BpkCalendarController private constructor(
-    internal val lazyGridState: LazyGridState,
-    internal val stateMachine: CalendarStateMachine,
-) : CalendarComponent by stateMachine {
+class BpkCalendarController(
+    initialParams: CalendarParams,
+    internal val lazyGridState: LazyGridState = LazyGridState(),
+    internal val onSelectionChanged: (CalendarSelection) -> Unit,
+) {
+    var state by mutableStateOf(CalendarState(initialParams))
+        private set
 
-    constructor(
-        initialParams: CalendarParams,
-        coroutineScope: CoroutineScope,
-        lazyGridState: LazyGridState = LazyGridState(),
-    ) : this(lazyGridState, CalendarStateMachine(coroutineScope, initialParams))
+    fun setSelection(selection: CalendarSelection) {
+        updateState(state.dispatchSetSelection(selection))
+    }
 
-    /**
-     * Scrolls to a specific date in a calendar.
-     * Does nothing if the date is out of range.
-     */
     suspend fun scrollToDate(date: LocalDate) {
-        val index = state.value.cells.indexOf(date)
-        if (index >= 0) {
-            lazyGridState.scrollToItem(index)
-        }
+        val index = state.cells.indexOf(date)
+        if (index >= 0) lazyGridState.scrollToItem(index)
     }
 
-    /**
-     * Scrolls with animation to a specific date in a calendar.
-     * Does nothing if the date is out of range.
-     */
     suspend fun smoothScrollToDate(date: LocalDate) {
-        val index = state.value.cells.indexOf(date)
-        if (index >= 0) {
-            lazyGridState.animateScrollToItem(index)
+        val index = state.cells.indexOf(date)
+        if (index >= 0) lazyGridState.animateScrollToItem(index)
+    }
+
+    fun setParams(value: CalendarParams) {
+        state = state.copy(params = value)
+    }
+
+    private fun updateState(newState: CalendarState) {
+        if (newState != state) {
+            state = newState
+            onSelectionChanged(state.selection)
         }
     }
 
-    internal val firstVisibleItemYear by derivedStateOf {
-        state.value.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
+    internal val firstVisibleItemYear: Int
+        get() = state.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
+
+    internal fun onClick(calendarInteraction: CalendarInteraction) {
+        when (calendarInteraction) {
+            is CalendarInteraction.DateClicked -> updateState(state.dispatchClick(calendarInteraction.day))
+            is CalendarInteraction.SelectMonthClicked -> updateState(state.dispatchClick(calendarInteraction.header))
+        }
     }
 }
 
 @Composable
 fun rememberCalendarController(
     initialParams: CalendarParams,
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
     lazyGridState: LazyGridState = rememberLazyGridState(),
+    onSelectionChanged: (CalendarSelection) -> Unit,
 ): BpkCalendarController =
     rememberSaveable(
-        coroutineScope, lazyGridState,
+        inputs = arrayOf(initialParams),
         saver = Saver<BpkCalendarController, Serializable>(
-            save = { it.state.value.selection },
-            restore = {
-                BpkCalendarController(initialParams, coroutineScope, lazyGridState).apply {
-                    setSelection(it as CalendarSelection)
+            save = { CalendarSavableData(it.state.selection, it.state.params) },
+            restore = { savedData ->
+                val (savedSelection, savedParams) = savedData as CalendarSavableData
+                BpkCalendarController(
+                    savedParams,
+                    lazyGridState,
+                    onSelectionChanged,
+                ).apply {
+                    setSelection(savedSelection)
                 }
             },
         ),
         init = {
-            BpkCalendarController(initialParams, coroutineScope, lazyGridState)
+            BpkCalendarController(initialParams, lazyGridState, onSelectionChanged)
         },
     )
+
+internal data class CalendarSavableData(
+    val selection: CalendarSelection,
+    val params: CalendarParams,
+) : Serializable

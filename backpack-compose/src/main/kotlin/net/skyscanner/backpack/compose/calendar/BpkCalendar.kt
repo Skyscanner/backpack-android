@@ -34,7 +34,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkCalendar(
-    controller: BpkCalendarComposeController,
+    controller: BpkCalendarController,
     modifier: Modifier = Modifier,
     customDateHandling: ((CalendarInteraction) -> Unit)? = null,
 ) {

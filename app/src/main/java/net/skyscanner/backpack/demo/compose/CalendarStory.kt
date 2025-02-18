@@ -18,14 +18,17 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
-import net.skyscanner.backpack.compose.calendar.rememberCalendarComposeController
+import net.skyscanner.backpack.compose.calendar.rememberCalendarController
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
@@ -96,31 +99,18 @@ private fun CalendarDemo(
 ) {
     val automationMode = LocalAutomationMode.current
     val floatingNotification = LocalFloatingNotification.current
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val controller = rememberCalendarComposeController(initialParams = CalendarStoryType.createInitialParams(type)) {
-        coroutineScope.launch {
-            if (!automationMode) {
-                when (it) {
-                    CalendarSelection.None -> {
-                        floatingNotification.show("No selection")
-                    }
-
-                    is CalendarSelection.Dates -> {
-                        floatingNotification.show("Range selected ${it.start} - ${it.end}")
-                    }
-
-                    is CalendarSelection.Month -> {
-                        floatingNotification.show("Month selected ${it.month}")
-                    }
-
-                    is CalendarSelection.Single -> {
-                        floatingNotification.show("Single date selected ${it.date}")
+    val controller =
+        rememberCalendarController(
+            initialParams = CalendarStoryType.createInitialParams(type),
+            onSelectionChanged = { selection ->
+                coroutineScope.launch {
+                    if (!automationMode) {
+                        floatingNotification.show(context.getSelectionMessage(selection))
                     }
                 }
-                floatingNotification.show(it.toString())
-            }
-        }
-    }
+            },)
 
     LaunchedEffect(type, controller, automationMode) {
         when (type) {
@@ -132,4 +122,15 @@ private fun CalendarDemo(
     }
 
     BpkCalendar(controller = controller, modifier = modifier)
+}
+
+private fun Context.getSelectionMessage(
+    selection: CalendarSelection,
+): String {
+    return when (selection) {
+        CalendarSelection.None -> getString(R.string.calendar_no_selection)
+        is CalendarSelection.Dates -> getString(R.string.calendar_range_selected, selection.start, selection.end)
+        is CalendarSelection.Month -> getString(R.string.calendar_month_selected, selection.month)
+        is CalendarSelection.Single -> getString(R.string.calendar_single_selected, selection.date)
+    }
 }

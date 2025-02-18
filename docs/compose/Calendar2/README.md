@@ -60,29 +60,22 @@ import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 val controller = rememberCalendarController(
   initialParams = CalendarParams(
     range = LocalDate.of(2019, 1, 2)..LocalDate.of(2019, 12, 31), // start and end dates in the range
-    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Dates, Months or Disabled
+    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Dates, Months or Disabled,
+    onSelectionChanged = { selection -> // callback for selection change, you can react to the selection here
+        when (selection) {
+            is CalendarSelection.None -> {}
+            is CalendarSelection.Single -> {}
+            is CalendarSelection.Dates -> {}
+            is CalendarSelection.Month -> {}
+        }
+
+    }
   )
 )
 
 BpkCalendar(controller)
 ```
 
-Now the component is ready. You can listen for the selection change using its state:
-
-```Kotlin
-controller
-  .state
-  .map { it.selection }
-  .onEach { selection ->
-    when (selection) { // reacting to the selection
-      is CalendarSelection.None -> {}
-      is CalendarSelection.Single -> {}
-      is CalendarSelection.Dates -> {}
-      is CalendarSelection.Month -> {}
-    }
-  }
-  .launchIn(myCoroutineScope)
-```
 
 ### (Optional) Manual Selection handling
 
