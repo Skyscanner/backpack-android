@@ -80,7 +80,7 @@ jobs:
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v4
         with:
-          deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
+          personal_token: ${{ secrets.DEPLOY_KEY }}
           publish_dir: dokka/
           keep_files: true
           external_repository: backpack/android
