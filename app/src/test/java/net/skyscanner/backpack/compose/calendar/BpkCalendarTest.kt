@@ -155,5 +155,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
         }
 
     private fun createController(params: CalendarParams): BpkCalendarController =
-        BpkCalendarController(initialParams = params, onSelectionChanged = {})
+        BpkCalendarController(
+            initialParams = params,
+            onSelectionChanged = {},
+        )
 }
