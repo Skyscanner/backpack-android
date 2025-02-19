@@ -167,7 +167,7 @@ jobs:
             adb uninstall net.skyscanner.backpack.compose.test || :
             adb uninstall net.skyscanner.backpack.common.test || :
 
-            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
+            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest && killall -INT crashpad_handler || true
 
   Screenshots:
     name: Screenshots tests
