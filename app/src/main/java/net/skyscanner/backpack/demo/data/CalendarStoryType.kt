@@ -84,7 +84,7 @@ enum class CalendarStoryType {
                     selectionMode = rangeSelectionModeWithAccessibilityLabels(),
                     monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
                         label = "Select whole month",
-                        selectableMonthRange = YearMonth.now().plusMonths(1)..YearMonth.now().plusMonths(3),
+                        selectableMonthRange = YearMonth.of(2019, 1).plusMonths(1)..YearMonth.now().plusMonths(3),
                     ),
                 )
 

@@ -84,7 +84,7 @@ fun CalendarStateMachine(
     }
 }
 
-internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
+fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
     if (date.inactive) return this
 
     val selection = when (params.selectionMode) {
@@ -108,7 +108,7 @@ internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState 
     )
 }
 
-internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): CalendarState =
+fun CalendarState.dispatchParamsUpdate(params: CalendarParams): CalendarState =
     copy(
         params = params,
         cells = CalendarCells(
@@ -117,7 +117,7 @@ internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): Calenda
         ),
     )
 
-internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
+fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
     when (selection) {
         is CalendarSelection.None -> Unit
         is CalendarSelection.Dates -> when {
@@ -127,11 +127,13 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
             selection.start !in params.range -> return this
             selection.end?.let { it !in params.range } == true -> return this
         }
+
         is CalendarSelection.Single -> when {
             params.selectionMode !is SelectionMode.Single -> return this
             params.cellsInfo[selection.date]?.disabled == true -> return this
             selection.date !in params.range -> return this
         }
+
         is CalendarSelection.Month -> {
             if (params.selectionMode == SelectionMode.Disabled) return this
         }
@@ -142,7 +144,7 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
     )
 }
 
-internal fun CalendarState.dispatchClick(data: CalendarCell.Header): CalendarState {
+fun CalendarState.dispatchClick(data: CalendarCell.Header): CalendarState {
     if (data.monthSelectionMode is CalendarParams.MonthSelectionMode.Disabled) return this
     val selection = when (params.selectionMode) {
         SelectionMode.Disabled -> selection

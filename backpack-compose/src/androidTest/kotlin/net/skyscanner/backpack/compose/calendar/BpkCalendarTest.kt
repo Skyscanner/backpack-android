@@ -32,10 +32,6 @@ import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -47,7 +43,6 @@ import org.junit.Test
 import java.time.LocalDate
 import java.util.Locale
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class BpkCalendarTest {
 
     private val initialStartDate = LocalDate.of(2019, 1, 2)
@@ -102,7 +97,7 @@ class BpkCalendarTest {
             .assertStateDescriptionEquals("startSelectionState")
             .performClick()
 
-        val state = controller.state.first()
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -129,7 +124,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
 
-        val state = controller.state.first()
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -159,7 +154,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("endSelectionState")
 
-        val state = controller.state.first()
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -181,7 +176,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
 
-        val state = controller.state.first()
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -215,13 +210,13 @@ class BpkCalendarTest {
             .onFirst()
             .assertIsNotSelected()
 
-        val state = controller.state.first()
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
 
     private fun createController(params: CalendarParams): BpkCalendarController =
-        BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
+        BpkCalendarController(initialParams = params, onSelectionChanged = {})
 }
 
 fun SemanticsNodeInteraction.assertOnClickLabelEquals(value: String): SemanticsNodeInteraction = assert(

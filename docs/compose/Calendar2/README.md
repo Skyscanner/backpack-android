@@ -41,13 +41,17 @@ Backpack Android is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-BpkCalendar uses coroutines under the hood.
-Since it designed with coroutines, the API is designed primarily for Kotlin language and may not be interoperable with Java.
-To use the API, make sure [kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines) is included to your project.
+`BpkCalendar` is designed for **Jetpack Compose** and manages its state internally without requiring external reactive dependencies.
+The API is optimized for **Kotlin** and may not be fully interoperable with Java.
 
-BpkCalendar is designed as a state machine.
-All the information it contains is available as a state in the [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/).
-Each method of the public API and some of the user interactions will change its state and emit it.
+### **State Management**
+- `BpkCalendarController` maintains the **calendar parameters** (`params`) and **selected dates** (`selection`).
+- State updates happen **synchronously** without background processing.
+- Selection changes trigger a **callback function** to notify updates.
+
+### **Coroutines Requirement**
+`BpkCalendarController` provides scrolling functions that are `suspend` functions.
+To use them, ensure that [kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines) is included in your project.
 
 Example of a declaration in Compose
 
@@ -60,43 +64,34 @@ import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 val controller = rememberCalendarController(
   initialParams = CalendarParams(
     range = LocalDate.of(2019, 1, 2)..LocalDate.of(2019, 12, 31), // start and end dates in the range
-    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Dates, Months or Disabled
+    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Dates, Months or Disabled,
+    onSelectionChanged = { selection -> // callback for selection change, you can react to the selection here
+        when (selection) {
+            is CalendarSelection.None -> {}
+            is CalendarSelection.Single -> {}
+            is CalendarSelection.Dates -> {}
+            is CalendarSelection.Month -> {}
+        }
+
+    }
   )
 )
 
 BpkCalendar(controller)
 ```
 
-Now the component is ready. You can listen for the selection change using its state:
 
-```Kotlin
-controller
-  .state
-  .map { it.selection }
-  .onEach { selection ->
-    when (selection) { // reacting to the selection
-      is CalendarSelection.None -> {}
-      is CalendarSelection.Single -> {}
-      is CalendarSelection.Dates -> {}
-      is CalendarSelection.Month -> {}
-    }
-  }
-  .launchIn(myCoroutineScope)
-```
+### (Optional) Manual Selection Handling
 
-### (Optional) Manual Selection handling
-
-To achieve behaviour that differs from the way the state machine handles things you can provide the optional
+To achieve selection behaviour that differs from the default selection, you can provide the optional
 `customDateHandling` property.
 This property is a lambda that will be called when a date is selected by the user.
 You can use it to handle the selection manually.
 You can then set the selection in the controller using the `setSelection` method.
 
-```Kotlin
+### Advanced Dates Customisation
 
-### Advanced dates customisation
-
-You can attach some of the information to each date displayed in calendar.
+You can attach some information to each date displayed in the calendar.
 This information will update its appearance and behaviour.
 
 In order to do this, specify `cellInfo` parameters like shown here:

@@ -402,4 +402,9 @@
     <string name="on" translatable="false">On</string>
     <string name="off" translatable="false">Off</string>
     <string name="value" translatable="false">Value</string>
+    <string name="calendar_no_selection" translatable="false">No selection</string>
+    <string name="calendar_range_selected" translatable="false">Range selected %1$s - %2$s</string>
+    <string name="calendar_month_selected" translatable="false">Whole month selected %1$s</string>
+    <string name="calendar_single_selected" translatable="false">Single date selected %1$s</string>
+
 </resources>
