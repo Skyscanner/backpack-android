@@ -38,10 +38,11 @@ import java.time.LocalDate
 
 class BpkCalendarController(
     initialParams: CalendarParams,
+    initialSelection: CalendarSelection = CalendarSelection.None,
     internal val lazyGridState: LazyGridState = LazyGridState(),
     internal val onSelectionChanged: (CalendarSelection) -> Unit,
 ) {
-    private var _state by mutableStateOf(CalendarState(initialParams))
+    private var _state by mutableStateOf(CalendarState(initialParams, initialSelection))
 
     val state by derivedStateOf { _state }
 
@@ -49,7 +50,7 @@ class BpkCalendarController(
      * Sets the selection of a calendar.
      */
     fun setSelection(selection: CalendarSelection) {
-        updateState(_state.dispatchSetSelection(selection))
+        _state = _state.dispatchSetSelection(selection)
     }
 
     /**
@@ -107,6 +108,7 @@ class BpkCalendarController(
 @Composable
 fun rememberCalendarController(
     initialParams: CalendarParams,
+    initialSelection: CalendarSelection = CalendarSelection.None,
     lazyGridState: LazyGridState = rememberLazyGridState(),
     onSelectionChanged: (CalendarSelection) -> Unit,
 ): BpkCalendarController =
@@ -118,15 +120,14 @@ fun rememberCalendarController(
                 val (savedSelection, savedParams) = savedData as CalendarSavableData
                 BpkCalendarController(
                     savedParams,
+                    savedSelection,
                     lazyGridState,
                     onSelectionChanged,
-                ).apply {
-                    setSelection(savedSelection)
-                }
+                )
             },
         ),
         init = {
-            BpkCalendarController(initialParams, lazyGridState, onSelectionChanged)
+            BpkCalendarController(initialParams, initialSelection, lazyGridState, onSelectionChanged)
         },
     )
 
