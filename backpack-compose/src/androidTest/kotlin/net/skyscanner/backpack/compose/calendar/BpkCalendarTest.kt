@@ -97,7 +97,7 @@ class BpkCalendarTest {
             .assertStateDescriptionEquals("startSelectionState")
             .performClick()
 
-        val state = controller._state
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -124,7 +124,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
 
-        val state = controller._state
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -154,7 +154,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("endSelectionState")
 
-        val state = controller._state
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -176,7 +176,7 @@ class BpkCalendarTest {
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
 
-        val state = controller._state
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
@@ -210,7 +210,7 @@ class BpkCalendarTest {
             .onFirst()
             .assertIsNotSelected()
 
-        val state = controller._state
+        val state = controller.state
 
         assertEquals(expected, state.selection)
     }
