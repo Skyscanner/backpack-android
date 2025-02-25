@@ -144,7 +144,7 @@ internal fun BpkTextFieldImpl(
     BasicTextField(
         value = value,
         onValueChange = onValueChange,
-        enabled = status != BpkFieldStatus.Disabled,
+        enabled = status != BpkFieldStatus.Disabled && !(type == BpkTextFieldType.Search && readOnly),
         readOnly = readOnly,
         textStyle = BpkTheme.typography.bodyDefault.copy(
             color = animateColorAsState(
