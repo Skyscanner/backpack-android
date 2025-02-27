@@ -75,7 +75,7 @@ class BpkCalendarController(
      * Updates the parameters of the calendar.
      */
     fun setParams(value: CalendarParams) {
-        _state = _state.copy(params = value)
+        _state = CalendarState(value, _state.selection)
     }
 
     /**
