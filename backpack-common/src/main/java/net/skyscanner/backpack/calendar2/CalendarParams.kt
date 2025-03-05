@@ -22,6 +22,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
@@ -73,7 +74,7 @@ data class CalendarParams(
      * Describes the selection behaviour
      */
     @Stable
-    sealed interface SelectionMode {
+    sealed interface SelectionMode : Serializable {
         /**
          * No date can be selected
          */
