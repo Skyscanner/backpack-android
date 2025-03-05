@@ -141,7 +141,7 @@ data class CellInfo(
     val status: CellStatus? = null,
     val label: CellLabel = CellLabel.Text(""), // Default is empty text
     val style: CellStatusStyle = CellStatusStyle.Label,
-) {
+) : Serializable {
 
     internal companion object {
         val Default = CellInfo()
