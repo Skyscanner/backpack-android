@@ -151,7 +151,7 @@ data class CellInfo(
 /**
  * Describes the label of the cell
  */
-sealed class CellLabel {
+sealed class CellLabel : Serializable {
     data class Text(val text: String) : CellLabel()
     data class Icon(
         val resId: Int,
