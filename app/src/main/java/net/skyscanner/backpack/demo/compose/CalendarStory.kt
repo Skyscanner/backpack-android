@@ -122,7 +122,7 @@ private fun CalendarDemo(
         }
     }
 
-    BpkCalendar(controller = controller, modifier = modifier)
+    BpkCalendar(controller = controller, modifier = modifier) { _ -> }
 }
 
 private fun Context.getSelectionMessage(

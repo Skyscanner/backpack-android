@@ -157,6 +157,8 @@ sealed class CellLabel : Serializable {
         val resId: Int,
         val tint: Int? = null,
     ) : CellLabel()
+
+    data class Loading(val contentDescription: String) : CellLabel()
 }
 
 /**

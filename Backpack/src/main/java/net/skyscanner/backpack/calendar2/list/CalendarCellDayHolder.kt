@@ -65,6 +65,7 @@ internal class CalendarCellDayHolder(
 
         when (val cellLabel = model.info.label) {
             is CellLabel.Text -> label.text = cellLabel.text
+            is CellLabel.Loading -> label.text = cellLabel.contentDescription
             is CellLabel.Icon -> {
                 icon.setImageResource(cellLabel.resId)
                 cellLabel.tint?.let { tint -> icon.imageTintList = context.getColorStateList(tint) }
@@ -75,10 +76,12 @@ internal class CalendarCellDayHolder(
                 day.setTextColor(selectionContentColor(model.selection))
                 day.background = selectionBackground(model.selection)
             }
+
             model.inactive -> {
                 day.setTextColor(disabledTextColor)
                 day.background = null
             }
+
             else -> {
                 day.setTextColor(defaultTextColor)
                 day.background = null
@@ -90,6 +93,7 @@ internal class CalendarCellDayHolder(
                 label.isVisible = false
                 icon.visibility = View.GONE
             }
+
             model.info.style == CellStatusStyle.Label -> {
                 when (val cellLabel = model.info.label) {
                     is CellLabel.Text -> {
@@ -97,16 +101,18 @@ internal class CalendarCellDayHolder(
                         label.setTextColor(labelColor(model.info.status))
                         icon.visibility = View.GONE
                     }
-                    is CellLabel.Icon -> {
+
+                    is CellLabel.Icon, is CellLabel.Loading -> {
                         icon.visibility = View.VISIBLE
                         label.visibility = View.GONE
                     }
                 }
             }
+
             else -> {
                 when (val cellLabel = model.info.label) {
                     is CellLabel.Text -> label.isVisible = cellLabel.text.isNotEmpty()
-                    is CellLabel.Icon -> icon.visibility = View.VISIBLE
+                    is CellLabel.Icon, is CellLabel.Loading -> icon.visibility = View.VISIBLE
                 }
             }
         }
