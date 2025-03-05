@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.data.dispatchClick
 import net.skyscanner.backpack.calendar2.data.dispatchSetSelection
@@ -115,11 +116,19 @@ fun rememberCalendarController(
     rememberSaveable(
         inputs = arrayOf(initialParams),
         saver = Saver<BpkCalendarController, Serializable>(
-            save = { CalendarSavableData(it.state.selection, it.state.params) },
+            save = {
+                with(it.state.params) {
+                    CalendarSavableData(
+                        it.state.selection,
+                        cellsInfo,
+                        selectionMode,
+                    )
+                }
+            },
             restore = { savedData ->
-                val (savedSelection, savedParams) = savedData as CalendarSavableData
+                val (savedSelection, cellsInfo, selectionMode) = savedData as CalendarSavableData
                 BpkCalendarController(
-                    savedParams,
+                    initialParams.copy(cellsInfo = cellsInfo, selectionMode = selectionMode),
                     savedSelection,
                     lazyGridState,
                     onSelectionChanged,
@@ -133,5 +142,6 @@ fun rememberCalendarController(
 
 internal data class CalendarSavableData(
     val selection: CalendarSelection,
-    val params: CalendarParams,
+    val cellsInfo: Map<LocalDate, CellInfo>,
+    val selectionMode: CalendarParams.SelectionMode,
 ) : Serializable
