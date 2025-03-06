@@ -141,7 +141,7 @@ data class CellInfo(
     val status: CellStatus? = null,
     val label: CellLabel = CellLabel.Text(""), // Default is empty text
     val style: CellStatusStyle = CellStatusStyle.Label,
-) {
+) : Serializable {
 
     internal companion object {
         val Default = CellInfo()
@@ -151,7 +151,7 @@ data class CellInfo(
 /**
  * Describes the label of the cell
  */
-sealed class CellLabel {
+sealed class CellLabel : Serializable {
     data class Text(val text: String) : CellLabel()
     data class Icon(
         val resId: Int,
