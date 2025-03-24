@@ -6,6 +6,9 @@ updates:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
+  labels: # Avoid default semver labels (https://github.com/dependabot/dependabot-core/issues/3465)
+    - dependencies
+    - java
   groups:
     kotlin-ksp:
       patterns:
