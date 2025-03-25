@@ -68,3 +68,39 @@ fun BpkCardWrapper(
         }
     }
 }
+
+@Composable
+fun BpkCardWrapper(
+    onClick: () -> Unit,
+    backgroundColor: Color,
+    headerContent: @Composable () -> Unit,
+    cardContent: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    cardPadding: BpkCardPadding = BpkCardPadding.Small,
+    corner: BpkCardCorner = BpkCardCorner.Small,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
+) {
+    Card(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth(),
+        shape = cardShape(corner),
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor,
+            disabledContainerColor = backgroundColor,
+        ),
+        elevation = cardElevation(elevation),
+        border = BorderStroke(width = BpkBorderSize.Lg, color = backgroundColor),
+    ) {
+        Column {
+            headerContent.invoke()
+            BpkCard(
+                modifier = Modifier.padding(BpkBorderSize.Lg),
+                corner = corner,
+                padding = cardPadding,
+                elevation = BpkCardElevation.None,
+            ) {
+                cardContent.invoke()
+            }
+        }
+    }
+}
