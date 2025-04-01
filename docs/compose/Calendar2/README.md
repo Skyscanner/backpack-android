@@ -89,10 +89,11 @@ This property is a lambda that will be called when a date is selected by the use
 You can use it to handle the selection manually.
 You can then set the selection in the controller using the `setSelection` method.
 
-### (Optional) Getting updated when calendar is scrolled
+### (Optional) Handling Calendar Scroll Updates
 
-If, hypothetically, you are wanting to know when the calendar is scrolled, you can use the `onScrollToMonth` parameter.
-This updates each time the BpkCalendarController `lazyGridState.firstVisibleItemIndex` property changes.
+To receive notifications when the calendar is scrolled, you can utilize the `onScrollToMonth` parameter.
+This callback is triggered whenever the `lazyGridState.firstVisibleItemIndex` property of the `BpkCalendarController` is
+updated.
 
 ### Advanced Dates Customisation
 
