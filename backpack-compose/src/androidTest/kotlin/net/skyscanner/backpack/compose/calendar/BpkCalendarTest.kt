@@ -25,6 +25,7 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -32,6 +33,7 @@ import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
+import androidx.compose.ui.test.performScrollToNode
 import kotlinx.coroutines.test.runTest
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -41,6 +43,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import java.time.LocalDate
+import java.time.YearMonth
 import java.util.Locale
 
 class BpkCalendarTest {
@@ -213,6 +216,27 @@ class BpkCalendarTest {
         val state = controller.state
 
         assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun withScrollHandling() = runTest {
+        val controller = createController(DefaultSingle)
+        var visitedMonth = YearMonth.of(2019, 1)
+
+        composeTestRule.setContent {
+            BpkTheme {
+                BpkCalendar(controller, onScrollToMonth = {
+                    visitedMonth = it
+                })
+            }
+        }
+
+        composeTestRule.onNodeWithTag(CALENDAR_GRID_TEST_TAG)
+            .performScrollToNode(hasContentDescription("October 2019", substring = true))
+
+        composeTestRule.waitForIdle()
+
+        assert(visitedMonth.monthValue > 1)
     }
 
     private fun createController(params: CalendarParams): BpkCalendarController =

@@ -36,6 +36,7 @@ import net.skyscanner.backpack.calendar2.data.dispatchClick
 import net.skyscanner.backpack.calendar2.data.dispatchSetSelection
 import java.io.Serializable
 import java.time.LocalDate
+import java.time.YearMonth
 
 class BpkCalendarController(
     initialParams: CalendarParams,
@@ -89,11 +90,14 @@ class BpkCalendarController(
         }
     }
 
+    val firstVisibleItemMonth: YearMonth
+        get() = _state.cells[lazyGridState.firstVisibleItemIndex].yearMonth
+
     /**
      * Returns the first visible item year.
      */
     internal val firstVisibleItemYear: Int
-        get() = _state.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
+        get() = firstVisibleItemMonth.year
 
     /**
      * Handles the click events of a calendar.
