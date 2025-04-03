@@ -94,7 +94,7 @@ fun CalendarNoFloatingYearLabel(modifier: Modifier = Modifier) =
 
 @Composable
 @Calendar2Component
-@ComposeStory("Multi-selection")
+@ComposeStory("Highlighted Dates")
 fun CalendarMultiSelection(modifier: Modifier = Modifier) =
     CalendarDemo(CalendarStoryType.MultiSelection, modifier)
 

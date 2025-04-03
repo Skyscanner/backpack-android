@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels.png" alt="Labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels_dm.png" alt="Labeled Calendar2 component - dark mode" width="375" /> |
 
+## Highlighted Dates
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates.png" alt="Hightlighted dates Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates_dm.png" alt="Hightlighted dates Calendar2 component - dark mode" width="375" /> |
+
 ## Icon as label
 
 | Day                                                                                                                                                                                                  | Night                                                                                                                                                                                                            |
@@ -106,6 +112,7 @@ controller.setParams(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
         label = CellLabel.Text("£30"), // adds label below the date
+        highlighted = true, // marks date as highlighted  
       ),
     )
   )
