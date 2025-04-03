@@ -95,6 +95,21 @@ To receive notifications when the calendar is scrolled, you can utilize the `onS
 This callback is triggered whenever the `lazyGridState.firstVisibleItemIndex` property of the `BpkCalendarController` is
 updated.
 
+For example you can show the furthest scrolled month's number (i.e. January = 1, February = 2, etc.) in a `BpkText` label:
+
+```Kotlin
+Column {
+    var month: YearMonth by remember { mutableStateOf(YearMonth.now()) }
+    BpkText("Month: ${month.monthValue}")
+    BpkCalendar(
+        controller = controller,
+        onScrollToMonth = {
+            month = it
+        }
+    )
+}
+```
+
 ### Advanced Dates Customisation
 
 You can attach some information to each date displayed in the calendar.
