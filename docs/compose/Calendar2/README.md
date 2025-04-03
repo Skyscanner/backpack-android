@@ -89,6 +89,27 @@ This property is a lambda that will be called when a date is selected by the use
 You can use it to handle the selection manually.
 You can then set the selection in the controller using the `setSelection` method.
 
+### (Optional) Handling Calendar Scroll Updates
+
+To receive notifications when the calendar is scrolled, you can utilize the `onScrollToMonth` parameter.
+This callback is triggered whenever the `lazyGridState.firstVisibleItemIndex` property of the `BpkCalendarController` is
+updated.
+
+For example you can show the furthest scrolled month's number (i.e. January = 1, February = 2, etc.) in a `BpkText` label:
+
+```Kotlin
+Column {
+    var month: YearMonth by remember { mutableStateOf(YearMonth.now()) }
+    BpkText("Month: ${month.monthValue}")
+    BpkCalendar(
+        controller = controller,
+        onScrollToMonth = {
+            month = it
+        }
+    )
+}
+```
+
 ### Advanced Dates Customisation
 
 You can attach some information to each date displayed in the calendar.

@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
@@ -31,12 +32,14 @@ import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarBadge
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarGrid
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarHeader
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import java.time.YearMonth
 
 @Composable
 fun BpkCalendar(
     controller: BpkCalendarController,
     modifier: Modifier = Modifier,
     customDateHandling: ((CalendarInteraction) -> Unit)? = null,
+    onScrollToMonth: ((YearMonth) -> Unit)? = null,
 ) {
 
     val state = controller.state
@@ -65,6 +68,12 @@ fun BpkCalendar(
                         .align(Alignment.TopCenter)
                         .padding(top = BpkSpacing.Base),
                 )
+            }
+        }
+
+        onScrollToMonth?.let {
+            LaunchedEffect(onScrollToMonth, controller.firstVisibleItemMonth) {
+                onScrollToMonth(controller.firstVisibleItemMonth)
             }
         }
     }
