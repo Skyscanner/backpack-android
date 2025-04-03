@@ -194,8 +194,7 @@ private fun Modifier.highlightedDayBackground(
     highlighted: Boolean,
 ): Modifier =
     if (highlighted) this
-        .border(2.dp, coreAccent, CircleShape)
-        .padding(10.dp) else this
+        .border(2.dp, coreAccent, CircleShape) else this
 
 private fun Modifier.cellDayBackground(
     coreAccent: Color,
