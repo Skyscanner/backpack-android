@@ -46,6 +46,7 @@ enum class CalendarStoryType {
     WithIconAsLabels,
     PreselectedRange,
     YearLabelInMonthHeader,
+    MultiSelection,
     ;
 
     companion object {
@@ -166,6 +167,22 @@ enum class CalendarStoryType {
                     selectionMode = CalendarParams.SelectionMode.Range(),
                     yearLabelInMonthHeader = true,
                 )
+                MultiSelection -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = singleSelectionModeWithAccessibilityLabels(),
+                    cellsInfo = mapOf(
+                        LocalDate.of(2019, 1, 9) to CellInfo(
+                            highlighted = true,
+                        ),
+                        LocalDate.of(2019, 1, 25) to CellInfo(
+                            highlighted = true,
+                        ),
+                        LocalDate.of(2019, 2, 2) to CellInfo(
+                            highlighted = true,
+                        ),
+                    ),
+                )
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(
@@ -190,6 +207,10 @@ object CalendarStorySelection {
     val PreselectedRange = CalendarSelection.Dates(
         start = range.start.plusDays(10),
         end = range.start.plusDays(20),
+    )
+
+    val PreselectedDate = CalendarSelection.Single(
+        date = range.start.plusDays(10),
     )
 
     val WholeMonthRange = CalendarSelection.Month(

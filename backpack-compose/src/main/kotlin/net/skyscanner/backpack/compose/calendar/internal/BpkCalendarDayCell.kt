@@ -112,6 +112,11 @@ internal fun BpkCalendarDayCell(
                         coreAccent = BpkTheme.colors.coreAccent,
                         surfaceSubtle = BpkTheme.colors.surfaceSubtle,
                         selection = selection,
+                        highlighted = model.info.highlighted,
+                    )
+                    .highlightedDayBackground(
+                        coreAccent = BpkTheme.colors.coreAccent,
+                        highlighted = model.info.highlighted,
                     ),
             )
 
@@ -184,10 +189,18 @@ private fun Modifier.cellSelectionBackground(
         -> this
     }
 
+private fun Modifier.highlightedDayBackground(
+    coreAccent: Color,
+    highlighted: Boolean,
+): Modifier =
+    if (highlighted) this
+        .border(2.dp, coreAccent, CircleShape) else this
+
 private fun Modifier.cellDayBackground(
     coreAccent: Color,
     surfaceSubtle: Color,
     selection: Selection?,
+    highlighted: Boolean,
 ): Modifier =
     when {
         selection != null ->
@@ -202,7 +215,11 @@ private fun Modifier.cellDayBackground(
                 Selection.EndMonth,
                 -> background(surfaceSubtle, CircleShape)
 
-                Selection.Single,
+                Selection.Single -> if (highlighted) this
+                    .border(1.dp, coreAccent, CircleShape)
+                    .padding(3.dp)
+                    .background(coreAccent, CircleShape) else background(coreAccent, CircleShape)
+
                 Selection.Start,
                 Selection.End,
                 -> background(coreAccent, CircleShape)
