@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.compose
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,7 +35,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -309,7 +307,6 @@ private fun StackItem(data: CardListSample) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color.White)
             .clickable {
                 coroutineScope.launch {
                     floatingNotification.show(notificationText)
