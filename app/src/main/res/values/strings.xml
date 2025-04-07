@@ -398,6 +398,13 @@
     <string name="card_list_item_2_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
     <string name="card_list_item_3_body_text">Immerse yourself in the rich history and culture of the Irish capital.</string>
     <string name="card_list_item_9_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
+    <string name="card_list_section_header_click">Section Header clicked!</string>
+    <string name="card_list_accessory_button_clicked">Accessory button clicked!</string>
+    <string name="card_list_item_clicked">Item clicked!</string>
+    <string name="card_list_add_item">Add item</string>
+    <string name="card_list_show_more">Show more</string>
+    <string name="card_list_show_less">Show less</string>
+
     <string name="shadow_status" translatable="false">Shadow: %1$s</string>
     <string name="on" translatable="false">On</string>
     <string name="off" translatable="false">Off</string>
