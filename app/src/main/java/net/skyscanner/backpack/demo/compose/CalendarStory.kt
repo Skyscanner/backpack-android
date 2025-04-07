@@ -93,6 +93,12 @@ fun CalendarNoFloatingYearLabel(modifier: Modifier = Modifier) =
     CalendarDemo(CalendarStoryType.YearLabelInMonthHeader, modifier)
 
 @Composable
+@Calendar2Component
+@ComposeStory("Highlighted Dates")
+fun CalendarMultiSelection(modifier: Modifier = Modifier) =
+    CalendarDemo(CalendarStoryType.MultiSelection, modifier)
+
+@Composable
 private fun CalendarDemo(
     type: CalendarStoryType,
     modifier: Modifier = Modifier,
@@ -118,6 +124,7 @@ private fun CalendarDemo(
             CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
             CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
             CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
+            CalendarStoryType.MultiSelection -> controller.setSelection(CalendarStorySelection.PreselectedDate)
             else -> Unit
         }
     }
