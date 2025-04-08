@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.cardlist.stack
 
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.cardlist.stack.internal.BpkStackCardListImpl
@@ -44,7 +43,7 @@ fun BpkStackCardList(
     accessoryStyle: BpkStackCardAccessoryStyle? = null,
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
-    content: @Composable (LazyItemScope.(Int) -> Unit),
+    content: @Composable ((Int) -> Unit),
 ) {
     BpkStackCardListImpl(
         title = title,
