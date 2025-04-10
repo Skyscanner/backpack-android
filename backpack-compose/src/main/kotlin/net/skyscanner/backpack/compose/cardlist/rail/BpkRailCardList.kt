@@ -27,9 +27,9 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 @Composable
 fun BpkRailCardList(
     title: String,
-    description: String,
     totalCards: Int,
     modifier: Modifier = Modifier,
+    description: String? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
     headerButton: BpkSectionHeaderButton? = null,
     content: @Composable (LazyItemScope.(Int) -> Unit),

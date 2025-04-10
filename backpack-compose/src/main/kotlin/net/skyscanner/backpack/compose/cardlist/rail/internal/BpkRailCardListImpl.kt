@@ -37,7 +37,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkRailCardListImpl(
     title: String,
-    description: String,
+    description: String?,
     headerButton: BpkSectionHeaderButton?,
     totalCards: Int,
     accessibilityHeaderTagEnabled: Boolean?,

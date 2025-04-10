@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,10 @@
 
 package net.skyscanner.backpack.compose.cardlist.stack.internal
 
-import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -47,7 +44,7 @@ import net.skyscanner.backpack.compose.tokens.ChevronUp
 @Composable
 internal fun BpkStackCardListImpl(
     title: String,
-    description: String,
+    description: String?,
     totalCount: Int,
     modifier: Modifier = Modifier,
     accessoryStyle: BpkStackCardAccessoryStyle? = null,
@@ -58,11 +55,21 @@ internal fun BpkStackCardListImpl(
 
     var isExpanded by rememberSaveable { mutableStateOf(false) }
     val targetCount = when (accessoryStyle) {
-        is BpkStackCardAccessoryStyle.Expand ->
-            if (isExpanded) accessoryStyle.expandedCount else accessoryStyle.collapsedCount
+        is BpkStackCardAccessoryStyle.Expand -> {
+            if (accessoryStyle.expandedCount < 0 || accessoryStyle.collapsedCount < 0) {
+                throw IllegalArgumentException("expandedCount/collapsedCount can not be negative")
+            }
+            if (accessoryStyle.expandedCount < accessoryStyle.collapsedCount) {
+                throw IllegalArgumentException("expandedCount should be greater than collapsedCount")
+            }
+            if (accessoryStyle.expandedCount <= MINIMUM_EXPANDED_COUNT) {
+                totalCount
+            } else {
+                if (isExpanded) accessoryStyle.expandedCount else accessoryStyle.collapsedCount
+            }
+        }
         else -> totalCount
     }
-    val animatedVisibleCount by animateIntAsState(targetValue = targetCount)
 
     LazyColumn(
         modifier = modifier,
@@ -77,33 +84,38 @@ internal fun BpkStackCardListImpl(
                 button = headerButton,
                 accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
             )
+        }
 
-            Spacer(modifier = Modifier.height(BpkSpacing.Base))
+        items(targetCount) {
+            Box(Modifier.animateItem()) {
+                content(it)
+            }
+        }
 
-            StackLayout(
-                content = content,
-                visibleCount = animatedVisibleCount,
-            )
-
+        item {
             accessoryStyle?.let {
                 when (it) {
                     is BpkStackCardAccessoryStyle.Expand -> {
-                        BpkButton(
-                            modifier = Modifier.fillMaxWidth()
-                                .padding(top = BpkSpacing.Base, bottom = BpkSpacing.Base),
-                            text = if (isExpanded) it.collapsedText else it.expandText,
-                            icon = if (isExpanded) BpkIcon.ChevronUp else BpkIcon.ChevronDown,
-                            position = BpkButtonIconPosition.End,
-                            type = BpkButtonType.Link,
-                            onClick = { isExpanded = !isExpanded },
-                        )
+                        if (it.expandedCount > MINIMUM_EXPANDED_COUNT) {
+                            BpkButton(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = BpkSpacing.Base),
+                                text = if (isExpanded) it.collapsedText else it.expandText,
+                                icon = if (isExpanded) BpkIcon.ChevronUp else BpkIcon.ChevronDown,
+                                position = BpkButtonIconPosition.End,
+                                type = BpkButtonType.Link,
+                                onClick = { isExpanded = !isExpanded },
+                            )
+                        }
                     }
 
                     is BpkStackCardAccessoryStyle.Button -> {
                         if (headerButton == null) {
                             BpkButton(
-                                modifier = Modifier.fillMaxWidth()
-                                    .padding(top = BpkSpacing.Base, bottom = BpkSpacing.Base),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = BpkSpacing.Base),
                                 text = it.title,
                                 type = BpkButtonType.Primary,
                                 position = BpkButtonIconPosition.End,
@@ -118,18 +130,4 @@ internal fun BpkStackCardListImpl(
     }
 }
 
-@Composable
-fun StackLayout(
-    visibleCount: Int,
-    modifier: Modifier = Modifier,
-    content: @Composable ((Int) -> Unit),
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
-        repeat(visibleCount) {
-            content(it)
-        }
-    }
-}
+internal const val MINIMUM_EXPANDED_COUNT = 2
