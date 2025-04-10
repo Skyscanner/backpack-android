@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels.png" alt="Labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels_dm.png" alt="Labeled Calendar2 component - dark mode" width="375" /> |
 
+## Highlighted Dates
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates.png" alt="Highlighted dates Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates_dm.png" alt="Highlighted dates Calendar2 component - dark mode" width="375" /> |
+
 ## Icon as label
 
 | Day                                                                                                                                                                                                  | Night                                                                                                                                                                                                            |
@@ -89,6 +95,27 @@ This property is a lambda that will be called when a date is selected by the use
 You can use it to handle the selection manually.
 You can then set the selection in the controller using the `setSelection` method.
 
+### (Optional) Handling Calendar Scroll Updates
+
+To receive notifications when the calendar is scrolled, you can utilize the `onScrollToMonth` parameter.
+This callback is triggered whenever the `lazyGridState.firstVisibleItemIndex` property of the `BpkCalendarController` is
+updated.
+
+For example you can show the furthest scrolled month's number (i.e. January = 1, February = 2, etc.) in a `BpkText` label:
+
+```Kotlin
+Column {
+    var month: YearMonth by remember { mutableStateOf(YearMonth.now()) }
+    BpkText("Month: ${month.monthValue}")
+    BpkCalendar(
+        controller = controller,
+        onScrollToMonth = {
+            month = it
+        }
+    )
+}
+```
+
 ### Advanced Dates Customisation
 
 You can attach some information to each date displayed in the calendar.
@@ -106,6 +133,7 @@ controller.setParams(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
         label = CellLabel.Text("£30"), // adds label below the date
+        highlighted = true, // marks date as highlighted
       ),
     )
   )
