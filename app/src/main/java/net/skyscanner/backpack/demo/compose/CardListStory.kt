@@ -129,6 +129,25 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
+@ComposeStory("Stack with expand accessory with less than minimum expanded count")
+fun CardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 2,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 1,
+                expandedCount = 2,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
 @ComposeStory("Stack with button accessory")
 fun CardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current

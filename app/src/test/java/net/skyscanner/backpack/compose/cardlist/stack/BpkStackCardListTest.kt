@@ -52,6 +52,14 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     fun defaultStack() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
+            totalCount = TOTAL_CARDS,
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun defaultStackWithDescription() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = TOTAL_CARDS,
         ) { index -> StackItem(dataList[index]) }
@@ -68,6 +76,21 @@ class BpkStackCardListTest : BpkSnapshotTest() {
                 collapsedText = stringResource(R.string.card_list_show_less),
                 collapsedCount = 2,
                 expandedCount = 5,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun stackWithExpandAccessoryWithLessThanMinimumExpandCount() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 2,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 1,
+                expandedCount = 2,
             ),
         ) { index -> StackItem(dataList[index]) }
     }
