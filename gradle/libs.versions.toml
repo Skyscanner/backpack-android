@@ -1,6 +1,6 @@
 [versions]
-kotlin = "2.1.10"
-ksp = "2.1.10-1.0.31" # depends on Kotlin version
+kotlin = "2.1.20"
+ksp = "2.1.20-1.0.32" # depends on Kotlin version
 compilerTesting = "0.7.0"
 destinations = "1.11.9" # update this alongside with compiler version
 
@@ -14,7 +14,7 @@ androidXJunit = "1.2.1"
 coroutines = "1.10.1"
 espresso = "3.6.1"
 kotlinPoet = "2.1.0"
-ktor = "3.1.1"
+ktor = "3.1.2"
 roborazzi = "1.43.1"
 
 [plugins]
