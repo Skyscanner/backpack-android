@@ -195,7 +195,7 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
                     coroutineScope.launch {
                         floatingNotification.show(notificationText2)
                     }
-                }
+                },
             ),
             headerButton = BpkSectionHeaderButton(
                 text = stringResource(R.string.card_list_header_button_text),
