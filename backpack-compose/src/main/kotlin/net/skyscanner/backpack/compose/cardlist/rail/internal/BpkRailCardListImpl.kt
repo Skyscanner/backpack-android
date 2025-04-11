@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.cardlist.rail.internal
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,7 +37,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkRailCardListImpl(
     title: String,
-    description: String,
+    description: String?,
     headerButton: BpkSectionHeaderButton?,
     totalCards: Int,
     accessibilityHeaderTagEnabled: Boolean?,
@@ -62,7 +61,6 @@ internal fun BpkRailCardListImpl(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RailLayout(
     totalCards: Int,
