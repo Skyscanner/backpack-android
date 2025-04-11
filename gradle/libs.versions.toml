@@ -11,7 +11,7 @@ androidSdkCommon = "31.8.2" # if the Gradle plugin version is X.Y.Z, then the li
 detekt = "1.23.8"
 lifecycle = "2.8.7"
 androidXJunit = "1.2.1"
-coroutines = "1.10.1"
+coroutines = "1.10.2"
 espresso = "3.6.1"
 kotlinPoet = "2.1.0"
 ktor = "3.1.2"
@@ -63,7 +63,7 @@ google-material = "com.google.android.material:material:1.12.0"
 google-maps = "com.google.android.gms:play-services-maps:19.1.0"
 google-mapsCompose = "com.google.maps.android:maps-compose:6.5.2"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
-google-guava = "com.google.guava:guava:33.4.0-jre"
+google-guava = "com.google.guava:guava:33.4.7-jre"
 
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoet" }
 square-kotlinPoetKsp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlinPoet" }
