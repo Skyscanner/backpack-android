@@ -105,7 +105,10 @@ internal fun BpkStackCardListImpl(
                                 icon = if (isExpanded) BpkIcon.ChevronUp else BpkIcon.ChevronDown,
                                 position = BpkButtonIconPosition.End,
                                 type = BpkButtonType.Link,
-                                onClick = { isExpanded = !isExpanded },
+                                onClick = {
+                                    isExpanded = !isExpanded
+                                    it.onExpansionChange?.invoke(isExpanded)
+                                },
                             )
                         }
                     }

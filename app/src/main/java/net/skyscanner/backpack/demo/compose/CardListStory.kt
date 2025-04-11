@@ -179,6 +179,7 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
     val notificationText = stringResource(R.string.card_list_section_header_click)
+    val notificationText2 = stringResource(R.string.card_list_on_list_expanded)
 
     Column(modifier) {
         BpkStackCardList(
@@ -190,6 +191,11 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
                 collapsedText = stringResource(R.string.card_list_show_less),
                 collapsedCount = 2,
                 expandedCount = 5,
+                onExpansionChange = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText2)
+                    }
+                }
             ),
             headerButton = BpkSectionHeaderButton(
                 text = stringResource(R.string.card_list_header_button_text),
