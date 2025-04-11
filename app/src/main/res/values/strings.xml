@@ -404,6 +404,7 @@
     <string name="card_list_add_item">Add item</string>
     <string name="card_list_show_more">Show more</string>
     <string name="card_list_show_less">Show less</string>
+    <string name="card_list_on_list_expanded">OnExpansionChange called!</string>
 
     <string name="shadow_status" translatable="false">Shadow: %1$s</string>
     <string name="on" translatable="false">On</string>

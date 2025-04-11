@@ -30,6 +30,7 @@ sealed class BpkStackCardAccessoryStyle {
         val expandedCount: Int,
         val expandText: String,
         val collapsedText: String,
+        val onExpansionChange: ((Boolean) -> Unit)? = null,
     ) : BpkStackCardAccessoryStyle()
     data class Button(val title: String, val icon: BpkIcon, val onClick: () -> Unit) : BpkStackCardAccessoryStyle()
 }
