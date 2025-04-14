@@ -27,9 +27,9 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 sealed class BpkStackCardAccessoryStyle {
     data class Expand(
         val collapsedCount: Int,
-        val expandedCount: Int,
         val expandText: String,
         val collapsedText: String,
+        val expandedCount: Int? = null,
         val onExpansionChange: ((Boolean) -> Unit)? = null,
     ) : BpkStackCardAccessoryStyle()
     data class Button(val title: String, val icon: BpkIcon, val onClick: () -> Unit) : BpkStackCardAccessoryStyle()

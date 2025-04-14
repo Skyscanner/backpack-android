@@ -56,16 +56,17 @@ internal fun BpkStackCardListImpl(
     var isExpanded by rememberSaveable { mutableStateOf(false) }
     val targetCount = when (accessoryStyle) {
         is BpkStackCardAccessoryStyle.Expand -> {
-            if (accessoryStyle.expandedCount < 0 || accessoryStyle.collapsedCount < 0) {
-                throw IllegalArgumentException("expandedCount/collapsedCount can not be negative")
+            if (totalCount < 0 || accessoryStyle.collapsedCount < 0) {
+                throw IllegalArgumentException("totalCount/collapsedCount cannot be negative")
             }
-            if (accessoryStyle.expandedCount < accessoryStyle.collapsedCount) {
-                throw IllegalArgumentException("expandedCount should be greater than collapsedCount")
+            val expandedCount = accessoryStyle.expandedCount ?: totalCount
+            if (expandedCount < accessoryStyle.collapsedCount) {
+                throw IllegalArgumentException("expandedCount cannot be smaller than collapsedCount")
             }
-            if (accessoryStyle.expandedCount <= MINIMUM_EXPANDED_COUNT) {
+            if (expandedCount <= MINIMUM_EXPANDED_COUNT) {
                 totalCount
             } else {
-                if (isExpanded) accessoryStyle.expandedCount else accessoryStyle.collapsedCount
+                if (isExpanded) expandedCount else accessoryStyle.collapsedCount
             }
         }
         else -> totalCount
@@ -92,15 +93,17 @@ internal fun BpkStackCardListImpl(
             }
         }
 
-        item {
-            accessoryStyle?.let {
-                when (it) {
-                    is BpkStackCardAccessoryStyle.Expand -> {
-                        if (it.expandedCount > MINIMUM_EXPANDED_COUNT) {
+        accessoryStyle?.let {
+            when (it) {
+                is BpkStackCardAccessoryStyle.Expand -> {
+                    val expandedCount = it.expandedCount ?: totalCount
+                    if (expandedCount > MINIMUM_EXPANDED_COUNT) {
+                        item(it.expandText) {
                             BpkButton(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(bottom = BpkSpacing.Base),
+                                    .padding(bottom = BpkSpacing.Base)
+                                    .animateItem(),
                                 text = if (isExpanded) it.collapsedText else it.expandText,
                                 icon = if (isExpanded) BpkIcon.ChevronUp else BpkIcon.ChevronDown,
                                 position = BpkButtonIconPosition.End,
@@ -112,13 +115,16 @@ internal fun BpkStackCardListImpl(
                             )
                         }
                     }
+                }
 
-                    is BpkStackCardAccessoryStyle.Button -> {
-                        if (headerButton == null) {
+                is BpkStackCardAccessoryStyle.Button -> {
+                    if (headerButton == null) {
+                        item(it.title) {
                             BpkButton(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(bottom = BpkSpacing.Base),
+                                    .padding(bottom = BpkSpacing.Base)
+                                    .animateItem(),
                                 text = it.title,
                                 type = BpkButtonType.Primary,
                                 position = BpkButtonIconPosition.End,

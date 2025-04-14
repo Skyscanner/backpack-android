@@ -124,7 +124,6 @@ BpkStackCardList(
         expandText = stringResource(R.string.card_list_show_more),
         collapsedText = stringResource(R.string.card_list_show_less),
         collapsedCount = 2,
-        expandedCount = 5
     ),
 ) { index ->
     // content
@@ -168,7 +167,6 @@ BpkStackCardList(
         expandText = stringResource(R.string.card_list_show_more),
         collapsedText = stringResource(R.string.card_list_show_less),
         collapsedCount = 2,
-        expandedCount = 5
     ),
     headerButton = BpkSectionHeaderButton(
         text = stringResource(R.string.card_list_header_button_text),

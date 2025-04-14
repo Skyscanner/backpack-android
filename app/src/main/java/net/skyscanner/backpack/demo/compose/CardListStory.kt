@@ -116,12 +116,11 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            totalCount = 5,
+            totalCount = 4,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
-                collapsedCount = 2,
-                expandedCount = 5,
+                collapsedCount = 4,
             ),
         ) { index -> StackItem(dataList[index]) }
     }
@@ -129,7 +128,7 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with expand accessory with less than minimum expanded count")
+@ComposeStory("Stack with expand accessory and expandedCount less than minimum")
 fun CardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkStackCardList(
@@ -140,7 +139,6 @@ fun CardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifi
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
                 collapsedCount = 1,
-                expandedCount = 2,
             ),
         ) { index -> StackItem(dataList[index]) }
     }
@@ -174,7 +172,7 @@ fun CardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with expand accessory and section header button")
+@ComposeStory("Stack with expand accessory and HeaderButton")
 fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
@@ -190,7 +188,6 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
                 collapsedCount = 2,
-                expandedCount = 5,
                 onExpansionChange = {
                     coroutineScope.launch {
                         floatingNotification.show(notificationText2)
@@ -211,7 +208,7 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with button accessory and section header button")
+@ComposeStory("Stack with button accessory and HeaderButton")
 fun CardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
