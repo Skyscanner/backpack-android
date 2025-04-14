@@ -116,11 +116,11 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
-            totalCount = 4,
+            totalCount = 5,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
-                collapsedCount = 4,
+                collapsedCount = 2,
             ),
         ) { index -> StackItem(dataList[index]) }
     }
