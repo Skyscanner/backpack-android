@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,44 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.cardlist.rail
+package net.skyscanner.backpack.compose.cardlist.stack
 
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.cardlist.rail.internal.BpkRailCardListImpl
+import net.skyscanner.backpack.compose.cardlist.stack.internal.BpkStackCardListImpl
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
+sealed class BpkStackCardAccessoryStyle {
+    data class Expand(
+        val collapsedCount: Int,
+        val expandText: String,
+        val collapsedText: String,
+        val expandedCount: Int? = null,
+        val onExpansionChange: ((Boolean) -> Unit)? = null,
+    ) : BpkStackCardAccessoryStyle()
+    data class Button(val title: String, val icon: BpkIcon, val onClick: () -> Unit) : BpkStackCardAccessoryStyle()
+}
+
 @Composable
-fun BpkRailCardList(
+fun BpkStackCardList(
     title: String,
-    totalCards: Int,
+    totalCount: Int,
     modifier: Modifier = Modifier,
     description: String? = null,
-    accessibilityHeaderTagEnabled: Boolean? = true,
+    accessoryStyle: BpkStackCardAccessoryStyle? = null,
     headerButton: BpkSectionHeaderButton? = null,
-    content: @Composable (LazyItemScope.(Int) -> Unit),
+    accessibilityHeaderTagEnabled: Boolean? = true,
+    content: @Composable ((Int) -> Unit),
 ) {
-    BpkRailCardListImpl(
+    BpkStackCardListImpl(
         title = title,
         description = description,
-        headerButton = headerButton,
-        totalCards = totalCards,
-        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
+        totalCount = totalCount,
         modifier = modifier,
+        accessoryStyle = accessoryStyle,
+        headerButton = headerButton,
+        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         content = content,
     )
 }
