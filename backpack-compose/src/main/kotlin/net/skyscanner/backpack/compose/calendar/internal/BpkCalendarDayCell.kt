@@ -39,8 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.semantics.SemanticsPropertyKey
-import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -62,9 +60,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
-
-val CircledKey = SemanticsPropertyKey<Boolean>("isCircled")
-var SemanticsPropertyReceiver.isCircled by CircledKey
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -90,7 +85,7 @@ internal fun BpkCalendarDayCell(
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )
-            .testTag(if (inactive) "inactive" else "active")
+            .testTag(checkDayCellStatus(inactive, model.info.highlighted))
             .semantics {
                 testTagsAsResourceId = true
                 if (model.stateDescription != null) {
@@ -98,7 +93,6 @@ internal fun BpkCalendarDayCell(
                 } else {
                     selected = selection != null && selection != Selection.Middle
                 }
-                isCircled = model.info.highlighted
             },
     ) {
         Box(
@@ -278,3 +272,19 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): String {
+    return when {
+        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE.tag
+        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED.tag
+        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED.tag
+        else -> CalendarDayCellTestTag.ACTIVE.tag
+    }
+}
+
+enum class CalendarDayCellTestTag(val tag: String) {
+    INACTIVE("inactive"),
+    INACTIVE_HIGHLIGHTED("inactive_highlighted"),
+    ACTIVE("active"),
+    ACTIVE_HIGHLIGHTED("active_highlighted"),
+}
