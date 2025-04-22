@@ -85,7 +85,7 @@ internal fun BpkCalendarDayCell(
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )
-            .testTag(if (inactive) "inactive" else "active")
+            .testTag(checkDayCellStatus(inactive, model.info.highlighted))
             .semantics {
                 testTagsAsResourceId = true
                 if (model.stateDescription != null) {
@@ -272,3 +272,19 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): String {
+    return when {
+        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE
+        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
+        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
+        else -> CalendarDayCellTestTag.ACTIVE
+    }.toString()
+}
+
+enum class CalendarDayCellTestTag {
+    INACTIVE,
+    INACTIVE_HIGHLIGHTED,
+    ACTIVE,
+    ACTIVE_HIGHLIGHTED,
+}
