@@ -39,8 +39,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.isEditable
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -61,6 +62,9 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
+
+val CircledKey = SemanticsPropertyKey<Boolean>("isCircled")
+var SemanticsPropertyReceiver.isCircled by CircledKey
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -94,7 +98,7 @@ internal fun BpkCalendarDayCell(
                 } else {
                     selected = selection != null && selection != Selection.Middle
                 }
-                isEditable = model.info.highlighted
+                isCircled = model.info.highlighted
             },
     ) {
         Box(
