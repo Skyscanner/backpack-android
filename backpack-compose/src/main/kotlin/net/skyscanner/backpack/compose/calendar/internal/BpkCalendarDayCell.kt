@@ -275,16 +275,16 @@ private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
 
 private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): String {
     return when {
-        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE.tag
-        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED.tag
-        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED.tag
-        else -> CalendarDayCellTestTag.ACTIVE.tag
-    }
+        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE
+        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
+        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
+        else -> CalendarDayCellTestTag.ACTIVE
+    }.toString()
 }
 
-enum class CalendarDayCellTestTag(val tag: String) {
-    INACTIVE("inactive"),
-    INACTIVE_HIGHLIGHTED("inactive_highlighted"),
-    ACTIVE("active"),
-    ACTIVE_HIGHLIGHTED("active_highlighted"),
+enum class CalendarDayCellTestTag {
+    INACTIVE,
+    INACTIVE_HIGHLIGHTED,
+    ACTIVE,
+    ACTIVE_HIGHLIGHTED,
 }
