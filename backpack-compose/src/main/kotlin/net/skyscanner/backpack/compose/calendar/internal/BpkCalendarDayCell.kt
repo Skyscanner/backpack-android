@@ -54,6 +54,7 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.calendar.CalendarDayCellTestTag
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall
 import net.skyscanner.backpack.compose.text.BpkText
@@ -280,11 +281,4 @@ private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): Strin
         !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
         else -> CalendarDayCellTestTag.ACTIVE
     }.toString()
-}
-
-enum class CalendarDayCellTestTag {
-    INACTIVE,
-    INACTIVE_HIGHLIGHTED,
-    ACTIVE,
-    ACTIVE_HIGHLIGHTED,
 }
