@@ -1,6 +1,6 @@
 package net.skyscanner.backpack.compose.calendar
 
-enum class CalendarDayCellTestTag {
+enum class BpkCalendarDayCellTestTag {
     INACTIVE,
     INACTIVE_HIGHLIGHTED,
     ACTIVE,

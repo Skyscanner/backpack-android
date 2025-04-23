@@ -54,7 +54,7 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.LocalContentColor
-import net.skyscanner.backpack.compose.calendar.CalendarDayCellTestTag
+import net.skyscanner.backpack.compose.calendar.BpkCalendarDayCellTestTag
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall
 import net.skyscanner.backpack.compose.text.BpkText
@@ -276,9 +276,9 @@ private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
 
 private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): String {
     return when {
-        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE
-        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
-        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
-        else -> CalendarDayCellTestTag.ACTIVE
+        inactive && !isHighlighted -> BpkCalendarDayCellTestTag.INACTIVE
+        inactive && isHighlighted -> BpkCalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
+        !inactive && isHighlighted -> BpkCalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
+        else -> BpkCalendarDayCellTestTag.ACTIVE
     }.toString()
 }
