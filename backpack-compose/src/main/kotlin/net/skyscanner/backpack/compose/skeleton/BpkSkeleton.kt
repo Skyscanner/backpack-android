@@ -28,11 +28,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -42,8 +42,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -102,6 +102,10 @@ enum class BpkSkeletonCornerType {
     Rounded,
 }
 
+enum class BpkShimmerSize {
+    Large, Small
+}
+
 private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
     if (skeletonHeightSize === BpkSkeletonHeightSizeType.Custom) {
         return this
@@ -127,11 +131,19 @@ private fun shimmerPrimaryColor(): Color = BpkSkeletonColors.shimmerStartEnd
 private fun shimmerSecondaryColor(): Color = BpkSkeletonColors.shimmerCenter
 
 @Composable
-private fun shimmerAnimation(): State<Dp> {
+private fun shimmerAnimation(width: Dp, size: BpkShimmerSize): State<Dp> {
     val infiniteTransition = rememberInfiniteTransition()
     return infiniteTransition.animateValue(
-        initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
-        animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000, delayMillis = 200, easing = LinearEasing)),
+        initialValue = -width,
+        targetValue = width,
+        typeConverter = Dp.VectorConverter,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = if (size == BpkShimmerSize.Small) 300 else 1000,
+                delayMillis = 200,
+                easing = LinearEasing,
+            ),
+        ),
     )
 }
 
@@ -154,9 +166,36 @@ private fun ShimmerBox(
 }
 
 /**
+ * Shimmer Overlay
+ * @param modifier To set some common attrs.
+ * @param shimmerSize To get the right animation for the size of the component.
+ * @param content Child component.
+ */
+@Composable
+fun BpkShimmerOverlay(
+    modifier: Modifier = Modifier,
+    shimmerSize: BpkShimmerSize = BpkShimmerSize.Large,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    BoxWithConstraints(modifier = modifier) {
+        content()
+        val offsetX by shimmerAnimation(maxWidth, shimmerSize)
+        ShimmerBox(
+            modifier = Modifier
+                .fillMaxSize()
+                .clipToBounds()
+                .graphicsLayer {
+                    translationX = offsetX.toPx()
+                    scaleX = if (shimmerSize == BpkShimmerSize.Small) 2f else 1f
+                },
+        )
+    }
+}
+
+/**
  * Image skeleton.
  * @param modifier To set some common attrs such as width, height.
- * @param cornerType To decode if it is square corner or rounded corner.
+ * @param cornerType To decide if it is square corner or rounded corner.
  */
 @Composable
 fun BpkImageSkeleton(
@@ -247,26 +286,4 @@ fun BpkCircleSkeleton(
             .size(diameter, diameter)
             .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2))),
     )
-}
-
-/**
- * Shimmer Overlay
- * @param modifier To set some common attrs.
- * @param content Child component.
- */
-@Composable
-fun BpkShimmerOverlay(
-    modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit,
-) {
-    val offsetX by shimmerAnimation()
-    Box(modifier = modifier) {
-        content()
-        ShimmerBox(
-            modifier = Modifier
-                .fillMaxSize()
-                .clipToBounds()
-                .offset { IntOffset(offsetX.roundToPx(), 0) },
-        )
-    }
 }

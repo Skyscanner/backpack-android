@@ -18,6 +18,11 @@
 
 package net.skyscanner.backpack.compose.calendar.internal
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,6 +32,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -57,6 +63,10 @@ import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.calendar.BpkCalendarDayCellTestTag
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall
+import net.skyscanner.backpack.compose.skeleton.BpkHeadlineSkeleton
+import net.skyscanner.backpack.compose.skeleton.BpkShimmerOverlay
+import net.skyscanner.backpack.compose.skeleton.BpkShimmerSize
+import net.skyscanner.backpack.compose.skeleton.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -134,33 +144,66 @@ internal fun BpkCalendarDayCell(
         }
 
         if (!inactive) {
-            when (val cellLabel = model.info.label) {
-                is CellLabel.Text -> {
-                    if (cellLabel.text.isNotBlank()) {
-                        BpkText(
-                            text = cellLabel.text,
-                            modifier = Modifier
-                                .padding(horizontal = BpkSpacing.Sm),
-                            overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Center,
-                            maxLines = 2,
-                            style = BpkTheme.typography.caption,
-                            color = labelColor(status, style),
-                        )
-                    }
-                }
-
-                is CellLabel.Icon -> {
-                    cellLabel.resId.let { resId ->
-                        BpkIcon.findBySmall(resId)?.let { bpkIcon ->
-                            val iconTint = cellLabel.tint
-                                ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
-                                ?.let { Color(it) } ?: LocalContentColor.current
-                            BpkIcon(
-                                icon = bpkIcon,
-                                tint = iconTint,
-                                contentDescription = null,
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = BpkSpacing.Base),
+            ) {
+                AnimatedContent(
+                    model.info.label,
+                    label = "AnimatedContent ${model.date}",
+                    contentAlignment = Alignment.Center,
+                    transitionSpec = {
+                        fadeIn(animationSpec = tween(220, delayMillis = 200))
+                            .togetherWith(
+                                fadeOut(animationSpec = tween(120)),
                             )
+                    },
+                    modifier = Modifier.matchParentSize(),
+                ) { label ->
+                    when (label) {
+                        is CellLabel.Text -> {
+                            if (label.text.isNotBlank()) {
+                                BpkText(
+                                    text = label.text,
+                                    modifier = Modifier,
+                                    overflow = TextOverflow.Ellipsis,
+                                    maxLines = 2,
+                                    textAlign = TextAlign.Center,
+                                    style = BpkTheme.typography.caption,
+                                    color = labelColor(status, style),
+                                )
+                            }
+                        }
+
+                        is CellLabel.Icon -> {
+                            label.resId.let { resId ->
+                                BpkIcon.findBySmall(resId)?.let { bpkIcon ->
+                                    val iconTint = label.tint
+                                        ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
+                                        ?.let { Color(it) } ?: LocalContentColor.current
+                                    BpkIcon(
+                                        icon = bpkIcon,
+                                        tint = iconTint,
+                                        contentDescription = null,
+                                        modifier = Modifier,
+                                    )
+                                }
+                            }
+                        }
+
+                        is CellLabel.Loading -> {
+                            BpkShimmerOverlay(
+                                shimmerSize = BpkShimmerSize.Small,
+                            ) {
+                                BpkHeadlineSkeleton(
+                                    skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
+                                    modifier = Modifier
+                                        .size(width = BpkSpacing.Lg, height = 12.dp)
+                                        .align(Alignment.Center),
+                                )
+                            }
                         }
                     }
                 }

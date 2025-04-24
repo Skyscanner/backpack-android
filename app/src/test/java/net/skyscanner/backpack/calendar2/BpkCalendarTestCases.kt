@@ -58,7 +58,11 @@ object BpkCalendarTestCases {
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
                     CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£12"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
-                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000000000000"), status = CellStatus.Positive),
+                    CellInfo(
+                        style = CellStatusStyle.Label,
+                        label = CellLabel.Text("£900000000000000"),
+                        status = CellStatus.Positive,
+                    ),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
                     CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
@@ -68,7 +72,22 @@ object BpkCalendarTestCases {
                     ),
             ),
         )
-
+        val Loading = DefaultRange.copy(
+            cellsInfo = mapOf(
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+            ),
+        )
         val Past = DefaultRange.copy(
             range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
         )

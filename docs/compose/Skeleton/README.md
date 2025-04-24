@@ -17,6 +17,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 ## Usage
 Skeleton components is built for an composition with shimmer animation. It is often used for a loading screen or loading cards.
 There is a shimmer overlay which is to wrap the whole composition.
+There are two shimmer animations, one for most components (Large, default) and one specially for small components (Small).
 There are 4 base elements with pre-selected size or custom size support: image skeleton, circle skeleton, headline skeleton and body text skeleton,
 they represent the real block as their name in a composition.
 You should put the whole composition into a shimmer overlay to add shimmer animation.

@@ -99,6 +99,12 @@ fun CalendarMultiSelection(modifier: Modifier = Modifier) =
     CalendarDemo(CalendarStoryType.MultiSelection, modifier)
 
 @Composable
+@Calendar2Component
+@ComposeStory("Loading")
+fun CalendarLoading(modifier: Modifier = Modifier) =
+    CalendarDemo(CalendarStoryType.Loading, modifier)
+
+@Composable
 private fun CalendarDemo(
     type: CalendarStoryType,
     modifier: Modifier = Modifier,
