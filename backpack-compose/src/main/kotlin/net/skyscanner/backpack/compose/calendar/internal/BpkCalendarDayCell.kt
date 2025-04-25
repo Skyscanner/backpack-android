@@ -150,14 +150,15 @@ internal fun BpkCalendarDayCell(
                     .fillMaxWidth()
                     .heightIn(min = BpkSpacing.Base),
             ) {
+                val animationDelay = BpkShimmerSize.Small.durationMillis * 2
                 AnimatedContent(
                     model.info.label,
                     label = "AnimatedContent ${model.date}",
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
-                        fadeIn(animationSpec = tween(220, delayMillis = 200))
+                        fadeIn(animationSpec = tween(200, delayMillis = animationDelay))
                             .togetherWith(
-                                fadeOut(animationSpec = tween(120)),
+                                fadeOut(animationSpec = tween(200, delayMillis = animationDelay)),
                             )
                     },
                     modifier = Modifier.matchParentSize(),
@@ -200,7 +201,8 @@ internal fun BpkCalendarDayCell(
                                 BpkHeadlineSkeleton(
                                     skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
                                     modifier = Modifier
-                                        .size(width = BpkSpacing.Lg, height = 12.dp)
+                                        .semantics { contentDescription = label.contentDescription }
+                                        .size(width = 28.dp, height = 12.dp)
                                         .align(Alignment.Center),
                                 )
                             }

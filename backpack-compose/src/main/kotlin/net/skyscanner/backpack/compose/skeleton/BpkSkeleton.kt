@@ -102,8 +102,11 @@ enum class BpkSkeletonCornerType {
     Rounded,
 }
 
-enum class BpkShimmerSize {
-    Large, Small
+enum class BpkShimmerSize(
+    val durationMillis: Int,
+    val delayMillis: Int,
+) {
+    Large(1000, 200), Small(300, 0)
 }
 
 private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
@@ -139,8 +142,8 @@ private fun shimmerAnimation(width: Dp, size: BpkShimmerSize): State<Dp> {
         typeConverter = Dp.VectorConverter,
         animationSpec = infiniteRepeatable(
             animation = tween(
-                durationMillis = if (size == BpkShimmerSize.Small) 300 else 1000,
-                delayMillis = 200,
+                durationMillis = size.durationMillis,
+                delayMillis = size.delayMillis,
                 easing = LinearEasing,
             ),
         ),

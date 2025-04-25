@@ -21,9 +21,14 @@ package net.skyscanner.backpack.demo.compose
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
@@ -101,8 +106,14 @@ fun CalendarMultiSelection(modifier: Modifier = Modifier) =
 @Composable
 @Calendar2Component
 @ComposeStory("Loading")
-fun CalendarLoading(modifier: Modifier = Modifier) =
-    CalendarDemo(CalendarStoryType.Loading, modifier)
+fun CalendarLoading(modifier: Modifier = Modifier) {
+    var type by remember { mutableStateOf(CalendarStoryType.Loading) }
+    CalendarDemo(type, modifier)
+    LaunchedEffect(Unit) {
+        delay(10)
+        type = CalendarStoryType.WithIconAsLabels
+    }
+}
 
 @Composable
 private fun CalendarDemo(
