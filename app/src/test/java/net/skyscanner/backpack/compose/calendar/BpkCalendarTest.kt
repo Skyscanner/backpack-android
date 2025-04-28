@@ -172,6 +172,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
         snap(controller)
     }
 
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun loading() {
+        val controller = createController(BpkCalendarTestCases.Params.Loading)
+        snap(controller)
+    }
+
     private fun snap(controller: BpkCalendarController) =
         snap(padding = 0.dp) {
             BpkCalendar(controller = controller)
