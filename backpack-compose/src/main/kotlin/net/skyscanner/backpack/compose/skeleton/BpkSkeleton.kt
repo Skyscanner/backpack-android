@@ -28,7 +28,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -102,6 +101,9 @@ enum class BpkSkeletonCornerType {
     Rounded,
 }
 
+/**
+ * Contains animation variables used for the shimmer effect for a given size of BpkSkeleton
+ */
 enum class BpkShimmerSize(
     val durationMillis: Int,
     val delayMillis: Int,
@@ -134,12 +136,12 @@ private fun shimmerPrimaryColor(): Color = BpkSkeletonColors.shimmerStartEnd
 private fun shimmerSecondaryColor(): Color = BpkSkeletonColors.shimmerCenter
 
 @Composable
-private fun shimmerAnimation(width: Dp, size: BpkShimmerSize): State<Dp> {
+private fun shimmerAnimation(size: BpkShimmerSize): State<Float> {
     val infiniteTransition = rememberInfiniteTransition()
     return infiniteTransition.animateValue(
-        initialValue = -width,
-        targetValue = width,
-        typeConverter = Dp.VectorConverter,
+        initialValue = -1f,
+        targetValue = 1f,
+        typeConverter = Float.VectorConverter,
         animationSpec = infiniteRepeatable(
             animation = tween(
                 durationMillis = size.durationMillis,
@@ -180,15 +182,15 @@ fun BpkShimmerOverlay(
     shimmerSize: BpkShimmerSize = BpkShimmerSize.Large,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    BoxWithConstraints(modifier = modifier) {
+    Box(modifier = modifier) {
         content()
-        val offsetX by shimmerAnimation(maxWidth, shimmerSize)
+        val offsetX by shimmerAnimation(shimmerSize)
         ShimmerBox(
             modifier = Modifier
                 .fillMaxSize()
                 .clipToBounds()
                 .graphicsLayer {
-                    translationX = offsetX.toPx()
+                    translationX = size.width * offsetX
                     scaleX = if (shimmerSize == BpkShimmerSize.Small) 2f else 1f
                 },
         )
