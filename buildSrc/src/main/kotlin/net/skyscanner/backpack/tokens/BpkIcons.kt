@@ -38,7 +38,6 @@ data class BpkIcon(
     enum class Type {
         Sm,
         Lg,
-        Xl,
     }
 
     sealed class Parser : BpkParser<List<File>, BpkIcons> {
@@ -69,7 +68,6 @@ data class BpkIcon(
                     val type = when (folder.name) {
                         "lg" -> Type.Lg
                         "sm" -> Type.Sm
-                        "xl" -> Type.Xl
                         else -> throw IllegalStateException("Unknown icon type=${folder.name}")
                     }
                     folder.listFiles()!!.map { file ->
