@@ -105,10 +105,11 @@ enum class BpkSkeletonCornerType {
  * Contains animation variables used for the shimmer effect for a given size of BpkSkeleton
  */
 enum class BpkShimmerSize(
-    val durationMillis: Int,
-    val delayMillis: Int,
+    internal val durationMillis: Int,
+    internal val delayMillis: Int,
 ) {
-    Large(1000, 200), Small(300, 10)
+    Large(durationMillis = 1000, delayMillis = 200),
+    Small(durationMillis = 300, delayMillis = 10),
 }
 
 private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
