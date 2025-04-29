@@ -47,6 +47,7 @@ enum class CalendarStoryType {
     PreselectedRange,
     YearLabelInMonthHeader,
     MultiSelection,
+    Loading,
     ;
 
     companion object {
@@ -183,6 +184,22 @@ enum class CalendarStoryType {
                         ),
                     ),
                 )
+
+                Loading ->
+                    CalendarParams(
+                        now = now,
+                        range = range,
+                        selectionMode = rangeSelectionModeWithAccessibilityLabels(),
+                        cellsInfo = range
+                            .toIterable()
+                            .associateWith {
+                                CellInfo(
+                                    label = CellLabel.Loading("Loading"),
+                                    status = CellStatus.Neutral,
+                                    style = CellStatusStyle.Label,
+                                )
+                            },
+                    )
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(
