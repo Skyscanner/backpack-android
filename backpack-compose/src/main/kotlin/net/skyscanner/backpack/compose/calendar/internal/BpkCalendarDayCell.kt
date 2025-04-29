@@ -198,11 +198,12 @@ internal fun BpkCalendarDayCell(
                             BpkShimmerOverlay(
                                 shimmerSize = BpkShimmerSize.Small,
                             ) {
+                                val height = BpkSpacing.Md + BpkSpacing.Sm
                                 BpkHeadlineSkeleton(
                                     skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
                                     modifier = Modifier
                                         .semantics { contentDescription = label.contentDescription }
-                                        .size(width = 28.dp, height = 12.dp)
+                                        .size(width = BpkSpacing.Xl, height = height)
                                         .align(Alignment.Center),
                                 )
                             }

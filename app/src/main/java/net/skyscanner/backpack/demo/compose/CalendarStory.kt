@@ -110,7 +110,7 @@ fun CalendarLoading(modifier: Modifier = Modifier) {
     var type by remember { mutableStateOf(CalendarStoryType.Loading) }
     CalendarDemo(type, modifier)
     LaunchedEffect(Unit) {
-        delay(10)
+        delay(1000)
         type = CalendarStoryType.WithIconAsLabels
     }
 }
