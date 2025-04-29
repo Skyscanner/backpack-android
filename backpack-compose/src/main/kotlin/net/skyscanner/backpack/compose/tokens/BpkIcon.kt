@@ -316,6 +316,14 @@ public val BpkIcon.Companion.BaggageGeneric: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.BaggagePersonalItem: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-personal-item",
+        small = R.drawable.bpk_baggage_personal_item_sm,
+        large = R.drawable.bpk_baggage_personal_item,
+    )
+)
+
 public val BpkIcon.Companion.BaggageRemove: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "baggage--remove",
@@ -481,6 +489,14 @@ public val BpkIcon.Companion.Chauffeur: BpkIcon by Delegates.singleton(
         name = "chauffeur",
         small = R.drawable.bpk_chauffeur_sm,
         large = R.drawable.bpk_chauffeur,
+    )
+)
+
+public val BpkIcon.Companion.Check: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "check",
+        small = R.drawable.bpk_check_sm,
+        large = R.drawable.bpk_check_sm,
     )
 )
 
@@ -2274,6 +2290,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.BaggageCheckedNotIncluded,
         BpkIcon.BaggageCross,
         BpkIcon.BaggageGeneric,
+        BpkIcon.BaggagePersonalItem,
         BpkIcon.BaggageRemove,
         BpkIcon.BaggageTick,
         BpkIcon.Bar,
@@ -2295,6 +2312,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.CenterLocation,
         BpkIcon.Chart,
         BpkIcon.Chauffeur,
+        BpkIcon.Check,
         BpkIcon.ChevronDown,
         BpkIcon.ChevronLeft,
         BpkIcon.ChevronRight,
