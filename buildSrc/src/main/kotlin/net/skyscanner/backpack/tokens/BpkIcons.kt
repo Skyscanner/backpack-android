@@ -68,7 +68,7 @@ data class BpkIcon(
                     val type = when (folder.name) {
                         "lg" -> Type.Lg
                         "sm" -> Type.Sm
-                        else -> throw IllegalStateException("Unknown icon type=${folder.name}")
+                        else -> throw IllegalStateException("Unknown icon type")
                     }
                     folder.listFiles()!!.map { file ->
                         val stream = ByteArrayOutputStream()
