@@ -156,7 +156,7 @@ internal fun BpkCalendarDayCell(
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
                         val delay = if (initialState is CellLabel.Loading) {
-                            BpkShimmerSize.Small.durationMillis * 2 // We want to show the shimmer at least twice
+                            (BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis) * 2 // We want to show the shimmer at least twice
                         } else {
                             0
                         }
