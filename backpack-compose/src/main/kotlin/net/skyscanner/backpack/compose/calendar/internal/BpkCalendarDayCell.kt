@@ -150,15 +150,19 @@ internal fun BpkCalendarDayCell(
                     .fillMaxWidth()
                     .heightIn(min = BpkSpacing.Base),
             ) {
-                val animationDelay = BpkShimmerSize.Small.durationMillis * 2
                 AnimatedContent(
                     model.info.label,
                     label = "AnimatedContent ${model.date}",
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
-                        fadeIn(animationSpec = tween(200, delayMillis = animationDelay))
+                        val delay = if (initialState is CellLabel.Loading) {
+                            BpkShimmerSize.Small.durationMillis * 2 // We want to show the shimmer at least twice
+                        } else {
+                            0
+                        }
+                        fadeIn(animationSpec = tween(200, delayMillis = delay))
                             .togetherWith(
-                                fadeOut(animationSpec = tween(200, delayMillis = animationDelay)),
+                                fadeOut(animationSpec = tween(200, delayMillis = delay)),
                             )
                     },
                     modifier = Modifier.matchParentSize(),

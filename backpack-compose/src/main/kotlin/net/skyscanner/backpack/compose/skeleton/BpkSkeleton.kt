@@ -109,7 +109,7 @@ enum class BpkShimmerSize(
     internal val delayMillis: Int,
 ) {
     Large(durationMillis = 1000, delayMillis = 200),
-    Small(durationMillis = 300, delayMillis = 10),
+    Small(durationMillis = 300, delayMillis = 800),
 }
 
 private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
