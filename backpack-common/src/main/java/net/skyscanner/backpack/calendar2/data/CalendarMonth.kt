@@ -59,7 +59,7 @@ internal inline fun CalendarMonth(
     val nextMonth = yearMonth.nextMonth()
     val cells = mutableListOf<CalendarCell>()
     cells += CalendarCell.Header(
-        title = MonthTitle(yearMonth, monthsFormatter, locale),
+        title = MonthTitle(yearMonth, monthsFormatter),
         yearMonth = yearMonth,
         monthSelectionMode = monthSelectionMode,
         calendarSelectionMode = calendarSelectionMode,
@@ -89,12 +89,13 @@ internal inline fun CalendarMonth(
     return CalendarMonth(yearMonth = yearMonth, cells = cells)
 }
 
-@Suppress("DEPRECATION")
-internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, locale: Locale): String {
+internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat): String {
     val date = Date(
         yearMonth.year - 1900,
         yearMonth.monthValue - 1,
-        2, // Lock the formatter date to 2nd, so it accounts for -12h tz and the month is predictable
+        2,
     )
-    return formatter.format(date).capitalize(locale)
+    return formatter.format(date)
+
+    // fixed functionality to return the month name in the correct locale
 }
