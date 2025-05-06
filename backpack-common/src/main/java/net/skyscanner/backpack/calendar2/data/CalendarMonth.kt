@@ -31,6 +31,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 
@@ -90,12 +91,7 @@ internal inline fun CalendarMonth(
 }
 
 internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat): String {
-    val date = Date(
-        yearMonth.year - 1900,
-        yearMonth.monthValue - 1,
-        2,
-    )
+    val localDate = LocalDate.of(yearMonth.year, yearMonth.monthValue, 2)
+    val date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
     return formatter.format(date)
-
-    // fixed functionality to return the month name in the correct locale
 }
