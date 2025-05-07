@@ -123,6 +123,7 @@
     <string name="toggle_disabled_checked">Disabled Checked</string>
     <string name="toggle_custom_title">Custom</string>
     <string name="toggle_custom_subtitle">Content</string>
+    <string name="toggle_long_text">Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long</string>
 
     <string name="panel_default">Default</string>
     <string name="panel_no_padding">No padding</string>

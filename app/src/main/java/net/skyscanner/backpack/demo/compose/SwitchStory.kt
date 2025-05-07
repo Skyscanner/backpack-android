@@ -27,8 +27,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -51,6 +55,12 @@ fun SwitchStory(modifier: Modifier = Modifier) {
 
         DisabledUncheckedSwitchExample()
         DisabledCheckedSwitchExample()
+
+        LongTextNoTruncationSwitchExample()
+        LongTextWithTopSwitchAlignmentSwitchExample()
+        LongTextWithTruncationSwitchExample()
+
+        AnnotatedStringSwitchExample()
         CustomContentSwitchExample()
     }
 }
@@ -96,6 +106,63 @@ internal fun DisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
         enabled = false,
         checked = true,
         onCheckedChange = null,
+    )
+}
+
+@Composable
+internal fun LongTextNoTruncationSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_long_text),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        shouldTruncate = false,
+    )
+}
+
+@Composable
+internal fun LongTextWithTopSwitchAlignmentSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_long_text),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        switchAlignment = Alignment.Top,
+    )
+}
+
+@Composable
+internal fun LongTextWithTruncationSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_long_text),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        shouldTruncate = true,
+    )
+}
+
+@Composable
+internal fun AnnotatedStringSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = buildAnnotatedString {
+            append(stringResource(R.string.toggle_long_text))
+            withStyle(
+                style = SpanStyle(
+                    color = BpkTheme.colors.textLink,
+                    fontFamily = BpkTheme.typography.bodyDefault.fontFamily,
+                ),
+            ) {
+                append(" styled text")
+            }
+        },
+        checked = checked,
+        onCheckedChange = { checked = it },
     )
 }
 

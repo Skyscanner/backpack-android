@@ -22,6 +22,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
@@ -41,9 +42,12 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 
@@ -54,6 +58,8 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    shouldTruncate: Boolean = false,
+    switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkSwitch(
@@ -61,8 +67,45 @@ fun BpkSwitch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
+        switchAlignment = switchAlignment,
         interactionSource = interactionSource,
-        content = { BpkText(text) },
+        content = {
+            BpkText(
+                modifier = Modifier.weight(1f),
+                text = text,
+                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
+    )
+}
+
+@Composable
+fun BpkSwitch(
+    text: AnnotatedString,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shouldTruncate: Boolean = false,
+    switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    BpkSwitch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        switchAlignment = switchAlignment,
+        interactionSource = interactionSource,
+        content = {
+            BpkText(
+                modifier = Modifier.weight(1f),
+                text = text,
+                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
     )
 }
 
@@ -72,6 +115,7 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
@@ -105,6 +149,7 @@ fun BpkSwitch(
         )
 
         BpkSwitchImpl(
+            modifier = Modifier.align(switchAlignment).padding(start = BpkSpacing.Base),
             checked = checked,
             onCheckedChange = onCheckedChange,
             enabled = enabled,
