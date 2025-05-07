@@ -91,6 +91,7 @@ data class CalendarParams(
             val startSelectionHint: String? = null,
             val noSelectionState: String? = null,
             val startSelectionState: String? = null,
+            val stateDescription: String? = null,
         ) : SelectionMode
 
         /**
@@ -104,6 +105,7 @@ data class CalendarParams(
             val startAndEndSelectionState: String? = null,
             val endSelectionState: String? = null,
             val betweenSelectionState: String? = null,
+            val stateDescription: String? = null,
         ) : SelectionMode
     }
 
@@ -142,6 +144,7 @@ data class CellInfo(
     val highlighted: Boolean = false,
     val label: CellLabel = CellLabel.Text(""), // Default is empty text
     val style: CellStatusStyle = CellStatusStyle.Label,
+    val contentDescription: String = "",
 ) : Serializable {
 
     internal companion object {

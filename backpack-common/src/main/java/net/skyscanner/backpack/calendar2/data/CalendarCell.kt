@@ -102,7 +102,7 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
-    contentDescription = date.format(params.dateContentDescriptionFormatter),
+    contentDescription = params.cellsInfo[date]?.let { date.format(params.dateContentDescriptionFormatter) + it.contentDescription } ?: date.format(params.dateContentDescriptionFormatter),
     stateDescription = stateDescription(date, params.selectionMode, selection),
     onClickLabel = onClickLabel(date, params.selectionMode, selection),
     text = buildSpannedString {
@@ -146,17 +146,20 @@ private fun stateDescription(
 ): String? = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> when (selection) {
         is CalendarSelection.None -> selectionMode.noSelectionState
-        is CalendarSelection.Single ->
-            when (selection.date) {
-                date -> selectionMode.startSelectionState
+        is CalendarSelection.Single -> {
+            when {
+                selection.date == date && selectionMode.stateDescription != null -> selectionMode.stateDescription
+                selection.date == date -> selectionMode.startSelectionState
                 else -> null
             }
+        }
         else -> null
     }
 
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.Dates ->
             when {
+                selection.start == date && selectionMode.stateDescription != null -> selectionMode.stateDescription
                 selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
                 selection.start == date && selection.end == null -> selectionMode.startSelectionState
                 selection.start == date && selection.end != null -> selectionMode.startSelectionState
