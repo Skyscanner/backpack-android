@@ -27,28 +27,7 @@ import net.skyscanner.backpack.compose.tokens.Picture
 import net.skyscanner.backpack.compose.utils.invisibleSemantic
 
 @Composable
-fun BpkImageGalleryPreview(
-    type: BpkImageGalleryPreviewType,
-    modifier: Modifier = Modifier,
-) {
-    when (type) {
-        is BpkImageGalleryPreviewType.Default -> BpkImageGalleryPreviewDefault(
-            image = type.image,
-            buttonText = type.buttonText,
-            onButtonClicked = type.onButtonClicked,
-            modifier = modifier,
-        )
-        is BpkImageGalleryPreviewType.Hero -> BpkImageGalleryPreviewHero(
-            state = type.state,
-            modifier = modifier,
-            onImageClicked = type.onImageClicked,
-            content = type.content,
-        )
-    }
-}
-
-@Composable
-internal fun BpkImageGalleryPreviewDefault(
+fun BpkImageGalleryPreviewDefault(
     image: BpkImageGalleryImage,
     buttonText: String,
     onButtonClicked: () -> Unit,
@@ -74,7 +53,7 @@ internal fun BpkImageGalleryPreviewDefault(
 }
 
 @Composable
-internal fun BpkImageGalleryPreviewHero(
+fun BpkImageGalleryPreviewHero(
     state: BpkCarouselState,
     modifier: Modifier = Modifier,
     onImageClicked: ((Int) -> Unit)? = null,
@@ -114,17 +93,3 @@ internal fun BpkImageGalleryPreviewHero(
 }
 
 private val ImageGalleryPreviewVerticalSpacing = 48.dp
-
-sealed interface BpkImageGalleryPreviewType {
-    data class Default(
-        val image: BpkImageGalleryImage,
-        val buttonText: String,
-        val onButtonClicked: () -> Unit,
-    ) : BpkImageGalleryPreviewType
-
-    data class Hero(
-        val state: BpkCarouselState,
-        val onImageClicked: ((Int) -> Unit)? = null,
-        val content: @Composable (BoxScope.(Int) -> Unit),
-    ) : BpkImageGalleryPreviewType
-}

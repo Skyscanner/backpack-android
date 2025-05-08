@@ -41,8 +41,8 @@ import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipGrid
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageCategory
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageGrid
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreview
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewType
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewDefault
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewHero
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGallerySlideshow
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.demo.R
@@ -55,12 +55,10 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun ImageGalleryPreviewDefaultStory(
     modifier: Modifier = Modifier,
 ) {
-    BpkImageGalleryPreview(
-        BpkImageGalleryPreviewType.Default(
-            image = ImageGalleryData.slideshowImages(LocalContext.current)[0],
-            buttonText = stringResource(R.string.image_gallery_preview_button),
-            onButtonClicked = { Log.d("BpkImageGalleryPreview", "Click on Gallery preview") },
-        ),
+    BpkImageGalleryPreviewDefault(
+        image = ImageGalleryData.slideshowImages(LocalContext.current)[0],
+        buttonText = stringResource(R.string.image_gallery_preview_button),
+        onButtonClicked = { Log.d("BpkImageGalleryPreview", "Click on Gallery preview") },
     )
 }
 
@@ -74,25 +72,24 @@ fun ImageGalleryPreviewHeroStory(
         totalImages = 4,
     )
 
-    BpkImageGalleryPreview(
-        BpkImageGalleryPreviewType.Hero(
-            state = pagerState,
-        ) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(
-                    id = when (it) {
-                        0 -> R.drawable.carousel_placeholder_1
-                        1 -> R.drawable.carousel_placeholder_2
-                        2 -> R.drawable.carousel_placeholder_3
-                        3 -> R.drawable.carousel_placeholder_4
-                        else -> R.drawable.carousel_placeholder_1
-                    },
-                ),
-                contentDescription = "Image $it",
-                contentScale = ContentScale.Crop,
-            )
-        })
+    BpkImageGalleryPreviewHero(
+        state = pagerState,
+    ) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(
+                id = when (it) {
+                    0 -> R.drawable.carousel_placeholder_1
+                    1 -> R.drawable.carousel_placeholder_2
+                    2 -> R.drawable.carousel_placeholder_3
+                    3 -> R.drawable.carousel_placeholder_4
+                    else -> R.drawable.carousel_placeholder_1
+                },
+            ),
+            contentDescription = "Image $it",
+            contentScale = ContentScale.Crop,
+        )
+    }
 }
 
 @Composable
