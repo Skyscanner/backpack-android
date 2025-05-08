@@ -22,7 +22,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
@@ -70,12 +71,15 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            BpkText(
-                modifier = Modifier.weight(1f),
-                text = text,
-                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis,
-            )
+            takeIf { text.isNotEmpty() }?.let {
+                BpkText(
+                    modifier = Modifier.weight(1f),
+                    text = text,
+                    maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.width(BpkSpacing.Base))
+            }
         },
     )
 }
@@ -99,12 +103,15 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            BpkText(
-                modifier = Modifier.weight(1f),
-                text = text,
-                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis,
-            )
+            takeIf { text.isNotEmpty() }?.let {
+                BpkText(
+                    modifier = Modifier.weight(1f),
+                    text = text,
+                    maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.width(BpkSpacing.Base))
+            }
         },
     )
 }
@@ -132,7 +139,8 @@ fun BpkSwitch(
                     onValueChange = onCheckedChange!!,
                     enabled = enabled,
                 )
-            }.applyIf(onCheckedChange == null) {
+            }
+            .applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {
                     role = Role.Switch
                     toggleableState = ToggleableState(checked)
@@ -149,7 +157,7 @@ fun BpkSwitch(
         )
 
         BpkSwitchImpl(
-            modifier = Modifier.align(switchAlignment).padding(start = BpkSpacing.Base),
+            modifier = Modifier.align(switchAlignment),
             checked = checked,
             onCheckedChange = onCheckedChange,
             enabled = enabled,
