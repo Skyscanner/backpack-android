@@ -130,6 +130,7 @@ internal fun LongTextWithTopSwitchAlignmentSwitchExample(modifier: Modifier = Mo
         checked = checked,
         onCheckedChange = { checked = it },
         switchAlignment = Alignment.Top,
+        shouldTruncate = false,
     )
 }
 
@@ -163,6 +164,7 @@ internal fun AnnotatedStringSwitchExample(modifier: Modifier = Modifier) {
         },
         checked = checked,
         onCheckedChange = { checked = it },
+        shouldTruncate = false,
     )
 }
 

@@ -58,7 +58,7 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shouldTruncate: Boolean = false,
+    shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -87,7 +87,7 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shouldTruncate: Boolean = false,
+    shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
