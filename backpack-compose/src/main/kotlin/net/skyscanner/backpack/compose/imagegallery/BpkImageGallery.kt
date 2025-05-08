@@ -18,15 +18,26 @@
 
 package net.skyscanner.backpack.compose.imagegallery
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
+import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGalleryGridModal
 import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGallerySlideshow
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Picture
 
 @Composable
 fun BpkImageGallerySlideshow(
@@ -125,6 +136,32 @@ fun BpkImageGalleryImageGrid(
         },
         state = state,
     )
+}
+
+@Composable
+fun BpkImageGalleryPreview(
+    image: BpkImageGalleryImage,
+    buttonText: String,
+    onButtonClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier
+        .aspectRatio(1.73f),
+    ) {
+        image.content(image.contentDescription(), ContentScale.Crop)
+        BpkButton(
+            text = buttonText,
+            icon = BpkIcon.Picture,
+            position = BpkButtonIconPosition.Start,
+            size = BpkButtonSize.Default,
+            type = BpkButtonType.Secondary,
+            contentDescription = buttonText,
+            onClick = onButtonClicked,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(all = BpkSpacing.Base),
+        )
+    }
 }
 
 data class BpkImageGalleryImage(

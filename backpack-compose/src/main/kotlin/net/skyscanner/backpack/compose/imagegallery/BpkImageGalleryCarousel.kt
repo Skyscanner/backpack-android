@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.badge.BpkBadge
@@ -37,7 +36,6 @@ import net.skyscanner.backpack.compose.carousel.BpkCarouselState
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.invisibleSemantic
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkImageGalleryCarousel(
     state: BpkCarouselState,
