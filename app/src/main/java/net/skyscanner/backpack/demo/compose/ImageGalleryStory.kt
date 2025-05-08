@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,6 +45,7 @@ import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipCategory
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageCategory
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreview
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ImageGalleryComponent
@@ -176,6 +178,18 @@ fun ImageGallerySlideshowStory(
     }
 }
 
+@Composable
+@ImageGalleryComponent
+@ComposeStory(name = "Gallery Preview")
+fun ImageGalleryPreviewStory(
+    modifier: Modifier = Modifier,
+) {
+    BpkImageGalleryPreview(
+        image = ImageGalleryData.slideshowImages(LocalContext.current)[0],
+        buttonText = stringResource(R.string.image_gallery_preview_button),
+        onButtonClicked = { Log.d("BpkImageGalleryPreview", "Click on Gallery preview") },
+    )
+}
 object ImageGalleryData {
 
     fun slideshowImages(context: Context) =
