@@ -117,6 +117,7 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            insideScrollableView = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
