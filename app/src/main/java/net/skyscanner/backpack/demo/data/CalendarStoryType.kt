@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.data
 
+import android.util.Log
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
@@ -60,7 +61,7 @@ enum class CalendarStoryType {
         private const val positivePriceThreshold = 2
         private const val neutralPriceThreshold = 3
         private const val negativePriceThreshold = 4
-
+        private var currentSelectedDate: LocalDate = LocalDate.of(2019, 1, 11)
         fun createInitialParams(type: CalendarStoryType): CalendarParams =
             when (type) {
                 SelectionDisabled -> CalendarParams(
@@ -169,6 +170,7 @@ enum class CalendarStoryType {
                     selectionMode = CalendarParams.SelectionMode.Range(),
                     yearLabelInMonthHeader = true,
                 )
+
                 MultiSelection -> CalendarParams(
                     now = now,
                     range = range,
@@ -204,29 +206,48 @@ enum class CalendarStoryType {
         )
 
         private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
-            startSelectionHint = DayCellAccessibilityLabel.Costume {
-                "Select as departure from Taiwan $it"
-            },
-            startSelectionState = DayCellAccessibilityLabel.Costume {
-                "Selected as departure from Taiwan $it"
-            },
-            noSelectionState = "No selection",
-            contentDescription = {
-                "Selected as departure from Tokyo, Japan"
-            },
+            accessibilityLabel = DayCellAccessibilityLabel.Dynamic(
+                selectionChange = { date ->
+                    Log.d("CalendarStoryType", "Selected date: $date  and current date is $currentSelectedDate")
+                    val label = when (date.dayOfMonth) {
+                        9 -> if (date != currentSelectedDate) {
+                            "Selected as departure from Tokyo-NRT"
+                        } else ""
+
+                        25 -> if (date != currentSelectedDate) {
+
+                            "Selected as departure from London-LHR, Paris-CDG. " + "Flight ${date.dayOfMonth + 1} changed back to ${date.dayOfMonth}"
+                        } else ""
+
+                        else -> "Selected as departure from ${date.dayOfMonth}"
+                    }
+                    currentSelectedDate = date
+                    label
+                },
+                selectionHint = { date ->
+                    "Select as departure for Flight number ${date.dayOfMonth} "
+                },
+                stateDescription = { date ->
+                    when (date.dayOfMonth) {
+                        9 -> "Selected as departure from Tokyo-NRT"
+                        25 -> "Selected as departure from London-LHR, Paris-CDG"
+                        else -> ""
+                    }
+                },
+            ),
         )
 
         private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
-            startSelectionHint = DayCellAccessibilityLabel.Static("Select as departure date"),
-            startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
-            noSelectionState = "No selection",
-            contentDescription = {
-                "Selected as departure from Tokyo, Japan"
-            },
+            accessibilityLabel = DayCellAccessibilityLabel.Static(
+                selectionHint = "Select as departure date",
+                selectionState = "Selected as departure date",
+                noSelectionState = "No selection",
+            ),
         )
     }
 }
 
+// "Selected as departure from Tokyo, Japan"
 fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellInfo> {
     val maxPrice = 5
     val noPriceThreshold = 0

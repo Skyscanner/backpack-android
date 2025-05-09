@@ -81,7 +81,6 @@ internal fun BpkCalendarDayCell(
 ) {
     val selection = model.selection
     val inactive = model.inactive
-
     val status = model.info.status
     val style = model.info.style
     Column(
@@ -92,7 +91,9 @@ internal fun BpkCalendarDayCell(
             .clickable(
                 indication = null,
                 enabled = !inactive,
-                onClick = { onClick(model) },
+                onClick = {
+                    onClick(model)
+                },
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )

@@ -28,8 +28,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
@@ -123,11 +125,20 @@ private fun CalendarDemo(
     val automationMode = LocalAutomationMode.current
     val floatingNotification = LocalFloatingNotification.current
     val context = LocalContext.current
+    val view = LocalView.current
     val coroutineScope = rememberCoroutineScope()
+    val params = CalendarStoryType.createInitialParams(type)
     val controller =
         rememberCalendarController(
-            initialParams = CalendarStoryType.createInitialParams(type),
+            initialParams = params,
             onSelectionChanged = { selection ->
+                val onSelectionChangeAccessibility =
+                    ((params.selectionMode as? CalendarParams.SelectionMode.Single)?.accessibilityLabel
+                        as? CalendarParams.DayCellAccessibilityLabel.Dynamic)?.selectionChange
+                val date = (selection as? CalendarSelection.Single)?.date
+                val label = date?.let { onSelectionChangeAccessibility?.invoke(it) }
+                label?.let { view.announceForAccessibility(it) }
+
                 if (!automationMode) {
                     coroutineScope.launch {
                         floatingNotification.show(context.getSelectionMessage(selection))
