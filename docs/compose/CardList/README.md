@@ -204,3 +204,126 @@ BpkStackCardList(
     // content
 }
 ```
+
+# Stack Column Variants 
+> **NOTICE**: The column varint should only be used when the compoent is to be lace inside of a scrollable View/Composable or one with infinite height
+
+
+
+## Stack - Column Variant 
+* To be used inside of a scollable layout or when used inside of a layout with infinite height (`RecyclerView`/`LazyColumn`/`LazyList`)
+* Important note: this compoent does *NOT* supprt scrolling
+```Kotlin
+import androidx.annotation.StringRes
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    description = stringResource(R.string.card_list_description),
+    totalCount = 3,
+    insideScrollableView = true
+) { index ->
+    // content
+}
+```
+
+
+
+## Stack with expand accessory - Column Variant 
+
+```Kotlin
+import androidx.annotation.StringRes
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    description = stringResource(R.string.card_list_description),
+    totalCount = 5,
+    insideScrollableView = true,
+    accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+        expandText = stringResource(R.string.card_list_show_more),
+        collapsedText = stringResource(R.string.card_list_show_less),
+        collapsedCount = 2,
+    ),
+) { index ->
+    // content
+}
+```
+
+## Stack with button accessory - Column Variant 
+
+```Kotlin
+import androidx.annotation.StringRes
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    description = stringResource(R.string.card_list_description),
+    totalCount = 5,
+    insideScrollableView = true,
+    accessoryStyle = BpkStackCardAccessoryStyle.Button(
+        title = stringResource(R.string.card_list_add_item),
+        icon = BpkIcon.AddCircle,
+        onClick = {},
+    )
+) { index ->
+    // content
+}
+```
+
+## Stack with expand accessory and section header button - Column Variant 
+
+```Kotlin
+import androidx.annotation.StringRes
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    description = stringResource(R.string.card_list_description),
+    totalCount = 5,
+    insideScrollableView = true,
+    accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+        expandText = stringResource(R.string.card_list_show_more),
+        collapsedText = stringResource(R.string.card_list_show_less),
+        collapsedCount = 2,
+    ),
+    headerButton = BpkSectionHeaderButton(
+        text = stringResource(R.string.card_list_header_button_text),
+        onClick = {},
+    ),
+) { index ->
+    // content
+}
+```
+
+## Stack with button accessory and section header button - Column Variant 
+* accessory button is not shown if `headerButton` is set
+
+```Kotlin
+import androidx.annotation.StringRes
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
+import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    description = stringResource(R.string.card_list_description),
+    totalCount = 5,
+    insideScrollableView = true,
+    accessoryStyle = BpkStackCardAccessoryStyle.Button(
+        title = stringResource(R.string.card_list_add_item),
+        icon = BpkIcon.AddCircle,
+        onClick = {},
+    ),
+    headerButton = BpkSectionHeaderButton(
+        text = stringResource(R.string.card_list_header_button_text),
+        onClick = {},
+    ),
+) { index ->
+    // content
+}
+```
