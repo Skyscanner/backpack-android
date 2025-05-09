@@ -132,8 +132,10 @@ fun ExpandableColumn(
             accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         )
 
-        for (index in 0 until targetCount) {
-            content(index)
+        Column(modifier = Modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+            for (index in 0 until targetCount) {
+                content(index)
+            }
         }
 
         accessoryStyle?.let {
