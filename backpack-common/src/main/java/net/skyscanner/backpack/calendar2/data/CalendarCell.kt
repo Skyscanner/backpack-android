@@ -203,6 +203,6 @@ private fun onClickLabel(
 
 fun DayCellAccessibilityLabel?.getAccessibilityLabel(date: LocalDate): String? = when (this) {
     is DayCellAccessibilityLabel.Static -> label
-    is DayCellAccessibilityLabel.Costume -> label(date)
+    is DayCellAccessibilityLabel.Dynamic -> label(date)
     else -> null
 }

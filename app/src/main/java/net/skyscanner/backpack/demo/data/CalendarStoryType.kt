@@ -203,10 +203,10 @@ enum class CalendarStoryType {
         )
 
         private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
-            startSelectionHint = DayCellAccessibilityLabel.Costume {
+            startSelectionHint = DayCellAccessibilityLabel.Dynamic {
                 "Select as departure from Taiwan $it"
             },
-            startSelectionState = DayCellAccessibilityLabel.Costume {
+            startSelectionState = DayCellAccessibilityLabel.Dynamic {
                 "Selected as departure from Taiwan $it"
             },
             noSelectionState = "No selection for departure from Taiwan",

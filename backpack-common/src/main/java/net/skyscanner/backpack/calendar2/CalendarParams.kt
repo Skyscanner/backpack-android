@@ -115,9 +115,13 @@ data class CalendarParams(
         ) : SelectionMode
     }
 
+    /**
+     * Describes the accessibility label of a day cell
+     * support Static string and costume string
+     */
     sealed class DayCellAccessibilityLabel {
         data class Static(val label: String) : DayCellAccessibilityLabel()
-        data class Costume(val label: (LocalDate) -> String) : DayCellAccessibilityLabel()
+        data class Dynamic(val label: (LocalDate) -> String) : DayCellAccessibilityLabel()
     }
 
     /**
