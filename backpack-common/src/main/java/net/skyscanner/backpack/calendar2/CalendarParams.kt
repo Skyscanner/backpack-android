@@ -117,7 +117,7 @@ data class CalendarParams(
 
     /**
      * Describes the accessibility label of a day cell
-     * support Static string and costume string
+     * support Static string and dynamic string
      */
     sealed class DayCellAccessibilityLabel {
         data class Static(val label: String) : DayCellAccessibilityLabel()

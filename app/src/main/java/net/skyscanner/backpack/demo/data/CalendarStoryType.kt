@@ -172,7 +172,7 @@ enum class CalendarStoryType {
                 MultiSelection -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = multipleSelectionModeWithCostumeAccessibilityLabels(),
+                    selectionMode = multipleSelectionModeWithDynamicAccessibilityLabels(),
                     cellsInfo = createCombinedCellsInfo(range),
                 )
 
@@ -202,7 +202,7 @@ enum class CalendarStoryType {
             betweenSelectionState = "Between departure and return date",
         )
 
-        private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
+        private fun multipleSelectionModeWithDynamicAccessibilityLabels() = CalendarParams.SelectionMode.Single(
             startSelectionHint = DayCellAccessibilityLabel.Dynamic {
                 "Select as departure from Taiwan $it"
             },
