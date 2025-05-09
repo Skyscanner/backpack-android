@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,13 +38,14 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGallerySlideshow
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageGrid
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipGrid
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipCategory
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipGrid
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageCategory
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImageGrid
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewDefault
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewHero
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGallerySlideshow
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ImageGalleryComponent
@@ -51,15 +53,28 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @ImageGalleryComponent
-@ComposeStory(name = "Carousel")
-fun ImageGalleryCarouselStory(
+@ComposeStory(name = "Gallery Preview Default")
+fun ImageGalleryPreviewDefaultStory(
+    modifier: Modifier = Modifier,
+) {
+    BpkImageGalleryPreviewDefault(
+        image = ImageGalleryData.slideshowImages(LocalContext.current)[0],
+        buttonText = stringResource(R.string.image_gallery_preview_button),
+        onButtonClicked = { Log.d("BpkImageGalleryPreview", "Click on Gallery preview") },
+    )
+}
+
+@Composable
+@ImageGalleryComponent
+@ComposeStory(name = "Gallery Preview Hero")
+fun ImageGalleryPreviewHeroStory(
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberBpkCarouselState(
         totalImages = 4,
     )
 
-    BpkImageGalleryCarousel(
+    BpkImageGalleryPreviewHero(
         modifier = modifier.height(345.dp),
         state = pagerState,
     ) {

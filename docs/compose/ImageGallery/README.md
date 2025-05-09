@@ -4,11 +4,17 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.imagegallery)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/imagegallery)
 
-## Carousel
+## Gallery Preview Default
 
-| Day                                                                                                                                                                                    | Night                                                                                                                                                                                                 |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/carousel.png" alt="Image Gallery Carousel component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/carousel_dm.png" alt="Image Gallery Carousel component - dark mode" width="375" /> |
+| Day                                                                                                                                                                                                          | Night                                                                                                                                                                                                                       |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/gallery-preview-default.png" alt="Image Gallery Preview Default component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/gallery-preview-default_dm.png" alt="Image Gallery Preview Default component - dark mode" width="375" /> |
+
+## Gallery Preview Hero
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                                 |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/gallery-preview-hero.png" alt="Image Gallery Preview Hero component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ImageGallery/screenshots/gallery-preview-hero_dm.png" alt="Image Gallery Preview Hero component - dark mode" width="375" /> |
 
 ## Slideshow
 
@@ -34,20 +40,40 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of an image gallery carousel:
+Example of an image gallery preview default:
 
 ```Kotlin
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewDefault
+
+BpkImageGalleryPreviewDefault(
+    image = Image(painter = painterResource(id = imageResId), contentDescription = ""),
+    buttonText = stringResource(stringResId),
+    onButtonClicked = { /* Do something */ },
+)
+```
+
+Example of an image gallery preview hero:
+
+```Kotlin
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
-import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryCarousel
+import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryPreviewHero
 
-val state = rememberBpkCarouselState(totalImages = totalImages)
+val pagerState = rememberBpkCarouselState(
+    totalImages = 4,
+)
 
-BpkImageGalleryCarousel(
-    state = state,
-    modifier = Modifier.height(100.dp),
-    onImageClicked = { index -> /* handle on click */ },
-) { index ->
-    Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
+BpkImageGalleryPreviewHero(
+    modifier = modifier.height(345.dp),
+    state = pagerState,
+) {
+    Image(
+        modifier = Modifier.fillMaxSize(),
+        painter = painterResource(id = imageResId),
+        contentDescription = "",
+        contentScale = ContentScale.Crop,
+    )
 }
 ```
 
@@ -74,7 +100,7 @@ BpkImageGallerySlideshow(
             title = "",
             description = "",
             credit =  "",
-            content = { contentDescription, contentScale ->
+            content = { contentDescription: String, contentScale: ContentScale ->
                 // Image content
             },
         ),
@@ -112,7 +138,7 @@ BpkImageGalleryChipGrid(
                     title = "",
                     description = "",
                     credit =  "",
-                    content = { contentDescription, contentScale ->
+                    content = { contentDescription: String, contentScale: ContentScale ->
                         // Image content
                     },
                 ),
@@ -154,7 +180,7 @@ BpkImageGalleryImageGrid(
                     title = "",
                     description = "",
                     credit =  "",
-                    content = { contentDescription, contentScale ->
+                    content = { contentDescription: String, contentScale: ContentScale ->
                         // Image content
                     },
                 ),
