@@ -206,7 +206,7 @@ BpkStackCardList(
 ```
 
 # Stack Column Variants 
-> **NOTICE**: The column varint should only be used when the compoent is to be lace inside of a scrollable View/Composable or one with infinite height
+> **NOTICE**: The column varint should only be used when the compoent is to be placed inside of a scrollable View/Composable or one with infinite height
 
 
 

@@ -51,7 +51,7 @@ internal fun BpkStackCardListImpl(
     accessoryStyle: BpkStackCardAccessoryStyle? = null,
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
-    insideScrollableView: Boolean = false,
+    isInScrollableContainer: Boolean = false,
     content: @Composable ((Int) -> Unit),
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -78,7 +78,7 @@ internal fun BpkStackCardListImpl(
         else -> totalCount
     }
 
-    if (insideScrollableView) {
+    if (isInScrollableContainer) {
         ExpandableColumn(
             expanded = expanded,
             onButtonTap = buttonTapped,
