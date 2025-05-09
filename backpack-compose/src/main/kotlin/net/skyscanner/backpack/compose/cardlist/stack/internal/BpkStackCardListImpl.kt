@@ -22,7 +22,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -123,12 +122,7 @@ fun ExpandableColumn(
     modifier: Modifier = Modifier,
     content: @Composable (Int) -> Unit,
 ) {
-    Column(
-        modifier = modifier
-            .padding(start = BpkSpacing.Base, end = BpkSpacing.Base)
-            .animateContentSize(),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    Column(modifier = modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
         BpkSectionHeader(
             title = title,
             description = description,
@@ -196,11 +190,7 @@ fun ExpandableLazyColumn(
     modifier: Modifier = Modifier,
     content: @Composable ((Int) -> Unit),
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(start = BpkSpacing.Base, end = BpkSpacing.Base),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
         item {
             BpkSectionHeader(
                 title = title,
