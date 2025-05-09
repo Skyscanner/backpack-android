@@ -59,7 +59,7 @@ class BpkCalendarTest {
         locale = Locale.UK,
         selectionMode = CalendarParams.SelectionMode.Single(
             startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
-            noSelectionState = DayCellAccessibilityLabel.Static("noSelectionState"),
+            noSelectionState = "noSelectionState",
             startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
             contentDescription = {
                 "contentDescription"
@@ -74,9 +74,9 @@ class BpkCalendarTest {
             startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
             endSelectionHint = DayCellAccessibilityLabel.Static("endSelectionHint"),
             startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
-            startAndEndSelectionState = DayCellAccessibilityLabel.Static("startAndEndSelectionState"),
+            startAndEndSelectionState = "startAndEndSelectionState",
             endSelectionState = DayCellAccessibilityLabel.Static("endSelectionState"),
-            betweenSelectionState = DayCellAccessibilityLabel.Static("betweenSelectionState"),
+            betweenSelectionState = "betweenSelectionState",
             contentDescription = {
                 "contentDescription"
             },

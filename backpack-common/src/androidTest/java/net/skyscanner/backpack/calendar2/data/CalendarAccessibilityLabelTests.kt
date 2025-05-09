@@ -35,7 +35,7 @@ class CalendarAccessibilityLabelTests {
         val calendarParams = CalendarSettings.Default.copy(
             selectionMode = SelectionMode.Single(
                 startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
-                noSelectionState = DayCellAccessibilityLabel.Static("noSelectionState"),
+                noSelectionState = "noSelectionState",
                 startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
             ),
         )
@@ -53,7 +53,7 @@ class CalendarAccessibilityLabelTests {
         val calendarParams = CalendarSettings.Default.copy(
             selectionMode = SelectionMode.Single(
                 startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
-                noSelectionState = DayCellAccessibilityLabel.Static("noSelectionState"),
+                noSelectionState = "noSelectionState",
                 startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
             ),
         )

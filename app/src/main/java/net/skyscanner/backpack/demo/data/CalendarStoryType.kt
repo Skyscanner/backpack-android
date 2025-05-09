@@ -198,8 +198,8 @@ enum class CalendarStoryType {
             endSelectionHint = DayCellAccessibilityLabel.Static("Select as return date"),
             startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
             endSelectionState = DayCellAccessibilityLabel.Static("Selected as return date"),
-            startAndEndSelectionState = DayCellAccessibilityLabel.Static("Selected as departure and return date"),
-            betweenSelectionState = DayCellAccessibilityLabel.Static("Between departure and return date"),
+            startAndEndSelectionState = "Selected as departure and return date",
+            betweenSelectionState = "Between departure and return date",
         )
 
         private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
@@ -209,7 +209,7 @@ enum class CalendarStoryType {
             startSelectionState = DayCellAccessibilityLabel.Costume {
                 "Selected as departure from Taiwan $it"
             },
-            noSelectionState = DayCellAccessibilityLabel.Costume { "No selection for departure from Taiwan" },
+            noSelectionState = "No selection for departure from Taiwan",
             contentDescription = {
                 "Selected as departure from Tokyo, Japan"
             },
@@ -218,7 +218,7 @@ enum class CalendarStoryType {
         private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
             startSelectionHint = DayCellAccessibilityLabel.Static("Select as departure date"),
             startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
-            noSelectionState = DayCellAccessibilityLabel.Static("No selection"),
+            noSelectionState = "No selection",
             contentDescription = {
                 "Selected as departure from Tokyo, Japan"
             },

@@ -155,7 +155,7 @@ private fun stateDescription(
     selection: CalendarSelection,
 ): String? = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> when (selection) {
-        is CalendarSelection.None -> selectionMode.noSelectionState.getAccessibilityLabel(date)
+        is CalendarSelection.None -> selectionMode.noSelectionState
         is CalendarSelection.Single ->
             when (selection.date) {
                 date -> selectionMode.startSelectionState.getAccessibilityLabel(date)
@@ -167,11 +167,11 @@ private fun stateDescription(
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.Dates ->
             when {
-                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState.getAccessibilityLabel(date)
+                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
                 selection.start == date && selection.end == null -> selectionMode.startSelectionState.getAccessibilityLabel(date)
                 selection.start == date && selection.end != null -> selectionMode.startSelectionState.getAccessibilityLabel(date)
                 selection.end == date -> selectionMode.endSelectionState.getAccessibilityLabel(date)
-                selection.end != null && date in selection -> selectionMode.betweenSelectionState.getAccessibilityLabel(date)
+                selection.end != null && date in selection -> selectionMode.betweenSelectionState
                 else -> null
             }
 
