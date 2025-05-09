@@ -89,7 +89,8 @@ data class CalendarParams(
         data class Single(
             @Transient
             val startSelectionHint: DayCellAccessibilityLabel? = null,
-            val noSelectionState: String? = null,
+            @Transient
+            val noSelectionState: DayCellAccessibilityLabel? = null,
             @Transient
             val startSelectionState: DayCellAccessibilityLabel? = null,
             @Transient
@@ -100,13 +101,20 @@ data class CalendarParams(
          * A range of dates can be selected.
          */
         data class Range(
-            val startSelectionHint: String? = null,
-            val endSelectionHint: String? = null,
-            val noSelectionState: String? = null,
-            val startSelectionState: String? = null,
-            val startAndEndSelectionState: String? = null,
-            val endSelectionState: String? = null,
-            val betweenSelectionState: String? = null,
+            @Transient
+            val startSelectionHint: DayCellAccessibilityLabel? = null,
+            @Transient
+            val endSelectionHint: DayCellAccessibilityLabel? = null,
+            @Transient
+            val startSelectionState: DayCellAccessibilityLabel? = null,
+            @Transient
+            val startAndEndSelectionState: DayCellAccessibilityLabel? = null,
+            @Transient
+            val endSelectionState: DayCellAccessibilityLabel? = null,
+            @Transient
+            val betweenSelectionState: DayCellAccessibilityLabel? = null,
+            @Transient
+            val contentDescription: ((LocalDate) -> String)? = null,
         ) : SelectionMode
     }
 

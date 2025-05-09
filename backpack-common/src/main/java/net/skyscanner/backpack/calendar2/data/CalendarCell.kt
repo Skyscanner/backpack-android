@@ -145,6 +145,7 @@ private fun contentDescription(
     selectionMode: CalendarParams.SelectionMode,
 ): String = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> selectionMode.contentDescription?.let { it(date) } ?: ""
+    is CalendarParams.SelectionMode.Range -> selectionMode.contentDescription?.let { it(date) } ?: ""
     else -> ""
 }
 
@@ -154,7 +155,7 @@ private fun stateDescription(
     selection: CalendarSelection,
 ): String? = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> when (selection) {
-        is CalendarSelection.None -> selectionMode.noSelectionState
+        is CalendarSelection.None -> selectionMode.noSelectionState.getAccessibilityLabel(date)
         is CalendarSelection.Single ->
             when (selection.date) {
                 date -> selectionMode.startSelectionState.getAccessibilityLabel(date)
@@ -166,11 +167,11 @@ private fun stateDescription(
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.Dates ->
             when {
-                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
-                selection.start == date && selection.end == null -> selectionMode.startSelectionState
-                selection.start == date && selection.end != null -> selectionMode.startSelectionState
-                selection.end == date -> selectionMode.endSelectionState
-                selection.end != null && date in selection -> selectionMode.betweenSelectionState
+                selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState.getAccessibilityLabel(date)
+                selection.start == date && selection.end == null -> selectionMode.startSelectionState.getAccessibilityLabel(date)
+                selection.start == date && selection.end != null -> selectionMode.startSelectionState.getAccessibilityLabel(date)
+                selection.end == date -> selectionMode.endSelectionState.getAccessibilityLabel(date)
+                selection.end != null && date in selection -> selectionMode.betweenSelectionState.getAccessibilityLabel(date)
                 else -> null
             }
 
@@ -187,11 +188,11 @@ private fun onClickLabel(
 ): String? = when (selectionMode) {
     is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint.getAccessibilityLabel(date)
     is CalendarParams.SelectionMode.Range -> when (selection) {
-        is CalendarSelection.None -> selectionMode.startSelectionHint
+        is CalendarSelection.None -> selectionMode.startSelectionHint.getAccessibilityLabel(date)
         is CalendarSelection.Dates ->
             when {
-                selection.end != null || date < selection.start -> selectionMode.startSelectionHint
-                else -> selectionMode.endSelectionHint
+                selection.end != null || date < selection.start -> selectionMode.startSelectionHint.getAccessibilityLabel(date)
+                else -> selectionMode.endSelectionHint.getAccessibilityLabel(date)
             }
 
         else -> null

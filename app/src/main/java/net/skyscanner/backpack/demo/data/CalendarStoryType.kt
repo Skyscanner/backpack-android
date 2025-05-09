@@ -194,13 +194,12 @@ enum class CalendarStoryType {
             }
 
         private fun rangeSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Range(
-            startSelectionHint = "Select as departure date",
-            endSelectionHint = "Select as return date",
-            startSelectionState = "Selected as departure date",
-            endSelectionState = "Selected as return date",
-            startAndEndSelectionState = "Selected as departure and return date",
-            betweenSelectionState = "Between departure and return date",
-            noSelectionState = "No selection",
+            startSelectionHint = DayCellAccessibilityLabel.Static("Select as departure date"),
+            endSelectionHint = DayCellAccessibilityLabel.Static("Select as return date"),
+            startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
+            endSelectionState = DayCellAccessibilityLabel.Static("Selected as return date"),
+            startAndEndSelectionState = DayCellAccessibilityLabel.Static("Selected as departure and return date"),
+            betweenSelectionState = DayCellAccessibilityLabel.Static("Between departure and return date"),
         )
 
         private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
@@ -210,7 +209,7 @@ enum class CalendarStoryType {
             startSelectionState = DayCellAccessibilityLabel.Costume {
                 "Selected as departure from Taiwan $it"
             },
-            noSelectionState = "No selection",
+            noSelectionState = DayCellAccessibilityLabel.Costume { "No selection for departure from Taiwan" },
             contentDescription = {
                 "Selected as departure from Tokyo, Japan"
             },
@@ -219,7 +218,7 @@ enum class CalendarStoryType {
         private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
             startSelectionHint = DayCellAccessibilityLabel.Static("Select as departure date"),
             startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
-            noSelectionState = "No selection",
+            noSelectionState = DayCellAccessibilityLabel.Static("No selection"),
             contentDescription = {
                 "Selected as departure from Tokyo, Japan"
             },
