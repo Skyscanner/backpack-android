@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellLabel
@@ -171,18 +172,8 @@ enum class CalendarStoryType {
                 MultiSelection -> CalendarParams(
                     now = now,
                     range = range,
-                    selectionMode = singleSelectionModeWithAccessibilityLabels(),
-                    cellsInfo = mapOf(
-                        LocalDate.of(2019, 1, 9) to CellInfo(
-                            highlighted = true,
-                        ),
-                        LocalDate.of(2019, 1, 25) to CellInfo(
-                            highlighted = true,
-                        ),
-                        LocalDate.of(2019, 2, 2) to CellInfo(
-                            highlighted = true,
-                        ),
-                    ),
+                    selectionMode = multipleSelectionModeWithCostumeAccessibilityLabels(),
+                    cellsInfo = createCombinedCellsInfo(range),
                 )
 
                 Loading ->
@@ -212,12 +203,85 @@ enum class CalendarStoryType {
             noSelectionState = "No selection",
         )
 
-        private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
-            startSelectionHint = "Select as departure date",
-            startSelectionState = "Selected as departure date",
+        private fun multipleSelectionModeWithCostumeAccessibilityLabels() = CalendarParams.SelectionMode.Single(
+            startSelectionHint = DayCellAccessibilityLabel.Costume {
+                "Select as departure from Taiwan $it"
+            },
+            startSelectionState = DayCellAccessibilityLabel.Costume {
+                "Selected as departure from Taiwan $it"
+            },
             noSelectionState = "No selection",
+            contentDescription = {
+                "Selected as departure from Tokyo, Japan"
+            },
+        )
+
+        private fun singleSelectionModeWithAccessibilityLabels() = CalendarParams.SelectionMode.Single(
+            startSelectionHint = DayCellAccessibilityLabel.Static("Select as departure date"),
+            startSelectionState = DayCellAccessibilityLabel.Static("Selected as departure date"),
+            noSelectionState = "No selection",
+            contentDescription = {
+                "Selected as departure from Tokyo, Japan"
+            },
         )
     }
+}
+
+fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellInfo> {
+    val maxPrice = 5
+    val noPriceThreshold = 0
+    val emptyPriceThreshold = 1
+    val positivePriceThreshold = 2
+    val neutralPriceThreshold = 3
+    val negativePriceThreshold = 4
+    val minPrice = 0
+
+    val baseCellsInfo = range.toIterable().associateWith {
+        val price = it.dayOfMonth % maxPrice
+        CellInfo(
+            label = when (price) {
+                in minPrice..noPriceThreshold -> CellLabel.Icon(
+                    resId = R.drawable.bpk_search_sm,
+                    tint = R.color.bpkCoreAccent,
+                )
+
+                else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
+            },
+            status = when (price) {
+                noPriceThreshold -> null
+                emptyPriceThreshold -> CellStatus.Empty
+                positivePriceThreshold -> CellStatus.Positive
+                neutralPriceThreshold -> CellStatus.Neutral
+                negativePriceThreshold -> CellStatus.Negative
+                else -> CellStatus.Empty
+            },
+            style = CellStatusStyle.Label,
+        )
+    }
+
+    val highlightedCells = mapOf(
+        LocalDate.of(2019, 1, 6) to CellInfo(
+            highlighted = true,
+            label = CellLabel.Icon(
+                resId = R.drawable.bpk_search_sm,
+                tint = R.color.bpkCoreAccent,
+            ),
+        ),
+        LocalDate.of(2019, 1, 9) to CellInfo(
+            highlighted = true,
+            label = CellLabel.Text("£100"),
+        ),
+        LocalDate.of(2019, 1, 25) to CellInfo(
+            highlighted = true,
+            label = CellLabel.Text("£100"),
+        ),
+        LocalDate.of(2019, 2, 2) to CellInfo(
+            highlighted = true,
+            label = CellLabel.Text("£100"),
+        ),
+    )
+
+    return baseCellsInfo + highlightedCells
 }
 
 object CalendarStorySelection {

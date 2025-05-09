@@ -24,6 +24,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.core.text.buildSpannedString
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -102,7 +103,7 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
-    contentDescription = date.format(params.dateContentDescriptionFormatter),
+    contentDescription = date.format(params.dateContentDescriptionFormatter) + contentDescription(date, params.selectionMode),
     stateDescription = stateDescription(date, params.selectionMode, selection),
     onClickLabel = onClickLabel(date, params.selectionMode, selection),
     text = buildSpannedString {
@@ -139,6 +140,14 @@ internal fun CalendarCellDay(
     },
 )
 
+private fun contentDescription(
+    date: LocalDate,
+    selectionMode: CalendarParams.SelectionMode,
+): String = when (selectionMode) {
+    is CalendarParams.SelectionMode.Single -> selectionMode.contentDescription?.let { it(date) } ?: ""
+    else -> ""
+}
+
 private fun stateDescription(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
@@ -148,7 +157,7 @@ private fun stateDescription(
         is CalendarSelection.None -> selectionMode.noSelectionState
         is CalendarSelection.Single ->
             when (selection.date) {
-                date -> selectionMode.startSelectionState
+                date -> selectionMode.startSelectionState.getAccessibilityLabel(date)
                 else -> null
             }
         else -> null
@@ -176,7 +185,7 @@ private fun onClickLabel(
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
 ): String? = when (selectionMode) {
-    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
+    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint.getAccessibilityLabel(date)
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.None -> selectionMode.startSelectionHint
         is CalendarSelection.Dates ->
@@ -189,4 +198,10 @@ private fun onClickLabel(
     }
 
     is CalendarParams.SelectionMode.Disabled -> null
+}
+
+fun DayCellAccessibilityLabel?.getAccessibilityLabel(date: LocalDate): String? = when (this) {
+    is DayCellAccessibilityLabel.Static -> label
+    is DayCellAccessibilityLabel.Costume -> label(date)
+    else -> null
 }

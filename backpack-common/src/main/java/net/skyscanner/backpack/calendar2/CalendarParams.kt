@@ -20,7 +20,6 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import java.io.Serializable
 import java.text.SimpleDateFormat
@@ -88,9 +87,13 @@ data class CalendarParams(
          * Accessibility labels are NOT supported in the view version
          */
         data class Single(
-            val startSelectionHint: String? = null,
+            @Transient
+            val startSelectionHint: DayCellAccessibilityLabel? = null,
             val noSelectionState: String? = null,
-            val startSelectionState: String? = null,
+            @Transient
+            val startSelectionState: DayCellAccessibilityLabel? = null,
+            @Transient
+            val contentDescription: ((LocalDate) -> String)? = null,
         ) : SelectionMode
 
         /**
@@ -105,6 +108,11 @@ data class CalendarParams(
             val endSelectionState: String? = null,
             val betweenSelectionState: String? = null,
         ) : SelectionMode
+    }
+
+    sealed class DayCellAccessibilityLabel {
+        data class Static(val label: String) : DayCellAccessibilityLabel()
+        data class Costume(val label: (LocalDate) -> String) : DayCellAccessibilityLabel()
     }
 
     /**
