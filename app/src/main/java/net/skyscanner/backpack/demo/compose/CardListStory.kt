@@ -258,7 +258,7 @@ fun ColumnCardListStackStory(modifier: Modifier = Modifier) {
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
 
         ) { index -> StackItem(dataList[index]) }
     }
@@ -274,7 +274,7 @@ fun ColumnCardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -294,7 +294,7 @@ fun ColumnCardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(
             description = stringResource(R.string.card_list_description),
             totalCount = 2,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -318,7 +318,7 @@ fun ColumnCardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,
@@ -347,7 +347,7 @@ fun ColumnCardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifi
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -385,7 +385,7 @@ fun ColumnCardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifi
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
             modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,

@@ -151,7 +151,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             totalCount = TOTAL_CARDS,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
         ) { index -> StackItem(dataList[index]) }
     }
 
@@ -161,7 +161,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = TOTAL_CARDS,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
         ) { index -> StackItem(dataList[index]) }
     }
 
@@ -171,7 +171,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -187,7 +187,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 2,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -203,7 +203,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,
@@ -218,7 +218,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -238,7 +238,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
-            insideScrollableView = true,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,

@@ -44,7 +44,7 @@ fun BpkStackCardList(
     accessoryStyle: BpkStackCardAccessoryStyle? = null,
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
-    insideScrollableView: Boolean = false,
+    isInScrollableContainer: Boolean = false,
     content: @Composable ((Int) -> Unit),
 ) {
     BpkStackCardListImpl(
@@ -55,7 +55,7 @@ fun BpkStackCardList(
         accessoryStyle = accessoryStyle,
         headerButton = headerButton,
         accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
-        insideScrollableView = insideScrollableView,
+        isInScrollableContainer = isInScrollableContainer,
         content = content,
     )
 }
