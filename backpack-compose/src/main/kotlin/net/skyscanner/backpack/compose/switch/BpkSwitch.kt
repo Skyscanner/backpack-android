@@ -22,9 +22,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
@@ -43,6 +42,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
@@ -70,12 +70,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            BpkText(
-                modifier = Modifier.weight(1f),
-                text = text,
-                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis,
-            )
+            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate)
         },
     )
 }
@@ -99,12 +94,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            BpkText(
-                modifier = Modifier.weight(1f),
-                text = text,
-                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis,
-            )
+            TextWithSpacer(text, shouldTruncate)
         },
     )
 }
@@ -132,7 +122,8 @@ fun BpkSwitch(
                     onValueChange = onCheckedChange!!,
                     enabled = enabled,
                 )
-            }.applyIf(onCheckedChange == null) {
+            }
+            .applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {
                     role = Role.Switch
                     toggleableState = ToggleableState(checked)
@@ -149,7 +140,7 @@ fun BpkSwitch(
         )
 
         BpkSwitchImpl(
-            modifier = Modifier.align(switchAlignment).padding(start = BpkSpacing.Base),
+            modifier = Modifier.align(switchAlignment),
             checked = checked,
             onCheckedChange = onCheckedChange,
             enabled = enabled,
@@ -158,7 +149,19 @@ fun BpkSwitch(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@Composable
+private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTruncate: Boolean) {
+    takeIf { annotatedString.isNotEmpty() }?.let {
+        BpkText(
+            modifier = Modifier.Companion.weight(1f),
+            text = annotatedString,
+            maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+            overflow = TextOverflow.Ellipsis,
+        )
+        Spacer(modifier = Modifier.width(BpkSpacing.Base))
+    }
+}
+
 @Composable
 private fun BpkSwitchImpl(
     checked: Boolean,

@@ -62,6 +62,7 @@ fun SwitchStory(modifier: Modifier = Modifier) {
 
         AnnotatedStringSwitchExample()
         CustomContentSwitchExample()
+        EmptyContentWithSwitchExample()
     }
 }
 
@@ -131,6 +132,18 @@ internal fun LongTextWithTopSwitchAlignmentSwitchExample(modifier: Modifier = Mo
         onCheckedChange = { checked = it },
         switchAlignment = Alignment.Top,
         shouldTruncate = false,
+    )
+}
+
+@Composable
+internal fun EmptyContentWithSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        content = {},
+        checked = checked,
+        onCheckedChange = { checked = it },
+        switchAlignment = Alignment.Top,
     )
 }
 
