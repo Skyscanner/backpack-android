@@ -23,6 +23,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
@@ -73,6 +75,7 @@ fun ImageGalleryPreviewHeroStory(
     )
 
     BpkImageGalleryPreviewHero(
+        modifier = modifier.height(345.dp),
         state = pagerState,
     ) {
         Image(
