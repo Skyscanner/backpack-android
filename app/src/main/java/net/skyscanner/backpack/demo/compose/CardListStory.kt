@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -97,26 +98,28 @@ fun CardListRailWithHeaderButtonStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack")
-fun CardListStackStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack - Lazy Column Based")
+fun LazyColumnCardListStackStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = TOTAL_CARDS,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
         ) { index -> StackItem(dataList[index]) }
     }
 }
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with expand accessory")
-fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack with expand accessory - Lazy Column Based")
+fun LazyColumnCardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -128,13 +131,14 @@ fun CardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with expand accessory and expandedCount less than minimum")
-fun CardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack with expand accessory and expandedCount less than minimum - Lazy Column Based")
+fun LazyColumnCardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 2,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -146,8 +150,8 @@ fun CardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifi
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with button accessory")
-fun CardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack with button accessory - Lazy Column Based")
+fun LazyColumnCardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
     val notificationText = stringResource(R.string.card_list_accessory_button_clicked)
@@ -157,6 +161,7 @@ fun CardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,
@@ -172,8 +177,8 @@ fun CardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with expand accessory and HeaderButton")
-fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack with expand accessory and HeaderButton - Lazy Column Based")
+fun LazyColumnCardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
     val notificationText = stringResource(R.string.card_list_section_header_click)
@@ -184,6 +189,7 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
             accessoryStyle = BpkStackCardAccessoryStyle.Expand(
                 expandText = stringResource(R.string.card_list_show_more),
                 collapsedText = stringResource(R.string.card_list_show_less),
@@ -208,8 +214,8 @@ fun CardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = M
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack with button accessory and HeaderButton")
-fun CardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
+@ComposeStory("Stack with button accessory and HeaderButton - Lazy Column Based")
+fun LazyColumnCardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
     val floatingNotification = LocalFloatingNotification.current
     val coroutineScope = rememberCoroutineScope()
     val notificationText1 = stringResource(R.string.card_list_section_header_click)
@@ -220,6 +226,166 @@ fun CardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifier = M
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            accessoryStyle = BpkStackCardAccessoryStyle.Button(
+                title = stringResource(R.string.card_list_add_item),
+                icon = BpkIcon.AddCircle,
+                onClick = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText2)
+                    }
+                },
+            ),
+            headerButton = BpkSectionHeaderButton(
+                text = stringResource(R.string.card_list_header_button_text),
+                onClick = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText1)
+                    }
+                },
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack - Column Based")
+fun ColumnCardListStackStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
+
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack with expand accessory - Column Based")
+fun ColumnCardListStackWithExpandAccessoryStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 2,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack with expand accessory and expandedCount less than minimum - Column Based")
+fun ColumnCardListStackWithExpandAccessoryWithLessThanMinimumExpandedCountStory(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 2,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 1,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack with button accessory - Column Based")
+fun ColumnCardListStackWithButtonAccessoryStory(modifier: Modifier = Modifier) {
+    val floatingNotification = LocalFloatingNotification.current
+    val coroutineScope = rememberCoroutineScope()
+    val notificationText = stringResource(R.string.card_list_accessory_button_clicked)
+
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Button(
+                title = stringResource(R.string.card_list_add_item),
+                icon = BpkIcon.AddCircle,
+                onClick = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText)
+                    }
+                },
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack with expand accessory and HeaderButton - Column Based")
+fun ColumnCardListStackWithExpandAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
+    val floatingNotification = LocalFloatingNotification.current
+    val coroutineScope = rememberCoroutineScope()
+    val notificationText = stringResource(R.string.card_list_section_header_click)
+    val notificationText2 = stringResource(R.string.card_list_on_list_expanded)
+
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 2,
+                onExpansionChange = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText2)
+                    }
+                },
+            ),
+            headerButton = BpkSectionHeaderButton(
+                text = stringResource(R.string.card_list_header_button_text),
+                onClick = {
+                    coroutineScope.launch {
+                        floatingNotification.show(notificationText)
+                    }
+                },
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack with button accessory and HeaderButton - Column Based")
+fun ColumnCardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifier = Modifier) {
+    val floatingNotification = LocalFloatingNotification.current
+    val coroutineScope = rememberCoroutineScope()
+    val notificationText1 = stringResource(R.string.card_list_section_header_click)
+    val notificationText2 = stringResource(R.string.card_list_accessory_button_clicked)
+
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,

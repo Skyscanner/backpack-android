@@ -49,7 +49,7 @@ import org.junit.Test
 class BpkStackCardListTest : BpkSnapshotTest() {
 
     @Test
-    fun defaultStack() = snap {
+    fun defaultLazyColumnStack() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             totalCount = TOTAL_CARDS,
@@ -57,7 +57,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun defaultStackWithDescription() = snap {
+    fun defaultLazyColumnStackWithDescription() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
@@ -66,7 +66,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun stackWithExpandAccessory() = snap {
+    fun lazyColumnStackWithExpandAccessory() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
@@ -81,7 +81,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun stackWithExpandAccessoryWithLessThanMinimumExpandCount() = snap {
+    fun lazyColumnStackWithExpandAccessoryWithLessThanMinimumExpandCount() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
@@ -96,7 +96,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun stackWithButtonAccessory() = snap {
+    fun lazyColumnStackWithButtonAccessory() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
@@ -110,7 +110,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun stackWithExpandAccessoryAndSectionHeader() = snap {
+    fun lazyColumnStackWithExpandAccessoryAndSectionHeader() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
@@ -129,11 +129,116 @@ class BpkStackCardListTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun stackWithButtonAccessoryAndSectionHeader() = snap {
+    fun lazyColumnStackWithButtonAccessoryAndSectionHeader() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             description = stringResource(R.string.card_list_description),
             totalCount = 5,
+            accessoryStyle = BpkStackCardAccessoryStyle.Button(
+                title = stringResource(R.string.card_list_add_item),
+                icon = BpkIcon.AddCircle,
+                onClick = {},
+            ),
+            headerButton = BpkSectionHeaderButton(
+                text = stringResource(R.string.card_list_header_button_text),
+                onClick = {},
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun defaultColumnStack() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            totalCount = TOTAL_CARDS,
+            isInScrollableContainer = true,
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun defaultColumnStackWithDescription() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = TOTAL_CARDS,
+            isInScrollableContainer = true,
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithExpandAccessory() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 2,
+                expandedCount = 5,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithExpandAccessoryWithLessThanMinimumExpandCount() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 2,
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 1,
+                expandedCount = 2,
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithButtonAccessory() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Button(
+                title = stringResource(R.string.card_list_add_item),
+                icon = BpkIcon.AddCircle,
+                onClick = {},
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithExpandAccessoryAndSectionHeader() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            isInScrollableContainer = true,
+            accessoryStyle = BpkStackCardAccessoryStyle.Expand(
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+                collapsedCount = 2,
+                expandedCount = 5,
+            ),
+            headerButton = BpkSectionHeaderButton(
+                text = stringResource(R.string.card_list_header_button_text),
+                onClick = {},
+            ),
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithButtonAccessoryAndSectionHeader() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            description = stringResource(R.string.card_list_description),
+            totalCount = 5,
+            isInScrollableContainer = true,
             accessoryStyle = BpkStackCardAccessoryStyle.Button(
                 title = stringResource(R.string.card_list_add_item),
                 icon = BpkIcon.AddCircle,

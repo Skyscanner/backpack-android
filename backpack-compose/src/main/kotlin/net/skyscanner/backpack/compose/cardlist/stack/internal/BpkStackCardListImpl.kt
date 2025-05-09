@@ -18,9 +18,10 @@
 
 package net.skyscanner.backpack.compose.cardlist.stack.internal
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -50,10 +51,14 @@ internal fun BpkStackCardListImpl(
     accessoryStyle: BpkStackCardAccessoryStyle? = null,
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
+    isInScrollableContainer: Boolean = false,
     content: @Composable ((Int) -> Unit),
 ) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    var buttonTapped: () -> Unit = {
+        expanded = !expanded
+    }
 
-    var isExpanded by rememberSaveable { mutableStateOf(false) }
     val targetCount = when (accessoryStyle) {
         is BpkStackCardAccessoryStyle.Expand -> {
             if (totalCount < 0 || accessoryStyle.collapsedCount < 0) {
@@ -66,17 +71,129 @@ internal fun BpkStackCardListImpl(
             if (expandedCount <= MINIMUM_EXPANDED_COUNT) {
                 totalCount
             } else {
-                if (isExpanded) expandedCount else accessoryStyle.collapsedCount
+                if (expanded) expandedCount else accessoryStyle.collapsedCount
             }
         }
+
         else -> totalCount
     }
 
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(start = BpkSpacing.Base, end = BpkSpacing.Base),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    if (isInScrollableContainer) {
+        ExpandableColumn(
+            expanded = expanded,
+            onButtonTap = buttonTapped,
+            title = title,
+            description = description,
+            headerButton = headerButton,
+            accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
+            accessoryStyle = accessoryStyle,
+            totalCount = totalCount,
+            targetCount = targetCount,
+            content = content,
+            modifier = modifier,
+        )
+    } else {
+        ExpandableLazyColumn(
+            isExpanded = expanded,
+            onButtonTap = buttonTapped,
+            title = title,
+            description = description,
+            headerButton = headerButton,
+            accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
+            totalCount = totalCount,
+            targetCount = targetCount,
+            accessoryStyle = accessoryStyle,
+            content = content,
+            modifier = modifier,
+        )
+    }
+}
+
+@Composable
+fun ExpandableColumn(
+    expanded: Boolean,
+    onButtonTap: () -> Unit,
+    title: String,
+    description: String?,
+    headerButton: BpkSectionHeaderButton?,
+    accessibilityHeaderTagEnabled: Boolean?,
+    accessoryStyle: BpkStackCardAccessoryStyle?,
+    totalCount: Int,
+    targetCount: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable (Int) -> Unit,
+) {
+    Column(modifier = modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+        BpkSectionHeader(
+            title = title,
+            description = description,
+            modifier = Modifier,
+            button = headerButton,
+            accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
+        )
+
+        Column(modifier = Modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+            for (index in 0 until targetCount) {
+                content(index)
+            }
+        }
+
+        accessoryStyle?.let {
+            when (it) {
+                is BpkStackCardAccessoryStyle.Expand -> {
+                    val expandedCount = it.expandedCount ?: totalCount
+                    if (expandedCount > MINIMUM_EXPANDED_COUNT) {
+
+                        BpkButton(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = BpkSpacing.Base),
+                            text = if (expanded) it.collapsedText else it.expandText,
+                            icon = if (expanded) BpkIcon.ChevronUp else BpkIcon.ChevronDown,
+                            position = BpkButtonIconPosition.End,
+                            type = BpkButtonType.Link,
+                            onClick = {
+                                onButtonTap()
+                                it.onExpansionChange?.invoke(expanded)
+                            },
+                        )
+                    }
+                }
+
+                is BpkStackCardAccessoryStyle.Button -> {
+                    if (headerButton == null) {
+                        BpkButton(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = BpkSpacing.Base),
+                            text = it.title,
+                            type = BpkButtonType.Primary,
+                            position = BpkButtonIconPosition.End,
+                            icon = it.icon,
+                            onClick = it.onClick,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ExpandableLazyColumn(
+    isExpanded: Boolean,
+    onButtonTap: () -> Unit,
+    title: String,
+    description: String?,
+    headerButton: BpkSectionHeaderButton?,
+    accessibilityHeaderTagEnabled: Boolean?,
+    totalCount: Int,
+    targetCount: Int,
+    accessoryStyle: BpkStackCardAccessoryStyle?,
+    modifier: Modifier = Modifier,
+    content: @Composable ((Int) -> Unit),
+) {
+    LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
         item {
             BpkSectionHeader(
                 title = title,
@@ -109,7 +226,7 @@ internal fun BpkStackCardListImpl(
                                 position = BpkButtonIconPosition.End,
                                 type = BpkButtonType.Link,
                                 onClick = {
-                                    isExpanded = !isExpanded
+                                    onButtonTap()
                                     it.onExpansionChange?.invoke(isExpanded)
                                 },
                             )
