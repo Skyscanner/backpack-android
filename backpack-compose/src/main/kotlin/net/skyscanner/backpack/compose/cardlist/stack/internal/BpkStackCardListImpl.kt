@@ -90,6 +90,7 @@ internal fun BpkStackCardListImpl(
             totalCount = totalCount,
             targetCount = targetCount,
             content = content,
+            modifier = modifier,
         )
     } else {
         ExpandableLazyColumn(
