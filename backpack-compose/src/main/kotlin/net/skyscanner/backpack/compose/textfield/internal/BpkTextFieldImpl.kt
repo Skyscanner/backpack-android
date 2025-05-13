@@ -195,6 +195,12 @@ private fun TextFieldBox(
     type: BpkTextFieldType = BpkTextFieldType.Default,
     textFieldContent: @Composable () -> Unit,
 ) {
+    val textFieldBoxTintColor by animateColorAsState(
+        when (status) {
+            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+            else -> BpkTheme.colors.textSecondary
+        },
+    )
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -229,12 +235,7 @@ private fun TextFieldBox(
                     contentDescription = null,
                     size = BpkIconSize.Large,
                     modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = animateColorAsState(
-                        when (status) {
-                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-                            else -> BpkTheme.colors.textSecondary
-                        },
-                    ).value,
+                    tint = textFieldBoxTintColor,
                 )
 
             else -> {}
@@ -248,7 +249,7 @@ private fun TextFieldBox(
 
             BpkText(
                 text = placeholder ?: "",
-                color = BpkTheme.colors.textDisabled,
+                color = textFieldBoxTintColor,
                 maxLines = maxLines,
                 modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
                 style = BpkTheme.typography.bodyDefault,
