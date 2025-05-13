@@ -248,7 +248,7 @@ private fun TextFieldBox(
 
             BpkText(
                 text = placeholder ?: "",
-                color = BpkTheme.colors.textDisabled,
+                color = BpkTheme.colors.textSecondary,
                 maxLines = maxLines,
                 modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
                 style = BpkTheme.typography.bodyDefault,
