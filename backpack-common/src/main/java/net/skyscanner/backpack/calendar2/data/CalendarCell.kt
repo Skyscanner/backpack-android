@@ -62,6 +62,7 @@ sealed class CalendarCell {
         val selection: Selection?,
         val text: CharSequence,
         val outOfRange: Boolean,
+        val testTag: String,
         val contentDescription: String,
         val stateDescription: String?,
         val onClickLabel: String?,
@@ -115,6 +116,7 @@ internal fun CalendarCellDay(
             .build()
         append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     },
+    testTag = date.format(params.dateContentDescriptionFormatter),
     selection = when (selection) {
         is CalendarSelection.None -> null
         is CalendarSelection.Single -> when (date) {

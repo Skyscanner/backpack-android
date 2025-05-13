@@ -96,7 +96,7 @@ internal fun BpkCalendarDayCell(
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )
-            .testTag(checkDayCellStatus(inactive, model.info.highlighted))
+            .testTag(checkDayCellStatus(inactive, model.info.highlighted) + model.testTag)
             .semantics {
                 testTagsAsResourceId = true
                 if (model.stateDescription != null) {
