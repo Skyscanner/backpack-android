@@ -105,7 +105,7 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
-    contentDescription = date.format(params.dateContentDescriptionFormatter) + generateContentDescription(date, params.selectionMode),
+    contentDescription = date.format(params.dateContentDescriptionFormatter) + ". " + generateContentDescription(date, params.selectionMode),
     stateDescription = stateDescription(date, params.selectionMode, selection),
     onClickLabel = onClickLabel(date, params.selectionMode, selection),
     text = buildSpannedString {
