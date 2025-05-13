@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
-import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.firstDay
 import net.skyscanner.backpack.calendar2.testCalendarWith
@@ -26,16 +26,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.LocalDate
 import java.time.Month
+import net.skyscanner.backpack.calendar2.CalendarParams.SelectionMode
 
 class CalendarAccessibilityLabelTests {
 
     @Test
     fun accessibility_labels_are_correct_when_single_selection_mode_and_no_date_selected() {
         val calendarParams = CalendarSettings.Default.copy(
-            selectionMode = CalendarParams.SelectionMode.Single(
-                startSelectionHint = "startSelectionHint",
+            selectionMode = SelectionMode.Single(
+                startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
                 noSelectionState = "noSelectionState",
-                startSelectionState = "startSelectionState",
+                startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
             ),
         )
         testCalendarWith(calendarParams) {
@@ -50,10 +51,10 @@ class CalendarAccessibilityLabelTests {
     @Test
     fun accessibility_labels_are_correct_when_single_selection_mode_and_date_selected() {
         val calendarParams = CalendarSettings.Default.copy(
-            selectionMode = CalendarParams.SelectionMode.Single(
-                startSelectionHint = "startSelectionHint",
+            selectionMode = SelectionMode.Single(
+                startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
                 noSelectionState = "noSelectionState",
-                startSelectionState = "startSelectionState",
+                startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
             ),
         )
         testCalendarWith(calendarParams) {
@@ -71,12 +72,11 @@ class CalendarAccessibilityLabelTests {
     @Test
     fun accessibility_labels_are_correct_when_range_selection_mode_and_no_date_selected() {
         val calendarParams = CalendarSettings.Default.copy(
-            selectionMode = CalendarParams.SelectionMode.Range(
-                startSelectionHint = "startSelectionHint",
-                noSelectionState = "noSelectionState",
-                startSelectionState = "startSelectionState",
-                endSelectionHint = "endSelectionHint",
-                endSelectionState = "endSelectionState",
+            selectionMode = SelectionMode.Range(
+                startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
+                startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
+                endSelectionHint = DayCellAccessibilityLabel.Static("endSelectionHint"),
+                endSelectionState = DayCellAccessibilityLabel.Static("endSelectionState"),
             ),
         )
         testCalendarWith(calendarParams) {
@@ -91,12 +91,11 @@ class CalendarAccessibilityLabelTests {
     @Test
     fun accessibility_labels_are_correct_when_range_selection_mode_and_start_date_selected() {
         val calendarParams = CalendarSettings.Default.copy(
-            selectionMode = CalendarParams.SelectionMode.Range(
-                startSelectionHint = "startSelectionHint",
-                noSelectionState = "noSelectionState",
-                startSelectionState = "startSelectionState",
-                endSelectionHint = "endSelectionHint",
-                endSelectionState = "endSelectionState",
+            selectionMode = SelectionMode.Range(
+                startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
+                startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
+                endSelectionHint = DayCellAccessibilityLabel.Static("endSelectionHint"),
+                endSelectionState = DayCellAccessibilityLabel.Static("endSelectionState"),
             ),
         )
         testCalendarWith(calendarParams) {
@@ -118,12 +117,11 @@ class CalendarAccessibilityLabelTests {
     @Test
     fun accessibility_labels_are_correct_when_range_selection_mode_and_start_and_end_dates_selected() {
         val calendarParams = CalendarSettings.Default.copy(
-            selectionMode = CalendarParams.SelectionMode.Range(
-                startSelectionHint = "startSelectionHint",
-                noSelectionState = "noSelectionState",
-                startSelectionState = "startSelectionState",
-                endSelectionHint = "endSelectionHint",
-                endSelectionState = "endSelectionState",
+            selectionMode = SelectionMode.Range(
+                startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
+                startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
+                endSelectionHint = DayCellAccessibilityLabel.Static("endSelectionHint"),
+                endSelectionState = DayCellAccessibilityLabel.Static("endSelectionState"),
             ),
         )
         testCalendarWith(calendarParams) {
