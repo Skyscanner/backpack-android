@@ -206,13 +206,13 @@ BpkStackCardList(
 ```
 
 # Stack Column Variants 
-> **NOTICE**: The column varint should only be used when the compoent is to be placed inside of a scrollable View/Composable or one with infinite height
+> **NOTICE**: The column variant should only be used when the component is to be placed inside of a scrollable View/Composable or one with infinite height
 
 
 
 ## Stack - Column Variant 
-* To be used inside of a scollable layout or when used inside of a layout with infinite height (`RecyclerView`/`LazyColumn`/`LazyList`)
-* Important note: this compoent does *NOT* supprt scrolling
+* To be used inside of a scrollable layout or when used inside of a layout with infinite height (`RecyclerView`/`LazyColumn`/`LazyList`)
+* Important note: this component does *NOT* support scrolling
 ```Kotlin
 import androidx.annotation.StringRes
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
