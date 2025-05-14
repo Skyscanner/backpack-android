@@ -20,6 +20,7 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import java.io.Serializable
 import java.text.SimpleDateFormat
@@ -87,41 +88,23 @@ data class CalendarParams(
          * Accessibility labels are NOT supported in the view version
          */
         data class Single(
-            @Transient
-            val startSelectionHint: DayCellAccessibilityLabel? = null,
+            val startSelectionHint: String? = null,
             val noSelectionState: String? = null,
-            @Transient
-            val startSelectionState: DayCellAccessibilityLabel? = null,
-            @Transient
-            val contentDescription: ((LocalDate) -> String)? = null,
+            val startSelectionState: String? = null,
         ) : SelectionMode
 
         /**
          * A range of dates can be selected.
          */
         data class Range(
-            @Transient
-            val startSelectionHint: DayCellAccessibilityLabel? = null,
-            @Transient
-            val endSelectionHint: DayCellAccessibilityLabel? = null,
-            @Transient
-            val startSelectionState: DayCellAccessibilityLabel? = null,
+            val startSelectionHint: String? = null,
+            val endSelectionHint: String? = null,
+            val noSelectionState: String? = null,
+            val startSelectionState: String? = null,
             val startAndEndSelectionState: String? = null,
-            @Transient
-            val endSelectionState: DayCellAccessibilityLabel? = null,
+            val endSelectionState: String? = null,
             val betweenSelectionState: String? = null,
-            @Transient
-            val contentDescription: ((LocalDate) -> String)? = null,
         ) : SelectionMode
-    }
-
-    /**
-     * Describes the accessibility label of a day cell
-     * support Static string and dynamic string
-     */
-    sealed class DayCellAccessibilityLabel {
-        data class Static(val label: String) : DayCellAccessibilityLabel()
-        data class Dynamic(val label: (LocalDate) -> String) : DayCellAccessibilityLabel()
     }
 
     /**

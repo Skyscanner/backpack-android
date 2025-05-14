@@ -23,9 +23,7 @@ import android.text.style.TtsSpan
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.core.text.buildSpannedString
-import net.skyscanner.backpack.calendar2.CalendarDayCellTestTag
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -63,7 +61,6 @@ sealed class CalendarCell {
         val selection: Selection?,
         val text: CharSequence,
         val outOfRange: Boolean,
-        val testTag: String,
         val contentDescription: String,
         val stateDescription: String?,
         val onClickLabel: String?,
@@ -105,7 +102,7 @@ internal fun CalendarCellDay(
     yearMonth = yearMonth,
     info = params.cellsInfo[date] ?: CellInfo.Default,
     outOfRange = date !in params.range,
-    contentDescription = date.format(params.dateContentDescriptionFormatter) + ". " + generateContentDescription(date, params.selectionMode),
+    contentDescription = date.format(params.dateContentDescriptionFormatter),
     stateDescription = stateDescription(date, params.selectionMode, selection),
     onClickLabel = onClickLabel(date, params.selectionMode, selection),
     text = buildSpannedString {
@@ -117,7 +114,6 @@ internal fun CalendarCellDay(
             .build()
         append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     },
-    testTag = checkDayCellStatus(params, date) + date.format(params.dateContentDescriptionFormatter),
     selection = when (selection) {
         is CalendarSelection.None -> null
         is CalendarSelection.Single -> when (date) {
@@ -143,15 +139,6 @@ internal fun CalendarCellDay(
     },
 )
 
-private fun generateContentDescription(
-    date: LocalDate,
-    selectionMode: CalendarParams.SelectionMode,
-): String = when (selectionMode) {
-    is CalendarParams.SelectionMode.Single -> selectionMode.contentDescription?.let { it(date) } ?: ""
-    is CalendarParams.SelectionMode.Range -> selectionMode.contentDescription?.let { it(date) } ?: ""
-    else -> ""
-}
-
 private fun stateDescription(
     date: LocalDate,
     selectionMode: CalendarParams.SelectionMode,
@@ -161,7 +148,7 @@ private fun stateDescription(
         is CalendarSelection.None -> selectionMode.noSelectionState
         is CalendarSelection.Single ->
             when (selection.date) {
-                date -> selectionMode.startSelectionState?.getAccessibilityLabel(date)
+                date -> selectionMode.startSelectionState
                 else -> null
             }
         else -> null
@@ -171,9 +158,9 @@ private fun stateDescription(
         is CalendarSelection.Dates ->
             when {
                 selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
-                selection.start == date && selection.end == null -> selectionMode.startSelectionState?.getAccessibilityLabel(date)
-                selection.start == date && selection.end != null -> selectionMode.startSelectionState?.getAccessibilityLabel(date)
-                selection.end == date -> selectionMode.endSelectionState?.getAccessibilityLabel(date)
+                selection.start == date && selection.end == null -> selectionMode.startSelectionState
+                selection.start == date && selection.end != null -> selectionMode.startSelectionState
+                selection.end == date -> selectionMode.endSelectionState
                 selection.end != null && date in selection -> selectionMode.betweenSelectionState
                 else -> null
             }
@@ -189,35 +176,17 @@ private fun onClickLabel(
     selectionMode: CalendarParams.SelectionMode,
     selection: CalendarSelection,
 ): String? = when (selectionMode) {
-    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
+    is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint
     is CalendarParams.SelectionMode.Range -> when (selection) {
-        is CalendarSelection.None -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
+        is CalendarSelection.None -> selectionMode.startSelectionHint
         is CalendarSelection.Dates ->
             when {
-                selection.end != null || date < selection.start -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
-                else -> selectionMode.endSelectionHint?.getAccessibilityLabel(date)
+                selection.end != null || date < selection.start -> selectionMode.startSelectionHint
+                else -> selectionMode.endSelectionHint
             }
 
         else -> null
     }
 
     is CalendarParams.SelectionMode.Disabled -> null
-}
-
-private fun checkDayCellStatus(params: CalendarParams, date: LocalDate): String {
-    val info = (params.cellsInfo[date] ?: CellInfo.Default)
-    val outOfRange = date !in params.range
-    val inactive = info.disabled || outOfRange
-    val isHighlighted = info.highlighted
-    return when {
-        inactive && !isHighlighted -> CalendarDayCellTestTag.INACTIVE
-        inactive && isHighlighted -> CalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
-        !inactive && isHighlighted -> CalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
-        else -> CalendarDayCellTestTag.ACTIVE
-    }.toString()
-}
-
-fun DayCellAccessibilityLabel.getAccessibilityLabel(date: LocalDate): String = when (this) {
-    is DayCellAccessibilityLabel.Static -> label
-    is DayCellAccessibilityLabel.Dynamic -> label(date)
 }

@@ -60,6 +60,7 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.calendar.BpkCalendarDayCellTestTag
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall
 import net.skyscanner.backpack.compose.skeleton.BpkHeadlineSkeleton
@@ -95,7 +96,7 @@ internal fun BpkCalendarDayCell(
                 onClickLabel = model.onClickLabel,
                 interactionSource = remember { MutableInteractionSource() },
             )
-            .testTag(model.testTag)
+            .testTag(checkDayCellStatus(inactive, model.info.highlighted))
             .semantics {
                 testTagsAsResourceId = true
                 if (model.stateDescription != null) {
@@ -322,3 +323,12 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+private fun checkDayCellStatus(inactive: Boolean, isHighlighted: Boolean): String {
+    return when {
+        inactive && !isHighlighted -> BpkCalendarDayCellTestTag.INACTIVE
+        inactive && isHighlighted -> BpkCalendarDayCellTestTag.INACTIVE_HIGHLIGHTED
+        !inactive && isHighlighted -> BpkCalendarDayCellTestTag.ACTIVE_HIGHLIGHTED
+        else -> BpkCalendarDayCellTestTag.ACTIVE
+    }.toString()
+}
