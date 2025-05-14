@@ -24,7 +24,6 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
-import androidx.compose.ui.test.assertContentDescriptionContains
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -37,7 +36,6 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import kotlinx.coroutines.test.runTest
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -58,12 +56,9 @@ class BpkCalendarTest {
     private val DefaultSingle = CalendarParams(
         locale = Locale.UK,
         selectionMode = CalendarParams.SelectionMode.Single(
-            startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
+            startSelectionHint = "startSelectionHint",
             noSelectionState = "noSelectionState",
-            startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
-            contentDescription = {
-                "contentDescription"
-            },
+            startSelectionState = "startSelectionState",
         ),
         range = initialRange,
         now = now,
@@ -71,15 +66,13 @@ class BpkCalendarTest {
 
     private val DefaultRange = DefaultSingle.copy(
         selectionMode = CalendarParams.SelectionMode.Range(
-            startSelectionHint = DayCellAccessibilityLabel.Static("startSelectionHint"),
-            endSelectionHint = DayCellAccessibilityLabel.Static("endSelectionHint"),
-            startSelectionState = DayCellAccessibilityLabel.Static("startSelectionState"),
+            startSelectionHint = "startSelectionHint",
+            endSelectionHint = "endSelectionHint",
+            noSelectionState = "noSelectionState",
+            startSelectionState = "startSelectionState",
             startAndEndSelectionState = "startAndEndSelectionState",
-            endSelectionState = DayCellAccessibilityLabel.Static("endSelectionState"),
+            endSelectionState = "endSelectionState",
             betweenSelectionState = "betweenSelectionState",
-            contentDescription = {
-                "contentDescription"
-            },
         ),
     )
 
@@ -98,13 +91,11 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("endSelectionHint")
             .assertStateDescriptionEquals("startSelectionState")
             .performClick()
@@ -126,18 +117,14 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("13")
             .onLast()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertStateDescriptionEquals("startSelectionState")
 
         composeTestRule.onAllNodesWithText("14")
             .onLast()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertStateDescriptionEquals("startSelectionState")
 
         val state = controller.state
@@ -160,14 +147,12 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
 
         composeTestRule.onAllNodesWithText("14")
             .onLast()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("endSelectionHint")
             .performClick()
             .assertStateDescriptionEquals("endSelectionState")
@@ -190,7 +175,6 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .performClick()
             .assertStateDescriptionEquals("startSelectionState")
@@ -218,18 +202,15 @@ class BpkCalendarTest {
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .performClick()
 
         composeTestRule.onAllNodesWithText("31")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertOnClickLabelEquals("startSelectionHint")
             .assertStateDescriptionEquals("startSelectionState")
 
         composeTestRule.onAllNodesWithText("17")
             .onFirst()
-            .assertContentDescriptionContains("contentDescription", true, true)
             .assertIsNotSelected()
 
         val state = controller.state
