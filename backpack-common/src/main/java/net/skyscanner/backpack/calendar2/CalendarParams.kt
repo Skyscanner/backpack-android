@@ -139,6 +139,7 @@ data class CalendarParams(
 data class CellInfo(
     val disabled: Boolean = false,
     val status: CellStatus? = null,
+    val highlighted: Boolean = false,
     val label: CellLabel = CellLabel.Text(""), // Default is empty text
     val style: CellStatusStyle = CellStatusStyle.Label,
 ) : Serializable {
@@ -157,6 +158,8 @@ sealed class CellLabel : Serializable {
         val resId: Int,
         val tint: Int? = null,
     ) : CellLabel()
+
+    data class Loading(val contentDescription: String) : CellLabel()
 }
 
 /**

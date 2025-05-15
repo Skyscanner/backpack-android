@@ -104,18 +104,6 @@ class BpkTextAreaTest : BpkSnapshotTest() {
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun disabledPlaceholder() {
-        snap {
-            BpkTextArea(
-                value = "",
-                onValueChange = {},
-                placeholder = "Placeholder",
-            )
-        }
-    }
-
-    @Test
     fun validated() {
         snap {
             BpkTextArea(

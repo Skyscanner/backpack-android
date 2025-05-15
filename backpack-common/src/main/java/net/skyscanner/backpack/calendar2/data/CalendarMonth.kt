@@ -31,6 +31,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 
@@ -59,7 +60,7 @@ internal inline fun CalendarMonth(
     val nextMonth = yearMonth.nextMonth()
     val cells = mutableListOf<CalendarCell>()
     cells += CalendarCell.Header(
-        title = MonthTitle(yearMonth, monthsFormatter, locale),
+        title = MonthTitle(yearMonth, monthsFormatter),
         yearMonth = yearMonth,
         monthSelectionMode = monthSelectionMode,
         calendarSelectionMode = calendarSelectionMode,
@@ -89,12 +90,8 @@ internal inline fun CalendarMonth(
     return CalendarMonth(yearMonth = yearMonth, cells = cells)
 }
 
-@Suppress("DEPRECATION")
-internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, locale: Locale): String {
-    val date = Date(
-        yearMonth.year - 1900,
-        yearMonth.monthValue - 1,
-        2, // Lock the formatter date to 2nd, so it accounts for -12h tz and the month is predictable
-    )
-    return formatter.format(date).capitalize(locale)
+internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat): String {
+    val localDate = LocalDate.of(yearMonth.year, yearMonth.monthValue, 2)
+    val date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
+    return formatter.format(date)
 }

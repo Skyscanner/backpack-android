@@ -42,6 +42,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun loading() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.Loading)
+        snap(calendar, padding = 0, captureFullScreen = true)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun past() {
         val calendar = BpkCalendar(testContext)
         calendar.setParams(BpkCalendarTestCases.Params.Past)

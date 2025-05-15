@@ -33,6 +33,8 @@ object BpkCalendarTestCases {
 
         private val initialStartDate = LocalDate.of(2019, 1, 2)
         private val initialEndDate = LocalDate.of(2019, 12, 31)
+        private val defaultHighlightedDates =
+            setOf(LocalDate.of(2019, 1, 10), LocalDate.of(2019, 1, 20), LocalDate.of(2019, 1, 29))
         private val initialRange = initialStartDate..initialEndDate
         private val now = initialStartDate
 
@@ -56,7 +58,11 @@ object BpkCalendarTestCases {
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
                     CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£12"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
-                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000000000000"), status = CellStatus.Positive),
+                    CellInfo(
+                        style = CellStatusStyle.Label,
+                        label = CellLabel.Text("£900000000000000"),
+                        status = CellStatus.Positive,
+                    ),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
                     CellInfo(style = CellStatusStyle.Label, label = CellLabel.Text("£900000"), status = CellStatus.Positive),
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
@@ -66,7 +72,22 @@ object BpkCalendarTestCases {
                     ),
             ),
         )
-
+        val Loading = DefaultRange.copy(
+            cellsInfo = mapOf(
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
+                    CellInfo(style = CellStatusStyle.Label, label = CellLabel.Loading("Loading")),
+            ),
+        )
         val Past = DefaultRange.copy(
             range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
         )
@@ -107,6 +128,10 @@ object BpkCalendarTestCases {
 
         val WithDisabledDates_SelectDisabledDate = WithDisabledDates
 
+        val WithHighLightedDates = DefaultSingle.copy(
+            cellsInfo = highlightedDates(initialRange, defaultHighlightedDates),
+        )
+
         val WithWholeMonthButtonEnabled = DefaultRange.copy(
             monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
                 label = "Select whole month",
@@ -135,6 +160,15 @@ object BpkCalendarTestCases {
                 .toIterable()
                 .filter { it.dayOfWeek == disabledDayOfWeek }
                 .associateWith { CellInfo(disabled = true) }
+
+        private fun highlightedDates(
+            range: ClosedRange<LocalDate>,
+            highLight: Set<LocalDate>,
+        ): Map<LocalDate, CellInfo> =
+            range
+                .toIterable()
+                .filter { highLight.contains(it) }
+                .associateWith { CellInfo(highlighted = true) }
     }
 
     object Selection {
@@ -159,5 +193,9 @@ object BpkCalendarTestCases {
         val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
 
         val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
+
+        val WithHighlightedDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 3))
+
+        val WithHighlightedDates_SelectHighLightedDate = CalendarSelection.Single(LocalDate.of(2019, 1, 10))
     }
 }

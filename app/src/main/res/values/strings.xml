@@ -123,6 +123,7 @@
     <string name="toggle_disabled_checked">Disabled Checked</string>
     <string name="toggle_custom_title">Custom</string>
     <string name="toggle_custom_subtitle">Content</string>
+    <string name="toggle_long_text">Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long</string>
 
     <string name="panel_default">Default</string>
     <string name="panel_no_padding">No padding</string>
@@ -376,6 +377,7 @@
     <string name="image_gallery_category_2">All photos (59)</string>
     <string name="image_gallery_category_3">Official photos (43)</string>
     <string name="image_gallery_category_4">Bedroom (13)</string>
+    <string name="image_gallery_preview_button">View photos</string>
 
     <string name="navigation_tabs_explore">Explore</string>
     <string name="navigation_tabs_flights">Flights</string>
@@ -398,6 +400,14 @@
     <string name="card_list_item_2_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
     <string name="card_list_item_3_body_text">Immerse yourself in the rich history and culture of the Irish capital.</string>
     <string name="card_list_item_9_body_text">Watch the city come alive in bloom as the warmer climes approach.</string>
+    <string name="card_list_section_header_click">Section Header clicked!</string>
+    <string name="card_list_accessory_button_clicked">Accessory button clicked!</string>
+    <string name="card_list_item_clicked">Item clicked!</string>
+    <string name="card_list_add_item">Add item</string>
+    <string name="card_list_show_more">Show more</string>
+    <string name="card_list_show_less">Show less</string>
+    <string name="card_list_on_list_expanded">OnExpansionChange called!</string>
+
     <string name="shadow_status" translatable="false">Shadow: %1$s</string>
     <string name="on" translatable="false">On</string>
     <string name="off" translatable="false">Off</string>

@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels.png" alt="Labeled Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/day-labels_dm.png" alt="Labeled Calendar2 component - dark mode" width="375" /> |
 
+## Highlighted Dates
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates.png" alt="Highlighted dates Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/highlighted-dates_dm.png" alt="Highlighted dates Calendar2 component - dark mode" width="375" /> |
+
 ## Icon as label
 
 | Day                                                                                                                                                                                                  | Night                                                                                                                                                                                                            |
@@ -34,6 +40,12 @@
 | Day                                                                                                                                                                                                                            | Night                                                                                                                                                                                                                                         |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/year-in-month-label-no-floating-year.png" alt="Calendar2 component showing year in month label" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/year-in-month-label-no-floating-year_dm.png" alt="Calendar2 component showing year in month label - dark mode" width="375" /> |
+
+## Loading
+
+| Day                                                                                                                                                                                         | Night                                                                                                                                                                                                       |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/loading.png" alt="Calendar2 component showing loading label" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/loading_dm.png" alt="Calendar2 component showing loading labels - dark mode" width="375" /> |
 
 ## Installation
 
@@ -127,6 +139,7 @@ controller.setParams(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
         label = CellLabel.Text("£30"), // adds label below the date
+        highlighted = true, // marks date as highlighted
       ),
     )
   )
@@ -148,5 +161,21 @@ controller.setParams(
       ),
     )
   )
+)
+```
+
+You can also show a loading state
+
+```Kotlin
+controller.setParams(
+    CalendarParams(
+        range = range,
+        selectionMode = selectionMode,
+        cellsInfo = mapOf(
+            LocalDate.of(2019, 1, 2) to CellInfo(
+                label = CellLabel.Loading(contentDescription = "Loading"), // adds loading indicator below the date
+            ),
+        )
+    )
 )
 ```

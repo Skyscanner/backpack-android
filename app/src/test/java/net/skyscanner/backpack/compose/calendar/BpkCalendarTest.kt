@@ -128,6 +128,29 @@ class BpkCalendarTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withHighlightedDates() {
+        val controller = createController(BpkCalendarTestCases.Params.WithHighLightedDates)
+        snap(controller)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withHighlightedDates_SelectSingle() {
+        val controller = createController(BpkCalendarTestCases.Params.WithHighLightedDates)
+        controller.setSelection(BpkCalendarTestCases.Selection.WithHighlightedDates_SelectSingle)
+        snap(controller)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withHighlightedDates_SelectHighLightedDate() {
+        val controller = createController(BpkCalendarTestCases.Params.WithHighLightedDates)
+        controller.setSelection(BpkCalendarTestCases.Selection.WithHighlightedDates_SelectHighLightedDate)
+        snap(controller)
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun withWholeMonthButtonEnabled() {
         val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
@@ -146,6 +169,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun withYearInMonthLabel() {
         val controller = createController(BpkCalendarTestCases.Params.WithYearInMonthLabel)
+        snap(controller)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun loading() {
+        val controller = createController(BpkCalendarTestCases.Params.Loading)
         snap(controller)
     }
 
