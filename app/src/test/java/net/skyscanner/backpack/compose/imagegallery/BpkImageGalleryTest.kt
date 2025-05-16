@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.imagegallery
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.ImageGalleryCarouselStory
 import net.skyscanner.backpack.demo.compose.ImageGalleryChipGridStory
 import net.skyscanner.backpack.demo.compose.ImageGalleryImageGridStory
 import net.skyscanner.backpack.demo.compose.ImageGallerySlideshowStory
@@ -27,11 +26,6 @@ import org.junit.Test
 import org.robolectric.RuntimeEnvironment
 
 class BpkImageGalleryTest : BpkSnapshotTest() {
-
-    @Test
-    fun carousel() {
-        snap { ImageGalleryCarouselStory() }
-    }
 
     @Test
     fun slideshow() {

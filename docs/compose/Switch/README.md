@@ -27,6 +27,29 @@ BpkSwitch(
   onCheckedChange = { checked -> },
 )
 ```
+Example of a Switch with annotated string:
+
+```Kotlin
+
+import androidx.compose.ui.text.buildAnnotatedString
+import net.skyscanner.backpack.compose.switch.BpkSwitch
+
+BpkSwitch(
+    text = buildAnnotatedString {
+        append(stringResource(R.string.toggle_long_text))
+        withStyle(
+            style = SpanStyle(
+                color = BpkTheme.colors.textLink,
+                fontFamily = BpkTheme.typography.bodyDefault.fontFamily,
+            ),
+        ) {
+            append(" styled text")
+        }
+  },
+    checked = true,
+    onCheckedChange = { checked -> },
+)
+```
 
 Example of a Switch with custom content:
 

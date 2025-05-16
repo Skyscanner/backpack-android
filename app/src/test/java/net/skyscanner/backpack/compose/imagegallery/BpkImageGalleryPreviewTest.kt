@@ -1,8 +1,7 @@
-package net.skyscanner.backpack.compose.calendar
-/*
+/**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2025 Skyscanner Ltd
+ * Copyright 2018 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +16,22 @@ package net.skyscanner.backpack.compose.calendar
  * limitations under the License.
  */
 
-enum class BpkCalendarDayCellTestTag {
-    INACTIVE,
-    INACTIVE_HIGHLIGHTED,
-    ACTIVE,
-    ACTIVE_HIGHLIGHTED,
+package net.skyscanner.backpack.compose.imagegallery
+
+import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.compose.ImageGalleryPreviewDefaultStory
+import net.skyscanner.backpack.demo.compose.ImageGalleryPreviewHeroStory
+import org.junit.Test
+
+class BpkImageGalleryPreviewTest : BpkSnapshotTest() {
+
+    @Test
+    fun previewDefault() {
+        snap { ImageGalleryPreviewDefaultStory() }
+    }
+
+    @Test
+    fun previewHero() {
+        snap { ImageGalleryPreviewHeroStory() }
+    }
 }

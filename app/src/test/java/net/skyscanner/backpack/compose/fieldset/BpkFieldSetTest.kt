@@ -103,6 +103,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
                 BpkTextField(
                     value = "",
                     onValueChange = { },
+                    status = BpkFieldStatus.Disabled,
                     placeholder = "Placeholder",
                 )
             }
