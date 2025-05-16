@@ -60,9 +60,9 @@ open class BpkSpinner @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val colors = arrayOf(
-        R.color.bpkPrimary,
+        R.color.bpkCoreAccent,
         R.color.bpkWhite,
-        R.color.bpkSkyGrayTint01,
+        R.color.bpkTextSecondary,
         R.color.bpkTextPrimary,
         R.color.bpkTextDisabled,
         R.color.bpkTextOnDark,

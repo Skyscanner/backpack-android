@@ -57,7 +57,7 @@ class BpkSpinnerTest {
     @Test
     fun test_dark() {
         subject.type = BpkSpinner.Type.DARK
-        Assert.assertEquals(subject.context.getColor(R.color.bpkSkyGrayTint01), subject.getColor())
+        Assert.assertEquals(subject.context.getColor(R.color.bpkTextSecondary), subject.getColor())
     }
 
     @Test
