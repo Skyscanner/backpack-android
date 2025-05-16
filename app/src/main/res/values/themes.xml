@@ -83,7 +83,7 @@
 
     <style name="LondonThemeFab">
         <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-        <item name="fabIconColor">@color/bpkPanjin</item>
+        <item name="fabIconColor">@color/bpkStatusDangerSpot</item>
     </style>
 
     <style name="LondonThemeButtonLink">
@@ -91,13 +91,13 @@
     </style>
 
     <style name="LondonThemeCheckbox">
-        <item name="checkboxColorChecked">@color/bpkPanjin</item>
+        <item name="checkboxColorChecked">@color/bpkStatusDangerSpot</item>
         <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
         <item name="checkboxColor">#013A76</item>
     </style>
 
     <style name="LondonThemeRadioButton">
-        <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+        <item name="radioButtonColorChecked">@color/bpkStatusDangerSpot</item>
         <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
         <item name="radioButtonColor">#013A76</item>
     </style>
@@ -146,7 +146,7 @@
 
     <style name="LondonThemeSnackbar">
         <item name="snackbarTextColor">#6392ce</item>
-        <item name="snackbarActionColor">@color/bpkPanjin</item>
+        <item name="snackbarActionColor">@color/bpkStatusDangerSpot</item>
         <item name="snackbarBackgroundColor">#00254B</item>
     </style>
 
@@ -154,7 +154,7 @@
     </style>
 
     <style name="LondonThemeSlider">
-        <item name="sliderThumbColor">@color/bpkPanjin</item>
+        <item name="sliderThumbColor">@color/bpkStatusDangerSpot</item>
         <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
         <item name="sliderTrackColorActive">#013A76</item>
     </style>
@@ -235,13 +235,13 @@
     </style>
 
     <style name="DohaThemeCheckbox">
-        <item name="checkboxColorChecked">@color/bpkPanjin</item>
+        <item name="checkboxColorChecked">@color/bpkStatusDangerSpot</item>
         <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
         <item name="checkboxColor">#ffb300</item>
     </style>
 
     <style name="DohaThemeRadioButton">
-        <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+        <item name="radioButtonColorChecked">@color/bpkStatusDangerSpot</item>
         <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
         <item name="radioButtonColor">#ffb300</item>
     </style>
@@ -298,7 +298,7 @@
     </style>
 
     <style name="DohaThemeSlider">
-        <item name="sliderThumbColor">@color/bpkPanjin</item>
+        <item name="sliderThumbColor">@color/bpkStatusDangerSpot</item>
         <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
         <item name="sliderTrackColorActive">#ffb300</item>
     </style>

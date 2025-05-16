@@ -60,7 +60,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         Alternate(
             id = 1,
             styleAttribute = R.attr.bpkHorizontalNavStyleAlternate,
-            defaultTextColor = R.color.bpkSkyGrayTint07,
+            defaultTextColor = R.color.bpkCanvasContrast,
             defaultTextSelectedColor = R.color.bpkWhite,
             defaultIndicatorColor = R.color.bpkWhite,
         ),
