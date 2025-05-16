@@ -4,5 +4,5 @@
     <size
         android:width="@dimen/bpkSpacingSm"
         android:height="@dimen/bpkSpacingSm" />
-    <solid android:color="@color/bpkSystemRed" />
+    <solid android:color="@color/bpkStatusDangerSpot" />
 </shape>

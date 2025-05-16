@@ -38,7 +38,7 @@
     </style>
 
     <style name="LondonThemeBpkStarRating" parent="">
-        <item name="starColor">@color/bpkSkyGrayTint06</item>
+        <item name="starColor">@color/bpkSurfaceHighlight</item>
         <item name="starFilledColor">?bpkPrimaryColor</item>
     </style>
 
@@ -106,11 +106,11 @@
         <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
         <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
         <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
-        <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+        <item name="barChartBarBackgroundColor">@color/bpkSurfaceHighlight</item>
         <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
         <item name="barChartLineColor">?bpkPrimaryColor</item>
-        <item name="barChartPopupBackgroundColor">@color/bpkSkyBlueShade01</item>
-        <item name="barChartPopupTextColor">@color/bpkSagano</item>
+        <item name="barChartPopupBackgroundColor">@color/bpkCoreAccent</item>
+        <item name="barChartPopupTextColor">@color/bpkStatusSuccessFill</item>
     </style>
 
     <style name="LondonThemeHorizontalNav">
@@ -120,7 +120,7 @@
     </style>
 
     <style name="LondonThemeHorizontalNavAlternate">
-        <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
+        <item name="horizontalNavTextColor">@color/bpkSurfaceHighlight</item>
         <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
         <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
     </style>
@@ -192,12 +192,12 @@
     </style>
 
     <style name="DohaThemeBpkStarRating" parent="">
-        <item name="starColor">@color/bpkSkyGrayTint06</item>
+        <item name="starColor">@color/bpkSurfaceHighlight</item>
         <item name="starFilledColor">?bpkPrimaryColor</item>
     </style>
 
     <style name="DohaThemeBpkSwitch" parent="">
-        <item name="switchPrimaryColor">@color/bpkKolkata</item>
+        <item name="switchPrimaryColor">@color/bpkStatusWarningSpot</item>
     </style>
 
     <style name="DohaThemeButtonPrimary">
@@ -227,7 +227,7 @@
 
     <style name="DohaThemeFab">
         <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-        <item name="fabIconColor">@color/bpkSkyGrayTint06</item>
+        <item name="fabIconColor">@color/bpkSurfaceHighlight</item>
     </style>
 
     <style name="DohaThemeButtonLink">
@@ -253,7 +253,7 @@
     </style>
 
     <style name="DohaThemeHorizontalNavAlternate">
-        <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
+        <item name="horizontalNavTextColor">@color/bpkSurfaceHighlight</item>
         <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
         <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
     </style>
@@ -279,7 +279,7 @@
 
     <style name="DohaThemeSnackbar">
         <item name="snackbarTextColor">#ffd677</item>
-        <item name="snackbarActionColor">@color/bpkHillier</item>
+        <item name="snackbarActionColor">@color/bpkStatusDangerSpot</item>
         <item name="snackbarBackgroundColor">#ffa000</item>
     </style>
 
@@ -290,11 +290,11 @@
         <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
         <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
         <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
-        <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+        <item name="barChartBarBackgroundColor">@color/bpkSurfaceHighlight</item>
         <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
         <item name="barChartLineColor">?bpkPrimaryColor</item>
-        <item name="barChartPopupBackgroundColor">@color/bpkSagano</item>
-        <item name="barChartPopupTextColor">@color/bpkAbisko</item>
+        <item name="barChartPopupBackgroundColor">@color/bpkStatusSuccessFill</item>
+        <item name="barChartPopupTextColor">@color/bpkPrimary</item>
     </style>
 
     <style name="DohaThemeSlider">
