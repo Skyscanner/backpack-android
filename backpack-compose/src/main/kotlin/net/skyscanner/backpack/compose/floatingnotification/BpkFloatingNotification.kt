@@ -36,8 +36,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -66,7 +66,7 @@ fun BpkFloatingNotification(
         }
     }
     val componentHeight =
-        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
+        if (LocalWindowInfo.current.containerSize.width.dp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
 
     AnimatedContent(
