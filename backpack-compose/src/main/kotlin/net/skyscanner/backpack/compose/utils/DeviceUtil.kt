@@ -20,28 +20,27 @@ package net.skyscanner.backpack.compose.utils
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalConfiguration
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 internal fun isSmallTablet(): Boolean {
-    val info = LocalWindowInfo.current.containerSize.width.dp
-    return info > SMALL_TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > SMALL_TABLET_WIDTH
 }
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 internal fun isTablet(): Boolean {
-    val info = LocalWindowInfo.current.containerSize.width.dp
-    return info > TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
 }
 
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 internal fun isDesktop(): Boolean {
-    val info = LocalWindowInfo.current.containerSize.width.dp
-    return info > TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
 }
 
 const val SMALL_TABLET_WIDTH = 513
