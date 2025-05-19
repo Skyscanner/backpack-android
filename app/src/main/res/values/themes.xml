@@ -294,7 +294,7 @@
         <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
         <item name="barChartLineColor">?bpkPrimaryColor</item>
         <item name="barChartPopupBackgroundColor">@color/bpkStatusSuccessFill</item>
-        <item name="barChartPopupTextColor">@color/bpkPrimary</item>
+        <item name="barChartPopupTextColor">@color/bpkCoreAccent</item>
     </style>
 
     <style name="DohaThemeSlider">
