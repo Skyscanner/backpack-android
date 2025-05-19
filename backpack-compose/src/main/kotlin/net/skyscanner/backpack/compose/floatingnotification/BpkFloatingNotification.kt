@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
@@ -48,6 +49,7 @@ import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNot
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
+@SuppressLint("ConfigurationScreenWidthHeight")
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
