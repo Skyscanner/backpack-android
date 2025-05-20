@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
@@ -36,8 +35,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -49,7 +48,6 @@ import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNot
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
-@SuppressLint("ConfigurationScreenWidthHeight")
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
@@ -65,8 +63,11 @@ fun BpkFloatingNotification(
             currentData.dismiss()
         }
     }
+    val widthDp = with(LocalDensity.current) {
+        LocalWindowInfo.current.containerSize.width.toDp()
+    }
     val componentHeight =
-        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
+        if (widthDp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
 
     AnimatedContent(
