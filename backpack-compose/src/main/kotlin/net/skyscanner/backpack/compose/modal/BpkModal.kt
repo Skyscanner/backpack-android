@@ -18,9 +18,6 @@
 
 package net.skyscanner.backpack.compose.modal
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
 import android.view.Window
 import android.view.WindowManager
 import androidx.compose.animation.AnimatedVisibility
@@ -32,7 +29,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -47,11 +43,9 @@ import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import androidx.core.view.WindowInsetsCompat
 
 internal const val ModalAnimationDurationMs = 300
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkModal(
@@ -70,8 +64,8 @@ fun BpkModal(
 
     Dialog(
         properties = DialogProperties(
-            usePlatformDefaultWidth = false, // allow us to control width
-            decorFitsSystemWindows = false, // if you still want edge-to-edge insets
+            usePlatformDefaultWidth = true,
+            decorFitsSystemWindows = false,
         ),
         onDismissRequest = { isVisible.targetState = false },
     ) {
@@ -82,17 +76,15 @@ fun BpkModal(
             dialogWindow?.apply {
                 WindowCompat.setDecorFitsSystemWindows(this, false)
                 val windowInsetsController = WindowInsetsControllerCompat(this, this.decorView)
+                // Below codes are deprecated for Android version 15 or above as it would always be transparent
                 statusBarColor = android.graphics.Color.TRANSPARENT
                 navigationBarColor = android.graphics.Color.TRANSPARENT
                 setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,
                 )
-                windowInsetsController.isAppearanceLightStatusBars = !isSystemInDarkTheme // Light status bar for light theme
+                windowInsetsController.isAppearanceLightStatusBars = !isSystemInDarkTheme
                 windowInsetsController.isAppearanceLightNavigationBars = !isSystemInDarkTheme
-                WindowInsetsControllerCompat(this, this.decorView).show(
-                    WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(),
-                )
             }
         }
 
@@ -123,13 +115,3 @@ fun BpkModal(
 
 @Composable
 private fun getDialogWindow(): Window? = (LocalView.current.parent as? DialogWindowProvider)?.window
-
-@Composable
-private fun getActivityWindow(): Window? = LocalView.current.context.getActivityWindow()
-
-private tailrec fun Context.getActivityWindow(): Window? =
-    when (this) {
-        is Activity -> window
-        is ContextWrapper -> baseContext.getActivityWindow()
-        else -> null
-    }
