@@ -21,10 +21,8 @@ package net.skyscanner.backpack.compose.modal
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.FrameLayout
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -34,6 +32,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -42,14 +41,17 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import androidx.core.view.WindowInsetsCompat
 
 internal const val ModalAnimationDurationMs = 300
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 @Suppress("ModifierMissing")
 fun BpkModal(
@@ -67,25 +69,30 @@ fun BpkModal(
     }
 
     Dialog(
-        properties = DialogProperties(decorFitsSystemWindows = false, usePlatformDefaultWidth = true),
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false, // allow us to control width
+            decorFitsSystemWindows = false, // if you still want edge-to-edge insets
+        ),
         onDismissRequest = { isVisible.targetState = false },
     ) {
-        // workaround for bug with edge to edge https://issuetracker.google.com/issues/246909281
-        val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
-        val parentView = LocalView.current.parent as View
         val isSystemInDarkTheme = isSystemInDarkTheme()
+
         SideEffect {
-            if (activityWindow != null && dialogWindow != null) {
-                if (!isSystemInDarkTheme) {
-                    WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).isAppearanceLightStatusBars = true
-                    WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).isAppearanceLightNavigationBars = true
-                }
-                val attributes = WindowManager.LayoutParams()
-                attributes.copyFrom(activityWindow.attributes)
-                attributes.type = dialogWindow.attributes.type
-                dialogWindow.attributes = attributes
-                parentView.layoutParams = FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
+            dialogWindow?.apply {
+                WindowCompat.setDecorFitsSystemWindows(this, false)
+                val windowInsetsController = WindowInsetsControllerCompat(this, this.decorView)
+                statusBarColor = android.graphics.Color.TRANSPARENT
+                navigationBarColor = android.graphics.Color.TRANSPARENT
+                setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                )
+                windowInsetsController.isAppearanceLightStatusBars = !isSystemInDarkTheme // Light status bar for light theme
+                windowInsetsController.isAppearanceLightNavigationBars = !isSystemInDarkTheme
+                WindowInsetsControllerCompat(this, this.decorView).show(
+                    WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(),
+                )
             }
         }
 
