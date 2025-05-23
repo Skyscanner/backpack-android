@@ -38,7 +38,6 @@ open class BpkChip @JvmOverloads constructor(
 
     private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
     private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
-    private val roleDescription = context.resources.getString(R.string.button)
 
     private var appearance: BpkChipAppearance
 
@@ -74,7 +73,6 @@ open class BpkChip @JvmOverloads constructor(
         this.setTextColor(appearance.text)
         this.isSingleLine = true
         this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
-        this.contentDescription = "$text, $roleDescription"
         initialize(attrs, defStyleAttr)
     }
 
