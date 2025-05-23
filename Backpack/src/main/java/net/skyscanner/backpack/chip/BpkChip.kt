@@ -73,6 +73,7 @@ open class BpkChip @JvmOverloads constructor(
         this.setTextColor(appearance.text)
         this.isSingleLine = true
         this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
+
         initialize(attrs, defStyleAttr)
     }
 
