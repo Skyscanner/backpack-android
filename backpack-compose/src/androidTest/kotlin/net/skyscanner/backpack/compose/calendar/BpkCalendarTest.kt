@@ -240,12 +240,12 @@ class BpkCalendarTest {
     @Test
     fun withScrollHandling() = runTest {
         val controller = createController(DefaultSingle)
-        var visitedMonth = YearMonth.of(2019, 1)
+        val visitedMonth = mutableListOf(YearMonth.of(2019, 1))
 
         composeTestRule.setContent {
             BpkTheme {
-                BpkCalendar(controller, onScrollToMonth = {
-                    visitedMonth = it
+                BpkCalendar(controller, onVisibleMonthsChanged = {
+                    visitedMonth += it
                 })
             }
         }
@@ -255,7 +255,7 @@ class BpkCalendarTest {
 
         composeTestRule.waitForIdle()
 
-        assert(visitedMonth.monthValue > 1)
+        assertEquals(10, visitedMonth.size)
     }
 
     private fun createController(params: CalendarParams): BpkCalendarController =

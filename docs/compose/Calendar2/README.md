@@ -103,20 +103,22 @@ You can then set the selection in the controller using the `setSelection` method
 
 ### (Optional) Handling Calendar Scroll Updates
 
-To receive notifications when the calendar is scrolled, you can utilize the `onScrollToMonth` parameter.
-This callback is triggered whenever the `lazyGridState.firstVisibleItemIndex` property of the `BpkCalendarController` is
-updated.
+To receive notifications when the calendar is scrolled, you can utilize the `onVisibleMonthsChanged` parameter.
+This callback is triggered whenever the visible months in the calendar change, allowing you to respond to user interactions
+or update UI elements based on the currently visible months.
 
-For example you can show the furthest scrolled month's number (i.e. January = 1, February = 2, etc.) in a `BpkText` label:
+For example you can show the furthest scrolled month in a `BpkText` label:
 
 ```Kotlin
+import java.time.YearMonth
+
 Column {
-    var month: YearMonth by remember { mutableStateOf(YearMonth.now()) }
-    BpkText("Month: ${month.monthValue}")
+    val month: MutableList<YearMonth> = remember { mutableListOf() }
+    BpkText("Month: ${month.last()}")
     BpkCalendar(
         controller = controller,
-        onScrollToMonth = {
-            month = it
+        onVisibleMonthsChanged = {
+            month += it
         }
     )
 }
