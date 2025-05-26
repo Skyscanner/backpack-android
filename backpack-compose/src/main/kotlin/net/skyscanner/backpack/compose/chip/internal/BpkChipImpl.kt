@@ -115,6 +115,7 @@ internal fun BpkDismissibleChipImpl(
                 .clickable(
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
+                    role = Role.Button,
                 ) { onClick!!.invoke() }
         },
     )
