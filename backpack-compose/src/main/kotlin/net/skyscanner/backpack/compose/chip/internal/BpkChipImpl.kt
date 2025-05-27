@@ -87,7 +87,7 @@ internal fun BpkChipImpl(
                     enabled = enabled,
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
-                    role = Role.Button,
+                    role = Role.Checkbox,
                 ) { onSelectedChange!!.invoke(!selected) }
         },
     )
@@ -115,7 +115,7 @@ internal fun BpkDismissibleChipImpl(
                 .clickable(
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
-                    role = Role.Button,
+                    role = Role.Checkbox,
                 ) { onClick!!.invoke() }
         },
     )
