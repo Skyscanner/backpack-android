@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
@@ -86,6 +87,7 @@ internal fun BpkChipImpl(
                     enabled = enabled,
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
+                    role = Role.Button,
                 ) { onSelectedChange!!.invoke(!selected) }
         },
     )
@@ -113,6 +115,7 @@ internal fun BpkDismissibleChipImpl(
                 .clickable(
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
+                    role = Role.Button,
                 ) { onClick!!.invoke() }
         },
     )
