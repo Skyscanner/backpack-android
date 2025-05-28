@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -47,6 +48,7 @@ import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNot
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
     state: BpkFloatingNotificationState,
@@ -61,7 +63,6 @@ fun BpkFloatingNotification(
             currentData.dismiss()
         }
     }
-
     val componentHeight =
         if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }

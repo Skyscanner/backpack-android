@@ -19,32 +19,24 @@
 package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalConfiguration
 
 @Composable
 internal fun isSmallTablet(): Boolean {
-    val widthDp = with(LocalDensity.current) {
-        LocalWindowInfo.current.containerSize.width.toDp()
-    }
-    return widthDp > SMALL_TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > SMALL_TABLET_WIDTH
 }
 
 @Composable
 internal fun isTablet(): Boolean {
-    val widthDp = with(LocalDensity.current) {
-        LocalWindowInfo.current.containerSize.width.toDp()
-    }
-    return widthDp > TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
 }
 
 @Composable
 internal fun isDesktop(): Boolean {
-    val widthDp = with(LocalDensity.current) {
-        LocalWindowInfo.current.containerSize.width.toDp()
-    }
-    return widthDp > TABLET_WIDTH.dp
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp > TABLET_WIDTH
 }
 
 const val SMALL_TABLET_WIDTH = 513
