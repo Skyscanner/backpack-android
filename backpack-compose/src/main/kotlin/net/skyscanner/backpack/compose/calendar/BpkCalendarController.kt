@@ -90,8 +90,11 @@ class BpkCalendarController(
         }
     }
 
-    internal val firstVisibleItemMonth: YearMonth
+    private val firstVisibleItemMonth: YearMonth
         get() = _state.cells[lazyGridState.firstVisibleItemIndex].yearMonth
+
+    internal val visibleMonths: Set<YearMonth>
+        get() = lazyGridState.layoutInfo.visibleItemsInfo.map { _state.cells[it.index].yearMonth }.toSet()
 
     /**
      * Returns the first visible item year.

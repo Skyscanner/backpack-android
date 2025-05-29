@@ -39,7 +39,7 @@ fun BpkCalendar(
     controller: BpkCalendarController,
     modifier: Modifier = Modifier,
     customDateHandling: ((CalendarInteraction) -> Unit)? = null,
-    onScrollToMonth: ((YearMonth) -> Unit)? = null,
+    onVisibleMonthsChanged: ((Set<YearMonth>) -> Unit)? = null,
 ) {
 
     val state = controller.state
@@ -71,9 +71,9 @@ fun BpkCalendar(
             }
         }
 
-        onScrollToMonth?.let {
-            LaunchedEffect(onScrollToMonth, controller.firstVisibleItemMonth) {
-                onScrollToMonth(controller.firstVisibleItemMonth)
+        onVisibleMonthsChanged?.let {
+            LaunchedEffect(onVisibleMonthsChanged, controller.visibleMonths) {
+                onVisibleMonthsChanged(controller.visibleMonths)
             }
         }
     }

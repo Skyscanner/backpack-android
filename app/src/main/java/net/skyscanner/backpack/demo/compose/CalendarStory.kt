@@ -140,7 +140,7 @@ private fun CalendarDemo(
         when (type) {
             CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
             CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
-            CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
+            CalendarStoryType.WithLabels -> controller.setSelection(PreselectedRange)
             CalendarStoryType.MultiSelection -> controller.setSelection(CalendarStorySelection.PreselectedDate)
             else -> Unit
         }
