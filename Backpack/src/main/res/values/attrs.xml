@@ -256,6 +256,7 @@
 
     <declare-styleable name="BpkNavBar">
         <attr name="navBarTitle" format="string" />
+        <attr name="navBarActionContentDescription" format="string" />
         <attr name="navBarIcon" format="reference" />
         <attr name="navBarMenu" format="reference" />
     </declare-styleable>
