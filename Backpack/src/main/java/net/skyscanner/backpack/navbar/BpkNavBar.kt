@@ -112,6 +112,7 @@ class BpkNavBar @JvmOverloads constructor(
         var title: CharSequence?
         var navIcon: Drawable?
         var menu = 0
+        var navIconContentDescription: CharSequence?
 
         createContextThemeWrapper(context, attrs, R.attr.bpkNavBarStyle).theme.obtainStyledAttributes(
             attrs,
@@ -121,12 +122,14 @@ class BpkNavBar @JvmOverloads constructor(
             title = it.getString(R.styleable.BpkNavBar_navBarTitle)
             navIcon = it.getDrawable(R.styleable.BpkNavBar_navBarIcon)
             menu = it.getResourceId(R.styleable.BpkNavBar_navBarMenu, menu)
+            navIconContentDescription = it.getString(R.styleable.BpkNavBar_navBarActionContentDescription)
         }
 
         this.background = ColorDrawable(context.getColor(R.color.bpkCanvas))
         this.title = title
         this.icon = navIcon
         this.navAction = navAction
+        this.toolbar.navigationContentDescription = navIconContentDescription
         this.menu = menu
         this.stateListAnimator = shadowStateListAnimator()
     }
