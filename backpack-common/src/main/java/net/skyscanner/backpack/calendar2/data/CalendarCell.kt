@@ -51,7 +51,6 @@ sealed class CalendarCell {
     data class Header internal constructor(
         val title: String,
         val calendarSelectionMode: CalendarParams.SelectionMode,
-        val monthSelectionMode: CalendarParams.MonthSelectionMode,
         override val yearMonth: YearMonth,
     ) : CalendarCell()
 
@@ -90,9 +89,6 @@ sealed interface CalendarInteraction {
 
     @Immutable
     data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
-
-    @Immutable
-    data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
 internal fun CalendarCellDay(
@@ -131,13 +127,6 @@ internal fun CalendarCellDay(
             selection.start == date && selection.end != null -> CalendarCell.Selection.Start
             selection.end == date -> CalendarCell.Selection.End
             selection.end != null && date in selection -> CalendarCell.Selection.Middle
-            else -> null
-        }
-
-        is CalendarSelection.Month -> when {
-            selection.start == date -> CalendarCell.Selection.StartMonth
-            selection.end == date -> CalendarCell.Selection.EndMonth
-            date in selection -> CalendarCell.Selection.Middle
             else -> null
         }
     },

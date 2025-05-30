@@ -22,9 +22,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
 import java.time.Period
-import java.time.YearMonth
 import java.util.Locale
 
 object BpkCalendarTestCases {
@@ -132,20 +130,11 @@ object BpkCalendarTestCases {
             cellsInfo = highlightedDates(initialRange, defaultHighlightedDates),
         )
 
-        val WithWholeMonthButtonEnabled = DefaultRange.copy(
-            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-                label = "Select whole month",
-                selectableMonthRange = YearMonth.of(2019, 1)..YearMonth.of(2019, 2),
-            ),
-        )
+        val WithWholeMonthButtonEnabled = DefaultRange.copy()
 
         val WithWholeMonthSetProgrammatically = DefaultRange.copy(
             range = LocalDate.of(2019, 1, 1)..(LocalDate.of(2019, 1, 1) + Period.ofYears(2)),
             now = LocalDate.of(2019, 1, 1),
-            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-                label = "Select whole month",
-                selectableMonthRange = YearMonth.of(2019, 1)..YearMonth.of(2019, 2),
-            ),
         )
 
         val WithYearInMonthLabel = DefaultRange.copy(
@@ -191,8 +180,6 @@ object BpkCalendarTestCases {
         val WithDisabledDates_SelectRange = CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
 
         val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
-
-        val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
 
         val WithHighlightedDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 3))
 
