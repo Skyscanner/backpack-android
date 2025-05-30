@@ -71,7 +71,7 @@ internal fun BpkCalendarGrid(
             itemContent = { index ->
                 when (val item = state.cells[index]) {
                     is CalendarCell.Day -> BpkCalendarDayCell(item, { onClick(CalendarInteraction.DateClicked(it)) })
-                    is CalendarCell.Header -> BpkCalendarHeaderCell(item, { onClick(CalendarInteraction.SelectMonthClicked(it)) })
+                    is CalendarCell.Header -> BpkCalendarHeaderCell(item)
                     is CalendarCell.Space -> BpkCalendarSpaceCell()
                 }
             },

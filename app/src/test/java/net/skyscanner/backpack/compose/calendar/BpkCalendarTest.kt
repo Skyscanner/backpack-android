@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.calendar
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
-import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import org.junit.Test
@@ -147,21 +146,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
     fun withHighlightedDates_SelectHighLightedDate() {
         val controller = createController(BpkCalendarTestCases.Params.WithHighLightedDates)
         controller.setSelection(BpkCalendarTestCases.Selection.WithHighlightedDates_SelectHighLightedDate)
-        snap(controller)
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun withWholeMonthButtonEnabled() {
-        val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
-        snap(controller)
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun withWholeMonthSet() {
-        val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
-        controller.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
         snap(controller)
     }
 

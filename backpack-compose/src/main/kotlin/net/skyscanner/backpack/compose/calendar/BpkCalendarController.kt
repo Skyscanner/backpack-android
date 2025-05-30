@@ -108,7 +108,6 @@ class BpkCalendarController(
     internal fun onClick(calendarInteraction: CalendarInteraction) {
         when (calendarInteraction) {
             is CalendarInteraction.DateClicked -> updateState(_state.dispatchClick(calendarInteraction.day))
-            is CalendarInteraction.SelectMonthClicked -> updateState(_state.dispatchClick(calendarInteraction.header))
         }
     }
 }

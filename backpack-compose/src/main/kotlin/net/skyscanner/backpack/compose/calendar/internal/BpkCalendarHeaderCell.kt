@@ -26,10 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -37,7 +34,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkCalendarHeaderCell(
     model: CalendarCell.Header,
-    onSelectWholeMonth: (CalendarCell.Header) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -56,15 +52,5 @@ internal fun BpkCalendarHeaderCell(
                 .semantics { heading() }
                 .padding(vertical = BpkSpacing.Lg),
         )
-
-        val monthSelectionMode = model.monthSelectionMode
-        if (monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth) {
-            BpkButton(
-                text = monthSelectionMode.label,
-                enabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled,
-                type = BpkButtonType.Link,
-                onClick = { onSelectWholeMonth(model) },
-            )
-        }
     }
 }

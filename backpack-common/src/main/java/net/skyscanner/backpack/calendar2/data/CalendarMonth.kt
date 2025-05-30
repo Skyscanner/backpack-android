@@ -49,7 +49,6 @@ internal inline fun CalendarMonth(
     monthsFormatter: SimpleDateFormat,
     weekFields: WeekFields,
     selection: CalendarSelection,
-    monthSelectionMode: CalendarParams.MonthSelectionMode,
     calendarSelectionMode: CalendarParams.SelectionMode,
     day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
@@ -62,7 +61,6 @@ internal inline fun CalendarMonth(
     cells += CalendarCell.Header(
         title = MonthTitle(yearMonth, monthsFormatter),
         yearMonth = yearMonth,
-        monthSelectionMode = monthSelectionMode,
         calendarSelectionMode = calendarSelectionMode,
     )
 
