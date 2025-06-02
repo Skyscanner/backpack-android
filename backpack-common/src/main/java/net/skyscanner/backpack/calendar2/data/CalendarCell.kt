@@ -51,7 +51,6 @@ sealed class CalendarCell {
     data class Header internal constructor(
         val title: String,
         val calendarSelectionMode: CalendarParams.SelectionMode,
-        val monthSelectionMode: CalendarParams.MonthSelectionMode,
         override val yearMonth: YearMonth,
     ) : CalendarCell()
 
@@ -90,9 +89,6 @@ sealed interface CalendarInteraction {
 
     @Immutable
     data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
-
-    @Immutable
-    data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
 internal fun CalendarCellDay(
@@ -125,19 +121,12 @@ internal fun CalendarCellDay(
             else -> null
         }
 
-        is CalendarSelection.Dates -> when {
+        is CalendarSelection.Range -> when {
             selection.start == date && selection.end == date -> CalendarCell.Selection.Double
             selection.start == date && selection.end == null -> CalendarCell.Selection.Single
             selection.start == date && selection.end != null -> CalendarCell.Selection.Start
             selection.end == date -> CalendarCell.Selection.End
             selection.end != null && date in selection -> CalendarCell.Selection.Middle
-            else -> null
-        }
-
-        is CalendarSelection.Month -> when {
-            selection.start == date -> CalendarCell.Selection.StartMonth
-            selection.end == date -> CalendarCell.Selection.EndMonth
-            date in selection -> CalendarCell.Selection.Middle
             else -> null
         }
     },
@@ -168,7 +157,7 @@ private fun stateDescription(
     }
 
     is CalendarParams.SelectionMode.Range -> when (selection) {
-        is CalendarSelection.Dates ->
+        is CalendarSelection.Range ->
             when {
                 selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
                 selection.start == date && selection.end == null -> selectionMode.startSelectionState?.getAccessibilityLabel(date)
@@ -192,7 +181,7 @@ private fun onClickLabel(
     is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.None -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
-        is CalendarSelection.Dates ->
+        is CalendarSelection.Range ->
             when {
                 selection.end != null || date < selection.start -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
                 else -> selectionMode.endSelectionHint?.getAccessibilityLabel(date)

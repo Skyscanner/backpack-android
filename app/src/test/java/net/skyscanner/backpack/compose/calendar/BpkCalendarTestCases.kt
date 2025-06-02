@@ -1,30 +1,15 @@
-/*
- * Backpack for Android - Skyscanner's Design System
- *
- * Copyright 2018 Skyscanner Ltd
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package net.skyscanner.backpack.calendar2
+package net.skyscanner.backpack.compose.calendar
 
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellLabel
+import net.skyscanner.backpack.calendar2.CellStatus
+import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
-import java.time.Period
-import java.time.YearMonth
 import java.util.Locale
 
 object BpkCalendarTestCases {
@@ -132,21 +117,7 @@ object BpkCalendarTestCases {
             cellsInfo = highlightedDates(initialRange, defaultHighlightedDates),
         )
 
-        val WithWholeMonthButtonEnabled = DefaultRange.copy(
-            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-                label = "Select whole month",
-                selectableMonthRange = YearMonth.of(2019, 1)..YearMonth.of(2019, 2),
-            ),
-        )
-
-        val WithWholeMonthSetProgrammatically = DefaultRange.copy(
-            range = LocalDate.of(2019, 1, 1)..(LocalDate.of(2019, 1, 1) + Period.ofYears(2)),
-            now = LocalDate.of(2019, 1, 1),
-            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-                label = "Select whole month",
-                selectableMonthRange = YearMonth.of(2019, 1)..YearMonth.of(2019, 2),
-            ),
-        )
+        val WithWholeMonthButtonEnabled = DefaultRange.copy()
 
         val WithYearInMonthLabel = DefaultRange.copy(
             yearLabelInMonthHeader = true,
@@ -182,17 +153,15 @@ object BpkCalendarTestCases {
         val TodayIsNewYear = CalendarSelection.Single(LocalDate.of(2017, 12, 31))
 
         val WithRangeSetProgrammatically =
-            CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
+            CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
 
         val WithSingleDaySetProgrammatically = CalendarSelection.Single(LocalDate.of(2019, 1, 16))
 
         val WithDisabledDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 10))
 
-        val WithDisabledDates_SelectRange = CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
+        val WithDisabledDates_SelectRange = CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
 
         val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
-
-        val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
 
         val WithHighlightedDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 3))
 

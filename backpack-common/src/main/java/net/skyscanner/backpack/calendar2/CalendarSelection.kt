@@ -20,11 +20,8 @@ package net.skyscanner.backpack.calendar2
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import net.skyscanner.backpack.calendar2.extension.firstDay
-import net.skyscanner.backpack.calendar2.extension.lastDay
-import java.time.LocalDate
-import java.time.YearMonth
 import java.io.Serializable
+import java.time.LocalDate
 
 /**
  * Describes the current selection in the calendar
@@ -58,35 +55,16 @@ sealed class CalendarSelection : Serializable {
     }
 
     /**
-     * Describes the current range selection in the calendar.
+     * A range of dates is selected.
+     * @param start of range
+     * @param end end of range. May be null if user haven't selected the end date yet
      */
-    @Stable
-    sealed class Range : CalendarSelection() {
-        abstract val start: LocalDate
-        abstract val end: LocalDate?
-
+    @Immutable
+    data class Range(val start: LocalDate, val end: LocalDate?) : CalendarSelection() {
         override fun contains(date: LocalDate): Boolean =
             when (end) {
                 null -> date == start
                 else -> date >= start && date <= end
             }
     }
-
-    /**
-     * A whole [month] is selected.
-     */
-    @Immutable
-    data class Month(
-        val month: YearMonth,
-        override val start: LocalDate = month.firstDay(),
-        override val end: LocalDate = month.lastDay(),
-    ) : Range()
-
-    /**
-     * A range of dates is selected.
-     * @param start of range
-     * @param end end of range. May be null if user haven't selected the end date yet
-     */
-    @Immutable
-    data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
 }

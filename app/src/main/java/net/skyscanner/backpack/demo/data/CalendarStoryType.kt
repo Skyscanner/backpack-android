@@ -29,9 +29,7 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
 import java.time.Period
-import java.time.YearMonth
 import kotlin.math.roundToInt
 
 private val now = LocalDate.of(2019, 1, 1)
@@ -41,7 +39,6 @@ enum class CalendarStoryType {
     SelectionDisabled,
     SelectionSingle,
     SelectionRange,
-    SelectionWholeMonth,
     WithDisabledDates,
     WithLabels,
     WithIconAsLabels,
@@ -79,16 +76,6 @@ enum class CalendarStoryType {
                     now = now,
                     range = range,
                     selectionMode = rangeSelectionModeWithAccessibilityLabels(),
-                )
-
-                SelectionWholeMonth -> CalendarParams(
-                    now = now,
-                    range = range,
-                    selectionMode = rangeSelectionModeWithAccessibilityLabels(),
-                    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-                        label = "Select whole month",
-                        selectableMonthRange = YearMonth.of(2019, 1).plusMonths(1)..YearMonth.now().plusMonths(3),
-                    ),
                 )
 
                 WithDisabledDates -> CalendarParams(
@@ -284,16 +271,12 @@ fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellI
 }
 
 object CalendarStorySelection {
-    val PreselectedRange = CalendarSelection.Dates(
+    val PreselectedRange = CalendarSelection.Range(
         start = range.start.plusDays(10),
         end = range.start.plusDays(20),
     )
 
     val PreselectedDate = CalendarSelection.Single(
         date = range.start.plusDays(10),
-    )
-
-    val WholeMonthRange = CalendarSelection.Month(
-        month = YearMonth.of(2019, Month.JANUARY),
     )
 }

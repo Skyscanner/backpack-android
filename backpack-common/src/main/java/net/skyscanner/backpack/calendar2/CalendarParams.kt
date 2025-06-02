@@ -24,7 +24,6 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.YearMonth
 import java.time.chrono.IsoChronology
 import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
@@ -43,7 +42,6 @@ import java.util.Locale
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header. Beware of the fact that some Chinese languages may require SHORT style instead of NARROW.
  * @param now [LocalDate] a date for the calendar to consider as current
- * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  * @param yearLabelInMonthHeader [Boolean] controls whether year is displayed inline with the month name or if the existing floating version is used
  */
 @Immutable
@@ -55,7 +53,6 @@ data class CalendarParams(
     val dayOfWeekText: TextStyle = findBestWeekdayStyleForLocale(locale),
     val dateContentDescriptionStyle: FormatStyle = FormatStyle.FULL,
     val now: LocalDate = LocalDate.now(),
-    val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
     val yearLabelInMonthHeader: Boolean = false,
 ) {
 
@@ -122,25 +119,6 @@ data class CalendarParams(
     sealed class DayCellAccessibilityLabel {
         data class Static(val label: String) : DayCellAccessibilityLabel()
         data class Dynamic(val label: (LocalDate) -> String) : DayCellAccessibilityLabel()
-    }
-
-    /**
-     * Describes the month selection behaviour
-     */
-    @Stable
-    sealed interface MonthSelectionMode {
-        /**
-         * No whole month selection is allowed.
-         */
-        data object Disabled : MonthSelectionMode
-
-        /**
-         * Only an entire month can be selected, by tapping on the [label] next to its name.
-         */
-        data class SelectWholeMonth(
-            val label: String,
-            val selectableMonthRange: ClosedRange<YearMonth>,
-        ) : MonthSelectionMode
     }
 }
 

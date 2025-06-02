@@ -136,12 +136,6 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
             webName = "button",
             componentsToReplace = setOf("android.widget.Button", "Button", "androidx.appcompat.widget.AppCompatButton"),
         ),
-        CALENDAR(
-            fullName = "net.skyscanner.backpack.calendar2.BpkCalendar",
-            webName = "calendar",
-            componentsToReplace = setOf("java.util.Calendar", "com.google.android.material.datepicker.MaterialDatePicker.Builder"),
-            staticMethodsToReplace = setOf("datePicker", "dateRangePicker"),
-        ),
         CARD(
             fullName = "net.skyscanner.backpack.card.BpkCardView",
             webName = "card",

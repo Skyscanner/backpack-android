@@ -23,28 +23,16 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.header
 import net.skyscanner.backpack.calendar2.lastDay
 import net.skyscanner.backpack.calendar2.rangeOf
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.time.LocalDate
-import java.time.Month
-import java.time.YearMonth
 
 class CalendarRangeSelectionTests {
 
     private val rangeSelection = CalendarSettings.Default.copy(
-        selectionMode = CalendarParams.SelectionMode.Range(),
-    )
-
-    private val monthSelection = CalendarSettings.Default.copy(
-        monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth(
-            "Select whole month",
-            selectableMonthRange = YearMonth.of(2000, 1)..YearMonth.of(2000, 12),
-        ),
         selectionMode = CalendarParams.SelectionMode.Range(),
     )
 
@@ -54,7 +42,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(start = firstDay.date, end = null), state.selection)
+                assertEquals(CalendarSelection.Range(start = firstDay.date, end = null), state.selection)
             }
         }
     }
@@ -66,7 +54,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
             }
         }
     }
@@ -78,7 +66,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
             }
         }
     }
@@ -90,7 +78,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
             }
         }
     }
@@ -103,7 +91,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
             }
         }
     }
@@ -157,62 +145,6 @@ class CalendarRangeSelectionTests {
 
             verify {
                 assertTrue(state.selection is CalendarSelection.None)
-            }
-        }
-    }
-
-    @Test
-    fun when_select_whole_month_is_within_the_same_date_selection_is_correct() {
-        testCalendarWith(monthSelection) {
-            stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
-            verify {
-                assertEquals(CalendarSelection.Month(header.yearMonth), state.selection)
-            }
-        }
-    }
-
-    @Test
-    fun given_whole_month_is_selected_and_a_range_selection_is_made_on_same_date_then_correct_state_should_return() {
-        testCalendarWith(monthSelection) {
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-
-            verify {
-                assertEquals(CalendarCell.Selection.Double, firstDay.selection)
-            }
-        }
-    }
-
-    @Test
-    fun given_whole_month_is_selected_and_a_range_selection_is_made_selection_then_correct_state_should_return() {
-        testCalendarWith(monthSelection) {
-            stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-            stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
-
-            verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
-            }
-        }
-    }
-
-    @Test
-    fun given_whole_month_is_selected_and_month_is_partly_in_range_only_in_range_selected() {
-        val mSelection = monthSelection.copy(
-            range = LocalDate.of(2000, Month.JANUARY, 15)..LocalDate.of(2001, Month.JANUARY, 14),
-        )
-        testCalendarWith(mSelection) {
-            stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
-
-            verify {
-                assertEquals(
-                    CalendarSelection.Month(
-                        month = header.yearMonth,
-                        start = mSelection.range.start,
-                        end = LocalDate.of(2000, monthSelection.range.start.month, 31),
-                    ),
-                    state.selection,
-                )
             }
         }
     }
