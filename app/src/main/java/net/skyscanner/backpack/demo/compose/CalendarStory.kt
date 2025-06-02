@@ -147,7 +147,7 @@ private fun Context.getSelectionMessage(
 ): String {
     return when (selection) {
         CalendarSelection.None -> getString(R.string.calendar_no_selection)
-        is CalendarSelection.Dates -> getString(R.string.calendar_range_selected, selection.start, selection.end)
+        is CalendarSelection.Range -> getString(R.string.calendar_range_selected, selection.start, selection.end)
         is CalendarSelection.Single -> getString(R.string.calendar_single_selected, selection.date)
     }
 }

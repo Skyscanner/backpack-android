@@ -121,7 +121,7 @@ internal fun CalendarCellDay(
             else -> null
         }
 
-        is CalendarSelection.Dates -> when {
+        is CalendarSelection.Range -> when {
             selection.start == date && selection.end == date -> CalendarCell.Selection.Double
             selection.start == date && selection.end == null -> CalendarCell.Selection.Single
             selection.start == date && selection.end != null -> CalendarCell.Selection.Start
@@ -157,7 +157,7 @@ private fun stateDescription(
     }
 
     is CalendarParams.SelectionMode.Range -> when (selection) {
-        is CalendarSelection.Dates ->
+        is CalendarSelection.Range ->
             when {
                 selection.start == date && selection.end == date -> selectionMode.startAndEndSelectionState
                 selection.start == date && selection.end == null -> selectionMode.startSelectionState?.getAccessibilityLabel(date)
@@ -181,7 +181,7 @@ private fun onClickLabel(
     is CalendarParams.SelectionMode.Single -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
     is CalendarParams.SelectionMode.Range -> when (selection) {
         is CalendarSelection.None -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
-        is CalendarSelection.Dates ->
+        is CalendarSelection.Range ->
             when {
                 selection.end != null || date < selection.start -> selectionMode.startSelectionHint?.getAccessibilityLabel(date)
                 else -> selectionMode.endSelectionHint?.getAccessibilityLabel(date)

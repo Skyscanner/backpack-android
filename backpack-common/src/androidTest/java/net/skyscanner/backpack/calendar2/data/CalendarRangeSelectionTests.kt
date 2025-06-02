@@ -42,7 +42,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(start = firstDay.date, end = null), state.selection)
+                assertEquals(CalendarSelection.Range(start = firstDay.date, end = null), state.selection)
             }
         }
     }
@@ -54,7 +54,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
             }
         }
     }
@@ -66,7 +66,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
             }
         }
     }
@@ -78,7 +78,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
             }
         }
     }
@@ -91,7 +91,7 @@ class CalendarRangeSelectionTests {
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
             }
         }
     }

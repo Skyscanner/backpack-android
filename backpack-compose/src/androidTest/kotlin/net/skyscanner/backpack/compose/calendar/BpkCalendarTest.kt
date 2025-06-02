@@ -88,7 +88,7 @@ class BpkCalendarTest {
 
     @Test
     fun withSameStartAndEndDateSelected() = runTest {
-        val expected = CalendarSelection.Dates(
+        val expected = CalendarSelection.Range(
             start = LocalDate.of(2019, 1, 17),
             end = LocalDate.of(2019, 1, 17),
         )
@@ -147,7 +147,7 @@ class BpkCalendarTest {
 
     @Test
     fun withStartAndEndDateSelected() = runTest {
-        val expected = CalendarSelection.Dates(
+        val expected = CalendarSelection.Range(
             start = LocalDate.of(2019, 1, 17),
             end = LocalDate.of(2019, 2, 14),
         )
@@ -179,7 +179,7 @@ class BpkCalendarTest {
 
     @Test
     fun withStartDateSelected() = runTest {
-        val expected = CalendarSelection.Dates(
+        val expected = CalendarSelection.Range(
             start = LocalDate.of(2019, 1, 17),
             end = null,
         )

@@ -153,13 +153,13 @@ object BpkCalendarTestCases {
         val TodayIsNewYear = CalendarSelection.Single(LocalDate.of(2017, 12, 31))
 
         val WithRangeSetProgrammatically =
-            CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
+            CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
 
         val WithSingleDaySetProgrammatically = CalendarSelection.Single(LocalDate.of(2019, 1, 16))
 
         val WithDisabledDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 10))
 
-        val WithDisabledDates_SelectRange = CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
+        val WithDisabledDates_SelectRange = CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
 
         val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
 

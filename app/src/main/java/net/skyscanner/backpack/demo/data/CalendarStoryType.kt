@@ -271,7 +271,7 @@ fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellI
 }
 
 object CalendarStorySelection {
-    val PreselectedRange = CalendarSelection.Dates(
+    val PreselectedRange = CalendarSelection.Range(
         start = range.start.plusDays(10),
         end = range.start.plusDays(20),
     )

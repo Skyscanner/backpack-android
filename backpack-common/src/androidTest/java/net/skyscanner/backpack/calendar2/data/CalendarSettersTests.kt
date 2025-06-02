@@ -60,10 +60,10 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
+            stateMachine.setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
 
             verify {
-                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
             }
         }
     }
@@ -89,7 +89,7 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Disabled,
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
+            stateMachine.setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
 
             verify {
                 assertEquals(CalendarSelection.None, state.selection)
@@ -124,7 +124,7 @@ class CalendarSettersTests {
             ),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = null))
+            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = null))
 
             verify {
                 assertEquals(CalendarSelection.None, state.selection)
@@ -141,7 +141,7 @@ class CalendarSettersTests {
             ),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date))
+            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date))
 
             verify {
                 assertEquals(CalendarSelection.None, state.selection)
@@ -169,7 +169,7 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date.minusMonths(1), end = null))
+            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date.minusMonths(1), end = null))
 
             verify {
                 assertEquals(CalendarSelection.None, state.selection)
@@ -183,7 +183,7 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date.plusMonths(1)))
+            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date.plusMonths(1)))
 
             verify {
                 assertEquals(CalendarSelection.None, state.selection)

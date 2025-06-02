@@ -84,10 +84,10 @@ fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
             val rangeStart = (selection as? CalendarSelection.Range)?.start
             val rangeEnd = (selection as? CalendarSelection.Range)?.end
             when {
-                rangeStart != null && rangeEnd != null -> CalendarSelection.Dates(start = date.date, end = null)
-                rangeStart == null -> CalendarSelection.Dates(start = date.date, end = null)
-                date.date < rangeStart -> CalendarSelection.Dates(start = date.date, end = null)
-                else -> CalendarSelection.Dates(start = rangeStart, end = date.date)
+                rangeStart != null && rangeEnd != null -> CalendarSelection.Range(start = date.date, end = null)
+                rangeStart == null -> CalendarSelection.Range(start = date.date, end = null)
+                date.date < rangeStart -> CalendarSelection.Range(start = date.date, end = null)
+                else -> CalendarSelection.Range(start = rangeStart, end = date.date)
             }
         }
     }
@@ -110,7 +110,7 @@ fun CalendarState.dispatchParamsUpdate(params: CalendarParams): CalendarState =
 fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
     when (selection) {
         is CalendarSelection.None -> Unit
-        is CalendarSelection.Dates -> when {
+        is CalendarSelection.Range -> when {
             params.selectionMode !is SelectionMode.Range -> return this
             params.cellsInfo[selection.start]?.disabled == true -> return this
             params.cellsInfo[selection.end]?.disabled == true -> return this

@@ -55,25 +55,16 @@ sealed class CalendarSelection : Serializable {
     }
 
     /**
-     * Describes the current range selection in the calendar.
+     * A range of dates is selected.
+     * @param start of range
+     * @param end end of range. May be null if user haven't selected the end date yet
      */
-    @Stable
-    sealed class Range : CalendarSelection() {
-        abstract val start: LocalDate
-        abstract val end: LocalDate?
-
+    @Immutable
+    data class Range(val start: LocalDate, val end: LocalDate?) : CalendarSelection() {
         override fun contains(date: LocalDate): Boolean =
             when (end) {
                 null -> date == start
                 else -> date >= start && date <= end
             }
     }
-
-    /**
-     * A range of dates is selected.
-     * @param start of range
-     * @param end end of range. May be null if user haven't selected the end date yet
-     */
-    @Immutable
-    data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
 }
