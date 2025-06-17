@@ -44,7 +44,7 @@ internal fun isDesktop(): Boolean {
     val widthDp = with(LocalDensity.current) {
         LocalWindowInfo.current.containerSize.width.toDp()
     }
-    return widthDp > TABLET_WIDTH.dp
+    return widthDp > DESKTOP_WIDTH.dp
 }
 
 const val SMALL_TABLET_WIDTH = 513
