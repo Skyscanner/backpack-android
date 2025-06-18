@@ -29,9 +29,12 @@ import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Density
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
@@ -89,40 +92,11 @@ internal fun BpkRatingTitle(
         LocalTextStyle provides BpkTheme.typography.heading5,
         LocalContentColor provides BpkTheme.colors.textPrimary,
     ) {
-        val density = LocalDensity.current
         Layout(
             content = content,
             modifier = modifier.heightIn(max = BpkSpacing.Lg),
-        ) { measurables, constraints ->
-            if (measurables.isEmpty()) {
-                layout(0, 0) {}
-            } else {
-                val placeable = measurables.first().measure(constraints)
-                val maxHeightPx = with(density) { BpkSpacing.Lg.roundToPx() }
-                val height = minOf(placeable.height, maxHeightPx)
-                val firstBaseline = if (placeable[FirstBaseline] != AlignmentLine.Unspecified) {
-                    placeable[FirstBaseline] + (height - placeable.height) / 2
-                } else {
-                    (height * 0.9f).toInt()
-                }
-                val lastBaseline = if (placeable[LastBaseline] != AlignmentLine.Unspecified) {
-                    placeable[LastBaseline] + (height - placeable.height) / 2
-                } else {
-                    firstBaseline
-                }
-
-                layout(
-                    width = placeable.width,
-                    height = height,
-                    alignmentLines = mapOf(
-                        FirstBaseline to firstBaseline,
-                        LastBaseline to lastBaseline,
-                    ),
-                ) {
-                    placeable.place(0, (height - placeable.height) / 2)
-                }
-            }
-        }
+            measurePolicy = rememberBaseLineMeasurements(),
+        )
     }
 }
 
@@ -142,6 +116,47 @@ internal fun BpkRatingSubtitle(
         color = BpkTheme.colors.textSecondary,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
+    )
+}
+
+@Composable
+private fun rememberBaseLineMeasurements(
+    density: Density = LocalDensity.current,
+): MeasurePolicy {
+    return remember(density) {
+        MeasurePolicy { measurables, constraints ->
+            if (measurables.isEmpty()) {
+                layout(0, 0) {}
+            }
+            val placeable = measurables.first().measure(constraints)
+            val height = minOf(placeable.height, with(density) { BpkSpacing.Lg.roundToPx() })
+            layout(
+                width = placeable.width,
+                height = height,
+                alignmentLines = placeable.calculateBaselines(height),
+            ) {
+                placeable.place(0, (height - placeable.height) / 2)
+            }
+        }
+    }
+}
+
+// This function calculates the baselines for the first and last lines of text in a Placeable.
+private fun Placeable.calculateBaselines(height: Int): Map<AlignmentLine, Int> {
+    val placeable = this
+    val firstBaseline = if (placeable[FirstBaseline] != AlignmentLine.Unspecified) {
+        placeable[FirstBaseline] + (height - placeable.height) / 2
+    } else {
+        (height * 0.9f).toInt()
+    }
+    val lastBaseline = if (placeable[LastBaseline] != AlignmentLine.Unspecified) {
+        placeable[LastBaseline] + (height - placeable.height) / 2
+    } else {
+        firstBaseline
+    }
+    return mapOf(
+        FirstBaseline to firstBaseline,
+        LastBaseline to lastBaseline,
     )
 }
 
