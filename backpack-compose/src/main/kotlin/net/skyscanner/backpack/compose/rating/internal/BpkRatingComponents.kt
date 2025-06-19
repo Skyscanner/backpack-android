@@ -127,15 +127,16 @@ private fun rememberBaseLineMeasurements(
         MeasurePolicy { measurables, constraints ->
             if (measurables.isEmpty()) {
                 layout(0, 0) {}
-            }
-            val placeable = measurables.first().measure(constraints)
-            val height = minOf(placeable.height, with(density) { BpkSpacing.Lg.roundToPx() })
-            layout(
-                width = placeable.width,
-                height = height,
-                alignmentLines = placeable.calculateBaselines(height),
-            ) {
-                placeable.place(0, (height - placeable.height) / 2)
+            } else {
+                val placeable = measurables.first().measure(constraints)
+                val height = minOf(placeable.height, with(density) { BpkSpacing.Lg.roundToPx() })
+                layout(
+                    width = placeable.width,
+                    height = height,
+                    alignmentLines = placeable.calculateBaselines(height),
+                ) {
+                    placeable.place(0, (height - placeable.height) / 2)
+                }
             }
         }
     }
