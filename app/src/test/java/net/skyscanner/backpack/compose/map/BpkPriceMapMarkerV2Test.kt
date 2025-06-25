@@ -19,6 +19,9 @@
 package net.skyscanner.backpack.compose.map
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Airports
+import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Test
 
 class BpkPriceMapMarkerV2Test : BpkSnapshotTest() {
@@ -36,5 +39,25 @@ class BpkPriceMapMarkerV2Test : BpkSnapshotTest() {
     @Test
     fun previousSelected() = snap {
         PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.PreviousSelected)
+    }
+
+    @Test
+    fun unselectedWithIcon() = snap {
+        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Unselected, prefixIcon = BpkIcon.Airports)
+    }
+
+    @Test
+    fun unselectedWithHeartIcon() = snap {
+        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Unselected, prefixIcon = BpkIcon.Heart)
+    }
+
+    @Test
+    fun selectedWithIcon() = snap {
+        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Selected, prefixIcon = BpkIcon.Heart)
+    }
+
+    @Test
+    fun previousSelectedWithIcon() = snap {
+        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.PreviousSelected, prefixIcon = BpkIcon.Heart)
     }
 }

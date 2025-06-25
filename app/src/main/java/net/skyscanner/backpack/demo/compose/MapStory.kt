@@ -46,7 +46,9 @@ import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.Cafe
+import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
@@ -97,6 +99,13 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
         else -> BpkPriceMarkerV2Status.Unselected
     }
 
+    val markerIcons = listOf(
+        BpkIcon.Heart,
+        BpkIcon.Heart,
+        BpkIcon.Airports,
+        BpkIcon.Heart,
+    )
+
     GoogleMap(
         modifier = modifier,
         cameraPositionState = rememberCameraPositionState { MapPosition },
@@ -108,6 +117,7 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
                 status = markerStatus(index),
                 state = rememberMarkerState(position = latLng),
                 onClick = { previousSelectedMarker = focusedMarker; focusedMarker = index; false },
+                prefixIcon = markerIcons[index],
             )
         }
     }
