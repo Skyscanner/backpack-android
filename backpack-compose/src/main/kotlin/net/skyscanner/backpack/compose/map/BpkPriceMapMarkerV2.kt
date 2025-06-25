@@ -20,23 +20,28 @@ package net.skyscanner.backpack.compose.map
 
 import androidx.annotation.RestrictTo
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.internal.BpkMapMarkerColors
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
@@ -55,9 +60,10 @@ fun BpkPriceMapMarkerV2(
     visible: Boolean = true,
     zIndex: Float? = null,
     onClick: (Marker) -> Boolean = { false },
+    prefixIcon: BpkIcon? = null,
 ) {
     val icon = rememberCapturedComposeBitmapDescriptor(title, status) {
-        PriceMarkerV2Layout(title = title, status = status)
+        PriceMarkerV2Layout(title = title, status = status, prefixIcon = prefixIcon)
     }
 
     MarkerInfoWindow(
@@ -73,33 +79,53 @@ fun BpkPriceMapMarkerV2(
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun PriceMarkerV2Layout(title: String, status: BpkPriceMarkerV2Status, modifier: Modifier = Modifier) {
+fun PriceMarkerV2Layout(
+    title: String,
+    status: BpkPriceMarkerV2Status,
+    modifier: Modifier = Modifier,
+    prefixIcon: BpkIcon? = null,
+) {
     val textColor = when (status) {
-        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.textPrimary
+        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.textOnLight
         BpkPriceMarkerV2Status.Selected -> BpkTheme.colors.textOnDark
         BpkPriceMarkerV2Status.PreviousSelected -> BpkTheme.colors.textOnLight
     }
 
     val backgroundFillColor = when (status) {
-        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.surfaceDefault
+        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.textOnDark
         BpkPriceMarkerV2Status.Selected -> BpkTheme.colors.corePrimary
         BpkPriceMarkerV2Status.PreviousSelected -> BpkMapMarkerColors.mapPreviousSelection
     }
 
-    val borderRadius = BpkBorderRadius.Sm
+    // Specify a different color for the heart icon according to the design spec.
+    val prefixIconColor = if (prefixIcon == BpkIcon.Heart && status == BpkPriceMarkerV2Status.Unselected) {
+        BpkTheme.colors.surfaceHero
+    } else {
+        textColor
+    }
 
     val labelStyle = BpkTheme.typography.label3
 
-    Box(
-        contentAlignment = Alignment.Center,
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .height(if (status == BpkPriceMarkerV2Status.Selected) FocusedMarkerHeight else DefaultMarkerHeight)
+            .height(BpkSpacing.Lg)
+            .shadow(elevation = MarkerElevation)
             .background(
                 color = backgroundFillColor,
-                shape = RoundedCornerShape(borderRadius),
+                shape = RoundedCornerShape(BpkBorderRadius.Sm),
             )
-            .padding(horizontal = BpkSpacing.Md, vertical = VerticalPadding),
+            .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
     ) {
+        prefixIcon?.let {
+            BpkIcon(
+                icon = it,
+                contentDescription = null,
+                tint = prefixIconColor,
+                size = BpkIconSize.Small,
+            )
+        }
         BpkText(
             text = title,
             color = textColor,
@@ -110,7 +136,4 @@ fun PriceMarkerV2Layout(title: String, status: BpkPriceMarkerV2Status, modifier:
     }
 }
 
-private val FocusedMarkerHeight = 26.dp
-private val DefaultMarkerHeight = 24.dp
-
-private val VerticalPadding = 1.dp
+private val MarkerElevation = 3.dp
