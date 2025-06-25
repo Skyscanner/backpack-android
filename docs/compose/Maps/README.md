@@ -73,6 +73,7 @@ import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 BpkPriceMapMarkerV2(
     title = "£198",
     status = BpkPriceMarkerV2Status.Selected,
+    prefixIcon = BpkIcon.Heart,
 )
 ```
 
