@@ -72,7 +72,20 @@ import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 
 BpkPriceMapMarkerV2(
     title = "£198",
+    status = BpkPriceMarkerV2Status.Selected
+)
+```
+
+Example of an price marker v2 with prefix icon:
+
+```Kotlin
+import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
+import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+
+BpkPriceMapMarkerV2(
+    title = "£198",
     status = BpkPriceMarkerV2Status.Selected,
+    prefixIcon = BpkIcon.Heart,
 )
 ```
 
