@@ -1,6 +1,6 @@
 # Backpack Component Standards
 
-Bellow are the standards and best practices for developing components in the Backpack Android library. These standards ensure that all components are accessible, well-designed, thoroughly tested, and properly documented. Wherever appropriate, these standards draw inspiration from established best practices such as Material 3 guidelines to ensure modern, accessible, and robust components.
+Below are the standards and best practices for developing components in the Backpack Android library. These standards ensure that all components are accessible, well-designed, thoroughly tested, and properly documented. Wherever appropriate, these standards draw inspiration from established best practices such as Material 3 guidelines to ensure modern, accessible, and robust components.
 
 ## Accessibility Standards
 
