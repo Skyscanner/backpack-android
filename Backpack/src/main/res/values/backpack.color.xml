@@ -39,12 +39,6 @@
     <color name="bpkBackgroundTertiaryLight">#ffffffff</color>
     <color name="bpkBagan">#fffff7cf</color>
     <color name="bpkBlack">#ff010913</color>
-    <color name="bpkBlackTint01">#ff131d2b</color>
-    <color name="bpkBlackTint02">#ff131d2b</color>
-    <color name="bpkBlackTint03">#ff243346</color>
-    <color name="bpkBlackTint04">#ff44505f</color>
-    <color name="bpkBlackTint05">#ff44505f</color>
-    <color name="bpkBlackTint06">#ffbdc4cb</color>
     <color name="bpkBunol">#fff55d42</color>
     <color name="bpkErfoud">#fffeeb87</color>
     <color name="bpkGlencoe">#ff62f1c6</color>
