@@ -68,16 +68,18 @@ data class BpkIcon(
                     val type = when (folder.name) {
                         "lg" -> Type.Lg
                         "sm" -> Type.Sm
-                        else -> throw IllegalStateException("Unknown icon type")
+                        else -> null
                     }
-                    folder.listFiles()!!.map { file ->
+                    folder.listFiles()!!.mapNotNull { file ->
                         val stream = ByteArrayOutputStream()
                         Svg2Vector.parseSvgToXml(file.toPath(), stream)
-                        BpkIcon(
-                            name = transformIconName(file.name),
-                            type = type,
-                            value = String(stream.toByteArray()),
-                        )
+                        type?.let {
+                            BpkIcon(
+                                name = transformIconName(file.name),
+                                type = type,
+                                value = String(stream.toByteArray()),
+                            )
+                        }
                     }
                 }
             }

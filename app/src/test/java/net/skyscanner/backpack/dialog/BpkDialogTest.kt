@@ -100,7 +100,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val dialog = BpkDialog(composeTestRule.activity, BpkDialog.Style.ALERT).apply {
             title = "Delete?"
             description = "Delete your profile?"
-            icon = BpkDialog.Icon(R.drawable.bpk_trash, composeTestRule.activity.getColor(R.color.bpkValensole))
+            icon = BpkDialog.Icon(R.drawable.bpk_trash, composeTestRule.activity.getColor(R.color.bpkTextSecondary))
 
             addActionButton(
                 BpkButton(composeTestRule.activity).apply {

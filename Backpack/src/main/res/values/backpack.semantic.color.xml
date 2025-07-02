@@ -20,14 +20,6 @@
 
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
-    <color name="bpkBackground">#ffffffff</color>
-    <color name="bpkBackgroundAlternative">#ffeff3f8</color>
-    <color name="bpkBackgroundAlternativeSecondary">#ffffffff</color>
-    <color name="bpkBackgroundElevation01">#ffffffff</color>
-    <color name="bpkBackgroundElevation02">#ffffffff</color>
-    <color name="bpkBackgroundElevation03">#ffffffff</color>
-    <color name="bpkBackgroundSecondary">#ffeff3f8</color>
-    <color name="bpkBackgroundTertiary">#ffffffff</color>
     <color name="bpkCanvas">#ffffffff</color>
     <color name="bpkCanvasContrast">#ffeff3f8</color>
     <color name="bpkCoreAccent">#ff0062e3</color>
@@ -36,7 +28,6 @@
     <color name="bpkLine">#ffc1c7cf</color>
     <color name="bpkLineOnDark">#80ffffff</color>
     <color name="bpkOverlay">#33000000</color>
-    <color name="bpkPrimary">#ff0062e3</color>
     <color name="bpkScrim">#b3000000</color>
     <color name="bpkStatusDangerFill">#ffffe9f9</color>
     <color name="bpkStatusDangerSpot">#ffe70866</color>
@@ -60,7 +51,5 @@
     <color name="bpkTextOnLight">#ff161616</color>
     <color name="bpkTextPrimary">#ff161616</color>
     <color name="bpkTextPrimaryInverse">#ffffffff</color>
-    <color name="bpkTextQuaternary">#33000000</color>
     <color name="bpkTextSecondary">#ff626971</color>
-    <color name="bpkTextTertiary">#33000000</color>
 </resources>
