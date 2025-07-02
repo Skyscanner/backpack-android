@@ -57,7 +57,7 @@ fun CardButtonStoryDefault(modifier: Modifier = Modifier) =
 @Composable
 @CardButtonComponent
 @ComposeStory("Small")
-fun CardButtonStoryLarge(modifier: Modifier = Modifier) =
+fun CardButtonStorySmall(modifier: Modifier = Modifier) =
     CardButtonsDemo(BpkCardButtonSize.Small, modifier)
 
 @Composable
