@@ -31,7 +31,7 @@ enum class BpkCardButtonStyle {
 
 enum class BpkCardButtonSize {
     Default,
-    Large,
+    Small,
 }
 
 @Composable

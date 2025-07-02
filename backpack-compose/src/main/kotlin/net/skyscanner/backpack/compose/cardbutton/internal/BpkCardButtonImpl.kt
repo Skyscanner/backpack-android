@@ -97,42 +97,37 @@ internal fun BpkSaveCardButtonImpl(
         animationSpec = tween(300),
     )
     Box(
-        modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
+        modifier = modifier
+            .clip(shape = CircleShape)
+            .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
+            .background(
+                color = when (style) {
+                    BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                    else -> Color.Transparent
+                },
+            )
+            .semantics { this.contentDescription = contentDescription }
+            .then(
+                if (state == BpkCardButtonState.Rest) {
+                    Modifier.toggleable(
+                        value = checked,
+                        role = Role.Switch,
+                        onValueChange = { checked ->
+                            if (checked) state = BpkCardButtonState.Transition
+                            onCheckedChange(checked)
+                        },
+                    )
+                } else Modifier,
+            ),
         contentAlignment = Alignment.Center,
     ) {
-        Box(
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
-                .background(
-                    color = when (style) {
-                        BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
-                        else -> Color.Transparent
-                    },
-                )
-                .semantics { this.contentDescription = contentDescription }
-                .then(
-                    if (state == BpkCardButtonState.Rest) {
-                        Modifier.toggleable(
-                            value = checked,
-                            role = Role.Switch,
-                            onValueChange = { checked ->
-                                if (checked) state = BpkCardButtonState.Transition
-                                onCheckedChange(checked)
-                            },
-                        )
-                    } else Modifier,
-                ),
-            contentAlignment = Alignment.Center,
-        ) {
-            Box(modifier = Modifier.scale(scaleAnimation.value)) {
-                BpkIcon(
-                    icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
-                    contentDescription = null,
-                    size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
-                    tint = colorAnimation,
-                )
-            }
+        Box(modifier = Modifier.scale(scaleAnimation.value)) {
+            BpkIcon(
+                icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
+                contentDescription = null,
+                size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
+                tint = colorAnimation,
+            )
         }
     }
 }
@@ -146,32 +141,27 @@ internal fun BpkShareCardButtonImpl(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
-        contentAlignment = Alignment.Center,
-    ) {
-        Box(
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
-                .background(
-                    color = when (style) {
-                        BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
-                        else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
-                    },
-                )
-                .clickableWithRipple(onClick = onClick),
-            contentAlignment = Alignment.Center,
-        ) {
-            BpkIcon(
-                modifier = Modifier,
-                icon = BpkIcon.ShareAndroid,
-                contentDescription = contentDescription,
-                size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
-                tint = when (style) {
-                    BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
-                    else -> BpkTheme.colors.textPrimary
+        modifier = modifier
+            .clip(shape = CircleShape)
+            .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
+            .background(
+                color = when (style) {
+                    BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                    else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
                 },
             )
-        }
+            .clickableWithRipple(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkIcon(
+            modifier = Modifier,
+            icon = BpkIcon.ShareAndroid,
+            contentDescription = contentDescription,
+            size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
+            tint = when (style) {
+                BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
+                else -> BpkTheme.colors.textPrimary
+            },
+        )
     }
 }

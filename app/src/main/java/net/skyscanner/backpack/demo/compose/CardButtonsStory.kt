@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -55,9 +56,9 @@ fun CardButtonStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @CardButtonComponent
-@ComposeStory("Large")
+@ComposeStory("Small")
 fun CardButtonStoryLarge(modifier: Modifier = Modifier) =
-    CardButtonsDemo(BpkCardButtonSize.Large, modifier)
+    CardButtonsDemo(BpkCardButtonSize.Small, modifier)
 
 @Composable
 private fun CardButtonsDemo(
@@ -90,7 +91,7 @@ private fun CardButtonsDemo(
             }
         }
         item {
-            Box(modifier = Modifier.height(BpkSpacing.Xxl + BpkSpacing.Md)) {
+            Box(modifier = Modifier.height(BpkSpacing.Xxl + BpkSpacing.Md), contentAlignment = Alignment.Center) {
                 Image(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.canadian_rockies_canada),
