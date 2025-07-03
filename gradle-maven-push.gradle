@@ -15,7 +15,7 @@ afterEvaluate { project ->
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/Skyscanner/backpack-android")
+                url = uri("https://maven.pkg.github.com/skyscanner/backpack-android")
                 credentials {
                     username = rootProject.ext.githubUsername.isEmpty() ? System.getenv("GITHUB_ACTOR") : rootProject.ext.githubUsername
                     password = rootProject.ext.githubToken.isEmpty() ? System.getenv("GITHUB_TOKEN") : rootProject.ext.githubToken
