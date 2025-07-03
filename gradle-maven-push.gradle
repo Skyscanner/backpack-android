@@ -12,6 +12,17 @@ android {
 
 afterEvaluate { project ->
     publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/skyscanner/backpack-android")
+                credentials {
+                    username = rootProject.ext.githubUsername.isEmpty() ? System.getenv("GITHUB_ACTOR") : rootProject.ext.githubUsername
+                    password = rootProject.ext.githubToken.isEmpty() ? System.getenv("GITHUB_TOKEN") : rootProject.ext.githubToken
+                }
+            }
+        }
+
         publications {
             maven(MavenPublication) {
                 groupId rootProject.ext.group
@@ -51,9 +62,10 @@ afterEvaluate { project ->
 
 tasks.register('checkMavenCredentials') {
     doLast {
-        def props = ["ossrhUsername", "ossrhPassword", "signing.keyId", "signing.password", "signing.secretKeyRingFile", "sonatypeStagingProfileId"]
-        if (props.any { rootProject.ext[it]?.isEmpty() }) {
-            ant.fail("Missing maven credentials")
+        def props = ["signing.keyId", "signing.password", "signing.secretKeyRingFile"]
+        // Skip GitHub credentials check as they can be provided by GitHub Actions
+        if (!System.getenv("GITHUB_ACTIONS") && props.any { rootProject.ext[it]?.isEmpty() }) {
+            ant.fail("Missing signing credentials")
         }
     }
 }
