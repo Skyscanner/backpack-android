@@ -148,7 +148,7 @@ internal fun BpkShareCardButtonImpl(
             .background(
                 color = when (style) {
                     BpkCardButtonStyle.Contained -> BpkCardButtonColors.containedFill
-                    else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
+                    else -> Color.Transparent
                 },
             )
             .clickableWithRipple(onClick = onClick),
