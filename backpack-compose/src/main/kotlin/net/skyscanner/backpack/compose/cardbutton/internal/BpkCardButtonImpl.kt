@@ -51,6 +51,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.HeartOutline
 import net.skyscanner.backpack.compose.tokens.ShareAndroid
+import net.skyscanner.backpack.compose.tokens.internal.BpkCardButtonColors
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 private enum class BpkCardButtonState {
@@ -102,7 +103,7 @@ internal fun BpkSaveCardButtonImpl(
             .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
             .background(
                 color = when (style) {
-                    BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                    BpkCardButtonStyle.Contained -> BpkCardButtonColors.containedFill
                     else -> Color.Transparent
                 },
             )
@@ -146,7 +147,7 @@ internal fun BpkShareCardButtonImpl(
             .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
             .background(
                 color = when (style) {
-                    BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                    BpkCardButtonStyle.Contained -> BpkCardButtonColors.containedFill
                     else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
                 },
             )
