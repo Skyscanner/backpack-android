@@ -61,6 +61,8 @@ jobs:
 
       - name: Publish artifacts
         run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v4

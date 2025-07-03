@@ -1,5 +1,4 @@
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
 
 android {
     publishing {
@@ -60,24 +59,3 @@ afterEvaluate { project ->
     }
 }
 
-tasks.register('checkMavenCredentials') {
-    doLast {
-        def props = ["signing.keyId", "signing.password", "signing.secretKeyRingFile"]
-        // Skip GitHub credentials check as they can be provided by GitHub Actions
-        if (!System.getenv("GITHUB_ACTIONS") && props.any { rootProject.ext[it]?.isEmpty() }) {
-            ant.fail("Missing signing credentials")
-        }
-    }
-}
-
-ext["signing.keyId"] = rootProject.ext["signing.keyId"]
-ext["signing.password"] = rootProject.ext["signing.password"]
-ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
-
-signing {
-    sign publishing.publications
-}
-
-tasks.withType(Sign) {
-    onlyIf { !project.version.endsWith("SNAPSHOT") }
-}
