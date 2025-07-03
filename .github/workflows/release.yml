@@ -25,7 +25,7 @@ jobs:
 
   Deploy:
     name: Deploy
-    runs-on: [ ubuntu-24.04-8cores-public,ubuntu-24.04-16cores-public ]
+    runs-on: ubuntu-24.04-16cores-public
     environment: Publishing
     needs: [Build]
     timeout-minutes: 30
