@@ -1,6 +1,3 @@
-ext["signing.keyId"] = ''
-ext["signing.password"] = ''
-ext["signing.secretKeyRingFile"] = ''
 ext["githubUsername"] = ''
 ext["githubToken"] = ''
 
@@ -12,7 +9,6 @@ if (localProps.exists()) {
 } else {
     Properties p = new Properties()
     p.putAll(System.getenv())
-    ext["signing.secretKeyRingFile"] = "${project.rootDir}/github.gpg"
     p.each { name, value ->
         switch (name) {
             case "GITHUB_USERNAME":
@@ -20,12 +16,6 @@ if (localProps.exists()) {
                 break
             case "GITHUB_TOKEN":
                 ext["githubToken"] = value
-                break
-            case "GITHUB_SIGNING_KEY_ID":
-                ext["signing.keyId"] = value
-                break
-            case "GITHUB_SIGNING_KEY_PASSWORD":
-                ext["signing.password"] = value
                 break
         }
     }
