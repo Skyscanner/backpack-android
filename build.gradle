@@ -27,7 +27,6 @@ buildscript {
         classpath libs.plugin.android
         classpath libs.plugin.kotlin
         classpath libs.plugin.dokka
-        classpath libs.plugin.nexusPublishing
         classpath libs.plugin.detekt
         classpath libs.plugin.ksp
         classpath libs.plugin.roborazzi
@@ -38,7 +37,6 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
 }
 
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
 apply from: 'publish-root.gradle'
 apply plugin: 'org.jetbrains.dokka'
 
