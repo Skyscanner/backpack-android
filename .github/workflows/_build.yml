@@ -20,7 +20,7 @@ jobs:
 
   Build:
     name: Build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04-16cores-public
     timeout-minutes: 30
     permissions:
       statuses: write
@@ -33,7 +33,7 @@ jobs:
         with:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-      
+
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -107,7 +107,7 @@ jobs:
 
   Android:
     name: Android tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04-16cores-public
     timeout-minutes: 30
 
     steps:
@@ -171,7 +171,7 @@ jobs:
 
   Screenshots:
     name: Screenshots tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04-16cores-public
     permissions:
       pull-requests: write
       contents: write

@@ -25,7 +25,7 @@ jobs:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
   Dependabot:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04-16cores-public
     permissions:
       pull-requests: write
     if: ${{ github.actor == 'dependabot[bot]' }}
