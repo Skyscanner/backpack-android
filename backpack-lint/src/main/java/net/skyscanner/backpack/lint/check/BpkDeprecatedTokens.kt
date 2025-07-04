@@ -25,5 +25,6 @@ import kotlin.String
 import kotlin.collections.List
 
 internal object BpkDeprecatedTokens {
-    public val deprecatedColors: List<String> = listOf()
+    public val deprecatedColors: List<String> = listOf(
+    )
 }
