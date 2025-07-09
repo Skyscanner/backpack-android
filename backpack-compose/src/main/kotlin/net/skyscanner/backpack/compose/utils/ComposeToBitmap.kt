@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.applyCanvas
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import androidx.core.graphics.createBitmap
 
 @Composable
 internal fun rememberCapturedComposeBitmapDescriptor(
@@ -53,9 +55,11 @@ internal fun rememberCapturedComposeBitmap(
     val currentContext = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
+    val previousKeys = rememberPrevious(*keys)
 
+    val refreshNeeded = previousKeys == null || previousKeys != keys.toList()
     val newBitmap = remember(parent, currentContext, currentContent, *keys) {
-        renderComposeToBitmap(parent, currentContext, cachedBitmap, currentContent)
+        renderComposeToBitmap(parent, currentContext, cachedBitmap, currentContent, refreshNeeded)
     }
     cachedBitmap = newBitmap
     return cachedBitmap ?: newBitmap
@@ -66,6 +70,7 @@ private fun renderComposeToBitmap(
     compositionContext: CompositionContext,
     cachedBitmap: Bitmap?,
     content: @Composable () -> Unit,
+    refreshNeeded: Boolean,
 ): Bitmap {
 
     val composeView = ComposeView(parent.context)
@@ -84,13 +89,10 @@ private fun renderComposeToBitmap(
 
     val bitmap = when {
         cachedBitmap == null ||
+            refreshNeeded ||
             cachedBitmap.width != composeView.measuredWidth ||
             cachedBitmap.height != composeView.measuredHeight ->
-            Bitmap.createBitmap(
-                composeView.measuredWidth,
-                composeView.measuredHeight,
-                Bitmap.Config.ARGB_8888,
-            )
+            createBitmap(composeView.measuredWidth, composeView.measuredHeight)
 
         else -> cachedBitmap
     }
@@ -102,4 +104,13 @@ private fun renderComposeToBitmap(
     parent.removeView(composeView)
 
     return bitmap
+}
+
+@Composable
+private fun rememberPrevious(vararg keys: Any?): List<Any?>? {
+    val state = remember { mutableStateOf<List<Any?>?>(null) }
+    SideEffect {
+        state.value = keys.toList()
+    }
+    return state.value
 }

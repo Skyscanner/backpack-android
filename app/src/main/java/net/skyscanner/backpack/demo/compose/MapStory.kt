@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -90,13 +91,18 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "PriceV2")
 fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableIntStateOf(0) }
-    var previousSelectedMarker by remember { mutableIntStateOf(1) }
-
-    fun markerStatus(index: Int): BpkPriceMarkerV2Status = when (index) {
-        focusedMarker -> BpkPriceMarkerV2Status.Selected
-        previousSelectedMarker -> BpkPriceMarkerV2Status.PreviousSelected
-        else -> BpkPriceMarkerV2Status.Unselected
+    val markerStatuses = remember {
+        mutableStateListOf(
+            BpkPriceMarkerV2Status.Selected,
+            BpkPriceMarkerV2Status.PreviousSelected,
+            BpkPriceMarkerV2Status.Unselected,
+            BpkPriceMarkerV2Status.Selected,
+            BpkPriceMarkerV2Status.PreviousSelected,
+            BpkPriceMarkerV2Status.Unselected,
+            BpkPriceMarkerV2Status.Selected,
+            BpkPriceMarkerV2Status.PreviousSelected,
+            BpkPriceMarkerV2Status.Unselected,
+        )
     }
 
     val markerPositions = listOf(
@@ -120,17 +126,32 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
         BpkIcon.Airports,
     )
 
+    val cameraPositionState = rememberCameraPositionState().apply {
+        position = CameraPosition.fromLatLngZoom(
+            LatLng(51.575308, -0.391776),
+            14f,
+        )
+    }
+
     GoogleMap(
         modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
+        cameraPositionState = cameraPositionState,
         mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
     ) {
         markerPositions.forEachIndexed { index, latLng ->
             BpkPriceMapMarkerV2(
                 title = stringArrayResource(R.array.map_marker_prices)[index % 3],
-                status = markerStatus(index % 3),
+                status = markerStatuses[index],
                 state = rememberMarkerState(position = latLng),
-                onClick = { previousSelectedMarker = focusedMarker; focusedMarker = index; false },
+                onClick = {
+                    markerStatuses.forEachIndexed { i, status ->
+                        if (i / 3 == index / 3 && status == BpkPriceMarkerV2Status.Selected) {
+                            markerStatuses[i] = BpkPriceMarkerV2Status.PreviousSelected
+                        }
+                    }
+                    markerStatuses[index] = BpkPriceMarkerV2Status.Selected
+                    false
+                },
                 prefixIcon = markerIcons[index / 3],
             )
         }
