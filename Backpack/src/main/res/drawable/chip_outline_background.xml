@@ -13,6 +13,6 @@
         android:topRightRadius="@dimen/bpkBorderRadiusXl" />
     <stroke
         android:width="@dimen/bpkBorderSizeSm"
-        android:color="@color/bpkLineDark" />
+        android:color="@color/bpkTextOnLight" />
 </shape>
 

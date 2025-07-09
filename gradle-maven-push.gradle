@@ -1,5 +1,4 @@
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
 
 android {
     publishing {
@@ -12,6 +11,17 @@ android {
 
 afterEvaluate { project ->
     publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/skyscanner/backpack-android")
+                credentials {
+                    username = rootProject.ext.githubUsername.isEmpty() ? System.getenv("GITHUB_ACTOR") : rootProject.ext.githubUsername
+                    password = rootProject.ext.githubToken.isEmpty() ? System.getenv("GITHUB_TOKEN") : rootProject.ext.githubToken
+                }
+            }
+        }
+
         publications {
             maven(MavenPublication) {
                 groupId rootProject.ext.group
@@ -49,23 +59,3 @@ afterEvaluate { project ->
     }
 }
 
-tasks.register('checkMavenCredentials') {
-    doLast {
-        def props = ["ossrhUsername", "ossrhPassword", "signing.keyId", "signing.password", "signing.secretKeyRingFile", "sonatypeStagingProfileId"]
-        if (props.any { rootProject.ext[it]?.isEmpty() }) {
-            ant.fail("Missing maven credentials")
-        }
-    }
-}
-
-ext["signing.keyId"] = rootProject.ext["signing.keyId"]
-ext["signing.password"] = rootProject.ext["signing.password"]
-ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
-
-signing {
-    sign publishing.publications
-}
-
-tasks.withType(Sign) {
-    onlyIf { !project.version.endsWith("SNAPSHOT") }
-}

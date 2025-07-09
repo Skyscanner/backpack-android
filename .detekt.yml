@@ -266,7 +266,7 @@ formatting:
   SpacingAroundParens:
     active: true
     autoCorrect: true
-    excludes: [ '**/compose/tokens/**' ]
+    excludes: [ '**/compose/tokens/**', '**/check/BpkDeprecatedTokens.kt' ]
   SpacingAroundRangeOperator:
     active: true
     autoCorrect: true

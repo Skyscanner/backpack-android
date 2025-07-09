@@ -1,23 +1,23 @@
 {
-  "private": true,
-  "name": "backpack-android",
-  "version": "0.0.0",
-  "engines": {
-    "node": "^18.16.0",
-    "npm": "^9.5.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Skyscanner/backpack-android.git"
-  },
-  "author": "Backpack Design System <backpack@skyscanner.net>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/Skyscanner/backpack-android/issues"
-  },
-  "homepage": "https://github.com/Skyscanner/backpack-android#readme",
-  "devDependencies": {
-    "@skyscanner/bpk-foundations-android": "^19.4.1",
-    "@skyscanner/bpk-svgs": "^20.4.1"
-  }
+    "private": true,
+    "name": "backpack-android",
+    "version": "0.0.0",
+    "engines": {
+        "node": "^18.16.0",
+        "npm": "^9.5.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Skyscanner/backpack-android.git"
+    },
+    "author": "Backpack Design System <backpack@skyscanner.net>",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/Skyscanner/backpack-android/issues"
+    },
+    "homepage": "https://github.com/Skyscanner/backpack-android#readme",
+    "devDependencies": {
+        "@skyscanner/bpk-foundations-android": "^21.0.0",
+        "@skyscanner/bpk-svgs": "^20.4.1"
+    }
 }

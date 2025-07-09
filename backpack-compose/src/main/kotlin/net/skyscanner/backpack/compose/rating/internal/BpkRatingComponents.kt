@@ -19,20 +19,22 @@
 package net.skyscanner.backpack.compose.rating.internal
 
 import android.icu.text.DecimalFormat
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.semantics.invisibleToUser
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Density
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
@@ -81,7 +83,6 @@ internal fun BpkRatingNumbers(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkRatingTitle(
     modifier: Modifier = Modifier,
@@ -91,19 +92,11 @@ internal fun BpkRatingTitle(
         LocalTextStyle provides BpkTheme.typography.heading5,
         LocalContentColor provides BpkTheme.colors.textPrimary,
     ) {
-        Box(
+        Layout(
+            content = content,
             modifier = modifier.heightIn(max = BpkSpacing.Lg),
-            contentAlignment = Alignment.CenterStart,
-        ) {
-            // a little trick to provide baseline params for the custom layouts with invisible text
-            BpkText(
-                text = "",
-                modifier = Modifier
-                    .alpha(0f)
-                    .semantics { invisibleToUser() },
-            )
-            content()
-        }
+            measurePolicy = rememberBaseLineMeasurements(),
+        )
     }
 }
 
@@ -123,6 +116,48 @@ internal fun BpkRatingSubtitle(
         color = BpkTheme.colors.textSecondary,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
+    )
+}
+
+@Composable
+private fun rememberBaseLineMeasurements(
+    density: Density = LocalDensity.current,
+): MeasurePolicy {
+    return remember(density) {
+        MeasurePolicy { measurables, constraints ->
+            if (measurables.isEmpty()) {
+                layout(0, 0) {}
+            } else {
+                val placeable = measurables.first().measure(constraints)
+                val height = minOf(placeable.height, with(density) { BpkSpacing.Lg.roundToPx() })
+                layout(
+                    width = placeable.width,
+                    height = height,
+                    alignmentLines = placeable.calculateBaselines(height),
+                ) {
+                    placeable.place(0, (height - placeable.height) / 2)
+                }
+            }
+        }
+    }
+}
+
+// This function calculates the baselines for the first and last lines of text in a Placeable.
+private fun Placeable.calculateBaselines(height: Int): Map<AlignmentLine, Int> {
+    val placeable = this
+    val firstBaseline = if (placeable[FirstBaseline] != AlignmentLine.Unspecified) {
+        placeable[FirstBaseline] + (height - placeable.height) / 2
+    } else {
+        (height * 0.9f).toInt()
+    }
+    val lastBaseline = if (placeable[LastBaseline] != AlignmentLine.Unspecified) {
+        placeable[LastBaseline] + (height - placeable.height) / 2
+    } else {
+        firstBaseline
+    }
+    return mapOf(
+        FirstBaseline to firstBaseline,
+        LastBaseline to lastBaseline,
     )
 }
 

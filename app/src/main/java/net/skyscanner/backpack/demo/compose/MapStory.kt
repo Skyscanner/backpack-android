@@ -46,7 +46,9 @@ import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.Cafe
+import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
@@ -97,17 +99,39 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
         else -> BpkPriceMarkerV2Status.Unselected
     }
 
+    val markerPositions = listOf(
+        // No icons
+        LatLng(51.588308, -0.391776),
+        LatLng(51.585308, -0.391776),
+        LatLng(51.582308, -0.391776),
+        // Heart icons
+        LatLng(51.578308, -0.391776),
+        LatLng(51.575308, -0.391776),
+        LatLng(51.572308, -0.391776),
+        // Other icons
+        LatLng(51.568308, -0.391776),
+        LatLng(51.565308, -0.391776),
+        LatLng(51.562308, -0.391776),
+    )
+
+    val markerIcons = listOf(
+        null,
+        BpkIcon.Heart,
+        BpkIcon.Airports,
+    )
+
     GoogleMap(
         modifier = modifier,
         cameraPositionState = rememberCameraPositionState { MapPosition },
         mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
     ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
+        markerPositions.forEachIndexed { index, latLng ->
             BpkPriceMapMarkerV2(
-                title = stringArrayResource(R.array.map_marker_prices)[index],
-                status = markerStatus(index),
+                title = stringArrayResource(R.array.map_marker_prices)[index % 3],
+                status = markerStatus(index % 3),
                 state = rememberMarkerState(position = latLng),
                 onClick = { previousSelectedMarker = focusedMarker; focusedMarker = index; false },
+                prefixIcon = markerIcons[index / 3],
             )
         }
     }

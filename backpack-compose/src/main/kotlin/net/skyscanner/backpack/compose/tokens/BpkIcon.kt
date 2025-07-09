@@ -908,6 +908,14 @@ public val BpkIcon.Companion.Flag: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.Flame: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "flame",
+        small = R.drawable.bpk_flame_sm,
+        large = R.drawable.bpk_flame,
+    )
+)
+
 public val BpkIcon.Companion.Flask: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "flask",
@@ -1105,6 +1113,14 @@ public val BpkIcon.Companion.HotelsSmoking: BpkIcon by Delegates.singleton(
         name = "hotels--smoking",
         small = R.drawable.bpk_hotels__smoking_sm,
         large = R.drawable.bpk_hotels__smoking,
+    )
+)
+
+public val BpkIcon.Companion.Incompatible: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "incompatible",
+        small = R.drawable.bpk_incompatible_sm,
+        large = R.drawable.bpk_incompatible,
     )
 )
 
@@ -2364,6 +2380,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.Filter,
         BpkIcon.Fingerprint,
         BpkIcon.Flag,
+        BpkIcon.Flame,
         BpkIcon.Flask,
         BpkIcon.Flight,
         BpkIcon.FlightFlexible,
@@ -2389,6 +2406,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.HotelsJacuzzi,
         BpkIcon.HotelsPetsAllowed,
         BpkIcon.HotelsSmoking,
+        BpkIcon.Incompatible,
         BpkIcon.Infant,
         BpkIcon.Information,
         BpkIcon.InformationCircle,

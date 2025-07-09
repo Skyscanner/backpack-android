@@ -1,9 +1,5 @@
-ext["signing.keyId"] = ''
-ext["signing.password"] = ''
-ext["signing.secretKeyRingFile"] = ''
-ext["ossrhUsername"] = ''
-ext["ossrhPassword"] = ''
-ext["sonatypeStagingProfileId"] = ''
+ext["githubUsername"] = ''
+ext["githubToken"] = ''
 
 File localProps = rootProject.file('local.properties')
 if (localProps.exists()) {
@@ -13,38 +9,14 @@ if (localProps.exists()) {
 } else {
     Properties p = new Properties()
     p.putAll(System.getenv())
-    ext["signing.secretKeyRingFile"] = "${project.rootDir}/sonatype.gpg"
     p.each { name, value ->
         switch (name) {
-            case "OSSRH_USERNAME":
-                ext["ossrhUsername"] = value
+            case "GITHUB_USERNAME":
+                ext["githubUsername"] = value
                 break
-            case "OSSRH_PASSWORD":
-                ext["ossrhPassword"] = value
+            case "GITHUB_TOKEN":
+                ext["githubToken"] = value
                 break
-            case "SONATYPE_SINGING_KEY_ID":
-                ext["signing.keyId"] = value
-                break
-            case "SONATYPE_SINGING_KEY_PASSWORD":
-                ext["signing.password"] = value
-                break
-            case "SONATYPE_STAGING_PROFILE_ID":
-                ext["sonatypeStagingProfileId"] = value
-                break
-        }
-    }
-}
-
-// Set up Sonatype repository
-nexusPublishing {
-    repositories {
-        sonatype {
-            stagingProfileId = sonatypeStagingProfileId
-            username = ossrhUsername
-            password = ossrhPassword
-
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }
     }
 }

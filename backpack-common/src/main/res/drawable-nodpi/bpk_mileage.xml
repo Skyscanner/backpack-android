@@ -5,7 +5,7 @@
     android:viewportHeight="24">
     <path
         android:fillColor="@color/bpkTextPrimary"
-        android:pathData="M20,12A8,8 0,0 0,8.89 4.627a1,1 0,0 1,-0.78 -1.842,9.995 9.995,0 1,1 -5.54,5.882 1,1 0,0 1,1.904 0.613l-0.019,0.053A8,8 0,1 0,20 12z" />
+        android:pathData="M20,12A8,8 0,0 0,8.89 4.627a1,1 0,0 1,-0.78 -1.842,9.995 9.995,0 1,1 -5.54,5.882 1,1 0,0 1,1.904 0.613l-0.019,0.053A8,8 0,1 0,20 12" />
     <path
         android:fillColor="@color/bpkTextPrimary"
         android:pathData="M4.293,6.207a1,1 0,0 1,1.414 -1.414l7,7a1,1 0,0 1,-1.414 1.414z" />
