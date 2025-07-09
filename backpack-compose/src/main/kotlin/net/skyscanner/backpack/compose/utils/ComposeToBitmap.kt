@@ -32,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -55,7 +56,7 @@ internal fun rememberCapturedComposeBitmap(
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
     val newBitmap = remember(parent, currentContext, currentContent, *keys) {
-        renderComposeToBitmap(parent, currentContext, cachedBitmap, currentContent)
+        renderComposeToBitmap(parent, currentContext, currentContent)
     }
     cachedBitmap = newBitmap
     return cachedBitmap ?: newBitmap
@@ -64,7 +65,6 @@ internal fun rememberCapturedComposeBitmap(
 private fun renderComposeToBitmap(
     parent: ViewGroup,
     compositionContext: CompositionContext,
-    cachedBitmap: Bitmap?,
     content: @Composable () -> Unit,
 ): Bitmap {
 
@@ -82,18 +82,7 @@ private fun renderComposeToBitmap(
 
     composeView.layout(0, 0, composeView.measuredWidth, composeView.measuredHeight)
 
-    val bitmap = when {
-        cachedBitmap == null ||
-            cachedBitmap.width != composeView.measuredWidth ||
-            cachedBitmap.height != composeView.measuredHeight ->
-            Bitmap.createBitmap(
-                composeView.measuredWidth,
-                composeView.measuredHeight,
-                Bitmap.Config.ARGB_8888,
-            )
-
-        else -> cachedBitmap
-    }
+    val bitmap = createBitmap(composeView.measuredWidth, composeView.measuredHeight)
 
     bitmap.applyCanvas {
         composeView.draw(this)
