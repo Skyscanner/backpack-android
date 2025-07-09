@@ -28,7 +28,7 @@ echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
 echo "export ANDROID_SDK_ROOT=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
 source ~/.bash_profile
 
-# For zsh users (macOS Catalina and later)
+# For zsh users
 echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.zshrc
 echo "export ANDROID_SDK_ROOT=\"$HOME/Library/Android/sdk\"" >> ~/.zshrc
 source ~/.zshrc
