@@ -23,7 +23,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,9 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalView
 import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import androidx.core.graphics.createBitmap
 
 @Composable
 internal fun rememberCapturedComposeBitmapDescriptor(
@@ -55,11 +54,9 @@ internal fun rememberCapturedComposeBitmap(
     val currentContext = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
-    val previousKeys = rememberPrevious(*keys)
 
-    val refreshNeeded = previousKeys == null || previousKeys != keys.toList()
     val newBitmap = remember(parent, currentContext, currentContent, *keys) {
-        renderComposeToBitmap(parent, currentContext, cachedBitmap, currentContent, refreshNeeded)
+        renderComposeToBitmap(parent, currentContext, currentContent)
     }
     cachedBitmap = newBitmap
     return cachedBitmap ?: newBitmap
@@ -68,9 +65,7 @@ internal fun rememberCapturedComposeBitmap(
 private fun renderComposeToBitmap(
     parent: ViewGroup,
     compositionContext: CompositionContext,
-    cachedBitmap: Bitmap?,
     content: @Composable () -> Unit,
-    refreshNeeded: Boolean,
 ): Bitmap {
 
     val composeView = ComposeView(parent.context)
@@ -87,15 +82,7 @@ private fun renderComposeToBitmap(
 
     composeView.layout(0, 0, composeView.measuredWidth, composeView.measuredHeight)
 
-    val bitmap = when {
-        cachedBitmap == null ||
-            refreshNeeded ||
-            cachedBitmap.width != composeView.measuredWidth ||
-            cachedBitmap.height != composeView.measuredHeight ->
-            createBitmap(composeView.measuredWidth, composeView.measuredHeight)
-
-        else -> cachedBitmap
-    }
+    val bitmap = createBitmap(composeView.measuredWidth, composeView.measuredHeight)
 
     bitmap.applyCanvas {
         composeView.draw(this)
@@ -104,13 +91,4 @@ private fun renderComposeToBitmap(
     parent.removeView(composeView)
 
     return bitmap
-}
-
-@Composable
-private fun rememberPrevious(vararg keys: Any?): List<Any?>? {
-    val state = remember { mutableStateOf<List<Any?>?>(null) }
-    SideEffect {
-        state.value = keys.toList()
-    }
-    return state.value
 }
