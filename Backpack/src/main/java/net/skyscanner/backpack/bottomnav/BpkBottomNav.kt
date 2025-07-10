@@ -33,6 +33,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import java.util.concurrent.CopyOnWriteArrayList
 
 open class BpkBottomNav @JvmOverloads constructor(
     context: Context,
@@ -111,8 +112,8 @@ open class BpkBottomNav @JvmOverloads constructor(
         private val menu: Menu,
     ) : OnItemSelectedListener, OnItemReselectedListener {
 
-        val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
-        val selected = mutableListOf<(MenuItem, Int) -> Unit>()
+        val reselected = CopyOnWriteArrayList<(MenuItem, Int) -> Unit>()
+        val selected = CopyOnWriteArrayList<(MenuItem, Int) -> Unit>()
 
         override fun onNavigationItemReselected(item: MenuItem) {
             val index = findIndexOf(item)
