@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.map
 
-import android.util.Log
 import androidx.annotation.RestrictTo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -64,7 +63,6 @@ fun BpkPriceMapMarkerV2(
     prefixIcon: BpkIcon? = null,
 ) {
     val icon = rememberCapturedComposeBitmapDescriptor(title, status.name) {
-        Log.d("MarkerDebug", "Recomputing bitmap for $title ${status.name}")
         PriceMarkerV2Layout(title = title, status = status, prefixIcon = prefixIcon)
     }
 
