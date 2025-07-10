@@ -33,7 +33,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import java.util.Collections
 
 open class BpkBottomNav @JvmOverloads constructor(
     context: Context,
@@ -112,24 +111,20 @@ open class BpkBottomNav @JvmOverloads constructor(
         private val menu: Menu,
     ) : OnItemSelectedListener, OnItemReselectedListener {
 
-        val reselected = Collections.synchronizedList(mutableListOf<(MenuItem, Int) -> Unit>())
-        val selected = Collections.synchronizedList(mutableListOf<(MenuItem, Int) -> Unit>())
+        val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
+        val selected = mutableListOf<(MenuItem, Int) -> Unit>()
 
         override fun onNavigationItemReselected(item: MenuItem) {
             val index = findIndexOf(item)
             if (index != -1) {
-                // Create a snapshot to avoid concurrent modification
-                val listeners = synchronized(reselected) { reselected.toList() }
-                listeners.forEach { it.invoke(item, index) }
+                reselected.forEach { it.invoke(item, index) }
             }
         }
 
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             val index = findIndexOf(item)
             if (index != -1) {
-                // Create a snapshot to avoid concurrent modification
-                val listeners = synchronized(selected) { selected.toList() }
-                listeners.forEach { it.invoke(item, index) }
+                selected.forEach { it.invoke(item, index) }
             }
             return true
         }
