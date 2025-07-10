@@ -1932,6 +1932,14 @@ public val BpkIcon.Companion.Taxi: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.Temperature: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "temperature",
+        small = R.drawable.bpk_temperature_sm,
+        large = R.drawable.bpk_temperature,
+    )
+)
+
 public val BpkIcon.Companion.ThumbsDown: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "thumbs-down",
@@ -2508,6 +2516,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.SwapHorizontal,
         BpkIcon.SwapVertical,
         BpkIcon.Taxi,
+        BpkIcon.Temperature,
         BpkIcon.ThumbsDown,
         BpkIcon.ThumbsUp,
         BpkIcon.Tick,
