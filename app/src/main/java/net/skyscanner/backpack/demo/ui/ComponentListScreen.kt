@@ -39,7 +39,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.ComponentScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
@@ -58,11 +59,9 @@ import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
-import net.skyscanner.backpack.demo.ui.destinations.ComponentScreenDestination
 
 @Composable
-@Destination("/")
-@RootNavGraph(start = true)
+@Destination<RootGraph>(start = true)
 fun ComponentListScreen(
     modifier: Modifier = Modifier,
     repository: StoriesRepository = StoriesRepository.getInstance(),
