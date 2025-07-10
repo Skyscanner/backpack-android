@@ -39,6 +39,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.zIndex
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
+import com.ramcosta.composedestinations.generated.destinations.StoryScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
@@ -53,11 +55,26 @@ import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
-import net.skyscanner.backpack.demo.ui.destinations.StoryScreenDestination
 
 @Composable
-@Destination("component")
+@Destination<RootGraph>
 fun ComponentScreen(
+    component: String,
+    modifier: Modifier = Modifier,
+    navigator: DestinationsNavigator = EmptyDestinationsNavigator,
+    repository: StoriesRepository = StoriesRepository.getInstance(),
+) {
+    ComponentScreenContent(
+        component = component,
+        modifier = modifier,
+        navigator = navigator,
+        repository = repository,
+        story = { it() },
+    )
+}
+
+@Composable
+private fun ComponentScreenContent(
     component: String,
     modifier: Modifier = Modifier,
     navigator: DestinationsNavigator = EmptyDestinationsNavigator,
