@@ -373,7 +373,6 @@
     <attr name="bpkFontFamilyBase" format="reference|string" />
     <attr name="bpkFontFamilyEmphasized" format="reference|string" />
     <attr name="bpkFontFamilyBlack" format="reference|string" />
-
     <attr name="bpkTextHero1Appearance" format="reference" />
     <attr name="bpkTextHero2Appearance" format="reference" />
     <attr name="bpkTextHero3Appearance" format="reference" />
