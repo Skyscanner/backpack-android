@@ -24,40 +24,40 @@ import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Test
 
-class BpkPriceMapMarkerV2Test : BpkSnapshotTest() {
+class BpkPriceMapMarkerTest : BpkSnapshotTest() {
 
     @Test
     fun unselected() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Unselected)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Unselected)
     }
 
     @Test
     fun selected() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Selected)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Selected)
     }
 
     @Test
     fun previousSelected() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.PreviousSelected)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.PreviousSelected)
     }
 
     @Test
     fun unselectedWithIcon() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Unselected, prefixIcon = BpkIcon.Airports)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Unselected, prefixIcon = BpkIcon.Airports)
     }
 
     @Test
     fun unselectedWithHeartIcon() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Unselected, prefixIcon = BpkIcon.Heart)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Unselected, prefixIcon = BpkIcon.Heart)
     }
 
     @Test
     fun selectedWithIcon() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.Selected, prefixIcon = BpkIcon.Heart)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Selected, prefixIcon = BpkIcon.Heart)
     }
 
     @Test
     fun previousSelectedWithIcon() = snap {
-        PriceMarkerV2Layout(title = "£100", status = BpkPriceMarkerV2Status.PreviousSelected, prefixIcon = BpkIcon.Heart)
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.PreviousSelected, prefixIcon = BpkIcon.Heart)
     }
 }

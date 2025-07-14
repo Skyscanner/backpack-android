@@ -4,11 +4,11 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.map)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/map)
 
-## Price Marker V2
+## Price Marker
 
-| Day                                                                                                                                                         | Night                                                                                                                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/pricev2.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/pricev2_dm.png" alt="Maps component - dark mode" width="375" /> |
+| Day                                                                                                                                                       | Night                                                                                                                                                                    |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/price.png" alt="Maps component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Maps/screenshots/price_dm.png" alt="Maps component - dark mode" width="375" /> |
 
 ## Location Marker
 
@@ -28,27 +28,27 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of an price marker v2:
+Example of an price marker:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
-import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
+import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 
-BpkPriceMapMarkerV2(
+BpkPriceMapMarker(
     title = "£198",
-    status = BpkPriceMarkerV2Status.Selected
+    status = BpkPriceMarkerStatus.Selected
 )
 ```
 
-Example of an price marker v2 with prefix icon:
+Example of an price marker with prefix icon:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
-import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
+import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
+import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 
-BpkPriceMapMarkerV2(
+BpkPriceMapMarker(
     title = "£198",
-    status = BpkPriceMarkerV2Status.Selected,
+    status = BpkPriceMarkerStatus.Selected,
     prefixIcon = BpkIcon.Heart,
 )
 ```

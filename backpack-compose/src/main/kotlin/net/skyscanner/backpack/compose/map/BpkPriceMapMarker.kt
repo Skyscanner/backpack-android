@@ -45,16 +45,16 @@ import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.tokens.internal.BpkMapMarkerColors
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
-enum class BpkPriceMarkerV2Status {
+enum class BpkPriceMarkerStatus {
     Unselected,
     Selected,
     PreviousSelected,
 }
 
 @Composable
-fun BpkPriceMapMarkerV2(
+fun BpkPriceMapMarker(
     title: String,
-    status: BpkPriceMarkerV2Status = BpkPriceMarkerV2Status.Unselected,
+    status: BpkPriceMarkerStatus = BpkPriceMarkerStatus.Unselected,
     state: MarkerState = rememberMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
@@ -63,7 +63,7 @@ fun BpkPriceMapMarkerV2(
     prefixIcon: BpkIcon? = null,
 ) {
     val icon = rememberCapturedComposeBitmapDescriptor(title, status.name) {
-        PriceMarkerV2Layout(title = title, status = status, prefixIcon = prefixIcon)
+        PriceMarkerLayout(title = title, status = status, prefixIcon = prefixIcon)
     }
 
     MarkerInfoWindow(
@@ -71,7 +71,7 @@ fun BpkPriceMapMarkerV2(
         tag = tag,
         title = title,
         visible = visible,
-        zIndex = if (status == BpkPriceMarkerV2Status.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
+        zIndex = if (status == BpkPriceMarkerStatus.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
         icon = icon,
         onClick = onClick,
     ) {}
@@ -79,26 +79,26 @@ fun BpkPriceMapMarkerV2(
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun PriceMarkerV2Layout(
+fun PriceMarkerLayout(
     title: String,
-    status: BpkPriceMarkerV2Status,
+    status: BpkPriceMarkerStatus,
     modifier: Modifier = Modifier,
     prefixIcon: BpkIcon? = null,
 ) {
     val textColor = when (status) {
-        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.textOnLight
-        BpkPriceMarkerV2Status.Selected -> BpkTheme.colors.textOnDark
-        BpkPriceMarkerV2Status.PreviousSelected -> BpkTheme.colors.textOnLight
+        BpkPriceMarkerStatus.Unselected -> BpkTheme.colors.textOnLight
+        BpkPriceMarkerStatus.Selected -> BpkTheme.colors.textOnDark
+        BpkPriceMarkerStatus.PreviousSelected -> BpkTheme.colors.textOnLight
     }
 
     val backgroundFillColor = when (status) {
-        BpkPriceMarkerV2Status.Unselected -> BpkTheme.colors.textOnDark
-        BpkPriceMarkerV2Status.Selected -> BpkTheme.colors.corePrimary
-        BpkPriceMarkerV2Status.PreviousSelected -> BpkMapMarkerColors.mapPreviousSelection
+        BpkPriceMarkerStatus.Unselected -> BpkTheme.colors.textOnDark
+        BpkPriceMarkerStatus.Selected -> BpkTheme.colors.corePrimary
+        BpkPriceMarkerStatus.PreviousSelected -> BpkMapMarkerColors.mapPreviousSelection
     }
 
     // Specify a different color for the heart icon according to the design spec.
-    val prefixIconColor = if (prefixIcon == BpkIcon.Heart && status == BpkPriceMarkerV2Status.Unselected) {
+    val prefixIconColor = if (prefixIcon == BpkIcon.Heart && status == BpkPriceMarkerStatus.Unselected) {
         BpkTheme.colors.surfaceHero
     } else {
         textColor
