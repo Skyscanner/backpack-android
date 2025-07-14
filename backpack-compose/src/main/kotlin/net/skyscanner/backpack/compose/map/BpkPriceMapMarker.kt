@@ -62,7 +62,7 @@ fun BpkPriceMapMarker(
     onClick: (Marker) -> Boolean = { false },
     prefixIcon: BpkIcon? = null,
 ) {
-    val icon = rememberCapturedComposeBitmapDescriptor(title, status.name) {
+    val icon = rememberCapturedComposeBitmapDescriptor(title, status, prefixIcon) {
         PriceMarkerLayout(title = title, status = status, prefixIcon = prefixIcon)
     }
 
