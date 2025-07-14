@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -35,22 +34,13 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.map.BpkHotelMapMarker
-import net.skyscanner.backpack.compose.map.BpkHotelMarkerStatus
-import net.skyscanner.backpack.compose.map.BpkIconMapMarker
-import net.skyscanner.backpack.compose.map.BpkIconMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkLocationMapMarker
 import net.skyscanner.backpack.compose.map.BpkPoiMapMarker
 import net.skyscanner.backpack.compose.map.BpkPoiMarkerStatus
-import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
-import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
-import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 import net.skyscanner.backpack.compose.tokens.Airports
-import net.skyscanner.backpack.compose.tokens.Cafe
 import net.skyscanner.backpack.compose.tokens.Heart
-import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
@@ -60,36 +50,6 @@ import net.skyscanner.backpack.meta.StoryKind
 @Composable
 @MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Price")
-fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableIntStateOf(0) }
-    var viewedMarkers by remember { mutableStateOf(setOf(1)) }
-
-    fun markerStatus(index: Int): BpkPriceMarkerStatus = when {
-        index == 3 -> BpkPriceMarkerStatus.Disabled
-        index == focusedMarker -> BpkPriceMarkerStatus.Focused
-        viewedMarkers.contains(index) -> BpkPriceMarkerStatus.Viewed
-        else -> BpkPriceMarkerStatus.Default
-    }
-
-    GoogleMap(
-        modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
-        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
-    ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
-            BpkPriceMapMarker(
-                title = stringArrayResource(R.array.map_marker_prices)[index],
-                status = markerStatus(index),
-                state = rememberMarkerState(position = latLng),
-                onClick = { focusedMarker = index; viewedMarkers += index; false },
-            )
-        }
-    }
-}
-
-@Composable
-@MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "PriceV2")
 fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
     val markerStatuses = remember {
         mutableStateListOf(
@@ -160,52 +120,6 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
 
 @Composable
 @MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Icon")
-fun IconMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableIntStateOf(0) }
-
-    fun markerStatus(index: Int): BpkIconMarkerStatus = when (index) {
-        3 -> BpkIconMarkerStatus.Disabled
-        focusedMarker -> BpkIconMarkerStatus.Focused
-        else -> BpkIconMarkerStatus.Default
-    }
-    GoogleMap(
-        modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
-        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
-    ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
-            BpkIconMapMarker(
-                contentDescription = stringResource(if (index == 2) R.string.map_marker_icon_cafe else R.string.map_marker_icon_landmark),
-                status = markerStatus(index),
-                icon = if (index == 2) BpkIcon.Cafe else BpkIcon.Landmark,
-                state = rememberMarkerState(position = latLng),
-                onClick = { focusedMarker = index; false },
-            )
-        }
-    }
-}
-
-@Composable
-@MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Pointer")
-fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
-    GoogleMap(
-        modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
-        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
-    ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
-            BpkPointerMapMarker(
-                title = stringArrayResource(R.array.map_marker_prices)[index],
-                state = rememberMarkerState(position = latLng),
-            )
-        }
-    }
-}
-
-@Composable
-@MapMarkersComponent
 @ComposeStory(kind = StoryKind.DemoOnly, name = "Location")
 fun LocationMapMarkerStory(modifier: Modifier = Modifier) {
     GoogleMap(
@@ -242,33 +156,6 @@ fun PoiMapMarkerStory(modifier: Modifier = Modifier) {
                 contentDescription = stringResource(R.string.map_marker_icon_landmark),
                 status = markerStatus(index),
                 icon = BpkIcon.Landmark,
-                state = rememberMarkerState(position = latLng),
-                onClick = { focusedMarker = index; false },
-            )
-        }
-    }
-}
-
-@Composable
-@MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Hotel")
-fun HotelMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableIntStateOf(0) }
-
-    fun markerStatus(index: Int): BpkHotelMarkerStatus = when (index) {
-        focusedMarker -> BpkHotelMarkerStatus.Selected
-        else -> BpkHotelMarkerStatus.Unselected
-    }
-    GoogleMap(
-        modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
-        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
-    ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
-            BpkHotelMapMarker(
-                contentDescription = stringResource(R.string.navigation_tabs_hotels),
-                status = markerStatus(index),
-                icon = BpkIcon.Hotels,
                 state = rememberMarkerState(position = latLng),
                 onClick = { focusedMarker = index; false },
             )
