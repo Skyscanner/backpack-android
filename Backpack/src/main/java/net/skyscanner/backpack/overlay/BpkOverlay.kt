@@ -65,7 +65,7 @@ open class BpkOverlay @JvmOverloads constructor(
         None(0),
         Tint(
             id = 1,
-            colorRes = R.color.bpkBlack,
+            colorRes = R.color.bpkTextOnLight,
             opacity = 0.56f,
         ),
     }
