@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -40,7 +41,7 @@ import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 
 @Composable
-@Destination("story")
+@Destination<RootGraph>
 fun StoryScreen(
     component: String,
     story: String,
