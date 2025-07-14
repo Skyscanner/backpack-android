@@ -182,7 +182,7 @@ public data class BpkTypography internal constructor(
         ),
       ),
       hero5 = TextStyle(
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Black,
         fontSize = BpkFontSize.Xxxxl,
         lineHeight = BpkLineHeight.Xxxxl,
         letterSpacing = BpkLetterSpacing.Tight,

@@ -5,6 +5,7 @@
         <item name="android:windowBackground">@color/bpkCanvas</item>
         <item name="bpkFontFamilyBase">@font/skyscanner_relative_android_book</item>
         <item name="bpkFontFamilyEmphasized">@font/skyscanner_relative_android_bold</item>
+        <item name="bpkFontFamilyBlack">@font/skyscanner_relative_android_black</item>
 
         <item name="android:lineSpacingMultiplier">1</item>
     </style>
