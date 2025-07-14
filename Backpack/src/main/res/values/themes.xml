@@ -13,6 +13,7 @@
 
         <item name="bpkFontFamilyBase">sans-serif</item>
         <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
+        <item name="bpkFontFamilyBlack">sans-serif-black</item>
         <item name="bpkTextHero1Appearance">@style/bpkTextHero1</item>
         <item name="bpkTextHero2Appearance">@style/bpkTextHero2</item>
         <item name="bpkTextHero3Appearance">@style/bpkTextHero3</item>

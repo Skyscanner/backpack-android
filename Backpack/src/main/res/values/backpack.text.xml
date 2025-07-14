@@ -124,7 +124,7 @@
   </style>
 
   <style name="bpkTextHero5">
-    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextXxxxlSize</item>
     <item name="lineHeight">56sp</item>
