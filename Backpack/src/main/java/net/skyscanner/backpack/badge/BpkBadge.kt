@@ -71,6 +71,7 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          *  Light themed style for badges
          */
+        @Deprecated("Switch to a different badge style")
         Light(4, R.color.bpkCanvasContrast, R.color.bpkSurfaceContrast),
 
         /**
@@ -86,7 +87,7 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          * Style for badges with a dark background
          */
-
+        @Deprecated("Switch to a different badge style")
         Dark(7, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
 
         /**
