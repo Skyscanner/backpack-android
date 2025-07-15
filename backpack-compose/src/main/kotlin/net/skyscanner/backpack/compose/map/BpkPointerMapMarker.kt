@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
 
+@Deprecated("Use BpkLocationMapMarker instead.", ReplaceWith("BpkLocationMapMarker"), DeprecationLevel.WARNING)
 @Composable
 fun BpkPointerMapMarker(
     title: String,

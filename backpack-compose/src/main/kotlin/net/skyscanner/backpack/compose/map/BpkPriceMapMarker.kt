@@ -51,6 +51,7 @@ enum class BpkPriceMarkerStatus {
     Disabled,
 }
 
+@Deprecated("Use BpkPriceMapMarkerV2 instead.", ReplaceWith("BpkPriceMapMarkerV2"), DeprecationLevel.WARNING)
 @Composable
 fun BpkPriceMapMarker(
     title: String,

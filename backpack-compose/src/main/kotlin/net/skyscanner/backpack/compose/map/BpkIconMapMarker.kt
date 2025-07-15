@@ -50,6 +50,7 @@ enum class BpkIconMarkerStatus {
 /**
  * @param onClick Callback invoked when the marker is clicked. Return true to consume the event, for example to disable the default centre map on marker behaviour.
  */
+@Deprecated("Use BpkPoiMapMarker instead.", ReplaceWith("BpkPoiMapMarker"), DeprecationLevel.WARNING)
 @Composable
 fun BpkIconMapMarker(
     contentDescription: String,
