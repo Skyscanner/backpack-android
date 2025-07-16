@@ -39,7 +39,7 @@ Example of a Overlay in XML
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="Rounded corners"
-      android:textColor="@color/bpkWhite" />
+      android:textColor="@color/bpkTextOnDark" />
 
   </net.skyscanner.backpack.overlay.BpkOverlay>
 ```

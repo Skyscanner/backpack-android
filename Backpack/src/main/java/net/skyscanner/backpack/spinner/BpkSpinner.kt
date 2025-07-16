@@ -61,7 +61,7 @@ open class BpkSpinner @JvmOverloads constructor(
 
     private val colors = arrayOf(
         R.color.bpkCoreAccent,
-        R.color.bpkWhite,
+        R.color.bpkTextOnDark,
         R.color.bpkTextSecondary,
         R.color.bpkTextPrimary,
         R.color.bpkTextDisabled,

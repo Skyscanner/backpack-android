@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 
 public data class BpkTypography internal constructor(
+    public val baseLarken: TextStyle,
     public val bodyDefault: TextStyle,
     public val bodyLongform: TextStyle,
     public val caption: TextStyle,
@@ -44,9 +45,21 @@ public data class BpkTypography internal constructor(
     public val label1: TextStyle,
     public val label2: TextStyle,
     public val label3: TextStyle,
+    public val smLarken: TextStyle,
     public val subheading: TextStyle,
+    public val xsLarken: TextStyle,
 ) {
     internal constructor(defaultFontFamily: FontFamily = FontFamily.SansSerif) : this(
+      baseLarken = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = BpkFontSize.Base,
+        lineHeight = BpkLineHeight.BaseTight,
+        fontFamily = defaultFontFamily,
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
+      ),
       bodyDefault = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Base,
@@ -222,10 +235,30 @@ public data class BpkTypography internal constructor(
             trim = LineHeightStyle.Trim.None,
         ),
       ),
+      smLarken = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = BpkFontSize.Sm,
+        lineHeight = BpkLineHeight.Sm,
+        fontFamily = defaultFontFamily,
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
+      ),
       subheading = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.Xl,
+        fontFamily = defaultFontFamily,
+        lineHeightStyle = LineHeightStyle(
+            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+            trim = LineHeightStyle.Trim.None,
+        ),
+      ),
+      xsLarken = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = BpkFontSize.Xs,
+        lineHeight = BpkLineHeight.Xs,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),

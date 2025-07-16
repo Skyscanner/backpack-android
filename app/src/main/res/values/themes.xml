@@ -48,21 +48,21 @@
 
     <style name="LondonThemeButtonPrimary">
         <item name="buttonBackgroundColor">?bpkPrimaryColor</item>
-        <item name="buttonTextColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">@color/bpkTextOnDark</item>
     </style>
 
     <style name="LondonThemeButtonSecondary">
-        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonBackgroundColor">@color/bpkTextOnDark</item>
         <item name="buttonTextColor">?bpkPrimaryColor</item>
     </style>
 
     <style name="LondonThemeButtonFeatured">
         <item name="buttonBackgroundColor">#ED1B28</item>
-        <item name="buttonTextColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">@color/bpkTextOnDark</item>
     </style>
 
     <style name="LondonThemeButtonDestructive">
-        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonBackgroundColor">@color/bpkTextOnDark</item>
         <item name="buttonTextColor">#ED1B28</item>
     </style>
 
@@ -78,7 +78,7 @@
         <item name="calendarDateSelectedBackgroundColor">#D11622</item>
         <item name="calendarDateSelectedSameDayBackgroundColor">#ED1B28</item>
         <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
-        <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+        <item name="calendarDateSelectedTextColor">@color/bpkTextOnDark</item>
     </style>
 
     <style name="LondonThemeFab">
@@ -104,7 +104,7 @@
 
     <style name="LondonThemeBarChart">
         <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
-        <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+        <item name="barChartColumnSubtitleColor">@color/bpkTextLink</item>
         <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
         <item name="barChartBarBackgroundColor">@color/bpkSurfaceHighlight</item>
         <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
@@ -130,7 +130,7 @@
         <item name="textFieldColorHintNormal">#9dbde6</item>
         <item name="textFieldColorHintFocused">#6392ce</item>
         <item name="textFieldColorIcon">?bpkPrimaryColor</item>
-        <item name="textFieldBackground">@color/bpkWhite</item>
+        <item name="textFieldBackground">@color/bpkTextOnDark</item>
     </style>
 
     <style name="LondonThemeTextInputLayout">
@@ -202,11 +202,11 @@
 
     <style name="DohaThemeButtonPrimary">
         <item name="buttonBackgroundColor">#ffb300</item>
-        <item name="buttonTextColor">@color/bpkWhite</item>
+        <item name="buttonTextColor">@color/bpkTextOnDark</item>
     </style>
 
     <style name="DohaThemeButtonSecondary">
-        <item name="buttonBackgroundColor">@color/bpkWhite</item>
+        <item name="buttonBackgroundColor">@color/bpkTextOnDark</item>
         <item name="buttonTextColor">#9B104C</item>
     </style>
 
@@ -218,7 +218,7 @@
         <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
         <item name="calendarDateSelectedSameDayBackgroundColor">#9B104C</item>
         <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
-        <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+        <item name="calendarDateSelectedTextColor">@color/bpkTextOnDark</item>
     </style>
 
     <style name="DohaThemeChip">
@@ -263,7 +263,7 @@
         <item name="textFieldColorHintNormal">#ffd677</item>
         <item name="textFieldColorHintFocused">#ffca4c</item>
         <item name="textFieldColorIcon">?bpkPrimaryColor</item>
-        <item name="textFieldBackground">@color/bpkWhite</item>
+        <item name="textFieldBackground">@color/bpkTextOnDark</item>
     </style>
 
     <style name="DohaThemeTextInputLayout">
@@ -288,7 +288,7 @@
 
     <style name="DohaThemeBarChart">
         <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
-        <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+        <item name="barChartColumnSubtitleColor">@color/bpkTextLink</item>
         <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
         <item name="barChartBarBackgroundColor">@color/bpkSurfaceHighlight</item>
         <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
