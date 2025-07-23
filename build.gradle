@@ -68,9 +68,8 @@ subprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+// Custom clean task removed - Dokka V2 provides its own clean task
+// The original task deleted rootProject.buildDir which is now handled by Dokka V2
 
 ext {
     group = "net.skyscanner.backpack"
