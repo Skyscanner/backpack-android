@@ -55,7 +55,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(BpkTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(qualifiers = RobolectricDeviceQualifiers.SmallPhone, sdk = [33])
+@Config(qualifiers = RobolectricDeviceQualifiers.SmallPhone, sdk = [35])
 abstract class BpkSnapshotTest(private val tags: List<Any> = emptyList()) {
 
     private val variant = BpkTestVariant.current
