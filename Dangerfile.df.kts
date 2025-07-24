@@ -82,23 +82,5 @@ danger(args) {
         if (unlicensedFiles.size > 0) {
             fail("These new files do not include the license heading: ${unlicensedFiles.joinToString(", ")}")
         }
-
-        // Label PRs with Copilot involvement
-        val hasCopilot = commits.any { c ->
-            val login = c.author?.login.orEmpty()
-            val message = c.commit.message.orEmpty()
-            login.contains("copilot", ignoreCase = true) ||
-                message.contains("Co-authored-by:", ignoreCase = true) && message.contains("copilot", ignoreCase = true)
-        }
-
-        if (hasCopilot) {
-            utils.createOrAddLabel(
-                labelConfig = mapOf(
-                    "name" to "ai: copilot",
-                    "color" to "6a000e",
-                    "description" to "Pull request authored or co-authored by GitHub Copilot"
-                )
-            )
-        }
     }
 }

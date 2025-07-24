@@ -48,3 +48,28 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{github.event.pull_request.html_url}}
+
+  CopilotAgent:
+    name: Label Copilot PRs
+    runs-on: ubuntu-24.04-16cores-public
+    needs: [Build]
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: cli/gh-action@v2
+      - name: Detect Copilot and Label
+        run: |
+          # look for "copilot" or "Co-authored-by" in all PR commit messages
+          if git log origin/${{ github.base_ref }}..HEAD --format=%B \
+               | grep -Eqi 'copilot|co-authored-by:.*copilot'; then
+            gh pr edit ${{ github.event.pull_request.number }} \
+              --add-label 'ai: copilot'
+          else
+            echo "No Copilot involvement found."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
