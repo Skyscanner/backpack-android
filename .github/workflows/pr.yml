@@ -48,3 +48,37 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{github.event.pull_request.html_url}}
+
+  CopilotAgent:
+    runs-on: ubuntu-24.04-16cores-public
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Check if Copilot Agent PR
+        id: copilot_check
+        run: |
+          AUTHOR="${{ github.event.pull_request.user.login }}"
+          BODY="${{ github.event.pull_request.body }}"
+          echo "PR Author: $AUTHOR"
+          echo "Checking for Copilot agent indicators..."
+          
+          if [[ "$AUTHOR" == "github-copilot"* ]] || [[ "$BODY" == *"copilot agent"* ]] || [[ "$BODY" == *"Copilot agent"* ]]; then
+            echo "copilot=true" >> $GITHUB_OUTPUT
+            echo "Copilot agent PR detected"
+          else
+            echo "copilot=false" >> $GITHUB_OUTPUT
+            echo "Not a Copilot agent PR"
+          fi
+
+      - name: Add Copilot Label
+        if: steps.copilot_check.outputs.copilot == 'true'
+        run: 'gh pr edit "$PR_URL" --add-label "ai: copilot"'
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_URL: ${{github.event.pull_request.html_url}}
