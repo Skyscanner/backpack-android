@@ -48,7 +48,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{github.event.pull_request.html_url}}
-
   CopilotAgent:
     name: Label Copilot PRs
     runs-on: ubuntu-24.04-16cores-public
