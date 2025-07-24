@@ -26,11 +26,13 @@ buildscript {
     }
 }
 
-tasks.named("dokkaHtml") {
-    moduleName = project.artifactId
-    dokkaSourceSets {
-        named("main") {
-            reportUndocumented = false
+dokka {
+    dokkaPublications.html {
+        moduleName = project.artifactId
+        dokkaSourceSets {
+            named("main") {
+                reportUndocumented = false
+            }
         }
     }
 }
