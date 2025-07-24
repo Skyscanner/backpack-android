@@ -68,7 +68,7 @@ jobs:
           echo "PR Author: $AUTHOR"
           echo "Checking for Copilot agent indicators..."
           
-          if [[ "$AUTHOR" == "github-copilot"* ]] || [[ "$BODY" == *"copilot agent"* ]] || [[ "$BODY" == *"Copilot agent"* ]]; then
+          if [[ "$AUTHOR" == "github-copilot"* ]] || [[ "$AUTHOR" == "copilot"* ]] || [[ "$BODY" == *"copilot agent"* ]] || [[ "$BODY" == *"Copilot agent"* ]] || [[ "$BODY" == *"@copilot"* ]]; then
             echo "copilot=true" >> $GITHUB_OUTPUT
             echo "Copilot agent PR detected"
           else
