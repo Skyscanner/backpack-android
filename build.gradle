@@ -76,8 +76,14 @@ ext {
     dokkaOutputDir = "dokka"
 }
 
-tasks.dokkaHtmlMultiModule.configure {
-    outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
+dokka {
+    dokkaPublications.html {
+        outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
+    }
+}
+
+tasks.register("createDokka404") {
+    dependsOn("dokkaGenerate")
     doLast {
         createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
 <html>
