@@ -84,22 +84,21 @@ danger(args) {
         }
 
         // Label PRs with Copilot involvement
-        val pr = pullRequest
-        val commits = github.api.pulls
-            .listCommits(pr.head.repo.owner.login, pr.head.repo.name, pr.number)
-            .execute()
-            .body()
-            .orEmpty()
-        val hasCopilot = commits.any { commit ->
-            val authorLogin = commit.author?.login.orEmpty()
-            val committerLogin = commit.committer?.login.orEmpty()
-            val message = commit.commit.message.orEmpty()
-            authorLogin.contains("copilot", ignoreCase = true) ||
-                committerLogin.contains("copilot", ignoreCase = true) ||
-                message.contains("co-authored-by:", ignoreCase = true) && message.contains("copilot", ignoreCase = true)
+        val hasCopilot = commits.any { c ->
+            val login = c.author?.login.orEmpty()
+            val message = c.commit.message.orEmpty()
+            login.contains("copilot", ignoreCase = true) ||
+                message.contains("Co-authored-by:", ignoreCase = true) && message.contains("copilot", ignoreCase = true)
         }
+
         if (hasCopilot) {
-            github.api.issues.addLabels(pr.head.repo.owner.login, pr.head.repo.name, pr.number, listOf("ai: copilot"))
+            utils.createOrAddLabel(
+                labelConfig = mapOf(
+                    "name" to "ai: copilot",
+                    "color" to "6a000e",
+                    "description" to "Pull request authored or co-authored by GitHub Copilot"
+                )
+            )
         }
     }
 }
