@@ -23,7 +23,6 @@ jobs:
     uses: ./.github/workflows/_build.yml
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
   Dependabot:
     runs-on: ubuntu-24.04-16cores-public
     permissions:
