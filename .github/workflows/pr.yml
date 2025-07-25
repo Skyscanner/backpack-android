@@ -48,3 +48,46 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           PR_URL: ${{github.event.pull_request.html_url}}
+
+  CopilotAgent:
+    runs-on: ubuntu-24.04-16cores-public
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Detect Copilot commits and label PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            const { data: commits } = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+
+            const isCopilot = commits.some(commit => {
+              const authorLogin = commit.author?.login || "";
+              const committerLogin = commit.committer?.login || "";
+              const message = commit.commit.message || "";
+
+              const hasAuthorCopilot = /copilot/i.test(authorLogin) ||
+                                       /copilot/i.test(committerLogin);
+              const hasCoAuthorCopilot = /co-authored-by:\s*.*copilot/i.test(message);
+
+              return hasAuthorCopilot || hasCoAuthorCopilot;
+            });
+
+            if (isCopilot) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ['ai: copilot']
+              });
+            }
