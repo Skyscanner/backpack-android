@@ -2,11 +2,8 @@ apply plugin: 'maven-publish'
 
 android {
     publishing {
-        // For Android Gradle Plugin 8.0+, we need to explicitly publish all variants
-        // or specify which variants to publish
         singleVariant("release") {
             withSourcesJar()
-            withJavadocJar()
         }
     }
 }
