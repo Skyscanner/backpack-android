@@ -22,9 +22,11 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -32,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.blur.bpkProgressiveBlur
 import net.skyscanner.backpack.compose.blur.bpkUniformBlur
 import net.skyscanner.backpack.compose.card.BpkCard
@@ -55,10 +58,8 @@ enum class BlurType {
  * Reusable composable for displaying an image with blur effect in a card
  *
  * @param imageRes Resource ID of the image to display
- * @param contentScale Content scale to apply to the image
  * @param blurType Type of blur effect to apply (UNIFORM or PROGRESSIVE)
  * @param modifier Optional modifier for the card
- * @param useWeight Whether to use weight(1f) instead of fillMaxSize() for the image modifier
  */
 @Composable
 fun BlurCard(
@@ -71,7 +72,7 @@ fun BlurCard(
         modifier = modifier,
     ) {
         val imageModifier = Modifier
-            .aspectRatio(1f)
+            .size(200.dp)
 
         val blurModifier = when (blurType) {
             BlurType.UNIFORM -> imageModifier.bpkUniformBlur()
@@ -109,7 +110,8 @@ fun BlurStory(modifier: Modifier = Modifier) {
 fun UniformBlurExample(modifier: Modifier = Modifier) {
     Column(
         modifier
-            .padding(BpkSpacing.Md),
+            .safeContentPadding()
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         BpkText(text = "Uniform Blur")
@@ -132,6 +134,8 @@ fun UniformBlurExample(modifier: Modifier = Modifier) {
 fun ProgressiveBlurExample(modifier: Modifier = Modifier) {
     Column(
         modifier
+            .safeContentPadding()
+            .fillMaxWidth()
             .padding(BpkSpacing.Md),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
