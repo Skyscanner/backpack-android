@@ -73,6 +73,9 @@ jobs:
           external_repository: backpack/android
           publish_branch: main
 
+      - name: Install libsecret for Supernova CLI
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
       - name: Update Supernova docs
         run: npx @supernovaio/cli publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemId=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
 
