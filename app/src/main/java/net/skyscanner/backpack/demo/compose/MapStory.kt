@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.ComposeMapColorScheme
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.google.maps.android.compose.rememberMarkerState
+import com.google.maps.android.compose.MarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkHotelMapMarker
 import net.skyscanner.backpack.compose.map.BpkHotelMarkerStatus
@@ -80,7 +80,7 @@ fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
             BpkPriceMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
                 status = markerStatus(index),
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
                 onClick = { focusedMarker = index; viewedMarkers += index; false },
             )
         }
@@ -142,7 +142,7 @@ fun PriceMapMarkerV2Story(modifier: Modifier = Modifier) {
             BpkPriceMapMarkerV2(
                 title = stringArrayResource(R.array.map_marker_prices)[index % 3],
                 status = markerStatuses[index],
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
                 onClick = {
                     markerStatuses.forEachIndexed { i, status ->
                         if (i / 3 == index / 3 && status == BpkPriceMarkerV2Status.Selected) {
@@ -179,7 +179,7 @@ fun IconMapMarkerStory(modifier: Modifier = Modifier) {
                 contentDescription = stringResource(if (index == 2) R.string.map_marker_icon_cafe else R.string.map_marker_icon_landmark),
                 status = markerStatus(index),
                 icon = if (index == 2) BpkIcon.Cafe else BpkIcon.Landmark,
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
                 onClick = { focusedMarker = index; false },
             )
         }
@@ -198,7 +198,7 @@ fun PointerMapMarkerStory(modifier: Modifier = Modifier) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkPointerMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
             )
         }
     }
@@ -216,7 +216,7 @@ fun LocationMapMarkerStory(modifier: Modifier = Modifier) {
         MarkerPositions.forEachIndexed { index, latLng ->
             BpkLocationMapMarker(
                 title = stringArrayResource(R.array.map_marker_prices)[index],
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
             )
         }
     }
@@ -242,7 +242,7 @@ fun PoiMapMarkerStory(modifier: Modifier = Modifier) {
                 contentDescription = stringResource(R.string.map_marker_icon_landmark),
                 status = markerStatus(index),
                 icon = BpkIcon.Landmark,
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
                 onClick = { focusedMarker = index; false },
             )
         }
@@ -269,7 +269,7 @@ fun HotelMapMarkerStory(modifier: Modifier = Modifier) {
                 contentDescription = stringResource(R.string.navigation_tabs_hotels),
                 status = markerStatus(index),
                 icon = BpkIcon.Hotels,
-                state = rememberMarkerState(position = latLng),
+                state = MarkerState(position = latLng),
                 onClick = { focusedMarker = index; false },
             )
         }
