@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.ksp
 
+import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import kotlin.reflect.KClass
@@ -71,8 +72,8 @@ fun AnnotationDefinition.enumParamOf(name: String): AnnotationParam<EnumValue> =
     object : AnnotationParam<EnumValue>(name) {
         override fun parse(value: Any): EnumValue =
             EnumValue(
-                value = (value as KSType).declaration.simpleName.getShortName(),
-                type = value.declaration.qualifiedName!!.getQualifier(),
+                value = (value as KSClassDeclaration).simpleName.getShortName(),
+                type = value.qualifiedName!!.getQualifier(),
             )
     }
 
@@ -85,11 +86,11 @@ fun AnnotationDefinition.typeParamOf(name: String): AnnotationParam<String> =
 fun AnnotationDefinition.enumParamsOf(name: String): AnnotationParam<List<EnumValue>> =
     object : AnnotationParam<List<EnumValue>>(name) {
         override fun parse(value: Any): List<EnumValue> =
-            (value as List<KSType>)
+            (value as List<KSClassDeclaration>)
                 .map {
                     EnumValue(
-                        value = it.declaration.simpleName.getShortName(),
-                        type = it.declaration.qualifiedName!!.getQualifier(),
+                        value = it.simpleName.getShortName(),
+                        type = it.qualifiedName!!.getQualifier(),
                     )
                 }
     }
