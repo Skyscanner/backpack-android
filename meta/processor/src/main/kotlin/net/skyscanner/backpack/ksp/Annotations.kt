@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.ksp
 
+import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import kotlin.reflect.KClass
@@ -70,10 +71,17 @@ fun AnnotationDefinition.intParamOf(name: String): AnnotationParam<Int> =
 fun AnnotationDefinition.enumParamOf(name: String): AnnotationParam<EnumValue> =
     object : AnnotationParam<EnumValue>(name) {
         override fun parse(value: Any): EnumValue =
-            EnumValue(
-                value = (value as KSType).declaration.simpleName.getShortName(),
-                type = value.declaration.qualifiedName!!.getQualifier(),
-            )
+            when (value) {
+                is KSClassDeclaration -> EnumValue(
+                    value = value.simpleName.getShortName(),
+                    type = value.qualifiedName!!.getQualifier(),
+                )
+                is KSType -> EnumValue(
+                    value = value.declaration.simpleName.getShortName(),
+                    type = value.declaration.qualifiedName!!.getQualifier(),
+                )
+                else -> throw IllegalArgumentException("Expected KSClassDeclaration or KSType, but got ${value::class}")
+            }
     }
 
 fun AnnotationDefinition.typeParamOf(name: String): AnnotationParam<String> =
@@ -85,11 +93,17 @@ fun AnnotationDefinition.typeParamOf(name: String): AnnotationParam<String> =
 fun AnnotationDefinition.enumParamsOf(name: String): AnnotationParam<List<EnumValue>> =
     object : AnnotationParam<List<EnumValue>>(name) {
         override fun parse(value: Any): List<EnumValue> =
-            (value as List<KSType>)
-                .map {
-                    EnumValue(
-                        value = it.declaration.simpleName.getShortName(),
-                        type = it.declaration.qualifiedName!!.getQualifier(),
+            (value as List<*>).map { item ->
+                when (item) {
+                    is KSClassDeclaration -> EnumValue(
+                        value = item.simpleName.getShortName(),
+                        type = item.qualifiedName!!.getQualifier(),
                     )
+                    is KSType -> EnumValue(
+                        value = item.declaration.simpleName.getShortName(),
+                        type = item.declaration.qualifiedName!!.getQualifier(),
+                    )
+                    else -> throw IllegalArgumentException("Expected KSClassDeclaration or KSType, but got ${item?.let { it::class }}")
                 }
+            }
     }
