@@ -18,6 +18,7 @@
 
 plugins {
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.figma.code.connect)
 }
 
 apply plugin: 'com.android.library'
@@ -58,6 +59,7 @@ dependencies {
     implementation libs.androidx.lifecycleViewmodel
     implementation libs.androidx.lifecycleViewmodelKtx
     implementation libs.androidx.coreKts
+    implementation libs.figma.code.connect
 
     androidTestImplementation libs.test.junitAndroid
     androidTestImplementation libs.test.rules
