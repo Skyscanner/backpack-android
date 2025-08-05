@@ -16,20 +16,19 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2
+package net.skyscanner.backpack.compose.calendar.internal.extension
 
-import androidx.compose.runtime.Immutable
-import net.skyscanner.backpack.calendar2.data.CalendarCells
-import net.skyscanner.backpack.util.InternalBackpackApi
+import java.time.LocalDate
+import java.time.YearMonth
 
-/**
- * The model containing all the information describing [BpkCalendar] in the moment.
- * @param params parameters used to configure the calendar
- * @param selection the current Calendar selection
- */
-@Immutable
-data class CalendarState(
-    val params: CalendarParams,
-    val selection: CalendarSelection = CalendarSelection.None,
-    @InternalBackpackApi val cells: CalendarCells = CalendarCells(params, selection),
-)
+internal fun YearMonth.firstDay(): LocalDate =
+    atDay(1)
+
+internal fun YearMonth.lastDay(): LocalDate =
+    atEndOfMonth()
+
+internal fun YearMonth.prevMonth(): YearMonth =
+    minusMonths(1)
+
+internal fun YearMonth.nextMonth(): YearMonth =
+    plusMonths(1)

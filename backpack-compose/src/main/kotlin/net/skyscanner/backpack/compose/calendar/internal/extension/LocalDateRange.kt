@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.extension
+package net.skyscanner.backpack.compose.calendar.internal.extension
 
 import androidx.compose.runtime.Stable
 import java.time.LocalDate

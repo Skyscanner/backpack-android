@@ -36,10 +36,10 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import kotlinx.coroutines.test.runTest
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
-import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
+import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Assert.assertEquals
 import org.junit.Rule

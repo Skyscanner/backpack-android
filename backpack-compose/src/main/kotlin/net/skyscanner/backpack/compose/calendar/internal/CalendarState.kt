@@ -15,64 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.internal
 
-import androidx.compose.runtime.Stable
-import kotlinx.coroutines.CoroutineScope
-import net.skyscanner.backpack.calendar2.CalendarComponent
-import net.skyscanner.backpack.calendar2.CalendarEffect
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarParams.SelectionMode
-import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.CalendarState
+import androidx.compose.runtime.Immutable
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.SelectionMode
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCells
 import net.skyscanner.backpack.util.InternalBackpackApi
-import net.skyscanner.backpack.util.MutableStateMachine
-import net.skyscanner.backpack.util.StateMachine
-import java.util.Locale
-
-@Stable
-@InternalBackpackApi
-interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, CalendarEffect> {
-
-    fun onClick(calendarInteraction: CalendarInteraction)
-    fun onLocaleChanged(locale: Locale)
-}
-
-@InternalBackpackApi
-fun CalendarStateMachine(
-    scope: CoroutineScope,
-    initialParams: CalendarParams,
-): CalendarStateMachine {
-
-    val fsm = MutableStateMachine<CalendarState, CalendarEffect>(scope, CalendarState(initialParams))
-
-    return object : CalendarStateMachine, StateMachine<CalendarState, CalendarEffect> by fsm {
-
-        override fun setParams(value: CalendarParams) {
-            fsm.commit {
-                it.dispatchParamsUpdate(value)
-            }
-        }
-
-        override fun onClick(calendarInteraction: CalendarInteraction) = when (calendarInteraction) {
-            is CalendarInteraction.DateClicked -> onCalendarDayCellClick(calendarInteraction.day)
-        }
-
-        private fun onCalendarDayCellClick(day: CalendarCell.Day) = fsm.commit { it.dispatchClick(day) }
-
-        override fun setSelection(selection: CalendarSelection) {
-            fsm.commit {
-                it.dispatchSetSelection(selection)
-            }
-        }
-
-        override fun onLocaleChanged(locale: Locale) {
-            fsm.commit {
-                it.dispatchParamsUpdate(it.params.copy(locale = locale))
-            }
-        }
-    }
-}
+import kotlin.collections.get
 
 fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
     if (date.inactive) return this
@@ -129,3 +79,9 @@ fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarSt
         cells = CalendarCells(params, selection),
     )
 }
+@Immutable
+data class CalendarState(
+    val params: CalendarParams,
+    val selection: CalendarSelection = CalendarSelection.None,
+    @InternalBackpackApi val cells: CalendarCells = CalendarCells(params, selection),
+)
