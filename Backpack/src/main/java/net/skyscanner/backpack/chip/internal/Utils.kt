@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.R
 
 internal fun chipRoundedRect(
@@ -31,7 +32,11 @@ internal fun chipRoundedRect(
     borderWidth: Int,
 ): Drawable = GradientDrawable().apply {
     shape = GradientDrawable.RECTANGLE
-    cornerRadii = FloatArray(8) { context.resources.getDimension(R.dimen.bpkBorderRadiusSm) }
+    cornerRadii = FloatArray(8) {
+        context.resources.getDimension(
+            BpkConfiguration.chipConfig?.radiusDimension ?: R.dimen.bpkBorderRadiusSm,
+        )
+    }
     color = background
     setStroke(borderWidth, border)
 }

@@ -21,6 +21,8 @@ package net.skyscanner.backpack.compose.button.internal
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
@@ -68,7 +70,9 @@ internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource)
 private fun BpkButtonType.defaultBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryNormalBackground
-        BpkButtonType.Secondary -> BpkButtonColors.secondaryNormalBackground
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.colorResource?.let { colorResource(it) }
+            ?: BpkButtonColors.secondaryNormalBackground
+
         BpkButtonType.Featured -> BpkButtonColors.featuredNormalBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkNormalBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightNormalBackground

@@ -28,6 +28,7 @@ import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.rippleDrawable
@@ -57,7 +58,8 @@ internal class ButtonStyle(
 
     fun getButtonBackground(enabled: Boolean, loading: Boolean): Drawable {
 
-        val radius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
+        val radius =
+            context.resources.getDimension(BpkConfiguration.buttonConfig?.radiusDimension ?: R.dimen.bpkBorderRadiusSm)
 
         fun roundRectDrawable(
             @ColorInt color: Int,

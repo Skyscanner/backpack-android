@@ -25,6 +25,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.util.colorStateList
@@ -93,7 +94,9 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.bpkCorePrimary)
+        override var selectedBackgroundColor: Int = context.getColor(
+            BpkConfiguration.chipConfig?.colorResource ?: R.color.bpkCorePrimary,
+        )
         override var backgroundColor: Int = Color.TRANSPARENT
         override var pressedBackgroundColor: Int = Color.TRANSPARENT
         override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
@@ -102,7 +105,9 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
         override var dismissibleIconColor: Int = context.getColor(R.color.bpkTextDisabledOnDark)
         override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
         override var strokeColor: Int = context.getColor(R.color.bpkLine)
-        override var pressedStrokeColor: Int = context.getColor(R.color.bpkCorePrimary)
+        override var pressedStrokeColor: Int = context.getColor(
+            BpkConfiguration.chipConfig?.colorResource ?: R.color.bpkCorePrimary,
+        )
         override val style = BpkChip.Style.Default
 
         init {

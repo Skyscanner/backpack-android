@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.button.internal
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -37,7 +38,7 @@ internal val BpkButtonSize.minHeight: Dp
     get() =
         when (this) {
             BpkButtonSize.Default -> 36.dp
-            BpkButtonSize.Large -> 48.dp
+            BpkButtonSize.Large -> BpkConfiguration.buttonConfig?.largeMinHeight ?: 48.dp
         }
 
 internal val BpkButtonSize.horizontalSpacing: Dp
