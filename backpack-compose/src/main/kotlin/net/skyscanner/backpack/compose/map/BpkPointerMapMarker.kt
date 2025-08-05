@@ -32,6 +32,7 @@ import androidx.compose.ui.geometry.Offset
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberUpdatedMarkerState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -41,7 +42,7 @@ import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescri
 @Composable
 fun BpkPointerMapMarker(
     title: String,
-    state: MarkerState = MarkerState(),
+    state: MarkerState = rememberUpdatedMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
     zIndex: Float = 0.0f,

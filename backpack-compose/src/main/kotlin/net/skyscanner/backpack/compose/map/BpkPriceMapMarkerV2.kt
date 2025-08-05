@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberUpdatedMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -54,7 +55,7 @@ enum class BpkPriceMarkerV2Status {
 fun BpkPriceMapMarkerV2(
     title: String,
     status: BpkPriceMarkerV2Status = BpkPriceMarkerV2Status.Unselected,
-    state: MarkerState = MarkerState(),
+    state: MarkerState = rememberUpdatedMarkerState(),
     tag: Any? = null,
     visible: Boolean = true,
     zIndex: Float? = null,
