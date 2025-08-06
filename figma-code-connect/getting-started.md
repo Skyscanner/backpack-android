@@ -33,7 +33,7 @@ figma connect --version
 
 ### Step 3: Configure Access Token
 
-** 1. Environment Variable (Recommended)**
+** Environment Variable **
 ```bash
 export FIGMA_ACCESS_TOKEN="your_token_here"
 ```
