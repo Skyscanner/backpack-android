@@ -33,7 +33,7 @@ figma connect --version
 
 ### Step 3: Configure Access Token
 
-** Environment Variable **
+**Environment Variable**
 ```bash
 export FIGMA_ACCESS_TOKEN="your_token_here"
 ```
@@ -44,55 +44,7 @@ echo 'export FIGMA_ACCESS_TOKEN="your_token_here"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-## 2. Project Configuration
-
-### Step 1: Verify Dependencies
-
-The following are already configured in Backpack Android:
-
-**In `gradle/libs.versions.toml`:**
-```toml
-[versions]
-kotlin = "2.0.0"  # Critical: Must be 2.0.0 for compatibility
-figmaCodeConnect = "1.2.1"
-figmaCodeConnectLib = "1.1.3"
-
-[plugins]
-figma-code-connect = { id = "com.figma.code.connect", version.ref = "figmaCodeConnect" }
-
-[libraries]
-figma-code-connect = { group = "com.figma.code.connect", name = "code-connect-lib", version.ref = "figmaCodeConnectLib" }
-```
-
-**In `backpack-compose/build.gradle`:**
-```gradle
-plugins {
-    id 'com.figma.code.connect'
-}
-
-dependencies {
-    implementation libs.figma.code.connect
-}
-```
-
-### Step 2: Initialize Code Connect
-
-Run from project root:
-```bash
-figma connect init
-```
-
-This creates `figma.config.json` with project settings:
-```json
-{
-  "codeConnect": {
-    "include": ["**/*CodeConnect.kt"],
-    "exclude": ["**/build/**"]
-  }
-}
-```
-
-## 3. Verify Setup
+## 2. Verify Setup
 
 ### Test 1: Check Token Access
 ```bash
@@ -106,13 +58,7 @@ figma connect parse --verbose
 ```
 ✅ Should find and parse existing `BpkButton` and `BpkText` Code Connect files
 
-### Test 3: Build Project
-```bash
-./gradlew :backpack-compose:compileDebugKotlin
-```
-✅ Should compile without errors
-
-## 4. Development Workflow
+## 3. Development Workflow
 
 ### Quick Test Command
 ```bash
@@ -138,7 +84,7 @@ figma connect publish
 figma connect --help
 ```
 
-## 5. Project Structure
+## 4. Project Structure
 
 Your Code Connect files should follow this pattern:
 ```
@@ -156,14 +102,10 @@ backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/
 
 ## 🚨 Important Notes
 
-### Kotlin Version Compatibility
-- **Must use Kotlin 2.0.0** (not 2.1.x)
-- Figma Code Connect plugin has compatibility issues with newer Kotlin versions
-
 ### File Naming Convention
 - Code Connect files must end with `CodeConnect.kt`
 - Place them alongside the main component file
-- Use descriptive class names: `BpkTextHero1CodeConnect`, `BpkButtonIconLeftCodeConnect`
+- Use descriptive class names: `BpkTextCodeConnect`, `BpkButtonCodeConnect`
 
 ### Parser Requirements
 - Keep Code Connect classes simple
@@ -192,9 +134,6 @@ npm install -g @figma/code-connect
 2. Update environment variable or config file
 3. Test with `figma connect status`
 
-### "Kotlin compilation errors"
-- Ensure Kotlin version is exactly 2.0.0
-- Check that Code Connect library is properly imported
 
 ### "No Code Connect files found"
 - Verify files end with `CodeConnect.kt`
