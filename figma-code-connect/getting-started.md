@@ -33,7 +33,7 @@ figma connect --version
 
 ### Step 3: Configure Access Token
 
-**Option A: Environment Variable (Recommended)**
+** 1. Environment Variable (Recommended)**
 ```bash
 export FIGMA_ACCESS_TOKEN="your_token_here"
 ```
@@ -43,16 +43,6 @@ Add to your shell profile (`.zshrc`, `.bashrc`, etc.):
 echo 'export FIGMA_ACCESS_TOKEN="your_token_here"' >> ~/.zshrc
 source ~/.zshrc
 ```
-
-**Option B: Project Config File**
-Create `figma.config.json` in project root:
-```json
-{
-  "accessToken": "your_token_here"
-}
-```
-
-⚠️ **Security Note**: Add `figma.config.json` to `.gitignore` if using Option B.
 
 ## 2. Project Configuration
 
