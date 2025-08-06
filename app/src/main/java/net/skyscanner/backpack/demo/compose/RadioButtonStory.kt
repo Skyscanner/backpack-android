@@ -53,6 +53,10 @@ fun RadioButtonStory(modifier: Modifier = Modifier) {
         DisabledUnCheckedRadioButtonExample()
         DisabledCheckedRadioButtonExample()
         CustomContentRadioButtonExample()
+
+        BpkText(stringResource(R.string.toggle_no_label))
+        var noLabelSelectedIndex by remember { mutableIntStateOf(1) }
+        NoLabelRadioButtonExample(selected = noLabelSelectedIndex == 0, onClick = { noLabelSelectedIndex = 0 })
     }
 }
 
@@ -119,4 +123,18 @@ internal fun CustomContentRadioButtonExample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
     }
+}
+
+@Composable
+internal fun NoLabelRadioButtonExample(
+    modifier: Modifier = Modifier,
+    selected: Boolean = false,
+    onClick: (() -> Unit)? = null,
+) {
+    BpkRadioButton(
+        modifier = modifier,
+        text = "",
+        selected = selected,
+        onClick = onClick,
+    )
 }

@@ -77,8 +77,13 @@ open class BpkCheckbox @JvmOverloads constructor(
                 intArrayOf(textDisabledColor, textEnabledColor),
             ),
         )
+    }
 
-        setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+
+        // Only apply padding if text is used, otherwise checkbox will have extra padding
+        if (!text.isNullOrEmpty()) setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
     }
 
     override fun setEnabled(enabled: Boolean) {
