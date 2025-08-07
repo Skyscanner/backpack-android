@@ -63,4 +63,11 @@ class BpkCheckboxTests : BpkSnapshotTest() {
         checkbox.isChecked = true
         snap(checkbox)
     }
+
+    @Test
+    @Variants()
+    fun noLabel() {
+        checkbox.text = null
+        snap(checkbox)
+    }
 }
