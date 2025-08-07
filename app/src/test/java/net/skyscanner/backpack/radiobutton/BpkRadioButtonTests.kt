@@ -55,4 +55,11 @@ class BpkRadioButtonTests : BpkSnapshotTest() {
         radioButton.isChecked = true
         snap(radioButton)
     }
+
+    @Test
+    @Variants()
+    fun noLabel() {
+        radioButton.text = null
+        snap(radioButton)
+    }
 }

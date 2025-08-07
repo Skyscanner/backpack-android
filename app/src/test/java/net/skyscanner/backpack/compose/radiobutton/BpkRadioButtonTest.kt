@@ -26,6 +26,7 @@ import net.skyscanner.backpack.demo.compose.DefaultCheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DefaultUncheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DisabledCheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DisabledUnCheckedRadioButtonExample
+import net.skyscanner.backpack.demo.compose.NoLabelRadioButtonExample
 import org.junit.Test
 
 class BpkRadioButtonTest : BpkSnapshotTest() {
@@ -64,6 +65,14 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
     fun customContent() {
         snap {
             CustomContentRadioButtonExample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noLabel() {
+        snap {
+            NoLabelRadioButtonExample()
         }
     }
 }

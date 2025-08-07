@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.DefaultCheckboxSample
 import net.skyscanner.backpack.demo.compose.DisabledCheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.DisabledUncheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.IntermediateCheckboxSample
+import net.skyscanner.backpack.demo.compose.NoLabelCheckboxSample
 import net.skyscanner.backpack.demo.compose.UncheckedCheckboxSample
 import org.junit.Test
 
@@ -82,6 +83,14 @@ class BpkCheckboxTest : BpkSnapshotTest() {
     fun customContent() {
         snap {
             CustomContentCheckboxSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noLabel() {
+        snap {
+            NoLabelCheckboxSample()
         }
     }
 }

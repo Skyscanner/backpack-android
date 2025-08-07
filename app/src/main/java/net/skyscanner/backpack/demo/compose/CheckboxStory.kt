@@ -53,6 +53,9 @@ fun CheckboxStory(modifier: Modifier = Modifier) {
         DisabledUncheckedCheckboxSample()
         DisabledCheckedCheckboxSample()
         CustomContentCheckboxSample()
+
+        BpkText(stringResource(R.string.toggle_no_label))
+        NoLabelCheckboxSample()
     }
 }
 
@@ -132,4 +135,13 @@ internal fun CustomContentCheckboxSample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
     }
+}
+
+@Composable
+internal fun NoLabelCheckboxSample(modifier: Modifier = Modifier) {
+    BpkCheckbox(
+        modifier = modifier,
+        checked = true,
+        onCheckedChange = {},
+    ) {}
 }
