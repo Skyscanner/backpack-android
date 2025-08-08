@@ -27,9 +27,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import net.skyscanner.backpack.calendar2.CalendarState
-import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.calendar2.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
 import net.skyscanner.backpack.util.InternalBackpackApi
 
 @SuppressLint("RestrictedApi")

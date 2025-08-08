@@ -16,15 +16,16 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.data
 
-import net.skyscanner.backpack.calendar2.CalendarSettings
-import net.skyscanner.backpack.calendar2.CellInfo
-import net.skyscanner.backpack.calendar2.CellLabel
-import net.skyscanner.backpack.calendar2.CellStatus
-import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.extension.toIterable
-import net.skyscanner.backpack.calendar2.testCalendarWith
+import net.skyscanner.backpack.compose.calendar.CalendarSettings
+import net.skyscanner.backpack.compose.calendar.internal.CellInfo
+import net.skyscanner.backpack.compose.calendar.internal.CellLabel
+import net.skyscanner.backpack.compose.calendar.internal.CellStatus
+import net.skyscanner.backpack.compose.calendar.internal.CellStatusStyle
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.internal.extension.toIterable
+import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -39,12 +40,10 @@ class CalendarInfoTests {
             },
         )
         testCalendarWith(params) {
-            verify {
-                for (i in 0..<state.cells.size) {
-                    val cell = state.cells[i]
-                    if (cell is CalendarCell.Day) {
-                        assertTrue(cell.info.disabled)
-                    }
+            for (i in 0..<currentState.cells.size) {
+                val cell = currentState.cells[i]
+                if (cell is CalendarCell.Day) {
+                    assertTrue(cell.info.disabled)
                 }
             }
         }
@@ -59,12 +58,10 @@ class CalendarInfoTests {
         )
 
         testCalendarWith(params) {
-            verify {
-                for (i in 0..<state.cells.size) {
-                    val cell = state.cells[i]
-                    if (cell is CalendarCell.Day) {
-                        assertEquals(cell.date.dayOfMonth.toString(), (cell.info.label as CellLabel.Text).text)
-                    }
+            for (i in 0..<currentState.cells.size) {
+                val cell = currentState.cells[i]
+                if (cell is CalendarCell.Day) {
+                    assertEquals(cell.date.dayOfMonth.toString(), (cell.info.label as CellLabel.Text).text)
                 }
             }
         }
@@ -79,12 +76,10 @@ class CalendarInfoTests {
         )
 
         testCalendarWith(params) {
-            verify {
-                for (i in 0..<state.cells.size) {
-                    val cell = state.cells[i]
-                    if (cell is CalendarCell.Day) {
-                        assertEquals(1, (cell.info.label as CellLabel.Icon).resId)
-                    }
+            for (i in 0..<currentState.cells.size) {
+                val cell = currentState.cells[i]
+                if (cell is CalendarCell.Day) {
+                    assertEquals(1, (cell.info.label as CellLabel.Icon).resId)
                 }
             }
         }
@@ -100,13 +95,11 @@ class CalendarInfoTests {
         )
 
         testCalendarWith(params) {
-            verify {
-                for (i in 0..<state.cells.size) {
-                    val cell = state.cells[i]
-                    if (cell is CalendarCell.Day) {
-                        assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)
-                        assertEquals(CellStatusStyle.Label, cell.info.style)
-                    }
+            for (i in 0..<currentState.cells.size) {
+                val cell = currentState.cells[i]
+                if (cell is CalendarCell.Day) {
+                    assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)
+                    assertEquals(CellStatusStyle.Label, cell.info.style)
                 }
             }
         }

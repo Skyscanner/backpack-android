@@ -16,13 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.data
 
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.CalendarSettings
-import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.testCalendarWith
+import net.skyscanner.backpack.compose.calendar.CalendarSettings
+import net.skyscanner.backpack.compose.calendar.firstDay
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
+import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -31,9 +32,7 @@ class CalendarSelectionTests {
     @Test
     fun no_date_selected_by_default() {
         testCalendarWith(CalendarSettings.Default) {
-            verify {
-                assertTrue(state.selection is CalendarSelection.None)
-            }
+            assertTrue(currentState.selection is CalendarSelection.None)
         }
     }
 
@@ -43,11 +42,9 @@ class CalendarSelectionTests {
             selectionMode = CalendarParams.SelectionMode.Disabled,
         )
         testCalendarWith(disabledDates) {
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+            onClick(CalendarInteraction.DateClicked(firstDay))
 
-            verify {
-                assertTrue(state.selection is CalendarSelection.None)
-            }
+            assertTrue(currentState.selection is CalendarSelection.None)
         }
     }
 }

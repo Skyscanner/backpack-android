@@ -16,17 +16,19 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.data
 
-import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
-import net.skyscanner.backpack.calendar2.CalendarSettings
-import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.testCalendarWith
+import net.skyscanner.backpack.compose.calendar.CalendarSettings
+import net.skyscanner.backpack.compose.calendar.firstDay
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.DayCellAccessibilityLabel
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.SelectionMode
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.LocalDate
 import java.time.Month
-import net.skyscanner.backpack.calendar2.CalendarParams.SelectionMode
 
 class CalendarAccessibilityLabelTests {
 
@@ -40,11 +42,9 @@ class CalendarAccessibilityLabelTests {
             ),
         )
         testCalendarWith(calendarParams) {
-            verify {
-                assertEquals(LocalDate.of(2000, Month.JANUARY, 1), (state.cells[7] as CalendarCell.Day).date)
-                assertEquals("noSelectionState", (state.cells[7] as CalendarCell.Day).stateDescription)
-                assertEquals("startSelectionHint", (state.cells[7] as CalendarCell.Day).onClickLabel)
-            }
+            assertEquals(LocalDate.of(2000, Month.JANUARY, 1), (currentState.cells[7] as CalendarCell.Day).date)
+            assertEquals("noSelectionState", (currentState.cells[7] as CalendarCell.Day).stateDescription)
+            assertEquals("startSelectionHint", (currentState.cells[7] as CalendarCell.Day).onClickLabel)
         }
     }
 
@@ -58,14 +58,12 @@ class CalendarAccessibilityLabelTests {
             ),
         )
         testCalendarWith(calendarParams) {
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-            val startDate = state.cells[7] as CalendarCell.Day // First of January
+            onClick(CalendarInteraction.DateClicked(firstDay))
+            val startDate = currentState.cells[7] as CalendarCell.Day // First of January
 
-            verify {
-                assertEquals(LocalDate.of(2000, Month.JANUARY, 1), startDate.date)
-                assertEquals("startSelectionHint", startDate.onClickLabel)
-                assertEquals("startSelectionState", startDate.stateDescription)
-            }
+            assertEquals(LocalDate.of(2000, Month.JANUARY, 1), startDate.date)
+            assertEquals("startSelectionHint", startDate.onClickLabel)
+            assertEquals("startSelectionState", startDate.stateDescription)
         }
     }
 
@@ -80,11 +78,9 @@ class CalendarAccessibilityLabelTests {
             ),
         )
         testCalendarWith(calendarParams) {
-            verify {
-                assertEquals(LocalDate.of(2000, Month.JANUARY, 1), (state.cells[7] as CalendarCell.Day).date)
-                assertEquals("startSelectionHint", (state.cells[7] as CalendarCell.Day).onClickLabel)
-                assertEquals(null, (state.cells[7] as CalendarCell.Day).stateDescription)
-            }
+            assertEquals(LocalDate.of(2000, Month.JANUARY, 1), (currentState.cells[7] as CalendarCell.Day).date)
+            assertEquals("startSelectionHint", (currentState.cells[7] as CalendarCell.Day).onClickLabel)
+            assertEquals(null, (currentState.cells[7] as CalendarCell.Day).stateDescription)
         }
     }
 
@@ -99,18 +95,15 @@ class CalendarAccessibilityLabelTests {
             ),
         )
         testCalendarWith(calendarParams) {
-            stateMachine.onClick(CalendarInteraction.DateClicked(state.cells[8] as CalendarCell.Day))
+            onClick(CalendarInteraction.DateClicked(currentState.cells[8] as CalendarCell.Day))
 
-            verify {
-
-                assertEquals(LocalDate.of(2000, Month.JANUARY, 2), (state.cells[8] as CalendarCell.Day).date)
-                assertEquals("endSelectionHint", (state.cells[8] as CalendarCell.Day).onClickLabel)
-                assertEquals("startSelectionState", (state.cells[8] as CalendarCell.Day).stateDescription)
-                assertEquals("endSelectionHint", (state.cells[9] as CalendarCell.Day).onClickLabel)
-                assertEquals(null, (state.cells[9] as CalendarCell.Day).stateDescription)
-                assertEquals("startSelectionHint", (state.cells[7] as CalendarCell.Day).onClickLabel)
-                assertEquals(null, (state.cells[7] as CalendarCell.Day).stateDescription)
-            }
+            assertEquals(LocalDate.of(2000, Month.JANUARY, 2), (currentState.cells[8] as CalendarCell.Day).date)
+            assertEquals("endSelectionHint", (currentState.cells[8] as CalendarCell.Day).onClickLabel)
+            assertEquals("startSelectionState", (currentState.cells[8] as CalendarCell.Day).stateDescription)
+            assertEquals("endSelectionHint", (currentState.cells[9] as CalendarCell.Day).onClickLabel)
+            assertEquals(null, (currentState.cells[9] as CalendarCell.Day).stateDescription)
+            assertEquals("startSelectionHint", (currentState.cells[7] as CalendarCell.Day).onClickLabel)
+            assertEquals(null, (currentState.cells[7] as CalendarCell.Day).stateDescription)
         }
     }
 
@@ -126,21 +119,18 @@ class CalendarAccessibilityLabelTests {
         )
         testCalendarWith(calendarParams) {
 
-            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-            stateMachine.onClick(CalendarInteraction.DateClicked(state.cells[8] as CalendarCell.Day))
+            onClick(CalendarInteraction.DateClicked(firstDay))
+            onClick(CalendarInteraction.DateClicked(currentState.cells[8] as CalendarCell.Day))
 
-            val startDate = state.cells[7] as CalendarCell.Day // First of January
-            val endDate = state.cells[8] as CalendarCell.Day
+            val startDate = currentState.cells[7] as CalendarCell.Day // First of January
+            val endDate = currentState.cells[8] as CalendarCell.Day
 
-            verify {
-
-                assertEquals("startSelectionHint", startDate.onClickLabel)
-                assertEquals("startSelectionState", startDate.stateDescription)
-                assertEquals("startSelectionHint", endDate.onClickLabel)
-                assertEquals("endSelectionState", endDate.stateDescription)
-                assertEquals("startSelectionHint", (state.cells[9] as CalendarCell.Day).onClickLabel)
-                assertEquals(null, (state.cells[9] as CalendarCell.Day).stateDescription)
-            }
+            assertEquals("startSelectionHint", startDate.onClickLabel)
+            assertEquals("startSelectionState", startDate.stateDescription)
+            assertEquals("startSelectionHint", endDate.onClickLabel)
+            assertEquals("endSelectionState", endDate.stateDescription)
+            assertEquals("startSelectionHint", (currentState.cells[9] as CalendarCell.Day).onClickLabel)
+            assertEquals(null, (currentState.cells[9] as CalendarCell.Day).stateDescription)
         }
     }
 }

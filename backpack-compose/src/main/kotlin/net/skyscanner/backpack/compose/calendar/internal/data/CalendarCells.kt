@@ -16,15 +16,15 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.internal.data
 
 import androidx.compose.runtime.Immutable
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.extension.firstDay
-import net.skyscanner.backpack.calendar2.extension.lastDay
-import net.skyscanner.backpack.calendar2.extension.toIterable
-import net.skyscanner.backpack.calendar2.extension.yearMonth
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
+import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.internal.extension.firstDay
+import net.skyscanner.backpack.compose.calendar.internal.extension.lastDay
+import net.skyscanner.backpack.compose.calendar.internal.extension.toIterable
+import net.skyscanner.backpack.compose.calendar.internal.extension.yearMonth
 import net.skyscanner.backpack.util.InternalBackpackApi
 import java.time.LocalDate
 

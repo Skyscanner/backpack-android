@@ -16,19 +16,10 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.extension
+package net.skyscanner.backpack.compose.calendar.internal.extension
 
 import java.time.LocalDate
 import java.time.YearMonth
 
-internal fun YearMonth.firstDay(): LocalDate =
-    atDay(1)
-
-internal fun YearMonth.lastDay(): LocalDate =
-    atEndOfMonth()
-
-internal fun YearMonth.prevMonth(): YearMonth =
-    minusMonths(1)
-
-internal fun YearMonth.nextMonth(): YearMonth =
-    plusMonths(1)
+internal fun LocalDate.yearMonth(): YearMonth =
+    YearMonth.of(year, month)

@@ -54,11 +54,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import net.skyscanner.backpack.calendar2.CellLabel
-import net.skyscanner.backpack.calendar2.CellStatus
-import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall

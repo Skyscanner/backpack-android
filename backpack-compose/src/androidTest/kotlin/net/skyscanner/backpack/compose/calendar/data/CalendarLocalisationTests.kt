@@ -16,13 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.data
 
 import android.text.Spanned
 import android.text.style.TtsSpan
 import androidx.core.text.getSpans
-import net.skyscanner.backpack.calendar2.CalendarSettings
-import net.skyscanner.backpack.calendar2.testCalendarWith
+import net.skyscanner.backpack.compose.calendar.CalendarSettings
+import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
+import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -38,47 +39,39 @@ class CalendarLocalisationTests {
     @Test
     fun month_titles_depend_on_locale() {
         testCalendarWith(russianLocale) {
-            verify {
-                assertEquals("Январь", (state.cells[0] as CalendarCell.Header).title)
-            }
+            assertEquals("Январь", (currentState.cells[0] as CalendarCell.Header).title)
         }
     }
 
     @Test
     fun week_fields_order_depends_on_locale() {
         testCalendarWith(CalendarSettings.Default) {
-            verify {
-                assertEquals(DayOfWeek.SUNDAY, state.params.weekFields.firstDayOfWeek)
-            }
+            assertEquals(DayOfWeek.SUNDAY, currentState.params.weekFields.firstDayOfWeek)
         }
     }
 
     @Test
     fun when_locale_changes_week_fields_order_is_updated() {
         testCalendarWith(CalendarSettings.Default) {
-            stateMachine.onLocaleChanged(russianLocale.locale)
-            verify {
-                assertEquals(DayOfWeek.MONDAY, state.params.weekFields.firstDayOfWeek)
-            }
+            setParams(currentState.params.copy(locale = russianLocale.locale))
+            assertEquals(DayOfWeek.MONDAY, currentState.params.weekFields.firstDayOfWeek)
         }
     }
 
     @Test
     fun days_content_description_is_a_correct_Tts_span() {
         testCalendarWith(CalendarSettings.Default) {
-            verify {
-                val cell = state.cells[7] as CalendarCell.Day
-                val text = cell.text as Spanned
-                val spans = text.getSpans<TtsSpan>()
-                assertTrue(spans.size == 1)
+            val cell = currentState.cells[7] as CalendarCell.Day
+            val text = cell.text as Spanned
+            val spans = text.getSpans<TtsSpan>()
+            assertTrue(spans.size == 1)
 
-                val ttsSpan = spans.first()
+            val ttsSpan = spans.first()
 
-                assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
-                assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
-                assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
-                assertEquals(2000, ttsSpan.args.get(TtsSpan.ARG_YEAR)) // 2000
-            }
+            assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
+            assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
+            assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
+            assertEquals(2000, ttsSpan.args.get(TtsSpan.ARG_YEAR)) // 2000
         }
     }
 }

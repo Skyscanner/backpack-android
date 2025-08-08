@@ -19,14 +19,14 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarParams.DayCellAccessibilityLabel
-import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.CellInfo
-import net.skyscanner.backpack.calendar2.CellLabel
-import net.skyscanner.backpack.calendar2.CellStatus
-import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.extension.toIterable
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.DayCellAccessibilityLabel
+import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.internal.CellInfo
+import net.skyscanner.backpack.compose.calendar.internal.CellLabel
+import net.skyscanner.backpack.compose.calendar.internal.CellStatus
+import net.skyscanner.backpack.compose.calendar.internal.CellStatusStyle
+import net.skyscanner.backpack.compose.calendar.internal.extension.toIterable
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Period

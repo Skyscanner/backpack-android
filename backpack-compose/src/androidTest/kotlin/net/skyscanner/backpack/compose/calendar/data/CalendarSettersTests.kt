@@ -16,15 +16,15 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.data
+package net.skyscanner.backpack.compose.calendar.data
 
-import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.CalendarSettings
-import net.skyscanner.backpack.calendar2.CellInfo
-import net.skyscanner.backpack.calendar2.firstDay
-import net.skyscanner.backpack.calendar2.lastDay
-import net.skyscanner.backpack.calendar2.testCalendarWith
+import net.skyscanner.backpack.compose.calendar.CalendarSettings
+import net.skyscanner.backpack.compose.calendar.firstDay
+import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
+import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.internal.CellInfo
+import net.skyscanner.backpack.compose.calendar.lastDay
+import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -33,10 +33,8 @@ class CalendarSettersTests {
     @Test
     fun setParams_changes_params() {
         testCalendarWith(CalendarSettings.Default) {
-            stateMachine.setParams(CalendarSettings.Default.copy(selectionMode = CalendarParams.SelectionMode.Disabled))
-            verify {
-                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-            }
+            setParams(CalendarSettings.Default.copy(selectionMode = CalendarParams.SelectionMode.Disabled))
+            assertEquals(CalendarParams.SelectionMode.Disabled, currentState.params.selectionMode)
         }
     }
 
@@ -46,11 +44,9 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Single(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
+            setSelection(CalendarSelection.Single(firstDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
-            }
+            assertEquals(CalendarSelection.Single(firstDay.date), currentState.selection)
         }
     }
 
@@ -60,11 +56,9 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
+            setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
-            }
+            assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), currentState.selection)
         }
     }
 
@@ -74,12 +68,10 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Disabled,
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
+            setSelection(CalendarSelection.Single(firstDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
+            assertEquals(CalendarParams.SelectionMode.Disabled, currentState.params.selectionMode)
         }
     }
 
@@ -89,12 +81,10 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Disabled,
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
+            setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
+            assertEquals(CalendarParams.SelectionMode.Disabled, currentState.params.selectionMode)
         }
     }
 
@@ -107,11 +97,9 @@ class CalendarSettersTests {
             ),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
+            setSelection(CalendarSelection.Single(firstDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
@@ -124,11 +112,9 @@ class CalendarSettersTests {
             ),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = null))
+            setSelection(CalendarSelection.Range(start = firstDay.date, end = null))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
@@ -141,11 +127,9 @@ class CalendarSettersTests {
             ),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date))
+            setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
@@ -155,11 +139,9 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Single(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Single(firstDay.date.minusMonths(1)))
+            setSelection(CalendarSelection.Single(firstDay.date.minusMonths(1)))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
@@ -169,11 +151,9 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date.minusMonths(1), end = null))
+            setSelection(CalendarSelection.Range(start = firstDay.date.minusMonths(1), end = null))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
@@ -183,25 +163,21 @@ class CalendarSettersTests {
             selectionMode = CalendarParams.SelectionMode.Range(),
         )
         testCalendarWith(disabledParams) {
-            stateMachine.setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date.plusMonths(1)))
+            setSelection(CalendarSelection.Range(start = firstDay.date, end = lastDay.date.plusMonths(1)))
 
-            verify {
-                assertEquals(CalendarSelection.None, state.selection)
-            }
+            assertEquals(CalendarSelection.None, currentState.selection)
         }
     }
 
     @Test
     fun setSelection_of_month_changes_selection() {
         testCalendarWith(CalendarSettings.Default) {
-            stateMachine.setParams(
+            setParams(
                 CalendarSettings.Default.copy(
                     selectionMode = CalendarParams.SelectionMode.Range(),
                 ),
             )
-            verify {
-                assertEquals(CalendarParams.SelectionMode.Range(), state.params.selectionMode)
-            }
+            assertEquals(CalendarParams.SelectionMode.Range(), currentState.params.selectionMode)
         }
     }
 }

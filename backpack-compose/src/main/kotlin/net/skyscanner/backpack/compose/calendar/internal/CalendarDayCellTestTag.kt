@@ -1,7 +1,9 @@
-/**
+package net.skyscanner.backpack.compose.calendar.internal
+
+/*
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,20 +17,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.skyscanner.backpack.calendar2
 
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
-import java.time.YearMonth
-
-/**
- * Describes any side effects from the calendar.
- */
-@Stable
-sealed interface CalendarEffect {
-    /**
-     * A Month [date] [CalendarEffect] is selected
-     */
-    @Immutable
-    data class MonthSelected(val date: YearMonth) : CalendarEffect
+enum class CalendarDayCellTestTag {
+    INACTIVE,
+    INACTIVE_HIGHLIGHTED,
+    ACTIVE,
+    ACTIVE_HIGHLIGHTED,
 }

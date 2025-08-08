@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.extension
+package net.skyscanner.backpack.compose.calendar.internal.extension
 
-import java.time.LocalDate
-import java.time.YearMonth
+import java.time.DayOfWeek
+import java.time.temporal.WeekFields
 
-internal fun LocalDate.yearMonth(): YearMonth =
-    YearMonth.of(year, month)
+internal val WeekFields.lastDayOfWeek: DayOfWeek
+    get() = firstDayOfWeek - 1
