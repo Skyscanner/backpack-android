@@ -21,7 +21,6 @@ package net.skyscanner.backpack.navbar
 import android.animation.ObjectAnimator
 import android.animation.StateListAnimator
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Menu
@@ -37,6 +36,7 @@ import net.skyscanner.backpack.navbar.internal.BpkToolbar
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.resolveThemeDimen
 import net.skyscanner.backpack.util.use
+import androidx.core.graphics.drawable.toDrawable
 
 class BpkNavBar @JvmOverloads constructor(
     context: Context,
@@ -59,6 +59,14 @@ class BpkNavBar @JvmOverloads constructor(
 
         collapsingLayout.addView(it, params)
     }
+
+    var titleColor: Int = context.getColor(R.color.bpkTextPrimary)
+        set(value) {
+            field = value
+            toolbar.setTitleTextColor(value)
+            collapsingLayout.setCollapsedTitleTextColor(value)
+            collapsingLayout.setExpandedTitleColor(value)
+        }
 
     var title: CharSequence?
         get() = toolbar.title
@@ -108,6 +116,18 @@ class BpkNavBar @JvmOverloads constructor(
             }
         }
 
+    var collapsedBackgroundColor: Int? = null
+        set(value) {
+            field = value
+            collapsingLayout.contentScrim = value?.toDrawable()
+        }
+
+    var navIconContentDescription: CharSequence? = null
+        set(value) {
+            field = value
+            toolbar.navigationContentDescription = value
+        }
+
     init {
         var title: CharSequence?
         var navIcon: Drawable?
@@ -125,9 +145,10 @@ class BpkNavBar @JvmOverloads constructor(
             navIconContentDescription = it.getString(R.styleable.BpkNavBar_navBarActionContentDescription)
         }
 
-        this.background = ColorDrawable(context.getColor(R.color.bpkCanvas))
+        this.background = context.getColor(R.color.bpkCanvas).toDrawable()
         this.title = title
         this.icon = navIcon
+        this.navIconContentDescription = navIconContentDescription
         this.navAction = navAction
         this.toolbar.navigationContentDescription = navIconContentDescription
         this.menu = menu
