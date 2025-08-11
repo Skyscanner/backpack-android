@@ -18,7 +18,9 @@
 package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.runtime.Immutable
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.SelectionMode
+import net.skyscanner.backpack.compose.calendar.CalendarParams
+import net.skyscanner.backpack.compose.calendar.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.CalendarParams.SelectionMode
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCells
 import net.skyscanner.backpack.util.InternalBackpackApi

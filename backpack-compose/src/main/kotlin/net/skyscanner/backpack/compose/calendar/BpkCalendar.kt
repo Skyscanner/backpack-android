@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarBadge
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarGrid
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarHeader

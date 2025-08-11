@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
+import net.skyscanner.backpack.compose.calendar.CalendarParams
 
 @Composable
 internal fun BpkCalendarBadge(

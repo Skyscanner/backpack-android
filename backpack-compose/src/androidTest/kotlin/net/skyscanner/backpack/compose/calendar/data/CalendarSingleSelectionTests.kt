@@ -20,11 +20,11 @@ package net.skyscanner.backpack.compose.calendar.data
 
 import net.skyscanner.backpack.compose.calendar.CalendarSettings
 import net.skyscanner.backpack.compose.calendar.firstDay
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
-import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
-import net.skyscanner.backpack.compose.calendar.internal.CellInfo
+import net.skyscanner.backpack.compose.calendar.CalendarParams
+import net.skyscanner.backpack.compose.calendar.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.CellInfo
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.lastDay
 import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.calendar.internal
+package net.skyscanner.backpack.compose.calendar
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable

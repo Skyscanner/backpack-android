@@ -28,7 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.CalendarInteraction
 import net.skyscanner.backpack.util.InternalBackpackApi
 
 @SuppressLint("RestrictedApi")

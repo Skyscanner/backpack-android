@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
 import org.junit.Test
 
 class BpkCalendarTest : BpkSnapshotTest() {

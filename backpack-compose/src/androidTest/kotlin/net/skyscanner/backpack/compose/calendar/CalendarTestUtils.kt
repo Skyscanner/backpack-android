@@ -18,11 +18,8 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
-import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.internal.CalendarState
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.internal.dispatchClick
 import net.skyscanner.backpack.compose.calendar.internal.dispatchParamsUpdate
 import net.skyscanner.backpack.compose.calendar.internal.dispatchSetSelection

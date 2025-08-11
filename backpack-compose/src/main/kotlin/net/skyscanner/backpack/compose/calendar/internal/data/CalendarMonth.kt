@@ -19,8 +19,8 @@
 package net.skyscanner.backpack.compose.calendar.internal.data
 
 import androidx.compose.runtime.Immutable
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
-import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.CalendarParams
+import net.skyscanner.backpack.compose.calendar.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.internal.extension.firstDay
 import net.skyscanner.backpack.compose.calendar.internal.extension.lastDay
 import net.skyscanner.backpack.compose.calendar.internal.extension.lastDayOfWeek
