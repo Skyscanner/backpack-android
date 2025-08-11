@@ -28,6 +28,7 @@ import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.navbar.BpkNavBar
+import net.skyscanner.backpack.navbar.NavBarStyle
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
@@ -56,6 +57,14 @@ fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
 fun NavBarStoryWithMenu(modifier: Modifier = Modifier) =
     NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
         setExpanded(false)
+    }
+
+@Composable
+@NavBarComponent
+@ViewStory("SurfaceContrast Style", StoryKind.DemoOnly)
+fun NavBarStoryWithSurfaceContrast(modifier: Modifier = Modifier) =
+    NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
+        style = NavBarStyle.SurfaceContrast
     }
 
 @Composable
