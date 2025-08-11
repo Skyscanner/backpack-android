@@ -150,7 +150,6 @@ class BpkNavBar @JvmOverloads constructor(
         this.icon = navIcon
         this.navIconContentDescription = navIconContentDescription
         this.navAction = navAction
-        this.toolbar.navigationContentDescription = navIconContentDescription
         this.menu = menu
         this.stateListAnimator = shadowStateListAnimator()
     }
