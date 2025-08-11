@@ -84,13 +84,6 @@ sealed class CalendarCell {
     }
 }
 
-@Stable
-sealed interface CalendarInteraction {
-
-    @Immutable
-    data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
-}
-
 internal fun CalendarCellDay(
     date: LocalDate,
     yearMonth: YearMonth,

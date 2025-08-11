@@ -23,7 +23,7 @@ import net.skyscanner.backpack.compose.calendar.firstDay
 import net.skyscanner.backpack.compose.calendar.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.compose.calendar.CalendarParams.SelectionMode
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Test

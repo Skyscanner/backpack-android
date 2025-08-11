@@ -24,7 +24,7 @@ import net.skyscanner.backpack.compose.calendar.CalendarParams
 import net.skyscanner.backpack.compose.calendar.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.CellInfo
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
-import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
+import net.skyscanner.backpack.compose.calendar.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.lastDay
 import net.skyscanner.backpack.compose.calendar.rangeOf
 import net.skyscanner.backpack.compose.calendar.testCalendarWith
