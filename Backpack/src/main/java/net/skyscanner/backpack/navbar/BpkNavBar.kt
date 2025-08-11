@@ -38,6 +38,11 @@ import net.skyscanner.backpack.util.resolveThemeDimen
 import net.skyscanner.backpack.util.use
 import androidx.core.graphics.drawable.toDrawable
 
+enum class NavBarStyle {
+    Default,
+    SurfaceContrast,
+}
+
 class BpkNavBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -60,12 +65,26 @@ class BpkNavBar @JvmOverloads constructor(
         collapsingLayout.addView(it, params)
     }
 
-    var titleColor: Int = context.getColor(R.color.bpkTextPrimary)
+    var style: NavBarStyle = NavBarStyle.Default
         set(value) {
             field = value
-            toolbar.setTitleTextColor(value)
-            collapsingLayout.setCollapsedTitleTextColor(value)
-            collapsingLayout.setExpandedTitleColor(value)
+            when (value) {
+                NavBarStyle.Default -> {
+                    collapsingLayout.contentScrim = context.getColor(R.color.bpkSurfaceDefault).toDrawable()
+                    toolbar.setBackgroundColor(context.getColor(R.color.bpkCanvas))
+                    toolbar.setTitleTextColor(context.getColor(R.color.bpkTextPrimary))
+                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextPrimary))
+                    collapsingLayout.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
+                }
+                NavBarStyle.SurfaceContrast -> {
+                    collapsingLayout.contentScrim = context.getColor(R.color.bpkSurfaceContrast).toDrawable()
+                    toolbar.setBackgroundColor(context.getColor(R.color.bpkSurfaceContrast))
+                    toolbar.setTitleTextColor(context.getColor(R.color.bpkTextOnDark))
+                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextOnDark))
+                    collapsingLayout.setExpandedTitleColor(context.getColor(R.color.bpkTextOnDark))
+                    collapsingLayout.setBackgroundColor(context.getColor(R.color.bpkSurfaceContrast))
+                }
+            }
         }
 
     var title: CharSequence?
@@ -114,12 +133,6 @@ class BpkNavBar @JvmOverloads constructor(
                 value.invoke(it)
                 return@setOnMenuItemClickListener true
             }
-        }
-
-    var collapsedBackgroundColor: Int? = null
-        set(value) {
-            field = value
-            collapsingLayout.contentScrim = value?.toDrawable()
         }
 
     var navIconContentDescription: CharSequence? = null
