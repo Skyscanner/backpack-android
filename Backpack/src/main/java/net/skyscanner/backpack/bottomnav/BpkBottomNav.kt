@@ -30,6 +30,7 @@ import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.size
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
@@ -61,7 +62,7 @@ open class BpkBottomNav @JvmOverloads constructor(
         menu.add(
             Menu.NONE,
             id,
-            menu.size(),
+            menu.size,
             wrapFontSpan(title),
         )
             .setIcon(icon)

@@ -21,7 +21,7 @@ package net.skyscanner.backpack.demo.data
 import android.content.Context
 import android.content.res.Resources
 import android.icu.text.NumberFormat
-import net.skyscanner.backpack.calendar2.extension.toIterable
+import net.skyscanner.backpack.compose.calendar.internal.extension.toIterable
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.demo.R
 import java.time.LocalDate
