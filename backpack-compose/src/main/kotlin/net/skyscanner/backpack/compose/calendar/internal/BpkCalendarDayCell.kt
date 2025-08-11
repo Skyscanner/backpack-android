@@ -57,6 +57,9 @@ import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.calendar.CellLabel
+import net.skyscanner.backpack.compose.calendar.CellStatus
+import net.skyscanner.backpack.compose.calendar.CellStatusStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.findBySmall
 import net.skyscanner.backpack.compose.skeleton.BpkHeadlineSkeleton

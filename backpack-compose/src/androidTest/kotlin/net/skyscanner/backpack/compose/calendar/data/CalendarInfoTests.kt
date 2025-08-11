@@ -19,10 +19,10 @@
 package net.skyscanner.backpack.compose.calendar.data
 
 import net.skyscanner.backpack.compose.calendar.CalendarSettings
-import net.skyscanner.backpack.compose.calendar.internal.CellInfo
-import net.skyscanner.backpack.compose.calendar.internal.CellLabel
-import net.skyscanner.backpack.compose.calendar.internal.CellStatus
-import net.skyscanner.backpack.compose.calendar.internal.CellStatusStyle
+import net.skyscanner.backpack.compose.calendar.CellInfo
+import net.skyscanner.backpack.compose.calendar.CellLabel
+import net.skyscanner.backpack.compose.calendar.CellStatus
+import net.skyscanner.backpack.compose.calendar.CellStatusStyle
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
 import net.skyscanner.backpack.compose.calendar.internal.extension.toIterable
 import net.skyscanner.backpack.compose.calendar.testCalendarWith

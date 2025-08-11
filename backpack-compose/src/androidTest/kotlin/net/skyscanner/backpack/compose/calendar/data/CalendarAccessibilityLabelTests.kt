@@ -20,8 +20,8 @@ package net.skyscanner.backpack.compose.calendar.data
 
 import net.skyscanner.backpack.compose.calendar.CalendarSettings
 import net.skyscanner.backpack.compose.calendar.firstDay
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.DayCellAccessibilityLabel
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.SelectionMode
+import net.skyscanner.backpack.compose.calendar.CalendarParams.DayCellAccessibilityLabel
+import net.skyscanner.backpack.compose.calendar.CalendarParams.SelectionMode
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarCell
 import net.skyscanner.backpack.compose.calendar.internal.data.CalendarInteraction
 import net.skyscanner.backpack.compose.calendar.testCalendarWith

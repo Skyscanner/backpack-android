@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.R

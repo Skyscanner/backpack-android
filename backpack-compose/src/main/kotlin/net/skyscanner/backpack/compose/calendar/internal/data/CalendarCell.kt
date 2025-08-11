@@ -24,10 +24,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.core.text.buildSpannedString
 import net.skyscanner.backpack.compose.calendar.internal.CalendarDayCellTestTag
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams
-import net.skyscanner.backpack.compose.calendar.internal.CalendarParams.DayCellAccessibilityLabel
-import net.skyscanner.backpack.compose.calendar.internal.CalendarSelection
-import net.skyscanner.backpack.compose.calendar.internal.CellInfo
+import net.skyscanner.backpack.compose.calendar.CalendarParams
+import net.skyscanner.backpack.compose.calendar.CalendarParams.DayCellAccessibilityLabel
+import net.skyscanner.backpack.compose.calendar.CalendarSelection
+import net.skyscanner.backpack.compose.calendar.CellInfo
 import net.skyscanner.backpack.util.InternalBackpackApi
 import java.time.LocalDate
 import java.time.YearMonth
