@@ -1,5 +1,3 @@
-package net.skyscanner.backpack.compose.calendar.internal
-
 /*
  * Backpack for Android - Skyscanner's Design System
  *
@@ -17,6 +15,8 @@ package net.skyscanner.backpack.compose.calendar.internal
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package net.skyscanner.backpack.compose.calendar
 
 enum class CalendarDayCellTestTag {
     INACTIVE,

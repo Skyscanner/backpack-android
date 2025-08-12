@@ -23,7 +23,7 @@ import android.text.style.TtsSpan
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.core.text.buildSpannedString
-import net.skyscanner.backpack.compose.calendar.internal.CalendarDayCellTestTag
+import net.skyscanner.backpack.compose.calendar.CalendarDayCellTestTag
 import net.skyscanner.backpack.compose.calendar.CalendarParams
 import net.skyscanner.backpack.compose.calendar.CalendarParams.DayCellAccessibilityLabel
 import net.skyscanner.backpack.compose.calendar.CalendarSelection
