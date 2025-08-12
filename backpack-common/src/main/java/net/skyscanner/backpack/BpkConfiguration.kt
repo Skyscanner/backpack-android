@@ -4,6 +4,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.FontRes
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.common.R
 
 sealed class BpkExperimentalComponent {
 
@@ -56,21 +58,40 @@ object BpkConfiguration {
     private var _hasSet: Boolean = false
 
     fun setConfigs(
-        globalConfig: BpkExperimentalComponent.Global? = null,
-        chipConfig: BpkExperimentalComponent.BpkChip? = null,
-        buttonConfig: BpkExperimentalComponent.BpkButton? = null,
-        textConfig: BpkExperimentalComponent.BpkText? = null,
-        cardConfig: BpkExperimentalComponent.BpkCard? = null,
+        globalConfig: Boolean = false,
+        chipConfig: Boolean = false,
+        buttonConfig: Boolean = false,
+        textConfig: Boolean = false,
+        cardConfig: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
         }
         _hasSet = true
-        this.globalConfig = globalConfig
-        this.chipConfig = chipConfig
-        this.buttonConfig = buttonConfig
-        this.textConfig = textConfig
-        this.cardConfig = cardConfig
+        if (globalConfig) {
+        }
+        if (chipConfig) {
+            this.chipConfig = BpkExperimentalComponent.BpkChip(
+                colorResource = R.color.bpkCoreAccent,
+                height = 36.dp,
+                heightDimension = R.dimen.bpk_new_chip_height,
+                radius = 100,
+                radiusDimension = R.dimen.bpkBorderRadiusFull,
+            )
+        }
+        if (buttonConfig) {
+            this.buttonConfig = BpkExperimentalComponent.BpkButton(
+                colorResource = R.color.bpkCoreAccent,
+                largeMinHeight = 56.dp,
+                largeMinHeightResource = R.dimen.bpk_button_large_height_new,
+                radius = 100,
+                radiusDimension = R.dimen.bpkBorderRadiusFull,
+            )
+        }
+        if (textConfig) {
+        }
+        if (cardConfig) {
+        }
     }
 
     var globalConfig: BpkExperimentalComponent.Global? = null
