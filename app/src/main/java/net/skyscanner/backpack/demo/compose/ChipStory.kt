@@ -39,9 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkConfiguration
-import net.skyscanner.backpack.BpkExperimentalComponent
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
@@ -97,13 +95,7 @@ private fun ChipDemo(
         var selected by rememberSaveable { mutableStateOf(false) }
         if (selected) {
             BpkConfiguration.setConfigs(
-                chipConfig = BpkExperimentalComponent.BpkChip(
-                    colorResource = R.color.bpkCoreAccent,
-                    height = 36.dp,
-                    heightDimension = R.dimen.bpk_new_chip_height,
-                    radius = 100,
-                    radiusDimension = R.dimen.bpkBorderRadiusFull,
-                ),
+                chipConfig = true,
             )
         }
         Column(
