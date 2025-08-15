@@ -1,0 +1,8 @@
+{
+  "codeConnect": {
+    "parser": "compose",
+    "include": [
+      "backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/**/*CodeConnect.kt"
+    ]
+  }
+}
