@@ -40,9 +40,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -81,7 +83,7 @@ internal fun BpkChipImpl(
         type = type,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onSelectedChange != null) {
-            clip(ChipShape)
+            clip(chipShape())
                 .selectable(
                     selected = selected,
                     enabled = enabled,
@@ -111,7 +113,7 @@ internal fun BpkDismissibleChipImpl(
         type = BpkChipType.Dismiss,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onClick != null) {
-            clip(ChipShape)
+            clip(chipShape())
                 .clickable(
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
@@ -165,11 +167,11 @@ internal fun BpkChipImpl(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         modifier = modifier
-            .height(BpkSpacing.Xl)
-            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), ChipShape)
-            .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, ChipShape)
-            .background(backgroundColor, ChipShape)
-            .clip(ChipShape)
+            .height(BpkConfiguration.chipConfig?.height ?: BpkSpacing.Xl)
+            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), chipShape())
+            .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, chipShape())
+            .background(backgroundColor, chipShape())
+            .clip(chipShape())
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
@@ -229,7 +231,9 @@ internal fun BpkChipImpl(
 private val BpkChipStyle.selectedBackgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.corePrimary
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkConfiguration.chipConfig?.colorResource?.let { colorResource(it) }
+            ?: BpkTheme.colors.corePrimary
+
         BpkChipStyle.OnDark -> BpkChipColors.onDarkOnBackground
     }
 
@@ -298,4 +302,7 @@ private val BpkChipType.icon: BpkIcon?
         BpkChipType.Dismiss -> BpkIcon.CloseCircle
     }
 
-private val ChipShape = RoundedCornerShape(BpkBorderRadius.Sm)
+private fun chipShape(): RoundedCornerShape =
+    BpkConfiguration.chipConfig?.radius?.let {
+        RoundedCornerShape(it)
+    } ?: RoundedCornerShape(BpkBorderRadius.Sm)

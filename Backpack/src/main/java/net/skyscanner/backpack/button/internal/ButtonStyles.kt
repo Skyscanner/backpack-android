@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.R
 
 internal sealed class ButtonStyles : (Context) -> ButtonStyle {
@@ -37,7 +38,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonSecondaryStyle,
-            bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
+            bgColorRes = BpkConfiguration.buttonConfig?.colorResource ?: R.color.__privateButtonSecondaryNormalBackground,
             bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
             contentColorRes = R.color.bpkTextPrimary,
         )

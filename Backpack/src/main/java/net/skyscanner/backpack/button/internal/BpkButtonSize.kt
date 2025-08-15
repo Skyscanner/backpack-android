@@ -21,6 +21,7 @@ package net.skyscanner.backpack.button.internal
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DimenRes
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 
@@ -46,7 +47,7 @@ internal val BpkButton.Size.minHeight: Int
     get() =
         when (this) {
             BpkButton.Size.Standard -> R.dimen.bpk_button_default_height
-            BpkButton.Size.Large -> R.dimen.bpk_button_large_height
+            BpkButton.Size.Large -> BpkConfiguration.buttonConfig?.largeMinHeightResource ?: R.dimen.bpk_button_large_height
         }
 
 @get:DimenRes

@@ -39,11 +39,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.BpkConfiguration
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
 import net.skyscanner.backpack.compose.chip.BpkDropdownChip
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
@@ -90,6 +92,12 @@ private fun ChipDemo(
             BpkChipStyle.OnImage -> Color.Transparent
         }
 
+        var selected by rememberSaveable { mutableStateOf(false) }
+        if (selected) {
+            BpkConfiguration.setConfigs(
+                chipConfig = true,
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,6 +105,8 @@ private fun ChipDemo(
                 .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         ) {
+
+            BpkSwitch("New style?", selected, { selected = it })
             ChipsRow(style, text = stringResource(R.string.chip_option))
             ChipsRow(style, withDropdown = true, text = stringResource(R.string.chip_dropdown))
             DismissibleChipsRow(style = style, icon = null, text = stringResource(R.string.chip_dismiss))
