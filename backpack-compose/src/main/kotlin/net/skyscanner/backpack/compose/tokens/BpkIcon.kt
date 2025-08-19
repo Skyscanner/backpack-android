@@ -21,12 +21,10 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import kotlin.collections.List
-import kotlin.properties.Delegates
 import net.skyscanner.backpack.compose.R
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIcon.Companion
 import net.skyscanner.backpack.compose.utils.singleton
+import kotlin.properties.Delegates
 
 public val BpkIcon.Companion.Accessibility: BpkIcon by Delegates.singleton(
     BpkIcon(
@@ -1932,13 +1930,6 @@ public val BpkIcon.Companion.Taxi: BpkIcon by Delegates.singleton(
     )
 )
 
-public val BpkIcon.Companion.Temperature: BpkIcon by Delegates.singleton(
-    BpkIcon(
-        name = "temperature",
-        small = R.drawable.bpk_temperature_sm,
-        large = R.drawable.bpk_temperature,
-    )
-)
 
 public val BpkIcon.Companion.ThumbsDown: BpkIcon by Delegates.singleton(
     BpkIcon(
@@ -2516,7 +2507,6 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.SwapHorizontal,
         BpkIcon.SwapVertical,
         BpkIcon.Taxi,
-        BpkIcon.Temperature,
         BpkIcon.ThumbsDown,
         BpkIcon.ThumbsUp,
         BpkIcon.Tick,
