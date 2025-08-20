@@ -1930,7 +1930,6 @@ public val BpkIcon.Companion.Taxi: BpkIcon by Delegates.singleton(
     )
 )
 
-
 public val BpkIcon.Companion.ThumbsDown: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "thumbs-down",

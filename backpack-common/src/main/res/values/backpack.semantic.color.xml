@@ -52,5 +52,4 @@
     <color name="bpkTextPrimary">#ff161616</color>
     <color name="bpkTextPrimaryInverse">#ffffffff</color>
     <color name="bpkTextSecondary">#ff626971</color>
-    <color name="bpkTextSuccess">#ff0c838a</color>
 </resources>

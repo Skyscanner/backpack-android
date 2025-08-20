@@ -28,7 +28,7 @@
       <attr name="lineHeight" />
   </declare-styleable>
 
-  <style name="bpkTextBodyDefault">
+    <style name="bpkTextBodyDefault">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextBaseSize</item>
