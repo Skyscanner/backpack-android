@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    api libs.compose.ui
+    testImplementation libs.test.junit
     implementation libs.compose.runtime
     androidTestImplementation libs.test.espressoCore
     androidTestImplementation libs.test.junit
