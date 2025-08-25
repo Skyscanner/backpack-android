@@ -20,9 +20,6 @@
 
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
-    <color name="bpkBlack">#ff010913</color>
     <color name="__privateSegmentedControlSurfaceContrastOnDay">#ff024daf</color>
     <color name="__privateSegmentedControlSurfaceContrastOnNight">#ff054184</color>
-    <color name="bpkSkyBlue">#ff0062e3</color>
-    <color name="bpkWhite">#ffffffff</color>
 </resources>

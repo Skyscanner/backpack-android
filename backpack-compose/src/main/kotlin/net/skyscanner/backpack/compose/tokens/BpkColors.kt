@@ -22,6 +22,7 @@
 package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
+import kotlin.Boolean
 
 public class BpkColors private constructor(
     public val isLight: Boolean,
@@ -57,6 +58,7 @@ public class BpkColors private constructor(
     public val textPrimary: Color,
     public val textPrimaryInverse: Color,
     public val textSecondary: Color,
+    public val textSuccess: Color,
 ) {
     internal companion object {
         public fun light(
@@ -92,6 +94,7 @@ public class BpkColors private constructor(
             textPrimary: Color = Color(0xFF161616),
             textPrimaryInverse: Color = Color(0xFFFFFFFF),
             textSecondary: Color = Color(0xFF626971),
+            textSuccess: Color = Color(0xFF0C838A),
         ): BpkColors = BpkColors(
             isLight = true,
             canvas = canvas,
@@ -126,6 +129,7 @@ public class BpkColors private constructor(
             textPrimary = textPrimary,
             textPrimaryInverse = textPrimaryInverse,
             textSecondary = textSecondary,
+            textSuccess = textSuccess,
         )
 
         public fun dark(
@@ -161,6 +165,7 @@ public class BpkColors private constructor(
             textPrimary: Color = Color(0xFFFFFFFF),
             textPrimaryInverse: Color = Color(0xFF010913),
             textSecondary: Color = Color(0xFFBDC4CB),
+            textSuccess: Color = Color(0xFF62F1C6),
         ): BpkColors = BpkColors(
             isLight = false,
             canvas = canvas,
@@ -195,6 +200,7 @@ public class BpkColors private constructor(
             textPrimary = textPrimary,
             textPrimaryInverse = textPrimaryInverse,
             textSecondary = textSecondary,
+            textSuccess = textSuccess,
         )
     }
 }
