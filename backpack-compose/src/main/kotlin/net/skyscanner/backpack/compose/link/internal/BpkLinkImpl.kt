@@ -21,9 +21,6 @@ package net.skyscanner.backpack.compose.link.internal
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -56,9 +53,7 @@ internal fun BpkLinkImpl(
     BpkText(
         text = buildAnnotatedStringFromMarkdown(text, textColor, onLinkClicked),
         style = style,
-        modifier = modifier.semantics {
-            role = Role.Button
-        },
+        modifier = modifier,
     )
 }
 
