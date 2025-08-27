@@ -21,6 +21,9 @@ package net.skyscanner.backpack.compose.link.internal
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -31,14 +34,16 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.link.BpkLinkStyle
-import net.skyscanner.backpack.compose.link.TextType
+import net.skyscanner.backpack.compose.link.TextSegment
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
+private val MARKDOWN_LINK_REGEX = Regex("\\[([^]]*)]\\(([^)]*)\\)")
+
 @Composable
 internal fun BpkLinkImpl(
-    listOfTexts: List<TextType>,
-    onLinkClicked: (Int) -> Unit,
+    text: String,
+    onLinkClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     linkStyle: BpkLinkStyle = BpkLinkStyle.Default,
@@ -48,62 +53,91 @@ internal fun BpkLinkImpl(
         BpkLinkStyle.OnContrast -> BpkTheme.colors.textOnDark
     }
 
-    val annotatedString = buildAnnotatedString {
-        listOfTexts.forEach { textType ->
-            when (textType) {
-                is TextType.RawText -> {
-                    appendRawText(textColor, textType.value)
-                }
-
-                is TextType.LinkText -> {
-                    val linkIndex = listOfTexts.filterIsInstance<TextType.LinkText>().indexOf(textType)
-                    val linkAnnotation = LinkAnnotation.Clickable(
-                        tag = "LINK_$linkIndex",
-                        linkInteractionListener = {
-                            onLinkClicked(linkIndex)
-                        },
-                    )
-                    appendClickableLink(linkAnnotation, textColor, textType.value)
-                }
-            }
-        }
-    }
-
     BpkText(
-        text = annotatedString,
+        text = buildAnnotatedStringFromMarkdown(text, textColor, onLinkClicked),
         style = style,
-        modifier = modifier,
+        modifier = modifier.semantics {
+            role = Role.Button
+        },
     )
 }
 
 @Composable
 internal fun BpkLinkImpl(
-    text: String,
-    onLinkClicked: () -> Unit,
+    segments: List<TextSegment>,
+    onLinkClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     linkStyle: BpkLinkStyle = BpkLinkStyle.Default,
 ) {
-    val textColor = when (linkStyle) {
-        BpkLinkStyle.Default -> BpkTheme.colors.textPrimary
-        BpkLinkStyle.OnContrast -> BpkTheme.colors.textOnDark
-    }
+    val markdownText = convertSegmentsToMarkdown(segments)
 
-    val annotatedString = buildAnnotatedString {
-        val linkAnnotation = LinkAnnotation.Clickable(
-            tag = "LINK",
-            linkInteractionListener = {
-                onLinkClicked()
-            },
-        )
-        appendClickableLink(linkAnnotation, textColor, text)
-    }
-
-    BpkText(
-        text = annotatedString,
-        style = style,
+    BpkLinkImpl(
+        text = markdownText,
+        onLinkClicked = onLinkClicked,
         modifier = modifier,
+        style = style,
+        linkStyle = linkStyle,
     )
+}
+
+@Composable
+private fun buildAnnotatedStringFromMarkdown(
+    text: String,
+    textColor: Color,
+    onLinkClicked: (String) -> Unit,
+): AnnotatedString {
+    return buildAnnotatedString {
+        val linkMatches = MARKDOWN_LINK_REGEX.findAll(text).toList()
+
+        if (linkMatches.isEmpty()) {
+            appendRawText(textColor, text)
+        } else {
+            var currentIndex = 0
+
+            linkMatches.forEachIndexed { linkIndex, match ->
+                if (match.range.first > currentIndex) {
+                    appendRawText(textColor, text.substring(currentIndex, match.range.first))
+                }
+
+                appendLinkText(match, linkIndex, onLinkClicked, textColor)
+
+                currentIndex = match.range.last + 1
+            }
+
+            if (currentIndex < text.length) {
+                appendRawText(textColor, text.substring(currentIndex))
+            }
+        }
+    }
+}
+
+@Composable
+private fun AnnotatedString.Builder.appendLinkText(
+    match: MatchResult,
+    linkIndex: Int,
+    onLinkClicked: (String) -> Unit,
+    textColor: Color,
+) {
+    val linkText = match.groupValues.getOrNull(1) ?: ""
+    val url = match.groupValues.getOrNull(2) ?: ""
+
+    if (linkText.isNotEmpty() || url.isNotEmpty()) {
+        val linkAnnotation = LinkAnnotation.Clickable(
+            tag = "LINK_$linkIndex",
+            linkInteractionListener = { onLinkClicked(url) },
+        )
+        withLink(linkAnnotation) {
+            withStyle(
+                SpanStyle(
+                    color = textColor,
+                    textDecoration = TextDecoration.Underline,
+                ),
+            ) {
+                append(linkText)
+            }
+        }
+    }
 }
 
 @Composable
@@ -111,27 +145,14 @@ private fun AnnotatedString.Builder.appendRawText(
     textColor: Color,
     text: String,
 ) {
-    withStyle(
-        SpanStyle(color = textColor),
-    ) {
+    withStyle(SpanStyle(color = textColor)) {
         append(text)
     }
 }
 
-@Composable
-private fun AnnotatedString.Builder.appendClickableLink(
-    linkAnnotation: LinkAnnotation.Clickable,
-    textColor: Color,
-    text: String,
-) {
-    withLink(linkAnnotation) {
-        withStyle(
-            SpanStyle(
-                color = textColor,
-                textDecoration = TextDecoration.Underline,
-            ),
-        ) {
-            append(text)
-        }
+private fun convertSegmentsToMarkdown(segments: List<TextSegment>): String = segments.joinToString("") { segment ->
+    when (segment) {
+        is TextSegment.Text -> segment.content
+        is TextSegment.Link -> "[${segment.text}](${segment.url})"
     }
 }

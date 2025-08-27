@@ -24,39 +24,32 @@ import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.link.internal.BpkLinkImpl
 
-sealed class TextType {
-    abstract val value: String
-
-    data class RawText(override val value: String) : TextType()
-    data class LinkText(override val value: String) : TextType()
-}
-
 enum class BpkLinkStyle {
     Default,
     OnContrast,
 }
 
-@Composable
-fun BpkLink(
-    text: List<TextType>,
-    onLinkClicked: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    textStyle: TextStyle = LocalTextStyle.current,
-    style: BpkLinkStyle = BpkLinkStyle.Default,
-) {
-    BpkLinkImpl(
-        listOfTexts = text,
-        onLinkClicked = onLinkClicked,
-        modifier = modifier,
-        style = textStyle,
-        linkStyle = style,
-    )
+/**
+ * Represents a segment of text that can be either plain text or a clickable link.
+ */
+sealed class TextSegment {
+    data class Text(val content: String) : TextSegment()
+    data class Link(val text: String, val url: String) : TextSegment()
 }
 
+/**
+ * BpkLink component for displaying text with clickable links using markdown syntax.
+ *
+ * @param text The text containing markdown-style links [text](url)
+ * @param onLinkClicked Callback invoked when a link is clicked, receives the URL
+ * @param modifier The modifier to be applied to the composable
+ * @param textStyle The style to be applied to the text
+ * @param style The visual style of the link (Default or OnContrast)
+ */
 @Composable
 fun BpkLink(
     text: String,
-    onLinkClicked: () -> Unit,
+    onLinkClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = LocalTextStyle.current,
     style: BpkLinkStyle = BpkLinkStyle.Default,
@@ -68,4 +61,42 @@ fun BpkLink(
         style = textStyle,
         linkStyle = style,
     )
+}
+
+/**
+ * BpkLink component for displaying text with clickable links using type-safe segments.
+ *
+ * @param segments The list of text segments (plain text and links), you can use [buildTextSegments] to create it
+ * @param onLinkClicked Callback invoked when a link is clicked, receives the URL
+ * @param modifier The modifier to be applied to the composable
+ * @param textStyle The style to be applied to the text
+ * @param style The visual style of the link (Default or OnContrast)
+ */
+@Composable
+fun BpkLink(
+    segments: List<TextSegment>,
+    onLinkClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    textStyle: TextStyle = LocalTextStyle.current,
+    style: BpkLinkStyle = BpkLinkStyle.Default,
+) {
+    BpkLinkImpl(
+        segments = segments,
+        onLinkClicked = onLinkClicked,
+        modifier = modifier,
+        style = textStyle,
+        linkStyle = style,
+    )
+}
+
+fun buildTextSegments(
+    autoSpace: Boolean = false,
+    block: TextSegmentBuilder.() -> Unit,
+): List<TextSegment> {
+    val segments = TextSegmentBuilder().apply(block).build()
+    return if (autoSpace) {
+        addSpacingBetweenSegments(segments)
+    } else {
+        segments
+    }
 }

@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.link.BpkLink
 import net.skyscanner.backpack.compose.link.BpkLinkStyle
-import net.skyscanner.backpack.compose.link.TextType
+import net.skyscanner.backpack.compose.link.buildTextSegments
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -77,12 +77,12 @@ private fun StoryContent(
         }
     }
     val cases = listOf<@Composable () -> Unit>(
-        { SimpleLinkExample(style = style, onNotification = showNotification) },
-        { SimpleLinkWithoutUrlExample(style = style, onNotification = showNotification) },
-        { MixedTextWithLinksExample(style = style, onNotification = showNotification) },
-        { MultipleLinksInParagraphExample(style = style, onNotification = showNotification) },
-        { LinkHeadingExample(style = style, onNotification = showNotification) },
-        { LinkCaptionExample(style = style, onNotification = showNotification) },
+        { SingleLinkExample(style = style, onNotification = showNotification) },
+        { LinkWithoutUrlExample(style = style, onNotification = showNotification) },
+        { TextWithMultipleLinksExample(style = style, onNotification = showNotification) },
+        { TypeSafeBuilderExample(style = style, onNotification = showNotification) },
+        { PriceLinksExample(style = style, onNotification = showNotification) },
+        { TextStyleVariationsExample(style = style, onNotification = showNotification) },
     )
     LazyColumn(
         modifier = modifier.padding(BpkSpacing.Base),
@@ -124,13 +124,12 @@ private fun LinkExample(
 }
 
 @Composable
-internal fun SimpleLinkExample(
+internal fun SingleLinkExample(
     modifier: Modifier = Modifier,
     style: BpkLinkStyle = BpkLinkStyle.Default,
     onNotification: (String) -> Unit = {},
 ) {
     val notificationTemplate = stringResource(R.string.link_story_notification_opening)
-    val url = stringResource(R.string.link_story_simple_example_url)
 
     LinkExample(
         title = stringResource(R.string.link_story_simple_example_title),
@@ -138,11 +137,9 @@ internal fun SimpleLinkExample(
         style = style,
     ) {
         BpkLink(
-            text = listOf(
-                TextType.LinkText(stringResource(R.string.link_story_simple_example_text)),
-            ),
+            text = stringResource(R.string.link_story_simple_example_text),
             style = style,
-            onLinkClicked = { _ ->
+            onLinkClicked = { url ->
                 onNotification(notificationTemplate.format(url))
             },
         )
@@ -150,7 +147,7 @@ internal fun SimpleLinkExample(
 }
 
 @Composable
-internal fun SimpleLinkWithoutUrlExample(
+internal fun LinkWithoutUrlExample(
     modifier: Modifier = Modifier,
     style: BpkLinkStyle = BpkLinkStyle.Default,
     onNotification: (String) -> Unit = {},
@@ -165,58 +162,25 @@ internal fun SimpleLinkWithoutUrlExample(
         BpkLink(
             text = stringResource(R.string.link_story_simple_without_url_text),
             style = style,
-            onLinkClicked = {
-                onNotification(clickedMessage)
+            onLinkClicked = { url ->
+                val message = if (url.isEmpty()) {
+                    "$clickedMessage (empty URL)"
+                } else {
+                    clickedMessage
+                }
+                onNotification(message)
             },
         )
     }
 }
 
 @Composable
-internal fun MixedTextWithLinksExample(
+internal fun TextWithMultipleLinksExample(
     modifier: Modifier = Modifier,
     style: BpkLinkStyle = BpkLinkStyle.Default,
     onNotification: (String) -> Unit = {},
 ) {
     val openingTemplate = stringResource(R.string.link_story_notification_opening)
-    val urls = listOf(
-        stringResource(R.string.link_story_mixed_text_url1),
-        stringResource(R.string.link_story_mixed_text_url2),
-    )
-
-    LinkExample(
-        title = stringResource(R.string.link_story_mixed_text_title),
-        modifier = modifier,
-        style = style,
-    ) {
-        BpkLink(
-            text = listOf(
-                TextType.RawText(stringResource(R.string.link_story_mixed_text_raw_start)),
-                TextType.LinkText(stringResource(R.string.link_story_mixed_text_link1)),
-                TextType.RawText(stringResource(R.string.link_story_mixed_text_raw_middle)),
-                TextType.LinkText(stringResource(R.string.link_story_mixed_text_link2)),
-                TextType.RawText(stringResource(R.string.link_story_mixed_text_raw_end)),
-            ),
-            style = style,
-            onLinkClicked = { index ->
-                onNotification(openingTemplate.format(urls[index]))
-            },
-        )
-    }
-}
-
-@Composable
-internal fun MultipleLinksInParagraphExample(
-    modifier: Modifier = Modifier,
-    style: BpkLinkStyle = BpkLinkStyle.Default,
-    onNotification: (String) -> Unit = {},
-) {
-    val openingTemplate = stringResource(R.string.link_story_notification_opening)
-    val urls = listOf(
-        stringResource(R.string.link_story_terms_url1),
-        stringResource(R.string.link_story_terms_url2),
-        stringResource(R.string.link_story_terms_url3),
-    )
 
     LinkExample(
         title = stringResource(R.string.link_story_terms_title),
@@ -224,71 +188,125 @@ internal fun MultipleLinksInParagraphExample(
         style = style,
     ) {
         BpkLink(
-            text = listOf(
-                TextType.RawText(stringResource(R.string.link_story_terms_raw_start)),
-                TextType.LinkText(stringResource(R.string.link_story_terms_link1)),
-                TextType.RawText(stringResource(R.string.link_story_terms_raw_middle)),
-                TextType.LinkText(stringResource(R.string.link_story_terms_link2)),
-                TextType.RawText(stringResource(R.string.link_story_terms_raw_middle2)),
-                TextType.LinkText(stringResource(R.string.link_story_terms_link3)),
-                TextType.RawText(stringResource(R.string.link_story_terms_raw_end)),
-            ),
+            text = stringResource(R.string.link_story_terms_full),
             style = style,
-            onLinkClicked = { index ->
-                onNotification(openingTemplate.format(urls[index]))
+            onLinkClicked = { url ->
+                onNotification(openingTemplate.format(url))
             },
         )
     }
 }
 
 @Composable
-internal fun LinkHeadingExample(
-    modifier: Modifier = Modifier,
-    style: BpkLinkStyle = BpkLinkStyle.Default,
-    onNotification: (String) -> Unit = {},
-) {
-    val url = stringResource(R.string.link_story_price_example_url)
-
-    LinkExample(
-        title = stringResource(R.string.link_story_link_heading_title),
-        modifier = modifier,
-        style = style,
-    ) {
-        BpkLink(
-            text = stringResource(R.string.link_story_price_example_link),
-            textStyle = BpkTheme.typography.heading4,
-            style = style,
-            onLinkClicked = {
-                onNotification(url)
-            },
-        )
-    }
-}
-
-@Composable
-internal fun LinkCaptionExample(
+internal fun TypeSafeBuilderExample(
     modifier: Modifier = Modifier,
     style: BpkLinkStyle = BpkLinkStyle.Default,
     onNotification: (String) -> Unit = {},
 ) {
     val openingTemplate = stringResource(R.string.link_story_notification_opening)
-    val url = stringResource(R.string.link_story_styled_text_url)
+    val searchPrefix = stringResource(R.string.link_story_search_prefix)
+    val flightsText = stringResource(R.string.link_story_flights_text)
+    val commaSeparator = stringResource(R.string.link_story_comma_separator)
+    val hotelsText = stringResource(R.string.link_story_hotels_text)
+    val andSeparator = stringResource(R.string.link_story_and_separator)
+    val carsText = stringResource(R.string.link_story_cars_text)
+    val searchSuffix = stringResource(R.string.link_story_search_suffix)
+    val flightsUrl = stringResource(R.string.link_story_url_flights)
+    val hotelsUrl = stringResource(R.string.link_story_url_hotels)
+    val carsUrl = stringResource(R.string.link_story_url_cars)
 
     LinkExample(
-        title = stringResource(R.string.link_story_link_caption_title),
+        title = stringResource(R.string.link_story_builder_title),
         modifier = modifier,
         style = style,
     ) {
         BpkLink(
-            text = listOf(
-                TextType.RawText(stringResource(R.string.link_story_styled_text_raw)),
-                TextType.LinkText(stringResource(R.string.link_story_styled_text_link)),
-            ),
-            textStyle = BpkTheme.typography.caption,
+            segments = buildTextSegments(autoSpace = true) {
+                text(searchPrefix)
+                link(flightsText, flightsUrl)
+                text(commaSeparator)
+                link(hotelsText, hotelsUrl)
+                text(andSeparator)
+                link(carsText, carsUrl)
+                text(searchSuffix)
+            },
             style = style,
-            onLinkClicked = { _ ->
+            onLinkClicked = { url ->
                 onNotification(openingTemplate.format(url))
             },
         )
+    }
+}
+
+@Composable
+internal fun PriceLinksExample(
+    modifier: Modifier = Modifier,
+    style: BpkLinkStyle = BpkLinkStyle.Default,
+    onNotification: (String) -> Unit = {},
+) {
+    val openingTemplate = stringResource(R.string.link_story_notification_opening)
+
+    LinkExample(
+        title = stringResource(R.string.link_story_price_links_title),
+        modifier = modifier,
+        style = style,
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm)) {
+            BpkLink(
+                text = stringResource(R.string.link_story_price_flight_markdown),
+                style = style,
+                onLinkClicked = { url -> onNotification(openingTemplate.format(url)) },
+            )
+
+            BpkLink(
+                text = stringResource(R.string.link_story_hotel_deals_markdown),
+                style = style,
+                onLinkClicked = { url -> onNotification(openingTemplate.format(url)) },
+            )
+        }
+    }
+}
+
+@Composable
+internal fun TextStyleVariationsExample(
+    modifier: Modifier = Modifier,
+    style: BpkLinkStyle = BpkLinkStyle.Default,
+    onNotification: (String) -> Unit = {},
+) {
+    val openingTemplate = stringResource(R.string.link_story_notification_opening)
+    val termsPrefix = stringResource(R.string.link_story_terms_prefix)
+    val termsText = stringResource(R.string.link_story_terms_text)
+    val termsUrl = stringResource(R.string.link_story_url_terms)
+
+    LinkExample(
+        title = stringResource(R.string.link_story_text_styles_title),
+        modifier = modifier,
+        style = style,
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm)) {
+            BpkLink(
+                text = stringResource(R.string.link_story_flight_deal_link),
+                textStyle = BpkTheme.typography.heading4,
+                style = style,
+                onLinkClicked = { url -> onNotification(openingTemplate.format(url)) },
+            )
+
+            BpkLink(
+                text = stringResource(R.string.link_story_guarantee_link),
+                textStyle = BpkTheme.typography.bodyDefault,
+                style = style,
+                onLinkClicked = { url -> onNotification(openingTemplate.format(url)) },
+            )
+
+            BpkLink(
+                segments = buildTextSegments {
+                    text(termsPrefix)
+                    link(termsText, termsUrl)
+                },
+                textStyle = BpkTheme.typography.caption,
+                style = style,
+                onLinkClicked = { url -> onNotification(openingTemplate.format(url)) },
+            )
+        }
     }
 }

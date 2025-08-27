@@ -16,117 +16,82 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-The Link component is designed to display clickable text links within text content. It supports both simple links and mixed text with multiple links.
+The Link component supports two approaches for creating clickable text:
 
-### Simple Link with Mixed Text
+### Markdown Strings
 
-For a single clickable link, you can use the mixed text approach:
+Use familiar `[text](url)` syntax for simple cases:
 
 ```Kotlin
 BpkLink(
-    text = listOf(
-        TextType.LinkText("Terms and Conditions", "https://www.skyscanner.net/terms")
-    ),
+    text = "Visit [Skyscanner](https://www.skyscanner.net) for great deals",
     onLinkClicked = { url ->
-        // Handle link click
         webView.loadUrl(url)
     }
 )
 ```
 
-### Simple Link (without URL)
+### Type-Safe Builder
+
+Use `buildTextSegments` for programmatic construction:
 
 ```Kotlin
 BpkLink(
-    text = "Click here",
-    onLinkClicked = {
-        // Handle click action without URL
-        navigateToScreen()
-    }
-)
-```
-
-### Mixed Text with Links
-
-For paragraphs containing both regular text and clickable links:
-
-```Kotlin
-BpkLink(
-    text = listOf(
-        TextType.RawText("By signing up, you agree to our "),
-        TextType.LinkText("Terms of Service", "https://www.skyscanner.net/terms"),
-        TextType.RawText(" and "),
-        TextType.LinkText("Privacy Policy", "https://www.skyscanner.net/privacy"),
-    ),
+    segments = buildTextSegments {
+        text("Explore ")
+        link("flights", "https://www.skyscanner.net/flights")
+        text(" and ")
+        link("hotels", "https://www.skyscanner.net/hotels")
+    },
     onLinkClicked = { url ->
-        // Handle link clicks
         webView.loadUrl(url)
     }
 )
 ```
+
 
 ### Link Styles
 
-The component supports two visual styles:
-
 ```Kotlin
-// Default style (for light backgrounds)
+// Default style (light backgrounds)
 BpkLink(
-    text = listOf(
-        TextType.LinkText("Default Link", "https://www.skyscanner.net")
-    ),
+    text = "[Link](https://example.com)",
     style = BpkLinkStyle.Default,
-    onLinkClicked = { url -> /* Handle click */ }
+    onLinkClicked = { url -> webView.loadUrl(url) }
 )
 
-// On contrast style (for dark backgrounds)
+// OnContrast style (dark backgrounds)
 BpkLink(
-    text = "Contrast Link",
+    text = "[Link](https://example.com)",
     style = BpkLinkStyle.OnContrast,
-    onLinkClicked = { /* Handle click without URL */ }
+    onLinkClicked = { url -> webView.loadUrl(url) }
 )
 ```
 
 ## Parameters
 
-### BpkLink (with list of texts)
-
-| Property | PropType | Required | Default Value |
-| -------- | -------- | -------- | ------------- |
-| text | List<TextType> | ✓ | - |
-| onLinkClicked | (Int) -> Unit | ✓ | - |
-| modifier | Modifier | - | Modifier |
-| textStyle | TextStyle | - | LocalTextStyle.current |
-| style | BpkLinkStyle | - | BpkLinkStyle.Default |
-
-### BpkLink (simple text)
-
 | Property | PropType | Required | Default Value |
 | -------- | -------- | -------- | ------------- |
 | text | String | ✓ | - |
-| onLinkClicked | () -> Unit | ✓ | - |
+| segments | List<TextSegment> | ✓ | - |
+| onLinkClicked | (String) -> Unit | ✓ | - |
 | modifier | Modifier | - | Modifier |
 | textStyle | TextStyle | - | LocalTextStyle.current |
 | style | BpkLinkStyle | - | BpkLinkStyle.Default |
 
-## TextType Sealed Class
+*Note: Use either `text` for markdown or `segments` for type-safe builder approach.*
 
-The `TextType` sealed class is used to define different types of text content:
+## buildTextSegments
+
+The `buildTextSegments` function provides a type-safe DSL for creating text with links:
 
 ```Kotlin
-sealed class TextType {
-    abstract val value: String
-
-    data class RawText(override val value: String) : TextType()
-    data class LinkText(
-        override val value: String,
-        val url: String,
-    ) : TextType()
+buildTextSegments {
+    text("Visit ")           // Plain text
+    link("Skyscanner", url)  // Clickable link  
+    text(" for deals")
 }
 ```
-
-- **RawText**: Regular, non-clickable text
-- **LinkText**: Clickable text with an associated URL
 
 ## BpkLinkStyle Enum
 
@@ -141,7 +106,8 @@ enum class BpkLinkStyle {
 
 The component automatically handles accessibility by:
 
-- Setting the appropriate semantic role as `Role.Button`
+- Setting the appropriate semantic role for clickable text
 - Providing content descriptions for screen readers
-- Supporting proper click actions
+- Supporting proper click actions and focus handling
 - Following platform accessibility guidelines
+- Maintaining text contrast ratios for both link styles
