@@ -41,7 +41,7 @@ sealed class TextSegment {
  * BpkLink component for displaying text with clickable links using markdown syntax.
  *
  * @param text The text containing markdown-style links [text](url)
- * @param onLinkClicked Callback invoked when a link is clicked, receives the URL
+ * @param onLinkClicked Callback invoked when a link is clicked, receives the URL.
  * @param modifier The modifier to be applied to the composable
  * @param textStyle The style to be applied to the text
  * @param style The visual style of the link (Default or OnContrast)
