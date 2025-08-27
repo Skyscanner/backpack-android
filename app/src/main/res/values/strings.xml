@@ -418,4 +418,43 @@
     <string name="calendar_month_selected" translatable="false">Whole month selected %1$s</string>
     <string name="calendar_single_selected" translatable="false">Single date selected %1$s</string>
 
+    <!-- Link Story Examples -->
+    <string name="link_story_simple_example_title">Simple Link</string>
+    <string name="link_story_simple_example_text">Visit Skyscanner</string>
+    <string name="link_story_simple_example_url" translatable="false">https://www.skyscanner.net</string>
+    <string name="link_story_simple_without_url_title">Link without URL</string>
+    <string name="link_story_simple_without_url_text">Click me</string>
+    <string name="link_story_mixed_text_title">Mixed Text with Links</string>
+    <string name="link_story_mixed_text_raw_start">"This is normal text with a "</string>
+    <string name="link_story_mixed_text_link1">link</string>
+    <string name="link_story_mixed_text_raw_middle">" in the middle and another "</string>
+    <string name="link_story_mixed_text_link2">link</string>
+    <string name="link_story_mixed_text_raw_end">" at the end."</string>
+    <string name="link_story_mixed_text_url1" translatable="false">https://www.skyscanner.net</string>
+    <string name="link_story_mixed_text_url2" translatable="false">https://www.backpack.com</string>
+    <string name="link_story_contrast_title">Link on Contrast Background</string>
+    <string name="link_story_contrast_text">Link on dark background</string>
+    <string name="link_story_contrast_url" translatable="false">https://www.skyscanner.net</string>
+    <string name="link_story_terms_title">Terms and Conditions Paragraph</string>
+    <string name="link_story_terms_raw_start">"By clicking \"Accept\" you agree to our "</string>
+    <string name="link_story_terms_link1">Terms of Service</string>
+    <string name="link_story_terms_raw_middle">" and "</string>
+    <string name="link_story_terms_link2">Privacy Policy</string>
+    <string name="link_story_terms_raw_middle2">". You also acknowledge that you have read our "</string>
+    <string name="link_story_terms_link3">Cookie Policy</string>
+    <string name="link_story_terms_raw_end">.</string>
+    <string name="link_story_terms_url1" translatable="false">https://www.skyscanner.net/terms</string>
+    <string name="link_story_terms_url2" translatable="false">https://www.skyscanner.net/privacy</string>
+    <string name="link_story_terms_url3" translatable="false">https://www.skyscanner.net/cookies</string>
+    <string name="link_story_notification_opening">Opening: %1$s</string>
+    <string name="link_story_notification_clicked">Link clicked!</string>
+    <string name="link_story_link_heading_title">Link Heading 4</string>
+    <string name="link_story_price_example_text">"Book now for "</string>
+    <string name="link_story_price_example_link">£1,367</string>
+    <string name="link_story_price_example_url" translatable="false">https://www.skyscanner.net/book</string>
+    <string name="link_story_link_caption_title">Link with Caption</string>
+    <string name="link_story_styled_text_raw">"Find great deals starting from "</string>
+    <string name="link_story_styled_text_link">£1,367 per person</string>
+    <string name="link_story_styled_text_url" translatable="false">https://www.skyscanner.net/deals</string>
+
 </resources>
