@@ -418,4 +418,46 @@
     <string name="calendar_month_selected" translatable="false">Whole month selected %1$s</string>
     <string name="calendar_single_selected" translatable="false">Single date selected %1$s</string>
 
+    <!-- Link Story Examples -->
+    <string name="link_story_simple_example_title">Simple Link</string>
+    <string name="link_story_simple_example_text">[Visit Skyscanner](https://www.skyscanner.net)</string>
+    <string name="link_story_simple_without_url_title">Link without URL</string>
+    <string name="link_story_simple_without_url_text">[Click me]()</string>
+    <string name="link_story_mixed_text_title">Mixed Text with Links</string>
+    <string name="link_story_mixed_text_full">This is normal text with a [link](https://www.skyscanner.net) in the middle and another [link](https://www.backpack.com) at the end.</string>
+    <string name="link_story_contrast_title">Link on Contrast Background</string>
+    <string name="link_story_contrast_text">Link on dark background</string>
+    <string name="link_story_terms_title">Terms and Conditions Paragraph</string>
+    <string name="link_story_terms_full">By clicking Accept you agree to our [Terms of Service](https://www.skyscanner.net/terms) and [Privacy Policy](https://www.skyscanner.net/privacy). You also acknowledge that you have read our [Cookie Policy](https://www.skyscanner.net/cookies).</string>
+    <string name="link_story_notification_opening">Opening: %1$s</string>
+    <string name="link_story_notification_clicked">Link clicked!</string>
+    <string name="link_story_link_heading_title">Link Heading 4</string>
+    <string name="link_story_price_example_link">[£1,367](https://www.skyscanner.net/book)</string>
+    <string name="link_story_link_caption_title">Link with Caption</string>
+    <string name="link_story_styled_text_full">Find great deals starting from [£1,367 per person](https://www.skyscanner.net/deals)</string>
+
+    <!-- New Link Story Examples -->
+    <string name="link_story_builder_title">Type-Safe Builder</string>
+    <string name="link_story_price_links_title">Price Links</string>
+    <string name="link_story_text_styles_title">Different Text Styles</string>
+    <string name="link_story_price_flight_markdown">From [£99](https://book.flight/99) London to Paris</string>
+    <string name="link_story_flight_deal_link">[£299 Flight Deal](https://deals.com/flight)</string>
+    <string name="link_story_guarantee_link">[Best Price Guarantee](https://guarantee.com)</string>
+    <string name="link_story_search_prefix">Search</string>
+    <string name="link_story_flights_text">flights</string>
+    <string name="link_story_comma_separator">,</string>
+    <string name="link_story_hotels_text">hotels</string>
+    <string name="link_story_and_separator">,and</string>
+    <string name="link_story_cars_text">cars</string>
+    <string name="link_story_search_suffix">in one place.</string>
+    <string name="link_story_hotel_deals_markdown">Hotel deals from [£149](https://book.hotel/149) per night</string>
+    <string name="link_story_terms_prefix">* </string>
+    <string name="link_story_terms_text">Terms apply</string>
+    <string name="link_story_url_flights">https://www.skyscanner.net/flights</string>
+    <string name="link_story_url_hotels">https://www.skyscanner.net/hotels</string>
+    <string name="link_story_url_cars">https://www.skyscanner.net/cars</string>
+    <string name="link_story_url_hotel_booking">https://book.hotel/149</string>
+    <string name="link_story_url_terms">https://terms.com</string>
+    <string name="link_story_hotel_price_accessibility">one hundred and forty-nine pounds</string>
+
 </resources>
