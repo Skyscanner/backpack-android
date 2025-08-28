@@ -18,10 +18,30 @@
 
 package net.skyscanner.backpack.configuration
 
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import net.skyscanner.backpack.common.R
+
 object BpkConfiguration {
     sealed class BpkExperimentalComponent {
 
-        data object BpkButton : BpkExperimentalComponent()
+        data class BpkButton(
+            val legacyStyle: LegacyStyle? = null,
+            val backgroundColor: Color? = null,
+        ) : BpkExperimentalComponent() {
+            data class LegacyStyle(
+                @ColorInt val bgColor: Int,
+                @ColorInt val bgPressedColor: Int,
+                @ColorInt val bgLoadingColor: Int,
+                @ColorInt val bgDisabledColor: Int,
+                @ColorInt val contentColor: Int,
+                @ColorInt val contentPressedColor: Int,
+                @ColorInt val contentDisabledColor: Int,
+                @ColorInt val contentLoadingColor: Int,
+                @ColorInt val rippleColor: Int,
+            )
+        }
 
         data object BpkText : BpkExperimentalComponent()
 
@@ -31,6 +51,8 @@ object BpkConfiguration {
     }
 
     private var _hasSet: Boolean = false
+
+    var logging: (() -> Unit)? = null
 
     fun setConfigs(
         chipConfig: Boolean = false,
@@ -46,7 +68,10 @@ object BpkConfiguration {
             this.chipConfig = BpkExperimentalComponent.BpkChip
         }
         if (buttonConfig) {
-            this.buttonConfig = BpkExperimentalComponent.BpkButton
+            this.buttonConfig = BpkExperimentalComponent.BpkButton(
+                null,
+                colorResource(R.color.bpkTextSuccess),
+            )
         }
         if (textConfig) {
             this.textConfig = BpkExperimentalComponent.BpkText
@@ -58,6 +83,11 @@ object BpkConfiguration {
 
     var chipConfig: BpkExperimentalComponent.BpkChip? = null
         private set
+
+    fun performLogging() {
+        logging?.invoke()
+        logging = null
+    }
 
     var buttonConfig: BpkExperimentalComponent.BpkButton? = null
         private set

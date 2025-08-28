@@ -26,6 +26,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @Composable
 internal fun BpkButtonType.disabledBackgroundColor(): Color =
@@ -68,7 +69,7 @@ internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource)
 private fun BpkButtonType.defaultBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryNormalBackground
-        BpkButtonType.Secondary -> BpkButtonColors.secondaryNormalBackground
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.backgroundColor.also { BpkConfiguration.performLogging() } ?: BpkButtonColors.secondaryNormalBackground
         BpkButtonType.Featured -> BpkButtonColors.featuredNormalBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkNormalBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightNormalBackground

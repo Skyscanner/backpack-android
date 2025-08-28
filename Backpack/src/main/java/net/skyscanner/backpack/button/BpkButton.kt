@@ -27,6 +27,7 @@ import androidx.annotation.Dimension
 import androidx.annotation.IntDef
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.withTranslation
+import androidx.core.view.doOnAttach
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
@@ -41,7 +42,9 @@ import net.skyscanner.backpack.button.internal.horizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.runOnFirstVisible
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 import kotlin.math.roundToInt
@@ -154,6 +157,11 @@ open class BpkButton(
         updateSize()
         applyStyle(style)
         BpkText.getFont(context, BpkText.TextStyle.Label1).applyTo(this)
+        doOnAttach {
+            runOnFirstVisible {
+                BpkConfiguration.performLogging()
+            }
+        }
     }
 
     override fun setEnabled(enabled: Boolean) {
