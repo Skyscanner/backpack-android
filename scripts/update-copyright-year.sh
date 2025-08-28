@@ -1,7 +1,7 @@
 #!/bin/bash
 # Backpack for Android - Skyscanner's Design System
 #
-# Copyright 2025 Skyscanner Ltd
+# Copyright 2018 - 2025 Skyscanner Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,68 +22,84 @@ set -e
 
 # Get current year or use provided year
 CURRENT_YEAR=${1:-$(date +%Y)}
-OLD_YEAR="2018"
+START_YEAR="2018"
+OLD_PATTERN_1="Copyright $START_YEAR Skyscanner Ltd"
+OLD_PATTERN_2="Copyright $CURRENT_YEAR Skyscanner Ltd"
+NEW_PATTERN="Copyright $START_YEAR - $CURRENT_YEAR Skyscanner Ltd"
 
-echo "Updating copyright from $OLD_YEAR to $CURRENT_YEAR..."
+echo "Updating copyright to range format: $NEW_PATTERN..."
 
-# Check if update is needed
-if [ "$OLD_YEAR" == "$CURRENT_YEAR" ]; then
-    echo "Copyright year is already current ($CURRENT_YEAR). No update needed."
+# Check if update is needed - look for files that don't already have the correct range format
+FILES_WITH_TARGET_PATTERN=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "$NEW_PATTERN" {} \; 2>/dev/null | wc -l)
+FILES_WITH_COPYRIGHT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright.*Skyscanner Ltd" {} \; 2>/dev/null | wc -l)
+
+if [ "$FILES_WITH_TARGET_PATTERN" -eq "$FILES_WITH_COPYRIGHT" ]; then
+    echo "Copyright format is already up to date ($NEW_PATTERN). No update needed."
     exit 0
 fi
 
 # Count files before update
-echo "Counting files with old copyright..."
-OLD_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright $OLD_YEAR Skyscanner Ltd" {} \; 2>/dev/null | wc -l)
-echo "Found $OLD_COUNT files with Copyright $OLD_YEAR"
+echo "Counting files that need copyright format update..."
+OLD_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -L "$NEW_PATTERN" {} \; 2>/dev/null | wc -l)
+echo "Found $OLD_COUNT files that need copyright format update"
 
 # Update Java/Kotlin files (/* */ comments)
-echo "Updating Java/Kotlin files..."
-find . -type f \( -name '*.kt' -o -name '*.java' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright $OLD_YEAR Skyscanner Ltd" {} \; 2>/dev/null | \
+echo "Updating Java/Kotlin files to range format..."
+find . -type f \( -name '*.kt' -o -name '*.java' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -L "$NEW_PATTERN" {} \; 2>/dev/null | \
 while read -r file; do
     echo "Updating: $file"
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        # macOS sed - handle both variants
-        sed -i '' "s/ \* Copyright $OLD_YEAR Skyscanner Ltd/ * Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
-        sed -i '' "s/\* Copyright $OLD_YEAR Skyscanner Ltd/* Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
+        # macOS sed - replace any Copyright YYYY pattern with the range format
+        sed -i '' "s/ \* Copyright [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$file"
+        sed -i '' "s/\* Copyright [0-9]\{4\} Skyscanner Ltd/* $NEW_PATTERN/g" "$file"
+        sed -i '' "s/ \* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$file"
+        sed -i '' "s/\* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/* $NEW_PATTERN/g" "$file"
     else
-        # GNU sed - handle both variants  
-        sed -i "s/ \* Copyright $OLD_YEAR Skyscanner Ltd/ * Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
-        sed -i "s/\* Copyright $OLD_YEAR Skyscanner Ltd/* Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
+        # GNU sed - replace any Copyright YYYY pattern with the range format
+        sed -i "s/ \* Copyright [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$file"
+        sed -i "s/\* Copyright [0-9]\{4\} Skyscanner Ltd/* $NEW_PATTERN/g" "$file"
+        sed -i "s/ \* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$file"
+        sed -i "s/\* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/* $NEW_PATTERN/g" "$file"
     fi
 done
 
 # Update Shell script files (# comments)  
-echo "Updating Shell files..."
-find . -type f -name '*.sh' ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright $OLD_YEAR Skyscanner Ltd" {} \; 2>/dev/null | \
+echo "Updating Shell files to range format..."
+find . -type f -name '*.sh' ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -L "$NEW_PATTERN" {} \; 2>/dev/null | \
 while read -r file; do
     echo "Updating: $file"
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        # macOS sed
-        sed -i '' "s/# Copyright $OLD_YEAR Skyscanner Ltd/# Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
+        # macOS sed - replace any Copyright YYYY pattern with the range format
+        sed -i '' "s/# Copyright [0-9]\{4\} Skyscanner Ltd/# $NEW_PATTERN/g" "$file"
+        sed -i '' "s/# Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/# $NEW_PATTERN/g" "$file"
     else
-        # GNU sed
-        sed -i "s/# Copyright $OLD_YEAR Skyscanner Ltd/# Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$file"
+        # GNU sed - replace any Copyright YYYY pattern with the range format
+        sed -i "s/# Copyright [0-9]\{4\} Skyscanner Ltd/# $NEW_PATTERN/g" "$file"
+        sed -i "s/# Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/# $NEW_PATTERN/g" "$file"
     fi
 done
 
 # Update copyright template file
 COPYRIGHT_TEMPLATE="buildSrc/src/main/resources/copyright.txt"
 if [ -f "$COPYRIGHT_TEMPLATE" ]; then
-    echo "Updating copyright template: $COPYRIGHT_TEMPLATE"
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/ \* Copyright $OLD_YEAR Skyscanner Ltd/ * Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$COPYRIGHT_TEMPLATE"
-    else
-        sed -i "s/ \* Copyright $OLD_YEAR Skyscanner Ltd/ * Copyright $CURRENT_YEAR Skyscanner Ltd/g" "$COPYRIGHT_TEMPLATE"
+    if ! grep -q "$NEW_PATTERN" "$COPYRIGHT_TEMPLATE"; then
+        echo "Updating copyright template: $COPYRIGHT_TEMPLATE"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' "s/ \* Copyright [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$COPYRIGHT_TEMPLATE"
+            sed -i '' "s/ \* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$COPYRIGHT_TEMPLATE"
+        else
+            sed -i "s/ \* Copyright [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$COPYRIGHT_TEMPLATE"
+            sed -i "s/ \* Copyright [0-9]\{4\} - [0-9]\{4\} Skyscanner Ltd/ * $NEW_PATTERN/g" "$COPYRIGHT_TEMPLATE"
+        fi
     fi
 fi
 
-echo "Copyright year update completed!"
+echo "Copyright format update completed!"
 
 # Count updated files for verification
-NEW_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright $CURRENT_YEAR Skyscanner Ltd" {} \; 2>/dev/null | wc -l)
-echo "Total files with updated copyright: $NEW_COUNT"
+NEW_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "$NEW_PATTERN" {} \; 2>/dev/null | wc -l)
+echo "Total files with updated copyright range format: $NEW_COUNT"
 
 # Show remaining files with old copyright (should be 0)
-REMAINING_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -l "Copyright $OLD_YEAR Skyscanner Ltd" {} \; 2>/dev/null | wc -l)
-echo "Files still with old copyright: $REMAINING_COUNT"
+REMAINING_COUNT=$(find . -type f \( -name '*.kt' -o -name '*.java' -o -name '*.sh' \) ! -path "./build/*" ! -path "./.git/*" ! -path "./node_modules/*" -exec grep -L "$NEW_PATTERN" {} \; 2>/dev/null | wc -l)
+echo "Files still with old copyright format: $REMAINING_COUNT"
