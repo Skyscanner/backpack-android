@@ -1,0 +1,63 @@
+name: Update Copyright Year
+
+on:
+  schedule:
+    # Run on January 1st at 00:00 UTC every year
+    - cron: '0 0 1 1 *'
+  workflow_dispatch:
+    # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-copyright:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Run copyright update script
+      run: |
+        ./scripts/update-copyright-year.sh
+        
+    - name: Check for changes
+      id: changes
+      run: |
+        if [[ $(git status --porcelain) ]]; then
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "Files have been updated"
+        else
+          echo "changes=false" >> $GITHUB_OUTPUT
+          echo "No changes needed"
+        fi
+        
+    - name: Create Pull Request
+      if: steps.changes.outputs.changes == 'true'
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "chore: update copyright year to $(date +%Y)"
+        title: "chore: update copyright year to $(date +%Y)"
+        body: |
+          This PR updates the copyright year in all source files from 2018 to $(date +%Y).
+          
+          Changes:
+          - Updated copyright headers in all .kt, .java, and .sh files
+          - Updated copyright template file
+          
+          This is an automated update triggered by the scheduled workflow.
+        branch: copyright-year-update-$(date +%Y)
+        delete-branch: true
+        
+    - name: Output result
+      run: |
+        if [[ "${{ steps.changes.outputs.changes }}" == "true" ]]; then
+          echo "Copyright year has been updated and a PR has been created"
+        else
+          echo "Copyright year is already current, no action needed"
+        fi

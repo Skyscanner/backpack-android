@@ -2,7 +2,7 @@
  * Backpack for Android - Skyscanner's Design System
  *
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2018 - 2025 Skyscanner Ltd
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
