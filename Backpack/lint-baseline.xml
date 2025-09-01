@@ -15,50 +15,6 @@
     <issue
         id="SimilarGradleDependency"
         message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
-        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
-        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
-            line="26"
-            column="18"/>
-    </issue>
-
-    <issue
-        id="SimilarGradleDependency"
-        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
-        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
-        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
-            line="26"
-            column="18"/>
-    </issue>
-
-    <issue
-        id="SimilarGradleDependency"
-        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
-        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
-        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
-            line="72"
-            column="24"/>
-    </issue>
-
-    <issue
-        id="SimilarGradleDependency"
-        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
-        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
-        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
-            line="72"
-            column="24"/>
-    </issue>
-
-    <issue
-        id="SimilarGradleDependency"
-        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
         errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
