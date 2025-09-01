@@ -86,29 +86,29 @@ private fun buildAnnotatedStringFromMarkdown(
         val linkMatches = MARKDOWN_LINK_REGEX.findAll(text).toList()
 
         if (linkMatches.isEmpty()) {
-            appendRawText(textColor, text)
+            AppendRawText(textColor, text)
         } else {
             var currentIndex = 0
 
             linkMatches.forEachIndexed { linkIndex, match ->
                 if (match.range.first > currentIndex) {
-                    appendRawText(textColor, text.substring(currentIndex, match.range.first))
+                    AppendRawText(textColor, text.substring(currentIndex, match.range.first))
                 }
 
-                appendLinkText(match, linkIndex, onLinkClicked, textColor)
+                AppendLinkText(match, linkIndex, onLinkClicked, textColor)
 
                 currentIndex = match.range.last + 1
             }
 
             if (currentIndex < text.length) {
-                appendRawText(textColor, text.substring(currentIndex))
+                AppendRawText(textColor, text.substring(currentIndex))
             }
         }
     }
 }
 
 @Composable
-private fun AnnotatedString.Builder.appendLinkText(
+private fun AnnotatedString.Builder.AppendLinkText(
     match: MatchResult,
     linkIndex: Int,
     onLinkClicked: (String) -> Unit,
@@ -136,7 +136,7 @@ private fun AnnotatedString.Builder.appendLinkText(
 }
 
 @Composable
-private fun AnnotatedString.Builder.appendRawText(
+private fun AnnotatedString.Builder.AppendRawText(
     textColor: Color,
     text: String,
 ) {

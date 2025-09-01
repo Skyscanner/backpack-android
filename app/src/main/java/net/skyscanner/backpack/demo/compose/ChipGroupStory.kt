@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -218,7 +219,9 @@ internal fun MultiSelectChipGroupSample(
 ) {
     // This is just for demonstration purposes, you should not create view model manually :)
     val scope = rememberCoroutineScope()
-    val resources = LocalContext.current.resources
+    val configuration = LocalConfiguration.current
+    val context = LocalContext.current
+    val resources = context.createConfigurationContext(configuration).resources
     val viewModel = remember { MultiChipViewModel(scope, resources = resources) }
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     BpkMultiSelectChipGroup(
