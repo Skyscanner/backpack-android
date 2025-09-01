@@ -1,26 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 7.0.0" type="baseline" client="gradle" name="AGP (7.0.0)" variant="all" version="7.0.0">
+<issues format="6" by="lint 8.8.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.8.2)" variant="all" version="8.8.2">
 
     <issue
-        id="NotifyDataSetChanged"
-        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
-        errorLine1="    notifyDataSetChanged()"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~">
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/net/skyscanner/backpack/barchart/internal/ChartAdapter.kt"
-            line="44"
-            column="5"/>
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="26"
+            column="18"/>
     </issue>
 
     <issue
-        id="NotifyDataSetChanged"
-        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
-        errorLine1="    notifyDataSetChanged()"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~">
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/net/skyscanner/backpack/barchart/internal/ChartAdapter.kt"
-            line="51"
-            column="5"/>
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="26"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="26"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="72"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="72"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="72"
+            column="24"/>
     </issue>
 
 </issues>

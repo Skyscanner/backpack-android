@@ -33,6 +33,7 @@ internal class ChartAdapter(
     private var selectedPosition: Int = UNSELECTED_POSITION
 
     private val onClickWrapper = { holder: ChartBarHolder ->
+        val oldPosition = selectedPosition
         if (!holder.itemView.isSelected) {
             selectedId = holder.model?.id ?: UNSELECTED_ID
             selectedPosition = holder.adapterPosition
@@ -41,14 +42,34 @@ internal class ChartAdapter(
             selectedPosition = UNSELECTED_POSITION
         }
 
-        notifyDataSetChanged()
+        // Notify specific item changes instead of entire dataset
+        if (oldPosition != UNSELECTED_POSITION) {
+            notifyItemChanged(oldPosition)
+        }
+        if (selectedPosition != UNSELECTED_POSITION) {
+            notifyItemChanged(selectedPosition)
+        }
         onClick(holder)
     }
 
     override fun invoke(model: ChartData) {
+        val oldSize = this.data.size
         this.data = model
         selectedPosition = UNSELECTED_POSITION
-        notifyDataSetChanged()
+        val newSize = this.data.size
+
+        // Use specific notifications instead of notifyDataSetChanged
+        when {
+            newSize == oldSize -> notifyItemRangeChanged(0, newSize)
+            newSize > oldSize -> {
+                notifyItemRangeChanged(0, oldSize)
+                notifyItemRangeInserted(oldSize, newSize - oldSize)
+            }
+            else -> {
+                notifyItemRangeChanged(0, newSize)
+                notifyItemRangeRemoved(newSize, oldSize - newSize)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChartBarHolder =

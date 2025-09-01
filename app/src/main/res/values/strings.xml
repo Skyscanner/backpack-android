@@ -39,8 +39,8 @@
     </string-array>
 
     <string name="star_rating_description">Rating</string>
-    <string name="star_rating_accessibility_status">%.0f out of %d</string>
-    <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
+    <string name="star_rating_accessibility_status" formatted="false">%.0f out of %d</string>
+    <string name="star_rating_decimal_accessibility_status" formatted="false">%.1f out of %d</string>
     <string name="star_rating_0_5">0 out of 5</string>
     <string name="star_rating_25_5">2.5 out of 5</string>
     <string name="star_rating_3_5">3 out of 5</string>
