@@ -22,10 +22,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class EmptyActivity : AppCompatActivity() {
     lateinit var root: FrameLayout
 
