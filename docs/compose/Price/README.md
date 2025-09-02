@@ -32,3 +32,24 @@ BpkPrice(
   align = BpkPriceAlign.End,
 )
 ```
+
+Example of a clickable Price:
+
+```Kotlin
+import net.skyscanner.backpack.compose.price.BpkPrice
+import net.skyscanner.backpack.compose.price.BpkPriceAlign
+import net.skyscanner.backpack.compose.price.BpkPriceSize
+
+BpkPrice(
+  price = "£1,830",
+  previousPrice = "£2,033",
+  leadingText = "App only deal",
+  trailingText = "per day",
+  size = BpkPriceSize.Large,
+  align = BpkPriceAlign.End,
+  onPriceClicked = {
+    // Handle price click
+    println("Price clicked!")
+  },
+)
+```
