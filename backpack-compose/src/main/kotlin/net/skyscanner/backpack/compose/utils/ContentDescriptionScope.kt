@@ -24,7 +24,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 
 @Stable
 interface ContentDescriptionScope {
@@ -46,7 +46,7 @@ internal fun ContentDescriptionScope(resources: Resources): ContentDescriptionSc
 
 @Composable
 internal fun rememberContentDescriptionScope(): ContentDescriptionScope {
-    val resources = LocalContext.current.resources
+    val resources = LocalResources.current
     return remember(resources) {
         ContentDescriptionScope(resources)
     }
