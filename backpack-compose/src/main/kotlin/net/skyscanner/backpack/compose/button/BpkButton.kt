@@ -73,7 +73,7 @@ fun BpkButton(
         interactionSource = interactionSource,
         modifier = modifier,
         onClick = onClick,
-        content = { ButtonText(text) },
+        content = { ButtonText(text = text, type = type) },
     )
 }
 
@@ -126,13 +126,22 @@ fun BpkButton(
         onClick = onClick,
         contentDescription = contentDescription,
     ) {
+
         when (position) {
             BpkButtonIconPosition.Start -> {
                 ButtonIcon(icon, null, size)
-                ButtonText(text)
+                ButtonText(
+                    text = text,
+                    type = type,
+                )
             }
+
             BpkButtonIconPosition.End -> {
-                ButtonText(text, modifier = Modifier.weight(1f, fill = false))
+                ButtonText(
+                    text = text,
+                    modifier = Modifier.weight(1f, fill = false),
+                    type = type,
+                )
                 ButtonIcon(icon, null, size)
             }
         }
@@ -190,10 +199,18 @@ fun BpkButton(
         when (position) {
             BpkButtonIconPosition.Start -> {
                 ButtonDrawable(icon, null, size)
-                ButtonText(text)
+                ButtonText(
+                    text = text,
+                    type = type,
+                )
             }
+
             BpkButtonIconPosition.End -> {
-                ButtonText(text, modifier = Modifier.weight(1f, fill = false))
+                ButtonText(
+                    text = text,
+                    modifier = Modifier.weight(1f, fill = false),
+                    type = type,
+                )
                 ButtonDrawable(icon, null, size)
             }
         }

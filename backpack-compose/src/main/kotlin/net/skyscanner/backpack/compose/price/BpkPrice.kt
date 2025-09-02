@@ -47,6 +47,7 @@ fun BpkPrice(
     align: BpkPriceAlign = BpkPriceAlign.Start,
     size: BpkPriceSize = BpkPriceSize.Small,
     icon: BpkIcon? = null,
+    onPriceClicked: (() -> Unit)? = null,
 ) {
     when (align) {
         BpkPriceAlign.Start -> {
@@ -58,6 +59,7 @@ fun BpkPrice(
                 trailingText = trailingText,
                 size = size,
                 icon = icon,
+                onPriceClicked = onPriceClicked,
             )
         }
 
@@ -70,6 +72,7 @@ fun BpkPrice(
                 trailingText = trailingText,
                 size = size,
                 icon = icon,
+                onPriceClicked = onPriceClicked,
             )
         }
 
@@ -82,6 +85,7 @@ fun BpkPrice(
                 trailingText = trailingText,
                 size = size,
                 icon = icon,
+                onPriceClicked = onPriceClicked,
             )
         }
     }

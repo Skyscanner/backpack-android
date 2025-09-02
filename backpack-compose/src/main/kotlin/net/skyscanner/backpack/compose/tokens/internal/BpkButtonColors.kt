@@ -66,10 +66,6 @@ internal object BpkButtonColors {
         @Composable
         get() = dynamicColorOf(Color(0x80FFFFFF), Color(0x80FFFFFF))
 
-    internal val linkPressedForeground: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFF024DAF), Color(0xFFD1F7FF))
-
     internal val primaryNormalBackground: Color
         @Composable
         get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF024DAF))

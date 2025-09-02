@@ -41,6 +41,8 @@ import net.skyscanner.backpack.button.internal.horizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -119,6 +121,10 @@ open class BpkButton(
         set(value) {
             field = value
             applyStyle(type.createStyle(context))
+            // Reapply text to update underline based on new type
+            originalText?.let {
+                setText(it, BufferType.NORMAL)
+            }
         }
 
     var size: Size = size
@@ -128,6 +134,23 @@ open class BpkButton(
         }
 
     private var enabled = isEnabled
+    private var originalText: CharSequence? = null
+
+    override fun setText(text: CharSequence, type: BufferType) {
+        originalText = text
+        // Handle icon-only case
+        if (iconDrawablePosition == ICON_POSITION_ICON_ONLY) {
+            super.setText(text, type)
+        } else if (this.type == Type.Link || this.type == Type.LinkOnDark) {
+            val spannableString = SpannableString(text)
+            if (text.isNotEmpty()) {
+                spannableString.setSpan(UnderlineSpan(), 0, text.length, 0)
+            }
+            super.setText(spannableString, type)
+        } else {
+            super.setText(text, type)
+        }
+    }
 
     init {
         var style: ButtonStyle = type.createStyle(context)

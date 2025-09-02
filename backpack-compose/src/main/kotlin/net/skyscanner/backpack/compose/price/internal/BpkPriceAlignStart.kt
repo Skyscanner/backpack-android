@@ -28,6 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.link.BpkLink
+import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -42,6 +44,7 @@ internal fun BpkPriceAlignStart(
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
     icon: BpkIcon? = null,
+    onPriceClicked: (() -> Unit)? = null,
 ) {
     Column(modifier = modifier) {
         Row {
@@ -66,10 +69,11 @@ internal fun BpkPriceAlignStart(
         }
         Row(verticalAlignment = Alignment.Bottom) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alignByBaseline()) {
-                BpkText(
-                    text = price,
-                    color = BpkTheme.colors.textPrimary,
-                    style = size.mainTextStyle(),
+                BpkLink(
+                    text = if (onPriceClicked != null) "[$price]($price)" else price,
+                    onLinkClicked = { _: String -> onPriceClicked?.invoke() },
+                    textStyle = size.mainTextStyle(),
+                    style = BpkLinkStyle.Default,
                 )
                 icon?.let {
                     BpkIcon(
