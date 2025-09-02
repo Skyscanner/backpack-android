@@ -56,6 +56,13 @@ object BpkConfiguration {
         }
     }
 
+    var logger: (() -> Unit)? = null
+
+    fun performLogging() {
+        logger?.invoke()
+        logger = null
+    }
+
     var chipConfig: BpkExperimentalComponent.BpkChip? = null
         private set
 
