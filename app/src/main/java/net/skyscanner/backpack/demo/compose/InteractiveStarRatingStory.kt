@@ -27,7 +27,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -80,7 +80,7 @@ private fun InteractiveRatingSample(
         val ratings = listOf(1, 2, 3, 4, 5)
         for (i in ratings) {
             key(i) {
-                var rating by remember { mutableIntStateOf(i) }
+                var rating by remember { mutableStateOf(i) }
                 BpkInteractiveStarRating(
                     rating = rating,
                     onRatingChanged = { rating = it },
