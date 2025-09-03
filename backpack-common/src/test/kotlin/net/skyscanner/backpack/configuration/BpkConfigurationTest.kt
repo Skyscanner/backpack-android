@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2025 Skyscanner Ltd
+ * Copyright 2018 - 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,5 +32,14 @@ class BpkConfigurationTest {
         assertEquals(BpkConfiguration.chipConfig, BpkConfiguration.BpkExperimentalComponent.BpkChip)
         val result = runCatching { BpkConfiguration.setConfigs(buttonConfig = true) }
         assertTrue(result.exceptionOrNull() is IllegalStateException)
+    }
+
+    @Test
+    fun `setting logger and then performing log logs once only`() {
+        var logCount = 0
+        BpkConfiguration.logger = { logCount++ }
+        BpkConfiguration.performLogging()
+        BpkConfiguration.performLogging()
+        assertEquals(1, logCount)
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2018 - 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
@@ -44,6 +43,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.round
 import kotlin.math.roundToInt
+import androidx.compose.ui.platform.LocalResources
 
 enum class BpkStarRatingSize {
     Large,
@@ -163,7 +163,7 @@ private fun BpkStarRating(
     }
     Row(
         modifier = modifier.starRatingSemantics(
-            resources = LocalContext.current.resources,
+            resources = LocalResources.current,
             rating = rating,
             maxRating = maxRating,
             numberOfStars = numberOfStars,

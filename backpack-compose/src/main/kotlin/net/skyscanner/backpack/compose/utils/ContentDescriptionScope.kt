@@ -1,7 +1,7 @@
 /*
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 Skyscanner Ltd
+ * Copyright 2018 - 2025 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 
 @Stable
 interface ContentDescriptionScope {
@@ -46,7 +46,7 @@ internal fun ContentDescriptionScope(resources: Resources): ContentDescriptionSc
 
 @Composable
 internal fun rememberContentDescriptionScope(): ContentDescriptionScope {
-    val resources = LocalContext.current.resources
+    val resources = LocalResources.current
     return remember(resources) {
         ContentDescriptionScope(resources)
     }
