@@ -71,7 +71,7 @@ internal fun BpkPriceRow(
         }
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alignByBaseline()) {
             BpkLink(
-                text = if (onPriceClicked != null) "[$price]($price)" else price,
+                text = priceAsALink(price, onPriceClicked),
                 onLinkClicked = { _: String -> onPriceClicked?.invoke() },
                 textStyle = size.mainTextStyle(),
                 style = BpkLinkStyle.Default,
