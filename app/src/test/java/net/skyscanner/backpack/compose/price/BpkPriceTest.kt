@@ -98,6 +98,62 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
         }
     }
 
+    @Test
+    fun priceClickable() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                size = size,
+                align = align,
+                onPriceClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceClickableTrailing() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                size = size,
+                align = align,
+                onPriceClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceClickableFull() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                previousPrice = stringResource(id = R.string.price_line_through_text),
+                leadingText = stringResource(id = R.string.price_leading_text),
+                size = size,
+                align = align,
+                onPriceClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceClickableWithIcon() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                previousPrice = stringResource(id = R.string.price_line_through_text),
+                leadingText = stringResource(id = R.string.price_leading_text),
+                size = size,
+                align = align,
+                icon = BpkIcon.NewWindow,
+                onPriceClicked = {},
+            )
+        }
+    }
+
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
