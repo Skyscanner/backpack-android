@@ -33,4 +33,13 @@ class BpkConfigurationTest {
         val result = runCatching { BpkConfiguration.setConfigs(buttonConfig = true) }
         assertTrue(result.exceptionOrNull() is IllegalStateException)
     }
+
+    @Test
+    fun `setting logger and then performing log logs once only`() {
+        var logCount = 0
+        BpkConfiguration.logger = { logCount++ }
+        BpkConfiguration.performLogging()
+        BpkConfiguration.performLogging()
+        assertEquals(1, logCount)
+    }
 }

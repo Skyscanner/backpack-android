@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bpkFontFamilyBase" format="reference|string" />
+    <attr name="bpkFontFamilyEmphasized" format="reference|string" />
+    <attr name="bpkFontFamilyBlack" format="reference|string" />
+
+</resources>
