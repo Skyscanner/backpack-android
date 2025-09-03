@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.link.BpkLink
-import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -73,7 +72,6 @@ internal fun BpkPriceAlignStart(
                     text = priceAsALink(price, onPriceClicked),
                     onLinkClicked = { _: String -> onPriceClicked?.invoke() },
                     textStyle = size.mainTextStyle(),
-                    style = BpkLinkStyle.Default,
                 )
                 icon?.let {
                     BpkIcon(
