@@ -36,8 +36,6 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
@@ -61,10 +59,24 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         ) {
-            PriceExample(
-                size = BpkPriceSize.Large,
-                align = BpkPriceAlign.Start,
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.Start,
+                )
+                PriceExample(
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.Start,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked large price!")
+                        }
+                    },
+                )
+            }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,6 +88,29 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.End,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.Start,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked small start price!")
+                        }
+                    },
+                )
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.End,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked small end price!")
+                        }
+                    },
                 )
             }
             Row(
@@ -119,48 +154,6 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 align = BpkPriceAlign.Row,
                 icon = BpkIcon.NewWindow,
             )
-
-            // Link examples
-            BpkText(
-                text = "Clickable prices:",
-                color = BpkTheme.colors.textPrimary,
-                style = BpkTheme.typography.heading5,
-                modifier = Modifier.padding(top = BpkSpacing.Base),
-            )
-
-            PriceExample(
-                size = BpkPriceSize.Large,
-                align = BpkPriceAlign.Start,
-                onClick = {
-                    scope.launch {
-                        floatingNotificationState.show("Clicked large price!")
-                    }
-                },
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                PriceExample(
-                    size = BpkPriceSize.Small,
-                    align = BpkPriceAlign.Start,
-                    onClick = {
-                        scope.launch {
-                            floatingNotificationState.show("Clicked small start price!")
-                        }
-                    },
-                )
-                PriceExample(
-                    size = BpkPriceSize.Small,
-                    align = BpkPriceAlign.End,
-                    onClick = {
-                        scope.launch {
-                            floatingNotificationState.show("Clicked small end price!")
-                        }
-                    },
-                )
-            }
 
             PriceExample(
                 size = BpkPriceSize.Small,
