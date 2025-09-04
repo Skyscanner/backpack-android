@@ -109,8 +109,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
             style = R.attr.bpkButtonLinkStyle,
             bgColorRes = android.R.color.transparent,
             bgDisabledColorRes = android.R.color.transparent,
-            contentColorRes = R.color.bpkTextLink,
-            contentPressedColorRes = R.color.__privateButtonLinkPressedForeground,
+            contentColorRes = R.color.bpkTextPrimary,
+            contentPressedColorRes = R.color.bpkTextPrimary,
             rippleColorRes = R.color.__buttonLinkRipple,
         )
     }

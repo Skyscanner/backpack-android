@@ -106,7 +106,7 @@ private fun BpkButtonType.defaultContentColor(): Color =
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
         BpkButtonType.Destructive -> BpkButtonColors.destructiveNormalForeground
-        BpkButtonType.Link -> BpkTheme.colors.textLink
+        BpkButtonType.Link -> BpkTheme.colors.textPrimary
         BpkButtonType.LinkOnDark -> BpkTheme.colors.textOnDark
     }
 
@@ -119,7 +119,7 @@ private fun BpkButtonType.pressedContentColor(): Color =
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
         BpkButtonType.Destructive -> BpkTheme.colors.textPrimaryInverse
-        BpkButtonType.Link -> BpkButtonColors.linkPressedForeground
+        BpkButtonType.Link -> BpkTheme.colors.textPrimary
         BpkButtonType.LinkOnDark -> BpkButtonColors.linkOnDarkPressedForeground
     }
 

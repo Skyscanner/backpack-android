@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
@@ -150,12 +151,22 @@ internal fun ButtonIcon(
 }
 
 @Composable
-internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
+internal fun ButtonText(
+    text: String,
+    type: BpkButtonType,
+    modifier: Modifier = Modifier,
+) {
+    val isLink = type == BpkButtonType.Link || type == BpkButtonType.LinkOnDark
     BpkText(
         text = text,
         modifier = modifier,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
+        style = if (isLink) {
+            LocalTextStyle.current.copy(textDecoration = TextDecoration.Underline)
+        } else {
+            LocalTextStyle.current
+        },
     )
 }
 

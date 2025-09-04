@@ -19,14 +19,19 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
@@ -41,75 +46,138 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @PriceComponent
 @ComposeStory
 fun PriceStory(modifier: Modifier = Modifier) {
-    Column(
+    val floatingNotificationState = rememberBpkFloatingNotificationState()
+    val scope = rememberCoroutineScope()
+
+    Box(
         modifier = modifier
-            .padding(BpkSpacing.Base)
             .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-        PriceExample(
-            size = BpkPriceSize.Large,
-            align = BpkPriceAlign.Start,
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+        Column(
+            modifier = Modifier
+                .padding(BpkSpacing.Base)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.Start,
+                )
+                PriceExample(
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.Start,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked large price!")
+                        }
+                    },
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.Start,
+                )
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.End,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.Start,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked small start price!")
+                        }
+                    },
+                )
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.End,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Clicked small end price!")
+                        }
+                    },
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.ExtraSmall,
+                    align = BpkPriceAlign.Start,
+                )
+                PriceExample(
+                    size = BpkPriceSize.ExtraSmall,
+                    align = BpkPriceAlign.End,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.Start,
+                    icon = BpkIcon.NewWindow,
+                )
+                PriceExample(
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.End,
+                    icon = BpkIcon.NewWindow,
+                )
+            }
             PriceExample(
                 size = BpkPriceSize.Small,
-                align = BpkPriceAlign.Start,
+                align = BpkPriceAlign.Row,
             )
-            PriceExample(
-                size = BpkPriceSize.Small,
-                align = BpkPriceAlign.End,
-            )
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
-                align = BpkPriceAlign.Start,
-            )
-            PriceExample(
-                size = BpkPriceSize.ExtraSmall,
-                align = BpkPriceAlign.End,
-            )
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            PriceExample(
-                size = BpkPriceSize.Small,
-                align = BpkPriceAlign.Start,
-                icon = BpkIcon.NewWindow,
+                align = BpkPriceAlign.Row,
             )
             PriceExample(
                 size = BpkPriceSize.Small,
-                align = BpkPriceAlign.End,
+                align = BpkPriceAlign.Row,
                 icon = BpkIcon.NewWindow,
             )
+
+            PriceExample(
+                size = BpkPriceSize.Small,
+                align = BpkPriceAlign.Row,
+                icon = BpkIcon.NewWindow,
+                onClick = {
+                    scope.launch {
+                        floatingNotificationState.show("Clicked row price with icon!")
+                    }
+                },
+            )
         }
-        PriceExample(
-            size = BpkPriceSize.Small,
-            align = BpkPriceAlign.Row,
-        )
-        PriceExample(
-            size = BpkPriceSize.ExtraSmall,
-            align = BpkPriceAlign.Row,
-        )
-        PriceExample(
-            size = BpkPriceSize.Small,
-            align = BpkPriceAlign.Row,
-            icon = BpkIcon.NewWindow,
-        )
+
+        BpkFloatingNotification(floatingNotificationState)
     }
 }
 
 @Composable
-private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign, icon: BpkIcon? = null) {
+private fun PriceExample(
+    size: BpkPriceSize,
+    align: BpkPriceAlign,
+    icon: BpkIcon? = null,
+    onClick: (() -> Unit)? = null,
+) {
     BpkPrice(
         price = stringResource(id = R.string.price_price),
         previousPrice = stringResource(id = R.string.price_line_through_text),
@@ -118,5 +186,6 @@ private fun PriceExample(size: BpkPriceSize, align: BpkPriceAlign, icon: BpkIcon
         size = size,
         align = align,
         icon = icon,
+        onPriceClicked = onClick,
     )
 }
