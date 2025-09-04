@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 - 2025 Skyscanner Ltd
+ * Copyright 2018 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,6 +65,10 @@ internal object BpkButtonColors {
     internal val linkOnDarkPressedForeground: Color
         @Composable
         get() = dynamicColorOf(Color(0x80FFFFFF), Color(0x80FFFFFF))
+
+    internal val linkPressedForeground: Color
+        @Composable
+        get() = dynamicColorOf(Color(0xFF024DAF), Color(0xFFD1F7FF))
 
     internal val primaryNormalBackground: Color
         @Composable
