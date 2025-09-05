@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.ui
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.content.withStyledAttributes
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -54,9 +55,9 @@ class SettingsThemeOption @JvmOverloads constructor(
         get() = findViewById<BpkText>(R.id.theme_name).text
 
     private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.SettingsThemeOption, defStyleAttr, 0)
-        val message = a.getString(R.styleable.SettingsThemeOption_themeName)
-        findViewById<BpkText>(R.id.theme_name).text = message
-        a.recycle()
+        context.withStyledAttributes(attrs, R.styleable.SettingsThemeOption, defStyleAttr, 0) {
+            val message = getString(R.styleable.SettingsThemeOption_themeName)
+            findViewById<BpkText>(R.id.theme_name).text = message
+        }
     }
 }
