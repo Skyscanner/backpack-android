@@ -21,6 +21,7 @@ package net.skyscanner.backpack.util
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import androidx.core.graphics.createBitmap
 import android.view.View
 
 internal inline fun View.rasterize(
@@ -35,7 +36,7 @@ internal inline fun View.rasterize(
 
     onLayoutDone(this)
 
-    val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
+    val bitmap = createBitmap(width, height, bitmapConfig)
     bitmap.eraseColor(Color.TRANSPARENT)
     draw(Canvas(bitmap))
 

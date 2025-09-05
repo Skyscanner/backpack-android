@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.8.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.8.2)" variant="all" version="8.8.2">
+<issues format="6" by="lint 8.9.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.9.1)" variant="all" version="8.9.1">
 
     <issue
         id="SimilarGradleDependency"
@@ -10,6 +10,39 @@
             file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
             line="26"
             column="18"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="plugin-kotlin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="26"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="72"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="SimilarGradleDependency"
+        message="There are multiple dependencies org.jetbrains.kotlin:kotlin-gradle-plugin but with different version"
+        errorLine1="kotlin-gradlePlugin = { module = &quot;org.jetbrains.kotlin:kotlin-gradle-plugin&quot;, version.ref = &quot;kotlin&quot; }"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Desktop/backpack-android/gradle/libs.versions.toml"
+            line="72"
+            column="24"/>
     </issue>
 
     <issue
