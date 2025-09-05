@@ -21,6 +21,7 @@ package net.skyscanner.backpack.util
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import androidx.core.graphics.createBitmap
 import android.view.View
 
 internal inline fun View.rasterize(
