@@ -36,7 +36,7 @@ internal inline fun View.rasterize(
 
     onLayoutDone(this)
 
-    val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
+    val bitmap = createBitmap(width, height, bitmapConfig)
     bitmap.eraseColor(Color.TRANSPARENT)
     draw(Canvas(bitmap))
 
