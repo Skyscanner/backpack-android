@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -51,21 +50,23 @@ internal fun BpkSnippetImpl(
 ) {
     val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     Column(
-        modifier = modifier
-            .apply {
-                if (onClick != null) {
-                    clickableWithRipple(onClick = onClick)
-                }
-            },
+        modifier = onClick?.let {
+            val shape = RoundedCornerShape(topStart = BpkBorderRadius.Md, topEnd = BpkBorderRadius.Md)
+            modifier
+                .clip(shape)
+                .clickableWithRipple(onClick = onClick)
+        } ?: modifier,
     ) {
         Box(
             modifier = Modifier
-                .padding(bottom = BpkSpacing.Base)
                 .aspectRatio(getAspectRatio(imageOrientation))
                 .background(BpkTheme.colors.surfaceHighlight, roundedCornerShape)
                 .clip(roundedCornerShape),
         ) {
             content()
+        }
+        if (!headline.isNullOrBlank() || !subHeading.isNullOrBlank() || !bodyText.isNullOrBlank()) {
+            Spacer(modifier = Modifier.height(BpkSpacing.Base))
         }
         if (!headline.isNullOrBlank()) {
             BpkText(
@@ -78,23 +79,28 @@ internal fun BpkSnippetImpl(
                     }
                 },
             )
-            Spacer(modifier = Modifier.height(BpkSpacing.Sm))
         }
         if (!subHeading.isNullOrBlank()) {
+            if (!headline.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(BpkSpacing.Sm))
+            }
             BpkText(
                 text = subHeading,
                 style = BpkTheme.typography.subheading,
                 color = BpkTheme.colors.textPrimary,
             )
-            Spacer(modifier = Modifier.height(BpkSpacing.Xl))
         }
         if (!bodyText.isNullOrBlank()) {
+            if (!headline.isNullOrBlank() && subHeading.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(BpkSpacing.Sm))
+            } else if (!subHeading.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(BpkSpacing.Xl))
+            }
             BpkText(
                 text = bodyText,
                 style = BpkTheme.typography.bodyDefault,
                 color = BpkTheme.colors.textPrimary,
             )
-            Spacer(modifier = Modifier.height(BpkSpacing.Base))
         }
     }
 }
