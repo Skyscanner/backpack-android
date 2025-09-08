@@ -49,7 +49,7 @@ internal fun BpkSnippetImpl(
     modifier: Modifier = Modifier,
     content: @Composable (() -> Unit),
 ) {
-    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Sm)
+    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     Column(
         modifier = modifier
             .apply {
