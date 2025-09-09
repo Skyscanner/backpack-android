@@ -20,12 +20,13 @@ package net.skyscanner.backpack.dialog.internal
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import kotlin.math.roundToInt
@@ -52,7 +53,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
     private var fullscreen = false
         set(value) {
             field = value
-            background = if (value) AppCompatResources.getDrawable(context, R.color.bpkSurfaceDefault) else getModalBg()
+            background = if (value) AppCompatResources.getDrawable(context, R.color.bpkSurfaceDefault) else modalBg
         }
 
     private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)
@@ -111,9 +112,8 @@ internal class DialogWindowLayout @JvmOverloads constructor(
         return false
     }
 
-    private fun getModalBg() = ContextCompat.getDrawable(context, android.R.color.transparent)!!
-
     private companion object {
+        val modalBg = ColorDrawable(Color.TRANSPARENT)
         const val heightPercentageToShowFullScreen = 0.75f
     }
 }

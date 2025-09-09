@@ -18,11 +18,11 @@
 
 package net.skyscanner.backpack.snackbar.internal
 
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import androidx.annotation.ColorInt
-import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.snackbar.BpkSnackbar
@@ -33,7 +33,7 @@ internal fun Snackbar.setBackgroundColorCompat(@ColorInt color: Int) {
         background = background.mutate()
         background.setTint(color)
     } else {
-        background = color.toDrawable()
+        background = ColorDrawable(color)
     }
     view.background = background
 }

@@ -29,7 +29,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.createBitmap
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -75,7 +74,7 @@ open class BpkFlare @JvmOverloads constructor(
         val pointerDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
             pointerDrawable.draw(Canvas(this))
         }
     }
@@ -84,7 +83,7 @@ open class BpkFlare @JvmOverloads constructor(
         val radiiDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        Bitmap.createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
             radiiDrawable.draw(Canvas(this))
         }
     }

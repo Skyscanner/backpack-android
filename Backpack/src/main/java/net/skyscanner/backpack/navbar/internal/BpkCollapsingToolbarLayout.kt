@@ -19,8 +19,8 @@
 package net.skyscanner.backpack.navbar.internal
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -50,6 +50,6 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
         expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
 
         setScrimsShown(false)
-        contentScrim = ContextCompat.getDrawable(context, R.color.bpkSurfaceDefault)
+        contentScrim = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
     }
 }
