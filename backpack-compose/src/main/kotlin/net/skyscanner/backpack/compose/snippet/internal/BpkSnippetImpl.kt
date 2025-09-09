@@ -48,20 +48,19 @@ internal fun BpkSnippetImpl(
     modifier: Modifier = Modifier,
     content: @Composable (() -> Unit),
 ) {
-    val roundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
+    val imageRoundedCornerShape = RoundedCornerShape(BpkBorderRadius.Md)
     Column(
         modifier = onClick?.let {
-            val shape = RoundedCornerShape(topStart = BpkBorderRadius.Md, topEnd = BpkBorderRadius.Md)
             modifier
-                .clip(shape)
+                .clip(RoundedCornerShape(topStart = BpkBorderRadius.Md, topEnd = BpkBorderRadius.Md))
                 .clickableWithRipple(onClick = onClick)
         } ?: modifier,
     ) {
         Box(
             modifier = Modifier
                 .aspectRatio(getAspectRatio(imageOrientation))
-                .background(BpkTheme.colors.surfaceHighlight, roundedCornerShape)
-                .clip(roundedCornerShape),
+                .background(BpkTheme.colors.surfaceHighlight, imageRoundedCornerShape)
+                .clip(imageRoundedCornerShape),
         ) {
             content()
         }
