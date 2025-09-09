@@ -30,7 +30,6 @@ import android.widget.TextView
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.content.withStyledAttributes
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil
@@ -161,11 +160,12 @@ open class BpkText @JvmOverloads constructor(
 
     @SuppressLint("CustomViewStyleable")
     private fun applyLineHeight(textAppearance: Int) {
-        context.withStyledAttributes(textAppearance, R.styleable.BpkTextStyle) {
-            val lineHeight = getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
-                .let { if (it == -1) null else it }
-            lineHeight?.let { TextViewCompat.setLineHeight(this@BpkText, lineHeight) }
-        }
+        val textStyleAttributes = context.obtainStyledAttributes(textAppearance, R.styleable.BpkTextStyle)
+        val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+            .let { if (it == -1) null else it }
+        lineHeight?.let { TextViewCompat.setLineHeight(this, lineHeight) }
+
+        textStyleAttributes.recycle()
     }
 
     data class FontDefinition(

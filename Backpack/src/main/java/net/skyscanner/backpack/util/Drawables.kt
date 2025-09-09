@@ -27,7 +27,6 @@ import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
 import androidx.annotation.ColorInt
-import androidx.core.graphics.createBitmap
 
 internal inline fun stateListDrawable(
     drawable: Drawable,
@@ -70,7 +69,7 @@ internal fun Drawable.rasterize(
     config: Bitmap.Config = Bitmap.Config.ARGB_8888,
 ): Bitmap {
     setBounds(0, 0, width, height)
-    val bitmap = createBitmap(width, height, config)
+    val bitmap = Bitmap.createBitmap(width, height, config)
     bitmap.eraseColor(Color.TRANSPARENT)
     draw(Canvas(bitmap))
     return bitmap

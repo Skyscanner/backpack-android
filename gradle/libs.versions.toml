@@ -4,9 +4,9 @@ ksp = "2.2.10-2.0.2" # depends on Kotlin version
 compilerTesting = "0.8.0"
 destinations = "2.2.0" # update this alongside with compiler version
 
-androidPlugin = "8.9.1"
-lint = "31.9.1"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.9.1" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.8.2"
+lint = "31.8.2"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.8.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.8"
 lifecycle = "2.9.3"
@@ -38,7 +38,7 @@ androidx-annotations = "androidx.annotation:annotation:1.9.1"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-androidx-coreKts = "androidx.core:core-ktx:1.17.0"
+androidx-coreKts = "androidx.core:core-ktx:1.16.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -60,7 +60,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.13.0"
 google-maps = "com.google.android.gms:play-services-maps:19.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:6.8.0"
+google-mapsCompose = "com.google.maps.android:maps-compose:6.7.2"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.4.8-jre"
 
