@@ -50,6 +50,75 @@ fun SnippetLandscapeStory(modifier: Modifier = Modifier) {
 
 @Composable
 @SnippetComponent
+@ComposeStory("Landscape - headline")
+fun SnippetLandscapeHeadlineStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        headline = stringResource(R.string.snippet_headline),
+    )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape - headline & subheading")
+fun SnippetLandscapeHeadlineSubheadingStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        headline = stringResource(R.string.snippet_headline),
+        subHeading = stringResource(R.string.snippet_sub_heading),
+    )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape - subheading")
+fun SnippetLandscapeSubheadingStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        subHeading = stringResource(R.string.snippet_sub_heading),
+    )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape - subheading & body")
+fun SnippetLandscapeSubheadingBodyStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        subHeading = stringResource(R.string.snippet_sub_heading),
+        bodyText = stringResource(R.string.snippet_body),
+    )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape - headline & body")
+fun SnippetLandscapeHeadlineBodyStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        headline = stringResource(R.string.snippet_headline),
+        bodyText = stringResource(R.string.snippet_body),
+    )
+}
+
+@Composable
+@SnippetComponent
+@ComposeStory("Landscape - body")
+fun SnippetLandscapeBodyStory(modifier: Modifier = Modifier) {
+    DefaultSnippetSample(
+        modifier = modifier,
+        imageOrientation = ImageOrientation.Landscape,
+        bodyText = stringResource(R.string.snippet_body),
+    )
+}
+
+@Composable
+@SnippetComponent
 @ComposeStory("Square")
 fun SnippetSquareStory(modifier: Modifier = Modifier) {
     DefaultSnippetSample(

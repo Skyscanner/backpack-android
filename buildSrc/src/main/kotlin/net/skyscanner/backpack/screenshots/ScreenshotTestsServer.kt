@@ -114,7 +114,9 @@ class ScreenshotTestsServer @JvmOverloads constructor(
         requireShell("settings put global animator_duration_scale 0")
         requireShell("am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1000")
         requireShell("am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100")
-        requireShell("am broadcast -a com.android.systemui.demo -e command network -e wifi hide -e level 4 -e mobile show -e datatype none")
+        requireShell("am broadcast -a com.android.systemui.demo -e command network -e wifi hide")
+        requireShell("am broadcast -a com.android.systemui.demo -e command network -e mobile show -e level 4 " +
+            "-e datatype none -e fully true -e roaming false -e sims 1 -e slot 0 -e nosim false")
         requireShell("am broadcast -a com.android.systemui.demo -e command notifications -e visible false")
         Thread.sleep(200L) // sleeping for 200 millis to make sure these settings actually applied
     }

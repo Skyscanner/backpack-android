@@ -97,6 +97,72 @@ class BpkSnippetTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun defaultHeadlineBody() = snap {
+        BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp),
+            imageOrientation = ImageOrientation.Landscape,
+            headline = stringResource(R.string.snippet_headline),
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultDescriptionBody() = snap {
+        BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp),
+            imageOrientation = ImageOrientation.Landscape,
+            subHeading = stringResource(R.string.snippet_sub_heading),
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultBody() = snap {
+        BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp),
+            imageOrientation = ImageOrientation.Landscape,
+            bodyText = stringResource(R.string.snippet_body),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
+    fun defaultDescription() = snap {
+        BpkSnippet(
+            modifier = Modifier
+                .width(MOBILE_WIDTH.dp),
+            imageOrientation = ImageOrientation.Landscape,
+            subHeading = stringResource(R.string.snippet_sub_heading),
+        ) {
+            Image(
+                painter = painterResource(R.drawable.snippet_placeholder_1),
+                contentDescription = stringResource(R.string.snippet_image_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
+    }
+
+    @Test
     fun squareHeadlineDescriptionBody() = snap {
         BpkSnippet(
             modifier = Modifier
