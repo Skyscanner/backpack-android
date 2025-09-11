@@ -32,12 +32,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavItem
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.AccountCircle
-import net.skyscanner.backpack.compose.tokens.Trips
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BottomNavComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.AccountCircle
+import net.skyscanner.backpack.icon.tokens.Trips
 
 @Composable
 @BottomNavComponent

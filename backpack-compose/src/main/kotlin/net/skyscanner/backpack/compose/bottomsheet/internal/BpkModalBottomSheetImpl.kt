@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetState
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.internal.IconAction
@@ -38,8 +38,8 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
 import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.icon.tokens.NativeAndroidClose
 
 /**
  * Backpack for Android - Skyscanner's Design System

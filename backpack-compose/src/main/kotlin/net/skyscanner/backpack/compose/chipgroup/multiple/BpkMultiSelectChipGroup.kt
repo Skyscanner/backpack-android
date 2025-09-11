@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.chipgroup.multiple.internal.BpkMultiSelectChipGroupImpl
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 
 sealed class BpkMultiChipGroupType {
     class Rail(val stickyChip: BpkStickyChipItem? = null) : BpkMultiChipGroupType()

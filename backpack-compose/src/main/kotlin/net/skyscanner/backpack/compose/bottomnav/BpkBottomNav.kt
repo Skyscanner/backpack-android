@@ -55,6 +55,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText

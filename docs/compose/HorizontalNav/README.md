@@ -69,7 +69,7 @@ Example of a Horizontal Nav (with icon):
 ```Kotlin
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 

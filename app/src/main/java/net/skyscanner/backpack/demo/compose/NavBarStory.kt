@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.divider.BpkDivider
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
@@ -44,15 +44,15 @@ import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.tokens.Accessibility
-import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.AccountIdCard
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NavBarComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.ListItem
+import net.skyscanner.backpack.icon.tokens.Accessibility
+import net.skyscanner.backpack.icon.tokens.Account
+import net.skyscanner.backpack.icon.tokens.AccountIdCard
 
 @Composable
 @NavBarComponent

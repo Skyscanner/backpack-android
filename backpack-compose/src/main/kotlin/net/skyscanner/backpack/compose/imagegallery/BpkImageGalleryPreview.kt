@@ -39,10 +39,10 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.BpkCarouselState
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Picture
 import net.skyscanner.backpack.compose.utils.invisibleSemantic
+import net.skyscanner.backpack.icon.tokens.Picture
 
 @Composable
 fun BpkImageGalleryPreviewDefault(

@@ -32,14 +32,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.PriceTag
-import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BadgeComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.PriceTag
+import net.skyscanner.backpack.icon.tokens.TickCircle
 
 @Composable
 @BadgeComponent

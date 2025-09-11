@@ -29,14 +29,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.fab.BpkFab
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Flight
-import net.skyscanner.backpack.compose.tokens.Search
-import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FabComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Flight
+import net.skyscanner.backpack.icon.tokens.Search
+import net.skyscanner.backpack.icon.tokens.Star
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable

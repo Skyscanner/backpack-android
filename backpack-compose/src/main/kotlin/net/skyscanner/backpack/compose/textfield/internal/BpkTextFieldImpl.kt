@@ -58,18 +58,19 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.ExclamationCircle
-import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.compose.utils.hideContentIf
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
+import net.skyscanner.backpack.icon.tokens.CloseCircle
+import net.skyscanner.backpack.icon.tokens.ExclamationCircle
+import net.skyscanner.backpack.icon.tokens.TickCircle
 
 @Composable
 internal fun BpkTextFieldImpl(

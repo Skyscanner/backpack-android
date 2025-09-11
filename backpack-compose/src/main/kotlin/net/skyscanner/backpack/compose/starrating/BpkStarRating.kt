@@ -29,12 +29,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Star
-import net.skyscanner.backpack.compose.tokens.StarHalf
-import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
@@ -44,6 +41,10 @@ import kotlin.math.floor
 import kotlin.math.round
 import kotlin.math.roundToInt
 import androidx.compose.ui.platform.LocalResources
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.tokens.Star
+import net.skyscanner.backpack.icon.tokens.StarHalf
+import net.skyscanner.backpack.icon.tokens.StarOutline
 
 enum class BpkStarRatingSize {
     Large,

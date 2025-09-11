@@ -29,7 +29,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.Default
@@ -37,8 +37,8 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.compose.utils.isSmallTablet
+import net.skyscanner.backpack.icon.tokens.LongArrowRight
 
 @Composable
 internal fun BpkSectionHeaderImpl(

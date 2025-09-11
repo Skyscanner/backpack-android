@@ -20,7 +20,7 @@ Example of a `BpkFab`:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.fab.BpkFab
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Search
 
 BpkFab(

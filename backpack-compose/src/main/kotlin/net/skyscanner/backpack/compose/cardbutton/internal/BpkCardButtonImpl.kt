@@ -45,14 +45,15 @@ import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Heart
-import net.skyscanner.backpack.compose.tokens.HeartOutline
-import net.skyscanner.backpack.compose.tokens.ShareAndroid
 import net.skyscanner.backpack.compose.tokens.internal.BpkCardButtonColors
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.icon.tokens.Heart
+import net.skyscanner.backpack.icon.tokens.HeartOutline
+import net.skyscanner.backpack.icon.tokens.ShareAndroid
 
 private enum class BpkCardButtonState {
     Rest,

@@ -39,16 +39,16 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
-import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.select.BpkDropDownWidth
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.tokens.ArrowDown
 
 private const val PIXEL_COUNT_100 = 100
 

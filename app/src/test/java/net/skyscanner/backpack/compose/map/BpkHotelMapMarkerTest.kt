@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.compose.map
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Hotels
 import org.junit.Test
 

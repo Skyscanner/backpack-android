@@ -34,7 +34,7 @@ import com.google.maps.android.compose.ComposeMapColorScheme
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.map.BpkHotelMapMarker
 import net.skyscanner.backpack.compose.map.BpkHotelMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkIconMapMarker
@@ -47,14 +47,14 @@ import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
-import net.skyscanner.backpack.compose.tokens.Airports
-import net.skyscanner.backpack.compose.tokens.Cafe
-import net.skyscanner.backpack.compose.tokens.Heart
-import net.skyscanner.backpack.compose.tokens.Hotels
-import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Airports
+import net.skyscanner.backpack.icon.tokens.Cafe
+import net.skyscanner.backpack.icon.tokens.Heart
+import net.skyscanner.backpack.icon.tokens.Hotels
+import net.skyscanner.backpack.icon.tokens.Landmark
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable

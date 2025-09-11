@@ -25,9 +25,9 @@ import net.skyscanner.backpack.compose.badge.internal.BadgeDrawable
 import net.skyscanner.backpack.compose.badge.internal.BadgeIcon
 import net.skyscanner.backpack.compose.badge.internal.BpkBadgeImpl
 import net.skyscanner.backpack.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.Exclamation
-import net.skyscanner.backpack.compose.tokens.InformationCircle
-import net.skyscanner.backpack.compose.tokens.TickCircle
+import net.skyscanner.backpack.icon.tokens.Exclamation
+import net.skyscanner.backpack.icon.tokens.InformationCircle
+import net.skyscanner.backpack.icon.tokens.TickCircle
 
 enum class BpkBadgeType {
     Normal,

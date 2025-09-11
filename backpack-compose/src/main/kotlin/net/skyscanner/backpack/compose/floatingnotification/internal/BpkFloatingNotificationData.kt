@@ -20,7 +20,7 @@ package net.skyscanner.backpack.compose.floatingnotification.internal
 
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.CancellableContinuation
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 
 @Stable
 internal data class BpkFloatingNotificationData(

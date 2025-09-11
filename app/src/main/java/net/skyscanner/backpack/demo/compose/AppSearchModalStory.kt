@@ -42,16 +42,16 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkSection
 import net.skyscanner.backpack.compose.appsearchmodal.BpkSectionHeading
 import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
-import net.skyscanner.backpack.compose.tokens.Airports
-import net.skyscanner.backpack.compose.tokens.City
-import net.skyscanner.backpack.compose.tokens.Landmark
-import net.skyscanner.backpack.compose.tokens.UseLocation
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.AppSearchModalComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Airports
+import net.skyscanner.backpack.icon.tokens.City
+import net.skyscanner.backpack.icon.tokens.Landmark
+import net.skyscanner.backpack.icon.tokens.UseLocation
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable

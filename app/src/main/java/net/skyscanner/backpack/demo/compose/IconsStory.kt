@@ -47,16 +47,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.values
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.IconComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.values
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable

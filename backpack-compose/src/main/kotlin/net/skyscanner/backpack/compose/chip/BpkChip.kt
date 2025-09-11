@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.chip.internal.BpkChipImpl
 import net.skyscanner.backpack.compose.chip.internal.BpkDismissibleChipImpl
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 
 enum class BpkChipStyle {
     Default,

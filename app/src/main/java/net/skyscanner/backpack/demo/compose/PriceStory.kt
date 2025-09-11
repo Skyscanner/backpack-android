@@ -32,15 +32,15 @@ import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PriceComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.NewWindow
 
 @Composable
 @PriceComponent

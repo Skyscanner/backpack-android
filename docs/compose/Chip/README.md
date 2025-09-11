@@ -65,7 +65,7 @@ Example of a Chip with leading icon:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.chip.BpkChip
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Deals
 
 BpkChip(

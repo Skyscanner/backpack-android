@@ -33,15 +33,15 @@ import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavSize
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.HorizontalNavComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.CloseCircle
+import net.skyscanner.backpack.icon.tokens.TickCircle
 
 @Composable
 @HorizontalNavComponent

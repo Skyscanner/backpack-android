@@ -53,18 +53,18 @@ import net.skyscanner.backpack.compose.chipgroup.multiple.BpkStickyChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipGroupType
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
 import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Beach
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Deals
-import net.skyscanner.backpack.compose.tokens.Filter
-import net.skyscanner.backpack.compose.tokens.Heart
-import net.skyscanner.backpack.compose.tokens.View
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ChipGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+import net.skyscanner.backpack.icon.tokens.Beach
+import net.skyscanner.backpack.icon.tokens.Deals
+import net.skyscanner.backpack.icon.tokens.Filter
+import net.skyscanner.backpack.icon.tokens.Heart
+import net.skyscanner.backpack.icon.tokens.View
 
 @Composable
 @ChipGroupComponent

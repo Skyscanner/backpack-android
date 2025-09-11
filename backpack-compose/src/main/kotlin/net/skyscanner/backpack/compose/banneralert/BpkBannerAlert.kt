@@ -21,7 +21,7 @@ package net.skyscanner.backpack.compose.banneralert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.banneralert.internal.BannerAlert
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 
 enum class BpkBannerAlertType {
     Info,

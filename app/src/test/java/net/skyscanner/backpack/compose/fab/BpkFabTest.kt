@@ -20,7 +20,7 @@
 package net.skyscanner.backpack.compose.fab
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Search
 import org.junit.Test
 

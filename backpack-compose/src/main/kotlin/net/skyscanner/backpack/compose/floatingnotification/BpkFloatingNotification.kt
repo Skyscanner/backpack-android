@@ -45,7 +45,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationData
 import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationImpl
 import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNotificationTransforms
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @OptIn(ExperimentalAnimationApi::class)

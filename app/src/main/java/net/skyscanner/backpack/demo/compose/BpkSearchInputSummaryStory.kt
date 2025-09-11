@@ -33,7 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryType
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
@@ -41,11 +41,11 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Hotels
-import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SearchInputSummaryComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Hotels
+import net.skyscanner.backpack.icon.tokens.Search
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable

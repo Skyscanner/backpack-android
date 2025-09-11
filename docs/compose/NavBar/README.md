@@ -78,7 +78,7 @@ BpkTopNavBar(
 Example of a navigation bar with icon actions
 
 ```Kotlin
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -114,7 +114,7 @@ Example of a collapsible navigation bar:
 
 ```Kotlin
 import androidx.compose.foundation.lazy.LazyColumn
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -158,7 +158,7 @@ Example of a collapsible transparent navigation bar:
 
 ```Kotlin
 import androidx.compose.foundation.lazy.LazyColumn
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.IconAction

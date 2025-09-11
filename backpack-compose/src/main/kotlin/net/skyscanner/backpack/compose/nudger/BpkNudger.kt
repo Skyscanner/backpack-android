@@ -30,6 +30,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText

@@ -19,7 +19,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of an icon:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 BpkIcon(
@@ -31,8 +31,8 @@ BpkIcon(
 Example of a large icon:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 BpkIcon(
@@ -45,7 +45,7 @@ BpkIcon(
 If you receive icon names from the server, you can use the `BpkIcon.findByName` method to retrieve the icon:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 val icon = BpkIcon.findByName("add-circle")

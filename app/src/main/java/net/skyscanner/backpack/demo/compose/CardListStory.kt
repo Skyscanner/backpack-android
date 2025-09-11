@@ -44,18 +44,18 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.cardlist.rail.BpkRailCardList
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.AddCircle
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardListComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+import net.skyscanner.backpack.icon.tokens.AddCircle
 
 @Composable
 @CardListComponent

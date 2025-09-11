@@ -36,13 +36,14 @@ import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 import net.skyscanner.backpack.compose.flightleg.bpkAirportHighlightStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FlightLegComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Aircraft
 
 @Composable
 @FlightLegComponent

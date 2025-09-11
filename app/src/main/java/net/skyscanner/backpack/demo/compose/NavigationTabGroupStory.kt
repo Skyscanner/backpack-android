@@ -32,19 +32,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroup
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Cars
-import net.skyscanner.backpack.compose.tokens.Explore
-import net.skyscanner.backpack.compose.tokens.Flight
-import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NavigationTabGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Cars
+import net.skyscanner.backpack.icon.tokens.Explore
+import net.skyscanner.backpack.icon.tokens.Flight
+import net.skyscanner.backpack.icon.tokens.Hotels
 
 @Composable
 @NavigationTabGroupComponent

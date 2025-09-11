@@ -33,13 +33,13 @@ import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FloatingNotificationComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
+import net.skyscanner.backpack.icon.tokens.Heart
 
 @Composable
 @FloatingNotificationComponent

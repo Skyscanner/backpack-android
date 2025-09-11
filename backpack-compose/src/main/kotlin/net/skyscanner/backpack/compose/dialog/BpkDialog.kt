@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.BpkFlareDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.BpkImageDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 
 @Composable
 @Suppress("ModifierMissing")

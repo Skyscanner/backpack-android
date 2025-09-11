@@ -45,8 +45,8 @@ import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Minus
-import net.skyscanner.backpack.compose.tokens.Plus
+import net.skyscanner.backpack.icon.tokens.Minus
+import net.skyscanner.backpack.icon.tokens.Plus
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)

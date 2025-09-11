@@ -32,20 +32,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textarea.BpkTextArea
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextFieldComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
+import net.skyscanner.backpack.icon.tokens.Accessibility
+import net.skyscanner.backpack.icon.tokens.Search
 
 @Composable
 @TextFieldComponent

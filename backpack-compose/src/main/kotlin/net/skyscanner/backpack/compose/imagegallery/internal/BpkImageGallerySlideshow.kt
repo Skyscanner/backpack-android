@@ -52,13 +52,14 @@ import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.BpkCarouselState
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Camera
 import net.skyscanner.backpack.compose.utils.invisibleSemantic
+import net.skyscanner.backpack.icon.tokens.Camera
 
 @Composable
 internal fun BpkImageGallerySlideshow(

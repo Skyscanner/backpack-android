@@ -43,13 +43,13 @@ import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
 import net.skyscanner.backpack.compose.chip.BpkDropdownChip
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Deals
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ChipComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.Deals
 
 @Composable
 @ChipComponent

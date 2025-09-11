@@ -35,13 +35,13 @@ import net.skyscanner.backpack.compose.dialog.BpkImageDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.AlertAdd
-import net.skyscanner.backpack.compose.tokens.Tick
-import net.skyscanner.backpack.compose.tokens.Trash
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.icon.tokens.AlertAdd
+import net.skyscanner.backpack.icon.tokens.Tick
+import net.skyscanner.backpack.icon.tokens.Trash
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable

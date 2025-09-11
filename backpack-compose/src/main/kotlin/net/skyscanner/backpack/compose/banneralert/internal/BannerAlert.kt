@@ -36,14 +36,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertStyle
 import net.skyscanner.backpack.compose.banneralert.BpkBannerAlertType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.compose.tokens.InformationCircle
-import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.compose.tokens.internal.BpkInfoBannerColors
+import net.skyscanner.backpack.icon.tokens.CloseCircle
+import net.skyscanner.backpack.icon.tokens.InformationCircle
+import net.skyscanner.backpack.icon.tokens.TickCircle
 
 @Composable
 internal fun BannerAlert(

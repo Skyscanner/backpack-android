@@ -35,12 +35,12 @@ import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.ChevronDown
-import net.skyscanner.backpack.compose.tokens.ChevronUp
+import net.skyscanner.backpack.icon.tokens.ChevronDown
+import net.skyscanner.backpack.icon.tokens.ChevronUp
 
 @Composable
 internal fun BpkStackCardListImpl(

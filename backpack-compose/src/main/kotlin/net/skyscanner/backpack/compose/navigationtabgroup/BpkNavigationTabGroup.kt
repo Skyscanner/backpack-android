@@ -22,7 +22,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationtabgroup.internal.BpkNavigationTabGroupImpl
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 

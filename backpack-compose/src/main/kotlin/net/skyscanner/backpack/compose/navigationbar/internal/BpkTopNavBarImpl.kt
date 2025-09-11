@@ -36,7 +36,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
 import net.skyscanner.backpack.compose.navigationbar.Action
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
@@ -47,9 +48,9 @@ import net.skyscanner.backpack.compose.navigationbar.asInternalState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-import net.skyscanner.backpack.compose.tokens.NativeAndroidBack
-import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.icon.tokens.NativeAndroidBack
+import net.skyscanner.backpack.icon.tokens.NativeAndroidClose
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

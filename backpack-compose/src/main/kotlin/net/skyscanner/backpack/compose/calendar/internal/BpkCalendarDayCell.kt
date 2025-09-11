@@ -61,7 +61,7 @@ import net.skyscanner.backpack.compose.calendar.CellLabel
 import net.skyscanner.backpack.compose.calendar.CellStatus
 import net.skyscanner.backpack.compose.calendar.CellStatusStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.findBySmall
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.skeleton.BpkHeadlineSkeleton
 import net.skyscanner.backpack.compose.skeleton.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.skeleton.BpkShimmerSize
@@ -70,6 +70,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
+import net.skyscanner.backpack.icon.findBySmall
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

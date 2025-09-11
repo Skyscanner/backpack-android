@@ -21,11 +21,11 @@ package net.skyscanner.backpack.compose.searchinputsummary
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
-import net.skyscanner.backpack.compose.tokens.Search
+import net.skyscanner.backpack.icon.tokens.Search
 
 sealed class Prefix {
     data class Icon(
