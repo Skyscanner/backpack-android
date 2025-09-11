@@ -21,10 +21,16 @@ package net.skyscanner.backpack.nudger
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIconSize
+import net.skyscanner.backpack.icon.get
+import net.skyscanner.backpack.icon.tokens.Minus
+import net.skyscanner.backpack.icon.tokens.Plus
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 import java.util.Locale
@@ -37,11 +43,11 @@ open class BpkNudger @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
-    private val decrementButton by unsafeLazy<View> {
+    private val decrementButton by unsafeLazy<BpkButton> {
         findViewById(R.id.bpk_nudger_decrement)
     }
 
-    private val incrementButton by unsafeLazy<View> {
+    private val incrementButton by unsafeLazy<BpkButton> {
         findViewById(R.id.bpk_nudger_increment)
     }
 
@@ -91,10 +97,12 @@ open class BpkNudger @JvmOverloads constructor(
             value = it.getInt(R.styleable.BpkNudger_nudgerValue, value)
         }
 
+        decrementButton.setIcon(AppCompatResources.getDrawable(context, BpkIcon.Minus[BpkIconSize.Small]))
         decrementButton.setOnClickListener {
             value--
             onChangeListener?.invoke(value)
         }
+        incrementButton.setIcon(AppCompatResources.getDrawable(context, BpkIcon.Plus[BpkIconSize.Small]))
         incrementButton.setOnClickListener {
             value++
             onChangeListener?.invoke(value)

@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="−"
-        app:buttonIcon="@drawable/bpk_minus_sm"
         app:buttonIconPosition="icon_only"
         app:buttonType="secondary"
         tools:ignore="HardcodedText" />
@@ -33,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="+"
-        app:buttonIcon="@drawable/bpk_plus_sm"
         app:buttonIconPosition="icon_only"
         app:buttonType="secondary"
         tools:ignore="HardcodedText" />

@@ -72,8 +72,8 @@ dependencies {
     testImplementation libs.test.coroutines
 
     lintPublish(project(":backpack-lint"))
-    implementation(project(":backpack-common"))
     implementation(project(":backpack-internal-icons"))
+    implementation(project(":backpack-common"))
 
     def composeBom = platform(libs.compose.bom)
     api composeBom

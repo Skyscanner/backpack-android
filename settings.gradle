@@ -1,7 +1,7 @@
 include ':Backpack',
+    ':backpack-internal-icons',
     ':backpack-common',
     ':backpack-compose',
-    ':backpack-internal-icons',
     ':backpack-lint',
     ':meta:annotations',
     ':meta:processor',
