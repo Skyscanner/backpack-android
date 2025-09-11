@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chipgroup.single.internal.BpkSingleSelectChipGroupImpl
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
 
 enum class BpkSingleChipGroupType {

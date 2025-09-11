@@ -35,7 +35,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius

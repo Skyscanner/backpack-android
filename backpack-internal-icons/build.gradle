@@ -16,10 +16,17 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.utils
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
-import kotlin.properties.Delegates
-import kotlin.properties.ReadOnlyProperty
+apply from: "$rootProject.projectDir/android-configuration.gradle"
+apply from: "tokens.gradle.kts"
 
-internal fun <T> Delegates.singleton(value: T): ReadOnlyProperty<Any?, T> =
-    ReadOnlyProperty { _, _ -> value }
+android {
+    namespace 'net.skyscanner.backpack.internal.icons'
+}
+
+// Note: This module is intentionally NOT published as it contains internal icon resources
+// that should only be accessed through the BpkIcon API in backpack-common
+
+apply from: "$rootProject.projectDir/android-configuration-check.gradle"

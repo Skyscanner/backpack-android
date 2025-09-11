@@ -23,16 +23,19 @@ import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
 import net.skyscanner.backpack.tokens.BpkTextStyle
 import net.skyscanner.backpack.tokens.BpkTextUnit
+import net.skyscanner.backpack.tokens.androidFileOf
 import net.skyscanner.backpack.tokens.nodeFileOf
 import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
 import net.skyscanner.backpack.tokens.saveTo
 import net.skyscanner.backpack.tokens.transformTo
+import com.squareup.kotlinpoet.ClassName
 
 tasks {
     val group = "tokens"
 
-    val src = project.projectDir.resolve("src/main/res").path
+    val src = project.projectDir.resolve("src/main/kotlin").path
+    val resSrc = project.projectDir.resolve("src/main/res").path
     val valuesFolder = "values"
     val iconSrc = project.projectDir.resolve("src/main/res/drawable-nodpi").path
     val rootDir = project.rootDir.path
@@ -41,6 +44,8 @@ tasks {
         .readAs(BpkFormat.Json)
     val iconSource = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
         .readAs(BpkFormat.Folder)
+    val rClass = ClassName("net.skyscanner.backpack.internal.icons", "R")
+    val iconsPackage = "net.skyscanner.backpack.icon.tokens"
 
     val generateElevationTokens by creating {
         this.group = group
@@ -48,7 +53,7 @@ tasks {
             source
                 .parseAs(BpkDimension.Category.Elevation)
                 .transformTo(BpkDimension.Format.Xml(namespace = "bpkElevation"))
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "elevation"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "elevation"))
                 .execute()
         }
     }
@@ -59,7 +64,7 @@ tasks {
             source
                 .parseAs(BpkDimension.Category.Spacing)
                 .transformTo(BpkDimension.Format.Xml(namespace = "bpkSpacing"))
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "dimensions.spacing"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "dimensions.spacing"))
                 .execute()
         }
     }
@@ -70,7 +75,7 @@ tasks {
             source
                 .parseAs(BpkDimension.Category.Radii)
                 .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderRadius"))
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "radii"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "radii"))
                 .execute()
         }
     }
@@ -81,7 +86,7 @@ tasks {
             source
                 .parseAs(BpkDimension.Category.Border)
                 .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderSize"))
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "borders"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "borders"))
                 .execute()
         }
     }
@@ -92,7 +97,7 @@ tasks {
             source
                 .parseAs(BpkDuration.Category.Animation)
                 .transformTo(BpkDuration.Format.Xml(namespace = "bpkAnimationDuration"))
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "animation"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "animation"))
                 .execute()
         }
     }
@@ -103,7 +108,7 @@ tasks {
             source
                 .parseAs(BpkTextUnit.Category.FontSize)
                 .transformTo(BpkTextUnit.Format.Xml)
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text.size"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "text.size"))
                 .execute()
         }
     }
@@ -114,7 +119,7 @@ tasks {
             source
                 .parseAs(BpkTextStyle.Category)
                 .transformTo(BpkTextStyle.Format.Xml)
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "text"))
                 .execute()
         }
     }
@@ -125,7 +130,7 @@ tasks {
             source
                 .parseAs(BpkColor.Static)
                 .transformTo(BpkColor.Format.StaticXml)
-                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "color"))
+                .saveTo(BpkOutput.XmlFile(resSrc, valuesFolder, "color"))
                 .execute()
         }
     }
@@ -136,7 +141,7 @@ tasks {
             source
                 .parseAs(BpkColor.Semantic)
                 .transformTo(BpkColor.Format.SemanticXml)
-                .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "semantic.color"))
+                .saveTo(BpkOutput.XmlFiles(resSrc, valuesFolder, "semantic.color"))
                 .execute()
         }
     }
@@ -147,18 +152,32 @@ tasks {
             source
                 .parseAs(BpkColor.Internal)
                 .transformTo(BpkColor.Format.SemanticXml)
-                .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "internal.color"))
+                .saveTo(BpkOutput.XmlFiles(resSrc, valuesFolder, "internal.color"))
+                .execute()
+        }
+    }
+
+    val generateInternalIcons by creating {
+        this.group = group
+        doLast {
+            iconSource
+                .parseAs(BpkIcon.Parser.Svg)
+                .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
+                .saveTo(BpkOutput.XmlIconFiles(project.projectDir.resolve("../backpack-internal-icons/src/main/res/drawable-nodpi").path))
                 .execute()
         }
     }
 
     val generateIcons by creating {
         this.group = group
+        dependsOn(generateInternalIcons)
+        dependsOn(":backpack-internal-icons:generateTokens")
         doLast {
-            iconSource
-                .parseAs(BpkIcon.Parser.Svg)
-                .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
-                .saveTo(BpkOutput.XmlIconFiles(iconSrc))
+            project.androidFileOf("backpack-internal-icons", "src/main/res/drawable-nodpi")
+                .readAs(BpkFormat.Folder)
+                .parseAs(BpkIcon.Parser.Xml)
+                .transformTo(BpkIcon.Format.Compose(rClass))
+                .saveTo(BpkOutput.KotlinExtensionFile(src, iconsPackage, "BpkIcon", rClass))
                 .execute()
         }
     }
@@ -185,6 +204,6 @@ tasks {
 
     val generateTokens by creating {
         this.group = group
-        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens, generateIcons)
+        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens, generateInternalIcons, generateIcons)
     }
 }

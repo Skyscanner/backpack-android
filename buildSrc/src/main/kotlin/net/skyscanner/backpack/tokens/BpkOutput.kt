@@ -59,6 +59,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
         val srcDir: String,
         val pkg: String,
         val name: String,
+        val rClass: ClassName? = null,
     ) : BpkOutput<List<PropertySpec>>() {
 
         override fun invoke(properties: List<PropertySpec>): Boolean {
@@ -66,6 +67,8 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
                 .indent(" ".repeat(4))
                 .suppressWarningTypes("RedundantVisibilityModifier", "unused")
                 .apply {
+                    // Add R class import if provided (for icon tokens)
+                    rClass?.let { addImport(it.packageName, it.simpleName) }
                     properties.forEach { addProperty(it) }
                 }
                 .build()

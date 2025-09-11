@@ -33,7 +33,7 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
 
     val tokensPackage = "net.skyscanner.backpack.compose.tokens"
-    val rClass = ClassName("net.skyscanner.backpack.compose", "R")
+    val rClass = ClassName("net.skyscanner.backpack.internal.icons", "R")
     val group = "tokens"
     val src = project.projectDir.resolve("src/main/kotlin").path
 
@@ -165,20 +165,9 @@ tasks {
         dependsOn(generateSemanticColors, generateInternalColors)
     }
 
-    val generateIcons by creating {
-        this.group = group
-        doLast {
-            project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-                .readAs(BpkFormat.Folder)
-                .parseAs(BpkIcon.Parser.Xml)
-                .transformTo(BpkIcon.Format.Compose(rClass))
-                .saveTo(BpkOutput.KotlinExtensionFile(src, tokensPackage, "BpkIcon"))
-                .execute()
-        }
-    }
 
     val generateTokens by creating {
         this.group = group
-        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
+        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens )
     }
 }

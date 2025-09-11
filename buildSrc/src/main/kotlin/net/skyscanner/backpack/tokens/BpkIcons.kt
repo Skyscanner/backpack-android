@@ -106,9 +106,9 @@ data class BpkIcon(
 typealias BpkIcons = List<BpkIcon>
 
 private val DelegatesClass = ClassName("kotlin.properties", "Delegates")
-private val SingletonMethod = MemberName("net.skyscanner.backpack.compose.utils", "singleton")
-private val BpkIconClass = ClassName("net.skyscanner.backpack.compose.icon", "BpkIcon")
-private val BpkIconReceiverClass = ClassName("net.skyscanner.backpack.compose.icon", "BpkIcon.Companion")
+private val SingletonMethod = MemberName("net.skyscanner.backpack.util", "singleton")
+private val BpkIconClass = ClassName("net.skyscanner.backpack.icon", "BpkIcon")
+private val BpkIconReceiverClass = ClassName("net.skyscanner.backpack.icon", "BpkIcon.Companion")
 private val BpkIconsType = List::class.asClassName().parameterizedBy(BpkIconClass)
 
 private fun String.toComposeName(): String =

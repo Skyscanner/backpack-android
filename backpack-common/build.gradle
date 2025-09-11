@@ -38,6 +38,7 @@ android {
 
 dependencies {
     api libs.compose.ui
+    implementation project(':backpack-internal-icons')
     testImplementation libs.test.junit
     implementation libs.compose.runtime
     androidTestImplementation libs.test.espressoCore
