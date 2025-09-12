@@ -24,7 +24,7 @@ ext {
     artifactId = "backpack-internal-icons"
 }
 
-apply from: rootProject.file('gradle-maven-push.gradle')
+//apply from: rootProject.file('gradle-maven-push.gradle')
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 apply from: "tokens.gradle.kts"
 
