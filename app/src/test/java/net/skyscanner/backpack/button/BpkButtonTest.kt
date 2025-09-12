@@ -36,8 +36,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
     private val icon
         get() = testContext.getDrawable(
             when (size) {
-                BpkButton.Size.Standard -> R.drawable.bpk_long_arrow_right_sm
-                BpkButton.Size.Large -> R.drawable.bpk_long_arrow_right
+                BpkButton.Size.Standard -> net.skyscanner.backpack.internal.icons.R.drawable.bpk_long_arrow_right_sm
+                BpkButton.Size.Large -> net.skyscanner.backpack.internal.icons.R.drawable.bpk_long_arrow_right
             },
         )
 
@@ -47,7 +47,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
         val view = BpkButton(testContext, type, size).apply {
             text = "Button"
         }
-        snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
+        snap(view, background = type.rowBackground() ?: net.skyscanner.backpack.common.R.color.bpkCanvas)
     }
 
     @Test
@@ -59,7 +59,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
             text = "Button"
             isEnabled = false
         }
-        snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
+        snap(view, background = type.rowBackground() ?: net.skyscanner.backpack.common.R.color.bpkCanvas)
     }
 
     @Test
@@ -69,7 +69,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
             text = "Button"
             loading = true
         }
-        snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
+        snap(view, background = type.rowBackground() ?: net.skyscanner.backpack.common.R.color.bpkCanvas)
     }
 
     @Test
@@ -165,7 +165,7 @@ private fun BpkButton.Type.rowBackground() =
         BpkButton.Type.SecondaryOnDark,
         BpkButton.Type.PrimaryOnDark,
         BpkButton.Type.LinkOnDark,
-        -> R.color.bpkSurfaceContrast
-        BpkButton.Type.PrimaryOnLight -> R.color.bpkTextOnDark
+        -> net.skyscanner.backpack.common.R.color.bpkSurfaceContrast
+        BpkButton.Type.PrimaryOnLight -> net.skyscanner.backpack.common.R.color.bpkTextOnDark
         else -> null
     }

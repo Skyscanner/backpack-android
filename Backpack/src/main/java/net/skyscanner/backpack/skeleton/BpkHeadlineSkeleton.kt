@@ -36,7 +36,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     val paint = Paint().apply {
-        color = context.getColor(R.color.bpkSurfaceHighlight)
+        color = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
         style = Paint.Style.FILL
         isAntiAlias = true
     }
@@ -71,9 +71,9 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
     private fun getHeightSize(size: SkeletonHeightSizeType): Int {
         return when (size) {
             SkeletonHeightSizeType.Custom -> 0
-            SkeletonHeightSizeType.Small -> R.dimen.bpkSpacingMd
-            SkeletonHeightSizeType.Medium -> R.dimen.bpkSpacingBase
-            SkeletonHeightSizeType.Large -> R.dimen.bpkSpacingXl
+            SkeletonHeightSizeType.Small -> net.skyscanner.backpack.common.R.dimen.bpkSpacingMd
+            SkeletonHeightSizeType.Medium -> net.skyscanner.backpack.common.R.dimen.bpkSpacingBase
+            SkeletonHeightSizeType.Large -> net.skyscanner.backpack.common.R.dimen.bpkSpacingXl
         }
     }
 
@@ -82,7 +82,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
             heightSize = parseHeightTypeAttribute(it, heightSize)
         }
 
-        outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
+        outlineProvider = CornerRadiusViewOutlineProvider(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusXs)
         clipToOutline = true
     }
 
@@ -95,7 +95,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        val borderRadius = context.resources.getDimensionPixelSize(R.dimen.bpkBorderRadiusXs)
+        val borderRadius = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusXs)
         canvas.drawRoundRect(0f, 0f, width.toFloat(), height.toFloat(), borderRadius.toFloat(), borderRadius.toFloat(), paint)
     }
 

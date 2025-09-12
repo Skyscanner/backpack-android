@@ -46,8 +46,8 @@ open class BpkFab @JvmOverloads constructor(
     }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        var backgroundColour = context.getColor(R.color.bpkCoreAccent)
-        var iconColour = context.getColor(R.color.bpkTextPrimaryInverse)
+        var backgroundColour = context.getColor(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        var iconColour = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse)
 
         context.theme.obtainStyledAttributes(
             attrs,
@@ -61,14 +61,14 @@ open class BpkFab @JvmOverloads constructor(
 
         this.imageTintList = getColorSelector(
             iconColour,
-            context.getColor(R.color.bpkTextDisabled),
+            context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
         )
         this.isClickable = isEnabled
         this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
-        this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
+        this.elevation = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkElevationBase).toFloat()
         this.backgroundTintList = getColorSelector(
             backgroundColour,
-            context.getColor(R.color.__privateButtonDisabledBackground),
+            context.getColor(net.skyscanner.backpack.common.R.color.__privateButtonDisabledBackground),
         )
     }
 

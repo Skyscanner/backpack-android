@@ -45,19 +45,19 @@ class BpkSpinnerTest {
     fun test_default() {
         Assert.assertFalse(subject.small)
         Assert.assertEquals(BpkSpinner.Type.PRIMARY, subject.type)
-        Assert.assertEquals(subject.context.getColor(R.color.bpkTextLink), subject.getColor())
+        Assert.assertEquals(subject.context.getColor(net.skyscanner.backpack.common.R.color.bpkTextLink), subject.getColor())
     }
 
     @Test
     fun test_light() {
         subject.type = BpkSpinner.Type.LIGHT
-        Assert.assertEquals(subject.context.getColor(R.color.bpkTextOnDark), subject.getColor())
+        Assert.assertEquals(subject.context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark), subject.getColor())
     }
 
     @Test
     fun test_dark() {
         subject.type = BpkSpinner.Type.DARK
-        Assert.assertEquals(subject.context.getColor(R.color.bpkTextSecondary), subject.getColor())
+        Assert.assertEquals(subject.context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary), subject.getColor())
     }
 
     @Test

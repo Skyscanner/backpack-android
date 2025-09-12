@@ -57,7 +57,7 @@ internal class ButtonStyle(
 
     fun getButtonBackground(enabled: Boolean, loading: Boolean): Drawable {
 
-        val radius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
+        val radius = context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusSm)
 
         fun roundRectDrawable(
             @ColorInt color: Int,
@@ -75,7 +75,7 @@ internal class ButtonStyle(
                     pressed = roundRectDrawable(bgPressedColor),
                     drawable = roundRectDrawable(bgColor),
                 ) {
-                    val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
+                    val strokeAnimation = context.resources.getInteger(net.skyscanner.backpack.common.R.integer.bpkAnimationDurationSm)
                     setEnterFadeDuration(strokeAnimation)
                     setExitFadeDuration(strokeAnimation)
                 },
@@ -128,12 +128,12 @@ internal class ButtonStyle(
             @AttrRes style: Int,
             @ColorRes bgColorRes: Int,
             @ColorRes bgPressedColorRes: Int = bgColorRes,
-            @ColorRes bgDisabledColorRes: Int = R.color.__privateButtonDisabledBackground,
+            @ColorRes bgDisabledColorRes: Int = net.skyscanner.backpack.common.R.color.__privateButtonDisabledBackground,
             @ColorRes bgLoadingColorRes: Int = bgPressedColorRes,
             @ColorRes rippleColorRes: Int = R.color.__buttonDefaultRipple,
             @ColorRes contentColorRes: Int,
             @ColorRes contentPressedColorRes: Int = contentColorRes,
-            @ColorRes contentDisabledColorRes: Int = R.color.bpkTextDisabled,
+            @ColorRes contentDisabledColorRes: Int = net.skyscanner.backpack.common.R.color.bpkTextDisabled,
             @ColorRes contentLoadingColorRes: Int = contentPressedColorRes,
         ): ButtonStyle {
 

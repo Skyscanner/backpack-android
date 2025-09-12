@@ -125,7 +125,7 @@ open class BpkText @JvmOverloads constructor(
             if (it.hasValue(R.styleable.BpkText_android_textColor)) {
                 _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)
             }
-            _textColorLink = ColorStateList.valueOf(context.getColor(R.color.bpkTextLink))
+            _textColorLink = ColorStateList.valueOf(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextLink))
 
             // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
             var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
@@ -160,8 +160,8 @@ open class BpkText @JvmOverloads constructor(
 
     @SuppressLint("CustomViewStyleable")
     private fun applyLineHeight(textAppearance: Int) {
-        val textStyleAttributes = context.obtainStyledAttributes(textAppearance, R.styleable.BpkTextStyle)
-        val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+        val textStyleAttributes = context.obtainStyledAttributes(textAppearance, net.skyscanner.backpack.common.R.styleable.BpkTextStyle)
+        val lineHeight = textStyleAttributes.getDimensionPixelSize(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_lineHeight, -1)
             .let { if (it == -1) null else it }
         lineHeight?.let { TextViewCompat.setLineHeight(this, lineHeight) }
 
@@ -193,20 +193,20 @@ open class BpkText @JvmOverloads constructor(
 private fun internalGetFont(context: Context, textStyle: BpkText.TextStyle): BpkText.FontDefinition {
     val styleRes = getStyleId(context, textStyle)
 
-    val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
+    val textStyleAttributes = context.obtainStyledAttributes(styleRes, net.skyscanner.backpack.common.R.styleable.BpkTextStyle)
     val fontSize = textStyleAttributes.getDimensionPixelSize(
-        R.styleable.BpkTextStyle_android_textSize,
+        net.skyscanner.backpack.common.R.styleable.BpkTextStyle_android_textSize,
         ResourcesUtil.dpToPx(16, context),
     )
-    val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
+    val letterSpacing = textStyleAttributes.getFloat(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_android_letterSpacing, -1f)
         .let { if (it == -1f) null else it }
 
-    val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+    val lineHeight = textStyleAttributes.getDimensionPixelSize(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_lineHeight, -1)
         .let { if (it == -1) null else it }
 
-    val typefaceResId = textStyleAttributes.getResourceId(R.styleable.BpkTextStyle_android_fontFamily, -1)
+    val typefaceResId = textStyleAttributes.getResourceId(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_android_fontFamily, -1)
     val typeface = if (typefaceResId == -1) {
-        textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily)?.let { Typeface.create(it, Typeface.NORMAL) }
+        textStyleAttributes.getString(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_android_fontFamily)?.let { Typeface.create(it, Typeface.NORMAL) }
     } else {
         if (context.isInEditMode()) {
             // Preview is broken when using the compat version for font loading as of AS 4.2 (see https://issuetracker.google.com/issues/150587499)

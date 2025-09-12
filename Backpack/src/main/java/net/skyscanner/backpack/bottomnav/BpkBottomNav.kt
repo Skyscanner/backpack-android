@@ -55,7 +55,7 @@ open class BpkBottomNav @JvmOverloads constructor(
         minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
         itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
         itemIconTintList = itemTextColor
-        elevation = resources.getDimension(R.dimen.bpkElevationLg)
+        elevation = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationLg)
     }
 
     fun addItem(id: Int, title: String, icon: Drawable): MenuItem =

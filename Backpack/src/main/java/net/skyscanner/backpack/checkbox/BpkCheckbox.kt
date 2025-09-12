@@ -48,11 +48,11 @@ open class BpkCheckbox @JvmOverloads constructor(
     }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        var checkmarkDefaultColor = context.getColor(R.color.bpkTextSecondary)
-        var checkmarkCheckedColor = context.getColor(R.color.bpkCoreAccent)
-        var checkmarkDisabledColor = context.getColor(R.color.bpkTextDisabled)
-        val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
-        val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
+        var checkmarkDefaultColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
+        var checkmarkCheckedColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        var checkmarkDisabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        val textDisabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        val textEnabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
         context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.BpkCheckbox,
@@ -83,7 +83,7 @@ open class BpkCheckbox @JvmOverloads constructor(
         super.setText(text, type)
 
         // Only apply padding if text is used, otherwise checkbox will have extra padding
-        if (!text.isNullOrEmpty()) setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
+        if (!text.isNullOrEmpty()) setPaddingRelative(resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
     }
 
     override fun setEnabled(enabled: Boolean) {

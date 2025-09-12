@@ -54,14 +54,14 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     private fun setupBottomSheet(state: Int): View {
         val root = CoordinatorLayout(testContext)
         val frameLayout = FrameLayout(root.context)
-        frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkCanvasContrast)
+        frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, net.skyscanner.backpack.common.R.color.bpkCanvasContrast)
         frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         root.addView(frameLayout)
 
         val bottomSheet = BpkBottomSheet(frameLayout.context)
         val bottomSheetParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         bottomSheetBehaviour = BpkBottomSheetBehaviour(root.context)
-        bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
+        bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingXxl)
         bottomSheetBehaviour.state = state
         bottomSheetParams.behavior = bottomSheetBehaviour
         bottomSheet.layoutParams = bottomSheetParams

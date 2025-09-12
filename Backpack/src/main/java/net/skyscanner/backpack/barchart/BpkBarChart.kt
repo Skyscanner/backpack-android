@@ -171,12 +171,12 @@ open class BpkBarChart @JvmOverloads constructor(
 
         var columnTitle = context.getColorStateList(R.color.bpk_barchart_title_selector)
         var columnSubtitle = context.getColorStateList(R.color.bpk_barchart_subtitle_selector)
-        var groupTitle = context.getColorStateList(R.color.bpkTextPrimary)
-        var chartBackground = context.getColorStateList(R.color.bpkSurfaceHighlight)
+        var groupTitle = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        var chartBackground = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
         var chartForeground = context.getColorStateList(R.color.bpk_barchart_bar_selector)
-        var chartLine = context.getColorStateList(R.color.bpkCoreAccent)
-        var popupBackground = context.getColorStateList(R.color.bpkCoreAccent)
-        var popupText = context.getColorStateList(R.color.bpkTextPrimaryInverse)
+        var chartLine = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        var popupBackground = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        var popupText = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse)
 
         themedContext.theme.obtainStyledAttributes(
             attrs,

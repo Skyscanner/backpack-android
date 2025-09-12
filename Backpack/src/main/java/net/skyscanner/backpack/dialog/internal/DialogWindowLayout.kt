@@ -53,7 +53,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
     private var fullscreen = false
         set(value) {
             field = value
-            background = if (value) AppCompatResources.getDrawable(context, R.color.bpkSurfaceDefault) else modalBg
+            background = if (value) AppCompatResources.getDrawable(context, net.skyscanner.backpack.common.R.color.bpkSurfaceDefault) else modalBg
         }
 
     private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)

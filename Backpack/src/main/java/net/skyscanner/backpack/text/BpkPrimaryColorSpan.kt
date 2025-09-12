@@ -25,7 +25,7 @@ import net.skyscanner.backpack.R
 
 class BpkPrimaryColorSpan(context: Context) : CharacterStyle() {
 
-    private val color = context.getColor(R.color.bpkTextLink)
+    private val color = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextLink)
 
     override fun updateDrawState(tp: TextPaint) {
         tp.color = color

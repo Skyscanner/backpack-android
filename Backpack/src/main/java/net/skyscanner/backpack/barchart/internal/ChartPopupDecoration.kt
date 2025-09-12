@@ -33,9 +33,9 @@ internal class ChartPopupDecoration(
 ) : RecyclerView.ItemDecoration() {
 
     private val drawable = ChartPopupDrawable(context, colors)
-    private val bottomSpacing = context.resources.getDimension(R.dimen.bpkSpacingSm)
-    private val topSpacing = context.resources.getDimension(R.dimen.bpkSpacingMd) +
-        context.resources.getDimension(R.dimen.bpkSpacingSm)
+    private val bottomSpacing = context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
+    private val topSpacing = context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd) +
+        context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)

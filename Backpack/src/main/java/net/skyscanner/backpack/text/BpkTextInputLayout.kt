@@ -105,9 +105,9 @@ open class BpkTextInputLayout @JvmOverloads constructor(
             defStyleAttr, 0,
         ).use {
             errorTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputErrorTextColor)
-                ?: context.getColorStateList(R.color.bpkTextError)
+                ?: context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkTextError)
             helperTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputHelperTextColor)
-                ?: context.getColorStateList(R.color.bpkTextSecondary)
+                ?: context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
 
             errorEnabled = it.getBoolean(R.styleable.BpkTextInputLayout_textInputErrorEnabled, errorEnabled)
 
@@ -116,11 +116,11 @@ open class BpkTextInputLayout @JvmOverloads constructor(
             helperText = it.getString(R.styleable.BpkTextInputLayout_textInputHelperText)
 
             errorIcon = it.getDrawable(R.styleable.BpkTextInputLayout_textInputErrorIcon)
-                ?: AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle_sm)
+                ?: AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_information_circle_sm)
             labelView.setTextColor(
                 colorStateList(
-                    color = context.getColor(R.color.bpkTextPrimary),
-                    disabledColor = context.getColor(R.color.bpkTextDisabled),
+                    color = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary),
+                    disabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
                 ),
             )
             updateErrorIconTint()

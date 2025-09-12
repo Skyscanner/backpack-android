@@ -47,8 +47,8 @@ open class BpkCardView @JvmOverloads constructor(
      * [CornerStyle.LARGE] = [R.dimen.bpkBorderRadiusLg]
      */
     enum class CornerStyle(@DimenRes val tokenRes: Int) {
-        SMALL(R.dimen.bpkBorderRadiusMd),
-        LARGE(R.dimen.bpkBorderRadiusLg),
+        SMALL(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusMd),
+        LARGE(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusLg),
     }
 
     enum class ElevationLevel {
@@ -60,14 +60,14 @@ open class BpkCardView @JvmOverloads constructor(
         fun toDimension(context: Context): Float =
             when (this) {
                 NONE -> 0f
-                DEFAULT -> context.resources.getDimension(R.dimen.bpkElevationSm)
-                FOCUSED -> context.resources.getDimension(R.dimen.bpkElevationLg)
+                DEFAULT -> context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationSm)
+                FOCUSED -> context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationLg)
             }
 
         fun toBackgroundColor(context: Context): ColorStateList {
             val background = when (this) {
-                NONE, DEFAULT -> context.getColor(R.color.bpkSurfaceDefault)
-                FOCUSED -> context.getColor(R.color.bpkSurfaceElevated)
+                NONE, DEFAULT -> context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceDefault)
+                FOCUSED -> context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceElevated)
             }
             return ColorStateList.valueOf(background)
         }
@@ -134,8 +134,8 @@ open class BpkCardView @JvmOverloads constructor(
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        paddingSize = context.resources.getDimension(R.dimen.bpkSpacingBase).toInt()
-        maxCardElevation = context.resources.getDimension(R.dimen.bpkElevationLg)
+        paddingSize = context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase).toInt()
+        maxCardElevation = context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationLg)
 
         context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0).use {
             padded = it.getBoolean(R.styleable.BpkCardView_padded, true)

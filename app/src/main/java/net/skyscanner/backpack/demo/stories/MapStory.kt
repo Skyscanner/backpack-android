@@ -91,21 +91,21 @@ class MapActivity : AppCompatActivity() {
                         context = context,
                         position = LatLng(45.0, 0.0),
                         title = "Badge 1",
-                        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+                        icon = if (type == Type.BadgesWithIcons) net.skyscanner.backpack.internal.icons.R.drawable.bpk_city else 0,
                         pointerOnly = type == Type.PointersOnly,
                     )
                     it.addBpkMarker(
                         context = context,
                         position = LatLng(0.0, 0.0),
                         title = "Badge 2",
-                        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+                        icon = if (type == Type.BadgesWithIcons) net.skyscanner.backpack.internal.icons.R.drawable.bpk_city else 0,
                         pointerOnly = type == Type.PointersOnly,
                     )
                     it.addBpkMarker(
                         context = context,
                         position = LatLng(-45.0, 0.0),
                         title = "Badge 3",
-                        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+                        icon = if (type == Type.BadgesWithIcons) net.skyscanner.backpack.internal.icons.R.drawable.bpk_city else 0,
                         pointerOnly = type == Type.PointersOnly,
                     )
                 }

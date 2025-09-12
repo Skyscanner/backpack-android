@@ -45,7 +45,7 @@ class BpkImageSkeleton @JvmOverloads constructor(
         set(value) {
             field = value
             if (value === CornerType.Rounded) {
-                backgroundDrawable.cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
+                backgroundDrawable.cornerRadius = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusSm)
             } else {
                 backgroundDrawable.cornerRadius = 0f
             }

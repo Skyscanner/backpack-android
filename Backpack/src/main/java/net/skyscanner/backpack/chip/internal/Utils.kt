@@ -31,7 +31,7 @@ internal fun chipRoundedRect(
     borderWidth: Int,
 ): Drawable = GradientDrawable().apply {
     shape = GradientDrawable.RECTANGLE
-    cornerRadii = FloatArray(8) { context.resources.getDimension(R.dimen.bpkBorderRadiusSm) }
+    cornerRadii = FloatArray(8) { context.resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusSm) }
     color = background
     setStroke(borderWidth, border)
 }

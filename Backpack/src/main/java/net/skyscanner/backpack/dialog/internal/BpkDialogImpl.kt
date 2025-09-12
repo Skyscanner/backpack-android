@@ -62,7 +62,7 @@ class BpkDialogImpl(
             it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
             val background = ColorDrawable(Color.TRANSPARENT)
-            val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
+            val margin = dialog.context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingLg)
             it.setBackgroundDrawable(InsetDrawable(background, margin))
         }
     }

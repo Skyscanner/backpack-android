@@ -32,7 +32,7 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : CollapsingToolbarLayout(
     createContextThemeWrapper(
-        androidx.appcompat.view.ContextThemeWrapper(context, R.style.Widget_Material3_CollapsingToolbar_Medium),
+        androidx.appcompat.view.ContextThemeWrapper(context, com.google.android.material.R.style.Widget_Material3_CollapsingToolbar_Medium),
         attrs,
         0,
     ),
@@ -50,6 +50,6 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
         expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
 
         setScrimsShown(false)
-        contentScrim = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
+        contentScrim = ColorDrawable(context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceDefault))
     }
 }

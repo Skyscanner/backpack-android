@@ -31,7 +31,7 @@ class BpkRadioButtonTest {
     private val emptyText: String = ""
     private val testString: String = "Test"
     private val context = TestContext
-    private val expectedPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+    private val expectedPadding = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
 
     @Test
     fun text_paddingApplied_whenInitialisedWithText() {

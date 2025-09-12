@@ -37,7 +37,7 @@ internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Success).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_confirmation)) {
                 dismiss()
@@ -56,7 +56,7 @@ internal fun SuccessTwoButtonsDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Success).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_confirmation)) {
                 dismiss()
@@ -80,7 +80,7 @@ internal fun SuccessThreeButtonsDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Success).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_confirmation)) {
                 dismiss()
@@ -109,7 +109,7 @@ internal fun WarningDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Warning).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        icon = BpkDialog.Icon(R.drawable.bpk_alert__add)
+        icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_alert__add)
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_confirmation)) {
                 dismiss()
@@ -138,7 +138,7 @@ internal fun DestructiveDialogExample() = DialogDemo { onDismiss ->
     BpkDialog(this, BpkDialog.Type.Destructive).apply {
         title = context.getString(R.string.dialog_title)
         description = context.getString(R.string.dialog_text)
-        icon = BpkDialog.Icon(R.drawable.bpk_trash)
+        icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_trash)
         addActionButton(
             BpkDialog.Button(context.getString(R.string.dialog_delete)) {
                 dismiss()

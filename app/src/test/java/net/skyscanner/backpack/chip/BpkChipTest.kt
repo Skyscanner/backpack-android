@@ -68,7 +68,7 @@ class BpkChipTest : BpkSnapshotTest() {
         view.text = "Chip"
         view.style = BpkChip.Style.OnDark
         view.isSelected = false
-        snap(view, background = R.color.bpkTextOnLight)
+        snap(view, background = net.skyscanner.backpack.common.R.color.bpkTextOnLight)
     }
 
     @Test
@@ -78,7 +78,7 @@ class BpkChipTest : BpkSnapshotTest() {
         view.text = "Chip"
         view.style = BpkChip.Style.OnDark
         view.isSelected = true
-        snap(view, R.color.bpkTextOnLight)
+        snap(view, net.skyscanner.backpack.common.R.color.bpkTextOnLight)
     }
 
     @Test
@@ -98,7 +98,7 @@ class BpkChipTest : BpkSnapshotTest() {
         view.text = "Chip"
         view.style = BpkChip.Style.OnImage
         view.isSelected = false
-        snap(view, background = R.color.bpkTextOnLight)
+        snap(view, background = net.skyscanner.backpack.common.R.color.bpkTextOnLight)
     }
 
     @Test
@@ -108,7 +108,7 @@ class BpkChipTest : BpkSnapshotTest() {
         view.text = "Chip"
         view.style = BpkChip.Style.OnImage
         view.isSelected = true
-        snap(view, R.color.bpkTextOnLight)
+        snap(view, net.skyscanner.backpack.common.R.color.bpkTextOnLight)
     }
 
     @Test
@@ -125,7 +125,7 @@ class BpkChipTest : BpkSnapshotTest() {
     fun withIcon() {
         val view = BpkChip(testContext)
         view.text = "Chip"
-        view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+        view.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account)
         snap(view)
     }
 
@@ -151,7 +151,7 @@ class BpkChipTest : BpkSnapshotTest() {
     fun withIconAndTypeDismiss() {
         val view = BpkChip(testContext)
         view.text = "Chip"
-        view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+        view.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account)
         view.type = BpkChip.Type.Dismiss
         snap(view)
     }
@@ -161,7 +161,7 @@ class BpkChipTest : BpkSnapshotTest() {
     fun withIconAndTypeDropdown() {
         val view = BpkChip(testContext)
         view.text = "Chip"
-        view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+        view.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account)
         view.type = BpkChip.Type.Dropdown
         snap(view)
     }
@@ -171,7 +171,7 @@ class BpkChipTest : BpkSnapshotTest() {
     fun withIconAndTypeDropdown_Selected() {
         val view = BpkChip(testContext)
         view.text = "Chip"
-        view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+        view.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account)
         view.type = BpkChip.Type.Dropdown
         view.isSelected = true
         snap(view)
@@ -182,7 +182,7 @@ class BpkChipTest : BpkSnapshotTest() {
     fun withIconAndTypeDropdown_Disabled() {
         val view = BpkChip(testContext)
         view.text = "Chip"
-        view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+        view.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account)
         view.type = BpkChip.Type.Dropdown
         view.isEnabled = true
         snap(view)

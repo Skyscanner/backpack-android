@@ -43,9 +43,9 @@ internal class ChartGraphView constructor(
         recyclerView.invalidateItemDecorations()
     }
 
-    private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-    private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-        resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+    private val titleHeight = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingXl)
+    private val titleSpacing = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd) +
+        resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
 
     private val title = BpkText(context).also {
         it.setTextColor(colors.groupTitle)

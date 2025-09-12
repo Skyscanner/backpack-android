@@ -53,7 +53,7 @@ open class BpkOverlay @JvmOverloads constructor(
         Rounded(
             id = 1,
             clipToOutline = true,
-            outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs),
+            outlineProvider = CornerRadiusViewOutlineProvider(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusXs),
         ),
     }
 
@@ -65,7 +65,7 @@ open class BpkOverlay @JvmOverloads constructor(
         None(0),
         Tint(
             id = 1,
-            colorRes = R.color.bpkTextOnLight,
+            colorRes = net.skyscanner.backpack.common.R.color.bpkTextOnLight,
             opacity = 0.56f,
         ),
     }

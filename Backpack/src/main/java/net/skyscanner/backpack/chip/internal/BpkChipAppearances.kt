@@ -35,7 +35,7 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
     override val background: Drawable
         get() = chipRoundedRect(
             context = context,
-            borderWidth = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm),
+            borderWidth = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkBorderSizeSm),
             background = chipColors(
                 selected = selectedBackgroundColor,
                 default = backgroundColor,
@@ -67,21 +67,21 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             selected = selectedTextColor,
             default = textColor,
             pressed = pressedTextColor,
-            disabled = context.getColor(R.color.bpkTextDisabled),
+            disabled = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
         )
 
     override val dismissibleText: ColorStateList
         get() = colorStateList(
             color = selectedTextColor,
             pressedColor = selectedTextColor,
-            disabledColor = context.getColor(R.color.bpkTextDisabled),
+            disabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
         )
 
     override val dismissibleIcon: ColorStateList
         get() = colorStateList(
             color = dismissibleIconColor,
             pressedColor = selectedTextColor,
-            disabledColor = context.getColor(R.color.bpkTextDisabled),
+            disabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
         )
 
     internal class Default(context: Context, private val typedArray: TypedArray?) : BpkChipAppearances(context) {
@@ -93,16 +93,16 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.bpkCorePrimary)
+        override var selectedBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkCorePrimary)
         override var backgroundColor: Int = Color.TRANSPARENT
         override var pressedBackgroundColor: Int = Color.TRANSPARENT
-        override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var dismissibleIconColor: Int = context.getColor(R.color.bpkTextDisabledOnDark)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
-        override var strokeColor: Int = context.getColor(R.color.bpkLine)
-        override var pressedStrokeColor: Int = context.getColor(R.color.bpkCorePrimary)
+        override var textColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        override var pressedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        override var selectedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+        override var dismissibleIconColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabledOnDark)
+        override var disabledBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipDisabledBackground)
+        override var strokeColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkLine)
+        override var pressedStrokeColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkCorePrimary)
         override val style = BpkChip.Style.Default
 
         init {
@@ -126,16 +126,16 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipOnDarkOnBackground)
+        override var selectedBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipOnDarkOnBackground)
         override var backgroundColor: Int = Color.TRANSPARENT
         override var pressedBackgroundColor: Int = Color.TRANSPARENT
-        override var textColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var pressedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var dismissibleIconColor: Int = context.getColor(R.color.__privateChipOnDarkOnDismissIcon)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
-        override var strokeColor: Int = context.getColor(R.color.bpkLineOnDark)
-        override var pressedStrokeColor: Int = context.getColor(R.color.__privateChipOnDarkPressedStroke)
+        override var textColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+        override var pressedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+        override var selectedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        override var dismissibleIconColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipOnDarkOnDismissIcon)
+        override var disabledBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipDisabledBackground)
+        override var strokeColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkLineOnDark)
+        override var pressedStrokeColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipOnDarkPressedStroke)
         override val style = BpkChip.Style.OnDark
 
         init {
@@ -159,14 +159,14 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.bpkCorePrimary)
-        override var backgroundColor: Int = context.getColor(R.color.bpkSurfaceDefault)
-        override var pressedBackgroundColor: Int = context.getColor(R.color.bpkSurfaceContrast)
-        override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var dismissibleIconColor: Int = context.getColor(R.color.bpkTextDisabledOnDark)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
+        override var selectedBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkCorePrimary)
+        override var backgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceDefault)
+        override var pressedBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceContrast)
+        override var textColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        override var pressedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        override var selectedTextColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+        override var dismissibleIconColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabledOnDark)
+        override var disabledBackgroundColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.__privateChipDisabledBackground)
         override var strokeColor: Int = Color.TRANSPARENT
         override var pressedStrokeColor: Int = Color.TRANSPARENT
         override val style = BpkChip.Style.OnImage

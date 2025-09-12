@@ -42,9 +42,9 @@ fun HorizontalNavStory(modifier: Modifier = Modifier) =
     }
 
 private fun init(horizontalNav: BpkHorizontalNav) {
-    horizontalNav.addTab("Flights", R.drawable.bpk_flight_sm)
-    horizontalNav.addTab("Hotels", R.drawable.bpk_hotels_sm)
-    horizontalNav.addTab("Car Hire", R.drawable.bpk_cars_sm)
+    horizontalNav.addTab("Flights", net.skyscanner.backpack.internal.icons.R.drawable.bpk_flight_sm)
+    horizontalNav.addTab("Hotels", net.skyscanner.backpack.internal.icons.R.drawable.bpk_hotels_sm)
+    horizontalNav.addTab("Car Hire", net.skyscanner.backpack.internal.icons.R.drawable.bpk_cars_sm)
 }
 
 private fun BpkHorizontalNav.addTab(tabText: String, @DrawableRes icon: Int) {

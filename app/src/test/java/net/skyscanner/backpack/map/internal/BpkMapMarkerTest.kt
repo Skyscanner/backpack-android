@@ -52,14 +52,14 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun withIcon() {
-        val view = createMarker(R.drawable.bpk_map, true)
+        val view = createMarker(net.skyscanner.backpack.internal.icons.R.drawable.bpk_map, true)
         snap(view)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun withIcon_Selected() {
-        val view = createMarker(R.drawable.bpk_map, true)
+        val view = createMarker(net.skyscanner.backpack.internal.icons.R.drawable.bpk_map, true)
         view.isSelected = true
         snap(view)
     }
@@ -67,7 +67,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default)
     fun withIcon_NoPointer() {
-        val view = createMarker(R.drawable.bpk_map, false)
+        val view = createMarker(net.skyscanner.backpack.internal.icons.R.drawable.bpk_map, false)
         snap(view)
     }
 

@@ -48,10 +48,10 @@ open class BpkRadioButton @JvmOverloads constructor(
     }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        var radioButtonDefaultColor = context.getColor(R.color.bpkTextSecondary)
-        var radioButtonCheckedColor = context.getColor(R.color.bpkCoreAccent)
-        var radioButtonDisabledColor = context.getColor(R.color.bpkTextDisabled)
-        val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
+        var radioButtonDefaultColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
+        var radioButtonCheckedColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        var radioButtonDisabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        val textEnabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
         context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.BpkRadioButton,
@@ -82,7 +82,7 @@ open class BpkRadioButton @JvmOverloads constructor(
         super.setText(text, type)
 
         // Only apply padding if text is used, otherwise radio button will have extra padding
-        if (!text.isNullOrEmpty()) setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
+        if (!text.isNullOrEmpty()) setPaddingRelative(resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
     }
 
     override fun setEnabled(enabled: Boolean) {

@@ -43,17 +43,17 @@ internal class ChartLegend constructor(
         isSelected = true
         isActivated = true
         setBackground(colors.chartForeground)
-        setTextColor(context.getColor(R.color.bpkTextPrimaryInverse))
+        setTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse))
     }
     private val activated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_activated).apply {
         isActivated = true
         setBackground(colors.chartForeground)
-        setTextColor(context.getColor(R.color.bpkTextOnDark))
+        setTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark))
     }
     private val inactivated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_inactivated).apply {
         isActivated = false
         setBackground(colors.chartForeground)
-        setTextColor(context.getColor(R.color.bpkTextPrimary))
+        setTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
     }
 
     override fun invoke(legend: BpkBarChart.Legend?) {

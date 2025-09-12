@@ -115,7 +115,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
         navBar.title = "Nav Bar"
 
         if (icon) {
-            navBar.icon = composeTestRule.activity.getDrawable(R.drawable.bpk_native_android__back)
+            navBar.icon = composeTestRule.activity.getDrawable(net.skyscanner.backpack.internal.icons.R.drawable.bpk_native_android__back)
         } else {
             navBar.icon = null
         }

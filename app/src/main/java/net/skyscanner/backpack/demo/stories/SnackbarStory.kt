@@ -98,7 +98,7 @@ private fun SnackbarDemo(
         findViewById<TextView>(R.id.snackbar_icon).setOnClickListener {
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-                .setIcon(R.drawable.bpk_tick_circle)
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
                 .setAction(R.string.snackbar_action) {}
                 .show()
         }
@@ -107,7 +107,7 @@ private fun SnackbarDemo(
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle(context.getString(R.string.snackbar_title))
-                .setIcon(R.drawable.bpk_tick_circle)
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
                 .setAction(R.string.snackbar_action) {}
                 .show()
         }
@@ -115,7 +115,7 @@ private fun SnackbarDemo(
         findViewById<TextView>(R.id.snackbar_iconOnly).setOnClickListener {
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-                .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
                 .show()
         }
 
@@ -123,15 +123,15 @@ private fun SnackbarDemo(
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle(context.getString(R.string.snackbar_title))
-                .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
                 .show()
         }
 
         findViewById<TextView>(R.id.snackbar_icon_iconOnly).setOnClickListener {
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-                .setIcon(R.drawable.bpk_tick_circle)
-                .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
                 .show()
         }
 
@@ -139,8 +139,8 @@ private fun SnackbarDemo(
             it as TextView
             BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle(context.getString(R.string.snackbar_title))
-                .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
-                .setIcon(R.drawable.bpk_tick_circle)
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
                 .show()
         }
 

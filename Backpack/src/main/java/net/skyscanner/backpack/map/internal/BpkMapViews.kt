@@ -44,6 +44,6 @@ internal fun createBpkMarkerView(
     }
     root.findViewById<BpkText>(R.id.text).text = title
     root.findViewById<View>(R.id.pointer).visibility = if (showPointer) View.VISIBLE else View.GONE
-    root.findViewById<ImageView>(R.id.flare).imageTintList = ColorStateList.valueOf(context.getColor(R.color.bpkCoreAccent))
+    root.findViewById<ImageView>(R.id.flare).imageTintList = ColorStateList.valueOf(context.getColor(net.skyscanner.backpack.common.R.color.bpkCoreAccent))
     return root
 }

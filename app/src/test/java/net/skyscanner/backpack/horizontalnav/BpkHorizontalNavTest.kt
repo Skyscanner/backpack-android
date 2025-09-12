@@ -46,9 +46,9 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
     @Test
     fun withIcons() {
         val horizontalNav = BpkHorizontalNav(testContext).apply {
-            addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
-            addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))
-            addTab(newTab().setText("Tab 3").setIcon(R.drawable.bpk_cars))
+            addTab(newTab().setText("Tab 1").setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_cars))
+            addTab(newTab().setText("Tab 2").setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_cars))
+            addTab(newTab().setText("Tab 3").setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_cars))
         }
         snap(horizontalNav)
     }

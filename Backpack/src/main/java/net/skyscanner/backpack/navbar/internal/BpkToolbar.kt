@@ -32,7 +32,7 @@ internal class BpkToolbar @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : MaterialToolbar(
     createContextThemeWrapper(
-        androidx.appcompat.view.ContextThemeWrapper(context, R.style.Widget_Material3_Toolbar),
+        androidx.appcompat.view.ContextThemeWrapper(context, com.google.android.material.R.style.Widget_Material3_Toolbar),
         attrs,
         0,
     ),
@@ -42,7 +42,7 @@ internal class BpkToolbar @JvmOverloads constructor(
 
     init {
         background = null
-        setTitleTextAppearance(context, R.style.bpkTextHeading4)
+        setTitleTextAppearance(context, net.skyscanner.backpack.common.R.style.bpkTextHeading4)
         setTitleMargin(0, 0, 0, 0)
     }
 

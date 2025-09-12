@@ -131,8 +131,8 @@ enum class CalendarStoryType {
                                 CellInfo(
                                     label = when (price) {
                                         in minPrice..noPriceThreshold -> CellLabel.Icon(
-                                            resId = R.drawable.bpk_search_sm,
-                                            tint = R.color.bpkCoreAccent,
+                                            resId = net.skyscanner.backpack.internal.icons.R.drawable.bpk_search_sm,
+                                            tint = net.skyscanner.backpack.common.R.color.bpkCoreAccent,
                                         )
 
                                         else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
@@ -227,8 +227,8 @@ fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellI
         CellInfo(
             label = when (price) {
                 in minPrice..noPriceThreshold -> CellLabel.Icon(
-                    resId = R.drawable.bpk_search_sm,
-                    tint = R.color.bpkCoreAccent,
+                    resId = net.skyscanner.backpack.internal.icons.R.drawable.bpk_search_sm,
+                    tint = net.skyscanner.backpack.common.R.color.bpkCoreAccent,
                 )
 
                 else -> CellLabel.Text("£${(it.dayOfMonth * 2.35f).roundToInt()}")
@@ -249,8 +249,8 @@ fun createCombinedCellsInfo(range: ClosedRange<LocalDate>): Map<LocalDate, CellI
         LocalDate.of(2019, 1, 6) to CellInfo(
             highlighted = true,
             label = CellLabel.Icon(
-                resId = R.drawable.bpk_search_sm,
-                tint = R.color.bpkCoreAccent,
+                resId = net.skyscanner.backpack.internal.icons.R.drawable.bpk_search_sm,
+                tint = net.skyscanner.backpack.common.R.color.bpkCoreAccent,
             ),
         ),
         LocalDate.of(2019, 1, 9) to CellInfo(

@@ -55,14 +55,14 @@ class BpkTextFieldTests : BpkSnapshotTest() {
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun iconStart() {
-        subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
+        subject.iconStart = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_search)
         snap(subject)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun iconEnd() {
-        subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
+        subject.iconEnd = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_search)
         snap(subject)
     }
 }

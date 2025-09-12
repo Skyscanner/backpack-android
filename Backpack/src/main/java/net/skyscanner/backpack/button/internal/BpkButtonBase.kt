@@ -76,7 +76,7 @@ abstract class BpkButtonBase internal constructor(
         gravity = Gravity.CENTER
         ellipsize = TextUtils.TruncateAt.END
         isClickable = isEnabled
-        iconSize = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+        iconSize = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase)
         backgroundTintList = null
     }
 }

@@ -47,7 +47,7 @@ object BpkCalendarTestCases {
                 LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 6) to
                     CellInfo(
                         style = CellStatusStyle.Label,
-                        label = CellLabel.Icon(resId = R.drawable.bpk_search_sm, tint = R.color.bpkCoreAccent),
+                        label = CellLabel.Icon(resId = net.skyscanner.backpack.internal.icons.R.drawable.bpk_search_sm, tint = net.skyscanner.backpack.common.R.color.bpkCoreAccent),
                     ),
             ),
         )

@@ -39,7 +39,7 @@ open class BpkBadge @JvmOverloads constructor(
 
     private var initialized = false
 
-    private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+    private val iconPadding = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
     private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
     init {
@@ -56,54 +56,54 @@ open class BpkBadge @JvmOverloads constructor(
         /**
          * Style for badges with positive messages
          */
-        Success(1, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusSuccessSpot),
+        Success(1, net.skyscanner.backpack.common.R.color.__privateBadgeBackgroundNormal, net.skyscanner.backpack.common.R.color.bpkTextPrimary, net.skyscanner.backpack.common.R.color.bpkStatusSuccessSpot),
 
         /**
          *  Style for badges with warning messages
          */
-        Warning(2, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusWarningSpot),
+        Warning(2, net.skyscanner.backpack.common.R.color.__privateBadgeBackgroundNormal, net.skyscanner.backpack.common.R.color.bpkTextPrimary, net.skyscanner.backpack.common.R.color.bpkStatusWarningSpot),
 
         /**
          * Style for badges with error messages
          */
-        Destructive(3, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary, R.color.bpkStatusDangerSpot),
+        Destructive(3, net.skyscanner.backpack.common.R.color.__privateBadgeBackgroundNormal, net.skyscanner.backpack.common.R.color.bpkTextPrimary, net.skyscanner.backpack.common.R.color.bpkStatusDangerSpot),
 
         /**
          *  Light themed style for badges
          */
         @Deprecated("Switch to a different badge style")
-        Light(4, R.color.bpkCanvasContrast, R.color.bpkSurfaceContrast),
+        Light(4, net.skyscanner.backpack.common.R.color.bpkCanvasContrast, net.skyscanner.backpack.common.R.color.bpkSurfaceContrast),
 
         /**
          *  Style for badges on dark themes
          */
-        Inverse(5, R.color.bpkSurfaceDefault, R.color.bpkTextPrimary),
+        Inverse(5, net.skyscanner.backpack.common.R.color.bpkSurfaceDefault, net.skyscanner.backpack.common.R.color.bpkTextPrimary),
 
         /**
          * Style for badges with a thin white outline
          */
-        Outline(6, R.color.bpkTextOnDark, R.color.bpkTextOnDark),
+        Outline(6, net.skyscanner.backpack.common.R.color.bpkTextOnDark, net.skyscanner.backpack.common.R.color.bpkTextOnDark),
 
         /**
          * Style for badges with a dark background
          */
         @Deprecated("Switch to a different badge style")
-        Dark(7, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+        Dark(7, net.skyscanner.backpack.common.R.color.bpkCorePrimary, net.skyscanner.backpack.common.R.color.bpkTextOnDark),
 
         /**
          * Style for badges
          */
-        Normal(8, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary),
+        Normal(8, net.skyscanner.backpack.common.R.color.__privateBadgeBackgroundNormal, net.skyscanner.backpack.common.R.color.bpkTextPrimary),
 
         /**
          * Style for badges with emphasis
          */
-        Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+        Strong(9, net.skyscanner.backpack.common.R.color.bpkCorePrimary, net.skyscanner.backpack.common.R.color.bpkTextOnDark),
 
         /**
          * Style for badges with brand
          */
-        Brand(10, R.color.bpkCoreAccent, R.color.bpkTextPrimaryInverse),
+        Brand(10, net.skyscanner.backpack.common.R.color.bpkCoreAccent, net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse),
         ;
 
         internal companion object {
@@ -174,13 +174,13 @@ open class BpkBadge @JvmOverloads constructor(
     private fun setup() {
         this.includeFontPadding = true
         this.textStyle = TextStyle.Footnote
-        this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
+        this.minHeight = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingLg)
         this.text = message
         this.icon = icon
 
         // set padding
-        val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
-        val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
+        val paddingMd = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd).toInt()
+        val paddingSm = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm).toInt()
         this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
         // set Text color
@@ -201,9 +201,9 @@ open class BpkBadge @JvmOverloads constructor(
     private fun updateIcon() {
         val currentIcon = if (icon == null) {
             when (type) {
-                Type.Success -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick_circle)
-                Type.Warning -> AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle)
-                Type.Destructive -> AppCompatResources.getDrawable(context, R.drawable.bpk_exclamation)
+                Type.Success -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
+                Type.Warning -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_information_circle)
+                Type.Destructive -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_exclamation)
                 else -> null
             }
         } else {
@@ -226,7 +226,7 @@ open class BpkBadge @JvmOverloads constructor(
         drawable.color = solid
         drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
 
-        val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
+        val cornerRadius = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusXs)
         drawable.cornerRadius = cornerRadius
         this.background = drawable
     }

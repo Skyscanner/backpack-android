@@ -81,11 +81,11 @@ open class BpkTextField @JvmOverloads constructor(
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
         BpkText.getFont(context, BpkText.TextStyle.BodyDefault).applyTo(paint)
 
-        var textColor = context.getColor(R.color.bpkTextPrimary)
-        var textColorDisabled = context.getColor(R.color.bpkTextDisabled)
-        var hintNormalColor = context.getColor(R.color.bpkTextSecondary)
+        var textColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        var textColorDisabled = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        var hintNormalColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
         var hintFocusedColor = hintNormalColor
-        var iconColor = context.getColor(R.color.bpkTextSecondary)
+        var iconColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
 
         var background: Drawable = AppCompatResources.getDrawable(context, R.drawable.bpk_text_field_background)!!
 
@@ -117,21 +117,21 @@ open class BpkTextField @JvmOverloads constructor(
                 pressedColor = hintNormalColor,
                 focusedColor = hintFocusedColor,
                 activatedColor = hintFocusedColor,
-                disabledColor = context.getColor(R.color.bpkTextDisabled),
+                disabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled),
             ),
         )
 
-        val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-        val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-            resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+        val paddingHorizontal = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase)
+        val paddingVertical = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd) +
+            resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
         setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
-        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-            resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+        compoundDrawablePadding = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd) +
+            resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
 
         gravity = Gravity.START or Gravity.CENTER_VERTICAL
         this.background = background
-        this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl) +
-            resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        this.minHeight = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingXxl) +
+            resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd)
     }
 
     override fun onRtlPropertiesChanged(layoutDirection: Int) {

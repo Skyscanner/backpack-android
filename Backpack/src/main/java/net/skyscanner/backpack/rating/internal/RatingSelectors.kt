@@ -71,9 +71,9 @@ internal class RatingSelectors(
     val backgroundColor: (BpkRating.Score) -> ColorStateList
 
     init {
-        var colorLow = context.getColorStateList(R.color.bpkStatusDangerFill)
-        var colorMedium = context.getColorStateList(R.color.bpkStatusWarningFill)
-        var colorHigh = context.getColorStateList(R.color.bpkStatusSuccessFill)
+        var colorLow = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkStatusDangerFill)
+        var colorMedium = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkStatusWarningFill)
+        var colorHigh = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkStatusSuccessFill)
 
         context.theme.obtainStyledAttributes(
             attrs,

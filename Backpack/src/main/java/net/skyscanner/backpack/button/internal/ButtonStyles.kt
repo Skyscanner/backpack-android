@@ -27,9 +27,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryStyle,
-            bgColorRes = R.color.__privateButtonPrimaryNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonPrimaryPressedBackground,
-            contentColorRes = R.color.bpkTextOnDark,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryPressedBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
         )
     }
 
@@ -37,9 +37,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonSecondaryStyle,
-            bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
-            contentColorRes = R.color.bpkTextPrimary,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryPressedBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextPrimary,
         )
     }
 
@@ -47,9 +47,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonFeaturedStyle,
-            bgColorRes = R.color.__privateButtonFeaturedNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonFeaturedPressedBackground,
-            contentColorRes = R.color.bpkTextPrimaryInverse,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonFeaturedNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonFeaturedPressedBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse,
         )
     }
 
@@ -57,10 +57,10 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonDestructiveStyle,
-            bgColorRes = R.color.__privateButtonDestructiveNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonDestructivePressedBackground,
-            contentColorRes = R.color.__privateButtonDestructiveNormalForeground,
-            contentPressedColorRes = R.color.bpkTextPrimaryInverse,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonDestructiveNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonDestructivePressedBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.__privateButtonDestructiveNormalForeground,
+            contentPressedColorRes = net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse,
         )
     }
 
@@ -68,11 +68,11 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryOnDarkStyle,
-            bgColorRes = R.color.__privateButtonPrimaryOnDarkNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonPrimaryOnDarkPressedBackground,
-            bgDisabledColorRes = R.color.__privateButtonPrimaryOnDarkDisabledBackground,
-            contentColorRes = R.color.bpkTextOnLight,
-            contentDisabledColorRes = R.color.__privateButtonPrimaryOnDarkDisabledForeground,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnDarkNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnDarkPressedBackground,
+            bgDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnDarkDisabledBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextOnLight,
+            contentDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnDarkDisabledForeground,
             rippleColorRes = R.color.__buttonOnDarkRipple,
         )
     }
@@ -81,11 +81,11 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonPrimaryOnLightStyle,
-            bgColorRes = R.color.__privateButtonPrimaryOnLightNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonPrimaryOnLightPressedBackground,
-            bgDisabledColorRes = R.color.__privateButtonPrimaryOnLightDisabledBackground,
-            contentColorRes = R.color.bpkTextOnDark,
-            contentDisabledColorRes = R.color.__privateButtonPrimaryOnLightDisabledForeground,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnLightNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnLightPressedBackground,
+            bgDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnLightDisabledBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
+            contentDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonPrimaryOnLightDisabledForeground,
             rippleColorRes = R.color.__buttonOnLightRipple,
         )
     }
@@ -94,11 +94,11 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
         override fun invoke(context: Context) = ButtonStyle.fromTheme(
             context = context,
             style = R.attr.bpkButtonSecondaryOnDarkStyle,
-            bgColorRes = R.color.__privateButtonSecondaryOnDarkNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonSecondaryOnDarkPressedBackground,
-            bgDisabledColorRes = R.color.__privateButtonSecondaryOnDarkDisabledBackground,
-            contentColorRes = R.color.bpkTextOnDark,
-            contentDisabledColorRes = R.color.__privateButtonSecondaryOnDarkDisabledForeground,
+            bgColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryOnDarkNormalBackground,
+            bgPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryOnDarkPressedBackground,
+            bgDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryOnDarkDisabledBackground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
+            contentDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonSecondaryOnDarkDisabledForeground,
             rippleColorRes = R.color.__buttonOnDarkRipple,
         )
     }
@@ -109,8 +109,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
             style = R.attr.bpkButtonLinkStyle,
             bgColorRes = android.R.color.transparent,
             bgDisabledColorRes = android.R.color.transparent,
-            contentColorRes = R.color.bpkTextPrimary,
-            contentPressedColorRes = R.color.bpkTextPrimary,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextPrimary,
+            contentPressedColorRes = net.skyscanner.backpack.common.R.color.bpkTextPrimary,
             rippleColorRes = R.color.__buttonLinkRipple,
         )
     }
@@ -121,9 +121,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
             style = R.attr.bpkButtonLinkOnDarkStyle,
             bgColorRes = android.R.color.transparent,
             bgDisabledColorRes = android.R.color.transparent,
-            contentColorRes = R.color.bpkTextOnDark,
-            contentPressedColorRes = R.color.__privateButtonLinkOnDarkPressedForeground,
-            contentDisabledColorRes = R.color.__privateButtonLinkOnDarkDisabledForeground,
+            contentColorRes = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
+            contentPressedColorRes = net.skyscanner.backpack.common.R.color.__privateButtonLinkOnDarkPressedForeground,
+            contentDisabledColorRes = net.skyscanner.backpack.common.R.color.__privateButtonLinkOnDarkDisabledForeground,
             rippleColorRes = R.color.__buttonLinkOnDarkRipple,
         )
     }

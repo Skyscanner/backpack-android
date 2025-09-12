@@ -49,7 +49,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Success
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -68,7 +68,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Destructive
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -78,7 +78,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Inverse
         badge.text = "Message"
-        snap(badge, background = R.color.bpkCorePrimary)
+        snap(badge, background = net.skyscanner.backpack.common.R.color.bpkCorePrimary)
     }
 
     @Test
@@ -87,8 +87,8 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Inverse
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
-        snap(badge, background = R.color.bpkCorePrimary)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
+        snap(badge, background = net.skyscanner.backpack.common.R.color.bpkCorePrimary)
     }
 
     @Test
@@ -106,7 +106,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Normal
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -125,7 +125,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Strong
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -144,7 +144,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Warning
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
         snap(badge)
     }
 
@@ -154,7 +154,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Outline
         badge.text = "Message"
-        snap(badge, background = R.color.bpkCorePrimary)
+        snap(badge, background = net.skyscanner.backpack.common.R.color.bpkCorePrimary)
     }
 
     @Test
@@ -163,7 +163,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
         val badge = BpkBadge(testContext)
         badge.type = BpkBadge.Type.Outline
         badge.text = "Message"
-        badge.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
-        snap(badge, background = R.color.bpkCorePrimary)
+        badge.icon = AppCompatResources.getDrawable(testContext, net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle_sm)
+        snap(badge, background = net.skyscanner.backpack.common.R.color.bpkCorePrimary)
     }
 }

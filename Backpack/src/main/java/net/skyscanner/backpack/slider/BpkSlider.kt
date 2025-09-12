@@ -53,8 +53,8 @@ open class BpkSlider @JvmOverloads constructor(
             defStyleAttr,
             0,
         ).use {
-            val primaryColor = context.getColorStateList(R.color.bpkCoreAccent)
-            val lineColor = context.getColorStateList(R.color.bpkLine)
+            val primaryColor = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+            val lineColor = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkLine)
 
             thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
             trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor

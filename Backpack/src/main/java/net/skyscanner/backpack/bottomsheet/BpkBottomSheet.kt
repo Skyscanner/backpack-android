@@ -30,7 +30,7 @@ open class BpkBottomSheet @JvmOverloads constructor(
 ) : CardView(context, attrs, defStyleAttr) {
 
     init {
-        cardElevation = resources.getDimension(R.dimen.bpkElevationLg)
+        cardElevation = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationLg)
         setBackgroundResource(R.drawable.bpk_bottom_sheet_background)
     }
 }

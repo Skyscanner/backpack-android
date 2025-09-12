@@ -38,7 +38,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val dialog = BpkDialog(composeTestRule.activity, BpkDialog.Type.Success).apply {
             title = "You are going to Tokyo!"
             description = "Your flight is all booked. Why not check out some hotels now?"
-            icon = BpkDialog.Icon(R.drawable.bpk_tick)
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
 
             addActionButton(
                 BpkDialog.Button("Continue") { },
@@ -61,7 +61,7 @@ class BpkDialogTest : BpkSnapshotTest() {
                 "Your flight is all booked. Why not check out some hotels now?"
             }.joinToString(separator = "\n")
 
-            icon = BpkDialog.Icon(R.drawable.bpk_tick)
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
 
             addActionButton(
                 BpkDialog.Button("Continue") { },
@@ -80,7 +80,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val dialog = BpkDialog(composeTestRule.activity, BpkDialog.Type.Destructive).apply {
             title = "Delete?"
             description = "Delete your profile?"
-            icon = BpkDialog.Icon(R.drawable.bpk_trash)
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_trash)
 
             addActionButton(
                 BpkDialog.Button("Delete") { },
@@ -100,7 +100,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val dialog = BpkDialog(composeTestRule.activity, BpkDialog.Style.ALERT).apply {
             title = "Delete?"
             description = "Delete your profile?"
-            icon = BpkDialog.Icon(R.drawable.bpk_trash, composeTestRule.activity.getColor(R.color.bpkTextSecondary))
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_trash, composeTestRule.activity.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary))
 
             addActionButton(
                 BpkButton(composeTestRule.activity).apply {
@@ -131,7 +131,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         dialog.apply {
             title = "Want to know when prices change?"
             description = "Create a price alert and we'll let you know changes for this route"
-            icon = BpkDialog.Icon(R.drawable.bpk_trash)
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_trash)
 
             addActionButton(
                 BpkDialog.Button("Create") { },
@@ -150,7 +150,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val dialog = BpkDialog(composeTestRule.activity, BpkDialog.Type.Flare).apply {
             title = "You are going to Tokyo!"
             description = "Your flight is all booked."
-            icon = BpkDialog.Icon(R.drawable.bpk_tick)
+            icon = BpkDialog.Icon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick)
 
             image!!.setImageResource(R.drawable.dialog_sample)
 
@@ -173,7 +173,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         dialog.show()
 
         var view: View? = null
-        onView(withId(R.id.dialog_buttons_root))
+        onView(withId(net.skyscanner.backpack.R.id.dialog_buttons_root))
             .inRoot(isDialog())
             .check { _, _ ->
                 val rootView = dialog.window!!.decorView
@@ -181,7 +181,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
                 view = rootView
             }
-        snap(view!!, background = R.color.bpkTextSecondary, padding = 0, width = 420, height = 600)
+        snap(view!!, background = net.skyscanner.backpack.common.R.color.bpkTextSecondary, padding = 0, width = 420, height = 600)
     }
 
     private fun View.findScrollView(): ScrollView? {

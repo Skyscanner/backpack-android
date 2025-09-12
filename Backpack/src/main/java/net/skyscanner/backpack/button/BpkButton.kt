@@ -94,7 +94,7 @@ open class BpkButton(
     private val progress by unsafeLazy {
         CircularProgressDrawable(context).apply {
             setStyle(CircularProgressDrawable.DEFAULT)
-            strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
+            strokeWidth = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm) * 0.5f
             callback = this@BpkButton
         }
     }

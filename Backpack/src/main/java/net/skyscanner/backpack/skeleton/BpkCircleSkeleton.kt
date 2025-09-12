@@ -35,7 +35,7 @@ class BpkCircleSkeleton @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
     val paint = Paint().apply {
-        color = context.getColor(R.color.bpkSurfaceHighlight)
+        color = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
         style = Paint.Style.FILL
         isAntiAlias = true
     }
@@ -89,8 +89,8 @@ class BpkCircleSkeleton @JvmOverloads constructor(
     private fun getInternalSize(): Int {
         return when (size) {
             CircleSize.Custom -> diameter
-            CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-            CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
+            CircleSize.Small -> context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingXl)
+            CircleSize.Large -> context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingLg) * 2
         }
     }
 

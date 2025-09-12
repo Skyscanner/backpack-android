@@ -121,7 +121,7 @@ private class IconsAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.icon_item, parent, false)
 
-        rtlIconBackgroundColor = parent.context.getColor(R.color.bpkLine)
+        rtlIconBackgroundColor = parent.context.getColor(net.skyscanner.backpack.common.R.color.bpkLine)
         return ViewHolder(view)
     }
 

@@ -36,7 +36,7 @@ open class BpkChip @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkChipStyle), attrs, defStyleAttr) {
 
-    private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    private val iconPadding = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd)
     private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
     private var appearance: BpkChipAppearance
@@ -101,7 +101,7 @@ open class BpkChip @JvmOverloads constructor(
         BpkChipAppearances.fromAttrs(context, attrs, defStyleAttr)
 
     private fun updateStyle() {
-        elevation = if (style == Style.OnImage) resources.getDimension(R.dimen.bpkElevationSm) else 0f
+        elevation = if (style == Style.OnImage) resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationSm) else 0f
         if (type == Type.Dismiss) {
             setTextColor(appearance.dismissibleText)
             this.background = appearance.dismissibleBackground
@@ -115,8 +115,8 @@ open class BpkChip @JvmOverloads constructor(
     private fun updateIcons() {
         val endIcon = when (type) {
             Type.Option -> null
-            Type.Dropdown -> AppCompatResources.getDrawable(context, R.drawable.bpk_chevron_down)
-            Type.Dismiss -> AppCompatResources.getDrawable(context, R.drawable.bpk_close_circle)
+            Type.Dropdown -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_chevron_down)
+            Type.Dismiss -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_close_circle)
         }?.mutate()
             ?.apply {
                 setBounds(0, 0, iconSize, iconSize)
@@ -136,9 +136,9 @@ open class BpkChip @JvmOverloads constructor(
         this.setCompoundDrawablesRelative(startIcon, null, endIcon, null)
 
         setPadding(
-            resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+            resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase),
             0,
-            resources.getDimensionPixelSize(if (type == Type.Option) R.dimen.bpkSpacingBase else R.dimen.bpkSpacingMd),
+            resources.getDimensionPixelSize(if (type == Type.Option) net.skyscanner.backpack.common.R.dimen.bpkSpacingBase else net.skyscanner.backpack.common.R.dimen.bpkSpacingMd),
             0,
         )
     }

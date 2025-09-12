@@ -33,7 +33,7 @@ class BpkCardTest : BpkSnapshotTest() {
         val text = TextView(testContext)
         text.text = "message"
         card.addView(text)
-        snap(card, R.color.bpkSurfaceHighlight)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
     }
 
     @Test
@@ -47,7 +47,7 @@ class BpkCardTest : BpkSnapshotTest() {
             )
             cornerStyle = BpkCardView.CornerStyle.LARGE
         }
-        snap(card, R.color.bpkSurfaceHighlight)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
     }
 
     @Test
@@ -58,7 +58,7 @@ class BpkCardTest : BpkSnapshotTest() {
         text.text = "message"
         card.addView(text)
         card.padded = false
-        snap(card, R.color.bpkSurfaceHighlight)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
     }
 
     @Test
@@ -68,7 +68,7 @@ class BpkCardTest : BpkSnapshotTest() {
         text.text = "message"
         card.addView(text)
         card.elevationLevel = BpkCardView.ElevationLevel.DEFAULT
-        snap(card, R.color.bpkSurfaceHighlight)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
     }
 
     @Test
@@ -79,7 +79,7 @@ class BpkCardTest : BpkSnapshotTest() {
         text.text = "message"
         card.addView(text)
         card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-        snap(card, R.color.bpkLine)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkLine)
     }
 
     @Test
@@ -90,6 +90,6 @@ class BpkCardTest : BpkSnapshotTest() {
         text.text = "message"
         card.addView(text)
         card.elevationLevel = BpkCardView.ElevationLevel.NONE
-        snap(card, R.color.bpkSurfaceHighlight)
+        snap(card, net.skyscanner.backpack.common.R.color.bpkSurfaceHighlight)
     }
 }

@@ -45,7 +45,7 @@ open class BpkSwitch @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : MaterialSwitch(
     createContextThemeWrapper(
-        ContextThemeWrapper(context, R.style.Widget_Material3_CompoundButton_MaterialSwitch),
+        ContextThemeWrapper(context, com.google.android.material.R.style.Widget_Material3_CompoundButton_MaterialSwitch),
         attrs,
         R.attr.bpkSwitchStyle,
     ),
@@ -58,12 +58,12 @@ open class BpkSwitch @JvmOverloads constructor(
     }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
-        val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
-        val textSecondaryColor = context.getColor(R.color.bpkTextSecondary)
-        val coreAccentColor = context.getColor(R.color.bpkCoreAccent)
-        val canvasContrastColor = context.getColor(R.color.bpkCanvasContrast)
-        var primaryInverseColor = context.getColor(R.color.bpkTextPrimaryInverse)
+        val textDisabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        val textEnabledColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary)
+        val textSecondaryColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextSecondary)
+        val coreAccentColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+        val canvasContrastColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkCanvasContrast)
+        var primaryInverseColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse)
         context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
             primaryInverseColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryInverseColor)
         }

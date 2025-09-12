@@ -60,12 +60,12 @@ open class BpkSpinner @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val colors = arrayOf(
-        R.color.bpkCoreAccent,
-        R.color.bpkTextOnDark,
-        R.color.bpkTextSecondary,
-        R.color.bpkTextPrimary,
-        R.color.bpkTextDisabled,
-        R.color.bpkTextOnDark,
+        net.skyscanner.backpack.common.R.color.bpkCoreAccent,
+        net.skyscanner.backpack.common.R.color.bpkTextOnDark,
+        net.skyscanner.backpack.common.R.color.bpkTextSecondary,
+        net.skyscanner.backpack.common.R.color.bpkTextPrimary,
+        net.skyscanner.backpack.common.R.color.bpkTextDisabled,
+        net.skyscanner.backpack.common.R.color.bpkTextOnDark,
     )
 
     private val animationsEnabled =

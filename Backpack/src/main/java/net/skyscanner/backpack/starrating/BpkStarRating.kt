@@ -33,10 +33,10 @@ open class BpkStarRating @JvmOverloads constructor(
     context = createContextThemeWrapper(context, attrs, R.attr.bpkStarRatingStyle),
     attrs = attrs,
     defStyleAttr = defStyleAttr,
-    empty = R.drawable.bpk_star_outline,
-    half = R.drawable.bpk_star_half,
-    full = R.drawable.bpk_star,
-    starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+    empty = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star_outline,
+    half = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star_half,
+    full = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star,
+    starSize = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase),
 ) {
 
     override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {

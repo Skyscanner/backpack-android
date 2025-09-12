@@ -50,13 +50,13 @@ class BpkNavBar @JvmOverloads constructor(
 ) : AppBarLayout(context, attrs) {
 
     private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
-        it.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
-        it.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextPrimary))
+        it.setExpandedTitleColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
+        it.setCollapsedTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
         addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
 
     private val toolbar: Toolbar = BpkToolbar(context).also {
-        it.setTitleTextColor(context.getColor(R.color.bpkTextPrimary))
+        it.setTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
         val toolbarHeight = resolveThemeDimen(context, android.R.attr.actionBarSize, R.dimen.bpk_nav_bar_toolbar_height)
         val params = CollapsingToolbarLayout.LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight).apply {
             collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
@@ -70,19 +70,19 @@ class BpkNavBar @JvmOverloads constructor(
             field = value
             when (value) {
                 NavBarStyle.Default -> {
-                    collapsingLayout.contentScrim = context.getColor(R.color.bpkSurfaceDefault).toDrawable()
-                    toolbar.setBackgroundColor(context.getColor(R.color.bpkCanvas))
-                    toolbar.setTitleTextColor(context.getColor(R.color.bpkTextPrimary))
-                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextPrimary))
-                    collapsingLayout.setExpandedTitleColor(context.getColor(R.color.bpkTextPrimary))
+                    collapsingLayout.contentScrim = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceDefault).toDrawable()
+                    toolbar.setBackgroundColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkCanvas))
+                    toolbar.setTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
+                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
+                    collapsingLayout.setExpandedTitleColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextPrimary))
                 }
                 NavBarStyle.SurfaceContrast -> {
-                    collapsingLayout.contentScrim = context.getColor(R.color.bpkSurfaceContrast).toDrawable()
-                    toolbar.setBackgroundColor(context.getColor(R.color.bpkSurfaceContrast))
-                    toolbar.setTitleTextColor(context.getColor(R.color.bpkTextOnDark))
-                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(R.color.bpkTextOnDark))
-                    collapsingLayout.setExpandedTitleColor(context.getColor(R.color.bpkTextOnDark))
-                    collapsingLayout.setBackgroundColor(context.getColor(R.color.bpkSurfaceContrast))
+                    collapsingLayout.contentScrim = context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceContrast).toDrawable()
+                    toolbar.setBackgroundColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceContrast))
+                    toolbar.setTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark))
+                    collapsingLayout.setCollapsedTitleTextColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark))
+                    collapsingLayout.setExpandedTitleColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark))
+                    collapsingLayout.setBackgroundColor(context.getColor(net.skyscanner.backpack.common.R.color.bpkSurfaceContrast))
                 }
             }
         }
@@ -158,7 +158,7 @@ class BpkNavBar @JvmOverloads constructor(
             navIconContentDescription = it.getString(R.styleable.BpkNavBar_navBarActionContentDescription)
         }
 
-        this.background = context.getColor(R.color.bpkCanvas).toDrawable()
+        this.background = context.getColor(net.skyscanner.backpack.common.R.color.bpkCanvas).toDrawable()
         this.title = title
         this.icon = navIcon
         this.navIconContentDescription = navIconContentDescription
@@ -180,14 +180,14 @@ class BpkNavBar @JvmOverloads constructor(
         StateListAnimator().apply {
             val duration = 150L
             addState(
-                intArrayOf(android.R.attr.state_enabled, R.attr.state_liftable, -R.attr.state_lifted),
+                intArrayOf(android.R.attr.state_enabled, com.google.android.material.R.attr.state_liftable, -com.google.android.material.R.attr.state_lifted),
                 ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", 0f).setDuration(duration),
             )
 
             // Default enabled state
             addState(
                 intArrayOf(android.R.attr.state_enabled),
-                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", resources.getDimension(R.dimen.bpkElevationSm))
+                ObjectAnimator.ofFloat(this@BpkNavBar, "elevation", resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkElevationSm))
                     .setDuration(duration),
             )
 

@@ -180,7 +180,7 @@ open class BpkRating private constructor(
             badge.text = null
             selectors.icon(value)
                 ?.let {
-                    val size = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+                    val size = resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase)
                     it.setBounds(0, 0, size, size)
                     val drawablePadding = (appearance.badgeWidth - size) / 2
                     badge.setPaddingRelative(drawablePadding, 0, drawablePadding, 0)

@@ -34,10 +34,10 @@ import net.skyscanner.backpack.toast.BpkToast
 @ViewStory
 fun BottomNavStory(modifier: Modifier = Modifier) =
     AndroidLayout<BpkBottomNav>(R.layout.fragment_bottom_nav, R.id.bottom_nav, modifier.navigationBarsPadding().fillMaxSize()) {
-        addItem(1, R.string.bottom_nav_home, R.drawable.bpk_hotels)
-        addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
-        addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_trips)
-        addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
+        addItem(1, R.string.bottom_nav_home, net.skyscanner.backpack.internal.icons.R.drawable.bpk_hotels)
+        addItem(2, R.string.bottom_nav_explore, net.skyscanner.backpack.internal.icons.R.drawable.bpk_navigation)
+        addItem(3, R.string.bottom_nav_trips, net.skyscanner.backpack.internal.icons.R.drawable.bpk_trips)
+        addItem(4, R.string.bottom_nav_profile, net.skyscanner.backpack.internal.icons.R.drawable.bpk_account_circle)
         addOnNavigationItemReselectedListener { item, index ->
             BpkToast.makeText(context, "${item.title} #$index is reselected!", BpkToast.LENGTH_SHORT).show()
         }

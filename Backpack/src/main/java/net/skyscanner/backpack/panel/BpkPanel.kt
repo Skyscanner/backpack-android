@@ -32,7 +32,7 @@ open class BpkPanel @JvmOverloads constructor(
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     @Dimension
-    private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
+    private var paddingSize = resources.getDimensionPixelOffset(net.skyscanner.backpack.common.R.dimen.bpkSpacingBase)
 
     init {
         initialize(attrs, defStyleAttr)

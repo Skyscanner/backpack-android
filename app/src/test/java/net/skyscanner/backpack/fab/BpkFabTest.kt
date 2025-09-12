@@ -30,14 +30,14 @@ class BpkFabTest : BpkSnapshotTest() {
 
     @Test
     fun default() {
-        fab.setImageResource(R.drawable.bpk_search)
+        fab.setImageResource(net.skyscanner.backpack.internal.icons.R.drawable.bpk_search)
         snap(fab)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun customIcon_Disabled() {
-        fab.setImageResource(R.drawable.bpk_search)
+        fab.setImageResource(net.skyscanner.backpack.internal.icons.R.drawable.bpk_search)
         fab.isEnabled = false
         snap(fab)
     }

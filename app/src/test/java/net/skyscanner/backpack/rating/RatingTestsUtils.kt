@@ -32,9 +32,9 @@ internal fun createTestRating(
     BpkRating(context, style, size, scale).apply {
         icon = {
             when (it) {
-                BpkRating.Score.Low -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_outline)
-                BpkRating.Score.Medium -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_half)
-                BpkRating.Score.High -> AppCompatResources.getDrawable(context, R.drawable.bpk_star)
+                BpkRating.Score.Low -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_star_outline)
+                BpkRating.Score.Medium -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_star_half)
+                BpkRating.Score.High -> AppCompatResources.getDrawable(context, net.skyscanner.backpack.internal.icons.R.drawable.bpk_star)
             }
         }
         title = {

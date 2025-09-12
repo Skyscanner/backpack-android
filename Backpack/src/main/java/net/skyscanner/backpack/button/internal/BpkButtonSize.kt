@@ -37,8 +37,8 @@ internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: Attribu
 internal val BpkButton.Size.iconSize: Int
     get() =
         when (this) {
-            BpkButton.Size.Standard -> R.dimen.bpkSpacingBase
-            BpkButton.Size.Large -> R.dimen.bpkSpacingLg
+            BpkButton.Size.Standard -> net.skyscanner.backpack.common.R.dimen.bpkSpacingBase
+            BpkButton.Size.Large -> net.skyscanner.backpack.common.R.dimen.bpkSpacingLg
         }
 
 @get:DimenRes
@@ -52,9 +52,9 @@ internal val BpkButton.Size.minHeight: Int
 @get:DimenRes
 internal val BpkButton.Size.horizontalPadding: Int
     get() =
-        R.dimen.bpkSpacingBase
+        net.skyscanner.backpack.common.R.dimen.bpkSpacingBase
 
 @get:DimenRes
 internal val BpkButton.Size.horizontalSpacing: Int
     get() =
-        R.dimen.bpkSpacingMd
+        net.skyscanner.backpack.common.R.dimen.bpkSpacingMd

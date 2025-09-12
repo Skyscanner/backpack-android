@@ -44,7 +44,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
         maxWidth = size
         maxHeight = size
         scaleType = ScaleType.CENTER
-        imageTintList = context.getColorStateList(R.color.bpkTextPrimaryInverse)
+        imageTintList = context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkTextPrimaryInverse)
     }
 
     var icon: BpkDialog.Icon? = null
@@ -61,15 +61,15 @@ internal class BpkDialogIcon @JvmOverloads constructor(
         GradientDrawable().apply {
             cornerRadius = size / 2f
             color = when (type) {
-                BpkDialog.Type.Success -> context.getColorStateList(R.color.bpkCoreAccent)
-                BpkDialog.Type.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
-                BpkDialog.Type.Destructive -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+                BpkDialog.Type.Success -> context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkCoreAccent)
+                BpkDialog.Type.Warning -> context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkStatusWarningSpot)
+                BpkDialog.Type.Destructive -> context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkStatusDangerSpot)
                 else -> ColorStateList.valueOf(backgroundColor)
             }
 
             setStroke(
                 resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-                context.getColorStateList(R.color.bpkSurfaceDefault),
+                context.getColorStateList(net.skyscanner.backpack.common.R.color.bpkSurfaceDefault),
             )
         }
 }

@@ -64,10 +64,10 @@ abstract class BpkSnapshotTest(private val tags: List<Any> = emptyList()) {
 
     protected fun snap(
         view: View,
-        @ColorRes background: Int = R.color.bpkCanvas,
+        @ColorRes background: Int = net.skyscanner.backpack.common.R.color.bpkCanvas,
         @Dimension(unit = DP) width: Int? = null,
         @Dimension(unit = DP) height: Int? = null,
-        @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd),
+        @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd),
         captureFullScreen: Boolean = false,
     ) {
         if (tags.isNotEmpty()) {

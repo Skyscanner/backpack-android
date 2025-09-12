@@ -44,10 +44,10 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
     context = createContextThemeWrapper(context, attrs, R.attr.bpkInteractiveStarRatingStyle),
     attrs = attrs,
     defStyleAttr = defStyleAttr,
-    empty = R.drawable.bpk_star_outline,
-    half = R.drawable.bpk_star,
-    full = R.drawable.bpk_star,
-    starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl),
+    empty = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star_outline,
+    half = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star,
+    full = net.skyscanner.backpack.internal.icons.R.drawable.bpk_star,
+    starSize = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingXxl),
 ) {
 
     init {

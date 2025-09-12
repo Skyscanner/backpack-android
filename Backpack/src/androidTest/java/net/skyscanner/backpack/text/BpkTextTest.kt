@@ -44,8 +44,8 @@ class BpkTextTest {
         val textSizePx = text.textSize
         val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
 
-        val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBodyDefault, R.styleable.BpkTextStyle)
-        val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
+        val expectedAttributes = context.obtainStyledAttributes(net.skyscanner.backpack.common.R.style.bpkTextBodyDefault, net.skyscanner.backpack.common.R.styleable.BpkTextStyle)
+        val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(net.skyscanner.backpack.common.R.styleable.BpkTextStyle_android_textSize, 0) /
             context.resources.displayMetrics.scaledDensity
 
         Assert.assertEquals(expectedTextSizeSp, textSizeSp)

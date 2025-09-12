@@ -52,10 +52,10 @@ internal class ChartPopupDrawable(
         lineTo(0f, -1f)
     }
 
-    private val borderRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
-    private val blockHeight = resources.getDimension(R.dimen.bpkSpacingXl)
+    private val borderRadius = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkBorderRadiusXs)
+    private val blockHeight = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingXl)
 
-    private val textSpacing = resources.getDimension(R.dimen.bpkSpacingMd) + resources.getDimension(R.dimen.bpkSpacingSm)
+    private val textSpacing = resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd) + resources.getDimension(net.skyscanner.backpack.common.R.dimen.bpkSpacingSm)
     private val textBounds = Rect()
 
     private val backgroundPaint = Paint().apply {

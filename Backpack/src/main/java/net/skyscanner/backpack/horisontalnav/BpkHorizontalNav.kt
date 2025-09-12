@@ -53,16 +53,16 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         Normal(
             id = 0,
             styleAttribute = R.attr.bpkHorizontalNavStyle,
-            defaultTextColor = R.color.bpkTextPrimary,
-            defaultTextSelectedColor = R.color.bpkTextLink,
-            defaultIndicatorColor = R.color.bpkTextLink,
+            defaultTextColor = net.skyscanner.backpack.common.R.color.bpkTextPrimary,
+            defaultTextSelectedColor = net.skyscanner.backpack.common.R.color.bpkTextLink,
+            defaultIndicatorColor = net.skyscanner.backpack.common.R.color.bpkTextLink,
         ),
         Alternate(
             id = 1,
             styleAttribute = R.attr.bpkHorizontalNavStyleAlternate,
-            defaultTextColor = R.color.bpkCanvasContrast,
-            defaultTextSelectedColor = R.color.bpkTextOnDark,
-            defaultIndicatorColor = R.color.bpkTextOnDark,
+            defaultTextColor = net.skyscanner.backpack.common.R.color.bpkCanvasContrast,
+            defaultTextSelectedColor = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
+            defaultIndicatorColor = net.skyscanner.backpack.common.R.color.bpkTextOnDark,
         ),
     }
 
@@ -143,7 +143,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
                 indicatorColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavIndicatorColor, indicatorColor)
             }
 
-        setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
+        setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkBorderSizeLg))
         setTabTextColors(textColor, textSelectedColor)
         setSelectedTabIndicatorColor(indicatorColor)
         isInlineLabel = true

@@ -63,7 +63,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     fun withIcon() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-                .setIcon(R.drawable.bpk_tick_circle)
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
                 .setAction("Action") {}
         }
     }
@@ -73,7 +73,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle("Title")
-                .setIcon(R.drawable.bpk_tick_circle)
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
                 .setAction("Action") {}
         }
     }
@@ -83,7 +83,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     fun iconOnly() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-                .setAction(R.drawable.bpk_close, "Close") {}
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, "Close") {}
         }
     }
 
@@ -93,7 +93,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle("Title")
-                .setAction(R.drawable.bpk_close, "Close") {}
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, "Close") {}
         }
     }
 
@@ -102,8 +102,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     fun iconWithAction() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-                .setIcon(R.drawable.bpk_tick_circle)
-                .setAction(R.drawable.bpk_close, "Close") {}
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, "Close") {}
         }
     }
 
@@ -112,8 +112,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
         capture {
             BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
                 .setTitle("Title")
-                .setIcon(R.drawable.bpk_tick_circle)
-                .setAction(R.drawable.bpk_close, "Close") {}
+                .setIcon(net.skyscanner.backpack.internal.icons.R.drawable.bpk_tick_circle)
+                .setAction(net.skyscanner.backpack.internal.icons.R.drawable.bpk_close, "Close") {}
         }
     }
 

@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation libs.test.junit
     androidTestImplementation libs.test.coroutines
 
+    implementation project(':backpack-internal-icons')
     api project(':backpack-common')
     lintPublish project(':backpack-lint')
 }

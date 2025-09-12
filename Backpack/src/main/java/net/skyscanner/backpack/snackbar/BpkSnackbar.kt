@@ -87,14 +87,14 @@ class BpkSnackbar private constructor(
     private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
     private val textFontSpan = BpkFontSpan(context, BpkText.TextStyle.Footnote)
 
-    private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
+    private val textView = snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
         gravity = Gravity.START or Gravity.CENTER_VERTICAL
-        compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        compoundDrawablePadding = context.resources.getDimensionPixelSize(net.skyscanner.backpack.common.R.dimen.bpkSpacingMd)
         setTextColor(textColor)
         minimumHeight = context.resources.getDimensionPixelSize(R.dimen.bpk_snackbar_min_height)
     }
 
-    private val actionView = snackbar.view.findViewById<TextView>(R.id.snackbar_action).apply {
+    private val actionView = snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_action).apply {
         setTextColor(actionColor)
         BpkText.getFont(context, BpkText.TextStyle.Label2).applyTo(this)
         transformationMethod = null
@@ -258,9 +258,9 @@ class BpkSnackbar private constructor(
         fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
             val context = view.context
 
-            @ColorInt var textColor = context.getColor(R.color.bpkTextOnDark)
-            @ColorInt var actionColor = context.getColor(R.color.bpkTextOnDark)
-            @ColorInt var backgroundColor = context.getColor(R.color.bpkCorePrimary)
+            @ColorInt var textColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+            @ColorInt var actionColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextOnDark)
+            @ColorInt var backgroundColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkCorePrimary)
 
             val outValue = TypedValue()
             context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

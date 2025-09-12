@@ -87,8 +87,8 @@ open class BpkStarRatingBase internal constructor(
 
     init {
         orientation = HORIZONTAL
-        var starColor = context.getColor(R.color.bpkTextDisabled)
-        var starFilledColor: Int = context.getColor(R.color.bpkStatusWarningSpot)
+        var starColor = context.getColor(net.skyscanner.backpack.common.R.color.bpkTextDisabled)
+        var starFilledColor: Int = context.getColor(net.skyscanner.backpack.common.R.color.bpkStatusWarningSpot)
 
         context.theme.obtainStyledAttributes(
             attrs,
