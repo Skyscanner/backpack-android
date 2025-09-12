@@ -53,6 +53,11 @@ afterEvaluate { project ->
                         developerConnection = 'scm:git:ssh://github.com/Skyscanner/backpack-android.git'
                         url = 'http://github.com/Skyscanner/backpack-android/tree/main'
                     }
+                    pom.withXml {
+                        asNode().dependencies.'dependency'.findAll {
+                            it.artifactId.text() == 'backpack-internal-icons'
+                        }.each { it.parent().remove(it) }
+                    }
                 }
             }
         }
