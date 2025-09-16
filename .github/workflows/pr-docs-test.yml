@@ -50,32 +50,6 @@ jobs:
           publish_dir: dokka/
           keep_files: false
           external_repository: backpack/android
-          publish_branch: pr-docs-test
+          publish_branch: main
           force_orphan: true
 
-      - name: Comment PR with documentation link
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const docsUrl = 'https://backpack.github.io/android/';
-
-            const comment = `📚 **Documentation Preview**
-
-            The documentation for this PR has been built and deployed for testing:
-
-            🔗 **[View Documentation Preview](${docsUrl})**
-
-            This preview includes:
-            - API Documentation (Dokka)
-            - Component Documentation (docs/ directory)
-            - Updated image URLs pointing to the correct repository
-
-            *This is a temporary deployment for testing purposes.*`;
-
-            github.rest.issues.createComment({
-              issue_number: prNumber,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
