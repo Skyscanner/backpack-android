@@ -74,34 +74,68 @@ ext {
     dokkaOutputDir = "dokka"
 }
 
+// Configure Dokka 2 for multi-module documentation aggregation
 dokka {
     dokkaPublications.html {
         outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
+        moduleName = "Backpack Android"
     }
 }
 
-tasks.register("createDokka404") {
-    dependsOn("dokkaGenerate")
+tasks.register("prepareDocs") {
+    def dokkaProjects = ['Backpack', 'backpack-compose', 'backpack-common']
+    dependsOn("dokkaGenerate", dokkaProjects.collect { ":${it}:dokkaGeneratePublicationHtml" })
+
     doLast {
-        createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
-<html>
-  <meta http-equiv="refresh" content="1;url=/android" />
-</html>
-"""
+        def outputDir = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
+
+        // Aggregate module documentation
+        dokkaProjects.each { projectName ->
+            def subProject = project(":${projectName}")
+            def moduleDocsDir = new File(subProject.layout.buildDirectory.asFile.get(), "dokka/html")
+            def moduleOutputDir = new File(outputDir, subProject.artifactId)
+
+            if (moduleDocsDir.exists()) {
+                copy {
+                    from moduleDocsDir
+                    into moduleOutputDir
+                }
+                println "Aggregated documentation from ${projectName}"
+            }
+        }
+
+        // Copy docs directory to dokka output and fix image URLs
+        def docsSource = new File(rootProject.rootDir, "docs")
+        def docsDest = new File(outputDir, "docs")
+
+        if (docsSource.exists()) {
+            copy {
+                from docsSource
+                into docsDest
+                include "**/*"
+            }
+
+            // Fix image URLs in README files
+            fileTree(docsDest) {
+                include "**/*.md"
+            }.each { file ->
+                def content = file.text
+                def updatedContent = content.replaceAll('Skyscanner/backpack-android', 'backpack/android')
+                if (content != updatedContent) {
+                    file.text = updatedContent
+                    println "Fixed image URLs in ${file.name}"
+                }
+            }
+
+            println "Copied component documentation with fixed image URLs"
+        }
     }
 }
 
-task installGitHooks(type: Copy) {
+tasks.register('installGitHooks', Copy) {
     from new File(rootProject.rootDir, 'hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks') }
     fileMode 0775
 }
 
 tasks.getByPath(':app:preBuild').dependsOn installGitHooks
-
-static File createNewFile(File parent, String path) {
-    def file = new File(parent, path)
-    file.parentFile.mkdirs()
-    file.createNewFile()
-    return file
-}
