@@ -40,6 +40,12 @@ plugins {
 apply from: 'publish-root.gradle'
 apply plugin: 'org.jetbrains.dokka'
 
+dependencies {
+    dokka project(':Backpack')
+    dokka project(':backpack-compose')
+    dokka project(':backpack-common')
+}
+
 allprojects {
     repositories {
         google()
@@ -76,35 +82,19 @@ ext {
 
 // Configure Dokka 2 for multi-module documentation aggregation
 dokka {
+    moduleName.set("Backpack Android")
+
     dokkaPublications.html {
         outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
-        moduleName = "Backpack Android"
     }
 }
 
 tasks.register("prepareDocs") {
-    def dokkaProjects = ['Backpack', 'backpack-compose', 'backpack-common']
-    dependsOn("dokkaGenerate", dokkaProjects.collect { ":${it}:dokkaGeneratePublicationHtml" })
+    dependsOn("dokkaGenerate")
 
     doLast {
-        def outputDir = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
-
-        // Aggregate module documentation
-        dokkaProjects.each { projectName ->
-            def subProject = project(":${projectName}")
-            def moduleDocsDir = new File(subProject.layout.buildDirectory.asFile.get(), "dokka/html")
-            def moduleOutputDir = new File(outputDir, subProject.artifactId)
-
-            if (moduleDocsDir.exists()) {
-                copy {
-                    from moduleDocsDir
-                    into moduleOutputDir
-                }
-                println "Aggregated documentation from ${projectName}"
-            }
-        }
-
         // Copy docs directory to dokka output and fix image URLs
+        def outputDir = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
         def docsSource = new File(rootProject.rootDir, "docs")
         def docsDest = new File(outputDir, "docs")
 
