@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.flare
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
@@ -32,6 +31,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import androidx.core.graphics.createBitmap
 
 /**
  * [BpkFlare] is designed to render a single item inside a "bubble".
@@ -74,7 +74,7 @@ open class BpkFlare @JvmOverloads constructor(
         val pointerDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight).apply {
             pointerDrawable.draw(Canvas(this))
         }
     }
@@ -83,7 +83,7 @@ open class BpkFlare @JvmOverloads constructor(
         val radiiDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        Bitmap.createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight).apply {
             radiiDrawable.draw(Canvas(this))
         }
     }

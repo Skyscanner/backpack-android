@@ -24,6 +24,7 @@ import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import net.skyscanner.backpack.R
+import androidx.core.content.withStyledAttributes
 
 open class BpkPanel @JvmOverloads constructor(
     context: Context,
@@ -53,9 +54,9 @@ open class BpkPanel @JvmOverloads constructor(
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
-        padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
-        this.background = AppCompatResources.getDrawable(context, R.drawable.border)
-        a.recycle()
+        context.withStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr) {
+            padding = getBoolean(R.styleable.BpkPanel_padding, true)
+            background = AppCompatResources.getDrawable(context, R.drawable.border)
+        }
     }
 }

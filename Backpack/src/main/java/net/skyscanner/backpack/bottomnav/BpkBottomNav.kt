@@ -35,6 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import java.util.concurrent.CopyOnWriteArrayList
+import androidx.core.view.get
 
 open class BpkBottomNav @JvmOverloads constructor(
     context: Context,
@@ -132,8 +133,8 @@ open class BpkBottomNav @JvmOverloads constructor(
         }
 
         private fun findIndexOf(item: MenuItem): Int {
-            for (i in 0..<menu.size()) {
-                if (menu.getItem(i) == item) {
+            for (i in 0..<menu.size) {
+                if (menu[i] == item) {
                     return i
                 }
             }

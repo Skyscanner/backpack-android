@@ -55,6 +55,25 @@ subprojects {
         mavenCentral()
     }
 
+    // Ensure all Java compilation uses Java Toolchain 17
+    tasks.withType(JavaCompile).configureEach {
+        javaCompiler = javaToolchains.compilerFor {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    // Ensure all Kotlin (Android/JVM) uses JDK 17 toolchain
+    plugins.withId("org.jetbrains.kotlin.android") {
+        kotlin {
+            jvmToolchain(17)
+        }
+    }
+    plugins.withId("org.jetbrains.kotlin.jvm") {
+        kotlin {
+            jvmToolchain(17)
+        }
+    }
+
     detekt {
         config = files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml")
         buildUponDefaultConfig = true

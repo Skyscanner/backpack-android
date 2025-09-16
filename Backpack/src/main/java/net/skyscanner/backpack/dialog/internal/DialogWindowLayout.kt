@@ -22,7 +22,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.content.res.AppCompatResources
@@ -30,6 +29,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import kotlin.math.roundToInt
+import androidx.core.graphics.drawable.toDrawable
 
 internal class DialogWindowLayout @JvmOverloads constructor(
     context: Context,
@@ -113,7 +113,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
     }
 
     private companion object {
-        val modalBg = ColorDrawable(Color.TRANSPARENT)
+        val modalBg = Color.TRANSPARENT.toDrawable()
         const val heightPercentageToShowFullScreen = 0.75f
     }
 }

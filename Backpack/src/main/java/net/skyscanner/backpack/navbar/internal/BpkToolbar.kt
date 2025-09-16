@@ -25,6 +25,8 @@ import android.view.Menu
 import com.google.android.material.appbar.MaterialToolbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import androidx.core.view.size
+import androidx.core.view.get
 
 internal class BpkToolbar @JvmOverloads constructor(
     context: Context,
@@ -62,8 +64,8 @@ internal class BpkToolbar @JvmOverloads constructor(
     }
 
     private fun tintMenu(menu: Menu) {
-        for (i in 0..<menu.size()) {
-            val item = menu.getItem(i)
+        for (i in 0..<menu.size) {
+            val item = menu[i]
             val icon = item.icon
             if (icon != null) {
                 item.icon = tintIcon(icon)
