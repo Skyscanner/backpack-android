@@ -56,8 +56,8 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
-      - name: Build Dokka docs
-        run: ./gradlew dokkaGenerate
+      - name: Build Dokka docs and prepare documentation
+        run: ./gradlew prepareDocs
 
       - name: Publish artifacts
         run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}

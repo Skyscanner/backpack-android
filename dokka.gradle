@@ -27,12 +27,14 @@ buildscript {
 }
 
 dokka {
-    dokkaPublications.html {
-        moduleName = project.artifactId
-        dokkaSourceSets {
-            named("main") {
-                reportUndocumented = false
-            }
+    moduleName = project.artifactId
+    dokkaSourceSets {
+        configureEach {
+            reportUndocumented = false
+            skipEmptyPackages = true
+
+            // Configure display name for this module
+            displayName = project.artifactId
         }
     }
 }
