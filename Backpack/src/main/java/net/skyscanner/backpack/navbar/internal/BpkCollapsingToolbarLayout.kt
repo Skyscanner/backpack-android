@@ -50,7 +50,7 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
         expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
 
         setScrimsShown(false)
-        @Suppress("UseKtx")
+
         contentScrim = context.getColor(R.color.bpkSurfaceDefault).toDrawable()
     }
 }

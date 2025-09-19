@@ -35,6 +35,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.isInEditMode
 import net.skyscanner.backpack.util.use
+import androidx.core.content.withStyledAttributes
 
 open class BpkText @JvmOverloads constructor(
     context: Context,
@@ -159,14 +160,12 @@ open class BpkText @JvmOverloads constructor(
     }
 
     @SuppressLint("CustomViewStyleable")
-    @Suppress("UseKtx")
     private fun applyLineHeight(textAppearance: Int) {
-        val textStyleAttributes = context.obtainStyledAttributes(textAppearance, R.styleable.BpkTextStyle)
-        val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
-            .let { if (it == -1) null else it }
-        lineHeight?.let { TextViewCompat.setLineHeight(this, lineHeight) }
-
-        textStyleAttributes.recycle()
+        context.withStyledAttributes(textAppearance, R.styleable.BpkTextStyle) {
+            val lineHeight = getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+                .let { if (it == -1) null else it }
+            lineHeight?.let { TextViewCompat.setLineHeight(this@BpkText, lineHeight) }
+        }
     }
 
     data class FontDefinition(

@@ -61,7 +61,6 @@ class BpkDialogImpl(
             val displayWidth = getScreenWidth(dialog)
             it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
-            @Suppress("UseKtx")
             val background = Color.TRANSPARENT.toDrawable()
             val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
             it.setBackgroundDrawable(InsetDrawable(background, margin))

@@ -22,6 +22,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Menu
+import androidx.core.view.get
+import androidx.core.view.size
 import com.google.android.material.appbar.MaterialToolbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -61,10 +63,9 @@ internal class BpkToolbar @JvmOverloads constructor(
         this.tintMenu(menu)
     }
 
-    @Suppress("UseKtx")
     private fun tintMenu(menu: Menu) {
-        for (i in 0..<menu.size()) {
-            val item = menu.getItem(i)
+        for (i in 0..<menu.size) {
+            val item = menu[i]
             val icon = item.icon
             if (icon != null) {
                 item.icon = tintIcon(icon)

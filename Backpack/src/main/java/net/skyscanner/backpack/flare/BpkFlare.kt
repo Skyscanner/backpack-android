@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.flare
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
@@ -29,6 +28,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.createBitmap
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -70,22 +70,20 @@ open class BpkFlare @JvmOverloads constructor(
         TOP(2),
     }
 
-    @Suppress("UseKtx")
     private val pointerMask by unsafeLazy {
         val pointerDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight).apply {
             pointerDrawable.draw(Canvas(this))
         }
     }
 
-    @Suppress("UseKtx")
     private val radiusMask by unsafeLazy {
         val radiiDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        Bitmap.createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+        createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight).apply {
             radiiDrawable.draw(Canvas(this))
         }
     }
@@ -174,6 +172,7 @@ open class BpkFlare @JvmOverloads constructor(
             InsetPaddingMode.NONE -> {}
             InsetPaddingMode.BOTTOM ->
                 setPaddingVertical(child, child.paddingTop, child.paddingBottom + pointerMask.height)
+
             InsetPaddingMode.TOP ->
                 setPaddingVertical(child, child.paddingTop + pointerMask.height, child.paddingBottom)
         }
@@ -199,6 +198,7 @@ open class BpkFlare @JvmOverloads constructor(
         when (pointerDirection) {
             PointerDirection.DOWN ->
                 clipPointerArea(pointerYStart, pointerXStart, height, canvas, width, pointerXEnd)
+
             PointerDirection.UP ->
                 clipPointerArea(0f, pointerXStart, pointerMask.height.toFloat(), canvas, width, pointerXEnd)
         }
@@ -238,6 +238,7 @@ open class BpkFlare @JvmOverloads constructor(
                 canvas.rotate(180f, width / 2, height / 2)
                 canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
             }
+
             PointerDirection.DOWN ->
                 canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
         }

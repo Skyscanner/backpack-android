@@ -30,6 +30,7 @@ import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.get
 import androidx.core.view.size
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import net.skyscanner.backpack.R
@@ -131,10 +132,9 @@ open class BpkBottomNav @JvmOverloads constructor(
             return true
         }
 
-        @Suppress("UseKtx")
         private fun findIndexOf(item: MenuItem): Int {
-            for (i in 0..<menu.size()) {
-                if (menu.getItem(i) == item) {
+            for (i in 0..<menu.size) {
+                if (menu[i] == item) {
                     return i
                 }
             }
