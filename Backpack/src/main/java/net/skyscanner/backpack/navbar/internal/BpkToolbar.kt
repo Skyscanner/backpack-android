@@ -61,6 +61,7 @@ internal class BpkToolbar @JvmOverloads constructor(
         this.tintMenu(menu)
     }
 
+    @Suppress("UseKtx")
     private fun tintMenu(menu: Menu) {
         for (i in 0..<menu.size()) {
             val item = menu.getItem(i)

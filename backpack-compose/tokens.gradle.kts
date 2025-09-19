@@ -31,7 +31,6 @@ import net.skyscanner.backpack.tokens.saveTo
 import net.skyscanner.backpack.tokens.transformTo
 
 tasks {
-
     val tokensPackage = "net.skyscanner.backpack.compose.tokens"
     val rClass = ClassName("net.skyscanner.backpack.compose", "R")
     val group = "tokens"
@@ -40,7 +39,7 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
 
-    val generateElevationTokens by creating {
+    val generateElevationTokens by registering {
         this.group = group
         doLast {
             source
@@ -51,7 +50,7 @@ tasks {
         }
     }
 
-    val generateSpacingTokens by creating {
+    val generateSpacingTokens by registering {
         this.group = group
         doLast {
             source
@@ -62,7 +61,7 @@ tasks {
         }
     }
 
-    val generateRadiiTokens by creating {
+    val generateRadiiTokens by registering {
         this.group = group
         doLast {
             source
@@ -73,7 +72,7 @@ tasks {
         }
     }
 
-    val generateBorderSizeTokens by creating {
+    val generateBorderSizeTokens by registering {
         this.group = group
         doLast {
             source
@@ -84,7 +83,7 @@ tasks {
         }
     }
 
-    val generateFontSizeTokens by creating {
+    val generateFontSizeTokens by registering {
         this.group = group
         doLast {
             source
@@ -95,7 +94,7 @@ tasks {
         }
     }
 
-    val generateLetterSpacingTokens by creating {
+    val generateLetterSpacingTokens by registering {
         this.group = group
         doLast {
             source
@@ -106,7 +105,7 @@ tasks {
         }
     }
 
-    val generateLineHeightTokens by creating {
+    val generateLineHeightTokens by registering {
         this.group = group
         doLast {
             source
@@ -117,7 +116,7 @@ tasks {
         }
     }
 
-    val generateTypographyTokens by creating {
+    val generateTypographyTokens by registering {
         this.group = group
         doLast {
             source
@@ -128,7 +127,7 @@ tasks {
         }
     }
 
-    val generateSemanticColors by creating {
+    val generateSemanticColors by registering {
         this.group = group
         doLast {
             source
@@ -139,7 +138,7 @@ tasks {
         }
     }
 
-    val generateInternalColors by creating {
+    val generateInternalColors by registering {
         this.group = group
         doLast {
             source
@@ -150,22 +149,22 @@ tasks {
         }
     }
 
-    val generateSizeTokens by creating {
+    val generateSizeTokens by registering {
         this.group = group
         dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
     }
 
-    val generateTextTokens by creating {
+    val generateTextTokens by registering {
         this.group = group
         dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
     }
 
-    val generateColorTokens by creating {
+    val generateColorTokens by registering {
         this.group = group
         dependsOn(generateSemanticColors, generateInternalColors)
     }
 
-    val generateIcons by creating {
+    val generateIcons by registering {
         this.group = group
         doLast {
             project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
@@ -177,7 +176,7 @@ tasks {
         }
     }
 
-    val generateTokens by creating {
+    val generateTokens by registering {
         this.group = group
         dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
     }

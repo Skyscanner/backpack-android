@@ -22,6 +22,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
+import androidx.core.graphics.createBitmap
 
 internal inline fun View.rasterize(
     widthMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
@@ -35,7 +36,7 @@ internal inline fun View.rasterize(
 
     onLayoutDone(this)
 
-    val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
+    val bitmap = createBitmap(width, height, bitmapConfig)
     bitmap.eraseColor(Color.TRANSPARENT)
     draw(Canvas(bitmap))
 

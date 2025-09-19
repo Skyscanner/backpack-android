@@ -131,6 +131,7 @@ open class BpkBottomNav @JvmOverloads constructor(
             return true
         }
 
+        @Suppress("UseKtx")
         private fun findIndexOf(item: MenuItem): Int {
             for (i in 0..<menu.size()) {
                 if (menu.getItem(i) == item) {
