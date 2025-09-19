@@ -52,6 +52,7 @@ open class BpkPanel @JvmOverloads constructor(
             }
         }
 
+    @Suppress("UseKtx")
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
         padding = a.getBoolean(R.styleable.BpkPanel_padding, true)

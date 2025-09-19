@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,6 +38,7 @@ import net.skyscanner.backpack.demo.components.IconComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.toast.BpkToast
+import androidx.core.graphics.drawable.toDrawable
 
 @Composable
 @IconComponent
@@ -139,7 +139,7 @@ private class IconsAdapter(
         // position of all icons to make it easier to see which icons currently support RTL
         if (direction == View.LAYOUT_DIRECTION_RTL && icons[position].drawable.isAutoMirrored) {
             holder.img.rotationY = 180f
-            holder.img.background = ColorDrawable(rtlIconBackgroundColor)
+            holder.img.background = rtlIconBackgroundColor.toDrawable()
         }
     }
 

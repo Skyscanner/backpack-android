@@ -70,6 +70,7 @@ open class BpkFlare @JvmOverloads constructor(
         TOP(2),
     }
 
+    @Suppress("UseKtx")
     private val pointerMask by unsafeLazy {
         val pointerDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
@@ -79,6 +80,7 @@ open class BpkFlare @JvmOverloads constructor(
         }
     }
 
+    @Suppress("UseKtx")
     private val radiusMask by unsafeLazy {
         val radiiDrawable = AppCompatResources.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)

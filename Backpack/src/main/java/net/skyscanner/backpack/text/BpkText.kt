@@ -159,6 +159,7 @@ open class BpkText @JvmOverloads constructor(
     }
 
     @SuppressLint("CustomViewStyleable")
+    @Suppress("UseKtx")
     private fun applyLineHeight(textAppearance: Int) {
         val textStyleAttributes = context.obtainStyledAttributes(textAppearance, R.styleable.BpkTextStyle)
         val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
