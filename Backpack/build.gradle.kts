@@ -1,4 +1,4 @@
-11  /**
+/**
  * Backpack for Android - Skyscanner's Design System
  *
  * Copyright 2018 - 2025 Skyscanner Ltd
