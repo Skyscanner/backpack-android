@@ -34,6 +34,35 @@
         <item name="bpkTextCaptionAppearance">@style/bpkTextCaption</item>
     </style>
 
+    <!-- VDL2-14 Enhanced Typography Theme -->
+    <style name="BpkTheme.Typography.Vdl214" parent="BpkTheme">
+        <!-- Override standard text appearances with VDL2-14 enhanced styles -->
+        <item name="bpkTextHero1Appearance">@style/bpkTextHero1Vdl</item>
+        <item name="bpkTextHero2Appearance">@style/bpkTextHero2Vdl</item>
+        <item name="bpkTextHero3Appearance">@style/bpkTextHero3Vdl</item>
+        <item name="bpkTextHero4Appearance">@style/bpkTextHero4Vdl</item>
+        <item name="bpkTextHero5Appearance">@style/bpkTextHero5Vdl</item>
+        <item name="bpkTextHeading1Appearance">@style/bpkTextHeading1Vdl</item>
+        <item name="bpkTextHeading2Appearance">@style/bpkTextHeading2Vdl</item>
+        <item name="bpkTextHeading3Appearance">@style/bpkTextHeading3Vdl</item>
+        <item name="bpkTextHeading4Appearance">@style/bpkTextHeading4Vdl</item>
+        <item name="bpkTextHeading5Appearance">@style/bpkTextHeading5Vdl</item>
+        
+        <!-- Map body styles to appropriate VDL editorial styles -->
+        <item name="bpkTextBodyDefaultAppearance">@style/bpkTextEditorial1Vdl</item>
+        <item name="bpkTextBodyLongformAppearance">@style/bpkTextEditorial2Vdl</item>
+        <item name="bpkTextSubheadingAppearance">@style/bpkTextEditorial3Vdl</item>
+        
+        <!-- Map label styles to appropriate VDL editorial styles -->
+        <item name="bpkTextLabel1Appearance">@style/bpkTextEditorial4Vdl</item>
+        <item name="bpkTextLabel2Appearance">@style/bpkTextEditorial5Vdl</item>
+        <item name="bpkTextLabel3Appearance">@style/bpkTextEditorial6Vdl</item>
+        
+        <!-- Keep footnote and caption as VDL editorial styles -->
+        <item name="bpkTextFootnoteAppearance">@style/bpkTextEditorial5Vdl</item>
+        <item name="bpkTextCaptionAppearance">@style/bpkTextEditorial6Vdl</item>
+    </style>
+
     <style name="BpkToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStartWithNavigation">56dp</item>
     </style>

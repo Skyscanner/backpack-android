@@ -40,6 +40,22 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
 
+    // VDL2-14 Typography tokens - manual additions until available in foundations package
+    val vdlLetterSpacingTokens = mapOf(
+        "VDL_DISPLAY_7" to -0.05, // -1.6px at 32px size ≈ -0.05em
+        "VDL_HERO" to -0.03, // -1.2px at 40px size ≈ -0.03em
+        "VDL_HEADING_1" to -0.03, // -1.2px at 40px size ≈ -0.03em
+        "VDL_HEADING_2" to -0.025, // -1.0px at 40px size ≈ -0.025em
+        "VDL_HEADING_3" to -0.02 // -0.6px at 30px size ≈ -0.02em
+    )
+    
+    val vdlLineHeightTokens = mapOf(
+        "VDL_DISPLAY_7" to 27.2, // 85% of 32px
+        "VDL_EDITORIAL_140" to 22.4, // 140% of 16px (Editorial 4)
+        "VDL_EDITORIAL_140_SM" to 19.6, // 140% of 14px (Editorial 5)
+        "VDL_EDITORIAL_140_XS" to 16.8 // 140% of 12px (Editorial 6)
+    )
+
     val generateElevationTokens by creating {
         this.group = group
         doLast {
@@ -100,7 +116,11 @@ tasks {
         doLast {
             source
                 .parseAs(BpkTextUnit.Category.LetterSpacing)
-                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
+                .transformTo(BpkTextUnit.Format.Compose(
+                    namespace = "BpkLetterSpacing", 
+                    internal = true,
+                    customTokens = vdlLetterSpacingTokens
+                ))
                 .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
                 .execute()
         }
@@ -111,7 +131,11 @@ tasks {
         doLast {
             source
                 .parseAs(BpkTextUnit.Category.LineHeight)
-                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight", internal = true))
+                .transformTo(BpkTextUnit.Format.Compose(
+                    namespace = "BpkLineHeight", 
+                    internal = true,
+                    customTokens = vdlLineHeightTokens
+                ))
                 .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
                 .execute()
         }

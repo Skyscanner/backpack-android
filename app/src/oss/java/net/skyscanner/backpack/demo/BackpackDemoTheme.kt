@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.demo.data.SharedPreferences
 
 @Composable
 fun BackpackDemoTheme(

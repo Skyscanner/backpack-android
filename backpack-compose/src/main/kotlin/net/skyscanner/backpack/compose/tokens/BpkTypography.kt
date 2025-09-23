@@ -31,10 +31,6 @@ public data class BpkTypography internal constructor(
     public val bodyDefault: TextStyle,
     public val bodyLongform: TextStyle,
     public val caption: TextStyle,
-    public val display7: TextStyle,
-    public val editorial4: TextStyle,
-    public val editorial5: TextStyle,
-    public val editorial6: TextStyle,
     public val footnote: TextStyle,
     public val heading1: TextStyle,
     public val heading2: TextStyle,
@@ -46,7 +42,6 @@ public data class BpkTypography internal constructor(
     public val hero3: TextStyle,
     public val hero4: TextStyle,
     public val hero5: TextStyle,
-    public val hero6: TextStyle,
     public val label1: TextStyle,
     public val label2: TextStyle,
     public val label3: TextStyle,
@@ -95,47 +90,6 @@ public data class BpkTypography internal constructor(
             trim = LineHeightStyle.Trim.None,
         ),
       ),
-      display7 = TextStyle(
-        fontWeight = FontWeight.Black,
-        fontSize = BpkFontSize.Xxl,
-        lineHeight = BpkLineHeight.VdlDisplay7,
-        letterSpacing = BpkLetterSpacing.VdlDisplay7,
-        fontFamily = defaultFontFamily,
-        lineHeightStyle = LineHeightStyle(
-            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
-            trim = LineHeightStyle.Trim.None,
-        ),
-      ),
-      editorial4 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = BpkFontSize.Base,
-        lineHeight = BpkLineHeight.VdlEditorial140,
-        fontFamily = defaultFontFamily,
-        lineHeightStyle = LineHeightStyle(
-            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
-            trim = LineHeightStyle.Trim.None,
-        ),
-      ),
-      editorial5 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = BpkFontSize.Sm,
-        lineHeight = BpkLineHeight.VdlEditorial140Sm,
-        fontFamily = defaultFontFamily,
-        lineHeightStyle = LineHeightStyle(
-            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
-            trim = LineHeightStyle.Trim.None,
-        ),
-      ),
-      editorial6 = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = BpkFontSize.Xs,
-        lineHeight = BpkLineHeight.VdlEditorial140Xs,
-        fontFamily = defaultFontFamily,
-        lineHeightStyle = LineHeightStyle(
-            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
-            trim = LineHeightStyle.Trim.None,
-        ),
-      ),
       footnote = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = BpkFontSize.Sm,
@@ -147,10 +101,9 @@ public data class BpkTypography internal constructor(
         ),
       ),
       heading1 = TextStyle(
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxxl,
         lineHeight = BpkLineHeight.Xxxl,
-        letterSpacing = BpkLetterSpacing.VdlHeading1,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
@@ -158,10 +111,9 @@ public data class BpkTypography internal constructor(
         ),
       ),
       heading2 = TextStyle(
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xxl,
         lineHeight = BpkLineHeight.Xxl,
-        letterSpacing = BpkLetterSpacing.VdlHeading2,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
@@ -169,10 +121,9 @@ public data class BpkTypography internal constructor(
         ),
       ),
       heading3 = TextStyle(
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Xl,
         lineHeight = BpkLineHeight.XlTight,
-        letterSpacing = BpkLetterSpacing.VdlHeading3,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
@@ -180,10 +131,9 @@ public data class BpkTypography internal constructor(
         ),
       ),
       heading4 = TextStyle(
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Lg,
         lineHeight = BpkLineHeight.LgTight,
-        letterSpacing = BpkLetterSpacing.VdlHeading3,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
@@ -191,10 +141,9 @@ public data class BpkTypography internal constructor(
         ),
       ),
       heading5 = TextStyle(
-        fontWeight = FontWeight.Black,
+        fontWeight = FontWeight.Bold,
         fontSize = BpkFontSize.Base,
         lineHeight = BpkLineHeight.BaseTight,
-        letterSpacing = BpkLetterSpacing.VdlHeading3,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
@@ -249,18 +198,7 @@ public data class BpkTypography internal constructor(
         fontWeight = FontWeight.Black,
         fontSize = BpkFontSize.Xxxxl,
         lineHeight = BpkLineHeight.Xxxxl,
-        letterSpacing = BpkLetterSpacing.VdlHero,
-        fontFamily = defaultFontFamily,
-        lineHeightStyle = LineHeightStyle(
-            alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
-            trim = LineHeightStyle.Trim.None,
-        ),
-      ),
-      hero6 = TextStyle(
-        fontWeight = FontWeight.Black,
-        fontSize = BpkFontSize.Xxxl,
-        lineHeight = BpkLineHeight.Xxxl,
-        letterSpacing = BpkLetterSpacing.VdlHero,
+        letterSpacing = BpkLetterSpacing.Tight,
         fontFamily = defaultFontFamily,
         lineHeightStyle = LineHeightStyle(
             alignment = LineHeightStyle.Alignment(topRatio = 0.2f),

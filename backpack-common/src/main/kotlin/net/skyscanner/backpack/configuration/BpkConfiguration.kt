@@ -34,6 +34,9 @@ object BpkConfiguration {
         DEFAULT,
         ALTERNATIVE_1,
         ALTERNATIVE_2,
+        VDL_2_14,
+        VDL_2_14_ALTERNATIVE_1,
+        VDL_2_14_ALTERNATIVE_2,
     }
 
     private var _hasSet: Boolean = false

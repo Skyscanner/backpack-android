@@ -179,4 +179,141 @@
     <item name="android:textSize">@dimen/bpkTextXsSize</item>
     <item name="lineHeight">16sp</item>
   </style>
+
+  <!-- VDL2-14 Enhanced Typography Styles -->
+  <style name="bpkTextDisplay7Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkText5xlSize</item>
+    <item name="lineHeight">27.2sp</item>
+    <item name="android:letterSpacing">-0.05</item>
+  </style>
+
+  <style name="bpkTextHero1Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxxlSize</item>
+    <item name="lineHeight">40.8sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHero2Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    <item name="lineHeight">34.0sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHero3Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
+    <item name="lineHeight">27.2sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHero4Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    <item name="lineHeight">20.4sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHero5Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    <item name="lineHeight">17.0sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHeading1Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxxlSize</item>
+    <item name="lineHeight">40.8sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHeading2Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    <item name="lineHeight">34.0sp</item>
+    <item name="android:letterSpacing">-0.025</item>
+  </style>
+
+  <style name="bpkTextHeading3Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
+    <item name="lineHeight">27.2sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextHeading4Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    <item name="lineHeight">20.4sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextHeading5Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    <item name="lineHeight">17.0sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextEditorial1Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">22.4sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
+
+  <style name="bpkTextEditorial2Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">22.4sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
+
+  <style name="bpkTextEditorial3Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">22.4sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
+
+  <style name="bpkTextEditorial4Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">22.4sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
+
+  <style name="bpkTextEditorial5Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextSmSize</item>
+    <item name="lineHeight">19.6sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
+
+  <style name="bpkTextEditorial6Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXsSize</item>
+    <item name="lineHeight">16.8sp</item>
+    <item name="android:letterSpacing">0.0</item>
+  </style>
 </resources>

@@ -53,14 +53,18 @@ object BpkTextUnit {
 
     sealed class Format<Output> : BpkTransformer<BpkTextUnits, Output> {
 
-        data class Compose(val namespace: String, val internal: Boolean = false) : Format<TypeSpec>() {
+        data class Compose(
+            val namespace: String,
+            val internal: Boolean = false,
+            val customTokens: Map<String, Double> = emptyMap(),
+        ) : Format<TypeSpec>() {
             override fun invoke(source: BpkTextUnits): TypeSpec =
-                toCompose(source, namespace, internal)
+                toCompose(source, namespace, internal, customTokens)
         }
 
-        object Xml : Format<String>() {
+        data class Xml(val customTokens: Map<String, Double> = emptyMap()) : Format<String>() {
             override fun invoke(source: BpkTextUnits): String =
-                toXml(source)
+                toXml(source, customTokens)
         }
     }
 }
@@ -102,11 +106,17 @@ private fun toCompose(
     source: BpkTextUnits,
     namespace: String,
     internal: Boolean,
-): TypeSpec =
-    TypeSpec.objectBuilder(namespace)
+    customTokens: Map<String, Double> = emptyMap(),
+): TypeSpec {
+    // Combine auto-generated tokens with custom VDL2-14 tokens
+    val allTokens = source.toMutableMap().apply {
+        putAll(customTokens)
+    }
+
+    return TypeSpec.objectBuilder(namespace)
         .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
         .addProperties(
-            source.map { (name, value) ->
+            allTokens.map { (name, value) ->
                 PropertySpec
                     .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_')), TextUnitClass)
                     .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
@@ -123,13 +133,21 @@ private fun toCompose(
                         }
                     })
                     .build()
-            },
+            }.sortedBy { it.name }, // Sort properties alphabetically for consistency
         )
         .build()
+}
 
 private fun toXml(
     source: BpkTextUnits,
-): String =
-    source.map { (name, value) ->
+    customTokens: Map<String, Double> = emptyMap(),
+): String {
+    // Combine auto-generated tokens with custom VDL2-14 tokens
+    val allTokens = source.toMutableMap().apply {
+        putAll(customTokens)
+    }
+
+    return allTokens.map { (name, value) ->
         "    <dimen name=\"bpkText${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}Size\">${value.toInt()}sp</dimen>"
-    }.joinToString("\n")
+    }.sorted().joinToString("\n") // Sort for consistency
+}

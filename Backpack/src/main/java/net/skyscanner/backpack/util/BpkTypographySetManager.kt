@@ -36,6 +36,9 @@ object BpkTypographySetManager {
             BpkConfiguration.BpkTypographySet.DEFAULT -> R.style.BpkTheme
             BpkConfiguration.BpkTypographySet.ALTERNATIVE_1 -> R.style.BpkTheme_Typography_Alternative1
             BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 -> R.style.BpkTheme_Typography_Alternative2
+            BpkConfiguration.BpkTypographySet.VDL_2_14 -> R.style.BpkTheme_Typography_Vdl214
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_1 -> R.style.BpkTheme_Typography_Vdl214_Alternative1
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_2 -> R.style.BpkTheme_Typography_Vdl214_Alternative2
         }
     }
 
@@ -53,6 +56,15 @@ object BpkTypographySetManager {
             }
             BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 -> {
                 R.style.BpkTheme_Typography_Alternative2
+            }
+            BpkConfiguration.BpkTypographySet.VDL_2_14 -> {
+                R.style.BpkTheme_Typography_Vdl214
+            }
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_1 -> {
+                R.style.BpkTheme_Typography_Vdl214_Alternative1
+            }
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_2 -> {
+                R.style.BpkTheme_Typography_Vdl214_Alternative2
             }
         }
     }

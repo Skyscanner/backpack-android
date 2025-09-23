@@ -38,6 +38,9 @@ object BpkTypographySet {
             BpkConfiguration.BpkTypographySet.DEFAULT -> defaultFontFamily
             BpkConfiguration.BpkTypographySet.ALTERNATIVE_1 -> alternativeFontFamily1
             BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 -> alternativeFontFamily2
+            BpkConfiguration.BpkTypographySet.VDL_2_14 -> defaultFontFamily
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_1 -> alternativeFontFamily1
+            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_2 -> alternativeFontFamily2
         }
         return BpkTypography(defaultFontFamily = fontFamily)
     }

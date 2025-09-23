@@ -244,5 +244,47 @@ ${content.joinToString("\n")}
   </style>"""
     }
 
-    return textStylesDeclaration + source.joinToString("\n") { it.toXml() }
+    // VDL2-14 enhanced typography styles with improved letter spacing and line heights
+    fun createVdlStyle(
+        baseName: String,
+        fontSize: String,
+        letterSpacing: Double,
+        lineHeight: Double,
+        fontWeight: String = "Base",
+    ): String {
+        val content = listOfNotNull(
+            "    <item name=\"android:fontFamily\">?bpkFontFamily$fontWeight</item>",
+            "    <item name=\"android:textColor\">@color/bpkTextPrimary</item>",
+            "    <item name=\"android:textSize\">@dimen/bpkText${fontSize}Size</item>",
+            "    <item name=\"lineHeight\">${lineHeight}sp</item>",
+            "    <item name=\"android:letterSpacing\">$letterSpacing</item>",
+        )
+        return """
+  <style name="bpkText${baseName}Vdl">
+${content.joinToString("\n")}
+  </style>"""
+    }
+
+    val vdlStyles = listOf(
+        // VDL2-14 Typography styles with enhanced letter spacing and line heights
+        createVdlStyle("Display7", "5xl", -0.05, 27.2, "Emphasized"), // 64sp with 85% line height
+        createVdlStyle("Hero1", "Xxxxl", -0.03, 40.8, "Emphasized"), // 48sp with 85% line height
+        createVdlStyle("Hero2", "Xxxl", -0.03, 34.0, "Emphasized"), // 40sp with 85% line height
+        createVdlStyle("Hero3", "Xxl", -0.03, 27.2, "Emphasized"), // 32sp with 85% line height
+        createVdlStyle("Hero4", "Xl", -0.03, 20.4, "Emphasized"), // 24sp with 85% line height
+        createVdlStyle("Hero5", "Lg", -0.03, 17.0, "Emphasized"), // 20sp with 85% line height
+        createVdlStyle("Heading1", "Xxxxl", -0.03, 40.8, "Emphasized"), // 48sp with 85% line height
+        createVdlStyle("Heading2", "Xxxl", -0.025, 34.0, "Emphasized"), // 40sp with 85% line height
+        createVdlStyle("Heading3", "Xxl", -0.02, 27.2, "Emphasized"), // 32sp with 85% line height
+        createVdlStyle("Heading4", "Xl", -0.02, 20.4, "Emphasized"), // 24sp with 85% line height
+        createVdlStyle("Heading5", "Lg", -0.02, 17.0, "Emphasized"), // 20sp with 85% line height
+        createVdlStyle("Editorial1", "Base", 0.0, 22.4), // 16sp with 140% line height (22.4sp)
+        createVdlStyle("Editorial2", "Base", 0.0, 22.4), // 16sp with 140% line height
+        createVdlStyle("Editorial3", "Base", 0.0, 22.4), // 16sp with 140% line height
+        createVdlStyle("Editorial4", "Base", 0.0, 22.4), // 16sp with 140% line height
+        createVdlStyle("Editorial5", "Sm", 0.0, 19.6), // 14sp with 140% line height (19.6sp)
+        createVdlStyle("Editorial6", "Xs", 0.0, 16.8), // 12sp with 140% line height (16.8sp)
+    )
+
+    return textStylesDeclaration + source.joinToString("\n") { it.toXml() } + "\n\n  <!-- VDL2-14 Enhanced Typography Styles -->" + vdlStyles.joinToString("\n")
 }
