@@ -180,7 +180,7 @@
     <item name="lineHeight">16sp</item>
   </style>
 
-  <!-- VDL2-14 Enhanced Typography Styles -->
+  <!-- VDL2 Enhanced Typography Styles -->
   <style name="bpkTextDisplay7Vdl">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>

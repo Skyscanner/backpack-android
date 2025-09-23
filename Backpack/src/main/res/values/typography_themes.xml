@@ -32,18 +32,6 @@
     <item name="bpkFontFamilyBlack">monospace</item>
   </style>
 
-  <!-- VDL2-14 with Alternative 1 (Serif) -->
-  <style name="BpkTheme.Typography.Vdl214.Alternative1" parent="BpkTheme.Typography.Vdl214">
-    <item name="bpkFontFamilyBase">serif</item>
-    <item name="bpkFontFamilyEmphasized">serif</item>
-    <item name="bpkFontFamilyBlack">serif</item>
-  </style>
 
-  <!-- VDL2-14 with Alternative 2 (Monospace) -->
-  <style name="BpkTheme.Typography.Vdl214.Alternative2" parent="BpkTheme.Typography.Vdl214">
-    <item name="bpkFontFamilyBase">monospace</item>
-    <item name="bpkFontFamilyEmphasized">monospace</item>
-    <item name="bpkFontFamilyBlack">monospace</item>
-  </style>
 
 </resources>

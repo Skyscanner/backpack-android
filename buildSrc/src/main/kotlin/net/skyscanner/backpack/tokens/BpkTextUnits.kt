@@ -108,7 +108,7 @@ private fun toCompose(
     internal: Boolean,
     customTokens: Map<String, Double> = emptyMap(),
 ): TypeSpec {
-    // Combine auto-generated tokens with custom VDL2-14 tokens
+    // Combine auto-generated tokens with custom VDL2 tokens
     val allTokens = source.toMutableMap().apply {
         putAll(customTokens)
     }
@@ -142,7 +142,7 @@ private fun toXml(
     source: BpkTextUnits,
     customTokens: Map<String, Double> = emptyMap(),
 ): String {
-    // Combine auto-generated tokens with custom VDL2-14 tokens
+    // Combine auto-generated tokens with custom VDL2 tokens
     val allTokens = source.toMutableMap().apply {
         putAll(customTokens)
     }

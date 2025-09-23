@@ -40,7 +40,7 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
 
-    // VDL2-14 Typography tokens - manual additions until available in foundations package
+    // VDL2 Typography tokens - manual additions until available in foundations package
     val vdlLetterSpacingTokens = mapOf(
         "VDL_DISPLAY_7" to -0.05, // -1.6px at 32px size ≈ -0.05em
         "VDL_HERO" to -0.03, // -1.2px at 40px size ≈ -0.03em

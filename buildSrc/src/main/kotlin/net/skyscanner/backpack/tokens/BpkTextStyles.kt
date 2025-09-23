@@ -244,7 +244,7 @@ ${content.joinToString("\n")}
   </style>"""
     }
 
-    // VDL2-14 enhanced typography styles with improved letter spacing and line heights
+    // VDL2 enhanced typography styles with improved letter spacing and line heights
     fun createVdlStyle(
         baseName: String,
         fontSize: String,
@@ -266,7 +266,7 @@ ${content.joinToString("\n")}
     }
 
     val vdlStyles = listOf(
-        // VDL2-14 Typography styles with enhanced letter spacing and line heights
+        // VDL2 Typography styles with enhanced letter spacing and line heights
         createVdlStyle("Display7", "5xl", -0.05, 27.2, "Emphasized"), // 64sp with 85% line height
         createVdlStyle("Hero1", "Xxxxl", -0.03, 40.8, "Emphasized"), // 48sp with 85% line height
         createVdlStyle("Hero2", "Xxxl", -0.03, 34.0, "Emphasized"), // 40sp with 85% line height
@@ -286,5 +286,5 @@ ${content.joinToString("\n")}
         createVdlStyle("Editorial6", "Xs", 0.0, 16.8), // 12sp with 140% line height (16.8sp)
     )
 
-    return textStylesDeclaration + source.joinToString("\n") { it.toXml() } + "\n\n  <!-- VDL2-14 Enhanced Typography Styles -->" + vdlStyles.joinToString("\n")
+    return textStylesDeclaration + source.joinToString("\n") { it.toXml() } + "\n\n  <!-- VDL2 Enhanced Typography Styles -->" + vdlStyles.joinToString("\n")
 }

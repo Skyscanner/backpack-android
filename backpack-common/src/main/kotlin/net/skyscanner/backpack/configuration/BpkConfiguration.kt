@@ -23,8 +23,6 @@ object BpkConfiguration {
 
         data object BpkButton : BpkExperimentalComponent()
 
-        data object BpkText : BpkExperimentalComponent()
-
         data object BpkCard : BpkExperimentalComponent()
 
         data object BpkChip : BpkExperimentalComponent()
@@ -32,11 +30,7 @@ object BpkConfiguration {
 
     enum class BpkTypographySet {
         DEFAULT,
-        ALTERNATIVE_1,
-        ALTERNATIVE_2,
-        VDL_2_14,
-        VDL_2_14_ALTERNATIVE_1,
-        VDL_2_14_ALTERNATIVE_2,
+        VDL_2,
     }
 
     private var _hasSet: Boolean = false
@@ -44,9 +38,8 @@ object BpkConfiguration {
     fun setConfigs(
         chipConfig: Boolean = false,
         buttonConfig: Boolean = false,
-        textConfig: Boolean = false,
         cardConfig: Boolean = false,
-        typographySet: BpkTypographySet = BpkTypographySet.DEFAULT,
+        typography: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -58,33 +51,12 @@ object BpkConfiguration {
         if (buttonConfig) {
             this.buttonConfig = BpkExperimentalComponent.BpkButton
         }
-        if (textConfig) {
-            this.textConfig = BpkExperimentalComponent.BpkText
+        if (typography) {
+            this.typographySet = BpkTypographySet.VDL_2
         }
         if (cardConfig) {
             this.cardConfig = BpkExperimentalComponent.BpkCard
         }
-        this.typographySet = typographySet
-    }
-
-    /**
-     * Updates the typography set. This can be called independently of setConfigs
-     * to support runtime typography switching.
-     */
-    fun setTypographySet(typographySet: BpkTypographySet) {
-        this.typographySet = typographySet
-    }
-
-    /**
-     * Resets the configuration state. Should only be used for testing or app restart scenarios.
-     */
-    internal fun reset() {
-        _hasSet = false
-        chipConfig = null
-        buttonConfig = null
-        textConfig = null
-        cardConfig = null
-        typographySet = BpkTypographySet.DEFAULT
     }
 
     var logger: (() -> Unit)? = null
@@ -98,9 +70,6 @@ object BpkConfiguration {
         private set
 
     var buttonConfig: BpkExperimentalComponent.BpkButton? = null
-        private set
-
-    var textConfig: BpkExperimentalComponent.BpkText? = null
         private set
 
     var cardConfig: BpkExperimentalComponent.BpkCard? = null

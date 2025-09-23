@@ -42,11 +42,11 @@ tasks {
     val iconSource = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
         .readAs(BpkFormat.Folder)
 
-    // VDL2-14 Typography tokens - manual additions until available in foundations package
+    // VDL2 Typography tokens - manual additions until available in foundations package
     // Note: For View system, these are primarily handled through text styles rather than separate dimensions
     val vdlFontSizeTokens: Map<String, Double> = mapOf(
-        // Additional font sizes for VDL2-14 if needed
-        // Currently VDL2-14 uses existing font sizes but with different line heights and letter spacing
+        // Additional font sizes for VDL2 if needed
+        // Currently VDL2 uses existing font sizes but with different line heights and letter spacing
     )
 
     val generateElevationTokens by creating {

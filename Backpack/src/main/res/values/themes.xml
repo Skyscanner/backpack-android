@@ -34,9 +34,9 @@
         <item name="bpkTextCaptionAppearance">@style/bpkTextCaption</item>
     </style>
 
-    <!-- VDL2-14 Enhanced Typography Theme -->
-    <style name="BpkTheme.Typography.Vdl214" parent="BpkTheme">
-        <!-- Override standard text appearances with VDL2-14 enhanced styles -->
+    <!-- VDL2 Enhanced Typography Theme -->
+    <style name="BpkTheme.Typography.Vdl2" parent="BpkTheme">
+        <!-- Override standard text appearances with VDL2 enhanced styles -->
         <item name="bpkTextHero1Appearance">@style/bpkTextHero1Vdl</item>
         <item name="bpkTextHero2Appearance">@style/bpkTextHero2Vdl</item>
         <item name="bpkTextHero3Appearance">@style/bpkTextHero3Vdl</item>

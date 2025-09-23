@@ -49,7 +49,7 @@
             <enum name="label3" value="15" />
             <enum name="footnote" value="16" />
             <enum name="caption" value="17" />
-            <!-- VDL2-14 Enhanced Typography Styles -->
+            <!-- VDL2 Enhanced Typography Styles -->
             <enum name="display7Vdl" value="18" />
             <enum name="hero1Vdl" value="19" />
             <enum name="hero2Vdl" value="20" />

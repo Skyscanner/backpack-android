@@ -31,14 +31,10 @@ object BpkTypographySetManager {
      * Returns the appropriate theme resource based on the current typography set configuration
      */
     @StyleRes
-    fun getThemeForTypographySet(): Int {
+    fun getTypographyTheme(): Int {
         return when (BpkConfiguration.typographySet) {
             BpkConfiguration.BpkTypographySet.DEFAULT -> R.style.BpkTheme
-            BpkConfiguration.BpkTypographySet.ALTERNATIVE_1 -> R.style.BpkTheme_Typography_Alternative1
-            BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 -> R.style.BpkTheme_Typography_Alternative2
-            BpkConfiguration.BpkTypographySet.VDL_2_14 -> R.style.BpkTheme_Typography_Vdl214
-            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_1 -> R.style.BpkTheme_Typography_Vdl214_Alternative1
-            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_2 -> R.style.BpkTheme_Typography_Vdl214_Alternative2
+            BpkConfiguration.BpkTypographySet.VDL_2 -> R.style.BpkTheme_Typography_Vdl2
         }
     }
 
@@ -49,22 +45,8 @@ object BpkTypographySetManager {
     fun applyTypographySetToTheme(@StyleRes baseTheme: Int): Int {
         return when (BpkConfiguration.typographySet) {
             BpkConfiguration.BpkTypographySet.DEFAULT -> baseTheme
-            BpkConfiguration.BpkTypographySet.ALTERNATIVE_1 -> {
-                // For apps that want to apply typography set to custom themes,
-                // they would need to create theme variations manually
-                R.style.BpkTheme_Typography_Alternative1
-            }
-            BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 -> {
-                R.style.BpkTheme_Typography_Alternative2
-            }
-            BpkConfiguration.BpkTypographySet.VDL_2_14 -> {
-                R.style.BpkTheme_Typography_Vdl214
-            }
-            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_1 -> {
-                R.style.BpkTheme_Typography_Vdl214_Alternative1
-            }
-            BpkConfiguration.BpkTypographySet.VDL_2_14_ALTERNATIVE_2 -> {
-                R.style.BpkTheme_Typography_Vdl214_Alternative2
+            BpkConfiguration.BpkTypographySet.VDL_2 -> {
+                R.style.BpkTheme_Typography_Vdl2
             }
         }
     }
