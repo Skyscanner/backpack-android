@@ -438,6 +438,7 @@
 
     <!-- New Link Story Examples -->
     <string name="link_story_builder_title">Type-Safe Builder</string>
+    <string name="link_story_builder_title_covert_segment">Type-Safe Builder Covert Segment</string>
     <string name="link_story_price_links_title">Price Links</string>
     <string name="link_story_text_styles_title">Different Text Styles</string>
     <string name="link_story_price_flight_markdown">From [£99](https://book.flight/99) London to Paris</string>
@@ -459,5 +460,6 @@
     <string name="link_story_url_hotel_booking">https://book.hotel/149</string>
     <string name="link_story_url_terms">https://terms.com</string>
     <string name="link_story_hotel_price_accessibility">one hundred and forty-nine pounds</string>
+    <string name="key_login_method_selection_tos_and_privacy_policy">By continuing you agree to our &lt;link0&gt;Terms of Service&lt;/link0&gt; and &lt;link1&gt;Privacy Policy&lt;/link1&gt;.</string>
 
 </resources>

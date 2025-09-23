@@ -33,7 +33,7 @@ internal fun processLinkMatch(
 
     segments.add(
         TextSegment.Link(
-            text = linkMatch.groupValues[1],
+            text = linkMatch.groupValues[2],
             url = url,
         ),
     )
