@@ -41,4 +41,4 @@ internal fun processLinkMatch(
     return remainingText.substring(linkMatch.range.last + 1)
 }
 
-internal val DEFAULT_REGEX = Regex("<link\\d+>(.*?)</link\\d+>")
+internal val DEFAULT_REGEX = Regex("<link(\\d+)>(.*?)</link\\1>")
