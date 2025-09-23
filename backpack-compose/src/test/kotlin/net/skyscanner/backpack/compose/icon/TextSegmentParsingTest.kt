@@ -161,18 +161,20 @@ class TextSegmentParsingTest {
     }
 
     @Test
-    fun `When convertToTextSegments() is called with non-matching processor then it should return single text segment`() {
+    fun `When convertToTextSegments() is called with custom regex then it should return link segment`() {
         // Given
         val expectedUrl = "https://example.com"
-        val inputText = "This text has <style0>a link</style0> but no matching processor."
+        val inputText = "This text has <style0>a link</style0> with custom regex."
         val urls = listOf(expectedUrl)
 
         // When
-        val result = inputText.convertToTextSegments(urls)
+        val result = inputText.convertToTextSegments(urls, "<style0>(.*?)</style0>".toRegex())
 
         // Then
-        assertEquals(1, result.size)
-        assertEquals(TextSegment.Text(inputText), result[0])
+        assertEquals(3, result.size)
+        assertEquals(TextSegment.Text("This text has "), result[0])
+        assertEquals(TextSegment.Link("a link", expectedUrl), result[1])
+        assertEquals(TextSegment.Text(" with custom regex."), result[2])
     }
 
     @Test
@@ -209,5 +211,41 @@ class TextSegmentParsingTest {
         assertEquals(TextSegment.Text("Click "), result[0])
         assertEquals(TextSegment.Link("", expectedUrl), result[1])
         assertEquals(TextSegment.Text(" here."), result[2])
+    }
+
+    @Test
+    fun `When convertToTextSegments() is called with button regex then it should return link segment`() {
+        // Given
+        val expectedUrl = "https://submit.com"
+        val inputText = "Click this <button>Submit</button> to continue."
+        val urls = listOf(expectedUrl)
+        val buttonRegex = "<button>(.*?)</button>".toRegex()
+
+        // When
+        val result = inputText.convertToTextSegments(urls, buttonRegex)
+
+        // Then
+        assertEquals(3, result.size)
+        assertEquals(TextSegment.Text("Click this "), result[0])
+        assertEquals(TextSegment.Link("Submit", expectedUrl), result[1])
+        assertEquals(TextSegment.Text(" to continue."), result[2])
+    }
+
+    @Test
+    fun `When convertToTextSegments() is called with complex regex then it should return link segment`() {
+        // Given
+        val expectedUrl = "https://example.com"
+        val inputText = "Visit our <custom123>awesome site</custom123> today!"
+        val urls = listOf(expectedUrl)
+        val customRegex = "<custom123>(.*?)</custom123>".toRegex()
+
+        // When
+        val result = inputText.convertToTextSegments(urls, customRegex)
+
+        // Then
+        assertEquals(3, result.size)
+        assertEquals(TextSegment.Text("Visit our "), result[0])
+        assertEquals(TextSegment.Link("awesome site", expectedUrl), result[1])
+        assertEquals(TextSegment.Text(" today!"), result[2])
     }
 }

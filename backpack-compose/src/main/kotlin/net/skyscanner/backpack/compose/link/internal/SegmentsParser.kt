@@ -31,9 +31,11 @@ internal fun processLinkMatch(
         segments.add(TextSegment.Text(beforeLink))
     }
 
+    val textGroupIndex = if (linkMatch.groupValues.size > 2) 2 else 1
+
     segments.add(
         TextSegment.Link(
-            text = linkMatch.groupValues[2],
+            text = linkMatch.groupValues[textGroupIndex],
             url = url,
         ),
     )

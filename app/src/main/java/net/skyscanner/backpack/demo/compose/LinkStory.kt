@@ -251,7 +251,7 @@ internal fun TypeSafeBuilderConvertSegmentExample(
     val segment = text.convertToTextSegments(listOf("https://example.com/terms", "https://example.com/privacy"))
 
     LinkExample(
-        title = stringResource(R.string.link_story_builder_title_covert_segment),
+        title = stringResource(R.string.link_story_builder_title_convert_segment),
         modifier = modifier,
         style = style,
     ) {
