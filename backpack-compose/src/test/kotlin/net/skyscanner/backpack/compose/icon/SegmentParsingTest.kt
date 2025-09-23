@@ -23,7 +23,7 @@ import net.skyscanner.backpack.compose.link.TextSegment
 import net.skyscanner.backpack.compose.link.convertToTextSegments
 import org.junit.Test
 
-class TextSegmentParsingTest {
+class SegmentParsingTest {
 
     @Test
     fun `When convertToTextSegments() is called with empty text then it should return empty list`() {
