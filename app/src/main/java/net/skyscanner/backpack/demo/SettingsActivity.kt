@@ -26,15 +26,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import net.skyscanner.backpack.demo.ui.SettingsThemeOption
+import net.skyscanner.backpack.demo.ui.SettingsTypographyOption
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.toggle.BpkSwitch
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var themes: List<SettingsThemeOption>
+    private lateinit var typographyOptions: List<SettingsTypographyOption>
     private val themeMapping = mapOf(
         "AppTheme" to R.style.AppTheme,
         "London" to R.style.LondonTheme,
         "Doha" to R.style.DohaTheme,
+    )
+    private val typographyMapping = mapOf(
+        "Default (Sans Serif)" to BpkConfiguration.BpkTypographySet.DEFAULT,
+        "Alternative 1 (Serif)" to BpkConfiguration.BpkTypographySet.ALTERNATIVE_1,
+        "Alternative 2 (Monospace)" to BpkConfiguration.BpkTypographySet.ALTERNATIVE_2,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +65,12 @@ class SettingsActivity : AppCompatActivity() {
             findViewById<SettingsThemeOption>(R.id.theme_doha).apply { setOnClickListener(::onThemeSelected) },
         )
 
+        typographyOptions = listOf(
+            findViewById<SettingsTypographyOption>(R.id.typography_default).apply { setOnClickListener(::onTypographySelected) },
+            findViewById<SettingsTypographyOption>(R.id.typography_alternative1).apply { setOnClickListener(::onTypographySelected) },
+            findViewById<SettingsTypographyOption>(R.id.typography_alternative2).apply { setOnClickListener(::onTypographySelected) },
+        )
+
         val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
         val themePicker = findViewById<View>(R.id.theme_picker)
 
@@ -72,6 +86,14 @@ class SettingsActivity : AppCompatActivity() {
                 if (themeMapping[it.text] == theme) {
                     it.isCurrent = true
                 }
+            }
+        }
+
+        // Set current typography set
+        val currentTypographySet = SharedPreferences.getTypographySet(this)
+        typographyOptions.forEach {
+            if (typographyMapping[it.text] == currentTypographySet) {
+                it.isCurrent = true
             }
         }
     }
@@ -90,6 +112,15 @@ class SettingsActivity : AppCompatActivity() {
         view.isCurrent = !view.isCurrent
 
         updateTheme()
+    }
+
+    fun onTypographySelected(view: View) {
+        typographyOptions.forEach { it.isCurrent = false }
+
+        view as SettingsTypographyOption
+        view.isCurrent = !view.isCurrent
+
+        updateTypographySet()
     }
 
     private fun onThemeSwitchClicked(isChecked: Boolean) {
@@ -120,5 +151,18 @@ class SettingsActivity : AppCompatActivity() {
             SharedPreferences.saveTheme(this, it)
             BackpackDemoApplication.triggerRebirth(this)
         }
+    }
+
+    private fun updateTypographySet() {
+        var typographySet = BpkConfiguration.BpkTypographySet.DEFAULT
+        typographyOptions.forEach {
+            if (it.isCurrent) {
+                typographySet = typographyMapping[it.text as String] ?: BpkConfiguration.BpkTypographySet.DEFAULT
+            }
+        }
+
+        SharedPreferences.saveTypographySet(this, typographySet)
+        BpkConfiguration.setTypographySet(typographySet)
+        BackpackDemoApplication.triggerRebirth(this)
     }
 }

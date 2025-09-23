@@ -54,4 +54,10 @@ internal object BpkLineHeight {
     internal val Xxl: TextUnit = 40.0.sp
 
     internal val Xxxxl: TextUnit = 56.0.sp
+
+    // VDL2-14: Additional line heights for new typography styles
+    internal val VdlDisplay7: TextUnit = 27.2.sp // 85% of 32px
+    internal val VdlEditorial140: TextUnit = 22.4.sp // 140% of 16px (Editorial 4)
+    internal val VdlEditorial140Sm: TextUnit = 19.6.sp // 140% of 14px (Editorial 5)
+    internal val VdlEditorial140Xs: TextUnit = 16.8.sp // 140% of 12px (Editorial 6)
 }

@@ -26,6 +26,7 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.ui.DemoScaffold
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setTheme(SharedPreferences.getTheme(this))
+
+        // Initialize BpkConfiguration with saved typography set
+        val typographySet = SharedPreferences.getTypographySet(this)
+        BpkConfiguration.setTypographySet(typographySet)
+
         setContent {
             DemoScaffold {
                 DestinationsNavHost(

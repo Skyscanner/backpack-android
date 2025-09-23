@@ -30,6 +30,7 @@ import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkShapes
 import net.skyscanner.backpack.compose.tokens.BpkTypography
+import net.skyscanner.backpack.compose.tokens.BpkTypographySet
 
 private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
     error("Wrap you content with BpkTheme {} to get access to Backpack typography")
@@ -46,7 +47,26 @@ fun BpkTheme(
     fontFamily: FontFamily = FontFamily.SansSerif,
     content: @Composable () -> Unit,
 ) {
-    val typography = BpkTypography(defaultFontFamily = fontFamily)
+    val typography = BpkTypographySet.create(defaultFontFamily = fontFamily)
+    val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+    val shapes = BpkShapes()
+
+    CompositionLocalProvider(
+        LocalBpkTypography provides typography,
+        LocalBpkColors provides colors,
+        LocalBpkShapes provides shapes,
+        LocalContentColor provides colors.textPrimary,
+        LocalTextStyle provides typography.bodyDefault,
+        content = content,
+    )
+}
+
+@Composable
+fun BpkTheme(
+    fontFamilies: Map<net.skyscanner.backpack.configuration.BpkConfiguration.BpkTypographySet, FontFamily>,
+    content: @Composable () -> Unit,
+) {
+    val typography = BpkTypographySet.create(fontFamilies = fontFamilies)
     val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
     val shapes = BpkShapes()
 
@@ -68,7 +88,7 @@ object BpkTheme {
         get() = if (LocalInspectionMode.current) {
             // when in preview mode return a default typography object to ensure previews work
             // without wrapping it in another composable
-            BpkTypography(defaultFontFamily = FontFamily.SansSerif)
+            BpkTypographySet.create(defaultFontFamily = FontFamily.SansSerif)
         } else {
             LocalBpkTypography.current
         }

@@ -20,11 +20,13 @@ package net.skyscanner.backpack.demo.data
 
 import android.content.Context
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 class SharedPreferences {
 
     companion object {
         val THEME = "theme"
+        val TYPOGRAPHY_SET = "typography_set"
 
         fun getTheme(context: Context): Int {
             return context
@@ -44,6 +46,29 @@ class SharedPreferences {
 
             with(sharedPref.edit()) {
                 putInt(THEME, theme)
+                commit()
+            }
+        }
+
+        fun getTypographySet(context: Context): BpkConfiguration.BpkTypographySet {
+            val ordinal = context
+                .getSharedPreferences(
+                    context.getString(R.string.preference_file_key),
+                    Context.MODE_PRIVATE,
+                )
+                .getInt(TYPOGRAPHY_SET, BpkConfiguration.BpkTypographySet.DEFAULT.ordinal)
+            return BpkConfiguration.BpkTypographySet.values()[ordinal]
+        }
+
+        fun saveTypographySet(context: Context, typographySet: BpkConfiguration.BpkTypographySet) {
+            val sharedPref = context
+                .getSharedPreferences(
+                    context.getString(R.string.preference_file_key),
+                    Context.MODE_PRIVATE,
+                )
+
+            with(sharedPref.edit()) {
+                putInt(TYPOGRAPHY_SET, typographySet.ordinal)
                 commit()
             }
         }

@@ -109,5 +109,50 @@
         android:layout_marginEnd="@dimen/bpkSpacingBase"
         android:background="@color/bpkLine" />
 
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bpkSpacingXxl"
+        android:background="@color/bpkSurfaceHighlight"
+        android:gravity="center_vertical|start"
+        android:paddingStart="@dimen/bpkSpacingBase"
+        android:text="@string/settings_section_typography"
+        android:textColor="@color/bpkTextSecondary"
+        app:textStyle="bodyDefault"
+        tools:ignore="RtlSymmetry" />
+
+    <LinearLayout
+        android:id="@+id/typography_set_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <net.skyscanner.backpack.demo.ui.SettingsTypographyOption
+            android:id="@+id/typography_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:typographyName="@string/settings_typography_default" />
+
+        <net.skyscanner.backpack.demo.ui.SettingsTypographyOption
+            android:id="@+id/typography_alternative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:typographyName="@string/settings_typography_alternative1" />
+
+        <net.skyscanner.backpack.demo.ui.SettingsTypographyOption
+            android:id="@+id/typography_alternative2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:typographyName="@string/settings_typography_alternative2" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginStart="@dimen/bpkSpacingBase"
+        android:layout_marginTop="@dimen/bpkSpacingSm"
+        android:layout_marginEnd="@dimen/bpkSpacingBase"
+        android:background="@color/bpkLine" />
+
 
 </LinearLayout>

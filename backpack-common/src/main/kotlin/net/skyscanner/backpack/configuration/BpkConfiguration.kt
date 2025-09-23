@@ -30,6 +30,12 @@ object BpkConfiguration {
         data object BpkChip : BpkExperimentalComponent()
     }
 
+    enum class BpkTypographySet {
+        DEFAULT,
+        ALTERNATIVE_1,
+        ALTERNATIVE_2,
+    }
+
     private var _hasSet: Boolean = false
 
     fun setConfigs(
@@ -37,6 +43,7 @@ object BpkConfiguration {
         buttonConfig: Boolean = false,
         textConfig: Boolean = false,
         cardConfig: Boolean = false,
+        typographySet: BpkTypographySet = BpkTypographySet.DEFAULT,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -54,6 +61,27 @@ object BpkConfiguration {
         if (cardConfig) {
             this.cardConfig = BpkExperimentalComponent.BpkCard
         }
+        this.typographySet = typographySet
+    }
+
+    /**
+     * Updates the typography set. This can be called independently of setConfigs
+     * to support runtime typography switching.
+     */
+    fun setTypographySet(typographySet: BpkTypographySet) {
+        this.typographySet = typographySet
+    }
+
+    /**
+     * Resets the configuration state. Should only be used for testing or app restart scenarios.
+     */
+    internal fun reset() {
+        _hasSet = false
+        chipConfig = null
+        buttonConfig = null
+        textConfig = null
+        cardConfig = null
+        typographySet = BpkTypographySet.DEFAULT
     }
 
     var logger: (() -> Unit)? = null
@@ -73,5 +101,8 @@ object BpkConfiguration {
         private set
 
     var cardConfig: BpkExperimentalComponent.BpkCard? = null
+        private set
+
+    var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
         private set
 }

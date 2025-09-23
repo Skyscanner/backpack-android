@@ -80,6 +80,11 @@
     <string name="settings_option_theme_description">This will enable themes for compatible components</string>
     <string name="settings_theme_doha">Doha</string>
     <string name="settings_theme_london">London</string>
+    
+    <string name="settings_section_typography">Typography Sets</string>
+    <string name="settings_typography_default">Default (Sans Serif)</string>
+    <string name="settings_typography_alternative1">Alternative 1 (Serif)</string>
+    <string name="settings_typography_alternative2">Alternative 2 (Monospace)</string>
 
     <string name="snackbar_title">Title</string>
     <string name="snackbar_message">Message</string>

@@ -2140,14 +2140,6 @@ public val BpkIcon.Companion.Virus: BpkIcon by Delegates.singleton(
     )
 )
 
-public val BpkIcon.Companion.Walk: BpkIcon by Delegates.singleton(
-    BpkIcon(
-        name = "walk",
-        small = R.drawable.bpk_walk_sm,
-        large = R.drawable.bpk_walk,
-    )
-)
-
 public val BpkIcon.Companion.Wallet: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "wallet",
@@ -2550,7 +2542,6 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.UseLocation,
         BpkIcon.View,
         BpkIcon.Virus,
-        BpkIcon.Walk,
         BpkIcon.Wallet,
         BpkIcon.Weather,
         BpkIcon.WeatherClear,
