@@ -56,6 +56,11 @@ object BpkTextStyle {
                 toCompose(source, className)
         }
 
+        data class ComposeVdl2(val className: String) : Format<TypeSpec>() {
+            override fun invoke(source: BpkTextStyles): TypeSpec =
+                toComposeVdl2(source, className)
+        }
+
         object Xml : Format<String>() {
             override fun invoke(source: BpkTextStyles): String =
                 toXml(source)
@@ -206,6 +211,189 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
     }
 
     return source.toTextStyleClass()
+}
+
+private fun toComposeVdl2(source: BpkTextStyles, className: String): TypeSpec {
+    val defaultFontFamily = "defaultFontFamily"
+
+    fun String.toSemanticName() =
+        CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.replace('-', '_'))
+
+    // VDL2 typography style models based on VDL2-14 requirements
+    val vdl2Styles = listOf(
+        // Display 7 - New - 32px (64sp), 85% line height, -1.6px letter spacing, Black/CAPS
+        BpkTextStyleModel(
+            name = "DISPLAY_7",
+            fontSize = Token("5xl", "64.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("VDL_DISPLAY_7", "27.2.sp"),
+            letterSpacing = Token("VDL_DISPLAY_7", "-(0.05).em"),
+        ),
+        // Hero 5 - Amended - no size change, no line height change, -1.2px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HERO_5",
+            fontSize = Token("XXXXL", "48.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXXXL", "56.0.sp"),
+            letterSpacing = Token("VDL_HERO", "-(0.03).em"),
+        ),
+        // Hero 6 - Amended - no size change, no line height change, -1.2px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HERO_6",
+            fontSize = Token("XXXL", "40.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXXL", "48.0.sp"),
+            letterSpacing = Token("VDL_HERO", "-(0.03).em"),
+        ),
+        // Heading 1 - Amended - no size change, no line height change, -1.2px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HEADING_1",
+            fontSize = Token("XXXL", "40.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXXL", "48.0.sp"),
+            letterSpacing = Token("VDL_HEADING_1", "-(0.03).em"),
+        ),
+        // Heading 2 - Amended - no size change, no line height change, -1.0px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HEADING_2",
+            fontSize = Token("XXL", "32.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXL", "40.0.sp"),
+            letterSpacing = Token("VDL_HEADING_2", "-(0.025).em"),
+        ),
+        // Heading 3 - Amended - no size change, no line height change, -0.6px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HEADING_3",
+            fontSize = Token("XL", "24.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XL_TIGHT", "28.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+        // Heading 4 - Amended - no size change, no line height change, -0.6px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HEADING_4",
+            fontSize = Token("LG", "20.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("LG_TIGHT", "24.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+        // Heading 5 - Amended - no size change, no line height change, -0.6px letter spacing, Black
+        BpkTextStyleModel(
+            name = "HEADING_5",
+            fontSize = Token("BASE", "16.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("BASE_TIGHT", "20.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+        // Editorial 4 - New - 16px, 140% line height, Regular 400
+        BpkTextStyleModel(
+            name = "EDITORIAL_4",
+            fontSize = Token("BASE", "16.0.sp"),
+            fontWeight = Token("BOOK", "FontWeight.Normal"),
+            lineHeight = Token("VDL_EDITORIAL_140", "22.4.sp"),
+            letterSpacing = null,
+        ),
+        // Editorial 5 - New - 14px, 140% line height, Regular 400
+        BpkTextStyleModel(
+            name = "EDITORIAL_5",
+            fontSize = Token("SM", "14.0.sp"),
+            fontWeight = Token("BOOK", "FontWeight.Normal"),
+            lineHeight = Token("VDL_EDITORIAL_140_SM", "19.6.sp"),
+            letterSpacing = null,
+        ),
+        // Editorial 6 - New - 12px, 140% line height, Regular 400
+        BpkTextStyleModel(
+            name = "EDITORIAL_6",
+            fontSize = Token("XS", "12.0.sp"),
+            fontWeight = Token("BOOK", "FontWeight.Normal"),
+            lineHeight = Token("VDL_EDITORIAL_140_XS", "16.8.sp"),
+            letterSpacing = null,
+        ),
+    )
+
+    fun BpkTextStyles.toVdl2TextStyleClass(): TypeSpec {
+
+        fun toVdl2ConstructorFunction(styles: List<BpkTextStyleModel>): FunSpec {
+
+            fun String.wrapIfDigits() = if (first().isDigit()) {
+                "`$this`"
+            } else this
+
+            fun Token.toName() =
+                CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_'))
+                    .wrapIfDigits()
+
+            fun BpkTextStyleModel.toParameter(): String =
+                "%textStyle:T(\n" +
+                    "    fontWeight = %fontWeight:T.${fontWeight.toName().let { if (it == "Book") "Normal" else if (it == "Black") "Black" else it }},\n" +
+                    "    fontSize = %fontSize:T.${fontSize.toName()},\n" +
+                    "    lineHeight = %lineHeight:T.${lineHeight.toName()},\n" + if (letterSpacing != null) {
+                        "    letterSpacing = %letterSpacing:T.${letterSpacing.toName()},\n"
+                    } else {
+                        ""
+                    } +
+                    "    fontFamily = $defaultFontFamily,\n" +
+                    "    lineHeightStyle = %lineHeightStyle:T(\n" +
+                    "        alignment = %lineHeightStyle:T.Alignment(topRatio = 0.2f),\n" +
+                    "        trim = %lineHeightStyle:T.Trim.None,\n" +
+                    "    ),\n" +
+                    "  )"
+
+            return FunSpec.constructorBuilder()
+                .addModifiers(KModifier.INTERNAL)
+                .addParameter(
+                    ParameterSpec
+                        .builder(defaultFontFamily, FontFamilyClass)
+                        .defaultValue("%T.SansSerif", FontFamilyClass)
+                        .build(),
+                )
+                .callThisConstructor(
+                    CodeBlock.builder().addNamed(
+                        styles.joinToString(
+                            prefix = "\n  ",
+                            separator = ",\n  ",
+                            postfix = ",\n",
+                        ) {
+                            "${it.name.toSemanticName()} = ${it.toParameter()}"
+                        }, mapOf(
+                            "textStyle" to TextStyleClass,
+                            "fontWeight" to FontWeightClass,
+                            "fontSize" to BpkFontSizeClass,
+                            "lineHeight" to BpkLineHeightClass,
+                            "letterSpacing" to BpkLetterSpacingClass,
+                            "platformTextStyle" to PlatformTextStyleClass,
+                            "lineHeightStyle" to LineHeightStyleClass,
+                        ),
+                    ).build(),
+                )
+                .build()
+        }
+
+        fun BpkTextStyleModel.toParameter(): ParameterSpec =
+            ParameterSpec
+                .builder(name.toSemanticName(), TextStyleClass)
+                .build()
+
+        fun BpkTextStyleModel.toProperty(): PropertySpec =
+            PropertySpec
+                .builder(name.toSemanticName(), TextStyleClass)
+                .initializer(name.toSemanticName())
+                .build()
+
+        return TypeSpec.classBuilder(className)
+            .primaryConstructor(
+                FunSpec.constructorBuilder()
+                    .addModifiers(KModifier.INTERNAL)
+                    .addParameters(vdl2Styles.map(BpkTextStyleModel::toParameter))
+                    .build(),
+            )
+            .addFunction(toVdl2ConstructorFunction(vdl2Styles))
+            .addProperties(vdl2Styles.map(BpkTextStyleModel::toProperty))
+            .addModifiers(KModifier.DATA)
+            .build()
+    }
+
+    return source.toVdl2TextStyleClass()
 }
 
 private fun toXml(source: BpkTextStyles): String {

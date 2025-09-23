@@ -25,6 +25,7 @@ import android.widget.RadioButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
+import androidx.core.content.withStyledAttributes
 
 class SettingsTypographyOption @JvmOverloads constructor(
     context: Context,
@@ -53,9 +54,9 @@ class SettingsTypographyOption @JvmOverloads constructor(
         titleView = findViewById(R.id.typography_title)
         radioButton = findViewById(R.id.typography_radio)
 
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.SettingsTypographyOption)
-        text = attributes.getString(R.styleable.SettingsTypographyOption_typographyName)
-        attributes.recycle()
+        context.withStyledAttributes(attrs, R.styleable.SettingsTypographyOption) {
+            text = getString(R.styleable.SettingsTypographyOption_typographyName)
+        }
 
         // Make the entire view clickable
         setOnClickListener {

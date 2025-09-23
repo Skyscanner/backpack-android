@@ -27,7 +27,7 @@
       <attr name="android:letterSpacing" />
       <attr name="lineHeight" />
   </declare-styleable>
-  
+
   <style name="bpkTextBaseLarken">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>

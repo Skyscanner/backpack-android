@@ -80,11 +80,10 @@
     <string name="settings_option_theme_description">This will enable themes for compatible components</string>
     <string name="settings_theme_doha">Doha</string>
     <string name="settings_theme_london">London</string>
-    
+
     <string name="settings_section_typography">Typography Sets</string>
     <string name="settings_typography_default">Default (Sans Serif)</string>
-    <string name="settings_typography_alternative1">Alternative 1 (Serif)</string>
-    <string name="settings_typography_alternative2">Alternative 2 (Monospace)</string>
+    <string name="settings_typography_alternative1">VDL 2</string>
 
     <string name="snackbar_title">Title</string>
     <string name="snackbar_message">Message</string>
@@ -464,5 +463,17 @@
     <string name="link_story_url_hotel_booking">https://book.hotel/149</string>
     <string name="link_story_url_terms">https://terms.com</string>
     <string name="link_story_hotel_price_accessibility">one hundred and forty-nine pounds</string>
+
+    <!-- Configuration Story Strings -->
+    <string name="configuration_title">BpkConfiguration Settings</string>
+    <string name="configuration_description">Configure experimental features for Backpack components. Note: Configuration can only be set once per app session.</string>
+    <string name="configuration_chip_config">Enable Chip Configuration</string>
+    <string name="configuration_button_config">Enable Button Configuration</string>
+    <string name="configuration_card_config">Enable Card Configuration</string>
+    <string name="configuration_typography">Enable VDL2 Typography</string>
+    <string name="configuration_apply">Apply Configuration</string>
+    <string name="configuration_applied">Configuration Applied</string>
+    <string name="configuration_restart_note">Configuration has been applied. Some changes may require app restart to take full effect.</string>
+    <string name="configuration_current_state">Current Configuration State</string>
 
 </resources>

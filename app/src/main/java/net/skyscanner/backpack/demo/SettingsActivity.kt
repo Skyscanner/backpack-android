@@ -25,11 +25,11 @@ import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.ui.SettingsThemeOption
 import net.skyscanner.backpack.demo.ui.SettingsTypographyOption
-import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.toggle.BpkSwitch
-import net.skyscanner.backpack.configuration.BpkConfiguration
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var themes: List<SettingsThemeOption>
@@ -41,8 +41,7 @@ class SettingsActivity : AppCompatActivity() {
     )
     private val typographyMapping = mapOf(
         "Default (Sans Serif)" to BpkConfiguration.BpkTypographySet.DEFAULT,
-        "Alternative 1 (Serif)" to BpkConfiguration.BpkTypographySet.ALTERNATIVE_1,
-        "Alternative 2 (Monospace)" to BpkConfiguration.BpkTypographySet.ALTERNATIVE_2,
+        "VDL 2" to BpkConfiguration.BpkTypographySet.VDL_2,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +67,6 @@ class SettingsActivity : AppCompatActivity() {
         typographyOptions = listOf(
             findViewById<SettingsTypographyOption>(R.id.typography_default).apply { setOnClickListener(::onTypographySelected) },
             findViewById<SettingsTypographyOption>(R.id.typography_alternative1).apply { setOnClickListener(::onTypographySelected) },
-            findViewById<SettingsTypographyOption>(R.id.typography_alternative2).apply { setOnClickListener(::onTypographySelected) },
         )
 
         val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
@@ -162,7 +160,9 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         SharedPreferences.saveTypographySet(this, typographySet)
-        BpkConfiguration.setTypographySet(typographySet)
+        BpkConfiguration.setConfigs(
+            typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
+        )
         BackpackDemoApplication.triggerRebirth(this)
     }
 }

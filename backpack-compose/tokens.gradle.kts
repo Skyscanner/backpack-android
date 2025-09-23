@@ -152,6 +152,17 @@ tasks {
         }
     }
 
+    val generateVdl2TypographyTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextStyle.Category)
+                .transformTo(BpkTextStyle.Format.ComposeVdl2(className = "BpkVdl2Typography"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
+    }
+
     val generateSemanticColors by creating {
         this.group = group
         doLast {
@@ -181,7 +192,7 @@ tasks {
 
     val generateTextTokens by creating {
         this.group = group
-        dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
+        dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens, generateVdl2TypographyTokens)
     }
 
     val generateColorTokens by creating {

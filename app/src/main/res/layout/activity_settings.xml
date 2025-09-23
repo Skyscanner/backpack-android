@@ -138,11 +138,6 @@
             android:layout_height="wrap_content"
             app:typographyName="@string/settings_typography_alternative1" />
 
-        <net.skyscanner.backpack.demo.ui.SettingsTypographyOption
-            android:id="@+id/typography_alternative2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:typographyName="@string/settings_typography_alternative2" />
 
     </LinearLayout>
 
