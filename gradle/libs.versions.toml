@@ -1,12 +1,12 @@
 [versions]
-kotlin = "2.2.10"
-ksp = "2.2.10-2.0.2" # depends on Kotlin version
+kotlin = "2.2.20"
+ksp = "2.2.20-2.0.3" # depends on Kotlin version
 compilerTesting = "0.9.0"
 destinations = "2.2.0" # update this alongside with compiler version
 
-androidPlugin = "8.8.2"
-lint = "31.8.2"  # android plugin, lint and sdk-common need to be updated together
-androidSdkCommon = "31.8.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+androidPlugin = "8.11.2"
+lint = "31.11.2"  # android plugin, lint and sdk-common need to be updated together
+androidSdkCommon = "31.11.2" # if the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
 
 detekt = "1.23.8"
 lifecycle = "2.9.3"
@@ -76,7 +76,7 @@ kotlin-compilerTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version.ref 
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2025.08.01" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2025.09.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }

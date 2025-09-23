@@ -16,14 +16,10 @@
  * limitations under the License.
  */
 
-// Token generation has been migrated to backpack-common module.
-// This file is kept for backwards compatibility but all token generation
-// is now handled by the backpack-common module's tokens.gradle.kts file.
-
 tasks {
     val group = "tokens"
 
-    val generateTokens by creating {
+    val generateTokens by registering {
         this.group = group
         // Depend on backpack-common token generation
         dependsOn(":backpack-common:generateTokens")
