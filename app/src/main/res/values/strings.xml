@@ -438,7 +438,7 @@
 
     <!-- New Link Story Examples -->
     <string name="link_story_builder_title">Type-Safe Builder</string>
-    <string name="link_story_builder_title_covert_segment">Type-Safe Builder Covert Segment</string>
+    <string name="link_story_builder_title_convert_segment">Type-Safe Builder Covert Segment</string>
     <string name="link_story_price_links_title">Price Links</string>
     <string name="link_story_text_styles_title">Different Text Styles</string>
     <string name="link_story_price_flight_markdown">From [£99](https://book.flight/99) London to Paris</string>
