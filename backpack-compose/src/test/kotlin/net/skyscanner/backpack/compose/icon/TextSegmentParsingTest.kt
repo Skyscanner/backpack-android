@@ -110,6 +110,33 @@ class TextSegmentParsingTest {
     }
 
     @Test
+    fun `When convertToTextSegments() is called with more than two links then it should process all links`() {
+        // Given
+        val termsUrl = "https://terms.example.com"
+        val privacyUrl = "https://privacy.example.com"
+        val helpUrl = "https://help.example.com"
+        val inputText = "By continuing, you agree to our <link0>Terms of Service</link0>, <link1>Privacy Policy</link1>, and <link2>Help Center</link2>."
+        val urls = listOf(
+            termsUrl,
+            privacyUrl,
+            helpUrl,
+        )
+
+        // When
+        val result = inputText.convertToTextSegments(urls)
+
+        // Then
+        assertEquals(7, result.size)
+        assertEquals(TextSegment.Text("By continuing, you agree to our "), result[0])
+        assertEquals(TextSegment.Link("Terms of Service", termsUrl), result[1])
+        assertEquals(TextSegment.Text(", "), result[2])
+        assertEquals(TextSegment.Link("Privacy Policy", privacyUrl), result[3])
+        assertEquals(TextSegment.Text(", and "), result[4])
+        assertEquals(TextSegment.Link("Help Center", helpUrl), result[5])
+        assertEquals(TextSegment.Text("."), result[6])
+    }
+
+    @Test
     fun `When convertToTextSegments() is called with link at start of text then it should return correct segments`() {
         // Given
         val expectedUrl = "https://example.com"
@@ -247,5 +274,29 @@ class TextSegmentParsingTest {
         assertEquals(TextSegment.Text("Visit our "), result[0])
         assertEquals(TextSegment.Link("awesome site", expectedUrl), result[1])
         assertEquals(TextSegment.Text(" today!"), result[2])
+    }
+
+    @Test
+    fun `When convertToTextSegments() is called with more than two custom links then it should process all custom links`() {
+        // Given
+        val firstUrl = "https://terms.example.com"
+        val secondUrl = "https://privacy.example.com"
+        val thirdUrl = "https://help.example.com"
+        val inputText = "Please read our <custom>Terms</custom>, <custom>Privacy Policy</custom>, and <custom>Help Center</custom> before continuing."
+        val urls = listOf(firstUrl, secondUrl, thirdUrl)
+        val customRegex = "<custom>(.*?)</custom>".toRegex()
+
+        // When
+        val result = inputText.convertToTextSegments(urls, customRegex)
+
+        // Then
+        assertEquals(7, result.size)
+        assertEquals(TextSegment.Text("Please read our "), result[0])
+        assertEquals(TextSegment.Link("Terms", firstUrl), result[1])
+        assertEquals(TextSegment.Text(", "), result[2])
+        assertEquals(TextSegment.Link("Privacy Policy", secondUrl), result[3])
+        assertEquals(TextSegment.Text(", and "), result[4])
+        assertEquals(TextSegment.Link("Help Center", thirdUrl), result[5])
+        assertEquals(TextSegment.Text(" before continuing."), result[6])
     }
 }
