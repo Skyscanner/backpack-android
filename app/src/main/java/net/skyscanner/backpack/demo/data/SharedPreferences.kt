@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.data
 
 import android.content.Context
+import androidx.core.content.edit
 import net.skyscanner.backpack.demo.R
 
 class SharedPreferences {
@@ -42,9 +43,8 @@ class SharedPreferences {
                     Context.MODE_PRIVATE,
                 )
 
-            with(sharedPref.edit()) {
+            sharedPref.edit(commit = true) {
                 putInt(THEME, theme)
-                commit()
             }
         }
     }

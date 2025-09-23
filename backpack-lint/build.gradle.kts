@@ -16,22 +16,32 @@
  * limitations under the License.
  */
 
-apply plugin: 'kotlin'
-apply from: "tokens.gradle.kts"
+import net.skyscanner.backpack.tokens.BpkFormat
+import net.skyscanner.backpack.tokens.nodeFileOf
+import net.skyscanner.backpack.tokens.parseAs
+import net.skyscanner.backpack.tokens.readAs
+import net.skyscanner.backpack.tokens.saveTo
+import net.skyscanner.backpack.tokens.transformTo
 
-dependencies {
-    compileOnly libs.kotlin.stdlib
-    compileOnly libs.lint.api
-
-    testImplementation libs.lint.lint
-    testImplementation libs.test.lint
-    testImplementation libs.test.junit
+plugins {
+    kotlin("jvm")
 }
 
-jar {
+dependencies {
+    compileOnly(libs.kotlin.stdlib)
+    compileOnly(libs.lint.api)
+
+    testImplementation(libs.lint.lint)
+    testImplementation(libs.test.lint)
+    testImplementation(libs.test.junit)
+}
+
+tasks.jar {
     manifest {
-        attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
+        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
     }
 }
 
-apply from: "$rootProject.projectDir/kotlin-configuration-check.gradle"
+apply(from = "tokens.gradle.kts")
+
+apply(from = "$rootDir/kotlin-configuration-check.gradle")

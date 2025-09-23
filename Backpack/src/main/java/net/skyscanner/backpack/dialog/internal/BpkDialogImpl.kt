@@ -21,8 +21,8 @@ package net.skyscanner.backpack.dialog.internal
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import androidx.core.graphics.drawable.toDrawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -61,7 +61,7 @@ class BpkDialogImpl(
             val displayWidth = getScreenWidth(dialog)
             it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
-            val background = ColorDrawable(Color.TRANSPARENT)
+            val background = Color.TRANSPARENT.toDrawable()
             val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
             it.setBackgroundDrawable(InsetDrawable(background, margin))
         }
