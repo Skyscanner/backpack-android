@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.link.internal.BpkLinkImpl
+import net.skyscanner.backpack.compose.link.internal.DEFAULT_REGEX
+import net.skyscanner.backpack.compose.link.internal.processLinkMatch
 
 enum class BpkLinkStyle {
     Default,
@@ -99,4 +101,30 @@ fun buildTextSegments(
     } else {
         segments
     }
+}
+
+fun String.convertToTextSegments(
+    urls: List<String>,
+    regex: Regex = DEFAULT_REGEX,
+): List<TextSegment> {
+    val segments = mutableListOf<TextSegment>()
+    var remainingText = this
+
+    for (url in urls) {
+        val linkMatch = regex.find(remainingText)
+        if (linkMatch != null) {
+            remainingText = processLinkMatch(
+                segments = segments,
+                remainingText = remainingText,
+                linkMatch = linkMatch,
+                url = url,
+            )
+        }
+    }
+
+    if (remainingText.isNotEmpty()) {
+        segments.add(TextSegment.Text(remainingText))
+    }
+
+    return segments
 }
