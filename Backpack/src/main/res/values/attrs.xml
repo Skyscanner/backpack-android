@@ -49,6 +49,24 @@
             <enum name="label3" value="15" />
             <enum name="footnote" value="16" />
             <enum name="caption" value="17" />
+            <!-- VDL2 Enhanced Typography Styles -->
+            <enum name="display7Vdl" value="18" />
+            <enum name="hero1Vdl" value="19" />
+            <enum name="hero2Vdl" value="20" />
+            <enum name="hero3Vdl" value="21" />
+            <enum name="hero4Vdl" value="22" />
+            <enum name="hero5Vdl" value="23" />
+            <enum name="heading1Vdl" value="24" />
+            <enum name="heading2Vdl" value="25" />
+            <enum name="heading3Vdl" value="26" />
+            <enum name="heading4Vdl" value="27" />
+            <enum name="heading5Vdl" value="28" />
+            <enum name="editorial1Vdl" value="29" />
+            <enum name="editorial2Vdl" value="30" />
+            <enum name="editorial3Vdl" value="31" />
+            <enum name="editorial4Vdl" value="32" />
+            <enum name="editorial5Vdl" value="33" />
+            <enum name="editorial6Vdl" value="34" />
         </attr>
         <attr name="android:textColor" format="color" />
     </declare-styleable>

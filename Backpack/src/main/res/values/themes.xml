@@ -34,6 +34,20 @@
         <item name="bpkTextCaptionAppearance">@style/bpkTextCaption</item>
     </style>
 
+    <!-- VDL2 Enhanced Typography Theme -->
+    <style name="BpkTheme.Typography.Vdl2" parent="BpkTheme">
+        <!-- Override standard text appearances with VDL2 enhanced styles -->
+        <item name="bpkTextHero1Appearance">@style/bpkTextHero1</item>
+        <item name="bpkTextHero2Appearance">@style/bpkTextHero2</item>
+        <item name="bpkTextHero3Appearance">@style/bpkTextHero3</item>
+        <item name="bpkTextHero5Appearance">@style/bpkTextHero5Vdl</item>
+        <item name="bpkTextHeading1Appearance">@style/bpkTextHeading1Vdl</item>
+        <item name="bpkTextHeading2Appearance">@style/bpkTextHeading2Vdl</item>
+        <item name="bpkTextHeading3Appearance">@style/bpkTextHeading3Vdl</item>
+        <item name="bpkTextHeading4Appearance">@style/bpkTextHeading4Vdl</item>
+        <item name="bpkTextHeading5Appearance">@style/bpkTextHeading5Vdl</item>
+    </style>
+
     <style name="BpkToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStartWithNavigation">56dp</item>
     </style>

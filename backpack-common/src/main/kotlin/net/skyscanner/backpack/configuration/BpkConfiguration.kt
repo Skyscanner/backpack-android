@@ -23,11 +23,14 @@ object BpkConfiguration {
 
         data object BpkButton : BpkExperimentalComponent()
 
-        data object BpkText : BpkExperimentalComponent()
-
         data object BpkCard : BpkExperimentalComponent()
 
         data object BpkChip : BpkExperimentalComponent()
+    }
+
+    enum class BpkTypographySet {
+        DEFAULT,
+        VDL_2,
     }
 
     private var _hasSet: Boolean = false
@@ -35,8 +38,8 @@ object BpkConfiguration {
     fun setConfigs(
         chipConfig: Boolean = false,
         buttonConfig: Boolean = false,
-        textConfig: Boolean = false,
         cardConfig: Boolean = false,
+        typography: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -48,8 +51,8 @@ object BpkConfiguration {
         if (buttonConfig) {
             this.buttonConfig = BpkExperimentalComponent.BpkButton
         }
-        if (textConfig) {
-            this.textConfig = BpkExperimentalComponent.BpkText
+        if (typography) {
+            this.typographySet = BpkTypographySet.VDL_2
         }
         if (cardConfig) {
             this.cardConfig = BpkExperimentalComponent.BpkCard
@@ -69,9 +72,9 @@ object BpkConfiguration {
     var buttonConfig: BpkExperimentalComponent.BpkButton? = null
         private set
 
-    var textConfig: BpkExperimentalComponent.BpkText? = null
+    var cardConfig: BpkExperimentalComponent.BpkCard? = null
         private set
 
-    var cardConfig: BpkExperimentalComponent.BpkCard? = null
+    var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
         private set
 }

@@ -24,15 +24,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.ui.DemoScaffold
+import net.skyscanner.backpack.util.BpkTypographySetManager
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+        // Initialize BpkConfiguration with saved typography set
+        val typographySet = SharedPreferences.getTypographySet(this)
+        BpkConfiguration.setConfigs(
+            typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
+        )
+        setTheme(BpkTypographySetManager.getTypographyTheme())
         super.onCreate(savedInstanceState)
-        setTheme(SharedPreferences.getTheme(this))
+
         setContent {
             DemoScaffold {
                 DestinationsNavHost(

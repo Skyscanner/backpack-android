@@ -266,4 +266,94 @@ public data class BpkTypography internal constructor(
         ),
       ),
     )
+
+    public companion object {
+        public fun VDL2(defaultFontFamily: FontFamily = FontFamily.SansSerif): BpkTypography {
+                                    /**
+                                     * VDL2 typography with enhanced letter spacing and optimized styles.
+                                     * Updated styles: Hero 4-5, Heading 1-5 with enhanced letter spacing and Black font weight
+                                     */
+                                    return BpkTypography(
+                                        defaultFontFamily
+                                    ).copy(
+                                        hero4 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.`5xl`,
+                lineHeight = BpkLineHeight.`5xl`,
+                letterSpacing = BpkLetterSpacing.VdlHero,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        hero5 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Xxxxl,
+                lineHeight = BpkLineHeight.Xxxxl,
+                letterSpacing = BpkLetterSpacing.VdlHero,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        heading1 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Xxxl,
+                lineHeight = BpkLineHeight.Xxxl,
+                letterSpacing = BpkLetterSpacing.VdlHeading1,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        heading2 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Xxl,
+                lineHeight = BpkLineHeight.Xxl,
+                letterSpacing = BpkLetterSpacing.VdlHeading2,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        heading3 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Xl,
+                lineHeight = BpkLineHeight.XlTight,
+                letterSpacing = BpkLetterSpacing.VdlHeading3,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        heading4 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Lg,
+                lineHeight = BpkLineHeight.LgTight,
+                letterSpacing = BpkLetterSpacing.VdlHeading3,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            ),
+                        heading5 = TextStyle(
+                fontWeight = FontWeight.Black,
+                fontSize = BpkFontSize.Base,
+                lineHeight = BpkLineHeight.BaseTight,
+                letterSpacing = BpkLetterSpacing.VdlHeading3,
+                fontFamily = defaultFontFamily,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
+                    trim = LineHeightStyle.Trim.None,
+                ),
+            )
+                                    )
+        }
+    }
 }

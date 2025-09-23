@@ -16,24 +16,25 @@
  * limitations under the License.
  */
 
-// Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier", "unused")
+package net.skyscanner.backpack.util
 
-package net.skyscanner.backpack.compose.tokens
+import androidx.annotation.StyleRes
+import net.skyscanner.backpack.R
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.em
+/**
+ * Utility class for managing typography sets in Views
+ */
+object BpkTypographySetManager {
 
-internal object BpkLetterSpacing {
-    internal val Tight: TextUnit = -(0.02).em
-
-    internal val VdlDisplay7: TextUnit = -(0.05).em
-
-    internal val VdlHeading1: TextUnit = -(0.03).em
-
-    internal val VdlHeading2: TextUnit = -(0.025).em
-
-    internal val VdlHeading3: TextUnit = -(0.02).em
-
-    internal val VdlHero: TextUnit = -(0.03).em
+    /**
+     * Returns the appropriate theme resource based on the current typography set configuration
+     */
+    @StyleRes
+    fun getTypographyTheme(): Int {
+        return when (BpkConfiguration.typographySet) {
+            BpkConfiguration.BpkTypographySet.DEFAULT -> R.style.BpkTheme
+            BpkConfiguration.BpkTypographySet.VDL_2 -> R.style.BpkTheme_Typography_Vdl2
+        }
+    }
 }

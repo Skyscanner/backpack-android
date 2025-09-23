@@ -19,13 +19,27 @@
 package net.skyscanner.backpack.demo
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.demo.data.SharedPreferences
 
 @Composable
 fun BackpackDemoTheme(
     content: @Composable () -> Unit,
 ) {
+    val context = LocalContext.current
+    val typographySet = SharedPreferences.getTypographySet(context)
+
+    val fontFamilies = mapOf(
+        BpkConfiguration.BpkTypographySet.DEFAULT to FontFamily.SansSerif,
+        BpkConfiguration.BpkTypographySet.ALTERNATIVE_1 to FontFamily.Serif,
+        BpkConfiguration.BpkTypographySet.ALTERNATIVE_2 to FontFamily.Monospace,
+    )
+
     BpkTheme(
+        fontFamilies = fontFamilies,
         content = content,
     )
 }

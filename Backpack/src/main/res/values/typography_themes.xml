@@ -17,19 +17,21 @@
     limitations under the License.
 -->
 <resources>
+  
+  <!-- Typography Set Alternative 1 Theme -->
+  <style name="BpkTheme.Typography.Alternative1" parent="BpkTheme">
+    <item name="bpkFontFamilyBase">serif</item>
+    <item name="bpkFontFamilyEmphasized">serif</item>
+    <item name="bpkFontFamilyBlack">serif</item>
+  </style>
 
-  <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
+  <!-- Typography Set Alternative 2 Theme -->
+  <style name="BpkTheme.Typography.Alternative2" parent="BpkTheme">
+    <item name="bpkFontFamilyBase">monospace</item>
+    <item name="bpkFontFamilyEmphasized">monospace</item>
+    <item name="bpkFontFamilyBlack">monospace</item>
+  </style>
 
-    <dimen name="bpkText5xlSize">64sp</dimen>
-    <dimen name="bpkText6xlSize">76sp</dimen>
-    <dimen name="bpkText7xlSize">96sp</dimen>
-    <dimen name="bpkText8xlSize">120sp</dimen>
-    <dimen name="bpkTextBaseSize">16sp</dimen>
-    <dimen name="bpkTextLgSize">20sp</dimen>
-    <dimen name="bpkTextSmSize">14sp</dimen>
-    <dimen name="bpkTextXlSize">24sp</dimen>
-    <dimen name="bpkTextXsSize">12sp</dimen>
-    <dimen name="bpkTextXxlSize">32sp</dimen>
-    <dimen name="bpkTextXxxlSize">40sp</dimen>
-    <dimen name="bpkTextXxxxlSize">48sp</dimen>
+
+
 </resources>
