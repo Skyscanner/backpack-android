@@ -16,14 +16,12 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.icon
+package net.skyscanner.backpack.compose.link
 
 import junit.framework.TestCase.assertEquals
-import net.skyscanner.backpack.compose.link.TextSegment
-import net.skyscanner.backpack.compose.link.convertToTextSegments
 import org.junit.Test
 
-class SegmentParsingTest {
+class BpkLinkTest {
 
     @Test
     fun `When convertToTextSegments() is called with empty text then it should return empty list`() {
