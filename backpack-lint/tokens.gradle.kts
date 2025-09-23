@@ -30,7 +30,7 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
 
-    val generateDeprecatedTokens by creating {
+    val generateDeprecatedTokens by registering {
         this.group = group
         doLast {
             source
@@ -41,7 +41,7 @@ tasks {
         }
     }
 
-    val generateTokens by creating {
+    val generateTokens by registering {
         this.group = group
         dependsOn(generateDeprecatedTokens)
     }

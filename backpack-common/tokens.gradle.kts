@@ -42,7 +42,7 @@ tasks {
     val iconSource = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
         .readAs(BpkFormat.Folder)
 
-    val generateElevationTokens by creating {
+    val generateElevationTokens by registering {
         this.group = group
         doLast {
             source
@@ -53,7 +53,7 @@ tasks {
         }
     }
 
-    val generateSpacingTokens by creating {
+    val generateSpacingTokens by registering {
         this.group = group
         doLast {
             source
@@ -64,7 +64,7 @@ tasks {
         }
     }
 
-    val generateRadiiTokens by creating {
+    val generateRadiiTokens by registering {
         this.group = group
         doLast {
             source
@@ -75,7 +75,7 @@ tasks {
         }
     }
 
-    val generateBorderSizeTokens by creating {
+    val generateBorderSizeTokens by registering {
         this.group = group
         doLast {
             source
@@ -86,7 +86,7 @@ tasks {
         }
     }
 
-    val generateAnimationDurationTokens by creating {
+    val generateAnimationDurationTokens by registering {
         this.group = group
         doLast {
             source
@@ -97,7 +97,7 @@ tasks {
         }
     }
 
-    val generateTextSizeTokens by creating {
+    val generateTextSizeTokens by registering {
         this.group = group
         doLast {
             source
@@ -108,7 +108,7 @@ tasks {
         }
     }
 
-    val generateTypographyTokens by creating {
+    val generateTypographyTokens by registering {
         this.group = group
         doLast {
             source
@@ -119,7 +119,7 @@ tasks {
         }
     }
 
-    val generateStaticColors by creating {
+    val generateStaticColors by registering {
         this.group = group
         doLast {
             source
@@ -130,7 +130,7 @@ tasks {
         }
     }
 
-    val generateSemanticColors by creating {
+    val generateSemanticColors by registering {
         this.group = group
         doLast {
             source
@@ -141,7 +141,7 @@ tasks {
         }
     }
 
-    val generateInternalColors by creating {
+    val generateInternalColors by registering {
         this.group = group
         doLast {
             source
@@ -152,7 +152,7 @@ tasks {
         }
     }
 
-    val generateIcons by creating {
+    val generateIcons by registering {
         this.group = group
         doLast {
             iconSource
@@ -163,27 +163,27 @@ tasks {
         }
     }
 
-    val generateSizeTokens by creating {
+    val generateSizeTokens by registering {
         this.group = group
         dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
     }
 
-    val generateDurationTokens by creating {
+    val generateDurationTokens by registering {
         this.group = group
         dependsOn(generateAnimationDurationTokens)
     }
 
-    val generateTextTokens by creating {
+    val generateTextTokens by registering {
         this.group = group
         dependsOn(generateTextSizeTokens, generateTypographyTokens)
     }
 
-    val generateColorTokens by creating {
+    val generateColorTokens by registering {
         this.group = group
         dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
     }
 
-    val generateTokens by creating {
+    val generateTokens by registering {
         this.group = group
         dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens, generateIcons)
     }
