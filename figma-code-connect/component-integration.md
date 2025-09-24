@@ -93,7 +93,7 @@ class BpkTextHero1CodeConnect {
 
 ### Step 3: Create the Code Connect File
 
-Create `Bpk[Component]CodeConnect.kt` alongside your main component file:
+Create `Bpk[Component].figma.kt` alongside your main component file:
 
 ```kotlin
 /*
@@ -327,7 +327,7 @@ Look for your component in the output:
 
 ### 3. Test Specific File
 ```bash
-figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/component/BpkComponentCodeConnect.kt --verbose
+figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/component/BpkComponent.figma.kt --verbose
 ```
 
 ## 🚨 Common Issues & Solutions
@@ -339,7 +339,7 @@ figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/com
 **Solution**: Simplify property mappings, use individual variant classes
 
 ### Issue: "Component not detected"
-**Solution**: Ensure file ends with `CodeConnect.kt` and has proper annotations
+**Solution**: Ensure file ends with `.figma.kt` and has proper annotations
 
 ### Issue: "Enum mapping errors"
 **Solution**: Verify Figma enum values match exactly (case-sensitive)
