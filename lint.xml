@@ -34,4 +34,7 @@
     <issue id="UnsafeOptInUsageError">
         <option name="opt-in" value="net.skyscanner.backpack.util.InternalBackpackApi" />
     </issue>
+
+    <!-- Ignore typos for link0, link1 patterns used in text processing -->
+    <issue id="Typos" severity="ignore" />
 </lint>

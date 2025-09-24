@@ -88,7 +88,7 @@ The `buildTextSegments` function provides a type-safe DSL for creating text with
 ```Kotlin
 buildTextSegments {
     text("Visit ")           // Plain text
-    link("Skyscanner", url)  // Clickable link  
+    link("Skyscanner", url)  // Clickable link
     text(" for deals")
 }
 ```
@@ -102,6 +102,32 @@ buildTextSegments(autoSpace = false) {
     text("for deals")
 }
 ```
+
+## convertToTextSegments Extension Function
+
+For cases where you need to convert text containing numbered link placeholders (e.g., `<link0>text</link0>`, `<link1>text</link1>`), use the `convertToTextSegments` extension function:
+
+```Kotlin
+val text = "By continuing, you agree to our <link0>Terms of Service</link0> and <link1>Privacy Policy</link1>."
+val urls = listOf(
+    "https://terms.example.com",
+    "https://privacy.example.com"
+)
+
+val segments = text.convertToTextSegments(urls)
+
+BpkLink(
+    segments = segments,
+    onLinkClicked = { url ->
+        webView.loadUrl(url)
+    }
+)
+```
+
+The function automatically:
+- Parses numbered link tags in sequential order
+- Matches each link with the corresponding URL from the list
+- Returns a list of `TextSegment` objects ready for use with `BpkLink`
 
 ## BpkLinkStyle Enum
 
