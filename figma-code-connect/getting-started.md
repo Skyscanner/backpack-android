@@ -25,11 +25,8 @@ export FIGMA_ACCESS_TOKEN="your_token_here"
 ### 3. Test Installation
 
 ```bash
-# Test parsing (should work with existing .figma.kt files)
-npx @figma/code-connect parse --verbose
-
-# List components
-npx @figma/code-connect list
+# Test validation (should work with existing .figma.kt files)
+npx figma connect publish --dry-run
 ```
 
 ## Project Structure

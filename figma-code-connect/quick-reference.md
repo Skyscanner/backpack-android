@@ -4,13 +4,11 @@
 
 ```bash
 # Testing
-npx @figma/code-connect parse --verbose
-npx @figma/code-connect list
+npx figma connect publish --dry-run
 ./gradlew :backpack-compose:compileDebugKotlin
 
 # Publishing
-npx @figma/code-connect publish --dry-run
-npx @figma/code-connect publish
+npx figma connect publish
 ```
 
 ## Annotations

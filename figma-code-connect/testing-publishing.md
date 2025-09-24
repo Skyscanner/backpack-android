@@ -6,26 +6,20 @@
 # Compile check
 ./gradlew :backpack-compose:compileDebugKotlin
 
-# Parse test
-npx @figma/code-connect parse --verbose
-
-# List components
-npx @figma/code-connect list
-
 # Test publishing
-npx @figma/code-connect publish --dry-run
+npx figma connect publish --dry-run
 ```
 
 ## Publishing
 
 ### Dry Run (Recommended)
 ```bash
-npx @figma/code-connect publish --dry-run
+npx figma connect publish --dry-run
 ```
 
 ### Publish to Figma
 ```bash
-npx @figma/code-connect publish
+npx figma connect publish
 ```
 
 ## Common Issues
