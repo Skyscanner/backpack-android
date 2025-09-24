@@ -7,8 +7,8 @@ Generates code snippets from Figma designs for Backpack Android components.
 1. Get [Figma access token](https://www.figma.com/settings)
 2. `export FIGMA_ACCESS_TOKEN="your_token"`
 3. Create `Component.figma.kt` with annotations
-4. Test: `npx @figma/code-connect parse --verbose`
-5. Publish: `npx @figma/code-connect publish`
+4. Test: `npx figma connect publish --dry-run`
+5. Publish: `npx figma connect publish`
 
 ## Documentation
 
