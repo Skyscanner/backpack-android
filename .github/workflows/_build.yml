@@ -105,6 +105,9 @@ jobs:
       - name: Unit Tests
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
+      - name: Install Figma Code Connect
+        run: npm install -g @figma/code-connect
+
       - name: Validate Code Connect files
         run: |
           if find backpack-compose/src/main/kotlin -name "*.figma.kt" -type f | grep -q .; then
