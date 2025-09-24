@@ -20,6 +20,8 @@ jobs:
       pull-requests: write
       contents: write
     uses: ./.github/workflows/_build.yml
+    with:
+      figma_enabled: true
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
       FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
