@@ -96,7 +96,7 @@ This creates `figma.config.json` with project settings:
 ```json
 {
   "codeConnect": {
-    "include": ["**/*CodeConnect.kt"],
+    "include": ["**/*.figma.kt"],
     "exclude": ["**/build/**"]
   }
 }
@@ -130,7 +130,7 @@ figma connect parse --verbose
 figma connect parse --verbose
 
 # Test a specific file
-figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/button/BpkButtonCodeConnect.kt --verbose
+figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/button/BpkButton.figma.kt --verbose
 ```
 
 ### Essential Commands
@@ -155,13 +155,13 @@ Your Code Connect files should follow this pattern:
 backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/
 ├── button/
 │   ├── BpkButton.kt                    # Main component
-│   └── BpkButtonCodeConnect.kt         # Code Connect integration
+│   └── BpkButton.figma.kt              # Code Connect integration
 ├── text/
 │   ├── BpkText.kt                      # Main component
-│   └── BpkTextCodeConnect.kt           # Code Connect integration
+│   └── BpkText.figma.kt                # Code Connect integration
 └── [component]/
     ├── Bpk[Component].kt               # Main component
-    └── Bpk[Component]CodeConnect.kt    # Code Connect integration
+    └── Bpk[Component].figma.kt         # Code Connect integration
 ```
 
 ## 🚨 Important Notes
@@ -171,7 +171,7 @@ backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/
 - Figma Code Connect plugin has compatibility issues with newer Kotlin versions
 
 ### File Naming Convention
-- Code Connect files must end with `CodeConnect.kt`
+- Code Connect files must end with `.figma.kt`
 - Place them alongside the main component file
 - Use descriptive class names: `BpkTextHero1CodeConnect`, `BpkButtonIconLeftCodeConnect`
 
@@ -207,7 +207,7 @@ npm install -g @figma/code-connect
 - Check that Code Connect library is properly imported
 
 ### "No Code Connect files found"
-- Verify files end with `CodeConnect.kt`
+- Verify files end with `.figma.kt`
 - Check `figma.config.json` include patterns
 - Ensure annotations are correctly applied
 

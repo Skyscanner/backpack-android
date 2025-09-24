@@ -338,7 +338,7 @@ Before testing your annotations:
 
 ### Code Structure Check
 - [ ] Class name follows `Bpk[Component][Variant]CodeConnect` pattern
-- [ ] File name ends with `CodeConnect.kt`
+- [ ] File name ends with `.figma.kt`
 - [ ] All required imports are present
 - [ ] Default values are meaningful
 
@@ -387,7 +387,7 @@ figma connect parse --verbose | grep -A 10 "YourComponent"
 
 ### Validate Property Mapping
 ```bash
-figma connect parse backpack-compose/src/main/kotlin/path/to/YourCodeConnect.kt --verbose
+figma connect parse backpack-compose/src/main/kotlin/path/to/Your.figma.kt --verbose
 ```
 
 ### Common Error Messages

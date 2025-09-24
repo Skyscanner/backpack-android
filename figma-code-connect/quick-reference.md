@@ -10,7 +10,7 @@ figma connect init
 
 # Development & Testing
 figma connect parse --verbose                    # Test all components
-figma connect parse path/to/Component.kt --verbose  # Test specific file
+figma connect parse path/to/Component.figma.kt --verbose  # Test specific file
 figma connect list                              # List all components
 ./gradlew :backpack-compose:compileDebugKotlin  # Kotlin compilation test
 
@@ -116,13 +116,13 @@ fun ComponentExample() {
 backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/
 ├── button/
 │   ├── BpkButton.kt
-│   └── BpkButtonCodeConnect.kt
+│   └── BpkButton.figma.kt
 ├── text/
 │   ├── BpkText.kt
-│   └── BpkTextCodeConnect.kt
+│   └── BpkText.figma.kt
 └── component/
     ├── BpkComponent.kt
-    └── BpkComponentCodeConnect.kt
+    └── BpkComponent.figma.kt
 ```
 
 ## 🎯 Success Criteria

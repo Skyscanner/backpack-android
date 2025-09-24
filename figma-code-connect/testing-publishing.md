@@ -39,7 +39,7 @@ figma connect parse --verbose
 Test a specific component file:
 
 ```bash
-figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/button/BpkButtonCodeConnect.kt --verbose
+figma connect parse backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/button/BpkButton.figma.kt --verbose
 ```
 
 **Expected output**:
@@ -83,7 +83,7 @@ Found 3 code connect files:
 figma connect parse --verbose
 
 # Test specific component
-figma connect parse path/to/ComponentCodeConnect.kt --verbose
+figma connect parse path/to/Component.figma.kt --verbose
 
 # List all components
 figma connect list
@@ -229,7 +229,7 @@ When you modify existing Code Connect integrations:
 figma connect parse --verbose
 
 # Verify specific component
-figma connect parse path/to/UpdatedCodeConnect.kt --verbose
+figma connect parse path/to/Updated.figma.kt --verbose
 
 # Test publishing
 figma connect publish --dry-run
@@ -258,7 +258,7 @@ figma connect publish
 ```bash
 # Create new Code Connect file
 # Test new component
-figma connect parse path/to/NewCodeConnect.kt --verbose
+figma connect parse path/to/New.figma.kt --verbose
 
 # Test all components still work
 figma connect parse --verbose
@@ -321,7 +321,7 @@ export FIGMA_ACCESS_TOKEN="your_token_here"
 **Error**: `No Code Connect files found`
 ```bash
 # Solution: Check file naming convention
-# Files must end with 'CodeConnect.kt'
+# Files must end with '.figma.kt'
 # Verify figma.config.json include patterns
 ```
 
