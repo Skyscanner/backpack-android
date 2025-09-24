@@ -105,6 +105,18 @@ jobs:
       - name: Unit Tests
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
+      - name: Validate Code Connect files
+        run: |
+          if find backpack-compose/src/main/kotlin -name "*.figma.kt" -type f | grep -q .; then
+            echo "🔍 Found Code Connect files, validating..."
+            npx @figma/code-connect parse --verbose
+            npx @figma/code-connect publish --dry-run
+          else
+            echo "No Code Connect files found, skipping validation"
+          fi
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+
   Android:
     name: Android tests
     runs-on: ubuntu-24.04-16cores-public
