@@ -5,6 +5,8 @@ on:
     secrets:
       GH_APP_PRIVATE_KEY:
         required: true
+      FIGMA_ACCESS_TOKEN:
+        required: false
 
 
 defaults:
@@ -106,9 +108,11 @@ jobs:
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
       - name: Install Figma Code Connect
+        if: ${{ secrets.FIGMA_ACCESS_TOKEN != '' }}
         run: npm install -g @figma/code-connect
 
       - name: Validate Code Connect files
+        if: ${{ secrets.FIGMA_ACCESS_TOKEN != '' }}
         run: |
           if find backpack-compose/src/main/kotlin -name "*.figma.kt" -type f | grep -q .; then
             echo "🔍 Found Code Connect files, validating..."
