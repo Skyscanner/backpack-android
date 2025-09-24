@@ -132,7 +132,7 @@ jobs:
         run: |
           if find backpack-compose/src/main/kotlin -name "*.figma.kt" -type f | grep -q .; then
             echo "🔍 Found Code Connect files, testing publish..."
-            npx figma connect publish --dry-run
+            npx figma connect publish
           else
             echo "No Code Connect files found, skipping test"
           fi
