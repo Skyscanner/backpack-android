@@ -34,6 +34,7 @@ import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.link.BpkLink
 import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.link.buildTextSegments
+import net.skyscanner.backpack.compose.link.convertToTextSegments
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -81,6 +82,7 @@ private fun StoryContent(
         { LinkWithoutUrlExample(style = style, onNotification = showNotification) },
         { TextWithMultipleLinksExample(style = style, onNotification = showNotification) },
         { TypeSafeBuilderExample(style = style, onNotification = showNotification) },
+        { TypeSafeBuilderConvertSegmentExample(style = style, onNotification = showNotification) },
         { PriceLinksExample(style = style, onNotification = showNotification) },
         { TextStyleVariationsExample(style = style, onNotification = showNotification) },
     )
@@ -230,6 +232,31 @@ internal fun TypeSafeBuilderExample(
                 link(carsText, carsUrl)
                 text(searchSuffix)
             },
+            style = style,
+            onLinkClicked = { url ->
+                onNotification(openingTemplate.format(url))
+            },
+        )
+    }
+}
+
+@Composable
+internal fun TypeSafeBuilderConvertSegmentExample(
+    modifier: Modifier = Modifier,
+    style: BpkLinkStyle = BpkLinkStyle.Default,
+    onNotification: (String) -> Unit = {},
+) {
+    val openingTemplate = stringResource(R.string.link_story_notification_opening)
+    val text = stringResource(R.string.key_login_method_selection_tos_and_privacy_policy)
+    val segment = text.convertToTextSegments(listOf("https://example.com/terms", "https://example.com/privacy"))
+
+    LinkExample(
+        title = stringResource(R.string.link_story_builder_title_convert_segment),
+        modifier = modifier,
+        style = style,
+    ) {
+        BpkLink(
+            segments = segment,
             style = style,
             onLinkClicked = { url ->
                 onNotification(openingTemplate.format(url))
