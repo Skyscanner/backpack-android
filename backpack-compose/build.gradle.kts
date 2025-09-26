@@ -33,7 +33,6 @@ import net.skyscanner.backpack.tokens.transformTo
 
 plugins {
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.figma.code.connect)
     id("com.android.library")
     id("kotlin-android")
 }
@@ -70,7 +69,6 @@ dependencies {
     implementation(libs.androidx.lifecycleViewmodel)
     implementation(libs.androidx.lifecycleViewmodelKtx)
     implementation(libs.androidx.coreKts)
-    implementation(libs.figma.code.connect)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.mockitoKotlin)

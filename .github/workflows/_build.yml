@@ -114,13 +114,14 @@ jobs:
 
       - name: Install Figma Code Connect
         if: ${{ inputs.figma_enabled }}
-        run: npm install -g @figma/code-connect
+        run: npm install -g @figma/code-connect@1.3.5
 
       - name: Validate Code Connect files
         if: ${{ inputs.figma_enabled }}
         run: |
-          if find backpack-compose/src/main/kotlin -name "*.figma.kt" -type f | grep -q .; then
+          if find app/src/main/java/net/skyscanner/backpack/demo/figma -name "*.figma.kt" -type f | grep -q .; then
             echo "🔍 Found Code Connect files, validating..."
+            npx figma connect parse
             npx figma connect publish --dry-run
           else
             echo "No Code Connect files found, skipping validation"
