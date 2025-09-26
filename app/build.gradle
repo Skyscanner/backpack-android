@@ -18,6 +18,7 @@
 
 plugins {
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.figma.code.connect)
 }
 
 apply plugin: 'com.android.application'
@@ -109,6 +110,7 @@ dependencies {
     implementation libs.compose.activity
     implementation libs.kotlin.reflection
     implementation libs.destinations.core
+    implementation libs.figma.code.connect
     testImplementation libs.test.junit
     testImplementation libs.roborazzi.compose
     testImplementation libs.roborazzi.core

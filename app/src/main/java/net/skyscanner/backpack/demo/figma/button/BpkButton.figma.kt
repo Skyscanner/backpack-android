@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.button
+package net.skyscanner.backpack.demo.figma.button
 
 import androidx.compose.runtime.Composable
 import com.figma.code.connect.Figma
@@ -24,8 +24,13 @@ import com.figma.code.connect.FigmaConnect
 import com.figma.code.connect.FigmaProperty
 import com.figma.code.connect.FigmaType
 import com.figma.code.connect.FigmaVariant
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
+import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.ArrowRight
+
 @FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=2965-0")
 @FigmaVariant(key = "Icon", value = "None")
 class BpkButtonCodeConnect {
@@ -81,6 +86,7 @@ class BpkButtonCodeConnect {
         )
     }
 }
+
 @FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=2965-0")
 @FigmaVariant(key = "Icon", value = "Left")
 class BpkButtonLeftIconCodeConnect {
@@ -138,6 +144,7 @@ class BpkButtonLeftIconCodeConnect {
         )
     }
 }
+
 @FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=2965-0")
 @FigmaVariant(key = "Icon", value = "Right")
 class BpkButtonRightIconCodeConnect {
@@ -195,6 +202,7 @@ class BpkButtonRightIconCodeConnect {
         )
     }
 }
+
 @FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=2965-0")
 @FigmaVariant(key = "Icon", value = "Icon only")
 class BpkButtonIconOnlyCodeConnect {

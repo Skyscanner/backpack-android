@@ -85,7 +85,7 @@ jobs:
         run: npx @supernovaio/cli publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemId=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
 
       - name: Install Figma Code Connect
-        run: npm install -g @figma/code-connect
+        run: npm install -g @figma/code-connect@1.3.5
 
       - name: Publish Code Connect to Figma
         run: npx figma connect publish --exit-on-unreadable-files

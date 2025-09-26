@@ -16,13 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.text
+package net.skyscanner.backpack.demo.figma.text
 
 import androidx.compose.runtime.Composable
 import com.figma.code.connect.FigmaConnect
 import com.figma.code.connect.FigmaProperty
 import com.figma.code.connect.FigmaType
 import com.figma.code.connect.FigmaVariant
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")

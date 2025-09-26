@@ -2,7 +2,7 @@
   "codeConnect": {
     "parser": "compose",
     "include": [
-      "backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/**/*.figma.kt"
+      "app/src/main/java/net/skyscanner/backpack/demo/figma/**/*.figma.kt"
     ]
   }
 }
