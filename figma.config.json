@@ -1,0 +1,8 @@
+{
+  "codeConnect": {
+    "parser": "compose",
+    "include": [
+      "app/src/main/java/net/skyscanner/backpack/demo/figma/**/*.figma.kt"
+    ]
+  }
+}
