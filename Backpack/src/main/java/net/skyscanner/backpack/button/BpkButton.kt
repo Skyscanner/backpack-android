@@ -37,12 +37,12 @@ import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.button.internal.createStyle
 import net.skyscanner.backpack.button.internal.fromAttrs
 import net.skyscanner.backpack.button.internal.fromId
-import net.skyscanner.backpack.button.internal.horizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import net.skyscanner.backpack.button.internal.getHorizontalPadding
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -89,7 +89,7 @@ open class BpkButton(
         }
 
     @Dimension
-    private val paddingHorizontal = resources.getDimension(size.horizontalPadding)
+    private fun getPaddingHorizontal() = size.getHorizontalPadding(context)
 
     private val progress by unsafeLazy {
         CircularProgressDrawable(context).apply {
@@ -224,7 +224,7 @@ open class BpkButton(
         }
         this.progress.setColorSchemeColors(style.getLoadingColor())
 
-        var paddingHorizontal = paddingHorizontal
+        var paddingHorizontal = getPaddingHorizontal()
 
         if (iconDrawablePosition == ICON_ONLY) {
             val requiredWidth = resources.getDimension(size.minHeight)
