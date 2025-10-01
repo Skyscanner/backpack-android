@@ -24,20 +24,31 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.rowBackground
 import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, flavour.second)) {
+class BpkButtonTest(flavour: Flavor) :
+    BpkSnapshotTest(listOfNotNull(flavour.first, flavour.second, "VDL2".takeIf { flavour.third })) {
 
     private val type: BpkButtonType = flavour.first
     private val size: BpkButtonSize = flavour.second
+    private val beta = flavour.third
     private val icon = BpkIcon.LongArrowRight
     private val iconDrawableRes = R.drawable.sample_icon
+
+    @Before
+    fun setup() {
+        // Ensure we start from a known state
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(buttonConfig = beta)
+    }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
@@ -175,15 +186,18 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
         fun flavours(): List<Flavor> = BpkButtonType.entries.flatMap { type ->
-            BpkButtonSize.entries.mapNotNull { size ->
+            BpkButtonSize.entries.flatMap { size ->
                 if (type == BpkButtonType.Primary || size == BpkButtonSize.Default) {
-                    Flavor(type, size)
+                    listOf(
+                        Triple(type, size, true),
+                        Triple(type, size, false),
+                    )
                 } else {
-                    null
+                    emptyList()
                 }
             }
         }
     }
 }
 
-private typealias Flavor = Pair<BpkButtonType, BpkButtonSize>
+private typealias Flavor = Triple<BpkButtonType, BpkButtonSize, Boolean>

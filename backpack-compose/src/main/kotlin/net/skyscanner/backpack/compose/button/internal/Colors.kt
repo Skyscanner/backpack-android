@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
@@ -68,7 +69,7 @@ internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource)
 private fun BpkButtonType.defaultBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryNormalBackground
-        BpkButtonType.Secondary -> BpkButtonColors.secondaryNormalBackground
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.secondaryBackgroundColor ?: BpkButtonColors.secondaryNormalBackground
         BpkButtonType.Featured -> BpkButtonColors.featuredNormalBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkNormalBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightNormalBackground
@@ -81,7 +82,7 @@ private fun BpkButtonType.defaultBackgroundColor(): Color =
 private fun BpkButtonType.pressedBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryPressedBackground
-        BpkButtonType.Secondary -> BpkButtonColors.secondaryPressedBackground
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.secondaryPressedBackgroundColor ?: BpkButtonColors.secondaryPressedBackground
         BpkButtonType.Featured -> BpkButtonColors.featuredPressedBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkPressedBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightPressedBackground
@@ -101,7 +102,7 @@ internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): C
 private fun BpkButtonType.defaultContentColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkTheme.colors.textOnDark
-        BpkButtonType.Secondary -> BpkTheme.colors.textPrimary
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.secondaryTextColor ?: BpkTheme.colors.textPrimary
         BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
@@ -114,7 +115,7 @@ private fun BpkButtonType.defaultContentColor(): Color =
 private fun BpkButtonType.pressedContentColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkTheme.colors.textOnDark
-        BpkButtonType.Secondary -> BpkTheme.colors.textPrimary
+        BpkButtonType.Secondary -> BpkConfiguration.buttonConfig?.secondaryTextColor ?: BpkTheme.colors.textPrimary
         BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark

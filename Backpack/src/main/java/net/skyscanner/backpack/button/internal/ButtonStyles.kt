@@ -19,7 +19,9 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import androidx.compose.ui.graphics.toArgb
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 internal sealed class ButtonStyles : (Context) -> ButtonStyle {
 
@@ -34,13 +36,31 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     }
 
     data object Secondary : ButtonStyles() {
-        override fun invoke(context: Context) = ButtonStyle.fromTheme(
-            context = context,
-            style = R.attr.bpkButtonSecondaryStyle,
-            bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
-            bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
-            contentColorRes = R.color.bpkTextPrimary,
-        )
+        override fun invoke(context: Context): ButtonStyle {
+            val baseStyle = ButtonStyle.fromTheme(
+                context = context,
+                style = R.attr.bpkButtonSecondaryStyle,
+                bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
+                bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
+                contentColorRes = R.color.bpkTextPrimary,
+            )
+
+            // Apply experimental configuration if available
+            return BpkConfiguration.buttonConfig?.let { config ->
+                ButtonStyle(
+                    context = context,
+                    bgColor = config.secondaryBackgroundColor.toArgb(),
+                    bgPressedColor = config.secondaryPressedBackgroundColor.toArgb(),
+                    bgLoadingColor = config.secondaryPressedBackgroundColor.toArgb(),
+                    bgDisabledColor = baseStyle.bgDisabledColor,
+                    contentColor = config.secondaryTextColor.toArgb(),
+                    contentPressedColor = config.secondaryTextColor.toArgb(),
+                    contentDisabledColor = baseStyle.contentDisabledColor,
+                    contentLoadingColor = config.secondaryTextColor.toArgb(),
+                    rippleColor = baseStyle.rippleColor,
+                )
+            } ?: baseStyle
+        }
     }
 
     data object Featured : ButtonStyles() {

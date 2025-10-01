@@ -23,6 +23,7 @@ import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: AttributeSet?): BpkButton.Size {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkBaseButton, 0, 0)
@@ -46,8 +47,17 @@ internal val BpkButton.Size.minHeight: Int
     get() =
         when (this) {
             BpkButton.Size.Standard -> R.dimen.bpk_button_default_height
-            BpkButton.Size.Large -> R.dimen.bpk_button_large_height
+            BpkButton.Size.Large -> BpkConfiguration.buttonConfig?.let { R.dimen.bpk_button_new_large_height }
+                ?: R.dimen.bpk_button_large_height
         }
+
+internal fun BpkButton.Size.getHorizontalPadding(context: Context): Float =
+    BpkConfiguration.buttonConfig?.let { config ->
+        when (this) {
+            BpkButton.Size.Standard -> config.defaultPaddingHorizontal.value * context.resources.displayMetrics.density
+            BpkButton.Size.Large -> config.largePaddingHorizontal.value * context.resources.displayMetrics.density
+        }
+    } ?: context.resources.getDimension(R.dimen.bpkSpacingBase)
 
 @get:DimenRes
 internal val BpkButton.Size.horizontalPadding: Int

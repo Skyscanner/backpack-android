@@ -30,20 +30,21 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.colorStateList
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.util.rippleDrawable
 import net.skyscanner.backpack.util.stateListDrawable
 
 internal class ButtonStyle(
     private val context: Context,
-    @ColorInt private val bgColor: Int,
-    @ColorInt private val bgPressedColor: Int,
-    @ColorInt private val bgLoadingColor: Int,
-    @ColorInt private val bgDisabledColor: Int,
-    @ColorInt private val contentColor: Int,
-    @ColorInt private val contentPressedColor: Int,
-    @ColorInt private val contentDisabledColor: Int,
-    @ColorInt private val contentLoadingColor: Int,
-    @ColorInt private val rippleColor: Int,
+    @ColorInt internal val bgColor: Int,
+    @ColorInt internal val bgPressedColor: Int,
+    @ColorInt internal val bgLoadingColor: Int,
+    @ColorInt internal val bgDisabledColor: Int,
+    @ColorInt internal val contentColor: Int,
+    @ColorInt internal val contentPressedColor: Int,
+    @ColorInt internal val contentDisabledColor: Int,
+    @ColorInt internal val contentLoadingColor: Int,
+    @ColorInt internal val rippleColor: Int,
 ) {
 
     fun getContentColor(): ColorStateList =
@@ -57,7 +58,11 @@ internal class ButtonStyle(
 
     fun getButtonBackground(enabled: Boolean, loading: Boolean): Drawable {
 
-        val radius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
+        val radius = BpkConfiguration.buttonConfig?.cornerRadius?.let {
+            // For experimental config, use 100% corner radius (half the height for pill shape)
+            // Using a large value like 100dp ensures full rounding regardless of button size
+            100f * context.resources.displayMetrics.density
+        } ?: context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
 
         fun roundRectDrawable(
             @ColorInt color: Int,
