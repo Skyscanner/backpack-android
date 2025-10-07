@@ -236,3 +236,6 @@ logcat.log
 danger_out.json
 .idea/runConfigurations.xml
 /.idea/AndroidProjectSystem.xml
+
+# Dokka output directory (deprecated)
+dokka/

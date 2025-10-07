@@ -26,7 +26,6 @@ buildscript {
     dependencies {
         classpath libs.plugin.android
         classpath libs.plugin.kotlin
-        classpath libs.plugin.dokka
         classpath libs.plugin.detekt
         classpath libs.plugin.ksp
         classpath libs.plugin.roborazzi
@@ -38,7 +37,6 @@ plugins {
 }
 
 apply from: 'publish-root.gradle'
-apply plugin: 'org.jetbrains.dokka'
 
 allprojects {
     repositories {
@@ -71,23 +69,11 @@ subprojects {
 
 ext {
     group = "net.skyscanner.backpack"
-    dokkaOutputDir = "dokka"
-}
-
-dokka {
-    dokkaPublications.html {
-        outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
-    }
 }
 
 tasks.register("createDokka404") {
-    dependsOn("dokkaGenerate")
     doLast {
-        createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
-<html>
-  <meta http-equiv="refresh" content="1;url=/android" />
-</html>
-"""
+        // This task is deprecated and no longer needed
     }
 }
 
@@ -98,10 +84,3 @@ task installGitHooks(type: Copy) {
 }
 
 tasks.getByPath(':app:preBuild').dependsOn installGitHooks
-
-static File createNewFile(File parent, String path) {
-    def file = new File(parent, path)
-    file.parentFile.mkdirs()
-    file.createNewFile()
-    return file
-}
