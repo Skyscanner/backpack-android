@@ -71,12 +71,6 @@ ext {
     group = "net.skyscanner.backpack"
 }
 
-tasks.register("createDokka404") {
-    doLast {
-        // This task is deprecated and no longer needed
-    }
-}
-
 task installGitHooks(type: Copy) {
     from new File(rootProject.rootDir, 'hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks') }
