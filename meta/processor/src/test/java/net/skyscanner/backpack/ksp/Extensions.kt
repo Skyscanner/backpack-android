@@ -58,7 +58,7 @@ internal fun testKsp(
     }
 
 /**
- * Returns stub source files used for KSP tests.
+ * Stub source files used for KSP tests.
  *
  * Embeds minimal data models (Component, Story) in a synthetic package so the processor
  * can resolve types like StoryKind without pulling real production sources.
