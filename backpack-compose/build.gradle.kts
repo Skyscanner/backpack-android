@@ -40,7 +40,6 @@ plugins {
 extra["artifactId"] = "backpack-compose"
 
 apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/dokka.gradle")
 apply(from = "$rootDir/android-configuration.gradle")
 
 android {
