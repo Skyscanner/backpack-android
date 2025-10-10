@@ -25,6 +25,7 @@ import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspSourcesDir
 import com.tschuchort.compiletesting.symbolProcessorProviders
+import com.tschuchort.compiletesting.useKsp2
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Assert.assertEquals
@@ -34,8 +35,10 @@ internal fun testKsp(
     evaluate: JvmCompilationResult.(String) -> Unit,
 ) {
     val compilation = KotlinCompilation().apply {
-        languageVersion = "1.9"
-        sources = sourceFile.mapIndexed { index, it -> SourceFile.kotlin("file$index.kt", it) }
+        languageVersion = "2.2"
+        useKsp2()
+        val userSources = sourceFile.mapIndexed { index, it -> SourceFile.kotlin("file$index.kt", it) }
+        sources = userSources + testStubs
         symbolProcessorProviders += BackpackSymbolProcessorProvider()
         inheritClassPath = true
         verbose = false
@@ -53,3 +56,33 @@ internal fun testKsp(
     testKsp(source.trimIndent()) {
         assertEquals(expected.trimIndent(), it.trimIndent())
     }
+
+/**
+ * Stub source files used for KSP tests.
+ *
+ * Embeds minimal data models (Component, Story) in a synthetic package so the processor
+ * can resolve types like StoryKind without pulling real production sources.
+ */
+private val testStubs = listOf(
+    SourceFile.kotlin(
+        "KspTestStubs.kt",
+        """
+    package net.skyscanner.backpack.demo.meta
+
+    import net.skyscanner.backpack.meta.StoryKind
+
+    data class Component(
+        val name: String,
+        val isToken: Boolean,
+    )
+
+    data class Story(
+        val name: String,
+        val kind: StoryKind,
+        val isCompose: Boolean,
+        val component: Component,
+        val content: () -> Unit,
+    )
+        """.trimIndent(),
+    ),
+)
