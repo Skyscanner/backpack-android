@@ -25,6 +25,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 internal val BpkButtonSize.iconSize: BpkIconSize
     get() =
@@ -37,16 +38,21 @@ internal val BpkButtonSize.minHeight: Dp
     get() =
         when (this) {
             BpkButtonSize.Default -> 36.dp
-            BpkButtonSize.Large -> 48.dp
+            BpkButtonSize.Large -> BpkConfiguration.buttonConfig?.largeHeight ?: 48.dp
         }
 
 internal val BpkButtonSize.horizontalSpacing: Dp
     get() =
         BpkSpacing.Md
 
-internal val BpkButtonType.contentPadding: PaddingValues
-    get() =
-        when (this) {
-            BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
-            else -> PaddingValues(horizontal = BpkSpacing.Base)
+internal fun BpkButtonType.contentPadding(size: BpkButtonSize): PaddingValues =
+    when (this) {
+        BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
+        else -> {
+            val horizontalPadding = when (size) {
+                BpkButtonSize.Default -> BpkConfiguration.buttonConfig?.defaultPaddingHorizontal ?: BpkSpacing.Base
+                BpkButtonSize.Large -> BpkConfiguration.buttonConfig?.largePaddingHorizontal ?: BpkSpacing.Base
+            }
+            PaddingValues(horizontal = horizontalPadding)
         }
+    }

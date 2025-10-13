@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.2.20"
-ksp = "2.2.20-2.0.3" # depends on Kotlin version
-compilerTesting = "0.9.0"
+ksp = "2.2.20-2.0.4" # depends on Kotlin version
+compilerTesting = "0.10.0"
 destinations = "2.2.0" # update this alongside with compiler version
 figmaCodeConnect = "1.2.1"
 figmaCodeConnectLib = "1.1.3"
@@ -29,7 +29,6 @@ figma-code-connect = { id = "com.figma.code.connect", version.ref = "figmaCodeCo
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-dokka = "org.jetbrains.dokka:dokka-gradle-plugin:2.0.0"
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
@@ -65,7 +64,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.13.0"
 google-maps = "com.google.android.gms:play-services-maps:19.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:6.7.2"
+google-mapsCompose = "com.google.maps.android:maps-compose:6.12.1"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.5.0-jre"
 
@@ -81,7 +80,7 @@ kotlin-compilerTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version.ref 
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2025.09.00" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2025.09.01" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
@@ -90,7 +89,7 @@ compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-compose-activity = "androidx.activity:activity-compose:1.10.1"
+compose-activity = "androidx.activity:activity-compose:1.11.0"
 
 destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
 destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }

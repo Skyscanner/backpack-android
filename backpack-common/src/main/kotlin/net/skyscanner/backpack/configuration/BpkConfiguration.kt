@@ -18,10 +18,23 @@
 
 package net.skyscanner.backpack.configuration
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.util.InternalBackpackApi
+
 object BpkConfiguration {
     sealed class BpkExperimentalComponent {
 
-        data object BpkButton : BpkExperimentalComponent()
+        data class BpkButton(
+            val cornerRadius: Dp = 999.dp,
+            val secondaryBackgroundColor: Color = Color(0xFFE3F0FF),
+            val secondaryPressedBackgroundColor: Color = Color(0xFFB4D7FF),
+            val secondaryTextColor: Color = Color(0xFF024DAF),
+            val largeHeight: Dp = 56.dp,
+            val defaultPaddingHorizontal: Dp = 16.dp, // Based on Figma design
+            val largePaddingHorizontal: Dp = 24.dp, // Based on Figma design
+        ) : BpkExperimentalComponent()
 
         data object BpkText : BpkExperimentalComponent()
 
@@ -31,6 +44,17 @@ object BpkConfiguration {
     }
 
     private var _hasSet: Boolean = false
+
+    // To allow testing, but shouldn't be used in production
+    @InternalBackpackApi
+    fun clearConfigs() {
+        chipConfig = null
+        buttonConfig = null
+        textConfig = null
+        cardConfig = null
+
+        _hasSet = false
+    }
 
     fun setConfigs(
         chipConfig: Boolean = false,
@@ -46,7 +70,7 @@ object BpkConfiguration {
             this.chipConfig = BpkExperimentalComponent.BpkChip
         }
         if (buttonConfig) {
-            this.buttonConfig = BpkExperimentalComponent.BpkButton
+            this.buttonConfig = BpkExperimentalComponent.BpkButton()
         }
         if (textConfig) {
             this.textConfig = BpkExperimentalComponent.BpkText

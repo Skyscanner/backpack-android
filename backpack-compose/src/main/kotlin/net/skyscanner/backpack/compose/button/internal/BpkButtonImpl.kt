@@ -60,6 +60,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
 import net.skyscanner.backpack.compose.utils.toRippleAlpha
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,8 +109,8 @@ internal fun BpkButtonImpl(
                 disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
                 disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
             ),
-            shape = ButtonShape,
-            contentPadding = type.contentPadding,
+            shape = buttonShape(),
+            contentPadding = type.contentPadding(size),
             elevation = null,
             content = {
                 CompositionLocalProvider(
@@ -185,7 +186,9 @@ internal fun ButtonDrawable(
     )
 }
 
-private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
+private fun buttonShape() = BpkConfiguration.buttonConfig?.cornerRadius?.let {
+    RoundedCornerShape(it)
+} ?: RoundedCornerShape(BpkBorderRadius.Sm)
 
 private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {

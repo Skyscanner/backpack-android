@@ -657,4 +657,4 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
 
 ## Docs
 
-Run `./gradlew dokkaHtmlMultiModule` to generate API docs. Docs will be generated in the `dokka` folder.
+Documentation for components is managed through markdown files in the `docs` directory. Each component has its own README file with usage examples, screenshots, and API documentation.
