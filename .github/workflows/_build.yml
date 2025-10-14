@@ -2,9 +2,16 @@ name: Build
 
 on:
   workflow_call:
+    inputs:
+      figma_enabled:
+        required: false
+        type: boolean
+        default: false
     secrets:
       GH_APP_PRIVATE_KEY:
         required: true
+      FIGMA_ACCESS_TOKEN:
+        required: false
 
 
 defaults:
@@ -104,6 +111,23 @@ jobs:
 
       - name: Unit Tests
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+
+      - name: Install Figma Code Connect
+        if: ${{ inputs.figma_enabled }}
+        run: npm install -g @figma/code-connect@1.3.5
+
+      - name: Validate Code Connect files
+        if: ${{ inputs.figma_enabled }}
+        run: |
+          if find app/src/main/java/net/skyscanner/backpack/demo/figma -name "*.figma.kt" -type f | grep -q .; then
+            echo "🔍 Found Code Connect files, validating..."
+            npx figma connect parse
+            npx figma connect publish --dry-run
+          else
+            echo "No Code Connect files found, skipping validation"
+          fi
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
   Android:
     name: Android tests

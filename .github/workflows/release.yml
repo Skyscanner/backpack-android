@@ -20,8 +20,11 @@ jobs:
       pull-requests: write
       contents: write
     uses: ./.github/workflows/_build.yml
+    with:
+      figma_enabled: true
     secrets:
       GH_APP_PRIVATE_KEY: ${{ secrets.GH_APP_PRIVATE_KEY }}
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
 
   Deploy:
     name: Deploy
@@ -67,6 +70,14 @@ jobs:
       - name: Update Supernova docs
         run: npx @supernovaio/cli publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemId=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
 
+      - name: Install Figma Code Connect
+        run: npm install -g @figma/code-connect@1.3.5
+
+      - name: Publish Code Connect to Figma
+        run: npx figma connect publish --exit-on-unreadable-files
+        env:
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+
       - name: Publish release to Runway
         run: |
           set -e
@@ -75,3 +86,4 @@ jobs:
           RUNWAY_API_KEY: ${{ secrets.RUNWAY_API_KEY }}
           RUNWAY_APP_ID: ${{ secrets.RUNWAY_APP_ID }}
           RUNWAY_BUCKET_ID: ${{ secrets.RUNWAY_BUCKET_ID }}
+

@@ -68,7 +68,6 @@ dependencies {
     implementation(libs.androidx.lifecycleViewmodel)
     implementation(libs.androidx.lifecycleViewmodelKtx)
     implementation(libs.androidx.coreKts)
-
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.mockitoKotlin)
