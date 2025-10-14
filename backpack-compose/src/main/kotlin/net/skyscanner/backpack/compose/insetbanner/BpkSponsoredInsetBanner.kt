@@ -30,8 +30,8 @@ fun BpkSponsoredInsetBanner(
     subHeadline: String?,
     callToAction: BpkSponsoredInsetBannerCTA,
     backgroundColor: Color,
+    logo: @Composable (() -> Unit),
     image: @Composable (() -> Unit)?,
-    logo: @Composable (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     BpkSponsoredInsetBannerImpl(

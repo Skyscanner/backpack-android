@@ -18,24 +18,23 @@
 
 package net.skyscanner.backpack.compose.insetbanner.internal
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerVariant
@@ -53,14 +52,11 @@ internal fun BpkSponsoredInsetBannerImpl(
     subHeadline: String?,
     callToAction: BpkSponsoredInsetBannerCTA,
     backgroundColor: Color,
+    logo: @Composable (() -> Unit),
     image: @Composable (() -> Unit)?,
-    logo: @Composable (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .background(color = BpkTheme.colors.canvasContrast), // TODO: check if needed
-    ) {
+    Column(modifier = modifier) {
         BpkSponsoredInsetBannerHeader(
             modifier = Modifier
                 .clip(
@@ -85,22 +81,33 @@ internal fun BpkSponsoredInsetBannerImpl(
             logo = logo,
         )
         image?.let {
-            Box(
+            ImageWithRoundedCornerShapeAtBottom(
                 modifier = Modifier
-                    // .padding(vertical = BpkSpacing.Base)
-                    .heightIn(max = 120.dp)
-                    .clip(
-                        shape = RoundedCornerShape(
-                            topStart = BpkSpacing.None,
-                            topEnd = BpkSpacing.None,
-                            bottomStart = BpkSpacing.Md,
-                            bottomEnd = BpkSpacing.Md,
-                        ),
-                    ),
-            ) {
-                image()
-            }
+                    .fillMaxWidth()
+                    .height(IMAGE_HEIGHT),
+                image = it,
+            )
         }
+    }
+}
+
+@Composable
+internal fun ImageWithRoundedCornerShapeAtBottom(
+    image: @Composable (() -> Unit),
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .clip(
+                shape = RoundedCornerShape(
+                    topStart = BpkSpacing.None,
+                    topEnd = BpkSpacing.None,
+                    bottomStart = BpkSpacing.Md,
+                    bottomEnd = BpkSpacing.Md,
+                ),
+            ),
+    ) {
+        image()
     }
 }
 
@@ -111,82 +118,81 @@ internal fun BpkSponsoredInsetBannerHeader(
     modifier: Modifier = Modifier,
     title: String? = null,
     subHeadline: String? = null,
-    logo: @Composable (() -> Unit)?,
+    logo: @Composable (() -> Unit),
 ) {
     Column(modifier = modifier.fillMaxWidth().padding(bottom = BpkSpacing.Md)) {
         Row(
             modifier = Modifier.fillMaxWidth().heightIn(max = LOGO_HEIGHT + BpkSpacing.Md),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            logo?.let {
-                Box(
-                    modifier = Modifier
-                        .padding(top = BpkSpacing.Md,
-                            start = BpkSpacing.Base,)
-                        .widthIn(max = LOGO_WIDTH)
-                        .heightIn(max = LOGO_HEIGHT),
-                ) {
-                    logo()
-                }
-            }
-            callToAction?.let {
-                Row(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .clickableWithRipple { callToAction.onClick() }
-                        .padding(top = BpkSpacing.Md, start = BpkSpacing.Base, end = BpkSpacing.Base),
-                    horizontalArrangement = Arrangement.spacedBy(space = BpkSpacing.Md),
-                ) {
-                    BpkText(
-                        text = callToAction.text,
-                        style = BpkTheme.typography.caption,
-                        color = getTextColor(variant = variant),
-                    )
-                    BpkIcon(
-                        icon = BpkIcon.InformationCircle,
-                        contentDescription = callToAction.accessibilityLabel,
-                        tint = getTintColor(variant = variant),
-                    )
-                }
-            }
-        }
-        Row(
-            modifier = Modifier,
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-        ) {
-            Column(
+            Box(
                 modifier = Modifier
-                    .padding(horizontal = BpkSpacing.Base)
-                    .weight(1f),
-                verticalArrangement = Arrangement.Center,
+                    .padding(top = BpkSpacing.Md, start = BpkSpacing.Base)
+                    .widthIn(max = LOGO_WIDTH)
+                    .heightIn(max = LOGO_HEIGHT),
             ) {
-                if (!title.isNullOrBlank()) {
-                    BpkText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = BpkSpacing.Sm),
-                        text = title,
-                        style = BpkTheme.typography.label2,
-                        color = getTextColor(variant = variant),
-                    )
-                }
-                if (!subHeadline.isNullOrBlank()) {
-                    BpkText(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = if (title.isNullOrBlank()) BpkSpacing.Sm else 0.dp),
-                        text = subHeadline,
-                        style = BpkTheme.typography.caption,
-                        color = getTextColor(variant = variant),
-                    )
-                }
+                logo()
             }
+            SponsorCTASection(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .clickableWithRipple { callToAction.onClick() }
+                    .padding(top = BpkSpacing.Md, start = BpkSpacing.Base, end = BpkSpacing.Base),
+                callToAction = callToAction,
+                variant = variant,
+            )
         }
+        if (!title.isNullOrBlank()) {
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, top = BpkSpacing.Sm),
+                text = title,
+                style = BpkTheme.typography.label2,
+                color = getTextColor(variant = variant),
+            )
+        }
+        if (!subHeadline.isNullOrBlank()) {
+            val topPadding = if (title.isNullOrBlank()) BpkSpacing.Sm else 0.dp
+            BpkText(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, top = topPadding),
+                text = subHeadline,
+                style = BpkTheme.typography.caption,
+                color = getTextColor(variant = variant),
+            )
+        }
+    }
+}
+
+@Composable
+private fun SponsorCTASection(
+    callToAction: BpkSponsoredInsetBannerCTA,
+    variant: BpkSponsoredInsetBannerVariant,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(space = BpkSpacing.Md),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        BpkText(
+            text = callToAction.text,
+            style = BpkTheme.typography.caption,
+            color = getTextColor(variant = variant),
+        )
+        BpkIcon(
+            icon = BpkIcon.InformationCircle,
+            contentDescription = callToAction.accessibilityLabel,
+            tint = getTintColor(variant = variant),
+        )
     }
 }
 
 private val LOGO_WIDTH = 88.dp
 private val LOGO_HEIGHT = 22.dp
+private val IMAGE_HEIGHT = 120.dp
 
 @Composable
 private fun getTextColor(variant: BpkSponsoredInsetBannerVariant): Color =
@@ -201,73 +207,3 @@ private fun getTintColor(variant: BpkSponsoredInsetBannerVariant): Color =
         BpkSponsoredInsetBannerVariant.OnLight -> BpkTheme.colors.textOnLight
         BpkSponsoredInsetBannerVariant.OnDark -> BpkTheme.colors.textOnDark
     }
-
-@Preview(name = "Default",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    locale = "en",
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
-)
-@Preview(name = "RTL",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    locale = "ar",
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
-)
-@Composable
-private fun PreviewBpkSponsoredInsetBannerImpl() {
-    BpkSponsoredInsetBannerImpl(
-        variant = BpkSponsoredInsetBannerVariant.OnLight,
-        title = "Title",
-        subHeadline = "Subheadline",
-        callToAction = BpkSponsoredInsetBannerCTA(
-            text = "Sponsored",
-            accessibilityLabel = "Call to action",
-            onClick = { /* No-op */ },
-        ),
-        logo = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFFFF761C)),
-            )
-        },
-        backgroundColor = Color(0xFFFFE300),
-        image = null,
-    )
-}
-
-@Preview(name = "DM",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    locale = "en",
-    showBackground = true,
-    backgroundColor = 0xFF010913, // BpkTheme.colors.canvas, DM
-)
-@Composable
-private fun PreviewBpkSponsoredInsetBannerImplOnDark() {
-    BpkSponsoredInsetBannerImpl(
-        variant = BpkSponsoredInsetBannerVariant.OnDark,
-        title = "Title",
-        subHeadline = "Subheadline",
-        callToAction = BpkSponsoredInsetBannerCTA(
-            text = "Sponsored",
-            accessibilityLabel = "Call to action",
-            onClick = { /* No-op */ },
-        ),
-        logo = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFFFFE300)),
-            )
-        },
-        backgroundColor = Color(0xFFFF761C),
-        image = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFF7AC512)),
-            )
-        },
-    )
-}
