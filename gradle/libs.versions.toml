@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.2.20"
 ksp = "2.2.20-2.0.4" # depends on Kotlin version
-compilerTesting = "0.10.0"
+compilerTesting = "0.10.1"
 destinations = "2.3.0" # update this alongside with compiler version
 
 androidPlugin = "8.13.0"
