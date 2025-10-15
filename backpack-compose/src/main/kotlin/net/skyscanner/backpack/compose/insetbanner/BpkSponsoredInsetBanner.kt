@@ -26,13 +26,13 @@ import net.skyscanner.backpack.compose.insetbanner.internal.BpkSponsoredInsetBan
 @Composable
 fun BpkSponsoredInsetBanner(
     variant: BpkSponsoredInsetBannerVariant,
-    title: String?,
-    subHeadline: String?,
     callToAction: BpkSponsoredInsetBannerCTA,
     backgroundColor: Color,
     logo: @Composable (() -> Unit),
-    image: @Composable (() -> Unit)?,
     modifier: Modifier = Modifier,
+    title: String? = null,
+    subHeadline: String? = null,
+    image: @Composable (() -> Unit)? = null,
 ) {
     BpkSponsoredInsetBannerImpl(
         modifier = modifier,
