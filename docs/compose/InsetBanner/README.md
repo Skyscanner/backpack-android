@@ -80,7 +80,7 @@ Note: The Inset Banner is clickable/expandable if a body text is provided.
 
 Under development. This version should replace the V1 in the future.
 
-### Spponsored
+### Sponsored
 
 #### OnLight with image
 

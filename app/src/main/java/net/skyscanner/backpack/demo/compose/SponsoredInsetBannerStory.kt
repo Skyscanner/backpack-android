@@ -42,6 +42,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory("Sponsored OnLight With Image")
 fun SponsoredInsetBannerStoryOnLightWithImage(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnLight,
         title = stringResource(R.string.inset_banner_title),
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
@@ -58,8 +59,9 @@ fun SponsoredInsetBannerStoryOnLightWithImage(modifier: Modifier = Modifier) {
 @Composable
 @InsetBannerComponent
 @ComposeStory("Sponsored OnLight without Image")
-fun SponsoredInsetBannerStoryOnLightWithoutImage() {
+fun SponsoredInsetBannerStoryOnLightWithoutImage(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnLight,
         title = stringResource(R.string.inset_banner_title),
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
@@ -78,6 +80,7 @@ fun SponsoredInsetBannerStoryOnLightWithoutImage() {
 @ComposeStory("Sponsored OnLight Without subHeadline")
 fun SponsoredInsetBannerStoryOnLightWithoutSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnLight,
         title = stringResource(R.string.inset_banner_title),
         callToAction = BpkSponsoredInsetBannerCTA(
@@ -95,6 +98,7 @@ fun SponsoredInsetBannerStoryOnLightWithoutSubHeadline(modifier: Modifier = Modi
 @ComposeStory("Sponsored OnLight Without Title")
 fun SponsoredInsetBannerStoryOnLightWithoutTitle(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnLight,
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
         callToAction = BpkSponsoredInsetBannerCTA(
@@ -112,6 +116,7 @@ fun SponsoredInsetBannerStoryOnLightWithoutTitle(modifier: Modifier = Modifier) 
 @ComposeStory("Sponsored OnLight Without Title nor subHeadline")
 fun SponsoredInsetBannerStoryOnLightWithoutTitleNorSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnLight,
         callToAction = BpkSponsoredInsetBannerCTA(
             text = stringResource(R.string.inset_banner_cta_text),
@@ -128,6 +133,7 @@ fun SponsoredInsetBannerStoryOnLightWithoutTitleNorSubHeadline(modifier: Modifie
 @ComposeStory("Sponsored OnDark With Image")
 fun SponsoredInsetBannerStoryOnDarkWithImage(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnDark,
         title = stringResource(R.string.inset_banner_title),
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
@@ -144,8 +150,9 @@ fun SponsoredInsetBannerStoryOnDarkWithImage(modifier: Modifier = Modifier) {
 @Composable
 @InsetBannerComponent
 @ComposeStory("Sponsored OnDark Without Image")
-fun SponsoredInsetBannerStoryOnDarkWithoutImage() {
+fun SponsoredInsetBannerStoryOnDarkWithoutImage(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnDark,
         title = stringResource(R.string.inset_banner_title),
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
@@ -164,6 +171,7 @@ fun SponsoredInsetBannerStoryOnDarkWithoutImage() {
 @ComposeStory("Sponsored OnDark Without subHeadline")
 fun SponsoredInsetBannerStoryOnDarkWithoutSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnDark,
         title = stringResource(R.string.inset_banner_title),
         callToAction = BpkSponsoredInsetBannerCTA(
@@ -181,6 +189,7 @@ fun SponsoredInsetBannerStoryOnDarkWithoutSubHeadline(modifier: Modifier = Modif
 @ComposeStory("Sponsored OnDark Without Title")
 fun SponsoredInsetBannerStoryOnDarkWithoutTitle(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnDark,
         subHeadline = stringResource(R.string.inset_banner_sub_headline),
         callToAction = BpkSponsoredInsetBannerCTA(
@@ -198,25 +207,8 @@ fun SponsoredInsetBannerStoryOnDarkWithoutTitle(modifier: Modifier = Modifier) {
 @ComposeStory("Sponsored OnDark Without Title nor subHeadline")
 fun SponsoredInsetBannerStoryOnDarkWithoutTitleNorSubHeadline(modifier: Modifier = Modifier) {
     DefaultSponsoredInsetBannerSample(
+        modifier = modifier,
         variant = OnDark,
-        callToAction = BpkSponsoredInsetBannerCTA(
-            text = stringResource(R.string.inset_banner_cta_text),
-            accessibilityLabel = stringResource(R.string.inset_banner_cta_accessibility_label),
-            onClick = {},
-        ),
-        image = null,
-        logo = getPartnerLogo(variant = OnDark),
-    )
-}
-
-@Composable
-@InsetBannerComponent
-@ComposeStory("Sponsored OnDark Without Image")
-fun SponsoredInsetBannerStoryOnDarkWithoutImage(modifier: Modifier = Modifier) {
-    DefaultSponsoredInsetBannerSample(
-        variant = OnDark,
-        title = stringResource(R.string.inset_banner_title),
-        subHeadline = stringResource(R.string.inset_banner_sub_headline),
         callToAction = BpkSponsoredInsetBannerCTA(
             text = stringResource(R.string.inset_banner_cta_text),
             accessibilityLabel = stringResource(R.string.inset_banner_cta_accessibility_label),
