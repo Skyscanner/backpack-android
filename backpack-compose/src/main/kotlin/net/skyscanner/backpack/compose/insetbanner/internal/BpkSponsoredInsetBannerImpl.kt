@@ -35,6 +35,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerVariant
@@ -173,7 +178,11 @@ private fun SponsorCTASection(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .clearAndSetSemantics {
+            this.contentDescription = callToAction.accessibilityLabel
+            role = Role.Button
+        },
         horizontalArrangement = Arrangement.spacedBy(space = BpkSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -184,7 +193,7 @@ private fun SponsorCTASection(
         )
         BpkIcon(
             icon = BpkIcon.InformationCircle,
-            contentDescription = callToAction.accessibilityLabel,
+            contentDescription = null,
             tint = getTintColor(variant = variant),
         )
     }

@@ -226,7 +226,7 @@ private fun getPartnerLogo(variant: BpkSponsoredInsetBannerVariant): @Composable
             OnDark -> painterResource(R.drawable.inset_banner_skyland_white)
             OnLight -> painterResource(R.drawable.inset_banner_skyland_black)
         },
-        contentDescription = stringResource(R.string.inset_banner_cta_accessibility_label),
+        contentDescription = stringResource(R.string.inset_banner_logo_accessibility_label),
         contentScale = ContentScale.Fit,
     )
 }
