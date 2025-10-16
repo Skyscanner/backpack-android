@@ -39,7 +39,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerVariant
@@ -180,9 +179,9 @@ private fun SponsorCTASection(
     Row(
         modifier = modifier
             .clearAndSetSemantics {
-            this.contentDescription = callToAction.accessibilityLabel
-            role = Role.Button
-        },
+                this.contentDescription = callToAction.accessibilityLabel
+                role = Role.Button
+            },
         horizontalArrangement = Arrangement.spacedBy(space = BpkSpacing.Md),
         verticalAlignment = Alignment.CenterVertically,
     ) {
