@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.insetbanner.internal
 
+import android.annotation.SuppressLint
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -48,7 +51,9 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.util.InternalBackpackApi
 
+@SuppressLint("RestrictedApi")
 @Composable
 internal fun BpkSponsoredInsetBannerImpl(
     variant: BpkSponsoredInsetBannerVariant,
@@ -88,7 +93,8 @@ internal fun BpkSponsoredInsetBannerImpl(
             ImageWithRoundedCornerShapeAtBottom(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(IMAGE_HEIGHT),
+                    .height(IMAGE_HEIGHT)
+                    .testTag(SPONSORED_INSET_BANNER_IMAGE_TEST_TAG),
                 image = it,
             )
         }
@@ -215,3 +221,7 @@ private fun getTintColor(variant: BpkSponsoredInsetBannerVariant): Color =
         BpkSponsoredInsetBannerVariant.OnLight -> BpkTheme.colors.textOnLight
         BpkSponsoredInsetBannerVariant.OnDark -> BpkTheme.colors.textOnDark
     }
+
+@VisibleForTesting(otherwise = VisibleForTesting.NONE)
+@InternalBackpackApi
+const val SPONSORED_INSET_BANNER_IMAGE_TEST_TAG = "SponsoredInsetBannerImageTestTag"
