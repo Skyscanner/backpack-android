@@ -49,6 +49,10 @@ android {
 }
 
 dependencies {
+    val composeBom = platform(libs.compose.bom)
+    api(composeBom)
+    implementation(composeBom)
+
     api(libs.compose.ui)
     testImplementation(libs.test.junit)
     implementation(libs.compose.runtime)
@@ -56,7 +60,6 @@ dependencies {
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.coroutines)
-    implementation(platform(libs.compose.bom))
 }
 
 apply(from = "tokens.gradle.kts")
