@@ -19,9 +19,9 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import androidx.compose.ui.graphics.toArgb
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.util.dynamicRgbColor
 
 internal sealed class ButtonStyles : (Context) -> ButtonStyle {
 
@@ -44,21 +44,33 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
                 bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
                 contentColorRes = R.color.bpkTextPrimary,
             )
-
             // Apply experimental configuration if available
             return BpkConfiguration.buttonConfig?.let { config ->
-                ButtonStyle(
-                    context = context,
-                    bgColor = config.secondaryBackgroundColor.toArgb(),
-                    bgPressedColor = config.secondaryPressedBackgroundColor.toArgb(),
-                    bgLoadingColor = config.secondaryPressedBackgroundColor.toArgb(),
-                    bgDisabledColor = baseStyle.bgDisabledColor,
-                    contentColor = config.secondaryTextColor.toArgb(),
-                    contentPressedColor = config.secondaryTextColor.toArgb(),
-                    contentDisabledColor = baseStyle.contentDisabledColor,
-                    contentLoadingColor = config.secondaryTextColor.toArgb(),
-                    rippleColor = baseStyle.rippleColor,
-                )
+                with(context) {
+                    val bgPressedColor = dynamicRgbColor(
+                        config.secondaryPressedBackgroundColorLight,
+                        config.secondaryPressedBackgroundColorDark,
+                    )
+                    val textColor = dynamicRgbColor(
+                        config.secondaryTextColorLight,
+                        config.secondaryTextColorDark,
+                    )
+                    ButtonStyle(
+                        context = context,
+                        bgColor = dynamicRgbColor(
+                            config.secondaryBackgroundColorLight,
+                            config.secondaryBackgroundColorDark,
+                        ),
+                        bgPressedColor = bgPressedColor,
+                        bgLoadingColor = bgPressedColor,
+                        bgDisabledColor = baseStyle.bgDisabledColor,
+                        contentColor = textColor,
+                        contentPressedColor = textColor,
+                        contentDisabledColor = baseStyle.contentDisabledColor,
+                        contentLoadingColor = textColor,
+                        rippleColor = baseStyle.rippleColor,
+                    )
+                }
             } ?: baseStyle
         }
     }

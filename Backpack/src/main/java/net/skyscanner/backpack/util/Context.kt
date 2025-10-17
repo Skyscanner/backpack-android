@@ -22,6 +22,8 @@ import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.content.ContextWrapper
 import android.view.accessibility.AccessibilityManager
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 
 internal fun Context.isInEditMode(): Boolean =
     unwrapped()::class.qualifiedName == "com.android.layoutlib.bridge.android.BridgeContext"
@@ -42,4 +44,19 @@ internal fun Context.isScreenReaderOn(): Boolean {
         return serviceInfoList.isNotEmpty()
     }
     return false
+}
+
+@InternalBackpackApi
+internal fun Context.isDarkMode(): Boolean {
+    return resources.configuration.uiMode and
+        android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
+        android.content.res.Configuration.UI_MODE_NIGHT_YES
+}
+
+@InternalBackpackApi
+internal fun Context.dynamicRgbColor(
+    lightColor: Color,
+    darkColor: Color,
+): Int {
+    return (if (isDarkMode()) darkColor else lightColor).toArgb()
 }
