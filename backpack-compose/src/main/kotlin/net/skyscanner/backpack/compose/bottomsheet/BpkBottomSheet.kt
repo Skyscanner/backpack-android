@@ -27,6 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
@@ -64,7 +65,7 @@ fun BpkBottomSheet(
         sheetSwipeEnabled = sheetGesturesEnabled,
         topBar = null,
         snackbarHost = { Box(Modifier) },
-        containerColor = BpkTheme.colors.surfaceDefault,
+        containerColor = Color.Transparent,
         contentColor = BpkTheme.colors.textPrimary,
         content = content,
     )
