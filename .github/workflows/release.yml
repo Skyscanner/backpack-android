@@ -56,16 +56,16 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
-      - name: Publish artifacts
-        run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload component list to release
         continue-on-error: true
         run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Publish artifacts
+        run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install libsecret for Supernova CLI
         run: sudo apt-get update && sudo apt-get install -y libsecret-1-0
