@@ -59,16 +59,9 @@ jobs:
       - name: Generate component list
         run: ./gradlew :backpack-compose:generateComponentList
 
-      - name: Verify component list file exists
-        run: |
-          if [ ! -f backpack-compose/src/main/res/raw/compose_components.txt ]; then
-            echo "Error: compose_components.txt not found. The generateComponentList task may have failed."
-            exit 0
-#           Exit with code 0 to not fail the entire workflow as this is non-critical
-          fi
-
       - name: Upload component list to release
-        run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/src/main/res/raw/compose_components.txt --clobber
+        continue-on-error: true
+        run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

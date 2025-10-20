@@ -22,7 +22,7 @@ tasks.register("generateComponentList") {
     description = "Generate list of public Compose components"
 
     val composeSourceDir = file("src/main/kotlin/net/skyscanner/backpack/compose")
-    val outputFile = file("src/main/res/raw/compose_components.txt")
+    val outputFile = file("build/outputs/compose_components.txt")
 
     inputs.dir(composeSourceDir)
     outputs.file(outputFile)
