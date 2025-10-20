@@ -56,17 +56,17 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             const updateType = '${{ steps.metadata.outputs.update-type }}';
-            
+
             // Get current labels
             const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: prNumber
             });
-            
+
             const currentLabelNames = currentLabels.map(label => label.name);
             const conflictingLabels = ['major', 'minor', 'patch'];
-            
+
             // Remove conflicting labels if they exist
             for (const conflictingLabel of conflictingLabels) {
               if (currentLabelNames.includes(conflictingLabel)) {
@@ -79,7 +79,7 @@ jobs:
                 console.log(`Removed conflicting label: ${conflictingLabel}`);
               }
             }
-            
+
             // Determine specific dependency label based on update type
             let specificLabel = null;
             switch (updateType) {
@@ -98,19 +98,19 @@ jobs:
               default:
                 console.log(`Unknown update type: ${updateType}, will use dependencies only`);
             }
-            
+
             const labelsToAdd = [];
-            
+
             // Add the dependencies label if it's not already present (required for CI)
             if (!currentLabelNames.includes('dependencies')) {
               labelsToAdd.push('dependencies');
             }
-            
+
             // Add specific dependency label if determined and not already present
             if (specificLabel && !currentLabelNames.includes(specificLabel)) {
               labelsToAdd.push(specificLabel);
             }
-            
+
             if (labelsToAdd.length > 0) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,

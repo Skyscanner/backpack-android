@@ -56,14 +56,11 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
-      - name: Generate component list
-        run: ./gradlew :backpack-compose:generateComponentList
-
-      - name: Upload component list to release
+      - name: Upload components list to release
         continue-on-error: true
         run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Publish artifacts
         run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
