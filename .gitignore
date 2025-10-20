@@ -239,3 +239,6 @@ danger_out.json
 
 # Dokka output directory (deprecated)
 dokka/
+
+# Generated component list
+backpack-compose/src/main/res/raw/compose_components.txt
