@@ -106,7 +106,7 @@ afterEvaluate {
                 artifact(tasks.named("generateComponentList").map {
                     file("build/outputs/compose_components.txt")
                 }) {
-                    classifier = ""
+                    classifier = "components"
                     extension = "txt"
                     builtBy(tasks.named("generateComponentList"))
                 }
