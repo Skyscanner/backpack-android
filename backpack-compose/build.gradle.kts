@@ -92,6 +92,6 @@ dependencies {
 }
 
 apply(from = "tokens.gradle.kts")
-
+apply(from = "components.gradle.kts")
 
 apply(from = "$rootDir/android-configuration-check.gradle")
