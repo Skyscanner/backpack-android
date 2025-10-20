@@ -30,6 +30,7 @@ import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
 import net.skyscanner.backpack.tokens.saveTo
 import net.skyscanner.backpack.tokens.transformTo
+import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
     alias(libs.plugins.compose.compiler)
@@ -95,3 +96,20 @@ apply(from = "tokens.gradle.kts")
 apply(from = "components.gradle.kts")
 
 apply(from = "$rootDir/android-configuration-check.gradle")
+
+// Publish component list as artifact
+afterEvaluate {
+    publishing {
+        publications {
+            named<MavenPublication>("maven") {
+                artifact(tasks.named("generateComponentList").map {
+                    file("build/outputs/compose_components.txt")
+                }) {
+                    classifier = ""
+                    extension = "txt"
+                    builtBy(tasks.named("generateComponentList"))
+                }
+            }
+        }
+    }
+}

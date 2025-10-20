@@ -123,51 +123,6 @@ jobs:
               console.log('All required labels already present');
             }
 
-  ComponentList:
-    runs-on: ubuntu-24.04-16cores-public
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/create-github-app-token@v2
-        id: app-token
-        with:
-          app-id: ${{ vars.GH_APP_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-
-      - name: Generate component list
-        run: ./gradlew :backpack-compose:generateComponentList
-
-      - name: Verify component list was generated
-        run: |
-          if [ ! -f backpack-compose/build/outputs/compose_components.txt ]; then
-            echo "Error: compose_components.txt was not generated"
-            exit 1
-          fi
-          echo "Component list generated successfully with $(wc -l < backpack-compose/build/outputs/compose_components.txt) components"
-          cat backpack-compose/build/outputs/compose_components.txt
-
-      - name: Upload to latest release (test)
-        continue-on-error: true
-        run: |
-          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
-          if [ -z "$LATEST_TAG" ]; then
-            echo "No releases found, skipping upload"
-            exit 0
-          fi
-          echo "Uploading to latest release: $LATEST_TAG"
-          gh release upload "$LATEST_TAG" backpack-compose/build/outputs/compose_components.txt --clobber
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
   CopilotAgent:
     runs-on: ubuntu-24.04-16cores-public
     permissions:
