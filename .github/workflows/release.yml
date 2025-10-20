@@ -35,6 +35,12 @@ jobs:
 
     steps:
 
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v5
 
@@ -55,15 +61,6 @@ jobs:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
-
-      - name: Generate component list
-        run: ./gradlew :backpack-compose:generateComponentList
-
-      - name: Upload component list to release
-        continue-on-error: true
-        run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish artifacts
         run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
