@@ -53,8 +53,3 @@ tasks.register("generateComponentList") {
         logger.lifecycle("Generated component list: ${components.size} components")
     }
 }
-
-// Hook into preBuild
-tasks.named("preBuild").configure {
-    dependsOn("generateComponentList")
-}
