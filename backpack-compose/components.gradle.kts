@@ -28,19 +28,30 @@ tasks.register("generateComponentList") {
     outputs.file(outputFile)
 
     doLast {
-        val pattern = Regex("""@Composable\s+fun\s+(Bpk[A-Za-z0-9_]*)\s*(?:<[^>]*>)?\s*\(""")
-        val excludePaths = listOf("/internal/", "Internal", "/theme/", "/tokens/", "/util/")
+        // NOTE: This regex attempts to match Compose component functions with possible annotations and modifiers.
+        // It captures optional visibility modifiers and handles annotations before @Composable.
+        // For full accuracy in complex edge cases, consider using a Kotlin parser.
+        val pattern = Regex(
+            """(?s)(?:@[A-Za-z0-9_]+[\s\r\n]*)*@[Cc]omposable[\s\r\n]*(?:(public|internal|private|protected)[\s\r\n]+)?fun[\s\r\n]+(Bpk[A-Za-z0-9_]*)[\s\r\n]*(?:<[^>]*>)?[\s\r\n]*\("""
+        )
+        val excludePaths = listOf("/internal/", "/theme/", "/tokens/", "/util/")
         val components = mutableSetOf<String>()
+
+        // Regex to detect internal functions anywhere in the file
+        val internalFunRegex = Regex("""\binternal\b[^\n]*\bfun\b""")
 
         fileTree(composeSourceDir) {
             include("**/*.kt")
         }.forEach { file ->
             if (excludePaths.none { file.path.contains(it) }) {
                 val content = file.readText()
-                if (!content.contains("internal fun")) {
+                // Skip files containing internal function declarations
+                if (!internalFunRegex.containsMatchIn(content)) {
                     pattern.findAll(content).forEach { match ->
-                        val name = match.groupValues[1]
-                        if (!name.contains("Internal") && !name.endsWith("Impl")) {
+                        val visibility = match.groupValues[1]
+                        val name = match.groupValues[2]
+                        // Only include public functions (explicit or default)
+                        if (visibility.isEmpty() || visibility == "public") {
                             components.add(name)
                         }
                     }
