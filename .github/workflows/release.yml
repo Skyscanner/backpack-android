@@ -62,6 +62,8 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
+      - name: Generate component list
+        run: ./gradlew :backpack-compose:generateComponentList
       - name: Upload components list to release
         continue-on-error: true
         run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
