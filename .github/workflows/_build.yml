@@ -84,7 +84,6 @@ jobs:
           echo "Component list generated successfully with $(wc -l < backpack-compose/build/outputs/compose_components.txt) components"
 
       - name: Upload component list to latest release
-        if: ${{ github.event_name != 'pull_request' }}
         continue-on-error: true
         run: |
           LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
