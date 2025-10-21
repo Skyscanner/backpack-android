@@ -97,20 +97,3 @@ apply(from = "tokens.gradle.kts")
 apply(from = "components.gradle.kts")
 
 apply(from = "$rootDir/android-configuration-check.gradle")
-
-// Publish component list as artifact
-afterEvaluate {
-    extensions.configure<PublishingExtension> {
-        publications {
-            named<MavenPublication>("maven") {
-                artifact(tasks.named("generateComponentList").map {
-                    file("build/outputs/compose_components.txt")
-                }) {
-                    classifier = "components"
-                    extension = "txt"
-                    builtBy(tasks.named("generateComponentList"))
-                }
-            }
-        }
-    }
-}
