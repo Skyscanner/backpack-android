@@ -72,30 +72,6 @@ jobs:
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
-      - name: Generate component list
-        run: ./gradlew :backpack-compose:generateComponentList
-
-      - name: Verify component list was generated
-        run: |
-          if [ ! -f backpack-compose/build/outputs/compose_components.txt ]; then
-            echo "Error: compose_components.txt was not generated"
-            exit 1
-          fi
-          echo "Component list generated successfully with $(wc -l < backpack-compose/build/outputs/compose_components.txt) components"
-
-      - name: Upload component list to latest release
-        continue-on-error: true
-        run: |
-          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
-          if [ -z "$LATEST_TAG" ]; then
-            echo "No releases found, skipping upload"
-            exit 0
-          fi
-          echo "Uploading to latest release: $LATEST_TAG"
-          gh release upload "$LATEST_TAG" backpack-compose/build/outputs/compose_components.txt --clobber
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
       - name: Tokens check
         if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
