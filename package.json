@@ -16,8 +16,13 @@
         "url": "https://github.com/Skyscanner/backpack-android/issues"
     },
     "homepage": "https://github.com/Skyscanner/backpack-android#readme",
+    "scripts": {
+        "preview-docs": "node preview-server.js"
+    },
     "devDependencies": {
         "@skyscanner/bpk-foundations-android": "^22.3.0",
-        "@skyscanner/bpk-svgs": "^20.4.1"
+        "@skyscanner/bpk-svgs": "^20.4.1",
+        "express": "^4.18.2",
+        "marked": "^9.1.2"
     }
 }
