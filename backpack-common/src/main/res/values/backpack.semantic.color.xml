@@ -42,6 +42,7 @@
     <color name="bpkSurfaceHighlight">#ffe0e4e9</color>
     <color name="bpkSurfaceLowContrast">#fff5f7fa</color>
     <color name="bpkSurfaceSubtle">#ffe3f0ff</color>
+    <color name="bpkSurfaceTint">#1affffff</color>
     <color name="bpkTextDisabled">#33000000</color>
     <color name="bpkTextDisabledOnDark">#80ffffff</color>
     <color name="bpkTextError">#ffe70866</color>
