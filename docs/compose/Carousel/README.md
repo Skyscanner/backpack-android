@@ -1,6 +1,6 @@
 # Carousel
 
-[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-compose)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-backpack--compose-blue)](https://github.com/Skyscanner/backpack-android/packages)
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.carousel)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/carousel)
 
@@ -12,13 +12,13 @@
 
 ## Installation
 
-Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+Backpack Compose is available through [GitHub Packages](https://github.com/Skyscanner/backpack-android/packages). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
 ## Usage
 
 Example of a Carousel:
 
-```Kotlin
+```kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
@@ -38,7 +38,7 @@ BpkCarousel(
 
 Example of starting at a specific image:
 
-```Kotlin
+```kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
@@ -61,7 +61,7 @@ BpkCarousel(
 
 Example of listening to page changes:
 
-```Kotlin
+```kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
@@ -85,7 +85,7 @@ BpkCarousel(
 
 Example of programmatically scrolling to a page:
 
-```Kotlin
+```kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
