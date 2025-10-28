@@ -22,6 +22,7 @@ package net.skyscanner.backpack.compose.bottomnav
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -67,6 +68,7 @@ sealed interface BpkBottomNavItem {
     val title: String
     val id: Int
     val showBadge: Boolean
+    val shouldTint: Boolean
 }
 
 fun BpkBottomNavItem(
@@ -74,16 +76,18 @@ fun BpkBottomNavItem(
     id: Int,
     icon: BpkIcon,
     showBadge: Boolean = false,
+    shouldTint: Boolean = false,
 ): BpkBottomNavItem =
-    IconBottomNavItem(title, id, showBadge, icon)
+    IconBottomNavItem(title, id, showBadge, shouldTint, icon)
 
 fun BpkBottomNavItem(
     title: String,
     id: Int,
     painter: Painter,
     showBadge: Boolean = false,
+    shouldTint: Boolean = false,
 ): BpkBottomNavItem =
-    PainterBottomNavItem(title, id, showBadge, painter)
+    PainterBottomNavItem(title, id, showBadge, shouldTint, painter)
 
 @Composable
 fun BpkBottomNav(
@@ -179,15 +183,25 @@ private fun BottomNavIcon(
                 icon = tabItem.icon,
                 contentDescription = null,
                 size = BpkIconSize.Large,
-                tint = tint,
+                tint = if (tabItem.shouldTint) tint else Color.Unspecified,
             )
 
-            is PainterBottomNavItem -> Icon(
-                modifier = Modifier.height(BpkSpacing.Lg),
-                painter = tabItem.painter,
-                contentDescription = null,
-                tint = tint,
-            )
+            is PainterBottomNavItem -> {
+                if (tabItem.shouldTint) {
+                    Icon(
+                        modifier = Modifier.height(BpkSpacing.Lg),
+                        painter = tabItem.painter,
+                        contentDescription = null,
+                        tint = tint,
+                    )
+                } else {
+                    Image(
+                        modifier = Modifier.height(BpkSpacing.Lg),
+                        painter = tabItem.painter,
+                        contentDescription = null,
+                    )
+                }
+            }
         }
         if (tabItem.showBadge) {
             NotificationDot(
@@ -214,6 +228,7 @@ private data class IconBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,
+    override val shouldTint: Boolean,
     val icon: BpkIcon,
 ) : BpkBottomNavItem
 
@@ -221,5 +236,6 @@ private data class PainterBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,
+    override val shouldTint: Boolean,
     val painter: Painter,
 ) : BpkBottomNavItem

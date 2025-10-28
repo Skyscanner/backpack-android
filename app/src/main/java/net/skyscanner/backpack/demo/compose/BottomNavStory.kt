@@ -64,17 +64,20 @@ fun BottomNavSample(
                 painter = painterResource(id = R.drawable.sample_icon),
                 title = stringResource(R.string.bottom_nav_explore),
                 id = 1,
+                shouldTint = false, // Don't tint bitmap images
             ),
             BpkBottomNavItem(
                 icon = BpkIcon.Trips,
                 title = stringResource(R.string.bottom_nav_trips),
                 id = 2,
+                shouldTint = true, // Tint regular icons
             ),
             BpkBottomNavItem(
                 icon = BpkIcon.AccountCircle,
                 title = stringResource(R.string.navigation_account),
                 id = 3,
                 showBadge = true,
+                shouldTint = true, // Tint regular icons
             ),
         ),
         selectedItemId = selectedItemId,
