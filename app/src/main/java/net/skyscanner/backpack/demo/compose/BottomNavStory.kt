@@ -32,6 +32,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavItem
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavPainter.PlainPainter
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavPainter.TintedPainter
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.AccountCircle
 import net.skyscanner.backpack.compose.tokens.Trips
@@ -47,37 +49,52 @@ fun BottomNavStory(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomEnd,
     ) {
-        BottomNavSample()
+        BottomNavSample(usePlainPainter = false)
+    }
+}
+
+@Composable
+@BottomNavComponent
+@ComposeStory(name = "With Plain Painter")
+fun BottomNavWithPlainPainterStory(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomEnd,
+    ) {
+        BottomNavSample(usePlainPainter = true)
     }
 }
 
 @Composable
 fun BottomNavSample(
     modifier: Modifier = Modifier,
+    usePlainPainter: Boolean = false,
     defaultItemId: Int = 1,
 ) {
     var selectedItemId by remember { mutableIntStateOf(defaultItemId) }
+    val painterRes = painterResource(id = R.drawable.sample_icon)
     BpkBottomNav(
         modifier = modifier,
         items = listOf(
             BpkBottomNavItem(
-                painter = painterResource(id = R.drawable.sample_icon),
+                painter = if (usePlainPainter) {
+                    PlainPainter(painterRes)
+                } else {
+                    TintedPainter(painterRes)
+                },
                 title = stringResource(R.string.bottom_nav_explore),
                 id = 1,
-                shouldTint = false, // Don't tint bitmap images
             ),
             BpkBottomNavItem(
                 icon = BpkIcon.Trips,
                 title = stringResource(R.string.bottom_nav_trips),
                 id = 2,
-                shouldTint = true, // Tint regular icons
             ),
             BpkBottomNavItem(
                 icon = BpkIcon.AccountCircle,
                 title = stringResource(R.string.navigation_account),
                 id = 3,
                 showBadge = true,
-                shouldTint = true, // Tint regular icons
             ),
         ),
         selectedItemId = selectedItemId,

@@ -64,11 +64,18 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Stable
+sealed interface BpkBottomNavPainter {
+    val painter: Painter
+
+    data class TintedPainter(override val painter: Painter) : BpkBottomNavPainter
+    data class PlainPainter(override val painter: Painter) : BpkBottomNavPainter
+}
+
+@Stable
 sealed interface BpkBottomNavItem {
     val title: String
     val id: Int
     val showBadge: Boolean
-    val shouldTint: Boolean
 }
 
 fun BpkBottomNavItem(
@@ -76,18 +83,16 @@ fun BpkBottomNavItem(
     id: Int,
     icon: BpkIcon,
     showBadge: Boolean = false,
-    shouldTint: Boolean = false,
 ): BpkBottomNavItem =
-    IconBottomNavItem(title, id, showBadge, shouldTint, icon)
+    IconBottomNavItem(title, id, showBadge, icon)
 
 fun BpkBottomNavItem(
     title: String,
     id: Int,
-    painter: Painter,
+    painter: BpkBottomNavPainter,
     showBadge: Boolean = false,
-    shouldTint: Boolean = false,
 ): BpkBottomNavItem =
-    PainterBottomNavItem(title, id, showBadge, shouldTint, painter)
+    PainterBottomNavItem(title, id, showBadge, painter)
 
 @Composable
 fun BpkBottomNav(
@@ -183,21 +188,21 @@ private fun BottomNavIcon(
                 icon = tabItem.icon,
                 contentDescription = null,
                 size = BpkIconSize.Large,
-                tint = if (tabItem.shouldTint) tint else Color.Unspecified,
+                tint = tint,
             )
 
             is PainterBottomNavItem -> {
-                if (tabItem.shouldTint) {
-                    Icon(
+                when (tabItem.painter) {
+                    is BpkBottomNavPainter.TintedPainter -> Icon(
                         modifier = Modifier.height(BpkSpacing.Lg),
-                        painter = tabItem.painter,
+                        painter = tabItem.painter.painter,
                         contentDescription = null,
                         tint = tint,
                     )
-                } else {
-                    Image(
+
+                    is BpkBottomNavPainter.PlainPainter -> Image(
                         modifier = Modifier.height(BpkSpacing.Lg),
-                        painter = tabItem.painter,
+                        painter = tabItem.painter.painter,
                         contentDescription = null,
                     )
                 }
@@ -228,7 +233,6 @@ private data class IconBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,
-    override val shouldTint: Boolean,
     val icon: BpkIcon,
 ) : BpkBottomNavItem
 
@@ -236,6 +240,5 @@ private data class PainterBottomNavItem(
     override val title: String,
     override val id: Int,
     override val showBadge: Boolean,
-    override val shouldTint: Boolean,
-    val painter: Painter,
+    val painter: BpkBottomNavPainter,
 ) : BpkBottomNavItem

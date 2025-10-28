@@ -37,4 +37,9 @@ class BpkBottomNavTest : BpkSnapshotTest() {
     fun selectionUpdated() = snap {
         BottomNavSample(defaultItemId = 2)
     }
+
+    @Test
+    fun plainPainterNoTintApplied() = snap {
+        BottomNavSample(defaultItemId = 2, usePlainPainter = true)
+    }
 }
