@@ -39,6 +39,15 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
 
+
+    // VDL2 Typography tokens - manual additions until available in foundations package
+    val vdlLetterSpacingTokens = mapOf(
+        "VDL_HERO" to -0.03, // -1.2px at 40px size ≈ -0.03em
+        "VDL_HEADING_1" to -0.03, // -1.2px at 40px size ≈ -0.03em
+        "VDL_HEADING_2" to -0.025, // -1.0px at 40px size ≈ -0.025em
+        "VDL_HEADING_3" to -0.02 // -0.6px at 30px size ≈ -0.02em
+    )
+
     val generateElevationTokens by registering {
         this.group = group
         doLast {
@@ -99,7 +108,7 @@ tasks {
         doLast {
             source
                 .parseAs(BpkTextUnit.Category.LetterSpacing)
-                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
+                .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true, customTokens = vdlLetterSpacingTokens))
                 .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
                 .execute()
         }
@@ -126,6 +135,9 @@ tasks {
                 .execute()
         }
     }
+
+    // VDL2 companion object is now automatically included in BpkTypography
+    // No separate task needed
 
     val generateSemanticColors by registering {
         this.group = group

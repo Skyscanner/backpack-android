@@ -463,4 +463,7 @@
     <string name="link_story_hotel_price_accessibility">one hundred and forty-nine pounds</string>
     <string name="key_login_method_selection_tos_and_privacy_policy">By continuing you agree to our &lt;link0&gt;Terms of Service&lt;/link0&gt; and &lt;link1&gt;Privacy Policy&lt;/link1&gt;.</string>
 
+    <string name="settings_section_typography">Typography Sets</string>
+    <string name="settings_typography_default">Default (Sans Serif)</string>
+    <string name="settings_typography_alternative1">VDL 2</string>
 </resources>

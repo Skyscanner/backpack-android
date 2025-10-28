@@ -179,4 +179,53 @@
     <item name="android:textSize">@dimen/bpkTextXsSize</item>
     <item name="lineHeight">16sp</item>
   </style>
+
+  <!-- VDL2 Enhanced Typography Styles -->
+  <style name="bpkTextHero5Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxxlSize</item>
+    <item name="lineHeight">56sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHeading1Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    <item name="lineHeight">48sp</item>
+    <item name="android:letterSpacing">-0.03</item>
+  </style>
+
+  <style name="bpkTextHeading2Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
+    <item name="lineHeight">40sp</item>
+    <item name="android:letterSpacing">-0.025</item>
+  </style>
+
+  <style name="bpkTextHeading3Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    <item name="lineHeight">28sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextHeading4Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    <item name="lineHeight">24sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextHeading5Vdl">
+    <item name="android:fontFamily">?bpkFontFamilyBlack</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">20sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
 </resources>

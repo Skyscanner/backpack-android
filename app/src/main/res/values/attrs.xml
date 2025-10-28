@@ -3,4 +3,8 @@
     <declare-styleable name="SettingsThemeOption">
         <attr name="themeName" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="SettingsTypographyOption">
+        <attr name="typographyName" format="string" />
+    </declare-styleable>
 </resources>

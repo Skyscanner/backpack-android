@@ -39,8 +39,6 @@ object BpkConfiguration {
             val largePaddingHorizontal: Dp = 24.dp, // Based on Figma design
         ) : BpkExperimentalComponent()
 
-        data object BpkText : BpkExperimentalComponent()
-
         data object BpkCard : BpkExperimentalComponent()
 
         data object BpkChip : BpkExperimentalComponent()
@@ -51,6 +49,11 @@ object BpkConfiguration {
         ) : BpkExperimentalComponent()
     }
 
+    enum class BpkTypographySet {
+        DEFAULT,
+        VDL_2,
+    }
+
     private var _hasSet: Boolean = false
 
     // To allow testing, but shouldn't be used in production
@@ -58,7 +61,6 @@ object BpkConfiguration {
     fun clearConfigs() {
         chipConfig = null
         buttonConfig = null
-        textConfig = null
         cardConfig = null
         badgeConfig = null
 
@@ -68,9 +70,9 @@ object BpkConfiguration {
     fun setConfigs(
         chipConfig: Boolean = false,
         buttonConfig: Boolean = false,
-        textConfig: Boolean = false,
         cardConfig: Boolean = false,
         badgeConfig: Boolean = false,
+        typography: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -82,8 +84,8 @@ object BpkConfiguration {
         if (buttonConfig) {
             this.buttonConfig = BpkExperimentalComponent.BpkButton()
         }
-        if (textConfig) {
-            this.textConfig = BpkExperimentalComponent.BpkText
+        if (typography) {
+            this.typographySet = BpkTypographySet.VDL_2
         }
         if (cardConfig) {
             this.cardConfig = BpkExperimentalComponent.BpkCard
@@ -106,11 +108,11 @@ object BpkConfiguration {
     var buttonConfig: BpkExperimentalComponent.BpkButton? = null
         private set
 
-    var textConfig: BpkExperimentalComponent.BpkText? = null
-        private set
-
     var cardConfig: BpkExperimentalComponent.BpkCard? = null
         private set
     var badgeConfig: BpkExperimentalComponent.BpkBadge? = null
+        private set
+
+    var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
         private set
 }

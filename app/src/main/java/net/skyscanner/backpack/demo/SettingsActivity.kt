@@ -25,8 +25,10 @@ import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.ui.SettingsThemeOption
 import net.skyscanner.backpack.demo.data.SharedPreferences
+import net.skyscanner.backpack.demo.ui.SettingsTypographyOption
 import net.skyscanner.backpack.toggle.BpkSwitch
 
 class SettingsActivity : AppCompatActivity() {
@@ -35,6 +37,11 @@ class SettingsActivity : AppCompatActivity() {
         "AppTheme" to R.style.AppTheme,
         "London" to R.style.LondonTheme,
         "Doha" to R.style.DohaTheme,
+    )
+    private lateinit var typographyOptions: List<SettingsTypographyOption>
+    private val typographyMapping = mapOf(
+        "Default (Sans Serif)" to BpkConfiguration.BpkTypographySet.DEFAULT,
+        "VDL 2" to BpkConfiguration.BpkTypographySet.VDL_2,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +63,19 @@ class SettingsActivity : AppCompatActivity() {
             findViewById<SettingsThemeOption>(R.id.theme_london).apply { setOnClickListener(::onThemeSelected) },
             findViewById<SettingsThemeOption>(R.id.theme_doha).apply { setOnClickListener(::onThemeSelected) },
         )
+
+        typographyOptions = listOf(
+            findViewById<SettingsTypographyOption>(R.id.typography_default).apply { setOnClickListener(::onTypographySelected) },
+            findViewById<SettingsTypographyOption>(R.id.typography_alternative1).apply { setOnClickListener(::onTypographySelected) },
+        )
+
+        // Initialize typography options based on saved preferences
+        val savedTypographySet = SharedPreferences.getTypographySet(this)
+        typographyOptions.forEach {
+            if (typographyMapping[it.text] == savedTypographySet) {
+                it.isCurrent = true
+            }
+        }
 
         val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
         val themePicker = findViewById<View>(R.id.theme_picker)
@@ -108,6 +128,15 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    fun onTypographySelected(view: View) {
+        typographyOptions.forEach { it.isCurrent = false }
+
+        view as SettingsTypographyOption
+        view.isCurrent = true
+
+        updateTypographySet()
+    }
+
     private fun updateTheme() {
         var theme = "AppTheme"
         themes.forEach {
@@ -120,5 +149,20 @@ class SettingsActivity : AppCompatActivity() {
             SharedPreferences.saveTheme(this, it)
             BackpackDemoApplication.triggerRebirth(this)
         }
+    }
+
+    private fun updateTypographySet() {
+        var typographySet = BpkConfiguration.BpkTypographySet.DEFAULT
+        typographyOptions.forEach {
+            if (it.isCurrent) {
+                typographySet = typographyMapping[it.text as String] ?: BpkConfiguration.BpkTypographySet.DEFAULT
+            }
+        }
+
+        SharedPreferences.saveTypographySet(this, typographySet)
+        BpkConfiguration.setConfigs(
+            typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
+        )
+        BackpackDemoApplication.triggerRebirth(this)
     }
 }

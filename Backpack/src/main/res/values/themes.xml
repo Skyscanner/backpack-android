@@ -49,6 +49,17 @@
         <item name="android:background">@color/bpkSurfaceDefault</item>
     </style>
 
+    <!-- VDL2 Enhanced Typography Theme -->
+    <style name="BpkTheme.Typography.Vdl2" parent="BpkTheme">
+        <!-- Override standard text appearances with VDL2 enhanced styles -->
+        <item name="bpkTextHero5Appearance">@style/bpkTextHero5Vdl</item>
+        <item name="bpkTextHeading1Appearance">@style/bpkTextHeading1Vdl</item>
+        <item name="bpkTextHeading2Appearance">@style/bpkTextHeading2Vdl</item>
+        <item name="bpkTextHeading3Appearance">@style/bpkTextHeading3Vdl</item>
+        <item name="bpkTextHeading4Appearance">@style/bpkTextHeading4Vdl</item>
+        <item name="bpkTextHeading5Appearance">@style/bpkTextHeading5Vdl</item>
+    </style>
+
 
     <style name="BpkToolbarNavigationButtonStyle.White" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="tint">@color/bpkTextPrimary</item>
