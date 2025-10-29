@@ -10,6 +10,12 @@
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/default.png" alt="BottomNav component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/default_dm.png" alt="BottomNav component - dark mode" width="375" /> |
 
+## With Plain Painter
+
+| Day                                                                                                                                                                                  | Night                                                                                                                                                                                               |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/with-plain-painter.png" alt="BottomNav with plain painter" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/with-plain-painter_dm.png" alt="BottomNav with plain painter - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -20,11 +26,12 @@ Example of a `BpkBottomNav`:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavPainter.TintedPainter
 
 BpkBottomNav(
   items = listOf(
     BpkBottomNavItem(
-      painter = painterResource(id = R.drawable.sample_icon),
+      painter = TintedPainter(painterResource(id = R.drawable.sample_icon)),
       title = "Explore",
       id = 1,
     ),
@@ -42,5 +49,24 @@ BpkBottomNav(
   ),
   selectedItemId = 1,
   onTabClicked = {}, // Handle update
+)
+```
+
+### Using Custom Icons
+
+When using custom icons via `Painter`, you can choose between two types:
+
+- **`TintedPainter`**: Applies color tinting to the icon (changes color based on selection state). Use this for monochrome icons that should match the component's color scheme.
+- **`PlainPainter`**: Displays the icon without any tinting. Use this for icons that have their own colors (e.g., brand logos, multi-colored icons).
+
+Example with `PlainPainter`:
+
+```Kotlin
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavPainter.PlainPainter
+
+BpkBottomNavItem(
+  painter = PlainPainter(painterResource(id = R.drawable.colored_logo)),
+  title = "Explore",
+  id = 1,
 )
 ```
