@@ -20,11 +20,11 @@ package net.skyscanner.backpack.demo.ui
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.RadioButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import androidx.core.content.withStyledAttributes
+import net.skyscanner.backpack.radiobutton.BpkRadioButton
 
 class SettingsTypographyOption @JvmOverloads constructor(
     context: Context,
@@ -33,7 +33,7 @@ class SettingsTypographyOption @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val titleView: BpkText
-    private val radioButton: RadioButton
+    private val radioButton: BpkRadioButton
 
     var text: CharSequence?
         get() = titleView.text
