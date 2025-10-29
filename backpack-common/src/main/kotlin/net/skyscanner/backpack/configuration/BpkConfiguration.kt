@@ -62,6 +62,7 @@ object BpkConfiguration {
         chipConfig = null
         buttonConfig = null
         cardConfig = null
+        typographySet = BpkTypographySet.DEFAULT
         badgeConfig = null
 
         _hasSet = false

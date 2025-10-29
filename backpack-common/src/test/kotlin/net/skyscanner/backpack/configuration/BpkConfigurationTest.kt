@@ -42,4 +42,25 @@ class BpkConfigurationTest {
         BpkConfiguration.performLogging()
         assertEquals(1, logCount)
     }
+
+    @Test
+    fun `setConfigs with typography true sets VDL_2 typographySet`() {
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(typography = true)
+        assertEquals(BpkConfiguration.BpkTypographySet.VDL_2, BpkConfiguration.typographySet)
+    }
+
+    @Test
+    fun `default typographySet is DEFAULT`() {
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs()
+        assertEquals(BpkConfiguration.BpkTypographySet.DEFAULT, BpkConfiguration.typographySet)
+    }
+
+    @Test
+    fun `typographySet remains DEFAULT when typography is false`() {
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(typography = false)
+        assertEquals(BpkConfiguration.BpkTypographySet.DEFAULT, BpkConfiguration.typographySet)
+    }
 }

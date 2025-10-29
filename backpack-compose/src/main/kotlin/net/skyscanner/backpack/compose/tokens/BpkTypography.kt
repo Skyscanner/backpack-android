@@ -281,7 +281,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Xxxxl,
                 lineHeight = BpkLineHeight.Xxxxl,
                 letterSpacing = BpkLetterSpacing.VdlHero,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,
@@ -292,7 +292,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Xxxl,
                 lineHeight = BpkLineHeight.Xxxl,
                 letterSpacing = BpkLetterSpacing.VdlHeading1,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,
@@ -303,7 +303,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Xxl,
                 lineHeight = BpkLineHeight.Xxl,
                 letterSpacing = BpkLetterSpacing.VdlHeading2,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,
@@ -314,7 +314,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Xl,
                 lineHeight = BpkLineHeight.XlTight,
                 letterSpacing = BpkLetterSpacing.VdlHeading3,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,
@@ -325,7 +325,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Lg,
                 lineHeight = BpkLineHeight.LgTight,
                 letterSpacing = BpkLetterSpacing.VdlHeading3,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,
@@ -336,7 +336,7 @@ public data class BpkTypography internal constructor(
                 fontSize = BpkFontSize.Base,
                 lineHeight = BpkLineHeight.BaseTight,
                 letterSpacing = BpkLetterSpacing.VdlHeading3,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = defaultFontFamily,
                 lineHeightStyle = LineHeightStyle(
                     alignment = LineHeightStyle.Alignment(topRatio = 0.2f),
                     trim = LineHeightStyle.Trim.None,

@@ -287,7 +287,7 @@ private fun createVdl2CompanionObject(typographyClassName: String): TypeSpec {
         codeBlockBuilder.add("fontSize = %T.${style.fontSize.toName()},\n", BpkFontSizeClass)
         codeBlockBuilder.add("lineHeight = %T.${style.lineHeight.toName()},\n", BpkLineHeightClass)
         codeBlockBuilder.add("letterSpacing = %T.${style.letterSpacing!!.toName()},\n", BpkLetterSpacingClass)
-        codeBlockBuilder.add("fontFamily = %T.SansSerif,\n", FontFamilyClass)
+        codeBlockBuilder.add("fontFamily = $defaultFontFamily,\n", FontFamilyClass)
         codeBlockBuilder.add("lineHeightStyle = %T(\n", LineHeightStyleClass)
         codeBlockBuilder.indent()
         codeBlockBuilder.add("alignment = %T.Alignment(topRatio = 0.2f),\n", LineHeightStyleClass)
