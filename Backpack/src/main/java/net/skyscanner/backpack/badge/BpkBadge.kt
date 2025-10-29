@@ -28,7 +28,9 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.ui.graphics.toArgb
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 
 open class BpkBadge @JvmOverloads constructor(
@@ -184,14 +186,29 @@ open class BpkBadge @JvmOverloads constructor(
         this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
         // set Text color
-        this.setTextColor(context.getColor(type.textColor))
+        val textColor: Int =
+            BpkConfiguration.badgeConfig?.inverseTextColor?.toArgb()?.takeIf { type == Type.Inverse } ?: context.getColor(
+                type.textColor,
+            )
+        this.setTextColor(textColor)
 
         // Set background
-        val bgColor = context.getColorStateList(type.bgColor)
-        if (type == Type.Outline) {
-            setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
-        } else {
-            setBackground(bgColor)
+        val defaultBgColour = BpkConfiguration.badgeConfig?.backgroundColor?.toArgb()?.let { ColorStateList.valueOf(it) }
+            ?: context.getColorStateList(type.bgColor)
+        when (type) {
+            Type.Outline -> {
+                setBackground(ColorStateList.valueOf(Color.TRANSPARENT), context.getColorStateList(type.bgColor))
+            }
+
+            Type.Strong, Type.Brand -> {
+                setBackground(
+                    context.getColorStateList(type.bgColor),
+                )
+            }
+
+            else -> {
+                setBackground(defaultBgColour)
+            }
         }
         this.gravity = Gravity.CENTER
 
@@ -209,11 +226,15 @@ open class BpkBadge @JvmOverloads constructor(
         } else {
             icon
         }
+        val tint: Int =
+            BpkConfiguration.badgeConfig?.inverseTextColor?.toArgb()?.takeIf { type == Type.Inverse } ?: context.getColor(
+                type.iconColor,
+            )
         currentIcon
             ?.mutate()
             ?.apply {
                 setBounds(0, 0, iconSize, iconSize)
-                setTint(context.getColor(type.iconColor))
+                setTint(tint)
                 setCompoundDrawablesRelative(this, null, null, null)
             }
     }

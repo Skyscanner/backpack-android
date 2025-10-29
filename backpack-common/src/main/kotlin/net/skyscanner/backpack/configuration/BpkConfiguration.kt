@@ -44,6 +44,12 @@ object BpkConfiguration {
         data object BpkCard : BpkExperimentalComponent()
 
         data object BpkChip : BpkExperimentalComponent()
+
+        data class BpkBadge(
+            val cornerRadius: Dp = 12.dp,
+            val backgroundColor: Color = Color.Transparent,
+            val inverseTextColor: Color = Color(0xFFFFFFFF),
+        ) : BpkExperimentalComponent()
     }
 
     private var _hasSet: Boolean = false
@@ -55,6 +61,7 @@ object BpkConfiguration {
         buttonConfig = null
         textConfig = null
         cardConfig = null
+        badgeConfig = null
 
         _hasSet = false
     }
@@ -64,6 +71,7 @@ object BpkConfiguration {
         buttonConfig: Boolean = false,
         textConfig: Boolean = false,
         cardConfig: Boolean = false,
+        badgeConfig: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -80,6 +88,9 @@ object BpkConfiguration {
         }
         if (cardConfig) {
             this.cardConfig = BpkExperimentalComponent.BpkCard
+        }
+        if (badgeConfig) {
+            this.badgeConfig = BpkExperimentalComponent.BpkBadge()
         }
     }
 
@@ -100,5 +111,7 @@ object BpkConfiguration {
         private set
 
     var cardConfig: BpkExperimentalComponent.BpkCard? = null
+        private set
+    var badgeConfig: BpkExperimentalComponent.BpkBadge? = null
         private set
 }
