@@ -40,8 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -61,6 +59,7 @@ import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.internal.BpkChipColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.compose.utils.toColor
 import net.skyscanner.backpack.configuration.BpkConfiguration.chipConfig
 
 @Composable
@@ -168,7 +167,7 @@ internal fun BpkChipImpl(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
         modifier = modifier
-            .height(chipConfig?.height?.let { with(LocalDensity.current) { it.toDp() } } ?: BpkSpacing.Xl)
+            .height(chipConfig?.height ?: BpkSpacing.Xl)
             .border(BorderStroke(BpkBorderSize.Sm, strokeColor), ChipShape)
             .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, ChipShape)
             .background(backgroundColor, ChipShape)
@@ -232,88 +231,88 @@ internal fun BpkChipImpl(
 private val BpkChipStyle.selectedBackgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.selectedBackgroundColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.corePrimary
-        BpkChipStyle.OnDark -> chipConfig?.selectedBackgroundColorOnDark?.toColor(LocalContext.current) ?: BpkChipColors.onDarkOnBackground
-        BpkChipStyle.OnImage -> chipConfig?.selectedBackgroundColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.corePrimary
+        BpkChipStyle.Default -> chipConfig?.selectedBackgroundColorDefault?.toColor() ?: BpkTheme.colors.corePrimary
+        BpkChipStyle.OnDark -> chipConfig?.selectedBackgroundColorOnDark?.toColor() ?: BpkChipColors.onDarkOnBackground
+        BpkChipStyle.OnImage -> chipConfig?.selectedBackgroundColorOnImage?.toColor() ?: BpkTheme.colors.corePrimary
     }
 
 private val BpkChipStyle.pressedBackgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.pressedBackgroundColorDefault?.toColor(LocalContext.current) ?: Color.Transparent
-        BpkChipStyle.OnDark -> chipConfig?.pressedBackgroundColorOnDark?.toColor(LocalContext.current) ?: Color.Transparent
-        BpkChipStyle.OnImage -> chipConfig?.pressedBackgroundColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.canvasContrast
+        BpkChipStyle.Default -> chipConfig?.pressedBackgroundColorDefault?.toColor() ?: Color.Transparent
+        BpkChipStyle.OnDark -> chipConfig?.pressedBackgroundColorOnDark?.toColor() ?: Color.Transparent
+        BpkChipStyle.OnImage -> chipConfig?.pressedBackgroundColorOnImage?.toColor() ?: BpkTheme.colors.canvasContrast
     }
 
 private val BpkChipStyle.disabledBackgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.disabledBackgroundColorDefault?.toColor(LocalContext.current) ?: BpkChipColors.disabledBackground
-        BpkChipStyle.OnDark -> chipConfig?.disabledBackgroundColorOnDark?.toColor(LocalContext.current) ?: BpkChipColors.disabledBackground
-        BpkChipStyle.OnImage -> chipConfig?.disabledBackgroundColorOnImage?.toColor(LocalContext.current) ?: BpkChipColors.disabledBackground
+        BpkChipStyle.Default -> chipConfig?.disabledBackgroundColorDefault?.toColor() ?: BpkChipColors.disabledBackground
+        BpkChipStyle.OnDark -> chipConfig?.disabledBackgroundColorOnDark?.toColor() ?: BpkChipColors.disabledBackground
+        BpkChipStyle.OnImage -> chipConfig?.disabledBackgroundColorOnImage?.toColor() ?: BpkChipColors.disabledBackground
     }
 
 private val BpkChipStyle.backgroundColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.backgroundColorDefault?.toColor(LocalContext.current) ?: Color.Transparent
-        BpkChipStyle.OnDark -> chipConfig?.backgroundColorOnDark?.toColor(LocalContext.current) ?: Color.Transparent
-        BpkChipStyle.OnImage -> chipConfig?.backgroundColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.surfaceDefault
+        BpkChipStyle.Default -> chipConfig?.backgroundColorDefault?.toColor() ?: Color.Transparent
+        BpkChipStyle.OnDark -> chipConfig?.backgroundColorOnDark?.toColor() ?: Color.Transparent
+        BpkChipStyle.OnImage -> chipConfig?.backgroundColorOnImage?.toColor() ?: BpkTheme.colors.surfaceDefault
     }
 
 private val BpkChipStyle.pressedStrokeColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.pressedStrokeColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.corePrimary
-        BpkChipStyle.OnDark -> chipConfig?.pressedStrokeColorOnDark?.toColor(LocalContext.current) ?: BpkChipColors.onDarkPressedStroke
-        BpkChipStyle.OnImage -> chipConfig?.pressedStrokeColorOnImage?.toColor(LocalContext.current) ?: Color.Transparent
+        BpkChipStyle.Default -> chipConfig?.pressedStrokeColorDefault?.toColor() ?: BpkTheme.colors.corePrimary
+        BpkChipStyle.OnDark -> chipConfig?.pressedStrokeColorOnDark?.toColor() ?: BpkChipColors.onDarkPressedStroke
+        BpkChipStyle.OnImage -> chipConfig?.pressedStrokeColorOnImage?.toColor() ?: Color.Transparent
     }
 
 private val BpkChipStyle.strokeColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.strokeColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.line
-        BpkChipStyle.OnDark -> chipConfig?.strokeColorOnDark?.toColor(LocalContext.current) ?: BpkTheme.colors.lineOnDark
-        BpkChipStyle.OnImage -> chipConfig?.strokeColorOnImage?.toColor(LocalContext.current) ?: Color.Transparent
+        BpkChipStyle.Default -> chipConfig?.strokeColorDefault?.toColor() ?: BpkTheme.colors.line
+        BpkChipStyle.OnDark -> chipConfig?.strokeColorOnDark?.toColor() ?: BpkTheme.colors.lineOnDark
+        BpkChipStyle.OnImage -> chipConfig?.strokeColorOnImage?.toColor() ?: Color.Transparent
     }
 
 private val BpkChipStyle.selectedContentColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.selectedContentColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.textOnDark
-        BpkChipStyle.OnDark -> chipConfig?.selectedContentColorOnDark?.toColor(LocalContext.current) ?: BpkTheme.colors.textPrimary
-        BpkChipStyle.OnImage -> chipConfig?.selectedContentColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.textOnDark
+        BpkChipStyle.Default -> chipConfig?.selectedContentColorDefault?.toColor() ?: BpkTheme.colors.textOnDark
+        BpkChipStyle.OnDark -> chipConfig?.selectedContentColorOnDark?.toColor() ?: BpkTheme.colors.textPrimary
+        BpkChipStyle.OnImage -> chipConfig?.selectedContentColorOnImage?.toColor() ?: BpkTheme.colors.textOnDark
     }
 
 private val BpkChipStyle.contentColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.contentColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.textPrimary
-        BpkChipStyle.OnDark -> chipConfig?.contentColorOnDark?.toColor(LocalContext.current) ?: BpkTheme.colors.textOnDark
-        BpkChipStyle.OnImage -> chipConfig?.contentColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.textPrimary
+        BpkChipStyle.Default -> chipConfig?.contentColorDefault?.toColor() ?: BpkTheme.colors.textPrimary
+        BpkChipStyle.OnDark -> chipConfig?.contentColorOnDark?.toColor() ?: BpkTheme.colors.textOnDark
+        BpkChipStyle.OnImage -> chipConfig?.contentColorOnImage?.toColor() ?: BpkTheme.colors.textPrimary
     }
 
 private val BpkChipStyle.pressedTrailingIconColor: Color
     @Composable
     get() = when (this) {
         BpkChipStyle.Default -> BpkTheme.colors.textPrimary
-        BpkChipStyle.OnDark -> chipConfig?.pressedTrailingIconColorOnDark?.toColor(LocalContext.current) ?: BpkTheme.colors.textPrimary
+        BpkChipStyle.OnDark -> chipConfig?.pressedTrailingIconColorOnDark?.toColor() ?: BpkTheme.colors.textPrimary
         BpkChipStyle.OnImage -> BpkTheme.colors.textPrimary
     }
 
 private val BpkChipStyle.dismissibleTrailingIconColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.dismissibleTrailingIconColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.textDisabledOnDark
-        BpkChipStyle.OnDark -> chipConfig?.dismissibleTrailingIconColorOnDark?.toColor(LocalContext.current) ?: BpkChipColors.onDarkOnDismissIcon
-        BpkChipStyle.OnImage -> chipConfig?.dismissibleTrailingIconColorOnImage?.toColor(LocalContext.current) ?: BpkTheme.colors.textDisabledOnDark
+        BpkChipStyle.Default -> chipConfig?.dismissibleTrailingIconColorDefault?.toColor() ?: BpkTheme.colors.textDisabledOnDark
+        BpkChipStyle.OnDark -> chipConfig?.dismissibleTrailingIconColorOnDark?.toColor() ?: BpkChipColors.onDarkOnDismissIcon
+        BpkChipStyle.OnImage -> chipConfig?.dismissibleTrailingIconColorOnImage?.toColor() ?: BpkTheme.colors.textDisabledOnDark
     }
 
 private val BpkChipStyle.dismissibleTrailingIconPressedColor: Color
     @Composable
     get() = when (this) {
-        BpkChipStyle.Default -> chipConfig?.dismissibleTrailingIconPressedColorDefault?.toColor(LocalContext.current) ?: BpkTheme.colors.textOnDark
-        BpkChipStyle.OnDark -> chipConfig?.dismissibleTrailingIconPressedColorOnDark?.toColor(LocalContext.current) ?: BpkTheme.colors.textPrimary
+        BpkChipStyle.Default -> chipConfig?.dismissibleTrailingIconPressedColorDefault?.toColor() ?: BpkTheme.colors.textOnDark
+        BpkChipStyle.OnDark -> chipConfig?.dismissibleTrailingIconPressedColorOnDark?.toColor() ?: BpkTheme.colors.textPrimary
         BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
     }
 
@@ -324,4 +323,5 @@ private val BpkChipType.icon: BpkIcon?
         BpkChipType.Dismiss -> BpkIcon.CloseCircle
     }
 
-private val ChipShape = RoundedCornerShape(chipConfig?.cornerRadius ?: BpkBorderRadius.Sm)
+private val ChipShape
+    get() = RoundedCornerShape(chipConfig?.cornerRadius ?: BpkBorderRadius.Sm)

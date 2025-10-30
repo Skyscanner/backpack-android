@@ -22,11 +22,13 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.util.ColorPair
 
 @Composable
 internal fun InteractionSource.animateAsColor(
@@ -50,5 +52,9 @@ internal fun InteractionSource.animateAsColor(
 @Composable
 internal fun dynamicColorOf(light: Color, dark: Color): Color =
     if (BpkTheme.colors.isLight) light else dark
+
+@Composable
+internal fun ColorPair.toColor(): Color =
+    if (isSystemInDarkTheme()) darkColor else lightColor
 
 internal fun Color.toRippleAlpha(): RippleAlpha = RippleAlpha(alpha, alpha, alpha, alpha)

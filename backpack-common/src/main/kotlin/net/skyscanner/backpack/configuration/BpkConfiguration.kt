@@ -20,9 +20,7 @@ package net.skyscanner.backpack.configuration
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import net.skyscanner.backpack.util.ColorPair
 import net.skyscanner.backpack.util.InternalBackpackApi
 
@@ -48,7 +46,7 @@ object BpkConfiguration {
 
         data class BpkChip(
             val cornerRadius: Dp = 999.dp,
-            val height: TextUnit = 32.sp,
+            val height: Dp = 36.dp,
 
             // Default
             val contentColorDefault: ColorPair = ColorPair(0xFF161616, 0xFFFFFFFF),

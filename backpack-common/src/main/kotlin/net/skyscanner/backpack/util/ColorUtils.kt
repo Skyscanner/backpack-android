@@ -30,10 +30,6 @@ data class ColorPair(
     val lightColor: Color = Color(lightColorLong)
     val darkColor: Color = Color(darkColorLong)
 
-    fun toColor(context: Context): Color {
-        return (if (context.isDarkMode()) darkColor else lightColor)
-    }
-
     fun toArgb(context: Context): Int {
         return (if (context.isDarkMode()) darkColor else lightColor).toArgb()
     }
