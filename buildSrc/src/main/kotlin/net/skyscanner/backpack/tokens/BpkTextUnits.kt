@@ -53,9 +53,9 @@ object BpkTextUnit {
 
     sealed class Format<Output> : BpkTransformer<BpkTextUnits, Output> {
 
-        data class Compose(val namespace: String, val internal: Boolean = false) : Format<TypeSpec>() {
+        data class Compose(val namespace: String, val internal: Boolean = false, val customTokens: Map<String, Double> = emptyMap()) : Format<TypeSpec>() {
             override fun invoke(source: BpkTextUnits): TypeSpec =
-                toCompose(source, namespace, internal)
+                toCompose(source, namespace, internal, customTokens)
         }
 
         object Xml : Format<String>() {
@@ -102,11 +102,16 @@ private fun toCompose(
     source: BpkTextUnits,
     namespace: String,
     internal: Boolean,
-): TypeSpec =
-    TypeSpec.objectBuilder(namespace)
+    customTokens: Map<String, Double> = emptyMap(),
+): TypeSpec {
+    // Combine auto-generated tokens with custom VDL2 tokens
+    val allTokens = source.toMutableMap().apply {
+        putAll(customTokens)
+    }
+    return TypeSpec.objectBuilder(namespace)
         .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
         .addProperties(
-            source.map { (name, value) ->
+            allTokens.map { (name, value) ->
                 PropertySpec
                     .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_')), TextUnitClass)
                     .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
@@ -126,6 +131,7 @@ private fun toCompose(
             },
         )
         .build()
+}
 
 private fun toXml(
     source: BpkTextUnits,

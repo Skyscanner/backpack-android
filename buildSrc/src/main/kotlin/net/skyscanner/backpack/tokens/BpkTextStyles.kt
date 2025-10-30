@@ -192,6 +192,9 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
                 .initializer(name.toSemanticName())
                 .build()
 
+        // Generate companion object with VDL2 function
+        val companionObject = createVdl2CompanionObject(className)
+
         return TypeSpec.classBuilder(className)
             .primaryConstructor(
                 FunSpec.constructorBuilder()
@@ -202,10 +205,127 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
             .addFunction(source.toConstructorFunction())
             .addProperties(map(BpkTextStyleModel::toProperty))
             .addModifiers(KModifier.DATA)
+            .addType(companionObject)
             .build()
     }
 
     return source.toTextStyleClass()
+}
+
+private fun createVdl2CompanionObject(typographyClassName: String): TypeSpec {
+    val defaultFontFamily = "defaultFontFamily"
+    val bpkTypographyClass = ClassName("net.skyscanner.backpack.compose.tokens", typographyClassName)
+
+    fun String.toSemanticName() =
+        CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.replace('-', '_'))
+
+    val vdl2Overrides = listOf(
+        BpkTextStyleModel(
+            name = "HERO_5",
+            fontSize = Token("XXXXL", "48.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXXXL", "56.0.sp"),
+            letterSpacing = Token("VDL_HERO", "-(0.03).em"),
+        ),
+        BpkTextStyleModel(
+            name = "HEADING_1",
+            fontSize = Token("XXXL", "40.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXXL", "48.0.sp"),
+            letterSpacing = Token("VDL_HEADING_1", "-(0.03).em"),
+        ),
+        BpkTextStyleModel(
+            name = "HEADING_2",
+            fontSize = Token("XXL", "32.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XXL", "40.0.sp"),
+            letterSpacing = Token("VDL_HEADING_2", "-(0.025).em"),
+        ),
+        BpkTextStyleModel(
+            name = "HEADING_3",
+            fontSize = Token("XL", "24.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("XL_TIGHT", "28.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+        BpkTextStyleModel(
+            name = "HEADING_4",
+            fontSize = Token("LG", "20.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("LG_TIGHT", "24.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+        BpkTextStyleModel(
+            name = "HEADING_5",
+            fontSize = Token("BASE", "16.0.sp"),
+            fontWeight = Token("BLACK", "FontWeight.Black"),
+            lineHeight = Token("BASE_TIGHT", "20.0.sp"),
+            letterSpacing = Token("VDL_HEADING_3", "-(0.02).em"),
+        ),
+    )
+
+    fun String.wrapIfDigits() = if (first().isDigit()) {
+        "`$this`"
+    } else this
+
+    fun Token.toName() =
+        CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_'))
+            .wrapIfDigits()
+
+    val codeBlockBuilder = CodeBlock.builder()
+    codeBlockBuilder.add("return %T(\n", bpkTypographyClass)
+    codeBlockBuilder.indent()
+    codeBlockBuilder.add("$defaultFontFamily\n")
+    codeBlockBuilder.unindent()
+    codeBlockBuilder.add(").copy(\n")
+    codeBlockBuilder.indent()
+
+    vdl2Overrides.forEachIndexed { index, style ->
+        codeBlockBuilder.add("${style.name.toSemanticName()} = %T(\n", TextStyleClass)
+        codeBlockBuilder.indent()
+        codeBlockBuilder.add("fontWeight = %T.Black,\n", FontWeightClass)
+        codeBlockBuilder.add("fontSize = %T.${style.fontSize.toName()},\n", BpkFontSizeClass)
+        codeBlockBuilder.add("lineHeight = %T.${style.lineHeight.toName()},\n", BpkLineHeightClass)
+        codeBlockBuilder.add("letterSpacing = %T.${style.letterSpacing!!.toName()},\n", BpkLetterSpacingClass)
+        codeBlockBuilder.add("fontFamily = $defaultFontFamily,\n")
+        codeBlockBuilder.add("lineHeightStyle = %T(\n", LineHeightStyleClass)
+        codeBlockBuilder.indent()
+        codeBlockBuilder.add("alignment = %T.Alignment(topRatio = 0.2f),\n", LineHeightStyleClass)
+        codeBlockBuilder.add("trim = %T.Trim.None,\n", LineHeightStyleClass)
+        codeBlockBuilder.unindent()
+        codeBlockBuilder.add("),\n")
+        codeBlockBuilder.unindent()
+        codeBlockBuilder.add(")")
+        if (index < vdl2Overrides.size - 1) {
+            codeBlockBuilder.add(",\n")
+        } else {
+            codeBlockBuilder.add(",\n")
+        }
+    }
+
+    codeBlockBuilder.unindent()
+    codeBlockBuilder.add(")\n")
+
+    val vdl2Function = FunSpec.builder("VDL2")
+        .addKdoc("""
+            VDL2 typography with enhanced letter spacing and optimized styles.
+            Updated styles: Hero 5, Heading 1-5 with enhanced letter spacing and Black font weight
+            Note: VDL2 does not include Display 7, Editorial 4-6 as they don't map to existing properties
+        """.trimIndent())
+        .addModifiers(KModifier.PUBLIC)
+        .addParameter(
+            ParameterSpec
+                .builder(defaultFontFamily, FontFamilyClass)
+                .defaultValue("%T.SansSerif", FontFamilyClass)
+                .build(),
+        )
+        .returns(bpkTypographyClass)
+        .addCode(codeBlockBuilder.build())
+        .build()
+
+    return TypeSpec.companionObjectBuilder()
+        .addFunction(vdl2Function)
+        .build()
 }
 
 private fun toXml(source: BpkTextStyles): String {
@@ -244,5 +364,36 @@ ${content.joinToString("\n")}
   </style>"""
     }
 
-    return textStylesDeclaration + source.joinToString("\n") { it.toXml() }
+    // VDL2 enhanced typography styles with improved letter spacing and line heights
+    fun createVdlStyle(
+        baseName: String,
+        fontSize: String,
+        letterSpacing: Double,
+        lineHeight: Int,
+        fontFamily: String = "Base",
+    ): String {
+        val content = listOfNotNull(
+            "    <item name=\"android:fontFamily\">?bpkFontFamily$fontFamily</item>",
+            "    <item name=\"android:textColor\">@color/bpkTextPrimary</item>",
+            "    <item name=\"android:textSize\">@dimen/bpkText${fontSize}Size</item>",
+            "    <item name=\"lineHeight\">${lineHeight}sp</item>",
+            "    <item name=\"android:letterSpacing\">$letterSpacing</item>",
+        )
+        return """
+  <style name="bpkText${baseName}Vdl">
+${content.joinToString("\n")}
+  </style>"""
+    }
+
+    val vdlStyles = listOf(
+        // VDL2 Typography styles with enhanced letter spacing and line heights
+        createVdlStyle("Hero5", "Xxxxl", -0.03, 56, "Black"),
+        createVdlStyle("Heading1", "Xxxl", -0.03, 48, "Black"),
+        createVdlStyle("Heading2", "Xxl", -0.025, 40, "Black"),
+        createVdlStyle("Heading3", "Xl", -0.02, 28, "Black"),
+        createVdlStyle("Heading4", "Lg", -0.02, 24, "Black"),
+        createVdlStyle("Heading5", "Base", -0.02, 20, "Black"),
+    )
+
+    return textStylesDeclaration + source.joinToString("\n") { it.toXml() } + "\n\n  <!-- VDL2 Enhanced Typography Styles -->" + vdlStyles.joinToString("\n")
 }
