@@ -23,9 +23,19 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.ParameterizedRobolectricTestRunner
 
-class BpkCardTest : BpkSnapshotTest() {
+@RunWith(ParameterizedRobolectricTestRunner::class)
+class BpkCardTest(val vdl2Enabled: Boolean) :
+    BpkSnapshotTest(if (vdl2Enabled) listOf("VDL2") else listOf("Default")) {
+    fun setup() {
+        // Ensure we start from a known state
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(cardConfig = vdl2Enabled)
+    }
 
     @Test
     fun smallCorner() {
@@ -62,6 +72,7 @@ class BpkCardTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default)
     fun unfocused() {
         val card = BpkCardView(testContext)
         val text = TextView(testContext)
@@ -91,5 +102,12 @@ class BpkCardTest : BpkSnapshotTest() {
         card.addView(text)
         card.elevationLevel = BpkCardView.ElevationLevel.NONE
         snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    companion object {
+
+        @JvmStatic
+        @ParameterizedRobolectricTestRunner.Parameters
+        fun flavours(): List<Boolean> = listOf(true, false)
     }
 }

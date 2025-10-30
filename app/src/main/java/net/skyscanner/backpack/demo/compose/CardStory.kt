@@ -46,7 +46,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun CardStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .background(BpkTheme.colors.line)
+            .background(BpkTheme.colors.canvasContrast)
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
