@@ -160,6 +160,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         SharedPreferences.saveTypographySet(this, typographySet)
+        BpkConfiguration.clearConfigs()
         BpkConfiguration.setConfigs(
             typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
         )

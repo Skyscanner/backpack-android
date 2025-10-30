@@ -1,4 +1,3 @@
-package net.skyscanner.backpack.demo.ui
 /*
 * Backpack for Android - Skyscanner's Design System
 *
@@ -16,6 +15,8 @@ package net.skyscanner.backpack.demo.ui
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
+package net.skyscanner.backpack.demo.ui
 
 import android.content.Context
 import android.util.AttributeSet

@@ -45,7 +45,11 @@ class SharedPreferences {
                     Context.MODE_PRIVATE,
                 )
                 .getInt(TYPOGRAPHY_SET, BpkConfiguration.BpkTypographySet.DEFAULT.ordinal)
-            return BpkConfiguration.BpkTypographySet.entries[ordinal]
+            return if (ordinal in 0 until BpkConfiguration.BpkTypographySet.entries.size) {
+                BpkConfiguration.BpkTypographySet.entries[ordinal]
+            } else {
+                BpkConfiguration.BpkTypographySet.DEFAULT
+            }
         }
 
         fun saveTypographySet(context: Context, typographySet: BpkConfiguration.BpkTypographySet) {
