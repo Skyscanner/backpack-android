@@ -29,7 +29,7 @@ class BpkConfigurationTest {
     fun `setConfigs sets chipConfig when called first time then throws the second time`() {
         BpkConfiguration.setConfigs(chipConfig = true)
         assertNotNull(BpkConfiguration.chipConfig)
-        assertEquals(BpkConfiguration.chipConfig, BpkConfiguration.BpkExperimentalComponent.BpkChip)
+        assertEquals(BpkConfiguration.chipConfig, BpkConfiguration.BpkExperimentalComponent.BpkChip())
         val result = runCatching { BpkConfiguration.setConfigs(buttonConfig = true) }
         assertTrue(result.exceptionOrNull() is IllegalStateException)
     }
