@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -37,7 +37,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.PriceTag
 import net.skyscanner.backpack.compose.tokens.TickCircle
-import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.BadgeComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
@@ -59,6 +58,7 @@ private fun BadgeRow(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = modifier
             .fillMaxWidth()
             .background(
@@ -67,8 +67,7 @@ private fun BadgeRow(
                     else -> Color.Transparent
                 },
             )
-            .padding(vertical = BpkSpacing.Sm)
-            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
+            .padding(BpkSpacing.Md),
     ) {
 
         if (type !in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive)) {
@@ -94,18 +93,10 @@ private fun BadgeRow(
                 BpkBadgeType.Warning,
                 BpkBadgeType.Destructive,
                 -> null
+
                 BpkBadgeType.Brand -> BpkIcon.PriceTag
                 else -> BpkIcon.TickCircle
             },
-        )
-
-        BpkBadge(
-            text = type.toString(),
-            icon = painterResource(id = R.drawable.sample_icon),
-            modifier = Modifier
-                .weight(1f)
-                .wrapContentWidth(align = Alignment.CenterHorizontally),
-            type = type,
         )
     }
 }
