@@ -20,7 +20,10 @@ package net.skyscanner.backpack.configuration
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import net.skyscanner.backpack.util.ColorPair
 import net.skyscanner.backpack.util.InternalBackpackApi
 
 object BpkConfiguration {
@@ -43,7 +46,46 @@ object BpkConfiguration {
 
         data object BpkCard : BpkExperimentalComponent()
 
-        data object BpkChip : BpkExperimentalComponent()
+        data class BpkChip(
+            val cornerRadius: Dp = 999.dp,
+            val height: TextUnit = 32.sp,
+
+            // Default
+            val contentColorDefault: ColorPair = ColorPair(0xFF161616, 0xFFFFFFFF),
+            val backgroundColorDefault: ColorPair = ColorPair(0x00000000, 0x00000000),
+            val strokeColorDefault: ColorPair = ColorPair(0xFFC1C7CF, 0x33FFFFFF),
+            val disabledBackgroundColorDefault: ColorPair = ColorPair(0xFFE0E3E5, 0xFF0B121D),
+            val pressedBackgroundColorDefault: ColorPair = ColorPair(0x00000000, 0xFF131D2B),
+            val pressedStrokeColorDefault: ColorPair = ColorPair(0xFF0062E3, 0xFF84E9FF),
+            val selectedBackgroundColorDefault: ColorPair = ColorPair(0xFF0062E3, 0xFF84E9FF),
+            val selectedContentColorDefault: ColorPair = ColorPair(0xFFFFFFFF, 0xFF010913),
+            val dismissibleTrailingIconColorDefault: ColorPair = ColorPair(0xFFFFFFFF, 0xFF010913),
+            val dismissibleTrailingIconPressedColorDefault: ColorPair = ColorPair(0xFFFFFFFF, 0xFF010913),
+
+            // On Dark
+            val contentColorOnDark: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+            val backgroundColorOnDark: ColorPair = ColorPair(0xFF154679, 0xFF024DAF),
+            val strokeColorOnDark: ColorPair = ColorPair(0x00000000, 0x00000000),
+            val disabledBackgroundColorOnDark: ColorPair = ColorPair(0xFFE0E3E5, 0xFF0B121D),
+            val pressedBackgroundColorOnDark: ColorPair = ColorPair(0xFF154679, 0xFF024DAF),
+            val pressedStrokeColorOnDark: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+            val pressedTrailingIconColorOnDark: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+            val selectedBackgroundColorOnDark: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+            val selectedContentColorOnDark: ColorPair = ColorPair(0xFF161616, 0xFF161616),
+            val dismissibleTrailingIconColorOnDark: ColorPair = ColorPair(0xFF161616, 0xFF161616),
+            val dismissibleTrailingIconPressedColorOnDark: ColorPair = ColorPair(0xFF161616, 0xFF010913),
+
+            // On Image
+            val contentColorOnImage: ColorPair = ColorPair(0xFF161616, 0xFFFFFFFF),
+            val backgroundColorOnImage: ColorPair = ColorPair(0xFFFFFFFF, 0xFF131D2B),
+            val strokeColorOnImage: ColorPair = ColorPair(0x00000000, 0x00000000),
+            val disabledBackgroundColorOnImage: ColorPair = ColorPair(0xFFE0E3E5, 0xFF0B121D),
+            val pressedBackgroundColorOnImage: ColorPair = ColorPair(0xFFEFF3F8, 0xFF131D2B),
+            val pressedStrokeColorOnImage: ColorPair = ColorPair(0x00000000, 0x00000000),
+            val selectedBackgroundColorOnImage: ColorPair = ColorPair(0xFF05203C, 0xFF054184),
+            val selectedContentColorOnImage: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+            val dismissibleTrailingIconColorOnImage: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
+        ) : BpkExperimentalComponent()
 
         data class BpkBadge(
             val backgroundColor: Color = Color.Transparent,
@@ -77,7 +119,7 @@ object BpkConfiguration {
         }
         _hasSet = true
         if (chipConfig) {
-            this.chipConfig = BpkExperimentalComponent.BpkChip
+            this.chipConfig = BpkExperimentalComponent.BpkChip()
         }
         if (buttonConfig) {
             this.buttonConfig = BpkExperimentalComponent.BpkButton()

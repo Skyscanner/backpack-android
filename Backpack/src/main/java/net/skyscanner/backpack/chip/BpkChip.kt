@@ -23,9 +23,11 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.ui.unit.Density
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.internal.BpkChipAppearance
 import net.skyscanner.backpack.chip.internal.BpkChipAppearances
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -72,7 +74,9 @@ open class BpkChip @JvmOverloads constructor(
         this.textStyle = TextStyle.Footnote
         this.setTextColor(appearance.text)
         this.isSingleLine = true
-        this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
+        this.height = BpkConfiguration.chipConfig?.height?.let {
+            with(Density(context)) { it.toPx().toInt() }
+        } ?: resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
         initialize(attrs, defStyleAttr)
     }
