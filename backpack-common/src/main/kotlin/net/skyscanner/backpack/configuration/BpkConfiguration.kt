@@ -46,7 +46,6 @@ object BpkConfiguration {
         data object BpkChip : BpkExperimentalComponent()
 
         data class BpkBadge(
-            val cornerRadius: Dp = 12.dp,
             val backgroundColor: Color = Color.Transparent,
             val inverseTextColor: Color = Color(0xFFFFFFFF),
         ) : BpkExperimentalComponent()

@@ -196,19 +196,13 @@ open class BpkBadge @JvmOverloads constructor(
         val defaultBgColour = BpkConfiguration.badgeConfig?.backgroundColor?.toArgb()?.let { ColorStateList.valueOf(it) }
             ?: context.getColorStateList(type.bgColor)
         when (type) {
-            Type.Outline -> {
-                setBackground(ColorStateList.valueOf(Color.TRANSPARENT), context.getColorStateList(type.bgColor))
-            }
+            Type.Outline -> setBackground(
+                solid = ColorStateList.valueOf(Color.TRANSPARENT),
+                stroke = context.getColorStateList(type.bgColor),
+            )
 
-            Type.Strong, Type.Brand -> {
-                setBackground(
-                    context.getColorStateList(type.bgColor),
-                )
-            }
-
-            else -> {
-                setBackground(defaultBgColour)
-            }
+            Type.Strong, Type.Brand -> setBackground(context.getColorStateList(type.bgColor))
+            else -> setBackground(defaultBgColour)
         }
         this.gravity = Gravity.CENTER
 
