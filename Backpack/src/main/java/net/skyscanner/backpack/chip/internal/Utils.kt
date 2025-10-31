@@ -32,9 +32,8 @@ internal fun chipRoundedRect(
     borderWidth: Int,
 ): Drawable = GradientDrawable().apply {
     shape = GradientDrawable.RECTANGLE
-    cornerRadii = FloatArray(8) {
-        BpkConfiguration.chipConfig?.let { Float.MAX_VALUE }
-            ?: context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
+    cornerRadii = FloatArray(8).apply {
+        fill(BpkConfiguration.chipConfig?.let { Float.MAX_VALUE } ?: context.resources.getDimension(R.dimen.bpkBorderRadiusSm))
     }
     color = background
     setStroke(borderWidth, border)
