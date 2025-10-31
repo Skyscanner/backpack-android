@@ -40,7 +40,9 @@ object BpkConfiguration {
             val largePaddingHorizontal: Dp = 24.dp, // Based on Figma design
         ) : BpkExperimentalComponent()
 
-        data object BpkCard : BpkExperimentalComponent()
+        data class BpkCard(
+            val defaultElevation: Float = 0.0f,
+        ) : BpkExperimentalComponent()
 
         data class BpkChip(
             val cornerRadius: Dp = 999.dp,
@@ -129,7 +131,7 @@ object BpkConfiguration {
             this.typographySet = BpkTypographySet.VDL_2
         }
         if (cardConfig) {
-            this.cardConfig = BpkExperimentalComponent.BpkCard
+            this.cardConfig = BpkExperimentalComponent.BpkCard()
         }
         if (badgeConfig) {
             this.badgeConfig = BpkExperimentalComponent.BpkBadge()

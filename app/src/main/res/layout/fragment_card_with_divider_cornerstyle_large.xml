@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/App.Story"
+    android:background="@color/bpkCanvasContrast"
     android:padding="0dp">
 
     <net.skyscanner.backpack.card.BpkCardView

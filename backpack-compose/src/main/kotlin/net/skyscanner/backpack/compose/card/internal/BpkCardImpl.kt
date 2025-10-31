@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @Composable
 internal inline fun CardContent(
@@ -78,7 +79,7 @@ internal fun cardElevation(elevation: BpkCardElevation): CardElevation {
         targetValue = when (elevation) {
             BpkCardElevation.None -> 0.dp
             BpkCardElevation.Focus -> BpkElevation.Xl
-            BpkCardElevation.Default -> BpkElevation.Sm
+            BpkCardElevation.Default -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
         },
         label = "BpkCard elevation",
     )
