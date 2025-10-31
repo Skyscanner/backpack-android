@@ -40,7 +40,7 @@ object BpkConfiguration {
         ) : BpkExperimentalComponent()
 
         data class BpkCard(
-            val defaultElevation: Dp = 0.dp,
+            val defaultElevation: Float = 0.0f,
         ) : BpkExperimentalComponent()
 
         data object BpkChip : BpkExperimentalComponent()

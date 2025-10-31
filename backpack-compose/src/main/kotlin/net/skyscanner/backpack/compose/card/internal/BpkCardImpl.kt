@@ -79,7 +79,7 @@ internal fun cardElevation(elevation: BpkCardElevation): CardElevation {
         targetValue = when (elevation) {
             BpkCardElevation.None -> 0.dp
             BpkCardElevation.Focus -> BpkElevation.Xl
-            BpkCardElevation.Default -> BpkConfiguration.cardConfig?.defaultElevation ?: BpkElevation.Sm
+            BpkCardElevation.Default -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
         },
         label = "BpkCard elevation",
     )

@@ -61,8 +61,7 @@ open class BpkCardView @JvmOverloads constructor(
         fun toDimension(context: Context): Float =
             when (this) {
                 NONE -> 0f
-                DEFAULT -> BpkConfiguration.cardConfig?.defaultElevation?.value?.times(context.resources.displayMetrics.density)
-                    ?: context.resources.getDimension(R.dimen.bpkElevationSm)
+                DEFAULT -> BpkConfiguration.cardConfig?.defaultElevation ?: context.resources.getDimension(R.dimen.bpkElevationSm)
 
                 FOCUSED -> context.resources.getDimension(R.dimen.bpkElevationLg)
             }
