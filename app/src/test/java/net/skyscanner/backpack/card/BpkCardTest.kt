@@ -24,6 +24,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.configuration.BpkConfiguration
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -31,6 +32,8 @@ import org.robolectric.ParameterizedRobolectricTestRunner
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BpkCardTest(val vdl2Enabled: Boolean) :
     BpkSnapshotTest(if (vdl2Enabled) listOf("VDL2") else listOf("Default")) {
+
+    @Before
     fun setup() {
         // Ensure we start from a known state
         BpkConfiguration.clearConfigs()
