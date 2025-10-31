@@ -26,6 +26,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.internal.BpkChipAppearance
 import net.skyscanner.backpack.chip.internal.BpkChipAppearances
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -72,7 +73,9 @@ open class BpkChip @JvmOverloads constructor(
         this.textStyle = TextStyle.Footnote
         this.setTextColor(appearance.text)
         this.isSingleLine = true
-        this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
+        this.height = BpkConfiguration.chipConfig?.height?.let {
+            (it.value * context.resources.displayMetrics.density).toInt()
+        } ?: resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
         initialize(attrs, defStyleAttr)
     }

@@ -27,6 +27,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.BpkChip
+import net.skyscanner.backpack.configuration.BpkConfiguration.chipConfig
 import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.use
 
@@ -93,16 +94,18 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.bpkCorePrimary)
-        override var backgroundColor: Int = Color.TRANSPARENT
-        override var pressedBackgroundColor: Int = Color.TRANSPARENT
-        override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
+        override var selectedBackgroundColor: Int = chipConfig?.selectedBackgroundColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkCorePrimary)
+        override var backgroundColor: Int = chipConfig?.backgroundColorDefault?.toArgb(context) ?: Color.TRANSPARENT
+        override var pressedBackgroundColor: Int = chipConfig?.pressedBackgroundColorDefault?.toArgb(context) ?: Color.TRANSPARENT
+        override var textColor: Int = chipConfig?.contentColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkTextPrimary)
         override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var dismissibleIconColor: Int = context.getColor(R.color.bpkTextDisabledOnDark)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
-        override var strokeColor: Int = context.getColor(R.color.bpkLine)
-        override var pressedStrokeColor: Int = context.getColor(R.color.bpkCorePrimary)
+        override var selectedTextColor: Int = chipConfig?.selectedContentColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkTextOnDark)
+        override var dismissibleIconColor: Int =
+            chipConfig?.dismissibleTrailingIconColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkTextDisabledOnDark)
+        override var disabledBackgroundColor: Int =
+            chipConfig?.disabledBackgroundColorDefault?.toArgb(context) ?: context.getColor(R.color.__privateChipDisabledBackground)
+        override var strokeColor: Int = chipConfig?.strokeColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkLine)
+        override var pressedStrokeColor: Int = chipConfig?.pressedStrokeColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkCorePrimary)
         override val style = BpkChip.Style.Default
 
         init {
@@ -126,16 +129,20 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipOnDarkOnBackground)
-        override var backgroundColor: Int = Color.TRANSPARENT
-        override var pressedBackgroundColor: Int = Color.TRANSPARENT
-        override var textColor: Int = context.getColor(R.color.bpkTextOnDark)
+        override var selectedBackgroundColor: Int =
+            chipConfig?.selectedBackgroundColorOnDark?.toArgb(context) ?: context.getColor(R.color.__privateChipOnDarkOnBackground)
+        override var backgroundColor: Int = chipConfig?.backgroundColorOnDark?.toArgb(context) ?: Color.TRANSPARENT
+        override var pressedBackgroundColor: Int = chipConfig?.pressedBackgroundColorOnDark?.toArgb(context) ?: Color.TRANSPARENT
+        override var textColor: Int = chipConfig?.contentColorOnDark?.toArgb(context) ?: context.getColor(R.color.bpkTextOnDark)
         override var pressedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var dismissibleIconColor: Int = context.getColor(R.color.__privateChipOnDarkOnDismissIcon)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
-        override var strokeColor: Int = context.getColor(R.color.bpkLineOnDark)
-        override var pressedStrokeColor: Int = context.getColor(R.color.__privateChipOnDarkPressedStroke)
+        override var selectedTextColor: Int = chipConfig?.selectedContentColorOnDark?.toArgb(context) ?: context.getColor(R.color.bpkTextPrimary)
+        override var dismissibleIconColor: Int =
+            chipConfig?.dismissibleTrailingIconColorOnDark?.toArgb(context) ?: context.getColor(R.color.__privateChipOnDarkOnDismissIcon)
+        override var disabledBackgroundColor: Int =
+            chipConfig?.disabledBackgroundColorOnDark?.toArgb(context) ?: context.getColor(R.color.__privateChipDisabledBackground)
+        override var strokeColor: Int = chipConfig?.strokeColorOnDark?.toArgb(context) ?: context.getColor(R.color.bpkLineOnDark)
+        override var pressedStrokeColor: Int =
+            chipConfig?.pressedStrokeColorOnDark?.toArgb(context) ?: context.getColor(R.color.__privateChipOnDarkPressedStroke)
         override val style = BpkChip.Style.OnDark
 
         init {
@@ -159,16 +166,18 @@ internal sealed class BpkChipAppearances(private val context: Context) : BpkChip
             typedArray?.recycle()
         }
 
-        override var selectedBackgroundColor: Int = context.getColor(R.color.bpkCorePrimary)
-        override var backgroundColor: Int = context.getColor(R.color.bpkSurfaceDefault)
-        override var pressedBackgroundColor: Int = context.getColor(R.color.bpkSurfaceContrast)
-        override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
+        override var selectedBackgroundColor: Int = chipConfig?.selectedBackgroundColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkCorePrimary)
+        override var backgroundColor: Int = chipConfig?.backgroundColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkSurfaceDefault)
+        override var pressedBackgroundColor: Int = chipConfig?.pressedBackgroundColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkSurfaceContrast)
+        override var textColor: Int = chipConfig?.contentColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkTextPrimary)
         override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-        override var selectedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
-        override var dismissibleIconColor: Int = context.getColor(R.color.bpkTextDisabledOnDark)
-        override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
-        override var strokeColor: Int = Color.TRANSPARENT
-        override var pressedStrokeColor: Int = Color.TRANSPARENT
+        override var selectedTextColor: Int = chipConfig?.selectedContentColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkTextOnDark)
+        override var dismissibleIconColor: Int =
+            chipConfig?.dismissibleTrailingIconColorOnImage?.toArgb(context) ?: context.getColor(R.color.bpkTextDisabledOnDark)
+        override var disabledBackgroundColor: Int =
+            chipConfig?.disabledBackgroundColorOnImage?.toArgb(context) ?: context.getColor(R.color.__privateChipDisabledBackground)
+        override var strokeColor: Int = chipConfig?.strokeColorOnImage?.toArgb(context) ?: Color.TRANSPARENT
+        override var pressedStrokeColor: Int = chipConfig?.pressedStrokeColorOnImage?.toArgb(context) ?: Color.TRANSPARENT
         override val style = BpkChip.Style.OnImage
 
         init {
