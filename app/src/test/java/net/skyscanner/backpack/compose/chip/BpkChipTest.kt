@@ -20,13 +20,27 @@ package net.skyscanner.backpack.compose.chip
 
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Deals
+import net.skyscanner.backpack.configuration.BpkConfiguration
+import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.ParameterizedRobolectricTestRunner
 
-class BpkChipTest : BpkSnapshotTest() {
+@RunWith(ParameterizedRobolectricTestRunner::class)
+class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first, "VDL2".takeIf { flavour.second })) {
+
+    private val vdl2 = flavour.second
+
+    @Before
+    fun setup() {
+        // Ensure we start from a known state
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(chipConfig = vdl2)
+    }
 
     @Test
     fun default() = snap {
@@ -54,54 +68,6 @@ class BpkChipTest : BpkSnapshotTest() {
     fun disabled() {
         snap {
             BpkChip(text = "Chip", enabled = false)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun notSelected_OnDark() {
-        snap(background = { BpkTheme.colors.surfaceContrast }) {
-            BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun selected_OnDark() {
-        snap(background = { BpkTheme.colors.surfaceContrast }) {
-            BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun disabled_OnDark() {
-        snap(background = { BpkTheme.colors.surfaceContrast }) {
-            BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun notSelected_OnImage() {
-        snap(background = { BpkTheme.colors.coreAccent }) {
-            BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnImage)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun selected_OnImage() {
-        snap(background = { BpkTheme.colors.coreAccent }) {
-            BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnImage)
-        }
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun disabled_OnImage() {
-        snap(background = { BpkTheme.colors.coreAccent }) {
-            BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnImage)
         }
     }
 
@@ -158,4 +124,18 @@ class BpkChipTest : BpkSnapshotTest() {
             BpkDropdownChip(text = "Chip", icon = BpkIcon.Deals, enabled = false)
         }
     }
+
+    companion object {
+
+        @JvmStatic
+        @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
+        fun flavours(): List<Pair<BpkChip.Style, Boolean>> = BpkChip.Style.entries.flatMap { style ->
+            listOf(
+                Pair(style, true),
+                Pair(style, false),
+            )
+        }
+    }
 }
+
+private typealias Flavor = Pair<BpkChip.Style, Boolean>
