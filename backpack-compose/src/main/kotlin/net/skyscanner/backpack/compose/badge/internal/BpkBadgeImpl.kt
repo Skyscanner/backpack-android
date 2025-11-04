@@ -67,7 +67,7 @@ internal fun BpkBadgeImpl(
         BpkText(
             text = text,
             color = contentColor,
-            style = BpkTheme.typography.footnote,
+            style = BpkConfiguration.badgeConfig?.let { BpkTheme.typography.caption } ?: BpkTheme.typography.footnote,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
