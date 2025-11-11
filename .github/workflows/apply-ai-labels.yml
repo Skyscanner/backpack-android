@@ -1,0 +1,270 @@
+name: Apply AI Work Labels
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  apply-labels:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all commits to analyze entire PR
+
+      - name: Extract labels from all commits
+        id: extract
+        run: |
+          echo "🔍 Analyzing all commits in PR..."
+
+          # Get base and head refs
+          BASE_REF="origin/${{ github.base_ref }}"
+          HEAD_REF="${{ github.head_ref }}"
+
+          echo "📊 Commit range: $BASE_REF..$HEAD_REF"
+
+          # Get all commits in PR
+          COMMIT_COUNT=$(git rev-list --count $BASE_REF..$HEAD_REF)
+          echo "   Total commits: $COMMIT_COUNT"
+
+          # Extract all commit messages
+          git log --format=%B $BASE_REF..$HEAD_REF > all_commits.txt
+
+          echo ""
+          echo "📝 Commits with AI-Labels:"
+          git log --format="%h - %s" $BASE_REF..$HEAD_REF | while read line; do
+            COMMIT_HASH=$(echo "$line" | cut -d' ' -f1)
+            if git log --format=%B -n 1 $COMMIT_HASH | grep -q "AI-Labels:"; then
+              echo "   ✓ $line"
+              git log --format=%B -n 1 $COMMIT_HASH | grep "AI-Labels:"
+            fi
+          done
+
+          echo ""
+
+          # Extract all AI-Labels and AI-Tools lines and process them
+          if grep -qE "AI-(Labels|Tools):" all_commits.txt; then
+            # Extract both AI-Labels and AI-Tools, split by delimiters, clean whitespace, remove duplicates
+            grep -E "AI-(Labels|Tools):" all_commits.txt | \
+              sed 's/AI-Labels: //; s/AI-Tools: //' | \
+              tr ',' '\n' | \
+              sed 's/^[[:space:]]*//;s/[[:space]]*$//' | \
+              grep -v '^$' | \
+              sort -u > new_labels.txt
+
+            echo "🏷️  Unique labels found across all commits:"
+            cat new_labels.txt | sed 's/^/   - /'
+            echo ""
+
+            echo "has_labels=true" >> $GITHUB_OUTPUT
+            echo "label_count=$(wc -l < new_labels.txt)" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  No AI-Labels found in any commit"
+            echo "has_labels=false" >> $GITHUB_OUTPUT
+            echo "label_count=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get existing PR labels
+        if: steps.extract.outputs.has_labels == 'true'
+        id: existing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔎 Checking existing labels on PR #${{ github.event.pull_request.number }}..."
+
+          # Get current PR labels
+          gh pr view ${{ github.event.pull_request.number }} \
+            --json labels \
+            --jq '.labels[].name' > existing_labels.txt
+
+          if [ -s existing_labels.txt ]; then
+            echo "   Existing labels:"
+            cat existing_labels.txt | sed 's/^/   - /'
+          else
+            echo "   No existing labels"
+          fi
+          echo ""
+
+      - name: Filter out duplicate labels
+        if: steps.extract.outputs.has_labels == 'true'
+        id: filter
+        run: |
+          echo "🔀 Filtering out labels that already exist..."
+
+          if [ -f existing_labels.txt ] && [ -s existing_labels.txt ]; then
+            # Remove labels that already exist on the PR
+            comm -23 new_labels.txt existing_labels.txt > labels_to_apply.txt
+
+            SKIPPED_COUNT=$(comm -12 new_labels.txt existing_labels.txt | wc -l | tr -d ' ')
+
+            if [ $SKIPPED_COUNT -gt 0 ]; then
+              echo "   ⏭️  Skipping $SKIPPED_COUNT already applied label(s):"
+              comm -12 new_labels.txt existing_labels.txt | sed 's/^/   - /'
+              echo ""
+            fi
+          else
+            cp new_labels.txt labels_to_apply.txt
+          fi
+
+          if [ -s labels_to_apply.txt ]; then
+            echo "✨ Labels to apply:"
+            cat labels_to_apply.txt | sed 's/^/   - /'
+            echo ""
+            echo "has_new_labels=true" >> $GITHUB_OUTPUT
+            echo "new_label_count=$(wc -l < labels_to_apply.txt)" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All labels already applied - nothing to do"
+            echo "has_new_labels=false" >> $GITHUB_OUTPUT
+            echo "new_label_count=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create labels if they don't exist
+        if: steps.filter.outputs.has_new_labels == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🎨 Ensuring labels exist in repository..."
+
+          # Backpack Android AI label configuration with "ai:" prefix
+          declare -A LABEL_CONFIG=(
+            # Use case labels
+            ["ai: implementation"]="0e8a16:AI-assisted implementation work"
+            ["ai: testing"]="5319e7:AI-assisted testing work"
+            ["ai: documentation"]="0075ca:AI-assisted documentation work"
+            ["ai: ci"]="959da5:AI-assisted CI/CD or build system work"
+
+            # Tool labels (dynamic - created as used)
+            ["ai: claude"]="FF9900:Work assisted by Claude AI"
+            ["ai: copilot"]="000000:Work assisted by GitHub Copilot"
+            ["ai: cursor"]="0066FF:Work assisted by Cursor"
+          )
+
+          # Get all existing repository labels
+          gh label list --json name --jq '.[].name' > repo_labels.txt
+
+          while IFS= read -r label; do
+            if [ -z "$label" ]; then
+              continue
+            fi
+
+            # Check if label exists in repository
+            if grep -Fxq "$label" repo_labels.txt; then
+              echo "   ✓ Label exists: '$label'"
+            else
+              # Extract color and description from config
+              CONFIG="${LABEL_CONFIG[$label]}"
+
+              if [ -n "$CONFIG" ]; then
+                COLOR="${CONFIG%%:*}"
+                DESCRIPTION="${CONFIG#*:}"
+              else
+                # Default for unknown AI tools
+                # If it starts with "ai: ", it's a tool label, use default tool color
+                if [[ "$label" == "ai: "* ]]; then
+                  COLOR="808080"
+                  DESCRIPTION="AI-assisted work"
+                  echo "   ℹ️  New AI tool label: '$label' (using default color)"
+                else
+                  # Non-AI label, shouldn't happen but handle gracefully
+                  COLOR="d3d3d3"
+                  DESCRIPTION="AI work label"
+                  echo "   ⚠️  Unknown label type: '$label' (using default color)"
+                fi
+              fi
+
+              echo "   🆕 Creating label: '$label' (#$COLOR)"
+
+              if gh label create "$label" \
+                --color "$COLOR" \
+                --description "$DESCRIPTION" 2>&1; then
+                echo "      ✅ Created successfully"
+              else
+                echo "      ⚠️  Failed to create (might be race condition)"
+              fi
+            fi
+          done < labels_to_apply.txt
+
+          echo ""
+
+      - name: Apply labels to PR
+        if: steps.filter.outputs.has_new_labels == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🏷️  Applying ${{ steps.filter.outputs.new_label_count }} label(s) to PR #${{ github.event.pull_request.number }}..."
+          echo ""
+
+          SUCCESS_COUNT=0
+          ERROR_COUNT=0
+
+          while IFS= read -r label; do
+            if [ -z "$label" ]; then
+              continue
+            fi
+
+            echo "   Applying: '$label'"
+
+            if gh pr edit ${{ github.event.pull_request.number }} \
+              --add-label "$label" 2>&1; then
+              echo "      ✅ Applied"
+              ((SUCCESS_COUNT++))
+            else
+              echo "      ❌ Failed"
+              ((ERROR_COUNT++))
+            fi
+          done < labels_to_apply.txt
+
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📊 Summary:"
+          echo "   Total commits analyzed: $(git rev-list --count origin/${{ github.base_ref }}..${{ github.head_ref }})"
+          echo "   Unique labels found: ${{ steps.extract.outputs.label_count }}"
+          echo "   Already applied: $((steps.extract.outputs.label_count - steps.filter.outputs.new_label_count))"
+          echo "   Newly applied: $SUCCESS_COUNT"
+
+          if [ $ERROR_COUNT -gt 0 ]; then
+            echo "   Failed: $ERROR_COUNT"
+            echo ""
+            echo "⚠️  Some labels failed to apply"
+            exit 1
+          fi
+
+      - name: Add comment to PR
+        if: steps.filter.outputs.has_new_labels == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Build label list
+          APPLIED_LABELS=$(cat labels_to_apply.txt | sed 's/^/- `/' | sed 's/$/`/' | paste -sd '\n' -)
+
+          # Count commits with AI labels
+          COMMIT_COUNT=$(git log --format=%B origin/${{ github.base_ref }}..${{ github.head_ref }} | grep -c "AI-Labels:" || echo "0")
+
+          # Create comment
+          gh pr comment ${{ github.event.pull_request.number }} --body \
+            "## 🤖 AI Work Labels Applied
+
+**Commits analyzed:** $COMMIT_COUNT commit(s) with AI-generated labels
+
+**Labels applied:**
+$APPLIED_LABELS
+
+---
+_These labels were automatically extracted from commit messages and applied to this PR._"
+
+      - name: Summary (no new labels)
+        if: steps.extract.outputs.has_labels == 'true' && steps.filter.outputs.has_new_labels == 'false'
+        run: |
+          echo "✅ All AI-generated labels are already applied to this PR"
+          echo ""
+          echo "📊 Summary:"
+          echo "   Total commits analyzed: $(git rev-list --count origin/${{ github.base_ref }}..${{ github.head_ref }})"
+          echo "   Unique labels found: ${{ steps.extract.outputs.label_count }}"
+          echo "   Already applied: ${{ steps.extract.outputs.label_count }}"
+          echo "   Newly applied: 0"

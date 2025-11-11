@@ -177,3 +177,77 @@ Run throw this checklist before submitting a new component or significant change
 
 ## Contribution Guidelines
 Ensure to include /CONTRIBUTING.md for additional context on contributing to Backpack Android components.
+
+## AI Work Logging
+
+After completing work with AI tools, create or append to `Log.<tool_name>.json` in **Git repository root**:
+
+**IMPORTANT: Always write to Git root, even if working in subdirectories (app/, Backpack/, etc.)**
+
+```bash
+# Use git to find repository root:
+LOG_PATH="$(git rev-parse --show-toplevel)/Log.<tool_name>.json"
+```
+
+### File Names by Tool
+
+- Claude: `Log.claude.json`
+- Copilot: `Log.copilot.json`
+- Cursor: `Log.cursor.json`
+
+### JSON Structure
+
+```json
+{
+  "changes": [
+    {
+      "type_of_change": ["implementation", "testing"],
+      "branch": "feature/badge-component",
+      "description": "Added BpkBadge component with tests",
+      "model": "claude-sonnet-4.5"
+    }
+  ]
+}
+```
+
+### type_of_change Options
+
+Select one or more:
+- **`implementation`** - Creating new code or functionality
+- **`testing`** - Writing or updating tests
+- **`documentation`** - Documentation updates
+- **`ci`** - CI/CD or build system work
+
+### Example Logs
+
+**New Component:**
+```json
+{
+  "changes": [{
+    "type_of_change": ["implementation", "testing", "documentation"],
+    "branch": "feature/chip",
+    "description": "Created BpkChip with tests and docs",
+    "model": "claude-sonnet-4.5"
+  }]
+}
+```
+
+**Bug Fix:**
+```json
+{
+  "changes": [{
+    "type_of_change": ["implementation"],
+    "branch": "fix/button-padding",
+    "description": "Fixed button padding issue",
+    "model": "claude-sonnet-4.5"
+  }]
+}
+```
+
+The system automatically:
+1. Processes log files during commits
+2. Appends labels to commit messages with `ai:` prefix
+3. Applies labels to PRs via GitHub Actions
+4. Tracks which AI tools were used
+
+See `scripts/ai-labels/README.md` for detailed documentation.

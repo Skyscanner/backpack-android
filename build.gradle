@@ -72,9 +72,18 @@ ext {
 }
 
 task installGitHooks(type: Copy) {
-    from new File(rootProject.rootDir, 'hooks/pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks') }
+    description 'Installs git hooks from hooks/ directory'
+    from new File(rootProject.rootDir, 'hooks/')
+    into new File(rootProject.rootDir, '.git/hooks')
+    exclude '*.md', '.*', 'README*'
     fileMode 0775
+
+    doLast {
+        def installed = source.files*.name.findAll { !it.startsWith('.') }
+        if (installed) {
+            logger.lifecycle("✅ Installed git hooks: ${installed.join(', ')}")
+        }
+    }
 }
 
 tasks.getByPath(':app:preBuild').dependsOn installGitHooks

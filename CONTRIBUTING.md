@@ -573,6 +573,113 @@ fun someSpecialFunction() {
 
 ---
 
+## AI Work Tracking
+
+Backpack Android automatically tracks AI-assisted development work to measure productivity impact and justify AI tool investments.
+
+### How It Works
+
+When you use AI tools (Claude, Copilot, Cursor, etc.) for development, create a log file in the **repository root**:
+
+```bash
+# Repository root (not in subdirectories!)
+touch Log.claude.json
+# or
+touch Log.copilot.json
+```
+
+The system automatically:
+1. Processes log files during commits (via `prepare-commit-msg` hook)
+2. Appends labels to commit messages with `ai:` prefix
+3. Applies labels to PRs via GitHub Actions
+4. Deletes log files after processing
+
+### Log File Format
+
+```json
+{
+  "changes": [
+    {
+      "type_of_change": ["implementation", "testing"],
+      "branch": "feature/badge-component",
+      "description": "Added BpkBadge component with tests",
+      "model": "claude-sonnet-4.5"
+    }
+  ]
+}
+```
+
+### Use Case Labels
+
+Select one or more:
+- **`implementation`** - Creating new code or functionality
+- **`testing`** - Writing or updating tests
+- **`documentation`** - Documentation updates
+- **`ci`** - CI/CD or build system work
+
+### Requirements
+
+The hook system auto-installs on first build. The only external dependency is `jq`:
+
+```bash
+# macOS
+brew install jq
+
+# Linux
+sudo apt-get install jq
+```
+
+### Example: Creating a New Component
+
+```bash
+# 1. Use Claude to create BpkChip component
+# 2. Create log file in repository root
+cat > Log.claude.json << EOF
+{
+  "changes": [{
+    "type_of_change": ["implementation", "testing", "documentation"],
+    "branch": "feature/chip-component",
+    "description": "Created BpkChip with snapshots and docs",
+    "model": "claude-sonnet-4.5"
+  }]
+}
+EOF
+
+# 3. Commit normally
+git add .
+git commit -m "Add Chip component"
+
+# Hook automatically:
+# - Extracts labels from log file
+# - Appends to commit message:
+#   AI-Labels: ai: implementation, ai: testing, ai: documentation
+#   AI-Tools: ai: claude
+#   AI-Tool: ai: claude | Model: claude-sonnet-4.5
+# - Deletes Log.claude.json
+
+# 4. Create PR - GitHub Actions applies labels:
+#   ✅ minor
+#   ✅ ai: implementation
+#   ✅ ai: testing
+#   ✅ ai: documentation
+#   ✅ ai: claude
+```
+
+### Troubleshooting
+
+**Labels not appearing?**
+- Ensure log file is in repository root (not in `app/` or `Backpack/` subdirectories)
+- Verify JSON is valid: `jq empty Log.claude.json`
+- Check hook is installed: `ls -la .git/hooks/prepare-commit-msg`
+- Reinstall hooks: `./gradlew installGitHooks`
+
+**jq not found?**
+- Install jq: `brew install jq` (macOS) or `sudo apt-get install jq` (Linux)
+
+For detailed documentation, see `scripts/ai-labels/README.md`.
+
+---
+
 ## Experimental changes
 
 Want to run A/B experiments on features that entail changes to Backpack components? Continue reading below 👇
