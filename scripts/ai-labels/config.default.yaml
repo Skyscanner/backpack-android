@@ -1,38 +1,19 @@
-# Backpack Android - AI Work Labels Configuration
-# This file defines the labels that will be applied to PRs based on AI-assisted work
+# AI Work Labels Configuration
+# Defines colors for GitHub labels (commit messages are source of truth for content)
 
-# Use case labels (what type of work was done)
-label_types:
-  - "implementation"  # Creating new code or functionality
-  - "testing"         # Writing or updating tests
-  - "documentation"   # Documentation updates
-  - "ci"              # CI/CD, Gradle, build system work
-
-# Prefix for all AI-related labels
-label_prefix: "ai: "
-
-# GitHub label colors (hex codes without #)
+# Label colors (hex codes without #)
 label_colors:
   # Use case labels
   "ai: implementation": "0e8a16"  # Green
   "ai: testing": "5319e7"         # Purple
   "ai: documentation": "0075ca"   # Blue
   "ai: ci": "959da5"              # Gray
+  "ai: failed": "d73a4a"          # Red (processing errors)
 
-  # Tool labels (dynamically created based on usage)
+  # Tool labels
   "ai: claude": "FF9900"          # Claude orange
   "ai: copilot": "000000"         # GitHub black
   "ai: cursor": "0066FF"          # Cursor blue
 
-# Label descriptions (shown on hover in GitHub)
-label_descriptions:
-  # Use case labels
-  "ai: implementation": "AI-assisted implementation work"
-  "ai: testing": "AI-assisted testing work"
-  "ai: documentation": "AI-assisted documentation work"
-  "ai: ci": "AI-assisted CI/CD or build system work"
-
-  # Tool labels
-  "ai: claude": "Work assisted by Claude AI"
-  "ai: copilot": "Work assisted by GitHub Copilot"
-  "ai: cursor": "Work assisted by Cursor"
+# Unknown labels get random colors for visual distinction
+# New tools are automatically supported - just create Log.<tool>.json

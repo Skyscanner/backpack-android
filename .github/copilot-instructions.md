@@ -191,6 +191,8 @@ LOG_PATH="$(git rev-parse --show-toplevel)/Log.<tool_name>.json"
 
 ### File Names by Tool
 
+Use `Log.<tool_name>.json`, where `<tool_name>` identifies whichever AI assistant you used (Codex, Copilot, Claude, Cursor, etc.). The names below are **examples**, not an exhaustive list:
+
 - Claude: `Log.claude.json`
 - Copilot: `Log.copilot.json`
 - Cursor: `Log.cursor.json`
