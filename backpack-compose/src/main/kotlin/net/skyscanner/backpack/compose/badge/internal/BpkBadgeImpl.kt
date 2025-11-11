@@ -56,7 +56,15 @@ internal fun BpkBadgeImpl(
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
-            .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
+            .then(
+                BpkConfiguration.badgeConfig?.endPadding?.takeIf {
+                    type !in listOf(BpkBadgeType.Inverse, BpkBadgeType.Strong, BpkBadgeType.Outline, BpkBadgeType.Brand)
+                }?.let {
+                    Modifier
+                        .padding(end = it)
+                        .padding(vertical = BpkSpacing.Sm)
+                } ?: Modifier.padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
+            ),
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -121,7 +129,7 @@ private val BpkBadgeType.contentColor: Color
         BpkBadgeType.Success -> BpkTheme.colors.textPrimary
         BpkBadgeType.Warning -> BpkTheme.colors.textPrimary
         BpkBadgeType.Destructive -> BpkTheme.colors.textPrimary
-        BpkBadgeType.Inverse -> BpkConfiguration.badgeConfig?.inverseTextColor ?: BpkTheme.colors.textPrimary
+        BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
         BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
         BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
     }
@@ -134,7 +142,7 @@ private val BpkBadgeType.backgroundColor: Color
         BpkBadgeType.Success -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
         BpkBadgeType.Warning -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
         BpkBadgeType.Destructive -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Inverse -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkTheme.colors.surfaceDefault
+        BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
         BpkBadgeType.Outline -> Color.Transparent
         BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
     }

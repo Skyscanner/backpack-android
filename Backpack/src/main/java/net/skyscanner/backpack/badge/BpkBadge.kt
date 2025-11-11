@@ -183,14 +183,19 @@ open class BpkBadge @JvmOverloads constructor(
         // set padding
         val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
         val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
-        this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
+        BpkConfiguration.badgeConfig?.takeIf {
+            type !in listOf(Type.Inverse, Type.Strong, Type.Outline, Type.Brand)
+        }?.let {
+            val horizontalPadding = it.endPadding.value * resources.displayMetrics.density
+            this.setPaddingRelative(
+                0, paddingSm, horizontalPadding.toInt(), paddingSm,
+            )
+        } ?: run {
+            this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
+        }
 
         // set Text color
-        val textColor: Int =
-            BpkConfiguration.badgeConfig?.inverseTextColor?.toArgb()?.takeIf { type == Type.Inverse } ?: context.getColor(
-                type.textColor,
-            )
-        this.setTextColor(textColor)
+        this.setTextColor(context.getColor(type.textColor))
 
         // Set background
         val defaultBgColour = BpkConfiguration.badgeConfig?.backgroundColor?.toArgb()?.let { ColorStateList.valueOf(it) }
@@ -201,7 +206,7 @@ open class BpkBadge @JvmOverloads constructor(
                 stroke = context.getColorStateList(type.bgColor),
             )
 
-            Type.Strong, Type.Brand -> setBackground(context.getColorStateList(type.bgColor))
+            Type.Strong, Type.Brand, Type.Inverse -> setBackground(context.getColorStateList(type.bgColor))
             else -> setBackground(defaultBgColour)
         }
         this.gravity = Gravity.CENTER
@@ -220,15 +225,12 @@ open class BpkBadge @JvmOverloads constructor(
         } else {
             icon
         }
-        val tint: Int =
-            BpkConfiguration.badgeConfig?.inverseTextColor?.toArgb()?.takeIf { type == Type.Inverse } ?: context.getColor(
-                type.iconColor,
-            )
+
         currentIcon
             ?.mutate()
             ?.apply {
                 setBounds(0, 0, iconSize, iconSize)
-                setTint(tint)
+                setTint(context.getColor(type.iconColor))
                 setCompoundDrawablesRelative(this, null, null, null)
             }
     }

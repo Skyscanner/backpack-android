@@ -87,7 +87,7 @@ object BpkConfiguration {
 
         data class BpkBadge(
             val backgroundColor: Color = Color.Transparent,
-            val inverseTextColor: Color = Color(0xFFFFFFFF),
+            val endPadding: Dp = 8.dp,
         ) : BpkExperimentalComponent()
     }
 
