@@ -106,6 +106,7 @@ open class BpkBadge @JvmOverloads constructor(
          * Style for badges with brand
          */
         Brand(10, R.color.bpkCoreAccent, R.color.bpkTextPrimaryInverse),
+        Subtle(11, R.color.__privateBadgeBackgroundNormal, R.color.bpkTextPrimary),
         ;
 
         internal companion object {
@@ -184,7 +185,7 @@ open class BpkBadge @JvmOverloads constructor(
         val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
         val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
         BpkConfiguration.badgeConfig?.takeIf {
-            type !in listOf(Type.Inverse, Type.Strong, Type.Outline, Type.Brand)
+            type !in listOf(Type.Inverse, Type.Strong, Type.Outline, Type.Brand, Type.Subtle)
         }?.let {
             val horizontalPadding = it.endPadding.value * resources.displayMetrics.density
             this.setPaddingRelative(
@@ -206,7 +207,7 @@ open class BpkBadge @JvmOverloads constructor(
                 stroke = context.getColorStateList(type.bgColor),
             )
 
-            Type.Strong, Type.Brand, Type.Inverse -> setBackground(context.getColorStateList(type.bgColor))
+            Type.Strong, Type.Brand, Type.Inverse, Type.Subtle -> setBackground(context.getColorStateList(type.bgColor))
             else -> setBackground(defaultBgColour)
         }
         this.gravity = Gravity.CENTER

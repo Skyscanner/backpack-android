@@ -58,7 +58,13 @@ internal fun BpkBadgeImpl(
             .background(type.backgroundColor, BadgeShape)
             .then(
                 BpkConfiguration.badgeConfig?.endPadding?.takeIf {
-                    type !in listOf(BpkBadgeType.Inverse, BpkBadgeType.Strong, BpkBadgeType.Outline, BpkBadgeType.Brand)
+                    type !in listOf(
+                        BpkBadgeType.Inverse,
+                        BpkBadgeType.Strong,
+                        BpkBadgeType.Outline,
+                        BpkBadgeType.Brand,
+                        BpkBadgeType.Subtle,
+                    )
                 }?.let {
                     Modifier
                         .padding(end = it)
@@ -124,7 +130,7 @@ private val BpkBadgeType.iconColor: Color
 private val BpkBadgeType.contentColor: Color
     @Composable
     get() = when (this) {
-        BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Normal, BpkBadgeType.Subtle -> BpkTheme.colors.textPrimary
         BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
         BpkBadgeType.Success -> BpkTheme.colors.textPrimary
         BpkBadgeType.Warning -> BpkTheme.colors.textPrimary
@@ -138,6 +144,7 @@ private val BpkBadgeType.backgroundColor: Color
     @Composable
     get() = when (this) {
         BpkBadgeType.Normal -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
+        BpkBadgeType.Subtle -> BpkBadgeColors.backgroundNormal
         BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
         BpkBadgeType.Success -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
         BpkBadgeType.Warning -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
