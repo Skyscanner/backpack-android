@@ -14,6 +14,7 @@
             <enum name="normal" value="8" />
             <enum name="strong" value="9" />
             <enum name="brand" value="10" />
+            <enum name="subtle" value="11" />
         </attr>
         <!-- message to be displayed -->
         <attr name="message" format="string" />
