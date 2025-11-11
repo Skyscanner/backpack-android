@@ -439,4 +439,58 @@
             app:buttonType="destructive" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bpkCanvasContrast"
+        android:gravity="center_horizontal|top"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/bpkSpacingBase"
+        android:paddingVertical="@dimen/bpkSpacingMd">
+
+        <net.skyscanner.backpack.button.BpkButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button"
+            app:buttonType="secondaryOnContrast" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <net.skyscanner.backpack.button.BpkButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button"
+            app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
+            app:buttonIconPosition="start"
+            app:buttonType="secondaryOnContrast" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <net.skyscanner.backpack.button.BpkButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button"
+            app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
+            app:buttonIconPosition="end"
+            app:buttonType="secondaryOnContrast" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <net.skyscanner.backpack.button.BpkButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
+            app:buttonIconPosition="icon_only"
+            app:buttonType="secondaryOnContrast" />
+    </LinearLayout>
+
 </LinearLayout>
