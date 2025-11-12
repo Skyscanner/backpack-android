@@ -15,51 +15,73 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# AI Labels Pre-Commit Hook
-# Extracts labels from Log.<tool>.json and appends to commit message
-#
 set -euo pipefail
 
 COMMIT_MSG_FILE="${1:-$(git rev-parse --git-dir)/COMMIT_EDITMSG}"
 GIT_ROOT="$(git rev-parse --show-toplevel)"
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 LABELS=()
+VALID_TYPES=("implementation" "testing" "documentation" "ci")
 
-# Find and process Log.*.json files
-for log in "${GIT_ROOT}"/Log.*.json; do
+validate_type() {
+    local type="$1"
+    for valid in "${VALID_TYPES[@]}"; do
+        [[ "$type" == "$valid" ]] && return 0
+    done
+    return 1
+}
+
+parse_yaml_branch() {
+    grep -E '^[[:space:]]+branch:' "$1" 2>/dev/null | head -1 | sed 's/.*:[[:space:]]*//' || echo ""
+}
+
+parse_yaml_types() {
+    sed -n '/type_of_change:/,/branch:/p' "$1" 2>/dev/null | \
+        grep -E '^[[:space:]]+- [a-z]' | \
+        grep -v ':' | \
+        sed 's/.*-[[:space:]]*//' || true
+}
+
+for log in "${GIT_ROOT}"/Log.*.yaml; do
     [ -e "$log" ] || continue
 
-    # Extract tool name from filename
-    TOOL=$(basename "$log" .json | sed 's/Log\.//' | tr '[:upper:]' '[:lower:]')
+    TOOL=$(basename "$log" .yaml | sed 's/Log\.//' | tr '[:upper:]' '[:lower:]')
 
-    # Validate branch matches
-    LOG_BRANCH=$(jq -r '.changes[].branch' "$log" 2>/dev/null | head -1)
-    if [ -n "$LOG_BRANCH" ] && [ "$LOG_BRANCH" != "$CURRENT_BRANCH" ]; then
+    LOG_BRANCH=$(parse_yaml_branch "$log")
+
+    if [ -z "$LOG_BRANCH" ]; then
         LABELS+=("ai: failed")
         rm -f "$log" 2>/dev/null || true
         continue
     fi
 
-    # Extract type_of_change labels, add ai: prefix
-    if command -v jq &>/dev/null && jq -e '.changes[].type_of_change[]' "$log" &>/dev/null; then
-        while IFS= read -r label; do
-            [ -n "$label" ] && LABELS+=("ai: $label")
-        done < <(jq -r '.changes[].type_of_change[]' "$log" 2>/dev/null | sort -u)
+    if [ "$LOG_BRANCH" != "$CURRENT_BRANCH" ]; then
+        LABELS+=("ai: failed")
+        rm -f "$log" 2>/dev/null || true
+        continue
+    fi
 
-        # Add tool label
+    HAS_VALID_TYPE=false
+    while IFS= read -r label; do
+        if [ -n "$label" ]; then
+            if validate_type "$label"; then
+                LABELS+=("ai: $label")
+                HAS_VALID_TYPE=true
+            else
+                LABELS+=("ai: failed")
+            fi
+        fi
+    done < <(parse_yaml_types "$log" | sort -u)
+
+    if [ "$HAS_VALID_TYPE" = true ]; then
         LABELS+=("ai: $TOOL")
-
-        # Clean up processed log
         rm -f "$log"
     else
-        # On error, add failure label
         LABELS+=("ai: failed")
         rm -f "$log" 2>/dev/null || true
     fi
 done
 
-# Append unique labels to commit message
 if [ ${#LABELS[@]} -gt 0 ]; then
     UNIQUE_LABELS=($(printf '%s\n' "${LABELS[@]}" | sort -u))
     echo "" >> "$COMMIT_MSG_FILE"

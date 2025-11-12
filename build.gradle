@@ -71,11 +71,10 @@ ext {
     group = "net.skyscanner.backpack"
 }
 
-task installGitHooks(type: Copy) {
+tasks.register('installGitHooks', Copy) {
     description 'Installs git hooks from hooks/ directory'
     from new File(rootProject.rootDir, 'hooks/')
     into new File(rootProject.rootDir, '.git/hooks')
-    exclude '*.md', '.*', 'README*'
     fileMode 0775
 
     doLast {

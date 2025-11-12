@@ -5,7 +5,7 @@ Automated tracking for AI-assisted development work using git hooks and GitHub A
 ## Overview
 
 Tracks AI contributions by:
-- Extracting metadata from `Log.<tool>.json` files at commit time
+- Extracting metadata from `Log.<tool>.yaml` files at commit time
 - Appending `ai:` prefixed labels to commit messages
 - Auto-applying PR labels via GitHub Actions
 - Capturing which AI tools were used (Claude, Copilot, Cursor, etc.)
@@ -14,49 +14,36 @@ All labels use `ai:` prefix for clear separation from project labels.
 
 ## Quick Start
 
-### Prerequisites
-
-```bash
-# macOS
-brew install jq
-
-# Linux
-sudo apt-get install jq
-```
-
 ### Installation
 
-Copy hook to your repository:
+Auto-installs on first build (installs git hooks):
 
 ```bash
-# Copy prepare-commit-msg hook
-cp hooks/prepare-commit-msg .git/hooks/
-chmod +x .git/hooks/prepare-commit-msg
+./gradlew build
 ```
+
+That's it! The system is ready to use.
 
 ## Usage
 
 ### Create Log File
 
-When using AI tools, create `Log.<tool>.json` in **repository root**:
+When using AI tools, create `Log.<tool>.yaml` in **repository root**:
 
 ```bash
-touch Log.claude.json
+touch Log.claude.yaml
 # or
-touch Log.copilot.json
+touch Log.copilot.yaml
 ```
 
 ### Log Format
 
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["implementation", "testing"],
-      "branch": "feature/new-component"
-    }
-  ]
-}
+```yaml
+changes:
+  - type_of_change:
+      - implementation
+      - testing
+    branch: feature/new-component
 ```
 
 **Fields:**
@@ -75,7 +62,7 @@ Tool labels are auto-generated: `ai: claude`, `ai: copilot`, etc.
 ## Workflow
 
 ```bash
-# 1. AI tool creates Log.claude.json (or you create manually)
+# 1. AI tool creates Log.claude.yaml (or you create manually)
 
 # 2. Stage and commit
 git add .
@@ -93,20 +80,21 @@ When PR is created, GitHub Actions extracts all `ai:` labels from commits and ap
 
 **Getting `ai: failed` label?**
 - Branch in log file doesn't match current git branch
-- Invalid JSON in log file
-- Missing `jq` or `type_of_change` field
+- Invalid YAML syntax in log file
+- Missing `type_of_change` field
+- Invalid type_of_change value (must be: `implementation`, `testing`, `documentation`, `ci`)
 
 **Labels not appearing?**
 ```bash
 # Check log file location (must be repo root)
-ls Log.*.json
+ls Log.*.yaml
 
-# Validate JSON
-jq empty Log.claude.json
+# Validate YAML syntax (check indentation)
+cat Log.claude.yaml
 
 # Check branch matches
 git branch --show-current
-jq -r '.changes[].branch' Log.claude.json
+grep 'branch:' Log.claude.yaml
 
 # Check hook exists
 ls -la .git/hooks/prepare-commit-msg

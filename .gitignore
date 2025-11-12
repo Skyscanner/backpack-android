@@ -248,4 +248,4 @@ dokka/
 backpack-compose/src/main/res/raw/compose_components.txt
 
 # AI work logs (processed by pre-commit hook)
-Log.*.json
+Log.*.yaml

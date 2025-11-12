@@ -6,7 +6,7 @@ Below are the standards and best practices for developing components in the Back
 
 ## CRITICAL: AI Work Logging is MANDATORY
 
-**BEFORE completing any work session, you MUST create/update `Log.<tool_name>.json` at the Git repository root.**
+**BEFORE completing any work session, you MUST create/update `Log.<tool_name>.yaml` at the Git repository root.**
 
 This is not optional. Every code change, test addition, or documentation update must be logged. See the [AI Work Logging](#ai-work-logging) section below for details.
 
@@ -97,7 +97,7 @@ A well-designed API is intuitive, consistent, and easy to use correctly. The fol
    - Components must be designed and implemented to fully support Right-to-Left (RTL) layouts, ensuring correct visual presentation and interaction.
    - Components should be designed to adapt gracefully to different screen sizes, orientations, and user accessibility settings (e.g., font scaling, display scaling).
 
-**📝 REMINDER: After implementing components or making API changes, update the AI Work Log at the Git repository root!**
+**📝 REMINDER: After implementing components or making API changes, update `Log.<tool>.yaml` at the Git repository root!**
 
 ## UI Tokens and Strings Principles
 UI tokens and strings are essential for maintaining consistency and adaptability across components. They should be used to define visual styles, spacing, and text content.
@@ -136,7 +136,7 @@ Thorough testing ensures that components work as expected and continue to work a
    - Focus on testing behaviour, not implementation details
    - Ensure all code paths are tested
 
-**📝 REMINDER: After adding or modifying tests, update the AI Work Log at the Git repository root!**
+**📝 REMINDER: After adding or modifying tests, update `Log.<tool>.yaml` at the Git repository root!**
 
 ## Documentation Standards
 
@@ -168,7 +168,7 @@ Good documentation is essential for component adoption and correct usage.
    - Show different states and configurations
    - Update screenshots when the component changes visually
 
-**📝 REMINDER: After adding or updating documentation, update the AI Work Log at the Git repository root!**
+**📝 REMINDER: After adding or updating documentation, update `Log.<tool>.yaml` at the Git repository root!**
 
 ## Compose vs View Components
 * Compose is our standard for new component development in Backpack Android.
@@ -189,7 +189,7 @@ Run throw this checklist before submitting a new component or significant change
 - [ ] API documentation is complete
 - [ ] Component is included in the demo app
 - [ ] Screenshots are up-to-date
-- [ ] **AI Work Log created/updated at Git repository root** (`Log.<tool_name>.json`)
+- [ ] **AI Work Log created/updated at Git repository root** (`Log.<tool_name>.yaml`)
 
 
 ## Contribution Guidelines
@@ -199,7 +199,7 @@ Ensure to include /CONTRIBUTING.md for additional context on contributing to Bac
 
 ### MANDATORY REQUIREMENT
 
-**After completing ANY work with AI tools, you MUST create or append to `Log.<tool_name>.json` in the Git repository root.**
+**After completing ANY work with AI tools, you MUST create or append to `Log.<tool_name>.yaml` in the Git repository root.**
 
 **WHEN TO LOG:**
 - ✅ After writing or modifying ANY code
@@ -214,33 +214,30 @@ Ensure to include /CONTRIBUTING.md for additional context on contributing to Bac
 
 ```bash
 # Use git to find repository root:
-LOG_PATH="$(git rev-parse --show-toplevel)/Log.<tool_name>.json"
+LOG_PATH="$(git rev-parse --show-toplevel)/Log.<tool_name>.yaml"
 ```
 
 ### File Names by Tool
 
-Use `Log.<tool_name>.json`, where `<tool_name>` identifies whichever AI assistant you used (Codex, Copilot, Claude, Cursor, etc.). The names below are **examples**, not an exhaustive list:
+Use `Log.<tool_name>.yaml`, where `<tool_name>` identifies whichever AI assistant you used (Codex, Copilot, Claude, Cursor, etc.). The names below are **examples**, not an exhaustive list:
 
-- Claude: `Log.claude.json`
-- Copilot: `Log.copilot.json`
-- Cursor: `Log.cursor.json`
+- Claude: `Log.claude.yaml`
+- Copilot: `Log.copilot.yaml`
+- Cursor: `Log.cursor.yaml`
 
-### JSON Structure
+### YAML Structure
 
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["implementation", "testing"],
-      "branch": "feature/badge-component"
-    }
-  ]
-}
+```yaml
+changes:
+  - type_of_change:
+      - implementation
+      - testing
+    branch: feature/badge-component
 ```
 
 ### type_of_change Options
 
-Select one or more:
+Select one or more (validation enforced):
 - **`implementation`** - Creating new code or functionality
 - **`testing`** - Writing or updating tests
 - **`documentation`** - Documentation updates
