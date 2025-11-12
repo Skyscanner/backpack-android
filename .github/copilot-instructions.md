@@ -4,7 +4,7 @@ Below are the standards and best practices for developing components in the Back
 
 ---
 
-## CRITICAL: AI Work Logging is MANDATORY
+## Critical: AI Work Logging is Mandatory
 
 **BEFORE completing any work session, you MUST create/update `Log.<tool_name>.yaml` at the Git repository root.**
 
