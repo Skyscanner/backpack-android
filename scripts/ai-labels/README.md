@@ -1,22 +1,20 @@
-# Backpack Android - AI Work Labels
+# AI Work Labels
 
-Automated system for tracking AI-assisted development work in Backpack Android.
+Automated tracking for AI-assisted development work using git hooks and GitHub Actions.
 
 ## Overview
 
-This system automatically:
-1. Extracts work metadata from `Log.<tool>.json` files
-2. Appends labels to commit messages with `ai:` prefix
-3. Applies GitHub PR labels automatically
-4. Tracks which AI tools were used
+Tracks AI contributions by:
+- Extracting metadata from `Log.<tool>.json` files at commit time
+- Appending `ai:` prefixed labels to commit messages
+- Auto-applying PR labels via GitHub Actions
+- Capturing which AI tools were used (Claude, Copilot, Cursor, etc.)
 
-All labels are prefixed with `ai:` to clearly separate AI work from other project labels (like `major`, `minor`, `dependencies`).
+All labels use `ai:` prefix for clear separation from project labels.
 
 ## Quick Start
 
-### 1. Prerequisites
-
-Install `jq` for JSON processing:
+### Prerequisites
 
 ```bash
 # macOS
@@ -26,380 +24,126 @@ brew install jq
 sudo apt-get install jq
 ```
 
-### 2. Auto-Installation
+### Installation
 
-The system auto-installs on your first build:
+Copy hook to your repository:
 
 ```bash
-./gradlew build
-# or
-# Open project in Android Studio (triggers Gradle sync)
+# Copy prepare-commit-msg hook
+cp hooks/prepare-commit-msg .git/hooks/
+chmod +x .git/hooks/prepare-commit-msg
 ```
-
-That's it! The `prepare-commit-msg` hook is now active.
 
 ## Usage
 
-### Creating a Log File
+### Create Log File
 
-When you use AI tools (Claude, Copilot, Cursor, etc.) for development work, create a log file in the **repository root**:
+When using AI tools, create `Log.<tool>.json` in **repository root**:
 
 ```bash
-# Create log file (use tool name in filename)
 touch Log.claude.json
 # or
 touch Log.copilot.json
 ```
 
-**Important**: Log file MUST be in repository root, not in subdirectories like `app/` or `Backpack/`.
-
-### Log File Format
+### Log Format
 
 ```json
 {
   "changes": [
     {
       "type_of_change": ["implementation", "testing"],
-      "branch": "feature/badge-component",
-      "description": "Added BpkBadge component with tests",
+      "branch": "feature/new-component",
+      "description": "Added component with tests",
       "model": "claude-sonnet-4.5"
     }
   ]
 }
 ```
 
-### Fields
+**Fields:**
+- `type_of_change` (required): One or more of `implementation`, `testing`, `documentation`, `ci`
+- `branch` (optional): Current git branch
+- `description` (optional): Brief description
+- `model` (optional): AI model identifier
 
-| Field | Required | Options | Description |
-|-------|----------|---------|-------------|
-| `type_of_change` | ✅ | `implementation`, `testing`, `documentation`, `ci` | What type of work was done |
-| `branch` | ⚠️ | Any string | Current git branch (optional but recommended) |
-| `description` | ⚠️ | Any string | Brief description (optional but recommended) |
-| `model` | ⚠️ | Any string | AI model used (e.g., `claude-sonnet-4.5`, `gpt-4`) |
+### Label Categories
 
-### Use Case Labels
+- `ai: implementation` - Code and features
+- `ai: testing` - Test additions/updates
+- `ai: documentation` - Docs updates
+- `ai: ci` - CI/CD and build changes
 
-**Four simple categories:**
-
-- **`ai: implementation`** - Creating new code or functionality (components, utilities, features)
-- **`ai: testing`** - Writing or updating tests (unit tests, UI tests, snapshots)
-- **`ai: documentation`** - Documentation updates (README, KDoc comments, guides)
-- **`ai: ci`** - CI/CD or build system work (Gradle, GitHub Actions, scripts)
+Tool labels are auto-generated: `ai: claude`, `ai: copilot`, etc.
 
 ## Workflow
 
-### Normal Workflow
-
 ```bash
-# 1. Use AI tool to write code
-# (tool creates Log.claude.json automatically, or you create it manually)
+# 1. AI tool creates Log.claude.json (or you create manually)
 
-# 2. Stage your changes
+# 2. Stage and commit
 git add .
+git commit -m "Add new component"
 
-# 3. Commit normally
-git commit -m "Add Badge component"
-
-# Hook processes log file automatically:
-# ✅ Extracted labels
-# ✅ Appended to commit message
-# ✅ Cleaned up log file
+# Hook automatically:
+# ✅ Extracts labels from log file
+# ✅ Appends to commit message
+# ✅ Deletes log file
 ```
 
-### Commit Message Enhancement
-
-**Before** (your message):
+**Commit enhancement:**
 ```
-Add Badge component
-```
+Add new component
 
-**After** (enhanced by hook):
-```
-Add Badge component
-
-AI-Labels: ai: implementation, ai: testing
-AI-Tools: ai: claude
-AI-Tool: ai: claude | Model: claude-sonnet-4.5
+ai: implementation ai: testing ai: claude
 ```
 
-### PR Labels
+**PR labels:**
+When PR is created, GitHub Actions extracts all `ai:` labels from commits and applies them with random colors.
 
-When you create a PR, GitHub Actions automatically:
-1. Scans all commits for `ai:` labels
-2. Creates labels with random colors if they don't exist
-3. Applies labels to the PR
-
-**Example PR labels:**
-```
-✅ minor                  # Semantic version
-✅ ai: implementation     # AI helped with implementation
-✅ ai: testing           # AI helped with tests
-✅ ai: claude            # Claude was used
-```
-
-## Examples
-
-### Example 1: New Component
+## Example
 
 ```json
 {
   "changes": [
     {
-      "type_of_change": ["implementation"],
-      "branch": "feature/badge",
-      "description": "Created BpkBadge Compose component",
+      "type_of_change": ["implementation", "testing"],
+      "description": "Built user profile component",
       "model": "claude-sonnet-4.5"
     }
   ]
 }
 ```
 
-**Result**: PR gets labels `ai: implementation` and `ai: claude`
-
-### Example 2: Test Suite
-
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["testing"],
-      "branch": "test/badge-snapshots",
-      "description": "Added Roborazzi snapshot tests",
-      "model": "claude-sonnet-4.5"
-    }
-  ]
-}
-```
-
-**Result**: PR gets labels `ai: testing` and `ai: claude`
-
-### Example 3: Multiple Use Cases
-
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["implementation", "testing", "documentation"],
-      "branch": "feature/chip",
-      "description": "Added Chip component with tests and docs",
-      "model": "claude-sonnet-4.5"
-    }
-  ]
-}
-```
-
-**Result**: PR gets labels `ai: implementation`, `ai: testing`, `ai: documentation`, and `ai: claude`
-
-### Example 4: CI Work
-
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["ci"],
-      "branch": "ci/update-gradle",
-      "description": "Updated Gradle to 8.5",
-      "model": "claude-sonnet-4.5"
-    }
-  ]
-}
-```
-
-**Result**: PR gets labels `ai: ci` and `ai: claude`
-
-### Example 5: Multiple Tools
-
-```bash
-# You used Claude for implementation
-cat Log.claude.json
-{
-  "changes": [{
-    "type_of_change": ["implementation"],
-    "description": "Created component",
-    "model": "claude-sonnet-4.5"
-  }]
-}
-
-# Then used Copilot for tests
-cat Log.copilot.json
-{
-  "changes": [{
-    "type_of_change": ["testing"],
-    "description": "Generated tests",
-    "model": "gpt-4"
-  }]
-}
-
-# Commit processes both logs
-git commit -m "Add component and tests"
-```
-
-**Result**: PR gets labels `ai: implementation`, `ai: testing`, `ai: claude`, and `ai: copilot`
-
-## Configuration
-
-### Label Colors
-
-Labels are automatically assigned **random colors** for visual distinction. Each label gets a unique color generated dynamically when created.
-
-**Why random colors?**
-- Each label gets a unique, readable color automatically
-- No configuration needed
-- Works with any new AI tool immediately
-- Colors are consistent once created (GitHub caches them)
+**Result:** PR gets `ai: implementation`, `ai: testing`, `ai: claude` labels.
 
 ## Troubleshooting
 
-### Labels Not Appearing
-
-**Check 1**: Is log file in repository root?
+**Labels not appearing?**
 ```bash
-# Wrong locations:
-app/Log.claude.json           # ❌ Too deep
-Backpack/Log.claude.json      # ❌ Too deep
+# Check log file location (must be repo root)
+ls Log.*.json
 
-# Correct location:
-Log.claude.json               # ✅ Repository root
-```
-
-**Check 2**: Is JSON valid?
-```bash
+# Validate JSON
 jq empty Log.claude.json
-# If error: fix JSON syntax
-```
 
-**Check 3**: Is hook installed?
-```bash
+# Check hook exists
 ls -la .git/hooks/prepare-commit-msg
-# Should exist and be executable
-```
 
-**Check 4**: Re-run hook installation
-```bash
-./gradlew installGitHooks
-```
-
-### Hook Not Running
-
-**Solution 1**: Reinstall hooks
-```bash
-./gradlew clean installGitHooks
-```
-
-**Solution 2**: Check hook permissions
-```bash
+# Reinstall hook
+cp hooks/prepare-commit-msg .git/hooks/
 chmod +x .git/hooks/prepare-commit-msg
 ```
 
-### jq Not Found
-
-**macOS**:
-```bash
-brew install jq
-```
-
-**Linux**:
-```bash
-sudo apt-get install jq
-```
-
-**Windows (WSL)**:
-```bash
-sudo apt-get install jq
-```
-
-### Manual Rerun
-
-If the hook fails, you can run it manually:
-
+**Manual hook execution:**
 ```bash
 ./scripts/ai-labels/process-labels.sh .git/COMMIT_EDITMSG
 ```
 
-### View Hook Output
-
-To see detailed hook execution:
-
-```bash
-# Make a test commit and watch output
-git commit -m "test" --verbose
-```
-
-## How It Works
-
-### Local (Pre-Commit Hook)
-
-```
-Developer commits
-    ↓
-prepare-commit-msg hook runs
-    ↓
-process-labels.sh script
-    ↓
-Searches repo root for Log.*.json
-    ↓
-Validates JSON structure
-    ↓
-Extracts type_of_change values
-    ↓
-Adds "ai: " prefix to labels
-    ↓
-Appends to commit message
-    ↓
-Deletes log files
-    ↓
-Commit proceeds
-```
-
-### Remote (GitHub Actions)
-
-```
-PR created/updated
-    ↓
-apply-ai-labels.yml workflow runs
-    ↓
-Scans all commits in PR
-    ↓
-Extracts ai: labels pattern
-    ↓
-Deduplicates labels
-    ↓
-Creates labels with random colors
-    ↓
-Applies to PR
-```
-
 ## Files
 
-- **`process-labels.sh`** - Pre-commit hook script
-- **`extract-commit-labels.sh`** - Extracts labels from commits
-- **`create-github-labels.sh`** - Creates labels with random colors
-- **`apply-pr-labels.sh`** - Applies labels to PRs
-
-## FAQ
-
-**Q: Do I have to create log files manually?**
-A: It depends on your AI tool. Some tools can auto-create them. Otherwise, yes, create manually.
-
-**Q: Can I use multiple tools on the same PR?**
-A: Yes! Create separate log files: `Log.claude.json`, `Log.copilot.json`, etc. The hook merges them.
-
-**Q: What if I forget to create a log file?**
-A: No problem! The system is opt-in. If no log file exists, commits proceed normally without AI labels.
-
-**Q: Will this block my commits if something goes wrong?**
-A: No. The hook is non-blocking. If errors occur, it logs them but doesn't prevent commits.
-
-**Q: Can I add custom use case labels?**
-A: Yes! Just add them to your `type_of_change` array in Log files. They'll automatically get random colors when created.
-
-**Q: Why "ai:" prefix?**
-A: It creates a clear namespace separation from other project labels and matches the existing `ai: copilot` label pattern.
-
-## Support
-
-For issues or questions:
-1. Check this README
-2. Check `CONTRIBUTING.md`
-3. Ask in #backpack-android Slack channel
-4. Create a GitHub issue
+- `process-labels.sh` - Pre-commit hook script
+- `extract-commit-labels.sh` - Extracts labels from commits
+- `create-github-labels.sh` - Creates labels with random colors
+- `apply-pr-labels.sh` - Applies labels to PRs
+- `.github/workflows/apply-ai-labels.yml` - GitHub Actions workflow
