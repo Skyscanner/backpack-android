@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -127,7 +126,6 @@ class BpkDividedCardTest : BpkSnapshotTest() {
         snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkDividedCard(
                 modifier = Modifier.width(400.dp),
-                elevation = BpkCardElevation.None,
                 primaryContent = {
                     Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
                     BpkText(

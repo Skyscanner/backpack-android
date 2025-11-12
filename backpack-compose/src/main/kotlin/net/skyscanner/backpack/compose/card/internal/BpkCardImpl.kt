@@ -32,12 +32,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCardCorner
-import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.toColor
 import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @Composable
@@ -57,11 +58,11 @@ internal inline fun CardContent(
 }
 
 @Composable
-internal fun cardColors(elevation: BpkCardElevation): CardColors {
+internal fun cardColors(style: BpkCardStyle): CardColors {
     val value by animateColorAsState(
-        targetValue = when (elevation) {
-            BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
-            BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
+        targetValue = when (style) {
+            BpkCardStyle.onContrast -> BpkTheme.colors.surfaceDefault
+            BpkCardStyle.onDefault -> BpkConfiguration.cardConfig?.backgroundColorDefault?.toColor() ?: BpkTheme.colors.surfaceDefault
         },
         label = "BpkCard background color",
     )
@@ -74,12 +75,11 @@ internal fun cardColors(elevation: BpkCardElevation): CardColors {
 }
 
 @Composable
-internal fun cardElevation(elevation: BpkCardElevation): CardElevation {
+internal fun cardElevation(elevation: BpkCardStyle): CardElevation {
     val value by animateDpAsState(
         targetValue = when (elevation) {
-            BpkCardElevation.None -> 0.dp
-            BpkCardElevation.Focus -> BpkElevation.Xl
-            BpkCardElevation.Default -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
+            BpkCardStyle.onContrast -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
+            BpkCardStyle.onDefault -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
         },
         label = "BpkCard elevation",
     )

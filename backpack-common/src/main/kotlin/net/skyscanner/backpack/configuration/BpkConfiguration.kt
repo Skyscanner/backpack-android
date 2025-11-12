@@ -42,6 +42,7 @@ object BpkConfiguration {
 
         data class BpkCard(
             val defaultElevation: Float = 0.0f,
+            val backgroundColorDefault: ColorPair = ColorPair(0xFFF7F9FB, 0xFF131D2B),
         ) : BpkExperimentalComponent()
 
         data class BpkChip(

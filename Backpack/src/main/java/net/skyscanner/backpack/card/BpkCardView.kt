@@ -52,6 +52,33 @@ open class BpkCardView @JvmOverloads constructor(
         LARGE(R.dimen.bpkBorderRadiusLg),
     }
 
+    enum class CardStyle {
+        DEFAULT,
+        CONTRAST,
+        ;
+        fun toDimension(context: Context): Float =
+            when (this) {
+                CONTRAST -> BpkConfiguration.cardConfig?.defaultElevation ?: context.resources.getDimension(R.dimen.bpkElevationSm)
+                DEFAULT -> BpkConfiguration.cardConfig?.defaultElevation ?: context.resources.getDimension(R.dimen.bpkElevationSm)
+            }
+
+        fun toBackgroundColor(context: Context): ColorStateList {
+            val background = when (this) {
+                DEFAULT -> BpkConfiguration.cardConfig?.backgroundColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkSurfaceDefault)
+                CONTRAST -> context.getColor(R.color.bpkSurfaceDefault)
+            }
+            return ColorStateList.valueOf(background)
+        }
+
+        companion object {
+            fun fromAttr(attr: Int) = when (attr) {
+                0 -> CONTRAST
+                1 -> DEFAULT
+                else -> throw IllegalStateException("Wrong elevation value")
+            }
+        }
+    }
+
     enum class ElevationLevel {
         NONE,
         DEFAULT,
@@ -105,17 +132,6 @@ open class BpkCardView @JvmOverloads constructor(
         }
 
     /**
-     * Sets the card to focused or not
-     * @property focused
-     */
-    @Deprecated("Use elevation instead")
-    var focused: Boolean = false
-        set(value) {
-            field = value
-            elevationLevel = if (value) ElevationLevel.FOCUSED else ElevationLevel.DEFAULT
-        }
-
-    /**
      * Sets the border radius of the card.
      *
      * @see [BpkCardView.CornerStyle]
@@ -127,12 +143,11 @@ open class BpkCardView @JvmOverloads constructor(
             radius = context.resources.getDimension(value.tokenRes)
         }
 
-    var elevationLevel: ElevationLevel = ElevationLevel.DEFAULT
+    var cardStyle: CardStyle = CardStyle.CONTRAST
         set(value) {
             field = value
             cardElevation = value.toDimension(context)
-            val background = customBackgroundColor ?: elevationLevel.toBackgroundColor(context)
-            setCardBackgroundColor(background)
+            setCardBackgroundColor(cardStyle.toBackgroundColor(context))
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -142,12 +157,7 @@ open class BpkCardView @JvmOverloads constructor(
         context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0).use {
             padded = it.getBoolean(R.styleable.BpkCardView_padded, true)
             customBackgroundColor = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
-            if (it.hasValue(R.styleable.BpkCardView_elevationLevel)) {
-                elevationLevel = ElevationLevel.fromAttr(it.getInt(R.styleable.BpkCardView_elevationLevel, 1))
-            } else {
-                @Suppress("DEPRECATION")
-                focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
-            }
+            cardStyle = CardStyle.fromAttr(it.getInt(R.styleable.BpkCardView_cardStyle, 0))
             cornerStyle = CornerStyle.entries[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
         }
     }
