@@ -20,10 +20,11 @@ set -euo pipefail
 pr_number="$1"
 labels_file="$2"
 
-gh pr view "$pr_number" --json labels -q '.labels[].name' > /tmp/existing_labels.txt 2>/dev/null || touch /tmp/existing_labels.txt
+existing_labels=$(mktemp)
+trap 'rm -f "$existing_labels"' EXIT
 
-comm -23 <(sort "$labels_file") <(sort /tmp/existing_labels.txt) | while IFS= read -r label; do
+gh pr view "$pr_number" --json labels -q '.labels[].name' > "$existing_labels" 2>/dev/null || touch "$existing_labels"
+
+comm -23 <(sort "$labels_file") <(sort "$existing_labels") | while IFS= read -r label; do
     gh pr edit "$pr_number" --add-label "$label" 2>/dev/null || true
 done
-
-rm -f /tmp/existing_labels.txt
