@@ -330,7 +330,7 @@
                 />
 
             <net.skyscanner.backpack.badge.BpkBadge
-                android:id="@+id/brand_1"
+                android:id="@+id/subtle_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:badgeType="subtle"
@@ -342,7 +342,7 @@
                 />
 
             <net.skyscanner.backpack.badge.BpkBadge
-                android:id="@+id/brand_2"
+                android:id="@+id/subtle_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:badgeIcon="@drawable/bpk_tick_circle_sm"
