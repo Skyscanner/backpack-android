@@ -31,7 +31,7 @@ for log in "${GIT_ROOT}"/Log.*.json; do
     [ -e "$log" ] || continue
 
     # Extract tool name from filename
-    TOOL=$(basename "$log" .json | sed 's/Log\.//')
+    TOOL=$(basename "$log" .json | sed 's/Log\.//' | tr '[:upper:]' '[:lower:]')
 
     # Validate branch matches
     LOG_BRANCH=$(jq -r '.changes[].branch' "$log" 2>/dev/null | head -1)
