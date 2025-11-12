@@ -24,7 +24,7 @@ output_file="$3"
 touch "$output_file"
 
 git log --format=%B "$base_ref..$head_ref" 2>/dev/null | \
-    grep -oE 'ai: [a-z0-9-]+' || true | \
+    { grep -oE 'ai: [a-z0-9-]+' || true; } | \
     sort -u > "$output_file"
 
 wc -l < "$output_file" | tr -d ' '
