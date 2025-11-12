@@ -197,7 +197,7 @@ Ensure to include /CONTRIBUTING.md for additional context on contributing to Bac
 
 ## AI Work Logging
 
-### 🚨 MANDATORY REQUIREMENT 🚨
+### MANDATORY REQUIREMENT
 
 **After completing ANY work with AI tools, you MUST create or append to `Log.<tool_name>.json` in the Git repository root.**
 
@@ -232,9 +232,7 @@ Use `Log.<tool_name>.json`, where `<tool_name>` identifies whichever AI assistan
   "changes": [
     {
       "type_of_change": ["implementation", "testing"],
-      "branch": "feature/badge-component",
-      "description": "Added BpkBadge component with tests",
-      "model": "claude-sonnet-4.5"
+      "branch": "feature/badge-component"
     }
   ]
 }

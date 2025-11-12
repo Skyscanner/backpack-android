@@ -53,9 +53,7 @@ touch Log.copilot.json
   "changes": [
     {
       "type_of_change": ["implementation", "testing"],
-      "branch": "feature/new-component",
-      "description": "Added component with tests",
-      "model": "claude-sonnet-4.5"
+      "branch": "feature/new-component"
     }
   ]
 }
@@ -63,9 +61,7 @@ touch Log.copilot.json
 
 **Fields:**
 - `type_of_change` (required): One or more of `implementation`, `testing`, `documentation`, `ci`
-- `branch` (optional): Current git branch
-- `description` (optional): Brief description
-- `model` (optional): AI model identifier
+- `branch` (required): Current git branch for validation
 
 ### Label Categories
 
@@ -91,33 +87,14 @@ git commit -m "Add new component"
 # ✅ Deletes log file
 ```
 
-**Commit enhancement:**
-```
-Add new component
-
-ai: implementation ai: testing ai: claude
-```
-
-**PR labels:**
 When PR is created, GitHub Actions extracts all `ai:` labels from commits and applies them with random colors.
 
-## Example
-
-```json
-{
-  "changes": [
-    {
-      "type_of_change": ["implementation", "testing"],
-      "description": "Built user profile component",
-      "model": "claude-sonnet-4.5"
-    }
-  ]
-}
-```
-
-**Result:** PR gets `ai: implementation`, `ai: testing`, `ai: claude` labels.
-
 ## Troubleshooting
+
+**Getting `ai: failed` label?**
+- Branch in log file doesn't match current git branch
+- Invalid JSON in log file
+- Missing `jq` or `type_of_change` field
 
 **Labels not appearing?**
 ```bash
@@ -126,6 +103,10 @@ ls Log.*.json
 
 # Validate JSON
 jq empty Log.claude.json
+
+# Check branch matches
+git branch --show-current
+jq -r '.changes[].branch' Log.claude.json
 
 # Check hook exists
 ls -la .git/hooks/prepare-commit-msg

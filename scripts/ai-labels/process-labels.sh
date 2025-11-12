@@ -23,6 +23,7 @@ set -euo pipefail
 
 COMMIT_MSG_FILE="${1:-$(git rev-parse --git-dir)/COMMIT_EDITMSG}"
 GIT_ROOT="$(git rev-parse --show-toplevel)"
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 LABELS=()
 
 # Find and process Log.*.json files
@@ -31,6 +32,14 @@ for log in "${GIT_ROOT}"/Log.*.json; do
 
     # Extract tool name from filename
     TOOL=$(basename "$log" .json | sed 's/Log\.//')
+
+    # Validate branch matches
+    LOG_BRANCH=$(jq -r '.changes[].branch' "$log" 2>/dev/null | head -1)
+    if [ -n "$LOG_BRANCH" ] && [ "$LOG_BRANCH" != "$CURRENT_BRANCH" ]; then
+        LABELS+=("ai: failed")
+        rm -f "$log" 2>/dev/null || true
+        continue
+    fi
 
     # Extract type_of_change labels, add ai: prefix
     if command -v jq &>/dev/null && jq -e '.changes[].type_of_change[]' "$log" &>/dev/null; then
