@@ -43,7 +43,7 @@ fun BpkCardWrapper(
     modifier: Modifier = Modifier,
     cardPadding: BpkCardPadding = BpkCardPadding.Small,
     corner: BpkCardCorner = BpkCardCorner.Small,
-    cardStyle: BpkCardStyle = BpkCardStyle.onDefault,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

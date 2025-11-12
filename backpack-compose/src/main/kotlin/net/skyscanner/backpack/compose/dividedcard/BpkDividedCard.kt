@@ -40,7 +40,7 @@ fun BpkDividedCard(
     secondaryContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
-    cardStyle: BpkCardStyle = BpkCardStyle.onDefault,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
 ) {
     onClick?.let {
         BpkCard(
