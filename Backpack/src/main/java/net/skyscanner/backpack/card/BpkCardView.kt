@@ -74,7 +74,7 @@ open class BpkCardView @JvmOverloads constructor(
             fun fromAttr(attr: Int) = when (attr) {
                 0 -> CONTRAST
                 1 -> DEFAULT
-                else -> throw IllegalStateException("Wrong elevation value")
+                else -> throw IllegalStateException("Invalid card style value")
             }
         }
     }
