@@ -75,20 +75,21 @@ internal fun BpkButtonImpl(
     contentDescription: String? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val clickable = enabled && !loading
+    val isInteractionEnabled = enabled && !loading
     val rippleConfiguration = createRippleConfiguration(type)
-    val buttonModifier = modifier.createButtonModifier(
-        size = size,
-        contentDescription = contentDescription,
-        clickable = clickable,
-        onClick = onClick,
-    )
-    val buttonColors = createButtonColors(type, loading, interactionSource)
+    val buttonModifier = modifier
+        .defaultButtonSize(size)
+        .applyAccessibilityOverride(
+            contentDescription = contentDescription,
+            enabled = isInteractionEnabled,
+            onClick = onClick,
+        )
+    val buttonColors = rememberButtonColors(type, loading, interactionSource)
 
     CompositionLocalProvider(LocalRippleConfiguration provides rippleConfiguration) {
         Button(
             onClick = onClick,
-            enabled = clickable,
+            enabled = isInteractionEnabled,
             modifier = buttonModifier,
             interactionSource = interactionSource,
             colors = buttonColors,
@@ -149,21 +150,20 @@ private fun createRippleConfiguration(type: BpkButtonType): RippleConfiguration 
     return RippleConfiguration(rippleColor, rippleColor.toRippleAlpha())
 }
 
-private fun Modifier.createButtonModifier(
-    size: BpkButtonSize,
-    contentDescription: String?,
-    clickable: Boolean,
-    onClick: () -> Unit,
-): Modifier {
-    val baseModifier = this
-        .defaultMinSize(BpkSpacing.Sm, size.minHeight)
+private fun Modifier.defaultButtonSize(size: BpkButtonSize): Modifier =
+    defaultMinSize(BpkSpacing.Sm, size.minHeight)
         .requiredHeight(size.minHeight)
 
+private fun Modifier.applyAccessibilityOverride(
+    contentDescription: String?,
+    enabled: Boolean,
+    onClick: () -> Unit,
+): Modifier {
     return if (contentDescription != null) {
-        baseModifier.then(
+        this.then(
             Modifier
                 .clickable(
-                    enabled = clickable,
+                    enabled = enabled,
                     onClick = onClick,
                     role = Role.Button,
                 )
@@ -172,12 +172,12 @@ private fun Modifier.createButtonModifier(
                 },
         )
     } else {
-        baseModifier
+        this
     }
 }
 
 @Composable
-private fun createButtonColors(
+private fun rememberButtonColors(
     type: BpkButtonType,
     loading: Boolean,
     interactionSource: MutableInteractionSource,
@@ -233,11 +233,11 @@ internal fun ButtonDrawable(
     size: BpkButtonSize,
     modifier: Modifier = Modifier,
 ) {
-    size.iconSize
+    val iconSize = size.iconSize
     Image(
         painter = icon,
         contentDescription = contentDescription,
-        modifier = modifier.defaultIconSize(size.iconSize),
+        modifier = modifier.defaultIconSize(iconSize),
     )
 }
 
