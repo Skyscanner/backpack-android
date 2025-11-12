@@ -4,7 +4,7 @@ Below are the standards and best practices for developing components in the Back
 
 ---
 
-## ⚠️ CRITICAL: AI Work Logging is MANDATORY
+## CRITICAL: AI Work Logging is MANDATORY
 
 **BEFORE completing any work session, you MUST create/update `Log.<tool_name>.json` at the Git repository root.**
 
@@ -247,50 +247,3 @@ Select one or more:
 - **`testing`** - Writing or updating tests
 - **`documentation`** - Documentation updates
 - **`ci`** - CI/CD or build system work
-
-### Example Logs
-
-**New Component:**
-```json
-{
-  "changes": [{
-    "type_of_change": ["implementation", "testing", "documentation"],
-    "branch": "feature/chip",
-    "description": "Created BpkChip with tests and docs",
-    "model": "claude-sonnet-4.5"
-  }]
-}
-```
-
-**Bug Fix:**
-```json
-{
-  "changes": [{
-    "type_of_change": ["implementation"],
-    "branch": "fix/button-padding",
-    "description": "Fixed button padding issue",
-    "model": "claude-sonnet-4.5"
-  }]
-}
-```
-
-The system automatically:
-1. Processes log files during commits
-2. Appends labels to commit messages with `ai:` prefix
-3. Applies labels to PRs via GitHub Actions
-4. Tracks which AI tools were used
-
-See `scripts/ai-labels/README.md` for detailed documentation.
-
----
-
-## 🔄 AI Assistant Workflow Reminder
-
-**Every time you complete work, follow this checklist:**
-
-1. ✅ Make your code/test/documentation changes
-2. ✅ Verify the changes work correctly
-3. ✅ **UPDATE THE AI WORK LOG** at `$(git rev-parse --show-toplevel)/Log.<tool_name>.json`
-4. ✅ Mark the task as complete
-
-**Missing the log entry is not acceptable.** It's required for tracking, analytics, and compliance.
