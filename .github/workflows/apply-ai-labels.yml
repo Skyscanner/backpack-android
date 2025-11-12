@@ -28,7 +28,7 @@ jobs:
         run: |
           LABEL_COUNT=$(./scripts/ai-labels/extract-commit-labels.sh \
             "origin/${{ github.base_ref }}" \
-            "${{ github.head_ref }}" \
+            "HEAD" \
             "labels.txt")
 
           [ "$LABEL_COUNT" -eq 0 ] && exit 0
