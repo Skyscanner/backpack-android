@@ -15,5 +15,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Process AI work labels from Log.<tool>.json files
+# Process AI work labels from Log.<tool>.yaml files
 ./scripts/ai-labels/process-labels.sh "$@"

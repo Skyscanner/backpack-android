@@ -22,14 +22,19 @@ set -euo pipefail
 
 labels_file="$1"
 
-gh label list --json name -q '.[].name' > /tmp/repo_labels.txt 2>/dev/null || touch /tmp/repo_labels.txt
-# Create missing labels
+repo_labels=$(mktemp)
+trap 'rm -f "$repo_labels"' EXIT
+
+gh label list --json name -q '.[].name' > "$repo_labels" 2>/dev/null || touch "$repo_labels"
+
 while IFS= read -r label; do
     [ -z "$label" ] && continue
-    grep -Fxq "$label" /tmp/repo_labels.txt 2>/dev/null && continue
+    grep -Fxq "$label" "$repo_labels" 2>/dev/null && continue
 
-    color=$(printf "%02X%02X%02X" $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50)))
+    if command -v md5sum >/dev/null 2>&1; then
+        color=$(printf "%s" "$label" | md5sum | cut -c1-6)
+    else
+        color=$(printf "%s" "$label" | md5 | cut -c1-6)
+    fi
     gh label create "$label" --color "$color" --description "AI-assisted work" 2>/dev/null || true
 done < "$labels_file"
-
-rm -f /tmp/repo_labels.txt

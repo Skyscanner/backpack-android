@@ -21,7 +21,9 @@ base_ref="$1"
 head_ref="$2"
 output_file="$3"
 
-git log --format=%B "$base_ref..$head_ref" | \
+touch "$output_file"
+
+git log --format=%B "$base_ref..$head_ref" 2>/dev/null | \
     grep -oE 'ai: [a-z0-9-]+' || true | \
     sort -u > "$output_file"
 
