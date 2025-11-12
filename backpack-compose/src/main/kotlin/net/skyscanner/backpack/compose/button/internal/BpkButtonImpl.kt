@@ -23,6 +23,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
@@ -57,7 +58,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
 import net.skyscanner.backpack.compose.utils.toRippleAlpha
 import net.skyscanner.backpack.configuration.BpkConfiguration
@@ -76,70 +76,125 @@ internal fun BpkButtonImpl(
     content: @Composable RowScope.() -> Unit,
 ) {
     val clickable = enabled && !loading
+    val rippleConfiguration = createRippleConfiguration(type)
+    val buttonModifier = modifier.createButtonModifier(
+        size = size,
+        contentDescription = contentDescription,
+        clickable = clickable,
+        onClick = onClick,
+    )
+    val buttonColors = createButtonColors(type, loading, interactionSource)
 
-    CompositionLocalProvider(
-        LocalRippleConfiguration provides RippleConfiguration(
-            type.rippleColor(),
-            type.rippleColor().toRippleAlpha(),
-        ),
-    ) {
+    CompositionLocalProvider(LocalRippleConfiguration provides rippleConfiguration) {
         Button(
             onClick = onClick,
             enabled = clickable,
-            modifier = modifier
-                .defaultMinSize(BpkSpacing.Sm, size.minHeight)
-                .requiredHeight(size.minHeight)
-                .applyIf(contentDescription != null) {
-                    then(
-                        Modifier
-                            .clickable(
-                                enabled = clickable,
-                                onClick = onClick,
-                                role = Role.Button,
-                            )
-                            .clearAndSetSemantics {
-                                this.contentDescription = contentDescription!!
-                            },
-                    )
-                },
+            modifier = buttonModifier,
             interactionSource = interactionSource,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = type.backgroundColor(interactionSource),
-                contentColor = type.contentColor(interactionSource),
-                disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-                disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
-            ),
+            colors = buttonColors,
             shape = buttonShape(),
             contentPadding = type.contentPadding(size),
             elevation = null,
             content = {
-                CompositionLocalProvider(
-                    LocalTextStyle provides BpkTheme.typography.label1,
-                ) {
-                    Box {
-                        Row(
-                            modifier = Modifier.hideContentIf(loading),
-                            horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
-                            verticalAlignment = Alignment.CenterVertically,
-                            content = content,
-                        )
-
-                        if (loading) {
-                            BpkSpinner(
-                                modifier = Modifier.align(Alignment.Center),
-                                color = LocalContentColor.current,
-                                size = when (size) {
-                                    BpkButtonSize.Default -> BpkSpinnerSize.Small
-                                    BpkButtonSize.Large -> BpkSpinnerSize.Large
-                                },
-                            )
-                        }
-                    }
-                }
+                ButtonContent(
+                    loading = loading,
+                    size = size,
+                    content = content,
+                )
             },
         )
     }
 }
+
+@Composable
+private fun ButtonContent(
+    loading: Boolean,
+    size: BpkButtonSize,
+    content: @Composable RowScope.() -> Unit,
+) {
+    CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label1) {
+        Box {
+            Row(
+                modifier = Modifier.hideContentIf(loading),
+                horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+                verticalAlignment = Alignment.CenterVertically,
+                content = content,
+            )
+
+            if (loading) {
+                LoadingSpinner(size)
+            }
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.LoadingSpinner(size: BpkButtonSize) {
+    val spinnerSize = when (size) {
+        BpkButtonSize.Default -> BpkSpinnerSize.Small
+        BpkButtonSize.Large -> BpkSpinnerSize.Large
+    }
+
+    BpkSpinner(
+        modifier = Modifier.align(Alignment.Center),
+        color = LocalContentColor.current,
+        size = spinnerSize,
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun createRippleConfiguration(type: BpkButtonType): RippleConfiguration {
+    val rippleColor = type.rippleColor()
+    return RippleConfiguration(rippleColor, rippleColor.toRippleAlpha())
+}
+
+private fun Modifier.createButtonModifier(
+    size: BpkButtonSize,
+    contentDescription: String?,
+    clickable: Boolean,
+    onClick: () -> Unit,
+): Modifier {
+    val baseModifier = this
+        .defaultMinSize(BpkSpacing.Sm, size.minHeight)
+        .requiredHeight(size.minHeight)
+
+    return if (contentDescription != null) {
+        baseModifier.then(
+            Modifier
+                .clickable(
+                    enabled = clickable,
+                    onClick = onClick,
+                    role = Role.Button,
+                )
+                .clearAndSetSemantics {
+                    this.contentDescription = contentDescription
+                },
+        )
+    } else {
+        baseModifier
+    }
+}
+
+@Composable
+private fun createButtonColors(
+    type: BpkButtonType,
+    loading: Boolean,
+    interactionSource: MutableInteractionSource,
+) = ButtonDefaults.buttonColors(
+    containerColor = type.backgroundColor(interactionSource),
+    contentColor = type.contentColor(interactionSource),
+    disabledContainerColor = if (loading) {
+        type.loadingBackgroundColor()
+    } else {
+        type.disabledBackgroundColor()
+    },
+    disabledContentColor = if (loading) {
+        type.loadingContentColor()
+    } else {
+        type.disabledContentColor()
+    },
+)
 
 @Composable
 internal fun ButtonIcon(
