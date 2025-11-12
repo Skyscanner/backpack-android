@@ -135,7 +135,7 @@ internal fun BpkButtonType.loadingContentColor(): Color = pressedContentColor()
 internal val secondaryPressedBackgroundWithVDL: Color
     @Composable
     get() =
-        BpkConfiguration.buttonConfig?.secondaryOnContrastBackgroundColor?.toColor()
+        BpkConfiguration.buttonConfig?.secondaryPressedBackgroundColor?.toColor()
             ?: BpkButtonColors.secondaryPressedBackground
 
 internal val secondaryNormalBackgroundWithVDL: Color
