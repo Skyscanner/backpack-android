@@ -31,10 +31,6 @@ while IFS= read -r label; do
     [ -z "$label" ] && continue
     grep -Fxq "$label" "$repo_labels" 2>/dev/null && continue
 
-    if command -v md5sum >/dev/null 2>&1; then
-        color=$(printf "%s" "$label" | md5sum | cut -c1-6)
-    else
-        color=$(printf "%s" "$label" | md5 | cut -c1-6)
-    fi
+    color=$(printf "%s" "$label" | md5sum | cut -c1-6)
     gh label create "$label" --color "$color" --description "AI-assisted work" 2>/dev/null || true
 done < "$labels_file"

@@ -45,41 +45,32 @@ parse_yaml_types() {
 for log in "${GIT_ROOT}"/Log.*.yaml; do
     [ -e "$log" ] || continue
 
-    TOOL=$(basename "$log" .yaml | sed 's/Log\.//' | tr '[:upper:]' '[:lower:]')
+    tool=$(basename "$log" .yaml | sed 's/Log\.//' | tr '[:upper:]' '[:lower:]')
+    branch=$(parse_yaml_branch "$log")
 
-    LOG_BRANCH=$(parse_yaml_branch "$log")
-
-    if [ -z "$LOG_BRANCH" ]; then
+    if [ -z "$branch" ] || [ "$branch" != "$CURRENT_BRANCH" ]; then
         LABELS+=("ai: failed")
         rm -f "$log" 2>/dev/null || true
         continue
     fi
 
-    if [ "$LOG_BRANCH" != "$CURRENT_BRANCH" ]; then
-        LABELS+=("ai: failed")
-        rm -f "$log" 2>/dev/null || true
-        continue
-    fi
-
-    HAS_VALID_TYPE=false
-    while IFS= read -r label; do
-        if [ -n "$label" ]; then
-            if validate_type "$label"; then
-                LABELS+=("ai: $label")
-                HAS_VALID_TYPE=true
-            else
-                LABELS+=("ai: failed")
-            fi
+    has_valid_type=false
+    while IFS= read -r type; do
+        if validate_type "$type"; then
+            LABELS+=("ai: $type")
+            has_valid_type=true
+        else
+            LABELS+=("ai: failed")
         fi
     done < <(parse_yaml_types "$log" | sort -u)
 
-    if [ "$HAS_VALID_TYPE" = true ]; then
-        LABELS+=("ai: $TOOL")
-        rm -f "$log"
+    if [ "$has_valid_type" = true ]; then
+        LABELS+=("ai: $tool")
     else
         LABELS+=("ai: failed")
-        rm -f "$log" 2>/dev/null || true
     fi
+
+    rm -f "$log" 2>/dev/null || true
 done
 
 if [ ${#LABELS[@]} -gt 0 ]; then

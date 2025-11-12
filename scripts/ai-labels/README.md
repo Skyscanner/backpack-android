@@ -74,7 +74,7 @@ git commit -m "Add new component"
 # ✅ Deletes log file
 ```
 
-When PR is created, GitHub Actions extracts all `ai:` labels from commits and applies them with random colors.
+When PR is created, GitHub Actions extracts all `ai:` labels from commits and applies them with deterministic colors.
 
 ## Troubleshooting
 
