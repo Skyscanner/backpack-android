@@ -13,6 +13,12 @@ jobs:
   apply-labels:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -24,14 +30,23 @@ jobs:
 
       - name: Extract and apply labels
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
+          echo "Extracting labels from origin/${{ github.base_ref }}..HEAD"
           LABEL_COUNT=$(./scripts/ai-labels/extract-commit-labels.sh \
             "origin/${{ github.base_ref }}" \
             "HEAD" \
             "labels.txt")
 
-          [ "$LABEL_COUNT" -eq 0 ] && exit 0
+          echo "Found $LABEL_COUNT labels"
+
+          if [ "$LABEL_COUNT" -eq 0 ]; then
+            echo "No AI labels found in commits, skipping"
+            exit 0
+          fi
+
+          echo "Labels to process:"
+          cat labels.txt
 
           ./scripts/ai-labels/create-github-labels.sh labels.txt
           ./scripts/ai-labels/apply-pr-labels.sh ${{ github.event.pull_request.number }} labels.txt
