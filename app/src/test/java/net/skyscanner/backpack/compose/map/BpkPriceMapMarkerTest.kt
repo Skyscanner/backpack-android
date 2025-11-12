@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.map
 
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Test
@@ -42,5 +44,11 @@ class BpkPriceMapMarkerTest : BpkSnapshotTest() {
     @Test
     fun disabled() = snap(background = { BpkTheme.colors.canvasContrast }) {
         PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Disabled)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun rtl() = snap {
+        PriceMarkerLayout(title = "£100", status = BpkPriceMarkerStatus.Default)
     }
 }

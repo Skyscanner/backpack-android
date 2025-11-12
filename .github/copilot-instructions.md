@@ -2,6 +2,16 @@
 
 Below are the standards and best practices for developing components in the Backpack Android library. These standards ensure that all components are accessible, well-designed, thoroughly tested, and properly documented. Wherever appropriate, these standards draw inspiration from established best practices such as Material 3 guidelines to ensure modern, accessible, and robust components.
 
+---
+
+## ⚠️ CRITICAL: AI Work Logging is MANDATORY
+
+**BEFORE completing any work session, you MUST create/update `Log.<tool_name>.json` at the Git repository root.**
+
+This is not optional. Every code change, test addition, or documentation update must be logged. See the [AI Work Logging](#ai-work-logging) section below for details.
+
+---
+
 ## Accessibility Standards
 
 Accessibility is a fundamental requirement for all Backpack components. Components must be usable by everyone.
@@ -87,6 +97,8 @@ A well-designed API is intuitive, consistent, and easy to use correctly. The fol
    - Components must be designed and implemented to fully support Right-to-Left (RTL) layouts, ensuring correct visual presentation and interaction.
    - Components should be designed to adapt gracefully to different screen sizes, orientations, and user accessibility settings (e.g., font scaling, display scaling).
 
+**📝 REMINDER: After implementing components or making API changes, update the AI Work Log at the Git repository root!**
+
 ## UI Tokens and Strings Principles
 UI tokens and strings are essential for maintaining consistency and adaptability across components. They should be used to define visual styles, spacing, and text content.
 ### Requirements
@@ -124,6 +136,8 @@ Thorough testing ensures that components work as expected and continue to work a
    - Focus on testing behaviour, not implementation details
    - Ensure all code paths are tested
 
+**📝 REMINDER: After adding or modifying tests, update the AI Work Log at the Git repository root!**
+
 ## Documentation Standards
 
 Good documentation is essential for component adoption and correct usage.
@@ -154,6 +168,8 @@ Good documentation is essential for component adoption and correct usage.
    - Show different states and configurations
    - Update screenshots when the component changes visually
 
+**📝 REMINDER: After adding or updating documentation, update the AI Work Log at the Git repository root!**
+
 ## Compose vs View Components
 * Compose is our standard for new component development in Backpack Android.
 * New components should be developed using Jetpack Compose and located in backpack-compose.
@@ -173,6 +189,7 @@ Run throw this checklist before submitting a new component or significant change
 - [ ] API documentation is complete
 - [ ] Component is included in the demo app
 - [ ] Screenshots are up-to-date
+- [ ] **AI Work Log created/updated at Git repository root** (`Log.<tool_name>.json`)
 
 
 ## Contribution Guidelines
@@ -180,9 +197,20 @@ Ensure to include /CONTRIBUTING.md for additional context on contributing to Bac
 
 ## AI Work Logging
 
-After completing work with AI tools, create or append to `Log.<tool_name>.json` in **Git repository root**:
+### 🚨 MANDATORY REQUIREMENT 🚨
+
+**After completing ANY work with AI tools, you MUST create or append to `Log.<tool_name>.json` in the Git repository root.**
+
+**WHEN TO LOG:**
+- ✅ After writing or modifying ANY code
+- ✅ After adding or updating tests
+- ✅ After updating documentation
+- ✅ After making CI/CD changes
+- ✅ BEFORE considering the task complete
 
 **IMPORTANT: Always write to Git root, even if working in subdirectories (app/, Backpack/, etc.)**
+
+**DO NOT SKIP THIS STEP!** This is tracked and required for all AI-assisted work.
 
 ```bash
 # Use git to find repository root:
@@ -253,3 +281,16 @@ The system automatically:
 4. Tracks which AI tools were used
 
 See `scripts/ai-labels/README.md` for detailed documentation.
+
+---
+
+## 🔄 AI Assistant Workflow Reminder
+
+**Every time you complete work, follow this checklist:**
+
+1. ✅ Make your code/test/documentation changes
+2. ✅ Verify the changes work correctly
+3. ✅ **UPDATE THE AI WORK LOG** at `$(git rev-parse --show-toplevel)/Log.<tool_name>.json`
+4. ✅ Mark the task as complete
+
+**Missing the log entry is not acceptable.** It's required for tracking, analytics, and compliance.
