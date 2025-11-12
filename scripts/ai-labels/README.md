@@ -120,11 +120,3 @@ chmod +x .git/hooks/prepare-commit-msg
 ```bash
 ./scripts/ai-labels/process-labels.sh .git/COMMIT_EDITMSG
 ```
-
-## Files
-
-- `process-labels.sh` - Pre-commit hook script
-- `extract-commit-labels.sh` - Extracts labels from commits
-- `create-github-labels.sh` - Creates labels with random colors
-- `apply-pr-labels.sh` - Applies labels to PRs
-- `.github/workflows/apply-ai-labels.yml` - GitHub Actions workflow
