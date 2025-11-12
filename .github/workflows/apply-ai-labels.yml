@@ -19,34 +19,20 @@ jobs:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Install yq
-        run: |
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
-
-      - name: Extract and apply labels
+      - name: Apply AI labels
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          echo "Extracting labels from origin/${{ github.base_ref }}..HEAD"
-          LABEL_COUNT=$(./scripts/ai-labels/extract-commit-labels.sh \
+          label_count=$(./scripts/ai-labels/extract-commit-labels.sh \
             "origin/${{ github.base_ref }}" \
             "HEAD" \
             "labels.txt")
 
-          echo "Found $LABEL_COUNT labels"
-
-          if [ "$LABEL_COUNT" -eq 0 ]; then
-            echo "No AI labels found in commits, skipping"
-            exit 0
-          fi
-
-          echo "Labels to process:"
-          cat labels.txt
+          [ "$label_count" -eq 0 ] && exit 0
 
           ./scripts/ai-labels/create-github-labels.sh labels.txt
           ./scripts/ai-labels/apply-pr-labels.sh ${{ github.event.pull_request.number }} labels.txt

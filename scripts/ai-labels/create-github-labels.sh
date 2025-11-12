@@ -20,41 +20,16 @@
 #
 set -euo pipefail
 
-LABELS_FILE="$1"
-CONFIG_FILE="$(dirname "$0")/config.default.yaml"
+labels_file="$1"
 
-# Get color from config or generate random color
-get_color() {
-    local label="$1"
-    if command -v yq &>/dev/null && [ -f "$CONFIG_FILE" ]; then
-        local color=$(yq eval ".label_colors.\"$label\"" "$CONFIG_FILE" 2>/dev/null)
-        if [ "$color" != "null" ] && [ -n "$color" ]; then
-            echo "$color"
-            return
-        fi
-    fi
-    # Generate random hex color (avoid too dark or too light)
-    printf "%02X%02X%02X" $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50))
-}
-
-# Get existing labels
-gh label list --json name -q '.[].name' > /tmp/repo_labels.txt 2>&1 || touch /tmp/repo_labels.txt
-
-echo "Creating missing labels from $LABELS_FILE"
-cat "$LABELS_FILE"
-
+gh label list --json name -q '.[].name' > /tmp/repo_labels.txt 2>/dev/null || touch /tmp/repo_labels.txt
 # Create missing labels
 while IFS= read -r label; do
     [ -z "$label" ] && continue
+    grep -Fxq "$label" /tmp/repo_labels.txt 2>/dev/null && continue
 
-    if grep -Fxq "$label" /tmp/repo_labels.txt 2>/dev/null; then
-        echo "Label already exists: $label"
-        continue
-    fi
-
-    COLOR=$(get_color "$label")
-    echo "Creating label: $label with color $COLOR"
-    gh label create "$label" --color "$COLOR" --description "AI-assisted work" || echo "Failed to create label: $label"
-done < "$LABELS_FILE"
+    color=$(printf "%02X%02X%02X" $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50)) $((RANDOM % 156 + 50)))
+    gh label create "$label" --color "$color" --description "AI-assisted work" 2>/dev/null || true
+done < "$labels_file"
 
 rm -f /tmp/repo_labels.txt

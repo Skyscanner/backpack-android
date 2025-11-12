@@ -15,24 +15,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# Apply labels to a GitHub PR
-#
 set -euo pipefail
 
-PR_NUMBER="$1"
-LABELS_FILE="$2"
+pr_number="$1"
+labels_file="$2"
 
-# Get existing PR labels
-gh pr view "$PR_NUMBER" --json labels -q '.labels[].name' > /tmp/existing_labels.txt 2>&1 || touch /tmp/existing_labels.txt
+gh pr view "$pr_number" --json labels -q '.labels[].name' > /tmp/existing_labels.txt 2>/dev/null || touch /tmp/existing_labels.txt
 
-# Apply only new labels (deduplicated with comm)
-echo "Applying labels from $LABELS_FILE to PR #$PR_NUMBER"
-cat "$LABELS_FILE"
-
-comm -23 <(sort "$LABELS_FILE") <(sort /tmp/existing_labels.txt) | while IFS= read -r label; do
-    echo "Adding label: $label"
-    gh pr edit "$PR_NUMBER" --add-label "$label" || echo "Failed to add label: $label"
+comm -23 <(sort "$labels_file") <(sort /tmp/existing_labels.txt) | while IFS= read -r label; do
+    gh pr edit "$pr_number" --add-label "$label" 2>/dev/null || true
 done
 
 rm -f /tmp/existing_labels.txt

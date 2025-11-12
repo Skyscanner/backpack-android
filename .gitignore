@@ -245,7 +245,3 @@ backpack-compose/src/main/res/raw/compose_components.txt
 
 # AI work logs (processed by pre-commit hook)
 Log.*.json
-
-# AI labels local config
-scripts/ai-labels/config.yaml
-scripts/ai-labels/.installed

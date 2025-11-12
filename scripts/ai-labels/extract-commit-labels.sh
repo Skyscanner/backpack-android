@@ -20,14 +20,12 @@
 #
 set -euo pipefail
 
-BASE_REF="$1"
-HEAD_REF="$2"
-OUTPUT_FILE="$3"
+base_ref="$1"
+head_ref="$2"
+output_file="$3"
 
-# Extract all "ai: <word>" patterns from commit messages
-git log --format=%B "$BASE_REF..$HEAD_REF" | \
+git log --format=%B "$base_ref..$head_ref" | \
     grep -oE 'ai: [a-z0-9-]+' | \
-    sort -u > "$OUTPUT_FILE"
+    sort -u > "$output_file"
 
-# Return count
-wc -l < "$OUTPUT_FILE" | tr -d ' '
+wc -l < "$output_file" | tr -d ' '

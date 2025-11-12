@@ -125,10 +125,9 @@ AI-Tool: ai: claude | Model: claude-sonnet-4.5
 ### PR Labels
 
 When you create a PR, GitHub Actions automatically:
-1. Scans all commits for `AI-Labels:` lines
-2. Creates labels if they don't exist
+1. Scans all commits for `ai:` labels
+2. Creates labels with random colors if they don't exist
 3. Applies labels to the PR
-4. Posts a summary comment
 
 **Example PR labels:**
 ```
@@ -239,23 +238,15 @@ git commit -m "Add component and tests"
 
 ## Configuration
 
-### Customizing Labels
+### Label Colors
 
-Edit `config.default.yaml` to customize:
-- Label colors
-- Label descriptions
-- Tool label colors
+Labels are automatically assigned **random colors** for visual distinction. Each label gets a unique color generated dynamically when created.
 
-**Note**: Changes to `config.default.yaml` are shared across the team (checked into git).
-
-### Local Overrides
-
-Create `config.yaml` (gitignored) for personal overrides:
-
-```bash
-cp config.default.yaml config.yaml
-# Edit config.yaml with your preferences
-```
+**Why random colors?**
+- Each label gets a unique, readable color automatically
+- No configuration needed
+- Works with any new AI tool immediately
+- Colors are consistent once created (GitHub caches them)
 
 ## Troubleshooting
 
@@ -369,23 +360,21 @@ apply-ai-labels.yml workflow runs
     ↓
 Scans all commits in PR
     ↓
-Parses "AI-Labels:" lines
+Extracts ai: labels pattern
     ↓
 Deduplicates labels
     ↓
-Creates labels if missing
+Creates labels with random colors
     ↓
 Applies to PR
-    ↓
-Posts summary comment
 ```
 
 ## Files
 
-- **`config.default.yaml`** - Default label configuration (committed to git)
-- **`config.yaml`** - Local overrides (gitignored, auto-created)
-- **`process-labels.sh`** - Main hook script
-- **`.installed`** - Installation marker (gitignored)
+- **`process-labels.sh`** - Pre-commit hook script
+- **`extract-commit-labels.sh`** - Extracts labels from commits
+- **`create-github-labels.sh`** - Creates labels with random colors
+- **`apply-pr-labels.sh`** - Applies labels to PRs
 
 ## FAQ
 
@@ -402,7 +391,7 @@ A: No problem! The system is opt-in. If no log file exists, commits proceed norm
 A: No. The hook is non-blocking. If errors occur, it logs them but doesn't prevent commits.
 
 **Q: Can I add custom use case labels?**
-A: Yes, edit `config.default.yaml` and add to `label_types`. Commit the change to share with team.
+A: Yes! Just add them to your `type_of_change` array in Log files. They'll automatically get random colors when created.
 
 **Q: Why "ai:" prefix?**
 A: It creates a clear namespace separation from other project labels and matches the existing `ai: copilot` label pattern.
