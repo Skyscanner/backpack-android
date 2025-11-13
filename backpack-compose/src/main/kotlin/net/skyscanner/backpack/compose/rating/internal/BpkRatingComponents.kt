@@ -75,7 +75,7 @@ internal fun BpkRatingNumbers(
                     BpkRatingSize.Base -> BpkTheme.typography.caption
                     BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
                 },
-                color = BpkTheme.colors.textSecondary,
+                color = BpkTheme.colors.textPrimary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -113,7 +113,7 @@ internal fun BpkRatingSubtitle(
             BpkRatingSize.Base -> BpkTheme.typography.caption
             BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
         },
-        color = BpkTheme.colors.textSecondary,
+        color = BpkTheme.colors.textPrimary,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )
