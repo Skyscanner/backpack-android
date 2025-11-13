@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -41,6 +42,7 @@ fun BpkDividedCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
     onClick?.let {
         BpkCard(
@@ -49,6 +51,7 @@ fun BpkDividedCard(
             corner = BpkCardCorner.Small,
             padding = BpkCardPadding.None,
             cardStyle = cardStyle,
+            elevation = elevation,
         ) {
             Content(
                 primaryContent = primaryContent,
@@ -61,6 +64,7 @@ fun BpkDividedCard(
             corner = BpkCardCorner.Small,
             padding = BpkCardPadding.None,
             cardStyle = cardStyle,
+            elevation = elevation,
         ) {
             Content(
                 primaryContent = primaryContent,

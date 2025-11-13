@@ -32,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -62,7 +63,8 @@ internal fun cardColors(style: BpkCardStyle): CardColors {
     val value by animateColorAsState(
         targetValue = when (style) {
             BpkCardStyle.onContrast -> BpkTheme.colors.surfaceDefault
-            BpkCardStyle.onDefault -> BpkConfiguration.cardConfig?.backgroundColorDefault?.toColor() ?: BpkTheme.colors.surfaceDefault
+            BpkCardStyle.onDefault -> BpkConfiguration.cardConfig?.backgroundColorDefault?.toColor()
+                ?: BpkTheme.colors.surfaceDefault
         },
         label = "BpkCard background color",
     )
@@ -75,11 +77,12 @@ internal fun cardColors(style: BpkCardStyle): CardColors {
 }
 
 @Composable
-internal fun cardElevation(elevation: BpkCardStyle): CardElevation {
+internal fun cardElevation(elevation: BpkCardElevation): CardElevation {
     val value by animateDpAsState(
         targetValue = when (elevation) {
-            BpkCardStyle.onContrast -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
-            BpkCardStyle.onDefault -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
+            BpkCardElevation.None -> 0.dp
+            BpkCardElevation.Focus -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Xl
+            BpkCardElevation.Default -> BpkConfiguration.cardConfig?.defaultElevation?.dp ?: BpkElevation.Sm
         },
         label = "BpkCard elevation",
     )

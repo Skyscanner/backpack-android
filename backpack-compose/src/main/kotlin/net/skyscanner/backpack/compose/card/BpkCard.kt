@@ -40,6 +40,12 @@ enum class BpkCardPadding {
     Small,
 }
 
+enum class BpkCardElevation {
+    None,
+    Default,
+    Focus,
+}
+
 enum class BpkCardStyle {
     onDefault,
     onContrast,
@@ -53,6 +59,7 @@ fun BpkCard(
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
     content: @Composable ColumnScope.() -> Unit,
@@ -63,7 +70,7 @@ fun BpkCard(
         enabled = enabled,
         shape = cardShape(corner),
         colors = cardColors(cardStyle),
-        elevation = cardElevation(cardStyle),
+        elevation = cardElevation(elevation),
         interactionSource = interactionSource,
         content = { CardContent(padding, content) },
     )
@@ -75,13 +82,14 @@ fun BpkCard(
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
         modifier = modifier,
         shape = cardShape(corner),
         colors = cardColors(cardStyle),
-        elevation = cardElevation(cardStyle),
+        elevation = cardElevation(elevation),
         content = { CardContent(padding, content) },
     )
 }

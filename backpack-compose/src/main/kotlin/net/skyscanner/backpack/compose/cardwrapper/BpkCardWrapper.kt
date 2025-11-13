@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.card.internal.cardElevation
@@ -44,6 +45,7 @@ fun BpkCardWrapper(
     cardPadding: BpkCardPadding = BpkCardPadding.Small,
     corner: BpkCardCorner = BpkCardCorner.Small,
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -52,7 +54,7 @@ fun BpkCardWrapper(
             containerColor = backgroundColor,
             disabledContainerColor = backgroundColor,
         ),
-        elevation = cardElevation(cardStyle),
+        elevation = cardElevation(elevation),
         border = BorderStroke(width = BpkBorderSize.Lg, color = backgroundColor),
     ) {
         Column {
@@ -62,6 +64,7 @@ fun BpkCardWrapper(
                 corner = corner,
                 padding = cardPadding,
                 cardStyle = cardStyle,
+                elevation = elevation,
             ) {
                 cardContent.invoke()
             }
