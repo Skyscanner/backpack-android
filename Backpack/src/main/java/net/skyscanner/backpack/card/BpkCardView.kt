@@ -147,7 +147,7 @@ open class BpkCardView @JvmOverloads constructor(
         set(value) {
             field = value
             cardElevation = value.toDimension(context)
-            setCardBackgroundColor(cardStyle.toBackgroundColor(context))
+            setCardBackgroundColor(customBackgroundColor ?: cardStyle.toBackgroundColor(context))
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
