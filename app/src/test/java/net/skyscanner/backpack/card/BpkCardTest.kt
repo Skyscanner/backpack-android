@@ -96,6 +96,40 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
         snap(card, R.color.bpkSurfaceHighlight)
     }
 
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noElevation() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.NONE
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun unfocused() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.DEFAULT
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun focused() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
+        snap(card, R.color.bpkLine)
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
     companion object {
 
         @JvmStatic
