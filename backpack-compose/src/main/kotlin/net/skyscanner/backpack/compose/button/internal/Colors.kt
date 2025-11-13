@@ -26,6 +26,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.toColor
 import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @Composable
@@ -70,6 +71,7 @@ private fun BpkButtonType.defaultBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryNormalBackground
         BpkButtonType.Secondary -> secondaryNormalBackgroundWithVDL
+        BpkButtonType.SecondaryOnContrast -> secondaryOnContrastBackgroundWithVDL
         BpkButtonType.Featured -> BpkButtonColors.featuredNormalBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkNormalBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightNormalBackground
@@ -82,7 +84,7 @@ private fun BpkButtonType.defaultBackgroundColor(): Color =
 private fun BpkButtonType.pressedBackgroundColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkButtonColors.primaryPressedBackground
-        BpkButtonType.Secondary -> secondaryPressedBackgroundWithVDL
+        BpkButtonType.Secondary, BpkButtonType.SecondaryOnContrast -> secondaryPressedBackgroundWithVDL
         BpkButtonType.Featured -> BpkButtonColors.featuredPressedBackground
         BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkPressedBackground
         BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightPressedBackground
@@ -102,7 +104,7 @@ internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): C
 private fun BpkButtonType.defaultContentColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkTheme.colors.textOnDark
-        BpkButtonType.Secondary -> secondaryTextColor
+        BpkButtonType.Secondary, BpkButtonType.SecondaryOnContrast -> secondaryTextColor
         BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
@@ -115,7 +117,7 @@ private fun BpkButtonType.defaultContentColor(): Color =
 private fun BpkButtonType.pressedContentColor(): Color =
     when (this) {
         BpkButtonType.Primary -> BpkTheme.colors.textOnDark
-        BpkButtonType.Secondary -> secondaryTextColor
+        BpkButtonType.Secondary, BpkButtonType.SecondaryOnContrast -> secondaryTextColor
         BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
         BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
         BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
@@ -133,28 +135,20 @@ internal fun BpkButtonType.loadingContentColor(): Color = pressedContentColor()
 internal val secondaryPressedBackgroundWithVDL: Color
     @Composable
     get() =
-        BpkConfiguration.buttonConfig?.let {
-            dynamicColorOf(
-                it.secondaryPressedBackgroundColorLight,
-                it.secondaryPressedBackgroundColorDark,
-            )
-        } ?: BpkButtonColors.secondaryPressedBackground
+        BpkConfiguration.buttonConfig?.secondaryPressedBackgroundColor?.toColor()
+            ?: BpkButtonColors.secondaryPressedBackground
 
 internal val secondaryNormalBackgroundWithVDL: Color
     @Composable
     get() =
-        BpkConfiguration.buttonConfig?.let {
-            dynamicColorOf(
-                it.secondaryBackgroundColorLight,
-                it.secondaryBackgroundColorDark,
-            )
-        } ?: BpkButtonColors.secondaryNormalBackground
+        BpkConfiguration.buttonConfig?.secondaryBackgroundColor?.toColor() ?: BpkButtonColors.secondaryNormalBackground
+
+internal val secondaryOnContrastBackgroundWithVDL: Color
+    @Composable
+    get() =
+        BpkConfiguration.buttonConfig?.secondaryOnContrastBackgroundColor?.toColor()
+            ?: BpkButtonColors.secondaryNormalBackground
 
 internal val secondaryTextColor: Color
     @Composable
-    get() = BpkConfiguration.buttonConfig?.let {
-        dynamicColorOf(
-            it.secondaryTextColorLight,
-            it.secondaryTextColorDark,
-        )
-    } ?: BpkTheme.colors.textPrimary
+    get() = BpkConfiguration.buttonConfig?.secondaryTextColor?.toColor() ?: BpkTheme.colors.textPrimary

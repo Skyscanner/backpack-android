@@ -48,6 +48,7 @@ enum class BpkButtonType {
     PrimaryOnDark,
     PrimaryOnLight,
     SecondaryOnDark,
+    SecondaryOnContrast,
     Destructive,
     Link,
     LinkOnDark,

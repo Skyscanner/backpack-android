@@ -334,5 +334,6 @@ internal fun BpkButtonType.rowBackground() =
     when (this) {
         BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkTheme.colors.surfaceContrast
         BpkButtonType.PrimaryOnLight -> BpkTheme.colors.textOnDark
+        BpkButtonType.SecondaryOnContrast -> BpkTheme.colors.canvasContrast
         else -> Color.Transparent
     }

@@ -96,6 +96,7 @@
             <enum name="secondaryOnDark" value="6" />
             <enum name="link" value="7" />
             <enum name="linkOnDark" value="8" />
+            <enum name="secondaryOnContrast" value="9" />
         </attr>
         <attr name="buttonIcon" format="reference" />
         <attr name="buttonIconPosition" format="enum">

@@ -29,12 +29,10 @@ object BpkConfiguration {
 
         data class BpkButton(
             val cornerRadius: Dp = 999.dp,
-            val secondaryBackgroundColorLight: Color = Color(0xFFE3F0FF),
-            val secondaryBackgroundColorDark: Color = Color(0xFF243346),
-            val secondaryPressedBackgroundColorLight: Color = Color(0xFFB4D7FF),
-            val secondaryPressedBackgroundColorDark: Color = Color(0xFF010913),
-            val secondaryTextColorLight: Color = Color(0xFF024DAF),
-            val secondaryTextColorDark: Color = Color(0xFFFFFFFF),
+            val secondaryBackgroundColor: ColorPair = ColorPair(0xFFE3F0FF, 0xFF243346),
+            val secondaryOnContrastBackgroundColor: ColorPair = ColorPair(0xFFCFE4FF, 0xFF243346),
+            val secondaryPressedBackgroundColor: ColorPair = ColorPair(0xFFB4D7FF, 0xFF010913),
+            val secondaryTextColor: ColorPair = ColorPair(0xFF024DAF, 0xFFFFFFFF),
             val largeHeight: Dp = 56.dp,
             val defaultPaddingHorizontal: Dp = 16.dp, // Based on Figma design
             val largePaddingHorizontal: Dp = 24.dp, // Based on Figma design

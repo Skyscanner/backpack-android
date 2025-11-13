@@ -257,6 +257,7 @@ open class BpkButton(
         SecondaryOnDark,
         Link,
         LinkOnDark,
+        SecondaryOnContrast,
         ;
 
         internal companion object
