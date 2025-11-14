@@ -19,9 +19,9 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import android.graphics.Color.toArgb
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.configuration.BpkConfiguration
-import net.skyscanner.backpack.util.dynamicRgbColor
 
 internal sealed class ButtonStyles : (Context) -> ButtonStyle {
 
@@ -46,31 +46,49 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
             )
             // Apply experimental configuration if available
             return BpkConfiguration.buttonConfig?.let { config ->
-                with(context) {
-                    val bgPressedColor = dynamicRgbColor(
-                        config.secondaryPressedBackgroundColorLight,
-                        config.secondaryPressedBackgroundColorDark,
-                    )
-                    val textColor = dynamicRgbColor(
-                        config.secondaryTextColorLight,
-                        config.secondaryTextColorDark,
-                    )
-                    ButtonStyle(
-                        context = context,
-                        bgColor = dynamicRgbColor(
-                            config.secondaryBackgroundColorLight,
-                            config.secondaryBackgroundColorDark,
-                        ),
-                        bgPressedColor = bgPressedColor,
-                        bgLoadingColor = bgPressedColor,
-                        bgDisabledColor = baseStyle.bgDisabledColor,
-                        contentColor = textColor,
-                        contentPressedColor = textColor,
-                        contentDisabledColor = baseStyle.contentDisabledColor,
-                        contentLoadingColor = textColor,
-                        rippleColor = baseStyle.rippleColor,
-                    )
-                }
+                val bgPressedColor = config.secondaryPressedBackgroundColor.toArgb(context)
+                val textColor = config.secondaryTextColor.toArgb(context)
+                ButtonStyle(
+                    context = context,
+                    bgColor = config.secondaryBackgroundColor.toArgb(context),
+                    bgPressedColor = bgPressedColor,
+                    bgLoadingColor = bgPressedColor,
+                    bgDisabledColor = baseStyle.bgDisabledColor,
+                    contentColor = textColor,
+                    contentPressedColor = textColor,
+                    contentDisabledColor = baseStyle.contentDisabledColor,
+                    contentLoadingColor = textColor,
+                    rippleColor = baseStyle.rippleColor,
+                )
+            } ?: baseStyle
+        }
+    }
+
+    data object SecondaryOnContrast : ButtonStyles() {
+        override fun invoke(context: Context): ButtonStyle {
+            val baseStyle = ButtonStyle.fromTheme(
+                context = context,
+                style = R.attr.bpkButtonSecondaryStyle,
+                bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
+                bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
+                contentColorRes = R.color.bpkTextPrimary,
+            )
+            // Apply experimental configuration if available
+            return BpkConfiguration.buttonConfig?.let { config ->
+                val bgPressedColor = config.secondaryPressedBackgroundColor.toArgb(context)
+                val textColor = config.secondaryTextColor.toArgb(context)
+                ButtonStyle(
+                    context = context,
+                    bgColor = config.secondaryOnContrastBackgroundColor.toArgb(context),
+                    bgPressedColor = bgPressedColor,
+                    bgLoadingColor = bgPressedColor,
+                    bgDisabledColor = baseStyle.bgDisabledColor,
+                    contentColor = textColor,
+                    contentPressedColor = textColor,
+                    contentDisabledColor = baseStyle.contentDisabledColor,
+                    contentLoadingColor = textColor,
+                    rippleColor = baseStyle.rippleColor,
+                )
             } ?: baseStyle
         }
     }

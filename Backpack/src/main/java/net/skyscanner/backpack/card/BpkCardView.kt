@@ -52,6 +52,27 @@ open class BpkCardView @JvmOverloads constructor(
         LARGE(R.dimen.bpkBorderRadiusLg),
     }
 
+    enum class CardStyle {
+        DEFAULT,
+        CONTRAST,
+        ;
+        fun toBackgroundColor(context: Context): ColorStateList {
+            val background = when (this) {
+                DEFAULT -> BpkConfiguration.cardConfig?.backgroundColorDefault?.toArgb(context) ?: context.getColor(R.color.bpkSurfaceDefault)
+                CONTRAST -> context.getColor(R.color.bpkSurfaceDefault)
+            }
+            return ColorStateList.valueOf(background)
+        }
+
+        companion object {
+            fun fromAttr(attr: Int) = when (attr) {
+                0 -> CONTRAST
+                1 -> DEFAULT
+                else -> throw IllegalStateException("Invalid card style value")
+            }
+        }
+    }
+
     enum class ElevationLevel {
         NONE,
         DEFAULT,
@@ -62,17 +83,8 @@ open class BpkCardView @JvmOverloads constructor(
             when (this) {
                 NONE -> 0f
                 DEFAULT -> BpkConfiguration.cardConfig?.defaultElevation ?: context.resources.getDimension(R.dimen.bpkElevationSm)
-
-                FOCUSED -> context.resources.getDimension(R.dimen.bpkElevationLg)
+                FOCUSED -> BpkConfiguration.cardConfig?.defaultElevation ?: context.resources.getDimension(R.dimen.bpkElevationLg)
             }
-
-        fun toBackgroundColor(context: Context): ColorStateList {
-            val background = when (this) {
-                NONE, DEFAULT -> context.getColor(R.color.bpkSurfaceDefault)
-                FOCUSED -> context.getColor(R.color.bpkSurfaceElevated)
-            }
-            return ColorStateList.valueOf(background)
-        }
 
         companion object {
             fun fromAttr(attr: Int) = when (attr) {
@@ -103,7 +115,6 @@ open class BpkCardView @JvmOverloads constructor(
             val padding = if (padded) paddingSize else 0
             this.setContentPadding(padding, padding, padding, padding)
         }
-
     /**
      * Sets the card to focused or not
      * @property focused
@@ -131,8 +142,12 @@ open class BpkCardView @JvmOverloads constructor(
         set(value) {
             field = value
             cardElevation = value.toDimension(context)
-            val background = customBackgroundColor ?: elevationLevel.toBackgroundColor(context)
-            setCardBackgroundColor(background)
+        }
+
+    var cardStyle: CardStyle = CardStyle.CONTRAST
+        set(value) {
+            field = value
+            setCardBackgroundColor(customBackgroundColor ?: cardStyle.toBackgroundColor(context))
         }
 
     private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -142,6 +157,7 @@ open class BpkCardView @JvmOverloads constructor(
         context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0).use {
             padded = it.getBoolean(R.styleable.BpkCardView_padded, true)
             customBackgroundColor = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
+            cardStyle = CardStyle.fromAttr(it.getInt(R.styleable.BpkCardView_cardStyle, 0))
             if (it.hasValue(R.styleable.BpkCardView_elevationLevel)) {
                 elevationLevel = ElevationLevel.fromAttr(it.getInt(R.styleable.BpkCardView_elevationLevel, 1))
             } else {

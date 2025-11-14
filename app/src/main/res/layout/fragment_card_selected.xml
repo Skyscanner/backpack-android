@@ -11,8 +11,7 @@
         android:layout_margin="@dimen/bpkSpacingLg"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        app:elevationLevel="focused">
+        android:foreground="?attr/selectableItemBackground">
 
         <net.skyscanner.backpack.text.BpkText
             android:layout_width="match_parent"

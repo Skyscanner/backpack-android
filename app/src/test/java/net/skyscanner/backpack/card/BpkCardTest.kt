@@ -75,6 +75,39 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onDefault() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.cardStyle = BpkCardView.CardStyle.DEFAULT
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrast() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.cardStyle = BpkCardView.CardStyle.CONTRAST
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noElevation() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.NONE
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default)
     fun unfocused() {
         val card = BpkCardView(testContext)
@@ -94,16 +127,6 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
         card.addView(text)
         card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
         snap(card, R.color.bpkLine)
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun noElevation() {
-        val card = BpkCardView(testContext)
-        val text = TextView(testContext)
-        text.text = "message"
-        card.addView(text)
-        card.elevationLevel = BpkCardView.ElevationLevel.NONE
         snap(card, R.color.bpkSurfaceHighlight)
     }
 

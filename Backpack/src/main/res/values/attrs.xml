@@ -14,6 +14,7 @@
             <enum name="normal" value="8" />
             <enum name="strong" value="9" />
             <enum name="brand" value="10" />
+            <enum name="subtle" value="11" />
         </attr>
         <!-- message to be displayed -->
         <attr name="message" format="string" />
@@ -95,6 +96,7 @@
             <enum name="secondaryOnDark" value="6" />
             <enum name="link" value="7" />
             <enum name="linkOnDark" value="8" />
+            <enum name="secondaryOnContrast" value="9" />
         </attr>
         <attr name="buttonIcon" format="reference" />
         <attr name="buttonIconPosition" format="enum">
@@ -119,6 +121,10 @@
             <enum name="none" value="0" />
             <enum name="normal" value="1" />
             <enum name="focused" value="2" />
+        </attr>
+        <attr name="cardStyle" format="enum">
+            <enum name="onContrast" value="0" />
+            <enum name="onDefault" value="1" />
         </attr>
     </declare-styleable>
 

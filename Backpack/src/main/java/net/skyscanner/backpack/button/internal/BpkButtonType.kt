@@ -39,6 +39,7 @@ internal fun BpkButton.Type.Companion.fromId(id: Int): BpkButton.Type =
         6 -> BpkButton.Type.SecondaryOnDark
         7 -> BpkButton.Type.Link
         8 -> BpkButton.Type.LinkOnDark
+        9 -> BpkButton.Type.SecondaryOnContrast
         else -> throw IllegalArgumentException()
     }
 
@@ -53,4 +54,5 @@ internal fun BpkButton.Type.createStyle(context: Context): ButtonStyle =
         BpkButton.Type.SecondaryOnDark -> ButtonStyles.SecondaryOnDark(context)
         BpkButton.Type.Link -> ButtonStyles.Link(context)
         BpkButton.Type.LinkOnDark -> ButtonStyles.LinkOnDark(context)
+        BpkButton.Type.SecondaryOnContrast -> ButtonStyles.SecondaryOnContrast(context)
     }

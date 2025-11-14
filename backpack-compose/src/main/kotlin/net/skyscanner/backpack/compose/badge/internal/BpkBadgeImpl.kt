@@ -56,7 +56,21 @@ internal fun BpkBadgeImpl(
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
-            .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
+            .then(
+                BpkConfiguration.badgeConfig?.endPadding?.takeIf {
+                    type !in listOf(
+                        BpkBadgeType.Inverse,
+                        BpkBadgeType.Strong,
+                        BpkBadgeType.Outline,
+                        BpkBadgeType.Brand,
+                        BpkBadgeType.Subtle,
+                    )
+                }?.let {
+                    Modifier
+                        .padding(end = it)
+                        .padding(vertical = BpkSpacing.Sm)
+                } ?: Modifier.padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
+            ),
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -116,12 +130,12 @@ private val BpkBadgeType.iconColor: Color
 private val BpkBadgeType.contentColor: Color
     @Composable
     get() = when (this) {
-        BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Normal, BpkBadgeType.Subtle -> BpkTheme.colors.textPrimary
         BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
         BpkBadgeType.Success -> BpkTheme.colors.textPrimary
         BpkBadgeType.Warning -> BpkTheme.colors.textPrimary
         BpkBadgeType.Destructive -> BpkTheme.colors.textPrimary
-        BpkBadgeType.Inverse -> BpkConfiguration.badgeConfig?.inverseTextColor ?: BpkTheme.colors.textPrimary
+        BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
         BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
         BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
     }
@@ -130,11 +144,12 @@ private val BpkBadgeType.backgroundColor: Color
     @Composable
     get() = when (this) {
         BpkBadgeType.Normal -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
+        BpkBadgeType.Subtle -> BpkBadgeColors.backgroundNormal
         BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
         BpkBadgeType.Success -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
         BpkBadgeType.Warning -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
         BpkBadgeType.Destructive -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Inverse -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkTheme.colors.surfaceDefault
+        BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
         BpkBadgeType.Outline -> Color.Transparent
         BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
     }

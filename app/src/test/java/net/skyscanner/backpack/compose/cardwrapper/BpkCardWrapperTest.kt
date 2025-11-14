@@ -32,7 +32,6 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.card.BpkCardCorner
-import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -89,7 +88,6 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
                 backgroundColor = BpkTheme.colors.coreEco,
-                elevation = BpkCardElevation.Focus,
                 headerContent = { HeaderContent() },
                 cardContent = { CardContent() },
             )

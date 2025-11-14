@@ -46,6 +46,11 @@ enum class BpkCardElevation {
     Focus,
 }
 
+enum class BpkCardStyle {
+    onDefault,
+    onContrast,
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkCard(
@@ -53,6 +58,7 @@ fun BpkCard(
     modifier: Modifier = Modifier,
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
     elevation: BpkCardElevation = BpkCardElevation.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
@@ -63,7 +69,7 @@ fun BpkCard(
         modifier = modifier,
         enabled = enabled,
         shape = cardShape(corner),
-        colors = cardColors(elevation),
+        colors = cardColors(cardStyle),
         elevation = cardElevation(elevation),
         interactionSource = interactionSource,
         content = { CardContent(padding, content) },
@@ -75,13 +81,14 @@ fun BpkCard(
     modifier: Modifier = Modifier,
     corner: BpkCardCorner = BpkCardCorner.Small,
     padding: BpkCardPadding = BpkCardPadding.Small,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
     elevation: BpkCardElevation = BpkCardElevation.Default,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
         modifier = modifier,
         shape = cardShape(corner),
-        colors = cardColors(elevation),
+        colors = cardColors(cardStyle),
         elevation = cardElevation(elevation),
         content = { CardContent(padding, content) },
     )
