@@ -23,8 +23,16 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.demo.compose.ClickableDefaultElevationCardExample
+import net.skyscanner.backpack.demo.compose.ClickableNoElevationCardExample
+import net.skyscanner.backpack.demo.compose.DisabledCardExample
+import net.skyscanner.backpack.demo.compose.EmptyContentCardExample
 import net.skyscanner.backpack.demo.compose.FocusableCardExample
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
+import net.skyscanner.backpack.demo.compose.LargeCornersNoElevationCardExample
+import net.skyscanner.backpack.demo.compose.LargeCornersNoPaddingCardExample
+import net.skyscanner.backpack.demo.compose.LongTextCardExample
+import net.skyscanner.backpack.demo.compose.MultipleContentCardExample
 import net.skyscanner.backpack.demo.compose.NoElevationCardExample
 import net.skyscanner.backpack.demo.compose.NoPaddingCardExample
 import net.skyscanner.backpack.demo.compose.NonClickableCardExample
@@ -78,6 +86,60 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun noElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         NoElevationCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        DisabledCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun clickableWithDefaultElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        ClickableDefaultElevationCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun clickableWithNoElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        ClickableNoElevationCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCornersNoPadding() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        LargeCornersNoPaddingCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCornersNoElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        LargeCornersNoElevationCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Rtl)
+    fun rtlLayout() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        SmallCornersCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun emptyContent() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        EmptyContentCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun longText() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        LongTextCardExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun multipleContent() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        MultipleContentCardExample()
     }
 
     companion object {

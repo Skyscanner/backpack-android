@@ -163,3 +163,118 @@ internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
         )
     }
 }
+
+@Composable
+internal fun DisabledCardExample(modifier: Modifier = Modifier) {
+    BpkCard(
+        modifier = modifier,
+        onClick = { },
+        enabled = false,
+    ) {
+        BpkText(
+            text = "Disabled card",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun ClickableDefaultElevationCardExample(modifier: Modifier = Modifier) {
+    BpkCard(
+        modifier = modifier,
+        onClick = { },
+        elevation = BpkCardElevation.Default,
+    ) {
+        BpkText(
+            text = "Clickable default elevation",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun ClickableNoElevationCardExample(modifier: Modifier = Modifier) {
+    BpkCard(
+        modifier = modifier,
+        onClick = { },
+        elevation = BpkCardElevation.None,
+    ) {
+        BpkText(
+            text = "Clickable no elevation",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun LargeCornersNoPaddingCardExample(modifier: Modifier = Modifier) {
+    BpkCard(
+        modifier = modifier,
+        corner = BpkCardCorner.Large,
+        padding = BpkCardPadding.None,
+    ) {
+        BpkText(
+            text = "Large corners + No padding",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun LargeCornersNoElevationCardExample(modifier: Modifier = Modifier) {
+    BpkCard(
+        modifier = modifier,
+        corner = BpkCardCorner.Large,
+        elevation = BpkCardElevation.None,
+    ) {
+        BpkText(
+            text = "Large corners + No elevation",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun EmptyContentCardExample(modifier: Modifier = Modifier) {
+    BpkCard(modifier = modifier) { }
+}
+
+@Composable
+internal fun LongTextCardExample(modifier: Modifier = Modifier) {
+    BpkCard(modifier = modifier) {
+        BpkText(
+            text = "Very long text that might wrap multiple lines to test how the card handles longer content that spans across multiple lines and ensures proper text wrapping behavior",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+internal fun MultipleContentCardExample(modifier: Modifier = Modifier) {
+    BpkCard(modifier = modifier) {
+        BpkText(
+            text = "Title",
+            style = BpkTheme.typography.heading4,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        BpkText(
+            text = "Subtitle",
+            style = BpkTheme.typography.caption,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        BpkText(
+            text = "Body text goes here",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
