@@ -83,6 +83,10 @@ internal fun BpkButtonImpl(
             type.rippleColor().toRippleAlpha(),
         ),
     ) {
+
+        val typography = BpkConfiguration.buttonConfig?.takeIf { size == BpkButtonSize.Default }
+            ?.let { BpkTheme.typography.label2 } ?: BpkTheme.typography.label1
+
         Button(
             onClick = onClick,
             enabled = clickable,
@@ -114,7 +118,7 @@ internal fun BpkButtonImpl(
             elevation = null,
             content = {
                 CompositionLocalProvider(
-                    LocalTextStyle provides BpkTheme.typography.label1,
+                    LocalTextStyle provides typography,
                 ) {
                     Box {
                         Row(
