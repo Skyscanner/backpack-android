@@ -29,9 +29,15 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 
 @Composable
 @CardComponent
-@ViewStory("Default")
+@ViewStory("Contrast")
 fun CardStoryDefault(modifier: Modifier = Modifier) =
     AndroidLayout(R.layout.fragment_card, modifier.fillMaxSize())
+
+@Composable
+@CardComponent
+@ViewStory("Default", StoryKind.DemoOnly)
+fun CardStoryContrast(modifier: Modifier = Modifier) =
+    AndroidLayout(R.layout.fragment_card_contrast, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
@@ -44,12 +50,6 @@ fun CardStoryWithoutPadding(modifier: Modifier = Modifier) =
 @ViewStory("Selected")
 fun CardStorySelected(modifier: Modifier = Modifier) =
     AndroidLayout(R.layout.fragment_card_selected, modifier.fillMaxSize())
-
-@Composable
-@CardComponent
-@ViewStory("No elevation", StoryKind.DemoOnly)
-fun CardStoryNoElevation(modifier: Modifier = Modifier) =
-    AndroidLayout(R.layout.fragment_card_no_elevation, modifier.fillMaxSize())
 
 @Composable
 @CardComponent

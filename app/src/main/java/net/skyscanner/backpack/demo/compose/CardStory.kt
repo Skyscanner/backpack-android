@@ -32,8 +32,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
-import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -55,6 +55,10 @@ fun CardStory(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .weight(1f)
 
+        OnDefaultStyleExample(cardModifier)
+
+        OnContrastStyleExample(cardModifier)
+
         SmallCornersCardExample(cardModifier)
 
         LargeCornersCardExample(cardModifier)
@@ -63,9 +67,41 @@ fun CardStory(modifier: Modifier = Modifier) {
 
         NonClickableCardExample(cardModifier)
 
-        NoElevationCardExample(cardModifier)
+        OnStyleSwapExample(cardModifier)
+    }
+}
 
-        FocusableCardExample(cardModifier)
+@Composable
+internal fun OnDefaultStyleExample(modifier: Modifier = Modifier) {
+    var cardStyle by remember { mutableStateOf(BpkCardStyle.onDefault) }
+
+    BpkCard(
+        modifier = modifier,
+        cardStyle = cardStyle,
+    ) {
+        BpkText(
+            text = "onDefault style",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
+    }
+}
+
+@Composable
+internal fun OnContrastStyleExample(modifier: Modifier = Modifier) {
+    var cardStyle by remember { mutableStateOf(BpkCardStyle.onContrast) }
+
+    BpkCard(
+        modifier = modifier,
+        cardStyle = cardStyle,
+    ) {
+        BpkText(
+            text = "onContrast style",
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+        )
     }
 }
 
@@ -127,36 +163,21 @@ internal fun NonClickableCardExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun FocusableCardExample(modifier: Modifier = Modifier) {
-    var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
+internal fun OnStyleSwapExample(modifier: Modifier = Modifier) {
+    var cardStyle by remember { mutableStateOf(BpkCardStyle.onDefault) }
 
     BpkCard(
         modifier = modifier,
-        elevation = elevation,
+        cardStyle = cardStyle,
         onClick = {
-            elevation = when (elevation) {
-                BpkCardElevation.None, BpkCardElevation.Default -> BpkCardElevation.Focus
-                BpkCardElevation.Focus -> BpkCardElevation.Default
+            cardStyle = when (cardStyle) {
+                BpkCardStyle.onDefault -> BpkCardStyle.onContrast
+                BpkCardStyle.onContrast -> BpkCardStyle.onDefault
             }
         },
     ) {
         BpkText(
-            text = if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus",
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.CenterHorizontally),
-        )
-    }
-}
-
-@Composable
-internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
-    BpkCard(
-        modifier = modifier,
-        elevation = BpkCardElevation.None,
-    ) {
-        BpkText(
-            text = "No elevation",
+            text = if (cardStyle == BpkCardStyle.onDefault) "Tap to change to onContrast style" else "Tap to change to onDefault style",
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally),

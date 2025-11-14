@@ -122,6 +122,10 @@
             <enum name="normal" value="1" />
             <enum name="focused" value="2" />
         </attr>
+        <attr name="cardStyle" format="enum">
+            <enum name="onContrast" value="0" />
+            <enum name="onDefault" value="1" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="BpkSpinner">

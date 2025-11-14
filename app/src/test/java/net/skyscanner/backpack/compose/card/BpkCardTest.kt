@@ -23,11 +23,12 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.configuration.BpkConfiguration
-import net.skyscanner.backpack.demo.compose.FocusableCardExample
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
-import net.skyscanner.backpack.demo.compose.NoElevationCardExample
 import net.skyscanner.backpack.demo.compose.NoPaddingCardExample
 import net.skyscanner.backpack.demo.compose.NonClickableCardExample
+import net.skyscanner.backpack.demo.compose.OnContrastStyleExample
+import net.skyscanner.backpack.demo.compose.OnDefaultStyleExample
+import net.skyscanner.backpack.demo.compose.OnStyleSwapExample
 import net.skyscanner.backpack.demo.compose.SmallCornersCardExample
 import org.junit.Before
 import org.junit.Test
@@ -43,6 +44,16 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
         // Ensure we start from a known state
         BpkConfiguration.clearConfigs()
         BpkConfiguration.setConfigs(cardConfig = vdl2Enabled)
+    }
+
+    @Test
+    fun onDefaultStyle() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        OnDefaultStyleExample()
+    }
+
+    @Test
+    fun onContrastStyle() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        OnContrastStyleExample()
     }
 
     @Test
@@ -64,20 +75,14 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun unfocused() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+    fun unClickable() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         NonClickableCardExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun focused() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
-        FocusableCardExample()
-    }
-
-    @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun noElevation() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
-        NoElevationCardExample()
+    fun clickable() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
+        OnStyleSwapExample()
     }
 
     companion object {
