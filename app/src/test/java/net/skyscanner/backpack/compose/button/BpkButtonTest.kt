@@ -51,7 +51,7 @@ class BpkButtonTest(flavour: Flavor) :
     }
 
     @Test
-    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     fun text() {
         snap(background = { type.rowBackground() }) {
             BpkButton("Button", type = type, size = size, onClick = {})
@@ -84,6 +84,24 @@ class BpkButtonTest(flavour: Flavor) :
 
         snap {
             BpkButton("Button", icon, BpkButtonIconPosition.Start, type = type, size = size, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun iconAtStartWithContentDescription() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = icon,
+                position = BpkButtonIconPosition.Start,
+                type = type,
+                size = size,
+                contentDescription = "Flight CTA",
+                onClick = {},
+            )
         }
     }
 
@@ -146,6 +164,86 @@ class BpkButtonTest(flavour: Flavor) :
     }
 
     @Test
+    @Variants(BpkTestVariant.Default)
+    fun painterIconOnly() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(
+                icon = painterResource(id = iconDrawableRes),
+                contentDescription = "Boarding pass",
+                type = type,
+                size = size,
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun loadingIconAtStart() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = icon,
+                position = BpkButtonIconPosition.Start,
+                type = type,
+                size = size,
+                loading = true,
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun loadingIconOnly() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(icon, "contentDescription", type = type, size = size, loading = true, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun loadingDrawableAtStart() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = painterResource(id = iconDrawableRes),
+                position = BpkButtonIconPosition.Start,
+                type = type,
+                size = size,
+                loading = true,
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun loadingDrawableAtEnd() {
+        assumeTrue(type == BpkButtonType.Primary)
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = painterResource(id = iconDrawableRes),
+                position = BpkButtonIconPosition.End,
+                type = type,
+                size = size,
+                loading = true,
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun drawableAtStart() {
         assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
@@ -160,6 +258,17 @@ class BpkButtonTest(flavour: Flavor) :
                 size = size,
                 onClick = {},
             )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun largeSizeNonPrimary() {
+        assumeTrue(type != BpkButtonType.Primary)
+        assumeTrue(beta)
+
+        snap(background = { type.rowBackground() }) {
+            BpkButton("Button", type = type, size = BpkButtonSize.Large, onClick = {})
         }
     }
 
