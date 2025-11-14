@@ -22,6 +22,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.AttributeSet
 import androidx.annotation.Dimension
 import androidx.annotation.IntDef
@@ -37,12 +39,11 @@ import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.button.internal.createStyle
 import net.skyscanner.backpack.button.internal.fromAttrs
 import net.skyscanner.backpack.button.internal.fromId
+import net.skyscanner.backpack.button.internal.getHorizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
-import net.skyscanner.backpack.button.internal.getHorizontalPadding
+import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -176,7 +177,9 @@ open class BpkButton(
         this.type = type
         updateSize()
         applyStyle(style)
-        BpkText.getFont(context, BpkText.TextStyle.Label1).applyTo(this)
+        val textStyle = BpkConfiguration.buttonConfig?.takeIf { size == Size.Standard }?.let { BpkText.TextStyle.Label2 }
+            ?: BpkText.TextStyle.Label1
+        BpkText.getFont(context, textStyle).applyTo(this)
     }
 
     override fun setEnabled(enabled: Boolean) {
