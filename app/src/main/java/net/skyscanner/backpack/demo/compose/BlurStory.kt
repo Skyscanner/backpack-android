@@ -39,6 +39,7 @@ import net.skyscanner.backpack.compose.blur.bpkProgressiveBlur
 import net.skyscanner.backpack.compose.blur.bpkUniformBlur
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -66,10 +67,12 @@ fun BlurCard(
     @DrawableRes imageRes: Int,
     blurType: BlurType,
     modifier: Modifier = Modifier,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
 ) {
     BpkCard(
         padding = BpkCardPadding.None,
         modifier = modifier,
+        cardStyle = cardStyle,
     ) {
         val imageModifier = Modifier
             .size(200.dp)
