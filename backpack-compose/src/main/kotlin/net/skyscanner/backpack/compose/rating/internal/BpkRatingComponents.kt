@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.LastBaseline
@@ -50,6 +51,7 @@ internal fun BpkRatingNumbers(
     size: BpkRatingSize,
     showScale: Boolean,
     modifier: Modifier = Modifier,
+    scaleColor: Color = BpkTheme.colors.textSecondary,
 ) {
     Row(modifier = modifier) {
 
@@ -75,7 +77,7 @@ internal fun BpkRatingNumbers(
                     BpkRatingSize.Base -> BpkTheme.typography.caption
                     BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
                 },
-                color = BpkTheme.colors.textPrimary,
+                color = scaleColor,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -105,6 +107,7 @@ internal fun BpkRatingSubtitle(
     subtitle: String,
     size: BpkRatingSize,
     modifier: Modifier = Modifier,
+    color: Color = BpkTheme.colors.textSecondary,
 ) {
     BpkText(
         modifier = modifier,
@@ -113,7 +116,7 @@ internal fun BpkRatingSubtitle(
             BpkRatingSize.Base -> BpkTheme.typography.caption
             BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
         },
-        color = BpkTheme.colors.textPrimary,
+        color = color,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )
