@@ -21,6 +21,7 @@ package net.skyscanner.backpack.configuration
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.common.R
 import net.skyscanner.backpack.util.ColorPair
 import net.skyscanner.backpack.util.InternalBackpackApi
 
@@ -88,6 +89,14 @@ object BpkConfiguration {
             val backgroundColor: Color = Color.Transparent,
             val endPadding: Dp = 8.dp,
         ) : BpkExperimentalComponent()
+
+        data class BpkIconography(
+            val explore: Int = R.drawable.bpk_beta_explore,
+            val flights: Int = R.drawable.bpk_flight,
+            val hotels: Int = R.drawable.bpk_hotels,
+            val cars: Int = R.drawable.bpk_cars,
+            val aircraft: Int = R.drawable.bpk_aircraft,
+        ) : BpkExperimentalComponent()
     }
 
     enum class BpkTypographySet {
@@ -105,6 +114,7 @@ object BpkConfiguration {
         cardConfig = null
         typographySet = BpkTypographySet.DEFAULT
         badgeConfig = null
+        iconographySet = null
 
         _hasSet = false
     }
@@ -115,6 +125,7 @@ object BpkConfiguration {
         cardConfig: Boolean = false,
         badgeConfig: Boolean = false,
         typography: Boolean = false,
+        iconography: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -134,6 +145,9 @@ object BpkConfiguration {
         }
         if (badgeConfig) {
             this.badgeConfig = BpkExperimentalComponent.BpkBadge()
+        }
+        if (iconography) {
+            this.iconographySet = BpkExperimentalComponent.BpkIconography()
         }
     }
 
@@ -156,5 +170,8 @@ object BpkConfiguration {
         private set
 
     var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
+        private set
+
+    var iconographySet: BpkExperimentalComponent.BpkIconography? = null
         private set
 }
