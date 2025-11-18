@@ -36,6 +36,7 @@ enum class NavBarStyle {
     Default,
     OnImage,
     SurfaceContrast,
+    CanvasContrast,
 }
 
 internal sealed interface Action {
