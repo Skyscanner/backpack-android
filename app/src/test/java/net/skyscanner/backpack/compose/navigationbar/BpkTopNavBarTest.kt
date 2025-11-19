@@ -27,6 +27,7 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.compose.ActionsTopNavBar
 import net.skyscanner.backpack.demo.compose.BackTopNavBar
+import net.skyscanner.backpack.demo.compose.CanvasContrastNavBarStory
 import net.skyscanner.backpack.demo.compose.CloseTopNavBar
 import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
 import net.skyscanner.backpack.demo.compose.TransparentNavBarStory
@@ -146,5 +147,16 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default)
     fun collapsedSurfaceContrastNavBar() = snap {
         SurfaceContrastNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+    }
+
+    @Test
+    fun expandedCanvasContrastNavBar() = snap {
+        CanvasContrastNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsedCanvasContrastNavBar() = snap {
+        CanvasContrastNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
     }
 }

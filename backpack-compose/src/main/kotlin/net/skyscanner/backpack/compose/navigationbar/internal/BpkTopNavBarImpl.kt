@@ -68,12 +68,14 @@ internal fun BpkTopNavBarImpl(
     val backgroundColor = when {
         fraction <= 0f -> when (style) {
             NavBarStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
+            NavBarStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
             else -> BpkTheme.colors.surfaceDefault
         }
         else -> when (style) {
             NavBarStyle.OnImage -> Color.Transparent
             NavBarStyle.Default -> BpkTheme.colors.canvas
             NavBarStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
+            NavBarStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
         }
     }
 
@@ -84,7 +86,7 @@ internal fun BpkTopNavBarImpl(
         }
         else -> when (style) {
             NavBarStyle.OnImage, NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
-            NavBarStyle.Default -> BpkTheme.colors.textPrimary
+            NavBarStyle.Default, NavBarStyle.CanvasContrast -> BpkTheme.colors.textPrimary
         }
     }
 
