@@ -28,6 +28,12 @@
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/surfacecontrast.png" alt="SurfaceContrast NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/surfacecontrast_dm.png" alt="SurfaceContrast NavBar component - dark mode" width="375" /> |
 
+## CanvasContrast
+
+| Day                                                                                                                                                                                   | Night                                                                                                                                                                                              |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/canvascontrast.png" alt="CanvasContrast NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/canvascontrast_dm.png" alt="CanvasContrast NavBar component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available
