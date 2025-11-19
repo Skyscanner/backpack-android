@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.fontscaling.MathUtils.lerp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.carousel.BpkCarouselState
 import net.skyscanner.backpack.compose.carousel.asInternalState
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
@@ -61,6 +62,7 @@ fun BpkCardCarousel(
     state: BpkCarouselState,
     cards: List<BpkCardCarouselItem>,
     modifier: Modifier = Modifier,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
 ) {
     val internalState = state.asInternalState()
     BoxWithConstraints(modifier = modifier) {
@@ -97,6 +99,7 @@ fun BpkCardCarousel(
                         BpkCarouselCard(
                             title = this.title,
                             description = this.description,
+                            cardStyle = cardStyle,
                             image = {
                                 content(contentDescription)
                             },
@@ -119,13 +122,15 @@ fun BpkCardCarousel(
 @Composable
 internal fun BpkCarouselCard(
     title: String,
+    cardStyle: BpkCardStyle,
+    image: @Composable (BoxScope.() -> Unit),
     modifier: Modifier = Modifier,
     description: String? = null,
-    image: @Composable (BoxScope.() -> Unit),
 ) {
     BpkCard(
         corner = BpkCardCorner.Small,
         padding = BpkCardPadding.None,
+        cardStyle = cardStyle,
         modifier = modifier.fillMaxWidth(),
     ) {
         Column(
