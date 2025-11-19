@@ -27,6 +27,8 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
+import net.skyscanner.backpack.compose.rating.BpkRatingTextColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -34,12 +36,16 @@ internal fun BpkRatingLayout(
     value: Float,
     scale: BpkRatingScale,
     size: BpkRatingSize,
+    infoColor: BpkRatingTextColor,
     title: @Composable (() -> Unit)?,
     subtitle: String?,
     showScale: Boolean,
     modifier: Modifier = Modifier,
 ) {
-
+    val infoColor = when (infoColor) {
+        BpkRatingTextColor.Primary -> BpkTheme.colors.textPrimary
+        BpkRatingTextColor.Secondary -> BpkTheme.colors.textSecondary
+    }
     Row(
         modifier = modifier.semantics(mergeDescendants = true) { },
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
@@ -51,16 +57,21 @@ internal fun BpkRatingLayout(
             scale = scale,
             size = size,
             showScale = showScale,
+            scaleColor = infoColor,
         )
 
         when (size) {
-
             BpkRatingSize.Base -> {
                 if (title != null) {
                     BpkRatingTitle(Modifier.alignByBaseline(), title)
                 }
                 if (subtitle != null) {
-                    BpkRatingSubtitle(subtitle, size, Modifier.alignByBaseline())
+                    BpkRatingSubtitle(
+                        subtitle = subtitle,
+                        size = size,
+                        modifier = Modifier.alignByBaseline(),
+                        color = infoColor,
+                    )
                 }
             }
 
@@ -72,7 +83,11 @@ internal fun BpkRatingLayout(
                         BpkRatingTitle(content = title)
                     }
                     if (subtitle != null) {
-                        BpkRatingSubtitle(subtitle, size)
+                        BpkRatingSubtitle(
+                            subtitle = subtitle,
+                            size = size,
+                            color = infoColor,
+                        )
                     }
                 }
         }

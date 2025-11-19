@@ -34,6 +34,11 @@ enum class BpkRatingScale {
     ZeroToTen,
 }
 
+enum class BpkRatingTextColor {
+    Primary,
+    Secondary,
+}
+
 @Composable
 fun BpkRating(
     title: String?,
@@ -41,6 +46,7 @@ fun BpkRating(
     modifier: Modifier = Modifier,
     scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
     size: BpkRatingSize = BpkRatingSize.Base,
+    infoColor: BpkRatingTextColor = BpkRatingTextColor.Secondary,
     subtitle: String? = null,
     showScale: Boolean = true,
 ) {
@@ -49,6 +55,7 @@ fun BpkRating(
         modifier = modifier,
         scale = scale,
         size = size,
+        infoColor = infoColor,
         subtitle = subtitle,
         showScale = showScale,
         title = if (title != null) { ->
@@ -67,6 +74,7 @@ fun BpkRating(
     modifier: Modifier = Modifier,
     scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
     size: BpkRatingSize = BpkRatingSize.Base,
+    infoColor: BpkRatingTextColor = BpkRatingTextColor.Secondary,
     subtitle: String? = null,
     showScale: Boolean = true,
     title: @Composable () -> Unit,
@@ -77,6 +85,7 @@ fun BpkRating(
         modifier = modifier,
         scale = scale,
         size = size,
+        infoColor = infoColor,
         subtitle = subtitle,
         showScale = showScale,
     )
