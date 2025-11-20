@@ -268,11 +268,35 @@ public val BpkIcon.Companion.BaggageCabinAdd: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.BaggageCabinIncludedTick: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-cabin-included-tick",
+        small = R.drawable.bpk_baggage_cabin_included_tick_sm,
+        large = R.drawable.bpk_baggage_cabin_included_tick,
+    )
+)
+
 public val BpkIcon.Companion.BaggageCabinNotIncluded: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "baggage-cabin-not-included",
         small = R.drawable.bpk_baggage_cabin_not_included_sm,
         large = R.drawable.bpk_baggage_cabin_not_included,
+    )
+)
+
+public val BpkIcon.Companion.BaggageCabinNotIncludedCross: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-cabin-not-included-cross",
+        small = R.drawable.bpk_baggage_cabin_not_included_cross_sm,
+        large = R.drawable.bpk_baggage_cabin_not_included_cross,
+    )
+)
+
+public val BpkIcon.Companion.BaggageCabinUncertain: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-cabin-uncertain",
+        small = R.drawable.bpk_baggage_cabin_uncertain_sm,
+        large = R.drawable.bpk_baggage_cabin_uncertain,
     )
 )
 
@@ -292,11 +316,35 @@ public val BpkIcon.Companion.BaggageCheckedAdd: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.BaggageCheckedIncludedTick: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-checked-included-tick",
+        small = R.drawable.bpk_baggage_checked_included_tick_sm,
+        large = R.drawable.bpk_baggage_checked_included_tick,
+    )
+)
+
 public val BpkIcon.Companion.BaggageCheckedNotIncluded: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "baggage-checked-not-included",
         small = R.drawable.bpk_baggage_checked_not_included_sm,
         large = R.drawable.bpk_baggage_checked_not_included,
+    )
+)
+
+public val BpkIcon.Companion.BaggageCheckedNotIncludedCross: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-checked-not-included-cross",
+        small = R.drawable.bpk_baggage_checked_not_included_cross_sm,
+        large = R.drawable.bpk_baggage_checked_not_included_cross,
+    )
+)
+
+public val BpkIcon.Companion.BaggageCheckedUncertain: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "baggage-checked-uncertain",
+        small = R.drawable.bpk_baggage_checked_uncertain_sm,
+        large = R.drawable.bpk_baggage_checked_uncertain,
     )
 )
 
@@ -2316,10 +2364,16 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.BaggageAdd,
         BpkIcon.BaggageCabin,
         BpkIcon.BaggageCabinAdd,
+        BpkIcon.BaggageCabinIncludedTick,
         BpkIcon.BaggageCabinNotIncluded,
+        BpkIcon.BaggageCabinNotIncludedCross,
+        BpkIcon.BaggageCabinUncertain,
         BpkIcon.BaggageChecked,
         BpkIcon.BaggageCheckedAdd,
+        BpkIcon.BaggageCheckedIncludedTick,
         BpkIcon.BaggageCheckedNotIncluded,
+        BpkIcon.BaggageCheckedNotIncludedCross,
+        BpkIcon.BaggageCheckedUncertain,
         BpkIcon.BaggageCross,
         BpkIcon.BaggageGeneric,
         BpkIcon.BaggagePersonalItem,
