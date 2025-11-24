@@ -88,6 +88,8 @@ object BpkConfiguration {
             val backgroundColor: Color = Color.Transparent,
             val endPadding: Dp = 8.dp,
         ) : BpkExperimentalComponent()
+
+        data object BpkIcon : BpkExperimentalComponent()
     }
 
     enum class BpkTypographySet {
@@ -105,6 +107,7 @@ object BpkConfiguration {
         cardConfig = null
         typographySet = BpkTypographySet.DEFAULT
         badgeConfig = null
+        iconConfig = null
 
         _hasSet = false
     }
@@ -115,6 +118,7 @@ object BpkConfiguration {
         cardConfig: Boolean = false,
         badgeConfig: Boolean = false,
         typography: Boolean = false,
+        iconography: Boolean = false,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")
@@ -135,6 +139,9 @@ object BpkConfiguration {
         if (badgeConfig) {
             this.badgeConfig = BpkExperimentalComponent.BpkBadge()
         }
+        if (iconography) {
+            this.iconConfig = BpkExperimentalComponent.BpkIcon
+        }
     }
 
     var logger: (() -> Unit)? = null
@@ -152,9 +159,13 @@ object BpkConfiguration {
 
     var cardConfig: BpkExperimentalComponent.BpkCard? = null
         private set
+
     var badgeConfig: BpkExperimentalComponent.BpkBadge? = null
         private set
 
     var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
+        private set
+
+    var iconConfig: BpkExperimentalComponent.BpkIcon? = null
         private set
 }

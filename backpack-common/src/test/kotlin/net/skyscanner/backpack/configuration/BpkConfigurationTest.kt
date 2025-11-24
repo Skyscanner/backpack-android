@@ -63,4 +63,18 @@ class BpkConfigurationTest {
         BpkConfiguration.setConfigs(typography = false)
         assertEquals(BpkConfiguration.BpkTypographySet.DEFAULT, BpkConfiguration.typographySet)
     }
+
+    @Test
+    fun `default iconographySet is null`() {
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs()
+        assertEquals(BpkConfiguration.iconConfig, null)
+    }
+
+    @Test
+    fun `setConfigs with iconography true sets icon config`() {
+        BpkConfiguration.clearConfigs()
+        BpkConfiguration.setConfigs(iconography = true)
+        assertNotNull(BpkConfiguration.iconConfig)
+    }
 }
