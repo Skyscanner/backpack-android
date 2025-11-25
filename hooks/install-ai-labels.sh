@@ -18,7 +18,7 @@
 set -o pipefail
 
 warn() {
-    echo -e "⚠️  Warning: $1 >&2"
+    echo -e "⚠️  Warning: $1" >&2
 }
 
 success() {
