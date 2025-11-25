@@ -15,10 +15,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# install-ai-labels.sh
-# Installs ai-labels for automatic AI tool detection in git commits
-# This script is designed to fail gracefully - it will never block your workflow
-
 set -o pipefail
 
 warn() {
