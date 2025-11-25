@@ -64,7 +64,6 @@ fi
 
 success "ai-labels installed successfully"
 
-# Run setup to configure hooks
 if ai-labels setup 2>/dev/null; then
     success "ai-labels hooks configured"
     info ""
