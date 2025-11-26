@@ -77,4 +77,22 @@ task installGitHooks(type: Copy) {
     fileMode 0775
 }
 
-tasks.getByPath(':app:preBuild').dependsOn installGitHooks
+task installAiLabels(type: Exec) {
+    description = 'Install ai-labels for AI tool detection in commits'
+    group = 'setup'
+
+    workingDir rootProject.rootDir
+    commandLine 'bash', 'hooks/install-ai-labels.sh'
+    ignoreExitValue = true
+    standardOutput = new ByteArrayOutputStream()
+    errorOutput = new ByteArrayOutputStream()
+
+    doLast {
+        def stdout = standardOutput.toString().trim()
+        def stderr = errorOutput.toString().trim()
+        if (stdout) println stdout
+        if (stderr) System.err.println stderr
+    }
+}
+
+tasks.getByPath(':app:preBuild').dependsOn installGitHooks, installAiLabels
