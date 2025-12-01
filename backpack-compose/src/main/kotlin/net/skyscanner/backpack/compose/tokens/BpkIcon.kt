@@ -2172,6 +2172,126 @@ public val BpkIcon.Companion.UseLocation: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.VdlCars: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-cars",
+        small = R.drawable.bpk_vdl_cars_sm,
+        large = R.drawable.bpk_vdl_cars,
+    )
+)
+
+public val BpkIcon.Companion.VdlFlight: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-flight",
+        small = R.drawable.bpk_vdl_flight_sm,
+        large = R.drawable.bpk_vdl_flight,
+    )
+)
+
+public val BpkIcon.Companion.VdlHomeBeach: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-home-beach",
+        small = R.drawable.bpk_vdl_home_beach,
+        large = R.drawable.bpk_vdl_home_beach,
+    )
+)
+
+public val BpkIcon.Companion.VdlHomeCars: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-home-cars",
+        small = R.drawable.bpk_vdl_home_cars,
+        large = R.drawable.bpk_vdl_home_cars,
+    )
+)
+
+public val BpkIcon.Companion.VdlHomeFlight: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-home-flight",
+        small = R.drawable.bpk_vdl_home_flight,
+        large = R.drawable.bpk_vdl_home_flight,
+    )
+)
+
+public val BpkIcon.Companion.VdlHomeHotels: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-home-hotels",
+        small = R.drawable.bpk_vdl_home_hotels,
+        large = R.drawable.bpk_vdl_home_hotels,
+    )
+)
+
+public val BpkIcon.Companion.VdlHotels: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-hotels",
+        small = R.drawable.bpk_vdl_hotels_sm,
+        large = R.drawable.bpk_vdl_hotels,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabDrops: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-drops",
+        small = R.drawable.bpk_vdl_tab_drops,
+        large = R.drawable.bpk_vdl_tab_drops,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabDropsSelected: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-drops-selected",
+        small = R.drawable.bpk_vdl_tab_drops_selected,
+        large = R.drawable.bpk_vdl_tab_drops_selected,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabProfile: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-profile",
+        small = R.drawable.bpk_vdl_tab_profile,
+        large = R.drawable.bpk_vdl_tab_profile,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabProfileSelected: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-profile-selected",
+        small = R.drawable.bpk_vdl_tab_profile_selected,
+        large = R.drawable.bpk_vdl_tab_profile_selected,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabSaved: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-saved",
+        small = R.drawable.bpk_vdl_tab_saved,
+        large = R.drawable.bpk_vdl_tab_saved,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabSavedSelected: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-saved-selected",
+        small = R.drawable.bpk_vdl_tab_saved_selected,
+        large = R.drawable.bpk_vdl_tab_saved_selected,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabSearch: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-search",
+        small = R.drawable.bpk_vdl_tab_search,
+        large = R.drawable.bpk_vdl_tab_search,
+    )
+)
+
+public val BpkIcon.Companion.VdlTabSearchSelected: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "vdl-tab-search-selected",
+        small = R.drawable.bpk_vdl_tab_search_selected,
+        large = R.drawable.bpk_vdl_tab_search_selected,
+    )
+)
+
 public val BpkIcon.Companion.View: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "view",
@@ -2602,6 +2722,21 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.Upgrade,
         BpkIcon.Upload,
         BpkIcon.UseLocation,
+        BpkIcon.VdlCars,
+        BpkIcon.VdlFlight,
+        BpkIcon.VdlHomeBeach,
+        BpkIcon.VdlHomeCars,
+        BpkIcon.VdlHomeFlight,
+        BpkIcon.VdlHomeHotels,
+        BpkIcon.VdlHotels,
+        BpkIcon.VdlTabDrops,
+        BpkIcon.VdlTabDropsSelected,
+        BpkIcon.VdlTabProfile,
+        BpkIcon.VdlTabProfileSelected,
+        BpkIcon.VdlTabSaved,
+        BpkIcon.VdlTabSavedSelected,
+        BpkIcon.VdlTabSearch,
+        BpkIcon.VdlTabSearchSelected,
         BpkIcon.View,
         BpkIcon.Virus,
         BpkIcon.Walk,
