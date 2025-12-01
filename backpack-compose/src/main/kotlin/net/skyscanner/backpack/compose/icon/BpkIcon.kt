@@ -32,10 +32,10 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.values
 
 @Immutable
-class BpkIcon(
+class BpkIcon internal constructor(
     val name: String,
-    val small: Int,
-    val large: Int,
+    internal val small: Int,
+    internal val large: Int,
 ) {
 
     override fun equals(other: Any?): Boolean =
