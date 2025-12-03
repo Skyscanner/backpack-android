@@ -20,16 +20,20 @@ package net.skyscanner.backpack.demo.stories
 
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NavBarComponent
-import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.navbar.BpkNavBar
 import net.skyscanner.backpack.navbar.NavBarStyle
-import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @NavBarComponent
@@ -72,22 +76,29 @@ private fun NavBarDemo(
     @LayoutRes layoutId: Int,
     modifier: Modifier = Modifier,
     init: BpkNavBar.() -> Unit = {},
-) =
-    AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
-        title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-            "عنوان الصفحة"
-        } else {
-            "Nav Bar"
+) {
+    val notificationState = rememberBpkFloatingNotificationState()
+    val scope = rememberCoroutineScope()
+
+    Box(modifier) {
+        AndroidLayout<BpkNavBar>(layoutId, R.id.appBar) {
+            title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+                "عنوان الصفحة"
+            } else {
+                "Nav Bar"
+            }
+            navAction = {
+                scope.launch {
+                    notificationState.show(text = "Nav is clicked!")
+                }
+            }
+            menuAction = {
+                scope.launch {
+                    notificationState.show(text = "${it.itemId.let(resources::getResourceEntryName)} is clicked!")
+                }
+            }
+            init()
         }
-        navAction = {
-            BpkToast.makeText(context, "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
-        }
-        menuAction = {
-            BpkToast.makeText(
-                context,
-                "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
-                BpkToast.LENGTH_SHORT,
-            ).show()
-        }
-        init()
+        BpkFloatingNotification(notificationState)
     }
+}

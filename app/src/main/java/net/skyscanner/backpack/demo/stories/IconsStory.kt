@@ -26,19 +26,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.IconComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
-import net.skyscanner.backpack.toast.BpkToast
-import androidx.core.graphics.drawable.toDrawable
 
 @Composable
 @IconComponent
@@ -57,12 +63,20 @@ private fun IconsDemo(
     iconType: IconType,
     modifier: Modifier = Modifier,
 ) {
-    AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons, modifier.fillMaxSize().navigationBarsPadding()) {
-        layoutManager = GridLayoutManager(context, 10)
-        adapter = IconsAdapter(
-            fetchAllIcons(context, iconType),
-            View.LAYOUT_DIRECTION_LTR,
-        )
+    val notificationState = rememberBpkFloatingNotificationState()
+    val scope = rememberCoroutineScope()
+
+    Box(modifier.fillMaxSize().navigationBarsPadding()) {
+        AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons) {
+            layoutManager = GridLayoutManager(context, 10)
+            adapter = IconsAdapter(
+                fetchAllIcons(context, iconType),
+                View.LAYOUT_DIRECTION_LTR,
+                notificationState,
+                scope,
+            )
+        }
+        BpkFloatingNotification(notificationState)
     }
 }
 
@@ -113,6 +127,8 @@ private fun fetchAllIcons(context: Context, iconType: IconType): List<BpkIcon> {
 private class IconsAdapter(
     private var icons: List<BpkIcon>,
     private val direction: Int,
+    private val notificationState: BpkFloatingNotificationState,
+    private val scope: CoroutineScope,
 ) : RecyclerView.Adapter<IconsAdapter.ViewHolder>() {
 
     private var rtlIconBackgroundColor: Int = 0
@@ -128,7 +144,9 @@ private class IconsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.img.setImageDrawable(icons[position].drawable)
         holder.img.setOnClickListener {
-            BpkToast.makeText(holder.itemView.context, icons[position].name, BpkToast.LENGTH_SHORT).show()
+            scope.launch {
+                notificationState.show(text = icons[position].name)
+            }
         }
         holder.img.contentDescription = icons[position].name
             .replace("bpk_", "")

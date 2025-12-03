@@ -35,17 +35,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
@@ -57,90 +60,91 @@ import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.IconComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @IconComponent
 @ComposeStory
 @OptIn(ExperimentalLayoutApi::class)
 fun IconsStory(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.padding(BpkSpacing.Base).navigationBarsPadding(),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
+    val notificationState = rememberBpkFloatingNotificationState()
+    val scope = rememberCoroutineScope()
 
-        var size by remember { mutableStateOf(BpkIconSize.Small) }
-        var layoutDirection by remember { mutableStateOf(LayoutDirection.Ltr) }
-
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-            verticalAlignment = Alignment.CenterVertically,
+    Box(modifier) {
+        Column(
+            modifier = Modifier.padding(BpkSpacing.Base).navigationBarsPadding(),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-            BpkRadioButton(
-                text = BpkIconSize.Small.toString(),
-                selected = size == BpkIconSize.Small,
-                onClick = { size = BpkIconSize.Small },
+            var size by remember { mutableStateOf(BpkIconSize.Small) }
+            var layoutDirection by remember { mutableStateOf(LayoutDirection.Ltr) }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+
+                BpkRadioButton(
+                    text = BpkIconSize.Small.toString(),
+                    selected = size == BpkIconSize.Small,
+                    onClick = { size = BpkIconSize.Small },
+                )
+
+                BpkRadioButton(
+                    text = BpkIconSize.Large.toString(),
+                    selected = size == BpkIconSize.Large,
+                    onClick = { size = BpkIconSize.Large },
+                )
+
+                BpkCheckbox(
+                    text = stringResource(R.string.icons_force_rtl),
+                    checked = layoutDirection == LayoutDirection.Rtl,
+                    onCheckedChange = {
+                        layoutDirection = when {
+                            it -> LayoutDirection.Rtl
+                            else -> LayoutDirection.Ltr
+                        }
+                    },
+                )
+            }
+
+            val clipboardManager = LocalClipboardManager.current
+            val copiedMessage = stringResource(R.string.copied_to_clipboard, "%s")
+
+            BpkText(
+                text = stringResource(R.string.icons_story_guide),
+                style = BpkTheme.typography.caption,
+                color = BpkTheme.colors.textSecondary,
             )
 
-            BpkRadioButton(
-                text = BpkIconSize.Large.toString(),
-                selected = size == BpkIconSize.Large,
-                onClick = { size = BpkIconSize.Large },
-            )
+            FlowRow(Modifier.verticalScroll(rememberScrollState())) {
+                BpkIcon.values.forEach { icon ->
 
-            BpkCheckbox(
-                text = stringResource(R.string.icons_force_rtl),
-                checked = layoutDirection == LayoutDirection.Rtl,
-                onCheckedChange = {
-                    layoutDirection = when {
-                        it -> LayoutDirection.Rtl
-                        else -> LayoutDirection.Ltr
-                    }
-                },
-            )
-        }
+                    CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
 
-        val context = LocalContext.current
-        val clipboardManager = LocalClipboardManager.current
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .border(Dp.Hairline, BpkTheme.colors.line)
+                                .clickableWithRipple {
+                                    clipboardManager.setText(AnnotatedString(icon.name))
+                                    scope.launch {
+                                        notificationState.show(text = copiedMessage.format(icon.name))
+                                    }
+                                }
+                                .requiredSize(BpkSpacing.Lg),
+                        ) {
 
-        BpkText(
-            text = stringResource(R.string.icons_story_guide),
-            style = BpkTheme.typography.caption,
-            color = BpkTheme.colors.textSecondary,
-        )
-
-        FlowRow(Modifier.verticalScroll(rememberScrollState())) {
-            BpkIcon.values.forEach { icon ->
-
-                CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
-
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .border(Dp.Hairline, BpkTheme.colors.line)
-                            .clickableWithRipple {
-                                clipboardManager.setText(AnnotatedString(icon.name))
-                                BpkToast
-                                    .makeText(
-                                        context,
-                                        context.getString(R.string.copied_to_clipboard, icon.name),
-                                        BpkToast.LENGTH_SHORT,
-                                    )
-                                    .show()
-                            }
-                            .requiredSize(BpkSpacing.Lg),
-                    ) {
-
-                        BpkIcon(
-                            icon = icon,
-                            contentDescription = stringResource(R.string.icons_story_content_description, icon.name),
-                            size = size,
-                        )
+                            BpkIcon(
+                                icon = icon,
+                                contentDescription = stringResource(R.string.icons_story_content_description, icon.name),
+                                size = size,
+                            )
+                        }
                     }
                 }
             }
         }
+        BpkFloatingNotification(notificationState)
     }
 }
