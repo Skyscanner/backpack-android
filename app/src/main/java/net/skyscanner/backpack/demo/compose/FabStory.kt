@@ -19,16 +19,19 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.fab.BpkFab
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Flight
@@ -37,37 +40,38 @@ import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FabComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
-import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @FabComponent
 @ComposeStory
 fun FabStory(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.padding(BpkSpacing.Xl),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
-    ) {
-        val context = LocalContext.current
-        BpkFab(
-            onClick = { showGenericMessageToast(context) },
-            icon = BpkIcon.Search,
-            contentDescription = stringResource(R.string.content_description),
-        )
+    val notificationState = rememberBpkFloatingNotificationState()
+    val scope = rememberCoroutineScope()
+    val message = stringResource(R.string.generic_message)
 
-        BpkFab(
-            onClick = { showGenericMessageToast(context) },
-            icon = BpkIcon.Star,
-            contentDescription = stringResource(R.string.content_description),
-        )
+    Box(modifier) {
+        Column(
+            modifier = Modifier.padding(BpkSpacing.Xl),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
+        ) {
+            BpkFab(
+                onClick = { scope.launch { notificationState.show(text = message) } },
+                icon = BpkIcon.Search,
+                contentDescription = stringResource(R.string.content_description),
+            )
 
-        BpkFab(
-            onClick = { showGenericMessageToast(context) },
-            icon = BpkIcon.Flight,
-            contentDescription = stringResource(R.string.content_description),
-        )
+            BpkFab(
+                onClick = { scope.launch { notificationState.show(text = message) } },
+                icon = BpkIcon.Star,
+                contentDescription = stringResource(R.string.content_description),
+            )
+
+            BpkFab(
+                onClick = { scope.launch { notificationState.show(text = message) } },
+                icon = BpkIcon.Flight,
+                contentDescription = stringResource(R.string.content_description),
+            )
+        }
+        BpkFloatingNotification(notificationState)
     }
-}
-
-private fun showGenericMessageToast(context: Context) {
-    BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
 }
