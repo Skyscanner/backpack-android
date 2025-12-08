@@ -1,8 +1,14 @@
 {
-  "codeConnect": {
-    "parser": "compose",
-    "include": [
-      "app/src/main/java/net/skyscanner/backpack/demo/figma/**/*.figma.kt"
-    ]
-  }
+    "codeConnect": {
+        "parser": "compose",
+        "include": [
+            "backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/**/*.kt",
+            "app/src/main/java/net/skyscanner/backpack/demo/figma/**/*.figma.kt"
+        ],
+        "documentUrlSubstitutions": {
+            "FIGMA_BUTTON": "https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components?node-id=10858-9698",
+            "FIGMA_CARD": "https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-50640",
+            "FIGMA_TEXT": "https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components?node-id=10911-51565"
+        }
+    }
 }

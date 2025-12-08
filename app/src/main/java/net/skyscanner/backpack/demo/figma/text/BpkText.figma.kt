@@ -26,7 +26,7 @@ import com.figma.code.connect.FigmaVariant
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 1")
 class BpkTextHero1CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -41,7 +41,7 @@ class BpkTextHero1CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 2")
 class BpkTextHero2CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -56,7 +56,7 @@ class BpkTextHero2CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 3")
 class BpkTextHero3CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -71,7 +71,7 @@ class BpkTextHero3CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 4")
 class BpkTextHero4CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -86,7 +86,7 @@ class BpkTextHero4CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 5")
 class BpkTextHero5CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -101,7 +101,7 @@ class BpkTextHero5CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Headline 1")
 class BpkTextHeading1CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -116,7 +116,7 @@ class BpkTextHeading1CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Headline 2")
 class BpkTextHeading2CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -131,7 +131,7 @@ class BpkTextHeading2CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Headline 3")
 class BpkTextHeading3CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -146,7 +146,7 @@ class BpkTextHeading3CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Headline 4")
 class BpkTextHeading4CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -161,7 +161,7 @@ class BpkTextHeading4CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Headline 5")
 class BpkTextHeading5CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -176,7 +176,7 @@ class BpkTextHeading5CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Subheading")
 class BpkTextSubheadingCodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -191,7 +191,7 @@ class BpkTextSubheadingCodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Body Default")
 class BpkTextBodyDefaultCodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -206,7 +206,7 @@ class BpkTextBodyDefaultCodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Body Longform")
 class BpkTextBodyLongformCodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -221,7 +221,7 @@ class BpkTextBodyLongformCodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Body Footnote")
 class BpkTextFootnoteCodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -236,7 +236,7 @@ class BpkTextFootnoteCodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Body Caption")
 class BpkTextCaptionCodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -251,7 +251,7 @@ class BpkTextCaptionCodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Label 1")
 class BpkTextLabel1CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -266,7 +266,7 @@ class BpkTextLabel1CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Label 2")
 class BpkTextLabel2CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")
@@ -281,7 +281,7 @@ class BpkTextLabel2CodeConnect {
     }
 }
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=22608-25390")
+@FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Label 3")
 class BpkTextLabel3CodeConnect {
     @FigmaProperty(FigmaType.Text, "Text Prop")

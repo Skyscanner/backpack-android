@@ -4,7 +4,7 @@ ksp = "2.3.3" # depends on Kotlin version
 compilerTesting = "0.11.1"
 destinations = "2.3.0" # update this alongside with compiler version
 
-figmaCodeConnect = "1.2.1"
+figmaCodeConnect = "1.2.6"
 figmaCodeConnectLib = "1.1.3"
 kotlinxSerialization = "1.7.3"
 

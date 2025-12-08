@@ -19,23 +19,19 @@
 package net.skyscanner.backpack.demo.figma.card
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.figma.code.connect.FigmaConnect
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-@FigmaConnect(url = "https://www.figma.com/design/irZ3YBx8vOm16ICkAr7mB3/Backpack-Components?node-id=4395-2506")
-class BpkCardCodeConnect {
+@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-50640")
+public class BpkCardDoc {
     @Composable
-    fun CardExample() {
+    public fun ComponentExample() {
         BpkCard {
-            Column(
-                modifier = Modifier.padding(16.dp),
-            ) {
+            Column() {
+                // Example content inside the card
                 BpkText(
                     text = "Card content",
                     style = BpkTheme.typography.bodyDefault,
