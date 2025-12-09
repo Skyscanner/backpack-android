@@ -9,7 +9,7 @@ import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalA
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10872-2409")
+@FigmaConnect("FIGMA_GRAPHIC_PROMO")
 @FigmaVariant(key = "Size", value = "Mobile")
 public class BpkGraphicPromoDoc {
     @FigmaProperty(FigmaType.Boolean, "Overlay?")

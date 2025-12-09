@@ -28,12 +28,12 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @FigmaConnect("FIGMA_TEXT")
 @FigmaVariant(key = "Style", value = "Hero 1")
-class BpkTextHero1CodeConnect {
+class BpkTextDoc {
     @FigmaProperty(FigmaType.Text, "Text Prop")
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.hero1,
@@ -48,7 +48,7 @@ class BpkTextHero2CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.hero2,
@@ -63,7 +63,7 @@ class BpkTextHero3CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.hero3,
@@ -78,7 +78,7 @@ class BpkTextHero4CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.hero4,
@@ -93,7 +93,7 @@ class BpkTextHero5CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.hero5,
@@ -108,7 +108,7 @@ class BpkTextHeading1CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.heading1,
@@ -123,7 +123,7 @@ class BpkTextHeading2CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.heading2,
@@ -138,7 +138,7 @@ class BpkTextHeading3CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.heading3,
@@ -153,7 +153,7 @@ class BpkTextHeading4CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.heading4,
@@ -168,7 +168,7 @@ class BpkTextHeading5CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.heading5,
@@ -183,7 +183,7 @@ class BpkTextSubheadingCodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.subheading,
@@ -198,7 +198,7 @@ class BpkTextBodyDefaultCodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.bodyDefault,
@@ -213,7 +213,7 @@ class BpkTextBodyLongformCodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.bodyLongform,
@@ -228,7 +228,7 @@ class BpkTextFootnoteCodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.footnote,
@@ -243,7 +243,7 @@ class BpkTextCaptionCodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.caption,
@@ -258,7 +258,7 @@ class BpkTextLabel1CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.label1,
@@ -273,7 +273,7 @@ class BpkTextLabel2CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.label2,
@@ -288,7 +288,7 @@ class BpkTextLabel3CodeConnect {
     val text: String = "Sample text"
 
     @Composable
-    fun TextExample() {
+    fun ComponentExample() {
         BpkText(
             text = text,
             style = BpkTheme.typography.label3,

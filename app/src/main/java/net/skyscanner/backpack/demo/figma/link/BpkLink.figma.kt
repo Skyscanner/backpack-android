@@ -7,7 +7,7 @@ import net.skyscanner.backpack.compose.link.BpkLink
 import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import kotlin.String
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10885-9743")
+@FigmaConnect("FIGMA_LINK")
 public class BpkLinkDoc {
     @FigmaProperty(FigmaType.Text, "Text")
     public val text: String = "Link"

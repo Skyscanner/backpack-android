@@ -7,7 +7,7 @@ import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 import net.skyscanner.backpack.compose.cardbutton.BpkSaveButton
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components?node-id=10858-50640")
+@FigmaConnect("FIGMA_SAVE_BUTTON")
 public class BpkSaveButtonDoc {
     @FigmaProperty(FigmaType.Enum, "Style")
     public val style: BpkCardButtonStyle = Figma.mapping(

@@ -7,7 +7,7 @@ import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-50288")
+@FigmaConnect("FIGMA_CAROUSEL")
 public class BpkCarouselDoc {
     @Composable
     public fun ComponentExample() {

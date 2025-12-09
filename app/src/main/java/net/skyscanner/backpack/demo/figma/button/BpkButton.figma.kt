@@ -55,7 +55,7 @@ class BpkButtonCodeConnect {
     )
 
     @Composable
-    fun ButtonExample() {
+    fun ComponentExample() {
         BpkButton(
             text = "Label",
             type = type,
@@ -111,7 +111,7 @@ class BpkButtonLeftIconCodeConnect {
     )
 
     @Composable
-    fun ButtonExample() {
+    fun ComponentExample() {
         BpkButton(
             text = "Label",
             type = type,
@@ -169,7 +169,7 @@ class BpkButtonRightIconCodeConnect {
     )
 
     @Composable
-    fun ButtonExample() {
+    fun ComponentExample() {
         BpkButton(
             text = "Label",
             type = type,
@@ -227,7 +227,7 @@ class BpkButtonIconOnlyCodeConnect {
     )
 
     @Composable
-    fun ButtonExample() {
+    fun ComponentExample() {
         BpkButton(
             icon = BpkIcon.ArrowRight,
             contentDescription = "Label",

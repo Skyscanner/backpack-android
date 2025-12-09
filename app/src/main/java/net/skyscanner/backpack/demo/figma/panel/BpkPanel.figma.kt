@@ -7,7 +7,7 @@ import com.figma.code.connect.FigmaType
 import net.skyscanner.backpack.compose.panel.BpkPanel
 import net.skyscanner.backpack.compose.panel.BpkPanelPadding
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-49752")
+@FigmaConnect("FIGMA_PANEL")
 public class BpkPanelDoc {
     @FigmaProperty(FigmaType.Enum, "Keyline?")
     public val propagateMinConstraints: Boolean = Figma.mapping(

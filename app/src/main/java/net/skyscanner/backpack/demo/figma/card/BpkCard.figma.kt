@@ -25,7 +25,7 @@ import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-50640")
+@FigmaConnect("FIGMA_CARD")
 public class BpkCardDoc {
     @Composable
     public fun ComponentExample() {

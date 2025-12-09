@@ -7,7 +7,7 @@ import net.skyscanner.backpack.compose.card.BpkCardStyle
 import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-@FigmaConnect("https://www.figma.com/design/KXf2gHNLDe2cXWUoHl4cTX/Backpack%E2%80%A8Foundations---Components/?node-id=10858-49736")
+@FigmaConnect("FIGMA_WRAPPER_CARD")
 public class BpkCardWrapperDoc {
     @Composable
     public fun ComponentExample() {
