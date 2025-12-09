@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.starrating
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.accessibility.AccessibilityNodeInfo
 import net.skyscanner.backpack.R
@@ -43,13 +44,11 @@ open class BpkStarRating @JvmOverloads constructor(
         super.onInitializeAccessibilityNodeInfo(info)
         val text = getAccessibilityText()
         if (text != null) {
-            if (info.contentDescription != null) {
-                // append the content description to match other announcements.
-                // Using `announceForAccessibility` or similar methods didn't get announced when focused, so this is a workaround
-                info.contentDescription = "$text ${info.contentDescription}"
-            } else {
-                info.contentDescription = text
+            // Prefer stateDescription where supported so TalkBack reads label then state.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                info.stateDescription = text
             }
+            info.contentDescription = info.contentDescription?.let { "$it $text" } ?: text
         }
     }
 
