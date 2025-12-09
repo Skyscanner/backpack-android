@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 
 @FigmaConnect("FIGMA_STATIC_STAR_RATING")
-class BpkHotelRatingDoc {
+class BpkStarRatingDoc {
 
     @FigmaProperty(FigmaType.Enum, "Rating")
     val rating: Float = Figma.mapping(

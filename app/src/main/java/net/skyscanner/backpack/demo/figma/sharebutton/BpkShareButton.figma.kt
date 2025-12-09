@@ -46,8 +46,8 @@ public class BpkSaveButtonDoc {
     public fun ComponentExample() {
         BpkShareButton(
             contentDescription = "Share", // Example content description for accessibility
-            size = BpkCardButtonSize.Default,
-            style = BpkCardButtonStyle.Default,
+            size = size,
+            style = style,
             onClick = {},
         )
     }

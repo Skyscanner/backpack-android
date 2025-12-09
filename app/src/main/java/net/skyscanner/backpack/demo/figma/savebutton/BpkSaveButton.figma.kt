@@ -57,8 +57,8 @@ public class BpkSaveButtonDoc {
             checked = checked,
             contentDescription = "Save", // Example content description for accessibility
             onCheckedChange = {},
-            size = BpkCardButtonSize.Default,
-            style = BpkCardButtonStyle.Default,
+            size = size,
+            style = style,
 
         )
     }
