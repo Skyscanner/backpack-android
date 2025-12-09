@@ -47,8 +47,9 @@ open class BpkStarRating @JvmOverloads constructor(
             // Prefer stateDescription where supported so TalkBack reads label then state.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 info.stateDescription = text
+            } else {
+                info.contentDescription = info.contentDescription?.let { "$it $text" } ?: text
             }
-            info.contentDescription = info.contentDescription?.let { "$it $text" } ?: text
         }
     }
 
