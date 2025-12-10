@@ -86,9 +86,10 @@ fun BpkFlightLeg(
                         .graphicsLayer(
                             clip = true,
                             shape = RoundedCornerShape(BpkBorderRadius.Xs),
-                            // Workarounds case when `carrierLogoContent` should fill the whole space
-                            // of the box, but the background still shines through as a few pixels wide border.
-                            // See https://issuetracker.google.com/issues/258962926#comment2 for reference.
+                            // CompositingStrategy.Offscreen ensures proper clipping when `carrierLogoContent`
+                            // fills the whole space. Without it, the background can bleed through at the edges
+                            // due to how Compose composites clipped layers. This is the recommended solution.
+                            // See https://developer.android.com/develop/ui/compose/graphics/draw/modifiers
                             compositingStrategy = CompositingStrategy.Offscreen,
                         )
                         .background(BpkTheme.colors.textOnDark),
