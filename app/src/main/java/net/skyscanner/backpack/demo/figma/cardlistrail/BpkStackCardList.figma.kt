@@ -24,7 +24,7 @@ import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
 
 @FigmaConnect("FIGMA_LIST_CARD")
 @FigmaVariant("Style", "Stack")
-public class BpkRailCardListDoc {
+public class BpkStackCardListDoc {
 
     @Composable
     public fun ComponentExample() {
