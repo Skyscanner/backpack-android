@@ -126,7 +126,7 @@ jobs:
       - name: Install Figma Code Connect
         if: ${{ inputs.figma_enabled && steps.code-connect-filter.outputs.code_connect == 'true' }}
         continue-on-error: true
-        run: npm install -g @figma/code-connect@1.3.5
+        run: npm install -g @figma/code-connect@1.3.11
 
       - name: Validate Code Connect files
         if: ${{ inputs.figma_enabled && steps.code-connect-filter.outputs.code_connect == 'true' }}
