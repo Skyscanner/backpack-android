@@ -18,11 +18,22 @@
 
 package net.skyscanner.backpack.compose.flightleg
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Aircraft
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BasicFlightLegSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegLongStopsSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegShortStopsSample
 import org.junit.Test
+import org.robolectric.RuntimeEnvironment
 
 class BpkFlightLegTest : BpkSnapshotTest() {
 
@@ -39,5 +50,86 @@ class BpkFlightLegTest : BpkSnapshotTest() {
     @Test
     fun completeLegShortStopsTest() = snap {
         CompleteFlightLegShortStopsSample()
+    }
+
+    @Test
+    fun carrierLogoFillsWholeSpace() = snap {
+        BpkFlightLeg(
+            departureArrivalTime = "19:50 - 22:45",
+            description = AnnotatedString("LHR-SIN, SwissAir"),
+            stopsInfo = "Direct",
+            duration = "7h 55m",
+            contentDescription = null,
+            carrierLogoContent = {
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(BpkTheme.colors.canvas),
+                    painter = painterResource(id = R.drawable.sample_icon),
+                    contentDescription = null,
+                )
+            },
+        )
+    }
+
+    @Test
+    fun carrierLogoConstrained() = snap {
+        BpkFlightLeg(
+            departureArrivalTime = "19:50 - 22:45",
+            description = AnnotatedString("LHR-SIN, SwissAir"),
+            stopsInfo = "Direct",
+            duration = "7h 55m",
+            contentDescription = null,
+            carrierLogoContent = {
+                BpkIcon(
+                    icon = BpkIcon.Aircraft,
+                    tint = BpkTheme.colors.textOnLight,
+                    contentDescription = null,
+                )
+            },
+        )
+    }
+
+    @Test
+    fun noCarrierLogo() = snap {
+        BpkFlightLeg(
+            departureArrivalTime = "19:50 - 22:45",
+            description = AnnotatedString("LHR-SIN, SwissAir"),
+            stopsInfo = "Direct",
+            duration = "7h 55m",
+            contentDescription = null,
+            carrierLogoContent = null,
+        )
+    }
+
+    @Test
+    fun simpleLegTest_landscape() {
+        RuntimeEnvironment.setQualifiers("+land")
+        snap {
+            BasicFlightLegSample()
+        }
+    }
+
+    @Test
+    fun carrierLogoFillsWholeSpace_landscape() {
+        RuntimeEnvironment.setQualifiers("+land")
+        snap {
+            BpkFlightLeg(
+                departureArrivalTime = "19:50 - 22:45",
+                description = AnnotatedString("LHR-SIN, SwissAir"),
+                stopsInfo = "Direct",
+                duration = "7h 55m",
+                contentDescription = null,
+                carrierLogoContent = {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(BpkTheme.colors.canvas),
+                        painter = painterResource(id = R.drawable.sample_icon),
+                        contentDescription = null,
+                    )
+                },
+            )
+        }
     }
 }
