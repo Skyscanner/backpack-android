@@ -42,7 +42,7 @@ androidx-appCompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-annotations = "androidx.annotation:annotation:1.9.1"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
-androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0"
 androidx-coreKts = "androidx.core:core-ktx:1.16.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
@@ -90,7 +90,7 @@ compose-uiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 compose-uiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-uiToolingTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-uiUtil = { group = "androidx.compose.ui", name = "ui-util" }
-compose-activity = "androidx.activity:activity-compose:1.12.0"
+compose-activity = "androidx.activity:activity-compose:1.12.1"
 
 destinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "destinations" }
 destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
