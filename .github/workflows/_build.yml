@@ -117,6 +117,7 @@ jobs:
         if: ${{ inputs.figma_enabled }}
         uses: dorny/paths-filter@v3
         with:
+          token: ${{ steps.app-token.outputs.token }}
           filters: |
             code_connect:
               - 'app/src/main/java/net/skyscanner/backpack/demo/figma/**'
