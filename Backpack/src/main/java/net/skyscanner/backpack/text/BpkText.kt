@@ -33,7 +33,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.isInEditMode
 import net.skyscanner.backpack.util.use
 import androidx.core.content.withStyledAttributes
 
@@ -208,12 +207,7 @@ private fun internalGetFont(context: Context, textStyle: BpkText.TextStyle): Bpk
     val typeface = if (typefaceResId == -1) {
         textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily)?.let { Typeface.create(it, Typeface.NORMAL) }
     } else {
-        if (context.isInEditMode()) {
-            // Preview is broken when using the compat version for font loading as of AS 4.2 (see https://issuetracker.google.com/issues/150587499)
-            context.resources.getFont(typefaceResId)
-        } else {
-            ResourcesCompat.getFont(context, typefaceResId)
-        }
+        ResourcesCompat.getFont(context, typefaceResId)
     } ?: throw IllegalStateException("Bpk font not configured correctly")
 
     textStyleAttributes.recycle()
