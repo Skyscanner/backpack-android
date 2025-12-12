@@ -30,9 +30,7 @@ import androidx.compose.runtime.remember
 @OptIn(ExperimentalMaterial3Api::class)
 fun rememberBpkModalBottomSheetState(
     skipPartiallyExpanded: Boolean = false,
-    // workaround for: https://issuetracker.google.com/issues/342089957 - remove with next compose compiler update
-//    confirmStateChange: (BpkModalBottomSheetValue) -> Boolean = { true },
-    confirmStateChange: (BpkModalBottomSheetValue) -> Boolean = remember { { true } },
+    confirmStateChange: (BpkModalBottomSheetValue) -> Boolean = { true },
 ): BpkModalBottomSheetState {
     val delegate = rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
