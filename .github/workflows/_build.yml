@@ -18,10 +18,69 @@ env:
 
 jobs:
 
-  Build:
-    name: Build
+  # ============================================
+  # PARALLEL JOB GROUP 1: Static Analysis & Tests
+  # These jobs run independently and in parallel
+  # ============================================
+
+  Detekt:
+    name: Detekt
     runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 30
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Detekt check
+        run: ./gradlew detekt -PdisablePreDex
+
+  Lint:
+    name: Lint
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Lint check
+        run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
+
+  UnitTests:
+    name: Unit Tests
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Unit Tests
+        run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+
+  BuildAndTokens:
+    name: Build & Tokens
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 20
     permissions:
       statuses: write
       pull-requests: write
@@ -96,14 +155,10 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update tokens"
           git push
 
-      - name: Detekt check
-        run: ./gradlew detekt -PdisablePreDex
-
-      - name: Lint check
-        run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
-
-      - name: Unit Tests
-        run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+  # ============================================
+  # PARALLEL JOB GROUP 2: Instrumented Tests
+  # These jobs also run in parallel with Group 1
+  # ============================================
 
   Android:
     name: Android tests
