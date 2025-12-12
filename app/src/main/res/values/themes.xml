@@ -23,7 +23,6 @@
         <item name="bpkRadioButtonStyle">@style/LondonThemeRadioButton</item>
         <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
         <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
-        <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
         <item name="bpkNavBarStyle">@style/LondonThemeNavBar</item>
         <item name="bpkSliderStyle">@style/LondonThemeSlider</item>
 
@@ -144,12 +143,6 @@
         <item name="ratingColorHigh">#00254B</item>
     </style>
 
-    <style name="LondonThemeSnackbar">
-        <item name="snackbarTextColor">#6392ce</item>
-        <item name="snackbarActionColor">@color/bpkStatusDangerSpot</item>
-        <item name="snackbarBackgroundColor">#00254B</item>
-    </style>
-
     <style name="LondonThemeNavBar">
     </style>
 
@@ -186,7 +179,6 @@
 
         <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
         <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
-        <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
         <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
         <item name="bpkBarChartStyle">@style/DohaThemeBarChart</item>
     </style>
@@ -275,12 +267,6 @@
         <item name="ratingColorLow">#ffd677</item>
         <item name="ratingColorMedium">#ffb300</item>
         <item name="ratingColorHigh">#ffa000</item>
-    </style>
-
-    <style name="DohaThemeSnackbar">
-        <item name="snackbarTextColor">#ffd677</item>
-        <item name="snackbarActionColor">@color/bpkStatusDangerSpot</item>
-        <item name="snackbarBackgroundColor">#ffa000</item>
     </style>
 
     <style name="DohaThemeNavBar">

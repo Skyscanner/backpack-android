@@ -191,9 +191,9 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
                 "androidx.appcompat.widget.AppCompatSeekBar",
             ),
         ),
-        SNACKBAR(
-            fullName = "net.skyscanner.backpack.snackbar.BpkSnackbar",
-            webName = "snackbar",
+        FLOATING_NOTIFICATION(
+            fullName = "net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationKt.BpkFloatingNotification",
+            webName = "floating-notification",
             componentsToReplace = setOf("com.google.android.material.snackbar.Snackbar"),
             staticMethodsToReplace = setOf("make"),
         ),
