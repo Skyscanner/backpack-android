@@ -254,12 +254,6 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="BpkSnackbar">
-        <attr name="snackbarTextColor" format="color" />
-        <attr name="snackbarActionColor" format="color" />
-        <attr name="snackbarBackgroundColor" format="color" />
-    </declare-styleable>
-
     <declare-styleable name="BpkNavBar">
         <attr name="navBarTitle" format="string" />
         <attr name="navBarActionContentDescription" format="string" />
@@ -368,7 +362,6 @@
     <attr name="bpkHorizontalNavStyleAlternate" format="reference" />
     <attr name="bpkTextFieldStyle" format="reference" />
     <attr name="bpkTextInputLayoutStyle" format="reference" />
-    <attr name="bpkSnackbarStyle" format="reference" />
     <attr name="bpkRatingStyle" format="reference" />
     <attr name="bpkBarChartStyle" format="reference" />
     <attr name="bpkNavBarStyle" format="reference" />

@@ -81,11 +81,6 @@
     <string name="settings_theme_doha">Doha</string>
     <string name="settings_theme_london">London</string>
 
-    <string name="snackbar_title">Title</string>
-    <string name="snackbar_message">Message</string>
-    <string name="snackbar_icon_content_description">Close</string>
-    <string name="snackbar_action">Action!</string>
-
     <string name="story_badge_compose">Compose-only</string>
     <string name="story_badge_view">View-only</string>
 
@@ -245,16 +240,6 @@
     <string name="toast_long">Long Toast</string>
     <string name="toast_short">Short Toast</string>
 
-    <string name="snackbar_short">Message (Duration Short)</string>
-    <string name="snackbar_long">Message (Duration Long)</string>
-    <string name="snackbar_indefinite">Message (Duration Indefinite)</string>
-    <string name="snackbar_title_message">Title + Message</string>
-    <string name="snackbar_icon_message">Icon + Message</string>
-    <string name="snackbar_icon_title_message">Icon + Title + Message</string>
-    <string name="snackbar_icon_action">Message (Icon Action)</string>
-    <string name="snackbar_title_icon_action">Title + Message (Icon Action)</string>
-    <string name="snackbar_icon_icon_action">Icon + Message (Icon Action)</string>
-    <string name="snackbar_icon_title_icon_action">Icon + title + message (Icon Action)</string>
     <string name="bar_chart_accessibility_label">%1$s the %2$s of %3$s, price is %4$s</string>
     <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s of %3$s, price is unknown</string>
     <string name="divided_card_width_more_than_minimum"><![CDATA[Card width >= 240 Dp]]></string>
