@@ -9,6 +9,7 @@ Compose:
     active: true
   ModifierMissing:
     active: true
+    excludes: ['**/*.figma.kt']
   ModifierNaming:
     active: true
   ModifierNotUsedAtRoot:
