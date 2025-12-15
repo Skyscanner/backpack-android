@@ -46,7 +46,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
         snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
-                backgroundColor = BpkTheme.colors.coreEco,
+                backgroundColor = BpkTheme.colors.corePrimary,
                 headerContent = { HeaderContent() },
                 cardContent = { CardContent() },
             )
@@ -59,7 +59,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
         snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
-                backgroundColor = BpkTheme.colors.coreEco,
+                backgroundColor = BpkTheme.colors.corePrimary,
                 corner = BpkCardCorner.Large,
                 headerContent = { HeaderContent() },
                 cardContent = { CardContent() },
@@ -73,7 +73,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
         snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
-                backgroundColor = BpkTheme.colors.coreEco,
+                backgroundColor = BpkTheme.colors.corePrimary,
                 cardPadding = BpkCardPadding.None,
                 headerContent = { HeaderContent() },
                 cardContent = { CardContent() },
@@ -87,7 +87,7 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
         snap(background = { BpkTheme.colors.surfaceHighlight }) {
             BpkCardWrapper(
                 modifier = Modifier.fillMaxWidth(),
-                backgroundColor = BpkTheme.colors.coreEco,
+                backgroundColor = BpkTheme.colors.corePrimary,
                 headerContent = { HeaderContent() },
                 cardContent = { CardContent() },
             )
@@ -108,7 +108,8 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
             BpkText(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = R.string.card_wrapper_card),
-                style = BpkTheme.typography.bodyDefault,
+                style = BpkTheme.typography.label2,
+                color = BpkTheme.colors.textOnDark,
                 textAlign = TextAlign.Center,
             )
         }
@@ -121,7 +122,8 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
                 .fillMaxWidth()
                 .height(BpkSpacing.Xxl),
             text = stringResource(id = R.string.card_wrapper_header),
-            style = BpkTheme.typography.bodyDefault,
+            style = BpkTheme.typography.label2,
+            color = BpkTheme.colors.textOnDark,
             textAlign = TextAlign.Center,
         )
     }
