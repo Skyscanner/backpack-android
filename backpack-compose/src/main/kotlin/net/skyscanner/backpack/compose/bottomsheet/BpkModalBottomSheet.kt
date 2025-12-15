@@ -32,6 +32,7 @@ sealed class BpkModalBottomSheetCloseAction {
     data object None : BpkModalBottomSheetCloseAction()
     data class Close(
         val contentDescription: String,
+        val onClick: (() -> Unit)? = null,
     ) : BpkModalBottomSheetCloseAction()
 }
 
