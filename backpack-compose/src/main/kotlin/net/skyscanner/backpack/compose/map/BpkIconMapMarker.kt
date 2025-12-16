@@ -83,7 +83,7 @@ fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modif
     val iconColor = when (status) {
         BpkIconMarkerStatus.Default -> BpkTheme.colors.surfaceDefault
         BpkIconMarkerStatus.Focused -> BpkTheme.colors.statusSuccessSpot
-        BpkIconMarkerStatus.Disabled -> BpkTheme.colors.coreEco
+        BpkIconMarkerStatus.Disabled -> BpkTheme.colors.corePrimary
     }
 
     val backgroundColor = when (status) {

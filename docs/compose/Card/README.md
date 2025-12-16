@@ -123,7 +123,7 @@ import net.skyscanner.backpack.compose.card.BpkCardCorner
 
 BpkCardWrapper(
   modifier = Modifier.fillMaxWidth(),
-  backgroundColor = BpkTheme.colors.coreEco,
+  backgroundColor = BpkTheme.colors.corePrimary,
   cardPadding = BpkCardPadding.None,
   corner = BpkCardCorner.Large,
   elevation = BpkCardElevation.Focus,
