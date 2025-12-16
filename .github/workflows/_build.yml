@@ -358,19 +358,16 @@ jobs:
           rm -rf app/screenshots/oss
           mkdir -p app/screenshots/oss
 
-          # Copy all screenshots from artifacts
-          if [ -d "screenshot-artifacts/screenshots-default" ]; then
-            cp -r screenshot-artifacts/screenshots-default/oss/* app/screenshots/oss/ 2>/dev/null || true
-          fi
-          if [ -d "screenshot-artifacts/screenshots-dm" ]; then
-            cp -r screenshot-artifacts/screenshots-dm/oss/* app/screenshots/oss/ 2>/dev/null || true
-          fi
-          if [ -d "screenshot-artifacts/screenshots-rtl" ]; then
-            cp -r screenshot-artifacts/screenshots-rtl/oss/* app/screenshots/oss/ 2>/dev/null || true
-          fi
-          if [ -d "screenshot-artifacts/screenshots-themed" ]; then
-            cp -r screenshot-artifacts/screenshots-themed/oss/* app/screenshots/oss/ 2>/dev/null || true
-          fi
+          # Copy all screenshots from artifacts with error checking
+          for variant in default dm rtl themed; do
+            artifact_dir="screenshot-artifacts/screenshots-$variant/oss"
+            if [ -d "$artifact_dir" ] && compgen -G "$artifact_dir/*" > /dev/null; then
+              echo "Copying screenshots for variant: $variant"
+              cp -r "$artifact_dir"/* app/screenshots/oss/
+            else
+              echo "Warning: No screenshots found for variant: $variant"
+            fi
+          done
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
