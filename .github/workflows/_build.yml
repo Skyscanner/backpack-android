@@ -212,12 +212,24 @@ jobs:
   # ============================================
   # Screenshot Tests - Parallelized by Variant
   # Each variant runs independently to reduce wall-clock time
+  # Using matrix strategy to eliminate duplication
   # ============================================
 
-  Screenshots-Default:
-    name: Screenshots (default)
+  Screenshots:
+    name: Screenshots (${{ matrix.variant.name }})
     runs-on: ubuntu-24.04-16cores-public
     timeout-minutes: 10
+    strategy:
+      matrix:
+        variant:
+          - name: default
+            flag: default
+          - name: dark mode
+            flag: dm
+          - name: RTL
+            flag: rtl
+          - name: themed
+            flag: themed
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -229,107 +241,23 @@ jobs:
           distribution: 'adopt'
           cache: gradle
 
-      - name: Screenshot Tests - Default Variant
+      - name: Screenshot Tests - ${{ matrix.variant.name }}
         run: |
           set -e
           rm -rf app/screenshots/oss
-          ./gradlew app:recordRoborazziOssDebug -Dvariant=default
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots-default
-          path: app/screenshots/
-          retention-days: 1
-
-  Screenshots-DarkMode:
-    name: Screenshots (dark mode)
-    runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
-
-      - name: Screenshot Tests - Dark Mode Variant
-        run: |
-          set -e
-          rm -rf app/screenshots/oss
-          ./gradlew app:recordRoborazziOssDebug -Dvariant=dm
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots-dm
-          path: app/screenshots/
-          retention-days: 1
-
-  Screenshots-RTL:
-    name: Screenshots (RTL)
-    runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
-
-      - name: Screenshot Tests - RTL Variant
-        run: |
-          set -e
-          rm -rf app/screenshots/oss
-          ./gradlew app:recordRoborazziOssDebug -Dvariant=rtl
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots-rtl
-          path: app/screenshots/
-          retention-days: 1
-
-  Screenshots-Themed:
-    name: Screenshots (themed)
-    runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
-
-      - name: Screenshot Tests - Themed Variant
-        run: |
-          set -e
-          rm -rf app/screenshots/oss
-          ./gradlew app:recordRoborazziOssDebug -Dvariant=themed
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots-themed
+          name: screenshots-${{ matrix.variant.flag }}
           path: app/screenshots/
           retention-days: 1
 
   Screenshots-Collect:
     name: Collect & commit screenshots
     runs-on: ubuntu-24.04-16cores-public
-    needs: [Screenshots-Default, Screenshots-DarkMode, Screenshots-RTL, Screenshots-Themed]
+    needs: Screenshots
     permissions:
       pull-requests: write
       contents: write
