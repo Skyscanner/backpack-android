@@ -23,8 +23,8 @@ jobs:
   # These jobs run independently and in parallel
   # ============================================
 
-  Detekt:
-    name: Detekt
+  StaticAnalysis:
+    name: Static Analysis (Detekt & Lint)
     runs-on: ubuntu-24.04-16cores-public
     timeout-minutes: 15
 
@@ -40,21 +40,6 @@ jobs:
 
       - name: Detekt check
         run: ./gradlew detekt -PdisablePreDex
-
-  Lint:
-    name: Lint
-    runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 15
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
 
       - name: Lint check
         run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
@@ -224,13 +209,131 @@ jobs:
 
             ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest && killall -INT crashpad_handler || true
 
-  Screenshots:
-    name: Screenshots tests
+  # ============================================
+  # Screenshot Tests - Parallelized by Variant
+  # Each variant runs independently to reduce wall-clock time
+  # ============================================
+
+  Screenshots-Default:
+    name: Screenshots (default)
     runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Screenshot Tests - Default Variant
+        run: |
+          set -e
+          rm -rf app/screenshots/oss
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=default
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-default
+          path: app/screenshots/
+          retention-days: 1
+
+  Screenshots-DarkMode:
+    name: Screenshots (dark mode)
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Screenshot Tests - Dark Mode Variant
+        run: |
+          set -e
+          rm -rf app/screenshots/oss
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=dm
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-dm
+          path: app/screenshots/
+          retention-days: 1
+
+  Screenshots-RTL:
+    name: Screenshots (RTL)
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Screenshot Tests - RTL Variant
+        run: |
+          set -e
+          rm -rf app/screenshots/oss
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=rtl
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-rtl
+          path: app/screenshots/
+          retention-days: 1
+
+  Screenshots-Themed:
+    name: Screenshots (themed)
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Screenshot Tests - Themed Variant
+        run: |
+          set -e
+          rm -rf app/screenshots/oss
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=themed
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-themed
+          path: app/screenshots/
+          retention-days: 1
+
+  Screenshots-Collect:
+    name: Collect & commit screenshots
+    runs-on: ubuntu-24.04-16cores-public
+    needs: [Screenshots-Default, Screenshots-DarkMode, Screenshots-RTL, Screenshots-Themed]
     permissions:
       pull-requests: write
       contents: write
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - uses: actions/create-github-app-token@v2
         id: app-token
@@ -243,18 +346,31 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
+      - name: Download all screenshot artifacts
+        uses: actions/download-artifact@v4
         with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+          path: screenshot-artifacts
 
-      - name: Screenshot Tests
-        id: screenshotTests
+      - name: Merge screenshot results
+        id: mergeScreenshots
         run: |
           set -e
-          ./scripts/record_screenshot_tests.sh
+          rm -rf app/screenshots/oss
+          mkdir -p app/screenshots/oss
+
+          # Copy all screenshots from artifacts
+          if [ -d "screenshot-artifacts/screenshots-default" ]; then
+            cp -r screenshot-artifacts/screenshots-default/oss/* app/screenshots/oss/ 2>/dev/null || true
+          fi
+          if [ -d "screenshot-artifacts/screenshots-dm" ]; then
+            cp -r screenshot-artifacts/screenshots-dm/oss/* app/screenshots/oss/ 2>/dev/null || true
+          fi
+          if [ -d "screenshot-artifacts/screenshots-rtl" ]; then
+            cp -r screenshot-artifacts/screenshots-rtl/oss/* app/screenshots/oss/ 2>/dev/null || true
+          fi
+          if [ -d "screenshot-artifacts/screenshots-themed" ]; then
+            cp -r screenshot-artifacts/screenshots-themed/oss/* app/screenshots/oss/ 2>/dev/null || true
+          fi
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
@@ -264,7 +380,7 @@ jobs:
         run: ./scripts/check-no-changes.sh
 
       - name: Commit changes
-        if: ${{ github.event_name == 'pull_request' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ github.event_name == 'pull_request' && steps.mergeScreenshots.outputs.CHANGED_FILES != '' }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
