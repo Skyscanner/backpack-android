@@ -159,3 +159,24 @@ if (openBottomSheet) {
     )
 }
 ```
+A close button can be added using the `closeButton` parameter of type `BpkModalBottomSheetCloseAction`.
+
+You can also provide an optional `onClick` lambda, which runs in addition to `onDismissRequest()` when the close button is pressed.
+This is useful when you need to execute extra logic such as tracking analytics events specifically for that button.
+```kotlin
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
+
+var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+
+if (openBottomSheet) {
+    BpkModalBottomSheet(
+        closeButton = BpkModalBottomSheetCloseAction.Close(
+            contentDescription = stringResource(id = R.string.navigation_close),
+            onClick = { /* code to be executed when the close button is pressed, right before onDismissRequest() is invoked */ },
+        ),
+        content = { /* content of the bottom sheet */ },
+        onDismissRequest = { openBottomSheet = false },
+    )
+}
+```
