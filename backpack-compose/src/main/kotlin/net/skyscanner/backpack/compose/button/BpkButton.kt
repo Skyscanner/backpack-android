@@ -20,9 +20,11 @@ package net.skyscanner.backpack.compose.button
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonDrawable
@@ -30,6 +32,8 @@ import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
 import net.skyscanner.backpack.compose.button.internal.minHeight
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.configuration.BpkConfiguration
 
 enum class BpkButtonIconPosition {
     Start,
@@ -53,6 +57,9 @@ enum class BpkButtonType {
     Link,
     LinkOnDark,
 }
+
+val BpkButtonShape: Shape
+    @Composable get() = BpkConfiguration.buttonConfig?.cornerRadius?.let { RoundedCornerShape(it) } ?: RoundedCornerShape(BpkBorderRadius.Sm)
 
 @Suppress("LambdaParameterEventTrailing")
 @Composable

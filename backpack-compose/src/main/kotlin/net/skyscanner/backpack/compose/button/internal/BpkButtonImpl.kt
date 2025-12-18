@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -49,13 +48,13 @@ import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.button.BpkButtonShape
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
@@ -113,7 +112,7 @@ internal fun BpkButtonImpl(
                 disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
                 disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
             ),
-            shape = buttonShape(),
+            shape = BpkButtonShape,
             contentPadding = type.contentPadding(size),
             elevation = null,
             content = {
@@ -189,10 +188,6 @@ internal fun ButtonDrawable(
         modifier = modifier.defaultIconSize(size.iconSize),
     )
 }
-
-private fun buttonShape() = BpkConfiguration.buttonConfig?.cornerRadius?.let {
-    RoundedCornerShape(it)
-} ?: RoundedCornerShape(BpkBorderRadius.Sm)
 
 private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {
