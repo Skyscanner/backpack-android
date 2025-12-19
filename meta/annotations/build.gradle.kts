@@ -16,10 +16,15 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
+plugins {
+    kotlin("jvm")
+}
+
+sourceSets {
+    main {
+        java.srcDirs("src/main/kotlin")
     }
 }
+
+apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+

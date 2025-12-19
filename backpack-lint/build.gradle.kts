@@ -16,13 +16,6 @@
  * limitations under the License.
  */
 
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.nodeFileOf
-import net.skyscanner.backpack.tokens.parseAs
-import net.skyscanner.backpack.tokens.readAs
-import net.skyscanner.backpack.tokens.saveTo
-import net.skyscanner.backpack.tokens.transformTo
-
 plugins {
     kotlin("jvm")
 }
@@ -44,4 +37,4 @@ tasks.jar {
 
 apply(from = "tokens.gradle.kts")
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle")
+apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
