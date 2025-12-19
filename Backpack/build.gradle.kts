@@ -23,8 +23,8 @@ plugins {
 
 extra["artifactId"] = "backpack-android"
 
-apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/android-configuration.gradle")
+apply(from = "$rootDir/gradle-maven-push.gradle.kts")
+apply(from = "$rootDir/android-configuration.gradle.kts")
 
 android {
     namespace = "net.skyscanner.backpack"
@@ -53,4 +53,4 @@ dependencies {
 
 apply(from = "tokens.gradle.kts")
 
-apply(from = "$rootDir/android-configuration-check.gradle")
+apply(from = "$rootDir/android-configuration-check.gradle.kts")

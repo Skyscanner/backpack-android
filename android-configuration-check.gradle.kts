@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 - 2025 Skyscanner Ltd
+ * Copyright 2018 - 2026 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
+tasks.register("lintOssDebug") {
+    dependsOn("lintDebug")
+}
+
+tasks.register("testOssDebugUnitTest") {
+    dependsOn("testDebugUnitTest")
 }

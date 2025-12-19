@@ -16,20 +16,6 @@
  * limitations under the License.
  */
 
-import net.skyscanner.backpack.tokens.BpkColor
-import net.skyscanner.backpack.tokens.BpkDimension
-import net.skyscanner.backpack.tokens.BpkDuration
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.BpkIcon
-import net.skyscanner.backpack.tokens.BpkOutput
-import net.skyscanner.backpack.tokens.BpkTextStyle
-import net.skyscanner.backpack.tokens.BpkTextUnit
-import net.skyscanner.backpack.tokens.nodeFileOf
-import net.skyscanner.backpack.tokens.parseAs
-import net.skyscanner.backpack.tokens.readAs
-import net.skyscanner.backpack.tokens.saveTo
-import net.skyscanner.backpack.tokens.transformTo
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -37,14 +23,17 @@ plugins {
 
 extra["artifactId"] = "backpack-common"
 
-apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/android-configuration.gradle")
+apply(from = "$rootDir/gradle-maven-push.gradle.kts")
+apply(from = "$rootDir/android-configuration.gradle.kts")
 
 android {
     namespace = "net.skyscanner.backpack.common"
-    kotlinOptions {
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        freeCompilerArgs.add("-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi")
+        freeCompilerArgs.add("-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi")
     }
 }
 
@@ -64,5 +53,4 @@ dependencies {
 
 apply(from = "tokens.gradle.kts")
 
-
-apply(from = "$rootDir/android-configuration-check.gradle")
+apply(from = "$rootDir/android-configuration-check.gradle.kts")

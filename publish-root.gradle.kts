@@ -16,10 +16,24 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+import java.util.Properties
+
+extra["githubUsername"] = ""
+extra["githubToken"] = ""
+
+val localProps = rootProject.file("local.properties")
+if (localProps.exists()) {
+    val properties = Properties()
+    localProps.inputStream().use { properties.load(it) }
+    properties.forEach { name, value -> extra[name.toString()] = value }
+} else {
+    val properties = Properties()
+    properties.putAll(System.getenv())
+    properties.forEach { (name, value) ->
+        when (name) {
+            "GITHUB_USERNAME" -> extra["githubUsername"] = value
+            "GITHUB_TOKEN" -> extra["githubToken"] = value
         }
     }
 }
+

@@ -16,10 +16,31 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        google()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
 }
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        google()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+    }
+}
+
+rootProject.name = "Backpack Android"
+
+include(":Backpack")
+include(":backpack-common")
+include(":backpack-compose")
+include(":backpack-lint")
+include(":meta:annotations")
+include(":meta:processor")
+include(":app")
+

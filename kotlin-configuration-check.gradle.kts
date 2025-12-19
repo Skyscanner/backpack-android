@@ -16,6 +16,6 @@
  * limitations under the License.
  */
 
-task testOssDebugUnitTest {
+tasks.register("testOssDebugUnitTest") {
     dependsOn("test")
 }
