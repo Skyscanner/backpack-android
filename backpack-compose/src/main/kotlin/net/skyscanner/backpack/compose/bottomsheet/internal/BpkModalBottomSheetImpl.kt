@@ -203,6 +203,7 @@ private fun BpkModalBottomSheetHeader(
                             BpkIcon.NativeAndroidClose,
                             onClick = {
                                 coroutineScope.launch { state.hide() }.invokeOnCompletion {
+                                    closeButton.onClick?.invoke()
                                     onDismissRequest()
                                 }
                             },
