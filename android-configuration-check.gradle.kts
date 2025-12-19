@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
+tasks.register("lintOssDebug") {
+    dependsOn("lintDebug")
+}
+
+tasks.register("testOssDebugUnitTest") {
+    dependsOn("testDebugUnitTest")
 }
