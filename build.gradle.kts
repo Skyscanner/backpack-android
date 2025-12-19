@@ -34,12 +34,10 @@ subprojects {
         source.setFrom(files("src", "$rootDir/buildSrc/src"))
     }
 
-    afterEvaluate {
-        dependencies {
-            "detektPlugins"(rootProject.libs.detektRules.compose)
-            "detektPlugins"(rootProject.libs.detektRules.formatting)
-            "detektPlugins"(rootProject.libs.detektRules.libraries)
-        }
+    dependencies {
+        "detektPlugins"(rootProject.libs.detektRules.compose)
+        "detektPlugins"(rootProject.libs.detektRules.formatting)
+        "detektPlugins"(rootProject.libs.detektRules.libraries)
     }
 }
 
