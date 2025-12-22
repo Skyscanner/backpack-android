@@ -48,12 +48,13 @@
     <color name="__privateButtonSecondaryOnDarkDisabledBackground">#ff0b121d</color>
     <color name="__privateButtonSecondaryOnDarkDisabledForeground">#33ffffff</color>
     <color name="__privateButtonSecondaryOnDarkNormalBackground">#1affffff</color>
-    <color name="__privateButtonSecondaryOnDarkPressedBackground">#ff010913</color>
+    <color name="__privateButtonSecondaryOnDarkPressedBackground">#ff04182d</color>
     <color name="__privateButtonSecondaryPressedBackground">#ffc1c7cf</color>
     <color name="__privateCardButtonContainedFill">#ccffffff</color>
     <color name="__privateChipDisabledBackground">#ffe0e4e9</color>
     <color name="__privateChipOnDarkOnBackground">#ffffffff</color>
     <color name="__privateChipOnDarkOnDismissIcon">#ff626971</color>
+    <color name="__privateChipOnDarkOnFill">#ff154679</color>
     <color name="__privateChipOnDarkPressedStroke">#ffffffff</color>
     <color name="__privateInfoBannerDefault">#ffeff3f8</color>
     <color name="__privateInfoBannerError">#ffe70866</color>

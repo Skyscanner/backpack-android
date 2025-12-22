@@ -20,7 +20,7 @@
 
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
-    <dimen name="bpkBorderRadiusFull">9999dp</dimen>
+    <dimen name="bpkBorderRadiusFull">100dp</dimen>
     <dimen name="bpkBorderRadiusXl">40dp</dimen>
     <dimen name="bpkBorderRadiusMd">12dp</dimen>
     <dimen name="bpkBorderRadiusNavTabs">18dp</dimen>
