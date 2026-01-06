@@ -22,9 +22,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set current year
-      run: echo "YEAR=$(date +'%Y')" >> $GITHUB_ENV
+      id: date
+      run: echo "year=$(date +'%Y')" >> $GITHUB_OUTPUT
       
     - name: Run copyright update script
+      env:
+        YEAR: ${{ steps.date.outputs.year }}
       run: |
         ./scripts/update-copyright-year.sh
         
@@ -44,17 +47,17 @@ jobs:
       uses: peter-evans/create-pull-request@v8
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "chore: update copyright year to ${{ env.YEAR }}"
-        title: "chore: update copyright year to ${{ env.YEAR }}"
+        commit-message: "chore: update copyright year to ${{ steps.date.outputs.year }}"
+        title: "chore: update copyright year to ${{ steps.date.outputs.year }}"
         body: |
-          This PR updates the copyright year in all source files from 2018 to ${{ env.YEAR }}.
+          This PR updates the copyright year in all source files from 2018 to ${{ steps.date.outputs.year }}.
           
           Changes:
           - Updated copyright headers in all .kt, .java, and .sh files
           - Updated copyright template file
           
           This is an automated update triggered by the scheduled workflow.
-        branch: copyright-year-update-${{ env.YEAR }}
+        branch: copyright-year-update-${{ steps.date.outputs.year }}
         delete-branch: true
         
     - name: Output result
