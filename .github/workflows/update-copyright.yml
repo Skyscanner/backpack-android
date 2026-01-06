@@ -63,6 +63,7 @@ jobs:
 
           This is an automated update triggered by the scheduled workflow.
         branch: copyright-year-update-${{ steps.date.outputs.year }}
+        labels: skip-changelog
         delete-branch: true
         
     - name: Output result
