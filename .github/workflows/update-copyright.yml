@@ -25,12 +25,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v6
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ steps.app-token.outputs.token }}
 
     - name: Set current year
       id: date
       run: echo "year=$(date +'%Y')" >> $GITHUB_OUTPUT
-      
+
     - name: Run copyright update script
       env:
         YEAR: ${{ steps.date.outputs.year }}
