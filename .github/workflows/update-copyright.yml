@@ -13,9 +13,15 @@ permissions:
 
 jobs:
   update-copyright:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-24.04-16cores-public
+
     steps:
+    - uses: actions/create-github-app-token@v2
+      id: app-token
+      with:
+        app-id: ${{ vars.GH_APP_ID }}
+        private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
     - name: Checkout repository
       uses: actions/checkout@v6
       with:
@@ -43,40 +49,21 @@ jobs:
         fi
         
     - name: Create Pull Request
-      if: steps.changes.outputs.changes == 'true'
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        YEAR: ${{ steps.date.outputs.year }}
-        BASE_BRANCH: ${{ github.ref_name }}
-      run: |
-        # Configure git as the actions bot
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        
-        BRANCH_NAME="copyright-year-update-${YEAR}"
+      uses: peter-evans/create-pull-request@v7
+      with:
+        token: ${{ steps.app-token.outputs.token }}
+        commit-message: "chore: update copyright year to ${{ steps.date.outputs.year }}"
+        title: "chore: update copyright year to ${{ steps.date.outputs.year }}"
+        body: |
+          This PR updates the copyright year in all source files from 2018 to ${{ steps.date.outputs.year }}.
 
-        # Create branch, commit, and push
-        git checkout -b "$BRANCH_NAME"
-        git add .
-        git commit -m "chore: update copyright year to ${YEAR}"
-        git push origin "$BRANCH_NAME" --force
+          Changes:
+          - Updated copyright headers in all .kt, .java, and .sh files
+          - Updated copyright template file
 
-        # Create PR using GitHub CLI checks if one exists first to prevent errors
-        if gh pr list --head "$BRANCH_NAME" --state open | grep -q "$BRANCH_NAME"; then
-          echo "PR already exists, branch updated."
-        else
-          gh pr create \
-            --title "chore: update copyright year to ${YEAR}" \
-            --body "This PR updates the copyright year in all source files from 2018 to ${YEAR}.
-
-            Changes:
-            - Updated copyright headers in all .kt, .java, and .sh files
-            - Updated copyright template file
-
-            This is an automated update triggered by the scheduled workflow." \
-            --base "$BASE_BRANCH" \
-            --head "$BRANCH_NAME"
-        fi
+          This is an automated update triggered by the scheduled workflow.
+        branch: copyright-year-update-${{ steps.date.outputs.year }}
+        delete-branch: true
         
     - name: Output result
       run: |
