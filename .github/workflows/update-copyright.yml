@@ -44,21 +44,39 @@ jobs:
         
     - name: Create Pull Request
       if: steps.changes.outputs.changes == 'true'
-      uses: peter-evans/create-pull-request@v8
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "chore: update copyright year to ${{ steps.date.outputs.year }}"
-        title: "chore: update copyright year to ${{ steps.date.outputs.year }}"
-        body: |
-          This PR updates the copyright year in all source files from 2018 to ${{ steps.date.outputs.year }}.
-          
-          Changes:
-          - Updated copyright headers in all .kt, .java, and .sh files
-          - Updated copyright template file
-          
-          This is an automated update triggered by the scheduled workflow.
-        branch: copyright-year-update-${{ steps.date.outputs.year }}
-        delete-branch: true
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        YEAR: ${{ steps.date.outputs.year }}
+        BASE_BRANCH: ${{ github.ref_name }}
+      run: |
+        # Configure git as the actions bot
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        
+        BRANCH_NAME="copyright-year-update-${YEAR}"
+
+        # Create branch, commit, and push
+        git checkout -b "$BRANCH_NAME"
+        git add .
+        git commit -m "chore: update copyright year to ${YEAR}"
+        git push origin "$BRANCH_NAME" --force
+
+        # Create PR using GitHub CLI checks if one exists first to prevent errors
+        if gh pr list --head "$BRANCH_NAME" --state open | grep -q "$BRANCH_NAME"; then
+          echo "PR already exists, branch updated."
+        else
+          gh pr create \
+            --title "chore: update copyright year to ${YEAR}" \
+            --body "This PR updates the copyright year in all source files from 2018 to ${YEAR}.
+
+            Changes:
+            - Updated copyright headers in all .kt, .java, and .sh files
+            - Updated copyright template file
+
+            This is an automated update triggered by the scheduled workflow." \
+            --base "$BASE_BRANCH" \
+            --head "$BRANCH_NAME"
+        fi
         
     - name: Output result
       run: |
