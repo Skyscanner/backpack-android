@@ -13,15 +13,27 @@ permissions:
 
 jobs:
   update-copyright:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-24.04-16cores-public
+
     steps:
+    - uses: actions/create-github-app-token@v2
+      id: app-token
+      with:
+        app-id: ${{ vars.GH_APP_ID }}
+        private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
     - name: Checkout repository
       uses: actions/checkout@v6
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-      
+        token: ${{ steps.app-token.outputs.token }}
+
+    - name: Set current year
+      id: date
+      run: echo "year=$(date +'%Y')" >> $GITHUB_OUTPUT
+
     - name: Run copyright update script
+      env:
+        YEAR: ${{ steps.date.outputs.year }}
       run: |
         ./scripts/update-copyright-year.sh
         
@@ -40,18 +52,19 @@ jobs:
       if: steps.changes.outputs.changes == 'true'
       uses: peter-evans/create-pull-request@v8
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "chore: update copyright year to $(date +%Y)"
-        title: "chore: update copyright year to $(date +%Y)"
+        token: ${{ steps.app-token.outputs.token }}
+        commit-message: "chore: update copyright year to ${{ steps.date.outputs.year }}"
+        title: "chore: update copyright year to ${{ steps.date.outputs.year }}"
         body: |
-          This PR updates the copyright year in all source files from 2018 to $(date +%Y).
-          
+          This PR updates the copyright year in all source files from 2018 to ${{ steps.date.outputs.year }}.
+
           Changes:
           - Updated copyright headers in all .kt, .java, and .sh files
           - Updated copyright template file
-          
+
           This is an automated update triggered by the scheduled workflow.
-        branch: copyright-year-update-$(date +%Y)
+        branch: copyright-year-update-${{ steps.date.outputs.year }}
+        labels: skip-changelog
         delete-branch: true
         
     - name: Output result
