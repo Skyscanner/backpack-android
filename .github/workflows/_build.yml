@@ -272,6 +272,9 @@ jobs:
             fi
           done
 
+          # Clean up temporary artifacts directory
+          rm -rf screenshot-artifacts
+
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
       - name: Check snapshot changes
