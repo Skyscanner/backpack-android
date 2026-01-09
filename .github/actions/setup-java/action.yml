@@ -1,0 +1,11 @@
+name: 'Setup Java & Gradle'
+description: 'Sets up JDK 17 with Gradle caching'
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v5
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+        cache: gradle

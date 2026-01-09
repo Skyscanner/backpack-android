@@ -31,12 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: Detekt check
         run: ./gradlew detekt -PdisablePreDex
@@ -52,12 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: Unit Tests
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
@@ -102,12 +92,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v5
@@ -161,12 +146,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: AVD cache
         uses: actions/cache@v4
@@ -234,12 +214,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: Screenshot Tests - ${{ matrix.variant.name }}
         run: |
@@ -279,8 +254,8 @@ jobs:
         with:
           path: screenshot-artifacts
 
-      - name: Merge screenshot results
-        id: mergeScreenshots
+      - name: Combine screenshot results
+        id: combineScreenshots
         run: |
           set -e
           rm -rf app/screenshots/oss
@@ -305,7 +280,7 @@ jobs:
         run: ./scripts/check-no-changes.sh
 
       - name: Commit changes
-        if: ${{ github.event_name == 'pull_request' && steps.mergeScreenshots.outputs.CHANGED_FILES != '' }}
+        if: ${{ github.event_name == 'pull_request' && steps.combineScreenshots.outputs.CHANGED_FILES != '' }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
