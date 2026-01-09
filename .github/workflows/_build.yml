@@ -219,7 +219,6 @@ jobs:
       - name: Screenshot Tests - ${{ matrix.variant.name }}
         run: |
           set -e
-          rm -rf app/screenshots/oss
           ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
 
       - name: Upload Screenshots
