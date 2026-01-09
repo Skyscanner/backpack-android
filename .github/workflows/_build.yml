@@ -18,10 +18,44 @@ env:
 
 jobs:
 
-  Build:
-    name: Build
+  # ============================================
+  # PARALLEL JOB GROUP 1: Static Analysis & Tests
+  # These jobs run independently and in parallel
+  # ============================================
+
+  StaticAnalysis:
+    name: DetektAndLint
     runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 30
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-java
+
+      - name: Detekt check
+        run: ./gradlew detekt -PdisablePreDex
+
+      - name: Lint check
+        run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
+
+  UnitTests:
+    name: Unit Tests
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-java
+
+      - name: Unit Tests
+        run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+
+  BuildAndTokens:
+    name: Build & Tokens
+    runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 20
     permissions:
       statuses: write
       pull-requests: write
@@ -58,12 +92,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v5
@@ -96,14 +125,10 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update tokens"
           git push
 
-      - name: Detekt check
-        run: ./gradlew detekt -PdisablePreDex
-
-      - name: Lint check
-        run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
-
-      - name: Unit Tests
-        run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+  # ============================================
+  # PARALLEL JOB GROUP 2: Instrumented Tests
+  # These jobs also run in parallel with Group 1
+  # ============================================
 
   Android:
     name: Android tests
@@ -121,12 +146,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+      - uses: ./.github/actions/setup-java
 
       - name: AVD cache
         uses: actions/cache@v5
@@ -169,13 +189,54 @@ jobs:
 
             ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest && killall -INT crashpad_handler || true
 
+  # ============================================
+  # Screenshot Tests - Parallelized by Variant
+  # Each variant runs independently to reduce wall-clock time
+  # Using matrix strategy to eliminate duplication
+  # ============================================
+
   Screenshots:
-    name: Screenshots tests
+    name: Screenshots (${{ matrix.variant.name }})
     runs-on: ubuntu-24.04-16cores-public
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        variant:
+          - name: default
+            flag: default
+          - name: dark mode
+            flag: dm
+          - name: RTL
+            flag: rtl
+          - name: themed
+            flag: themed
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-java
+
+      - name: Screenshot Tests - ${{ matrix.variant.name }}
+        run: |
+          set -e
+          rm -rf app/screenshots/oss
+          ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.variant.flag }}
+          path: app/screenshots/
+          retention-days: 1
+
+  Screenshots-Collect:
+    name: Collect & commit screenshots
+    runs-on: ubuntu-24.04-16cores-public
+    needs: Screenshots
     permissions:
       pull-requests: write
       contents: write
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - uses: actions/create-github-app-token@v2
         id: app-token
@@ -188,18 +249,28 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v5
+      - name: Download all screenshot artifacts
+        uses: actions/download-artifact@v4
         with:
-          java-version: '17'
-          distribution: 'adopt'
-          cache: gradle
+          path: screenshot-artifacts
 
-      - name: Screenshot Tests
-        id: screenshotTests
+      - name: Combine screenshot results
+        id: combineScreenshots
         run: |
           set -e
-          ./scripts/record_screenshot_tests.sh
+          rm -rf app/screenshots/oss
+          mkdir -p app/screenshots/oss
+
+          # Copy all screenshots from artifacts with error checking
+          for variant in default dm rtl themed; do
+            artifact_dir="screenshot-artifacts/screenshots-$variant/oss"
+            if [ -d "$artifact_dir" ] && compgen -G "$artifact_dir/*" > /dev/null; then
+              echo "Copying screenshots for variant: $variant"
+              cp -r "$artifact_dir"/* app/screenshots/oss/
+            else
+              echo "Warning: No screenshots found for variant: $variant"
+            fi
+          done
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
@@ -209,7 +280,7 @@ jobs:
         run: ./scripts/check-no-changes.sh
 
       - name: Commit changes
-        if: ${{ github.event_name == 'pull_request' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ github.event_name == 'pull_request' && steps.combineScreenshots.outputs.CHANGED_FILES != '' }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
