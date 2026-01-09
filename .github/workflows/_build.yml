@@ -219,7 +219,6 @@ jobs:
       - name: Screenshot Tests - ${{ matrix.variant.name }}
         run: |
           set -e
-          rm -rf app/screenshots/oss
           ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
 
       - name: Upload Screenshots
@@ -271,6 +270,9 @@ jobs:
               echo "Warning: No screenshots found for variant: $variant"
             fi
           done
+
+          # Clean up temporary artifacts directory
+          rm -rf screenshot-artifacts
 
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
