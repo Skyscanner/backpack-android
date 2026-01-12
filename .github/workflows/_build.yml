@@ -222,7 +222,7 @@ jobs:
           ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
 
       - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: screenshots-${{ matrix.variant.flag }}
           path: app/screenshots/
