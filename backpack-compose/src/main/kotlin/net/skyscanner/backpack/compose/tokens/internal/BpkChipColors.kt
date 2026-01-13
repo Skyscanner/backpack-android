@@ -38,6 +38,10 @@ internal object BpkChipColors {
         @Composable
         get() = dynamicColorOf(Color(0xFF626971), Color(0x80FFFFFF))
 
+    internal val onDarkOnFill: Color
+        @Composable
+        get() = dynamicColorOf(Color(0xFF154679), Color(0xFF024DAF))
+
     internal val onDarkPressedStroke: Color
         @Composable
         get() = dynamicColorOf(Color(0xFFFFFFFF), Color(0xFF054184))
