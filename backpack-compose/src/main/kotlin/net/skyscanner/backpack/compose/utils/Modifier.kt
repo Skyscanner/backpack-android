@@ -58,7 +58,6 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
     return if (predicate) block() else this
 }
 
-@Suppress("ModifierComposable")
 @Composable
 fun Modifier.clickableWithRipple(
     enabled: Boolean = true,
