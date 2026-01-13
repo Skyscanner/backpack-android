@@ -192,8 +192,8 @@ private fun CustomContent(
 ) {
     BpkStarRating(
         rating = RatingValue,
-        contentDescription = { _, _ ->
-            stringResource(R.string.star_rating_accessibility_status, RatingValue, 5)
+        contentDescription = { _, max ->
+            stringResource(R.string.star_rating_accessibility_status, RatingValue, max)
         },
         modifier = modifier,
     )
