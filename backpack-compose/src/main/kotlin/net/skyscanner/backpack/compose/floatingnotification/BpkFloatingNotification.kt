@@ -22,9 +22,9 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -68,12 +68,12 @@ fun BpkFloatingNotification(
     }
     val componentHeight =
         if (widthDp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
-    val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
+    val slideOffsetPx = with(LocalDensity.current) { BpkSpacing.Lg.toPx().toInt() }
 
     AnimatedContent(
         targetState = currentData,
         modifier = modifier,
-        transitionSpec = floatingNotificationTransforms(slideDistancePx),
+        transitionSpec = floatingNotificationTransforms(slideOffsetPx),
         label = "Floating Notification",
     ) { data ->
 
@@ -89,7 +89,7 @@ fun BpkFloatingNotification(
                 BpkFloatingNotificationImpl(
                     data = data,
                     modifier = Modifier
-                        .requiredHeight(componentHeight)
+                        .heightIn(min = componentHeight)
                         .widthIn(max = DefaultTabletSize.width),
                 )
             }
