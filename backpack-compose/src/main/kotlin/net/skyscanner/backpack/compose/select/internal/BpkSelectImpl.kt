@@ -79,7 +79,7 @@ internal fun BpkSelectImpl(
         onExpandedChange = { expanded = !expanded },
     ) {
         BpkTextFieldImpl(
-            modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+            modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable),
             value = selectText,
             onValueChange = {},
             type = BpkTextFieldType.Select,
