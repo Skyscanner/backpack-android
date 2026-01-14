@@ -55,7 +55,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(BpkTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(qualifiers = RobolectricDeviceQualifiers.SmallPhone, sdk = [35])
+@Config(sdk = [35])
 abstract class BpkSnapshotTest(private val tags: List<Any> = emptyList()) {
 
     private val variant = BpkTestVariant.current
@@ -73,9 +73,13 @@ abstract class BpkSnapshotTest(private val tags: List<Any> = emptyList()) {
 
     @Before
     fun setQualifiers() {
-        if (variant.qualifier != null) {
-            RuntimeEnvironment.setQualifiers(variant.qualifier)
+        val qualifiers = buildString {
+            append(RobolectricDeviceQualifiers.SmallPhone)
+            if (variant.qualifier != null) {
+                append(variant.qualifier)
+            }
         }
+        RuntimeEnvironment.setQualifiers(qualifiers)
     }
 
     protected fun snap(
