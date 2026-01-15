@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 - 2025 Skyscanner Ltd
+ * Copyright 2018 - 2026 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 
 plugins {
-    kotlin("jvm")
+    id("backpack.kotlin-library")
 }
 
 dependencies {
@@ -28,6 +28,11 @@ dependencies {
     testImplementation(libs.test.junit)
     testImplementation(libs.kotlin.compilerTesting)
     testImplementation(libs.kotlin.compilerTestingKsp)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 sourceSets {

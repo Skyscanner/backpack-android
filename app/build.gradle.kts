@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 - 2025 Skyscanner Ltd
+ * Copyright 2018 - 2026 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,15 @@
  * limitations under the License.
  */
 
+import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
 import java.util.Properties
 
 plugins {
+    id("backpack.android-app")
     alias(libs.plugins.compose.compiler)
-    id("com.android.application")
-    kotlin("android")
     alias(libs.plugins.ksp)
     alias(libs.plugins.roborazzi)
 }
-
-apply(from = "screenshots.gradle.kts")
 
 val properties = Properties()
 properties.putAll(System.getenv())
@@ -36,21 +34,13 @@ if (rootProject.file("local.properties").exists()) {
 
 android {
     namespace = "net.skyscanner.backpack.demo"
-    compileSdk = 36
 
     defaultConfig {
         applicationId = "net.skyscanner.backpack"
-        minSdk = 28
         versionCode = 1
         versionName = "1.0.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["MAPS_API_KEY"] = properties.getProperty("MAPS_API_KEY", "")
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
     signingConfigs {
@@ -78,40 +68,64 @@ android {
         create("internal") {
             dimension = "version"
         }
+        create("screenshots") {
+            dimension = "version"
+            versionNameSuffix = "-screenshots"
+            testInstrumentationRunnerArguments["notClass"] = "net.skyscanner.backpack.*"
+            testInstrumentationRunnerArguments["class"] = "net.skyscanner.backpack.docs.GenerateScreenshots"
+        }
+    }
+
+    sourceSets {
+        getByName("screenshots") {
+            java.srcDirs("src/internal/java")
+            res.srcDirs("src/internal/res")
+        }
     }
 
     testOptions {
-        animationsDisabled = true
         unitTests {
-            isIncludeAndroidResources = true
             all {
                 it.systemProperty("variant", System.getProperty("variant") ?: "default")
                 it.systemProperty("robolectric.pixelCopyRenderMode", "hardware")
             }
         }
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    packaging {
-        resources.excludes.add("**/attach_hotspot_windows.dll")
-        resources.excludes.add("META-INF/licenses/**")
-        resources.excludes.add("META-INF/AL2.0")
-        resources.excludes.add("META-INF/LGPL2.1")
+        managedDevices {
+            devices {
+                create("Docs", com.android.build.api.dsl.ManagedVirtualDevice::class) {
+                    device = "Pixel"
+                    apiLevel = 35
+                    systemImageSource = "aosp"
+                }
+            }
+        }
     }
 }
 
-kotlin {
-    jvmToolchain(17)
+// Screenshots server setup
+val screenshotServer = net.skyscanner.backpack.screenshots.ScreenshotTestsServer(rootProject.file("docs"))
+
+tasks.register("startScreenshotsServer") {
+    doFirst {
+        screenshotServer.start()
+    }
+    finalizedBy("stopScreenshotsServer")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-        freeCompilerArgs.add("-opt-in=net.skyscanner.backpack.util.InternalBackpackApi")
+tasks.register("stopScreenshotsServer") {
+    doLast {
+        screenshotServer.close()
     }
+}
+
+tasks.withType<ManagedDeviceInstrumentationTestTask>().configureEach {
+    outputs.upToDateWhen { device.get().name != "Docs" }
+}
+
+tasks.register("recordScreenshots") {
+    mustRunAfter("startScreenshotsServer")
+    dependsOn("startScreenshotsServer", "DocsScreenshotsDebugAndroidTest")
+    finalizedBy("stopScreenshotsServer")
 }
 
 dependencies {
@@ -149,5 +163,10 @@ dependencies {
     implementation(composeBom)
     debugImplementation(composeBom)
     androidTestImplementation(composeBom)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 

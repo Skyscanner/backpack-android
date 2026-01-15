@@ -16,17 +16,16 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import org.gradle.accessors.dm.LibrariesForLibs
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
 
-val libs = the<LibrariesForLibs>()
-
-configure<LibraryExtension> {
-    compileSdk = 36
+android {
+    compileSdk = SdkVersions.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 28
+        minSdk = SdkVersions.MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,21 +34,26 @@ configure<LibraryExtension> {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    lint {
-        lintConfig = file("$rootDir/lint.xml")
-        baseline = file("$projectDir/lint-baseline.xml")
-        checkReleaseBuilds = false // we're already running lint separately
-        warningsAsErrors = true
-        disable += "UnusedResources" // we're exposing resources for consumers
-        targetSdk = 35
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 
     buildFeatures {
-        buildConfig = false
+        compose = true
+    }
+
+    packaging {
+        resources.excludes.add("**/attach_hotspot_windows.dll")
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
-configure<KotlinProjectExtension> {
+kotlin {
     jvmToolchain(17)
 }
 
@@ -59,11 +63,3 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
         freeCompilerArgs.add("-opt-in=net.skyscanner.backpack.util.InternalBackpackApi")
     }
 }
-
-dependencies {
-    "api"(libs.androidx.annotations)
-    "api"(libs.kotlin.stdlib)
-    "api"(libs.kotlin.coroutines)
-    "api"(libs.androidx.appCompat)
-}
-

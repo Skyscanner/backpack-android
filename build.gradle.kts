@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018 - 2025 Skyscanner Ltd
+ * Copyright 2018 - 2026 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,10 @@
  */
 
 plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.ksp) apply false
@@ -24,6 +28,8 @@ plugins {
 }
 
 apply(from = "publish-root.gradle.kts")
+
+extra["group"] = "net.skyscanner.backpack"
 
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
@@ -33,15 +39,7 @@ subprojects {
         buildUponDefaultConfig = true
         source.setFrom(files("src", "$rootDir/buildSrc/src"))
     }
-
-    dependencies {
-        "detektPlugins"(rootProject.libs.detektRules.compose)
-        "detektPlugins"(rootProject.libs.detektRules.formatting)
-        "detektPlugins"(rootProject.libs.detektRules.libraries)
-    }
 }
-
-extra["group"] = "net.skyscanner.backpack"
 
 tasks.register<Copy>("installGitHooks") {
     from(File(rootProject.rootDir, "hooks/pre-commit"))

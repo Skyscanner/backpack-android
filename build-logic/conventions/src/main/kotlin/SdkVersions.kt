@@ -16,22 +16,8 @@
  * limitations under the License.
  */
 
-plugins {
-    id("backpack.kotlin-library")
+object SdkVersions {
+    const val COMPILE_SDK = 36
+    const val MIN_SDK = 28
+    const val TARGET_SDK = 35
 }
-
-dependencies {
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
-}
-
-sourceSets {
-    main {
-        java.srcDirs("src/main/kotlin")
-    }
-}
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
-

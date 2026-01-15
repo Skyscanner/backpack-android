@@ -17,21 +17,15 @@
  */
 
 plugins {
-    id("backpack.kotlin-library")
+    `kotlin-dsl`
 }
 
 dependencies {
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
+    implementation(libs.plugin.android)
+    implementation(libs.kotlin.gradlePlugin)
 }
 
-sourceSets {
-    main {
-        java.srcDirs("src/main/kotlin")
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
-

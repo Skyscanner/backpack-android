@@ -16,17 +16,16 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.LibraryExtension
-import org.gradle.accessors.dm.LibrariesForLibs
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+plugins {
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+}
 
-val libs = the<LibrariesForLibs>()
-
-configure<LibraryExtension> {
-    compileSdk = 36
+android {
+    compileSdk = SdkVersions.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 28
+        minSdk = SdkVersions.MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,10 +37,10 @@ configure<LibraryExtension> {
     lint {
         lintConfig = file("$rootDir/lint.xml")
         baseline = file("$projectDir/lint-baseline.xml")
-        checkReleaseBuilds = false // we're already running lint separately
+        checkReleaseBuilds = false
         warningsAsErrors = true
-        disable += "UnusedResources" // we're exposing resources for consumers
-        targetSdk = 35
+        disable += "UnusedResources"
+        targetSdk = SdkVersions.TARGET_SDK
     }
 
     buildFeatures {
@@ -49,7 +48,7 @@ configure<LibraryExtension> {
     }
 }
 
-configure<KotlinProjectExtension> {
+kotlin {
     jvmToolchain(17)
 }
 
@@ -59,11 +58,3 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
         freeCompilerArgs.add("-opt-in=net.skyscanner.backpack.util.InternalBackpackApi")
     }
 }
-
-dependencies {
-    "api"(libs.androidx.annotations)
-    "api"(libs.kotlin.stdlib)
-    "api"(libs.kotlin.coroutines)
-    "api"(libs.androidx.appCompat)
-}
-
