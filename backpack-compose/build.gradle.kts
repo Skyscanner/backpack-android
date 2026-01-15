@@ -63,7 +63,12 @@ dependencies {
     implementation(libs.androidx.coreKts)
 
     // Module-specific test dependencies
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.compose)
+    androidTestImplementation(libs.test.junitAndroid)
+    androidTestImplementation(libs.test.rules)
+    androidTestImplementation(libs.test.mockitoKotlin)
+    androidTestImplementation(libs.test.mockitoAndroid)
     debugImplementation(libs.compose.uiTooling)
     debugImplementation(libs.compose.uiToolingTestManifest)
 

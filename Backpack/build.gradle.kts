@@ -38,11 +38,19 @@ dependencies {
     implementation(libs.androidx.swiperefreshLayout)
     implementation(libs.androidx.coreKts)
 
-    // Additional test dependencies not in convention
+    // Test dependencies
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.junitKtx)
+    androidTestImplementation(libs.test.espressoCore)
     androidTestImplementation(libs.test.espressoContrib)
+    androidTestImplementation(libs.test.rules)
+    androidTestImplementation(libs.test.mockitoKotlin)
+    androidTestImplementation(libs.test.mockitoAndroid)
+    androidTestImplementation(libs.test.coroutines)
 
     api(project(":backpack-common"))
+    lintPublish(project(":backpack-lint"))
 
     // Detekt rules
     detektPlugins(libs.detektRules.compose)

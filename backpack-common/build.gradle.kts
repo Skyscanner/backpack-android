@@ -45,6 +45,13 @@ dependencies {
     api(libs.compose.ui)
     implementation(libs.compose.runtime)
 
+    // Test dependencies
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.espressoCore)
+    androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.junitAndroid)
+    androidTestImplementation(libs.test.coroutines)
+
     // Detekt rules
     detektPlugins(libs.detektRules.compose)
     detektPlugins(libs.detektRules.formatting)
