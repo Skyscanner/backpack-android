@@ -163,5 +163,10 @@ dependencies {
     implementation(composeBom)
     debugImplementation(composeBom)
     androidTestImplementation(composeBom)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 

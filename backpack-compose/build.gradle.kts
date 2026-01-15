@@ -68,6 +68,11 @@ dependencies {
     debugImplementation(libs.compose.uiToolingTestManifest)
 
     implementation(project(":backpack-common"))
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 apply(from = "tokens.gradle.kts")

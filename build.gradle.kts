@@ -39,23 +39,6 @@ subprojects {
         buildUponDefaultConfig = true
         source.setFrom(files("src", "$rootDir/buildSrc/src"))
     }
-
-    dependencies {
-        add("detektPlugins", rootProject.libs.detektRules.compose)
-        add("detektPlugins", rootProject.libs.detektRules.formatting)
-        add("detektPlugins", rootProject.libs.detektRules.libraries)
-    }
-}
-
-// Convenience task to publish all libraries at once
-tasks.register("publishLibraries") {
-    description = "Publishes all Backpack libraries to GitHubPackages"
-    group = "publishing"
-    dependsOn(
-        ":Backpack:publishAllPublicationsToGitHubPackagesRepository",
-        ":backpack-common:publishAllPublicationsToGitHubPackagesRepository",
-        ":backpack-compose:publishAllPublicationsToGitHubPackagesRepository"
-    )
 }
 
 tasks.register<Copy>("installGitHooks") {

@@ -27,6 +27,11 @@ dependencies {
     testImplementation(libs.lint.lint)
     testImplementation(libs.test.lint)
     testImplementation(libs.test.junit)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 tasks.jar {

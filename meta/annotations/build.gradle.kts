@@ -21,6 +21,10 @@ plugins {
 }
 
 dependencies {
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 sourceSets {

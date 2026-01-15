@@ -44,6 +44,11 @@ dependencies {
     // Module-specific dependencies
     api(libs.compose.ui)
     implementation(libs.compose.runtime)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 apply(from = "tokens.gradle.kts")

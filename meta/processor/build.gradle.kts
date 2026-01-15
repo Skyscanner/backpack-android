@@ -28,6 +28,11 @@ dependencies {
     testImplementation(libs.test.junit)
     testImplementation(libs.kotlin.compilerTesting)
     testImplementation(libs.kotlin.compilerTestingKsp)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 sourceSets {
