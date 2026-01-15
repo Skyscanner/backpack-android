@@ -24,9 +24,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -79,7 +79,7 @@ internal fun BpkSelectImpl(
         onExpandedChange = { expanded = !expanded },
     ) {
         BpkTextFieldImpl(
-            modifier = modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
+            modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
             value = selectText,
             onValueChange = {},
             type = BpkTextFieldType.Select,
@@ -90,17 +90,17 @@ internal fun BpkSelectImpl(
         )
         ExposedDropdownMenu(
             expanded = if (status != BpkFieldStatus.Disabled) expanded else false,
+            onDismissRequest = {
+                expanded = false
+                focusManager.clearFocus()
+            },
             scrollState = scrollState,
             modifier = Modifier
                 .background(BpkTheme.colors.surfaceDefault)
                 .applyIf(dropDownWidth == BpkDropDownWidth.MaxWidth) {
                     fillMaxWidth()
                 },
-            matchTextFieldWidth = dropDownWidth == BpkDropDownWidth.MatchSelectWidth,
-            onDismissRequest = {
-                expanded = false
-                focusManager.clearFocus()
-            },
+            matchAnchorWidth = dropDownWidth == BpkDropDownWidth.MatchSelectWidth,
         ) {
             options.forEachIndexed { index, option ->
                 val itemBackgroundColor =
