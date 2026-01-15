@@ -17,17 +17,14 @@
  */
 
 plugins {
-    id("backpack.kotlin-library")
+    id("org.jetbrains.kotlin.jvm")
 }
 
-dependencies {
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-sourceSets {
-    main {
-        java.srcDirs("src/main/kotlin")
-    }
+kotlin {
+    jvmToolchain(17)
 }
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
-

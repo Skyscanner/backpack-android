@@ -17,15 +17,14 @@
  */
 
 plugins {
+    id("backpack.android-library")
     alias(libs.plugins.compose.compiler)
-    id("com.android.library")
-    id("kotlin-android")
+    id("backpack.publishing")
 }
 
-extra["artifactId"] = "backpack-compose"
-
-apply(from = "$rootDir/gradle-maven-push.gradle.kts")
-apply(from = "$rootDir/android-configuration.gradle.kts")
+backpackPublishing {
+    artifactId = "backpack-compose"
+}
 
 android {
     namespace = "net.skyscanner.backpack.compose"
@@ -42,6 +41,14 @@ android {
 }
 
 dependencies {
+    // Compose BOM
+    val composeBom = platform(libs.compose.bom)
+    api(composeBom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    debugImplementation(composeBom)
+
+    // Module-specific API dependencies
     api(libs.compose.ui)
     api(libs.compose.foundation)
     api(libs.compose.uiToolingPreview)
@@ -49,31 +56,18 @@ dependencies {
     api(libs.google.maps)
     api(libs.google.mapsCompose)
 
+    // Module-specific implementation dependencies
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycleViewmodel)
     implementation(libs.androidx.lifecycleViewmodelKtx)
     implementation(libs.androidx.coreKts)
 
-    androidTestImplementation(libs.test.junitAndroid)
-    androidTestImplementation(libs.test.rules)
-    androidTestImplementation(libs.test.mockitoKotlin)
-    androidTestImplementation(libs.test.mockitoAndroid)
+    // Module-specific test dependencies
     androidTestImplementation(libs.test.compose)
-
     debugImplementation(libs.compose.uiTooling)
     debugImplementation(libs.compose.uiToolingTestManifest)
 
-    testImplementation(libs.test.junit)
-    testImplementation(libs.test.coroutines)
-
-    lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))
-
-    val composeBom = platform(libs.compose.bom)
-    api(composeBom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    debugImplementation(composeBom)
 }
 
 apply(from = "tokens.gradle.kts")

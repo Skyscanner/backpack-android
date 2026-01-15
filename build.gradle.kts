@@ -17,6 +17,10 @@
  */
 
 plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.ksp) apply false
@@ -24,6 +28,8 @@ plugins {
 }
 
 apply(from = "publish-root.gradle.kts")
+
+extra["group"] = "net.skyscanner.backpack"
 
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
@@ -35,13 +41,22 @@ subprojects {
     }
 
     dependencies {
-        "detektPlugins"(rootProject.libs.detektRules.compose)
-        "detektPlugins"(rootProject.libs.detektRules.formatting)
-        "detektPlugins"(rootProject.libs.detektRules.libraries)
+        add("detektPlugins", rootProject.libs.detektRules.compose)
+        add("detektPlugins", rootProject.libs.detektRules.formatting)
+        add("detektPlugins", rootProject.libs.detektRules.libraries)
     }
 }
 
-extra["group"] = "net.skyscanner.backpack"
+// Convenience task to publish all libraries at once
+tasks.register("publishLibraries") {
+    description = "Publishes all Backpack libraries to GitHubPackages"
+    group = "publishing"
+    dependsOn(
+        ":Backpack:publishAllPublicationsToGitHubPackagesRepository",
+        ":backpack-common:publishAllPublicationsToGitHubPackagesRepository",
+        ":backpack-compose:publishAllPublicationsToGitHubPackagesRepository"
+    )
+}
 
 tasks.register<Copy>("installGitHooks") {
     from(File(rootProject.rootDir, "hooks/pre-commit"))

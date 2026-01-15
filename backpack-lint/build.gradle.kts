@@ -17,7 +17,7 @@
  */
 
 plugins {
-    kotlin("jvm")
+    id("backpack.kotlin-library")
 }
 
 dependencies {

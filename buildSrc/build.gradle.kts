@@ -33,9 +33,7 @@ java {
 
 dependencies {
     implementation(gradleApi())
-    implementation(libs.plugin.android)
     implementation(libs.android.sdkCommon)
-    implementation(libs.kotlin.gradlePlugin)
     implementation(libs.square.kotlinPoet)
     implementation(libs.google.guava)
     implementation(libs.protocol.gson)

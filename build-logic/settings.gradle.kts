@@ -16,18 +16,17 @@
  * limitations under the License.
  */
 
-plugins {
-    id("backpack.kotlin-library")
-}
-
-dependencies {
-}
-
-sourceSets {
-    main {
-        java.srcDirs("src/main/kotlin")
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
-
+rootProject.name = "build-logic"
+include(":conventions")
