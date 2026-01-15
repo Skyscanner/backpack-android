@@ -51,11 +51,13 @@ jobs:
 
       - name: Apply dependency labels
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+            UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
             const prNumber = context.issue.number;
-            const updateType = '${{ steps.metadata.outputs.update-type }}';
+            const updateType = process.env.UPDATE_TYPE;
 
             // Get current labels
             const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({

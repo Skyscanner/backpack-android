@@ -80,7 +80,7 @@ jobs:
       - name: Fetch Dependabot metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' }}
         with:
           github-token: "${{ steps.app-token.outputs.token }}"
 
@@ -107,20 +107,20 @@ jobs:
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: Tokens check
-        if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
+        if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
           ./gradlew generateTokens -PdisablePreDex
           ./scripts/check-no-changes.sh
 
       - name: Token update
         id: tokenUpdate
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')}}
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')}}
         run: |
           ./gradlew generateTokens -PdisablePreDex
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
       - name: Token commit
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
