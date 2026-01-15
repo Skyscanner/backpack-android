@@ -14,16 +14,19 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
@@ -153,6 +156,16 @@ private fun ModalBottomSheetContent(
 }
 
 @Composable
+private fun OverrideTextSizeScaling(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalDensity provides Density(
+            density = LocalDensity.current.density,
+            fontScale = 1f,
+        ),
+    ) { content() }
+}
+
+@Composable
 @OptIn(ExperimentalMaterial3Api::class)
 private fun BpkModalBottomSheetHeader(
     title: String?,
@@ -179,20 +192,22 @@ private fun BpkModalBottomSheetHeader(
             .padding(horizontal = BpkSpacing.Base),
         title = {
             title?.let {
-                BpkText(
-                    text = it,
-                    style = BpkTheme.typography.heading5,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .semantics {
-                            heading()
-                        }
-                        .applyIf(titleContentDescription != null) {
-                            semantics {
-                                contentDescription = titleContentDescription!!
+                OverrideTextSizeScaling {
+                    BpkText(
+                        text = it,
+                        style = BpkTheme.typography.heading5,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .semantics {
+                                heading()
                             }
-                        },
-                )
+                            .applyIf(titleContentDescription != null) {
+                                semantics {
+                                    contentDescription = titleContentDescription!!
+                                }
+                            },
+                    )
+                }
             }
         },
         navigationIcon = {
@@ -216,7 +231,11 @@ private fun BpkModalBottomSheetHeader(
             }
         },
         actions = {
-            action?.let { TextAction(action = it) }
+            action?.let {
+                OverrideTextSizeScaling {
+                    TextAction(action = it)
+                }
+            }
         },
         windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
         colors = TopAppBarColors(

@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.link.BpkLink
+import net.skyscanner.backpack.compose.link.buildTextSegments
 import net.skyscanner.backpack.compose.navigationbar.Action
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
@@ -71,6 +73,7 @@ internal fun BpkTopNavBarImpl(
             NavBarStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
             else -> BpkTheme.colors.surfaceDefault
         }
+
         else -> when (style) {
             NavBarStyle.OnImage -> Color.Transparent
             NavBarStyle.Default -> BpkTheme.colors.canvas
@@ -84,6 +87,7 @@ internal fun BpkTopNavBarImpl(
             NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
             else -> BpkTheme.colors.textPrimary
         }
+
         else -> when (style) {
             NavBarStyle.OnImage, NavBarStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
             NavBarStyle.Default, NavBarStyle.CanvasContrast -> BpkTheme.colors.textPrimary
@@ -163,12 +167,10 @@ internal fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
             .clickableWithRipple(bounded = false, role = Role.Button) { action.onClick() },
         contentAlignment = Alignment.Center,
     ) {
-        BpkText(
-            text = action.text,
-            color = BpkTheme.colors.textLink,
-            style = BpkTheme.typography.label1,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
+        BpkLink(
+            segments = buildTextSegments { link(action.text, "") },
+            textStyle = BpkTheme.typography.heading5,
+            onLinkClicked = { action.onClick() },
         )
     }
 }

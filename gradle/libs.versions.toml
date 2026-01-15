@@ -15,7 +15,7 @@ coroutines = "1.10.2"
 espresso = "3.7.0"
 kotlinPoet = "2.2.0"
 ktor = "3.3.3"
-roborazzi = "1.55.0"
+roborazzi = "1.56.0"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -62,7 +62,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.13.0"
 google-maps = "com.google.android.gms:play-services-maps:19.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:6.12.2"
+google-mapsCompose = "com.google.maps.android:maps-compose:7.0.0"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.5.0-jre"
 
