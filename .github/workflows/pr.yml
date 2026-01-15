@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-24.04-16cores-public
     permissions:
       pull-requests: write
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
       - uses: actions/create-github-app-token@v2
         id: app-token

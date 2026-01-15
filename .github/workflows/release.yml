@@ -43,6 +43,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -66,14 +68,16 @@ jobs:
         run: ./gradlew :backpack-compose:generateComponentList
       - name: Upload components list to release
         continue-on-error: true
-        run: gh release upload ${{ github.event.release.tag_name }} backpack-compose/build/outputs/compose_components.txt --clobber
+        run: gh release upload ${GITHUB_EVENT_RELEASE_TAG_NAME} backpack-compose/build/outputs/compose_components.txt --clobber
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
 
       - name: Publish artifacts
-        run: ./gradlew publish -Pversion=${{ github.event.release.tag_name }}
+        run: ./gradlew publish -Pversion=${GITHUB_EVENT_RELEASE_TAG_NAME}
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_EVENT_RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
 
       - name: Install libsecret for Supernova CLI
         run: sudo apt-get update && sudo apt-get install -y libsecret-1-0

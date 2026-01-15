@@ -26,6 +26,7 @@ jobs:
       uses: actions/checkout@v6
       with:
         token: ${{ steps.app-token.outputs.token }}
+        persist-credentials: false
 
     - name: Set current year
       id: date
@@ -69,8 +70,10 @@ jobs:
         
     - name: Output result
       run: |
-        if [[ "${{ steps.changes.outputs.changes }}" == "true" ]]; then
+        if [[ "${STEPS_CHANGES_OUTPUTS_CHANGES}" == "true" ]]; then
           echo "Copyright year has been updated and a PR has been created"
         else
           echo "Copyright year is already current, no action needed"
         fi
+      env:
+        STEPS_CHANGES_OUTPUTS_CHANGES: ${{ steps.changes.outputs.changes }}
