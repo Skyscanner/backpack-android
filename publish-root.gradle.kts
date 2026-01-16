@@ -16,30 +16,24 @@
  * limitations under the License.
  */
 
-plugins {
-    id("backpack.kotlin-library")
-}
+import java.util.Properties
 
-dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
+extra["githubUsername"] = ""
+extra["githubToken"] = ""
 
-    testImplementation(libs.lint.lint)
-    testImplementation(libs.test.lint)
-    testImplementation(libs.test.junit)
-
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
-}
-
-tasks.jar {
-    manifest {
-        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
+val localProps = rootProject.file("local.properties")
+if (localProps.exists()) {
+    val properties = Properties()
+    localProps.inputStream().use { properties.load(it) }
+    properties.forEach { name, value -> extra[name.toString()] = value }
+} else {
+    val properties = Properties()
+    properties.putAll(System.getenv())
+    properties.forEach { (name, value) ->
+        when (name) {
+            "GITHUB_USERNAME" -> extra["githubUsername"] = value
+            "GITHUB_TOKEN" -> extra["githubToken"] = value
+        }
     }
 }
 
-apply(from = "tokens.gradle.kts")
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")

@@ -16,10 +16,16 @@
  * limitations under the License.
  */
 
-task lintOssDebug {
-    dependsOn("lintDebug")
+plugins {
+    `kotlin-dsl`
 }
 
-task testOssDebugUnitTest {
-    dependsOn("testDebugUnitTest")
+dependencies {
+    implementation(libs.plugin.android)
+    implementation(libs.kotlin.gradlePlugin)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }

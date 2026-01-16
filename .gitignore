@@ -98,6 +98,7 @@ gen-external-apklibs
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+.idea/compiler.xml
 
 # Gradle:
 .idea/**/gradle.xml

@@ -16,30 +16,8 @@
  * limitations under the License.
  */
 
-plugins {
-    id("backpack.kotlin-library")
+object SdkVersions {
+    const val COMPILE_SDK = 36
+    const val MIN_SDK = 28
+    const val TARGET_SDK = 35
 }
-
-dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
-
-    testImplementation(libs.lint.lint)
-    testImplementation(libs.test.lint)
-    testImplementation(libs.test.junit)
-
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
-}
-
-tasks.jar {
-    manifest {
-        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
-    }
-}
-
-apply(from = "tokens.gradle.kts")
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")

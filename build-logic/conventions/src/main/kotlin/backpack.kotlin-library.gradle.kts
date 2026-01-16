@@ -17,29 +17,14 @@
  */
 
 plugins {
-    id("backpack.kotlin-library")
+    id("org.jetbrains.kotlin.jvm")
 }
 
-dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
-
-    testImplementation(libs.lint.lint)
-    testImplementation(libs.test.lint)
-    testImplementation(libs.test.junit)
-
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.jar {
-    manifest {
-        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
-    }
+kotlin {
+    jvmToolchain(17)
 }
-
-apply(from = "tokens.gradle.kts")
-
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")

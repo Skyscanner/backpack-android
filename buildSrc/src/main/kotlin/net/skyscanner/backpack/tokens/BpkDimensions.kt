@@ -33,7 +33,7 @@ object BpkDimension {
         object Spacing : Category() {
             override fun invoke(source: Map<String, Any>): BpkDimensions =
                 parseDimensions(source, "spacings", "SPACING_") {
-                    it.key.toLowerCase() in setOf("base", "lg", "md", "none", "sm", "xl", "xxl", "xxxl", "xxxxl")
+                    it.key.lowercase() in setOf("base", "lg", "md", "none", "sm", "xl", "xxl", "xxxl", "xxxxl")
                 }
         }
 

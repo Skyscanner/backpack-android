@@ -21,12 +21,13 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
-
-    testImplementation(libs.lint.lint)
-    testImplementation(libs.test.lint)
+    implementation(libs.google.kspApi)
+    implementation(libs.square.kotlinPoet)
+    implementation(libs.square.kotlinPoetKsp)
+    implementation(project(":meta:annotations"))
     testImplementation(libs.test.junit)
+    testImplementation(libs.kotlin.compilerTesting)
+    testImplementation(libs.kotlin.compilerTestingKsp)
 
     // Detekt rules
     detektPlugins(libs.detektRules.compose)
@@ -34,12 +35,11 @@ dependencies {
     detektPlugins(libs.detektRules.libraries)
 }
 
-tasks.jar {
-    manifest {
-        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
+sourceSets {
+    main {
+        java.srcDirs("src/main/kotlin")
     }
 }
 
-apply(from = "tokens.gradle.kts")
-
 apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+
