@@ -16,6 +16,22 @@
  * limitations under the License.
  */
 
-task testOssDebugUnitTest {
-    dependsOn("test")
+plugins {
+    id("backpack.kotlin-library")
 }
+
+dependencies {
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
+}
+
+sourceSets {
+    main {
+        java.srcDirs("src/main/kotlin")
+    }
+}
+
+apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+

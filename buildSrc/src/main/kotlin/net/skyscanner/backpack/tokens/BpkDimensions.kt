@@ -18,11 +18,11 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
-import com.squareup.kotlinpoet.buildCodeBlock
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.buildCodeBlock
 
 interface BpkDimensions : Map<String, Int>
 
@@ -33,7 +33,7 @@ object BpkDimension {
         object Spacing : Category() {
             override fun invoke(source: Map<String, Any>): BpkDimensions =
                 parseDimensions(source, "spacings", "SPACING_") {
-                    it.key.toLowerCase() in setOf("base", "lg", "md", "none", "sm", "xl", "xxl", "xxxl", "xxxxl")
+                    it.key.lowercase() in setOf("base", "lg", "md", "none", "sm", "xl", "xxl", "xxxl", "xxxxl")
                 }
         }
 

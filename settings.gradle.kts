@@ -16,30 +16,32 @@
  * limitations under the License.
  */
 
-plugins {
-    id("backpack.kotlin-library")
-}
-
-dependencies {
-    compileOnly(libs.kotlin.stdlib)
-    compileOnly(libs.lint.api)
-
-    testImplementation(libs.lint.lint)
-    testImplementation(libs.test.lint)
-    testImplementation(libs.test.junit)
-
-    // Detekt rules
-    detektPlugins(libs.detektRules.compose)
-    detektPlugins(libs.detektRules.formatting)
-    detektPlugins(libs.detektRules.libraries)
-}
-
-tasks.jar {
-    manifest {
-        attributes("Lint-Registry-v2" to "net.skyscanner.backpack.lint.IssueRegistry")
+pluginManagement {
+    includeBuild("build-logic")
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        google()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
 }
 
-apply(from = "tokens.gradle.kts")
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        google()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+    }
+}
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+rootProject.name = "Backpack Android"
+
+include(":Backpack")
+include(":backpack-common")
+include(":backpack-compose")
+include(":backpack-lint")
+include(":meta:annotations")
+include(":meta:processor")
+include(":app")
+
