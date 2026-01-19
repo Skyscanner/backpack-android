@@ -18,6 +18,8 @@
 
 plugins {
     `kotlin-dsl`
+    `java-gradle-plugin`
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
@@ -28,4 +30,29 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+
+gradlePlugin {
+    plugins {
+        register("backpackAndroidLibrary") {
+            id = "backpack.android-library"
+            implementationClass = "net.skyscanner.backpack.conventions.BackpackAndroidLibraryPlugin"
+        }
+        register("backpackAndroidApp") {
+            id = "backpack.android-app"
+            implementationClass = "net.skyscanner.backpack.conventions.BackpackAndroidAppPlugin"
+        }
+        register("backpackKotlinLibrary") {
+            id = "backpack.kotlin-library"
+            implementationClass = "net.skyscanner.backpack.conventions.BackpackKotlinLibraryPlugin"
+        }
+        register("backpackPublishing") {
+            id = "backpack.publishing"
+            implementationClass = "net.skyscanner.backpack.conventions.BackpackPublishingPlugin"
+        }
+    }
 }
