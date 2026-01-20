@@ -16,16 +16,17 @@ jobs:
     runs-on: ubuntu-24.04-16cores-public
 
     steps:
-    - uses: actions/create-github-app-token@v2
+    - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
       id: app-token
       with:
         app-id: ${{ vars.GH_APP_ID }}
         private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
         token: ${{ steps.app-token.outputs.token }}
+        persist-credentials: false
 
     - name: Set current year
       id: date
@@ -50,7 +51,7 @@ jobs:
         
     - name: Create Pull Request
       if: steps.changes.outputs.changes == 'true'
-      uses: peter-evans/create-pull-request@v8
+      uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8.0.0
       with:
         token: ${{ steps.app-token.outputs.token }}
         commit-message: "chore: update copyright year to ${{ steps.date.outputs.year }}"
@@ -69,8 +70,10 @@ jobs:
         
     - name: Output result
       run: |
-        if [[ "${{ steps.changes.outputs.changes }}" == "true" ]]; then
+        if [[ "${STEPS_CHANGES_OUTPUTS_CHANGES}" == "true" ]]; then
           echo "Copyright year has been updated and a PR has been created"
         else
           echo "Copyright year is already current, no action needed"
         fi
+      env:
+        STEPS_CHANGES_OUTPUTS_CHANGES: ${{ steps.changes.outputs.changes }}

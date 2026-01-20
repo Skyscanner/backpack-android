@@ -29,7 +29,9 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
 
       - uses: ./.github/actions/setup-java
 
@@ -45,7 +47,9 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
 
       - uses: ./.github/actions/setup-java
 
@@ -62,20 +66,21 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: app-token
         with:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
 
       - name: Fetch Dependabot metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v2.5.0
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' }}
         with:
           github-token: "${{ steps.app-token.outputs.token }}"
 
@@ -95,27 +100,27 @@ jobs:
       - uses: ./.github/actions/setup-java
 
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v5
+        uses: gradle/actions/wrapper-validation@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
 
       - name: Build
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: Tokens check
-        if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
+        if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' || github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && !contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
           ./gradlew generateTokens -PdisablePreDex
           ./scripts/check-no-changes.sh
 
       - name: Token update
         id: tokenUpdate
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')}}
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')}}
         run: |
           ./gradlew generateTokens -PdisablePreDex
           changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
       - name: Token commit
-        if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
@@ -138,7 +143,9 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
 
       - name: Enable KVM group perms
         run: |
@@ -149,7 +156,7 @@ jobs:
       - uses: ./.github/actions/setup-java
 
       - name: AVD cache
-        uses: actions/cache@v5
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         id: avd-cache
         with:
           path: |
@@ -159,7 +166,7 @@ jobs:
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
         with:
           profile: Nexus 4
           sdcard-path-or-size: 512M
@@ -171,7 +178,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: Android Tests
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
         with:
           profile: Nexus 4
           sdcard-path-or-size: 512M
@@ -212,7 +219,9 @@ jobs:
             flag: themed
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
 
       - uses: ./.github/actions/setup-java
 
@@ -222,7 +231,7 @@ jobs:
           ./gradlew app:recordRoborazziOssDebug -Dvariant=${{ matrix.variant.flag }}
 
       - name: Upload Screenshots
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: screenshots-${{ matrix.variant.flag }}
           path: app/screenshots/
@@ -237,19 +246,20 @@ jobs:
       contents: write
     timeout-minutes: 5
     steps:
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
         id: app-token
         with:
           app-id: ${{ vars.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
 
       - name: Download all screenshot artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           path: screenshot-artifacts
 
