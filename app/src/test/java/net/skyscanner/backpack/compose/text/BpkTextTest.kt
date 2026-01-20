@@ -43,7 +43,7 @@ class BpkTextTest : BpkSnapshotTest() {
     fun colored() = snap {
         BpkText(
             text = "Sample",
-            color = BpkTheme.colors.textLink,
+            color = BpkTheme.colors.coreAccent,
         )
     }
 
@@ -60,7 +60,7 @@ class BpkTextTest : BpkSnapshotTest() {
         BpkText(
             text = buildAnnotatedString {
                 append("Sample ")
-                withStyle(style = SpanStyle(color = BpkTheme.colors.textLink)) {
+                withStyle(style = SpanStyle(color = BpkTheme.colors.coreAccent)) {
                     append("Text")
                 }
             },
