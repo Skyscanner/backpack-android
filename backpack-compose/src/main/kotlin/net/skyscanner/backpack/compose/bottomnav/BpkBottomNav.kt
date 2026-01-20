@@ -135,11 +135,11 @@ private fun RowScope.BottomNavigationItem(
     modifier: Modifier = Modifier,
 ) {
 
-    val ripple = ripple(bounded = false, color = BpkTheme.colors.textPrimary)
+    val ripple = ripple(bounded = false, color = BpkTheme.colors.coreAccent)
 
     val contentColor by animateColorAsState(
         label = "BottomNavItem content color",
-        targetValue = BpkTheme.colors.textPrimary,
+        targetValue = if (selected) BpkTheme.colors.textPrimary else BpkTheme.colors.textSecondary,
         animationSpec = tween(
             durationMillis = 300,
             easing = FastOutSlowInEasing,
