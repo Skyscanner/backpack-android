@@ -168,7 +168,7 @@ internal fun AnnotatedStringSwitchExample(modifier: Modifier = Modifier) {
             append(stringResource(R.string.toggle_long_text))
             withStyle(
                 style = SpanStyle(
-                    color = BpkTheme.colors.textLink,
+                    color = BpkTheme.colors.textPrimary,
                     fontFamily = BpkTheme.typography.bodyDefault.fontFamily,
                 ),
             ) {

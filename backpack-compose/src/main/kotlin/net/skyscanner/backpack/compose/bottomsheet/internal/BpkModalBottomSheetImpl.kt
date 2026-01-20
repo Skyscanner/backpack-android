@@ -243,7 +243,7 @@ private fun BpkModalBottomSheetHeader(
             scrolledContainerColor = backgroundColor,
             navigationIconContentColor = textColor,
             titleContentColor = textColor,
-            actionIconContentColor = BpkTheme.colors.textLink,
+            actionIconContentColor = BpkTheme.colors.textPrimary,
         ),
     )
 }

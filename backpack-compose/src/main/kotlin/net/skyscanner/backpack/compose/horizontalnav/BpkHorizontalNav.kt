@@ -18,9 +18,10 @@
 
 package net.skyscanner.backpack.compose.horizontalnav
 
-import androidx.compose.animation.animateColor
+import android.R.attr.enabled
+import android.R.attr.label
+import android.R.attr.onClick
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -118,7 +119,7 @@ private fun TabRow(
     Surface(
         modifier = modifier.selectableGroup(),
         color = BpkTheme.colors.surfaceDefault,
-        contentColor = BpkTheme.colors.textLink,
+        contentColor = BpkTheme.colors.textPrimary,
     ) {
         Row(
             modifier = Modifier
@@ -128,7 +129,7 @@ private fun TabRow(
                     dividerThickness = 1.dp,
                 )
                 .drawIndicator(
-                    indicatorColor = BpkTheme.colors.textLink,
+                    indicatorColor = BpkTheme.colors.coreAccent,
                     indicatorHeight = 2.dp,
                     tabsCount = tabs.size,
                     indicatorOffset = animateFloatAsState(
@@ -192,28 +193,9 @@ private fun Tab(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
-    val ripple = ripple(bounded = true, color = BpkTheme.colors.textLink)
+    val ripple = ripple(bounded = true, color = BpkTheme.colors.corePrimary)
     val transition = updateTransition(targetState = selected, label = "HorizontalNav.Tab transition")
-    val color by transition.animateColor(
-        transitionSpec = {
-            if (false isTransitioningTo true) {
-                tween(
-                    durationMillis = TabFadeInAnimationDuration,
-                    delayMillis = TabFadeInAnimationDelay,
-                    easing = LinearEasing,
-                )
-            } else {
-                tween(
-                    durationMillis = TabFadeOutAnimationDuration,
-                    easing = LinearEasing,
-                )
-            }
-        },
-        targetValueByState = {
-            if (it) BpkTheme.colors.textLink else BpkTheme.colors.textPrimary
-        },
-        label = "HorizontalNav.Tab color",
-    )
+    val color = BpkTheme.colors.textPrimary
     CompositionLocalProvider(
         LocalContentColor provides color,
     ) {
