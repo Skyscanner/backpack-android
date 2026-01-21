@@ -121,9 +121,13 @@ jobs:
 
       - name: Token commit
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
+        env:
+          TOKEN: ${{ steps.app-token.outputs.token }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${REPOSITORY}.git
           git fetch origin $GITHUB_HEAD_REF
           git checkout $GITHUB_HEAD_REF
           git add .
@@ -293,9 +297,13 @@ jobs:
 
       - name: Commit changes
         if: ${{ github.event_name == 'pull_request' && steps.combineScreenshots.outputs.CHANGED_FILES != '' }}
+        env:
+          TOKEN: ${{ steps.app-token.outputs.token }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
           git config --local user.name "skyscanner-backpack-bot[bot]"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${REPOSITORY}.git
           git fetch origin $GITHUB_HEAD_REF
           git checkout $GITHUB_HEAD_REF
           git add app/screenshots/*
