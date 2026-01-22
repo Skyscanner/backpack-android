@@ -32,11 +32,13 @@ fun BpkPriceRange(
     configuration: BpkPriceRangeConfiguration,
     modifier: Modifier = Modifier,
     cardWidth: Dp? = null,
+    contentDescription: String? = null,
 ) {
     BpkPriceRangeImpl(
         configuration = configuration,
         modifier = modifier,
         cardWidth = cardWidth,
+        contentDescription = contentDescription,
     )
 }
 

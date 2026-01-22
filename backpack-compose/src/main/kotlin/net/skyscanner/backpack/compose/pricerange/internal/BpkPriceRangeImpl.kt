@@ -40,7 +40,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.SubcomposeLayout
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -63,12 +64,19 @@ internal val MarkerFlareHeight = 6.dp
 @Composable
 internal fun BpkPriceRangeImpl(
     configuration: BpkPriceRangeConfiguration,
+    contentDescription: String?,
     modifier: Modifier = Modifier,
     cardWidth: Dp? = null,
 ) {
     val contentModifier = if (cardWidth != null) modifier.width(cardWidth) else modifier
 
-    Box(modifier = contentModifier.semantics(mergeDescendants = true) {}) {
+    Box(
+        modifier = contentModifier.clearAndSetSemantics {
+            if (contentDescription != null) {
+                this.contentDescription = contentDescription
+            }
+        },
+    ) {
         when (configuration) {
             is BpkPriceRangeConfiguration.Default -> {
                 Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm)) {
