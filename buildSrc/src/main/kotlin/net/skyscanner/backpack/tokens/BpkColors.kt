@@ -70,6 +70,33 @@ object BpkColor {
             parseColors(source, resolveReferences = true) { it.isSemanticColor() && it.isPrivate }.toBpkColors()
     }
 
+    object LintLightMode : BpkParser<Map<String, Any>, net.skyscanner.backpack.lint.BpkColors> {
+
+        override fun invoke(source: Map<String, Any>): net.skyscanner.backpack.lint.BpkColors {
+            val colors = parseColors(source, resolveReferences = true) { it.isSemanticColor() && !it.isPrivate }
+
+            val map = colors.filter { !it.deprecated }
+                .associate { color ->
+                    val tokenName = color.name
+                    val hexValue = color.defaultValue.uppercase().let {
+                        // Convert #RRGGBBAA to 0xAARRGGBB format for Compose Color
+                        if (it.startsWith("#") && it.length == 9) {
+                            val rgb = it.substring(1, 7)
+                            val alpha = it.substring(7, 9)
+                            "0x$alpha$rgb"
+                        } else {
+                            it
+                        }
+                    }
+                    tokenName to hexValue
+                }
+
+            return object : net.skyscanner.backpack.lint.BpkColors, Map<String, String> by map {
+                override fun toString(): String = map.toString()
+            }
+        }
+    }
+
     sealed class Format<In, Out> : BpkTransformer<In, Out> {
 
         data class SemanticCompose(val className: String) : Format<BpkColors, TypeSpec>() {
