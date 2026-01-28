@@ -16,13 +16,15 @@
  * limitations under the License.
  */
 
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.BpkDimension
-import net.skyscanner.backpack.tokens.BpkColor
-import net.skyscanner.backpack.lint.BpkDimensionLintRules
 import net.skyscanner.backpack.lint.BpkColorLintRules
+import net.skyscanner.backpack.lint.BpkDimensionLintRules
 import net.skyscanner.backpack.lint.BpkLintingOutput
+import net.skyscanner.backpack.lint.BpkTypographyLintRules
 import net.skyscanner.backpack.lint.saveToLint
+import net.skyscanner.backpack.tokens.BpkColor
+import net.skyscanner.backpack.tokens.BpkDimension
+import net.skyscanner.backpack.tokens.BpkFormat
+import net.skyscanner.backpack.tokens.BpkTextStyle
 import net.skyscanner.backpack.tokens.nodeFileOf
 import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
@@ -81,8 +83,25 @@ tasks {
         }
     }
 
+    val generateTypographyLintMap by registering {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextStyle.Category)
+                .transformTo(BpkTypographyLintRules.Format.TypographyLintDetectorMap(namespace = "BpkTheme.typography"))
+                .saveToLint(BpkLintingOutput.KotlinFile(src, tokensPackage, "GeneratedTypographyTokenMap.kt"))
+                .execute()
+        }
+    }
+
     val generateTokens by registering {
         this.group = group
-        dependsOn(generateDeprecatedTokens, generateSpacingLintMap, generateBorderRadiusLintMap, generateColorLintMap)
+        dependsOn(
+            generateDeprecatedTokens,
+            generateSpacingLintMap,
+            generateBorderRadiusLintMap,
+            generateColorLintMap,
+            generateTypographyLintMap
+        )
     }
 }

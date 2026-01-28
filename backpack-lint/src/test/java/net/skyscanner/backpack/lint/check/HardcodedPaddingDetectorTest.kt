@@ -20,13 +20,14 @@ package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 @Suppress("UnstableApiUsage")
-class HardcodedSpacingDetectorTest {
+class HardcodedPaddingDetectorTest {
 
     @Test
-    fun `detects hardcoded spacing with exact token match`() {
+    fun `detects hardcoded padding with exact token match`() {
         val code = kotlin(
             """
             package test
@@ -39,37 +40,15 @@ class HardcodedSpacingDetectorTest {
 
         lint().files(code, modifierStub(), dpStub())
             .allowMissingSdk()
-            .issues(HardcodedSpacingDetector.ISSUE)
-            .testModes(com.android.tools.lint.checks.infrastructure.TestMode.DEFAULT)
+            .issues(HardcodedPaddingDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
             .run()
             .expectErrorCount(1)
             .expectContains("BpkSpacing.Base")
     }
 
     @Test
-    fun `detects hardcoded border radius with exact token match`() {
-        val code = kotlin(
-            """
-            package test
-            import androidx.compose.foundation.shape.RoundedCornerShape
-            import androidx.compose.ui.unit.dp
-
-            fun test() = RoundedCornerShape(8.dp)
-            """,
-        ).indented()
-
-        // RoundedCornerShape is a constructor, not a method, so it may not be detected
-        // This test verifies that if detected, it would suggest BpkBorderRadius.Sm
-        // For now, just verify the code compiles and doesn't crash the detector
-        lint().files(code, roundedCornerShapeStub(), dpStub())
-            .allowMissingSdk()
-            .issues(HardcodedSpacingDetector.ISSUE)
-            .run()
-        // The detector may not detect constructors yet, so we just check it runs without error
-    }
-
-    @Test
-    fun `shows available tokens when value not found`() {
+    fun `shows available tokens when padding value not found`() {
         val code = kotlin(
             """
             package test
@@ -82,11 +61,50 @@ class HardcodedSpacingDetectorTest {
 
         lint().files(code, modifierStub(), dpStub())
             .allowMissingSdk()
-            .issues(HardcodedSpacingDetector.ISSUE)
+            .issues(HardcodedPaddingDetector.ISSUE)
             .run()
             .expectContains("Available tokens")
             .expectContains("BpkSpacing.Sm")
             .expectContains("BpkSpacing.Md")
+    }
+
+    @Test
+    fun `allows variable dp usage in padding`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            private val PADDING = 16
+            fun test() = Modifier.padding(PADDING.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedPaddingDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
+
+    @Test
+    fun `does not trigger on size methods`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            fun test() = Modifier.size(200.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedPaddingDetector.ISSUE)
+            .run()
+            .expectClean()
     }
 
     private fun modifierStub() = kotlin(
@@ -99,15 +117,6 @@ class HardcodedSpacingDetectorTest {
             fun padding(value: Dp): Modifier
             fun size(value: Dp): Modifier
         }
-        """,
-    ).indented()
-
-    private fun roundedCornerShapeStub() = kotlin(
-        """
-        package androidx.compose.foundation.shape
-        import androidx.compose.ui.unit.Dp
-
-        class RoundedCornerShape(size: Dp)
         """,
     ).indented()
 

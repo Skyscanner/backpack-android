@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.lint.check
 
+import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
@@ -26,46 +27,23 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.ULiteralExpression
-import org.jetbrains.uast.UQualifiedReferenceExpression
-import org.jetbrains.uast.UReferenceExpression
+import com.intellij.openapi.util.TextRange
+import org.jetbrains.kotlin.psi.KtCallExpression
+import org.jetbrains.kotlin.psi.KtConstantExpression
+import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
+import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtTreeVisitorVoid
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UFile
 
 @Suppress("UnstableApiUsage")
 class HardcodedTypographyDetector : Detector(), SourceCodeScanner {
 
     companion object {
         private const val EXPLANATION =
-            """Use BpkTypography.* instead of hardcoded font sizes or TextStyle creation. Hardcoding typography bypasses the design system and creates inconsistent text styling.
-
-Available BpkTypography styles:
-    • BpkTypography.hero1 - Hero 1 (120sp/Bold)
-    • BpkTypography.hero2 - Hero 2 (96sp/Bold)
-    • BpkTypography.hero3 - Hero 3 (76sp/Bold)
-    • BpkTypography.hero4 - Hero 4 (64sp/Bold)
-    • BpkTypography.hero5 - Hero 5 (52sp/Bold)
-    • BpkTypography.heading1 - Heading 1 (40sp/Bold)
-    • BpkTypography.heading2 - Heading 2 (32sp/Bold)
-    • BpkTypography.heading3 - Heading 3 (24sp/Bold)
-    • BpkTypography.heading4 - Heading 4 (20sp/Bold)
-    • BpkTypography.heading5 - Heading 5 (16sp/Bold)
-    • BpkTypography.subheading - Subheading (20sp/Normal)
-    • BpkTypography.bodyLongform - Body Longform (20sp/Normal)
-    • BpkTypography.bodyDefault - Body Default (16sp/Normal)
-    • BpkTypography.footnote - Footnote (14sp/Normal)
-    • BpkTypography.caption - Caption (12sp/Normal)
-    • BpkTypography.label1 - Label 1 (16sp/Bold)
-    • BpkTypography.label2 - Label 2 (14sp/Bold)
-    • BpkTypography.label3 - Label 3 (12sp/Bold)
-    • BpkTypography.baseLarken - Base Larken (16sp/Bold/Larken)
-    • BpkTypography.smLarken - Small Larken (14sp/Bold/Larken)
-    • BpkTypography.xsLarken - XSmall Larken (12sp/Bold/Larken)
-
-If you're unsure which typography style to use, consult with design.
-
-Need support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"""
+            "Use BpkTheme.typography.* instead of hardcoded font sizes or TextStyle creation. " +
+                "Hardcoding typography bypasses the design system and creates inconsistent text styling.\n\n" +
+                "Need support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
 
         val ISSUE = Issue.create(
             id = "HardcodedTypography",
@@ -78,93 +56,123 @@ Need support? Share your message in #backpack Slack channel: https://skyscanner.
                 Scope.JAVA_FILE_SCOPE,
             ),
         )
+
+        private val FONT_WEIGHT_NAMES = listOf(
+            "Thin", "ExtraLight", "Light", "Normal", "Medium",
+            "SemiBold", "Bold", "ExtraBold", "Black",
+        )
+
+        // Regex to find hardcoded .sp usage like "16.sp", "12.sp"
+        private val HARDCODED_SP_REGEX = Regex("""(\d+)\.sp\b""")
     }
 
-    override fun getApplicableReferenceNames(): List<String> = listOf("sp")
+    override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(UFile::class.java)
 
-    override fun visitReference(
-        context: JavaContext,
-        reference: UReferenceExpression,
-        referenced: PsiElement,
-    ) {
-        // Check if this is a .sp property access (e.g., 16.sp)
-        val parent = reference.uastParent
-        if (parent is UQualifiedReferenceExpression) {
-            // Check if the receiver is a LITERAL number (not a variable)
-            val receiver = parent.receiver
-            if (receiver is ULiteralExpression) {
-                // This is a hardcoded number like 16.sp
-                val value = receiver.value
-                if (value is Number) {
-                    context.report(
-                        ISSUE,
-                        context.getLocation(parent),
-                        EXPLANATION,
-                    )
-                }
-            }
-            // If receiver is NOT a literal (e.g., FONT_SIZE_CONSTANT.sp), we allow it
-        }
-    }
+    override fun createUastHandler(context: JavaContext) = object : UElementHandler() {
+        override fun visitFile(node: UFile) {
+            val ktFile = node.sourcePsi as? KtFile ?: return
+            val reportedRanges = mutableSetOf<TextRange>()
 
-    override fun getApplicableConstructorTypes(): List<String> = listOf(
-        "androidx.compose.ui.text.TextStyle",
-    )
-
-    override fun visitConstructor(
-        context: JavaContext,
-        node: UCallExpression,
-        constructor: PsiMethod,
-    ) {
-        // Check if TextStyle constructor has fontSize parameter
-        val evaluator = context.evaluator
-        val containingClass = constructor.containingClass ?: return
-        val fqName = evaluator.getQualifiedName(containingClass)
-
-        if (fqName == "androidx.compose.ui.text.TextStyle") {
-            // Check if fontSize argument is present
-            val hasFontSize = node.valueArguments.any { arg ->
-                val argName = arg.getExpressionType()?.canonicalText
-                argName?.contains("TextUnit") == true
-            }
-
-            if (hasFontSize) {
-                context.report(
-                    ISSUE,
-                    context.getLocation(node),
-                    EXPLANATION,
-                )
-            }
-        }
-    }
-
-    override fun getApplicableMethodNames(): List<String> = listOf("TextStyle")
-
-    override fun visitMethodCall(
-        context: JavaContext,
-        node: UCallExpression,
-        method: PsiMethod,
-    ) {
-        // Check for TextStyle() factory function calls
-        val evaluator = context.evaluator
-        val methodName = node.methodName ?: return
-
-        if (methodName == "TextStyle") {
-            val containingClass = method.containingClass
-            if (containingClass != null) {
-                val fqName = evaluator.getQualifiedName(containingClass)
-                if (fqName == "androidx.compose.ui.text.TextStyle" ||
-                    fqName == "androidx.compose.ui.text.TextStyleKt") {
-                    val arguments = node.valueArguments
-                    if (arguments.isNotEmpty()) {
-                        context.report(
-                            ISSUE,
-                            context.getLocation(node),
-                            EXPLANATION,
-                        )
+            // First pass: Find and report TextStyle calls with hardcoded .sp
+            ktFile.accept(object : KtTreeVisitorVoid() {
+                override fun visitCallExpression(expression: KtCallExpression) {
+                    val callee = expression.calleeExpression?.text
+                    if (callee == "TextStyle" || callee?.endsWith(".TextStyle") == true) {
+                        val spValue = extractSpValue(expression)
+                        if (spValue != null) {
+                            val fontWeight = extractFontWeight(expression.text)
+                            reportedRanges.add(expression.textRange)
+                            context.report(
+                                ISSUE,
+                                context.getLocation(expression),
+                                getTextStyleSuggestion(spValue, fontWeight),
+                            )
+                        }
                     }
+                    super.visitCallExpression(expression)
                 }
+            })
+
+            // Second pass: Find standalone .sp usage (not inside TextStyle)
+            ktFile.accept(object : KtTreeVisitorVoid() {
+                override fun visitDotQualifiedExpression(expression: KtDotQualifiedExpression) {
+                    val selector = expression.selectorExpression?.text
+                    val receiver = expression.receiverExpression
+
+                    if (selector == "sp" && receiver is KtConstantExpression) {
+                        // Check if this .sp is inside any reported TextStyle call
+                        val isInsideTextStyle = reportedRanges.any { range ->
+                            range.contains(expression.textRange)
+                        }
+
+                        if (!isInsideTextStyle) {
+                            val spValue = receiver.text.toIntOrNull()
+                            if (spValue != null) {
+                                context.report(
+                                    ISSUE,
+                                    context.getLocation(expression),
+                                    getTypographySuggestion(spValue, "Normal"),
+                                )
+                            }
+                        }
+                    }
+                    super.visitDotQualifiedExpression(expression)
+                }
+            })
+        }
+    }
+
+    private fun extractSpValue(textStyleCall: KtCallExpression): Int? {
+        // Look for fontSize argument with .sp value
+        val callText = textStyleCall.text
+        val match = HARDCODED_SP_REGEX.find(callText)
+        return match?.groupValues?.get(1)?.toIntOrNull()
+    }
+
+    private fun extractFontWeight(source: String): String {
+        for (name in FONT_WEIGHT_NAMES) {
+            if (source.contains("FontWeight.$name")) {
+                return name
             }
+        }
+        return "Normal"
+    }
+
+    private fun getTypographySuggestion(spValue: Int, fontWeight: String): String {
+        val tokens = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP[spValue to fontWeight]
+        return if (tokens != null) {
+            if (tokens.size == 1) {
+                "Use ${tokens[0]} instead of $spValue.sp"
+            } else {
+                val tokenList = tokens.joinToString("\n") { "• $it" }
+                "Use one of these typography styles instead of $spValue.sp:\n$tokenList"
+            }
+        } else {
+            val available = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP.entries
+                .sortedBy { it.key.first }
+                .joinToString("\n") { (key, styles) ->
+                    "• ${key.first}sp/${key.second} = ${styles.joinToString(", ")}"
+                }
+            "Use BpkTheme.typography.* instead of $spValue.sp. Available styles:\n$available"
+        }
+    }
+
+    private fun getTextStyleSuggestion(spValue: Int, fontWeight: String): String {
+        val tokens = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP[spValue to fontWeight]
+        return if (tokens != null) {
+            if (tokens.size == 1) {
+                "Use ${tokens[0]} instead of TextStyle"
+            } else {
+                val tokenList = tokens.joinToString("\n") { "• $it" }
+                "Use one of these typography styles instead of TextStyle:\n$tokenList"
+            }
+        } else {
+            val available = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP.entries
+                .sortedBy { it.key.first }
+                .joinToString("\n") { (key, styles) ->
+                    "• ${key.first}sp/${key.second} = ${styles.joinToString(", ")}"
+                }
+            "Use BpkTheme.typography.* instead of TextStyle. Available styles:\n$available"
         }
     }
 }
