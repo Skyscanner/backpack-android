@@ -20,6 +20,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -57,6 +58,11 @@ fun ColorsComposeStory(modifier: Modifier = Modifier) {
 
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
+    val contrastTextColor = if (token.value.luminance() > 0.5) {
+        BpkTheme.colors.textOnLight
+    } else {
+        BpkTheme.colors.textOnDark
+    }
     Row(
         modifier = Modifier.height(56.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -71,13 +77,13 @@ private fun ColorSampleRow(token: Token<Color>) {
             modifier = Modifier
                 .height(56.dp)
                 .width(112.dp)
-                .padding(1.dp)
+                .border(1.dp, BpkTheme.colors.line)
                 .background(token.value),
             contentAlignment = Alignment.Center,
         ) {
             BpkText(
                 text = colorToHex(color = token.value),
-                color = if (token.value.luminance() > 0.5) Color.Black else Color.White,
+                color = contrastTextColor,
             )
         }
     }
