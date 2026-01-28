@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.detector.api.Category
+import net.skyscanner.backpack.lint.util.LintConstants
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -39,8 +40,8 @@ import org.jetbrains.uast.UReferenceExpression
 class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
-            "This color doesn't exist in Backpack. Please check BpkTheme.colors for available colors.\n\nNeed support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
+        private val EXPLANATION =
+            "This color doesn't exist in Backpack. Please check BpkTheme.colors for available colors.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
         private fun getColorSuggestion(hex: String): String {
             val tokens = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hex]
@@ -48,8 +49,8 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
                 if (tokens.size == 1) {
                     "Use ${tokens[0]} instead of Color($hex)"
                 } else {
-                    val tokenList = tokens.joinToString("\n• ")
-                    "Use one of these tokens instead of Color($hex). All these tokens have the same color value:\n• $tokenList"
+                    val tokenList = tokens.joinToString("\n- ")
+                    "Use one of these tokens instead of Color($hex). All these tokens have the same color value:\n- $tokenList"
                 }
             } else {
                 EXPLANATION

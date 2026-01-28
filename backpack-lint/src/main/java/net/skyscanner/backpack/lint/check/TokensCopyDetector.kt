@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.detector.api.Category
+import net.skyscanner.backpack.lint.util.LintConstants
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -34,8 +35,8 @@ import org.jetbrains.uast.UQualifiedReferenceExpression
 class TokensCopyDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
-            "Do not use .copy() to modify design tokens. Request a new semantic token from the design team instead. Using .copy() bypasses the design system and breaks theming support.\n\nNeed support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
+        private val EXPLANATION =
+            "Do not use .copy() to modify design tokens. Request a new semantic token from the design team instead. Using .copy() bypasses the design system and breaks theming support.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
             id = "TokensCopy",

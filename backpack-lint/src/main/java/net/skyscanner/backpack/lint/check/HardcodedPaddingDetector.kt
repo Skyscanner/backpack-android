@@ -23,13 +23,13 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiElement
-import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.ULiteralExpression
+import net.skyscanner.backpack.lint.util.LintConstants
+import net.skyscanner.backpack.lint.util.TokenSuggestionBuilder
+import net.skyscanner.backpack.lint.util.UastTreeUtils
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 
@@ -40,10 +40,10 @@ import org.jetbrains.uast.UReferenceExpression
 class HardcodedPaddingDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
+        private val EXPLANATION =
             "Use BpkSpacing.* tokens instead of hardcoded .dp values for padding. " +
                 "Hardcoding spacing bypasses the design system and creates inconsistent layouts.\n\n" +
-                "Need support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
+                LintConstants.SUPPORT_MESSAGE
 
         val ISSUE = Issue.create(
             id = "HardcodedPadding",
@@ -70,6 +70,11 @@ class HardcodedPaddingDetector : Detector(), SourceCodeScanner {
             "safeContentPadding",
             "systemBarsPadding",
         )
+
+        private val suggestionBuilder = TokenSuggestionBuilder(
+            tokenMap = GeneratedSpacingTokenMap.SPACING_TOKEN_MAP,
+            tokenTypePrefix = "BpkSpacing",
+        )
     }
 
     override fun getApplicableReferenceNames(): List<String> = listOf("dp")
@@ -81,72 +86,12 @@ class HardcodedPaddingDetector : Detector(), SourceCodeScanner {
     ) {
         val parent = reference.uastParent
         if (parent is UQualifiedReferenceExpression) {
-            val receiver = parent.receiver
-            if (receiver is ULiteralExpression) {
-                val value = receiver.value
-                if (value is Number && isInsidePaddingMethod(parent)) {
-                    val intValue = value.toInt()
-                    val message = getSuggestion(intValue)
-                    val token = GeneratedSpacingTokenMap.SPACING_TOKEN_MAP[intValue]
-                    val fix = if (token != null) {
-                        LintFix.create()
-                            .replace()
-                            .text("$intValue.dp")
-                            .with(token)
-                            .autoFix()
-                            .build()
-                    } else {
-                        null
-                    }
-                    context.report(ISSUE, context.getLocation(parent), message, fix)
-                }
+            val intValue = UastTreeUtils.extractNumericDpValue(parent)
+            if (intValue != null && UastTreeUtils.isInsideMethodCall(parent, PADDING_METHODS)) {
+                val message = suggestionBuilder.buildMessage(intValue)
+                val fix = suggestionBuilder.buildLintFix(intValue)
+                context.report(ISSUE, context.getLocation(parent), message, fix)
             }
-        }
-    }
-
-    private fun isInsidePaddingMethod(dpExpression: UQualifiedReferenceExpression): Boolean {
-        var current = dpExpression.uastParent
-        var depth = 0
-        val maxDepth = 10
-
-        while (current != null && depth < maxDepth) {
-            if (current is UCallExpression) {
-                val methodName = current.methodName
-                if (methodName in PADDING_METHODS) {
-                    if (current.valueArguments.any { arg -> containsExpression(arg, dpExpression) }) {
-                        return true
-                    }
-                }
-            }
-            current = current.uastParent
-            depth++
-        }
-        return false
-    }
-
-    private fun containsExpression(
-        parent: org.jetbrains.uast.UElement,
-        target: org.jetbrains.uast.UElement,
-    ): Boolean {
-        if (parent == target) return true
-        var current: org.jetbrains.uast.UElement? = target
-        while (current != null) {
-            if (current == parent) return true
-            current = current.uastParent
-            if (current is UCallExpression && current != parent) break
-        }
-        return false
-    }
-
-    private fun getSuggestion(value: Int): String {
-        val token = GeneratedSpacingTokenMap.SPACING_TOKEN_MAP[value]
-        return if (token != null) {
-            "Use $token instead of $value.dp"
-        } else {
-            val available = GeneratedSpacingTokenMap.SPACING_TOKEN_MAP.entries
-                .sortedBy { it.key }
-                .joinToString("\n") { "• ${it.key}.dp = ${it.value}" }
-            "Use BpkSpacing.* tokens instead of $value.dp. Available tokens:\n$available"
         }
     }
 }

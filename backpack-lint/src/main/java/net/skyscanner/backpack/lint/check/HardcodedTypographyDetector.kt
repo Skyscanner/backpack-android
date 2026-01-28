@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.client.api.UElementHandler
+import net.skyscanner.backpack.lint.util.LintConstants
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
@@ -40,10 +41,10 @@ import org.jetbrains.uast.UFile
 class HardcodedTypographyDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
+        private val EXPLANATION =
             "Use BpkTheme.typography.* instead of hardcoded font sizes or TextStyle creation. " +
                 "Hardcoding typography bypasses the design system and creates inconsistent text styling.\n\n" +
-                "Need support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
+                LintConstants.SUPPORT_MESSAGE
 
         val ISSUE = Issue.create(
             id = "HardcodedTypography",

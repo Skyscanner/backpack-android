@@ -27,8 +27,7 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiElement
-import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.ULiteralExpression
+import net.skyscanner.backpack.lint.util.UastTreeUtils
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 
@@ -83,53 +82,15 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
     ) {
         val parent = reference.uastParent
         if (parent is UQualifiedReferenceExpression) {
-            val receiver = parent.receiver
-            if (receiver is ULiteralExpression) {
-                val value = receiver.value
-                if (value is Number) {
-                    val methodName = findSizeMethodName(parent)
-                    if (methodName != null) {
-                        val intValue = value.toInt()
-                        val message = getSuggestion(intValue, methodName)
-                        context.report(ISSUE, context.getLocation(parent), message)
-                    }
+            val intValue = UastTreeUtils.extractNumericDpValue(parent)
+            if (intValue != null) {
+                val methodName = UastTreeUtils.findContainingMethodName(parent, SIZE_METHODS)
+                if (methodName != null) {
+                    val message = getSuggestion(intValue, methodName)
+                    context.report(ISSUE, context.getLocation(parent), message)
                 }
             }
         }
-    }
-
-    private fun findSizeMethodName(dpExpression: UQualifiedReferenceExpression): String? {
-        var current = dpExpression.uastParent
-        var depth = 0
-        val maxDepth = 10
-
-        while (current != null && depth < maxDepth) {
-            if (current is UCallExpression) {
-                val methodName = current.methodName
-                if (methodName in SIZE_METHODS) {
-                    if (current.valueArguments.any { arg -> containsExpression(arg, dpExpression) }) {
-                        return methodName
-                    }
-                }
-            }
-            current = current.uastParent
-            depth++
-        }
-        return null
-    }
-
-    private fun containsExpression(
-        parent: org.jetbrains.uast.UElement,
-        target: org.jetbrains.uast.UElement,
-    ): Boolean {
-        if (parent == target) return true
-        var current: org.jetbrains.uast.UElement? = target
-        while (current != null) {
-            if (current == parent) return true
-            current = current.uastParent
-            if (current is UCallExpression && current != parent) break
-        }
-        return false
     }
 
     private fun getSuggestion(value: Int, methodName: String): String {

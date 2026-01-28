@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.detector.api.Category
+import net.skyscanner.backpack.lint.util.LintConstants
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -35,9 +36,9 @@ import org.jetbrains.uast.UPolyadicExpression
 class UnicodeIconUsageDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
+        private val EXPLANATION =
             "Unicode symbols used as icons are not accessible. Use BpkIcon composables with contentDescription instead.\n\n" +
-                "Need support? Share your message in #backpack Slack channel: https://skyscanner.slack.com/archives/C0JHPDSSU"
+                LintConstants.SUPPORT_MESSAGE
 
         val ISSUE = Issue.create(
             id = "UnicodeIconUsage",
