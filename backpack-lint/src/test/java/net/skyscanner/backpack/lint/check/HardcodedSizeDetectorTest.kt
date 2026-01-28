@@ -129,6 +129,34 @@ class HardcodedSizeDetectorTest {
             .expectClean()
     }
 
+    @Test
+    fun `provides fix to extract constant for height`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            fun test() = Modifier.height(100.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedSizeDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectFixDiffs(
+                """
+                Fix for src/test/test.kt line 5: Extract to constant 'ItemHeight':
+                @@ -5 +5
+                - fun test() = Modifier.height(100.dp)
+                + private val ItemHeight = 100.dp
+                + fun test() = Modifier.height(ItemHeight)
+                """.trimIndent(),
+            )
+    }
+
     private fun modifierStub() = kotlin(
         """
         package androidx.compose.ui

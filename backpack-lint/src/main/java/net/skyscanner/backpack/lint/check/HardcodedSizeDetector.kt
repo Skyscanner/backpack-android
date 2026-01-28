@@ -23,11 +23,16 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.LintFix
+import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiElement
 import net.skyscanner.backpack.lint.util.UastTreeUtils
+import org.jetbrains.uast.UClass
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 
@@ -86,23 +91,74 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             if (intValue != null) {
                 val methodName = UastTreeUtils.findContainingMethodName(parent, SIZE_METHODS)
                 if (methodName != null) {
-                    val message = getSuggestion(intValue, methodName)
-                    context.report(ISSUE, context.getLocation(parent), message)
+                    val constantName = getConstantName(methodName)
+                    val message = getSuggestion(intValue, methodName, constantName)
+                    val fix = buildExtractConstantFix(context, parent, intValue, constantName)
+                    context.report(ISSUE, context.getLocation(parent), message, fix)
                 }
             }
         }
     }
 
-    private fun getSuggestion(value: Int, methodName: String): String {
-        val constantName = when (methodName) {
+    private fun getConstantName(methodName: String): String {
+        return when (methodName) {
             "width", "requiredWidth", "widthIn" -> "ItemWidth"
             "height", "requiredHeight", "heightIn" -> "ItemHeight"
             else -> "ItemSize"
         }
+    }
+
+    private fun getSuggestion(value: Int, methodName: String, constantName: String): String {
         return "Extract hardcoded size to a named constant.\n\n" +
             "Example:\n" +
             "private val $constantName = $value.dp\n\n" +
             "// Then use:\n" +
             "Modifier.$methodName($constantName)"
+    }
+
+    private fun buildExtractConstantFix(
+        context: JavaContext,
+        dpExpression: UQualifiedReferenceExpression,
+        value: Int,
+        constantName: String,
+    ): LintFix {
+        val insertionPoint = findInsertionPoint(context, dpExpression)
+
+        val replaceFix = LintFix.create()
+            .replace()
+            .text("$value.dp")
+            .with(constantName)
+            .build()
+
+        val insertFix = LintFix.create()
+            .replace()
+            .range(insertionPoint)
+            .beginning()
+            .with("private val $constantName = $value.dp\n")
+            .build()
+
+        return LintFix.create()
+            .name("Extract to constant '$constantName'")
+            .composite(insertFix, replaceFix)
+    }
+
+    private fun findInsertionPoint(context: JavaContext, element: UElement): Location {
+        var current: UElement? = element
+        while (current != null) {
+            when (current) {
+                is UMethod -> {
+                    current.sourcePsi?.let { psi ->
+                        return context.getLocation(psi)
+                    }
+                }
+                is UClass -> {
+                    current.sourcePsi?.let { psi ->
+                        return context.getLocation(psi)
+                    }
+                }
+            }
+            current = current.uastParent
+        }
+        return context.getLocation(element)
     }
 }
