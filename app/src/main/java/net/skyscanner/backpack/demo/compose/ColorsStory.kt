@@ -56,6 +56,8 @@ fun ColorsComposeStory(modifier: Modifier = Modifier) {
     }
 }
 
+private val ItemHeight = 56.dp
+private val ItemWidth = 112.dp
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
     val contrastTextColor = if (token.value.luminance() > 0.5) {
@@ -64,7 +66,7 @@ private fun ColorSampleRow(token: Token<Color>) {
         BpkTheme.colors.textOnDark
     }
     Row(
-        modifier = Modifier.height(56.dp),
+        modifier = Modifier.height(ItemHeight),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BpkText(
@@ -75,8 +77,8 @@ private fun ColorSampleRow(token: Token<Color>) {
         )
         Box(
             modifier = Modifier
-                .height(56.dp)
-                .width(112.dp)
+                .height(ItemHeight)
+                .width(ItemWidth)
                 .border(1.dp, BpkTheme.colors.line)
                 .background(token.value),
             contentAlignment = Alignment.Center,
