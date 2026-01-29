@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,7 +32,6 @@ import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerCTA
 import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerVariant
 import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerVariant.OnDark
 import net.skyscanner.backpack.compose.insetbanner.BpkInsetBannerVariant.OnLight
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.InsetBannerComponent
@@ -190,8 +190,8 @@ internal fun DefaultInsetBannerSample(
         BpkInsetBanner(
             variant = variant,
             backgroundColor = when (variant) {
-                OnDark -> BpkTheme.colors.coreAccent
-                OnLight -> BpkTheme.colors.statusWarningSpot
+                OnDark -> Color(BACKGROUND_ONDARK_COLOR_HEX)
+                OnLight -> Color(BACKGROUND_ONLIGHT_COLOR_HEX)
             },
             title = title,
             subHeadline = subHeadline,
@@ -201,3 +201,6 @@ internal fun DefaultInsetBannerSample(
         )
     }
 }
+
+const val BACKGROUND_ONDARK_COLOR_HEX = 0xFFFF6601
+const val BACKGROUND_ONLIGHT_COLOR_HEX = 0xFFFFE300

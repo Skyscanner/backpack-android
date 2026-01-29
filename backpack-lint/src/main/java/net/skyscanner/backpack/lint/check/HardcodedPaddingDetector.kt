@@ -40,7 +40,7 @@ import org.jetbrains.uast.UReferenceExpression
 class HardcodedPaddingDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private val EXPLANATION =
+        private const val EXPLANATION =
             "Use BpkSpacing.* tokens instead of hardcoded .dp values for padding. " +
                 "Hardcoding spacing bypasses the design system and creates inconsistent layouts.\n\n" +
                 LintConstants.SUPPORT_MESSAGE

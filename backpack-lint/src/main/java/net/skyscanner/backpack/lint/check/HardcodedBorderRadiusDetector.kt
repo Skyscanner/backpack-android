@@ -40,7 +40,7 @@ import org.jetbrains.uast.UReferenceExpression
 class HardcodedBorderRadiusDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private val EXPLANATION =
+        private const val EXPLANATION =
             "Use BpkBorderRadius.* tokens instead of hardcoded .dp values. " +
                 "Hardcoding border radius bypasses the design system and creates inconsistent shapes.\n\n" +
                 LintConstants.SUPPORT_MESSAGE

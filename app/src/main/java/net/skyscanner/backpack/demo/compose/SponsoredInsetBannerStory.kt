@@ -32,7 +32,6 @@ import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerVarian
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBanner
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerCTA
 import net.skyscanner.backpack.compose.insetbanner.BpkSponsoredInsetBannerVariant
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.InsetBannerComponent
@@ -256,8 +255,8 @@ internal fun DefaultSponsoredInsetBannerSample(
         BpkSponsoredInsetBanner(
             variant = variant,
             backgroundColor = when (variant) {
-                OnDark -> BpkTheme.colors.coreAccent
-                OnLight -> BpkTheme.colors.statusWarningSpot
+                OnDark -> androidx.compose.ui.graphics.Color(BACKGROUND_ONDARK_COLOR_HEX)
+                OnLight -> androidx.compose.ui.graphics.Color(BACKGROUND_ONLIGHT_COLOR_HEX)
             },
             title = title,
             subHeadline = subHeadline,

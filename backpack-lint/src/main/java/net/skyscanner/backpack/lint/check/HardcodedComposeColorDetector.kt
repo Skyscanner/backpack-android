@@ -40,7 +40,7 @@ import org.jetbrains.uast.UReferenceExpression
 class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private val EXPLANATION =
+        private const val EXPLANATION =
             "This color doesn't exist in Backpack. Please check BpkTheme.colors for available colors.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
         private fun getColorSuggestion(hex: String): String {

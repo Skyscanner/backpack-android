@@ -98,18 +98,22 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             if (intValue != null) {
                 val methodName = UastTreeUtils.findContainingMethodName(parent, SIZE_METHODS)
                 if (methodName != null) {
-                    val existingConstants = findExistingDpConstants(parent, intValue)
-                    val fix = buildFix(context, parent, intValue, methodName, existingConstants)
-                    val message = buildMessage(intValue, methodName, existingConstants)
+                    val allConstants = findAllDpConstants(parent)
+                    val sameValueConstants = allConstants.filter { it.value == intValue }.map { it.name }
+                    val allConstantNames = allConstants.map { it.name }.toSet()
+                    val fix = buildFix(context, parent, intValue, methodName, sameValueConstants, allConstantNames)
+                    val message = buildMessage(intValue, methodName, sameValueConstants, allConstantNames)
                     context.report(ISSUE, context.getLocation(parent), message, fix)
                 }
             }
         }
     }
 
-    private fun findExistingDpConstants(element: UElement, targetValue: Int): List<String> {
+    private data class DpConstant(val name: String, val value: Int)
+
+    private fun findAllDpConstants(element: UElement): List<DpConstant> {
         val file = element.getContainingUFile() ?: return emptyList()
-        val constants = mutableListOf<String>()
+        val constants = mutableListOf<DpConstant>()
 
         file.accept(object : AbstractUastVisitor() {
             override fun visitFile(node: UFile): Boolean {
@@ -117,24 +121,30 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
                 DP_CONSTANT_PATTERN.findAll(source).forEach { match ->
                     val name = match.groupValues[1]
                     val value = match.groupValues[2].toIntOrNull()
-                    if (value == targetValue) {
-                        constants.add(name)
+                    if (value != null) {
+                        constants.add(DpConstant(name, value))
                     }
                 }
                 return true
             }
         })
 
-        return constants.distinct()
+        return constants.distinctBy { it.name }
     }
 
-    private fun buildMessage(value: Int, methodName: String, existingConstants: List<String>): String {
-        return if (existingConstants.isNotEmpty()) {
-            val constantList = existingConstants.joinToString(", ")
+    private fun buildMessage(
+        value: Int,
+        methodName: String,
+        sameValueConstants: List<String>,
+        allConstantNames: Set<String>,
+    ): String {
+        return if (sameValueConstants.isNotEmpty()) {
+            val constantList = sameValueConstants.joinToString(", ")
             "Hardcoded size detected. Existing constant(s) with same value: $constantList\n\n" +
                 "Use an existing constant or extract to a new one."
         } else {
-            val suggestedName = getConstantName(methodName)
+            val baseName = getConstantName(methodName)
+            val suggestedName = generateUniqueName(baseName, allConstantNames)
             "Extract hardcoded size to a named constant.\n\n" +
                 "Example:\n" +
                 "private val $suggestedName = $value.dp\n\n" +
@@ -148,12 +158,13 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         dpExpression: UQualifiedReferenceExpression,
         value: Int,
         methodName: String,
-        existingConstants: List<String>,
+        sameValueConstants: List<String>,
+        allConstantNames: Set<String>,
     ): LintFix {
         val fixes = mutableListOf<LintFix>()
 
-        // Add fixes for existing constants (just replace, no insert needed)
-        existingConstants.forEach { constantName ->
+        // Add fixes for existing constants with same value (just replace, no insert needed)
+        sameValueConstants.forEach { constantName ->
             val reuseFix = LintFix.create()
                 .name("Use existing constant '$constantName'")
                 .replace()
@@ -168,10 +179,12 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         val namingOptions = getConstantNameOptions(methodName)
         val insertionPoint = findInsertionPoint(context, dpExpression)
 
-        namingOptions.forEach { constantName ->
-            // Skip if this name already exists
-            if (constantName !in existingConstants) {
-                fixes.add(createExtractConstantFix(constantName, value, insertionPoint))
+        namingOptions.forEach { baseName ->
+            // Generate a unique name if the base name already exists
+            val uniqueName = generateUniqueName(baseName, allConstantNames)
+            // Skip if this exact name already exists with same value (already added above)
+            if (uniqueName !in sameValueConstants) {
+                fixes.add(createExtractConstantFix(uniqueName, value, insertionPoint))
             }
         }
 
@@ -181,6 +194,17 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             LintFix.create()
                 .alternatives(*fixes.toTypedArray())
         }
+    }
+
+    private fun generateUniqueName(baseName: String, existingNames: Set<String>): String {
+        if (baseName !in existingNames) {
+            return baseName
+        }
+        var counter = 2
+        while ("$baseName$counter" in existingNames) {
+            counter++
+        }
+        return "$baseName$counter"
     }
 
     private fun createExtractConstantFix(
