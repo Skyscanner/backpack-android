@@ -95,46 +95,45 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
                     fqName == "androidx.compose.ui.graphics.ColorKt") {
                     val arguments = node.valueArguments
                     if (arguments.isNotEmpty()) {
-                        // Try to extract hex value for specific suggestion
+                        // Only report if the argument is a hardcoded literal value
+                        // Allow dynamic values like Color(variable.toColorInt())
                         val hexValue = extractHexValue(arguments.firstOrNull())
-                        val message = if (hexValue != null) {
-                            getColorSuggestion(hexValue)
-                        } else {
-                            EXPLANATION
-                        }
-
-                        val token = hexValue?.let { GeneratedColorTokenMap.COLOR_TOKEN_MAP[it] }
-                        val fix = if (token != null && hexValue != null) {
-                            if (token.size == 1) {
-                                // Single option: provide direct quick fix
-                                LintFix.create()
-                                    .replace()
-                                    .text("Color($hexValue)")
-                                    .with(token[0])
-                                    .autoFix()
-                                    .build()
-                            } else {
-                                // Multiple options: provide alternatives for user to choose
-                                val alternatives = token.map { tokenName ->
+                        if (hexValue != null) {
+                            val message = getColorSuggestion(hexValue)
+                            val token = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hexValue]
+                            val fix = if (token != null) {
+                                if (token.size == 1) {
+                                    // Single option: provide direct quick fix
                                     LintFix.create()
                                         .replace()
                                         .text("Color($hexValue)")
-                                        .with(tokenName)
+                                        .with(token[0])
+                                        .autoFix()
                                         .build()
+                                } else {
+                                    // Multiple options: provide alternatives for user to choose
+                                    val alternatives = token.map { tokenName ->
+                                        LintFix.create()
+                                            .replace()
+                                            .text("Color($hexValue)")
+                                            .with(tokenName)
+                                            .build()
+                                    }
+                                    LintFix.create()
+                                        .alternatives(*alternatives.toTypedArray())
                                 }
-                                LintFix.create()
-                                    .alternatives(*alternatives.toTypedArray())
+                            } else {
+                                null
                             }
-                        } else {
-                            null
-                        }
 
-                        context.report(
-                            ISSUE,
-                            context.getLocation(node),
-                            message,
-                            fix,
-                        )
+                            context.report(
+                                ISSUE,
+                                context.getLocation(node),
+                                message,
+                                fix,
+                            )
+                        }
+                        // If hexValue is null, the argument is a variable/expression - allow it
                     }
                     return
                 }
@@ -167,50 +166,48 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
             return
         }
 
-        // Report ALL Color constructor calls with arguments
-        // (Color.Unspecified and Color.Transparent have no arguments, so they're allowed)
+        // Only report Color constructor calls with hardcoded literal arguments
+        // Allow dynamic values like Color(variable.toColorInt()) from backend data
         val arguments = node.valueArguments
         if (arguments.isNotEmpty()) {
-            // Try to extract hex value for specific suggestion
+            // Only flag if the argument is a hardcoded literal value
             val hexValue = extractHexValue(arguments.firstOrNull())
-            val message = if (hexValue != null) {
-                getColorSuggestion(hexValue)
-            } else {
-                EXPLANATION
-            }
-
-            val token = hexValue?.let { GeneratedColorTokenMap.COLOR_TOKEN_MAP[it] }
-            val fix = if (token != null && hexValue != null) {
-                if (token.size == 1) {
-                    // Single option: provide direct quick fix
-                    LintFix.create()
-                        .replace()
-                        .text("Color($hexValue)")
-                        .with(token[0])
-                        .autoFix()
-                        .build()
-                } else {
-                    // Multiple options: provide alternatives for user to choose
-                    val alternatives = token.map { tokenName ->
+            if (hexValue != null) {
+                val message = getColorSuggestion(hexValue)
+                val token = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hexValue]
+                val fix = if (token != null) {
+                    if (token.size == 1) {
+                        // Single option: provide direct quick fix
                         LintFix.create()
                             .replace()
                             .text("Color($hexValue)")
-                            .with(tokenName)
+                            .with(token[0])
+                            .autoFix()
                             .build()
+                    } else {
+                        // Multiple options: provide alternatives for user to choose
+                        val alternatives = token.map { tokenName ->
+                            LintFix.create()
+                                .replace()
+                                .text("Color($hexValue)")
+                                .with(tokenName)
+                                .build()
+                        }
+                        LintFix.create()
+                            .alternatives(*alternatives.toTypedArray())
                     }
-                    LintFix.create()
-                        .alternatives(*alternatives.toTypedArray())
+                } else {
+                    null
                 }
-            } else {
-                null
-            }
 
-            context.report(
-                ISSUE,
-                context.getLocation(node),
-                message,
-                fix,
-            )
+                context.report(
+                    ISSUE,
+                    context.getLocation(node),
+                    message,
+                    fix,
+                )
+            }
+            // If hexValue is null, the argument is a variable/expression - allow it
         }
     }
 

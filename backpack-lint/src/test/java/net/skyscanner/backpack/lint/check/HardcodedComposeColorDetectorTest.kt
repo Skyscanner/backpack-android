@@ -148,6 +148,66 @@ class HardcodedComposeColorDetectorTest {
             .expectContains("#backpack Slack channel")
     }
 
+    @Test
+    fun `allows dynamic color from variable`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.graphics.Color
+
+            class PackageUiModel(val brandColor: String)
+
+            fun String.toColorInt(): Long = 0L
+
+            fun test(packageUiModel: PackageUiModel) = Color(packageUiModel.brandColor.toColorInt())
+            """,
+        ).indented()
+
+        lint().files(code, colorStub())
+            .allowMissingSdk()
+            .issues(HardcodedComposeColorDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
+
+    @Test
+    fun `allows dynamic color from function call`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.graphics.Color
+
+            fun getColorFromBackend(): Long = 0L
+
+            fun test() = Color(getColorFromBackend())
+            """,
+        ).indented()
+
+        lint().files(code, colorStub())
+            .allowMissingSdk()
+            .issues(HardcodedComposeColorDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
+
+    @Test
+    fun `allows dynamic color from variable reference`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.graphics.Color
+
+            fun test(colorValue: Long) = Color(colorValue)
+            """,
+        ).indented()
+
+        lint().files(code, colorStub())
+            .allowMissingSdk()
+            .issues(HardcodedComposeColorDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
+
     private fun colorStub() = kotlin(
         """
         package androidx.compose.ui.graphics
