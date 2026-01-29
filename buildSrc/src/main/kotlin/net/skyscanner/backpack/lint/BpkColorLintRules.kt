@@ -99,10 +99,12 @@ object BpkColorLintRules {
                 }
             }
 
-        val entries = hexToTokens.map { (hex, tokens) ->
-            val tokenList = tokens.joinToString(", ") { "\"$it\"" }
-            "        \"$hex\" to listOf($tokenList),"
-        }.joinToString("\n")
+        val entries = hexToTokens.entries
+            .sortedBy { it.key }
+            .map { (hex, tokens) ->
+                val tokenList = tokens.sorted().joinToString(", ") { "\"$it\"" }
+                "        \"$hex\" to listOf($tokenList),"
+            }.joinToString("\n")
 
         return """
             |package net.skyscanner.backpack.lint.check

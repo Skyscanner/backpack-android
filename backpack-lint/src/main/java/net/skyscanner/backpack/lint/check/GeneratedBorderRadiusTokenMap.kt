@@ -22,12 +22,12 @@ package net.skyscanner.backpack.lint.check
 
 internal object GeneratedBorderRadiusTokenMap {
     val BORDER_RADIUS_TOKEN_MAP = mapOf(
-        9999 to "BpkBorderRadius.Full",
-        40 to "BpkBorderRadius.Xl",
+        4 to "BpkBorderRadius.Xs",
+        8 to "BpkBorderRadius.Sm",
         12 to "BpkBorderRadius.Md",
         18 to "BpkBorderRadius.NavTabs",
-        8 to "BpkBorderRadius.Sm",
-        4 to "BpkBorderRadius.Xs",
         24 to "BpkBorderRadius.Lg",
+        40 to "BpkBorderRadius.Xl",
+        100 to "BpkBorderRadius.Full",
     )
 }

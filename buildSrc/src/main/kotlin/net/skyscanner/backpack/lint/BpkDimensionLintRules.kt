@@ -47,10 +47,12 @@ object BpkDimensionLintRules {
     }
 
     private fun toSpacingLintDetectorMap(source: BpkDimensions, namespace: String): String {
-        val entries = source.map { (name, value) ->
-            val tokenName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)
-            "        $value to \"$namespace.$tokenName\","
-        }.joinToString("\n")
+        val entries = source.entries
+            .sortedBy { it.value }
+            .map { (name, value) ->
+                val tokenName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)
+                "        $value to \"$namespace.$tokenName\","
+            }.joinToString("\n")
 
         return """
             |package net.skyscanner.backpack.lint.check
@@ -64,10 +66,12 @@ object BpkDimensionLintRules {
     }
 
     private fun toBorderRadiusLintDetectorMap(source: BpkDimensions, namespace: String): String {
-        val entries = source.map { (name, value) ->
-            val tokenName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)
-            "        $value to \"$namespace.$tokenName\","
-        }.joinToString("\n")
+        val entries = source.entries
+            .sortedBy { it.value }
+            .map { (name, value) ->
+                val tokenName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)
+                "        $value to \"$namespace.$tokenName\","
+            }.joinToString("\n")
 
         return """
             |package net.skyscanner.backpack.lint.check

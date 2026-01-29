@@ -22,14 +22,14 @@ package net.skyscanner.backpack.lint.check
 
 internal object GeneratedSpacingTokenMap {
     val SPACING_TOKEN_MAP = mapOf(
-        16 to "BpkSpacing.Base",
-        64 to "BpkSpacing.Xxxl",
-        32 to "BpkSpacing.Xl",
-        40 to "BpkSpacing.Xxl",
-        96 to "BpkSpacing.Xxxxl",
-        8 to "BpkSpacing.Md",
         0 to "BpkSpacing.None",
         4 to "BpkSpacing.Sm",
+        8 to "BpkSpacing.Md",
+        16 to "BpkSpacing.Base",
         24 to "BpkSpacing.Lg",
+        32 to "BpkSpacing.Xl",
+        40 to "BpkSpacing.Xxl",
+        64 to "BpkSpacing.Xxxl",
+        96 to "BpkSpacing.Xxxxl",
     )
 }
