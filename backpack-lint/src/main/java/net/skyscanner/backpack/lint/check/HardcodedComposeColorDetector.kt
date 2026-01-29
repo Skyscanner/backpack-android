@@ -43,6 +43,9 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
         private const val EXPLANATION =
             "This color doesn't exist in Backpack. Please check BpkTheme.colors for available colors.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
+        private const val COMPOSE_COLOR_CLASS = "androidx.compose.ui.graphics.Color"
+        private const val COMPOSE_COLOR_KT_CLASS = "androidx.compose.ui.graphics.ColorKt"
+
         private fun getColorSuggestion(hex: String): String {
             val tokens = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hex]
             return if (tokens != null) {
@@ -69,75 +72,73 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
             ),
         )
 
-        // Common hardcoded color names to detect
         private val HARDCODED_COLOR_NAMES = setOf(
             "Red", "Blue", "Green", "Yellow", "Cyan", "Magenta", "White", "Black",
             "Gray", "LightGray", "DarkGray",
         )
     }
 
-    override fun getApplicableConstructorTypes(): List<String> = listOf(
-        "androidx.compose.ui.graphics.Color",
-    )
+    override fun getApplicableConstructorTypes(): List<String> = listOf(COMPOSE_COLOR_CLASS)
 
     override fun getApplicableMethodNames(): List<String> = listOf("Color") + HARDCODED_COLOR_NAMES.toList()
 
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
-        val evaluator = context.evaluator
         val methodName = node.methodName ?: return
+        if (methodName != "Color" && methodName != "constructor-impl") return
 
-        // Check if this is Color() constructor-like call via companion object
-        if (methodName == "Color" || methodName == "constructor-impl") {
-            val containingClass = method.containingClass
-            if (containingClass != null) {
-                val fqName = evaluator.getQualifiedName(containingClass)
-                if (fqName == "androidx.compose.ui.graphics.Color" ||
-                    fqName == "androidx.compose.ui.graphics.ColorKt") {
-                    val arguments = node.valueArguments
-                    if (arguments.isNotEmpty()) {
-                        // Only report if the argument is a hardcoded literal value
-                        // Allow dynamic values like Color(variable.toColorInt())
-                        val hexValue = extractHexValue(arguments.firstOrNull())
-                        if (hexValue != null) {
-                            val message = getColorSuggestion(hexValue)
-                            val token = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hexValue]
-                            val fix = if (token != null) {
-                                if (token.size == 1) {
-                                    // Single option: provide direct quick fix
-                                    LintFix.create()
-                                        .replace()
-                                        .text("Color($hexValue)")
-                                        .with(token[0])
-                                        .autoFix()
-                                        .build()
-                                } else {
-                                    // Multiple options: provide alternatives for user to choose
-                                    val alternatives = token.map { tokenName ->
-                                        LintFix.create()
-                                            .replace()
-                                            .text("Color($hexValue)")
-                                            .with(tokenName)
-                                            .build()
-                                    }
-                                    LintFix.create()
-                                        .alternatives(*alternatives.toTypedArray())
-                                }
-                            } else {
-                                null
-                            }
+        val containingClass = method.containingClass ?: return
+        val fqName = context.evaluator.getQualifiedName(containingClass)
+        if (!isComposeColorClass(fqName)) return
 
-                            context.report(
-                                ISSUE,
-                                context.getLocation(node),
-                                message,
-                                fix,
-                            )
-                        }
-                        // If hexValue is null, the argument is a variable/expression - allow it
-                    }
-                    return
-                }
+        reportHardcodedColorIfLiteral(context, node)
+    }
+
+    override fun visitConstructor(
+        context: JavaContext,
+        node: UCallExpression,
+        constructor: PsiMethod,
+    ) {
+        val containingClass = constructor.containingClass ?: return
+        val fqName = context.evaluator.getQualifiedName(containingClass)
+        if (fqName != COMPOSE_COLOR_CLASS) return
+
+        reportHardcodedColorIfLiteral(context, node)
+    }
+
+    private fun isComposeColorClass(fqName: String?): Boolean {
+        return fqName == COMPOSE_COLOR_CLASS || fqName == COMPOSE_COLOR_KT_CLASS
+    }
+
+    private fun reportHardcodedColorIfLiteral(context: JavaContext, node: UCallExpression) {
+        val arguments = node.valueArguments
+        if (arguments.isEmpty()) return
+
+        val hexValue = extractHexValue(arguments.firstOrNull()) ?: return
+        val message = getColorSuggestion(hexValue)
+        val tokens = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hexValue]
+        val fix = buildColorLintFix(hexValue, tokens)
+
+        context.report(ISSUE, context.getLocation(node), message, fix)
+    }
+
+    private fun buildColorLintFix(hexValue: String, tokens: List<String>?): LintFix? {
+        tokens ?: return null
+        return if (tokens.size == 1) {
+            LintFix.create()
+                .replace()
+                .text("Color($hexValue)")
+                .with(tokens[0])
+                .autoFix()
+                .build()
+        } else {
+            val alternatives = tokens.map { tokenName ->
+                LintFix.create()
+                    .replace()
+                    .text("Color($hexValue)")
+                    .with(tokenName)
+                    .build()
             }
+            LintFix.create().alternatives(*alternatives.toTypedArray())
         }
     }
 
@@ -150,65 +151,6 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
             }
         }
         return null
-    }
-
-    override fun visitConstructor(
-        context: JavaContext,
-        node: UCallExpression,
-        constructor: PsiMethod,
-    ) {
-        // Verify this is actually the Compose Color constructor
-        val evaluator = context.evaluator
-        val containingClass = constructor.containingClass ?: return
-        val fqName = evaluator.getQualifiedName(containingClass)
-
-        if (fqName != "androidx.compose.ui.graphics.Color") {
-            return
-        }
-
-        // Only report Color constructor calls with hardcoded literal arguments
-        // Allow dynamic values like Color(variable.toColorInt()) from backend data
-        val arguments = node.valueArguments
-        if (arguments.isNotEmpty()) {
-            // Only flag if the argument is a hardcoded literal value
-            val hexValue = extractHexValue(arguments.firstOrNull())
-            if (hexValue != null) {
-                val message = getColorSuggestion(hexValue)
-                val token = GeneratedColorTokenMap.COLOR_TOKEN_MAP[hexValue]
-                val fix = if (token != null) {
-                    if (token.size == 1) {
-                        // Single option: provide direct quick fix
-                        LintFix.create()
-                            .replace()
-                            .text("Color($hexValue)")
-                            .with(token[0])
-                            .autoFix()
-                            .build()
-                    } else {
-                        // Multiple options: provide alternatives for user to choose
-                        val alternatives = token.map { tokenName ->
-                            LintFix.create()
-                                .replace()
-                                .text("Color($hexValue)")
-                                .with(tokenName)
-                                .build()
-                        }
-                        LintFix.create()
-                            .alternatives(*alternatives.toTypedArray())
-                    }
-                } else {
-                    null
-                }
-
-                context.report(
-                    ISSUE,
-                    context.getLocation(node),
-                    message,
-                    fix,
-                )
-            }
-            // If hexValue is null, the argument is a variable/expression - allow it
-        }
     }
 
     override fun getApplicableReferenceNames(): List<String> = HARDCODED_COLOR_NAMES.toList()
@@ -225,11 +167,9 @@ class HardcodedComposeColorDetector : Detector(), SourceCodeScanner {
         if (parent is UQualifiedReferenceExpression) {
             val containingClass = referenced.containingClass ?: return
             val evaluator = context.evaluator
-            val fqName = evaluator.getQualifiedName(containingClass)
+            val qualifiedReference = evaluator.getQualifiedName(containingClass)
 
-            // Verify it's the Compose Color class
-            if (fqName == "androidx.compose.ui.graphics.Color") {
-                // Skip Color.Unspecified and Color.Transparent
+            if (qualifiedReference == COMPOSE_COLOR_CLASS) {
                 val fieldName = referenced.name
                 if (fieldName !in setOf("Unspecified", "Transparent")) {
                     context.report(

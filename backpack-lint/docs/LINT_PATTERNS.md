@@ -11,7 +11,7 @@ Scan file for existing constants to suggest reuse or generate unique names.
 ```kotlin
 private data class DpConstant(val name: String, val value: Int)
 
-private val DP_CONSTANT_PATTERN = Regex("""(?:private\s+)?val\s+(\w+)\s*=\s*(\d+)\.dp""")
+private val DP_CONSTANT_PATTERN = Regex("""\bval\s+(\w+)\s*=\s*(\d+)\.dp""")
 ```
 
 ### Find All Constants in File
@@ -122,38 +122,30 @@ Color(colorValue)  // variable
 
 ## Finding Parent Method Context
 
-Check if expression is inside specific method calls.
+Check if expression is inside specific method calls. Use `UastTreeUtils` for this.
 
 ```kotlin
-private fun findContainingMethodName(
-    expression: UQualifiedReferenceExpression,
-    targetMethods: Set<String>,
-): String? {
-    var current: UElement? = expression
-    var depth = 0
-    while (current != null && depth < 10) {
-        if (current is UCallExpression) {
-            val methodName = current.methodName
-            if (methodName in targetMethods) {
-                return methodName
-            }
-        }
-        current = current.uastParent
-        depth++
-    }
-    return null
-}
-```
-
-### Usage
-
-```kotlin
-private val SIZE_METHODS = setOf("size", "width", "height", "border")
-
-val methodName = findContainingMethodName(dpExpression, SIZE_METHODS)
+// Use the utility function - traverses until root
+val methodName = UastTreeUtils.findContainingMethodName(dpExpression, SIZE_METHODS)
 if (methodName != null) {
     // Expression is inside a size method - report
 }
+```
+
+### Available in UastTreeUtils
+
+```kotlin
+// Check if inside method call (returns Boolean)
+UastTreeUtils.isInsideMethodCall(element, methodNames)
+
+// Get containing method name (returns String?)
+UastTreeUtils.findContainingMethodName(element, methodNames)
+
+// Extract numeric value from 16.dp (returns Int?)
+UastTreeUtils.extractNumericDpValue(expression)
+
+// Find insertion point for adding code (returns Location)
+UastTreeUtils.findInsertionPoint(context, element)
 ```
 
 ## Extracting Numeric Values
@@ -225,8 +217,8 @@ class MyDetector : Detector(), SourceCodeScanner {
 // BAD: Matches parameter assignments like "width = 1.dp"
 Regex("""(\w+)\s*=\s*(\d+)\.dp""")
 
-// GOOD: Only matches val declarations
-Regex("""(?:private\s+)?val\s+(\w+)\s*=\s*(\d+)\.dp""")
+// GOOD: Only matches val declarations (any visibility)
+Regex("""\bval\s+(\w+)\s*=\s*(\d+)\.dp""")
 ```
 
 ### Extract Multiple Values
@@ -244,6 +236,6 @@ val fontWeight = match?.groupValues?.get(2)
 1. Use `ULiteralExpression` check to distinguish hardcoded vs dynamic values
 2. Scan entire file for existing constants before suggesting new names
 3. Generate unique names with number suffix to avoid conflicts
-4. Use regex with `val` keyword to avoid matching parameter assignments
+4. Use regex with `\bval\s+` to match only val declarations (any visibility)
 5. Track reported locations to prevent duplicates
-6. Limit tree traversal depth to avoid performance issues
+6. Use `UastTreeUtils` for common tree traversal operations

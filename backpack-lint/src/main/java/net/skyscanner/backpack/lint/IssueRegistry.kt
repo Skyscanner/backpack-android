@@ -32,7 +32,7 @@ import net.skyscanner.backpack.lint.check.HardcodedComposeColorDetector
 import net.skyscanner.backpack.lint.check.HardcodedPaddingDetector
 import net.skyscanner.backpack.lint.check.HardcodedSizeDetector
 import net.skyscanner.backpack.lint.check.HardcodedTypographyDetector
-import net.skyscanner.backpack.lint.check.TokensCopyDetector
+import net.skyscanner.backpack.lint.check.BpkTokensCopyDetector
 import net.skyscanner.backpack.lint.check.UnicodeIconUsageDetector
 
 @Suppress("unused", "UnstableApiUsage")
@@ -51,7 +51,7 @@ class IssueRegistry : IssueRegistry() {
         HardcodedBorderRadiusDetector.ISSUE,
         HardcodedSizeDetector.ISSUE,
         HardcodedTypographyDetector.ISSUE,
-        TokensCopyDetector.ISSUE,
+        BpkTokensCopyDetector.ISSUE,
         UnicodeIconUsageDetector.ISSUE,
     )
 

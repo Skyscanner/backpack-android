@@ -161,37 +161,29 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
     ): LintFix {
         val fixes = mutableListOf<LintFix>()
 
-        // Add fixes for existing constants with same value (just replace, no insert needed)
-        sameValueConstants.forEach { constantName ->
-            val reuseFix = LintFix.create()
-                .name("Use existing constant '$constantName'")
-                .replace()
-                .text("$value.dp")
-                .with(constantName)
-                .autoFix()
-                .build()
-            fixes.add(reuseFix)
-        }
+        sameValueConstants.mapTo(fixes) { createReuseConstantFix(it, value) }
 
-        // Add fixes for creating new constants with different naming options
         val namingOptions = getConstantNameOptions(methodName)
         val insertionPoint = UastTreeUtils.findInsertionPoint(context, dpExpression)
 
         namingOptions.forEach { baseName ->
-            // Generate a unique name if the base name already exists
             val uniqueName = generateUniqueName(baseName, allConstantNames)
-            // Skip if this exact name already exists with same value (already added above)
             if (uniqueName !in sameValueConstants) {
                 fixes.add(createExtractConstantFix(uniqueName, value, insertionPoint))
             }
         }
 
-        return if (fixes.size == 1) {
-            fixes.first()
-        } else {
-            LintFix.create()
-                .alternatives(*fixes.toTypedArray())
-        }
+        return if (fixes.size == 1) fixes.first() else LintFix.create().alternatives(*fixes.toTypedArray())
+    }
+
+    private fun createReuseConstantFix(constantName: String, value: Int): LintFix {
+        return LintFix.create()
+            .name("Use existing constant '$constantName'")
+            .replace()
+            .text("$value.dp")
+            .with(constantName)
+            .autoFix()
+            .build()
     }
 
     private fun generateUniqueName(baseName: String, existingNames: Set<String>): String {

@@ -74,106 +74,94 @@ class HardcodedTypographyDetector : Detector(), SourceCodeScanner {
             val ktFile = node.sourcePsi as? KtFile ?: return
             val reportedRanges = mutableSetOf<TextRange>()
 
-            // First pass: Find and report TextStyle calls with hardcoded .sp
-            ktFile.accept(object : KtTreeVisitorVoid() {
-                override fun visitCallExpression(expression: KtCallExpression) {
-                    val callee = expression.calleeExpression?.text
-                    if (callee == "TextStyle" || callee?.endsWith(".TextStyle") == true) {
-                        val spValue = extractSpValue(expression)
-                        if (spValue != null) {
-                            val fontWeight = extractFontWeight(expression.text)
-                            reportedRanges.add(expression.textRange)
-                            context.report(
-                                ISSUE,
-                                context.getLocation(expression),
-                                getTextStyleSuggestion(spValue, fontWeight),
-                            )
-                        }
-                    }
-                    super.visitCallExpression(expression)
-                }
-            })
-
-            // Second pass: Find standalone .sp usage (not inside TextStyle)
-            ktFile.accept(object : KtTreeVisitorVoid() {
-                override fun visitDotQualifiedExpression(expression: KtDotQualifiedExpression) {
-                    val selector = expression.selectorExpression?.text
-                    val receiver = expression.receiverExpression
-
-                    if (selector == "sp" && receiver is KtConstantExpression) {
-                        // Check if this .sp is inside any reported TextStyle call
-                        val isInsideTextStyle = reportedRanges.any { range ->
-                            range.contains(expression.textRange)
-                        }
-
-                        if (!isInsideTextStyle) {
-                            val spValue = receiver.text.toIntOrNull()
-                            if (spValue != null) {
-                                context.report(
-                                    ISSUE,
-                                    context.getLocation(expression),
-                                    getTypographySuggestion(spValue, "Normal"),
-                                )
-                            }
-                        }
-                    }
-                    super.visitDotQualifiedExpression(expression)
-                }
-            })
+            reportTextStyleCalls(context, ktFile, reportedRanges)
+            reportStandaloneSpUsage(context, ktFile, reportedRanges)
         }
     }
 
+    private fun reportTextStyleCalls(
+        context: JavaContext,
+        ktFile: KtFile,
+        reportedRanges: MutableSet<TextRange>,
+    ) {
+        ktFile.accept(object : KtTreeVisitorVoid() {
+            override fun visitCallExpression(expression: KtCallExpression) {
+                val callee = expression.calleeExpression?.text
+                if (callee == "TextStyle" || callee?.endsWith(".TextStyle") == true) {
+                    val spValue = extractSpValue(expression)
+                    if (spValue != null) {
+                        val fontWeight = extractFontWeight(expression.text)
+                        reportedRanges.add(expression.textRange)
+                        context.report(
+                            ISSUE,
+                            context.getLocation(expression),
+                            getTokenSuggestion(spValue, fontWeight, "TextStyle"),
+                        )
+                    }
+                }
+                super.visitCallExpression(expression)
+            }
+        })
+    }
+
+    private fun reportStandaloneSpUsage(
+        context: JavaContext,
+        ktFile: KtFile,
+        reportedRanges: Set<TextRange>,
+    ) {
+        ktFile.accept(object : KtTreeVisitorVoid() {
+            override fun visitDotQualifiedExpression(expression: KtDotQualifiedExpression) {
+                val selector = expression.selectorExpression?.text
+                val receiver = expression.receiverExpression
+
+                if (selector == "sp" && receiver is KtConstantExpression) {
+                    val isInsideTextStyle = reportedRanges.any { it.contains(expression.textRange) }
+                    if (!isInsideTextStyle) {
+                        val spValue = receiver.text.toIntOrNull()
+                        if (spValue != null) {
+                            context.report(
+                                ISSUE,
+                                context.getLocation(expression),
+                                getTokenSuggestion(spValue, "Normal", "$spValue.sp"),
+                            )
+                        }
+                    }
+                }
+                super.visitDotQualifiedExpression(expression)
+            }
+        })
+    }
+
     private fun extractSpValue(textStyleCall: KtCallExpression): Int? {
-        // Look for fontSize argument with .sp value
         val callText = textStyleCall.text
         val match = HARDCODED_SP_REGEX.find(callText)
         return match?.groupValues?.get(1)?.toIntOrNull()
     }
 
     private fun extractFontWeight(source: String): String {
-        for (name in FONT_WEIGHT_NAMES) {
-            if (source.contains("FontWeight.$name")) {
-                return name
-            }
-        }
-        return "Normal"
+        return FONT_WEIGHT_NAMES.firstOrNull { source.contains("FontWeight.$it") } ?: "Normal"
     }
 
-    private fun getTypographySuggestion(spValue: Int, fontWeight: String): String {
+    private fun getTokenSuggestion(spValue: Int, fontWeight: String, replacementTarget: String): String {
         val tokens = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP[spValue to fontWeight]
         return if (tokens != null) {
             if (tokens.size == 1) {
-                "Use ${tokens[0]} instead of $spValue.sp"
+                "Use ${tokens[0]} instead of $replacementTarget"
             } else {
                 val tokenList = tokens.joinToString("\n") { "• $it" }
-                "Use one of these typography styles instead of $spValue.sp:\n$tokenList"
+                "Use one of these typography styles instead of $replacementTarget:\n$tokenList"
             }
         } else {
-            val available = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP.entries
-                .sortedBy { it.key.first }
-                .joinToString("\n") { (key, styles) ->
-                    "• ${key.first}sp/${key.second} = ${styles.joinToString(", ")}"
-                }
-            "Use BpkTheme.typography.* instead of $spValue.sp. Available styles:\n$available"
+            "Use BpkTheme.typography.* instead of $replacementTarget. ${buildAvailableTokensMessage()}"
         }
     }
 
-    private fun getTextStyleSuggestion(spValue: Int, fontWeight: String): String {
-        val tokens = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP[spValue to fontWeight]
-        return if (tokens != null) {
-            if (tokens.size == 1) {
-                "Use ${tokens[0]} instead of TextStyle"
-            } else {
-                val tokenList = tokens.joinToString("\n") { "• $it" }
-                "Use one of these typography styles instead of TextStyle:\n$tokenList"
+    private fun buildAvailableTokensMessage(): String {
+        val available = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP.entries
+            .sortedBy { it.key.first }
+            .joinToString("\n") { (key, styles) ->
+                "• ${key.first}sp/${key.second} = ${styles.joinToString(", ")}"
             }
-        } else {
-            val available = GeneratedTypographyTokenMap.TYPOGRAPHY_TOKEN_MAP.entries
-                .sortedBy { it.key.first }
-                .joinToString("\n") { (key, styles) ->
-                    "• ${key.first}sp/${key.second} = ${styles.joinToString(", ")}"
-                }
-            "Use BpkTheme.typography.* instead of TextStyle. Available styles:\n$available"
-        }
+        return "Available styles:\n$available"
     }
 }
