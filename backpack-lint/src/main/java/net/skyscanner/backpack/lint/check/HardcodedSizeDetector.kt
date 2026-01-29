@@ -175,12 +175,6 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             }
         }
 
-        // Add custom name option (user can rename the placeholder)
-        val customName = "MyCustomName"
-        if (customName !in existingConstants && customName !in namingOptions) {
-            fixes.add(createExtractConstantFix(customName, value, insertionPoint, isCustom = true))
-        }
-
         return if (fixes.size == 1) {
             fixes.first()
         } else {
@@ -193,7 +187,6 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         constantName: String,
         value: Int,
         insertionPoint: Location,
-        isCustom: Boolean = false,
     ): LintFix {
         val replaceFix = LintFix.create()
             .replace()
@@ -208,14 +201,8 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             .with("private val $constantName = $value.dp\n")
             .build()
 
-        val fixName = if (isCustom) {
-            "Extract to custom constant (rename '$constantName')"
-        } else {
-            "Extract to new constant '$constantName'"
-        }
-
         return LintFix.create()
-            .name(fixName)
+            .name("Extract to new constant '$constantName'")
             .composite(insertFix, replaceFix)
     }
 
