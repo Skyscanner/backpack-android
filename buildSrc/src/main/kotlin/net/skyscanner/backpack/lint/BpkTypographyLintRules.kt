@@ -45,7 +45,7 @@ object BpkTypographyLintRules {
         val grouped = source
             .groupBy(
                 keySelector = {
-                    val sp = it.fontSize.value.removeSuffix(".0").toInt()
+                    val sp = it.fontSize.value.toDouble().toInt()
                     val weight = normalizeWeight(it.fontWeight.name)
                     sp to weight
                 },
