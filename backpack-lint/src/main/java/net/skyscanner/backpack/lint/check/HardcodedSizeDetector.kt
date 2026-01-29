@@ -79,9 +79,10 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             "sizeIn",
             "widthIn",
             "heightIn",
+            "border",
         )
 
-        private val DP_CONSTANT_PATTERN = Regex("""(\w+)\s*=\s*(\d+)\.dp""")
+        private val DP_CONSTANT_PATTERN = Regex("""(?:private\s+)?val\s+(\w+)\s*=\s*(\d+)\.dp""")
     }
 
     override fun getApplicableReferenceNames(): List<String> = listOf("dp")
@@ -170,25 +171,14 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         namingOptions.forEach { constantName ->
             // Skip if this name already exists
             if (constantName !in existingConstants) {
-                val replaceFix = LintFix.create()
-                    .replace()
-                    .text("$value.dp")
-                    .with(constantName)
-                    .build()
-
-                val insertFix = LintFix.create()
-                    .replace()
-                    .range(insertionPoint)
-                    .beginning()
-                    .with("private val $constantName = $value.dp\n")
-                    .build()
-
-                val compositeFix = LintFix.create()
-                    .name("Extract to new constant '$constantName'")
-                    .composite(insertFix, replaceFix)
-
-                fixes.add(compositeFix)
+                fixes.add(createExtractConstantFix(constantName, value, insertionPoint))
             }
+        }
+
+        // Add custom name option (user can rename the placeholder)
+        val customName = "MyCustomName"
+        if (customName !in existingConstants && customName !in namingOptions) {
+            fixes.add(createExtractConstantFix(customName, value, insertionPoint, isCustom = true))
         }
 
         return if (fixes.size == 1) {
@@ -199,10 +189,41 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         }
     }
 
+    private fun createExtractConstantFix(
+        constantName: String,
+        value: Int,
+        insertionPoint: Location,
+        isCustom: Boolean = false,
+    ): LintFix {
+        val replaceFix = LintFix.create()
+            .replace()
+            .text("$value.dp")
+            .with(constantName)
+            .build()
+
+        val insertFix = LintFix.create()
+            .replace()
+            .range(insertionPoint)
+            .beginning()
+            .with("private val $constantName = $value.dp\n")
+            .build()
+
+        val fixName = if (isCustom) {
+            "Extract to custom constant (rename '$constantName')"
+        } else {
+            "Extract to new constant '$constantName'"
+        }
+
+        return LintFix.create()
+            .name(fixName)
+            .composite(insertFix, replaceFix)
+    }
+
     private fun getConstantName(methodName: String): String {
         return when (methodName) {
             "width", "requiredWidth", "widthIn" -> "ItemWidth"
             "height", "requiredHeight", "heightIn" -> "ItemHeight"
+            "border" -> "BorderWidth"
             else -> "ItemSize"
         }
     }
@@ -211,6 +232,7 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         return when (methodName) {
             "width", "requiredWidth", "widthIn" -> listOf("ItemWidth", "ComponentWidth", "ContentWidth")
             "height", "requiredHeight", "heightIn" -> listOf("ItemHeight", "ComponentHeight", "ContentHeight")
+            "border" -> listOf("BorderWidth", "BorderStrokeWidth", "StrokeWidth")
             else -> listOf("ItemSize", "ComponentSize", "ContentSize")
         }
     }

@@ -200,6 +200,50 @@ class HardcodedSizeDetectorTest {
             .expectContains("Use an existing constant or extract to a new one")
     }
 
+    @Test
+    fun `detects hardcoded border width and suggests BorderWidth constant`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+            import androidx.compose.ui.graphics.Color
+
+            fun test() = Modifier.border(width = 1.dp, color = Color.Black)
+            """,
+        ).indented()
+
+        lint().files(code, modifierWithBorderStub(), dpStub(), colorStub())
+            .allowMissingSdk()
+            .issues(HardcodedSizeDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectWarningCount(1)
+            .expectContains("Extract hardcoded size")
+            .expectContains("private val BorderWidth = 1.dp")
+    }
+
+    @Test
+    fun `provides custom naming option for extraction`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            fun test() = Modifier.size(48.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedSizeDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectWarningCount(1)
+            .expectContains("Extract hardcoded size")
+    }
+
     private fun modifierStub() = kotlin(
         """
         package androidx.compose.ui
@@ -215,12 +259,41 @@ class HardcodedSizeDetectorTest {
         """,
     ).indented()
 
+    private fun modifierWithBorderStub() = kotlin(
+        """
+        package androidx.compose.ui
+        import androidx.compose.ui.unit.Dp
+        import androidx.compose.ui.graphics.Color
+
+        interface Modifier {
+            companion object : Modifier
+            fun padding(value: Dp): Modifier
+            fun size(value: Dp): Modifier
+            fun width(value: Dp): Modifier
+            fun height(value: Dp): Modifier
+            fun border(width: Dp, color: Color): Modifier
+        }
+        """,
+    ).indented()
+
     private fun dpStub() = kotlin(
         """
         package androidx.compose.ui.unit
 
         class Dp
         val Int.dp: Dp get() = Dp()
+        """,
+    ).indented()
+
+    private fun colorStub() = kotlin(
+        """
+        package androidx.compose.ui.graphics
+
+        class Color {
+            companion object {
+                val Black = Color()
+            }
+        }
         """,
     ).indented()
 }
