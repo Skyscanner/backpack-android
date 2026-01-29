@@ -39,7 +39,11 @@ sealed class BpkLintingOutput<Input> : (Input) -> Boolean {
             val copyright = try {
                 Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
             } catch (e: Exception) {
-                ""
+                throw IllegalStateException(
+                    "Failed to load copyright header from buildSrc/src/main/resources/copyright.txt. " +
+                        "Copyright headers are required for all generated files.",
+                    e,
+                )
             }
 
             // Add auto-generated comment
