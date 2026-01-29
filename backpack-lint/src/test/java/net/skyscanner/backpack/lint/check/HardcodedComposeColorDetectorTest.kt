@@ -116,7 +116,7 @@ class HardcodedComposeColorDetectorTest {
             package test
             import androidx.compose.ui.graphics.Color
 
-            fun test() = Color(0xFF0062E3)
+            fun test() = Color(0xFF05203C)
             """,
         ).indented()
 
@@ -124,8 +124,8 @@ class HardcodedComposeColorDetectorTest {
             .allowMissingSdk()
             .issues(HardcodedComposeColorDetector.ISSUE)
             .run()
-            .expectContains("BpkTheme.colors.coreAccent")
-            .expectContains("BpkTheme.colors.textLink")
+            .expectContains("BpkTheme.colors.corePrimary")
+            .expectContains("BpkTheme.colors.surfaceContrast")
             .expectContains("All these tokens have the same color value")
     }
 
