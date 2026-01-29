@@ -36,7 +36,7 @@ import org.jetbrains.uast.UPolyadicExpression
 class UnicodeIconUsageDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private const val EXPLANATION =
+        private val EXPLANATION =
             "Unicode symbols used as icons are not accessible. Use BpkIcon composables with contentDescription instead.\n\n" +
                 LintConstants.SUPPORT_MESSAGE
 
