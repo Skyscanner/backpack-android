@@ -130,7 +130,7 @@ class HardcodedSizeDetectorTest {
     }
 
     @Test
-    fun `provides fix to extract constant for height`() {
+    fun `provides fix suggestions in warning message`() {
         val code = kotlin(
             """
             package test
@@ -146,15 +146,58 @@ class HardcodedSizeDetectorTest {
             .issues(HardcodedSizeDetector.ISSUE)
             .testModes(TestMode.DEFAULT)
             .run()
-            .expectFixDiffs(
-                """
-                Fix for src/test/test.kt line 5: Extract to constant 'ItemHeight':
-                @@ -5 +5
-                - fun test() = Modifier.height(100.dp)
-                + private val ItemHeight = 100.dp
-                + fun test() = Modifier.height(ItemHeight)
-                """.trimIndent(),
-            )
+            .expectWarningCount(1)
+            .expectContains("Extract hardcoded size to a named constant")
+            .expectContains("private val ItemHeight = 100.dp")
+            .expectContains("Modifier.height(ItemHeight)")
+    }
+
+    @Test
+    fun `suggests reusing existing constant with same value`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            private val ItemHeight = 56.dp
+
+            fun test() = Modifier.height(56.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedSizeDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectWarningCount(1)
+            .expectContains("Existing constant(s) with same value: ItemHeight")
+    }
+
+    @Test
+    fun `provides fix to reuse existing constant`() {
+        val code = kotlin(
+            """
+            package test
+            import androidx.compose.ui.Modifier
+            import androidx.compose.ui.unit.dp
+
+            private val RowHeight = 56.dp
+
+            fun test() = Modifier.height(56.dp)
+            """,
+        ).indented()
+
+        lint().files(code, modifierStub(), dpStub())
+            .allowMissingSdk()
+            .issues(HardcodedSizeDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectWarningCount(1)
+            .expectContains("Hardcoded size detected")
+            .expectContains("Existing constant(s) with same value: RowHeight")
+            .expectContains("Use an existing constant or extract to a new one")
     }
 
     private fun modifierStub() = kotlin(

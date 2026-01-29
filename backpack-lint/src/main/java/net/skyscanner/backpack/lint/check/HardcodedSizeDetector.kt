@@ -32,12 +32,16 @@ import com.intellij.psi.PsiElement
 import net.skyscanner.backpack.lint.util.UastTreeUtils
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UFile
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
+import org.jetbrains.uast.getContainingUFile
+import org.jetbrains.uast.visitor.AbstractUastVisitor
 
 /**
  * Detects hardcoded .dp values used in size/width/height methods and suggests extracting to named constants.
+ * If an existing constant with the same value exists in the file, it will suggest reusing that constant.
  */
 @Suppress("UnstableApiUsage")
 class HardcodedSizeDetector : Detector(), SourceCodeScanner {
@@ -76,6 +80,8 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             "widthIn",
             "heightIn",
         )
+
+        private val DP_CONSTANT_PATTERN = Regex("""(\w+)\s*=\s*(\d+)\.dp""")
     }
 
     override fun getApplicableReferenceNames(): List<String> = listOf("dp")
@@ -91,12 +97,105 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             if (intValue != null) {
                 val methodName = UastTreeUtils.findContainingMethodName(parent, SIZE_METHODS)
                 if (methodName != null) {
-                    val constantName = getConstantName(methodName)
-                    val message = getSuggestion(intValue, methodName, constantName)
-                    val fix = buildExtractConstantFix(context, parent, intValue, constantName)
+                    val existingConstants = findExistingDpConstants(parent, intValue)
+                    val fix = buildFix(context, parent, intValue, methodName, existingConstants)
+                    val message = buildMessage(intValue, methodName, existingConstants)
                     context.report(ISSUE, context.getLocation(parent), message, fix)
                 }
             }
+        }
+    }
+
+    private fun findExistingDpConstants(element: UElement, targetValue: Int): List<String> {
+        val file = element.getContainingUFile() ?: return emptyList()
+        val constants = mutableListOf<String>()
+
+        file.accept(object : AbstractUastVisitor() {
+            override fun visitFile(node: UFile): Boolean {
+                val source = node.sourcePsi?.text ?: return false
+                DP_CONSTANT_PATTERN.findAll(source).forEach { match ->
+                    val name = match.groupValues[1]
+                    val value = match.groupValues[2].toIntOrNull()
+                    if (value == targetValue) {
+                        constants.add(name)
+                    }
+                }
+                return true
+            }
+        })
+
+        return constants.distinct()
+    }
+
+    private fun buildMessage(value: Int, methodName: String, existingConstants: List<String>): String {
+        return if (existingConstants.isNotEmpty()) {
+            val constantList = existingConstants.joinToString(", ")
+            "Hardcoded size detected. Existing constant(s) with same value: $constantList\n\n" +
+                "Use an existing constant or extract to a new one."
+        } else {
+            val suggestedName = getConstantName(methodName)
+            "Extract hardcoded size to a named constant.\n\n" +
+                "Example:\n" +
+                "private val $suggestedName = $value.dp\n\n" +
+                "// Then use:\n" +
+                "Modifier.$methodName($suggestedName)"
+        }
+    }
+
+    private fun buildFix(
+        context: JavaContext,
+        dpExpression: UQualifiedReferenceExpression,
+        value: Int,
+        methodName: String,
+        existingConstants: List<String>,
+    ): LintFix {
+        val fixes = mutableListOf<LintFix>()
+
+        // Add fixes for existing constants (just replace, no insert needed)
+        existingConstants.forEach { constantName ->
+            val reuseFix = LintFix.create()
+                .name("Use existing constant '$constantName'")
+                .replace()
+                .text("$value.dp")
+                .with(constantName)
+                .autoFix()
+                .build()
+            fixes.add(reuseFix)
+        }
+
+        // Add fixes for creating new constants with different naming options
+        val namingOptions = getConstantNameOptions(methodName)
+        val insertionPoint = findInsertionPoint(context, dpExpression)
+
+        namingOptions.forEach { constantName ->
+            // Skip if this name already exists
+            if (constantName !in existingConstants) {
+                val replaceFix = LintFix.create()
+                    .replace()
+                    .text("$value.dp")
+                    .with(constantName)
+                    .build()
+
+                val insertFix = LintFix.create()
+                    .replace()
+                    .range(insertionPoint)
+                    .beginning()
+                    .with("private val $constantName = $value.dp\n")
+                    .build()
+
+                val compositeFix = LintFix.create()
+                    .name("Extract to new constant '$constantName'")
+                    .composite(insertFix, replaceFix)
+
+                fixes.add(compositeFix)
+            }
+        }
+
+        return if (fixes.size == 1) {
+            fixes.first()
+        } else {
+            LintFix.create()
+                .alternatives(*fixes.toTypedArray())
         }
     }
 
@@ -108,38 +207,12 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
         }
     }
 
-    private fun getSuggestion(value: Int, methodName: String, constantName: String): String {
-        return "Extract hardcoded size to a named constant.\n\n" +
-            "Example:\n" +
-            "private val $constantName = $value.dp\n\n" +
-            "// Then use:\n" +
-            "Modifier.$methodName($constantName)"
-    }
-
-    private fun buildExtractConstantFix(
-        context: JavaContext,
-        dpExpression: UQualifiedReferenceExpression,
-        value: Int,
-        constantName: String,
-    ): LintFix {
-        val insertionPoint = findInsertionPoint(context, dpExpression)
-
-        val replaceFix = LintFix.create()
-            .replace()
-            .text("$value.dp")
-            .with(constantName)
-            .build()
-
-        val insertFix = LintFix.create()
-            .replace()
-            .range(insertionPoint)
-            .beginning()
-            .with("private val $constantName = $value.dp\n")
-            .build()
-
-        return LintFix.create()
-            .name("Extract to constant '$constantName'")
-            .composite(insertFix, replaceFix)
+    private fun getConstantNameOptions(methodName: String): List<String> {
+        return when (methodName) {
+            "width", "requiredWidth", "widthIn" -> listOf("ItemWidth", "ComponentWidth", "ContentWidth")
+            "height", "requiredHeight", "heightIn" -> listOf("ItemHeight", "ComponentHeight", "ContentHeight")
+            else -> listOf("ItemSize", "ComponentSize", "ContentSize")
+        }
     }
 
     private fun findInsertionPoint(context: JavaContext, element: UElement): Location {
