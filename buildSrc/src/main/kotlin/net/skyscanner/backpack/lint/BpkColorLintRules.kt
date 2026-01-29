@@ -18,6 +18,7 @@
 package net.skyscanner.backpack.lint
 
 import com.google.common.base.CaseFormat
+import net.skyscanner.backpack.tokens.BpkParser
 import net.skyscanner.backpack.tokens.BpkTransformer
 
 /**
@@ -25,6 +26,56 @@ import net.skyscanner.backpack.tokens.BpkTransformer
  * Focuses on light mode colors, mapping hex values to semantic BpkTheme.colors properties.
  */
 object BpkColorLintRules {
+
+    /**
+     * Parser that extracts semantic colors from token source for lint rules.
+     * Only includes non-deprecated semantic colors in light mode.
+     */
+    object Parser : BpkParser<Map<String, Any>, BpkColors> {
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invoke(source: Map<String, Any>): BpkColors {
+            val props = source["props"] as? Map<String, Map<String, String>> ?: return emptyBpkColors()
+
+            val colorData = props.filter { (_, value) -> value["type"] == "color" }
+
+            val map = colorData
+                .filter { (key, value) ->
+                    // Include semantic colors (have darkValue) that are not private or deprecated
+                    val hasDarkValue = value["darkValue"] != null
+                    val isPrivate = key.startsWith("PRIVATE_")
+                    val isDeprecated = value["deprecated"].toBoolean()
+                    val isMarcomms = key.startsWith("MARCOMMS_")
+                    hasDarkValue && !isPrivate && !isDeprecated && !isMarcomms
+                }
+                .map { (key, value) ->
+                    val tokenName = key.removePrefix("COLOR_").removeSuffix("_COLOR")
+                    val hexValue = value["value"]?.uppercase()?.let { hex ->
+                        // Convert #RRGGBBAA to 0xAARRGGBB format for Compose Color
+                        if (hex.startsWith("#") && hex.length == 9) {
+                            val rgb = hex.substring(1, 7)
+                            val alpha = hex.substring(7, 9)
+                            "0x$alpha$rgb"
+                        } else if (hex.startsWith("#") && hex.length == 7) {
+                            "0xFF${hex.substring(1)}"
+                        } else {
+                            hex
+                        }
+                    } ?: ""
+                    tokenName to hexValue
+                }
+                .filter { it.second.isNotEmpty() }
+                .toMap()
+
+            return object : BpkColors, Map<String, String> by map {
+                override fun toString(): String = map.toString()
+            }
+        }
+
+        private fun emptyBpkColors(): BpkColors = object : BpkColors, Map<String, String> by emptyMap() {
+            override fun toString(): String = "{}"
+        }
+    }
 
     sealed class Format<Output> : BpkTransformer<BpkColors, Output> {
 
@@ -66,7 +117,7 @@ object BpkColorLintRules {
 }
 
 /**
- * Interface for color data (hex string mapped to list of token names)
+ * Interface for color data (hex string mapped to token name)
  * Multiple tokens can share the same hex value
  */
 interface BpkColors : Map<String, String>

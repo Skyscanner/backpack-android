@@ -21,7 +21,6 @@ import net.skyscanner.backpack.lint.BpkDimensionLintRules
 import net.skyscanner.backpack.lint.BpkLintingOutput
 import net.skyscanner.backpack.lint.BpkTypographyLintRules
 import net.skyscanner.backpack.lint.saveToLint
-import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkTextStyle
@@ -76,7 +75,7 @@ tasks {
         this.group = group
         doLast {
             source
-                .parseAs(BpkColor.LintLightMode)
+                .parseAs(BpkColorLintRules.Parser)
                 .transformTo(BpkColorLintRules.Format.ColorLintDetectorMap(namespace = "BpkTheme.colors"))
                 .saveToLint(BpkLintingOutput.KotlinFile(src, tokensPackage, "GeneratedColorTokenMap.kt"))
                 .execute()
