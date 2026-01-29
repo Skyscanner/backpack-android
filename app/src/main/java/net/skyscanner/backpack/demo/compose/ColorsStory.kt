@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -58,9 +59,11 @@ fun ColorsComposeStory(modifier: Modifier = Modifier) {
 
 private val ItemHeight = 56.dp
 private val ItemWidth = 112.dp
+private val BorderStrokeWidth = 1.dp
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
-    val contrastTextColor = if (token.value.luminance() > 0.5) {
+    val isLightColor = remember(token.value) { token.value.luminance() > 0.5 }
+    val contrastTextColor = if (isLightColor) {
         BpkTheme.colors.textOnLight
     } else {
         BpkTheme.colors.textOnDark
@@ -79,7 +82,7 @@ private fun ColorSampleRow(token: Token<Color>) {
             modifier = Modifier
                 .height(ItemHeight)
                 .width(ItemWidth)
-                .border(1.dp, BpkTheme.colors.line)
+                .border(BorderStrokeWidth, BpkTheme.colors.line)
                 .background(token.value),
             contentAlignment = Alignment.Center,
         ) {

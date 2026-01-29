@@ -30,10 +30,8 @@ import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiElement
 import net.skyscanner.backpack.lint.util.UastTreeUtils
-import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UFile
-import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 import org.jetbrains.uast.getContainingUFile
@@ -82,7 +80,7 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             "border",
         )
 
-        private val DP_CONSTANT_PATTERN = Regex("""(?:private\s+)?val\s+(\w+)\s*=\s*(\d+)\.dp""")
+        private val DP_CONSTANT_PATTERN = Regex("""\bval\s+(\w+)\s*=\s*(\d+)\.dp""")
     }
 
     override fun getApplicableReferenceNames(): List<String> = listOf("dp")
@@ -177,7 +175,7 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
 
         // Add fixes for creating new constants with different naming options
         val namingOptions = getConstantNameOptions(methodName)
-        val insertionPoint = findInsertionPoint(context, dpExpression)
+        val insertionPoint = UastTreeUtils.findInsertionPoint(context, dpExpression)
 
         namingOptions.forEach { baseName ->
             // Generate a unique name if the base name already exists
@@ -246,25 +244,5 @@ class HardcodedSizeDetector : Detector(), SourceCodeScanner {
             "border" -> listOf("BorderWidth", "BorderStrokeWidth", "StrokeWidth")
             else -> listOf("ItemSize", "ComponentSize", "ContentSize")
         }
-    }
-
-    private fun findInsertionPoint(context: JavaContext, element: UElement): Location {
-        var current: UElement? = element
-        while (current != null) {
-            when (current) {
-                is UMethod -> {
-                    current.sourcePsi?.let { psi ->
-                        return context.getLocation(psi)
-                    }
-                }
-                is UClass -> {
-                    current.sourcePsi?.let { psi ->
-                        return context.getLocation(psi)
-                    }
-                }
-            }
-            current = current.uastParent
-        }
-        return context.getLocation(element)
     }
 }

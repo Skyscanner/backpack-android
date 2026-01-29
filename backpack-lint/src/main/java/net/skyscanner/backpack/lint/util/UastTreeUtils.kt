@@ -18,9 +18,13 @@
 
 package net.skyscanner.backpack.lint.util
 
+import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.Location
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.ULiteralExpression
+import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UQualifiedReferenceExpression
 
 /**
@@ -28,59 +32,23 @@ import org.jetbrains.uast.UQualifiedReferenceExpression
  */
 internal object UastTreeUtils {
 
-    private const val DEFAULT_MAX_DEPTH = 10
-
-    /**
-     * Finds a parent method call with a matching method name.
-     *
-     * @param element The starting element to search from
-     * @param methodNames Set of method names to match
-     * @param maxDepth Maximum depth to traverse up the tree (default: 10)
-     * @param additionalMatcher Optional additional matcher for method names (e.g., contains check)
-     * @return The matching [UCallExpression] if found, null otherwise
-     */
-    fun findParentMethodCall(
-        element: UElement,
-        methodNames: Set<String>,
-        maxDepth: Int = DEFAULT_MAX_DEPTH,
-        additionalMatcher: ((String) -> Boolean)? = null,
-    ): UCallExpression? {
-        var current = element.uastParent
-        var depth = 0
-
-        while (current != null && depth < maxDepth) {
-            if (current is UCallExpression) {
-                val methodName = current.methodName
-                if (methodName in methodNames || (additionalMatcher != null && methodName?.let(additionalMatcher) == true)) {
-                    return current
-                }
-            }
-            current = current.uastParent
-            depth++
-        }
-        return null
-    }
-
     /**
      * Checks if the element is inside a method call with one of the specified method names,
      * and the element is an argument of that method call.
      *
      * @param element The element to check (typically a .dp expression)
      * @param methodNames Set of method names to match
-     * @param maxDepth Maximum depth to traverse up the tree (default: 10)
      * @param additionalMatcher Optional additional matcher for method names
      * @return True if the element is inside a matching method call, false otherwise
      */
     fun isInsideMethodCall(
         element: UQualifiedReferenceExpression,
         methodNames: Set<String>,
-        maxDepth: Int = DEFAULT_MAX_DEPTH,
         additionalMatcher: ((String) -> Boolean)? = null,
     ): Boolean {
         var current = element.uastParent
-        var depth = 0
 
-        while (current != null && depth < maxDepth) {
+        while (current != null) {
             if (current is UCallExpression) {
                 val methodName = current.methodName
                 if (methodName in methodNames || (additionalMatcher != null && methodName?.let(additionalMatcher) == true)) {
@@ -90,7 +58,6 @@ internal object UastTreeUtils {
                 }
             }
             current = current.uastParent
-            depth++
         }
         return false
     }
@@ -100,18 +67,15 @@ internal object UastTreeUtils {
      *
      * @param element The element to check
      * @param methodNames Set of method names to match
-     * @param maxDepth Maximum depth to traverse up the tree (default: 10)
      * @return The matching method name if found, null otherwise
      */
     fun findContainingMethodName(
         element: UQualifiedReferenceExpression,
         methodNames: Set<String>,
-        maxDepth: Int = DEFAULT_MAX_DEPTH,
     ): String? {
         var current = element.uastParent
-        var depth = 0
 
-        while (current != null && depth < maxDepth) {
+        while (current != null) {
             if (current is UCallExpression) {
                 val methodName = current.methodName
                 if (methodName in methodNames) {
@@ -121,7 +85,6 @@ internal object UastTreeUtils {
                 }
             }
             current = current.uastParent
-            depth++
         }
         return null
     }
@@ -160,5 +123,29 @@ internal object UastTreeUtils {
             }
         }
         return null
+    }
+
+    /**
+     * Finds an appropriate insertion point for adding code (e.g., constant declarations).
+     * Traverses up to find the containing method or class.
+     *
+     * @param context The JavaContext for getting locations
+     * @param element The element to find insertion point for
+     * @return Location of the containing method or class, or the element itself as fallback
+     */
+    fun findInsertionPoint(context: JavaContext, element: UElement): Location {
+        var current: UElement? = element
+        while (current != null) {
+            when (current) {
+                is UMethod -> {
+                    current.sourcePsi?.let { return context.getLocation(it) }
+                }
+                is UClass -> {
+                    current.sourcePsi?.let { return context.getLocation(it) }
+                }
+            }
+            current = current.uastParent
+        }
+        return context.getLocation(element)
     }
 }
