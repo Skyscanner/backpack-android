@@ -110,19 +110,32 @@ internal object UastTreeUtils {
 
     /**
      * Extracts a numeric literal value from a .dp qualified reference expression.
+     * Only returns a value for hardcoded numeric literals (e.g., "16.dp").
+     * Returns null for named constants (e.g., "IMAGE_HEIGHT.dp").
      *
      * @param parent The qualified reference expression (e.g., "16.dp")
      * @return The numeric value as Int if the receiver is a numeric literal, null otherwise
      */
     fun extractNumericDpValue(parent: UQualifiedReferenceExpression): Int? {
         val receiver = parent.receiver
-        if (receiver is ULiteralExpression) {
-            val value = receiver.value
-            if (value is Number) {
-                return value.toInt()
-            }
+
+        // Only match actual numeric literals, not references to constants
+        if (receiver !is ULiteralExpression) {
+            return null
         }
-        return null
+
+        val value = receiver.value
+        if (value !is Number) {
+            return null
+        }
+
+        // Additional safety: verify the source text looks like a number
+        val sourceText = receiver.sourcePsi?.text ?: return null
+        if (!sourceText.matches(Regex("""^-?\d+(\.\d+)?[fFdDlL]?$"""))) {
+            return null
+        }
+
+        return value.toInt()
     }
 
     /**
