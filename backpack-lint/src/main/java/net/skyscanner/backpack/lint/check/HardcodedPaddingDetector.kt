@@ -43,7 +43,7 @@ class HardcodedPaddingDetector : Detector(), SourceCodeScanner {
         private const val EXPLANATION =
             "Use BpkSpacing.* tokens instead of hardcoded .dp values for padding. " +
                 "Hardcoding spacing bypasses the design system and creates inconsistent layouts.\n\n" +
-                LintConstants.SUPPORT_MESSAGE
+                "${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
             id = "HardcodedPadding",

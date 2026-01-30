@@ -43,7 +43,7 @@ class HardcodedBorderRadiusDetector : Detector(), SourceCodeScanner {
         private const val EXPLANATION =
             "Use BpkBorderRadius.* tokens instead of hardcoded .dp values. " +
                 "Hardcoding border radius bypasses the design system and creates inconsistent shapes.\n\n" +
-                LintConstants.SUPPORT_MESSAGE
+                "${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
             id = "HardcodedBorderRadius",
