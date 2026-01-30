@@ -35,7 +35,7 @@ import org.jetbrains.uast.UQualifiedReferenceExpression
 class BpkTokensCopyDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private val EXPLANATION =
+        private const val EXPLANATION =
             "Do not use .copy() to modify design tokens. Request a new semantic token from the design team instead. Using .copy() bypasses the design system and breaks theming support.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
