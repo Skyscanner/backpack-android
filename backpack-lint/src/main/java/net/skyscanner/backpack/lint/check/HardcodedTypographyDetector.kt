@@ -41,10 +41,10 @@ import org.jetbrains.uast.UFile
 class HardcodedTypographyDetector : Detector(), SourceCodeScanner {
 
     companion object {
-        private val EXPLANATION =
+        private const val EXPLANATION =
             "Use BpkTheme.typography.* instead of hardcoded font sizes or TextStyle creation. " +
                 "Hardcoding typography bypasses the design system and creates inconsistent text styling.\n\n" +
-                LintConstants.SUPPORT_MESSAGE
+                "${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
             id = "HardcodedTypography",
