@@ -27,6 +27,27 @@ import org.junit.Test
 class BpkTokensCopyDetectorTest {
 
     @Test
+    fun `detects copy on BpkTheme colors corePrimary`() {
+        val code = kotlin(
+            """
+            package test
+            import net.skyscanner.backpack.compose.theme.BpkTheme
+
+            fun test() {
+                val customColor = BpkTheme.colors.corePrimary.copy(alpha = 0.3f)
+            }
+            """,
+        ).indented()
+
+        lint().files(code, bpkThemeStubWithMoreColors())
+            .allowMissingSdk()
+            .issues(BpkTokensCopyDetector.ISSUE)
+            .testModes(TestMode.DEFAULT)
+            .run()
+            .expectContains("Do not use .copy() to modify design tokens")
+    }
+
+    @Test
     fun `detects copy on BpkTheme colors with coreAccent`() {
         val code = kotlin(
             """
@@ -296,6 +317,7 @@ class BpkTokensCopyDetectorTest {
 
         data class BpkColors(
             val coreAccent: BpkColor = BpkColor(),
+            val corePrimary: BpkColor = BpkColor(),
             val textPrimary: BpkColor = BpkColor(),
             val statusWarningFill: BpkColor = BpkColor(),
             val statusSuccessSpot: BpkColor = BpkColor(),

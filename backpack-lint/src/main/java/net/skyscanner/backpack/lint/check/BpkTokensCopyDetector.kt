@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.lint.check
 
 import com.android.tools.lint.detector.api.Category
-import net.skyscanner.backpack.lint.util.LintConstants
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -28,6 +27,7 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiMethod
+import net.skyscanner.backpack.lint.util.LintConstants
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UQualifiedReferenceExpression
 
@@ -39,7 +39,7 @@ class BpkTokensCopyDetector : Detector(), SourceCodeScanner {
             "Do not use .copy() to modify design tokens. Request a new semantic token from the design team instead. Using .copy() bypasses the design system and breaks theming support.\n\n${LintConstants.SUPPORT_MESSAGE}"
 
         val ISSUE = Issue.create(
-            id = "TokensCopy",
+            id = "BpkTokensCopy",
             briefDescription = "Design token modified with .copy()",
             explanation = EXPLANATION,
             category = Category.CORRECTNESS,
@@ -60,12 +60,26 @@ class BpkTokensCopyDetector : Detector(), SourceCodeScanner {
     override fun getApplicableMethodNames(): List<String> = listOf("copy")
 
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
-        val receiver = node.receiver as? UQualifiedReferenceExpression ?: return
-        val receiverText = receiver.asSourceString()
+        val receiverText = getReceiverText(node) ?: return
 
         if (isDesignTokenReceiver(receiverText)) {
             context.report(ISSUE, context.getLocation(node), EXPLANATION)
         }
+    }
+
+    private fun getReceiverText(node: UCallExpression): String? {
+        val directReceiver = node.receiver
+        if (directReceiver != null) {
+            return directReceiver.asSourceString()
+        }
+
+        val parent = node.uastParent
+        if (parent is UQualifiedReferenceExpression) {
+            val receiver = parent.receiver
+            return receiver.asSourceString()
+        }
+
+        return null
     }
 
     private fun isDesignTokenReceiver(receiverText: String): Boolean {
