@@ -76,12 +76,6 @@ android {
         }
     }
 
-    sourceSets {
-        getByName("screenshots") {
-            java.directories.add("src/internal/java")
-            res.directories.add("src/internal/res")
-        }
-    }
 
     testOptions {
         unitTests {
