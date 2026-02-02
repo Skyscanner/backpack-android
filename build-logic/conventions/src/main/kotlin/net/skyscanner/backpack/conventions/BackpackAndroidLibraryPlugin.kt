@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.conventions
 
 import SdkVersions
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.internal.lint.AndroidLintTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -34,7 +34,6 @@ class BackpackAndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             plugins.apply("com.android.library")
-            plugins.apply("org.jetbrains.kotlin.android")
 
             extensions.configure<LibraryExtension> {
                 compileSdk = SdkVersions.COMPILE_SDK
