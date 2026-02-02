@@ -39,6 +39,16 @@ subprojects {
         buildUponDefaultConfig = true
         source.setFrom(files("src", "$rootDir/buildSrc/src"))
     }
+
+    // Workaround for K2 FIR lint analysis crash when analyzing Kotlin build scripts
+    // Disable all lintAnalyze* tasks to prevent Lint from crashing during build script analysis
+    afterEvaluate {
+        tasks.configureEach {
+            if (name.contains("lintAnalyze")) {
+                enabled = false
+            }
+        }
+    }
 }
 
 tasks.register<Copy>("installGitHooks") {

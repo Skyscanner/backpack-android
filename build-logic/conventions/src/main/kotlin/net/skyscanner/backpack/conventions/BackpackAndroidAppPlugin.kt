@@ -80,6 +80,13 @@ class BackpackAndroidAppPlugin : Plugin<Project> {
                     )
                 }
             }
+
+            // Workaround for K2 FIR lint analysis crash when analyzing Kotlin build scripts
+            tasks.withType<AndroidLintTask>().configureEach {
+                if (name.contains("Analyze")) {
+                    enabled = false
+                }
+            }
         }
     }
 }
