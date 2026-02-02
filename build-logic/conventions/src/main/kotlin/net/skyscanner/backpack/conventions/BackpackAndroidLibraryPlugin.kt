@@ -20,6 +20,7 @@ package net.skyscanner.backpack.conventions
 
 import SdkVersions
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.lint.AndroidLintTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
