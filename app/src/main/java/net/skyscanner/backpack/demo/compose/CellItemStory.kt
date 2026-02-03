@@ -53,6 +53,7 @@ fun CellItemStory(modifier: Modifier = Modifier) {
 internal fun CellItemSample(modifier: Modifier = Modifier) {
     BpkCellItem(
         icon = BpkIcon.Account,
+        iconContentDescription = "Account",
         title = "Title",
         description = "Description",
         showDivider = true,

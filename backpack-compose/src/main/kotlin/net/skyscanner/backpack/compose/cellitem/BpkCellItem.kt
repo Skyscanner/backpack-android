@@ -42,6 +42,7 @@ fun BpkCellItem(
     title: String,
     modifier: Modifier = Modifier,
     icon: BpkIcon? = null,
+    iconContentDescription: String? = null,
     onClick: (() -> Unit)? = null,
     description: String? = null,
     showDivider: Boolean = false,
@@ -65,9 +66,8 @@ fun BpkCellItem(
             icon?.let {
                 BpkIcon(
                     icon = icon,
-                    contentDescription = null,
+                    contentDescription = iconContentDescription,
                     size = BpkIconSize.Large,
-                    modifier = Modifier,
                 )
 
                 Spacer(modifier = Modifier.width(BpkSpacing.Base))
@@ -80,15 +80,13 @@ fun BpkCellItem(
                     text = title,
                     style = BpkTheme.typography.heading5,
                     color = BpkTheme.colors.textPrimary,
-                    modifier = Modifier,
                 )
 
                 description?.let {
                     BpkText(
                         text = it,
                         style = BpkTheme.typography.footnote,
-                        color = BpkTheme.colors.textPrimary,
-                        modifier = Modifier,
+                        color = BpkTheme.colors.textSecondary,
                     )
                 }
             }
@@ -110,6 +108,7 @@ fun BpkCellItem(
 private fun BpkCellItemPreview() {
     BpkCellItem(
         icon = BpkIcon.Account,
+        iconContentDescription = "Account",
         title = "Title",
         description = "Description",
         showDivider = true,
