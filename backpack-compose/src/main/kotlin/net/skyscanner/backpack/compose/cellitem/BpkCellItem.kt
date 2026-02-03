@@ -1,0 +1,100 @@
+package net.skyscanner.backpack.compose.cellitem
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.compose.annotation.BpkPreviews
+import net.skyscanner.backpack.compose.divider.BpkDivider
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Account
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+
+@Composable
+fun BpkCellItem(
+    title: String,
+    modifier: Modifier = Modifier,
+    icon: BpkIcon? = null,
+    onClick: (() -> Unit)? = null,
+    description: String? = null,
+    showDivider: Boolean = false,
+    accessory: (@Composable () -> Unit)? = null,
+) {
+    Column(
+        modifier = modifier.then(
+            if (onClick != null) {
+                Modifier.clickable(onClick = onClick)
+            } else {
+                Modifier
+            },
+        ),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(BpkSpacing.Base),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            icon?.let {
+                BpkIcon(
+                    icon = icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Large,
+                    modifier = Modifier,
+                )
+
+                Spacer(modifier = Modifier.width(BpkSpacing.Base))
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+            ) {
+                BpkText(
+                    text = title,
+                    style = BpkTheme.typography.heading5,
+                    color = BpkTheme.colors.textPrimary,
+                    modifier = Modifier,
+                )
+
+                description?.let {
+                    BpkText(
+                        text = it,
+                        style = BpkTheme.typography.footnote,
+                        color = BpkTheme.colors.textPrimary,
+                        modifier = Modifier,
+                    )
+                }
+            }
+
+            // Render the accessory composable if provided
+            accessory?.invoke()
+        }
+
+        if (showDivider) {
+            BpkDivider(
+                modifier = Modifier.padding(horizontal = BpkSpacing.Base),
+            )
+        }
+    }
+}
+
+@BpkPreviews
+@Composable
+private fun BpkCellItemPreview() {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        title = "Title",
+        description = "Description",
+        showDivider = true,
+        onClick = {},
+    )
+}
