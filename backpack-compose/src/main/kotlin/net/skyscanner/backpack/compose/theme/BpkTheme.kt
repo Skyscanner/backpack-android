@@ -32,15 +32,9 @@ import net.skyscanner.backpack.compose.tokens.BpkShapes
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 import net.skyscanner.backpack.configuration.BpkConfiguration
 
-private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
-    error("Wrap you content with BpkTheme {} to get access to Backpack typography")
-}
-private val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
-    error("Wrap you content with BpkTheme {} to get access to Backpack colors")
-}
-private val LocalBpkShapes = staticCompositionLocalOf<BpkShapes> {
-    error("Wrap you content with BpkTheme {} to get access to Backpack shapes")
-}
+private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography?> { null }
+private val LocalBpkColors = staticCompositionLocalOf<BpkColors?> { null }
+private val LocalBpkShapes = staticCompositionLocalOf<BpkShapes?> { null }
 
 @Composable
 fun BpkTheme(
@@ -69,33 +63,33 @@ object BpkTheme {
     val typography: BpkTypography
         @Composable
         @ReadOnlyComposable
-        get() = if (LocalInspectionMode.current) {
+        get() = LocalBpkTypography.current ?: if (LocalInspectionMode.current) {
             // when in preview mode return a default typography object to ensure previews work
             // without wrapping it in another composable
             BpkTypography(defaultFontFamily = FontFamily.SansSerif)
         } else {
-            LocalBpkTypography.current
+            error("BpkTheme not found in composition hierarchy")
         }
 
     val colors: BpkColors
         @Composable
         @ReadOnlyComposable
-        get() = if (LocalInspectionMode.current) {
+        get() = LocalBpkColors.current ?: if (LocalInspectionMode.current) {
             // when in preview mode return a default colour object to ensure previews work
             // without wrapping it in another composable
             if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
         } else {
-            LocalBpkColors.current
+            error("BpkTheme not found in composition hierarchy")
         }
 
     val shapes: BpkShapes
         @Composable
         @ReadOnlyComposable
-        get() = if (LocalInspectionMode.current) {
+        get() = LocalBpkShapes.current ?: if (LocalInspectionMode.current) {
             // when in preview mode return a default typography object to ensure previews work
             // without wrapping it in another composable
             BpkShapes()
         } else {
-            LocalBpkShapes.current
+            error("BpkTheme not found in composition hierarchy")
         }
 }
