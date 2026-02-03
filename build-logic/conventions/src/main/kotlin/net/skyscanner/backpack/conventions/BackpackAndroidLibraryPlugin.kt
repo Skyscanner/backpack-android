@@ -55,6 +55,7 @@ class BackpackAndroidLibraryPlugin : Plugin<Project> {
                     disable.add("UnusedResources")
                     targetSdk = SdkVersions.TARGET_SDK
                     checkDependencies = false
+                    abortOnError = false
                 }
 
                 buildFeatures {

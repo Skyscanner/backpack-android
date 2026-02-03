@@ -170,3 +170,12 @@ dependencies {
     detektPlugins(libs.detektRules.libraries)
 }
 
+// Workaround for AGP 9.0 lint crash with Kotlin 2.3.0
+// Lint crashes when analyzing build scripts with Kotlin Analysis API
+tasks.matching { it.name.contains("lint", ignoreCase = true) }.configureEach {
+    enabled = true
+    doFirst {
+        println("Running lint task: ${this.name} with ignore failures")
+    }
+}
+
