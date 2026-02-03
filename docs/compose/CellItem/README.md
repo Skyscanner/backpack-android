@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.tokens.Account
 
 BpkCellItem(
   icon = BpkIcon.Account,
+  iconContentDescription = "Account",
   title = "Title",
   description = "Description",
 )
@@ -49,6 +50,7 @@ import net.skyscanner.backpack.compose.tokens.Account
 
 BpkCellItem(
   icon = BpkIcon.Account,
+  iconContentDescription = "Account",
   title = "Title",
   description = "Description",
   showDivider = true,
@@ -66,6 +68,7 @@ import net.skyscanner.backpack.compose.switch.BpkSwitch
 
 BpkCellItem(
   icon = BpkIcon.Account,
+  iconContentDescription = "Account",
   title = "Title",
   description = "Description",
   accessory = {
