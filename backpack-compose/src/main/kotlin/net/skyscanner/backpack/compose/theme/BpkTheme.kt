@@ -86,7 +86,7 @@ object BpkTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalBpkShapes.current ?: if (LocalInspectionMode.current) {
-            // when in preview mode return a default typography object to ensure previews work
+            // when in preview mode return a default shapes object to ensure previews work
             // without wrapping it in another composable
             BpkShapes()
         } else {
