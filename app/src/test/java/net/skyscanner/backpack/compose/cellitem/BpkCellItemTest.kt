@@ -61,9 +61,9 @@ class BpkCellItemTest : BpkSnapshotTest() {
             showDivider = true,
             accessory = {
                 BpkSwitch(
-                    text = "On",
                     checked = true,
                     onCheckedChange = {},
+                    content = {},
                 )
             },
         )
