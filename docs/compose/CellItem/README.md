@@ -79,3 +79,101 @@ BpkCellItem(
   },
 )
 ```
+
+## Cell Accessories
+
+Backpack provides standard accessory components for common use cases:
+
+### Chevron Accessory
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
+
+BpkCellItem(
+  title = "Settings",
+  onClick = { /* Navigate */ },
+  accessory = {
+    BpkCellAccessoryChevron()
+  },
+)
+```
+
+### Switch Accessory
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
+
+BpkCellItem(
+  title = "Notifications",
+  accessory = {
+    BpkCellAccessorySwitch(
+      checked = true,
+      onCheckedChange = { /* Handle change */ },
+    )
+  },
+)
+```
+
+### Text Accessory
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
+
+BpkCellItem(
+  title = "Language",
+  onClick = { /* Select language */ },
+  accessory = {
+    BpkCellAccessoryText("English")
+  },
+)
+```
+
+### Logo Accessory
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
+
+BpkCellItem(
+  title = "Partner Name",
+  accessory = {
+    BpkCellAccessoryLogo(R.drawable.partner_logo)
+  },
+)
+```
+
+## Cell Group
+
+Group multiple cell items together in a card:
+
+```Kotlin
+import androidx.compose.foundation.layout.Column
+import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
+
+BpkCellGroup {
+  Column {
+    BpkCellItem(
+      title = "Profile",
+      description = "Manage your account",
+      showDivider = true,
+      onClick = { /* Navigate */ },
+      accessory = {
+        BpkCellAccessoryChevron()
+      },
+    )
+    BpkCellItem(
+      title = "Settings",
+      description = "App preferences",
+      onClick = { /* Navigate */ },
+      accessory = {
+        BpkCellAccessoryChevron()
+      },
+    )
+  }
+}
+```
