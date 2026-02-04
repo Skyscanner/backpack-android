@@ -27,8 +27,10 @@ import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CellItemComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -59,5 +61,12 @@ internal fun CellItemSample(modifier: Modifier = Modifier) {
         showDivider = true,
         onClick = {},
         modifier = modifier,
+        accessory = {
+            BpkIcon(
+                icon = BpkIcon.ChevronRight,
+                contentDescription = null,
+                tint = BpkTheme.colors.textPrimary,
+            )
+        },
     )
 }
