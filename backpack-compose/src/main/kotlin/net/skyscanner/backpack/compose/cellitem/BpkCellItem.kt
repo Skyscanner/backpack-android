@@ -113,11 +113,7 @@ private fun BpkCellItemPreview() {
         showDivider = true,
         onClick = {},
         accessory = {
-            BpkIcon(
-                icon = BpkIcon.ChevronRight,
-                contentDescription = null,
-                tint = BpkTheme.colors.textPrimary,
-            )
+            BpkCellAccessoryChevron()
         },
     )
 }

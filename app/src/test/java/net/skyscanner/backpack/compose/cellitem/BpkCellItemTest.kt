@@ -76,4 +76,47 @@ class BpkCellItemTest : BpkSnapshotTest() {
             onClick = {},
         )
     }
+
+    @Test
+    fun withChevronAccessory() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Title",
+            description = "Description",
+            onClick = {},
+            accessory = {
+                BpkCellAccessoryChevron()
+            },
+        )
+    }
+
+    @Test
+    fun withSwitchAccessory() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Title",
+            description = "Description",
+            accessory = {
+                BpkCellAccessorySwitch(
+                    checked = true,
+                    onCheckedChange = {},
+                )
+            },
+        )
+    }
+
+    @Test
+    fun withTextAccessory() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Title",
+            description = "Description",
+            accessory = {
+                BpkCellAccessoryText("Value")
+            },
+        )
+    }
 }
