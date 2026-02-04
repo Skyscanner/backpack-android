@@ -31,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
+import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
@@ -76,6 +77,14 @@ fun CellItemStory(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(BpkSpacing.Base),
             )
             CellItemWithText()
+        }
+
+        Column {
+            BpkText(
+                text = "Cell Group",
+                modifier = Modifier.padding(BpkSpacing.Base),
+            )
+            CellGroup()
         }
     }
 }
@@ -142,4 +151,47 @@ internal fun CellItemWithText(modifier: Modifier = Modifier) {
             BpkCellAccessoryText("English")
         },
     )
+}
+
+@Composable
+internal fun CellGroup(modifier: Modifier = Modifier) {
+    BpkCellGroup(modifier = modifier) {
+        Column {
+            BpkCellItem(
+                icon = BpkIcon.Account,
+                iconContentDescription = "Account",
+                title = "Profile Settings",
+                description = "Manage your account",
+                showDivider = true,
+                onClick = {},
+                accessory = {
+                    BpkCellAccessoryChevron()
+                },
+            )
+            var notificationsEnabled by remember { mutableStateOf(true) }
+            BpkCellItem(
+                icon = BpkIcon.Account,
+                iconContentDescription = "Notifications",
+                title = "Notifications",
+                description = "Push notifications",
+                showDivider = true,
+                accessory = {
+                    BpkCellAccessorySwitch(
+                        checked = notificationsEnabled,
+                        onCheckedChange = { notificationsEnabled = it },
+                    )
+                },
+            )
+            BpkCellItem(
+                icon = BpkIcon.Account,
+                iconContentDescription = "Language",
+                title = "Language",
+                description = "App display language",
+                onClick = {},
+                accessory = {
+                    BpkCellAccessoryText("English")
+                },
+            )
+        }
+    }
 }
