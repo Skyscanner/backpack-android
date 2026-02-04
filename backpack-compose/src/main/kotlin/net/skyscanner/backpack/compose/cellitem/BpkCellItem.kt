@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +27,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -36,6 +36,9 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.ChevronRight
+import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 @Composable
 fun BpkCellItem(
@@ -49,13 +52,9 @@ fun BpkCellItem(
     accessory: (@Composable () -> Unit)? = null,
 ) {
     Column(
-        modifier = modifier.then(
-            if (onClick != null) {
-                Modifier.clickable(onClick = onClick)
-            } else {
-                Modifier
-            },
-        ),
+        modifier = modifier.applyIf(onClick != null) {
+            clickableWithRipple(role = Role.Button) { onClick?.invoke() }
+        },
     ) {
         Row(
             modifier = Modifier
@@ -113,5 +112,12 @@ private fun BpkCellItemPreview() {
         description = "Description",
         showDivider = true,
         onClick = {},
+        accessory = {
+            BpkIcon(
+                icon = BpkIcon.ChevronRight,
+                contentDescription = null,
+                tint = BpkTheme.colors.textPrimary,
+            )
+        },
     )
 }
