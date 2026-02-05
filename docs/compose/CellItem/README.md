@@ -10,6 +10,42 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/default.png" alt="Cell Item component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/default_dm.png" alt="Cell Item component - dark mode" width="375" /> |
 
+## With Chevron Accessory
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron-accessory.png" alt="Cell Item with Chevron" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron-accessory_dm.png" alt="Cell Item with Chevron - dark mode" width="375" /> |
+
+## With Switch Accessory
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch-accessory.png" alt="Cell Item with Switch" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch-accessory_dm.png" alt="Cell Item with Switch - dark mode" width="375" /> |
+
+## With Text Accessory
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text-accessory.png" alt="Cell Item with Text" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text-accessory_dm.png" alt="Cell Item with Text - dark mode" width="375" /> |
+
+## With Logo Accessory
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
+
+## With Padded Style
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-padded-style.png" alt="Cell Item with Padded Style" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-padded-style_dm.png" alt="Cell Item with Padded Style - dark mode" width="375" /> |
+
+## Cell Group
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/cell-group.png" alt="Cell Group" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/cell-group_dm.png" alt="Cell Group - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -167,7 +203,7 @@ BpkCellGroup {
     BpkCellItem(
       title = "Profile",
       description = "Manage your account",
-      showDivider = true,
+      style = BpkCellItemStyle.Divider,
       onClick = { /* Navigate */ },
       accessory = {
         BpkCellAccessoryChevron()
