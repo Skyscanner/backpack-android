@@ -157,12 +157,12 @@ internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
         icon = BpkIcon.Account,
         iconContentDescription = "Account",
         title = "Partner Program",
-        description = "Backpack Demo",
+        description = "Skyland Airlines",
         style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
-            BpkCellAccessoryLogo(R.drawable.ic_launcher_foreground)
+            BpkCellAccessoryLogo(R.drawable.skyairlines)
         },
     )
 }
