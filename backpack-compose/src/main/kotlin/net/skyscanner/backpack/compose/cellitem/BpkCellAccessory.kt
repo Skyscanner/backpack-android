@@ -23,6 +23,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -108,6 +109,7 @@ fun BpkCellAccessoryLogo(
     Image(
         painter = painterResource(logoDrawable),
         contentDescription = null,
+        colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
         modifier = modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
     )
 }
