@@ -18,16 +18,13 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
@@ -36,9 +33,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CellItemComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -46,65 +41,50 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @CellItemComponent
 @ComposeStory
-fun CellItemStory(modifier: Modifier = Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+fun CellItemDefaultStory(modifier: Modifier = Modifier) {
+    CellItemSample(modifier)
+}
 
-        Column {
-            BpkText(
-                text = stringResource(R.string.generic_default),
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemSample()
-        }
+@Composable
+@CellItemComponent
+@ComposeStory("With Chevron Accessory")
+fun CellItemWithChevronStory(modifier: Modifier = Modifier) {
+    CellItemWithChevron(modifier)
+}
 
-        Column {
-            BpkText(
-                text = "With Chevron Accessory",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemWithChevron()
-        }
+@Composable
+@CellItemComponent
+@ComposeStory("With Switch Accessory")
+fun CellItemWithSwitchStory(modifier: Modifier = Modifier) {
+    CellItemWithSwitch(modifier)
+}
 
-        Column {
-            BpkText(
-                text = "With Switch Accessory",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemWithSwitch()
-        }
+@Composable
+@CellItemComponent
+@ComposeStory("With Text Accessory")
+fun CellItemWithTextStory(modifier: Modifier = Modifier) {
+    CellItemWithText(modifier)
+}
 
-        Column {
-            BpkText(
-                text = "With Text Accessory",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemWithText()
-        }
+@Composable
+@CellItemComponent
+@ComposeStory("With Logo Accessory")
+fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
+    CellItemWithLogo(modifier)
+}
 
-        Column {
-            BpkText(
-                text = "With Logo Accessory",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemWithLogo()
-        }
+@Composable
+@CellItemComponent
+@ComposeStory("With Padded Style")
+fun CellItemWithPaddedStyleStory(modifier: Modifier = Modifier) {
+    CellItemWithPaddedStyle(modifier)
+}
 
-        Column {
-            BpkText(
-                text = "With Padded Style",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellItemWithPaddedStyle()
-        }
-
-        Column {
-            BpkText(
-                text = "Cell Group",
-                modifier = Modifier.padding(BpkSpacing.Base),
-            )
-            CellGroup()
-        }
-    }
+@Composable
+@CellItemComponent
+@ComposeStory("Cell Group")
+fun CellItemGroupStory(modifier: Modifier = Modifier) {
+    CellGroup(modifier)
 }
 
 @Composable
