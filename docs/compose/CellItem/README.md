@@ -45,6 +45,7 @@ Example of a clickable BpkCellItem with divider:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Account
 
@@ -53,10 +54,16 @@ BpkCellItem(
   iconContentDescription = "Account",
   title = "Title",
   description = "Description",
-  showDivider = true,
+  style = BpkCellItemStyle.Divider,
   onClick = { /* Handle click */ },
 )
 ```
+
+### Cell Item Styles
+
+The `style` parameter accepts `BpkCellItemStyle`:
+- `BpkCellItemStyle.Divider` - Adds a divider at the bottom of the cell
+- `BpkCellItemStyle.Padded` - Standard padding without divider
 
 Example of a BpkCellItem with custom accessory:
 

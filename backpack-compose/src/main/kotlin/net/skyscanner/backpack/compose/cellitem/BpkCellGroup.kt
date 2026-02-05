@@ -60,7 +60,7 @@ private fun BpkCellGroupPreview() {
                 iconContentDescription = "Account",
                 title = "Profile Settings",
                 description = "Manage your account",
-                showDivider = true,
+                style = BpkCellItemStyle.Divider,
                 onClick = {},
                 accessory = {
                     BpkCellAccessoryChevron()
@@ -71,7 +71,7 @@ private fun BpkCellGroupPreview() {
                 iconContentDescription = "Settings",
                 title = "App Settings",
                 description = "Configure preferences",
-                showDivider = true,
+                style = BpkCellItemStyle.Divider,
                 onClick = {},
                 accessory = {
                     BpkCellAccessoryChevron()

@@ -34,6 +34,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
 import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.Account
@@ -105,7 +106,7 @@ internal fun CellItemSample(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Title",
         description = "Description",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
     )
@@ -118,7 +119,7 @@ internal fun CellItemWithChevron(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Profile Settings",
         description = "Manage your account",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
@@ -135,7 +136,7 @@ internal fun CellItemWithSwitch(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Notifications",
         description = "Enable push notifications",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         modifier = modifier,
         accessory = {
             BpkCellAccessorySwitch(
@@ -153,7 +154,7 @@ internal fun CellItemWithText(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Language",
         description = "App display language",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
@@ -169,7 +170,7 @@ internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Partner Program",
         description = "Skyland Airlines",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
@@ -187,7 +188,7 @@ internal fun CellGroup(modifier: Modifier = Modifier) {
                 iconContentDescription = "Account",
                 title = "Profile Settings",
                 description = "Manage your account",
-                showDivider = true,
+                style = BpkCellItemStyle.Divider,
                 onClick = {},
                 accessory = {
                     BpkCellAccessoryChevron()
@@ -199,7 +200,7 @@ internal fun CellGroup(modifier: Modifier = Modifier) {
                 iconContentDescription = "Notifications",
                 title = "Notifications",
                 description = "Push notifications",
-                showDivider = true,
+                style = BpkCellItemStyle.Divider,
                 accessory = {
                     BpkCellAccessorySwitch(
                         checked = notificationsEnabled,

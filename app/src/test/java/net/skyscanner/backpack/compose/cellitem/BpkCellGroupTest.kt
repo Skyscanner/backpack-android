@@ -35,7 +35,7 @@ class BpkCellGroupTest : BpkSnapshotTest() {
                     icon = BpkIcon.Account,
                     iconContentDescription = "Account",
                     title = "Profile Settings",
-                    showDivider = true,
+                    style = BpkCellItemStyle.Divider,
                     onClick = {},
                     accessory = {
                         BpkCellAccessoryChevron()
@@ -63,7 +63,7 @@ class BpkCellGroupTest : BpkSnapshotTest() {
                     iconContentDescription = "Account",
                     title = "Profile",
                     description = "View your profile",
-                    showDivider = true,
+                    style = BpkCellItemStyle.Divider,
                     onClick = {},
                     accessory = {
                         BpkCellAccessoryChevron()
@@ -74,7 +74,7 @@ class BpkCellGroupTest : BpkSnapshotTest() {
                     iconContentDescription = "Settings",
                     title = "Settings",
                     description = "App preferences",
-                    showDivider = true,
+                    style = BpkCellItemStyle.Divider,
                     onClick = {},
                     accessory = {
                         BpkCellAccessoryChevron()
@@ -100,7 +100,7 @@ class BpkCellGroupTest : BpkSnapshotTest() {
             Column {
                 BpkCellItem(
                     title = "Notifications",
-                    showDivider = true,
+                    style = BpkCellItemStyle.Divider,
                     accessory = {
                         BpkCellAccessorySwitch(
                             checked = true,
@@ -110,7 +110,7 @@ class BpkCellGroupTest : BpkSnapshotTest() {
                 )
                 BpkCellItem(
                     title = "Language",
-                    showDivider = true,
+                    style = BpkCellItemStyle.Divider,
                     onClick = {},
                     accessory = {
                         BpkCellAccessoryText("English")

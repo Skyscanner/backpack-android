@@ -39,6 +39,18 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
+enum class BpkCellItemStyle {
+    /**
+     * Cell with divider at the bottom
+     */
+    Divider,
+
+    /**
+     * Cell with padding around content
+     */
+    Padded,
+}
+
 @Composable
 fun BpkCellItem(
     title: String,
@@ -47,7 +59,7 @@ fun BpkCellItem(
     iconContentDescription: String? = null,
     onClick: (() -> Unit)? = null,
     description: String? = null,
-    showDivider: Boolean = false,
+    style: BpkCellItemStyle? = null,
     accessory: (@Composable () -> Unit)? = null,
 ) {
     Column(
@@ -93,7 +105,7 @@ fun BpkCellItem(
             accessory?.invoke()
         }
 
-        if (showDivider) {
+        if (style == BpkCellItemStyle.Divider) {
             BpkDivider(
                 modifier = Modifier.padding(horizontal = BpkSpacing.Base),
             )
@@ -109,7 +121,7 @@ private fun BpkCellItemPreview() {
         iconContentDescription = "Account",
         title = "Title",
         description = "Description",
-        showDivider = true,
+        style = BpkCellItemStyle.Divider,
         onClick = {},
         accessory = {
             BpkCellAccessoryChevron()
