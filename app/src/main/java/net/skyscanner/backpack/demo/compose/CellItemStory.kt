@@ -91,6 +91,14 @@ fun CellItemStory(modifier: Modifier = Modifier) {
 
         Column {
             BpkText(
+                text = "With Padded Style",
+                modifier = Modifier.padding(BpkSpacing.Base),
+            )
+            CellItemWithPaddedStyle()
+        }
+
+        Column {
+            BpkText(
                 text = "Cell Group",
                 modifier = Modifier.padding(BpkSpacing.Base),
             )
@@ -175,6 +183,22 @@ internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
         modifier = modifier,
         accessory = {
             BpkCellAccessoryLogo(R.drawable.skyairlines)
+        },
+    )
+}
+
+@Composable
+internal fun CellItemWithPaddedStyle(modifier: Modifier = Modifier) {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        iconContentDescription = "Account",
+        title = "Padded Cell",
+        description = "No divider, just padding",
+        style = BpkCellItemStyle.Padded,
+        onClick = {},
+        modifier = modifier,
+        accessory = {
+            BpkCellAccessoryChevron()
         },
     )
 }
