@@ -108,6 +108,6 @@ fun BpkCellAccessoryLogo(
     Image(
         painter = painterResource(logoDrawable),
         contentDescription = null,
-        modifier = modifier.size(BpkSpacing.Lg),
+        modifier = modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
     )
 }
