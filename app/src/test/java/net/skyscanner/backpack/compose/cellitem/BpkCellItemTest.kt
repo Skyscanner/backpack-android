@@ -22,6 +22,7 @@ import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.tokens.Account
+import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
 class BpkCellItemTest : BpkSnapshotTest() {
@@ -116,6 +117,19 @@ class BpkCellItemTest : BpkSnapshotTest() {
             description = "Description",
             accessory = {
                 BpkCellAccessoryText("Value")
+            },
+        )
+    }
+
+    @Test
+    fun withLogoAccessory() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Partner Program",
+            description = "Skyland Airlines",
+            accessory = {
+                BpkCellAccessoryLogo(R.drawable.skyairlines)
             },
         )
     }

@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
+import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
 import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
@@ -77,6 +78,14 @@ fun CellItemStory(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(BpkSpacing.Base),
             )
             CellItemWithText()
+        }
+
+        Column {
+            BpkText(
+                text = "With Logo Accessory",
+                modifier = Modifier.padding(BpkSpacing.Base),
+            )
+            CellItemWithLogo()
         }
 
         Column {
@@ -149,6 +158,22 @@ internal fun CellItemWithText(modifier: Modifier = Modifier) {
         modifier = modifier,
         accessory = {
             BpkCellAccessoryText("English")
+        },
+    )
+}
+
+@Composable
+internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        iconContentDescription = "Account",
+        title = "Partner Program",
+        description = "Skyland Airlines",
+        showDivider = true,
+        onClick = {},
+        modifier = modifier,
+        accessory = {
+            BpkCellAccessoryLogo(R.drawable.skyairlines)
         },
     )
 }
