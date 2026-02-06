@@ -66,7 +66,7 @@ fun BpkCellItem(
 ) {
     val backgroundColor = when (style) {
         BpkCellItemStyle.SurfaceDefault -> BpkTheme.colors.surfaceDefault
-        BpkCellItemStyle.SurfaceLowContrast -> BpkTheme.colors.surfaceContrast
+        BpkCellItemStyle.SurfaceLowContrast -> BpkTheme.colors.surfaceLowContrast
     }
 
     val shape = when (corner) {
