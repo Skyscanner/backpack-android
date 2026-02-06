@@ -10,47 +10,47 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/default.png" alt="Cell Item component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/default_dm.png" alt="Cell Item component - dark mode" width="375" /> |
 
-## With Chevron Accessory
+## With Chevron
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron-accessory.png" alt="Cell Item with Chevron" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron-accessory_dm.png" alt="Cell Item with Chevron - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron.png" alt="Cell Item with Chevron" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-chevron_dm.png" alt="Cell Item with Chevron - dark mode" width="375" /> |
 
-## With Switch Accessory
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch-accessory.png" alt="Cell Item with Switch" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch-accessory_dm.png" alt="Cell Item with Switch - dark mode" width="375" /> |
-
-## With Text Accessory
+## With Switch
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text-accessory.png" alt="Cell Item with Text" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text-accessory_dm.png" alt="Cell Item with Text - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch.png" alt="Cell Item with Switch" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-switch_dm.png" alt="Cell Item with Switch - dark mode" width="375" /> |
 
-## With Logo Accessory
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
-
-## With Surface Low Contrast Style
+## With Text
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-style.png" alt="Cell Item with Surface Low Contrast" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-style_dm.png" alt="Cell Item with Surface Low Contrast - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text.png" alt="Cell Item with Text" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text_dm.png" alt="Cell Item with Text - dark mode" width="375" /> |
 
-## With Rounded Corner
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-rounded-corner.png" alt="Cell Item with Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-rounded-corner_dm.png" alt="Cell Item with Rounded Corner - dark mode" width="375" /> |
-
-## With Surface Low Contrast And Rounded Corner
+## With Logo
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-and-rounded-corner.png" alt="Cell Item with Surface Low Contrast and Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-and-rounded-corner_dm.png" alt="Cell Item with Surface Low Contrast and Rounded Corner - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
+
+## Surface Low Contrast
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast.png" alt="Cell Item with Surface Low Contrast" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast_dm.png" alt="Cell Item with Surface Low Contrast - dark mode" width="375" /> |
+
+## Rounded Corner
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/rounded-corner.png" alt="Cell Item with Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/rounded-corner_dm.png" alt="Cell Item with Rounded Corner - dark mode" width="375" /> |
+
+## Surface Low Contrast + Rounded
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-and-rounded.png" alt="Cell Item with Surface Low Contrast and Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-and-rounded_dm.png" alt="Cell Item with Surface Low Contrast and Rounded Corner - dark mode" width="375" /> |
 
 
 ## Installation
@@ -69,6 +69,49 @@ BpkCellItem(
 )
 ```
 
+Example of a BpkCellItem with icon and body:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.tokens.Account
+
+BpkCellItem(
+  icon = {
+    BpkIcon(
+      icon = BpkIcon.Account,
+      contentDescription = "Account",
+      size = BpkIconSize.Large,
+    )
+  },
+  title = "Title",
+  body = "Description",
+)
+```
+
+Example of a clickable BpkCellItem:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.tokens.Account
+
+BpkCellItem(
+  icon = {
+    BpkIcon(
+      icon = BpkIcon.Account,
+      contentDescription = "Account",
+      size = BpkIconSize.Large,
+    )
+  },
+  title = "Title",
+  body = "Description",
+  onClick = { /* Handle click */ },
+)
+```
+
 Example of a BpkCellItem with Surface Low Contrast style:
 
 ```Kotlin
@@ -77,7 +120,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 
 BpkCellItem(
   title = "Title",
-  description = "Description",
+  body = "Description",
   style = BpkCellItemStyle.SurfaceLowContrast,
 )
 ```
@@ -90,56 +133,31 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
 
 BpkCellItem(
   title = "Title",
-  description = "Description",
+  body = "Description",
   corner = BpkCellItemCorner.Rounded,
 )
 ```
 
-Example of a BpkCellItem with icon and description:
+Example of a BpkCellItem with custom slot:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.Account
-
-BpkCellItem(
-  icon = BpkIcon.Account,
-  iconContentDescription = "Account",
-  title = "Title",
-  description = "Description",
-)
-```
-
-Example of a clickable BpkCellItem:
-
-```Kotlin
-import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.Account
-
-BpkCellItem(
-  icon = BpkIcon.Account,
-  iconContentDescription = "Account",
-  title = "Title",
-  description = "Description",
-  onClick = { /* Handle click */ },
-)
-```
-
-Example of a BpkCellItem with custom accessory:
-
-```Kotlin
-import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 
 BpkCellItem(
-  icon = BpkIcon.Account,
-  iconContentDescription = "Account",
+  icon = {
+    BpkIcon(
+      icon = BpkIcon.Account,
+      contentDescription = "Account",
+      size = BpkIconSize.Large,
+    )
+  },
   title = "Title",
-  description = "Description",
-  accessory = {
+  body = "Description",
+  slot = {
     BpkSwitch(
       checked = true,
       onCheckedChange = { /* Handle change */ },
@@ -148,11 +166,11 @@ BpkCellItem(
 )
 ```
 
-## Cell Accessories
+## Standard Slot Components
 
-Backpack provides standard accessory components for common use cases:
+Backpack provides standard slot components for common use cases:
 
-### Chevron Accessory
+### Chevron
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
@@ -161,13 +179,13 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
 BpkCellItem(
   title = "Settings",
   onClick = { /* Navigate */ },
-  accessory = {
+  slot = {
     BpkCellAccessoryChevron()
   },
 )
 ```
 
-### Switch Accessory
+### Switch
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
@@ -175,7 +193,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 
 BpkCellItem(
   title = "Notifications",
-  accessory = {
+  slot = {
     BpkCellAccessorySwitch(
       checked = true,
       onCheckedChange = { /* Handle change */ },
@@ -184,7 +202,7 @@ BpkCellItem(
 )
 ```
 
-### Text Accessory
+### Text
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
@@ -193,13 +211,13 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
 BpkCellItem(
   title = "Language",
   onClick = { /* Select language */ },
-  accessory = {
+  slot = {
     BpkCellAccessoryText("English")
   },
 )
 ```
 
-### Logo Accessory
+### Logo
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
@@ -207,9 +225,8 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
 
 BpkCellItem(
   title = "Partner Name",
-  accessory = {
+  slot = {
     BpkCellAccessoryLogo(R.drawable.partner_logo)
   },
 )
 ```
-
