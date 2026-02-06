@@ -18,16 +18,20 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -38,19 +42,43 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
+enum class BpkCellItemStyle {
+    SurfaceDefault,
+    SurfaceLowContrast,
+}
+
+enum class BpkCellItemCorner {
+    Default,
+    Rounded,
+}
+
 @Composable
 fun BpkCellItem(
     title: String,
     modifier: Modifier = Modifier,
+    style: BpkCellItemStyle = BpkCellItemStyle.SurfaceDefault,
+    corner: BpkCellItemCorner = BpkCellItemCorner.Default,
     icon: BpkIcon? = null,
     iconContentDescription: String? = null,
     onClick: (() -> Unit)? = null,
     description: String? = null,
     accessory: (@Composable () -> Unit)? = null,
 ) {
+    val backgroundColor = when (style) {
+        BpkCellItemStyle.SurfaceDefault -> BpkTheme.colors.surfaceDefault
+        BpkCellItemStyle.SurfaceLowContrast -> BpkTheme.colors.surfaceContrast
+    }
+
+    val shape = when (corner) {
+        BpkCellItemCorner.Default -> RoundedCornerShape(0.dp)
+        BpkCellItemCorner.Rounded -> RoundedCornerShape(BpkSpacing.Md)
+    }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clip(shape)
+            .background(backgroundColor)
             .applyIf(onClick != null) {
                 clickableWithRipple(role = Role.Button) { onClick?.invoke() }
             }

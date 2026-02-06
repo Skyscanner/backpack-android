@@ -34,6 +34,24 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
 
+## With Surface Low Contrast Style
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-style.png" alt="Cell Item with Surface Low Contrast" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-style_dm.png" alt="Cell Item with Surface Low Contrast - dark mode" width="375" /> |
+
+## With Rounded Corner
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-rounded-corner.png" alt="Cell Item with Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-rounded-corner_dm.png" alt="Cell Item with Rounded Corner - dark mode" width="375" /> |
+
+## With Surface Low Contrast And Rounded Corner
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-and-rounded-corner.png" alt="Cell Item with Surface Low Contrast and Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-surface-low-contrast-and-rounded-corner_dm.png" alt="Cell Item with Surface Low Contrast and Rounded Corner - dark mode" width="375" /> |
+
 
 ## Installation
 
@@ -48,6 +66,32 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 
 BpkCellItem(
   title = "Title",
+)
+```
+
+Example of a BpkCellItem with Surface Low Contrast style:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
+
+BpkCellItem(
+  title = "Title",
+  description = "Description",
+  style = BpkCellItemStyle.SurfaceLowContrast,
+)
+```
+
+Example of a BpkCellItem with Rounded corners:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
+
+BpkCellItem(
+  title = "Title",
+  description = "Description",
+  corner = BpkCellItemCorner.Rounded,
 )
 ```
 

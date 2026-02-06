@@ -132,4 +132,40 @@ class BpkCellItemTest : BpkSnapshotTest() {
             },
         )
     }
+
+    @Test
+    fun withSurfaceLowContrastStyle() = snap {
+        BpkCellItem(
+            title = "Title",
+            description = "Description",
+            style = BpkCellItemStyle.SurfaceLowContrast,
+        )
+    }
+
+    @Test
+    fun withRoundedCorner() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Title",
+            description = "Description",
+            corner = BpkCellItemCorner.Rounded,
+        )
+    }
+
+    @Test
+    fun withSurfaceLowContrastAndRoundedCorner() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            iconContentDescription = "Account",
+            title = "Title",
+            description = "Description",
+            onClick = {},
+            style = BpkCellItemStyle.SurfaceLowContrast,
+            corner = BpkCellItemCorner.Rounded,
+            accessory = {
+                BpkCellAccessoryChevron()
+            },
+        )
+    }
 }

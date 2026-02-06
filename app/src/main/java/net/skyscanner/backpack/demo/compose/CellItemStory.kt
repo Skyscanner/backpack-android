@@ -29,6 +29,8 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.demo.R
@@ -141,6 +143,74 @@ internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
         modifier = modifier,
         accessory = {
             BpkCellAccessoryLogo(R.drawable.skyairlines)
+        },
+    )
+}
+
+@Composable
+@CellItemComponent
+@ComposeStory("With Surface Low Contrast Style")
+fun CellItemWithSurfaceLowContrastStory(modifier: Modifier = Modifier) {
+    CellItemWithSurfaceLowContrast(modifier)
+}
+
+@Composable
+@CellItemComponent
+@ComposeStory("With Rounded Corner")
+fun CellItemWithRoundedCornerStory(modifier: Modifier = Modifier) {
+    CellItemWithRoundedCorner(modifier)
+}
+
+@Composable
+@CellItemComponent
+@ComposeStory("With Surface Low Contrast And Rounded Corner")
+fun CellItemWithSurfaceLowContrastAndRoundedCornerStory(modifier: Modifier = Modifier) {
+    CellItemWithSurfaceLowContrastAndRoundedCorner(modifier)
+}
+
+@Composable
+internal fun CellItemWithSurfaceLowContrast(modifier: Modifier = Modifier) {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        iconContentDescription = "Account",
+        title = "Title",
+        description = "Description",
+        style = BpkCellItemStyle.SurfaceLowContrast,
+        modifier = modifier,
+    )
+}
+
+@Composable
+internal fun CellItemWithRoundedCorner(modifier: Modifier = Modifier) {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        iconContentDescription = "Account",
+        title = "Profile Settings",
+        description = "Manage your account",
+        onClick = {},
+        corner = BpkCellItemCorner.Rounded,
+        modifier = modifier,
+        accessory = {
+            BpkCellAccessoryChevron()
+        },
+    )
+}
+
+@Composable
+internal fun CellItemWithSurfaceLowContrastAndRoundedCorner(modifier: Modifier = Modifier) {
+    BpkCellItem(
+        icon = BpkIcon.Account,
+        iconContentDescription = "Account",
+        title = "Notifications",
+        description = "Enable push notifications",
+        style = BpkCellItemStyle.SurfaceLowContrast,
+        corner = BpkCellItemCorner.Rounded,
+        modifier = modifier,
+        accessory = {
+            BpkCellAccessorySwitch(
+                checked = true,
+                onCheckedChange = {},
+            )
         },
     )
 }
