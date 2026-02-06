@@ -53,13 +53,12 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withAccessoryAndDivider() = snap {
+    fun withAccessory() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,
             iconContentDescription = "Account",
             title = "Title",
             description = "Description",
-            style = BpkCellItemStyle.Divider,
             accessory = {
                 BpkSwitch(
                     checked = true,
@@ -67,17 +66,6 @@ class BpkCellItemTest : BpkSnapshotTest() {
                     content = {},
                 )
             },
-        )
-    }
-
-    @Test
-    fun withPaddedStyle() = snap {
-        BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
-            title = "Title",
-            description = "Description",
-            style = BpkCellItemStyle.Padded,
         )
     }
 

@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,9 +28,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
 import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
-import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.demo.R
@@ -74,27 +71,12 @@ fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-@CellItemComponent
-@ComposeStory("With Padded Style")
-fun CellItemWithPaddedStyleStory(modifier: Modifier = Modifier) {
-    CellItemWithPaddedStyle(modifier)
-}
-
-@Composable
-@CellItemComponent
-@ComposeStory("Cell Group")
-fun CellItemGroupStory(modifier: Modifier = Modifier) {
-    CellGroup(modifier)
-}
-
-@Composable
 internal fun CellItemSample(modifier: Modifier = Modifier) {
     BpkCellItem(
         icon = BpkIcon.Account,
         iconContentDescription = "Account",
         title = "Title",
         description = "Description",
-        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
     )
@@ -107,7 +89,6 @@ internal fun CellItemWithChevron(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Profile Settings",
         description = "Manage your account",
-        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
@@ -124,7 +105,6 @@ internal fun CellItemWithSwitch(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Notifications",
         description = "Enable push notifications",
-        style = BpkCellItemStyle.Divider,
         modifier = modifier,
         accessory = {
             BpkCellAccessorySwitch(
@@ -142,7 +122,6 @@ internal fun CellItemWithText(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Language",
         description = "App display language",
-        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
@@ -158,70 +137,10 @@ internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
         iconContentDescription = "Account",
         title = "Partner Program",
         description = "Skyland Airlines",
-        style = BpkCellItemStyle.Divider,
         onClick = {},
         modifier = modifier,
         accessory = {
             BpkCellAccessoryLogo(R.drawable.skyairlines)
         },
     )
-}
-
-@Composable
-internal fun CellItemWithPaddedStyle(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Padded Cell",
-        description = "No divider, just padding",
-        style = BpkCellItemStyle.Padded,
-        onClick = {},
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessoryChevron()
-        },
-    )
-}
-
-@Composable
-internal fun CellGroup(modifier: Modifier = Modifier) {
-    BpkCellGroup(modifier = modifier) {
-        Column {
-            BpkCellItem(
-                icon = BpkIcon.Account,
-                iconContentDescription = "Account",
-                title = "Profile Settings",
-                description = "Manage your account",
-                style = BpkCellItemStyle.Divider,
-                onClick = {},
-                accessory = {
-                    BpkCellAccessoryChevron()
-                },
-            )
-            var notificationsEnabled by remember { mutableStateOf(true) }
-            BpkCellItem(
-                icon = BpkIcon.Account,
-                iconContentDescription = "Notifications",
-                title = "Notifications",
-                description = "Push notifications",
-                style = BpkCellItemStyle.Divider,
-                accessory = {
-                    BpkCellAccessorySwitch(
-                        checked = notificationsEnabled,
-                        onCheckedChange = { notificationsEnabled = it },
-                    )
-                },
-            )
-            BpkCellItem(
-                icon = BpkIcon.Account,
-                iconContentDescription = "Language",
-                title = "Language",
-                description = "App display language",
-                onClick = {},
-                accessory = {
-                    BpkCellAccessoryText("English")
-                },
-            )
-        }
-    }
 }

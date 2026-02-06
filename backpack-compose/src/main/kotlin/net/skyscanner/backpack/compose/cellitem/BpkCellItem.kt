@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
-import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -39,18 +38,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
-enum class BpkCellItemStyle {
-    /**
-     * Cell with divider at the bottom
-     */
-    Divider,
-
-    /**
-     * Cell with padding around content
-     */
-    Padded,
-}
-
 @Composable
 fun BpkCellItem(
     title: String,
@@ -59,57 +46,47 @@ fun BpkCellItem(
     iconContentDescription: String? = null,
     onClick: (() -> Unit)? = null,
     description: String? = null,
-    style: BpkCellItemStyle? = null,
     accessory: (@Composable () -> Unit)? = null,
 ) {
-    Column(
-        modifier = modifier.applyIf(onClick != null) {
-            clickableWithRipple(role = Role.Button) { onClick?.invoke() }
-        },
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .applyIf(onClick != null) {
+                clickableWithRipple(role = Role.Button) { onClick?.invoke() }
+            }
+            .padding(BpkSpacing.Base),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(BpkSpacing.Base),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            icon?.let {
-                BpkIcon(
-                    icon = icon,
-                    contentDescription = iconContentDescription,
-                    size = BpkIconSize.Large,
-                )
-
-                Spacer(modifier = Modifier.width(BpkSpacing.Base))
-            }
-
-            Column(
-                modifier = Modifier.weight(1f),
-            ) {
-                BpkText(
-                    text = title,
-                    style = BpkTheme.typography.heading5,
-                    color = BpkTheme.colors.textPrimary,
-                )
-
-                description?.let {
-                    BpkText(
-                        text = it,
-                        style = BpkTheme.typography.footnote,
-                        color = BpkTheme.colors.textSecondary,
-                    )
-                }
-            }
-
-            // Render the accessory composable if provided
-            accessory?.invoke()
-        }
-
-        if (style == BpkCellItemStyle.Divider) {
-            BpkDivider(
-                modifier = Modifier.padding(horizontal = BpkSpacing.Base),
+        icon?.let {
+            BpkIcon(
+                icon = icon,
+                contentDescription = iconContentDescription,
+                size = BpkIconSize.Large,
             )
+
+            Spacer(modifier = Modifier.width(BpkSpacing.Base))
         }
+
+        Column(
+            modifier = Modifier.weight(1f),
+        ) {
+            BpkText(
+                text = title,
+                style = BpkTheme.typography.heading5,
+                color = BpkTheme.colors.textPrimary,
+            )
+
+            description?.let {
+                BpkText(
+                    text = it,
+                    style = BpkTheme.typography.footnote,
+                    color = BpkTheme.colors.textSecondary,
+                )
+            }
+        }
+
+        // Render the accessory composable if provided
+        accessory?.invoke()
     }
 }
 
@@ -121,7 +98,6 @@ private fun BpkCellItemPreview() {
         iconContentDescription = "Account",
         title = "Title",
         description = "Description",
-        style = BpkCellItemStyle.Divider,
         onClick = {},
         accessory = {
             BpkCellAccessoryChevron()

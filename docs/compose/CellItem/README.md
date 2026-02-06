@@ -34,17 +34,6 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo-accessory_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
 
-## With Padded Style
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-padded-style.png" alt="Cell Item with Padded Style" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-padded-style_dm.png" alt="Cell Item with Padded Style - dark mode" width="375" /> |
-
-## Cell Group
-
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/cell-group.png" alt="Cell Group" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/cell-group_dm.png" alt="Cell Group - dark mode" width="375" /> |
 
 ## Installation
 
@@ -77,11 +66,10 @@ BpkCellItem(
 )
 ```
 
-Example of a clickable BpkCellItem with divider:
+Example of a clickable BpkCellItem:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Account
 
@@ -90,16 +78,9 @@ BpkCellItem(
   iconContentDescription = "Account",
   title = "Title",
   description = "Description",
-  style = BpkCellItemStyle.Divider,
   onClick = { /* Handle click */ },
 )
 ```
-
-### Cell Item Styles
-
-The `style` parameter accepts `BpkCellItemStyle`:
-- `BpkCellItemStyle.Divider` - Adds a divider at the bottom of the cell
-- `BpkCellItemStyle.Padded` - Standard padding without divider
 
 Example of a BpkCellItem with custom accessory:
 
@@ -188,35 +169,3 @@ BpkCellItem(
 )
 ```
 
-## Cell Group
-
-Group multiple cell items together in a card:
-
-```Kotlin
-import androidx.compose.foundation.layout.Column
-import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
-import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
-
-BpkCellGroup {
-  Column {
-    BpkCellItem(
-      title = "Profile",
-      description = "Manage your account",
-      style = BpkCellItemStyle.Divider,
-      onClick = { /* Navigate */ },
-      accessory = {
-        BpkCellAccessoryChevron()
-      },
-    )
-    BpkCellItem(
-      title = "Settings",
-      description = "App preferences",
-      onClick = { /* Navigate */ },
-      accessory = {
-        BpkCellAccessoryChevron()
-      },
-    )
-  }
-}
-```
