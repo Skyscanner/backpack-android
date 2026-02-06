@@ -58,11 +58,10 @@ fun BpkCellItem(
     modifier: Modifier = Modifier,
     style: BpkCellItemStyle = BpkCellItemStyle.SurfaceDefault,
     corner: BpkCellItemCorner = BpkCellItemCorner.Default,
-    icon: BpkIcon? = null,
-    iconContentDescription: String? = null,
+    icon: (@Composable () -> Unit)? = null,
     onClick: (() -> Unit)? = null,
-    description: String? = null,
-    accessory: (@Composable () -> Unit)? = null,
+    body: String? = null,
+    slot: (@Composable () -> Unit)? = null,
 ) {
     val backgroundColor = when (style) {
         BpkCellItemStyle.SurfaceDefault -> BpkTheme.colors.surfaceDefault
@@ -86,12 +85,7 @@ fun BpkCellItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         icon?.let {
-            BpkIcon(
-                icon = icon,
-                contentDescription = iconContentDescription,
-                size = BpkIconSize.Large,
-            )
-
+            it()
             Spacer(modifier = Modifier.width(BpkSpacing.Base))
         }
 
@@ -104,7 +98,7 @@ fun BpkCellItem(
                 color = BpkTheme.colors.textPrimary,
             )
 
-            description?.let {
+            body?.let {
                 BpkText(
                     text = it,
                     style = BpkTheme.typography.footnote,
@@ -113,8 +107,8 @@ fun BpkCellItem(
             }
         }
 
-        // Render the accessory composable if provided
-        accessory?.invoke()
+        // Render the slot composable if provided
+        slot?.invoke()
     }
 }
 
@@ -122,12 +116,17 @@ fun BpkCellItem(
 @Composable
 private fun BpkCellItemPreview() {
     BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
+        icon = {
+            BpkIcon(
+                icon = BpkIcon.Account,
+                contentDescription = "Account",
+                size = BpkIconSize.Large,
+            )
+        },
         title = "Title",
-        description = "Description",
+        body = "Description",
         onClick = {},
-        accessory = {
+        slot = {
             BpkCellAccessoryChevron()
         },
     )

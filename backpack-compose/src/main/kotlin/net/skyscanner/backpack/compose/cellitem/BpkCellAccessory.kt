@@ -89,7 +89,7 @@ fun BpkCellAccessoryText(
     BpkText(
         text = text,
         style = BpkTheme.typography.bodyDefault,
-        color = BpkTheme.colors.textSecondary,
+        color = BpkTheme.colors.textPrimary,
         modifier = modifier,
     )
 }

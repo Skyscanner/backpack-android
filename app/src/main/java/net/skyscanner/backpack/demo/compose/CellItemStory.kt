@@ -18,6 +18,11 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +37,10 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CellItemComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -41,176 +49,233 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CellItemComponent
 @ComposeStory
 fun CellItemDefaultStory(modifier: Modifier = Modifier) {
-    CellItemSample(modifier)
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Title",
+            body = "Description",
+            onClick = {},
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Chevron Accessory")
+@ComposeStory("With Chevron")
 fun CellItemWithChevronStory(modifier: Modifier = Modifier) {
-    CellItemWithChevron(modifier)
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Profile Settings",
+            body = "Manage your account",
+            onClick = {},
+            slot = {
+                BpkCellAccessoryChevron()
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Switch Accessory")
+@ComposeStory("With Switch")
 fun CellItemWithSwitchStory(modifier: Modifier = Modifier) {
-    CellItemWithSwitch(modifier)
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        var checked by remember { mutableStateOf(true) }
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Notifications",
+            body = "Enable push notifications",
+            slot = {
+                BpkCellAccessorySwitch(
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Text Accessory")
+@ComposeStory("With Text")
 fun CellItemWithTextStory(modifier: Modifier = Modifier) {
-    CellItemWithText(modifier)
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Language",
+            body = "App display language",
+            onClick = {},
+            slot = {
+                BpkCellAccessoryText("English")
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Logo Accessory")
+@ComposeStory("With Logo")
 fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
-    CellItemWithLogo(modifier)
-}
-
-@Composable
-internal fun CellItemSample(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Title",
-        description = "Description",
-        onClick = {},
-        modifier = modifier,
-    )
-}
-
-@Composable
-internal fun CellItemWithChevron(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Profile Settings",
-        description = "Manage your account",
-        onClick = {},
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessoryChevron()
-        },
-    )
-}
-
-@Composable
-internal fun CellItemWithSwitch(modifier: Modifier = Modifier) {
-    var checked by remember { mutableStateOf(true) }
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Notifications",
-        description = "Enable push notifications",
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessorySwitch(
-                checked = checked,
-                onCheckedChange = { checked = it },
-            )
-        },
-    )
-}
-
-@Composable
-internal fun CellItemWithText(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Language",
-        description = "App display language",
-        onClick = {},
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessoryText("English")
-        },
-    )
-}
-
-@Composable
-internal fun CellItemWithLogo(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Partner Program",
-        description = "Skyland Airlines",
-        onClick = {},
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessoryLogo(R.drawable.skyairlines)
-        },
-    )
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Partner Program",
+            body = "Skyland Airlines",
+            onClick = {},
+            slot = {
+                BpkCellAccessoryLogo(R.drawable.skyairlines)
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Surface Low Contrast Style")
-fun CellItemWithSurfaceLowContrastStory(modifier: Modifier = Modifier) {
-    CellItemWithSurfaceLowContrast(modifier)
+@ComposeStory("Surface Low Contrast")
+fun CellItemSurfaceLowContrastStory(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Title",
+            body = "Description",
+            style = BpkCellItemStyle.SurfaceLowContrast,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Rounded Corner")
-fun CellItemWithRoundedCornerStory(modifier: Modifier = Modifier) {
-    CellItemWithRoundedCorner(modifier)
+@ComposeStory("Rounded Corner")
+fun CellItemRoundedCornerStory(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Profile Settings",
+            body = "Manage your account",
+            onClick = {},
+            corner = BpkCellItemCorner.Rounded,
+            slot = {
+                BpkCellAccessoryChevron()
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Surface Low Contrast And Rounded Corner")
-fun CellItemWithSurfaceLowContrastAndRoundedCornerStory(modifier: Modifier = Modifier) {
-    CellItemWithSurfaceLowContrastAndRoundedCorner(modifier)
-}
-
-@Composable
-internal fun CellItemWithSurfaceLowContrast(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Title",
-        description = "Description",
-        style = BpkCellItemStyle.SurfaceLowContrast,
-        modifier = modifier,
-    )
-}
-
-@Composable
-internal fun CellItemWithRoundedCorner(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Profile Settings",
-        description = "Manage your account",
-        onClick = {},
-        corner = BpkCellItemCorner.Rounded,
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessoryChevron()
-        },
-    )
-}
-
-@Composable
-internal fun CellItemWithSurfaceLowContrastAndRoundedCorner(modifier: Modifier = Modifier) {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        iconContentDescription = "Account",
-        title = "Notifications",
-        description = "Enable push notifications",
-        style = BpkCellItemStyle.SurfaceLowContrast,
-        corner = BpkCellItemCorner.Rounded,
-        modifier = modifier,
-        accessory = {
-            BpkCellAccessorySwitch(
-                checked = true,
-                onCheckedChange = {},
-            )
-        },
-    )
+@ComposeStory("Surface Low Contrast + Rounded")
+fun CellItemSurfaceLowContrastAndRoundedStory(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
+            title = "Notifications",
+            body = "Enable push notifications",
+            style = BpkCellItemStyle.SurfaceLowContrast,
+            corner = BpkCellItemCorner.Rounded,
+            slot = {
+                var checked by remember { mutableStateOf(true) }
+                BpkCellAccessorySwitch(
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 }

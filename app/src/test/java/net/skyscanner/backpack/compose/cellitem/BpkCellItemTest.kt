@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.cellitem
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.demo.R
@@ -35,31 +36,41 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withDescription() = snap {
+    fun withBody() = snap {
         BpkCellItem(
             title = "Title",
-            description = "Description",
+            body = "Description",
         )
     }
 
     @Test
-    fun withIconAndDescription() = snap {
+    fun withIconAndBody() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
+            body = "Description",
         )
     }
 
     @Test
-    fun withAccessory() = snap {
+    fun withSlot() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
-            accessory = {
+            body = "Description",
+            slot = {
                 BpkSwitch(
                     checked = true,
                     onCheckedChange = {},
@@ -78,27 +89,37 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withChevronAccessory() = snap {
+    fun withChevron() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
+            body = "Description",
             onClick = {},
-            accessory = {
+            slot = {
                 BpkCellAccessoryChevron()
             },
         )
     }
 
     @Test
-    fun withSwitchAccessory() = snap {
+    fun withSwitch() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
-            accessory = {
+            body = "Description",
+            slot = {
                 BpkCellAccessorySwitch(
                     checked = true,
                     onCheckedChange = {},
@@ -108,62 +129,82 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withTextAccessory() = snap {
+    fun withText() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
-            accessory = {
+            body = "Description",
+            slot = {
                 BpkCellAccessoryText("Value")
             },
         )
     }
 
     @Test
-    fun withLogoAccessory() = snap {
+    fun withLogo() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Partner Program",
-            description = "Skyland Airlines",
-            accessory = {
+            body = "Skyland Airlines",
+            slot = {
                 BpkCellAccessoryLogo(R.drawable.skyairlines)
             },
         )
     }
 
     @Test
-    fun withSurfaceLowContrastStyle() = snap {
+    fun surfaceLowContrast() = snap {
         BpkCellItem(
             title = "Title",
-            description = "Description",
+            body = "Description",
             style = BpkCellItemStyle.SurfaceLowContrast,
         )
     }
 
     @Test
-    fun withRoundedCorner() = snap {
+    fun roundedCorner() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
+            body = "Description",
             corner = BpkCellItemCorner.Rounded,
         )
     }
 
     @Test
-    fun withSurfaceLowContrastAndRoundedCorner() = snap {
+    fun surfaceLowContrastAndRoundedCorner() = snap {
         BpkCellItem(
-            icon = BpkIcon.Account,
-            iconContentDescription = "Account",
+            icon = {
+                BpkIcon(
+                    icon = BpkIcon.Account,
+                    contentDescription = "Account",
+                    size = BpkIconSize.Large,
+                )
+            },
             title = "Title",
-            description = "Description",
+            body = "Description",
             onClick = {},
             style = BpkCellItemStyle.SurfaceLowContrast,
             corner = BpkCellItemCorner.Rounded,
-            accessory = {
+            slot = {
                 BpkCellAccessoryChevron()
             },
         )
