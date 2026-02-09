@@ -102,7 +102,7 @@ fun BpkCellItem(
                 BpkText(
                     text = it,
                     style = BpkTheme.typography.footnote,
-                    color = BpkTheme.colors.textSecondary,
+                    color = BpkTheme.colors.textPrimary,
                 )
             }
         }
