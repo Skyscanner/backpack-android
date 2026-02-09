@@ -50,7 +50,7 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-and-rounded.png" alt="Cell Item with Surface Low Contrast and Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-and-rounded_dm.png" alt="Cell Item with Surface Low Contrast and Rounded Corner - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-+-rounded.png" alt="Cell Item with Surface Low Contrast and Rounded Corner" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/surface-low-contrast-+-rounded_dm.png" alt="Cell Item with Surface Low Contrast and Rounded Corner - dark mode" width="375" /> |
 
 
 ## Installation
@@ -74,17 +74,10 @@ Example of a BpkCellItem with icon and body:
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.Account
 
 BpkCellItem(
-  icon = {
-    BpkIcon(
-      icon = BpkIcon.Account,
-      contentDescription = "Account",
-      size = BpkIconSize.Large,
-    )
-  },
+  icon = BpkIcon.Account,
   title = "Title",
   body = "Description",
 )
@@ -95,17 +88,10 @@ Example of a clickable BpkCellItem:
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.Account
 
 BpkCellItem(
-  icon = {
-    BpkIcon(
-      icon = BpkIcon.Account,
-      contentDescription = "Account",
-      size = BpkIconSize.Large,
-    )
-  },
+  icon = BpkIcon.Account,
   title = "Title",
   body = "Description",
   onClick = { /* Handle click */ },
@@ -143,22 +129,16 @@ Example of a BpkCellItem with custom slot:
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 
 BpkCellItem(
-  icon = {
-    BpkIcon(
-      icon = BpkIcon.Account,
-      contentDescription = "Account",
-      size = BpkIconSize.Large,
-    )
-  },
+  icon = BpkIcon.Account,
   title = "Title",
   body = "Description",
   slot = {
     BpkSwitch(
+      text = "",
       checked = true,
       onCheckedChange = { /* Handle change */ },
     )
@@ -166,35 +146,42 @@ BpkCellItem(
 )
 ```
 
-## Standard Slot Components
+## Common Slot Patterns
 
-Backpack provides standard slot components for common use cases:
+Here are common patterns for using the slot parameter:
 
-### Chevron
+### Chevron (Navigation Indicator)
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryChevron
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.tokens.ChevronRight
 
 BpkCellItem(
   title = "Settings",
   onClick = { /* Navigate */ },
   slot = {
-    BpkCellAccessoryChevron()
+    BpkIcon(
+      icon = BpkIcon.ChevronRight,
+      contentDescription = null,
+      size = BpkIconSize.Small,
+    )
   },
 )
 ```
 
-### Switch
+### Switch (Toggle Control)
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellAccessorySwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitch
 
 BpkCellItem(
   title = "Notifications",
   slot = {
-    BpkCellAccessorySwitch(
+    BpkSwitch(
+      text = "",
       checked = true,
       onCheckedChange = { /* Handle change */ },
     )
@@ -202,31 +189,46 @@ BpkCellItem(
 )
 ```
 
-### Text
+### Text (Value Display)
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryText
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 
 BpkCellItem(
   title = "Language",
   onClick = { /* Select language */ },
   slot = {
-    BpkCellAccessoryText("English")
+    BpkText(
+      text = "English",
+      style = BpkTheme.typography.bodyDefault,
+    )
   },
 )
 ```
 
-### Logo
+### Image/Logo
 
 ```Kotlin
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.cellitem.BpkCellAccessoryLogo
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 BpkCellItem(
   title = "Partner Name",
   slot = {
-    BpkCellAccessoryLogo(R.drawable.partner_logo)
+    Image(
+      painter = painterResource(R.drawable.partner_logo),
+      contentDescription = null,
+      colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
+      modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
+    )
   },
 )
 ```

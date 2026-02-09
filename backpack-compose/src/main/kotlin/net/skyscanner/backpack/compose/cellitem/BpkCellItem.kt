@@ -58,7 +58,7 @@ fun BpkCellItem(
     modifier: Modifier = Modifier,
     style: BpkCellItemStyle = BpkCellItemStyle.SurfaceDefault,
     corner: BpkCellItemCorner = BpkCellItemCorner.Default,
-    icon: (@Composable () -> Unit)? = null,
+    icon: BpkIcon? = null,
     onClick: (() -> Unit)? = null,
     body: String? = null,
     slot: (@Composable () -> Unit)? = null,
@@ -85,7 +85,11 @@ fun BpkCellItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         icon?.let {
-            it()
+            BpkIcon(
+                icon = it,
+                contentDescription = null,
+                size = BpkIconSize.Large,
+            )
             Spacer(modifier = Modifier.width(BpkSpacing.Base))
         }
 
@@ -116,18 +120,9 @@ fun BpkCellItem(
 @Composable
 private fun BpkCellItemPreview() {
     BpkCellItem(
-        icon = {
-            BpkIcon(
-                icon = BpkIcon.Account,
-                contentDescription = "Account",
-                size = BpkIconSize.Large,
-            )
-        },
+        icon = BpkIcon.Account,
         title = "Title",
         body = "Description",
         onClick = {},
-        slot = {
-            BpkCellAccessoryChevron()
-        },
     )
 }
