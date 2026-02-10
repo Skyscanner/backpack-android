@@ -41,6 +41,7 @@ androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0"
 androidx-coreKts = "androidx.core:core-ktx:1.16.0"
+androidx-concurrentFutures = "androidx.concurrent:concurrent-futures:1.2.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
