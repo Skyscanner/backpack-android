@@ -80,7 +80,6 @@ fun BpkAppSearchModal(
     state: BpkModalState = rememberBpkModalState(),
     prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
-    onDismissAnimationCompletion: (() -> Unit)? = null,
 ) {
     BpkModal(
         navIcon = NavIcon.Close(
@@ -92,7 +91,6 @@ fun BpkAppSearchModal(
         action = null,
         title = title,
         onDismiss = onClose,
-        onDismissAnimationCompletion = { onDismissAnimationCompletion?.invoke() },
     ) {
         BpkAppSearchModalImpl(
             inputText = inputText,

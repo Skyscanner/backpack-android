@@ -31,9 +31,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
@@ -57,7 +55,6 @@ fun BpkModal(
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
-    onDismissAnimationCompletion: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val isVisible = state.isVisible
@@ -74,14 +71,6 @@ fun BpkModal(
     ) {
         val dialogWindow = getDialogWindow()
         val isSystemInDarkTheme = isSystemInDarkTheme()
-
-        LaunchedEffect(isVisible.currentState) {
-            snapshotFlow { !isVisible.currentState }.collect {
-                if (it && isVisible.isIdle) {
-                    onDismissAnimationCompletion?.invoke()
-                }
-            }
-        }
 
         SideEffect {
             dialogWindow?.apply {
