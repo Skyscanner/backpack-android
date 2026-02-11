@@ -38,8 +38,8 @@ import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.Notification
-import net.skyscanner.backpack.compose.tokens.World
+import net.skyscanner.backpack.compose.tokens.Hotels
+import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.components.CellGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -94,7 +94,7 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     BpkIcon(
-                        icon = BpkIcon.Notification,
+                        icon = BpkIcon.Hotels,
                         contentDescription = "Notifications",
                         size = BpkIconSize.Large,
                     )
@@ -112,6 +112,7 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     BpkSwitch(
                         checked = notificationsEnabled,
                         onCheckedChange = { notificationsEnabled = it },
+                        content = {},
                     )
                 }
             }
@@ -124,7 +125,7 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     BpkIcon(
-                        icon = BpkIcon.World,
+                        icon = BpkIcon.Accessibility,
                         contentDescription = "Language",
                         size = BpkIconSize.Large,
                     )
