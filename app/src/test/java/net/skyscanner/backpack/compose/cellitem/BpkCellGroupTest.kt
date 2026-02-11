@@ -18,10 +18,11 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
+import androidx.compose.foundation.layout.padding
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.tokens.Account
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Test
 
 class BpkCellGroupTest : BpkSnapshotTest() {
@@ -30,56 +31,24 @@ class BpkCellGroupTest : BpkSnapshotTest() {
     fun default() = snap {
         BpkCellGroup {
             item {
-                BpkCellItem(
-                    icon = {
-                        BpkIcon(
-                            icon = BpkIcon.Account,
-                            contentDescription = "Account",
-                            size = BpkIconSize.Large,
-                        )
-                    },
-                    title = "Profile Settings",
-                    body = "Manage your account",
-                    onClick = {},
-                    slot = {
-                        BpkCellAccessoryChevron()
-                    },
+                BpkText(
+                    text = "Profile Settings",
+                    style = BpkTheme.typography.label1,
+                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
                 )
             }
             item {
-                BpkCellItem(
-                    icon = {
-                        BpkIcon(
-                            icon = BpkIcon.Account,
-                            contentDescription = "Account",
-                            size = BpkIconSize.Large,
-                        )
-                    },
-                    title = "Notifications",
-                    body = "Enable push notifications",
-                    slot = {
-                        BpkCellAccessorySwitch(
-                            checked = true,
-                            onCheckedChange = {},
-                        )
-                    },
+                BpkText(
+                    text = "Notifications",
+                    style = BpkTheme.typography.label1,
+                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
                 )
             }
             item {
-                BpkCellItem(
-                    icon = {
-                        BpkIcon(
-                            icon = BpkIcon.Account,
-                            contentDescription = "Account",
-                            size = BpkIconSize.Large,
-                        )
-                    },
-                    title = "Language",
-                    body = "App display language",
-                    onClick = {},
-                    slot = {
-                        BpkCellAccessoryText("English")
-                    },
+                BpkText(
+                    text = "Language",
+                    style = BpkTheme.typography.label1,
+                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
                 )
             }
         }
