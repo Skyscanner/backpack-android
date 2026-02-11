@@ -124,50 +124,20 @@ BpkCellItem(
 )
 ```
 
-Example of a BpkCellItem with custom slot:
+## Slot Types
 
-```Kotlin
-import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-
-BpkCellItem(
-  icon = BpkIcon.Account,
-  title = "Title",
-  body = "Description",
-  slot = {
-    BpkSwitch(
-      text = "",
-      checked = true,
-      onCheckedChange = { /* Handle change */ },
-    )
-  },
-)
-```
-
-## Common Slot Patterns
-
-Here are common patterns for using the slot parameter:
+BpkCellItem supports different slot types via the `BpkCellItemSlot` sealed interface:
 
 ### Chevron (Navigation Indicator)
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.tokens.ChevronRight
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
 BpkCellItem(
   title = "Settings",
   onClick = { /* Navigate */ },
-  slot = {
-    BpkIcon(
-      icon = BpkIcon.ChevronRight,
-      contentDescription = null,
-      size = BpkIconSize.Small,
-    )
-  },
+  slot = BpkCellItemSlot.Chevron,
 )
 ```
 
@@ -175,17 +145,15 @@ BpkCellItem(
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
+var enabled by remember { mutableStateOf(true) }
 BpkCellItem(
   title = "Notifications",
-  slot = {
-    BpkSwitch(
-      text = "",
-      checked = true,
-      onCheckedChange = { /* Handle change */ },
-    )
-  },
+  slot = BpkCellItemSlot.Switch(
+    checked = enabled,
+    onCheckedChange = { enabled = it },
+  ),
 )
 ```
 
@@ -193,42 +161,51 @@ BpkCellItem(
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
 BpkCellItem(
   title = "Language",
-  onClick = { /* Select language */ },
-  slot = {
-    BpkText(
-      text = "English",
-      style = BpkTheme.typography.bodyDefault,
-    )
-  },
+  slot = BpkCellItemSlot.Text("English"),
 )
 ```
 
-### Image/Logo
+### Logo (Image Display)
 
 ```Kotlin
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
 BpkCellItem(
-  title = "Partner Name",
-  slot = {
-    Image(
-      painter = painterResource(R.drawable.partner_logo),
-      contentDescription = null,
-      colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
-      modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
-    )
-  },
+  title = "Partner",
+  slot = BpkCellItemSlot.Logo(R.drawable.partner_logo),
+)
+```
+
+## Complete Example
+
+```Kotlin
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Account
+
+var notificationsEnabled by remember { mutableStateOf(true) }
+
+BpkCellItem(
+  icon = BpkIcon.Account,
+  title = "Notifications",
+  body = "Enable push notifications",
+  style = BpkCellItemStyle.SurfaceLowContrast,
+  corner = BpkCellItemCorner.Rounded,
+  slot = BpkCellItemSlot.Switch(
+    checked = notificationsEnabled,
+    onCheckedChange = { notificationsEnabled = it },
+  ),
 )
 ```
