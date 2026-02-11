@@ -142,7 +142,7 @@ fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
             title = "Partner Program",
             body = "Skyland Airlines",
             onClick = {},
-            slot = BpkCellItemSlot.Logo(R.drawable.skyairlines),
+            slot = BpkCellItemSlot.Image(R.drawable.skyairlines),
             modifier = Modifier.fillMaxWidth(),
         )
     }

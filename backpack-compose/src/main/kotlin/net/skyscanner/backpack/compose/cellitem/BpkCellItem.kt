@@ -90,12 +90,12 @@ sealed interface BpkCellItemSlot {
     ) : BpkCellItemSlot
 
     /**
-     * Displays an image/logo, typically used for branding or identification.
+     * Displays an image, typically used for branding or identification.
      *
-     * @param logoDrawable The drawable resource ID for the logo.
+     * @param imageDrawable The drawable resource ID for the image.
      */
-    data class Logo(
-        @DrawableRes val logoDrawable: Int,
+    data class Image(
+        @DrawableRes val imageDrawable: Int,
     ) : BpkCellItemSlot
 }
 
@@ -183,9 +183,9 @@ fun BpkCellItem(
                         color = BpkTheme.colors.textPrimary,
                     )
                 }
-                is BpkCellItemSlot.Logo -> {
+                is BpkCellItemSlot.Image -> {
                     Image(
-                        painter = painterResource(slotType.logoDrawable),
+                        painter = painterResource(slotType.imageDrawable),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
                         modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),

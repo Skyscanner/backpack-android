@@ -169,7 +169,7 @@ BpkCellItem(
 )
 ```
 
-### Logo (Image Display)
+### Image (Image Display)
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
@@ -177,7 +177,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
 BpkCellItem(
   title = "Partner",
-  slot = BpkCellItemSlot.Logo(R.drawable.partner_logo),
+  slot = BpkCellItemSlot.Image(R.drawable.partner_logo),
 )
 ```
 
