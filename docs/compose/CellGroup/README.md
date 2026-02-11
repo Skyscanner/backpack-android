@@ -104,7 +104,7 @@ BpkCellGroup {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             BpkIcon(
-                icon = BpkIcon.Notification,
+                icon = BpkIcon.Hotels,
                 contentDescription = "Notifications",
                 size = BpkIconSize.Large,
             )
@@ -122,6 +122,7 @@ BpkCellGroup {
             BpkSwitch(
                 checked = notificationsEnabled,
                 onCheckedChange = { notificationsEnabled = it },
+                content = {},
             )
         }
     }
@@ -134,7 +135,7 @@ BpkCellGroup {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             BpkIcon(
-                icon = BpkIcon.World,
+                icon = BpkIcon.Accessibility,
                 contentDescription = "Language",
                 size = BpkIconSize.Large,
             )
