@@ -29,21 +29,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CellItemComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -83,13 +76,7 @@ fun CellItemWithChevronStory(modifier: Modifier = Modifier) {
             title = "Profile Settings",
             body = "Manage your account",
             onClick = {},
-            slot = {
-                BpkIcon(
-                    icon = BpkIcon.ChevronRight,
-                    contentDescription = null,
-                    size = BpkIconSize.Small,
-                )
-            },
+            slot = BpkCellItemSlot.Chevron,
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -110,13 +97,10 @@ fun CellItemWithSwitchStory(modifier: Modifier = Modifier) {
             icon = BpkIcon.Account,
             title = "Notifications",
             body = "Enable push notifications",
-            slot = {
-                BpkSwitch(
-                    text = "",
-                    checked = checked,
-                    onCheckedChange = { checked = it },
-                )
-            },
+            slot = BpkCellItemSlot.Switch(
+                checked = checked,
+                onCheckedChange = { checked = it },
+            ),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -137,12 +121,7 @@ fun CellItemWithTextStory(modifier: Modifier = Modifier) {
             title = "Language",
             body = "App display language",
             onClick = {},
-            slot = {
-                BpkText(
-                    text = "English",
-                    style = BpkTheme.typography.bodyDefault,
-                )
-            },
+            slot = BpkCellItemSlot.Text("English"),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -163,14 +142,7 @@ fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
             title = "Partner Program",
             body = "Skyland Airlines",
             onClick = {},
-            slot = {
-                Image(
-                    painter = painterResource(R.drawable.skyairlines),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
-                    modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
-                )
-            },
+            slot = BpkCellItemSlot.Logo(R.drawable.skyairlines),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -212,13 +184,7 @@ fun CellItemRoundedCornerStory(modifier: Modifier = Modifier) {
             body = "Manage your account",
             onClick = {},
             corner = BpkCellItemCorner.Rounded,
-            slot = {
-                BpkIcon(
-                    icon = BpkIcon.ChevronRight,
-                    contentDescription = null,
-                    size = BpkIconSize.Small,
-                )
-            },
+            slot = BpkCellItemSlot.Chevron,
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -241,13 +207,10 @@ fun CellItemSurfaceLowContrastAndRoundedStory(modifier: Modifier = Modifier) {
             body = "Enable push notifications",
             style = BpkCellItemStyle.SurfaceLowContrast,
             corner = BpkCellItemCorner.Rounded,
-            slot = {
-                BpkSwitch(
-                    text = "",
-                    checked = checked,
-                    onCheckedChange = { checked = it },
-                )
-            },
+            slot = BpkCellItemSlot.Switch(
+                checked = checked,
+                onCheckedChange = { checked = it },
+            ),
             modifier = Modifier.fillMaxWidth(),
         )
     }

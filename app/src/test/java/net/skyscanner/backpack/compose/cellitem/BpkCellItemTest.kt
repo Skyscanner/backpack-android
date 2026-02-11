@@ -18,20 +18,9 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 
@@ -67,13 +56,10 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Title",
             body = "Description",
-            slot = {
-                BpkSwitch(
-                    text = "",
-                    checked = true,
-                    onCheckedChange = {},
-                )
-            },
+            slot = BpkCellItemSlot.Switch(
+                checked = true,
+                onCheckedChange = {},
+            ),
         )
     }
 
@@ -92,13 +78,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             title = "Title",
             body = "Description",
             onClick = {},
-            slot = {
-                BpkIcon(
-                    icon = BpkIcon.ChevronRight,
-                    contentDescription = null,
-                    size = BpkIconSize.Small,
-                )
-            },
+            slot = BpkCellItemSlot.Chevron,
         )
     }
 
@@ -108,13 +88,10 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Title",
             body = "Description",
-            slot = {
-                BpkSwitch(
-                    text = "",
-                    checked = true,
-                    onCheckedChange = {},
-                )
-            },
+            slot = BpkCellItemSlot.Switch(
+                checked = true,
+                onCheckedChange = {},
+            ),
         )
     }
 
@@ -124,12 +101,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Title",
             body = "Description",
-            slot = {
-                BpkText(
-                    text = "Value",
-                    style = BpkTheme.typography.bodyDefault,
-                )
-            },
+            slot = BpkCellItemSlot.Text("Value"),
         )
     }
 
@@ -139,14 +111,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Partner Program",
             body = "Skyland Airlines",
-            slot = {
-                Image(
-                    painter = painterResource(R.drawable.skyairlines),
-                    contentDescription = null,
-                    colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
-                    modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
-                )
-            },
+            slot = BpkCellItemSlot.Logo(R.drawable.skyairlines),
         )
     }
 
@@ -178,13 +143,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             onClick = {},
             style = BpkCellItemStyle.SurfaceLowContrast,
             corner = BpkCellItemCorner.Rounded,
-            slot = {
-                BpkIcon(
-                    icon = BpkIcon.ChevronRight,
-                    contentDescription = null,
-                    size = BpkIconSize.Small,
-                )
-            },
+            slot = BpkCellItemSlot.Chevron,
         )
     }
 }

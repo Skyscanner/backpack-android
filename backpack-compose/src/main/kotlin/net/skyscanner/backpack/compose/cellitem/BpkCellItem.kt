@@ -18,27 +18,34 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
@@ -52,6 +59,46 @@ enum class BpkCellItemCorner {
     Rounded,
 }
 
+/**
+ * Sealed interface defining the types of accessories (slots) that can be displayed
+ * on the trailing edge of a [BpkCellItem].
+ */
+sealed interface BpkCellItemSlot {
+    /**
+     * Displays a right-pointing chevron icon, typically used to indicate navigation.
+     */
+    data object Chevron : BpkCellItemSlot
+
+    /**
+     * Displays a toggle switch control.
+     *
+     * @param checked The current checked state of the switch.
+     * @param onCheckedChange Callback invoked when the switch is toggled.
+     */
+    data class Switch(
+        val checked: Boolean,
+        val onCheckedChange: (Boolean) -> Unit,
+    ) : BpkCellItemSlot
+
+    /**
+     * Displays secondary text content, typically used for values or labels.
+     *
+     * @param text The text to display.
+     */
+    data class Text(
+        val text: String,
+    ) : BpkCellItemSlot
+
+    /**
+     * Displays an image/logo, typically used for branding or identification.
+     *
+     * @param logoDrawable The drawable resource ID for the logo.
+     */
+    data class Logo(
+        @DrawableRes val logoDrawable: Int,
+    ) : BpkCellItemSlot
+}
+
 @Composable
 fun BpkCellItem(
     title: String,
@@ -61,7 +108,7 @@ fun BpkCellItem(
     icon: BpkIcon? = null,
     onClick: (() -> Unit)? = null,
     body: String? = null,
-    slot: (@Composable () -> Unit)? = null,
+    slot: BpkCellItemSlot? = null,
 ) {
     val backgroundColor = when (style) {
         BpkCellItemStyle.SurfaceDefault -> BpkTheme.colors.surfaceDefault
@@ -111,8 +158,41 @@ fun BpkCellItem(
             }
         }
 
-        // Render the slot composable if provided
-        slot?.invoke()
+        // Render the slot based on the sealed interface type
+        slot?.let { slotType ->
+            when (slotType) {
+                is BpkCellItemSlot.Chevron -> {
+                    BpkIcon(
+                        icon = BpkIcon.ChevronRight,
+                        contentDescription = null,
+                        size = BpkIconSize.Small,
+                        tint = BpkTheme.colors.textPrimary,
+                    )
+                }
+                is BpkCellItemSlot.Switch -> {
+                    BpkSwitch(
+                        text = "",
+                        checked = slotType.checked,
+                        onCheckedChange = slotType.onCheckedChange,
+                    )
+                }
+                is BpkCellItemSlot.Text -> {
+                    BpkText(
+                        text = slotType.text,
+                        style = BpkTheme.typography.bodyDefault,
+                        color = BpkTheme.colors.textPrimary,
+                    )
+                }
+                is BpkCellItemSlot.Logo -> {
+                    Image(
+                        painter = painterResource(slotType.logoDrawable),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(BpkTheme.colors.textPrimary),
+                        modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
+                    )
+                }
+            }
+        }
     }
 }
 
