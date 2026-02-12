@@ -33,10 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -63,6 +65,7 @@ fun SwitchStory(modifier: Modifier = Modifier) {
         AnnotatedStringSwitchExample()
         CustomContentSwitchExample()
         EmptyContentWithSwitchExample()
+        SwitchWithInfoIconExample()
     }
 }
 
@@ -194,4 +197,19 @@ internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
     }
+}
+
+@Composable
+internal fun SwitchWithInfoIconExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+    // BpkIcon.InformationCircle would be used here when the icon extensions are properly exposed
+    // For now, here's the API usage example:
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = "Driver aged 25-75",
+        checked = checked,
+        onCheckedChange = { checked = it },
+         icon = BpkIcon.InformationCircle,
+         onIconClick = { /* Handle info icon click */ },
+    )
 }
