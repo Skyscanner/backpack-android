@@ -80,7 +80,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Title",
             body = "Description",
-            slot = BpkCellItemSlot.Text("Value"),
+            slot = BpkCellItemSlot.Text("Text"),
         )
     }
 
