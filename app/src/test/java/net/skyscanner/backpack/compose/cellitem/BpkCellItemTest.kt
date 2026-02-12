@@ -85,6 +85,19 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun withLink() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            title = "Privacy Policy",
+            body = "Read our privacy policy",
+            slot = BpkCellItemSlot.Link(
+                text = "View",
+                onClick = {},
+            ),
+        )
+    }
+
+    @Test
     fun withImage() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,

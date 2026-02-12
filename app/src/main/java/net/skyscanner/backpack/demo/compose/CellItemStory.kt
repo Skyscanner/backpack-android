@@ -129,6 +129,29 @@ fun CellItemWithTextStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CellItemComponent
+@ComposeStory("With Link")
+fun CellItemWithLinkStory(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            title = "Privacy Policy",
+            body = "Read our privacy policy",
+            slot = BpkCellItemSlot.Link(
+                text = "View",
+                onClick = {},
+            ),
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+@CellItemComponent
 @ComposeStory("With Image")
 fun CellItemWithImageStory(modifier: Modifier = Modifier) {
     Column(

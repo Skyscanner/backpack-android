@@ -28,6 +28,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text.png" alt="Cell Item with Text" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text_dm.png" alt="Cell Item with Text - dark mode" width="375" /> |
 
+## With Link
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-link.png" alt="Cell Item with Link" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-link_dm.png" alt="Cell Item with Link - dark mode" width="375" /> |
+
 ## With Image
 
 | Day | Night |
@@ -166,6 +172,21 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 BpkCellItem(
   title = "Language",
   slot = BpkCellItemSlot.Text("English"),
+)
+```
+
+### Link (Clickable Link)
+
+```Kotlin
+import net.skyscanner.backpack.compose.cellitem.BpkCellItem
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
+
+BpkCellItem(
+  title = "Privacy Policy",
+  slot = BpkCellItemSlot.Link(
+    text = "View",
+    onClick = { /* Handle click */ },
+  ),
 )
 ```
 

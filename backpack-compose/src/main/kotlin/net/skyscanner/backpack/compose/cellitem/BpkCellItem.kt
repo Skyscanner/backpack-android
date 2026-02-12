@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.link.BpkLink
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -86,6 +87,17 @@ sealed interface BpkCellItemSlot {
      */
     data class Text(
         val text: String,
+    ) : BpkCellItemSlot
+
+    /**
+     * Displays clickable link-styled text.
+     *
+     * @param text The text to display.
+     * @param onClick Callback invoked when the link is clicked.
+     */
+    data class Link(
+        val text: String,
+        val onClick: () -> Unit,
     ) : BpkCellItemSlot
 
     /**
@@ -180,6 +192,13 @@ fun BpkCellItem(
                         text = slotType.text,
                         style = BpkTheme.typography.bodyDefault,
                         color = BpkTheme.colors.textPrimary,
+                    )
+                }
+                is BpkCellItemSlot.Link -> {
+                    BpkLink(
+                        text = slotType.text,
+                        onLinkClicked = { slotType.onClick() },
+                        textStyle = BpkTheme.typography.bodyDefault,
                     )
                 }
                 is BpkCellItemSlot.Image -> {
