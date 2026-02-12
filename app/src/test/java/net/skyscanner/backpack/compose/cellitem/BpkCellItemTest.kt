@@ -91,7 +91,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             title = "Privacy Policy",
             body = "Read our privacy policy",
             slot = BpkCellItemSlot.Link(
-                text = "View",
+                text = "Link",
                 url = "https://example.com/privacy",
                 onClick = {},
             ),

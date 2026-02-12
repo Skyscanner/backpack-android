@@ -184,7 +184,7 @@ import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 BpkCellItem(
   title = "Privacy Policy",
   slot = BpkCellItemSlot.Link(
-    text = "View",
+    text = "Link",
     url = "https://example.com/privacy",
     onClick = { url -> /* Handle click with url */ },
   ),
