@@ -93,11 +93,13 @@ sealed interface BpkCellItemSlot {
      * Displays clickable link-styled text.
      *
      * @param text The text to display.
-     * @param onClick Callback invoked when the link is clicked.
+     * @param url The URL associated with the link.
+     * @param onClick Callback invoked when the link is clicked, receives the URL.
      */
     data class Link(
         val text: String,
-        val onClick: () -> Unit,
+        val url: String,
+        val onClick: (String) -> Unit,
     ) : BpkCellItemSlot
 
     /**
@@ -196,8 +198,8 @@ fun BpkCellItem(
                 }
                 is BpkCellItemSlot.Link -> {
                     BpkLink(
-                        text = "[${slotType.text}](link)",
-                        onLinkClicked = { _ -> slotType.onClick() },
+                        text = "[${slotType.text}](${slotType.url})",
+                        onLinkClicked = slotType.onClick,
                         textStyle = BpkTheme.typography.bodyDefault,
                     )
                 }

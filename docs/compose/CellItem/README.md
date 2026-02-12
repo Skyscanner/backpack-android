@@ -185,7 +185,8 @@ BpkCellItem(
   title = "Privacy Policy",
   slot = BpkCellItemSlot.Link(
     text = "View",
-    onClick = { /* Handle click */ },
+    url = "https://example.com/privacy",
+    onClick = { url -> /* Handle click with url */ },
   ),
 )
 ```

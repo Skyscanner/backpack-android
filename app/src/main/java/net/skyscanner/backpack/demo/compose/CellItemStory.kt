@@ -143,6 +143,7 @@ fun CellItemWithLinkStory(modifier: Modifier = Modifier) {
             body = "Read our privacy policy",
             slot = BpkCellItemSlot.Link(
                 text = "View",
+                url = "https://example.com/privacy",
                 onClick = {},
             ),
             modifier = Modifier.fillMaxWidth(),
