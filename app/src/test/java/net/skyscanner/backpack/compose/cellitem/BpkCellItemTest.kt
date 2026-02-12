@@ -104,7 +104,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
             icon = BpkIcon.Account,
             title = "Partner Program",
             body = "Skyland Airlines",
-            slot = BpkCellItemSlot.Image(R.drawable.skyairlines),
+            slot = BpkCellItemSlot.Image(R.drawable.sample_icon),
         )
     }
 

@@ -166,7 +166,7 @@ fun CellItemWithImageStory(modifier: Modifier = Modifier) {
             title = "Partner Program",
             body = "Skyland Airlines",
             onClick = {},
-            slot = BpkCellItemSlot.Image(R.drawable.skyairlines),
+            slot = BpkCellItemSlot.Image(R.drawable.sample_icon),
             modifier = Modifier.fillMaxWidth(),
         )
     }
