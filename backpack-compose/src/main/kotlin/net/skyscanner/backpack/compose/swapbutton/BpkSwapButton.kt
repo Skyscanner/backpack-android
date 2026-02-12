@@ -44,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Swap
 import net.skyscanner.backpack.compose.tokens.SwapVertical
 
 enum class BpkSwapButtonStyle {
@@ -82,15 +81,15 @@ fun BpkSwapButton(
     )
 
     val backgroundColor = when (style) {
-        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.canvas
+        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.surfaceDefault
         BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
-        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
+        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.surfaceDefault
     }
 
     val borderColor = when (style) {
-        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.canvas
-        BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
-        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.coreAccent
+        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.surfaceContrast
+        BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvas
+        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.corePrimary
     }
 
     Box(

@@ -43,8 +43,7 @@ fun SwapButtonDefaultStory(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(BpkDimension.Spacing.Md)
-            .background(BpkTheme.colors.surfaceContrast),
+            .padding(BpkDimension.Spacing.Md),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
