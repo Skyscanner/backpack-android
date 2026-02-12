@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.switch
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -45,6 +46,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -62,6 +64,8 @@ fun BpkSwitch(
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    icon: BpkIcon? = null,
+    onIconClick: (() -> Unit)? = null,
 ) {
     BpkSwitch(
         checked = checked,
@@ -70,8 +74,10 @@ fun BpkSwitch(
         enabled = enabled,
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
+        icon = icon,
+        onIconClick = onIconClick,
         content = {
-            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, color)
+            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, color, icon, onIconClick)
         },
     )
 }
@@ -87,6 +93,8 @@ fun BpkSwitch(
     color: Color = Color.Unspecified,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    icon: BpkIcon? = null,
+    onIconClick: (() -> Unit)? = null,
 ) {
     BpkSwitch(
         checked = checked,
@@ -95,8 +103,10 @@ fun BpkSwitch(
         enabled = enabled,
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
+        icon = icon,
+        onIconClick = onIconClick,
         content = {
-            TextWithSpacer(text, shouldTruncate, color)
+            TextWithSpacer(text, shouldTruncate, color, icon, onIconClick)
         },
     )
 }
@@ -109,6 +119,8 @@ fun BpkSwitch(
     enabled: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    icon: BpkIcon? = null,
+    onIconClick: (() -> Unit)? = null,
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
     Row(
@@ -152,15 +164,37 @@ fun BpkSwitch(
 }
 
 @Composable
-private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTruncate: Boolean, color: Color) {
+private fun RowScope.TextWithSpacer(
+    annotatedString: AnnotatedString,
+    shouldTruncate: Boolean,
+    color: Color,
+    icon: BpkIcon? = null,
+    onIconClick: (() -> Unit)? = null,
+) {
     takeIf { annotatedString.isNotEmpty() }?.let {
-        BpkText(
-            modifier = Modifier.Companion.weight(1f),
-            color = color,
-            text = annotatedString,
-            maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-            overflow = TextOverflow.Ellipsis,
-        )
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+        ) {
+            BpkText(
+                color = color,
+                text = annotatedString,
+                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                overflow = TextOverflow.Ellipsis,
+            )
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon,
+                    contentDescription = null,
+                    modifier = Modifier.clickable(
+                        enabled = onIconClick != null,
+                        onClick = onIconClick ?: {},
+                    ),
+                    tint = color,
+                )
+            }
+        }
         Spacer(modifier = Modifier.width(BpkSpacing.Base))
     }
 }
