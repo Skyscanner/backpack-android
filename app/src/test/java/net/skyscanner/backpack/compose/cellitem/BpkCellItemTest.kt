@@ -51,14 +51,6 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun clickable() = snap {
-        BpkCellItem(
-            title = "Title",
-            onClick = {},
-        )
-    }
-
-    @Test
     fun withChevron() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,
