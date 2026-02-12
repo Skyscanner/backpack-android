@@ -59,6 +59,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryRounding
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
@@ -90,6 +91,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -118,6 +120,7 @@ internal fun BpkTextFieldImpl(
         trailingIcon = trailingIcon,
         clearAction = clearAction,
         type = type,
+        rounding = rounding,
     )
 }
 
@@ -140,6 +143,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
 ) {
     BasicTextField(
         value = value,
@@ -176,6 +180,7 @@ internal fun BpkTextFieldImpl(
                 textFieldContent = it,
                 clearAction = if (readOnly && prefix == null) null else clearAction, // Remove clearAction if readOnly enabled.
                 type = type,
+                rounding = rounding,
             )
         },
     )
@@ -193,6 +198,7 @@ private fun TextFieldBox(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
     textFieldContent: @Composable () -> Unit,
 ) {
     val textFieldBoxTintColor by animateColorAsState(
@@ -201,13 +207,14 @@ private fun TextFieldBox(
             else -> BpkTheme.colors.textSecondary
         },
     )
+    val shape = textFieldShape(type = type, rounding = rounding)
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .width(IntrinsicSize.Max)
             .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
             .border(
-                width = 1.dp, shape = textFieldShape(type = type),
+                width = 1.dp, shape = shape,
                 color = animateColorAsState(
                     when {
                         status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
@@ -217,7 +224,7 @@ private fun TextFieldBox(
                     },
                 ).value,
             )
-            .background(BpkTheme.colors.surfaceDefault, textFieldShape(type = type))
+            .background(BpkTheme.colors.surfaceDefault, shape)
             .padding(horizontal = BpkSpacing.Md),
     ) {
 
@@ -340,7 +347,37 @@ internal enum class BpkTextFieldType {
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-) = RoundedCornerShape(if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) BpkBorderRadius.Md else BpkBorderRadius.Sm)
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+): RoundedCornerShape {
+    val cornerRadius = if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) {
+        BpkBorderRadius.Md
+    } else {
+        BpkBorderRadius.Sm
+    }
+
+    return when (rounding) {
+        is BpkSearchInputSummaryRounding.AllCorners -> RoundedCornerShape(cornerRadius)
+        is BpkSearchInputSummaryRounding.TopCorners -> RoundedCornerShape(
+            topStart = cornerRadius,
+            bottomStart = 0.dp,
+            topEnd = cornerRadius,
+            bottomEnd = 0.dp,
+        )
+
+        is BpkSearchInputSummaryRounding.BottomCorners -> RoundedCornerShape(
+            topStart = 0.dp,
+            bottomStart = cornerRadius,
+            topEnd = 0.dp,
+            bottomEnd = cornerRadius,
+        )
+        BpkSearchInputSummaryRounding.NoRoundedCorners -> RoundedCornerShape(
+            topStart = 0.dp,
+            bottomStart = 0.dp,
+            topEnd = 0.dp,
+            bottomEnd = 0.dp,
+        )
+    }
+}
 
 private data class Icon(
     val icon: BpkIcon,
