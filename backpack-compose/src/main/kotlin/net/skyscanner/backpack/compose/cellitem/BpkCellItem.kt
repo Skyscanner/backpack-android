@@ -196,8 +196,8 @@ fun BpkCellItem(
                 }
                 is BpkCellItemSlot.Link -> {
                     BpkLink(
-                        text = slotType.text,
-                        onLinkClicked = { slotType.onClick() },
+                        text = "[${slotType.text}](link)",
+                        onLinkClicked = { _ -> slotType.onClick() },
                         textStyle = BpkTheme.typography.bodyDefault,
                     )
                 }
