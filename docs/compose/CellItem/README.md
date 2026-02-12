@@ -28,11 +28,11 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text.png" alt="Cell Item with Text" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-text_dm.png" alt="Cell Item with Text - dark mode" width="375" /> |
 
-## With Logo
+## With Image
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo.png" alt="Cell Item with Logo" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-logo_dm.png" alt="Cell Item with Logo - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-image.png" alt="Cell Item with Image" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CellItem/screenshots/with-image_dm.png" alt="Cell Item with Image - dark mode" width="375" /> |
 
 ## Surface Low Contrast
 

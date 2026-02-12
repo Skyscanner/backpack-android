@@ -129,8 +129,8 @@ fun CellItemWithTextStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CellItemComponent
-@ComposeStory("With Logo")
-fun CellItemWithLogoStory(modifier: Modifier = Modifier) {
+@ComposeStory("With Image")
+fun CellItemWithImageStory(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .background(BpkTheme.colors.line)

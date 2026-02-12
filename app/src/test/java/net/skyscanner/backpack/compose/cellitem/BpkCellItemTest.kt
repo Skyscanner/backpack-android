@@ -106,7 +106,7 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withLogo() = snap {
+    fun withImage() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,
             title = "Partner Program",
