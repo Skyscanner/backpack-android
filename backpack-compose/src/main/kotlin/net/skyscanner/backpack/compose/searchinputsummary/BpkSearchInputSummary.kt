@@ -44,6 +44,30 @@ sealed class BpkSearchInputSummaryType {
     data class ReadOnly(val isFocused: Boolean) : BpkSearchInputSummaryType()
 }
 
+/**
+ * Defines the corner rounding style for BpkSearchInputSummary.
+ */
+sealed class BpkSearchInputSummaryRounding {
+    /**
+     * All corners are rounded (default behavior).
+     */
+    data object AllCorners : BpkSearchInputSummaryRounding()
+
+    /**
+     * Only the start corners (top-start and bottom-start) are rounded.
+     * Useful for the first item in a horizontal row of inputs.
+     */
+    data object TopCorners : BpkSearchInputSummaryRounding()
+
+    /**
+     * Only the end corners (top-end and bottom-end) are rounded.
+     * Useful for the last item in a horizontal row of inputs.
+     */
+    data object BottomCorners : BpkSearchInputSummaryRounding()
+
+    data object NoRoundedCorners : BpkSearchInputSummaryRounding()
+}
+
 @Composable
 fun BpkSearchInputSummary(
     inputText: String,
@@ -53,6 +77,7 @@ fun BpkSearchInputSummary(
     clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
 ) {
     val isFocused = if (type is BpkSearchInputSummaryType.ReadOnly) type.isFocused else null
     BpkTextFieldImpl(
@@ -66,5 +91,6 @@ fun BpkSearchInputSummary(
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
         isFocused = isFocused,
+        rounding = rounding,
     )
 }

@@ -47,6 +47,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -58,6 +59,7 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    color: Color = Color.Unspecified,
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -70,7 +72,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate)
+            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, color)
         },
     )
 }
@@ -83,6 +85,7 @@ fun BpkSwitch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shouldTruncate: Boolean = true,
+    color: Color = Color.Unspecified,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -94,7 +97,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            TextWithSpacer(text, shouldTruncate)
+            TextWithSpacer(text, shouldTruncate, color)
         },
     )
 }
@@ -150,10 +153,11 @@ fun BpkSwitch(
 }
 
 @Composable
-private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTruncate: Boolean) {
+private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTruncate: Boolean, color: Color) {
     takeIf { annotatedString.isNotEmpty() }?.let {
         BpkText(
             modifier = Modifier.Companion.weight(1f),
+            color = color,
             text = annotatedString,
             maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
             overflow = TextOverflow.Ellipsis,

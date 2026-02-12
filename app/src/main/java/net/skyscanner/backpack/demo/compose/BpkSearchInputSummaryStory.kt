@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,12 +36,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
+import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryRounding
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryType
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Calendar
+import net.skyscanner.backpack.compose.tokens.Family
+import net.skyscanner.backpack.compose.tokens.FlightLanding
+import net.skyscanner.backpack.compose.tokens.FlightTakeoff
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
@@ -55,14 +60,11 @@ fun SearchInputSummaryExamples(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .systemBarsPadding()
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
+            .background(BpkTheme.colors.surfaceContrast),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-        DefaultExample()
-        TextPrefixExample()
-        IconPrefixExample()
-        NoPrefixExample()
-        ReadOnlyExample()
+        CornerExample()
     }
 }
 
@@ -207,6 +209,53 @@ internal fun ReadOnlyExample() {
 }
 
 @Composable
+@SearchInputSummaryComponent
+@ComposeStory(name = "Corner", kind = StoryKind.ScreenshotOnly)
+internal fun CornerExample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+        modifier = Modifier.padding(BpkSpacing.Base)
+            .background(BpkTheme.colors.surfaceContrast),
+    ) {
+        SearchInputSummaryStory(
+            name = "Corner",
+            inputText = "",
+            inputHint = "London Heathrow",
+            prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
+            rounding = BpkSearchInputSummaryRounding.TopCorners,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+        )
+
+        SearchInputSummaryStory(
+            name = "Croner",
+            inputText = "",
+            inputHint = "Tokyo Haneda",
+            prefix = Prefix.Icon(BpkIcon.FlightLanding),
+            rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+        )
+
+        SearchInputSummaryStory(
+            name = "Croner",
+            inputText = "",
+            inputHint = "Thurs 9 May - Fri 29 May, 2025",
+            prefix = Prefix.Icon(BpkIcon.Calendar),
+            rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+        )
+
+        SearchInputSummaryStory(
+            name = "Croner",
+            inputText = "",
+            inputHint = "2 adults, 1 child",
+            prefix = Prefix.Icon(BpkIcon.Family),
+            rounding = BpkSearchInputSummaryRounding.BottomCorners,
+            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+        )
+    }
+}
+
+@Composable
 internal fun SearchInputSummaryStory(
     name: String,
     modifier: Modifier = Modifier,
@@ -215,15 +264,11 @@ internal fun SearchInputSummaryStory(
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
+    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
 ) {
     Column(
         modifier = modifier,
     ) {
-        BpkText(
-            text = name,
-            style = BpkTheme.typography.heading4,
-            modifier = Modifier.padding(vertical = BpkSpacing.Base),
-        )
         var state by remember { mutableStateOf(inputText) }
         BpkSearchInputSummary(
             inputText = state,
@@ -237,6 +282,7 @@ internal fun SearchInputSummaryStory(
             },
             modifier = searchInputSummaryModifier.fillMaxWidth(),
             type = type,
+            rounding = rounding,
         )
     }
 }
