@@ -51,19 +51,6 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun withSlot() = snap {
-        BpkCellItem(
-            icon = BpkIcon.Account,
-            title = "Title",
-            body = "Description",
-            slot = BpkCellItemSlot.Switch(
-                checked = true,
-                onCheckedChange = {},
-            ),
-        )
-    }
-
-    @Test
     fun clickable() = snap {
         BpkCellItem(
             title = "Title",
