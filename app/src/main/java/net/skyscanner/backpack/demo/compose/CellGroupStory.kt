@@ -37,7 +37,10 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Accessibility
+import net.skyscanner.backpack.compose.tokens.InformationCircle
+import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CellGroupComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
@@ -59,6 +62,8 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     title = "Profile Settings",
                     body = "Manage your account",
                     icon = BpkIcon.Account,
+                    onClick = {},
+                    slot = BpkCellItemSlot.Chevron,
                 ),
                 BpkCellItemData(
                     title = "Notifications",
@@ -74,6 +79,24 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     body = "App display language",
                     icon = BpkIcon.Accessibility,
                     slot = BpkCellItemSlot.Text("English"),
+                ),
+                BpkCellItemData(
+                    title = "Help Center",
+                    body = "Get support and answers",
+                    icon = BpkIcon.InformationCircle,
+                    slot = BpkCellItemSlot.Link(
+                        text = "Visit",
+                        url = "https://help.skyscanner.net",
+                        onClick = {},
+                    ),
+                ),
+                BpkCellItemData(
+                    title = "Airline Partner",
+                    body = "British Airways",
+                    icon = BpkIcon.Aircraft,
+                    slot = BpkCellItemSlot.Image(
+                        imageDrawable = R.drawable.sample_icon,
+                    ),
                 ),
             ),
             modifier = Modifier.fillMaxWidth(),
