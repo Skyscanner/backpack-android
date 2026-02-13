@@ -18,39 +18,25 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
-import androidx.compose.foundation.layout.padding
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Test
 
 class BpkCellGroupTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        BpkCellGroup {
-            item {
-                BpkText(
-                    text = "Profile Settings",
-                    style = BpkTheme.typography.label1,
-                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
-                )
-            }
-            item {
-                BpkText(
-                    text = "Notifications",
-                    style = BpkTheme.typography.label1,
-                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
-                )
-            }
-            item {
-                BpkText(
-                    text = "Language",
-                    style = BpkTheme.typography.label1,
-                    modifier = androidx.compose.ui.Modifier.padding(BpkSpacing.Base),
-                )
-            }
-        }
+        BpkCellGroup(
+            items = listOf(
+                BpkCellItemData(
+                    title = "Profile Settings",
+                ),
+                BpkCellItemData(
+                    title = "Notifications",
+                ),
+                BpkCellItemData(
+                    title = "Language",
+                ),
+            ),
+        )
     }
 }

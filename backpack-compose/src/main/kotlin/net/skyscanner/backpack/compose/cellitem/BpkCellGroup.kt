@@ -19,102 +19,94 @@
 package net.skyscanner.backpack.compose.cellitem
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.divider.BpkDivider
-import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 /**
- * A container component that groups multiple composable items together with automatic dividers.
+ * Data class representing a cell item in a [BpkCellGroup].
+ * This class holds all the parameters needed to construct a [BpkCellItem].
+ *
+ * @param title The primary text to display in the cell item.
+ * @param body Optional secondary text to display below the title.
+ * @param icon Optional icon to display at the leading edge of the cell item.
+ * @param onClick Optional click handler for the cell item.
+ * @param slot Optional accessory content to display at the trailing edge of the cell item.
+ */
+data class BpkCellItemData(
+    val title: String,
+    val body: String? = null,
+    val icon: BpkIcon? = null,
+    val onClick: (() -> Unit)? = null,
+    val slot: BpkCellItemSlot? = null,
+)
+
+/**
+ * A container component that groups multiple [BpkCellItem]s together with automatic dividers.
  * The group always uses rounded corners and default surface styling as per design specifications.
  *
+ * @param items List of [BpkCellItemData] to display in the group.
  * @param modifier Optional modifier for the group container.
- * @param content The composable content to display within the group. Use [item] to add items.
  */
 @Composable
 fun BpkCellGroup(
+    items: List<BpkCellItemData>,
     modifier: Modifier = Modifier,
-    content: BpkCellGroupScope.() -> Unit,
 ) {
     val shape = RoundedCornerShape(BpkSpacing.Md)
     val backgroundColor = BpkTheme.colors.surfaceDefault
 
-    val scope = BpkCellGroupScopeImpl()
-    scope.content()
-
-    Column(
+    LazyColumn(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape)
             .background(backgroundColor),
     ) {
-        scope.items.forEachIndexed { index, item ->
-            item()
-            if (index < scope.items.lastIndex) {
+        itemsIndexed(items) { index, itemData ->
+            BpkCellItem(
+                title = itemData.title,
+                body = itemData.body,
+                icon = itemData.icon,
+                onClick = itemData.onClick,
+                slot = itemData.slot,
+                style = BpkCellItemStyle.SurfaceDefault,
+                corner = BpkCellItemCorner.Default,
+            )
+            if (index < items.lastIndex) {
                 BpkDivider()
             }
         }
     }
 }
 
-/**
- * Scope for adding items to a [BpkCellGroup].
- */
-interface BpkCellGroupScope {
-    /**
-     * Adds an item to the group.
-     *
-     * @param content The composable content for this item.
-     */
-    fun item(content: @Composable () -> Unit)
-}
-
-private class BpkCellGroupScopeImpl : BpkCellGroupScope {
-    val items = mutableListOf<@Composable () -> Unit>()
-
-    override fun item(content: @Composable () -> Unit) {
-        items.add(content)
-    }
-}
-
 @BpkPreviews
 @Composable
 private fun BpkCellGroupPreview() {
-    BpkCellGroup {
-        item {
-            BpkText(
-                text = "Example Item 1",
-                style = BpkTheme.typography.label1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-            )
-        }
-        item {
-            BpkText(
-                text = "Example Item 2",
-                style = BpkTheme.typography.label1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-            )
-        }
-        item {
-            BpkText(
-                text = "Example Item 3",
-                style = BpkTheme.typography.label1,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(BpkSpacing.Base),
-            )
-        }
-    }
+    BpkCellGroup(
+        items = listOf(
+            BpkCellItemData(
+                title = "Profile Settings",
+                body = "Manage your account",
+                icon = BpkIcon.Account,
+            ),
+            BpkCellItemData(
+                title = "Notifications",
+                body = "Enable push notifications",
+            ),
+            BpkCellItemData(
+                title = "Language",
+                body = "App display language",
+            ),
+        ),
+    )
 }

@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -29,13 +28,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemData
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.Hotels
@@ -57,96 +54,29 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         BpkCellGroup(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(BpkSpacing.Base),
-                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    BpkIcon(
-                        icon = BpkIcon.Account,
-                        contentDescription = "Account",
-                        size = BpkIconSize.Large,
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        BpkText(
-                            text = "Profile Settings",
-                            style = BpkTheme.typography.label1,
-                        )
-                        BpkText(
-                            text = "Manage your account",
-                            style = BpkTheme.typography.caption,
-                            color = BpkTheme.colors.textSecondary,
-                        )
-                    }
-                }
-            }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(BpkSpacing.Base),
-                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    BpkIcon(
-                        icon = BpkIcon.Hotels,
-                        contentDescription = "Notifications",
-                        size = BpkIconSize.Large,
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        BpkText(
-                            text = "Notifications",
-                            style = BpkTheme.typography.label1,
-                        )
-                        BpkText(
-                            text = "Enable push notifications",
-                            style = BpkTheme.typography.caption,
-                            color = BpkTheme.colors.textSecondary,
-                        )
-                    }
-                    BpkSwitch(
+            items = listOf(
+                BpkCellItemData(
+                    title = "Profile Settings",
+                    body = "Manage your account",
+                    icon = BpkIcon.Account,
+                ),
+                BpkCellItemData(
+                    title = "Notifications",
+                    body = "Enable push notifications",
+                    icon = BpkIcon.Hotels,
+                    slot = BpkCellItemSlot.Switch(
                         checked = notificationsEnabled,
                         onCheckedChange = { notificationsEnabled = it },
-                        content = {},
-                    )
-                }
-            }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(BpkSpacing.Base),
-                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    BpkIcon(
-                        icon = BpkIcon.Accessibility,
-                        contentDescription = "Language",
-                        size = BpkIconSize.Large,
-                    )
-                    Column(modifier = Modifier.weight(1f)) {
-                        BpkText(
-                            text = "Language",
-                            style = BpkTheme.typography.label1,
-                        )
-                        BpkText(
-                            text = "App display language",
-                            style = BpkTheme.typography.caption,
-                            color = BpkTheme.colors.textSecondary,
-                        )
-                    }
-                    BpkText(
-                        text = "English",
-                        style = BpkTheme.typography.label2,
-                        color = BpkTheme.colors.textSecondary,
-                    )
-                }
-            }
-        }
+                    ),
+                ),
+                BpkCellItemData(
+                    title = "Language",
+                    body = "App display language",
+                    icon = BpkIcon.Accessibility,
+                    slot = BpkCellItemSlot.Text("English"),
+                ),
+            ),
+            modifier = Modifier.fillMaxWidth(),
+        )
     }
 }

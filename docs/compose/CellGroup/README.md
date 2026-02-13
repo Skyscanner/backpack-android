@@ -17,156 +17,77 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a basic BpkCellGroup with simple text items:
+Example of a basic BpkCellGroup:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemData
+import net.skyscanner.backpack.compose.icon.BpkIcon
 
-BpkCellGroup {
-    item {
-        BpkText(
-            text = "Profile Settings",
-            style = BpkTheme.typography.label1,
-            modifier = Modifier.padding(BpkSpacing.Base),
-        )
-    }
-    item {
-        BpkText(
-            text = "Notifications",
-            style = BpkTheme.typography.label1,
-            modifier = Modifier.padding(BpkSpacing.Base),
-        )
-    }
-    item {
-        BpkText(
-            text = "Language",
-            style = BpkTheme.typography.label1,
-            modifier = Modifier.padding(BpkSpacing.Base),
-        )
-    }
-}
+BpkCellGroup(
+    items = listOf(
+        BpkCellItemData(
+            title = "Profile Settings",
+            icon = BpkIcon.Account,
+        ),
+        BpkCellItemData(
+            title = "Notifications",
+            icon = BpkIcon.Hotels,
+        ),
+        BpkCellItemData(
+            title = "Language",
+            icon = BpkIcon.Accessibility,
+        ),
+    ),
+)
 ```
 
-Example of a BpkCellGroup with custom cell layouts:
+Example of a BpkCellGroup with body text and slots:
 
 ```Kotlin
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Alignment
 import net.skyscanner.backpack.compose.cellitem.BpkCellGroup
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemData
+import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 var notificationsEnabled by remember { mutableStateOf(true) }
 
-BpkCellGroup {
-    item {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(BpkSpacing.Base),
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            BpkIcon(
-                icon = BpkIcon.Account,
-                contentDescription = "Account",
-                size = BpkIconSize.Large,
-            )
-            Column(modifier = Modifier.weight(1f)) {
-                BpkText(
-                    text = "Profile Settings",
-                    style = BpkTheme.typography.label1,
-                )
-                BpkText(
-                    text = "Manage your account",
-                    style = BpkTheme.typography.caption,
-                    color = BpkTheme.colors.textSecondary,
-                )
-            }
-        }
-    }
-    item {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(BpkSpacing.Base),
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            BpkIcon(
-                icon = BpkIcon.Hotels,
-                contentDescription = "Notifications",
-                size = BpkIconSize.Large,
-            )
-            Column(modifier = Modifier.weight(1f)) {
-                BpkText(
-                    text = "Notifications",
-                    style = BpkTheme.typography.label1,
-                )
-                BpkText(
-                    text = "Enable push notifications",
-                    style = BpkTheme.typography.caption,
-                    color = BpkTheme.colors.textSecondary,
-                )
-            }
-            BpkSwitch(
+BpkCellGroup(
+    items = listOf(
+        BpkCellItemData(
+            title = "Profile Settings",
+            body = "Manage your account",
+            icon = BpkIcon.Account,
+            onClick = { /* Navigate to profile */ },
+            slot = BpkCellItemSlot.Chevron,
+        ),
+        BpkCellItemData(
+            title = "Notifications",
+            body = "Enable push notifications",
+            icon = BpkIcon.Hotels,
+            slot = BpkCellItemSlot.Switch(
                 checked = notificationsEnabled,
                 onCheckedChange = { notificationsEnabled = it },
-                content = {},
-            )
-        }
-    }
-    item {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(BpkSpacing.Base),
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            BpkIcon(
-                icon = BpkIcon.Accessibility,
-                contentDescription = "Language",
-                size = BpkIconSize.Large,
-            )
-            Column(modifier = Modifier.weight(1f)) {
-                BpkText(
-                    text = "Language",
-                    style = BpkTheme.typography.label1,
-                )
-                BpkText(
-                    text = "App display language",
-                    style = BpkTheme.typography.caption,
-                    color = BpkTheme.colors.textSecondary,
-                )
-            }
-            BpkText(
-                text = "English",
-                style = BpkTheme.typography.label2,
-                color = BpkTheme.colors.textSecondary,
-            )
-        }
-    }
-}
+            ),
+        ),
+        BpkCellItemData(
+            title = "Language",
+            body = "App display language",
+            icon = BpkIcon.Accessibility,
+            slot = BpkCellItemSlot.Text("English"),
+        ),
+    ),
+)
 ```
 
 ## Key Features
 
-- **Flexible Content**: Accepts any composable content within each item, allowing full customization of cell layouts.
+- **Type-Safe**: Accepts only `List<BpkCellItemData>`, ensuring consistent cell item structure.
 - **Automatic Dividers**: Automatically adds dividers between all items in the group.
 - **Rounded Corners**: The group always uses rounded corners as per design specifications.
 - **Consistent Styling**: Provides a unified background and styling for grouped content.
-- **Simple API**: Use the `item {}` function to add items without manual divider management.
+- **Lazy Rendering**: Uses `LazyColumn` for efficient rendering of large lists.
+- **BpkCellItem Integration**: Automatically inflates `BpkCellItemData` into `BpkCellItem` components.
 
 ## Design Notes
 
@@ -174,4 +95,4 @@ The Cell Group component has fixed styling according to design specifications:
 - Always uses rounded corners
 - Always uses default surface background
 - Dividers are automatically managed between items
-- Content within each item is completely customizable
+- Each item is rendered as a `BpkCellItem` with consistent styling
