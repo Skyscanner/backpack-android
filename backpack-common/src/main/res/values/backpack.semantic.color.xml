@@ -22,9 +22,9 @@
 
     <color name="bpkCanvas">#ffffffff</color>
     <color name="bpkCanvasContrast">#ffeff3f8</color>
-    <color name="bpkCoreAccent">#ff0062e3</color>
+    <color name="bpkCoreAccent">#ffd50032</color>
     <color name="bpkCoreEco">#ff0fa1a9</color>
-    <color name="bpkCorePrimary">#ff05203c</color>
+    <color name="bpkCorePrimary">#ff3c0613</color>
     <color name="bpkLine">#ffc1c7cf</color>
     <color name="bpkLineOnDark">#80ffffff</color>
     <color name="bpkOverlay">#33000000</color>
@@ -35,19 +35,19 @@
     <color name="bpkStatusSuccessSpot">#ff0c838a</color>
     <color name="bpkStatusWarningFill">#fffff7cf</color>
     <color name="bpkStatusWarningSpot">#fff55d42</color>
-    <color name="bpkSurfaceContrast">#ff05203c</color>
+    <color name="bpkSurfaceContrast">#ff3c0613</color>
     <color name="bpkSurfaceDefault">#ffffffff</color>
     <color name="bpkSurfaceElevated">#ffffffff</color>
-    <color name="bpkSurfaceHero">#ff0062e3</color>
+    <color name="bpkSurfaceHero">#ffd50032</color>
     <color name="bpkSurfaceHighlight">#ffe0e4e9</color>
     <color name="bpkSurfaceLowContrast">#fff5f7fa</color>
-    <color name="bpkSurfaceSubtle">#ffe3f0ff</color>
+    <color name="bpkSurfaceSubtle">#ffffe7ed</color>
     <color name="bpkSurfaceTint">#1affffff</color>
     <color name="bpkTextDisabled">#33000000</color>
     <color name="bpkTextDisabledOnDark">#80ffffff</color>
     <color name="bpkTextError">#ffe70866</color>
-    <color name="bpkTextHero">#ff0062e3</color>
-    <color name="bpkTextLink">#ff0062e3</color>
+    <color name="bpkTextHero">#ffd50032</color>
+    <color name="bpkTextLink">#ffd50032</color>
     <color name="bpkTextOnDark">#ffffffff</color>
     <color name="bpkTextOnLight">#ff161616</color>
     <color name="bpkTextPrimary">#ff161616</color>

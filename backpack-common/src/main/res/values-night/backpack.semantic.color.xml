@@ -22,9 +22,9 @@
 
     <color name="bpkCanvas">#ff010913</color>
     <color name="bpkCanvasContrast">#ff010913</color>
-    <color name="bpkCoreAccent">#ff84e9ff</color>
+    <color name="bpkCoreAccent">#ffff96ad</color>
     <color name="bpkCoreEco">#ff0fa1a9</color>
-    <color name="bpkCorePrimary">#ff054184</color>
+    <color name="bpkCorePrimary">#ff7f1a32</color>
     <color name="bpkLine">#ff44505f</color>
     <color name="bpkLineOnDark">#ff44505f</color>
     <color name="bpkOverlay">#ccffffff</color>
@@ -47,7 +47,7 @@
     <color name="bpkTextDisabledOnDark">#80ffffff</color>
     <color name="bpkTextError">#ffff649c</color>
     <color name="bpkTextHero">#ff010913</color>
-    <color name="bpkTextLink">#ff84e9ff</color>
+    <color name="bpkTextLink">#ffff96ad</color>
     <color name="bpkTextOnDark">#ffffffff</color>
     <color name="bpkTextOnLight">#ff010913</color>
     <color name="bpkTextPrimary">#ffffffff</color>
