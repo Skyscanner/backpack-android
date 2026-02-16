@@ -52,12 +52,14 @@ if (showModal.value) {
         title = title,
         navIcon = NavIcon.Close(
             contentDescription = "Navigate back",
-            onClick = { coroutineScope.launch { modalState.hide() } },
+            onClick = { modalState.hide() },
         ),
         action = TextAction(
             text = "Action",
             onClick = {
-                coroutineScope.launch { modalState.hide() }
+                modalState.hide() {
+                    // optional callback after the modal is fully dismissed
+                }
             },
         ),
         onDismiss = { showModal.value = false },

@@ -20,35 +20,60 @@ package net.skyscanner.backpack.compose.modal
 
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 @Composable
-fun rememberBpkModalState() = remember {
-    BpkModalState(MutableTransitionState(false).apply { targetState = true })
+fun rememberBpkModalState(): BpkModalState {
+    val modalState = remember {
+        BpkModalState(MutableTransitionState(false).apply { targetState = true })
+    }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        modalState.setCoroutineScope(scope)
+    }
+
+    return modalState
 }
 
 class BpkModalState internal constructor(
     internal val isVisible: MutableTransitionState<Boolean>,
 ) {
-    suspend fun show() {
+
+    private var _pendingHideAnimationCallback: (() -> Unit)? = null
+    private var _scope: CoroutineScope? = null
+
+    internal fun setCoroutineScope(scope: CoroutineScope) {
+        _scope = scope
+    }
+
+    fun show() {
         animateState(true)
     }
 
-    suspend fun hide() {
+    fun hide(onHidden: (() -> Unit)? = null) {
         animateState(false)
+        onHidden?.let { callback ->
+            _pendingHideAnimationCallback = callback
+            _scope?.launch {
+                snapshotFlow { isVisible.isIdle && !isVisible.currentState }.distinctUntilChanged().filter { it }.collect {
+                    callback.invoke()
+                    _pendingHideAnimationCallback = null
+                }
+            }
+        }
     }
 
-    private suspend fun animateState(newVisibility: Boolean) {
+    private fun animateState(newVisibility: Boolean) {
         isVisible.targetState = newVisibility
         if (isVisible.currentState == newVisibility) {
             return
-        }
-        withContext(Dispatchers.IO) {
-            while (!isVisible.isIdle) {
-                // continue until the animation is finished
-            }
         }
     }
 }
