@@ -21,16 +21,18 @@ package net.skyscanner.backpack.compose.divider
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BpkDivider(
     modifier: Modifier = Modifier,
+    color: Color = BpkTheme.colors.line,
 ) {
     Divider(
         modifier = modifier,
-        color = BpkTheme.colors.line,
+        color = color,
         thickness = 1.dp,
     )
 }
