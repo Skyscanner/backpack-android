@@ -5,7 +5,7 @@ Compose:
     active: true
   DefaultsVisibility:
     active: true
-  ModifierComposable:
+  ModifierComposed:
     active: true
   ModifierMissing:
     active: true

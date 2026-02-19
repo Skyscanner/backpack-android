@@ -31,7 +31,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
 
-detektRules-compose = "io.nlopez.compose.rules:detekt:0.4.28"
+detektRules-compose = "io.nlopez.compose.rules:detekt:0.5.3"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektRules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
 
