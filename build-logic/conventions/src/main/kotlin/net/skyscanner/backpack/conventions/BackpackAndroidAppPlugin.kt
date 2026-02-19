@@ -19,7 +19,8 @@
 package net.skyscanner.backpack.conventions
 
 import SdkVersions
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.gradle.internal.lint.AndroidLintTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -33,9 +34,8 @@ class BackpackAndroidAppPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             plugins.apply("com.android.application")
-            plugins.apply("org.jetbrains.kotlin.android")
 
-            extensions.configure<BaseAppModuleExtension> {
+            extensions.configure<ApplicationExtension> {
                 compileSdk = SdkVersions.COMPILE_SDK
 
                 defaultConfig {
@@ -78,6 +78,13 @@ class BackpackAndroidAppPlugin : Plugin<Project> {
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=net.skyscanner.backpack.util.InternalBackpackApi",
                     )
+                }
+            }
+
+            // Workaround for K2 FIR lint analysis crash when analyzing Kotlin build scripts
+            tasks.withType<AndroidLintTask>().configureEach {
+                if (name.contains("Analyze")) {
+                    enabled = false
                 }
             }
         }

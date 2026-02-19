@@ -55,7 +55,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -76,12 +76,6 @@ android {
         }
     }
 
-    sourceSets {
-        getByName("screenshots") {
-            java.srcDirs("src/internal/java")
-            res.srcDirs("src/internal/res")
-        }
-    }
 
     testOptions {
         unitTests {
@@ -91,8 +85,8 @@ android {
             }
         }
         managedDevices {
-            devices {
-                create("Docs", com.android.build.api.dsl.ManagedVirtualDevice::class) {
+            localDevices {
+                create("Docs") {
                     device = "Pixel"
                     apiLevel = 35
                     systemImageSource = "aosp"
