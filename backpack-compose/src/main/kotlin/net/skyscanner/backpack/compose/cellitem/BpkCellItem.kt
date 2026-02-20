@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.cellitem
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -156,10 +157,10 @@ fun BpkCellItem(
 
         Column(
             modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
         ) {
             BpkText(
                 text = title,
-                modifier = if (body != null) Modifier.padding(bottom = BpkSpacing.Sm) else Modifier,
                 style = BpkTheme.typography.heading5,
                 color = BpkTheme.colors.textPrimary,
             )
