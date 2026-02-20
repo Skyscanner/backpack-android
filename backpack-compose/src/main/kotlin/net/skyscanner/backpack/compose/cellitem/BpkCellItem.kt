@@ -159,6 +159,7 @@ fun BpkCellItem(
         ) {
             BpkText(
                 text = title,
+                modifier = Modifier.padding(bottom = BpkSpacing.Sm),
                 style = BpkTheme.typography.heading5,
                 color = BpkTheme.colors.textPrimary,
             )
