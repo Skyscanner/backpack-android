@@ -20,7 +20,9 @@ package net.skyscanner.backpack.compose.segmentedcontrol
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.segmentedcontrol.internal.BpkSegmentedControlImpl
+import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkSegmentedControlStyle {
     CanvasDefault,
@@ -39,6 +41,7 @@ fun BpkSegmentedControl(
     modifier: Modifier = Modifier,
     shadow: Boolean = false,
     type: BpkSegmentedControlStyle = BpkSegmentedControlStyle.CanvasDefault,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     val limitedButtonContents = buttonContents.take(maxNumberOfButtons)
     BpkSegmentedControlImpl(
@@ -48,5 +51,6 @@ fun BpkSegmentedControl(
         modifier = modifier,
         shadow = shadow,
         type = type,
+        textStyle = textStyle
     )
 }

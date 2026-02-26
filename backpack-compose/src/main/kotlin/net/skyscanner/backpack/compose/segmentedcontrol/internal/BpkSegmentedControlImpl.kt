@@ -41,9 +41,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.segmentedcontrol.BpkSegmentedControlStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -65,6 +67,7 @@ internal fun BpkSegmentedControlImpl(
     shadow: Boolean,
     type: BpkSegmentedControlStyle,
     modifier: Modifier = Modifier,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -88,6 +91,7 @@ internal fun BpkSegmentedControlImpl(
                 type = type,
                 content = content,
                 onItemClick = { onItemClick(index) },
+                textStyle = textStyle
             )
         }
     }
@@ -100,6 +104,7 @@ private fun BpkSegmentedControlButton(
     content: String,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     Box(
         modifier = modifier
@@ -122,7 +127,7 @@ private fun BpkSegmentedControlButton(
             text = content,
             textAlign = TextAlign.Center,
             color = getTextColor(type, isSelected),
-            style = BpkTheme.typography.footnote,
+            style = textStyle,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
         )
