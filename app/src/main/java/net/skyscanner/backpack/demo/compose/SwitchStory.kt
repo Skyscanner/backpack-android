@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,10 +52,11 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun SwitchStory(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .padding(BpkSpacing.Base)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-
         DefaultUncheckedSwitchExample()
         DefaultCheckedSwitchExample()
 
@@ -234,6 +237,7 @@ internal fun OnContrastUncheckedSwitchExample(modifier: Modifier = Modifier) {
             color = BpkTheme.colors.textOnDark,
             onCheckedChange = { checked = it },
             style = BpkSwitchStyle.OnContrast,
+            textStyle = BpkTheme.typography.label1
         )
     }
 }

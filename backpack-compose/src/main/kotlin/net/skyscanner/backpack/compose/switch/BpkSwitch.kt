@@ -43,9 +43,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -82,6 +84,7 @@ fun BpkSwitch(
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
     style: BpkSwitchStyle = BpkSwitchStyle.Default,
+    textStyle: TextStyle = LocalTextStyle.current,
 ) {
     BpkSwitch(
         checked = checked,
@@ -94,7 +97,7 @@ fun BpkSwitch(
         onIconClick = onIconClick,
         style = style,
         content = {
-            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, color, icon, onIconClick)
+            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, textStyle, color, icon, onIconClick)
         },
     )
 }
@@ -113,6 +116,7 @@ fun BpkSwitch(
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
     style: BpkSwitchStyle = BpkSwitchStyle.Default,
+    textStyle: TextStyle = LocalTextStyle.current,
 ) {
     BpkSwitch(
         checked = checked,
@@ -125,7 +129,7 @@ fun BpkSwitch(
         onIconClick = onIconClick,
         style = style,
         content = {
-            TextWithSpacer(text, shouldTruncate, color, icon, onIconClick)
+            TextWithSpacer(text, shouldTruncate, textStyle, color, icon, onIconClick)
         },
     )
 }
@@ -188,6 +192,7 @@ fun BpkSwitch(
 private fun RowScope.TextWithSpacer(
     annotatedString: AnnotatedString,
     shouldTruncate: Boolean,
+    style: TextStyle,
     color: Color,
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
@@ -202,6 +207,7 @@ private fun RowScope.TextWithSpacer(
                 color = color,
                 text = annotatedString,
                 maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                style = style,
                 overflow = TextOverflow.Ellipsis,
             )
             if (icon != null) {
