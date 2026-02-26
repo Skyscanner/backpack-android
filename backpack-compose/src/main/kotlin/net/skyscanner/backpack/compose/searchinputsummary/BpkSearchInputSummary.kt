@@ -20,11 +20,14 @@ package net.skyscanner.backpack.compose.searchinputsummary
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Search
 
 sealed class Prefix {
@@ -74,10 +77,15 @@ fun BpkSearchInputSummary(
     inputHint: String,
     prefix: Prefix,
     onInputChanged: (String) -> Unit,
-    clearAction: BpkClearAction,
     modifier: Modifier = Modifier,
+    clearAction: BpkClearAction? = null,
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
     rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
+    iconTint: Color? = null,
+    textTint: Color? = null,
 ) {
     val isFocused = if (type is BpkSearchInputSummaryType.ReadOnly) type.isFocused else null
     BpkTextFieldImpl(
@@ -92,5 +100,10 @@ fun BpkSearchInputSummary(
         type = BpkTextFieldType.Search,
         isFocused = isFocused,
         rounding = rounding,
+        horizontalPadding = horizontalPadding,
+        contentPadding = contentPadding,
+        minHeight = minHeight,
+        iconTint = iconTint,
+        textTint = textTint,
     )
 }

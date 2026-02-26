@@ -55,6 +55,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -92,6 +93,11 @@ internal fun BpkTextFieldImpl(
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
     rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
+    iconTint: Color? = null,
+    textTint: Color? = null,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -121,6 +127,11 @@ internal fun BpkTextFieldImpl(
         clearAction = clearAction,
         type = type,
         rounding = rounding,
+        horizontalPadding = horizontalPadding,
+        contentPadding = contentPadding,
+        minHeight = minHeight,
+        iconTint = iconTint,
+        textTint = textTint,
     )
 }
 
@@ -144,6 +155,11 @@ internal fun BpkTextFieldImpl(
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
     rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
+    iconTint: Color? = null,
+    textTint: Color? = null,
 ) {
     BasicTextField(
         value = value,
@@ -181,6 +197,11 @@ internal fun BpkTextFieldImpl(
                 clearAction = if (readOnly && prefix == null) null else clearAction, // Remove clearAction if readOnly enabled.
                 type = type,
                 rounding = rounding,
+                horizontalPadding = horizontalPadding,
+                contentPadding = contentPadding,
+                minHeight = minHeight,
+                iconTint = iconTint,
+                textTint = textTint,
             )
         },
     )
@@ -199,6 +220,11 @@ private fun TextFieldBox(
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
     rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
+    iconTint: Color? = null,
+    textTint: Color? = null,
     textFieldContent: @Composable () -> Unit,
 ) {
     val textFieldBoxTintColor by animateColorAsState(
@@ -212,7 +238,7 @@ private fun TextFieldBox(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .width(IntrinsicSize.Max)
-            .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
+            .requiredHeightIn(min = minHeight)
             .border(
                 width = 1.dp, shape = shape,
                 color = animateColorAsState(
@@ -225,7 +251,7 @@ private fun TextFieldBox(
                 ).value,
             )
             .background(BpkTheme.colors.surfaceDefault, shape)
-            .padding(horizontal = BpkSpacing.Md),
+            .padding(horizontal = horizontalPadding),
     ) {
 
         when (prefix) {
@@ -242,7 +268,7 @@ private fun TextFieldBox(
                     contentDescription = null,
                     size = BpkIconSize.Large,
                     modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = textFieldBoxTintColor,
+                    tint = iconTint ?: textFieldBoxTintColor,
                 )
 
             else -> {}
@@ -251,12 +277,12 @@ private fun TextFieldBox(
         Box(
             modifier = Modifier
                 .weight(1f)
-                .padding(BpkSpacing.Md),
+                .padding(contentPadding),
         ) {
 
             BpkText(
                 text = placeholder ?: "",
-                color = textFieldBoxTintColor,
+                color = textTint ?: textFieldBoxTintColor,
                 maxLines = maxLines,
                 modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
                 style = BpkTheme.typography.bodyDefault,

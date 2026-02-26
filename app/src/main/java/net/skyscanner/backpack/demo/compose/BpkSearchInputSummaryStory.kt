@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -33,7 +34,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryRounding
@@ -64,6 +67,7 @@ fun SearchInputSummaryExamples(modifier: Modifier = Modifier) {
             .background(BpkTheme.colors.surfaceContrast),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
+        DefaultExample()
         CornerExample()
     }
 }
@@ -213,51 +217,66 @@ internal fun ReadOnlyExample() {
 @ComposeStory(name = "Corner", kind = StoryKind.ScreenshotOnly)
 internal fun CornerExample() {
     Column(
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+        verticalArrangement = Arrangement.spacedBy(0.dp),
         modifier = Modifier.padding(BpkSpacing.Base)
             .background(BpkTheme.colors.surfaceContrast),
     ) {
         SearchInputSummaryStory(
-            name = "Corner",
-            inputText = "",
-            inputHint = "London Heathrow",
+            inputText = "London Heathrow",
+            inputHint = "",
             prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
             rounding = BpkSearchInputSummaryRounding.TopCorners,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+            textTint = BpkTheme.colors.textPrimary,
+            iconTint = BpkTheme.colors.textPrimary,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Md,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Base,
         )
 
         SearchInputSummaryStory(
-            name = "Croner",
-            inputText = "",
-            inputHint = "Tokyo Haneda",
+            inputText = "Barcelona",
+            inputHint = "",
             prefix = Prefix.Icon(BpkIcon.FlightLanding),
             rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+            textTint = BpkTheme.colors.textPrimary,
+            iconTint = BpkTheme.colors.textPrimary,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Md,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Base,
         )
 
         SearchInputSummaryStory(
-            name = "Croner",
-            inputText = "",
-            inputHint = "Thurs 9 May - Fri 29 May, 2025",
+            inputText = "Fri 18 Aug – Fri 25 Aug, 2025",
+            inputHint = "",
             prefix = Prefix.Icon(BpkIcon.Calendar),
             rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+            textTint = BpkTheme.colors.textPrimary,
+            iconTint = BpkTheme.colors.textPrimary,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Md,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Base,
         )
 
         SearchInputSummaryStory(
-            name = "Croner",
-            inputText = "",
-            inputHint = "2 adults, 1 child",
+            inputText = "2 adults, 1 child, economy",
+            inputHint = "",
             prefix = Prefix.Icon(BpkIcon.Family),
             rounding = BpkSearchInputSummaryRounding.BottomCorners,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+            textTint = BpkTheme.colors.textPrimary,
+            iconTint = BpkTheme.colors.textPrimary,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Md,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Base,
         )
     }
 }
 
 @Composable
 internal fun SearchInputSummaryStory(
-    name: String,
     modifier: Modifier = Modifier,
     searchInputSummaryModifier: Modifier = Modifier,
     inputText: String = stringResource(id = R.string.city_rome),
@@ -265,6 +284,12 @@ internal fun SearchInputSummaryStory(
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
     rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    name: String? = null,
+    iconTint: Color? = null,
+    textTint: Color? = null,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
 ) {
     Column(
         modifier = modifier,
@@ -283,6 +308,11 @@ internal fun SearchInputSummaryStory(
             modifier = searchInputSummaryModifier.fillMaxWidth(),
             type = type,
             rounding = rounding,
+            iconTint = iconTint,
+            textTint = textTint,
+            horizontalPadding = horizontalPadding,
+            contentPadding = contentPadding,
+            minHeight = minHeight,
         )
     }
 }
