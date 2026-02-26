@@ -21,6 +21,8 @@ package net.skyscanner.backpack.compose.navigationtabgroup
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationtabgroup.internal.BpkNavigationTabGroupImpl
@@ -33,6 +35,21 @@ enum class BpkNavigationTabGroupStyle {
     SurfaceContrast,
 }
 
+/**
+ * Defines the alignment for items in BpkNavigationTabGroup.
+ */
+enum class BpkNavigationTabGroupItemAlignment {
+    /**
+     * Items are arranged horizontally in a row.
+     */
+    Horizontal,
+
+    /**
+     * Items are arranged vertically in a column.
+     */
+    Vertical,
+}
+
 @Composable
 fun BpkNavigationTabGroup(
     tabs: List<BpkNavigationTabItem>,
@@ -42,6 +59,10 @@ fun BpkNavigationTabGroup(
     style: BpkNavigationTabGroupStyle = BpkNavigationTabGroupStyle.CanvasDefault,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
+    itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
+    tabBackgroundColor: Color? = null,
+    tabWidth: Dp? = null,
+    tabHeight: Dp? = null,
 ) {
     BpkNavigationTabGroupImpl(
         tabs = tabs,
@@ -51,5 +72,9 @@ fun BpkNavigationTabGroup(
         style = style,
         contentPadding = contentPadding,
         behaviouralEventWrapper = behaviouralEventWrapper,
+        itemAlignment = itemAlignment,
+        tabBackgroundColor = tabBackgroundColor,
+        tabWidth = tabWidth,
+        tabHeight = tabHeight,
     )
 }

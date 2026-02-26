@@ -19,17 +19,22 @@
 package net.skyscanner.backpack.compose.navigationtabgroup.internal
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupItemAlignment
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -44,33 +49,84 @@ internal fun BpkNavigationTabGroupImpl(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
+    itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
+    tabBackgroundColor: Color? = null,
+    tabWidth: Dp? = null,
+    tabHeight: Dp? = null,
 ) {
-    LazyRow(
-        modifier = modifier.selectableGroup(),
-        contentPadding = contentPadding,
-        state = rememberLazyListState(),
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-    ) {
-        itemsIndexed(items = tabs) { index, tab ->
-            if (behaviouralEventWrapper != null) {
-                behaviouralEventWrapper(tab, Modifier) {
-                    NavigationTabItem(
-                        tab = tab,
-                        selected = index == selectedIndex,
-                        style = style,
-                        onClick = {
-                            onItemClicked.invoke(tabs[index])
-                            notifyClick()
-                        },
-                    )
+    when (itemAlignment) {
+        BpkNavigationTabGroupItemAlignment.Horizontal -> {
+            LazyRow(
+                modifier = modifier.selectableGroup(),
+                contentPadding = contentPadding,
+                state = rememberLazyListState(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+            ) {
+                itemsIndexed(items = tabs) { index, tab ->
+                    if (behaviouralEventWrapper != null) {
+                        behaviouralEventWrapper(tab, Modifier) {
+                            NavigationTabItem(
+                                tab = tab,
+                                selected = index == selectedIndex,
+                                style = style,
+                                onClick = {
+                                    onItemClicked.invoke(tabs[index])
+                                    notifyClick()
+                                },
+                                backgroundColor = tabBackgroundColor,
+                                width = tabWidth,
+                                height = tabHeight,
+                            )
+                        }
+                    } else {
+                        NavigationTabItem(
+                            tab = tab,
+                            selected = index == selectedIndex,
+                            style = style,
+                            onClick = { onItemClicked.invoke(tabs[index]) },
+                            backgroundColor = tabBackgroundColor,
+                            width = tabWidth,
+                            height = tabHeight,
+                        )
+                    }
                 }
-            } else {
-                NavigationTabItem(
-                    tab = tab,
-                    selected = index == selectedIndex,
-                    style = style,
-                    onClick = { onItemClicked.invoke(tabs[index]) },
-                )
+            }
+        }
+        BpkNavigationTabGroupItemAlignment.Vertical -> {
+            LazyColumn(
+                modifier = modifier.selectableGroup(),
+                contentPadding = contentPadding,
+                state = rememberLazyListState(),
+                verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+            ) {
+                itemsIndexed(items = tabs) { index, tab ->
+                    if (behaviouralEventWrapper != null) {
+                        behaviouralEventWrapper(tab, Modifier) {
+                            NavigationTabItem(
+                                tab = tab,
+                                selected = index == selectedIndex,
+                                style = style,
+                                onClick = {
+                                    onItemClicked.invoke(tabs[index])
+                                    notifyClick()
+                                },
+                                backgroundColor = tabBackgroundColor,
+                                width = tabWidth,
+                                height = tabHeight,
+                            )
+                        }
+                    } else {
+                        NavigationTabItem(
+                            tab = tab,
+                            selected = index == selectedIndex,
+                            style = style,
+                            onClick = { onItemClicked.invoke(tabs[index]) },
+                            backgroundColor = tabBackgroundColor,
+                            width = tabWidth,
+                            height = tabHeight,
+                        )
+                    }
+                }
             }
         }
     }
@@ -83,6 +139,9 @@ private fun NavigationTabItem(
     style: BpkNavigationTabGroupStyle,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    backgroundColor: Color? = null,
+    width: Dp? = null,
+    height: Dp? = null,
 ) {
     val tabStyle = when (style) {
         BpkNavigationTabGroupStyle.SurfaceContrast -> BpkNavigationTabStyle.SurfaceContrast
@@ -95,5 +154,8 @@ private fun NavigationTabItem(
         selected = selected,
         style = tabStyle,
         onClick = onClick,
+        backgroundColor = backgroundColor,
+        width = width,
+        height = height,
     )
 }

@@ -61,6 +61,9 @@ internal fun BpkNavigationTab(
     modifier: Modifier = Modifier,
     style: BpkNavigationTabStyle = BpkNavigationTabStyle.CanvasDefault,
     icon: BpkIcon? = null,
+    backgroundColor: Color? = null,
+    width: androidx.compose.ui.unit.Dp? = null,
+    height: androidx.compose.ui.unit.Dp? = null,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     BpkNavigationTabImpl(
@@ -77,6 +80,9 @@ internal fun BpkNavigationTab(
                     indication = bpkRipple(),
                 ) { onClick!!.invoke() }
         },
+        backgroundColor = backgroundColor,
+        width = width,
+        height = height,
     )
 }
 
@@ -88,9 +94,12 @@ private fun BpkNavigationTabImpl(
     icon: BpkIcon?,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
+    backgroundColor: Color? = null,
+    width: androidx.compose.ui.unit.Dp? = null,
+    height: androidx.compose.ui.unit.Dp? = null,
 ) {
-    val backgroundColor by animateColorAsState(
-        targetValue = when {
+    val bgColor by animateColorAsState(
+        targetValue = backgroundColor ?: when {
             selected -> BpkTheme.colors.coreAccent
             else -> interactionSource.animateAsColor(
                 default = Color.Transparent,
@@ -122,14 +131,15 @@ private fun BpkNavigationTabImpl(
         label = "",
     )
 
-    val navigationTabHeight = 36.dp
+    val navigationTabHeight = height ?: 36.dp
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .height(navigationTabHeight)
+            .applyIf(width != null) { width(width!!) }
             .clip(CircleShape)
-            .background(backgroundColor)
+            .background(bgColor)
             .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
             .padding(horizontal = BpkSpacing.Base),
     ) {
