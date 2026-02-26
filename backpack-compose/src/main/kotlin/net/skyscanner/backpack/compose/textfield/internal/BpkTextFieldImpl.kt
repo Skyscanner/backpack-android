@@ -60,7 +60,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryRounding
+import net.skyscanner.backpack.compose.searchinputsummary.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
@@ -92,7 +92,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    rounding: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
     minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
@@ -154,7 +154,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    rounding: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
     minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
@@ -219,7 +219,7 @@ private fun TextFieldBox(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    rounding: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
     minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
@@ -373,7 +373,7 @@ internal enum class BpkTextFieldType {
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    rounding: Docking = Docking.Float,
 ): RoundedCornerShape {
     val cornerRadius = if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) {
         BpkBorderRadius.Md
@@ -382,21 +382,21 @@ private fun textFieldShape(
     }
 
     return when (rounding) {
-        is BpkSearchInputSummaryRounding.AllCorners -> RoundedCornerShape(cornerRadius)
-        is BpkSearchInputSummaryRounding.TopCorners -> RoundedCornerShape(
+        is Docking.Float -> RoundedCornerShape(cornerRadius)
+        is Docking.Top -> RoundedCornerShape(
             topStart = cornerRadius,
             bottomStart = 0.dp,
             topEnd = cornerRadius,
             bottomEnd = 0.dp,
         )
 
-        is BpkSearchInputSummaryRounding.BottomCorners -> RoundedCornerShape(
+        is Docking.Bottom -> RoundedCornerShape(
             topStart = 0.dp,
             bottomStart = cornerRadius,
             topEnd = 0.dp,
             bottomEnd = cornerRadius,
         )
-        BpkSearchInputSummaryRounding.NoRoundedCorners -> RoundedCornerShape(
+        Docking.Middle -> RoundedCornerShape(
             topStart = 0.dp,
             bottomStart = 0.dp,
             topEnd = 0.dp,

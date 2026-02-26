@@ -39,7 +39,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
-import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryRounding
+import net.skyscanner.backpack.compose.searchinputsummary.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryType
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
@@ -225,7 +225,7 @@ internal fun CornerExample() {
             inputText = "London Heathrow",
             inputHint = "",
             prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
-            rounding = BpkSearchInputSummaryRounding.TopCorners,
+            rounding = Docking.Top,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
             textTint = BpkTheme.colors.textPrimary,
             iconTint = BpkTheme.colors.textPrimary,
@@ -238,7 +238,7 @@ internal fun CornerExample() {
             inputText = "Barcelona",
             inputHint = "",
             prefix = Prefix.Icon(BpkIcon.FlightLanding),
-            rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
+            rounding = Docking.Middle,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
             textTint = BpkTheme.colors.textPrimary,
             iconTint = BpkTheme.colors.textPrimary,
@@ -251,7 +251,7 @@ internal fun CornerExample() {
             inputText = "Fri 18 Aug – Fri 25 Aug, 2025",
             inputHint = "",
             prefix = Prefix.Icon(BpkIcon.Calendar),
-            rounding = BpkSearchInputSummaryRounding.NoRoundedCorners,
+            rounding = Docking.Middle,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
             textTint = BpkTheme.colors.textPrimary,
             iconTint = BpkTheme.colors.textPrimary,
@@ -264,7 +264,7 @@ internal fun CornerExample() {
             inputText = "2 adults, 1 child, economy",
             inputHint = "",
             prefix = Prefix.Icon(BpkIcon.Family),
-            rounding = BpkSearchInputSummaryRounding.BottomCorners,
+            rounding = Docking.Bottom,
             type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
             textTint = BpkTheme.colors.textPrimary,
             iconTint = BpkTheme.colors.textPrimary,
@@ -283,7 +283,7 @@ internal fun SearchInputSummaryStory(
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    rounding: Docking = Docking.Float,
     name: String? = null,
     iconTint: Color? = null,
     textTint: Color? = null,
@@ -307,7 +307,7 @@ internal fun SearchInputSummaryStory(
             },
             modifier = searchInputSummaryModifier.fillMaxWidth(),
             type = type,
-            rounding = rounding,
+            docking = rounding,
             iconTint = iconTint,
             textTint = textTint,
             horizontalPadding = horizontalPadding,

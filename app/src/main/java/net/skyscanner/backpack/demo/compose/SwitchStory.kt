@@ -209,7 +209,7 @@ internal fun SwitchWithInfoIconExample(modifier: Modifier = Modifier) {
         text = "Driver aged 25-75",
         checked = checked,
         onCheckedChange = { checked = it },
-         icon = BpkIcon.InformationCircle,
-         onIconClick = { /* Handle info icon click */ },
+        icon = BpkIcon.InformationCircle,
+        onIconClick = { /* Handle info icon click */ },
     )
 }

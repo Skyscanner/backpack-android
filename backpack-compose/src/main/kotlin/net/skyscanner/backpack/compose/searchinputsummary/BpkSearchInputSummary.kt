@@ -50,25 +50,25 @@ sealed class BpkSearchInputSummaryType {
 /**
  * Defines the corner rounding style for BpkSearchInputSummary.
  */
-sealed class BpkSearchInputSummaryRounding {
+sealed class Docking {
     /**
      * All corners are rounded (default behavior).
      */
-    data object AllCorners : BpkSearchInputSummaryRounding()
+    data object Float : Docking()
 
     /**
      * Only the start corners (top-start and bottom-start) are rounded.
      * Useful for the first item in a horizontal row of inputs.
      */
-    data object TopCorners : BpkSearchInputSummaryRounding()
+    data object Top : Docking()
 
     /**
      * Only the end corners (top-end and bottom-end) are rounded.
      * Useful for the last item in a horizontal row of inputs.
      */
-    data object BottomCorners : BpkSearchInputSummaryRounding()
+    data object Bottom : Docking()
 
-    data object NoRoundedCorners : BpkSearchInputSummaryRounding()
+    data object Middle : Docking()
 }
 
 @Composable
@@ -80,7 +80,7 @@ fun BpkSearchInputSummary(
     modifier: Modifier = Modifier,
     clearAction: BpkClearAction? = null,
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
-    rounding: BpkSearchInputSummaryRounding = BpkSearchInputSummaryRounding.AllCorners,
+    docking: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
     minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
@@ -99,7 +99,7 @@ fun BpkSearchInputSummary(
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
         isFocused = isFocused,
-        rounding = rounding,
+        rounding = docking,
         horizontalPadding = horizontalPadding,
         contentPadding = contentPadding,
         minHeight = minHeight,
