@@ -19,22 +19,18 @@
 package net.skyscanner.backpack.compose.navigationtabgroup.internal
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupItemAlignment
+import net.skyscanner.backpack.compose.navigationtabgroup.ItemAlignment
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -49,7 +45,7 @@ internal fun BpkNavigationTabGroupImpl(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
-    itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
+    itemAlignment: ItemAlignment = ItemAlignment.Horizontal,
 ) {
     LazyRow(
         modifier = modifier.selectableGroup(),
@@ -91,7 +87,7 @@ private fun NavigationTabItem(
     style: BpkNavigationTabGroupStyle,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
+    itemAlignment: ItemAlignment = ItemAlignment.Horizontal,
 ) {
     val tabStyle = when (style) {
         BpkNavigationTabGroupStyle.SurfaceContrast -> BpkNavigationTabStyle.SurfaceContrast
@@ -104,6 +100,6 @@ private fun NavigationTabItem(
         selected = selected,
         style = tabStyle,
         onClick = onClick,
-        isVertical = itemAlignment == BpkNavigationTabGroupItemAlignment.Vertical,
+        isVertical = itemAlignment == ItemAlignment.Vertical,
     )
 }

@@ -32,10 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroup
-import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupItemAlignment
+import net.skyscanner.backpack.compose.navigationtabgroup.ItemAlignment
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -144,7 +143,7 @@ internal fun NavigationTabGroupVerticalStory() {
             selectedIndex = selectedIndex,
             onItemClicked = { selectedIndex = tabs.indexOf(it) },
             style = BpkNavigationTabGroupStyle.SurfaceContrast,
-            itemAlignment = BpkNavigationTabGroupItemAlignment.Vertical,
+            itemAlignment = ItemAlignment.Vertical,
         )
     }
 }
