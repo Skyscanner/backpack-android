@@ -60,9 +60,6 @@ fun BpkNavigationTabGroup(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
     itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
-    tabBackgroundColor: Color? = null,
-    tabWidth: Dp? = null,
-    tabHeight: Dp? = null,
 ) {
     BpkNavigationTabGroupImpl(
         tabs = tabs,
@@ -73,8 +70,5 @@ fun BpkNavigationTabGroup(
         contentPadding = contentPadding,
         behaviouralEventWrapper = behaviouralEventWrapper,
         itemAlignment = itemAlignment,
-        tabBackgroundColor = tabBackgroundColor,
-        tabWidth = tabWidth,
-        tabHeight = tabHeight,
     )
 }

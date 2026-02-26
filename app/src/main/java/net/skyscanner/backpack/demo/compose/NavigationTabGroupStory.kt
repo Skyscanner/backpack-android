@@ -55,7 +55,10 @@ import net.skyscanner.backpack.meta.StoryKind
 fun NavigationTabGroupStory(modifier: Modifier = Modifier) {
     NavigationTabGroupDemo(
         modifier,
-    ) { style -> NavigationTabGroupSample(style = style) }
+    ) { style ->
+        NavigationTabGroupSample(style = style)
+        NavigationTabGroupVerticalStory()
+    }
 }
 
 @Composable
@@ -142,7 +145,6 @@ internal fun NavigationTabGroupVerticalStory() {
             onItemClicked = { selectedIndex = tabs.indexOf(it) },
             style = BpkNavigationTabGroupStyle.SurfaceContrast,
             itemAlignment = BpkNavigationTabGroupItemAlignment.Vertical,
-            tabHeight = 48.dp,
         )
     }
 }

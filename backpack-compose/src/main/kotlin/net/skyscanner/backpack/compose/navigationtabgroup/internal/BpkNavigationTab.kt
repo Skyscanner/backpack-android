@@ -27,8 +27,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -48,6 +51,7 @@ import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkNavigationTabColors
+import net.skyscanner.backpack.compose.tokens.internal.BpkSegmentedControlColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
 
@@ -64,9 +68,6 @@ internal fun BpkNavigationTab(
     modifier: Modifier = Modifier,
     style: BpkNavigationTabStyle = BpkNavigationTabStyle.CanvasDefault,
     icon: BpkIcon? = null,
-    backgroundColor: Color? = null,
-    width: androidx.compose.ui.unit.Dp? = null,
-    height: androidx.compose.ui.unit.Dp? = null,
     isVertical: Boolean = false,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -84,9 +85,6 @@ internal fun BpkNavigationTab(
                     indication = bpkRipple(),
                 ) { onClick!!.invoke() }
         },
-        backgroundColor = backgroundColor,
-        width = width,
-        height = height,
         isVertical = isVertical,
     )
 }
@@ -99,14 +97,13 @@ private fun BpkNavigationTabImpl(
     icon: BpkIcon?,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
-    backgroundColor: Color? = null,
     width: androidx.compose.ui.unit.Dp? = null,
     height: androidx.compose.ui.unit.Dp? = null,
     isVertical: Boolean = false,
 ) {
     val bgColor by animateColorAsState(
-        targetValue = backgroundColor ?: when {
-            selected -> BpkTheme.colors.coreAccent
+        targetValue = when {
+            selected -> BpkSegmentedControlColors.surfaceContrastOn
             else -> interactionSource.animateAsColor(
                 default = Color.Transparent,
                 pressed = style.pressedBackgroundColor,
@@ -144,12 +141,13 @@ private fun BpkNavigationTabImpl(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = modifier
-                .height(navigationTabHeight)
+                .wrapContentSize()
+                .heightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
+                .widthIn(min = BpkSpacing.Xxl + BpkSpacing.Xl + BpkSpacing.Sm)
                 .applyIf(width != null) { width(width!!) }
                 .clip(CircleShape)
                 .background(bgColor)
-                .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
-                .padding(BpkSpacing.Md),
+                .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
         ) {
             if (icon != null) {
                 BpkIcon(
@@ -166,7 +164,7 @@ private fun BpkNavigationTabImpl(
                 style = BpkTheme.typography.label2,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = if (icon != null) BpkSpacing.Sm else 0.dp),
+                modifier = Modifier.padding(top = if (icon != null) 1.dp else 0.dp),
             )
         }
     } else {
