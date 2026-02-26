@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,6 +36,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -66,6 +68,8 @@ fun SwitchStory(modifier: Modifier = Modifier) {
         CustomContentSwitchExample()
         EmptyContentWithSwitchExample()
         SwitchWithInfoIconExample()
+
+        OnContrastUncheckedSwitchExample()
     }
 }
 
@@ -212,4 +216,24 @@ internal fun SwitchWithInfoIconExample(modifier: Modifier = Modifier) {
         icon = BpkIcon.InformationCircle,
         onIconClick = { /* Handle info icon click */ },
     )
+}
+
+@Composable
+internal fun OnContrastUncheckedSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(BpkTheme.colors.surfaceContrast)
+            .padding(BpkSpacing.Base),
+    ) {
+        BpkSwitch(
+            modifier = Modifier.fillMaxWidth(),
+            text = "On Contrast Unchecked",
+            checked = checked,
+            color = BpkTheme.colors.textOnDark,
+            onCheckedChange = { checked = it },
+            style = BpkSwitchStyle.OnContrast,
+        )
+    }
 }

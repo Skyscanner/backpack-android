@@ -53,6 +53,21 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 
+/**
+ * Defines the style for BpkSwitch.
+ */
+sealed class BpkSwitchStyle {
+    /**
+     * Default style for switches on light backgrounds.
+     */
+    data object Default : BpkSwitchStyle()
+
+    /**
+     * Style for switches on contrasting (dark) backgrounds.
+     */
+    data object OnContrast : BpkSwitchStyle()
+}
+
 @Composable
 fun BpkSwitch(
     text: String,
@@ -66,6 +81,7 @@ fun BpkSwitch(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
 ) {
     BpkSwitch(
         checked = checked,
@@ -76,6 +92,7 @@ fun BpkSwitch(
         interactionSource = interactionSource,
         icon = icon,
         onIconClick = onIconClick,
+        style = style,
         content = {
             TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate, color, icon, onIconClick)
         },
@@ -95,6 +112,7 @@ fun BpkSwitch(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
 ) {
     BpkSwitch(
         checked = checked,
@@ -105,6 +123,7 @@ fun BpkSwitch(
         interactionSource = interactionSource,
         icon = icon,
         onIconClick = onIconClick,
+        style = style,
         content = {
             TextWithSpacer(text, shouldTruncate, color, icon, onIconClick)
         },
@@ -121,6 +140,7 @@ fun BpkSwitch(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     icon: BpkIcon? = null,
     onIconClick: (() -> Unit)? = null,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
     Row(
@@ -159,6 +179,7 @@ fun BpkSwitch(
             onCheckedChange = onCheckedChange,
             enabled = enabled,
             interactionSource = interactionSource,
+            style = style,
         )
     }
 }
@@ -206,6 +227,7 @@ private fun BpkSwitchImpl(
     enabled: Boolean,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
 ) {
     // our design system isn't designed with the minimum touch target in mind at the moment.
     // Disable the enforcement to avoid the extra padding
@@ -216,24 +238,44 @@ private fun BpkSwitchImpl(
             modifier = modifier.semantics { invisibleToUser() },
             enabled = enabled,
             interactionSource = interactionSource,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
-                checkedTrackColor = BpkTheme.colors.coreAccent,
-                checkedBorderColor = BpkTheme.colors.coreAccent,
-                checkedIconColor = Color.Transparent,
-                uncheckedThumbColor = BpkTheme.colors.textSecondary,
-                uncheckedTrackColor = BpkTheme.colors.canvasContrast,
-                uncheckedBorderColor = BpkTheme.colors.textSecondary,
-                uncheckedIconColor = Color.Transparent,
-                disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledCheckedIconColor = Color.Transparent,
-                disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedIconColor = Color.Transparent,
-            ),
+            colors = when (style) {
+                BpkSwitchStyle.Default -> SwitchDefaults.colors(
+                    checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
+                    checkedTrackColor = BpkTheme.colors.coreAccent,
+                    checkedBorderColor = BpkTheme.colors.coreAccent,
+                    checkedIconColor = Color.Transparent,
+                    uncheckedThumbColor = BpkTheme.colors.textSecondary,
+                    uncheckedTrackColor = BpkTheme.colors.canvasContrast,
+                    uncheckedBorderColor = BpkTheme.colors.textSecondary,
+                    uncheckedIconColor = Color.Transparent,
+                    disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedIconColor = Color.Transparent,
+                    disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedIconColor = Color.Transparent,
+                )
+                BpkSwitchStyle.OnContrast -> SwitchDefaults.colors(
+                    checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
+                    checkedTrackColor = BpkTheme.colors.coreAccent,
+                    checkedBorderColor = BpkTheme.colors.coreAccent,
+                    checkedIconColor = Color.Transparent,
+                    uncheckedThumbColor = BpkTheme.colors.textOnDark,
+                    uncheckedTrackColor = Color.Transparent,
+                    uncheckedBorderColor = BpkTheme.colors.textOnDark,
+                    uncheckedIconColor = Color.Transparent,
+                    disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedIconColor = Color.Transparent,
+                    disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedIconColor = Color.Transparent,
+                )
+            },
         )
     }
 }
