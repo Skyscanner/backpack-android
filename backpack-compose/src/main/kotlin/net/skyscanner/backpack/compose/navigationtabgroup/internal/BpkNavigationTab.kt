@@ -23,9 +23,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -64,6 +67,7 @@ internal fun BpkNavigationTab(
     backgroundColor: Color? = null,
     width: androidx.compose.ui.unit.Dp? = null,
     height: androidx.compose.ui.unit.Dp? = null,
+    isVertical: Boolean = false,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     BpkNavigationTabImpl(
@@ -83,6 +87,7 @@ internal fun BpkNavigationTab(
         backgroundColor = backgroundColor,
         width = width,
         height = height,
+        isVertical = isVertical,
     )
 }
 
@@ -97,6 +102,7 @@ private fun BpkNavigationTabImpl(
     backgroundColor: Color? = null,
     width: androidx.compose.ui.unit.Dp? = null,
     height: androidx.compose.ui.unit.Dp? = null,
+    isVertical: Boolean = false,
 ) {
     val bgColor by animateColorAsState(
         targetValue = backgroundColor ?: when {
@@ -133,33 +139,65 @@ private fun BpkNavigationTabImpl(
 
     val navigationTabHeight = height ?: 36.dp
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .height(navigationTabHeight)
-            .applyIf(width != null) { width(width!!) }
-            .clip(CircleShape)
-            .background(bgColor)
-            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
-            .padding(horizontal = BpkSpacing.Base),
-    ) {
-        if (icon != null) {
-            BpkIcon(
-                icon = icon,
-                size = BpkIconSize.Small,
-                contentDescription = null,
-                tint = contentColor,
+    if (isVertical) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+                .height(navigationTabHeight)
+                .applyIf(width != null) { width(width!!) }
+                .clip(CircleShape)
+                .background(bgColor)
+                .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
+                .padding(BpkSpacing.Md),
+        ) {
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon,
+                    size = BpkIconSize.Small,
+                    contentDescription = null,
+                    tint = contentColor,
+                )
+            }
+
+            BpkText(
+                text = text,
+                color = contentColor,
+                style = BpkTheme.typography.label2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(top = if (icon != null) BpkSpacing.Sm else 0.dp),
             )
         }
+    } else {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
+                .height(navigationTabHeight)
+                .applyIf(width != null) { width(width!!) }
+                .clip(CircleShape)
+                .background(bgColor)
+                .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
+                .padding(horizontal = BpkSpacing.Base),
+        ) {
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon,
+                    size = BpkIconSize.Small,
+                    contentDescription = null,
+                    tint = contentColor,
+                )
+            }
 
-        BpkText(
-            text = text,
-            color = contentColor,
-            style = BpkTheme.typography.label2,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = if (icon != null) BpkSpacing.Md else 0.dp),
-        )
+            BpkText(
+                text = text,
+                color = contentColor,
+                style = BpkTheme.typography.label2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(start = if (icon != null) BpkSpacing.Md else 0.dp),
+            )
+        }
     }
 }
 

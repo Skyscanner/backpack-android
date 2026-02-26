@@ -76,6 +76,7 @@ internal fun BpkNavigationTabGroupImpl(
                                 backgroundColor = tabBackgroundColor,
                                 width = tabWidth,
                                 height = tabHeight,
+                                itemAlignment = itemAlignment,
                             )
                         }
                     } else {
@@ -87,6 +88,7 @@ internal fun BpkNavigationTabGroupImpl(
                             backgroundColor = tabBackgroundColor,
                             width = tabWidth,
                             height = tabHeight,
+                            itemAlignment = itemAlignment,
                         )
                     }
                 }
@@ -113,6 +115,7 @@ internal fun BpkNavigationTabGroupImpl(
                                 backgroundColor = tabBackgroundColor,
                                 width = tabWidth,
                                 height = tabHeight,
+                                itemAlignment = itemAlignment,
                             )
                         }
                     } else {
@@ -124,6 +127,7 @@ internal fun BpkNavigationTabGroupImpl(
                             backgroundColor = tabBackgroundColor,
                             width = tabWidth,
                             height = tabHeight,
+                            itemAlignment = itemAlignment,
                         )
                     }
                 }
@@ -142,6 +146,7 @@ private fun NavigationTabItem(
     backgroundColor: Color? = null,
     width: Dp? = null,
     height: Dp? = null,
+    itemAlignment: BpkNavigationTabGroupItemAlignment = BpkNavigationTabGroupItemAlignment.Horizontal,
 ) {
     val tabStyle = when (style) {
         BpkNavigationTabGroupStyle.SurfaceContrast -> BpkNavigationTabStyle.SurfaceContrast
@@ -157,5 +162,6 @@ private fun NavigationTabItem(
         backgroundColor = backgroundColor,
         width = width,
         height = height,
+        isVertical = itemAlignment == BpkNavigationTabGroupItemAlignment.Vertical,
     )
 }
