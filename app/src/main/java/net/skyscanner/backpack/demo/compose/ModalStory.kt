@@ -23,12 +23,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.modal.BpkModal
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
@@ -91,27 +89,24 @@ private fun ModalDemo(
 
     if (showModal.value) {
         val modalState = rememberBpkModalState()
-        val coroutineScope = rememberCoroutineScope()
         BpkModal(
             state = modalState,
             title = title,
             navIcon = when (navActionType) {
                 ActionType.Close -> NavIcon.Close(
                     contentDescription = stringResource(id = R.string.navigation_back),
-                    onClick = { coroutineScope.launch { modalState.hide() } },
+                    onClick = { modalState.hide() },
                 )
 
                 ActionType.Back -> NavIcon.Back(
                     contentDescription = stringResource(id = R.string.navigation_back),
-                    onClick = { coroutineScope.launch { modalState.hide() } },
+                    onClick = { modalState.hide() },
                 )
             },
             action = actionText?.let {
                 TextAction(
                     text = it,
-                    onClick = {
-                        coroutineScope.launch { modalState.hide() }
-                    },
+                    onClick = { modalState.hide() },
                 )
             },
             onDismiss = { showModal.value = false },
