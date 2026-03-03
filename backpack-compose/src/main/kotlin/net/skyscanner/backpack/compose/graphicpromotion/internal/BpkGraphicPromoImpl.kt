@@ -197,6 +197,7 @@ private fun SponsoredMessage(
     val inlineIconId = "infoIcon"
     val annotatedText = buildAnnotatedString {
         append(sponsor.title)
+        append(WORD_JOINER)
         appendInlineContent(inlineIconId)
     }
     val density = LocalDensity.current
@@ -435,6 +436,7 @@ private const val RATIO_PORTRAIT_TABLET: Float = 705 / 360f
 private const val RATIO_PORTRAIT_DESKTOP: Float = 1024 / 460f
 private const val SPONSOR_LOGO_HEIGHT = 32
 private const val SPONSOR_LOGO_WIDTH = 160
+private const val WORD_JOINER = "\u2060"
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,
