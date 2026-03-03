@@ -87,9 +87,9 @@ fun BpkSwapButton(
     }
 
     val borderColor = when (style) {
-        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.surfaceContrast
+        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.canvasContrast
         BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvas
-        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.corePrimary
+        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.textPrimary
     }
 
     Box(
