@@ -200,10 +200,11 @@ private fun SponsoredMessage(
     val inlineIconId = "infoIcon"
     val annotatedText = buildAnnotatedString {
         append(sponsor.title)
-        appendInlineContent(inlineIconId, "[info]")
+        appendInlineContent(inlineIconId)
     }
     val density = LocalDensity.current
     val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
+    val iconSizePx = with(density) { BpkSpacing.Base.toPx() }
     val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
     val inlineContent = mapOf(
         inlineIconId to InlineTextContent(
@@ -227,7 +228,7 @@ private fun SponsoredMessage(
     )
 
     var iconCenter by remember { mutableStateOf(Offset.Zero) }
-    val iconCharOffset = sponsor.title.length + 1
+    val iconCharOffset = sponsor.title.length
 
     Box(modifier = modifier) {
         BpkText(
@@ -238,7 +239,11 @@ private fun SponsoredMessage(
             onTextLayout = { result ->
                 onTextLayout(result)
                 if (iconCharOffset < result.layoutInput.text.length) {
-                    iconCenter = result.getBoundingBox(iconCharOffset).center
+                    val rect = result.getBoundingBox(iconCharOffset)
+                    iconCenter = Offset(
+                        x = rect.right - iconSizePx / 2f,
+                        y = rect.center.y,
+                    )
                 }
             },
             inlineContent = inlineContent,
