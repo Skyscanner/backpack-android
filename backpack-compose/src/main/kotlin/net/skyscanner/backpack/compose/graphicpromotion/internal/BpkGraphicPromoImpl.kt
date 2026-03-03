@@ -33,12 +33,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,10 +58,16 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collectLatest
@@ -64,12 +75,15 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVariant
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.InformationCircle
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 import net.skyscanner.backpack.compose.utils.isDesktop
 import net.skyscanner.backpack.compose.utils.isSmallTablet
 import net.skyscanner.backpack.compose.utils.isTablet
@@ -170,7 +184,7 @@ private fun SponsorOverlayView(
         Column {
             SponsoredLogo(sponsorLogo)
             Spacer(Modifier.height(BpkSpacing.Md))
-            SponsoredMessage(sponsor, textColor)
+            SponsoredMessage(sponsor = sponsor, textColor = textColor)
         }
     }
 }
@@ -179,16 +193,76 @@ private fun SponsorOverlayView(
 private fun SponsoredMessage(
     sponsor: BpkGraphicsPromoSponsor,
     textColor: Color,
+    modifier: Modifier = Modifier,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
-    BpkText(
-        text = sponsor.title,
-        style = BpkTheme.typography.caption,
-        color = textColor,
-        maxLines = maxLines,
-        onTextLayout = onTextLayout,
+    val inlineIconId = "infoIcon"
+    val annotatedText = buildAnnotatedString {
+        append(sponsor.title)
+        appendInlineContent(inlineIconId, "[info]")
+    }
+    val density = LocalDensity.current
+    val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
+    val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
+    val inlineContent = mapOf(
+        inlineIconId to InlineTextContent(
+            Placeholder(
+                width = placeholderWidthSp,
+                height = iconSizeSp,
+                placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
+            ),
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.CenterEnd,
+            ) {
+                BpkIcon(
+                    icon = BpkIcon.InformationCircle,
+                    contentDescription = null,
+                    tint = textColor,
+                )
+            }
+        },
     )
+
+    var iconCenter by remember { mutableStateOf(Offset.Zero) }
+    val iconCharOffset = sponsor.title.length + 1
+
+    Box(modifier = modifier) {
+        BpkText(
+            text = annotatedText,
+            style = BpkTheme.typography.caption,
+            color = textColor,
+            maxLines = maxLines,
+            onTextLayout = { result ->
+                onTextLayout(result)
+                if (iconCharOffset < result.layoutInput.text.length) {
+                    iconCenter = result.getBoundingBox(iconCharOffset).center
+                }
+            },
+            inlineContent = inlineContent,
+        )
+        if (iconCenter != Offset.Zero) {
+            val touchTargetSize = MIN_TOUCH_TARGET.dp
+            @Suppress("ModifierMissing")
+            Box(modifier = Modifier.matchParentSize()) {
+                Box(
+                    modifier = Modifier
+                        .offset(
+                            x = with(density) { iconCenter.x.toDp() } - touchTargetSize / 2,
+                            y = with(density) { iconCenter.y.toDp() } - touchTargetSize / 2,
+                        )
+                        .size(touchTargetSize)
+                        .clickableWithRipple { sponsor.callToAction.onClick() }
+                        .clearAndSetSemantics {
+                            contentDescription = sponsor.callToAction.accessibilityLabel
+                            role = Role.Button
+                        },
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -382,6 +456,7 @@ private const val RATIO_PORTRAIT_TABLET: Float = 705 / 360f
 private const val RATIO_PORTRAIT_DESKTOP: Float = 1024 / 460f
 private const val SPONSOR_LOGO_HEIGHT = 32
 private const val SPONSOR_LOGO_WIDTH = 160
+private const val MIN_TOUCH_TARGET = 48
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,
