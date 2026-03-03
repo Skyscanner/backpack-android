@@ -211,20 +211,24 @@ private fun SponsoredMessage(
             ),
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickableWithRipple { sponsor.callToAction.onClick() }
-                    .clearAndSetSemantics {
-                        contentDescription = sponsor.callToAction.accessibilityLabel
-                        role = Role.Button
-                    },
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.CenterEnd,
             ) {
-                BpkIcon(
-                    icon = BpkIcon.InformationCircle,
-                    contentDescription = null,
-                    tint = textColor,
-                )
+                Box(
+                    modifier = Modifier
+                        .clickableWithRipple { sponsor.callToAction.onClick() }
+                        .clearAndSetSemantics {
+                            contentDescription = sponsor.callToAction.accessibilityLabel
+                            role = Role.Button
+                        },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    BpkIcon(
+                        icon = BpkIcon.InformationCircle,
+                        contentDescription = null,
+                        tint = textColor,
+                    )
+                }
             }
         },
     )
