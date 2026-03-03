@@ -36,9 +36,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -62,7 +60,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -204,7 +201,6 @@ private fun SponsoredMessage(
     }
     val density = LocalDensity.current
     val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
-    val iconSizePx = with(density) { BpkSpacing.Base.toPx() }
     val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
     val inlineContent = mapOf(
         inlineIconId to InlineTextContent(
@@ -215,7 +211,13 @@ private fun SponsoredMessage(
             ),
         ) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickableWithRipple { sponsor.callToAction.onClick() }
+                    .clearAndSetSemantics {
+                        contentDescription = sponsor.callToAction.accessibilityLabel
+                        role = Role.Button
+                    },
                 contentAlignment = Alignment.CenterEnd,
             ) {
                 BpkIcon(
@@ -227,47 +229,15 @@ private fun SponsoredMessage(
         },
     )
 
-    var iconCenter by remember { mutableStateOf(Offset.Zero) }
-    val iconCharOffset = sponsor.title.length
-
-    Box(modifier = modifier) {
-        BpkText(
-            text = annotatedText,
-            style = BpkTheme.typography.caption,
-            color = textColor,
-            maxLines = maxLines,
-            onTextLayout = { result ->
-                onTextLayout(result)
-                if (iconCharOffset < result.layoutInput.text.length) {
-                    val rect = result.getBoundingBox(iconCharOffset)
-                    iconCenter = Offset(
-                        x = rect.right - iconSizePx / 2f,
-                        y = rect.center.y,
-                    )
-                }
-            },
-            inlineContent = inlineContent,
-        )
-        if (iconCenter != Offset.Zero) {
-            val touchTargetSize = MIN_TOUCH_TARGET.dp
-            @Suppress("ModifierMissing")
-            Box(modifier = Modifier.matchParentSize()) {
-                Box(
-                    modifier = Modifier
-                        .offset(
-                            x = with(density) { iconCenter.x.toDp() } - touchTargetSize / 2,
-                            y = with(density) { iconCenter.y.toDp() } - touchTargetSize / 2,
-                        )
-                        .size(touchTargetSize)
-                        .clickableWithRipple { sponsor.callToAction.onClick() }
-                        .clearAndSetSemantics {
-                            contentDescription = sponsor.callToAction.accessibilityLabel
-                            role = Role.Button
-                        },
-                )
-            }
-        }
-    }
+    BpkText(
+        modifier = modifier,
+        text = annotatedText,
+        style = BpkTheme.typography.caption,
+        color = textColor,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+        inlineContent = inlineContent,
+    )
 }
 
 @Composable
@@ -461,7 +431,6 @@ private const val RATIO_PORTRAIT_TABLET: Float = 705 / 360f
 private const val RATIO_PORTRAIT_DESKTOP: Float = 1024 / 460f
 private const val SPONSOR_LOGO_HEIGHT = 32
 private const val SPONSOR_LOGO_WIDTH = 160
-private const val MIN_TOUCH_TARGET = 48
 
 private val interactiveBackgroundAnimationSpec: AnimationSpec<Float> = spring(
     stiffness = 800f,
