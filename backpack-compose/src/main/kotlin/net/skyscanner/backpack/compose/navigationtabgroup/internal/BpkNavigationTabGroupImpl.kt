@@ -30,7 +30,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.navigationtabgroup.ItemAlignment
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabGroupStyle
 import net.skyscanner.backpack.compose.navigationtabgroup.BpkNavigationTabItem
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -45,7 +44,6 @@ internal fun BpkNavigationTabGroupImpl(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
-    itemAlignment: ItemAlignment = ItemAlignment.Horizontal,
 ) {
     LazyRow(
         modifier = modifier.selectableGroup(),
@@ -59,7 +57,6 @@ internal fun BpkNavigationTabGroupImpl(
                     NavigationTabItem(
                         tab = tab,
                         selected = index == selectedIndex,
-                        itemAlignment = itemAlignment,
                         style = style,
                         onClick = {
                             onItemClicked.invoke(tabs[index])
@@ -71,7 +68,6 @@ internal fun BpkNavigationTabGroupImpl(
                 NavigationTabItem(
                     tab = tab,
                     selected = index == selectedIndex,
-                    itemAlignment = itemAlignment,
                     style = style,
                     onClick = { onItemClicked.invoke(tabs[index]) },
                 )
@@ -87,7 +83,6 @@ private fun NavigationTabItem(
     style: BpkNavigationTabGroupStyle,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    itemAlignment: ItemAlignment = ItemAlignment.Horizontal,
 ) {
     val tabStyle = when (style) {
         BpkNavigationTabGroupStyle.SurfaceContrast -> BpkNavigationTabStyle.SurfaceContrast
@@ -100,6 +95,5 @@ private fun NavigationTabItem(
         selected = selected,
         style = tabStyle,
         onClick = onClick,
-        isVertical = itemAlignment == ItemAlignment.Vertical,
     )
 }

@@ -68,7 +68,6 @@ internal fun BpkNavigationTab(
     modifier: Modifier = Modifier,
     style: BpkNavigationTabStyle = BpkNavigationTabStyle.CanvasDefault,
     icon: BpkIcon? = null,
-    isVertical: Boolean = false,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     BpkNavigationTabImpl(
@@ -85,7 +84,6 @@ internal fun BpkNavigationTab(
                     indication = bpkRipple(),
                 ) { onClick!!.invoke() }
         },
-        isVertical = isVertical,
     )
 }
 
@@ -97,9 +95,6 @@ private fun BpkNavigationTabImpl(
     icon: BpkIcon?,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
-    width: androidx.compose.ui.unit.Dp? = null,
-    height: androidx.compose.ui.unit.Dp? = null,
-    isVertical: Boolean = false,
 ) {
     val bgColor by animateColorAsState(
         targetValue = when {
@@ -125,18 +120,14 @@ private fun BpkNavigationTabImpl(
 
     val contentColor by animateColorAsState(
         targetValue = when {
-            selected -> BpkTheme.colors.textPrimaryInverse
+            selected -> BpkTheme.colors.textOnDark
             else -> interactionSource.animateAsColor(
-                default = style.contentColor,
-                pressed = style.pressedContentColor,
+                default = BpkTheme.colors.textOnDark,
+                pressed = BpkTheme.colors.textOnDark,
             )
         },
         label = "",
     )
-
-    val navigationTabHeight = height ?: 36.dp
-
-    if (isVertical) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -144,7 +135,6 @@ private fun BpkNavigationTabImpl(
                 .wrapContentSize()
                 .heightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
                 .widthIn(min = BpkSpacing.Xxl + BpkSpacing.Xl + BpkSpacing.Sm)
-                .applyIf(width != null) { width(width!!) }
                 .clip(CircleShape)
                 .background(bgColor)
                 .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
@@ -167,36 +157,6 @@ private fun BpkNavigationTabImpl(
                 modifier = Modifier.padding(top = if (icon != null) 1.dp else 0.dp),
             )
         }
-    } else {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier
-                .height(navigationTabHeight)
-                .applyIf(width != null) { width(width!!) }
-                .clip(CircleShape)
-                .background(bgColor)
-                .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
-                .padding(horizontal = BpkSpacing.Base),
-        ) {
-            if (icon != null) {
-                BpkIcon(
-                    icon = icon,
-                    size = BpkIconSize.Small,
-                    contentDescription = null,
-                    tint = contentColor,
-                )
-            }
-
-            BpkText(
-                text = text,
-                color = contentColor,
-                style = BpkTheme.typography.label2,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = if (icon != null) BpkSpacing.Md else 0.dp),
-            )
-        }
-    }
 }
 
 private val BpkNavigationTabStyle.pressedBackgroundColor: Color
@@ -218,13 +178,6 @@ private val BpkNavigationTabStyle.pressedStrokeColor: Color
     get() = when (this) {
         BpkNavigationTabStyle.CanvasDefault -> BpkTheme.colors.textPrimary
         BpkNavigationTabStyle.SurfaceContrast -> BpkNavigationTabColors.hover
-    }
-
-private val BpkNavigationTabStyle.contentColor: Color
-    @Composable
-    get() = when (this) {
-        BpkNavigationTabStyle.CanvasDefault -> BpkTheme.colors.textPrimary
-        BpkNavigationTabStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
     }
 
 private val BpkNavigationTabStyle.pressedContentColor: Color

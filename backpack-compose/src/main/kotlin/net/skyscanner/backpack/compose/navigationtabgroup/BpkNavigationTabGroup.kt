@@ -33,21 +33,6 @@ enum class BpkNavigationTabGroupStyle {
     SurfaceContrast,
 }
 
-/**
- * Defines the alignment for items in BpkNavigationTabGroup.
- */
-enum class ItemAlignment {
-    /**
-     * Items are arranged horizontally in a row.
-     */
-    Horizontal,
-
-    /**
-     * Items are arranged vertically in a column.
-     */
-    Vertical,
-}
-
 @Composable
 fun BpkNavigationTabGroup(
     tabs: List<BpkNavigationTabItem>,
@@ -57,7 +42,6 @@ fun BpkNavigationTabGroup(
     style: BpkNavigationTabGroupStyle = BpkNavigationTabGroupStyle.CanvasDefault,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
-    itemAlignment: ItemAlignment = ItemAlignment.Horizontal,
 ) {
     BpkNavigationTabGroupImpl(
         tabs = tabs,
@@ -67,6 +51,5 @@ fun BpkNavigationTabGroup(
         style = style,
         contentPadding = contentPadding,
         behaviouralEventWrapper = behaviouralEventWrapper,
-        itemAlignment = itemAlignment,
     )
 }
