@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
@@ -66,12 +67,12 @@ fun BpkLocationMapMarker(
 fun LocationMarkerLayout(modifier: Modifier = Modifier) {
     Box(
         modifier
-            .size(BpkSpacing.Base)
+            .size(BpkSpacing.Base.takeIf { it > 0.dp } ?: 16.dp)
             .border(
-                border = BorderStroke(BpkBorderSize.Lg, BpkTheme.colors.textOnDark),
+                border = BorderStroke(BpkBorderSize.Lg.takeIf { it >  0.dp} ?: 2.dp, BpkTheme.colors.textOnDark),
                 shape = CircleShape,
             )
-            .padding(BpkBorderSize.Lg)
+            .padding(BpkBorderSize.Lg.takeIf { it >  0.dp} ?: 2.dp)
             .background(color = BpkTheme.colors.corePrimary, shape = CircleShape),
     )
 }
