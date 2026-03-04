@@ -40,7 +40,7 @@ data class BpkGraphicsPromoSponsor(
     val title: String,
     val logo: String,
     val accessibilityLabel: String,
-    val callToAction: BpkGraphicPromoSponsorCTA,
+    val callToAction: BpkGraphicPromoSponsorCTA? = null,
 )
 
 @Composable
