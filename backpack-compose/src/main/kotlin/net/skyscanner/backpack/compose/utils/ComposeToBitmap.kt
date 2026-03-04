@@ -82,7 +82,10 @@ private fun renderComposeToBitmap(
 
     composeView.layout(0, 0, composeView.measuredWidth, composeView.measuredHeight)
 
-    val bitmap = createBitmap(composeView.measuredWidth, composeView.measuredHeight)
+    // Ensure bitmap dimensions are at least 1x1 to avoid IllegalArgumentException
+    val width = composeView.measuredWidth.coerceAtLeast(1)
+    val height = composeView.measuredHeight.coerceAtLeast(1)
+    val bitmap = createBitmap(width, height)
 
     bitmap.applyCanvas {
         composeView.draw(this)
