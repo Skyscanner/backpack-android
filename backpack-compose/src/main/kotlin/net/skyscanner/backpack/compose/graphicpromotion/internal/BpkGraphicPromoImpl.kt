@@ -207,8 +207,8 @@ private fun SponsoredMessage(
         inlineIconId to InlineTextContent(
             Placeholder(
                 width = placeholderWidthSp,
-                height = captionStyle.lineHeight,
-                placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
+                height = captionStyle.fontSize,
+                placeholderVerticalAlign = PlaceholderVerticalAlign.TextCenter,
             ),
         ) {
             Box(
