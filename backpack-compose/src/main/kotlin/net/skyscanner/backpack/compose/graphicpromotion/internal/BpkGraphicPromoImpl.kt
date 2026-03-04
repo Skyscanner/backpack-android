@@ -197,48 +197,42 @@ private fun SponsoredMessage(
     val inlineIconId = "infoIcon"
     val annotatedText = buildAnnotatedString {
         append(sponsor.title)
-        if (sponsor.callToAction != null) {
-            append(WORD_JOINER)
-            appendInlineContent(inlineIconId)
-        }
+        append(WORD_JOINER)
+        appendInlineContent(inlineIconId)
     }
-    val inlineContent = if (sponsor.callToAction != null) {
-        val density = LocalDensity.current
-        val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
-        val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
-        mapOf(
-            inlineIconId to InlineTextContent(
-                Placeholder(
-                    width = placeholderWidthSp,
-                    height = iconSizeSp,
-                    placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
-                ),
+    val density = LocalDensity.current
+    val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
+    val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
+    val inlineContent = mapOf(
+        inlineIconId to InlineTextContent(
+            Placeholder(
+                width = placeholderWidthSp,
+                height = iconSizeSp,
+                placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
+            ),
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.CenterEnd,
             ) {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.CenterEnd,
+                    modifier = Modifier
+                        .clickableWithRipple { sponsor.callToAction.onClick() }
+                        .clearAndSetSemantics {
+                            contentDescription = sponsor.callToAction.accessibilityLabel
+                            role = Role.Button
+                        },
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .clickableWithRipple { sponsor.callToAction.onClick() }
-                            .clearAndSetSemantics {
-                                contentDescription = sponsor.callToAction.accessibilityLabel
-                                role = Role.Button
-                            },
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        BpkIcon(
-                            icon = BpkIcon.InformationCircle,
-                            contentDescription = null,
-                            tint = textColor,
-                        )
-                    }
+                    BpkIcon(
+                        icon = BpkIcon.InformationCircle,
+                        contentDescription = null,
+                        tint = textColor,
+                    )
                 }
-            },
-        )
-    } else {
-        emptyMap()
-    }
+            }
+        },
+    )
 
     BpkText(
         modifier = modifier,
