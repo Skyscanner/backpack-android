@@ -50,15 +50,18 @@ fun BpkLocationMapMarker(
         LocationMarkerLayout()
     }
 
-    MarkerInfoWindow(
-        state = state,
-        tag = tag,
-        title = title,
-        visible = visible,
-        zIndex = zIndex,
-        icon = iconBitmap,
-        onClick = onClick,
-    ) {}
+    // Only show marker if bitmap is ready to avoid stale/invalid icons
+    if (iconBitmap != null) {
+        MarkerInfoWindow(
+            state = state,
+            tag = tag,
+            title = title,
+            visible = visible,
+            zIndex = zIndex,
+            icon = iconBitmap,
+            onClick = onClick,
+        ) {}
+    }
 }
 
 @Composable
