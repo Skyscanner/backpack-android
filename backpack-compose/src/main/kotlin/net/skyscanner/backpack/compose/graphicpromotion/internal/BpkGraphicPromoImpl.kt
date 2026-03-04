@@ -200,14 +200,14 @@ private fun SponsoredMessage(
         append(WORD_JOINER)
         appendInlineContent(inlineIconId)
     }
+    val captionStyle = BpkTheme.typography.caption
     val density = LocalDensity.current
-    val iconSizeSp = with(density) { BpkSpacing.Base.toSp() }
     val placeholderWidthSp = with(density) { (BpkSpacing.Md + BpkSpacing.Base).toSp() }
     val inlineContent = mapOf(
         inlineIconId to InlineTextContent(
             Placeholder(
                 width = placeholderWidthSp,
-                height = iconSizeSp,
+                height = captionStyle.lineHeight,
                 placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
             ),
         ) {
@@ -237,7 +237,7 @@ private fun SponsoredMessage(
     BpkText(
         modifier = modifier,
         text = annotatedText,
-        style = BpkTheme.typography.caption,
+        style = captionStyle,
         color = textColor,
         maxLines = maxLines,
         onTextLayout = onTextLayout,
