@@ -69,10 +69,10 @@ fun LocationMarkerLayout(modifier: Modifier = Modifier) {
         modifier
             .size(BpkSpacing.Base.takeIf { it > 0.dp } ?: 16.dp)
             .border(
-                border = BorderStroke(BpkBorderSize.Lg.takeIf { it >  0.dp} ?: 2.dp, BpkTheme.colors.textOnDark),
+                border = BorderStroke(BpkBorderSize.Lg.takeIf { it > 0.dp } ?: 2.dp, BpkTheme.colors.textOnDark),
                 shape = CircleShape,
             )
-            .padding(BpkBorderSize.Lg.takeIf { it >  0.dp} ?: 2.dp)
+            .padding(BpkBorderSize.Lg.takeIf { it > 0.dp } ?: 2.dp)
             .background(color = BpkTheme.colors.corePrimary, shape = CircleShape),
     )
 }
