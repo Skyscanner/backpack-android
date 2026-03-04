@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoSponsorCTA
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
@@ -75,6 +76,10 @@ internal fun GraphicPromoStorySponsored() {
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "In partnership with Skyland",
+            callToAction = BpkGraphicPromoSponsorCTA(
+                accessibilityLabel = "Learn more about our sponsor",
+                onClick = {},
+            ),
         ),
     )
 }
@@ -88,6 +93,10 @@ internal fun GraphicPromoStorySponsoredWithLongTitle() {
             accessibilityLabel = "Sponsored",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "In partnership with the distinguished and extraordinary Skyland",
+            callToAction = BpkGraphicPromoSponsorCTA(
+                accessibilityLabel = "Learn more about our sponsor",
+                onClick = {},
+            ),
         ),
     )
 }

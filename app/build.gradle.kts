@@ -132,6 +132,7 @@ dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation(libs.androidx.lifecycleKtx)
     implementation(libs.androidx.lifecycleRuntimeCompose)
+    implementation(libs.androidx.concurrentFutures)
     implementation(libs.compose.activity)
     implementation(libs.kotlin.reflection)
     implementation(libs.destinations.core)
@@ -169,4 +170,3 @@ dependencies {
     detektPlugins(libs.detektRules.formatting)
     detektPlugins(libs.detektRules.libraries)
 }
-
