@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavBackgroundColor
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavSize
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -61,12 +62,37 @@ fun HorizontalNavStory(modifier: Modifier = Modifier) {
         BpkText(text = stringResource(R.string.tabs_small_with_icon))
         HorizontalNav_SmallWithIcon_Sample()
 
+        BpkText(text = stringResource(R.string.tabs_background))
+        HorizontalNav_CanvasContrastBackground_Sample()
+
         BpkText(text = stringResource(R.string.tabs_large))
         HorizontalNav_Large_Sample()
 
         BpkText(text = stringResource(R.string.tabs_large_with_icon))
         HorizontalNav_LargeWithIcon_Sample()
     }
+}
+
+@Composable
+internal fun HorizontalNav_CanvasContrastBackground_Sample(modifier: Modifier = Modifier) {
+    val tabs = listOf(
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_one),
+        ),
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_two),
+        ),
+    )
+
+    var activeIndex by rememberSaveable { mutableIntStateOf(0) }
+
+    BpkHorizontalNav(
+        modifier = modifier,
+        tabs = tabs,
+        activeIndex = activeIndex,
+        backgroundColor = BpkHorizontalNavBackgroundColor.CanvasContrast,
+        onChanged = { activeIndex = it },
+    )
 }
 
 @Composable

@@ -41,6 +41,7 @@ androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0"
 androidx-coreKts = "androidx.core:core-ktx:1.16.0"
+androidx-concurrentFutures = "androidx.concurrent:concurrent-futures:1.2.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -62,7 +63,7 @@ test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.13.0"
 google-maps = "com.google.android.gms:play-services-maps:19.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:7.0.0"
+google-mapsCompose = "com.google.maps.android:maps-compose:8.0.1"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.5.0-jre"
 

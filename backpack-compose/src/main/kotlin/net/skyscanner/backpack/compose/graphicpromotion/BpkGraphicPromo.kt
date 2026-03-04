@@ -31,10 +31,16 @@ import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 enum class BpkGraphicPromoVariant { OnDark, OnLight, }
 enum class BpkGraphicPromoVerticalAlignment { Top, Bottom, }
 
+data class BpkGraphicPromoSponsorCTA(
+    val accessibilityLabel: String,
+    val onClick: () -> Unit,
+)
+
 data class BpkGraphicsPromoSponsor(
     val title: String,
     val logo: String,
     val accessibilityLabel: String,
+    val callToAction: BpkGraphicPromoSponsorCTA,
 )
 
 @Composable

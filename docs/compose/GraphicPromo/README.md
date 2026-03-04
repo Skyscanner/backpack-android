@@ -49,8 +49,9 @@ Example of a GraphicPromo:
 ```Kotlin
 import android.util.Log
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
-import net.skyscanner.backpack.compose.graphicpromotion.Sponsor
-import net.skyscanner.backpack.compose.graphicpromotion.VerticalAlignment
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoSponsorCTA
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
+import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 
 
@@ -58,12 +59,16 @@ BpkGraphicPromo(
     kicker = "Travel tips",
     headline = "Three Parks Challenge",
     subHeadline = "How to complete the climb in 3 days",
-    verticalAlignment = VerticalAlignment.Bottom,
+    verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
     overlayType = BpkOverlayType.SolidHigh,
     sponsor = BpkGraphicsPromoSponsor(
         accessibilityLabel = "Sponsored",
         logo = "https://images.kiwi.com/airlines/64/FR.png",
         title = "Sponsored",
+        callToAction = BpkGraphicPromoSponsorCTA(
+            accessibilityLabel = "Learn more about our sponsor",
+            onClick = { /* open sponsor info modal */ },
+        ),
     ),
     image = {
         Image(
