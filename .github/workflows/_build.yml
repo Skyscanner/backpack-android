@@ -83,6 +83,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' }}
         with:
           github-token: "${{ steps.app-token.outputs.token }}"
+          skip-commit-verification: true
 
       - name: Setup NPM
         run: |
