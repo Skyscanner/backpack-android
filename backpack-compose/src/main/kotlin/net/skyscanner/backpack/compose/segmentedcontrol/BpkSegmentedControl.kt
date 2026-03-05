@@ -41,7 +41,6 @@ fun BpkSegmentedControl(
     modifier: Modifier = Modifier,
     shadow: Boolean = false,
     type: BpkSegmentedControlStyle = BpkSegmentedControlStyle.CanvasDefault,
-    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     val limitedButtonContents = buttonContents.take(maxNumberOfButtons)
     BpkSegmentedControlImpl(
@@ -51,6 +50,5 @@ fun BpkSegmentedControl(
         modifier = modifier,
         shadow = shadow,
         type = type,
-        textStyle = textStyle
     )
 }

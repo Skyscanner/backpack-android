@@ -67,7 +67,6 @@ internal fun BpkSegmentedControlImpl(
     shadow: Boolean,
     type: BpkSegmentedControlStyle,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -91,7 +90,6 @@ internal fun BpkSegmentedControlImpl(
                 type = type,
                 content = content,
                 onItemClick = { onItemClick(index) },
-                textStyle = textStyle
             )
         }
     }
@@ -104,7 +102,6 @@ private fun BpkSegmentedControlButton(
     content: String,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle = BpkTheme.typography.footnote,
 ) {
     Box(
         modifier = modifier
@@ -127,7 +124,7 @@ private fun BpkSegmentedControlButton(
             text = content,
             textAlign = TextAlign.Center,
             color = getTextColor(type, isSelected),
-            style = textStyle,
+            style = BpkTheme.typography.label2,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
         )
