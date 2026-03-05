@@ -38,7 +38,7 @@ jobs:
 
       - name: Fetch Dependabot metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@dbb049abf688ec9ef67bc8f233a4475d2a81961a # v2.6.0
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
         with:
           github-token: "${{ steps.app-token.outputs.token }}"
           skip-commit-verification: true
