@@ -179,7 +179,6 @@ internal fun SegmentedControlsSample(
         buttonContents = buttonContents,
         onItemClick = { currentIndex = it },
         selectedIndex = currentIndex,
-        textStyle = BpkTheme.typography.label2
     )
 }
 

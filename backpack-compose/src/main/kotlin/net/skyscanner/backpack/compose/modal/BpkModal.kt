@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -40,11 +41,19 @@ import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
+import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 internal const val ModalAnimationDurationMs = 300
+
+enum class ModalStyle{
+    Default,
+    SurfaceContrast
+}
 
 @Composable
 @Suppress("ModifierMissing")
@@ -52,6 +61,8 @@ fun BpkModal(
     navIcon: NavIcon,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
+    navBarState: TopNavBarStatus = TopNavBarStatus.Collapsed,
+    modalStyle: ModalStyle = ModalStyle.Default,
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
@@ -60,6 +71,16 @@ fun BpkModal(
     val isVisible = state.isVisible
     if (isVisible.isIdle && !isVisible.currentState) {
         onDismiss?.invoke()
+    }
+
+    val color: Color = when(modalStyle) {
+        ModalStyle.Default -> BpkTheme.colors.surfaceDefault
+        ModalStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
+    }
+
+    val navBarStyle = when(modalStyle) {
+        ModalStyle.Default -> NavBarStyle.Default
+        ModalStyle.SurfaceContrast -> NavBarStyle.SurfaceContrast
     }
 
     Dialog(
@@ -94,16 +115,21 @@ fun BpkModal(
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
             modifier = modifier.fillMaxSize(),
         ) {
-            Column(modifier = Modifier.background(BpkTheme.colors.surfaceDefault)) {
+            val navBarState = rememberTopAppBarState(navBarState)
+            Column(modifier = Modifier.background(color)) {
                 if (action != null) {
                     BpkTopNavBar(
+                        state = navBarState,
                         navIcon = navIcon,
+                        style = navBarStyle,
                         title = title.orEmpty(),
                         action = action,
                     )
                 } else {
                     BpkTopNavBar(
+                        state = navBarState,
                         navIcon = navIcon,
+                        style = navBarStyle,
                         title = title.orEmpty(),
                     )
                 }
