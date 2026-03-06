@@ -53,18 +53,20 @@ fun BpkPointerMapMarker(
         PointerMarkerLayout()
     }
 
-    MarkerInfoWindow(
-        state = state,
-        tag = tag,
-        title = title,
-        anchor = Offset(0.5f, 0.5f),
-        visible = visible,
-        zIndex = zIndex,
-        icon = iconBitmap,
-        onClick = onClick,
-        onInfoWindowClick = onInfoWindowClick,
-    ) {
-        PriceMarkerLayout(title = title, status = BpkPriceMarkerStatus.Focused)
+    iconBitmap?.let {
+        MarkerInfoWindow(
+            state = state,
+            tag = tag,
+            title = title,
+            anchor = Offset(0.5f, 0.5f),
+            visible = visible,
+            zIndex = zIndex,
+            icon = iconBitmap,
+            onClick = onClick,
+            onInfoWindowClick = onInfoWindowClick,
+        ) {
+            PriceMarkerLayout(title = title, status = BpkPriceMarkerStatus.Focused)
+        }
     }
 }
 

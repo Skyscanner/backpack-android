@@ -65,16 +65,17 @@ fun BpkIconMapMarker(
     val iconBitmap = rememberCapturedComposeBitmapDescriptor(icon, status) {
         IconMarkerLayout(status = status, icon = icon)
     }
-
-    MarkerInfoWindow(
-        state = state,
-        tag = tag,
-        title = contentDescription,
-        visible = visible,
-        zIndex = if (status == BpkIconMarkerStatus.Focused && zIndex == null) 1.0f else zIndex ?: 0.0f,
-        icon = iconBitmap,
-        onClick = onClick,
-    ) {}
+    iconBitmap?.let {
+        MarkerInfoWindow(
+            state = state,
+            tag = tag,
+            title = contentDescription,
+            visible = visible,
+            zIndex = if (status == BpkIconMarkerStatus.Focused && zIndex == null) 1.0f else zIndex ?: 0.0f,
+            icon = iconBitmap,
+            onClick = onClick,
+        ) {}
+    }
 }
 
 @Composable

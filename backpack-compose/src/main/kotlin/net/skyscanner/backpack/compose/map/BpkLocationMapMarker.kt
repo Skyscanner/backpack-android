@@ -51,14 +51,14 @@ fun BpkLocationMapMarker(
     }
 
     // Only show marker if bitmap is ready to avoid stale/invalid icons
-    if (iconBitmap != null) {
+    iconBitmap?.let {
         MarkerInfoWindow(
             state = state,
             tag = tag,
             title = title,
             visible = visible,
             zIndex = zIndex,
-            icon = iconBitmap,
+            icon = it,
             onClick = onClick,
         ) {}
     }
