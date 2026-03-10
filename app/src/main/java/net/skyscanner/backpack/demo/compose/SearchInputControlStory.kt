@@ -34,8 +34,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummary
-import net.skyscanner.backpack.compose.searchinputsummary.BpkSearchInputSummaryType
+import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
+import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlType
+import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
@@ -44,43 +45,44 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.SearchInputSummaryComponent
+import net.skyscanner.backpack.demo.components.SearchInputControlComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
-fun SearchInputSummaryExamples(modifier: Modifier = Modifier) {
+fun SearchInputControlExamples(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .navigationBarsPadding(),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-        DefaultExample()
-        TextPrefixExample()
-        IconPrefixExample()
-        NoPrefixExample()
-        ReadOnlyExample()
+        DefaultControlExample()
+        TextPrefixControlExample()
+        IconPrefixControlExample()
+        NoPrefixControlExample()
+        ReadOnlyControlExample()
+        CornerControlExample()
     }
 }
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(name = "Default prefix", kind = StoryKind.ScreenshotOnly)
-internal fun DefaultExample() {
+internal fun DefaultControlExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Default, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Default, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
@@ -89,21 +91,21 @@ internal fun DefaultExample() {
 }
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(name = "Text prefix", kind = StoryKind.ScreenshotOnly)
-internal fun TextPrefixExample() {
+internal fun TextPrefixControlExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Text prefix, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Text(stringResource(id = R.string.text_field_prefix)),
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Text prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
@@ -113,21 +115,21 @@ internal fun TextPrefixExample() {
 }
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(name = "Icon prefix", kind = StoryKind.ScreenshotOnly)
-internal fun IconPrefixExample() {
+internal fun IconPrefixControlExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Icon prefix, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Icon prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
@@ -137,21 +139,21 @@ internal fun IconPrefixExample() {
 }
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(name = "No prefix", kind = StoryKind.ScreenshotOnly)
-internal fun NoPrefixExample() {
+internal fun NoPrefixControlExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "No prefix, empty",
             inputText = "",
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "No prefix, filled in",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
@@ -161,60 +163,112 @@ internal fun NoPrefixExample() {
 }
 
 @Composable
-@SearchInputSummaryComponent
+@SearchInputControlComponent
 @ComposeStory(name = "Read only", kind = StoryKind.ScreenshotOnly)
-internal fun ReadOnlyExample() {
+internal fun ReadOnlyControlExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Read only, unfocused",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
-            type = BpkSearchInputSummaryType.ReadOnly(isFocused = false),
+            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Read only, focused",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
-            type = BpkSearchInputSummaryType.ReadOnly(isFocused = true),
+            type = BpkSearchInputControlType.ReadOnly(isFocused = true),
         )
 
         var firstFocused by remember { mutableStateOf(false) }
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Read only, focus on click",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
-            type = BpkSearchInputSummaryType.ReadOnly(isFocused = firstFocused),
-            searchInputSummaryModifier = Modifier.clickable { firstFocused = !firstFocused },
+            type = BpkSearchInputControlType.ReadOnly(isFocused = firstFocused),
+            searchInputControlModifier = Modifier.clickable { firstFocused = !firstFocused },
         )
 
-        SearchInputSummaryStory(
+        SearchInputControlStory(
             name = "Read only, focus on click",
             inputText = stringResource(id = R.string.city_rome),
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.None,
-            type = BpkSearchInputSummaryType.ReadOnly(isFocused = !firstFocused),
-            searchInputSummaryModifier = Modifier.clickable { firstFocused = !firstFocused },
+            type = BpkSearchInputControlType.ReadOnly(isFocused = !firstFocused),
+            searchInputControlModifier = Modifier.clickable { firstFocused = !firstFocused },
         )
     }
 }
 
 @Composable
-internal fun SearchInputSummaryStory(
+@SearchInputControlComponent
+@ComposeStory(name = "Corner", kind = StoryKind.ScreenshotOnly)
+internal fun CornerControlExample() {
+    Column(
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
+        BpkText(
+            text = "Docked stack",
+            style = BpkTheme.typography.heading4,
+            modifier = Modifier.padding(vertical = BpkSpacing.Base),
+        )
+        BpkSearchInputControl(
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Icon(BpkIcon.Search),
+            onInputChanged = {},
+            modifier = Modifier.fillMaxWidth(),
+            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            docking = Docking.Top,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Sm,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Md,
+        )
+        BpkSearchInputControl(
+            inputText = stringResource(id = R.string.city_rome),
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Icon(BpkIcon.Hotels),
+            onInputChanged = {},
+            modifier = Modifier.fillMaxWidth(),
+            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            docking = Docking.Middle,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Sm,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Md,
+        )
+        BpkSearchInputControl(
+            inputText = "",
+            inputHint = stringResource(id = R.string.text_field_hint),
+            prefix = Prefix.Icon(BpkIcon.Hotels),
+            onInputChanged = {},
+            modifier = Modifier.fillMaxWidth(),
+            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            docking = Docking.Bottom,
+            horizontalPadding = BpkSpacing.Base,
+            contentPadding = BpkSpacing.Sm,
+            minHeight = BpkSpacing.Xxl + BpkSpacing.Md,
+        )
+    }
+}
+
+@Composable
+internal fun SearchInputControlStory(
     name: String,
     modifier: Modifier = Modifier,
-    searchInputSummaryModifier: Modifier = Modifier,
+    searchInputControlModifier: Modifier = Modifier,
     inputText: String = stringResource(id = R.string.city_rome),
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
-    type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
+    type: BpkSearchInputControlType = BpkSearchInputControlType.TextInput,
+    docking: Docking = Docking.Float,
 ) {
     Column(
         modifier = modifier,
@@ -225,7 +279,7 @@ internal fun SearchInputSummaryStory(
             modifier = Modifier.padding(vertical = BpkSpacing.Base),
         )
         var state by remember { mutableStateOf(inputText) }
-        BpkSearchInputSummary(
+        BpkSearchInputControl(
             inputText = state,
             inputHint = inputHint,
             prefix = prefix,
@@ -233,8 +287,9 @@ internal fun SearchInputSummaryStory(
             clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
                 state = ""
             },
-            modifier = searchInputSummaryModifier.fillMaxWidth(),
+            modifier = searchInputControlModifier.fillMaxWidth(),
             type = type,
+            docking = docking,
         )
     }
 }

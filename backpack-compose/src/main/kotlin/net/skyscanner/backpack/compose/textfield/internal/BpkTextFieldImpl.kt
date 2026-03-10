@@ -54,11 +54,13 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
@@ -90,6 +92,10 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    docking: Docking = Docking.Float,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
 ) {
 
     var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
@@ -118,6 +124,10 @@ internal fun BpkTextFieldImpl(
         trailingIcon = trailingIcon,
         clearAction = clearAction,
         type = type,
+        docking = docking,
+        horizontalPadding = horizontalPadding,
+        contentPadding = contentPadding,
+        minHeight = minHeight,
     )
 }
 
@@ -140,6 +150,10 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    docking: Docking = Docking.Float,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
 ) {
     BasicTextField(
         value = value,
@@ -174,8 +188,12 @@ internal fun BpkTextFieldImpl(
                 isFocused = isFocused ?: interactionSource.collectIsFocusedAsState().value,
                 trailingIcon = trailingIcon,
                 textFieldContent = it,
-                clearAction = if (readOnly && prefix == null) null else clearAction, // Remove clearAction if readOnly enabled.
+                clearAction = if (readOnly && prefix == null) null else clearAction,
                 type = type,
+                docking = docking,
+                horizontalPadding = horizontalPadding,
+                contentPadding = contentPadding,
+                minHeight = minHeight,
             )
         },
     )
@@ -193,21 +211,26 @@ private fun TextFieldBox(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    docking: Docking = Docking.Float,
+    horizontalPadding: Dp = BpkSpacing.Md,
+    contentPadding: Dp = BpkSpacing.Md,
+    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
     textFieldContent: @Composable () -> Unit,
 ) {
-    val textFieldBoxTintColor by animateColorAsState(
+    val tintColor by animateColorAsState(
         when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
             else -> BpkTheme.colors.textSecondary
         },
     )
+    val shape = textFieldShape(type = type, docking = docking)
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .width(IntrinsicSize.Max)
-            .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
+            .requiredHeightIn(min = minHeight)
             .border(
-                width = 1.dp, shape = textFieldShape(type = type),
+                width = 1.dp, shape = shape,
                 color = animateColorAsState(
                     when {
                         status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
@@ -217,8 +240,8 @@ private fun TextFieldBox(
                     },
                 ).value,
             )
-            .background(BpkTheme.colors.surfaceDefault, textFieldShape(type = type))
-            .padding(horizontal = BpkSpacing.Md),
+            .background(BpkTheme.colors.surfaceDefault, shape)
+            .padding(horizontal = horizontalPadding),
     ) {
 
         when (prefix) {
@@ -226,7 +249,7 @@ private fun TextFieldBox(
                 BpkText(
                     text = prefix.prefixText,
                     modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    color = BpkTheme.colors.textSecondary,
+                    color = tintColor,
                 )
 
             is Prefix.Icon ->
@@ -235,7 +258,7 @@ private fun TextFieldBox(
                     contentDescription = null,
                     size = BpkIconSize.Large,
                     modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = textFieldBoxTintColor,
+                    tint = tintColor,
                 )
 
             else -> {}
@@ -244,12 +267,12 @@ private fun TextFieldBox(
         Box(
             modifier = Modifier
                 .weight(1f)
-                .padding(BpkSpacing.Md),
+                .padding(contentPadding),
         ) {
 
             BpkText(
                 text = placeholder ?: "",
-                color = textFieldBoxTintColor,
+                color = tintColor,
                 maxLines = maxLines,
                 modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
                 style = BpkTheme.typography.bodyDefault,
@@ -340,7 +363,16 @@ internal enum class BpkTextFieldType {
 @Composable
 private fun textFieldShape(
     type: BpkTextFieldType,
-) = RoundedCornerShape(if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) BpkBorderRadius.Md else BpkBorderRadius.Sm)
+    docking: Docking = Docking.Float,
+): RoundedCornerShape {
+    val radius = if (type == BpkTextFieldType.Search || type == BpkTextFieldType.Select) BpkBorderRadius.Md else BpkBorderRadius.Sm
+    return when (docking) {
+        Docking.Float -> RoundedCornerShape(radius)
+        Docking.Top -> RoundedCornerShape(topStart = radius, topEnd = radius, bottomStart = 0.dp, bottomEnd = 0.dp)
+        Docking.Middle -> RoundedCornerShape(0.dp)
+        Docking.Bottom -> RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = radius, bottomEnd = radius)
+    }
+}
 
 private data class Icon(
     val icon: BpkIcon,
