@@ -18,6 +18,10 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.buildCodeBlock
 
 interface BpkDurations : Map<String, Int>
 
@@ -32,6 +36,11 @@ object BpkDuration {
     }
 
     sealed class Format<Output> : BpkTransformer<BpkDurations, Output> {
+
+        data class Compose(val namespace: String) : Format<TypeSpec>() {
+            override fun invoke(source: BpkDurations): TypeSpec =
+                toCompose(source, namespace)
+        }
 
         data class Xml(val namespace: String) : Format<String>() {
             override fun invoke(source: BpkDurations): String =
@@ -63,6 +72,21 @@ private fun parseIntegers(
             map.toString()
     }
 }
+
+private fun toCompose(
+    source: BpkDurations,
+    namespace: String,
+): TypeSpec =
+    TypeSpec.objectBuilder(namespace)
+        .addProperties(
+            source.map { (name, value) ->
+                PropertySpec
+                    .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), Int::class, KModifier.CONST)
+                    .initializer(buildCodeBlock { add("%L", value) })
+                    .build()
+            },
+        )
+        .build()
 
 private fun toXml(source: BpkDurations, type: String): String =
     source.map { (name, value) ->
