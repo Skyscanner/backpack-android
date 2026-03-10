@@ -45,6 +45,7 @@ import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarState
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
@@ -61,7 +62,7 @@ fun BpkModal(
     navIcon: NavIcon,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
-    navBarState: TopNavBarState = rememberTopAppBarState(),
+    navBarState: TopNavBarState = rememberFixedTopAppBarState(),
     modalStyle: ModalStyle = ModalStyle.Default,
     action: TextAction? = null,
     title: String? = null,
