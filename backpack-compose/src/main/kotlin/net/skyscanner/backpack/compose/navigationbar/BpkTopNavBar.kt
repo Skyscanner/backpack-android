@@ -62,7 +62,6 @@ fun BpkTopNavBar(
     insets: WindowInsets? = WindowInsets.statusBars,
     actions: List<IconAction> = emptyList(),
     style: NavBarStyle = NavBarStyle.Default,
-
 ) {
     BpkTopNavBarImpl(
         scrollBehavior = rememberFixedTopAppBarState(),

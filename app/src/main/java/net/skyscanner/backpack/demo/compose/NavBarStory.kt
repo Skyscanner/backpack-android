@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.Account
@@ -85,6 +86,37 @@ fun CollapsibleNavBarStory(
 ) {
     val state = rememberTopAppBarState(initialStatus)
     Column(modifier.nestedScroll(state)) {
+        BpkTopNavBar(
+            state = state,
+            title = stringResource(R.string.navigation_bar_title),
+            insets = insets,
+            navIcon = when {
+                showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
+                else -> NavIcon.None
+            },
+            actions = if (showActions) listOf(
+                IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
+                IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
+                IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+            ) else emptyList(),
+        )
+        NavBarSampleBody(showList)
+    }
+}
+
+@Composable
+@NavBarComponent
+@ComposeStory("NonScrollable")
+fun NonScrollableNavBarStory(
+    modifier: Modifier = Modifier,
+    initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
+    showList: Boolean = true,
+    showActions: Boolean = true,
+    showNav: Boolean = true,
+    insets: WindowInsets? = null,
+) {
+    val state = rememberFixedTopAppBarState(initialStatus)
+    Column(modifier) {
         BpkTopNavBar(
             state = state,
             title = stringResource(R.string.navigation_bar_title),
