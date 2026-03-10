@@ -59,12 +59,16 @@ fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expa
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun rememberFixedTopAppBarState(): TopNavBarState {
+fun rememberFixedTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Collapsed): TopNavBarState {
+    val heightOffset = when (initialStatus) {
+        TopNavBarStatus.Expanded -> 0f
+        TopNavBarStatus.Collapsed -> -Float.MAX_VALUE
+    }
     val behaviour = TopAppBarDefaults.pinnedScrollBehavior(
         canScroll = { false },
         state = rememberTopAppBarState(
-            initialHeightOffset = -Float.MAX_VALUE,
-            initialContentOffset = -Float.MAX_VALUE,
+            initialHeightOffset = heightOffset,
+            initialContentOffset = heightOffset,
         ),
     )
     return TopNavBarInternalState(behaviour)
