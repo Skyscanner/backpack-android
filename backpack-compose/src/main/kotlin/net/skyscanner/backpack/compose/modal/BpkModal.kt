@@ -44,7 +44,7 @@ import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
-import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarState
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
@@ -61,7 +61,7 @@ fun BpkModal(
     navIcon: NavIcon,
     modifier: Modifier = Modifier,
     state: BpkModalState = rememberBpkModalState(),
-    navBarState: TopNavBarStatus = TopNavBarStatus.Collapsed,
+    navBarState: TopNavBarState = rememberTopAppBarState(),
     modalStyle: ModalStyle = ModalStyle.Default,
     action: TextAction? = null,
     title: String? = null,
@@ -115,7 +115,6 @@ fun BpkModal(
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
             modifier = modifier.fillMaxSize(),
         ) {
-            val navBarState = rememberTopAppBarState(navBarState)
             Column(modifier = Modifier.background(color)) {
                 if (action != null) {
                     BpkTopNavBar(

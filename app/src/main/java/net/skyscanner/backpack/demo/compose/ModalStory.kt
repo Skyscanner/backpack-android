@@ -33,6 +33,7 @@ import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -93,7 +94,7 @@ private fun ModalDemo(
         BpkModal(
             state = modalState,
             title = title,
-            navBarState = TopNavBarStatus.Expanded,
+            navBarState = rememberFixedTopAppBarState(TopNavBarStatus.Expanded),
             navIcon = when (navActionType) {
                 ActionType.Close -> NavIcon.Close(
                     contentDescription = stringResource(id = R.string.navigation_back),
