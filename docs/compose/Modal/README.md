@@ -30,9 +30,9 @@
 
 ## Modal with SurfaceContrast
 
-| Day                                                                                                                                                                                   | Night                                                                                                                                                                                                | Right to Left                                                                                                                                                                                         |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/surface-contrast-with-back.png" alt="ModalSurfaceContrast" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/surface-contrast-with-back_dm.png" alt="ModalSurfaceContrast - dark mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/surface-contrast-with-black_rtl.png" alt="ModalSurfaceContrast - rtl mode" width="375" /> |
+| Day                                                                                                                                                                                   | Night                                                                                                                                                                                                |                                                                    
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/surface-contrast-with-back.png" alt="ModalSurfaceContrast" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Modal/screenshots/surface-contrast-with-back_dm.png" alt="ModalSurfaceContrast - dark mode" width="375" /> |
 
 ## Installation
 
@@ -100,17 +100,17 @@ BpkModal(
 The modal's navigation bar state can be customized using the `navBarState` parameter:
 
 ```Kotlin
-// Fixed expanded (default)
+// Fixed expanded
 BpkModal(
     navIcon = NavIcon.Close(...),
-    navBarState = rememberFixedTopAppBarState(),
+    navBarState = rememberFixedTopAppBarState(TopNavBarStatus.Expanded),
     ...
 )
 
-// Fixed collapsed
+// Fixed collapsed (default)
 BpkModal(
     navIcon = NavIcon.Close(...),
-    navBarState = rememberFixedTopAppBarState(TopNavBarStatus.Collapsed),
+    navBarState = rememberFixedTopAppBarState(),
     ...
 )
 ```

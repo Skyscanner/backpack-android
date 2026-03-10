@@ -65,8 +65,7 @@ import net.skyscanner.backpack.demo.ui.ListItem
 fun NavBarStoryCollapsed(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .padding(vertical = BpkSpacing.Base)
-            .scrollable(state = rememberScrollState(), orientation = Orientation.Vertical),
+            .padding(vertical = BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
         val collapsedState = rememberFixedTopAppBarState()

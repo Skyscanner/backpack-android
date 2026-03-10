@@ -79,7 +79,8 @@ internal fun ModalSurfaceContrastWithBackIcon() {
         title = stringResource(R.string.dialog_title),
         navActionType = ActionType.Back,
         modalStyle = ModalStyle.SurfaceContrast,
-        navNavBarState = rememberFixedTopAppBarState(
+        actionText = "Text",
+        navBarState = rememberFixedTopAppBarState(
             TopNavBarStatus.Expanded,
         ),
     )
@@ -95,7 +96,7 @@ private fun ModalDemo(
     title: String? = null,
     actionText: String? = null,
     modalStyle: ModalStyle = ModalStyle.Default,
-    navNavBarState: TopNavBarState = rememberFixedTopAppBarState(),
+    navBarState: TopNavBarState = rememberFixedTopAppBarState(),
     navActionType: ActionType = ActionType.Close,
 ) {
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -130,7 +131,7 @@ private fun ModalDemo(
                 )
             },
             modalStyle = modalStyle,
-            navBarState = navNavBarState,
+            navBarState = navBarState,
             onDismiss = { showModal.value = false },
         ) {
             TextContent()
