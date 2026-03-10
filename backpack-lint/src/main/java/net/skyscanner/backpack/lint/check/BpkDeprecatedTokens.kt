@@ -21,9 +21,6 @@
 
 package net.skyscanner.backpack.lint.check
 
-import kotlin.String
-import kotlin.collections.List
-
 internal object BpkDeprecatedTokens {
     public val deprecatedColors: List<String> = listOf(
         "bpkCoreEcoDay",

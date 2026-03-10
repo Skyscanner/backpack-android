@@ -22,7 +22,6 @@
 package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
-import kotlin.Boolean
 
 public class BpkColors private constructor(
     public val isLight: Boolean,
