@@ -18,6 +18,7 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
+import com.squareup.kotlinpoet.INT
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -81,7 +82,7 @@ private fun toCompose(
         .addProperties(
             source.map { (name, value) ->
                 PropertySpec
-                    .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), Int::class, KModifier.CONST)
+                    .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), INT, KModifier.CONST)
                     .initializer(buildCodeBlock { add("%L", value) })
                     .build()
             },
