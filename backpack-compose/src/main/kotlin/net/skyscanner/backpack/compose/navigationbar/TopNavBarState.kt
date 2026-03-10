@@ -59,7 +59,7 @@ fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expa
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun rememberFixedTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
+fun rememberFixedTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Collapsed): TopNavBarState {
     val heightOffset = when (initialStatus) {
         TopNavBarStatus.Expanded -> 0f
         TopNavBarStatus.Collapsed -> -Float.MAX_VALUE
