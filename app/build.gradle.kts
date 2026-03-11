@@ -79,7 +79,7 @@ android {
     sourceSets {
         getByName("screenshots") {
             java.srcDirs("src/internal/java")
-            res.srcDirs("src/internal/res")
+            res.srcDirs("src/screenshots/res")
         }
     }
 
