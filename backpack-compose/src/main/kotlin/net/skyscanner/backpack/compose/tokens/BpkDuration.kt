@@ -19,15 +19,12 @@
 // Auto-generated: do not edit
 @file:Suppress("RedundantVisibilityModifier", "unused")
 
-package net.skyscanner.backpack.lint.check
+package net.skyscanner.backpack.compose.tokens
 
-internal object BpkDeprecatedTokens {
-    public val deprecatedColors: List<String> = listOf(
-        "bpkCoreEcoDay",
-        "bpkCoreEcoNight",
-        "bpkTextLinkNight",
-        "bpkTextLinkDay",
-        "bpkCoreEco",
-        "bpkTextLink",
-    )
+public object BpkDuration {
+    public const val Xs: Int = 50
+
+    public const val Sm: Int = 200
+
+    public const val Base: Int = 400
 }

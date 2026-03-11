@@ -1921,6 +1921,7 @@ public val BpkIcon.Companion.Star: BpkIcon by Delegates.singleton(
         name = "star",
         small = R.drawable.bpk_star_sm,
         large = R.drawable.bpk_star,
+        extraLarge = R.drawable.bpk_star_xxxl,
     )
 )
 
@@ -1929,6 +1930,7 @@ public val BpkIcon.Companion.StarHalf: BpkIcon by Delegates.singleton(
         name = "star-half",
         small = R.drawable.bpk_star_half_sm,
         large = R.drawable.bpk_star_half,
+        extraLarge = R.drawable.bpk_star_half_xxxl,
     )
 )
 
@@ -1937,6 +1939,7 @@ public val BpkIcon.Companion.StarOutline: BpkIcon by Delegates.singleton(
         name = "star-outline",
         small = R.drawable.bpk_star_outline_sm,
         large = R.drawable.bpk_star_outline,
+        extraLarge = R.drawable.bpk_star_outline_xxxl,
     )
 )
 

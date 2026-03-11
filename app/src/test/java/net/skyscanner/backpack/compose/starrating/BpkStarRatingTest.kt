@@ -143,6 +143,29 @@ class BpkStarRatingTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun starSizeExtraLarge() = snap {
+        BpkStarRating(
+            rating = 3f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = BpkStarRatingSize.ExtraLarge,
+        )
+    }
+
+    @Test
+    fun interactiveStarRatingExtraLarge() = snap {
+        BpkInteractiveStarRating(
+            rating = 2,
+            onRatingChanged = { },
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = BpkStarRatingSize.ExtraLarge,
+        )
+    }
+
+    @Test
     fun interactiveStarRating() = snap {
         BpkInteractiveStarRating(
             rating = 2,

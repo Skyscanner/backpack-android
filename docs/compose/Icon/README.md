@@ -42,6 +42,20 @@ BpkIcon(
 )
 ```
 
+Example of an extra large icon (currently supported for star icons only):
+
+```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.tokens.BpkIcon
+
+BpkIcon(
+  icon = BpkIcon.Star,
+  contentDescription = myContentDescription,
+  size = BpkIconSize.ExtraLarge,
+)
+```
+
 If you receive icon names from the server, you can use the `BpkIcon.findByName` method to retrieve the icon:
 
 ```Kotlin

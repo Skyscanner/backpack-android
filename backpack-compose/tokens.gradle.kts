@@ -19,6 +19,7 @@
 import com.squareup.kotlinpoet.ClassName
 import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
+import net.skyscanner.backpack.tokens.BpkDuration
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
@@ -88,6 +89,17 @@ tasks {
             source
                 .parseAs(BpkDimension.Category.Border)
                 .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderSize"))
+                .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+                .execute()
+        }
+    }
+
+    val generateAnimationDurationTokens by registering {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDuration.Category.Animation)
+                .transformTo(BpkDuration.Format.Compose(namespace = "BpkDuration"))
                 .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
                 .execute()
         }
@@ -172,6 +184,11 @@ tasks {
         dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
     }
 
+    val generateDurationTokens by registering {
+        this.group = group
+        dependsOn(generateAnimationDurationTokens)
+    }
+
     val generateColorTokens by registering {
         this.group = group
         dependsOn(generateSemanticColors, generateInternalColors)
@@ -191,6 +208,6 @@ tasks {
 
     val generateTokens by registering {
         this.group = group
-        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
+        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens, generateIcons)
     }
 }
