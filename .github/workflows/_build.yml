@@ -210,7 +210,7 @@ jobs:
   Screenshots:
     name: Screenshots (${{ matrix.variant.name }})
     runs-on: ubuntu-24.04-16cores-public
-    timeout-minutes: 10
+    timeout-minutes: 20
     strategy:
       matrix:
         variant:
