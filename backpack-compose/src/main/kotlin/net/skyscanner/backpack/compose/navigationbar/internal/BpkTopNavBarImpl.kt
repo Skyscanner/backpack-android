@@ -95,8 +95,8 @@ internal fun BpkTopNavBarImpl(
         }
     }
 
-    val bpkLinkStyle = when (style) {
-        NavBarStyle.SurfaceContrast -> BpkLinkStyle.OnContrast
+    val bpkLinkStyle = when {
+        contentColor == BpkTheme.colors.textOnDark -> BpkLinkStyle.OnContrast
         else -> BpkLinkStyle.Default
     }
 

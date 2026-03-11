@@ -25,7 +25,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -34,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -91,7 +91,8 @@ fun BpkModal(
         onDismissRequest = { isVisible.targetState = false },
     ) {
         val dialogWindow = getDialogWindow()
-        val isSystemInDarkTheme = isSystemInDarkTheme()
+        // Determine if icons should be light based on background luminance
+        val isBackgroundLight = backgroundColor.luminance() > 0.5f
 
         SideEffect {
             dialogWindow?.apply {
@@ -104,8 +105,8 @@ fun BpkModal(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,
                 )
-                windowInsetsController.isAppearanceLightStatusBars = !isSystemInDarkTheme
-                windowInsetsController.isAppearanceLightNavigationBars = !isSystemInDarkTheme
+                windowInsetsController.isAppearanceLightStatusBars = isBackgroundLight
+                windowInsetsController.isAppearanceLightNavigationBars = isBackgroundLight
             }
         }
 
