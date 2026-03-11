@@ -73,7 +73,7 @@ internal fun GraphicPromoStoryAlignmentBottomWithText() {
 internal fun GraphicPromoStorySponsored() {
     BpkGraphicPromoSample(
         sponsor = BpkGraphicsPromoSponsor(
-            accessibilityLabel = "Sponsored",
+            accessibilityLabel = "In partnership with Skyland",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "In partnership with Skyland",
             callToAction = BpkGraphicPromoSponsorCTA(
@@ -90,7 +90,7 @@ internal fun GraphicPromoStorySponsored() {
 internal fun GraphicPromoStorySponsoredWithLongTitle() {
     BpkGraphicPromoSample(
         sponsor = BpkGraphicsPromoSponsor(
-            accessibilityLabel = "Sponsored",
+            accessibilityLabel = "In partnership with the distinguished and extraordinary Skyland",
             logo = "https://images.kiwi.com/airlines/64/FR.png",
             title = "In partnership with the distinguished and extraordinary Skyland",
             callToAction = BpkGraphicPromoSponsorCTA(

@@ -125,7 +125,8 @@ internal fun BpkGraphicPromoImpl(
         if (overlayType != null) {
             BpkOverlay(
                 modifier = Modifier
-                    .matchParentSize(),
+                    .matchParentSize()
+                    .semantics { hideFromAccessibility() },
                 overlayType = overlayType,
                 foregroundContent = {
                     ForegroundContent(
@@ -143,7 +144,8 @@ internal fun BpkGraphicPromoImpl(
         } else {
             Box(
                 modifier = Modifier
-                    .matchParentSize(),
+                    .matchParentSize()
+                    .semantics { hideFromAccessibility() },
                 content = image,
             )
             ForegroundContent(
@@ -253,7 +255,8 @@ private fun SponsoredLogo(
     Box(
         modifier = Modifier
             .heightIn(max = SPONSOR_LOGO_HEIGHT.dp)
-            .widthIn(max = SPONSOR_LOGO_WIDTH.dp),
+            .widthIn(max = SPONSOR_LOGO_WIDTH.dp)
+            .semantics { hideFromAccessibility() },
         content = { sponsorLogo?.let { it() } },
     )
 }
