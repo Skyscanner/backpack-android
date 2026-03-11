@@ -35,8 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.StarRatingInteractiveComponent
@@ -44,8 +42,30 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @StarRatingInteractiveComponent
-@ComposeStory
-fun InteractiveStarRatingStory(modifier: Modifier = Modifier) {
+@ComposeStory("Small")
+fun InteractiveStarRatingStorySmall(modifier: Modifier = Modifier) {
+    InteractiveStarRatingStoryContent(size = BpkStarRatingSize.Small, modifier = modifier)
+}
+
+@Composable
+@StarRatingInteractiveComponent
+@ComposeStory("Large")
+fun InteractiveStarRatingStoryLarge(modifier: Modifier = Modifier) {
+    InteractiveStarRatingStoryContent(size = BpkStarRatingSize.Large, modifier = modifier)
+}
+
+@Composable
+@StarRatingInteractiveComponent
+@ComposeStory("Extra Large")
+fun InteractiveStarRatingStoryExtraLarge(modifier: Modifier = Modifier) {
+    InteractiveStarRatingStoryContent(size = BpkStarRatingSize.ExtraLarge, modifier = modifier)
+}
+
+@Composable
+private fun InteractiveStarRatingStoryContent(
+    size: BpkStarRatingSize,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier = modifier.fillMaxHeight(),
         contentAlignment = Alignment.Center,
@@ -54,45 +74,19 @@ fun InteractiveStarRatingStory(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(start = BpkSpacing.Xl),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
         ) {
-            InteractiveRatingSample(
-                size = BpkStarRatingSize.ExtraLarge,
-                text = stringResource(R.string.icons_extra_large),
-            )
-            InteractiveRatingSample(
-                size = BpkStarRatingSize.Large,
-                text = stringResource(R.string.icons_large),
-            )
-            InteractiveRatingSample(
-                size = BpkStarRatingSize.Small,
-                text = stringResource(R.string.icons_small),
-            )
-        }
-    }
-}
-
-@Composable
-private fun InteractiveRatingSample(
-    size: BpkStarRatingSize,
-    text: String,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier) {
-        BpkText(
-            text = text,
-            style = BpkTheme.typography.heading3,
-        )
-        val ratings = listOf(1, 2, 3, 4, 5)
-        for (i in ratings) {
-            key(i) {
-                var rating by remember { mutableIntStateOf(i) }
-                BpkInteractiveStarRating(
-                    rating = rating,
-                    onRatingChanged = { rating = it },
-                    contentDescription = { value, max ->
-                        stringResource(R.string.star_rating_accessibility_status, value, max)
-                    },
-                    size = size,
-                )
+            val ratings = listOf(1, 2, 3, 4, 5)
+            for (i in ratings) {
+                key(i) {
+                    var rating by remember { mutableIntStateOf(i) }
+                    BpkInteractiveStarRating(
+                        rating = rating,
+                        onRatingChanged = { rating = it },
+                        contentDescription = { value, max ->
+                            stringResource(R.string.star_rating_accessibility_status, value, max)
+                        },
+                        size = size,
+                    )
+                }
             }
         }
     }

@@ -4,17 +4,43 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.starrating)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/starrating)
 
-## Default
+## Small
 
-| Day                                                                                                                                                                      | Night                                                                                                                                                                                   |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default_dm.png" alt="Star Rating component - dark mode" width="375" /> |
+| Day                                                                                                                                                                    | Night                                                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/small.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/small_dm.png" alt="Star Rating component - dark mode" width="375" /> |
+
+## Large
+
+| Day                                                                                                                                                                    | Night                                                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/large.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/large_dm.png" alt="Star Rating component - dark mode" width="375" /> |
+
+## Extra Large
+
+| Day                                                                                                                                                                            | Night                                                                                                                                                                                         |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/extra-large.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/extra-large_dm.png" alt="Star Rating component - dark mode" width="375" /> |
 
 ## Interactive
 
-| Day                                                                                                                                                                                             | Night                                                                                                                                                                                                          |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/default.png" alt="Interactive Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/default_dm.png" alt="Interactive Star Rating component - dark mode" width="375" /> |
+### Small
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/small.png" alt="Interactive Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/small_dm.png" alt="Interactive Star Rating component - dark mode" width="375" /> |
+
+### Large
+
+| Day                                                                                                                                                                                                | Night                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/large.png" alt="Interactive Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/large_dm.png" alt="Interactive Star Rating component - dark mode" width="375" /> |
+
+### Extra Large
+
+| Day                                                                                                                                                                                                        | Night                                                                                                                                                                                                                     |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/extra-large.png" alt="Interactive Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/extra-large_dm.png" alt="Interactive Star Rating component - dark mode" width="375" /> |
 
 ## Installation
 

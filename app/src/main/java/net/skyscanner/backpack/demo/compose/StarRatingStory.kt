@@ -22,9 +22,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
@@ -46,8 +44,30 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @StarRatingComponent
-@ComposeStory
-fun StarRatingStory(modifier: Modifier = Modifier) {
+@ComposeStory("Small")
+fun StarRatingStorySmall(modifier: Modifier = Modifier) {
+    StarRatingStoryContent(size = BpkStarRatingSize.Small, modifier = modifier)
+}
+
+@Composable
+@StarRatingComponent
+@ComposeStory("Large")
+fun StarRatingStoryLarge(modifier: Modifier = Modifier) {
+    StarRatingStoryContent(size = BpkStarRatingSize.Large, modifier = modifier)
+}
+
+@Composable
+@StarRatingComponent
+@ComposeStory("Extra Large")
+fun StarRatingStoryExtraLarge(modifier: Modifier = Modifier) {
+    StarRatingStoryContent(size = BpkStarRatingSize.ExtraLarge, modifier = modifier)
+}
+
+@Composable
+private fun StarRatingStoryContent(
+    size: BpkStarRatingSize,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier = modifier.fillMaxHeight(),
         contentAlignment = Alignment.Center,
@@ -56,50 +76,8 @@ fun StarRatingStory(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(start = BpkSpacing.Xl),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
         ) {
-            BpkText(
-                text = stringResource(R.string.static_default_rating_title),
-                style = BpkTheme.typography.heading2,
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-            ) {
-                StaticRatingSample(
-                    size = BpkStarRatingSize.ExtraLarge,
-                    text = stringResource(R.string.icons_extra_large),
-                )
-                StaticRatingSample(
-                    size = BpkStarRatingSize.Large,
-                    text = stringResource(R.string.icons_large),
-                )
-                StaticRatingSample(
-                    size = BpkStarRatingSize.Small,
-                    text = stringResource(R.string.icons_small),
-                )
-            }
-            Column {
-                BpkText(
-                    text = stringResource(R.string.hotel_star_rating_title),
-                    style = BpkTheme.typography.heading2,
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-                ) {
-                    HotelRatingSample(
-                        size = BpkStarRatingSize.ExtraLarge,
-                        text = stringResource(R.string.icons_extra_large),
-                    )
-                    HotelRatingSample(
-                        size = BpkStarRatingSize.Large,
-                        text = stringResource(R.string.icons_large),
-                    )
-                    HotelRatingSample(
-                        size = BpkStarRatingSize.Small,
-                        text = stringResource(R.string.icons_small),
-                    )
-                }
-            }
+            StaticRatingSample(size = size)
+            HotelRatingSample(size = size)
         }
     }
 }
@@ -108,12 +86,11 @@ fun StarRatingStory(modifier: Modifier = Modifier) {
 @Composable
 private fun HotelRatingSample(
     size: BpkStarRatingSize,
-    text: String,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         BpkText(
-            text = text,
+            text = stringResource(R.string.hotel_star_rating_title),
             style = BpkTheme.typography.heading3,
         )
         for (i in 1..5) {
@@ -141,12 +118,11 @@ private fun HotelRatingSample(
 @Composable
 private fun StaticRatingSample(
     size: BpkStarRatingSize,
-    text: String,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         BpkText(
-            text = text,
+            text = stringResource(R.string.static_default_rating_title),
             style = BpkTheme.typography.heading3,
         )
         val ratings = listOf(1f, 2f, 3f, 3.5f, 4f, 5f)
