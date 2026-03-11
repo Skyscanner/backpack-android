@@ -65,6 +65,10 @@ fun StarRatingStory(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
             ) {
                 StaticRatingSample(
+                    size = BpkStarRatingSize.ExtraLarge,
+                    text = stringResource(R.string.icons_extra_large),
+                )
+                StaticRatingSample(
                     size = BpkStarRatingSize.Large,
                     text = stringResource(R.string.icons_large),
                 )
@@ -82,6 +86,10 @@ fun StarRatingStory(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
                 ) {
+                    HotelRatingSample(
+                        size = BpkStarRatingSize.ExtraLarge,
+                        text = stringResource(R.string.icons_extra_large),
+                    )
                     HotelRatingSample(
                         size = BpkStarRatingSize.Large,
                         text = stringResource(R.string.icons_large),

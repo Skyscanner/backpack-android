@@ -36,6 +36,7 @@ class BpkIcon internal constructor(
     val name: String,
     internal val small: Int,
     internal val large: Int,
+    internal val extraLarge: Int = large,
 ) {
 
     override fun equals(other: Any?): Boolean =
@@ -53,6 +54,7 @@ class BpkIcon internal constructor(
 enum class BpkIconSize {
     Small,
     Large,
+    ExtraLarge,
 }
 
 val LocalBpkIconSize = staticCompositionLocalOf { BpkIconSize.Small }
@@ -84,10 +86,12 @@ private operator fun BpkIcon.get(size: BpkIconSize): Int =
     when (size) {
         BpkIconSize.Small -> small
         BpkIconSize.Large -> large
+        BpkIconSize.ExtraLarge -> extraLarge
     }
 
 private fun Modifier.defaultMinSize(size: BpkIconSize): Modifier =
     when (size) {
         BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
         BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+        BpkIconSize.ExtraLarge -> requiredSize(BpkSpacing.Xxl, BpkSpacing.Xxl)
     }

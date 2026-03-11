@@ -61,6 +61,7 @@
 
     <string name="icons_small">Small</string>
     <string name="icons_large">Large</string>
+    <string name="icons_extra_large">Extra Large</string>
     <string name="icons_color">In color</string>
     <string name="icons_flight">Flight icon</string>
     <string name="icons_car">Car icon</string>

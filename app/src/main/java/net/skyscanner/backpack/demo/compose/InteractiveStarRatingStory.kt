@@ -55,6 +55,10 @@ fun InteractiveStarRatingStory(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
         ) {
             InteractiveRatingSample(
+                size = BpkStarRatingSize.ExtraLarge,
+                text = stringResource(R.string.icons_extra_large),
+            )
+            InteractiveRatingSample(
                 size = BpkStarRatingSize.Large,
                 text = stringResource(R.string.icons_large),
             )

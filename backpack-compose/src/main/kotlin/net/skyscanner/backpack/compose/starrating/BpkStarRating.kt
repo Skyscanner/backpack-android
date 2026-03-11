@@ -48,6 +48,7 @@ import androidx.compose.ui.platform.LocalResources
 enum class BpkStarRatingSize {
     Large,
     Small,
+    ExtraLarge,
 }
 
 enum class BpkRatingRounding {
@@ -154,6 +155,7 @@ private fun BpkStarRating(
     val iconSize = when (size) {
         BpkStarRatingSize.Large -> BpkIconSize.Large
         BpkStarRatingSize.Small -> BpkIconSize.Small
+        BpkStarRatingSize.ExtraLarge -> BpkIconSize.ExtraLarge
     }
     val coercedRating = rating.coerceIn(0f, numberOfStars.toFloat())
     val roundedRating = when (rounding) {

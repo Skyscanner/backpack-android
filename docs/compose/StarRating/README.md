@@ -116,3 +116,26 @@ BpkInteractiveStarRating(
   size = BpkStarRatingSize.Small,
 )
 ```
+
+Example of an extra large `BpkInteractiveStarRating`:
+
+```Kotlin
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+
+var rating by remember { mutableStateOf(0) }
+
+BpkInteractiveStarRating(
+  rating = rating,
+  onRatingChanged = { rating = it },
+  contentDescription = { value, max ->
+    stringResource(R.string.star_rating_accessibility_status, value, max)
+  },
+  size = BpkStarRatingSize.ExtraLarge,
+)
+```
