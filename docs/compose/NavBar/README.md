@@ -174,8 +174,8 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 
-// Fixed expanded (default)
-val fixedState = rememberFixedTopAppBarState()
+// Fixed expanded
+val fixedState = rememberFixedTopAppBarState(TopNavBarStatus.Expanded)
 
 BpkTopNavBar(
   state = fixedState,
@@ -183,8 +183,8 @@ BpkTopNavBar(
   navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
 )
 
-// Fixed collapsed
-val collapsedState = rememberFixedTopAppBarState(TopNavBarStatus.Collapsed)
+// Fixed collapsed(default)
+val collapsedState = rememberFixedTopAppBarState()
 
 BpkTopNavBar(
   state = collapsedState,
