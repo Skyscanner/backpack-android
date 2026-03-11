@@ -20,13 +20,10 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkHotelRating
@@ -68,17 +65,12 @@ private fun StarRatingStoryContent(
     size: BpkStarRatingSize,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.fillMaxHeight(),
-        contentAlignment = Alignment.Center,
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
     ) {
-        Column(
-            modifier = Modifier.padding(start = BpkSpacing.Xl),
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-        ) {
-            StaticRatingSample(size = size)
-            HotelRatingSample(size = size)
-        }
+        StaticRatingSample(size = size)
+        HotelRatingSample(size = size)
     }
 }
 

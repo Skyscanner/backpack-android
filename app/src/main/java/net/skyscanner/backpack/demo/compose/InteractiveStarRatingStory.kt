@@ -20,9 +20,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +28,6 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
@@ -66,27 +63,22 @@ private fun InteractiveStarRatingStoryContent(
     size: BpkStarRatingSize,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.fillMaxHeight(),
-        contentAlignment = Alignment.Center,
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
     ) {
-        Column(
-            modifier = Modifier.padding(start = BpkSpacing.Xl),
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-        ) {
-            val ratings = listOf(1, 2, 3, 4, 5)
-            for (i in ratings) {
-                key(i) {
-                    var rating by remember { mutableIntStateOf(i) }
-                    BpkInteractiveStarRating(
-                        rating = rating,
-                        onRatingChanged = { rating = it },
-                        contentDescription = { value, max ->
-                            stringResource(R.string.star_rating_accessibility_status, value, max)
-                        },
-                        size = size,
-                    )
-                }
+        val ratings = listOf(1, 2, 3, 4, 5)
+        for (i in ratings) {
+            key(i) {
+                var rating by remember { mutableIntStateOf(i) }
+                BpkInteractiveStarRating(
+                    rating = rating,
+                    onRatingChanged = { rating = it },
+                    contentDescription = { value, max ->
+                        stringResource(R.string.star_rating_accessibility_status, value, max)
+                    },
+                    size = size,
+                )
             }
         }
     }
