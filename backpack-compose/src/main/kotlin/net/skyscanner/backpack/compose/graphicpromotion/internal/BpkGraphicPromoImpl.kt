@@ -58,6 +58,7 @@ import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.LocalDensity
@@ -235,7 +236,7 @@ private fun SponsoredMessage(
     )
 
     BpkText(
-        modifier = modifier,
+        modifier = modifier.semantics { hideFromAccessibility() },
         text = annotatedText,
         style = captionStyle,
         color = textColor,
@@ -271,6 +272,7 @@ private fun MessageOverlay(
     ) {
         if (!kicker.isNullOrBlank()) {
             BpkText(
+                modifier = Modifier.semantics { hideFromAccessibility() },
                 text = kicker,
                 style = BpkTheme.typography.subheading,
                 color = textColor,
@@ -278,12 +280,14 @@ private fun MessageOverlay(
         }
 
         BpkText(
+            modifier = Modifier.semantics { hideFromAccessibility() },
             text = headline,
             style = BpkTheme.typography.heading2,
             color = textColor,
         )
         if (!subHeadline.isNullOrBlank()) {
             BpkText(
+                modifier = Modifier.semantics { hideFromAccessibility() },
                 text = subHeadline,
                 style = BpkTheme.typography.heading5,
                 color = textColor,
