@@ -28,5 +28,7 @@
     <dimen name="bpkSpacingMd">8dp</dimen>
     <dimen name="bpkSpacingNone">0dp</dimen>
     <dimen name="bpkSpacingSm">4dp</dimen>
+    <dimen name="bpkSpacingXs">2dp</dimen>
     <dimen name="bpkSpacingLg">24dp</dimen>
+    <dimen name="bpkSpacingXxs">1dp</dimen>
 </resources>

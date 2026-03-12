@@ -193,4 +193,5 @@ private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
     when (size) {
         BpkIconSize.Small -> this.requiredSize(BpkSpacing.Base, BpkSpacing.Base)
         BpkIconSize.Large -> this.requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+        BpkIconSize.ExtraLarge -> this.requiredSize(BpkSpacing.Xxl, BpkSpacing.Xxl)
     }

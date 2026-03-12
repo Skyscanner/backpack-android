@@ -36,6 +36,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
         override fun invoke(typeSpec: TypeSpec): Boolean {
             FileSpec.builder(pkg, typeSpec.name!!)
                 .indent(" ".repeat(4))
+                .addKotlinDefaultImports() // Prevents Kotlin's standard default package imports being included in the generated file
                 .suppressWarningTypes("RedundantVisibilityModifier", "unused")
                 .addType(typeSpec)
                 .build()

@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionContext
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,60 +36,79 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun rememberCapturedComposeBitmapDescriptor(
     vararg keys: Any?,
     content: @Composable () -> Unit,
-): BitmapDescriptor {
+): BitmapDescriptor? {
     val bitmap = rememberCapturedComposeBitmap(*keys, content = content)
-    return remember(bitmap) { BitmapDescriptorFactory.fromBitmap(bitmap) }
+    return remember(bitmap) { bitmap?.let { BitmapDescriptorFactory.fromBitmap(it) } }
 }
 
 @Composable
 internal fun rememberCapturedComposeBitmap(
     vararg keys: Any?,
     content: @Composable () -> Unit,
-): Bitmap {
+): Bitmap? {
     val parent = LocalView.current as ViewGroup
     val currentContext = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
     var cachedBitmap by remember { mutableStateOf<Bitmap?>(null) }
 
-    val newBitmap = remember(parent, currentContext, currentContent, *keys) {
-        renderComposeToBitmap(parent, currentContext, currentContent)
+    LaunchedEffect(parent, currentContext, currentContent, *keys) {
+        var retries = 0
+        val maxRetries = 5
+
+        while (retries < maxRetries) {
+            val bitmap = renderComposeToBitmap(parent, currentContext, currentContent)
+            if (bitmap != null) {
+                cachedBitmap = bitmap
+                return@LaunchedEffect
+            }
+            retries++
+            if (retries < maxRetries) {
+                delay(16) // Wait ~1 frame (~16ms at 60fps)
+            }
+        }
     }
-    cachedBitmap = newBitmap
-    return cachedBitmap ?: newBitmap
+
+    return cachedBitmap
 }
 
 private fun renderComposeToBitmap(
     parent: ViewGroup,
     compositionContext: CompositionContext,
     content: @Composable () -> Unit,
-): Bitmap {
-
+): Bitmap? {
     val composeView = ComposeView(parent.context)
     composeView.setParentCompositionContext(compositionContext)
-
     composeView.setContent(content)
 
-    parent.addView(composeView)
+    return try {
+        parent.addView(composeView)
 
-    composeView.measure(
-        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-    )
+        composeView.measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+        )
 
-    composeView.layout(0, 0, composeView.measuredWidth, composeView.measuredHeight)
+        composeView.layout(0, 0, composeView.measuredWidth, composeView.measuredHeight)
 
-    val bitmap = createBitmap(composeView.measuredWidth, composeView.measuredHeight)
+        // If measurements are not ready yet (0x0), return null to retry on next frame
+        if (composeView.measuredWidth <= 0 || composeView.measuredHeight <= 0) {
+            return null
+        }
 
-    bitmap.applyCanvas {
-        composeView.draw(this)
+        val bitmap = createBitmap(composeView.measuredWidth, composeView.measuredHeight)
+
+        bitmap.applyCanvas {
+            composeView.draw(this)
+        }
+
+        bitmap
+    } finally {
+        parent.removeView(composeView)
     }
-
-    parent.removeView(composeView)
-
-    return bitmap
 }
