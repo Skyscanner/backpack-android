@@ -134,19 +134,19 @@ private fun ModalDemo(
             navBarState = navBarState,
             onDismiss = { showModal.value = false },
         ) {
-            TextContent()
+            TextContent(modalStyle == ModalStyle.SurfaceContrast)
         }
     }
 }
 
 @Composable
-private fun TextContent() {
+private fun TextContent(isOnContrast: Boolean) {
     BpkText(
         modifier = Modifier
             .fillMaxSize()
             .padding(BpkSpacing.Base),
         text = stringResource(R.string.dialog_text),
         style = BpkTheme.typography.bodyDefault,
-        color = BpkTheme.colors.textPrimary,
+        color = if (isOnContrast) BpkTheme.colors.textOnDark else BpkTheme.colors.textPrimary,
     )
 }
