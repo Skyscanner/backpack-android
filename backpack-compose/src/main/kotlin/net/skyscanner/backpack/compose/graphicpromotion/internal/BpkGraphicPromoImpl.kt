@@ -270,12 +270,11 @@ private fun MessageOverlay(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.clearAndSetSemantics { },
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
     ) {
         if (!kicker.isNullOrBlank()) {
             BpkText(
-                modifier = Modifier.semantics { hideFromAccessibility() },
                 text = kicker,
                 style = BpkTheme.typography.subheading,
                 color = textColor,
@@ -283,14 +282,12 @@ private fun MessageOverlay(
         }
 
         BpkText(
-            modifier = Modifier.semantics { hideFromAccessibility() },
             text = headline,
             style = BpkTheme.typography.heading2,
             color = textColor,
         )
         if (!subHeadline.isNullOrBlank()) {
             BpkText(
-                modifier = Modifier.semantics { hideFromAccessibility() },
                 text = subHeadline,
                 style = BpkTheme.typography.heading5,
                 color = textColor,
