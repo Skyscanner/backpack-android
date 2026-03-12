@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.modal
 
 import android.view.Window
-import android.view.WindowManager
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -85,7 +84,7 @@ fun BpkModal(
 
     Dialog(
         properties = DialogProperties(
-            usePlatformDefaultWidth = true,
+            usePlatformDefaultWidth = false,
             decorFitsSystemWindows = false,
         ),
         onDismissRequest = { isVisible.targetState = false },
@@ -101,10 +100,6 @@ fun BpkModal(
                 // Below codes are deprecated for Android version 15 or above as it would always be transparent
                 statusBarColor = android.graphics.Color.TRANSPARENT
                 navigationBarColor = android.graphics.Color.TRANSPARENT
-                setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                )
                 windowInsetsController.isAppearanceLightStatusBars = isBackgroundLight
                 windowInsetsController.isAppearanceLightNavigationBars = isBackgroundLight
             }
