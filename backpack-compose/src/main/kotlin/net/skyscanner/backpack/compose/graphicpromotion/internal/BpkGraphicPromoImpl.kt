@@ -58,6 +58,7 @@ import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.platform.LocalDensity
@@ -124,7 +125,8 @@ internal fun BpkGraphicPromoImpl(
         if (overlayType != null) {
             BpkOverlay(
                 modifier = Modifier
-                    .matchParentSize(),
+                    .matchParentSize()
+                    .semantics { hideFromAccessibility() },
                 overlayType = overlayType,
                 foregroundContent = {
                     ForegroundContent(
@@ -142,7 +144,8 @@ internal fun BpkGraphicPromoImpl(
         } else {
             Box(
                 modifier = Modifier
-                    .matchParentSize(),
+                    .matchParentSize()
+                    .semantics { hideFromAccessibility() },
                 content = image,
             )
             ForegroundContent(
@@ -235,7 +238,7 @@ private fun SponsoredMessage(
     )
 
     BpkText(
-        modifier = modifier,
+        modifier = modifier.semantics { hideFromAccessibility() },
         text = annotatedText,
         style = captionStyle,
         color = textColor,
@@ -252,7 +255,8 @@ private fun SponsoredLogo(
     Box(
         modifier = Modifier
             .heightIn(max = SPONSOR_LOGO_HEIGHT.dp)
-            .widthIn(max = SPONSOR_LOGO_WIDTH.dp),
+            .widthIn(max = SPONSOR_LOGO_WIDTH.dp)
+            .semantics { hideFromAccessibility() },
         content = { sponsorLogo?.let { it() } },
     )
 }
@@ -266,7 +270,7 @@ private fun MessageOverlay(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.clearAndSetSemantics { },
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md, Alignment.Top),
     ) {
         if (!kicker.isNullOrBlank()) {
