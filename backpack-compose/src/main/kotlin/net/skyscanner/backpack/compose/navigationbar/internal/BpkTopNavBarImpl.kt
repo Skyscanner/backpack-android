@@ -38,6 +38,7 @@ import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.link.BpkLink
+import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.link.buildTextSegments
 import net.skyscanner.backpack.compose.navigationbar.Action
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -94,6 +95,11 @@ internal fun BpkTopNavBarImpl(
         }
     }
 
+    val bpkLinkStyle = when {
+        contentColor == BpkTheme.colors.textOnDark -> BpkLinkStyle.OnContrast
+        else -> BpkLinkStyle.Default
+    }
+
     val elevation = when {
         fraction <= 0f -> BpkDimension.Elevation.Sm
         else -> 0.dp
@@ -137,7 +143,7 @@ internal fun BpkTopNavBarImpl(
             actions.forEach { action ->
                 when (action) {
                     is IconAction -> IconAction(action)
-                    is TextAction -> TextAction(action)
+                    is TextAction -> TextAction(action, style = bpkLinkStyle)
                 }
             }
         },
@@ -159,7 +165,7 @@ internal fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
+internal fun TextAction(action: TextAction, modifier: Modifier = Modifier, style: BpkLinkStyle = BpkLinkStyle.Default) {
     Box(
         modifier = modifier
             .fillMaxHeight()
@@ -170,6 +176,7 @@ internal fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
         BpkLink(
             segments = buildTextSegments { link(action.text, "") },
             textStyle = BpkTheme.typography.heading5,
+            style = style,
             onLinkClicked = { action.onClick() },
         )
     }

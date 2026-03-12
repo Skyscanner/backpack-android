@@ -30,6 +30,7 @@ import net.skyscanner.backpack.demo.compose.BackTopNavBar
 import net.skyscanner.backpack.demo.compose.CanvasContrastNavBarStory
 import net.skyscanner.backpack.demo.compose.CloseTopNavBar
 import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
+import net.skyscanner.backpack.demo.compose.NavBarStoryExpanded
 import net.skyscanner.backpack.demo.compose.TransparentNavBarStory
 import net.skyscanner.backpack.demo.compose.NoNavIconTopNavBar
 import net.skyscanner.backpack.demo.compose.SurfaceContrastNavBarStory
@@ -40,30 +41,35 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
 
     @Test
     fun default() = snap {
-        ActionsTopNavBar(Modifier.fillMaxWidth())
+        val state = rememberFixedTopAppBarState()
+        ActionsTopNavBar(state)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
     fun noNavIcon() = snap {
-        NoNavIconTopNavBar(Modifier.fillMaxWidth())
+        val state = rememberFixedTopAppBarState()
+        NoNavIconTopNavBar(state)
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
     fun back() = snap {
-        BackTopNavBar(Modifier.fillMaxWidth())
+        val state = rememberFixedTopAppBarState()
+        BackTopNavBar(state)
     }
 
     @Test
     @Variants(BpkTestVariant.Default)
     fun close() = snap {
-        CloseTopNavBar(Modifier.fillMaxWidth())
+        val state = rememberFixedTopAppBarState()
+        CloseTopNavBar(state)
     }
 
     @Test
     fun textAction() = snap {
-        TextActionTopNavBar(Modifier.fillMaxWidth())
+        val state = rememberFixedTopAppBarState()
+        TextActionTopNavBar(state, Modifier.fillMaxWidth())
     }
 
     @Test
@@ -158,5 +164,11 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default)
     fun collapsedCanvasContrastNavBar() = snap {
         CanvasContrastNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun expandedFixedNavBar() = snap {
+        NavBarStoryExpanded()
     }
 }

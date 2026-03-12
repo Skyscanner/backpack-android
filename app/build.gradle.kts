@@ -76,6 +76,13 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("screenshots") {
+            java.srcDirs("src/internal/java")
+            res.srcDirs("src/screenshots/res")
+        }
+    }
+
     testOptions {
         unitTests {
             all {

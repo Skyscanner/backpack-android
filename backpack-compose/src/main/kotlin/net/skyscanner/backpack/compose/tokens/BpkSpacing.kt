@@ -41,5 +41,9 @@ public object BpkSpacing {
 
     public val Sm: Dp = 4.dp
 
+    public val Xs: Dp = 2.dp
+
     public val Lg: Dp = 24.dp
+
+    public val Xxs: Dp = 1.dp
 }

@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +28,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -40,8 +43,10 @@ import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavBarStyle
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarState
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
@@ -57,19 +62,41 @@ import net.skyscanner.backpack.demo.ui.ListItem
 
 @Composable
 @NavBarComponent
-@ComposeStory("Default")
-fun NavBarStory(modifier: Modifier = Modifier) {
+@ComposeStory("Default Fixed Collapsed State")
+fun NavBarStoryCollapsed(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(vertical = BpkSpacing.Base),
+        modifier = modifier
+            .padding(vertical = BpkSpacing.Base),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-
+        val collapsedState = rememberFixedTopAppBarState()
         val childModifier = Modifier.fillMaxWidth()
-        NoNavIconTopNavBar(childModifier)
-        BackTopNavBar(childModifier)
-        CloseTopNavBar(childModifier)
-        ActionsTopNavBar(childModifier)
-        TextActionTopNavBar(childModifier)
+        NoNavIconTopNavBar(collapsedState, childModifier)
+        BackTopNavBar(collapsedState, childModifier)
+        CloseTopNavBar(collapsedState, childModifier)
+        ActionsTopNavBar(collapsedState, childModifier)
+        TextActionTopNavBar(collapsedState, childModifier)
+    }
+}
+
+@Composable
+@NavBarComponent
+@ComposeStory("Default Fixed Expanded State")
+fun NavBarStoryExpanded(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .padding(vertical = BpkSpacing.Base)
+            .scrollable(state = rememberScrollState(), orientation = Orientation.Vertical),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        val expandedState = rememberFixedTopAppBarState(TopNavBarStatus.Expanded)
+        val childModifier = Modifier.fillMaxWidth()
+
+        NoNavIconTopNavBar(expandedState, childModifier)
+        BackTopNavBar(expandedState, childModifier)
+        CloseTopNavBar(expandedState, childModifier)
+        ActionsTopNavBar(expandedState, childModifier)
+        TextActionTopNavBar(expandedState, childModifier)
     }
 }
 
@@ -288,9 +315,10 @@ private fun NavBarSampleBody(showList: Boolean) {
 }
 
 @Composable
-internal fun NoNavIconTopNavBar(modifier: Modifier = Modifier) {
+internal fun NoNavIconTopNavBar(state: TopNavBarState, modifier: Modifier = Modifier) {
     BpkTopNavBar(
         navIcon = NavIcon.None,
+        state = state,
         title = stringResource(R.string.navigation_bar_title),
         modifier = modifier,
         insets = null,
@@ -298,9 +326,10 @@ internal fun NoNavIconTopNavBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun BackTopNavBar(modifier: Modifier = Modifier) {
+internal fun BackTopNavBar(state: TopNavBarState, modifier: Modifier = Modifier) {
     BpkTopNavBar(
         title = stringResource(R.string.navigation_bar_title),
+        state = state,
         navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
         modifier = modifier,
         insets = null,
@@ -308,9 +337,10 @@ internal fun BackTopNavBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun CloseTopNavBar(modifier: Modifier = Modifier) {
+internal fun CloseTopNavBar(state: TopNavBarState, modifier: Modifier = Modifier) {
     BpkTopNavBar(
         title = stringResource(R.string.navigation_bar_title),
+        state = state,
         navIcon = NavIcon.Close(contentDescription = stringResource(R.string.navigation_close)) {},
         modifier = modifier,
         insets = null,
@@ -318,9 +348,10 @@ internal fun CloseTopNavBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
+internal fun ActionsTopNavBar(state: TopNavBarState, modifier: Modifier = Modifier) {
     BpkTopNavBar(
         title = stringResource(R.string.navigation_bar_title),
+        state = state,
         navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
         actions = listOf(
             IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
@@ -333,9 +364,10 @@ internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
+internal fun TextActionTopNavBar(state: TopNavBarState, modifier: Modifier = Modifier) {
     BpkTopNavBar(
         navIcon = NavIcon.None,
+        state = state,
         title = stringResource(R.string.navigation_bar_title),
         action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
         modifier = modifier,
