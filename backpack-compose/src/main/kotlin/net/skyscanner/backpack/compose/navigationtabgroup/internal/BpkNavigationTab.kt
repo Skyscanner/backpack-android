@@ -52,6 +52,8 @@ import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
 
 private val NavigationTabShape = RoundedCornerShape(BpkBorderRadius.NavTabs)
+private val NavigationTabMinHeight = 48.dp
+private val NavigationTabMinWidth = 76.dp
 
 internal enum class BpkNavigationTabStyle {
     CanvasDefault,
@@ -132,8 +134,8 @@ private fun BpkNavigationTabImpl(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = modifier
-            .heightIn(min = 48.dp)
-            .widthIn(min = 76.dp)
+            .heightIn(min = NavigationTabMinHeight)
+            .widthIn(min = NavigationTabMinWidth)
             .background(backgroundColor)
             .border(BorderStroke(BpkBorderSize.Sm, strokeColor), NavigationTabShape)
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
