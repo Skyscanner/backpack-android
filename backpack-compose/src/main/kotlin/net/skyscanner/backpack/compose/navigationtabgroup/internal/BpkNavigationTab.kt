@@ -23,11 +23,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -42,11 +43,14 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.theme.bpkRipple
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkNavigationTabColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
+
+private val NavigationTabShape = RoundedCornerShape(BpkBorderRadius.NavTabs)
 
 internal enum class BpkNavigationTabStyle {
     CanvasDefault,
@@ -70,7 +74,7 @@ internal fun BpkNavigationTab(
         icon = icon,
         interactionSource = interactionSource,
         modifier = modifier.applyIf(onClick != null) {
-            clip(CircleShape)
+            clip(NavigationTabShape)
                 .selectable(
                     selected = selected,
                     interactionSource = interactionSource,
@@ -122,16 +126,15 @@ private fun BpkNavigationTabImpl(
         label = "",
     )
 
-    val navigationTabHeight = 36.dp
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .height(navigationTabHeight)
-            .clip(CircleShape)
+            .heightIn(min = 48.dp)
+            .widthIn(min = 76.dp)
+            .clip(NavigationTabShape)
             .background(backgroundColor)
-            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), CircleShape)
-            .padding(horizontal = BpkSpacing.Base),
+            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), NavigationTabShape)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
     ) {
         if (icon != null) {
             BpkIcon(
@@ -148,7 +151,7 @@ private fun BpkNavigationTabImpl(
             style = BpkTheme.typography.label2,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = if (icon != null) BpkSpacing.Md else 0.dp),
+            modifier = Modifier.padding(top = if (icon != null) BpkSpacing.Xs else 0.dp),
         )
     }
 }
@@ -163,8 +166,8 @@ private val BpkNavigationTabStyle.pressedBackgroundColor: Color
 private val BpkNavigationTabStyle.strokeColor: Color
     @Composable
     get() = when (this) {
-        BpkNavigationTabStyle.CanvasDefault -> BpkNavigationTabColors.outline
-        BpkNavigationTabStyle.SurfaceContrast -> BpkTheme.colors.textOnDark
+        BpkNavigationTabStyle.CanvasDefault -> BpkTheme.colors.line
+        BpkNavigationTabStyle.SurfaceContrast -> BpkNavigationTabColors.onDarkOutline
     }
 
 private val BpkNavigationTabStyle.pressedStrokeColor: Color
