@@ -122,7 +122,7 @@ private fun BpkSegmentedControlButton(
             text = content,
             textAlign = TextAlign.Center,
             color = getTextColor(type, isSelected),
-            style = BpkTheme.typography.footnote,
+            style = BpkTheme.typography.label2,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
         )
