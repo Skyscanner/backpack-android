@@ -68,6 +68,7 @@
     <color name="__privateMapPoiPin">#ff8e47ba</color>
     <color name="__privateMapPreviousSelection">#ffcfe4ff</color>
     <color name="__privateNavigationTabHover">#ffd1f7ff</color>
+    <color name="__privateNavigationTabOnDarkOutline">#33ffffff</color>
     <color name="__privateNavigationTabOutline">#ffffffff</color>
     <color name="__privateNavigationTabSelected">#ff054184</color>
     <color name="__privateSegmentedControlCanvasDefault">#ff131d2b</color>
