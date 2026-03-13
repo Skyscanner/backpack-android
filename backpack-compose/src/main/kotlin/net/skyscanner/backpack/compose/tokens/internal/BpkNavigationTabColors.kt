@@ -30,13 +30,13 @@ internal object BpkNavigationTabColors {
         @Composable
         get() = dynamicColorOf(Color(0xFF154679), Color(0xFFD1F7FF))
 
-    internal val outline: Color
-        @Composable
-        get() = dynamicColorOf(Color(0xFFC1C7CF), Color(0xFFFFFFFF))
-
     internal val onDarkOutline: Color
         @Composable
         get() = dynamicColorOf(Color(0x33FFFFFF), Color(0x33FFFFFF))
+
+    internal val outline: Color
+        @Composable
+        get() = dynamicColorOf(Color(0xFFC1C7CF), Color(0xFFFFFFFF))
 
     internal val selected: Color
         @Composable
