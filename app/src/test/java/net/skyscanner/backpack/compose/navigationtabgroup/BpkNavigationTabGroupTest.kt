@@ -55,7 +55,7 @@ class BpkNavigationTabGroupTest : BpkSnapshotTest() {
 
     @Test
     fun semanticsSelectedState() = snap(
-        background = { Color.Transparent },
+        background = { BpkTheme.colors.canvas },
         assertion = {
             onAllNodes(isSelectable()).assertCountEquals(4)
             onAllNodes(isSelectable())[0].assertIsSelected()
