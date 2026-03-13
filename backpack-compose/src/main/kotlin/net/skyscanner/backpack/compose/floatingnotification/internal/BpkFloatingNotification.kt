@@ -28,7 +28,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -62,7 +61,6 @@ internal fun BpkFloatingNotificationImpl(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxHeight()
                 .padding(horizontal = BpkSpacing.Base),
             horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
             verticalAlignment = Alignment.CenterVertically,
@@ -99,12 +97,12 @@ internal fun BpkFloatingNotificationImpl(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun floatingNotificationTransforms(
-    slideDistancePx: Int,
+    slideOffsetPx: Int,
 ): AnimatedContentTransitionScope<BpkFloatingNotificationData?>.() -> ContentTransform =
     {
         ContentTransform(
-            targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
-            initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
+            targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { height -> height + slideOffsetPx },
+            initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { height -> height + slideOffsetPx },
         )
     }
 

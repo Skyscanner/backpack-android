@@ -16,53 +16,48 @@
  * limitations under the License.
  */
 
-import net.skyscanner.backpack.tokens.BpkColor
-import net.skyscanner.backpack.tokens.BpkDimension
-import net.skyscanner.backpack.tokens.BpkDuration
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.BpkIcon
-import net.skyscanner.backpack.tokens.BpkOutput
-import net.skyscanner.backpack.tokens.BpkTextStyle
-import net.skyscanner.backpack.tokens.BpkTextUnit
-import net.skyscanner.backpack.tokens.nodeFileOf
-import net.skyscanner.backpack.tokens.parseAs
-import net.skyscanner.backpack.tokens.readAs
-import net.skyscanner.backpack.tokens.saveTo
-import net.skyscanner.backpack.tokens.transformTo
-
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    id("backpack.android-library")
+    id("backpack.publishing")
 }
 
-extra["artifactId"] = "backpack-common"
-
-apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/android-configuration.gradle")
+backpackPublishing {
+    artifactId = "backpack-common"
+}
 
 android {
     namespace = "net.skyscanner.backpack.common"
-    kotlinOptions {
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
-        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        freeCompilerArgs.add("-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi")
     }
 }
 
 dependencies {
+    // Compose BOM
     val composeBom = platform(libs.compose.bom)
     api(composeBom)
     implementation(composeBom)
 
+    // Module-specific dependencies
     api(libs.compose.ui)
-    testImplementation(libs.test.junit)
     implementation(libs.compose.runtime)
+
+    // Test dependencies
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.espressoCore)
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.coroutines)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 apply(from = "tokens.gradle.kts")
 
-
-apply(from = "$rootDir/android-configuration-check.gradle")
+apply(from = "$rootDir/android-configuration-check.gradle.kts")

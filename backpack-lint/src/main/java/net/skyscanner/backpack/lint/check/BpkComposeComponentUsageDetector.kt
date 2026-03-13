@@ -81,6 +81,21 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
             webName = "text-input",
             componentsToReplace = setOf(
                 "androidx.compose.foundation.text.BasicTextField",
+                "androidx.compose.foundation.text.BasicSecureTextField",
+            ),
+        ),
+        TEXT(
+            fullName = "net.skyscanner.backpack.compose.text.BpkText",
+            webName = "text",
+            componentsToReplace = setOf(
+                "androidx.compose.foundation.text.BasicText",
+            ),
+        ),
+        LINK(
+            fullName = "net.skyscanner.backpack.compose.link.BpkLink",
+            webName = "link",
+            componentsToReplace = setOf(
+                "androidx.compose.foundation.text.ClickableText",
             ),
         ),
         ;

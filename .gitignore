@@ -98,6 +98,7 @@ gen-external-apklibs
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+.idea/compiler.xml
 
 # Gradle:
 .idea/**/gradle.xml
@@ -247,3 +248,4 @@ backpack-compose/src/main/res/raw/compose_components.txt
 /.idea/copilot.data.migration.ask2agent.xml
 /.idea/copilot.data.migration.edit.xml
 /.idea/markdown.xml
+/.idea/shelf/

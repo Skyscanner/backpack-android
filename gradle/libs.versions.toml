@@ -1,6 +1,6 @@
 [versions]
-kotlin = "2.2.21"
-ksp = "2.3.3" # depends on Kotlin version
+kotlin = "2.3.0"
+ksp = "2.3.6" # depends on Kotlin version
 compilerTesting = "0.12.1"
 destinations = "2.3.0" # update this alongside with compiler version
 
@@ -14,20 +14,22 @@ androidXJunit = "1.3.0"
 coroutines = "1.10.2"
 espresso = "3.7.0"
 kotlinPoet = "2.2.0"
-ktor = "3.3.3"
-roborazzi = "1.55.0"
+ktor = "3.4.0"
+roborazzi = "1.59.0"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
+android-application = { id = "com.android.application", version.ref = "androidPlugin" }
+android-library = { id = "com.android.library", version.ref = "androidPlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 [libraries]
 
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "androidPlugin" }
-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
-plugin-roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi-gradle-plugin", version.ref = "roborazzi" }
 
 detektRules-compose = "io.nlopez.compose.rules:detekt:0.5.3"
 detektRules-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -39,6 +41,7 @@ androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 androidx-swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0"
 androidx-coreKts = "androidx.core:core-ktx:1.16.0"
+androidx-concurrentFutures = "androidx.concurrent:concurrent-futures:1.3.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
@@ -53,14 +56,14 @@ test-espressoCore = { module = "androidx.test.espresso:espresso-core", version.r
 test-espressoContrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 test-rules = "androidx.test:rules:1.7.0"
 test-mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-test-mockitoAndroid = "org.mockito:mockito-android:5.21.0"
+test-mockitoAndroid = "org.mockito:mockito-android:5.22.0"
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 test-lint = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 test-compose = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 google-material = "com.google.android.material:material:1.13.0"
 google-maps = "com.google.android.gms:play-services-maps:19.2.0"
-google-mapsCompose = "com.google.maps.android:maps-compose:6.12.2"
+google-mapsCompose = "com.google.maps.android:maps-compose:8.2.0"
 google-kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 google-guava = "com.google.guava:guava:33.5.0-jre"
 
@@ -76,7 +79,7 @@ kotlin-compilerTestingKsp = { module = "dev.zacsweers.kctfork:ksp", version.ref 
 lint-lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2025.11.01" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2026.02.00" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
@@ -103,4 +106,4 @@ android-sdkCommon = { module = "com.android.tools:sdk-common", version.ref = "an
 roborazzi-core = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
 roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
 roborazzi-junit = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "roborazzi" }
-robolectric = "org.robolectric:robolectric:4.16"
+robolectric = "org.robolectric:robolectric:4.16.1"

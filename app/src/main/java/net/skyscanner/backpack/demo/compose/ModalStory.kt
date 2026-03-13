@@ -23,17 +23,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.modal.ModalStyle
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarState
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -69,6 +71,21 @@ internal fun ModalWithoutActionAndTitle() {
     ModalDemo()
 }
 
+@Composable
+@ModalComponent
+@ComposeStory("SurfaceContrast With Back")
+internal fun ModalSurfaceContrastWithBackIcon() {
+    ModalDemo(
+        title = stringResource(R.string.dialog_title),
+        navActionType = ActionType.Back,
+        modalStyle = ModalStyle.SurfaceContrast,
+        actionText = "Text",
+        navBarState = rememberFixedTopAppBarState(
+            TopNavBarStatus.Expanded,
+        ),
+    )
+}
+
 enum class ActionType {
     Close,
     Back,
@@ -78,6 +95,8 @@ enum class ActionType {
 private fun ModalDemo(
     title: String? = null,
     actionText: String? = null,
+    modalStyle: ModalStyle = ModalStyle.Default,
+    navBarState: TopNavBarState = rememberFixedTopAppBarState(),
     navActionType: ActionType = ActionType.Close,
 ) {
     val showModal = rememberSaveable { mutableStateOf(true) }
@@ -91,44 +110,43 @@ private fun ModalDemo(
 
     if (showModal.value) {
         val modalState = rememberBpkModalState()
-        val coroutineScope = rememberCoroutineScope()
         BpkModal(
             state = modalState,
             title = title,
             navIcon = when (navActionType) {
                 ActionType.Close -> NavIcon.Close(
                     contentDescription = stringResource(id = R.string.navigation_back),
-                    onClick = { coroutineScope.launch { modalState.hide() } },
+                    onClick = { modalState.hide() },
                 )
 
                 ActionType.Back -> NavIcon.Back(
                     contentDescription = stringResource(id = R.string.navigation_back),
-                    onClick = { coroutineScope.launch { modalState.hide() } },
+                    onClick = { modalState.hide() },
                 )
             },
             action = actionText?.let {
                 TextAction(
                     text = it,
-                    onClick = {
-                        coroutineScope.launch { modalState.hide() }
-                    },
+                    onClick = { modalState.hide() },
                 )
             },
+            modalStyle = modalStyle,
+            navBarState = navBarState,
             onDismiss = { showModal.value = false },
         ) {
-            TextContent()
+            TextContent(modalStyle == ModalStyle.SurfaceContrast)
         }
     }
 }
 
 @Composable
-private fun TextContent() {
+private fun TextContent(isOnContrast: Boolean) {
     BpkText(
         modifier = Modifier
             .fillMaxSize()
             .padding(BpkSpacing.Base),
         text = stringResource(R.string.dialog_text),
         style = BpkTheme.typography.bodyDefault,
-        color = BpkTheme.colors.textPrimary,
+        color = if (isOnContrast) BpkTheme.colors.textOnDark else BpkTheme.colors.textPrimary,
     )
 }

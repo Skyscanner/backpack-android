@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkBorderRadius {
-    public val Full: Dp = 9_999.dp
+    public val Full: Dp = 100.dp
 
     public val Xl: Dp = 40.dp
 

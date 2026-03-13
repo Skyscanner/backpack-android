@@ -18,9 +18,10 @@
 
 package net.skyscanner.backpack.compose.horizontalnav
 
-import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.compose.HorizontalNav_CanvasContrastBackground_Sample
 import net.skyscanner.backpack.demo.compose.HorizontalNav_LargeWithIcon_Sample
 import net.skyscanner.backpack.demo.compose.HorizontalNav_Large_Sample
 import net.skyscanner.backpack.demo.compose.HorizontalNav_SmallWithIcon_Sample
@@ -46,6 +47,14 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
     fun smallWithIcon() {
         snap {
             HorizontalNav_SmallWithIcon_Sample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun canvasContrastBackground() {
+        snap {
+            HorizontalNav_CanvasContrastBackground_Sample()
         }
     }
 

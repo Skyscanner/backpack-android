@@ -20,6 +20,8 @@ updates:
       patterns:
       - "com.android.tools:*"
       - "com.android.tools.*"
+  cooldown:
+    default-days: 7
 
 - package-ecosystem: npm
   directory: "/"
@@ -31,6 +33,8 @@ updates:
   versioning-strategy: increase-if-necessary
   allow:
     - dependency-type: "direct"
+  cooldown:
+    default-days: 7
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
@@ -38,3 +42,5 @@ updates:
     day: monday
     time: "19:00"
   open-pull-requests-limit: 10
+  cooldown:
+    default-days: 7

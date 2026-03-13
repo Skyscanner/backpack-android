@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.modal
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.ModalStory
+import net.skyscanner.backpack.demo.compose.ModalSurfaceContrastWithBackIcon
 import net.skyscanner.backpack.demo.compose.ModalWithBackIcon
 import net.skyscanner.backpack.demo.compose.ModalWithoutAction
 import net.skyscanner.backpack.demo.compose.ModalWithoutActionAndTitle
@@ -45,5 +46,10 @@ class BpkModalTest : BpkSnapshotTest() {
     @Test
     fun modalWithoutActionAndTitle() = snap(captureFullScreen = true) {
         ModalWithoutActionAndTitle()
+    }
+
+    @Test
+    fun modalSurfaceContrastWithBackIcon() = snap(captureFullScreen = true) {
+        ModalSurfaceContrastWithBackIcon()
     }
 }

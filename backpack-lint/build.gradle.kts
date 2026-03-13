@@ -16,15 +16,8 @@
  * limitations under the License.
  */
 
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.nodeFileOf
-import net.skyscanner.backpack.tokens.parseAs
-import net.skyscanner.backpack.tokens.readAs
-import net.skyscanner.backpack.tokens.saveTo
-import net.skyscanner.backpack.tokens.transformTo
-
 plugins {
-    kotlin("jvm")
+    id("backpack.kotlin-library")
 }
 
 dependencies {
@@ -34,6 +27,11 @@ dependencies {
     testImplementation(libs.lint.lint)
     testImplementation(libs.test.lint)
     testImplementation(libs.test.junit)
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 tasks.jar {
@@ -44,4 +42,4 @@ tasks.jar {
 
 apply(from = "tokens.gradle.kts")
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle")
+apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")

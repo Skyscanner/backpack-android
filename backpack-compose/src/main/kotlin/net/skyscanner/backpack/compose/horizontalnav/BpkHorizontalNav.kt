@@ -18,9 +18,7 @@
 
 package net.skyscanner.backpack.compose.horizontalnav
 
-import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -38,7 +36,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,6 +61,11 @@ enum class BpkHorizontalNavSize {
     Small,
 }
 
+enum class BpkHorizontalNavBackgroundColor {
+    SurfaceDefault,
+    CanvasContrast,
+}
+
 data class BpkHorizontalNavTab(
     val title: String,
     val icon: BpkIcon? = null,
@@ -75,12 +77,17 @@ fun BpkHorizontalNav(
     activeIndex: Int,
     onChanged: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    backgroundColor: BpkHorizontalNavBackgroundColor = BpkHorizontalNavBackgroundColor.SurfaceDefault,
     size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
     TabRow(
         selectedTabIndex = activeIndex,
         tabs = tabs,
         onChanged = onChanged,
+        backgroundColor = when (backgroundColor) {
+            BpkHorizontalNavBackgroundColor.SurfaceDefault -> BpkTheme.colors.surfaceDefault
+            BpkHorizontalNavBackgroundColor.CanvasContrast -> BpkTheme.colors.canvasContrast
+        },
         modifier = modifier.height(
             when (size) {
                 BpkHorizontalNavSize.Default -> 48.dp
@@ -112,13 +119,14 @@ private fun TabRow(
     selectedTabIndex: Int,
     onChanged: (Int) -> Unit,
     tabs: List<BpkHorizontalNavTab>,
+    backgroundColor: Color,
     modifier: Modifier = Modifier,
     content: @Composable RowScope.(BpkHorizontalNavTab) -> Unit,
 ) {
     Surface(
         modifier = modifier.selectableGroup(),
-        color = BpkTheme.colors.surfaceDefault,
-        contentColor = BpkTheme.colors.textLink,
+        color = backgroundColor,
+        contentColor = BpkTheme.colors.textPrimary,
     ) {
         Row(
             modifier = Modifier
@@ -128,7 +136,7 @@ private fun TabRow(
                     dividerThickness = 1.dp,
                 )
                 .drawIndicator(
-                    indicatorColor = BpkTheme.colors.textLink,
+                    indicatorColor = BpkTheme.colors.coreAccent,
                     indicatorHeight = 2.dp,
                     tabsCount = tabs.size,
                     indicatorOffset = animateFloatAsState(
@@ -192,28 +200,9 @@ private fun Tab(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
-    val ripple = ripple(bounded = true, color = BpkTheme.colors.textLink)
+    val ripple = ripple(bounded = true, color = BpkTheme.colors.corePrimary)
     val transition = updateTransition(targetState = selected, label = "HorizontalNav.Tab transition")
-    val color by transition.animateColor(
-        transitionSpec = {
-            if (false isTransitioningTo true) {
-                tween(
-                    durationMillis = TabFadeInAnimationDuration,
-                    delayMillis = TabFadeInAnimationDelay,
-                    easing = LinearEasing,
-                )
-            } else {
-                tween(
-                    durationMillis = TabFadeOutAnimationDuration,
-                    easing = LinearEasing,
-                )
-            }
-        },
-        targetValueByState = {
-            if (it) BpkTheme.colors.textLink else BpkTheme.colors.textPrimary
-        },
-        label = "HorizontalNav.Tab color",
-    )
+    val color = BpkTheme.colors.textPrimary
     CompositionLocalProvider(
         LocalContentColor provides color,
     ) {

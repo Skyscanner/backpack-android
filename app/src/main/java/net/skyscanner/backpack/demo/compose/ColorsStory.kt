@@ -20,6 +20,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,10 +57,19 @@ fun ColorsComposeStory(modifier: Modifier = Modifier) {
     }
 }
 
+private val ItemHeight = 56.dp
+private val ItemWidth = 112.dp
+private val BorderStrokeWidth = 1.dp
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
+    val isLightColor = remember(token.value) { token.value.luminance() > 0.5 }
+    val contrastTextColor = if (isLightColor) {
+        BpkTheme.colors.textOnLight
+    } else {
+        BpkTheme.colors.textOnDark
+    }
     Row(
-        modifier = Modifier.height(56.dp),
+        modifier = Modifier.height(ItemHeight),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BpkText(
@@ -69,15 +80,15 @@ private fun ColorSampleRow(token: Token<Color>) {
         )
         Box(
             modifier = Modifier
-                .height(56.dp)
-                .width(112.dp)
-                .padding(1.dp)
+                .height(ItemHeight)
+                .width(ItemWidth)
+                .border(BorderStrokeWidth, BpkTheme.colors.line)
                 .background(token.value),
             contentAlignment = Alignment.Center,
         ) {
             BpkText(
                 text = colorToHex(color = token.value),
-                color = if (token.value.luminance() > 0.5) Color.Black else Color.White,
+                color = contrastTextColor,
             )
         }
     }

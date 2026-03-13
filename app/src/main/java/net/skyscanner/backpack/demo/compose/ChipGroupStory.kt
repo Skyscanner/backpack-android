@@ -86,9 +86,9 @@ fun SingleSelectChipGroupStoryWrap(modifier: Modifier = Modifier) =
 @ChipGroupComponent
 @ComposeStory("Multi Select Rail")
 fun MultiSelectChipGroupStoryRail(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
     val floatingNotification = LocalFloatingNotification.current
     val scope = rememberCoroutineScope()
+    val stickyChipActionText = stringResource(R.string.sticky_chip_action)
     ChipGroupDemo(
         modifier,
     ) { style ->
@@ -100,7 +100,7 @@ fun MultiSelectChipGroupStoryRail(modifier: Modifier = Modifier) {
                     icon = BpkIcon.Filter,
                 ) {
                     scope.launch {
-                        floatingNotification.show(context.getString(R.string.sticky_chip_action))
+                        floatingNotification.show(stickyChipActionText)
                     }
                 },
             ),

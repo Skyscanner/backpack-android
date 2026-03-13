@@ -4,11 +4,17 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.navigationbar)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/navigationbar)
 
-## Default
+## Default Fixed Collapsed State
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default.png" alt="NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default_dm.png" alt="NavBar component - dark mode" width="375" /> |
+| Day                                                                                                                                                                                   | Night |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default-fixed-collapsed-state.png" alt="NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default-fixed-collapsed-state_dm.png" alt="NavBar component - dark mode" width="375" /> |
+
+## Default Fixed Expanded State
+
+| Day                                                                                                                                                                                  | Night |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default-fixed-expanded-state.png" alt="NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default-fixed-expanded-state_dm.png" alt="NavBar component - dark mode" width="375" /> |
 
 ## Collapsible
 
@@ -160,6 +166,33 @@ Column(modifier.nestedScroll(state)) {
 ```
 
 By default, The navigation bar is solid style, but you can specify the OnImage style to make it transparent while in expanded state.
+Example of a non-scrollable (fixed) navigation bar:
+
+```Kotlin
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.navigationbar.rememberFixedTopAppBarState
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
+
+// Fixed expanded
+val fixedState = rememberFixedTopAppBarState(TopNavBarStatus.Expanded)
+
+BpkTopNavBar(
+  state = fixedState,
+  title = stringResource(R.string.navigation_bar_title),
+  navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
+)
+
+// Fixed collapsed(default)
+val collapsedState = rememberFixedTopAppBarState()
+
+BpkTopNavBar(
+  state = collapsedState,
+  title = stringResource(R.string.navigation_bar_title),
+  navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
+)
+```
+
 Example of a collapsible transparent navigation bar:
 
 ```Kotlin

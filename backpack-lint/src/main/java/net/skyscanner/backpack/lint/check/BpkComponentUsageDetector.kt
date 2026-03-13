@@ -144,7 +144,11 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
         CHECKBOX(
             fullName = "net.skyscanner.backpack.checkbox.BpkCheckbox",
             webName = "checkbox",
-            componentsToReplace = setOf("android.widget.Checkbox", "Checkbox", "androidx.appcompat.widget.AppCompatCheckBox"),
+            componentsToReplace = setOf(
+                "android.widget.Checkbox",
+                "Checkbox",
+                "androidx.appcompat.widget.AppCompatCheckBox",
+            ),
         ),
         CHIP(
             fullName = "net.skyscanner.backpack.chip.BpkChip",
@@ -215,12 +219,20 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
         TEXT(
             fullName = "net.skyscanner.backpack.text.BpkText",
             webName = "text",
-            componentsToReplace = setOf("android.widget.TextView", "TextView", "androidx.appcompat.widget.AppCompatTextView"),
+            componentsToReplace = setOf(
+                "android.widget.TextView",
+                "TextView",
+                "androidx.appcompat.widget.AppCompatTextView",
+            ),
         ),
         TEXT_FIELD(
             fullName = "net.skyscanner.backpack.text.BpkTextField",
             webName = "text-input",
-            componentsToReplace = setOf("android.widget.EditText", "EditText", "androidx.appcompat.widget.AppCompatEditText"),
+            componentsToReplace = setOf(
+                "android.widget.EditText",
+                "EditText",
+                "androidx.appcompat.widget.AppCompatEditText",
+            ),
         ),
         TEXT_INPUT_LAYOUT(
             fullName = "net.skyscanner.backpack.text.BpkTextInputLayout",

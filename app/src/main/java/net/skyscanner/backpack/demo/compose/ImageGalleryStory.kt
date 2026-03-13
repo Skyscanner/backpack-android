@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +34,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryChipCategory
@@ -113,13 +111,12 @@ fun ImageGalleryImageGridStory(
 
         if (showModal.value) {
             val modalState = rememberBpkModalState()
-            val coroutineScope = rememberCoroutineScope()
 
             BpkImageGalleryImageGrid(
                 state = modalState,
                 initialCategory = initialPage,
                 closeContentDescription = stringResource(R.string.navigation_close),
-                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onCloseClicked = { modalState.hide() },
                 onDismiss = { showModal.value = false },
                 categories = ImageGalleryData.imageCategories(context),
             )
@@ -145,13 +142,12 @@ fun ImageGalleryChipGridStory(
 
         if (showModal.value) {
             val modalState = rememberBpkModalState()
-            val coroutineScope = rememberCoroutineScope()
 
             BpkImageGalleryChipGrid(
                 state = modalState,
                 initialCategory = initialPage,
                 closeContentDescription = stringResource(R.string.navigation_close),
-                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onCloseClicked = { modalState.hide() },
                 onDismiss = { showModal.value = false },
                 categories = ImageGalleryData.chipCategories(context),
             )
@@ -176,14 +172,13 @@ fun ImageGallerySlideshowStory(
 
         if (showModal.value) {
             val modalState = rememberBpkModalState()
-            val coroutineScope = rememberCoroutineScope()
             val context = LocalContext.current
 
             BpkImageGallerySlideshow(
                 state = modalState,
                 closeContentDescription = stringResource(R.string.navigation_close),
                 initialImage = initialPage,
-                onCloseClicked = { coroutineScope.launch { modalState.hide() } },
+                onCloseClicked = { modalState.hide() },
                 onDismiss = { showModal.value = false },
                 images = ImageGalleryData.slideshowImages(context),
             )

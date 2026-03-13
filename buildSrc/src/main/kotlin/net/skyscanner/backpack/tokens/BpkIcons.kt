@@ -38,6 +38,7 @@ data class BpkIcon(
     enum class Type {
         Sm,
         Lg,
+        Xxxl,
     }
 
     sealed class Parser : BpkParser<List<File>, BpkIcons> {
@@ -49,17 +50,23 @@ data class BpkIcon(
 
                 return iconFiles
                     .map { file ->
+                        val nameWithoutExt = file.nameWithoutExtension
+                        val type = when {
+                            nameWithoutExt.endsWith("_sm") -> Type.Sm
+                            nameWithoutExt.endsWith("_xxxl") -> Type.Xxxl
+                            else -> Type.Lg
+                        }
                         BpkIcon(
-                            name = transformIconName(file.nameWithoutExtension),
-                            type = if (file.nameWithoutExtension.endsWith("_sm")) Type.Sm else Type.Lg,
-                            value = file.nameWithoutExtension,
+                            name = transformIconName(nameWithoutExt),
+                            type = type,
+                            value = nameWithoutExt,
                         )
                     }
                     .sortedBy { it.name.toComposeName() }
             }
 
             private fun transformIconName(name: String): String =
-                name.removePrefix("bpk_").removeSuffix("_sm")
+                name.removePrefix("bpk_").removeSuffix("_sm").removeSuffix("_xxxl")
         }
 
         object Svg : Parser() {
@@ -68,6 +75,7 @@ data class BpkIcon(
                     val type = when (folder.name) {
                         "lg" -> Type.Lg
                         "sm" -> Type.Sm
+                        "xxxl" -> Type.Xxxl
                         else -> null
                     }
                     folder.listFiles()!!.mapNotNull { file ->
@@ -129,28 +137,35 @@ private fun toCompose(
         val large =
             icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value
                 ?: error("Invalid icon format! : $name")
+        val extraLarge =
+            icons.firstOrNull { it.type == BpkIcon.Type.Xxxl }?.value
+
+        val codeBlock = CodeBlock
+            .builder()
+            .addStatement("%T.%M(", DelegatesClass, SingletonMethod)
+            .indent()
+            .addStatement("%T(", BpkIconClass)
+            .indent()
+            .addStatement("name = %S,", name.replace("_", "-"))
+            .addStatement("small = %T.drawable.%N,", rClass, small)
+            .addStatement("large = %T.drawable.%N,", rClass, large)
+            .apply {
+                if (extraLarge != null) {
+                    addStatement("extraLarge = %T.drawable.%N,", rClass, extraLarge)
+                }
+            }
+            .unindent()
+            .addStatement(")")
+            .unindent()
+            .addStatement(")")
+            .build()
 
         PropertySpec.builder(
             name = name.toComposeName(),
             type = BpkIconClass,
         )
             .receiver(BpkIconReceiverClass)
-            .delegate(
-                CodeBlock
-                    .builder()
-                    .addStatement("%T.%M(", DelegatesClass, SingletonMethod)
-                    .indent()
-                    .addStatement("%T(", BpkIconClass)
-                    .indent()
-                    .addStatement("name = %S,", name.replace("_", "-"))
-                    .addStatement("small = %T.drawable.%N,", rClass, small)
-                    .addStatement("large = %T.drawable.%N,", rClass, large)
-                    .unindent()
-                    .addStatement(")")
-                    .unindent()
-                    .addStatement(")")
-                    .build(),
-            )
+            .delegate(codeBlock)
             .build()
     }
     .plusElement(
@@ -185,7 +200,11 @@ private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<
         CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_UNDERSCORE, name)
             .removeSuffix(".svg")
             .let {
-                val suffix = if (type == BpkIcon.Type.Sm) "_sm" else ""
+                val suffix = when (type) {
+                    BpkIcon.Type.Sm -> "_sm"
+                    BpkIcon.Type.Xxxl -> "_xxxl"
+                    BpkIcon.Type.Lg -> ""
+                }
                 "bpk_$it$suffix"
             }
 

@@ -66,15 +66,17 @@ fun BpkPriceMapMarkerV2(
         PriceMarkerV2Layout(title = title, status = status, prefixIcon = prefixIcon)
     }
 
-    MarkerInfoWindow(
-        state = state,
-        tag = tag,
-        title = title,
-        visible = visible,
-        zIndex = if (status == BpkPriceMarkerV2Status.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
-        icon = icon,
-        onClick = onClick,
-    ) {}
+    icon?.let {
+        MarkerInfoWindow(
+            state = state,
+            tag = tag,
+            title = title,
+            visible = visible,
+            zIndex = if (status == BpkPriceMarkerV2Status.Selected && zIndex == null) 1.0f else zIndex ?: 0.0f,
+            icon = icon,
+            onClick = onClick,
+        ) {}
+    }
 }
 
 @Composable

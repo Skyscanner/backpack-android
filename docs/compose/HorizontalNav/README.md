@@ -64,6 +64,30 @@ BpkHorizontalNav(
 )
 ```
 
+Example of a Horizontal Nav (with contrast background color):
+
+```Kotlin
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavBackgroundColor
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
+
+val tabs = listOf(
+  BpkHorizontalNavTab(
+    title = "Tab 1",
+  ),
+  BpkHorizontalNavTab(
+    title = "Tab 2",
+  ),
+)
+
+BpkHorizontalNav(
+  tabs = tabs,
+  activeIndex = activeIndex,
+  backgroundColor = BpkHorizontalNavBackgroundColor.CanvasContrast,
+  onChanged = { index -> },
+)
+```
+
 Example of a Horizontal Nav (with icon):
 
 ```Kotlin

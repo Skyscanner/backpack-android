@@ -16,33 +16,15 @@
  * limitations under the License.
  */
 
-import com.squareup.kotlinpoet.ClassName
-import net.skyscanner.backpack.tokens.BpkColor
-import net.skyscanner.backpack.tokens.BpkDimension
-import net.skyscanner.backpack.tokens.BpkFormat
-import net.skyscanner.backpack.tokens.BpkIcon
-import net.skyscanner.backpack.tokens.BpkOutput
-import net.skyscanner.backpack.tokens.BpkTextStyle
-import net.skyscanner.backpack.tokens.BpkTextUnit
-import net.skyscanner.backpack.tokens.androidFileOf
-import net.skyscanner.backpack.tokens.nodeFileOf
-import net.skyscanner.backpack.tokens.parseAs
-import net.skyscanner.backpack.tokens.readAs
-import net.skyscanner.backpack.tokens.saveTo
-import net.skyscanner.backpack.tokens.transformTo
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
-
 plugins {
+    id("backpack.android-library")
     alias(libs.plugins.compose.compiler)
-    id("com.android.library")
-    id("kotlin-android")
+    id("backpack.publishing")
 }
 
-extra["artifactId"] = "backpack-compose"
-
-apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/android-configuration.gradle")
+backpackPublishing {
+    artifactId = "backpack-compose"
+}
 
 android {
     namespace = "net.skyscanner.backpack.compose"
@@ -50,15 +32,23 @@ android {
         compose = true
         resValues = false
     }
-    packagingOptions {
-        exclude("**/attach_hotspot_windows.dll")
-        exclude("META-INF/licenses/**")
-        exclude("META-INF/AL2.0")
-        exclude("META-INF/LGPL2.1")
+    packaging {
+        resources.excludes.add("**/attach_hotspot_windows.dll")
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
 dependencies {
+    // Compose BOM
+    val composeBom = platform(libs.compose.bom)
+    api(composeBom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    debugImplementation(composeBom)
+
+    // Module-specific API dependencies
     api(libs.compose.ui)
     api(libs.compose.foundation)
     api(libs.compose.uiToolingPreview)
@@ -66,34 +56,31 @@ dependencies {
     api(libs.google.maps)
     api(libs.google.mapsCompose)
 
+    // Module-specific implementation dependencies
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycleViewmodel)
     implementation(libs.androidx.lifecycleViewmodelKtx)
     implementation(libs.androidx.coreKts)
 
+    // Module-specific test dependencies
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.compose)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.mockitoKotlin)
     androidTestImplementation(libs.test.mockitoAndroid)
-    androidTestImplementation(libs.test.compose)
-
     debugImplementation(libs.compose.uiTooling)
     debugImplementation(libs.compose.uiToolingTestManifest)
 
-    testImplementation(libs.test.junit)
-    testImplementation(libs.test.coroutines)
-
-    lintPublish(project(":backpack-lint"))
     implementation(project(":backpack-common"))
 
-    val composeBom = platform(libs.compose.bom)
-    api(composeBom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    debugImplementation(composeBom)
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 apply(from = "tokens.gradle.kts")
 apply(from = "components.gradle.kts")
 
-apply(from = "$rootDir/android-configuration-check.gradle")
+apply(from = "$rootDir/android-configuration-check.gradle.kts")

@@ -17,26 +17,29 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    id("backpack.android-library")
+    id("backpack.publishing")
 }
 
-extra["artifactId"] = "backpack-android"
-
-apply(from = "$rootDir/gradle-maven-push.gradle")
-apply(from = "$rootDir/android-configuration.gradle")
+backpackPublishing {
+    artifactId = "backpack-android"
+}
 
 android {
     namespace = "net.skyscanner.backpack"
 }
 
 dependencies {
+    // Module-specific dependencies
     api(libs.google.material)
     api(libs.androidx.constraintLayout)
     api(libs.androidx.cardView)
     api(libs.google.maps)
     implementation(libs.androidx.swiperefreshLayout)
     implementation(libs.androidx.coreKts)
+
+    // Test dependencies
+    testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.junitKtx)
     androidTestImplementation(libs.test.espressoCore)
@@ -44,13 +47,17 @@ dependencies {
     androidTestImplementation(libs.test.rules)
     androidTestImplementation(libs.test.mockitoKotlin)
     androidTestImplementation(libs.test.mockitoAndroid)
-    androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.coroutines)
 
     api(project(":backpack-common"))
     lintPublish(project(":backpack-lint"))
+
+    // Detekt rules
+    detektPlugins(libs.detektRules.compose)
+    detektPlugins(libs.detektRules.formatting)
+    detektPlugins(libs.detektRules.libraries)
 }
 
 apply(from = "tokens.gradle.kts")
 
-apply(from = "$rootDir/android-configuration-check.gradle")
+apply(from = "$rootDir/android-configuration-check.gradle.kts")

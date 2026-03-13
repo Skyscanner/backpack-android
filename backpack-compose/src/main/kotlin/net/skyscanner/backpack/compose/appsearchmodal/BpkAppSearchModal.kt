@@ -19,10 +19,8 @@
 package net.skyscanner.backpack.compose.appsearchmodal
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.appsearchmodal.internal.BpkAppSearchModalImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.modal.BpkModal
@@ -83,13 +81,10 @@ fun BpkAppSearchModal(
     prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
-    val coroutineScope = rememberCoroutineScope()
     BpkModal(
         navIcon = NavIcon.Close(
             contentDescription = closeAccessibilityLabel,
-            onClick = {
-                coroutineScope.launch { state.hide() }
-            },
+            onClick = { state.hide() },
         ),
         modifier = modifier,
         state = state,

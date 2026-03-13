@@ -25,8 +25,15 @@ import com.android.tools.lint.detector.api.Issue
 import net.skyscanner.backpack.lint.check.BpkComponentUsageDetector
 import net.skyscanner.backpack.lint.check.BpkComposeComponentUsageDetector
 import net.skyscanner.backpack.lint.check.BpkDeprecatedColorUsageDetector
+import net.skyscanner.backpack.lint.check.BpkTokensCopyDetector
+import net.skyscanner.backpack.lint.check.HardcodedBorderRadiusDetector
 import net.skyscanner.backpack.lint.check.HardcodedColorResourceDetector
 import net.skyscanner.backpack.lint.check.HardcodedColorUsageDetector
+import net.skyscanner.backpack.lint.check.HardcodedComposeColorDetector
+import net.skyscanner.backpack.lint.check.HardcodedPaddingDetector
+import net.skyscanner.backpack.lint.check.HardcodedSizeDetector
+import net.skyscanner.backpack.lint.check.HardcodedTypographyDetector
+import net.skyscanner.backpack.lint.check.UnicodeIconUsageDetector
 
 @Suppress("unused", "UnstableApiUsage")
 class IssueRegistry : IssueRegistry() {
@@ -39,6 +46,13 @@ class IssueRegistry : IssueRegistry() {
         HardcodedColorUsageDetector.ISSUE,
         HardcodedColorResourceDetector.ISSUE,
         BpkDeprecatedColorUsageDetector.ISSUE,
+        HardcodedPaddingDetector.ISSUE,
+        HardcodedBorderRadiusDetector.ISSUE,
+        HardcodedSizeDetector.ISSUE,
+        HardcodedComposeColorDetector.ISSUE,
+        HardcodedTypographyDetector.ISSUE,
+        BpkTokensCopyDetector.ISSUE,
+        UnicodeIconUsageDetector.ISSUE,
     )
 
     override val vendor: Vendor = Vendor(vendorName = "Skyscanner", identifier = "backpack-android")
