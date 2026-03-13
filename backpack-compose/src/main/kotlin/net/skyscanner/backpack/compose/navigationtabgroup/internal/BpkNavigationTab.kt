@@ -73,14 +73,15 @@ internal fun BpkNavigationTab(
         style = style,
         icon = icon,
         interactionSource = interactionSource,
-        modifier = modifier.applyIf(onClick != null) {
-            clip(NavigationTabShape)
-                .selectable(
+        modifier = modifier
+            .clip(NavigationTabShape)
+            .applyIf(onClick != null) {
+                selectable(
                     selected = selected,
                     interactionSource = interactionSource,
                     indication = bpkRipple(),
                 ) { onClick!!.invoke() }
-        },
+            },
     )
 }
 
@@ -131,7 +132,6 @@ private fun BpkNavigationTabImpl(
         modifier = modifier
             .heightIn(min = 48.dp)
             .widthIn(min = 76.dp)
-            .clip(NavigationTabShape)
             .background(backgroundColor)
             .border(BorderStroke(BpkBorderSize.Sm, strokeColor), NavigationTabShape)
             .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),

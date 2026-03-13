@@ -19,6 +19,11 @@
 package net.skyscanner.backpack.compose.navigationtabgroup
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.isSelectable
+import androidx.compose.ui.test.onAllNodes
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.NavigationTabGroupSample
@@ -34,5 +39,32 @@ class BpkNavigationTabGroupTest : BpkSnapshotTest() {
     @Test
     fun onDark() = snap(background = { BpkTheme.colors.surfaceContrast }) {
         NavigationTabGroupSample(style = BpkNavigationTabGroupStyle.SurfaceContrast)
+    }
+
+    @Test
+    fun withoutIcons() = snap(background = { Color.Transparent }) {
+        BpkNavigationTabGroup(
+            tabs = listOf(
+                BpkNavigationTabItem("Tab 1"),
+                BpkNavigationTabItem("Tab 2"),
+                BpkNavigationTabItem("Tab 3"),
+            ),
+            selectedIndex = 0,
+            onItemClicked = {},
+        )
+    }
+
+    @Test
+    fun semanticsSelectedState() = snap(
+        background = { Color.Transparent },
+        assertion = {
+            onAllNodes(isSelectable()).assertCountEquals(4)
+            onAllNodes(isSelectable())[0].assertIsSelected()
+            onAllNodes(isSelectable())[1].assertIsNotSelected()
+            onAllNodes(isSelectable())[2].assertIsNotSelected()
+            onAllNodes(isSelectable())[3].assertIsNotSelected()
+        },
+    ) {
+        NavigationTabGroupSample()
     }
 }
