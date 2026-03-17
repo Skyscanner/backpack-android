@@ -60,6 +60,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlStyle
 import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.text.BpkText
@@ -92,6 +93,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    searchInputControlStyle: BpkSearchInputControlStyle? = null,
     docking: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
@@ -124,6 +126,7 @@ internal fun BpkTextFieldImpl(
         trailingIcon = trailingIcon,
         clearAction = clearAction,
         type = type,
+        searchInputControlStyle = searchInputControlStyle,
         docking = docking,
         horizontalPadding = horizontalPadding,
         contentPadding = contentPadding,
@@ -150,6 +153,7 @@ internal fun BpkTextFieldImpl(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    searchInputControlStyle: BpkSearchInputControlStyle? = null,
     docking: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
@@ -190,6 +194,7 @@ internal fun BpkTextFieldImpl(
                 textFieldContent = it,
                 clearAction = if (readOnly && prefix == null) null else clearAction,
                 type = type,
+                searchInputControlStyle = searchInputControlStyle,
                 docking = docking,
                 horizontalPadding = horizontalPadding,
                 contentPadding = contentPadding,
@@ -211,6 +216,7 @@ private fun TextFieldBox(
     trailingIcon: BpkIcon? = null,
     clearAction: BpkClearAction? = null,
     type: BpkTextFieldType = BpkTextFieldType.Default,
+    searchInputControlStyle: BpkSearchInputControlStyle? = null,
     docking: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
@@ -224,65 +230,95 @@ private fun TextFieldBox(
         },
     )
     val shape = textFieldShape(type = type, docking = docking)
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    val isSearchInputControl = searchInputControlStyle != null
+    val onContrastFocused = searchInputControlStyle is BpkSearchInputControlStyle.OnContrast && isFocused
+    val outerBorderWidth = if (isSearchInputControl) 2.dp else 1.dp
+    val innerBorderWidth = if (onContrastFocused) 2.dp else 0.dp
+    val borderColor = animateColorAsState(
+        when {
+            status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
+            status is BpkFieldStatus.Error -> BpkTheme.colors.textError
+            isFocused -> BpkTheme.colors.coreAccent
+            isSearchInputControl -> Color.Transparent
+            else -> BpkTheme.colors.line
+        },
+    ).value
+    val outerBorderColor = borderColor
+    val innerBorderColor = if (onContrastFocused) BpkTheme.colors.surfaceDefault else Color.Transparent
+    val backgroundColor = when (searchInputControlStyle) {
+        BpkSearchInputControlStyle.Default -> BpkTheme.colors.canvasContrast
+        BpkSearchInputControlStyle.OnContrast -> BpkTheme.colors.surfaceDefault
+        null -> BpkTheme.colors.surfaceDefault
+    }
+    Box(
         modifier = modifier
             .width(IntrinsicSize.Max)
             .requiredHeightIn(min = minHeight)
-            .border(
-                width = 1.dp, shape = shape,
-                color = animateColorAsState(
-                    when {
-                        status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
-                        status is BpkFieldStatus.Error -> BpkTheme.colors.textError
-                        isFocused -> BpkTheme.colors.coreAccent
-                        else -> BpkTheme.colors.line
-                    },
-                ).value,
-            )
-            .background(BpkTheme.colors.surfaceDefault, shape)
-            .padding(horizontal = horizontalPadding),
+            .background(backgroundColor, shape),
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .matchParentSize()
+                .padding(horizontal = horizontalPadding),
+        ) {
 
-        when (prefix) {
-            is Prefix.Text ->
+            when (prefix) {
+                is Prefix.Text ->
+                    BpkText(
+                        text = prefix.prefixText,
+                        modifier = Modifier.padding(start = BpkSpacing.Sm),
+                        color = tintColor,
+                    )
+
+                is Prefix.Icon ->
+                    BpkIcon(
+                        icon = prefix.icon,
+                        contentDescription = null,
+                        size = BpkIconSize.Large,
+                        modifier = Modifier.padding(start = BpkSpacing.Sm),
+                        tint = tintColor,
+                    )
+
+                else -> {}
+            }
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(contentPadding),
+            ) {
+
                 BpkText(
-                    text = prefix.prefixText,
-                    modifier = Modifier.padding(start = BpkSpacing.Sm),
+                    text = placeholder ?: "",
                     color = tintColor,
+                    maxLines = maxLines,
+                    modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
+                    style = BpkTheme.typography.bodyDefault,
+                    overflow = TextOverflow.Ellipsis,
                 )
 
-            is Prefix.Icon ->
-                BpkIcon(
-                    icon = prefix.icon,
-                    contentDescription = null,
-                    size = BpkIconSize.Large,
-                    modifier = Modifier.padding(start = BpkSpacing.Sm),
-                    tint = tintColor,
-                )
+                textFieldContent()
+            }
 
-            else -> {}
+            TrailingIcon(trailingIcon, status, clearAction, value, type)
         }
 
         Box(
             modifier = Modifier
-                .weight(1f)
-                .padding(contentPadding),
-        ) {
-
-            BpkText(
-                text = placeholder ?: "",
-                color = tintColor,
-                maxLines = maxLines,
-                modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
-                style = BpkTheme.typography.bodyDefault,
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            textFieldContent()
-        }
-
-        TrailingIcon(trailingIcon, status, clearAction, value, type)
+                .matchParentSize()
+                .border(
+                    width = outerBorderWidth,
+                    shape = shape,
+                    color = outerBorderColor,
+                )
+                .padding(if (innerBorderWidth > 0.dp) 2.dp else 0.dp)
+                .border(
+                    width = innerBorderWidth,
+                    shape = shape,
+                    color = innerBorderColor,
+                ),
+        )
     }
 }
 

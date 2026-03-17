@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,13 +29,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
+import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlStyle
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlType
 import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
@@ -213,11 +217,42 @@ internal fun ReadOnlyControlExample() {
 @ComposeStory(name = "Corner", kind = StoryKind.ScreenshotOnly)
 internal fun CornerControlExample() {
     Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xl),
         modifier = Modifier.padding(BpkSpacing.Base),
     ) {
+        SearchInputControlDockedStack(
+            title = "On default",
+            style = BpkSearchInputControlStyle.Default,
+            backgroundColor = BpkTheme.colors.surfaceDefault,
+            textColor = BpkTheme.colors.textPrimary,
+        )
+        SearchInputControlDockedStack(
+            title = "On contrast",
+            style = BpkSearchInputControlStyle.OnContrast,
+            backgroundColor = BpkTheme.colors.surfaceContrast,
+            textColor = BpkTheme.colors.textOnDark,
+        )
+    }
+}
+
+@Composable
+private fun SearchInputControlDockedStack(
+    title: String,
+    style: BpkSearchInputControlStyle,
+    backgroundColor: Color,
+    textColor: Color,
+) {
+    var focusedIndex by remember { mutableIntStateOf(0) }
+    Column(
+        modifier = Modifier
+            .background(backgroundColor)
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base),
+    ) {
         BpkText(
-            text = "Docked stack",
+            text = title,
             style = BpkTheme.typography.heading4,
+            color = textColor,
             modifier = Modifier.padding(vertical = BpkSpacing.Base),
         )
         BpkSearchInputControl(
@@ -225,8 +260,11 @@ internal fun CornerControlExample() {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Search),
             onInputChanged = {},
-            modifier = Modifier.fillMaxWidth(),
-            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { focusedIndex = 0 },
+            type = BpkSearchInputControlType.ReadOnly(isFocused = focusedIndex == 0),
+            style = style,
             docking = Docking.Top,
             horizontalPadding = BpkSpacing.Base,
             contentPadding = BpkSpacing.Sm,
@@ -237,8 +275,11 @@ internal fun CornerControlExample() {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
             onInputChanged = {},
-            modifier = Modifier.fillMaxWidth(),
-            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { focusedIndex = 1 },
+            type = BpkSearchInputControlType.ReadOnly(isFocused = focusedIndex == 1),
+            style = style,
             docking = Docking.Middle,
             horizontalPadding = BpkSpacing.Base,
             contentPadding = BpkSpacing.Sm,
@@ -249,8 +290,11 @@ internal fun CornerControlExample() {
             inputHint = stringResource(id = R.string.text_field_hint),
             prefix = Prefix.Icon(BpkIcon.Hotels),
             onInputChanged = {},
-            modifier = Modifier.fillMaxWidth(),
-            type = BpkSearchInputControlType.ReadOnly(isFocused = false),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { focusedIndex = 2 },
+            type = BpkSearchInputControlType.ReadOnly(isFocused = focusedIndex == 2),
+            style = style,
             docking = Docking.Bottom,
             horizontalPadding = BpkSpacing.Base,
             contentPadding = BpkSpacing.Sm,
@@ -268,6 +312,7 @@ internal fun SearchInputControlStory(
     inputHint: String = stringResource(id = R.string.text_field_hint),
     prefix: Prefix = Prefix.Icon(BpkIcon.Search),
     type: BpkSearchInputControlType = BpkSearchInputControlType.TextInput,
+    style: BpkSearchInputControlStyle = BpkSearchInputControlStyle.Default,
     docking: Docking = Docking.Float,
 ) {
     Column(
@@ -289,6 +334,7 @@ internal fun SearchInputControlStory(
             },
             modifier = searchInputControlModifier.fillMaxWidth(),
             type = type,
+            style = style,
             docking = docking,
         )
     }

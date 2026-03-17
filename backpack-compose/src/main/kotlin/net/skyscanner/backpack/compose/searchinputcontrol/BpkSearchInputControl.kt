@@ -33,6 +33,11 @@ sealed class BpkSearchInputControlType {
     data class ReadOnly(val isFocused: Boolean) : BpkSearchInputControlType()
 }
 
+sealed class BpkSearchInputControlStyle {
+    data object Default : BpkSearchInputControlStyle()
+    data object OnContrast : BpkSearchInputControlStyle()
+}
+
 /**
  * Defines the corner rounding style for BpkSearchInputControl, allowing multiple
  * controls to be stacked together with shared corner rounding.
@@ -60,6 +65,7 @@ fun BpkSearchInputControl(
     modifier: Modifier = Modifier,
     clearAction: BpkClearAction? = null,
     type: BpkSearchInputControlType = BpkSearchInputControlType.TextInput,
+    style: BpkSearchInputControlStyle = BpkSearchInputControlStyle.Default,
     docking: Docking = Docking.Float,
     horizontalPadding: Dp = BpkSpacing.Md,
     contentPadding: Dp = BpkSpacing.Md,
@@ -77,6 +83,7 @@ fun BpkSearchInputControl(
         clearAction = clearAction,
         type = BpkTextFieldType.Search,
         isFocused = isFocused,
+        searchInputControlStyle = style,
         docking = docking,
         horizontalPadding = horizontalPadding,
         contentPadding = contentPadding,
