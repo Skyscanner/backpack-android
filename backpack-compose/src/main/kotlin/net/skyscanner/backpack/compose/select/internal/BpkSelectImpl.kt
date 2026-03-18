@@ -42,8 +42,7 @@ import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.select.BpkDropDownWidth
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
-import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
+import net.skyscanner.backpack.compose.textfield.internal.BpkStaticFieldImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.ArrowDown
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -78,12 +77,10 @@ internal fun BpkSelectImpl(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
     ) {
-        BpkTextFieldImpl(
+        BpkStaticFieldImpl(
             modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
             value = selectText,
-            onValueChange = {},
-            type = BpkTextFieldType.Select,
-            readOnly = true,
+            isFocused = expanded,
             placeholder = placeholder,
             status = status,
             trailingIcon = BpkIcon.ArrowDown,
@@ -140,7 +137,7 @@ internal fun BpkSelectImpl(
     status: BpkFieldStatus = LocalFieldStatus.current,
     onClick: (() -> Unit)? = null,
 ) {
-    BpkTextFieldImpl(
+    BpkStaticFieldImpl(
         modifier = if (status == BpkFieldStatus.Disabled) modifier else modifier.clickableWithRipple(
             bounded = true,
             role = Role.Button,
@@ -148,8 +145,6 @@ internal fun BpkSelectImpl(
             onClick?.let { it() }
         },
         value = text,
-        onValueChange = {},
-        readOnly = true,
         placeholder = placeholder,
         status = status,
         trailingIcon = BpkIcon.ArrowDown,

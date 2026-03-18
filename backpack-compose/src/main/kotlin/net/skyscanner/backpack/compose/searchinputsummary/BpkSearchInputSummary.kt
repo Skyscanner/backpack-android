@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.textfield.internal.BpkStaticFieldImpl
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
 import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
 import net.skyscanner.backpack.compose.tokens.Search
@@ -54,17 +55,26 @@ fun BpkSearchInputSummary(
     modifier: Modifier = Modifier,
     type: BpkSearchInputSummaryType = BpkSearchInputSummaryType.TextInput,
 ) {
-    val isFocused = if (type is BpkSearchInputSummaryType.ReadOnly) type.isFocused else null
-    BpkTextFieldImpl(
-        value = inputText,
-        onValueChange = onInputChanged,
-        modifier = modifier,
-        readOnly = type is BpkSearchInputSummaryType.ReadOnly,
-        placeholder = inputHint,
-        prefix = prefix,
-        status = BpkFieldStatus.Default,
-        clearAction = clearAction,
-        type = BpkTextFieldType.Search,
-        isFocused = isFocused,
-    )
+    if (type is BpkSearchInputSummaryType.ReadOnly) {
+        BpkStaticFieldImpl(
+            value = inputText,
+            modifier = modifier,
+            placeholder = inputHint,
+            prefix = prefix,
+            status = BpkFieldStatus.Default,
+            isFocused = type.isFocused,
+            clearAction = clearAction,
+        )
+    } else {
+        BpkTextFieldImpl(
+            value = inputText,
+            onValueChange = onInputChanged,
+            modifier = modifier,
+            placeholder = inputHint,
+            prefix = prefix,
+            status = BpkFieldStatus.Default,
+            clearAction = clearAction,
+            type = BpkTextFieldType.Search,
+        )
+    }
 }

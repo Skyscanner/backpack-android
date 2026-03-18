@@ -19,43 +19,19 @@
 package net.skyscanner.backpack.compose.searchinputcontrol
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.CornerControlExample
-import net.skyscanner.backpack.demo.compose.DefaultControlExample
-import net.skyscanner.backpack.demo.compose.IconPrefixControlExample
-import net.skyscanner.backpack.demo.compose.NoPrefixControlExample
-import net.skyscanner.backpack.demo.compose.ReadOnlyControlExample
-import net.skyscanner.backpack.demo.compose.TextPrefixControlExample
+import net.skyscanner.backpack.demo.compose.OnContrastControlExample
+import net.skyscanner.backpack.demo.compose.OnDefaultControlExample
 import org.junit.Test
 
 class BpkSearchInputControlTest : BpkSnapshotTest() {
 
     @Test
-    fun defaultSearchInputControl() = snap {
-        DefaultControlExample()
+    fun onDefault() = snap {
+        OnDefaultControlExample()
     }
 
     @Test
-    fun textSearchInputControl() = snap {
-        TextPrefixControlExample()
-    }
-
-    @Test
-    fun iconSearchInputControl() = snap {
-        IconPrefixControlExample()
-    }
-
-    @Test
-    fun noPrefixSearchInputControl() = snap {
-        NoPrefixControlExample()
-    }
-
-    @Test
-    fun readOnlySearchInputControl() = snap {
-        ReadOnlyControlExample()
-    }
-
-    @Test
-    fun cornerSearchInputControl() = snap {
-        CornerControlExample()
+    fun onContrast() = snap {
+        OnContrastControlExample()
     }
 }

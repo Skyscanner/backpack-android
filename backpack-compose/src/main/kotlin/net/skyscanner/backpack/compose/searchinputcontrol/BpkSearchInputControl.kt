@@ -20,21 +20,13 @@ package net.skyscanner.backpack.compose.searchinputcontrol
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
-import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldImpl
-import net.skyscanner.backpack.compose.textfield.internal.BpkTextFieldType
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-
-sealed class BpkSearchInputControlType {
-    data object TextInput : BpkSearchInputControlType()
-    data class ReadOnly(val isFocused: Boolean) : BpkSearchInputControlType()
-}
+import net.skyscanner.backpack.compose.textfield.internal.BpkControlFieldImpl
 
 sealed class BpkSearchInputControlStyle {
-    data object Default : BpkSearchInputControlStyle()
+    data object OnDefault : BpkSearchInputControlStyle()
     data object OnContrast : BpkSearchInputControlStyle()
 }
 
@@ -61,32 +53,21 @@ fun BpkSearchInputControl(
     inputText: String,
     inputHint: String,
     prefix: Prefix,
-    onInputChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
     clearAction: BpkClearAction? = null,
-    type: BpkSearchInputControlType = BpkSearchInputControlType.TextInput,
-    style: BpkSearchInputControlStyle = BpkSearchInputControlStyle.Default,
+    isFocused: Boolean = false,
+    style: BpkSearchInputControlStyle = BpkSearchInputControlStyle.OnDefault,
     docking: Docking = Docking.Float,
-    horizontalPadding: Dp = BpkSpacing.Md,
-    contentPadding: Dp = BpkSpacing.Md,
-    minHeight: Dp = BpkSpacing.Xxl + BpkSpacing.Md,
 ) {
-    val isFocused = if (type is BpkSearchInputControlType.ReadOnly) type.isFocused else null
-    BpkTextFieldImpl(
+    BpkControlFieldImpl(
         value = inputText,
-        onValueChange = onInputChanged,
         modifier = modifier,
-        readOnly = type is BpkSearchInputControlType.ReadOnly,
         placeholder = inputHint,
         prefix = prefix,
         status = BpkFieldStatus.Default,
-        clearAction = clearAction,
-        type = BpkTextFieldType.Search,
         isFocused = isFocused,
-        searchInputControlStyle = style,
+        clearAction = clearAction,
+        style = style,
         docking = docking,
-        horizontalPadding = horizontalPadding,
-        contentPadding = contentPadding,
-        minHeight = minHeight,
     )
 }
