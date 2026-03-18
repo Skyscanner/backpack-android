@@ -4,41 +4,17 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.searchinputcontrol)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/searchinputcontrol)
 
-## Default
+## On default
 
 | Day | Night |
 |-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/default-prefix.png" alt="BpkSearchInputControl component showing default magnifying glass icon" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/default-prefix_dm.png" alt="BpkSearchInputControl component showing default magnifying glass icon - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/on-default.png" alt="BpkSearchInputControl on default background" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/on-default_dm.png" alt="BpkSearchInputControl on default background - dark mode" width="375" /> |
 
-## Text prefix
-
-| Day | Night |
-|-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/text-prefix.png" alt="BpkSearchInputControl component showing text prefix From" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/text-prefix_dm.png" alt="BpkSearchInputControl component showing text prefix From - dark mode" width="375" /> |
-
-## Icon prefix
+## On contrast
 
 | Day | Night |
 |-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/icon-prefix.png" alt="BpkSearchInputControl component showing custom icon prefix" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/icon-prefix_dm.png" alt="BpkSearchInputControl component showing custom icon prefix - dark mode" width="375" /> |
-
-## No prefix
-
-| Day | Night |
-|-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/no-prefix.png" alt="BpkSearchInputControl component showing no prefix" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/no-prefix_dm.png" alt="BpkSearchInputControl component showing no prefix - dark mode" width="375" /> |
-
-## Read only
-
-| Day | Night |
-|-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/read-only.png" alt="BpkSearchInputControl component in read only mode" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/read-only_dm.png" alt="BpkSearchInputControl component in read only mode - dark mode" width="375" /> |
-
-## Corner (Docking)
-
-| Day | Night |
-|-----|-------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/corner.png" alt="BpkSearchInputControl components docked together as a stack" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/corner_dm.png" alt="BpkSearchInputControl components docked together as a stack - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/on-contrast.png" alt="BpkSearchInputControl on contrast background" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/SearchInputControl/screenshots/on-contrast_dm.png" alt="BpkSearchInputControl on contrast background - dark mode" width="375" /> |
 
 ## Installation
 
@@ -48,52 +24,51 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
-`BpkSearchInputControl` is a specialised search text field with larger corners and support for a prefix (`None`, `Text`, or `Icon`). It supports read-only mode, optional clear action, and docking — allowing multiple controls to be stacked together with shared corner rounding.
+`BpkSearchInputControl` is a non-editable search field with prefix support (`None`, `Text`, or `Icon`), focus state, and docking — allowing multiple controls to be stacked together with shared corner rounding. It comes in two styles: `OnDefault` (for light backgrounds) and `OnContrast` (for dark backgrounds).
 
-Example of a `BpkSearchInputControl` showing a text prefix before the search query:
+Example of a basic `BpkSearchInputControl`:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 
 BpkSearchInputControl(
-    inputText = inputText,
-    inputHint = inputHint,
+    inputText = "London",
+    inputHint = "Where from?",
     prefix = Prefix.Text("From"),
-    onInputChanged = { /* update input */ },
 )
 ```
 
-Example of a `BpkSearchInputControl` showing an icon prefix with a clear action:
+Example with an icon prefix, clear action, and focus state:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
+import net.skyscanner.backpack.compose.tokens.FlightTakeoff
 
 BpkSearchInputControl(
-    inputText = inputText,
-    inputHint = inputHint,
-    prefix = Prefix.Icon(BpkIcon.Hotels),
-    onInputChanged = { /* update input */ },
-    clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) { /* clear input */ },
+    inputText = "London",
+    inputHint = "Where from?",
+    prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
+    isFocused = true,
+    clearAction = BpkClearAction("Clear") { /* clear input */ },
 )
 ```
 
-Example of a `BpkSearchInputControl` in read-only focused mode:
+Example on a contrast background:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
-import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlType
+import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlStyle
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 
 BpkSearchInputControl(
-    inputText = inputText,
-    inputHint = inputHint,
-    prefix = Prefix.None,
-    onInputChanged = { /* update input */ },
-    type = BpkSearchInputControlType.ReadOnly(isFocused = true),
+    inputText = "London",
+    inputHint = "Where from?",
+    prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
+    style = BpkSearchInputControlStyle.OnContrast,
 )
 ```
 
@@ -104,19 +79,19 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
 import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
+import net.skyscanner.backpack.compose.tokens.FlightLanding
+import net.skyscanner.backpack.compose.tokens.FlightTakeoff
 
 BpkSearchInputControl(
-    inputText = origin,
-    inputHint = "From",
-    prefix = Prefix.Icon(BpkIcon.Search),
-    onInputChanged = { origin = it },
+    inputText = "London",
+    inputHint = "Where from?",
+    prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
     docking = Docking.Top,
 )
 BpkSearchInputControl(
-    inputText = destination,
-    inputHint = "To",
-    prefix = Prefix.Icon(BpkIcon.Search),
-    onInputChanged = { destination = it },
+    inputText = "Edinburgh",
+    inputHint = "Where to?",
+    prefix = Prefix.Icon(BpkIcon.FlightLanding),
     docking = Docking.Bottom,
 )
 ```
