@@ -41,7 +41,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.SwapVertical
 
@@ -122,7 +121,6 @@ fun BpkSwapButton(
             BpkIcon(
                 icon = BpkIcon.SwapVertical,
                 contentDescription = null,
-                size = BpkIconSize.Large,
             )
         }
     }
