@@ -108,7 +108,7 @@ internal fun SearchInputControlDockedStack(
         modifier = Modifier.fillMaxWidth(),
     ) {
         BpkSearchInputControl(
-            inputText = "Where from?",
+            inputText = "London",
             inputHint = "Where from?",
             prefix = Prefix.Icon(BpkIcon.FlightTakeoff),
             modifier = Modifier
@@ -119,7 +119,7 @@ internal fun SearchInputControlDockedStack(
             docking = Docking.Top,
         )
         BpkSearchInputControl(
-            inputText = "Where to?",
+            inputText = "",
             inputHint = "Where to?",
             prefix = Prefix.Icon(BpkIcon.FlightLanding),
             modifier = Modifier
@@ -131,7 +131,7 @@ internal fun SearchInputControlDockedStack(
         )
         BpkSearchInputControl(
             inputText = "Thurs 9 May – Fri 29 May, 2025",
-            inputHint = "Thurs 9 May – Fri 29 May, 2025",
+            inputHint = "Select dates",
             prefix = Prefix.Icon(BpkIcon.Calendar),
             modifier = Modifier
                 .fillMaxWidth()
@@ -141,7 +141,7 @@ internal fun SearchInputControlDockedStack(
             docking = Docking.Middle,
         )
         BpkSearchInputControl(
-            inputText = "Who's travelling?",
+            inputText = "1 adult",
             inputHint = "Who's travelling?",
             prefix = Prefix.Icon(BpkIcon.Family),
             modifier = Modifier
