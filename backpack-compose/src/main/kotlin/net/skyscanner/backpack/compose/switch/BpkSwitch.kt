@@ -18,12 +18,12 @@
 
 package net.skyscanner.backpack.compose.switch
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.Switch
@@ -42,14 +42,28 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import net.skyscanner.backpack.compose.LocalTextStyle
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
+
+enum class BpkSwitchStyle {
+    Default,
+    OnContrast,
+}
+
+data class BpkSwitchIcon(
+    val icon: BpkIcon,
+    val contentDescription: String,
+    val onClick: () -> Unit,
+)
 
 @Composable
 fun BpkSwitch(
@@ -58,8 +72,11 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    textStyle: TextStyle = LocalTextStyle.current,
+    icon: BpkSwitchIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkSwitch(
@@ -67,10 +84,17 @@ fun BpkSwitch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
+        style = style,
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            TextWithSpacer(buildAnnotatedString { append(text) }, shouldTruncate)
+            TextWithSpacer(
+                annotatedString = buildAnnotatedString { append(text) },
+                shouldTruncate = shouldTruncate,
+                style = style,
+                textStyle = textStyle,
+                icon = icon,
+            )
         },
     )
 }
@@ -82,8 +106,11 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    textStyle: TextStyle = LocalTextStyle.current,
+    icon: BpkSwitchIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkSwitch(
@@ -91,10 +118,17 @@ fun BpkSwitch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
+        style = style,
         switchAlignment = switchAlignment,
         interactionSource = interactionSource,
         content = {
-            TextWithSpacer(text, shouldTruncate)
+            TextWithSpacer(
+                annotatedString = text,
+                shouldTruncate = shouldTruncate,
+                textStyle = textStyle,
+                icon = icon,
+                style = style,
+            )
         },
     )
 }
@@ -105,6 +139,7 @@ fun BpkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(Boolean) -> Unit,
@@ -145,21 +180,55 @@ fun BpkSwitch(
             onCheckedChange = onCheckedChange,
             enabled = enabled,
             interactionSource = interactionSource,
+            style = style,
         )
     }
 }
 
 @Composable
-private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTruncate: Boolean) {
+private fun RowScope.TextWithSpacer(
+    annotatedString: AnnotatedString,
+    shouldTruncate: Boolean,
+    textStyle: TextStyle,
+    style: BpkSwitchStyle,
+    icon: BpkSwitchIcon? = null,
+) {
     takeIf { annotatedString.isNotEmpty() }?.let {
-        BpkText(
-            modifier = Modifier.Companion.weight(1f),
-            text = annotatedString,
-            maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
-            overflow = TextOverflow.Ellipsis,
-        )
-        Spacer(modifier = Modifier.width(BpkSpacing.Base))
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        ) {
+            BpkText(
+                text = annotatedString,
+                color = getTextColor(style),
+                style = textStyle,
+                maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f, fill = false),
+            )
+            if (icon != null) {
+                BpkIcon(
+                    icon = icon.icon,
+                    contentDescription = icon.contentDescription,
+                    tint = getTextColor(style),
+                    modifier = Modifier
+                        .padding(end = BpkSpacing.Base)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = icon.onClick,
+                        ),
+                )
+            }
+        }
     }
+}
+
+@Composable
+private fun getTextColor(style: BpkSwitchStyle): Color = when (style) {
+    BpkSwitchStyle.Default -> BpkTheme.colors.textPrimary
+    BpkSwitchStyle.OnContrast -> BpkTheme.colors.textOnDark
 }
 
 @Composable
@@ -169,6 +238,7 @@ private fun BpkSwitchImpl(
     enabled: Boolean,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
 ) {
     // our design system isn't designed with the minimum touch target in mind at the moment.
     // Disable the enforcement to avoid the extra padding
@@ -179,24 +249,45 @@ private fun BpkSwitchImpl(
             modifier = modifier.semantics { invisibleToUser() },
             enabled = enabled,
             interactionSource = interactionSource,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
-                checkedTrackColor = BpkTheme.colors.coreAccent,
-                checkedBorderColor = BpkTheme.colors.coreAccent,
-                checkedIconColor = Color.Transparent,
-                uncheckedThumbColor = BpkTheme.colors.textSecondary,
-                uncheckedTrackColor = BpkTheme.colors.canvasContrast,
-                uncheckedBorderColor = BpkTheme.colors.textSecondary,
-                uncheckedIconColor = Color.Transparent,
-                disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledCheckedIconColor = Color.Transparent,
-                disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedIconColor = Color.Transparent,
-            ),
+            colors = when (style) {
+                BpkSwitchStyle.Default -> SwitchDefaults.colors(
+                    checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
+                    checkedTrackColor = BpkTheme.colors.coreAccent,
+                    checkedBorderColor = BpkTheme.colors.coreAccent,
+                    checkedIconColor = Color.Transparent,
+                    uncheckedThumbColor = BpkTheme.colors.textSecondary,
+                    uncheckedTrackColor = BpkTheme.colors.canvasContrast,
+                    uncheckedBorderColor = BpkTheme.colors.textSecondary,
+                    uncheckedIconColor = Color.Transparent,
+                    disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedIconColor = Color.Transparent,
+                    disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedIconColor = Color.Transparent,
+                )
+
+                BpkSwitchStyle.OnContrast -> SwitchDefaults.colors(
+                    checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
+                    checkedTrackColor = BpkTheme.colors.coreAccent,
+                    checkedBorderColor = BpkTheme.colors.coreAccent,
+                    checkedIconColor = Color.Transparent,
+                    uncheckedThumbColor = BpkTheme.colors.textOnDark,
+                    uncheckedTrackColor = Color.Transparent,
+                    uncheckedBorderColor = BpkTheme.colors.textOnDark,
+                    uncheckedIconColor = Color.Transparent,
+                    disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledCheckedIconColor = Color.Transparent,
+                    disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedIconColor = Color.Transparent,
+                )
+            },
         )
     }
 }

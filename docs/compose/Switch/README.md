@@ -51,6 +51,40 @@ BpkSwitch(
 )
 ```
 
+Example of a Switch with an icon:
+
+```Kotlin
+import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchIcon
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.InformationCircle
+
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { checked -> },
+  icon = BpkSwitchIcon(
+    icon = BpkIcon.InformationCircle,
+    contentDescription = "More information",
+    onClick = { },
+  ),
+)
+```
+
+Example of a Switch with OnContrast style:
+
+```Kotlin
+import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
+
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { checked -> },
+  style = BpkSwitchStyle.OnContrast,
+)
+```
+
 Example of a Switch with custom content:
 
 ```Kotlin
