@@ -23,22 +23,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonDefaults
+import net.skyscanner.backpack.compose.radiobutton.internal.BpkRadioButtonImpl
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.invisibleToUser
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -96,34 +87,6 @@ fun BpkRadioButton(
         BpkToggleableContent(
             enabled = enabled,
             content = { content(selected) },
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
-@Composable
-private fun BpkRadioButtonImpl(
-    selected: Boolean,
-    onClick: (() -> Unit)?,
-    enabled: Boolean,
-    interactionSource: MutableInteractionSource,
-    modifier: Modifier = Modifier,
-) {
-    // our design system isn't designed with the minimum touch target in mind at the moment.
-    // Disable the enforcement to avoid the extra padding
-    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
-        RadioButton(
-            selected = selected,
-            onClick = onClick,
-            modifier = modifier.semantics { invisibleToUser() },
-            enabled = enabled,
-            interactionSource = interactionSource,
-            colors = RadioButtonDefaults.colors(
-                selectedColor = BpkTheme.colors.coreAccent,
-                unselectedColor = BpkTheme.colors.textSecondary,
-                disabledSelectedColor = BpkTheme.colors.textDisabled,
-                disabledUnselectedColor = BpkTheme.colors.textDisabled,
-            ),
         )
     }
 }

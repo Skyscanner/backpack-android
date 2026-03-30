@@ -18,43 +18,15 @@
 
 package net.skyscanner.backpack.compose.skeleton
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.VectorConverter
-import androidx.compose.animation.core.animateValue
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.internal.BpkSkeletonColors
-
-private val BpkSkeletonBorderRadiusXXS = BpkBorderRadius.Xs.div(2)
-private val BpkHeadlineSkeletonHeightSm = BpkSpacing.Md
-private val BpkHeadlineSkeletonHeightMd = BpkSpacing.Base
-private val BpkHeadlineSkeletonHeightLg = BpkSpacing.Xl
-private val BpkCircleSizeSm = BpkSpacing.Xl
-private val BpkCircleSizeLg = BpkSpacing.Lg.times(2)
+import net.skyscanner.backpack.compose.skeleton.internal.BpkBodyTextSkeletonImpl
+import net.skyscanner.backpack.compose.skeleton.internal.BpkCircleSkeletonImpl
+import net.skyscanner.backpack.compose.skeleton.internal.BpkHeadlineSkeletonImpl
+import net.skyscanner.backpack.compose.skeleton.internal.BpkImageSkeletonImpl
+import net.skyscanner.backpack.compose.skeleton.internal.BpkShimmerOverlayImpl
 
 enum class BpkSkeletonHeightSizeType {
     /**
@@ -112,65 +84,6 @@ enum class BpkShimmerSize(
     Small(durationMillis = 300, delayMillis = 400),
 }
 
-private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
-    if (skeletonHeightSize === BpkSkeletonHeightSizeType.Custom) {
-        return this
-    }
-
-    val heightSize = when (skeletonHeightSize) {
-        BpkSkeletonHeightSizeType.Small -> BpkHeadlineSkeletonHeightSm
-        BpkSkeletonHeightSizeType.Medium -> BpkHeadlineSkeletonHeightMd
-        BpkSkeletonHeightSizeType.Large -> BpkHeadlineSkeletonHeightLg
-        BpkSkeletonHeightSizeType.Custom -> 0.dp
-    }
-
-    return this.height(heightSize)
-}
-
-@Composable
-private fun shimmerBackgroundColor(): Color = BpkTheme.colors.surfaceHighlight
-
-@Composable
-private fun shimmerPrimaryColor(): Color = BpkSkeletonColors.shimmerStartEnd
-
-@Composable
-private fun shimmerSecondaryColor(): Color = BpkSkeletonColors.shimmerCenter
-
-@Composable
-private fun shimmerAnimation(size: BpkShimmerSize): State<Float> {
-    val infiniteTransition = rememberInfiniteTransition()
-    return infiniteTransition.animateValue(
-        initialValue = -1f,
-        targetValue = 1f,
-        typeConverter = Float.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = size.durationMillis,
-                delayMillis = size.delayMillis,
-                easing = LinearEasing,
-            ),
-        ),
-    )
-}
-
-@Composable
-private fun ShimmerBox(
-    modifier: Modifier = Modifier,
-) {
-    return Box(
-        modifier = modifier
-            .background(
-                brush = Brush.horizontalGradient(
-                    listOf(
-                        shimmerPrimaryColor(),
-                        shimmerSecondaryColor(),
-                        shimmerPrimaryColor(),
-                    ),
-                ),
-            ),
-    )
-}
-
 /**
  * Shimmer Overlay
  * @param modifier To set some common attrs.
@@ -183,19 +96,11 @@ fun BpkShimmerOverlay(
     shimmerSize: BpkShimmerSize = BpkShimmerSize.Large,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(modifier = modifier) {
-        content()
-        val offsetX by shimmerAnimation(shimmerSize)
-        ShimmerBox(
-            modifier = Modifier
-                .fillMaxSize()
-                .clipToBounds()
-                .graphicsLayer {
-                    translationX = size.width * offsetX
-                    scaleX = if (shimmerSize == BpkShimmerSize.Small) 2f else 1f
-                },
-        )
-    }
+    BpkShimmerOverlayImpl(
+        modifier = modifier,
+        shimmerSize = shimmerSize,
+        content = content,
+    )
 }
 
 /**
@@ -208,13 +113,9 @@ fun BpkImageSkeleton(
     modifier: Modifier = Modifier,
     cornerType: BpkSkeletonCornerType = BpkSkeletonCornerType.Square,
 ) {
-    val cornerRadius = if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp
-    Box(
-        modifier = modifier
-            .background(
-                shimmerBackgroundColor(),
-                RoundedCornerShape(cornerRadius),
-            ),
+    BpkImageSkeletonImpl(
+        modifier = modifier,
+        cornerType = cornerType,
     )
 }
 
@@ -226,28 +127,9 @@ fun BpkImageSkeleton(
 fun BpkBodyTextSkeleton(
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier.height(BpkSpacing.Xxl)) {
-        Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md)) {
-            Box(
-                modifier = Modifier
-                    .height(BpkSpacing.Md)
-                    .fillMaxWidth(0.85f)
-                    .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
-            )
-            Box(
-                modifier = Modifier
-                    .height(BpkSpacing.Md)
-                    .fillMaxWidth()
-                    .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
-            )
-            Box(
-                modifier = Modifier
-                    .height(BpkSpacing.Md)
-                    .fillMaxWidth(0.57f)
-                    .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
-            )
-        }
-    }
+    BpkBodyTextSkeletonImpl(
+        modifier = modifier,
+    )
 }
 
 /**
@@ -260,15 +142,9 @@ fun BpkHeadlineSkeleton(
     modifier: Modifier = Modifier,
     skeletonHeightSize: BpkSkeletonHeightSizeType = BpkSkeletonHeightSizeType.Small,
 ) {
-    val cornerRadius = if (skeletonHeightSize === BpkSkeletonHeightSizeType.Small) {
-        BpkSkeletonBorderRadiusXXS
-    } else {
-        BpkBorderRadius.Xs
-    }
-    Box(
-        modifier = modifier
-            .enhanceHeadlineHeight(skeletonHeightSize)
-            .background(shimmerBackgroundColor(), RoundedCornerShape(cornerRadius)),
+    BpkHeadlineSkeletonImpl(
+        modifier = modifier,
+        skeletonHeightSize = skeletonHeightSize,
     )
 }
 
@@ -281,15 +157,8 @@ fun BpkCircleSkeleton(
     circleSize: BpkCircleSizeType,
     modifier: Modifier = Modifier,
 ) {
-    val diameter: Dp = when (circleSize) {
-        is BpkCircleSizeType.Small -> BpkCircleSizeSm
-        is BpkCircleSizeType.Large -> BpkCircleSizeLg
-        is BpkCircleSizeType.Custom -> circleSize.diameter
-    }
-
-    Box(
-        modifier = modifier
-            .size(diameter, diameter)
-            .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2))),
+    BpkCircleSkeletonImpl(
+        circleSize = circleSize,
+        modifier = modifier,
     )
 }

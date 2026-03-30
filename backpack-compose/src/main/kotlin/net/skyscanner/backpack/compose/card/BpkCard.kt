@@ -20,15 +20,10 @@ package net.skyscanner.backpack.compose.card
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.card.internal.CardContent
-import net.skyscanner.backpack.compose.card.internal.cardColors
-import net.skyscanner.backpack.compose.card.internal.cardElevation
-import net.skyscanner.backpack.compose.card.internal.cardShape
+import net.skyscanner.backpack.compose.card.internal.BpkCardImpl
 
 enum class BpkCardCorner {
     Small,
@@ -51,7 +46,6 @@ enum class BpkCardStyle {
     onContrast,
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkCard(
     onClick: () -> Unit,
@@ -64,15 +58,16 @@ fun BpkCard(
     enabled: Boolean = true,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Card(
-        onClick = onClick,
+    BpkCardImpl(
         modifier = modifier,
+        corner = corner,
+        padding = padding,
+        cardStyle = cardStyle,
+        elevation = elevation,
+        onClick = onClick,
         enabled = enabled,
-        shape = cardShape(corner),
-        colors = cardColors(cardStyle),
-        elevation = cardElevation(elevation),
         interactionSource = interactionSource,
-        content = { CardContent(padding, content) },
+        content = content,
     )
 }
 
@@ -85,11 +80,12 @@ fun BpkCard(
     elevation: BpkCardElevation = BpkCardElevation.Default,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Card(
+    BpkCardImpl(
         modifier = modifier,
-        shape = cardShape(corner),
-        colors = cardColors(cardStyle),
-        elevation = cardElevation(elevation),
-        content = { CardContent(padding, content) },
+        corner = corner,
+        padding = padding,
+        cardStyle = cardStyle,
+        elevation = elevation,
+        content = content,
     )
 }

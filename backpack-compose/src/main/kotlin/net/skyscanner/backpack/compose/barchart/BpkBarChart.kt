@@ -18,20 +18,11 @@
 
 package net.skyscanner.backpack.compose.barchart
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.barchart.internal.BarChartLegend
-import net.skyscanner.backpack.compose.barchart.internal.BarChartList
-import net.skyscanner.backpack.compose.barchart.internal.BarChartTitle
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.barchart.internal.BpkBarChartImpl
 
 @Composable
 fun BpkBarChart(
@@ -41,43 +32,11 @@ fun BpkBarChart(
     modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
 ) {
-    Column(modifier = modifier) {
-
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-            modifier = Modifier
-                .padding(horizontal = BpkSpacing.Base)
-                .padding(top = BpkSpacing.Base),
-        ) {
-
-            Column(Modifier.weight(1f)) {
-
-                BpkText(
-                    text = model.caption,
-                    maxLines = 1,
-                    color = BpkTheme.colors.textSecondary,
-                    style = BpkTheme.typography.label2,
-                )
-
-                BarChartTitle(
-                    model = model,
-                    state = state,
-                )
-            }
-
-            model.legend?.let { legend ->
-                BarChartLegend(
-                    legend = legend,
-                )
-            }
-        }
-
-        BarChartList(
-            modifier = Modifier.padding(top = BpkSpacing.Lg, bottom = BpkSpacing.Xl),
-            model = model,
-            selected = selected,
-            onSelected = onSelectionChange,
-            state = state,
-        )
-    }
+    BpkBarChartImpl(
+        model = model,
+        selected = selected,
+        onSelectionChange = onSelectionChange,
+        modifier = modifier,
+        state = state,
+    )
 }

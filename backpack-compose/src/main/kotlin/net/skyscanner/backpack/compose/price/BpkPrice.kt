@@ -21,9 +21,7 @@ package net.skyscanner.backpack.compose.price
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignEnd
-import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignStart
-import net.skyscanner.backpack.compose.price.internal.BpkPriceRow
+import net.skyscanner.backpack.compose.price.internal.BpkPriceImpl
 
 enum class BpkPriceAlign {
     Start,
@@ -49,44 +47,15 @@ fun BpkPrice(
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
-    when (align) {
-        BpkPriceAlign.Start -> {
-            BpkPriceAlignStart(
-                price = price,
-                modifier = modifier,
-                leadingText = leadingText,
-                previousPrice = previousPrice,
-                trailingText = trailingText,
-                size = size,
-                icon = icon,
-                onPriceClicked = onPriceClicked,
-            )
-        }
-
-        BpkPriceAlign.End -> {
-            BpkPriceAlignEnd(
-                price = price,
-                modifier = modifier,
-                leadingText = leadingText,
-                previousPrice = previousPrice,
-                trailingText = trailingText,
-                size = size,
-                icon = icon,
-                onPriceClicked = onPriceClicked,
-            )
-        }
-
-        BpkPriceAlign.Row -> {
-            BpkPriceRow(
-                price = price,
-                modifier = modifier,
-                leadingText = leadingText,
-                previousPrice = previousPrice,
-                trailingText = trailingText,
-                size = size,
-                icon = icon,
-                onPriceClicked = onPriceClicked,
-            )
-        }
-    }
+    BpkPriceImpl(
+        price = price,
+        modifier = modifier,
+        leadingText = leadingText,
+        previousPrice = previousPrice,
+        trailingText = trailingText,
+        align = align,
+        size = size,
+        icon = icon,
+        onPriceClicked = onPriceClicked,
+    )
 }

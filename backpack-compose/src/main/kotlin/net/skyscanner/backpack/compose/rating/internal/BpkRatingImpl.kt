@@ -32,7 +32,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
-internal fun BpkRatingLayout(
+internal fun BpkRatingImpl(
     value: Float,
     scale: BpkRatingScale,
     size: BpkRatingSize,

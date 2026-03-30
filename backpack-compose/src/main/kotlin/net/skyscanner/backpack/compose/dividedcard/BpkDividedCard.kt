@@ -18,22 +18,14 @@
 
 package net.skyscanner.backpack.compose.dividedcard
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.card.BpkCard
-import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
-import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.BpkCardStyle
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.dividedcard.internal.BpkDividedCardImpl
 
 @Composable
 fun BpkDividedCard(
@@ -44,51 +36,14 @@ fun BpkDividedCard(
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
     elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
-    onClick?.let {
-        BpkCard(
-            onClick = it,
-            modifier = modifier,
-            corner = BpkCardCorner.Small,
-            padding = BpkCardPadding.None,
-            cardStyle = cardStyle,
-            elevation = elevation,
-        ) {
-            Content(
-                primaryContent = primaryContent,
-                secondaryContent = secondaryContent,
-            )
-        }
-    } ?: run {
-        BpkCard(
-            modifier = modifier,
-            corner = BpkCardCorner.Small,
-            padding = BpkCardPadding.None,
-            cardStyle = cardStyle,
-            elevation = elevation,
-        ) {
-            Content(
-                primaryContent = primaryContent,
-                secondaryContent = secondaryContent,
-            )
-        }
-    }
-}
-
-@Composable
-private fun Content(
-    primaryContent: @Composable () -> Unit,
-    secondaryContent: @Composable () -> Unit,
-) {
-    Column {
-        primaryContent.invoke()
-        Spacer(
-            modifier = Modifier
-                .height(1.dp)
-                .fillMaxWidth()
-                .background(color = BpkTheme.colors.surfaceHighlight),
-        )
-        secondaryContent.invoke()
-    }
+    BpkDividedCardImpl(
+        primaryContent = primaryContent,
+        secondaryContent = secondaryContent,
+        modifier = modifier,
+        onClick = onClick,
+        cardStyle = cardStyle,
+        elevation = elevation,
+    )
 }
 
 fun Modifier.dividedCardWidth(cardWidth: Dp): Modifier {

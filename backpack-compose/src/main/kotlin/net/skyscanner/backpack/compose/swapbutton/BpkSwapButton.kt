@@ -18,31 +18,11 @@
 
 package net.skyscanner.backpack.compose.swapbutton
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.SwapVertical
+import net.skyscanner.backpack.compose.swapbutton.internal.BpkSwapButtonImpl
 
 enum class BpkSwapButtonStyle {
     CanvasDefault,
@@ -68,64 +48,11 @@ fun BpkSwapButton(
     style: BpkSwapButtonStyle = BpkSwapButtonStyle.CanvasDefault,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    var isRotated by remember { mutableStateOf(false) }
-
-    val rotation by animateFloatAsState(
-        targetValue = if (isRotated) 180f else 0f,
-        animationSpec = tween(durationMillis = 300),
-        label = "swap_button_rotation",
+    BpkSwapButtonImpl(
+        onClick = onClick,
+        contentDescription = contentDescription,
+        modifier = modifier,
+        style = style,
+        interactionSource = interactionSource,
     )
-
-    val backgroundColor = when (style) {
-        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.surfaceDefault
-        BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvasContrast
-        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.surfaceDefault
-    }
-
-    val borderColor = when (style) {
-        BpkSwapButtonStyle.CanvasDefault -> BpkTheme.colors.canvasContrast
-        BpkSwapButtonStyle.CanvasContrast -> BpkTheme.colors.canvas
-        BpkSwapButtonStyle.SurfaceContrast -> BpkTheme.colors.textPrimary
-    }
-
-    Box(
-        modifier = modifier
-            .size(OuterBoxTouchTargetSize)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                role = Role.Button,
-                onClick = {
-                    isRotated = !isRotated
-                    onClick()
-                },
-            )
-            .semantics(mergeDescendants = true) {
-                this.contentDescription = contentDescription
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(SwapButtonSize)
-                .clip(CircleShape)
-                .background(backgroundColor)
-                .border(
-                    width = BorderWidth,
-                    color = borderColor,
-                    shape = CircleShape,
-                )
-                .rotate(rotation),
-            contentAlignment = Alignment.Center,
-        ) {
-            BpkIcon(
-                icon = BpkIcon.SwapVertical,
-                contentDescription = null,
-            )
-        }
-    }
 }
-
-private val OuterBoxTouchTargetSize = 48.dp
-private val SwapButtonSize = 36.dp
-private val BorderWidth = 2.dp

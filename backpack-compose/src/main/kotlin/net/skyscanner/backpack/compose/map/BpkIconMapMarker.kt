@@ -19,27 +19,14 @@
 package net.skyscanner.backpack.compose.map
 
 import androidx.annotation.RestrictTo
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.map.internal.IconMarkerShape
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderSize
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
+import net.skyscanner.backpack.compose.map.internal.BpkIconMapMarkerImpl
+import net.skyscanner.backpack.compose.map.internal.IconMarkerLayoutImpl
 
 enum class BpkIconMarkerStatus {
     Default,
@@ -62,79 +49,20 @@ fun BpkIconMapMarker(
     zIndex: Float? = null,
     onClick: (Marker) -> Boolean = { false },
 ) {
-    val iconBitmap = rememberCapturedComposeBitmapDescriptor(icon, status) {
-        IconMarkerLayout(status = status, icon = icon)
-    }
-    iconBitmap?.let {
-        MarkerInfoWindow(
-            state = state,
-            tag = tag,
-            title = contentDescription,
-            visible = visible,
-            zIndex = if (status == BpkIconMarkerStatus.Focused && zIndex == null) 1.0f else zIndex ?: 0.0f,
-            icon = iconBitmap,
-            onClick = onClick,
-        ) {}
-    }
+    BpkIconMapMarkerImpl(
+        contentDescription = contentDescription,
+        icon = icon,
+        status = status,
+        state = state,
+        tag = tag,
+        visible = visible,
+        zIndex = zIndex,
+        onClick = onClick,
+    )
 }
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun IconMarkerLayout(status: BpkIconMarkerStatus, icon: BpkIcon, modifier: Modifier = Modifier) {
-    val iconColor = when (status) {
-        BpkIconMarkerStatus.Default -> BpkTheme.colors.surfaceDefault
-        BpkIconMarkerStatus.Focused -> BpkTheme.colors.statusSuccessSpot
-        BpkIconMarkerStatus.Disabled -> BpkTheme.colors.corePrimary
-    }
-
-    val backgroundColor = when (status) {
-        BpkIconMarkerStatus.Default -> BpkTheme.colors.statusSuccessSpot
-        BpkIconMarkerStatus.Focused -> BpkTheme.colors.surfaceDefault
-        BpkIconMarkerStatus.Disabled -> BpkTheme.colors.statusSuccessFill
-    }
-
-    val strokeColor = when (status) {
-        BpkIconMarkerStatus.Focused -> BpkTheme.colors.statusSuccessSpot
-        else -> backgroundColor
-    }
-
-    val markerSize = when (status) {
-        BpkIconMarkerStatus.Focused -> DpSize(FocusedMarkerWidth, FocusedMarkerHeight)
-        else -> DpSize(DefaultMarkerWidth, DefaultMarkerHeight)
-    }
-
-    val iconOffset = when (status) {
-        BpkIconMarkerStatus.Focused -> BpkSpacing.Md
-        else -> DefaultIconOffset
-    }
-
-    val shape = IconMarkerShape()
-
-    Box(
-        contentAlignment = Alignment.TopCenter,
-        modifier = modifier
-            .background(color = backgroundColor, shape = shape)
-            .border(
-                width = BpkBorderSize.Sm,
-                color = strokeColor,
-                shape = shape,
-            )
-            .size(markerSize),
-    ) {
-        BpkIcon(
-            icon = icon,
-            contentDescription = null,
-            size = BpkIconSize.Small,
-            tint = iconColor,
-            modifier = Modifier.padding(top = iconOffset),
-        )
-    }
+    IconMarkerLayoutImpl(status = status, icon = icon, modifier = modifier)
 }
-
-private val DefaultIconOffset = 5.dp
-
-private val FocusedMarkerWidth = 32.dp
-private val FocusedMarkerHeight = 40.dp
-
-private val DefaultMarkerWidth = 26.dp
-private val DefaultMarkerHeight = 32.dp

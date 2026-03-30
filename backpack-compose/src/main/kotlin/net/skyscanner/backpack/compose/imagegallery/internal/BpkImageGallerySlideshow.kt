@@ -48,8 +48,8 @@ import androidx.compose.ui.text.withStyle
 import kotlinx.coroutines.flow.distinctUntilChanged
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.BpkCarouselState
+import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.imagegallery.BpkImageGalleryImage
@@ -147,7 +147,7 @@ private fun ImageCarousel(
     modifier: Modifier = Modifier,
     overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
 ) {
-    BpkCarousel(
+    BpkCarouselImpl(
         modifier = modifier,
         state = pagerState,
         overlayContent = overlayContent,

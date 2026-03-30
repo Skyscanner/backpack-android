@@ -19,24 +19,13 @@
 package net.skyscanner.backpack.compose.map
 
 import androidx.annotation.RestrictTo
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderSize
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.rememberCapturedComposeBitmapDescriptor
+import net.skyscanner.backpack.compose.map.internal.BpkPointerMapMarkerImpl
+import net.skyscanner.backpack.compose.map.internal.PointerMarkerLayoutImpl
 
 @Deprecated("Use BpkLocationMapMarker instead.", ReplaceWith("BpkLocationMapMarker"), DeprecationLevel.WARNING)
 @Composable
@@ -49,38 +38,19 @@ fun BpkPointerMapMarker(
     onClick: (Marker) -> Boolean = { false },
     onInfoWindowClick: (Marker) -> Unit = {},
 ) {
-    val iconBitmap = rememberCapturedComposeBitmapDescriptor {
-        PointerMarkerLayout()
-    }
-
-    iconBitmap?.let {
-        MarkerInfoWindow(
-            state = state,
-            tag = tag,
-            title = title,
-            anchor = Offset(0.5f, 0.5f),
-            visible = visible,
-            zIndex = zIndex,
-            icon = iconBitmap,
-            onClick = onClick,
-            onInfoWindowClick = onInfoWindowClick,
-        ) {
-            PriceMarkerLayout(title = title, status = BpkPriceMarkerStatus.Focused)
-        }
-    }
+    BpkPointerMapMarkerImpl(
+        title = title,
+        state = state,
+        tag = tag,
+        visible = visible,
+        zIndex = zIndex,
+        onClick = onClick,
+        onInfoWindowClick = onInfoWindowClick,
+    )
 }
 
 @Composable
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun PointerMarkerLayout(modifier: Modifier = Modifier) {
-    Box(
-        modifier
-            .size(BpkSpacing.Base)
-            .border(
-                border = BorderStroke(BpkBorderSize.Lg, BpkTheme.colors.surfaceDefault),
-                shape = CircleShape,
-            )
-            .padding(BpkBorderSize.Lg)
-            .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
-    )
+    PointerMarkerLayoutImpl(modifier = modifier)
 }

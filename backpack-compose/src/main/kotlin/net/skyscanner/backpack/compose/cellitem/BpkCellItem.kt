@@ -19,37 +19,10 @@
 package net.skyscanner.backpack.compose.cellitem
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.annotation.BpkPreviews
+import net.skyscanner.backpack.compose.cellitem.internal.BpkCellItemImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.link.BpkLink
-import net.skyscanner.backpack.compose.link.BpkLinkStyle
-import net.skyscanner.backpack.compose.switch.BpkSwitch
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.ChevronRight
-import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 enum class BpkCellItemStyle {
     SurfaceDefault,
@@ -125,107 +98,14 @@ fun BpkCellItem(
     body: String? = null,
     slot: BpkCellItemSlot? = null,
 ) {
-    val backgroundColor = when (style) {
-        BpkCellItemStyle.SurfaceDefault -> BpkTheme.colors.surfaceDefault
-        BpkCellItemStyle.SurfaceLowContrast -> BpkTheme.colors.surfaceLowContrast
-    }
-
-    val shape = when (corner) {
-        BpkCellItemCorner.Default -> RoundedCornerShape(0.dp)
-        BpkCellItemCorner.Rounded -> RoundedCornerShape(BpkSpacing.Md)
-    }
-
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(backgroundColor)
-            .applyIf(onClick != null) {
-                clickableWithRipple(role = Role.Button) { onClick?.invoke() }
-            }
-            .padding(BpkSpacing.Base),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        icon?.let {
-            BpkIcon(
-                icon = it,
-                contentDescription = null,
-                size = BpkIconSize.Large,
-            )
-            Spacer(modifier = Modifier.width(BpkSpacing.Base))
-        }
-
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-        ) {
-            BpkText(
-                text = title,
-                style = BpkTheme.typography.heading5,
-                color = BpkTheme.colors.textPrimary,
-            )
-
-            body?.let {
-                BpkText(
-                    text = it,
-                    style = BpkTheme.typography.footnote,
-                    color = BpkTheme.colors.textPrimary,
-                )
-            }
-        }
-
-        // Render the slot based on the sealed interface type
-        slot?.let { slotType ->
-            when (slotType) {
-                is BpkCellItemSlot.Chevron -> {
-                    BpkIcon(
-                        icon = BpkIcon.ChevronRight,
-                        contentDescription = null,
-                        size = BpkIconSize.Small,
-                        tint = BpkTheme.colors.textPrimary,
-                    )
-                }
-                is BpkCellItemSlot.Switch -> {
-                    BpkSwitch(
-                        text = "",
-                        checked = slotType.checked,
-                        onCheckedChange = slotType.onCheckedChange,
-                    )
-                }
-                is BpkCellItemSlot.Text -> {
-                    BpkText(
-                        text = slotType.text,
-                        style = BpkTheme.typography.bodyDefault,
-                        color = BpkTheme.colors.textPrimary,
-                    )
-                }
-                is BpkCellItemSlot.Link -> {
-                    BpkLink(
-                        text = "[${slotType.text}](${slotType.url})",
-                        onLinkClicked = slotType.onClick,
-                        textStyle = BpkTheme.typography.bodyDefault,
-                        style = BpkLinkStyle.Default,
-                    )
-                }
-                is BpkCellItemSlot.Image -> {
-                    Image(
-                        painter = painterResource(slotType.imageDrawable),
-                        contentDescription = null,
-                        modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
-                    )
-                }
-            }
-        }
-    }
-}
-
-@BpkPreviews
-@Composable
-private fun BpkCellItemPreview() {
-    BpkCellItem(
-        icon = BpkIcon.Account,
-        title = "Title",
-        body = "Description",
-        onClick = {},
+    BpkCellItemImpl(
+        title = title,
+        modifier = modifier,
+        style = style,
+        corner = corner,
+        icon = icon,
+        onClick = onClick,
+        body = body,
+        slot = slot,
     )
 }

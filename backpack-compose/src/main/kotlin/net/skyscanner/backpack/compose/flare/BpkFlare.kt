@@ -18,19 +18,12 @@
 
 package net.skyscanner.backpack.compose.flare
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.flare.internal.FlareContentPadding
-import net.skyscanner.backpack.compose.flare.internal.FlareRectShape
-import net.skyscanner.backpack.compose.flare.internal.FlareShape
+import net.skyscanner.backpack.compose.flare.internal.BpkFlareImpl
 
 enum class BpkFlareRadius {
     None,
@@ -53,23 +46,14 @@ fun BpkFlare(
     propagateMinConstraints: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(
-        modifier = modifier
-            .clip(FlareRectShape(radius)) // this exists to improve anti-aliasing on < sdk 30. remove when dropping support
-            .clip(FlareShape(radius, pointerDirection))
-            .background(background)
-            .padding(
-                top = when (pointerDirection) {
-                    BpkFlarePointerDirection.Up -> FlareContentPadding(insetContent)
-                    BpkFlarePointerDirection.Down -> 0.dp
-                },
-                bottom = when (pointerDirection) {
-                    BpkFlarePointerDirection.Up -> 0.dp
-                    BpkFlarePointerDirection.Down -> FlareContentPadding(insetContent)
-                },
-            ),
-        propagateMinConstraints = propagateMinConstraints,
+    BpkFlareImpl(
+        modifier = modifier,
+        radius = radius,
+        pointerDirection = pointerDirection,
+        background = background,
+        insetContent = insetContent,
         contentAlignment = contentAlignment,
+        propagateMinConstraints = propagateMinConstraints,
         content = content,
     )
 }

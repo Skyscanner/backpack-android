@@ -18,19 +18,9 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarBadge
-import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarGrid
-import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarHeader
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarImpl
 import java.time.YearMonth
 
 @Composable
@@ -40,40 +30,10 @@ fun BpkCalendar(
     customDateHandling: ((CalendarInteraction) -> Unit)? = null,
     onVisibleMonthsChanged: ((Set<YearMonth>) -> Unit)? = null,
 ) {
-
-    val state = controller.state
-
-    Column(modifier = modifier) {
-
-        BpkCalendarHeader(
-            params = state.params,
-            modifier = Modifier.fillMaxWidth(),
-        )
-
-        Box(modifier = Modifier.weight(1f)) {
-
-            BpkCalendarGrid(
-                state = state,
-                lazyGridState = controller.lazyGridState,
-                onClick = customDateHandling ?: controller::onClick,
-                modifier = Modifier.fillMaxSize(),
-            )
-
-            if (!state.params.yearLabelInMonthHeader) {
-                BpkCalendarBadge(
-                    firstVisibleItemYear = controller.firstVisibleItemYear,
-                    params = state.params,
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .padding(top = BpkSpacing.Base),
-                )
-            }
-        }
-
-        onVisibleMonthsChanged?.let {
-            LaunchedEffect(onVisibleMonthsChanged, controller.visibleMonths) {
-                onVisibleMonthsChanged(controller.visibleMonths)
-            }
-        }
-    }
+    BpkCalendarImpl(
+        controller = controller,
+        modifier = modifier,
+        customDateHandling = customDateHandling,
+        onVisibleMonthsChanged = onVisibleMonthsChanged,
+    )
 }

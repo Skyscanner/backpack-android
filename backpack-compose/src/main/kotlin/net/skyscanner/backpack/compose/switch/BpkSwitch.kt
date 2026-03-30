@@ -25,18 +25,13 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
+import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
-import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
@@ -44,9 +39,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -159,44 +152,5 @@ private fun RowScope.TextWithSpacer(annotatedString: AnnotatedString, shouldTrun
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.width(BpkSpacing.Base))
-    }
-}
-
-@Composable
-private fun BpkSwitchImpl(
-    checked: Boolean,
-    onCheckedChange: ((Boolean) -> Unit)?,
-    enabled: Boolean,
-    interactionSource: MutableInteractionSource,
-    modifier: Modifier = Modifier,
-) {
-    // our design system isn't designed with the minimum touch target in mind at the moment.
-    // Disable the enforcement to avoid the extra padding
-    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
-        Switch(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            modifier = modifier.semantics { invisibleToUser() },
-            enabled = enabled,
-            interactionSource = interactionSource,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = BpkTheme.colors.textPrimaryInverse,
-                checkedTrackColor = BpkTheme.colors.coreAccent,
-                checkedBorderColor = BpkTheme.colors.coreAccent,
-                checkedIconColor = Color.Transparent,
-                uncheckedThumbColor = BpkTheme.colors.textSecondary,
-                uncheckedTrackColor = BpkTheme.colors.canvasContrast,
-                uncheckedBorderColor = BpkTheme.colors.textSecondary,
-                uncheckedIconColor = Color.Transparent,
-                disabledCheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledCheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledCheckedIconColor = Color.Transparent,
-                disabledUncheckedThumbColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedBorderColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedIconColor = Color.Transparent,
-            ),
-        )
     }
 }

@@ -18,20 +18,11 @@
 
 package net.skyscanner.backpack.compose.panel
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.panel.internal.BpkPanelImpl
 
 sealed interface BpkPanelPadding {
 
@@ -48,21 +39,11 @@ fun BpkPanel(
     padding: BpkPanelPadding = BpkPanelPadding.Base,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(
+    BpkPanelImpl(
+        modifier = modifier,
         contentAlignment = contentAlignment,
         propagateMinConstraints = propagateMinConstraints,
+        padding = padding,
         content = content,
-        modifier = modifier
-            .clip(PanelShape)
-            .background(BpkTheme.colors.surfaceDefault)
-            .border(1.dp, BpkTheme.colors.line, PanelShape)
-            .padding(
-                all = when (padding) {
-                    BpkPanelPadding.None -> 0.dp
-                    BpkPanelPadding.Base -> BpkSpacing.Base
-                },
-            ),
     )
 }
-
-private val PanelShape = RoundedCornerShape(BpkBorderRadius.Md)

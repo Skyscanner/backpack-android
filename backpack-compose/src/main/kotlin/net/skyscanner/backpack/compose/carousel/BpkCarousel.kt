@@ -18,17 +18,12 @@
 
 package net.skyscanner.backpack.compose.carousel
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
-import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
+import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
 
 @Composable
 fun BpkCarousel(
@@ -36,45 +31,10 @@ fun BpkCarousel(
     modifier: Modifier = Modifier,
     content: @Composable (BoxScope.(Int) -> Unit),
 ) {
-    BpkCarousel(
+    BpkCarouselImpl(
         state = state,
         modifier = modifier,
         content = content,
         overlayContent = { pageIndicator -> Box(Modifier.align(Alignment.BottomCenter)) { pageIndicator?.invoke() } },
     )
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-internal fun BpkCarousel(
-    state: BpkCarouselState,
-    overlayContent: @Composable (BoxScope.((@Composable () -> Unit)?) -> Unit),
-    modifier: Modifier = Modifier,
-    content: @Composable (BoxScope.(Int) -> Unit),
-) {
-    val internalState = state.asInternalState()
-    Box(modifier = modifier) {
-        HorizontalPager(
-            modifier = Modifier
-                .testTag("pager")
-                .fillMaxSize(),
-            state = internalState.delegate,
-        ) {
-            content(internalState.getModdedPageNumber(it, internalState.pageCount))
-        }
-
-        // if there is more than one image, display the page indicator
-        overlayContent {
-            if (internalState.pageCount > 1) {
-                BpkPageIndicator(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .testTag("pageIndicator"),
-                    totalIndicators = internalState.pageCount,
-                    currentIndex = internalState.currentPage,
-                    style = BpkPageIndicatorStyle.OverImage,
-                )
-            }
-        }
-    }
 }

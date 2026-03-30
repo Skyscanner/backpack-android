@@ -18,17 +18,13 @@
 
 package net.skyscanner.backpack.compose.spinner
 
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.LocalContentColor
+import net.skyscanner.backpack.compose.spinner.internal.BpkSpinnerImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkSpinnerSize {
     Small,
@@ -48,7 +44,7 @@ fun BpkSpinner(
     modifier: Modifier = Modifier,
     style: BpkSpinnerStyle = findBestSpinnerStyleFor(LocalContentColor.current, BpkTheme.colors.isLight),
 ) {
-    BpkSpinner(
+    BpkSpinnerImpl(
         size = size,
         modifier = modifier,
         color = when (style) {
@@ -65,19 +61,12 @@ internal fun BpkSpinner(
     color: Color,
     modifier: Modifier = Modifier,
 ) {
-    CircularProgressIndicator(
-        modifier = modifier.requiredSize(size.dp, size.dp),
-        strokeWidth = 2.dp,
+    BpkSpinnerImpl(
+        size = size,
+        modifier = modifier,
         color = color,
     )
 }
-
-private val BpkSpinnerSize.dp: Dp
-    get() = when (this) {
-        BpkSpinnerSize.Small -> BpkSpacing.Base
-        BpkSpinnerSize.Large -> BpkSpacing.Lg
-        BpkSpinnerSize.XLarge -> BpkSpacing.Xl
-    }
 
 private fun findBestSpinnerStyleFor(contentColor: Color, lightMode: Boolean): BpkSpinnerStyle =
     if (contentColor.luminance() > 0.5f && lightMode) {

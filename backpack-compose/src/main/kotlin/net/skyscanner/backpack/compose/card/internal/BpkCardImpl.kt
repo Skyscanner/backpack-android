@@ -20,13 +20,16 @@ package net.skyscanner.backpack.compose.card.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -41,6 +44,41 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.toColor
 import net.skyscanner.backpack.configuration.BpkConfiguration
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun BpkCardImpl(
+    modifier: Modifier = Modifier,
+    corner: BpkCardCorner = BpkCardCorner.Small,
+    padding: BpkCardPadding = BpkCardPadding.Small,
+    cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
+    onClick: (() -> Unit)? = null,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource? = null,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    if (onClick != null && interactionSource != null) {
+        Card(
+            onClick = onClick,
+            modifier = modifier,
+            enabled = enabled,
+            shape = cardShape(corner),
+            colors = cardColors(cardStyle),
+            elevation = cardElevation(elevation),
+            interactionSource = interactionSource,
+            content = { CardContent(padding, content) },
+        )
+    } else {
+        Card(
+            modifier = modifier,
+            shape = cardShape(corner),
+            colors = cardColors(cardStyle),
+            elevation = cardElevation(elevation),
+            content = { CardContent(padding, content) },
+        )
+    }
+}
 
 @Composable
 internal inline fun CardContent(

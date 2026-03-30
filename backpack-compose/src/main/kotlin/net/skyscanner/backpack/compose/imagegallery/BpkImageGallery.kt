@@ -21,12 +21,11 @@ package net.skyscanner.backpack.compose.imagegallery
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGalleryGridModal
-import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGallerySlideshow
-import net.skyscanner.backpack.compose.modal.BpkModal
+import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGalleryChipGridImpl
+import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGalleryImageGridImpl
+import net.skyscanner.backpack.compose.imagegallery.internal.BpkImageGallerySlideshowImpl
 import net.skyscanner.backpack.compose.modal.BpkModalState
 import net.skyscanner.backpack.compose.modal.rememberBpkModalState
-import net.skyscanner.backpack.compose.navigationbar.NavIcon
 
 @Composable
 fun BpkImageGallerySlideshow(
@@ -39,18 +38,16 @@ fun BpkImageGallerySlideshow(
     onImageChanged: ((Int) -> Unit)? = null,
     state: BpkModalState = rememberBpkModalState(),
 ) {
-    BpkModal(
-        navIcon = NavIcon.Close(closeContentDescription, onCloseClicked),
+    BpkImageGallerySlideshowImpl(
+        images = images,
+        closeContentDescription = closeContentDescription,
+        onCloseClicked = onCloseClicked,
         onDismiss = onDismiss,
-        state = state,
         modifier = modifier,
-    ) {
-        BpkImageGallerySlideshow(
-            images = images,
-            initialImage = initialImage,
-            onImageChanged = onImageChanged,
-        )
-    }
+        initialImage = initialImage,
+        onImageChanged = onImageChanged,
+        state = state,
+    )
 }
 
 @Composable
@@ -66,26 +63,16 @@ fun BpkImageGalleryChipGrid(
     onImageChanged: ((BpkImageGalleryChipCategory, BpkImageGalleryImage) -> Unit)? = null,
     state: BpkModalState = rememberBpkModalState(),
 ) {
-    BpkImageGalleryGridModal(
-        categories = BpkImageGalleryCategories.Chip(categories),
-        initialCategory = initialCategory,
+    BpkImageGalleryChipGridImpl(
+        categories = categories,
         closeContentDescription = closeContentDescription,
         onCloseClicked = onCloseClicked,
         onDismiss = onDismiss,
         modifier = modifier,
-        onCategoryChanged = { category -> onCategoryChanged?.invoke(category as BpkImageGalleryChipCategory) },
-        onImageClicked = { category, image ->
-            onImageClicked?.invoke(
-                category as BpkImageGalleryChipCategory,
-                image,
-            )
-        },
-        onImageChanged = { category, image ->
-            onImageChanged?.invoke(
-                category as BpkImageGalleryChipCategory,
-                image,
-            )
-        },
+        initialCategory = initialCategory,
+        onCategoryChanged = onCategoryChanged,
+        onImageClicked = onImageClicked,
+        onImageChanged = onImageChanged,
         state = state,
     )
 }
@@ -103,26 +90,16 @@ fun BpkImageGalleryImageGrid(
     onImageChanged: ((BpkImageGalleryImageCategory, BpkImageGalleryImage) -> Unit)? = null,
     state: BpkModalState = rememberBpkModalState(),
 ) {
-    BpkImageGalleryGridModal(
-        categories = BpkImageGalleryCategories.Image(categories),
-        initialCategory = initialCategory,
+    BpkImageGalleryImageGridImpl(
+        categories = categories,
         closeContentDescription = closeContentDescription,
         onCloseClicked = onCloseClicked,
         onDismiss = onDismiss,
         modifier = modifier,
-        onCategoryChanged = { category -> onCategoryChanged?.invoke(category as BpkImageGalleryImageCategory) },
-        onImageClicked = { category, image ->
-            onImageClicked?.invoke(
-                category as BpkImageGalleryImageCategory,
-                image,
-            )
-        },
-        onImageChanged = { category, image ->
-            onImageChanged?.invoke(
-                category as BpkImageGalleryImageCategory,
-                image,
-            )
-        },
+        initialCategory = initialCategory,
+        onCategoryChanged = onCategoryChanged,
+        onImageClicked = onImageClicked,
+        onImageChanged = onImageChanged,
         state = state,
     )
 }

@@ -24,23 +24,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
-import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
-import androidx.compose.material3.TriStateCheckbox
+import net.skyscanner.backpack.compose.checkbox.internal.BpkCheckboxImpl
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.invisibleToUser
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -142,35 +133,3 @@ fun BpkCheckbox(
         )
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
-@Composable
-private fun BpkCheckboxImpl(
-    state: ToggleableState,
-    onClick: (() -> Unit)?,
-    enabled: Boolean,
-    interactionSource: MutableInteractionSource,
-    modifier: Modifier = Modifier,
-) {
-    // our design system isn't designed with the minimum touch target in mind at the moment.
-    // Disable the enforcement to avoid the extra padding
-    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
-        TriStateCheckbox(
-            state = state,
-            onClick = onClick,
-            enabled = enabled,
-            modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
-            interactionSource = interactionSource,
-            colors = CheckboxDefaults.colors(
-                checkedColor = BpkTheme.colors.coreAccent,
-                uncheckedColor = BpkTheme.colors.textSecondary,
-                checkmarkColor = BpkTheme.colors.textPrimaryInverse,
-                disabledCheckedColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedColor = BpkTheme.colors.textDisabled,
-                disabledIndeterminateColor = BpkTheme.colors.textDisabled,
-            ),
-        )
-    }
-}
-
-private const val BackpackCheckboxScale = 0.89f

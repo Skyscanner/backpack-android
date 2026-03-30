@@ -46,7 +46,7 @@ import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.compose.tokens.internal.BpkInfoBannerColors
 
 @Composable
-internal fun BannerAlert(
+internal fun BpkBannerAlertImpl(
     type: BpkBannerAlertType,
     message: String,
     style: BpkBannerAlertStyle,
@@ -109,7 +109,7 @@ internal fun BannerAlert(
 private fun BannerAlertPreview(
     @PreviewParameter(BannerAlertPreviewParamsProvider::class) preview: Pair<BpkBannerAlertType, BpkBannerAlertStyle>,
 ) {
-    BannerAlert(
+    BpkBannerAlertImpl(
         type = preview.first,
         message = "Hello world!",
         alertTypeContentDescription = "Content description",

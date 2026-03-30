@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.nudger
+package net.skyscanner.backpack.compose.nudger.internal
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Row

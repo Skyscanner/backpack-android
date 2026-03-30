@@ -21,7 +21,7 @@ package net.skyscanner.backpack.compose.rating
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.rating.internal.BpkRatingLayout
+import net.skyscanner.backpack.compose.rating.internal.BpkRatingImpl
 import net.skyscanner.backpack.compose.text.BpkText
 
 enum class BpkRatingSize {
@@ -50,7 +50,7 @@ fun BpkRating(
     subtitle: String? = null,
     showScale: Boolean = true,
 ) {
-    BpkRatingLayout(
+    BpkRatingImpl(
         value = value,
         modifier = modifier,
         scale = scale,
@@ -79,7 +79,7 @@ fun BpkRating(
     showScale: Boolean = true,
     title: @Composable () -> Unit,
 ) {
-    BpkRatingLayout(
+    BpkRatingImpl(
         title = title,
         value = value,
         modifier = modifier,

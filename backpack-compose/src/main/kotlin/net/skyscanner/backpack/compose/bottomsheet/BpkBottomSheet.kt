@@ -16,59 +16,37 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package net.skyscanner.backpack.compose.bottomsheet
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.bottomsheet.internal.BottomSheetContent
-import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetHandle
+import net.skyscanner.backpack.compose.bottomsheet.internal.BpkBottomSheetImpl
 import net.skyscanner.backpack.compose.bottomsheet.internal.BpkDragHandleStyle
-import net.skyscanner.backpack.compose.bottomsheet.internal.HandleHeight
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkElevation
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkBottomSheet(
     sheetContent: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     state: BpkBottomSheetState = rememberBpkBottomSheetState(),
     sheetGesturesEnabled: Boolean = true,
-    peekHeight: Dp = DefaultSheetPeekHeight,
+    peekHeight: Dp = 56.dp,
     dragHandleStyle: BpkDragHandleStyle = BpkDragHandleStyle.Default,
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    BottomSheetScaffold(
-        sheetContent = { BottomSheetContent(dragHandleStyle = dragHandleStyle, content = sheetContent) },
+    BpkBottomSheetImpl(
+        sheetContent = sheetContent,
         modifier = modifier,
-        scaffoldState = rememberBottomSheetScaffoldState(
-            bottomSheetState = state.delegate,
-        ),
-        sheetPeekHeight = peekHeight + HandleHeight,
-        sheetShape = RoundedCornerShape(topStart = BpkBorderRadius.Lg, topEnd = BpkBorderRadius.Lg),
-        sheetContainerColor = BpkTheme.colors.surfaceElevated,
-        sheetContentColor = BpkTheme.colors.textPrimary,
-        sheetTonalElevation = 0.dp,
-        sheetShadowElevation = BpkElevation.Lg,
-        sheetDragHandle = { if (dragHandleStyle == BpkDragHandleStyle.Default) BpkBottomSheetHandle() },
-        sheetSwipeEnabled = sheetGesturesEnabled,
-        topBar = null,
-        snackbarHost = { Box(Modifier) },
-        containerColor = Color.Transparent,
-        contentColor = BpkTheme.colors.textPrimary,
+        delegate = state.delegate,
+        sheetGesturesEnabled = sheetGesturesEnabled,
+        peekHeight = peekHeight,
+        dragHandleStyle = dragHandleStyle,
         content = content,
     )
 }
-
-private val DefaultSheetPeekHeight = 56.dp

@@ -18,23 +18,14 @@
 
 package net.skyscanner.backpack.compose.cardwrapper
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.card.BpkCardStyle
-import net.skyscanner.backpack.compose.card.internal.cardElevation
-import net.skyscanner.backpack.compose.card.internal.cardShape
-import net.skyscanner.backpack.compose.tokens.BpkBorderSize
+import net.skyscanner.backpack.compose.cardwrapper.internal.BpkCardWrapperImpl
 
 @Composable
 fun BpkCardWrapper(
@@ -47,27 +38,14 @@ fun BpkCardWrapper(
     cardStyle: BpkCardStyle = BpkCardStyle.onContrast,
     elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = cardShape(corner),
-        colors = CardDefaults.cardColors(
-            containerColor = backgroundColor,
-            disabledContainerColor = backgroundColor,
-        ),
-        elevation = cardElevation(elevation),
-        border = BorderStroke(width = BpkBorderSize.Lg, color = backgroundColor),
-    ) {
-        Column {
-            headerContent.invoke()
-            BpkCard(
-                modifier = Modifier.padding(BpkBorderSize.Lg),
-                corner = corner,
-                padding = cardPadding,
-                cardStyle = cardStyle,
-                elevation = elevation,
-            ) {
-                cardContent.invoke()
-            }
-        }
-    }
+    BpkCardWrapperImpl(
+        backgroundColor = backgroundColor,
+        headerContent = headerContent,
+        cardContent = cardContent,
+        modifier = modifier,
+        cardPadding = cardPadding,
+        corner = corner,
+        cardStyle = cardStyle,
+        elevation = elevation,
+    )
 }

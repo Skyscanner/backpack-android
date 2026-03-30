@@ -20,7 +20,7 @@ package net.skyscanner.backpack.compose.banneralert
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.banneralert.internal.BannerAlert
+import net.skyscanner.backpack.compose.banneralert.internal.BpkBannerAlertImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
 enum class BpkBannerAlertType {
@@ -44,7 +44,7 @@ fun BpkBannerAlert(
     icon: BpkIcon? = null,
     style: BpkBannerAlertStyle = BpkBannerAlertStyle.Default,
 ) {
-    BannerAlert(
+    BpkBannerAlertImpl(
         modifier = modifier,
         type = type,
         message = message,

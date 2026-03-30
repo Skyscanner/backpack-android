@@ -18,20 +18,10 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import net.skyscanner.backpack.compose.annotation.BpkPreviews
-import net.skyscanner.backpack.compose.divider.BpkDivider
+import net.skyscanner.backpack.compose.cellitem.internal.BpkCellGroupImpl
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Account
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 /**
  * Data class representing a cell item in a [BpkCellGroup].
@@ -63,50 +53,8 @@ fun BpkCellGroup(
     items: List<BpkCellItemData>,
     modifier: Modifier = Modifier,
 ) {
-    val shape = RoundedCornerShape(BpkSpacing.Md)
-    val backgroundColor = BpkTheme.colors.surfaceDefault
-
-    LazyColumn(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(backgroundColor),
-    ) {
-        itemsIndexed(items) { index, itemData ->
-            BpkCellItem(
-                title = itemData.title,
-                body = itemData.body,
-                icon = itemData.icon,
-                onClick = itemData.onClick,
-                slot = itemData.slot,
-                style = BpkCellItemStyle.SurfaceDefault,
-                corner = BpkCellItemCorner.Default,
-            )
-            if (index < items.lastIndex) {
-                BpkDivider()
-            }
-        }
-    }
-}
-
-@BpkPreviews
-@Composable
-private fun BpkCellGroupPreview() {
-    BpkCellGroup(
-        items = listOf(
-            BpkCellItemData(
-                title = "Profile Settings",
-                body = "Manage your account",
-                icon = BpkIcon.Account,
-            ),
-            BpkCellItemData(
-                title = "Notifications",
-                body = "Enable push notifications",
-            ),
-            BpkCellItemData(
-                title = "Language",
-                body = "App display language",
-            ),
-        ),
+    BpkCellGroupImpl(
+        items = items,
+        modifier = modifier,
     )
 }
