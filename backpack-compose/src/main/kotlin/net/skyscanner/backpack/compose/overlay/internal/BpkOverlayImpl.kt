@@ -67,7 +67,7 @@ private enum class GradientDirection {
     Vignette,
 }
 
-private fun BpkOverlayType.toGradientlevel(): GradientLevel =
+private fun BpkOverlayType.toGradientLevel(): GradientLevel =
     when (this) {
         BpkOverlayType.SolidLow,
         BpkOverlayType.TopLow,
@@ -126,7 +126,7 @@ private fun BoxScope.Overlay(
             .matchParentSize()
             .drawWithCache {
                 val direction = overlayType.toDirection(layoutDirection)
-                val level = overlayType.toGradientlevel()
+                val level = overlayType.toGradientLevel()
                 val brush = direction.toBrush(gradientLevel = level, color = gradientColor)
                 onDrawBehind {
                     if (overlayType == BpkOverlayType.Vignette) {
