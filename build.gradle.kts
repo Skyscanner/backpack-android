@@ -31,13 +31,24 @@ apply(from = "publish-root.gradle.kts")
 
 extra["group"] = "net.skyscanner.backpack"
 
+val stagedOnly = project.findProperty("stagedOnly") == "true"
+val stagedFiles: List<File> by lazy {
+    providers.exec {
+        commandLine("git", "diff", "--cached", "--name-only", "--diff-filter=ACM")
+    }.standardOutput.asText.get()
+        .lines()
+        .filter { it.endsWith(".kt") }
+        .map { rootDir.resolve(it) }
+        .filter { it.exists() }
+}
+
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         config.setFrom(files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml"))
         buildUponDefaultConfig = true
-        source.setFrom(files("src", "$rootDir/buildSrc/src"))
+        source.setFrom(if (stagedOnly) stagedFiles else files("src", "$rootDir/buildSrc/src"))
     }
 }
 
