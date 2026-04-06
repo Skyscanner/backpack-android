@@ -121,6 +121,11 @@
     <string name="toggle_custom_subtitle">Content</string>
     <string name="toggle_long_text">Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long</string>
     <string name="toggle_no_label">Without Label</string>
+    <string name="toggle_with_icon">Default with icon</string>
+    <string name="toggle_with_icon_content_description">Default with icon and custom content description</string>
+    <string name="toggle_with_icon_long_text">Default with icon and long text string</string>
+    <string name="toggle_on_contrast_unchecked">On Contrast Unchecked</string>
+    <string name="toggle_on_contrast_with_icon_checked">On Contrast with Icon Checked</string>
 
     <string name="panel_default">Default</string>
     <string name="panel_no_padding">No padding</string>

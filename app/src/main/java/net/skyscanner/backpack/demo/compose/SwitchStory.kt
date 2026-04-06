@@ -18,10 +18,14 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,8 +38,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
@@ -44,9 +50,11 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @SwitchComponent
 @ComposeStory
-fun SwitchStory(modifier: Modifier = Modifier) {
+fun SwitchStoryWithInfoIconSwitchExample(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
 
@@ -55,6 +63,19 @@ fun SwitchStory(modifier: Modifier = Modifier) {
 
         DisabledUncheckedSwitchExample()
         DisabledCheckedSwitchExample()
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = BpkTheme.colors.surfaceContrast,
+                    shape = RoundedCornerShape(BpkBorderRadius.Md),
+                )
+                .padding(BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            OnContrastSwitchExample()
+        }
 
         LongTextNoTruncationSwitchExample()
         LongTextWithTopSwitchAlignmentSwitchExample()
@@ -194,4 +215,16 @@ internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
     }
+}
+
+@Composable
+internal fun OnContrastSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(R.string.toggle_on_contrast_unchecked),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        style = BpkSwitchStyle.OnContrast,
+    )
 }

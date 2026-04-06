@@ -22,11 +22,13 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultUncheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DisabledCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DisabledUncheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.OnContrastSwitchExample
 import org.junit.Test
 
 class BpkSwitchTest : BpkSnapshotTest() {
@@ -58,5 +60,14 @@ class BpkSwitchTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default)
     fun customContent() = snap(width = 200.dp) {
         CustomContentSwitchExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrast() = snap(
+        width = 200.dp,
+        background = { BpkTheme.colors.surfaceContrast },
+    ) {
+        OnContrastSwitchExample()
     }
 }
