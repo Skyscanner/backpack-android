@@ -27,11 +27,14 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @Composable
 internal fun BpkToggleableContent(
     enabled: Boolean,
+    onContrast: Boolean = false,
     content: @Composable () -> Unit,
 ) {
 
     val contentColor = when {
+        enabled && onContrast -> BpkTheme.colors.textOnDark
         enabled -> BpkTheme.colors.textPrimary
+        onContrast -> BpkTheme.colors.textDisabledOnDark
         else -> BpkTheme.colors.textDisabled
     }
 

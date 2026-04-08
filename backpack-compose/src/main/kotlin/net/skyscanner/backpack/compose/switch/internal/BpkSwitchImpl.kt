@@ -83,7 +83,7 @@ internal fun BpkSwitchImpl(
                     uncheckedBorderColor = switchOnColor,
                     uncheckedIconColor = Color.Transparent,
                     disabledCheckedThumbColor = BpkTheme.colors.textOnDark,
-                    disabledCheckedTrackColor = switchDisabledColor,
+                    disabledCheckedTrackColor = BpkTheme.colors.surfaceContrast,
                     disabledCheckedBorderColor = switchDisabledColor,
                     disabledCheckedIconColor = Color.Transparent,
                     disabledUncheckedThumbColor = switchDisabledColor,

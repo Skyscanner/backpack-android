@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
@@ -43,7 +42,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -78,7 +76,6 @@ fun BpkSwitch(
             TextWithSpacer(
                 annotatedString = buildAnnotatedString { append(text) },
                 shouldTruncate = shouldTruncate,
-                style = style,
                 textStyle = textStyle,
             )
         },
@@ -111,7 +108,6 @@ fun BpkSwitch(
                 annotatedString = text,
                 shouldTruncate = shouldTruncate,
                 textStyle = textStyle,
-                style = style,
             )
         },
     )
@@ -155,6 +151,7 @@ fun BpkSwitch(
 
         BpkToggleableContent(
             enabled = enabled,
+            onContrast = style == BpkSwitchStyle.OnContrast,
             content = { content(checked) },
         )
 
@@ -174,23 +171,15 @@ private fun RowScope.TextWithSpacer(
     annotatedString: AnnotatedString,
     shouldTruncate: Boolean,
     textStyle: TextStyle,
-    style: BpkSwitchStyle,
 ) {
     takeIf { annotatedString.isNotEmpty() }?.let {
         BpkText(
             modifier = Modifier.weight(1f),
             text = annotatedString,
-            color = getTextColor(style),
             style = textStyle,
             maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.width(BpkSpacing.Base))
     }
-}
-
-@Composable
-private fun getTextColor(style: BpkSwitchStyle): Color = when (style) {
-    BpkSwitchStyle.Default -> BpkTheme.colors.textPrimary
-    BpkSwitchStyle.OnContrast -> BpkTheme.colors.textOnDark
 }
