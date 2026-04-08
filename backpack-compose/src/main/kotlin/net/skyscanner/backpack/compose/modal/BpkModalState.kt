@@ -26,6 +26,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
@@ -48,7 +49,6 @@ class BpkModalState internal constructor(
     internal val isVisible: MutableTransitionState<Boolean>,
 ) {
 
-    private var _pendingHideAnimationCallback: (() -> Unit)? = null
     private var _hideJob: Job? = null
     private var _scope: CoroutineScope? = null
 
@@ -57,6 +57,8 @@ class BpkModalState internal constructor(
     }
 
     fun show() {
+        _hideJob?.cancel()
+        _hideJob = null
         animateState(true)
     }
 
@@ -65,11 +67,10 @@ class BpkModalState internal constructor(
         _hideJob = null
         animateState(false)
         onHidden?.let { callback ->
-            _pendingHideAnimationCallback = callback
             _hideJob = _scope?.launch {
                 snapshotFlow { isVisible.isIdle && !isVisible.currentState }.distinctUntilChanged().filter { it }.first()
+                ensureActive()
                 callback.invoke()
-                _pendingHideAnimationCallback = null
             }
         }
     }
