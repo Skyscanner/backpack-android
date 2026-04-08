@@ -22,8 +22,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.progressSemantics
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
@@ -32,8 +35,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.disabled
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.setProgress
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
@@ -62,52 +70,102 @@ internal fun BpkRangeSliderImpl(
     val isLowerThumbBeingTouched = startInteractionSource.collectIsDraggedAsState().value
     val isUpperThumbBeingTouched = endInteractionSource.collectIsDraggedAsState().value
 
-    RangeSlider(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        enabled = enabled,
-        startInteractionSource = startInteractionSource,
-        endInteractionSource = endInteractionSource,
-        valueRange = minValue..maxValue,
-        steps = steps,
-        onValueChangeFinished = onValueChangeFinished,
-        startThumb = {
-            if (isLowerThumbBeingTouched && lowerThumbLabel != null) {
-                SlideRangeLabel(
-                    label = lowerThumbLabel,
+    val needsA11yProxy = lowerThumbLabel != null || upperThumbLabel != null
+
+    val sliderContent: @Composable (Modifier) -> Unit = { sliderModifier ->
+        RangeSlider(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = sliderModifier,
+            enabled = enabled,
+            startInteractionSource = startInteractionSource,
+            endInteractionSource = endInteractionSource,
+            valueRange = minValue..maxValue,
+            steps = steps,
+            onValueChangeFinished = onValueChangeFinished,
+            startThumb = {
+                if (isLowerThumbBeingTouched && lowerThumbLabel != null) {
+                    SlideRangeLabel(
+                        label = lowerThumbLabel,
+                        enabled = enabled,
+                        interactionSource = startInteractionSource,
+                    )
+                } else {
+                    SliderThumb(
+                        interactionSource = startInteractionSource,
+                        enabled = enabled,
+                    )
+                }
+            },
+            endThumb = {
+                if (isUpperThumbBeingTouched && upperThumbLabel != null) {
+                    SlideRangeLabel(
+                        label = upperThumbLabel,
+                        enabled = enabled,
+                        interactionSource = endInteractionSource,
+                    )
+                } else {
+                    SliderThumb(
+                        interactionSource = endInteractionSource,
+                        enabled = enabled,
+                    )
+                }
+            },
+            track = { rangeSliderState ->
+                RangeSliderTrack(
                     enabled = enabled,
-                    interactionSource = startInteractionSource,
+                    rangeSliderState = rangeSliderState,
                 )
-            } else {
-                SliderThumb(
-                    interactionSource = startInteractionSource,
-                    enabled = enabled,
-                )
+            },
+            colors = sliderColors(),
+        )
+    }
+
+    if (needsA11yProxy) {
+        Box(modifier = modifier.semantics { isTraversalGroup = true }) {
+            sliderContent(Modifier.clearAndSetSemantics {})
+            Row(modifier = Modifier.matchParentSize()) {
+                if (lowerThumbLabel != null) {
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .rangeThumbSemantics(
+                                label = lowerThumbLabel,
+                                currentValue = value.start,
+                                valueRange = minValue..maxValue,
+                                steps = steps,
+                                enabled = enabled,
+                                onValueChange = { newStart ->
+                                    onValueChange(newStart..value.endInclusive)
+                                    onValueChangeFinished?.invoke()
+                                },
+                            ),
+                    )
+                }
+                if (upperThumbLabel != null) {
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .rangeThumbSemantics(
+                                label = upperThumbLabel,
+                                currentValue = value.endInclusive,
+                                valueRange = minValue..maxValue,
+                                steps = steps,
+                                enabled = enabled,
+                                onValueChange = { newEnd ->
+                                    onValueChange(value.start..newEnd)
+                                    onValueChangeFinished?.invoke()
+                                },
+                            ),
+                    )
+                }
             }
-        },
-        endThumb = {
-            if (isUpperThumbBeingTouched && upperThumbLabel != null) {
-                SlideRangeLabel(
-                    label = upperThumbLabel,
-                    enabled = enabled,
-                    interactionSource = endInteractionSource,
-                )
-            } else {
-                SliderThumb(
-                    interactionSource = endInteractionSource,
-                    enabled = enabled,
-                )
-            }
-        },
-        track = { rangeSliderState ->
-            RangeSliderTrack(
-                enabled = enabled,
-                rangeSliderState = rangeSliderState,
-            )
-        },
-        colors = sliderColors(),
-    )
+        }
+    } else {
+        sliderContent(modifier)
+    }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -141,7 +199,7 @@ private fun SlideRangeLabel(
                 textAlign = TextAlign.Center,
                 maxLines = 1,
                 modifier = Modifier
-                    .semantics { invisibleToUser() },
+                    .semantics { hideFromAccessibility() },
             )
         }
         SliderThumb(
@@ -176,6 +234,29 @@ private fun LabelLayout(
         }
     }
 }
+
+private fun Modifier.rangeThumbSemantics(
+    label: String,
+    currentValue: Float,
+    valueRange: ClosedFloatingPointRange<Float>,
+    steps: Int,
+    enabled: Boolean,
+    onValueChange: (Float) -> Unit,
+): Modifier = semantics {
+    stateDescription = label
+    if (!enabled) disabled()
+    setProgress { targetValue ->
+        val newValue = targetValue.coerceIn(valueRange.start, valueRange.endInclusive)
+        if (newValue != currentValue) {
+            onValueChange(newValue)
+            true
+        } else false
+    }
+}.progressSemantics(
+    value = currentValue,
+    valueRange = valueRange,
+    steps = steps,
+)
 
 private val FlareHeight = 6.dp
 private val BorderRadius = 6.dp
