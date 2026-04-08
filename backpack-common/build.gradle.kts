@@ -51,6 +51,7 @@ dependencies {
     androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.coroutines)
+    androidTestImplementation(libs.androidx.appCompat)
 
     // Detekt rules
     detektPlugins(libs.detektRules.compose)
