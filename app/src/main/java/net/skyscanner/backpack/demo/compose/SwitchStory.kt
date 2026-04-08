@@ -18,10 +18,14 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,8 +38,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
@@ -44,17 +50,36 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @SwitchComponent
 @ComposeStory
-fun SwitchStory(modifier: Modifier = Modifier) {
+fun SwitchStoryDefaultDefault(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.padding(BpkSpacing.Base),
+        modifier = modifier
+            .padding(BpkSpacing.Base)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
 
         DefaultUncheckedSwitchExample()
         DefaultCheckedSwitchExample()
 
-        DisabledUncheckedSwitchExample()
-        DisabledCheckedSwitchExample()
+        DefaultDisabledUncheckedSwitchExample()
+        DefaultDisabledCheckedSwitchExample()
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = BpkTheme.colors.surfaceContrast,
+                    shape = RoundedCornerShape(BpkBorderRadius.Md),
+                )
+                .padding(BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            OnContrastUncheckedSwitchExample()
+            OnContrastCheckedSwitchExample()
+
+            OnContrastDisabledUncheckedSwitchExample()
+            OnContrastDisabledCheckedSwitchExample()
+        }
 
         LongTextNoTruncationSwitchExample()
         LongTextWithTopSwitchAlignmentSwitchExample()
@@ -89,7 +114,7 @@ internal fun DefaultCheckedSwitchExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun DisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
+internal fun DefaultDisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
     BpkSwitch(
         modifier = modifier.fillMaxWidth(),
         text = stringResource(id = R.string.toggle_disabled_unchecked),
@@ -100,7 +125,7 @@ internal fun DisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun DisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
+internal fun DefaultDisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
     BpkSwitch(
         modifier = modifier.fillMaxWidth(),
         text = stringResource(id = R.string.toggle_disabled_checked),
@@ -194,4 +219,53 @@ internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
     }
+}
+
+@Composable
+internal fun OnContrastUncheckedSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(R.string.toggle_on_contrast_unchecked),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        style = BpkSwitchStyle.OnContrast,
+    )
+}
+
+@Composable
+internal fun OnContrastCheckedSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(R.string.toggle_on_contrast_checked),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        style = BpkSwitchStyle.OnContrast,
+    )
+}
+
+@Composable
+internal fun OnContrastDisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(R.string.toggle_on_contrast_disabled_unchecked),
+        enabled = false,
+        checked = checked,
+        onCheckedChange = { checked = it },
+        style = BpkSwitchStyle.OnContrast,
+    )
+}
+@Composable
+internal fun OnContrastDisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(R.string.toggle_on_contrast_disabled_checked),
+        enabled = false,
+        checked = checked,
+        onCheckedChange = { checked = it },
+        style = BpkSwitchStyle.OnContrast,
+    )
 }

@@ -19,14 +19,18 @@
 package net.skyscanner.backpack.compose.switch
 
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.DefaultDisabledCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.DefaultDisabledUncheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultUncheckedSwitchExample
-import net.skyscanner.backpack.demo.compose.DisabledCheckedSwitchExample
-import net.skyscanner.backpack.demo.compose.DisabledUncheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.OnContrastCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.OnContrastDisabledCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.OnContrastDisabledUncheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.OnContrastUncheckedSwitchExample
 import org.junit.Test
 
 class BpkSwitchTest : BpkSnapshotTest() {
@@ -44,14 +48,37 @@ class BpkSwitchTest : BpkSnapshotTest() {
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun disabledUnchecked() = snap(width = 200.dp) {
-        DisabledUncheckedSwitchExample()
+    fun defaultDisabledUnchecked() = snap(width = 200.dp) {
+        DefaultDisabledUncheckedSwitchExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun disabledChecked() = snap(width = 200.dp) {
-        DisabledCheckedSwitchExample()
+    fun defaultDisabledChecked() = snap(width = 200.dp) {
+        DefaultDisabledCheckedSwitchExample()
+    }
+
+    @Test
+    fun onContrastUnchecked() = snap(width = 200.dp) {
+        OnContrastUncheckedSwitchExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastCheckedSwitch() = snap(width = 200.dp) {
+        OnContrastCheckedSwitchExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastDisabledUnchecked() = snap(width = 200.dp) {
+        OnContrastDisabledUncheckedSwitchExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastDisabledChecked() = snap(width = 200.dp) {
+        OnContrastDisabledCheckedSwitchExample()
     }
 
     @Test

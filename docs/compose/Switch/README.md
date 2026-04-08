@@ -1,4 +1,4 @@
-# Switch
+Is # Switch
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-compose)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose)
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.switch)
@@ -27,27 +27,42 @@ BpkSwitch(
   onCheckedChange = { checked -> },
 )
 ```
+
 Example of a Switch with annotated string:
 
 ```Kotlin
-
 import androidx.compose.ui.text.buildAnnotatedString
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 
 BpkSwitch(
-    text = buildAnnotatedString {
-        append(stringResource(R.string.toggle_long_text))
-        withStyle(
-            style = SpanStyle(
-                color = BpkTheme.colors.coreAccent,
-                fontFamily = BpkTheme.typography.bodyDefault.fontFamily,
-            ),
-        ) {
-            append(" styled text")
-        }
+  text = buildAnnotatedString {
+    append(stringResource(R.string.toggle_long_text))
+    withStyle(
+      style = SpanStyle(
+        color = BpkTheme.colors.coreAccent,
+        fontFamily = BpkTheme.typography.bodyDefault.fontFamily,
+      ),
+    ) {
+      append(" styled text")
+    }
   },
-    checked = true,
-    onCheckedChange = { checked -> },
+  checked = true,
+  onCheckedChange = { checked -> },
+)
+```
+
+Example of a Switch with OnContrast style and custom text style:
+
+```Kotlin
+import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
+
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { checked -> },
+  style = BpkSwitchStyle.OnContrast,
+  textStyle = BpkTheme.typography.heading5,
 )
 ```
 
