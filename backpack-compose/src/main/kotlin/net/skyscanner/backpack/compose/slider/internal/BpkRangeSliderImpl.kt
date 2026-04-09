@@ -20,13 +20,15 @@ package net.skyscanner.backpack.compose.slider.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import kotlin.math.roundToInt
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.progressSemantics
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
@@ -133,7 +135,8 @@ internal fun BpkRangeSliderImpl(
                             .rangeThumbSemantics(
                                 label = lowerThumbLabel,
                                 currentValue = value.start,
-                                valueRange = minValue..maxValue,
+                                fullRange = minValue..maxValue,
+                                clampRange = minValue..value.endInclusive,
                                 steps = steps,
                                 enabled = enabled,
                                 onValueChange = { newStart ->
@@ -151,7 +154,8 @@ internal fun BpkRangeSliderImpl(
                             .rangeThumbSemantics(
                                 label = upperThumbLabel,
                                 currentValue = value.endInclusive,
-                                valueRange = minValue..maxValue,
+                                fullRange = minValue..maxValue,
+                                clampRange = value.start..maxValue,
                                 steps = steps,
                                 enabled = enabled,
                                 onValueChange = { newEnd ->
@@ -238,25 +242,40 @@ private fun LabelLayout(
 private fun Modifier.rangeThumbSemantics(
     label: String,
     currentValue: Float,
-    valueRange: ClosedFloatingPointRange<Float>,
+    fullRange: ClosedFloatingPointRange<Float>,
+    clampRange: ClosedFloatingPointRange<Float>,
     steps: Int,
     enabled: Boolean,
     onValueChange: (Float) -> Unit,
 ): Modifier = semantics {
     stateDescription = label
+    progressBarRangeInfo = ProgressBarRangeInfo(currentValue, fullRange, steps)
     if (!enabled) disabled()
     setProgress { targetValue ->
-        val newValue = targetValue.coerceIn(valueRange.start, valueRange.endInclusive)
+        val newValue = snapToStep(targetValue, fullRange, steps)
+            .coerceIn(clampRange.start, clampRange.endInclusive)
         if (newValue != currentValue) {
             onValueChange(newValue)
             true
         } else false
     }
-}.progressSemantics(
-    value = currentValue,
-    valueRange = valueRange,
-    steps = steps,
-)
+}
+
+// Mirrors M3's internal step-snapping logic: snaps a raw targetValue to the nearest
+// discrete tick position defined by [steps]. steps=0 means continuous (no snapping).
+private fun snapToStep(
+    targetValue: Float,
+    valueRange: ClosedFloatingPointRange<Float>,
+    steps: Int,
+): Float {
+    if (steps == 0) return targetValue.coerceIn(valueRange.start, valueRange.endInclusive)
+    val totalIntervals = steps + 1
+    val rangeSize = valueRange.endInclusive - valueRange.start
+    val nearestIndex = ((targetValue - valueRange.start) / rangeSize * totalIntervals)
+        .roundToInt()
+        .coerceIn(0, totalIntervals)
+    return valueRange.start + nearestIndex * rangeSize / totalIntervals
+}
 
 private val FlareHeight = 6.dp
 private val BorderRadius = 6.dp
