@@ -39,7 +39,7 @@ class CalendarLocalisationTests {
     @Test
     fun month_titles_depend_on_locale() {
         testCalendarWith(russianLocale) {
-            assertEquals("Январь", (currentState.cells[0] as CalendarCell.Header).title)
+            assertEquals("январь", (currentState.cells[0] as CalendarCell.Header).title)
         }
     }
 

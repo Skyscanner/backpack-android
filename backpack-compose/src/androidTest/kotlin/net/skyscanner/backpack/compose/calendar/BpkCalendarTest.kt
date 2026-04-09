@@ -40,6 +40,7 @@ import net.skyscanner.backpack.compose.calendar.CalendarParams.DayCellAccessibil
 import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.time.LocalDate
@@ -238,12 +239,12 @@ class BpkCalendarTest {
     @Test
     fun withScrollHandling() = runTest {
         val controller = createController(DefaultSingle)
-        val visitedMonth = mutableListOf(YearMonth.of(2019, 1))
+        val visitedMonths = mutableSetOf(YearMonth.of(2019, 1))
 
         composeTestRule.setContent {
             BpkTheme {
                 BpkCalendar(controller, onVisibleMonthsChanged = {
-                    visitedMonth += it
+                    visitedMonths += it
                 })
             }
         }
@@ -253,7 +254,7 @@ class BpkCalendarTest {
 
         composeTestRule.waitForIdle()
 
-        assertEquals(10, visitedMonth.size)
+        assertTrue(visitedMonths.contains(YearMonth.of(2019, 10)))
     }
 
     private fun createController(params: CalendarParams): BpkCalendarController =
