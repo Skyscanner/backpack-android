@@ -230,6 +230,11 @@ jobs:
 
       - uses: ./.github/actions/setup-java
 
+      - name: Clean old screenshots
+        run: |
+          rm -rf app/screenshots/oss
+          mkdir -p app/screenshots/oss
+
       - name: Screenshot Tests - ${{ matrix.variant.name }}
         run: |
           set -e
