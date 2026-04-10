@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultDisabledCheckedSwitchExample
@@ -59,25 +60,25 @@ class BpkSwitchTest : BpkSnapshotTest() {
     }
 
     @Test
-    fun onContrastUnchecked() = snap(width = 200.dp) {
+    fun onContrastUnchecked() = snap(width = 200.dp, background = { BpkTheme.colors.surfaceContrast }) {
         OnContrastUncheckedSwitchExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onContrastCheckedSwitch() = snap(width = 200.dp) {
+    fun onContrastChecked() = snap(width = 200.dp, background = { BpkTheme.colors.surfaceContrast }) {
         OnContrastCheckedSwitchExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onContrastDisabledUnchecked() = snap(width = 200.dp) {
+    fun onContrastDisabledUnchecked() = snap(width = 200.dp, background = { BpkTheme.colors.surfaceContrast }) {
         OnContrastDisabledUncheckedSwitchExample()
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    fun onContrastDisabledChecked() = snap(width = 200.dp) {
+    fun onContrastDisabledChecked() = snap(width = 200.dp, background = { BpkTheme.colors.surfaceContrast }) {
         OnContrastDisabledCheckedSwitchExample()
     }
 
