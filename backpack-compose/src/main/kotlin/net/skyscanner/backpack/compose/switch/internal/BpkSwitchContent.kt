@@ -16,28 +16,33 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.utils
+package net.skyscanner.backpack.compose.switch.internal
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
-internal fun BpkToggleableContent(
+internal fun BpkSwitchContent(
     enabled: Boolean,
+    onContrast: Boolean = false,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
     content: @Composable () -> Unit,
 ) {
 
     val contentColor = when {
+        enabled && onContrast -> BpkTheme.colors.textOnDark
         enabled -> BpkTheme.colors.textPrimary
+        onContrast -> BpkTheme.colors.textDisabledOnDark
         else -> BpkTheme.colors.textDisabled
     }
 
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
-        LocalTextStyle provides BpkTheme.typography.footnote,
+        LocalTextStyle provides textStyle,
         content = content,
     )
 }
