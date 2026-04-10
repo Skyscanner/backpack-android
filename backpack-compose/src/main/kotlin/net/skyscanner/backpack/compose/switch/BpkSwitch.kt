@@ -39,9 +39,9 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.LocalTextStyle
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -61,7 +61,7 @@ fun BpkSwitch(
     style: BpkSwitchStyle = BpkSwitchStyle.Default,
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
-    textStyle: TextStyle = LocalTextStyle.current,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkSwitch(
@@ -92,7 +92,7 @@ fun BpkSwitch(
     style: BpkSwitchStyle = BpkSwitchStyle.Default,
     shouldTruncate: Boolean = true,
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
-    textStyle: TextStyle = LocalTextStyle.current,
+    textStyle: TextStyle = BpkTheme.typography.footnote,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkSwitch(
