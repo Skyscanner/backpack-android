@@ -20,15 +20,12 @@ package net.skyscanner.backpack.compose.slider.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import kotlin.math.roundToInt
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.semantics.ProgressBarRangeInfo
-import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
@@ -37,10 +34,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
@@ -51,6 +50,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -268,9 +268,12 @@ private fun snapToStep(
     valueRange: ClosedFloatingPointRange<Float>,
     steps: Int,
 ): Float {
+    val rangeSize = valueRange.endInclusive - valueRange.start
+    // Guard against zero-length range to avoid NaN/Infinity
+    if (rangeSize <= 0f) return valueRange.start
+
     if (steps == 0) return targetValue.coerceIn(valueRange.start, valueRange.endInclusive)
     val totalIntervals = steps + 1
-    val rangeSize = valueRange.endInclusive - valueRange.start
     val nearestIndex = ((targetValue - valueRange.start) / rangeSize * totalIntervals)
         .roundToInt()
         .coerceIn(0, totalIntervals)
