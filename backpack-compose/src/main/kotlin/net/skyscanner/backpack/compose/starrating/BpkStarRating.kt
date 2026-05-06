@@ -71,18 +71,23 @@ fun BpkHotelRating(
     modifier: Modifier = Modifier,
     size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
-    BpkHotelRating(
-        rating = rating,
-        contentDescription = contentDescription,
+    BpkStarRatingImpl(
+        rating = rating.toFloat(),
+        maxRating = 5,
+        numberOfStars = rating,
+        rounding = BpkRatingRounding.Down,
         modifier = modifier,
+        contentDescription = contentDescription,
         size = size,
-        color = BpkRatingColor.Yellow,
+        color = starColor(BpkRatingColor.Yellow),
     )
 }
 
 @Deprecated(
-    message = "Use the overload of BpkHotelRating that remove the color parameter instead.",
-    replaceWith = ReplaceWith("BpkHotelRating(rating, contentDescription, modifier, size)"),
+    message = "Use the overload of BpkHotelRating that removes the color parameter.",
+    replaceWith = ReplaceWith(
+        "BpkHotelRating(rating = rating, contentDescription = contentDescription, modifier = modifier, size = size)",
+    ),
 )
 @OptIn(ExperimentalBackpackApi::class)
 @Composable
