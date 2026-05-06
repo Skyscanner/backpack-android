@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -43,9 +42,7 @@ import net.skyscanner.backpack.compose.map.BpkLocationMapMarker
 import net.skyscanner.backpack.compose.map.BpkPoiMapMarker
 import net.skyscanner.backpack.compose.map.BpkPoiMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPointerMapMarker
-import net.skyscanner.backpack.compose.map.BpkPriceMapMarker
 import net.skyscanner.backpack.compose.map.BpkPriceMapMarkerV2
-import net.skyscanner.backpack.compose.map.BpkPriceMarkerStatus
 import net.skyscanner.backpack.compose.map.BpkPriceMarkerV2Status
 import net.skyscanner.backpack.compose.tokens.Airports
 import net.skyscanner.backpack.compose.tokens.Cafe
@@ -56,36 +53,6 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
-
-@Composable
-@MapMarkersComponent
-@ComposeStory(kind = StoryKind.DemoOnly, name = "Price")
-fun PriceMapMarkerStory(modifier: Modifier = Modifier) {
-    var focusedMarker by remember { mutableIntStateOf(0) }
-    var viewedMarkers by remember { mutableStateOf(setOf(1)) }
-
-    fun markerStatus(index: Int): BpkPriceMarkerStatus = when {
-        index == 3 -> BpkPriceMarkerStatus.Disabled
-        index == focusedMarker -> BpkPriceMarkerStatus.Focused
-        viewedMarkers.contains(index) -> BpkPriceMarkerStatus.Viewed
-        else -> BpkPriceMarkerStatus.Default
-    }
-
-    GoogleMap(
-        modifier = modifier,
-        cameraPositionState = rememberCameraPositionState { MapPosition },
-        mapColorScheme = ComposeMapColorScheme.FOLLOW_SYSTEM,
-    ) {
-        MarkerPositions.forEachIndexed { index, latLng ->
-            BpkPriceMapMarker(
-                title = stringArrayResource(R.array.map_marker_prices)[index],
-                status = markerStatus(index),
-                state = rememberUpdatedMarkerState(latLng),
-                onClick = { focusedMarker = index; viewedMarkers += index; false },
-            )
-        }
-    }
-}
 
 @Composable
 @MapMarkersComponent
