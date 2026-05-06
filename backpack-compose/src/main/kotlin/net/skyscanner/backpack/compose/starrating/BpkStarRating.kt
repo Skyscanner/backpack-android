@@ -80,6 +80,10 @@ fun BpkHotelRating(
     )
 }
 
+@Deprecated(
+    message = "Use the overload of BpkHotelRating that remove the color parameter instead.",
+    replaceWith = ReplaceWith("BpkHotelRating(rating, contentDescription, modifier, size)"),
+)
 @OptIn(ExperimentalBackpackApi::class)
 @Composable
 fun BpkHotelRating(
