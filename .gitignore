@@ -59,6 +59,7 @@ captures/
 .idea/deploymentTargetDropDown.xml
 .idea/deploymentTargetSelector.xml
 /.idea/ktfmt.xml
+/.idea/.name
 .idea/other.xml
 .kotlin/*
 

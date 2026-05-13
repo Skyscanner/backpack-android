@@ -153,12 +153,13 @@ BpkCellItem(
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
-var enabled by remember { mutableStateOf(true) }
+var checked by remember { mutableStateOf(true) }
 BpkCellItem(
   title = "Notifications",
   slot = BpkCellItemSlot.Switch(
-    checked = enabled,
-    onCheckedChange = { enabled = it },
+    checked = checked,
+    enabled = false, // Optional: disable the switch
+    onCheckedChange = { checked = it },
   ),
 )
 ```

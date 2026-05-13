@@ -133,6 +133,7 @@ private fun RenderSlot(slotType: BpkCellItemSlot) {
                 text = "",
                 checked = slotType.checked,
                 onCheckedChange = slotType.onCheckedChange,
+                enabled = slotType.enabled,
             )
         }
         is BpkCellItemSlot.Text -> {

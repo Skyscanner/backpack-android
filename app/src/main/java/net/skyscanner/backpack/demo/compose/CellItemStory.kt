@@ -108,6 +108,31 @@ fun CellItemWithSwitchStory(modifier: Modifier = Modifier) {
 
 @Composable
 @CellItemComponent
+@ComposeStory("With Switch (Disabled)")
+fun CellItemWithDisabledSwitchStory(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        var checked by remember { mutableStateOf(true) }
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            title = "Notifications",
+            body = "Enable push notifications",
+            slot = BpkCellItemSlot.Switch(
+                checked = checked,
+                onCheckedChange = { checked = it },
+                enabled = false,
+            ),
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+@CellItemComponent
 @ComposeStory("With Text")
 fun CellItemWithTextStory(modifier: Modifier = Modifier) {
     Column(
