@@ -75,6 +75,20 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun withDisabledSwitch() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            title = "Title",
+            body = "Description",
+            slot = BpkCellItemSlot.Switch(
+                checked = true,
+                enabled = false,
+                onCheckedChange = {},
+            ),
+        )
+    }
+
+    @Test
     fun withText() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,

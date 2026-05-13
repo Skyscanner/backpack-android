@@ -132,6 +132,7 @@ private fun RenderSlot(slotType: BpkCellItemSlot) {
             BpkSwitch(
                 text = "",
                 checked = slotType.checked,
+                enabled = slotType.enabled,
                 onCheckedChange = slotType.onCheckedChange,
             )
         }
