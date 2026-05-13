@@ -82,8 +82,8 @@ class BpkCellItemTest : BpkSnapshotTest() {
             body = "Description",
             slot = BpkCellItemSlot.Switch(
                 checked = true,
-                enabled = false,
                 onCheckedChange = {},
+                enabled = false,
             ),
         )
     }

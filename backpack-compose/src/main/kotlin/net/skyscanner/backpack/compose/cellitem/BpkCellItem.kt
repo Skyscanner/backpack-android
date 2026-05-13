@@ -48,13 +48,13 @@ sealed interface BpkCellItemSlot {
      * Displays a toggle switch control.
      *
      * @param checked The current checked state of the switch.
-     * @param enabled Whether the switch is enabled or disabled.
      * @param onCheckedChange Callback invoked when the switch is toggled.
+     * @param enabled Whether the switch is enabled or disabled.
      */
     data class Switch(
         val checked: Boolean,
-        val enabled: Boolean = true,
         val onCheckedChange: (Boolean) -> Unit,
+        val enabled: Boolean = true,
     ) : BpkCellItemSlot
 
     /**

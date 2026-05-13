@@ -123,8 +123,8 @@ fun CellItemWithDisabledSwitchStory(modifier: Modifier = Modifier) {
             body = "Enable push notifications",
             slot = BpkCellItemSlot.Switch(
                 checked = checked,
-                enabled = false,
                 onCheckedChange = { checked = it },
+                enabled = false,
             ),
             modifier = Modifier.fillMaxWidth(),
         )
