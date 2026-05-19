@@ -71,6 +71,8 @@
     <color name="__privateNavigationTabOnDarkOutline">#33ffffff</color>
     <color name="__privateNavigationTabOutline">#ffffffff</color>
     <color name="__privateNavigationTabSelected">#ff054184</color>
+    <color name="__privatePageIndicatorButtonCarouselNormalBackground">#80ffffff</color>
+    <color name="__privatePageIndicatorButtonCarouselPressedBackground">#ccffffff</color>
     <color name="__privateSegmentedControlCanvasDefault">#ff131d2b</color>
     <color name="__privateSegmentedControlSurfaceContrast">#ff131d2b</color>
     <color name="__privateSegmentedControlSurfaceContrastOn">#ff054184</color>
