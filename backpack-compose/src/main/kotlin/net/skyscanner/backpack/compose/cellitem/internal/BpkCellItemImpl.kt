@@ -112,6 +112,7 @@ internal fun BpkCellItemImpl(
         }
 
         slot?.let { slotType ->
+            Spacer(modifier = Modifier.width(BpkSpacing.Base))
             RenderSlot(slotType)
         }
     }
