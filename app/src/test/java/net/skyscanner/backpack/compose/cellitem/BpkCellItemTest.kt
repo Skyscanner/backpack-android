@@ -89,6 +89,19 @@ class BpkCellItemTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun withLongBodyAndSwitch() = snap {
+        BpkCellItem(
+            icon = BpkIcon.Account,
+            title = "Title",
+            body = "This is a long description that should wrap onto multiple lines so we can verify that there is enough padding between the body text and the trailing switch slot.",
+            slot = BpkCellItemSlot.Switch(
+                checked = true,
+                onCheckedChange = {},
+            ),
+        )
+    }
+
+    @Test
     fun withText() = snap {
         BpkCellItem(
             icon = BpkIcon.Account,
