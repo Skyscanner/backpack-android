@@ -33,5 +33,5 @@ sourceSets {
     }
 }
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+apply(from = rootProject.file("kotlin-configuration-check.gradle.kts"))
 
