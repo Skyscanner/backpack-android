@@ -40,6 +40,6 @@ tasks.jar {
     }
 }
 
-apply(from = "tokens.gradle.kts")
+apply(from = file("tokens.gradle.kts"))
 
-apply(from = "$rootDir/kotlin-configuration-check.gradle.kts")
+apply(from = rootProject.file("kotlin-configuration-check.gradle.kts"))

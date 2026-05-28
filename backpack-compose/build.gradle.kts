@@ -80,7 +80,7 @@ dependencies {
     detektPlugins(libs.detektRules.libraries)
 }
 
-apply(from = "tokens.gradle.kts")
-apply(from = "components.gradle.kts")
+apply(from = file("tokens.gradle.kts"))
+apply(from = file("components.gradle.kts"))
 
-apply(from = "$rootDir/android-configuration-check.gradle.kts")
+apply(from = rootProject.file("android-configuration-check.gradle.kts"))

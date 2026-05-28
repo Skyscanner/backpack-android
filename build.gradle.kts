@@ -27,7 +27,7 @@ plugins {
     alias(libs.plugins.roborazzi) apply false
 }
 
-apply(from = "publish-root.gradle.kts")
+apply(from = file("publish-root.gradle.kts"))
 
 extra["group"] = "net.skyscanner.backpack"
 
