@@ -1,0 +1,19 @@
+{
+  "name": "backpack-android-token-sync",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens:fetch": "tsx src/fetch.ts",
+    "tokens:build": "tsx src/build.ts",
+    "tokens:sync": "tsx src/sync.ts"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "style-dictionary": "^5.4.1"
+  }
+}
