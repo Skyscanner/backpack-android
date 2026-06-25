@@ -15,7 +15,7 @@ coroutines = "1.11.0"
 espresso = "3.7.0"
 kotlinPoet = "2.3.0"
 ktor = "3.5.0"
-roborazzi = "1.63.0"
+roborazzi = "1.64.0"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
