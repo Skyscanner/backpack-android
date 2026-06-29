@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.link.internal
 
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -73,6 +75,30 @@ internal fun BpkLinkImpl(
         modifier = modifier,
         style = style,
         linkStyle = linkStyle,
+    )
+}
+
+@Composable
+internal fun BpkLinkImpl(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    style: TextStyle = LocalTextStyle.current,
+    linkStyle: BpkLinkStyle = BpkLinkStyle.Default,
+) {
+    val textColor = when (linkStyle) {
+        BpkLinkStyle.Default -> BpkTheme.colors.textPrimary
+        BpkLinkStyle.OnContrast -> BpkTheme.colors.textOnDark
+    }
+
+    BpkText(
+        text = buildAnnotatedString {
+            withStyle(SpanStyle(color = textColor, textDecoration = TextDecoration.Underline)) {
+                append(text)
+            }
+        },
+        style = style,
+        modifier = modifier.clickable(role = Role.Button, onClick = onClick),
     )
 }
 

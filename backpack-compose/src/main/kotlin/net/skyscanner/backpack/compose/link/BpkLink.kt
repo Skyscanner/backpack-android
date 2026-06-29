@@ -91,6 +91,33 @@ fun BpkLink(
     )
 }
 
+/**
+ * BpkLink component for displaying a standalone clickable link without URL navigation.
+ * Prefer this over the segment overload when there is no URL — e.g. in-app actions.
+ *
+ * @param text The link label
+ * @param onClick Callback invoked when the link is tapped
+ * @param modifier The modifier to be applied to the composable
+ * @param textStyle The style to be applied to the text
+ * @param style The visual style of the link (Default or OnContrast)
+ */
+@Composable
+fun BpkLink(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    textStyle: TextStyle = LocalTextStyle.current,
+    style: BpkLinkStyle = BpkLinkStyle.Default,
+) {
+    BpkLinkImpl(
+        text = text,
+        onClick = onClick,
+        modifier = modifier,
+        style = textStyle,
+        linkStyle = style,
+    )
+}
+
 fun buildTextSegments(
     autoSpace: Boolean = true,
     block: TextSegmentBuilder.() -> Unit,
