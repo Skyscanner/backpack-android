@@ -548,6 +548,22 @@ public val BpkIcon.Companion.Check: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.CheckboxMinus: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "checkbox-minus",
+        small = R.drawable.bpk_checkbox_minus,
+        large = R.drawable.bpk_checkbox_minus,
+    )
+)
+
+public val BpkIcon.Companion.CheckboxTick: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "checkbox-tick",
+        small = R.drawable.bpk_checkbox_tick,
+        large = R.drawable.bpk_checkbox_tick,
+    )
+)
+
 public val BpkIcon.Companion.ChevronDown: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "chevron-down",
@@ -2522,6 +2538,8 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.Chart,
         BpkIcon.Chauffeur,
         BpkIcon.Check,
+        BpkIcon.CheckboxMinus,
+        BpkIcon.CheckboxTick,
         BpkIcon.ChevronDown,
         BpkIcon.ChevronLeft,
         BpkIcon.ChevronRight,
