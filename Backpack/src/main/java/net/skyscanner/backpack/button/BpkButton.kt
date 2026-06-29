@@ -43,7 +43,6 @@ import net.skyscanner.backpack.button.internal.getHorizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
 import net.skyscanner.backpack.button.internal.minHeight
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -177,9 +176,7 @@ open class BpkButton(
         this.type = type
         updateSize()
         applyStyle(style)
-        val textStyle = BpkConfiguration.buttonConfig?.takeIf { size == Size.Standard }?.let { BpkText.TextStyle.Label2 }
-            ?: BpkText.TextStyle.Label1
-        BpkText.getFont(context, textStyle).applyTo(this)
+        BpkText.getFont(context, BpkText.TextStyle.Label1).applyTo(this)
     }
 
     override fun setEnabled(enabled: Boolean) {

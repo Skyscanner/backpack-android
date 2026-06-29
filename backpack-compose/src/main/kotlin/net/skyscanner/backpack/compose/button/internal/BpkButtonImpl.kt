@@ -46,9 +46,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.LocalTextStyle
+import net.skyscanner.backpack.compose.button.BpkButtonShape
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.button.BpkButtonShape
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
@@ -59,7 +59,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.hideContentIf
 import net.skyscanner.backpack.compose.utils.toRippleAlpha
-import net.skyscanner.backpack.configuration.BpkConfiguration
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,10 +81,6 @@ internal fun BpkButtonImpl(
             type.rippleColor().toRippleAlpha(),
         ),
     ) {
-
-        val typography = BpkConfiguration.buttonConfig?.takeIf { size == BpkButtonSize.Default }
-            ?.let { BpkTheme.typography.label2 } ?: BpkTheme.typography.label1
-
         Button(
             onClick = onClick,
             enabled = clickable,
@@ -117,7 +112,7 @@ internal fun BpkButtonImpl(
             elevation = null,
             content = {
                 CompositionLocalProvider(
-                    LocalTextStyle provides typography,
+                    LocalTextStyle provides BpkTheme.typography.label1,
                 ) {
                     Box {
                         Row(
