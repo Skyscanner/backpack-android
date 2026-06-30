@@ -16,7 +16,18 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-The Link component supports two approaches for creating clickable text:
+The Link component supports three approaches for creating clickable text:
+
+### Action Link (no URL)
+
+Use this when the link triggers an in-app action rather than navigating to a URL. This is also the correct choice for TalkBack accessibility — TalkBack will announce "double tap to activate" instead of "links available".
+
+```Kotlin
+BpkLink(
+    text = "Read before booking",
+    onClick = { showBottomSheet() }
+)
+```
 
 ### Markdown Strings
 
@@ -74,12 +85,13 @@ BpkLink(
 | -------- | -------- | -------- | ------------- |
 | text | String | ✓ | - |
 | segments | List<TextSegment> | ✓ | - |
-| onLinkClicked | (String) -> Unit | ✓ | - |
+| onClick | () -> Unit | ✓ (action overload) | - |
+| onLinkClicked | (String) -> Unit | ✓ (url overloads) | - |
 | modifier | Modifier | - | Modifier |
 | textStyle | TextStyle | - | LocalTextStyle.current |
 | style | BpkLinkStyle | - | BpkLinkStyle.Default |
 
-*Note: Use either `text` for markdown or `segments` for type-safe builder approach.*
+*Note: Use `onClick` for in-app actions, `text` (markdown) or `segments` for URL navigation.*
 
 ## buildTextSegments
 

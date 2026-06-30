@@ -415,7 +415,6 @@
     <string name="link_story_simple_example_title">Simple Link</string>
     <string name="link_story_simple_example_text">[Visit Skyscanner](https://www.skyscanner.net)</string>
     <string name="link_story_simple_without_url_title">Link without URL</string>
-    <string name="link_story_simple_without_url_text">[Click me]()</string>
     <string name="link_story_mixed_text_title">Mixed Text with Links</string>
     <string name="link_story_mixed_text_full">This is normal text with a [link](https://www.skyscanner.net) in the middle and another [link](https://www.backpack.com) at the end.</string>
     <string name="link_story_contrast_title">Link on Contrast Background</string>
@@ -453,6 +452,7 @@
     <string name="link_story_url_hotel_booking">https://book.hotel/149</string>
     <string name="link_story_url_terms">https://terms.com</string>
     <string name="link_story_hotel_price_accessibility">one hundred and forty-nine pounds</string>
+    <string name="link_story_action_link_text">Read before booking</string>
     <string name="key_login_method_selection_tos_and_privacy_policy">By continuing you agree to our &lt;link0&gt;Terms of Service&lt;/link0&gt; and &lt;link1&gt;Privacy Policy&lt;/link1&gt;.</string>
 
     <string name="settings_section_typography">Typography Sets</string>

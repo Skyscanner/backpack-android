@@ -162,16 +162,9 @@ internal fun LinkWithoutUrlExample(
         style = style,
     ) {
         BpkLink(
-            text = stringResource(R.string.link_story_simple_without_url_text),
+            text = stringResource(R.string.link_story_action_link_text),
             style = style,
-            onLinkClicked = { url ->
-                val message = if (url.isEmpty()) {
-                    "$clickedMessage (empty URL)"
-                } else {
-                    clickedMessage
-                }
-                onNotification(message)
-            },
+            onClick = { onNotification(clickedMessage) },
         )
     }
 }
