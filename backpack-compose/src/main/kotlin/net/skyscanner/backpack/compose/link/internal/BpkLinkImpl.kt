@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.link.internal
 
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
@@ -91,12 +92,15 @@ internal fun BpkLinkImpl(
         BpkLinkStyle.OnContrast -> BpkTheme.colors.textOnDark
     }
 
-    BpkText(
-        text = buildAnnotatedString {
+    val annotatedText = remember(text, textColor) {
+        buildAnnotatedString {
             withStyle(SpanStyle(color = textColor, textDecoration = TextDecoration.Underline)) {
                 append(text)
             }
-        },
+        }
+    }
+    BpkText(
+        text = annotatedText,
         style = style,
         modifier = modifier.clickable(role = Role.Button, onClick = onClick),
     )

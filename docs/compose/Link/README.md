@@ -81,17 +81,34 @@ BpkLink(
 
 ## Parameters
 
-| Property | PropType | Required | Default Value |
-| -------- | -------- | -------- | ------------- |
-| text | String | ✓ | - |
-| segments | List<TextSegment> | ✓ | - |
-| onClick | () -> Unit | ✓ (action overload) | - |
-| onLinkClicked | (String) -> Unit | ✓ (url overloads) | - |
-| modifier | Modifier | - | Modifier |
-| textStyle | TextStyle | - | LocalTextStyle.current |
-| style | BpkLinkStyle | - | BpkLinkStyle.Default |
+All three overloads share these common optional parameters:
 
-*Note: Use `onClick` for in-app actions, `text` (markdown) or `segments` for URL navigation.*
+| Property | PropType | Default Value |
+| -------- | -------- | ------------- |
+| modifier | Modifier | Modifier |
+| textStyle | TextStyle | LocalTextStyle.current |
+| style | BpkLinkStyle | BpkLinkStyle.Default |
+
+**Action overload** — `BpkLink(text, onClick)`
+
+| Property | PropType |
+| -------- | -------- |
+| text | String |
+| onClick | () -> Unit |
+
+**Markdown overload** — `BpkLink(text, onLinkClicked)`
+
+| Property | PropType |
+| -------- | -------- |
+| text | String (markdown `[label](url)`) |
+| onLinkClicked | (String) -> Unit |
+
+**Segments overload** — `BpkLink(segments, onLinkClicked)`
+
+| Property | PropType |
+| -------- | -------- |
+| segments | List\<TextSegment\> |
+| onLinkClicked | (String) -> Unit |
 
 ## buildTextSegments
 
