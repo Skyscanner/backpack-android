@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -66,6 +67,8 @@ internal fun BpkModalImpl(
         onDismiss?.invoke()
     }
 
+    val activityView = LocalView.current
+
     val backgroundColor: Color = when (modalStyle) {
         ModalStyle.Default -> BpkTheme.colors.surfaceDefault
         ModalStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
@@ -96,6 +99,22 @@ internal fun BpkModalImpl(
                 navigationBarColor = android.graphics.Color.TRANSPARENT
                 windowInsetsController.isAppearanceLightStatusBars = isBackgroundLight
                 windowInsetsController.isAppearanceLightNavigationBars = isBackgroundLight
+            }
+        }
+
+        LaunchedEffect(isVisible.targetState) {
+            if (!isVisible.targetState) {
+                // Setting FLAG_NOT_FOCUSABLE removes the dialog from the IME focus chain.
+                // This causes the keyboard to dismiss immediately and prevents Samsung One UI
+                // from re-asserting it when focus transfers back to the activity window.
+                dialogWindow?.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                val imm = activityView.context.getSystemService(
+                    android.content.Context.INPUT_METHOD_SERVICE,
+                ) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(
+                    dialogWindow?.decorView?.windowToken ?: activityView.windowToken,
+                    0,
+                )
             }
         }
 
