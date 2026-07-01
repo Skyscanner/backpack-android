@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -124,7 +125,7 @@ internal fun BpkModalImpl(
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
             modifier = modifier.fillMaxSize(),
         ) {
-            Column(modifier = Modifier.background(backgroundColor)) {
+            Column(modifier = Modifier.fillMaxSize().background(backgroundColor)) {
                 if (action != null) {
                     BpkTopNavBar(
                         navIcon = navIcon,
@@ -141,7 +142,7 @@ internal fun BpkModalImpl(
                         title = title.orEmpty(),
                     )
                 }
-                Box(content = content)
+                Box(modifier = Modifier.weight(1f).imePadding(), content = content)
             }
         }
     }
