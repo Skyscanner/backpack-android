@@ -16,7 +16,18 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-The Link component supports two approaches for creating clickable text:
+The Link component supports three approaches for creating clickable text:
+
+### Action Link (no URL)
+
+Use this when the link triggers an in-app action rather than navigating to a URL. This is also the correct choice for TalkBack accessibility — TalkBack will announce "double tap to activate" instead of "links available".
+
+```Kotlin
+BpkLink(
+    text = "Read before booking",
+    onClick = { showBottomSheet() }
+)
+```
 
 ### Markdown Strings
 
@@ -70,16 +81,34 @@ BpkLink(
 
 ## Parameters
 
-| Property | PropType | Required | Default Value |
-| -------- | -------- | -------- | ------------- |
-| text | String | ✓ | - |
-| segments | List<TextSegment> | ✓ | - |
-| onLinkClicked | (String) -> Unit | ✓ | - |
-| modifier | Modifier | - | Modifier |
-| textStyle | TextStyle | - | LocalTextStyle.current |
-| style | BpkLinkStyle | - | BpkLinkStyle.Default |
+All three overloads share these common optional parameters:
 
-*Note: Use either `text` for markdown or `segments` for type-safe builder approach.*
+| Property | PropType | Default Value |
+| -------- | -------- | ------------- |
+| modifier | Modifier | Modifier |
+| textStyle | TextStyle | LocalTextStyle.current |
+| style | BpkLinkStyle | BpkLinkStyle.Default |
+
+**Action overload** — `BpkLink(text, onClick)`
+
+| Property | PropType |
+| -------- | -------- |
+| text | String |
+| onClick | () -> Unit |
+
+**Markdown overload** — `BpkLink(text, onLinkClicked)`
+
+| Property | PropType |
+| -------- | -------- |
+| text | String (markdown `[label](url)`) |
+| onLinkClicked | (String) -> Unit |
+
+**Segments overload** — `BpkLink(segments, onLinkClicked)`
+
+| Property | PropType |
+| -------- | -------- |
+| segments | List\<TextSegment\> |
+| onLinkClicked | (String) -> Unit |
 
 ## buildTextSegments
 

@@ -68,6 +68,32 @@ class BpkLinkTest : BpkSnapshotTest() {
     }
 
     @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun actionLinkDefault() {
+        snap {
+            BpkLink(
+                text = "Read before booking",
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun actionLinkOnContrast() {
+        snap(
+            background = { BpkTheme.colors.corePrimary },
+        ) {
+            BpkLink(
+                text = "Read before booking",
+                style = BpkLinkStyle.OnContrast,
+                modifier = Modifier.padding(16.dp),
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default)
     fun sentenceWithTwoLinks() {
         snap {
