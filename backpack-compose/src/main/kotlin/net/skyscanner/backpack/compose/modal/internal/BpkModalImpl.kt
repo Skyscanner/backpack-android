@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.modal.internal
 
 import android.view.Window
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -28,7 +30,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -66,6 +70,8 @@ internal fun BpkModalImpl(
         onDismiss?.invoke()
     }
 
+    val activityView = LocalView.current
+
     val backgroundColor: Color = when (modalStyle) {
         ModalStyle.Default -> BpkTheme.colors.surfaceDefault
         ModalStyle.SurfaceContrast -> BpkTheme.colors.surfaceContrast
@@ -99,13 +105,27 @@ internal fun BpkModalImpl(
             }
         }
 
+        LaunchedEffect(isVisible.targetState) {
+            if (!isVisible.targetState) {
+                // Setting FLAG_NOT_FOCUSABLE removes the dialog from the IME focus chain.
+                // This causes the keyboard to dismiss immediately and prevents Samsung One UI
+                // from re-asserting it when focus transfers back to the activity window.
+                dialogWindow?.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                val imm = activityView.context.getSystemService(InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(
+                    dialogWindow?.decorView?.windowToken ?: activityView.windowToken,
+                    0,
+                )
+            }
+        }
+
         AnimatedVisibility(
             visibleState = isVisible,
             enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
             exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
             modifier = modifier.fillMaxSize(),
         ) {
-            Column(modifier = Modifier.background(backgroundColor)) {
+            Column(modifier = Modifier.fillMaxSize().background(backgroundColor)) {
                 if (action != null) {
                     BpkTopNavBar(
                         navIcon = navIcon,
@@ -122,7 +142,7 @@ internal fun BpkModalImpl(
                         title = title.orEmpty(),
                     )
                 }
-                Box(content = content)
+                Box(modifier = Modifier.weight(1f).imePadding(), content = content)
             }
         }
     }
