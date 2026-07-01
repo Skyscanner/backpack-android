@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.modal.internal
 
 import android.view.Window
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -107,11 +109,9 @@ internal fun BpkModalImpl(
                 // Setting FLAG_NOT_FOCUSABLE removes the dialog from the IME focus chain.
                 // This causes the keyboard to dismiss immediately and prevents Samsung One UI
                 // from re-asserting it when focus transfers back to the activity window.
-                dialogWindow?.addFlags(android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-                val imm = activityView.context.getSystemService(
-                    android.content.Context.INPUT_METHOD_SERVICE,
-                ) as android.view.inputmethod.InputMethodManager
-                imm.hideSoftInputFromWindow(
+                dialogWindow?.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                val imm = activityView.context.getSystemService(InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(
                     dialogWindow?.decorView?.windowToken ?: activityView.windowToken,
                     0,
                 )
