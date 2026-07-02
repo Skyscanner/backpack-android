@@ -19,8 +19,12 @@
 package net.skyscanner.backpack.compose.checkbox
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.demo.compose.CheckboxTrailingSample
+import net.skyscanner.backpack.demo.compose.CheckboxWithIconSample
+import net.skyscanner.backpack.demo.compose.CheckboxWithIconTrailingSample
 import net.skyscanner.backpack.demo.compose.CheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.CustomContentCheckboxSample
 import net.skyscanner.backpack.demo.compose.DefaultCheckboxSample
@@ -28,6 +32,13 @@ import net.skyscanner.backpack.demo.compose.DisabledCheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.DisabledUncheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.IntermediateCheckboxSample
 import net.skyscanner.backpack.demo.compose.NoLabelCheckboxSample
+import net.skyscanner.backpack.demo.compose.OnContrastCheckboxWithIconSample
+import net.skyscanner.backpack.demo.compose.OnContrastCheckboxWithIconTrailingSample
+import net.skyscanner.backpack.demo.compose.OnContrastCheckedCheckboxSample
+import net.skyscanner.backpack.demo.compose.OnContrastDisabledCheckedCheckboxSample
+import net.skyscanner.backpack.demo.compose.OnContrastDisabledUncheckedCheckboxSample
+import net.skyscanner.backpack.demo.compose.OnContrastIntermediateCheckboxSample
+import net.skyscanner.backpack.demo.compose.OnContrastUncheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.UncheckedCheckboxSample
 import org.junit.Test
 
@@ -76,6 +87,72 @@ class BpkCheckboxTest : BpkSnapshotTest() {
         snap {
             DisabledCheckedCheckboxSample()
         }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun checkboxTrailing() {
+        snap {
+            CheckboxTrailingSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withIcon() {
+        snap {
+            CheckboxWithIconSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withIconTrailing() {
+        snap {
+            CheckboxWithIconTrailingSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastUnchecked() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastUncheckedCheckboxSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastChecked() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastCheckedCheckboxSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastIntermediate() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastIntermediateCheckboxSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastDisabledUnchecked() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastDisabledUncheckedCheckboxSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastDisabledChecked() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastDisabledCheckedCheckboxSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastWithIcon() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastCheckboxWithIconSample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onContrastWithIconTrailing() = snap(background = { BpkTheme.colors.surfaceContrast }) {
+        OnContrastCheckboxWithIconTrailingSample()
     }
 
     @Test
