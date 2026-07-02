@@ -121,6 +121,9 @@
     <string name="toggle_custom_subtitle">Content</string>
     <string name="toggle_long_text">Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long Text Long</string>
     <string name="toggle_no_label">Without Label</string>
+    <string name="toggle_checkbox_end">Checkbox at End</string>
+    <string name="toggle_with_icon">Label with Icon</string>
+    <string name="toggle_with_icon_content_description">More information</string>
     <string name="toggle_on_contrast_unchecked">On Contrast Unchecked</string>
     <string name="toggle_on_contrast_checked">On Contrast Checked</string>
     <string name="toggle_on_contrast_disabled_unchecked">On Contrast Disabled Unchecked</string>

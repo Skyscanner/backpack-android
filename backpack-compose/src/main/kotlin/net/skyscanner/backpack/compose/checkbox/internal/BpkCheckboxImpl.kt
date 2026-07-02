@@ -27,11 +27,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import kotlin.math.floor
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
@@ -45,9 +50,13 @@ internal fun BpkCheckboxImpl(
     // our design system isn't designed with the minimum touch target in mind at the moment.
     // Disable the enforcement to avoid the extra padding
     CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
+        val strokeWidthPx = with(LocalDensity.current) { floor(3.6.dp.toPx()) }
+
         TriStateCheckbox(
             state = state,
             onClick = onClick,
+            checkmarkStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
+            outlineStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
             enabled = enabled,
             modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
             interactionSource = interactionSource,
