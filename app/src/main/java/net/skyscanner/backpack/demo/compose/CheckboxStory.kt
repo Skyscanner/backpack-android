@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
+import net.skyscanner.backpack.compose.checkbox.BpkCheckboxPosition
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -52,6 +56,8 @@ fun CheckboxStory(modifier: Modifier = Modifier) {
         CheckedCheckboxSample()
         DisabledUncheckedCheckboxSample()
         DisabledCheckedCheckboxSample()
+        CheckboxAtEndSample()
+        CheckboxWithIconSample()
         CustomContentCheckboxSample()
 
         BpkText(stringResource(R.string.toggle_no_label))
@@ -120,6 +126,34 @@ internal fun DisabledCheckedCheckboxSample(modifier: Modifier = Modifier) {
         checked = true,
         enabled = false,
         onCheckedChange = {},
+    )
+}
+
+@Composable
+internal fun CheckboxAtEndSample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+
+    BpkCheckbox(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_checkbox_end),
+        checked = checked,
+        checkboxPosition = BpkCheckboxPosition.End,
+        onCheckedChange = { checked = it },
+    )
+}
+
+@Composable
+internal fun CheckboxWithIconSample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_with_icon),
+        checked = checked,
+        icon = BpkIcon.InformationCircle,
+        iconContentDescription = stringResource(id = R.string.toggle_with_icon_content_description),
+        onIconClick = { },
+        onCheckedChange = { checked = it },
     )
 }
 

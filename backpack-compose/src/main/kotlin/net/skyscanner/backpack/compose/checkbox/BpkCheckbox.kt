@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.checkbox
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -31,10 +32,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.text.style.LineHeightStyle
+import net.skyscanner.backpack.compose.LocalTextStyle
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
+
+enum class BpkCheckboxPosition {
+    Start,
+    End,
+}
 
 @Composable
 fun BpkCheckbox(
@@ -43,6 +52,10 @@ fun BpkCheckbox(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Start,
+    icon: BpkIcon? = null,
+    iconContentDescription: String? = null,
+    onIconClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkCheckbox(
@@ -51,7 +64,16 @@ fun BpkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier,
-        content = { BpkText(text) },
+        checkboxPosition = checkboxPosition,
+        content = {
+            CheckboxLabel(
+                text = text,
+                enabled = enabled,
+                icon = icon,
+                iconContentDescription = iconContentDescription,
+                onIconClick = onIconClick,
+            )
+        },
     )
 }
 
@@ -62,6 +84,10 @@ fun BpkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Start,
+    icon: BpkIcon? = null,
+    iconContentDescription: String? = null,
+    onIconClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkCheckbox(
@@ -70,7 +96,16 @@ fun BpkCheckbox(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
-        content = { BpkText(text) },
+        checkboxPosition = checkboxPosition,
+        content = {
+            CheckboxLabel(
+                text = text,
+                enabled = enabled,
+                icon = icon,
+                iconContentDescription = iconContentDescription,
+                onIconClick = onIconClick,
+            )
+        },
     )
 }
 
@@ -80,6 +115,7 @@ fun BpkCheckbox(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Start,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
@@ -91,6 +127,7 @@ fun BpkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier,
+        checkboxPosition = checkboxPosition,
         content = { content(checked) },
     )
 }
@@ -101,6 +138,7 @@ fun BpkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Start,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(ToggleableState) -> Unit,
 ) {
@@ -118,18 +156,74 @@ fun BpkCheckbox(
             )
         },
     ) {
-
-        BpkCheckboxImpl(
-            modifier = Modifier.padding(end = BpkSpacing.Md),
-            state = state,
-            enabled = enabled,
-            interactionSource = interactionSource,
-            onClick = onClick,
-        )
+        if (checkboxPosition == BpkCheckboxPosition.Start) {
+            BpkCheckboxImpl(
+                modifier = Modifier.padding(end = BpkSpacing.Md),
+                state = state,
+                enabled = enabled,
+                interactionSource = interactionSource,
+                onClick = onClick,
+            )
+        }
 
         BpkToggleableContent(
             enabled = enabled,
             content = { content(state) },
+        )
+
+        if (checkboxPosition == BpkCheckboxPosition.End) {
+            BpkCheckboxImpl(
+                modifier = Modifier.padding(start = BpkSpacing.Md),
+                state = state,
+                enabled = enabled,
+                interactionSource = interactionSource,
+                onClick = onClick,
+            )
+        }
+    }
+}
+
+@Composable
+private fun RowScope.CheckboxLabel(
+    text: String,
+    enabled: Boolean,
+    icon: BpkIcon?,
+    iconContentDescription: String?,
+    onIconClick: (() -> Unit)?,
+) {
+    // Without an icon, render the label unchanged to preserve the layout existing
+    // consumers already depend on.
+    if (icon == null) {
+        BpkText(text)
+        return
+    }
+
+    Row(
+        // Constrain to the space left by the checkbox so long labels wrap instead of
+        // growing under the icon.
+        modifier = Modifier.weight(1f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+    ) {
+        // Trim the line-height leading so the label's box hugs its glyphs, keeping the
+        // text visually centred against the icon rather than riding high in its line box.
+        BpkText(
+            modifier = Modifier.weight(1f, fill = false),
+            text = text,
+            style = LocalTextStyle.current.copy(
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment.Center,
+                    trim = LineHeightStyle.Trim.Both,
+                ),
+            ),
+        )
+
+        BpkIcon(
+            icon = icon,
+            contentDescription = iconContentDescription,
+            modifier = Modifier.applyIf(enabled && onIconClick != null) {
+                clickable(onClick = onIconClick!!)
+            },
         )
     }
 }

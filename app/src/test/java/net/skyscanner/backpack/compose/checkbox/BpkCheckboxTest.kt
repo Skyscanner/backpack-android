@@ -21,6 +21,8 @@ package net.skyscanner.backpack.compose.checkbox
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.demo.compose.CheckboxAtEndSample
+import net.skyscanner.backpack.demo.compose.CheckboxWithIconSample
 import net.skyscanner.backpack.demo.compose.CheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.CustomContentCheckboxSample
 import net.skyscanner.backpack.demo.compose.DefaultCheckboxSample
@@ -75,6 +77,22 @@ class BpkCheckboxTest : BpkSnapshotTest() {
     fun disabledChecked() {
         snap {
             DisabledCheckedCheckboxSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun checkboxAtEnd() {
+        snap {
+            CheckboxAtEndSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withIcon() {
+        snap {
+            CheckboxWithIconSample()
         }
     }
 
