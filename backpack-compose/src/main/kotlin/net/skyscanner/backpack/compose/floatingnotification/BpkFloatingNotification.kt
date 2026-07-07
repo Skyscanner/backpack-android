@@ -35,8 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -47,6 +51,7 @@ import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloating
 import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNotificationTransforms
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -54,12 +59,19 @@ fun BpkFloatingNotification(
     state: BpkFloatingNotificationState,
     modifier: Modifier = Modifier,
 ) {
-
+    val accessibilityManager = LocalAccessibilityManager.current
     val currentData = state.currentData
+
     LaunchedEffect(currentData) {
         if (currentData != null) {
-            val duration = currentData.hideAfter
-            delay(duration)
+            val duration = accessibilityManager?.calculateRecommendedTimeoutMillis(
+                originalTimeoutMillis = currentData.hideAfter,
+                containsIcons = currentData.icon != null,
+                containsText = currentData.text.isNotEmpty(),
+                containsControls = currentData.cta != null,
+            ) ?: currentData.hideAfter
+
+            delay(duration.milliseconds)
             currentData.dismiss()
         }
     }
@@ -70,28 +82,30 @@ fun BpkFloatingNotification(
         if (widthDp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideOffsetPx = with(LocalDensity.current) { BpkSpacing.Lg.toPx().toInt() }
 
-    AnimatedContent(
-        targetState = currentData,
-        modifier = modifier,
-        transitionSpec = floatingNotificationTransforms(slideOffsetPx),
-        label = "Floating Notification",
-    ) { data ->
+    Box(modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
+        AnimatedContent(
+            targetState = currentData,
+            modifier = modifier,
+            transitionSpec = floatingNotificationTransforms(slideOffsetPx),
+            label = "Floating Notification",
+        ) { data ->
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
-                .navigationBarsPadding(),
-            contentAlignment = Alignment.BottomCenter,
-        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
+                    .navigationBarsPadding(),
+                contentAlignment = Alignment.BottomCenter,
+            ) {
 
-            if (data != null) {
-                BpkFloatingNotificationImpl(
-                    data = data,
-                    modifier = Modifier
-                        .heightIn(min = componentHeight)
-                        .widthIn(max = DefaultTabletSize.width),
-                )
+                if (data != null) {
+                    BpkFloatingNotificationImpl(
+                        data = data,
+                        modifier = Modifier
+                            .heightIn(min = componentHeight)
+                            .widthIn(max = DefaultTabletSize.width),
+                    )
+                }
             }
         }
     }
