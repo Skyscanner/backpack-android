@@ -36,6 +36,16 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 
+enum class BpkCheckboxPosition {
+    Leading,
+    Trailing,
+}
+
+enum class BpkCheckboxStyle {
+    Default,
+    OnContrast,
+}
+
 @Composable
 fun BpkCheckbox(
     text: String,
@@ -43,6 +53,8 @@ fun BpkCheckbox(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Leading,
+    style: BpkCheckboxStyle = BpkCheckboxStyle.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkCheckbox(
@@ -51,6 +63,8 @@ fun BpkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier,
+        checkboxPosition = checkboxPosition,
+        style = style,
         content = { BpkText(text) },
     )
 }
@@ -62,6 +76,8 @@ fun BpkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Leading,
+    style: BpkCheckboxStyle = BpkCheckboxStyle.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BpkCheckbox(
@@ -70,6 +86,8 @@ fun BpkCheckbox(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
+        checkboxPosition = checkboxPosition,
+        style = style,
         content = { BpkText(text) },
     )
 }
@@ -80,6 +98,8 @@ fun BpkCheckbox(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Leading,
+    style: BpkCheckboxStyle = BpkCheckboxStyle.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
@@ -91,6 +111,8 @@ fun BpkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier,
+        checkboxPosition = checkboxPosition,
+        style = style,
         content = { content(checked) },
     )
 }
@@ -101,6 +123,8 @@ fun BpkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkboxPosition: BpkCheckboxPosition = BpkCheckboxPosition.Leading,
+    style: BpkCheckboxStyle = BpkCheckboxStyle.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.(ToggleableState) -> Unit,
 ) {
@@ -118,18 +142,32 @@ fun BpkCheckbox(
             )
         },
     ) {
-
-        BpkCheckboxImpl(
-            modifier = Modifier.padding(end = BpkSpacing.Md),
-            state = state,
-            enabled = enabled,
-            interactionSource = interactionSource,
-            onClick = onClick,
-        )
+        if (checkboxPosition == BpkCheckboxPosition.Leading) {
+            BpkCheckboxImpl(
+                modifier = Modifier.padding(end = BpkSpacing.Md),
+                state = state,
+                enabled = enabled,
+                interactionSource = interactionSource,
+                onClick = onClick,
+                style = style,
+            )
+        }
 
         BpkToggleableContent(
             enabled = enabled,
+            onContrast = style == BpkCheckboxStyle.OnContrast,
             content = { content(state) },
         )
+
+        if (checkboxPosition == BpkCheckboxPosition.Trailing) {
+            BpkCheckboxImpl(
+                modifier = Modifier.padding(start = BpkSpacing.Md),
+                state = state,
+                enabled = enabled,
+                interactionSource = interactionSource,
+                onClick = onClick,
+                style = style,
+            )
+        }
     }
 }
