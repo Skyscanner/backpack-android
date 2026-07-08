@@ -34,7 +34,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Expand
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerController
@@ -62,7 +65,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     VideoPlayerCard(controller = controller, modifier = modifier)
 }
 
-// Use case 2: card tap opens the same controller fullscreen — playback continues uninterrupted
+// Use case 2: expand button opens the same controller fullscreen — playback continues uninterrupted
 @Composable
 @VideoPlayerComponent
 @ComposeStory(name = "Continuous Playback")
@@ -95,10 +98,27 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
             )
         }
     } else {
-        VideoPlayerCard(
-            controller = controller,
-            modifier = modifier.clickable { fullscreen = true },
-        )
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .aspectRatio(16f / 9f)
+                .padding(BpkSpacing.Base),
+        ) {
+            BpkVideoPlayer(
+                controller = controller,
+                modifier = Modifier.matchParentSize(),
+            )
+            BpkIcon(
+                icon = BpkIcon.Expand,
+                contentDescription = "Open fullscreen",
+                size = BpkIconSize.Large,
+                tint = Color.White,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(BpkSpacing.Sm)
+                    .clickable { fullscreen = true },
+            )
+        }
     }
 }
 
