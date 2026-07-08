@@ -18,35 +18,130 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerController
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerDefaultControls
 import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.components.VideoPlayerComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
+private const val VIDEO_URL =
+    "https://content.skyscnr.com/media/68afbd83-d09a-48e8-9821-90c117b8f842/593d0fe4-5459-4c43-beb9-49f9ce79d365.m3u8"
+
+// Use case 1: 16:9 card with built-in play/pause overlay
 @Composable
 @VideoPlayerComponent
-@ComposeStory
-fun VideoPlayerStory(modifier: Modifier = Modifier) {
+@ComposeStory(name = "Default Controls")
+fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
-            videoUrl = "https://content.skyscnr.com/media/68afbd83-d09a-48e8-9821-90c117b8f842/593d0fe4-5459-4c43-beb9-49f9ce79d365.m3u8",
+            videoUrl = VIDEO_URL,
             loop = true,
             startsMuted = true,
             accessibilityLabel = "Sample video",
         ),
     )
+    VideoPlayerCard(controller = controller, modifier = modifier)
+}
 
+// Use case 2: card tap opens the same controller fullscreen — playback continues uninterrupted
+@Composable
+@VideoPlayerComponent
+@ComposeStory(name = "Continuous Playback")
+fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
+    val controller = rememberBpkVideoPlayerController(
+        config = BpkVideoPlayerConfig(
+            videoUrl = VIDEO_URL,
+            loop = true,
+            startsMuted = true,
+            accessibilityLabel = "Sample video",
+        ),
+    )
+    var fullscreen by remember { mutableStateOf(false) }
+
+    VideoPlayerCard(
+        controller = controller,
+        modifier = modifier.clickable { fullscreen = true },
+    )
+
+    if (fullscreen) {
+        Dialog(
+            onDismissRequest = { fullscreen = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false),
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black)
+                    .clickable { fullscreen = false },
+            ) {
+                BpkVideoPlayer(
+                    controller = controller,
+                    modifier = Modifier.fillMaxSize(),
+                )
+                BpkVideoPlayerDefaultControls(
+                    controller = controller,
+                    modifier = Modifier.align(Alignment.TopEnd),
+                )
+            }
+        }
+    }
+}
+
+// Use case 3: fullscreen-only, no card
+@Composable
+@VideoPlayerComponent
+@ComposeStory(name = "Fullscreen")
+fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
+    val controller = rememberBpkVideoPlayerController(
+        config = BpkVideoPlayerConfig(
+            videoUrl = VIDEO_URL,
+            loop = true,
+            startsMuted = true,
+            accessibilityLabel = "Sample video",
+        ),
+    )
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Black)
+            .clickable { controller.toggle() },
+    ) {
+        BpkVideoPlayer(
+            controller = controller,
+            modifier = Modifier.fillMaxSize(),
+        )
+        BpkVideoPlayerDefaultControls(
+            controller = controller,
+            modifier = Modifier.align(Alignment.TopEnd),
+        )
+    }
+}
+
+@Composable
+private fun VideoPlayerCard(
+    controller: BpkVideoPlayerController,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
