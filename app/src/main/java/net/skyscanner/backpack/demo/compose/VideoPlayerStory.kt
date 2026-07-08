@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -33,8 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
@@ -78,32 +77,28 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
     )
     var fullscreen by remember { mutableStateOf(false) }
 
-    VideoPlayerCard(
-        controller = controller,
-        modifier = modifier.clickable { fullscreen = true },
-    )
-
     if (fullscreen) {
-        Dialog(
-            onDismissRequest = { fullscreen = false },
-            properties = DialogProperties(usePlatformDefaultWidth = false),
+        BackHandler { fullscreen = false }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black)
+                .clickable { fullscreen = false },
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black)
-                    .clickable { fullscreen = false },
-            ) {
-                BpkVideoPlayer(
-                    controller = controller,
-                    modifier = Modifier.fillMaxSize(),
-                )
-                BpkVideoPlayerDefaultControls(
-                    controller = controller,
-                    modifier = Modifier.align(Alignment.TopEnd),
-                )
-            }
+            BpkVideoPlayer(
+                controller = controller,
+                modifier = Modifier.fillMaxSize(),
+            )
+            BpkVideoPlayerDefaultControls(
+                controller = controller,
+                modifier = Modifier.align(Alignment.TopEnd),
+            )
         }
+    } else {
+        VideoPlayerCard(
+            controller = controller,
+            modifier = modifier.clickable { fullscreen = true },
+        )
     }
 }
 
