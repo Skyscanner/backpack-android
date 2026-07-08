@@ -33,8 +33,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Expand
@@ -85,7 +85,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black)
+                .background(BpkTheme.colors.surfaceContrast)
                 .clickable { fullscreen = false },
         ) {
             BpkVideoPlayer(
@@ -111,7 +111,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
                 icon = BpkIcon.Expand,
                 contentDescription = "Open fullscreen",
                 size = BpkIconSize.Large,
-                tint = Color.White,
+                tint = BpkTheme.colors.textOnDark,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(BpkSpacing.Sm),
@@ -136,7 +136,7 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(BpkTheme.colors.surfaceContrast)
             .clickable { controller.toggle() },
     ) {
         BpkVideoPlayer(
