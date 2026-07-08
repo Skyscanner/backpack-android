@@ -81,22 +81,19 @@ fun BpkFloatingNotification(
         if (widthDp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideOffsetPx = with(LocalDensity.current) { BpkSpacing.Lg.toPx().toInt() }
 
-    Box(modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
-        AnimatedContent(
-            targetState = currentData,
-            modifier = modifier,
-            transitionSpec = floatingNotificationTransforms(slideOffsetPx),
-            label = "Floating Notification",
-        ) { data ->
-
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
-                    .navigationBarsPadding(),
-                contentAlignment = Alignment.BottomCenter,
-            ) {
-
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
+            .navigationBarsPadding(),
+        contentAlignment = Alignment.BottomCenter,
+    ) {
+        Box(modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
+            AnimatedContent(
+                targetState = currentData,
+                transitionSpec = floatingNotificationTransforms(slideOffsetPx),
+                label = "Floating Notification",
+            ) { data ->
                 if (data != null) {
                     BpkFloatingNotificationImpl(
                         data = data,
