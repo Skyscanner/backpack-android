@@ -57,7 +57,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
             videoUrl = VIDEO_URL,
-            loop = true,
+            loop = false,
             startsMuted = true,
             accessibilityLabel = "Sample video",
         ),
@@ -85,8 +85,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black)
-                .clickable { fullscreen = false },
+                .background(Color.Black),
         ) {
             BpkVideoPlayer(
                 controller = controller,

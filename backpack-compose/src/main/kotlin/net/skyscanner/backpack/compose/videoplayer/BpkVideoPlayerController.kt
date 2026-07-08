@@ -67,6 +67,7 @@ class BpkVideoPlayerController internal constructor(
 
     fun play() {
         if (_playbackState.value is BpkVideoPlaybackState.Failed) return
+        if (_playbackState.value is BpkVideoPlaybackState.Ended) player.seekTo(0)
         player.play()
     }
 
