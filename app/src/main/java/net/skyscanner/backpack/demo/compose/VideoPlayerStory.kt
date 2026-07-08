@@ -75,6 +75,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
             videoUrl = VIDEO_URL,
             loop = true,
             startsMuted = true,
+            scaleToFill = true,
             accessibilityLabel = "Sample video",
         ),
     )
@@ -132,6 +133,7 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
             videoUrl = VIDEO_URL,
             loop = true,
             startsMuted = true,
+            scaleToFill = true,
             accessibilityLabel = "Sample video",
         ),
     )

@@ -27,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -57,6 +58,7 @@ class BpkVideoPlayerController internal constructor(
     init {
         player.repeatMode = if (config.loop) Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
         player.volume = if (config.startsMuted) 0f else 1f
+        player.videoScalingMode = if (config.scaleToFill) C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING else C.VIDEO_SCALING_MODE_SCALE_TO_FIT
         player.playWhenReady = config.autoPlay && !(config.respectsReducedMotion && isReducedMotionEnabled(context))
         player.addListener(playerListener())
         player.setMediaItem(MediaItem.fromUri(config.videoUrl))
