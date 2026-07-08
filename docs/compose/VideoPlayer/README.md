@@ -16,18 +16,26 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-A video player with no enforced aspect ratio. By default it shows a built-in play/pause button via `BpkVideoPlayerDefaultControls`. Compose custom overlays directly on top of `BpkVideoPlayer` for fully custom UIs.
+A video player with no enforced aspect ratio. Control playback via `BpkVideoPlayerController`, obtained with `rememberBpkVideoPlayerController`. Compose overlays directly on top of `BpkVideoPlayer` — use the built-in `BpkVideoPlayerDefaultControls` or wire your own UI to the controller.
 
-### Simple — built-in controls
+### Obtaining the controller
 
 ```kotlin
 val controller = rememberBpkVideoPlayerController(
     config = BpkVideoPlayerConfig(
         videoUrl = "https://example.com/video.mp4",
+        loop = true,
+        startsMuted = true,
         accessibilityLabel = stringResource(R.string.video_accessibility_label),
     ),
 )
+```
 
+`rememberBpkVideoPlayerController` creates a `BpkVideoPlayerController` scoped to the composition. The player is automatically released when the composable leaves the tree.
+
+### Simple — built-in controls
+
+```kotlin
 Box {
     BpkVideoPlayer(
         controller = controller,
@@ -41,6 +49,32 @@ Box {
     )
 }
 ```
+
+### Custom controls
+
+`BpkVideoPlayerDefaultControls` is optional. Use `controller` directly to build any UI — observe `controller.playbackState` and `controller.isMuted` as Compose `State` to react to changes.
+
+```kotlin
+val playbackState by controller.playbackState
+val isMuted by controller.isMuted
+
+Box {
+    BpkVideoPlayer(
+        controller = controller,
+        modifier = Modifier.fillMaxSize(),
+    )
+    Row(modifier = Modifier.align(Alignment.BottomCenter)) {
+        Button(onClick = { controller.toggle() }) {
+            Text(if (playbackState.isPlaying) "Pause" else "Play")
+        }
+        Button(onClick = { controller.setMuted(!isMuted) }) {
+            Text(if (isMuted) "Unmute" else "Mute")
+        }
+    }
+}
+```
+
+Available controller actions: `play()`, `pause()`, `toggle()`, `setMuted(Boolean)`, `resetToStart()`.
 
 ### Shared controller — continuous playback across transitions
 
