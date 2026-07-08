@@ -62,7 +62,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
             accessibilityLabel = "Sample video",
         ),
     )
-    VideoPlayerCard(controller = controller, modifier = modifier)
+    VideoPlayerCard(controller = controller, scaleToFill = false, modifier = modifier)
 }
 
 // Use case 2: expand button opens the same controller fullscreen — playback continues uninterrupted
@@ -107,6 +107,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
         ) {
             BpkVideoPlayer(
                 controller = controller,
+                scaleToFill = false,
                 modifier = Modifier.matchParentSize(),
             )
             BpkIcon(
@@ -158,6 +159,7 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
 private fun VideoPlayerCard(
     controller: BpkVideoPlayerController,
     modifier: Modifier = Modifier,
+    scaleToFill: Boolean,
 ) {
     Box(
         modifier = modifier
@@ -167,6 +169,7 @@ private fun VideoPlayerCard(
     ) {
         BpkVideoPlayer(
             controller = controller,
+            scaleToFill = scaleToFill,
             modifier = Modifier
                 .matchParentSize()
                 .clickable { controller.toggle() },

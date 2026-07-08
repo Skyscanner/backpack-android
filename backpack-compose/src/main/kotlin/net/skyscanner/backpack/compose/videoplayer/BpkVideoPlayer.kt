@@ -25,12 +25,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.media3.common.C
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.compose.PlayerSurface
 import net.skyscanner.backpack.compose.videoplayer.internal.rememberReducedMotionEnabled
+import kotlin.math.roundToInt
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -47,22 +49,39 @@ fun BpkVideoPlayer(
         }
     }
 
-    LaunchedEffect(scaleToFill) {
-        controller.player.videoScalingMode = if (scaleToFill) {
-            C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-        } else {
-            C.VIDEO_SCALING_MODE_SCALE_TO_FIT
-        }
-    }
-
     Box(
-        modifier = modifier.semantics {
-            contentDescription = controller.config.accessibilityLabel
-        },
+        modifier = modifier
+            .clipToBounds()
+            .semantics {
+                contentDescription = controller.config.accessibilityLabel
+            },
     ) {
         PlayerSurface(
             player = controller.player,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .then(if (scaleToFill) Modifier.scaleToFill() else Modifier),
         )
+    }
+}
+
+// Scales the composable up uniformly so its shorter dimension fills the container,
+// then centers it — equivalent to AVLayerVideoGravity.resizeAspectFill / CSS object-fit: cover.
+private fun Modifier.scaleToFill(): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val scale = maxOf(
+        constraints.maxWidth.toFloat() / placeable.width,
+        constraints.maxHeight.toFloat() / placeable.height,
+    )
+    val scaledWidth = (placeable.width * scale).roundToInt()
+    val scaledHeight = (placeable.height * scale).roundToInt()
+    layout(constraints.maxWidth, constraints.maxHeight) {
+        placeable.placeWithLayer(
+            x = ((constraints.maxWidth - scaledWidth) / 2f).roundToInt(),
+            y = ((constraints.maxHeight - scaledHeight) / 2f).roundToInt(),
+        ) {
+            scaleX = scale
+            scaleY = scale
+        }
     }
 }
