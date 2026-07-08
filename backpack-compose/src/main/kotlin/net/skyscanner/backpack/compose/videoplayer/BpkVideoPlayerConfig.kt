@@ -29,6 +29,5 @@ data class BpkVideoPlayerConfig(
     val respectsReducedMotion: Boolean = true,
     val loop: Boolean = false,
     val startsMuted: Boolean = true,
-    val scaleToFill: Boolean = false,
     val accessibilityLabel: String,
 )

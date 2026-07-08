@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.media3.common.C
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.compose.PlayerSurface
 import net.skyscanner.backpack.compose.videoplayer.internal.rememberReducedMotionEnabled
@@ -36,12 +37,21 @@ import net.skyscanner.backpack.compose.videoplayer.internal.rememberReducedMotio
 fun BpkVideoPlayer(
     controller: BpkVideoPlayerController,
     modifier: Modifier = Modifier,
+    scaleToFill: Boolean = false,
 ) {
     val reducedMotion by rememberReducedMotionEnabled()
 
     LaunchedEffect(reducedMotion) {
         if (reducedMotion && controller.playbackState.value.isPlaying) {
             controller.pause()
+        }
+    }
+
+    LaunchedEffect(scaleToFill) {
+        controller.player.videoScalingMode = if (scaleToFill) {
+            C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
+        } else {
+            C.VIDEO_SCALING_MODE_SCALE_TO_FIT
         }
     }
 

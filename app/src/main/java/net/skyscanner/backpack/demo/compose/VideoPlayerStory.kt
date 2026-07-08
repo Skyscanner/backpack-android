@@ -75,7 +75,6 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
             videoUrl = VIDEO_URL,
             loop = true,
             startsMuted = true,
-            scaleToFill = true,
             accessibilityLabel = "Sample video",
         ),
     )
@@ -92,6 +91,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
             BpkVideoPlayer(
                 controller = controller,
                 modifier = Modifier.fillMaxSize(),
+                scaleToFill = true,
             )
             BpkVideoPlayerDefaultControls(
                 controller = controller,
@@ -133,7 +133,6 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
             videoUrl = VIDEO_URL,
             loop = true,
             startsMuted = true,
-            scaleToFill = true,
             accessibilityLabel = "Sample video",
         ),
     )
@@ -146,6 +145,7 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
         BpkVideoPlayer(
             controller = controller,
             modifier = Modifier.fillMaxSize(),
+            scaleToFill = true,
         )
         BpkVideoPlayerDefaultControls(
             controller = controller,
