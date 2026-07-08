@@ -85,16 +85,13 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black),
+                .background(Color.Black)
+                .clickable { fullscreen = false },
         ) {
             BpkVideoPlayer(
                 controller = controller,
                 modifier = Modifier.fillMaxSize(),
                 scaleToFill = true,
-            )
-            BpkVideoPlayerDefaultControls(
-                controller = controller,
-                modifier = Modifier.align(Alignment.TopEnd),
             )
         }
     } else {
@@ -102,7 +99,8 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
             modifier = modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f)
-                .padding(BpkSpacing.Base),
+                .padding(BpkSpacing.Base)
+                .clickable { fullscreen = true },
         ) {
             BpkVideoPlayer(
                 controller = controller,
@@ -116,8 +114,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
                 tint = Color.White,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(BpkSpacing.Sm)
-                    .clickable { fullscreen = true },
+                    .padding(BpkSpacing.Sm),
             )
         }
     }
