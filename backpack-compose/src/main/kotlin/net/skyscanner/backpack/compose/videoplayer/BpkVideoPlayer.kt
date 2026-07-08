@@ -19,10 +19,14 @@
 package net.skyscanner.backpack.compose.videoplayer
 
 import androidx.annotation.OptIn
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -45,11 +49,15 @@ fun BpkVideoPlayer(
         }
     }
 
-    ContentFrame(
-        player = controller.player,
-        contentScale = if (scaleToFill) ContentScale.Crop else ContentScale.Fit,
-        modifier = modifier.semantics {
-            contentDescription = controller.config.accessibilityLabel
-        },
-    )
+    Box(
+        modifier = modifier
+            .background(Color.Black)
+            .semantics { contentDescription = controller.config.accessibilityLabel },
+    ) {
+        ContentFrame(
+            player = controller.player,
+            contentScale = if (scaleToFill) ContentScale.Crop else ContentScale.Fit,
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
 }
