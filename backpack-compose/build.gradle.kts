@@ -56,6 +56,11 @@ dependencies {
     api(libs.google.maps)
     api(libs.google.mapsCompose)
 
+    // Media3 — video playback for BpkVideoPlayer
+    implementation(libs.media3.exoplayer)
+    api(libs.media3.exoplayerHls)
+    api(libs.media3.uiCompose)
+
     // Module-specific implementation dependencies
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycleViewmodel)
@@ -64,6 +69,7 @@ dependencies {
 
     // Module-specific test dependencies
     testImplementation(libs.test.junit)
+    testImplementation(libs.test.coroutines)
     androidTestImplementation(libs.test.compose)
     androidTestImplementation(libs.test.junitAndroid)
     androidTestImplementation(libs.test.rules)
