@@ -51,7 +51,6 @@ import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloating
 import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNotificationTransforms
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -71,7 +70,7 @@ fun BpkFloatingNotification(
                 containsControls = currentData.cta != null,
             ) ?: currentData.hideAfter
 
-            delay(duration.milliseconds)
+            delay(duration)
             currentData.dismiss()
         }
     }
