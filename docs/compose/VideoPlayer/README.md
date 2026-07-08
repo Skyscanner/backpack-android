@@ -4,7 +4,7 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.videoplayer)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/videoplayer)
 
-## Default
+## Default controls
 
 | Day | Night |
 | --- | --- |
@@ -16,65 +16,109 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-### Basic usage
+A video player with no enforced aspect ratio. By default it shows a built-in play/pause button via `BpkVideoPlayerDefaultControls`. Compose custom overlays directly on top of `BpkVideoPlayer` for fully custom UIs.
 
-```Kotlin
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
-import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
+### Simple — built-in controls
 
+```kotlin
 val controller = rememberBpkVideoPlayerController(
-  config = BpkVideoPlayerConfig(
-    videoUrl = "https://example.com/video.mp4",
-    accessibilityLabel = stringResource(R.string.video_accessibility_label),
-  ),
-)
-
-BpkVideoPlayer(controller = controller)
-```
-
-### With default controls overlay
-
-```Kotlin
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerDefaultControls
-import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
-
-val controller = rememberBpkVideoPlayerController(
-  config = BpkVideoPlayerConfig(
-    videoUrl = "https://example.com/video.mp4",
-    loop = true,
-    startsMuted = true,
-    accessibilityLabel = stringResource(R.string.video_accessibility_label),
-  ),
+    config = BpkVideoPlayerConfig(
+        videoUrl = "https://example.com/video.mp4",
+        accessibilityLabel = stringResource(R.string.video_accessibility_label),
+    ),
 )
 
 Box {
-  BpkVideoPlayer(
-    controller = controller,
-    modifier = Modifier
-      .matchParentSize()
-      .clickable { controller.toggle() },
-  )
-  BpkVideoPlayerDefaultControls(
-    controller = controller,
-    modifier = Modifier.align(Alignment.TopEnd),
-  )
+    BpkVideoPlayer(
+        controller = controller,
+        modifier = Modifier
+            .matchParentSize()
+            .clickable { controller.toggle() },
+    )
+    BpkVideoPlayerDefaultControls(
+        controller = controller,
+        modifier = Modifier.align(Alignment.TopEnd),
+    )
 }
+```
+
+### Shared controller — continuous playback across transitions
+
+Create a `BpkVideoPlayerController` and pass it to multiple `BpkVideoPlayer` calls. Playback continues uninterrupted when the view changes (e.g. card → fullscreen).
+
+```kotlin
+val controller = rememberBpkVideoPlayerController(
+    config = BpkVideoPlayerConfig(
+        videoUrl = "https://example.com/video.mp4",
+        loop = true,
+        startsMuted = true,
+        accessibilityLabel = stringResource(R.string.video_accessibility_label),
+    ),
+)
+
+// Card view — scale to fit
+BpkVideoPlayer(controller = controller)
+
+// Fullscreen — same controller, playback never resets, scale to fill
+BpkVideoPlayer(controller = controller, scaleToFill = true)
+```
+
+### Scale to fill (crop)
+
+Pass `scaleToFill = true` to crop the video to fill the container without letterboxing — equivalent to iOS `resizeAspectFill`.
+
+```kotlin
+BpkVideoPlayer(
+    controller = controller,
+    modifier = Modifier.fillMaxSize(),
+    scaleToFill = true,
+)
 ```
 
 ### Observing playback state
 
-```Kotlin
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlaybackState
-
+```kotlin
 val playbackState by controller.playbackState
 
 when (playbackState) {
-  is BpkVideoPlaybackState.Playing -> { /* video is playing */ }
-  is BpkVideoPlaybackState.Paused -> { /* video is paused */ }
-  is BpkVideoPlaybackState.Failed -> { /* handle error */ }
-  else -> { /* loading, buffering, etc. */ }
+    is BpkVideoPlaybackState.Playing   -> { /* video is playing */ }
+    is BpkVideoPlaybackState.Paused    -> { /* video is paused */ }
+    is BpkVideoPlaybackState.Ended     -> { /* video finished */ }
+    is BpkVideoPlaybackState.Failed    -> { /* handle error */ }
+    else                               -> { /* loading, buffering, etc. */ }
 }
 ```
+
+### State reference
+
+| State | Meaning |
+| --- | --- |
+| `Idle` | Player not yet prepared |
+| `Loading` | Asset is being fetched or decoded |
+| `ReadyToPlay` | Asset ready — `autoPlay` will call `play()` if enabled |
+| `Playing` | Playback active |
+| `Paused` | Playback paused |
+| `Buffering` | Rebuffering mid-playback |
+| `Ended` | Playback reached the end |
+| `Failed(cause)` | Load failed or timed out |
+
+Convenience helpers on `BpkVideoPlaybackState`:
+
+```kotlin
+controller.playbackState.value.isPlaying  // true only when Playing
+controller.playbackState.value.isLoading  // true for Loading and Buffering
+```
+
+### Audio behaviour
+
+The player defaults to `startsMuted = true`. Volume can be toggled at any time:
+
+```kotlin
+controller.setMuted(false) // unmute
+controller.setMuted(true)  // mute
+```
+
+### Accessibility
+
+- Reduced motion: autoplay is blocked and playback pauses when `ANIMATOR_DURATION_SCALE` is set to 0 or `AccessibilityManager.isAnimationsEnabled` returns false (API 33+).
+- `accessibilityLabel` in `BpkVideoPlayerConfig` is applied as a `contentDescription` on the player container.

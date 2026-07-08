@@ -4,18 +4,6 @@ For latest changelogs check the [releases page](https://github.com/Skyscanner/ba
 
 # Previous changelogs
 
-# 37.0.0
-
-**Added:**
-- `backpack-compose`:
-  - New `BpkVideoPlayer` composable for video playback built on Media3/ExoPlayer
-  - New `BpkVideoPlayerController` state holder with `play()`, `pause()`, `toggle()`, `setMuted()`, `resetToStart()`
-  - New `BpkVideoPlayerConfig` for configuring URL, timeout, looping, mute, reduced motion, accessibility label, and poster image
-  - New `BpkVideoPlaybackState` sealed class: `Idle`, `Loading`, `ReadyToPlay`, `Buffering`, `Playing`, `Paused`, `Ended`, `Failed`
-  - New `BpkVideoPlayerDefaultControls` composable providing a pre-built play/pause overlay
-  - Reduced motion support via `ANIMATOR_DURATION_SCALE` and `AccessibilityManager` (API 33+)
-  - Adds `media3-exoplayer`, `media3-exoplayer-hls`, and `media3-ui-compose` dependencies (~2–4 MB bundle increase)
-
 # 36.3.0
 
 **Added:**
