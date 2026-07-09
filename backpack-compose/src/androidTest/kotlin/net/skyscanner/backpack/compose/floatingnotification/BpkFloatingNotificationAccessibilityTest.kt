@@ -46,38 +46,6 @@ class BpkFloatingNotificationAccessibilityTest {
     )
 
     @Test
-    fun liveRegion_isPolite_whenNotificationIsShown() {
-        val state = BpkFloatingNotificationState()
-        val scope = TestScope(UnconfinedTestDispatcher())
-
-        scope.launch {
-            state.show(text = "Saved")
-        }
-
-        composeTestRule.setContent {
-            BpkTheme {
-                BpkFloatingNotification(state = state)
-            }
-        }
-
-        composeTestRule.onNode(hasLiveRegionPolite).assertExists()
-    }
-
-    @Test
-    fun liveRegion_isPolite_whenNoNotificationIsShown() {
-        val state = BpkFloatingNotificationState()
-
-        composeTestRule.setContent {
-            BpkTheme {
-                BpkFloatingNotification(state = state)
-            }
-        }
-
-        // Live region wrapper is always present, not just when content is visible
-        composeTestRule.onNode(hasLiveRegionPolite).assertExists()
-    }
-
-    @Test
     fun accessibilityManager_recommendedTimeout_isUsedAsDelay() {
         val state = BpkFloatingNotificationState()
         val scope = TestScope(UnconfinedTestDispatcher())

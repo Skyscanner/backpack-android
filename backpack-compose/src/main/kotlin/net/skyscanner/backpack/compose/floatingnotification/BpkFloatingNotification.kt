@@ -38,9 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -81,27 +78,28 @@ fun BpkFloatingNotification(
         if (widthDp >= TABLET_MIN_WIDTH.dp) DefaultTabletSize.height else DefaultPhoneSize.height
     val slideOffsetPx = with(LocalDensity.current) { BpkSpacing.Lg.toPx().toInt() }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
-            .navigationBarsPadding(),
-        contentAlignment = Alignment.BottomCenter,
-    ) {
-        Box(modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
-            AnimatedContent(
-                targetState = currentData,
-                transitionSpec = floatingNotificationTransforms(slideOffsetPx),
-                label = "Floating Notification",
-            ) { data ->
-                if (data != null) {
-                    BpkFloatingNotificationImpl(
-                        data = data,
-                        modifier = Modifier
-                            .heightIn(min = componentHeight)
-                            .widthIn(max = DefaultTabletSize.width),
-                    )
-                }
+    AnimatedContent(
+        targetState = currentData,
+        modifier = modifier,
+        transitionSpec = floatingNotificationTransforms(slideOffsetPx),
+        label = "Floating Notification",
+    ) { data ->
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg)
+                .navigationBarsPadding(),
+            contentAlignment = Alignment.BottomCenter,
+        ) {
+
+            if (data != null) {
+                BpkFloatingNotificationImpl(
+                    data = data,
+                    modifier = Modifier
+                        .heightIn(min = componentHeight)
+                        .widthIn(max = DefaultTabletSize.width),
+                )
             }
         }
     }
