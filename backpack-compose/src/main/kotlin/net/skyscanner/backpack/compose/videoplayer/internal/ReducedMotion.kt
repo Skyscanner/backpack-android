@@ -18,40 +18,34 @@
 
 package net.skyscanner.backpack.compose.videoplayer.internal
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
-import android.os.Build
 import android.provider.Settings
-import android.view.accessibility.AccessibilityManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 
 @Composable
 internal fun rememberReducedMotionEnabled(): State<Boolean> {
     val context = LocalContext.current
-    return produceState(initialValue = isReducedMotionEnabled(context)) {
-        value = isReducedMotionEnabled(context)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    return produceState(initialValue = isReducedMotionEnabled(context), lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                value = isReducedMotionEnabled(context)
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        awaitDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 }
 
 internal fun isReducedMotionEnabled(context: Context): Boolean {
-    val animatorScale = Settings.Global.getFloat(
-        context.contentResolver,
-        Settings.Global.ANIMATOR_DURATION_SCALE,
-        1f,
-    )
-    if (animatorScale == 0f) return true
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        if (!am.isEnabled) return false
-        val services = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
-        if (services.isNotEmpty() && !am.isTouchExplorationEnabled) {
-            // isAnimationsEnabled is only available via reflection-free check on API 33+
-            @Suppress("NewApi")
-            if (!am.isEnabled) return true
-        }
-    }
-    return false
+    val resolver = context.contentResolver
+    val animatorScale = Settings.Global.getFloat(resolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
+    val transitionScale = Settings.Global.getFloat(resolver, Settings.Global.TRANSITION_ANIMATION_SCALE, 1f)
+    return animatorScale == 0f || transitionScale == 0f
 }

@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.lifecycleViewmodel)
     implementation(libs.androidx.lifecycleViewmodelKtx)
+    implementation(libs.androidx.lifecycleRuntimeCompose)
     implementation(libs.androidx.coreKts)
 
     // Module-specific test dependencies
