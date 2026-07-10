@@ -39,11 +39,11 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.switch.internal.BpkSwitchContent
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 
 enum class BpkSwitchStyle {
@@ -150,7 +150,7 @@ fun BpkSwitch(
             },
     ) {
 
-        BpkSwitchContent(
+        BpkToggleableContent(
             enabled = enabled,
             onContrast = style == BpkSwitchStyle.OnContrast,
             textStyle = textStyle ?: BpkTheme.typography.footnote,
