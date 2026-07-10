@@ -22,7 +22,5 @@ import androidx.media3.common.PlaybackException
 
 sealed class BpkVideoPlayerError {
     data object LoadTimeout : BpkVideoPlayerError()
-    data object InvalidUrl : BpkVideoPlayerError()
     data class PlaybackFailed(val cause: PlaybackException) : BpkVideoPlayerError()
-    data object Interrupted : BpkVideoPlayerError()
 }
