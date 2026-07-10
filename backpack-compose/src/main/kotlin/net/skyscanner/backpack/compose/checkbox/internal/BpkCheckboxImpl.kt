@@ -27,11 +27,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.checkbox.BpkCheckboxStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.internal.BpkCheckboxColors
+import kotlin.math.floor
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
@@ -41,24 +48,40 @@ internal fun BpkCheckboxImpl(
     enabled: Boolean,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
+    style: BpkCheckboxStyle = BpkCheckboxStyle.Default,
 ) {
     // our design system isn't designed with the minimum touch target in mind at the moment.
     // Disable the enforcement to avoid the extra padding
     CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
+        val strokeWidthPx = with(LocalDensity.current) { floor(3.25.dp.toPx()) }
+
         TriStateCheckbox(
             state = state,
             onClick = onClick,
+            checkmarkStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
+            outlineStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
             enabled = enabled,
             modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
             interactionSource = interactionSource,
-            colors = CheckboxDefaults.colors(
-                checkedColor = BpkTheme.colors.coreAccent,
-                uncheckedColor = BpkTheme.colors.textSecondary,
-                checkmarkColor = BpkTheme.colors.textPrimaryInverse,
-                disabledCheckedColor = BpkTheme.colors.textDisabled,
-                disabledUncheckedColor = BpkTheme.colors.textDisabled,
-                disabledIndeterminateColor = BpkTheme.colors.textDisabled,
-            ),
+            colors = when (style) {
+                BpkCheckboxStyle.Default -> CheckboxDefaults.colors(
+                    checkedColor = BpkTheme.colors.coreAccent,
+                    uncheckedColor = BpkTheme.colors.textSecondary,
+                    checkmarkColor = BpkTheme.colors.textPrimaryInverse,
+                    disabledCheckedColor = BpkTheme.colors.textDisabled,
+                    disabledUncheckedColor = BpkTheme.colors.textDisabled,
+                    disabledIndeterminateColor = BpkTheme.colors.textDisabled,
+                )
+
+                BpkCheckboxStyle.OnContrast -> CheckboxDefaults.colors(
+                    checkedColor = BpkTheme.colors.coreAccent,
+                    uncheckedColor = BpkCheckboxColors.onContrastBorder,
+                    checkmarkColor = BpkTheme.colors.textPrimaryInverse,
+                    disabledCheckedColor = BpkCheckboxColors.onContrastDisabled,
+                    disabledUncheckedColor = BpkCheckboxColors.onContrastDisabled,
+                    disabledIndeterminateColor = BpkCheckboxColors.onContrastDisabled,
+                )
+            },
         )
     }
 }
