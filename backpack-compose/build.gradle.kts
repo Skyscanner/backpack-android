@@ -58,8 +58,8 @@ dependencies {
 
     // Media3 — video playback for BpkVideoPlayer
     implementation(libs.media3.exoplayer)
-    api(libs.media3.exoplayerHls)
-    api(libs.media3.uiCompose)
+    implementation(libs.media3.exoplayerHls)
+    implementation(libs.media3.uiCompose)
 
     // Module-specific implementation dependencies
     implementation(libs.compose.material3)

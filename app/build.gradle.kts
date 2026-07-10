@@ -156,7 +156,6 @@ dependencies {
     androidTestImplementation(libs.ktor.clientCio)
     implementation(project(":Backpack"))
     implementation(project(":backpack-compose"))
-    implementation(libs.media3.exoplayerHls)
     implementation(project(":meta:annotations"))
     ksp(project(":meta:processor"))
     ksp(libs.destinations.ksp)
