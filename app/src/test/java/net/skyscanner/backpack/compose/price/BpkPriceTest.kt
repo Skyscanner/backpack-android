@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.price
 
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithText
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.NewWindow
@@ -35,7 +37,9 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
 
     @Test
     fun priceOnly() {
-        snap {
+        // Also guards against the price rendering blank when a BpkPrice node is re-used in a lazy
+        // list (regression: the price value must always be present in the semantics tree).
+        snap(assertion = { onNodeWithText(testContext.getString(R.string.price_price)).assertIsDisplayed() }) {
             BpkPrice(
                 price = stringResource(id = R.string.price_price),
                 size = size,
@@ -100,7 +104,8 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
 
     @Test
     fun priceClickable() {
-        snap {
+        // Same regression guard for the clickable path, which renders via BpkLink.
+        snap(assertion = { onNodeWithText(testContext.getString(R.string.price_price)).assertIsDisplayed() }) {
             BpkPrice(
                 price = stringResource(id = R.string.price_price),
                 size = size,
