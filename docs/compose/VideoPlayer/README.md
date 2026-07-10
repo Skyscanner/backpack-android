@@ -143,6 +143,25 @@ controller.playbackState.value.isPlaying  // true only when Playing
 controller.playbackState.value.isLoading  // true for Loading and Buffering
 ```
 
+### Handling errors
+
+`BpkVideoPlaybackState.Failed` carries a `BpkVideoPlayerError` describing what went wrong:
+
+| Error | Meaning |
+| --- | --- |
+| `LoadTimeout` | The asset didn't finish loading within `loadTimeoutMs` |
+| `PlaybackFailed(cause: PlaybackException)` | ExoPlayer reported a playback error — inspect `cause` (a Media3 `PlaybackException`) for details |
+
+```kotlin
+val state = controller.playbackState.value
+if (state is BpkVideoPlaybackState.Failed) {
+    when (val error = state.cause) {
+        is BpkVideoPlayerError.LoadTimeout -> { /* show a retry prompt */ }
+        is BpkVideoPlayerError.PlaybackFailed -> { /* inspect error.cause */ }
+    }
+}
+```
+
 ### Audio behaviour
 
 The player defaults to `startsMuted = true`. Volume can be toggled at any time:

@@ -26,9 +26,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 
 internal object PlayerFactory {
-    // Pass Context to DefaultMediaSourceFactory so it uses the ServiceLoader mechanism
-    // to discover only the format extensions present on the classpath, rather than
-    // probing via reflection for all known factories (which crashes if e.g. HLS is absent).
     @OptIn(UnstableApi::class)
     fun build(context: Context): ExoPlayer =
         ExoPlayer.Builder(context)
