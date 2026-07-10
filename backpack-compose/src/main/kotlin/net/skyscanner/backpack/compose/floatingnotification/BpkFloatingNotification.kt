@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
@@ -54,11 +55,18 @@ fun BpkFloatingNotification(
     state: BpkFloatingNotificationState,
     modifier: Modifier = Modifier,
 ) {
-
+    val accessibilityManager = LocalAccessibilityManager.current
     val currentData = state.currentData
+
     LaunchedEffect(currentData) {
         if (currentData != null) {
-            val duration = currentData.hideAfter
+            val duration = accessibilityManager?.calculateRecommendedTimeoutMillis(
+                originalTimeoutMillis = currentData.hideAfter,
+                containsIcons = currentData.icon != null,
+                containsText = currentData.text.isNotEmpty(),
+                containsControls = currentData.cta != null,
+            ) ?: currentData.hideAfter
+
             delay(duration)
             currentData.dismiss()
         }
