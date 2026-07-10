@@ -32,6 +32,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Pause
 import net.skyscanner.backpack.compose.tokens.Play
 
@@ -45,9 +48,9 @@ fun BpkVideoPlayerDefaultControls(
 
     Box(
         modifier = modifier
-            .padding(8.dp)
+            .padding(BpkSpacing.Md)
             .size(40.dp)
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(BpkBorderRadius.Sm))
             .background(Color.White.copy(alpha = 0.1f)),
         contentAlignment = Alignment.Center,
     ) {
@@ -55,7 +58,7 @@ fun BpkVideoPlayerDefaultControls(
             icon = if (playbackState.isPlaying) BpkIcon.Pause else BpkIcon.Play,
             contentDescription = null,
             size = BpkIconSize.Large,
-            tint = Color.White,
+            tint = BpkTheme.colors.textOnDark,
         )
     }
 }
