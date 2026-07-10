@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.videoplayer
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -29,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -46,6 +49,17 @@ fun BpkVideoPlayerDefaultControls(
     val playbackState by controller.playbackState
     if (playbackState.isLoading) return
 
+    VideoPlayerControlButton(
+        isPlaying = playbackState.isPlaying,
+        modifier = modifier,
+    )
+}
+
+@Composable
+private fun VideoPlayerControlButton(
+    isPlaying: Boolean,
+    modifier: Modifier = Modifier,
+) {
     Box(
         modifier = modifier
             .padding(BpkSpacing.Md)
@@ -55,10 +69,38 @@ fun BpkVideoPlayerDefaultControls(
         contentAlignment = Alignment.Center,
     ) {
         BpkIcon(
-            icon = if (playbackState.isPlaying) BpkIcon.Pause else BpkIcon.Play,
+            icon = if (isPlaying) BpkIcon.Pause else BpkIcon.Play,
             contentDescription = null,
             size = BpkIconSize.Large,
             tint = BpkTheme.colors.textOnDark,
         )
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun VideoPlayerControlButtonPreview() {
+    Box(
+        modifier = Modifier
+            .size(120.dp)
+            .background(Color.Black),
+        contentAlignment = Alignment.Center,
+    ) {
+        VideoPlayerControlButton(isPlaying = false)
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun VideoPlayerControlButtonPlayingPreview() {
+    Box(
+        modifier = Modifier
+            .size(120.dp)
+            .background(Color.Black),
+        contentAlignment = Alignment.Center,
+    ) {
+        VideoPlayerControlButton(isPlaying = true)
     }
 }
