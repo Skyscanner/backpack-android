@@ -35,13 +35,13 @@ val controller = rememberBpkVideoPlayerController(
 
 ### Simple — built-in controls
 
+`BpkVideoPlayerDefaultControls` handles play/pause taps internally.
+
 ```kotlin
 Box {
     BpkVideoPlayer(
         controller = controller,
-        modifier = Modifier
-            .matchParentSize()
-            .clickable { controller.toggle() },
+        modifier = Modifier.matchParentSize(),
     )
     BpkVideoPlayerDefaultControls(
         controller = controller,
@@ -161,6 +161,30 @@ if (state is BpkVideoPlaybackState.Failed) {
     }
 }
 ```
+
+### Poster image and loading placeholder
+
+`BpkVideoPlayer` does not manage poster images — the component renders video only. Use `playbackState` to show your own placeholder while loading or on failure:
+
+```kotlin
+val state by controller.playbackState
+
+Box {
+    // Show a poster/placeholder until the first frame is ready, and on error
+    if (state.isLoading || state is BpkVideoPlaybackState.Failed) {
+        AsyncImage(
+            model = posterUrl,
+            contentDescription = null,
+            contentScale = if (scaleToFill) ContentScale.Crop else ContentScale.Fit,
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
+    BpkVideoPlayer(controller = controller, modifier = Modifier.matchParentSize())
+    BpkVideoPlayerDefaultControls(controller = controller)
+}
+```
+
+`ReadyToPlay` is the transition point when the first frame is decoded and ready to display — hide the poster at that point.
 
 ### Audio behaviour
 

@@ -23,7 +23,6 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class BpkVideoPlayerConfig(
     val videoUrl: String,
-    val posterImageUrl: String? = null,
     val loadTimeoutMs: Long = 7_000L,
     val autoPlay: Boolean = true,
     val respectsReducedMotion: Boolean = true,
