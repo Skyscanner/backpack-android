@@ -40,7 +40,6 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Expand
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerController
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerDefaultControls
 import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.components.VideoPlayerComponent
@@ -63,7 +62,22 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
             accessibilityLabel = "Sample video",
         ),
     )
-    VideoPlayerCard(controller = controller, scaleToFill = false, modifier = modifier)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(16f / 9f)
+            .padding(BpkSpacing.Base),
+    ) {
+        BpkVideoPlayer(
+            controller = controller,
+            scaleToFill = false,
+            modifier = Modifier.matchParentSize(),
+        )
+        BpkVideoPlayerDefaultControls(
+            controller = controller,
+            modifier = Modifier.align(Alignment.TopEnd),
+        )
+    }
 }
 
 // Use case 2: expand button opens the same controller fullscreen — playback continues uninterrupted
@@ -144,30 +158,6 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
             controller = controller,
             modifier = Modifier.fillMaxSize(),
             scaleToFill = true,
-        )
-        BpkVideoPlayerDefaultControls(
-            controller = controller,
-            modifier = Modifier.align(Alignment.TopEnd),
-        )
-    }
-}
-
-@Composable
-private fun VideoPlayerCard(
-    controller: BpkVideoPlayerController,
-    modifier: Modifier = Modifier,
-    scaleToFill: Boolean,
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(16f / 9f)
-            .padding(BpkSpacing.Base),
-    ) {
-        BpkVideoPlayer(
-            controller = controller,
-            scaleToFill = scaleToFill,
-            modifier = Modifier.matchParentSize(),
         )
         BpkVideoPlayerDefaultControls(
             controller = controller,
