@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.videoplayer
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -51,6 +53,7 @@ fun BpkVideoPlayerDefaultControls(
 
     VideoPlayerControlButton(
         isPlaying = playbackState.isPlaying,
+        onClick = { controller.toggle() },
         modifier = modifier,
     )
 }
@@ -58,6 +61,7 @@ fun BpkVideoPlayerDefaultControls(
 @Composable
 private fun VideoPlayerControlButton(
     isPlaying: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -65,12 +69,17 @@ private fun VideoPlayerControlButton(
             .padding(BpkSpacing.Md)
             .size(40.dp)
             .clip(RoundedCornerShape(BpkBorderRadius.Sm))
-            .background(Color.White.copy(alpha = 0.1f)),
+            .background(Color.White.copy(alpha = 0.1f))
+            .clickable(
+                onClickLabel = if (isPlaying) "Pause video" else "Play video",
+                role = Role.Button,
+                onClick = onClick,
+            ),
         contentAlignment = Alignment.Center,
     ) {
         BpkIcon(
             icon = if (isPlaying) BpkIcon.Pause else BpkIcon.Play,
-            contentDescription = null,
+            contentDescription = if (isPlaying) "Pause" else "Play",
             size = BpkIconSize.Large,
             tint = BpkTheme.colors.textOnDark,
         )
@@ -87,7 +96,7 @@ private fun VideoPlayerControlButtonPreview() {
             .background(Color.Black),
         contentAlignment = Alignment.Center,
     ) {
-        VideoPlayerControlButton(isPlaying = false)
+        VideoPlayerControlButton(isPlaying = false, onClick = {})
     }
 }
 
@@ -101,6 +110,6 @@ private fun VideoPlayerControlButtonPlayingPreview() {
             .background(Color.Black),
         contentAlignment = Alignment.Center,
     ) {
-        VideoPlayerControlButton(isPlaying = true)
+        VideoPlayerControlButton(isPlaying = true, onClick = {})
     }
 }

@@ -166,9 +166,7 @@ private fun VideoPlayerCard(
         BpkVideoPlayer(
             controller = controller,
             scaleToFill = scaleToFill,
-            modifier = Modifier
-                .matchParentSize()
-                .clickable { controller.toggle() },
+            modifier = Modifier.matchParentSize(),
         )
         BpkVideoPlayerDefaultControls(
             controller = controller,
