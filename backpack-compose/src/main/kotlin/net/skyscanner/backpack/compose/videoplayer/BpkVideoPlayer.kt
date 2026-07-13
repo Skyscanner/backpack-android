@@ -44,7 +44,7 @@ fun BpkVideoPlayer(
     val reducedMotion by rememberReducedMotionEnabled()
 
     LaunchedEffect(reducedMotion) {
-        if (reducedMotion && controller.playbackState.value.isPlaying) {
+        if (reducedMotion && controller.config.respectsReducedMotion && controller.playbackState.value.isPlaying) {
             controller.pause()
         }
     }

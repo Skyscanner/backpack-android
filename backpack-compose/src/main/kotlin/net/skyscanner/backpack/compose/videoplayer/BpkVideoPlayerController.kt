@@ -109,9 +109,9 @@ class BpkVideoPlayerController internal constructor(
             when (playbackState) {
                 Player.STATE_READY -> {
                     timeoutJob?.cancel()
-                    if (_playbackState.value !is BpkVideoPlaybackState.Playing) {
-                        _playbackState.value = BpkVideoPlaybackState.ReadyToPlay
-                    }
+                    _playbackState.value =
+                        if (player.isPlaying) BpkVideoPlaybackState.Playing
+                        else BpkVideoPlaybackState.ReadyToPlay
                 }
                 Player.STATE_BUFFERING -> {
                     if (_playbackState.value is BpkVideoPlaybackState.Playing) {

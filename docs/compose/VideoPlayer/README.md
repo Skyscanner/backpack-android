@@ -173,5 +173,5 @@ controller.setMuted(true)  // mute
 
 ### Accessibility
 
-- Reduced motion: autoplay is blocked and playback pauses when `ANIMATOR_DURATION_SCALE` is set to 0 or `AccessibilityManager.isAnimationsEnabled` returns false (API 33+).
+- Reduced motion: autoplay is blocked and playback pauses when `ANIMATOR_DURATION_SCALE` or `TRANSITION_ANIMATION_SCALE` is set to 0 (controllable via developer options or accessibility settings).
 - `accessibilityLabel` in `BpkVideoPlayerConfig` is applied as a `contentDescription` on the player container.
