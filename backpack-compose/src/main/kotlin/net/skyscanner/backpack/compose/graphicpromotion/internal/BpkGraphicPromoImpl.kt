@@ -89,7 +89,7 @@ import net.skyscanner.backpack.compose.utils.isTablet
 @Composable
 internal fun BpkGraphicPromoImpl(
     headline: String,
-    image: @Composable BoxScope.() -> Unit,
+    background: @Composable BoxScope.() -> Unit,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
     kicker: String? = null,
@@ -139,14 +139,14 @@ internal fun BpkGraphicPromoImpl(
                         sponsorLogo = sponsorLogo,
                     )
                 },
-                content = image,
+                content = background,
             )
         } else {
             Box(
                 modifier = Modifier
                     .matchParentSize()
                     .semantics { hideFromAccessibility() },
-                content = image,
+                content = background,
             )
             ForegroundContent(
                 headline = headline,

@@ -33,9 +33,13 @@ import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
+import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.GraphicPromoComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 @Composable
 @GraphicPromoComponent
@@ -101,6 +105,57 @@ internal fun GraphicPromoStorySponsoredWithLongTitle() {
     )
 }
 
+private const val GRAPHIC_PROMO_VIDEO_URL =
+    "https://content.skyscnr.com/media/68afbd83-d09a-48e8-9821-90c117b8f842/593d0fe4-5459-4c43-beb9-49f9ce79d365.m3u8"
+
+@Composable
+@GraphicPromoComponent
+@ComposeStory(name = "Sponsored with video background", kind = StoryKind.DemoOnly)
+internal fun GraphicPromoStorySponsoredWithVideoBackground() {
+    val controller = rememberBpkVideoPlayerController(
+        config = BpkVideoPlayerConfig(
+            videoUrl = GRAPHIC_PROMO_VIDEO_URL,
+            loop = true,
+            startsMuted = true,
+            accessibilityLabel = "Sample video",
+        ),
+    )
+    BpkGraphicPromo(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
+        headline = "Three Parks Challenge",
+        verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+        overlayType = BpkOverlayType.SolidHigh,
+        sponsor = BpkGraphicsPromoSponsor(
+            accessibilityLabel = "In partnership with Skyland",
+            logo = "https://images.kiwi.com/airlines/64/FR.png",
+            title = "In partnership with Skyland",
+            callToAction = BpkGraphicPromoSponsorCTA(
+                accessibilityLabel = "Learn more about our sponsor",
+                onClick = {},
+            ),
+        ),
+        background = {
+            BpkVideoPlayer(
+                controller = controller,
+                modifier = Modifier.matchParentSize(),
+                scaleToFill = true,
+            )
+        },
+        sponsorLogo = {
+            Image(
+                painter = painterResource(id = R.drawable.skyland),
+                contentDescription = "Image",
+                contentScale = ContentScale.Fit,
+            )
+        },
+        tapAction = {
+            Log.d("BpkGraphicPromo", "Tap on graphic promo")
+        },
+    )
+}
+
 @Composable
 internal fun BpkGraphicPromoSample(
     modifier: Modifier = Modifier,
@@ -121,7 +176,7 @@ internal fun BpkGraphicPromoSample(
         verticalAlignment = verticalAlignment,
         overlayType = overlayType,
         sponsor = sponsor,
-        image = {
+        background = {
             Image(
                 modifier = Modifier.matchParentSize(),
                 painter = painterResource(
