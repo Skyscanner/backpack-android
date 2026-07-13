@@ -90,56 +90,27 @@ BpkGraphicPromo(
 )
 ```
 
-### Sponsored with a video background
+### Background content
 
-The `background` parameter accepts any composable, so a [`BpkVideoPlayer`](https://github.com/skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/videoplayer) can be used in place of a static image:
+`background` accepts any composable, so it can be a static image or a [`BpkVideoPlayer`](https://github.com/skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/videoplayer):
 
 ```Kotlin
-import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
-import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoSponsorCTA
-import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
-import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
-import net.skyscanner.backpack.compose.overlay.BpkOverlayType
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
-import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
-import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
+// Image
+background = {
+    Image(
+        modifier = Modifier.matchParentSize(),
+        painter = painterResource(id = R.drawable.graphic_promo),
+        contentDescription = "Image",
+        contentScale = ContentScale.Crop,
+    )
+}
 
-val controller = rememberBpkVideoPlayerController(
-    config = BpkVideoPlayerConfig(
-        videoUrl = "https://example.com/video.m3u8",
-        loop = true,
-        startsMuted = true,
-        accessibilityLabel = "Sample video",
-    ),
-)
-
-BpkGraphicPromo(
-    headline = "Three Parks Challenge",
-    verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
-    overlayType = BpkOverlayType.SolidHigh,
-    sponsor = BpkGraphicsPromoSponsor(
-        accessibilityLabel = "Sponsored",
-        logo = "https://images.kiwi.com/airlines/64/FR.png",
-        title = "Sponsored",
-        callToAction = BpkGraphicPromoSponsorCTA(
-            accessibilityLabel = "Learn more about our sponsor",
-            onClick = { /* open sponsor info modal */ },
-        ),
-    ),
-    background = {
-        BpkVideoPlayer(
-            controller = controller,
-            modifier = Modifier.matchParentSize(),
-            scaleToFill = true,
-        )
-    },
-    sponsorLogo = {
-        Image(
-            painter = painterResource(id = R.drawable.skyland),
-            contentDescription = "Image",
-            contentScale = ContentScale.Fit,
-        )
-    },
-    tapAction = { /* handle tap */ },
-)
+// Video
+background = {
+    BpkVideoPlayer(
+        controller = controller,
+        modifier = Modifier.matchParentSize(),
+        scaleToFill = true,
+    )
+}
 ```
