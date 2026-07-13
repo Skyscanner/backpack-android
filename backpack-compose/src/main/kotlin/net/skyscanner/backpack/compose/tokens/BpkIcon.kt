@@ -1180,6 +1180,14 @@ public val BpkIcon.Companion.HotelsSmoking: BpkIcon by Delegates.singleton(
     )
 )
 
+public val BpkIcon.Companion.HotelsSwimmingPool: BpkIcon by Delegates.singleton(
+    BpkIcon(
+        name = "hotels--swimming-pool",
+        small = R.drawable.bpk_hotels__swimming_pool_sm,
+        large = R.drawable.bpk_hotels__swimming_pool,
+    )
+)
+
 public val BpkIcon.Companion.Incompatible: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "incompatible",
@@ -2617,6 +2625,7 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.HotelsJacuzzi,
         BpkIcon.HotelsPetsAllowed,
         BpkIcon.HotelsSmoking,
+        BpkIcon.HotelsSwimmingPool,
         BpkIcon.Incompatible,
         BpkIcon.Infant,
         BpkIcon.Information,
