@@ -45,6 +45,7 @@ import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerDefaultControls
 import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.components.VideoPlayerComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 
 private const val VIDEO_URL =
     "https://content.skyscnr.com/media/68afbd83-d09a-48e8-9821-90c117b8f842/593d0fe4-5459-4c43-beb9-49f9ce79d365.m3u8"
@@ -52,7 +53,7 @@ private const val VIDEO_URL =
 // Use case 1: 16:9 card with built-in play/pause overlay
 @Composable
 @VideoPlayerComponent
-@ComposeStory(name = "Default Controls")
+@ComposeStory(name = "Default Controls", kind = StoryKind.DemoOnly)
 fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
@@ -68,7 +69,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
 // Use case 2: expand button opens the same controller fullscreen — playback continues uninterrupted
 @Composable
 @VideoPlayerComponent
-@ComposeStory(name = "Continuous Playback")
+@ComposeStory(name = "Continuous Playback", kind = StoryKind.DemoOnly)
 fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
@@ -123,7 +124,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
 // Use case 3: fullscreen-only, no card
 @Composable
 @VideoPlayerComponent
-@ComposeStory(name = "Fullscreen")
+@ComposeStory(name = "Fullscreen", kind = StoryKind.DemoOnly)
 fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
