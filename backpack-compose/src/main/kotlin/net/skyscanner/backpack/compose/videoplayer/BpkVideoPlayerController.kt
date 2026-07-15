@@ -35,8 +35,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.videoplayer.internal.PlaybackEvent
 import net.skyscanner.backpack.compose.videoplayer.internal.PlayerFactory
 import net.skyscanner.backpack.compose.videoplayer.internal.isReducedMotionEnabled
+import net.skyscanner.backpack.compose.videoplayer.internal.reducePlaybackState
 
 @Stable
 class BpkVideoPlayerController internal constructor(
@@ -44,7 +46,7 @@ class BpkVideoPlayerController internal constructor(
     private val scope: CoroutineScope,
     context: Context,
 ) {
-    private val _playbackState = mutableStateOf<BpkVideoPlaybackState>(BpkVideoPlaybackState.Idle)
+    private val _playbackState = mutableStateOf<BpkVideoPlaybackState>(BpkVideoPlaybackState.Loading)
     val playbackState: State<BpkVideoPlaybackState> get() = _playbackState
 
     private val _isMuted = mutableStateOf(config.startsMuted)
@@ -61,7 +63,6 @@ class BpkVideoPlayerController internal constructor(
         player.addListener(playerListener())
         player.setMediaItem(MediaItem.fromUri(config.videoUrl.value))
         player.prepare()
-        _playbackState.value = BpkVideoPlaybackState.Loading
         startLoadTimeout()
     }
 
@@ -86,6 +87,9 @@ class BpkVideoPlayerController internal constructor(
 
     fun resetToStart() {
         player.seekTo(0)
+        if (_playbackState.value is BpkVideoPlaybackState.Ended) {
+            _playbackState.value = BpkVideoPlaybackState.ReadyToPlay
+        }
     }
 
     fun dispose() {
@@ -104,38 +108,30 @@ class BpkVideoPlayerController internal constructor(
         }
     }
 
+    private fun apply(event: PlaybackEvent) {
+        _playbackState.value = reducePlaybackState(_playbackState.value, event)
+    }
+
     private fun playerListener() = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             when (playbackState) {
                 Player.STATE_READY -> {
                     timeoutJob?.cancel()
-                    _playbackState.value =
-                        if (player.isPlaying) BpkVideoPlaybackState.Playing
-                        else BpkVideoPlaybackState.ReadyToPlay
+                    apply(PlaybackEvent.Ready(isPlaying = player.isPlaying))
                 }
-                Player.STATE_BUFFERING -> {
-                    if (_playbackState.value is BpkVideoPlaybackState.Playing ||
-                        _playbackState.value is BpkVideoPlaybackState.ReadyToPlay
-                    ) {
-                        _playbackState.value = BpkVideoPlaybackState.Buffering
-                    }
-                }
-                Player.STATE_ENDED -> _playbackState.value = BpkVideoPlaybackState.Ended
+                Player.STATE_BUFFERING -> apply(PlaybackEvent.Buffering)
+                Player.STATE_ENDED -> apply(PlaybackEvent.Ended)
                 Player.STATE_IDLE -> Unit
             }
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (isPlaying) {
-                _playbackState.value = BpkVideoPlaybackState.Playing
-            } else if (_playbackState.value is BpkVideoPlaybackState.Playing) {
-                _playbackState.value = BpkVideoPlaybackState.Paused
-            }
+            apply(PlaybackEvent.IsPlayingChanged(isPlaying))
         }
 
         override fun onPlayerError(error: PlaybackException) {
             timeoutJob?.cancel()
-            _playbackState.value = BpkVideoPlaybackState.Failed(BpkVideoPlayerError.PlaybackFailed(error))
+            apply(PlaybackEvent.Error(error))
         }
     }
 }
