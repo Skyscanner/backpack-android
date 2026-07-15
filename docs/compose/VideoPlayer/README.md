@@ -23,7 +23,7 @@ A video player with no enforced aspect ratio. Control playback via `BpkVideoPlay
 ```kotlin
 val controller = rememberBpkVideoPlayerController(
     config = BpkVideoPlayerConfig(
-        videoUrl = "https://example.com/video.mp4",
+        videoUrl = BpkVideoUrl("https://example.com/video.mp4"),
         loop = true,
         startsMuted = true,
         accessibilityLabel = stringResource(R.string.video_accessibility_label),
@@ -35,7 +35,7 @@ val controller = rememberBpkVideoPlayerController(
 
 ### Simple — built-in controls
 
-`BpkVideoPlayerDefaultControls` handles play/pause taps internally.
+`BpkVideoPlayerDefaultControls` handles play/pause taps internally. Provide localized `playContentDescription` and `pauseContentDescription` — the component owns no user-facing copy.
 
 ```kotlin
 Box {
@@ -45,6 +45,8 @@ Box {
     )
     BpkVideoPlayerDefaultControls(
         controller = controller,
+        playContentDescription = stringResource(R.string.video_play_label),
+        pauseContentDescription = stringResource(R.string.video_pause_label),
         modifier = Modifier.align(Alignment.TopEnd),
     )
 }
@@ -83,7 +85,7 @@ Create a `BpkVideoPlayerController` and pass it to multiple `BpkVideoPlayer` cal
 ```kotlin
 val controller = rememberBpkVideoPlayerController(
     config = BpkVideoPlayerConfig(
-        videoUrl = "https://example.com/video.mp4",
+        videoUrl = BpkVideoUrl("https://example.com/video.mp4"),
         loop = true,
         startsMuted = true,
         accessibilityLabel = stringResource(R.string.video_accessibility_label),
@@ -175,3 +177,4 @@ controller.setMuted(true)  // mute
 
 - Reduced motion: autoplay is blocked and playback pauses when `ANIMATOR_DURATION_SCALE` or `TRANSITION_ANIMATION_SCALE` is set to 0.
 - `accessibilityLabel` in `BpkVideoPlayerConfig` is applied as a `contentDescription` on the player container.
+- `videoUrl` in `BpkVideoPlayerConfig` is a `BpkVideoUrl` value class — wrap the URL string with `BpkVideoUrl("…")`.
