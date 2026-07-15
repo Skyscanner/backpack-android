@@ -152,7 +152,7 @@ controller.playbackState.value.isLoading  // true for Loading and Buffering
 | Error | Meaning |
 | --- | --- |
 | `LoadTimeout` | The asset didn't finish loading within `loadTimeoutMs` |
-| `PlaybackFailed(cause: PlaybackException)` | ExoPlayer reported a playback error — inspect `cause` (a Media3 `PlaybackException`) for details |
+| `PlaybackFailed(cause: Exception)` | The player reported a playback error — inspect `cause` for details |
 
 ```kotlin
 val state = controller.playbackState.value

@@ -66,7 +66,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(16f / 9f)
+            .aspectRatio(9f / 16f)
             .padding(BpkSpacing.Base),
     ) {
         BpkVideoPlayer(
@@ -116,7 +116,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .aspectRatio(16f / 9f)
+                .aspectRatio(9f / 16f)
                 .padding(BpkSpacing.Base)
                 .clickable { fullscreen = true },
         ) {

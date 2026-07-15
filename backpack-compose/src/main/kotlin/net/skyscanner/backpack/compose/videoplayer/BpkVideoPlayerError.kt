@@ -18,9 +18,7 @@
 
 package net.skyscanner.backpack.compose.videoplayer
 
-import androidx.media3.common.PlaybackException
-
 sealed class BpkVideoPlayerError {
     data object LoadTimeout : BpkVideoPlayerError()
-    data class PlaybackFailed(val cause: PlaybackException) : BpkVideoPlayerError()
+    data class PlaybackFailed(val cause: Exception) : BpkVideoPlayerError()
 }

@@ -114,7 +114,9 @@ class BpkVideoPlayerController internal constructor(
                         else BpkVideoPlaybackState.ReadyToPlay
                 }
                 Player.STATE_BUFFERING -> {
-                    if (_playbackState.value is BpkVideoPlaybackState.Playing) {
+                    if (_playbackState.value is BpkVideoPlaybackState.Playing ||
+                        _playbackState.value is BpkVideoPlaybackState.ReadyToPlay
+                    ) {
                         _playbackState.value = BpkVideoPlaybackState.Buffering
                     }
                 }
