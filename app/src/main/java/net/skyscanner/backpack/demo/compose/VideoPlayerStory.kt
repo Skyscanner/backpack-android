@@ -41,6 +41,7 @@ import net.skyscanner.backpack.compose.tokens.Expand
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerDefaultControls
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoUrl
 import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.components.VideoPlayerComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -56,7 +57,7 @@ private const val VIDEO_URL =
 fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
-            videoUrl = VIDEO_URL,
+            videoUrl = BpkVideoUrl(VIDEO_URL),
             loop = false,
             startsMuted = true,
             accessibilityLabel = "Sample video",
@@ -75,6 +76,8 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
         )
         BpkVideoPlayerDefaultControls(
             controller = controller,
+            playContentDescription = "Play video",
+            pauseContentDescription = "Pause video",
             modifier = Modifier.align(Alignment.TopEnd),
         )
     }
@@ -87,7 +90,7 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
 fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
-            videoUrl = VIDEO_URL,
+            videoUrl = BpkVideoUrl(VIDEO_URL),
             loop = true,
             startsMuted = true,
             accessibilityLabel = "Sample video",
@@ -142,7 +145,7 @@ fun VideoPlayerContinuousPlaybackStory(modifier: Modifier = Modifier) {
 fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
-            videoUrl = VIDEO_URL,
+            videoUrl = BpkVideoUrl(VIDEO_URL),
             loop = true,
             startsMuted = true,
             accessibilityLabel = "Sample video",
@@ -161,6 +164,8 @@ fun VideoPlayerFullscreenStory(modifier: Modifier = Modifier) {
         )
         BpkVideoPlayerDefaultControls(
             controller = controller,
+            playContentDescription = "Play video",
+            pauseContentDescription = "Pause video",
             modifier = Modifier.align(Alignment.TopEnd),
         )
     }

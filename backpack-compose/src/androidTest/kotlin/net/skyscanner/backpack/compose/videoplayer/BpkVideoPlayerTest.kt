@@ -33,7 +33,7 @@ class BpkVideoPlayerTest {
     val composeTestRule = createComposeRule()
 
     private val stubConfig = BpkVideoPlayerConfig(
-        videoUrl = "https://example.com/stub.mp4",
+        videoUrl = BpkVideoUrl("https://example.com/stub.mp4"),
         accessibilityLabel = "Test video",
     )
 
@@ -103,7 +103,7 @@ class BpkVideoPlayerTest {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(
                     BpkVideoPlayerConfig(
-                        videoUrl = "https://example.com/stub.mp4",
+                        videoUrl = BpkVideoUrl("https://example.com/stub.mp4"),
                         loadTimeoutMs = 100L,
                         accessibilityLabel = "Test video",
                     ),

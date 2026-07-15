@@ -18,15 +18,5 @@
 
 package net.skyscanner.backpack.compose.videoplayer
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
-data class BpkVideoPlayerConfig(
-    val videoUrl: BpkVideoUrl,
-    val loadTimeoutMs: Long = 7_000L,
-    val autoPlay: Boolean = true,
-    val respectsReducedMotion: Boolean = true,
-    val loop: Boolean = false,
-    val startsMuted: Boolean = true,
-    val accessibilityLabel: String,
-)
+@JvmInline
+value class BpkVideoUrl(val value: String)

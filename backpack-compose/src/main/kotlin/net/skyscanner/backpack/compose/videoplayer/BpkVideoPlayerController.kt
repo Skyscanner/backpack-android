@@ -59,7 +59,7 @@ class BpkVideoPlayerController internal constructor(
         player.volume = if (config.startsMuted) 0f else 1f
         player.playWhenReady = config.autoPlay && !(config.respectsReducedMotion && isReducedMotionEnabled(context))
         player.addListener(playerListener())
-        player.setMediaItem(MediaItem.fromUri(config.videoUrl))
+        player.setMediaItem(MediaItem.fromUri(config.videoUrl.value))
         player.prepare()
         _playbackState.value = BpkVideoPlaybackState.Loading
         startLoadTimeout()

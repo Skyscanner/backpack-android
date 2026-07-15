@@ -39,6 +39,8 @@ import net.skyscanner.backpack.compose.tokens.Play
 @Composable
 fun BpkVideoPlayerDefaultControls(
     controller: BpkVideoPlayerController,
+    playContentDescription: String,
+    pauseContentDescription: String,
     modifier: Modifier = Modifier,
 ) {
     val playbackState by controller.playbackState
@@ -46,7 +48,7 @@ fun BpkVideoPlayerDefaultControls(
 
     BpkButton(
         icon = if (playbackState.isPlaying) BpkIcon.Pause else BpkIcon.Play,
-        contentDescription = if (playbackState.isPlaying) "Pause video" else "Play video",
+        contentDescription = if (playbackState.isPlaying) pauseContentDescription else playContentDescription,
         type = BpkButtonType.SecondaryOnDark,
         modifier = modifier,
         onClick = { controller.toggle() },
