@@ -26,7 +26,7 @@ import net.skyscanner.backpack.compose.videoplayer.internal.VideoPlayerHandle
  * makes and lets a test drive the registered [Player.Listener] via the `emit*` helpers, without any
  * ExoPlayer or Android framework dependency.
  */
-class FakeVideoPlayerHandle : VideoPlayerHandle {
+internal class FakeVideoPlayerHandle : VideoPlayerHandle {
 
     val listeners = mutableListOf<Player.Listener>()
 
