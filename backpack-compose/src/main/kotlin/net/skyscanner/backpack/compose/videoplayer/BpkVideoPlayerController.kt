@@ -27,16 +27,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
-import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.videoplayer.internal.PlaybackEvent
 import net.skyscanner.backpack.compose.videoplayer.internal.PlayerFactory
+import net.skyscanner.backpack.compose.videoplayer.internal.VideoPlayerHandle
 import net.skyscanner.backpack.compose.videoplayer.internal.isReducedMotionEnabled
 import net.skyscanner.backpack.compose.videoplayer.internal.reducePlaybackState
 
@@ -44,7 +43,8 @@ import net.skyscanner.backpack.compose.videoplayer.internal.reducePlaybackState
 class BpkVideoPlayerController internal constructor(
     val config: BpkVideoPlayerConfig,
     private val scope: CoroutineScope,
-    context: Context,
+    private val handle: VideoPlayerHandle,
+    reducedMotionEnabled: Boolean,
 ) {
     private val _playbackState = mutableStateOf<BpkVideoPlaybackState>(BpkVideoPlaybackState.Loading)
     val playbackState: State<BpkVideoPlaybackState> get() = _playbackState
@@ -52,28 +52,28 @@ class BpkVideoPlayerController internal constructor(
     private val _isMuted = mutableStateOf(config.startsMuted)
     val isMuted: State<Boolean> get() = _isMuted
 
-    internal val player: ExoPlayer = PlayerFactory.build(context)
+    internal val player: Player get() = handle.player
 
     private var timeoutJob: Job? = null
 
     init {
-        player.repeatMode = if (config.loop) Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
-        player.volume = if (config.startsMuted) 0f else 1f
-        player.playWhenReady = config.autoPlay && !(config.respectsReducedMotion && isReducedMotionEnabled(context))
-        player.addListener(playerListener())
-        player.setMediaItem(MediaItem.fromUri(config.videoUrl.value))
-        player.prepare()
+        handle.repeatMode = if (config.loop) Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
+        handle.volume = if (config.startsMuted) 0f else 1f
+        handle.playWhenReady = config.autoPlay && !(config.respectsReducedMotion && reducedMotionEnabled)
+        handle.addListener(playerListener())
+        handle.setMediaItem(config.videoUrl.value)
+        handle.prepare()
         startLoadTimeout()
     }
 
     fun play() {
         if (_playbackState.value is BpkVideoPlaybackState.Failed) return
-        if (_playbackState.value is BpkVideoPlaybackState.Ended) player.seekTo(0)
-        player.play()
+        if (_playbackState.value is BpkVideoPlaybackState.Ended) handle.seekTo(0)
+        handle.play()
     }
 
     fun pause() {
-        player.pause()
+        handle.pause()
     }
 
     fun toggle() {
@@ -82,11 +82,11 @@ class BpkVideoPlayerController internal constructor(
 
     fun setMuted(muted: Boolean) {
         _isMuted.value = muted
-        player.volume = if (muted) 0f else 1f
+        handle.volume = if (muted) 0f else 1f
     }
 
     fun resetToStart() {
-        player.seekTo(0)
+        handle.seekTo(0)
         if (_playbackState.value is BpkVideoPlaybackState.Ended) {
             _playbackState.value = BpkVideoPlaybackState.ReadyToPlay
         }
@@ -94,7 +94,7 @@ class BpkVideoPlayerController internal constructor(
 
     fun dispose() {
         timeoutJob?.cancel()
-        player.release()
+        handle.release()
     }
 
     private fun startLoadTimeout() {
@@ -103,7 +103,7 @@ class BpkVideoPlayerController internal constructor(
             delay(config.loadTimeoutMs)
             if (_playbackState.value == BpkVideoPlaybackState.Loading) {
                 _playbackState.value = BpkVideoPlaybackState.Failed(BpkVideoPlayerError.LoadTimeout)
-                player.stop()
+                handle.stop()
             }
         }
     }
@@ -117,7 +117,7 @@ class BpkVideoPlayerController internal constructor(
             when (playbackState) {
                 Player.STATE_READY -> {
                     timeoutJob?.cancel()
-                    apply(PlaybackEvent.Ready(isPlaying = player.isPlaying))
+                    apply(PlaybackEvent.Ready(isPlaying = handle.isPlaying))
                 }
                 Player.STATE_BUFFERING -> apply(PlaybackEvent.Buffering)
                 Player.STATE_ENDED -> apply(PlaybackEvent.Ended)
@@ -141,7 +141,12 @@ fun rememberBpkVideoPlayerController(config: BpkVideoPlayerConfig): BpkVideoPlay
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val controller = remember(config) {
-        BpkVideoPlayerController(config = config, scope = scope, context = context)
+        BpkVideoPlayerController(
+            config = config,
+            scope = scope,
+            handle = PlayerFactory.build(context),
+            reducedMotionEnabled = isReducedMotionEnabled(context),
+        )
     }
     DisposableEffect(controller) {
         onDispose { controller.dispose() }
