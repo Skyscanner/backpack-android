@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.videoplayer
 
 sealed class BpkVideoPlaybackState {
-    data object Idle : BpkVideoPlaybackState()
     data object Loading : BpkVideoPlaybackState()
     data object ReadyToPlay : BpkVideoPlaybackState()
     data object Buffering : BpkVideoPlaybackState()
