@@ -129,7 +129,6 @@ when (playbackState) {
 
 | State | Meaning |
 | --- | --- |
-| `Idle` | Player not yet prepared |
 | `Loading` | Asset is being fetched or decoded |
 | `ReadyToPlay` | Asset ready — `autoPlay` will call `play()` if enabled |
 | `Playing` | Playback active |

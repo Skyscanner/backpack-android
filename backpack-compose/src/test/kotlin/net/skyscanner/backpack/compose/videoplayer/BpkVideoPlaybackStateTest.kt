@@ -27,7 +27,6 @@ class BpkVideoPlaybackStateTest {
     @Test
     fun `isPlaying is true only for Playing state`() {
         assertTrue(BpkVideoPlaybackState.Playing.isPlaying)
-        assertFalse(BpkVideoPlaybackState.Idle.isPlaying)
         assertFalse(BpkVideoPlaybackState.Loading.isPlaying)
         assertFalse(BpkVideoPlaybackState.ReadyToPlay.isPlaying)
         assertFalse(BpkVideoPlaybackState.Buffering.isPlaying)
@@ -40,7 +39,6 @@ class BpkVideoPlaybackStateTest {
     fun `isLoading is true for Loading and Buffering states`() {
         assertTrue(BpkVideoPlaybackState.Loading.isLoading)
         assertTrue(BpkVideoPlaybackState.Buffering.isLoading)
-        assertFalse(BpkVideoPlaybackState.Idle.isLoading)
         assertFalse(BpkVideoPlaybackState.ReadyToPlay.isLoading)
         assertFalse(BpkVideoPlaybackState.Playing.isLoading)
         assertFalse(BpkVideoPlaybackState.Paused.isLoading)
