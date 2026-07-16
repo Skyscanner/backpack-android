@@ -46,7 +46,7 @@ data class BpkGraphicsPromoSponsor(
 @Composable
 fun BpkGraphicPromo(
     headline: String,
-    image: @Composable BoxScope.() -> Unit,
+    background: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier,
     kicker: String? = null,
     subHeadline: String? = null,
@@ -68,7 +68,7 @@ fun BpkGraphicPromo(
         variant = variant,
         verticalAlignment = verticalAlignment,
         sponsor = sponsor,
-        image = image,
+        background = background,
         sponsorLogo = sponsorLogo,
         interactionSource = interactionSource,
         tapAction = tapAction,

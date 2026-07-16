@@ -70,7 +70,7 @@ BpkGraphicPromo(
             onClick = { /* open sponsor info modal */ },
         ),
     ),
-    image = {
+    background = {
         Image(
             modifier = Modifier.matchParentSize(),
             painter = painterResource(id = R.drawable.graphic_promo),
@@ -88,4 +88,29 @@ BpkGraphicPromo(
         Log.d("TAG", "Tap on graphic promo")
     },
 )
+```
+
+### Background content
+
+`background` accepts any composable, so it can be a static image or a [`BpkVideoPlayer`](https://github.com/skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/videoplayer):
+
+```Kotlin
+// Image
+background = {
+    Image(
+        modifier = Modifier.matchParentSize(),
+        painter = painterResource(id = R.drawable.graphic_promo),
+        contentDescription = "Image",
+        contentScale = ContentScale.Crop,
+    )
+}
+
+// Video
+background = {
+    BpkVideoPlayer(
+        controller = controller,
+        modifier = Modifier.matchParentSize(),
+        scaleToFill = true,
+    )
+}
 ```

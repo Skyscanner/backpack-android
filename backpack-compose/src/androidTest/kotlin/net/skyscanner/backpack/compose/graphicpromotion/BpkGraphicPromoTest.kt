@@ -55,7 +55,7 @@ class BpkGraphicPromoTest {
                     subHeadline = subHeadline,
                     sponsor = sponsor,
                     sponsorLogo = sponsorLogo,
-                    image = { Box(Modifier.fillMaxSize()) },
+                    background = { Box(Modifier.fillMaxSize()) },
                 )
             }
         }
