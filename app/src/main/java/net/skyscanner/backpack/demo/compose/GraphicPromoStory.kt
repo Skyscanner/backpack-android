@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoUrl
 import net.skyscanner.backpack.compose.videoplayer.rememberBpkVideoPlayerController
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.GraphicPromoComponent
@@ -114,7 +115,7 @@ private const val GRAPHIC_PROMO_VIDEO_URL =
 internal fun GraphicPromoStorySponsoredWithVideoBackground() {
     val controller = rememberBpkVideoPlayerController(
         config = BpkVideoPlayerConfig(
-            videoUrl = GRAPHIC_PROMO_VIDEO_URL,
+            videoUrl = BpkVideoUrl(GRAPHIC_PROMO_VIDEO_URL),
             loop = true,
             startsMuted = true,
             accessibilityLabel = "Sample video",
