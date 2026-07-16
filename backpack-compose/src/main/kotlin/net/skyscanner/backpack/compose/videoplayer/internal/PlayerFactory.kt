@@ -31,10 +31,11 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 internal object PlayerFactory {
     @OptIn(UnstableApi::class)
     fun build(context: Context): VideoPlayerHandle {
-        val exoPlayer = ExoPlayer.Builder(context)
+        val applicationContext = context.applicationContext
+        val exoPlayer = ExoPlayer.Builder(applicationContext)
             .setMediaSourceFactory(
-                DefaultMediaSourceFactory(context).setDataSourceFactory(
-                    DefaultDataSource.Factory(context, DefaultHttpDataSource.Factory()),
+                DefaultMediaSourceFactory(applicationContext).setDataSourceFactory(
+                    DefaultDataSource.Factory(applicationContext, DefaultHttpDataSource.Factory()),
                 ),
             )
             .build()

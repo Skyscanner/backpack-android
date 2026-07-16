@@ -176,4 +176,4 @@ controller.setMuted(true)  // mute
 
 - Reduced motion: autoplay is blocked and playback pauses when `ANIMATOR_DURATION_SCALE` or `TRANSITION_ANIMATION_SCALE` is set to 0.
 - `accessibilityLabel` in `BpkVideoPlayerConfig` is applied as a `contentDescription` on the player container.
-- `videoUrl` in `BpkVideoPlayerConfig` is a `BpkVideoUrl` value class — wrap an HTTPS URL or local file path with `BpkVideoUrl("…")`.
+- `videoUrl` in `BpkVideoPlayerConfig` is a `BpkVideoUrl` value class. It supports HTTP(S) URLs, absolute local file paths, and `file:///` URIs, for example `BpkVideoUrl("https://example.com/video.mp4")`, `BpkVideoUrl("/data/user/0/example/cache/video.mp4")`, or `BpkVideoUrl("file:///data/user/0/example/cache/video.mp4")`.
