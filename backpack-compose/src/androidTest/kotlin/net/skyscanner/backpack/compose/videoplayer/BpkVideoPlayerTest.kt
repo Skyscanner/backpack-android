@@ -101,7 +101,8 @@ class BpkVideoPlayerTest {
     )
 
     @Test
-    fun accessibilityLabel_isAppliedToSemantics() {
+    fun givenAccessibilityLabel_whenRendered_thenLabelIsAppliedToSemantics() {
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 val controller = rememberBpkVideoPlayerController(stubConfig)
@@ -109,6 +110,7 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // Then
         composeTestRule
             .onNodeWithContentDescription("Test video")
             .assertExists()
@@ -116,7 +118,8 @@ class BpkVideoPlayerTest {
     }
 
     @Test
-    fun initialState_isLoading() {
+    fun givenStubConfig_whenRendered_thenInitialStateIsLoading() {
+        // When
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -125,11 +128,13 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // Then
         assertTrue(controller.playbackState.value.isLoading)
     }
 
     @Test
-    fun setMuted_false_updatesIsMuted() {
+    fun givenMutedController_whenSetMutedFalse_thenIsMutedIsFalse() {
+        // Given
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -137,14 +142,18 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
-
         assertTrue(controller.isMuted.value)
+
+        // When
         composeTestRule.runOnIdle { controller.setMuted(false) }
+
+        // Then
         assertFalse(controller.isMuted.value)
     }
 
     @Test
-    fun setMuted_toggle_isIdempotent() {
+    fun givenMutedController_whenSetMutedToggledTwice_thenIsMutedIsRestored() {
+        // Given
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -153,14 +162,22 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // When
         composeTestRule.runOnIdle { controller.setMuted(false) }
+
+        // Then
         assertFalse(controller.isMuted.value)
+
+        // When
         composeTestRule.runOnIdle { controller.setMuted(true) }
+
+        // Then
         assertTrue(controller.isMuted.value)
     }
 
     @Test
-    fun play_whenFailed_doesNotCrash() {
+    fun givenFailedPlayback_whenPlayCalled_thenStateRemainsFailedWithoutCrash() {
+        // Given
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -174,18 +191,20 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
-
         composeTestRule.waitUntil(timeoutMillis = 2_000L) {
             controller.playbackState.value is BpkVideoPlaybackState.Failed
         }
 
-        // play() on a Failed state must be a no-op — no exception, state unchanged
+        // When
         composeTestRule.runOnIdle { controller.play() }
+
+        // Then
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Failed)
     }
 
     @Test
-    fun loopConfigTrue_mapsToPlayerRepeatModeOne() {
+    fun givenLoopTrue_whenRendered_thenPlayerRepeatModeIsOne() {
+        // When
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -193,11 +212,14 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
+
+        // Then
         assertEquals(Player.REPEAT_MODE_ONE, controller.player.repeatMode)
     }
 
     @Test
-    fun loopConfigFalse_mapsToPlayerRepeatModeOff() {
+    fun givenLoopFalse_whenRendered_thenPlayerRepeatModeIsOff() {
+        // When
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -205,11 +227,14 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
+
+        // Then
         assertEquals(Player.REPEAT_MODE_OFF, controller.player.repeatMode)
     }
 
     @Test
-    fun startsMutedTrue_mapsToZeroVolume() {
+    fun givenStartsMutedTrue_whenRendered_thenPlayerVolumeIsZero() {
+        // When
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -217,11 +242,14 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
+
+        // Then
         assertEquals(0f, controller.player.volume, 0f)
     }
 
     @Test
-    fun startsMutedFalse_mapsToFullVolume() {
+    fun givenStartsMutedFalse_whenRendered_thenPlayerVolumeIsFull() {
+        // When
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -229,11 +257,14 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
+
+        // Then
         assertEquals(1f, controller.player.volume, 0f)
     }
 
     @Test
-    fun setMuted_updatesPlayerVolume() {
+    fun givenPlayableConfig_whenSetMutedToggled_thenPlayerVolumeUpdates() {
+        // Given
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -242,15 +273,22 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // When
         composeTestRule.runOnIdle { controller.setMuted(false) }
+
+        // Then
         assertEquals(1f, controller.player.volume, 0f)
 
+        // When
         composeTestRule.runOnIdle { controller.setMuted(true) }
+
+        // Then
         assertEquals(0f, controller.player.volume, 0f)
     }
 
     @Test
-    fun autoPlay_withReducedMotionDisabled_reachesPlaying() {
+    fun givenAutoPlayWithReducedMotionDisabled_whenRendered_thenStateReachesPlaying() {
+        // Given
         disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
@@ -260,14 +298,18 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // When
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
+
+        // Then
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Playing)
     }
 
     @Test
-    fun autoPlayOff_neverStartsPlaying() {
+    fun givenAutoPlayOff_whenRendered_thenStateIsReadyToPlay() {
+        // Given
         disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
@@ -277,14 +319,18 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // When
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.ReadyToPlay
         }
+
+        // Then
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.ReadyToPlay)
     }
 
     @Test
-    fun playPauseToggle_driveRealPlayback() {
+    fun givenPlayingState_whenPauseAndToggleCalled_thenStateTransitionsCorrectly() {
+        // Given
         disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
@@ -293,24 +339,32 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
-
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
 
+        // When
         composeTestRule.runOnIdle { controller.pause() }
+
+        // Then
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Paused
         }
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Paused)
 
+        // When
         composeTestRule.runOnIdle { controller.toggle() }
+
+        // Then
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Playing)
 
+        // When
         composeTestRule.runOnIdle { controller.toggle() }
+
+        // Then
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Paused
         }
@@ -318,7 +372,8 @@ class BpkVideoPlayerTest {
     }
 
     @Test
-    fun playbackReachesEnded_thenPlayRestartsFromStart() {
+    fun givenEndedPlayback_whenPlayCalled_thenStateReachesPlayingAgain() {
+        // Given
         disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
@@ -327,13 +382,15 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
-
         composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Ended
         }
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Ended)
 
+        // When
         composeTestRule.runOnIdle { controller.play() }
+
+        // Then
         composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
@@ -341,7 +398,8 @@ class BpkVideoPlayerTest {
     }
 
     @Test
-    fun resetToStart_afterEnded_settlesReadyToPlay() {
+    fun givenEndedPlayback_whenResetToStartCalled_thenStateIsReadyToPlay() {
+        // Given
         disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
@@ -350,17 +408,20 @@ class BpkVideoPlayerTest {
                 BpkVideoPlayer(controller = controller)
             }
         }
-
         composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
             controller.playbackState.value is BpkVideoPlaybackState.Ended
         }
 
+        // When
         composeTestRule.runOnIdle { controller.resetToStart() }
+
+        // Then
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.ReadyToPlay)
     }
 
     @Test
-    fun dispose_releasesTheUnderlyingPlayer() {
+    fun givenPlayerComposed_whenRemovedFromComposition_thenUnderlyingPlayerIsReleased() {
+        // Given
         lateinit var controller: BpkVideoPlayerController
         var showPlayer by mutableStateOf(true)
         composeTestRule.setContent {
@@ -372,9 +433,11 @@ class BpkVideoPlayerTest {
             }
         }
 
+        // When
         composeTestRule.runOnIdle { showPlayer = false }
         composeTestRule.waitForIdle()
 
+        // Then
         assertEquals(Player.STATE_IDLE, controller.player.playbackState)
     }
 
