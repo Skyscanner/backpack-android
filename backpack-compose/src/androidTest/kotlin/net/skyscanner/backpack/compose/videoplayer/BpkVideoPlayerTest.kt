@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.videoplayer
 
-import android.os.ParcelFileDescriptor.AutoCloseInputStream
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,9 +25,9 @@ import androidx.compose.ui.test.assertContentDescriptionContains
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.media3.common.Player
-import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import org.junit.After
+import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.ENDED_STATE_TIMEOUT_MS
+import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.PLAYING_STATE_TIMEOUT_MS
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -40,51 +39,13 @@ class BpkVideoPlayerTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    @get:Rule
+    val videoPlayerTestRule = VideoPlayerTestRule()
+
     private val stubConfig = BpkVideoPlayerConfig(
         videoUrl = BpkVideoUrl("https://example.com/stub.mp4"),
         accessibilityLabel = "Test video",
     )
-
-    private var originalAnimationScales: Pair<String?, String?>? = null
-
-    // BpkVideoPlayerController defaults to respectsReducedMotion = true and treats animator/transition
-    // scale 0 (a common test-emulator setting, used to speed up Espresso) as a reduced-motion signal,
-    // which suppresses autoplay and leaves the player stuck at ReadyToPlay.
-    private fun disableReducedMotionSignal() {
-        originalAnimationScales =
-            getGlobalSetting(ANIMATOR_DURATION_SCALE_KEY) to getGlobalSetting(TRANSITION_ANIMATION_SCALE_KEY)
-        putGlobalSetting(ANIMATOR_DURATION_SCALE_KEY, "1")
-        putGlobalSetting(TRANSITION_ANIMATION_SCALE_KEY, "1")
-    }
-
-    @After
-    fun restoreReducedMotionSignalIfChanged() {
-        originalAnimationScales?.let { (animator, transition) ->
-            putGlobalSetting(ANIMATOR_DURATION_SCALE_KEY, animator ?: "1")
-            putGlobalSetting(TRANSITION_ANIMATION_SCALE_KEY, transition ?: "1")
-            originalAnimationScales = null
-        }
-    }
-
-    // android.provider.Settings.Global requires WRITE_SECURE_SETTINGS, which the app under test does
-    // not hold; UiAutomation shell commands run with shell identity, which does.
-    private fun getGlobalSetting(key: String): String? =
-        runShellCommand("settings get global $key")
-            .trim()
-            .takeUnless { it == "null" || it.isEmpty() }
-
-    private fun putGlobalSetting(key: String, value: String) {
-        runShellCommand("settings put global $key $value")
-    }
-
-    private fun runShellCommand(command: String): String =
-        AutoCloseInputStream(InstrumentationRegistry.getInstrumentation().uiAutomation.executeShellCommand(command))
-            .use { it.readBytes().decodeToString() }
-
-    private fun bundledVideoUrl(): String {
-        val targetPackage = InstrumentationRegistry.getInstrumentation().targetContext.packageName
-        return "android.resource://$targetPackage/raw/bpk_video_player_test"
-    }
 
     private fun playableConfig(
         loop: Boolean = false,
@@ -92,7 +53,7 @@ class BpkVideoPlayerTest {
         autoPlay: Boolean = true,
         loadTimeoutMs: Long = 7_000L,
     ) = BpkVideoPlayerConfig(
-        videoUrl = BpkVideoUrl(bundledVideoUrl()),
+        videoUrl = BpkVideoUrl(videoPlayerTestRule.bundledVideoUrl()),
         loop = loop,
         startsMuted = startsMuted,
         autoPlay = autoPlay,
@@ -289,7 +250,7 @@ class BpkVideoPlayerTest {
     @Test
     fun givenAutoPlayWithReducedMotionDisabled_whenRendered_thenStateReachesPlaying() {
         // Given
-        disableReducedMotionSignal()
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -310,7 +271,7 @@ class BpkVideoPlayerTest {
     @Test
     fun givenAutoPlayOff_whenRendered_thenStateIsReadyToPlay() {
         // Given
-        disableReducedMotionSignal()
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -331,7 +292,7 @@ class BpkVideoPlayerTest {
     @Test
     fun givenPlayingState_whenPauseAndToggleCalled_thenStateTransitionsCorrectly() {
         // Given
-        disableReducedMotionSignal()
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -374,7 +335,7 @@ class BpkVideoPlayerTest {
     @Test
     fun givenEndedPlayback_whenPlayCalled_thenStateReachesPlayingAgain() {
         // Given
-        disableReducedMotionSignal()
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -400,7 +361,7 @@ class BpkVideoPlayerTest {
     @Test
     fun givenEndedPlayback_whenResetToStartCalled_thenStateIsReadyToPlay() {
         // Given
-        disableReducedMotionSignal()
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         composeTestRule.setContent {
             BpkTheme {
@@ -422,15 +383,19 @@ class BpkVideoPlayerTest {
     @Test
     fun givenPlayerComposed_whenRemovedFromComposition_thenUnderlyingPlayerIsReleased() {
         // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
         var showPlayer by mutableStateOf(true)
         composeTestRule.setContent {
             BpkTheme {
                 if (showPlayer) {
-                    controller = rememberBpkVideoPlayerController(playableConfig())
+                    controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
                     BpkVideoPlayer(controller = controller)
                 }
             }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
 
         // When
@@ -439,12 +404,5 @@ class BpkVideoPlayerTest {
 
         // Then
         assertEquals(Player.STATE_IDLE, controller.player.playbackState)
-    }
-
-    private companion object {
-        const val ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale"
-        const val TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale"
-        const val PLAYING_STATE_TIMEOUT_MS = 5_000L
-        const val ENDED_STATE_TIMEOUT_MS = 8_000L
     }
 }
