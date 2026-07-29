@@ -20,7 +20,7 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons" alt="With Icons Maps component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons_dm.png" alt="With Icons Maps component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons.png" alt="With Icons Maps component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons_dm.png" alt="With Icons Maps component - dark mode" width="375" /> |
 
 ## Installation
 
