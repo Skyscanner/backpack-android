@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,8 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
@@ -44,8 +47,26 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @PriceComponent
-@ComposeStory
-fun PriceStory(modifier: Modifier = Modifier) {
+@ComposeStory("Default")
+fun PriceStoryDefault(modifier: Modifier = Modifier) {
+    PriceStory(style = BpkPriceStyle.onDefault, modifier = modifier)
+}
+
+@Composable
+@PriceComponent
+@ComposeStory("OnContrast")
+fun PriceStoryOnContrast(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(BpkTheme.colors.corePrimary),
+    ) {
+        PriceStory(style = BpkPriceStyle.onContrast, modifier = modifier)
+    }
+}
+
+@Composable
+fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
     val floatingNotificationState = rememberBpkFloatingNotificationState()
     val scope = rememberCoroutineScope()
 
@@ -66,10 +87,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.Large,
                     align = BpkPriceAlign.Start,
+                    style = style,
                 )
                 PriceExample(
                     size = BpkPriceSize.Large,
                     align = BpkPriceAlign.Start,
+                    style = style,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("Clicked large price!")
@@ -84,10 +107,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.Start,
+                    style = style,
                 )
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.End,
+                    style = style,
                 )
             }
             Row(
@@ -97,6 +122,7 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.Start,
+                    style = style,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("Clicked small start price!")
@@ -106,6 +132,7 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.End,
+                    style = style,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("Clicked small end price!")
@@ -120,10 +147,12 @@ fun PriceStory(modifier: Modifier = Modifier) {
                 PriceExample(
                     size = BpkPriceSize.ExtraSmall,
                     align = BpkPriceAlign.Start,
+                    style = style,
                 )
                 PriceExample(
                     size = BpkPriceSize.ExtraSmall,
                     align = BpkPriceAlign.End,
+                    style = style,
                 )
             }
             Row(
@@ -134,25 +163,30 @@ fun PriceStory(modifier: Modifier = Modifier) {
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.Start,
                     icon = BpkIcon.NewWindow,
+                    style = style,
                 )
                 PriceExample(
                     size = BpkPriceSize.Small,
                     align = BpkPriceAlign.End,
                     icon = BpkIcon.NewWindow,
+                    style = style,
                 )
             }
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.Row,
+                style = style,
             )
             PriceExample(
                 size = BpkPriceSize.ExtraSmall,
                 align = BpkPriceAlign.Row,
+                style = style,
             )
             PriceExample(
                 size = BpkPriceSize.Small,
                 align = BpkPriceAlign.Row,
                 icon = BpkIcon.NewWindow,
+                style = style,
             )
 
             PriceExample(
@@ -164,6 +198,7 @@ fun PriceStory(modifier: Modifier = Modifier) {
                         floatingNotificationState.show("Clicked row price with icon!")
                     }
                 },
+                style = style,
             )
         }
 
@@ -175,6 +210,7 @@ fun PriceStory(modifier: Modifier = Modifier) {
 private fun PriceExample(
     size: BpkPriceSize,
     align: BpkPriceAlign,
+    style: BpkPriceStyle,
     icon: BpkIcon? = null,
     onClick: (() -> Unit)? = null,
 ) {
@@ -186,6 +222,7 @@ private fun PriceExample(
         size = size,
         align = align,
         icon = icon,
+        style = style,
         onPriceClicked = onClick,
     )
 }

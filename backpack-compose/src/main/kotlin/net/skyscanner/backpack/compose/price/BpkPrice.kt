@@ -35,6 +35,11 @@ enum class BpkPriceSize {
     ExtraSmall,
 }
 
+enum class BpkPriceStyle {
+    onDefault,
+    onContrast,
+}
+
 @Composable
 fun BpkPrice(
     price: String,
@@ -44,6 +49,7 @@ fun BpkPrice(
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
     size: BpkPriceSize = BpkPriceSize.Small,
+    style: BpkPriceStyle = BpkPriceStyle.onDefault,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
@@ -55,6 +61,7 @@ fun BpkPrice(
         trailingText = trailingText,
         align = align,
         size = size,
+        style = style,
         icon = icon,
         onPriceClicked = onPriceClicked,
     )

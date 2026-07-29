@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 
 @Composable
 internal fun BpkPriceImpl(
@@ -33,6 +34,7 @@ internal fun BpkPriceImpl(
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
     size: BpkPriceSize = BpkPriceSize.Small,
+    style: BpkPriceStyle = BpkPriceStyle.onDefault,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
@@ -45,6 +47,7 @@ internal fun BpkPriceImpl(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
+                style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
             )
@@ -58,6 +61,7 @@ internal fun BpkPriceImpl(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
+                style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
             )
@@ -71,6 +75,7 @@ internal fun BpkPriceImpl(
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
+                style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
             )
