@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.videoplayer
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.OptIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -28,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -45,6 +48,7 @@ import net.skyscanner.backpack.compose.videoplayer.internal.isReducedMotionEnabl
 import net.skyscanner.backpack.compose.videoplayer.internal.reducePlaybackState
 
 @Stable
+@OptIn(UnstableApi::class)
 class BpkVideoPlayerController internal constructor(
     val config: BpkVideoPlayerConfig,
     private val scope: CoroutineScope,
@@ -57,8 +61,7 @@ class BpkVideoPlayerController internal constructor(
     private val _isMuted = mutableStateOf(config.startsMuted)
     val isMuted: State<Boolean> get() = _isMuted
 
-    @OptIn(UnstableApi::class)
-    internal val player: ExoPlayer = run {
+    private val exoPlayer: ExoPlayer = run {
         val applicationContext = context.applicationContext
         ExoPlayer.Builder(applicationContext)
             .setMediaSourceFactory(
@@ -67,6 +70,20 @@ class BpkVideoPlayerController internal constructor(
                 ),
             )
             .build()
+    }
+
+    // ContentFrame uses player.listen {} whose invokeOnCancellation fires on whatever thread
+    // cancels the coroutine scope (e.g. the instrumentation thread in tests), causing ExoPlayer's
+    // thread check to crash. Wrapping removeListener to always run on the main thread fixes that.
+    internal val player: Player = object : ForwardingPlayer(exoPlayer) {
+        private val mainHandler = Handler(Looper.getMainLooper())
+        override fun removeListener(listener: Player.Listener) {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                super.removeListener(listener)
+            } else {
+                mainHandler.post { runCatching { super.removeListener(listener) } }
+            }
+        }
     }
 
     private var timeoutJob: Job? = null
