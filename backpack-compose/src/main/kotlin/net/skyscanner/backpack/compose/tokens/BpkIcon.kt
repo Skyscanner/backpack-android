@@ -288,7 +288,7 @@ public val BpkIcon.Companion.BaggageCabinNotIncludedCross: BpkIcon by Delegates.
     BpkIcon(
         name = "baggage-cabin-not-included-cross",
         small = R.drawable.bpk_baggage_cabin_not_included_cross_sm,
-        large = R.drawable.bpk_baggage_cabin_not_included_cross,
+        large = R.drawable.bpk_baggage_cabin_not_included_cross_sm,
     )
 )
 
@@ -384,7 +384,7 @@ public val BpkIcon.Companion.BaggageTick: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "baggage-tick",
         small = R.drawable.bpk_baggage_tick_sm,
-        large = R.drawable.bpk_baggage_tick,
+        large = R.drawable.bpk_baggage_tick_sm,
     )
 )
 
@@ -1088,7 +1088,7 @@ public val BpkIcon.Companion.HealthFitness: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "health-fitness",
         small = R.drawable.bpk_health_fitness_sm,
-        large = R.drawable.bpk_health_fitness,
+        large = R.drawable.bpk_health_fitness_sm,
     )
 )
 
@@ -1247,7 +1247,7 @@ public val BpkIcon.Companion.InformationLanguageQuestion: BpkIcon by Delegates.s
 public val BpkIcon.Companion.Insurance: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "insurance",
-        small = R.drawable.bpk_insurance_sm,
+        small = R.drawable.bpk_insurance,
         large = R.drawable.bpk_insurance,
     )
 )
@@ -1447,7 +1447,7 @@ public val BpkIcon.Companion.Media: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Menu: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "menu",
-        small = R.drawable.bpk_menu_sm,
+        small = R.drawable.bpk_menu,
         large = R.drawable.bpk_menu,
     )
 )
@@ -1735,7 +1735,7 @@ public val BpkIcon.Companion.Powerplug: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Ppe: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "ppe",
-        small = R.drawable.bpk_ppe_sm,
+        small = R.drawable.bpk_ppe,
         large = R.drawable.bpk_ppe,
     )
 )
@@ -1855,7 +1855,7 @@ public val BpkIcon.Companion.Settings: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Share: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "share",
-        small = R.drawable.bpk_share_sm,
+        small = R.drawable.bpk_share,
         large = R.drawable.bpk_share,
     )
 )
@@ -1954,7 +1954,6 @@ public val BpkIcon.Companion.StarHalf: BpkIcon by Delegates.singleton(
         name = "star-half",
         small = R.drawable.bpk_star_half_sm,
         large = R.drawable.bpk_star_half,
-        extraLarge = R.drawable.bpk_star_half_xxxl,
     )
 )
 
@@ -2010,7 +2009,7 @@ public val BpkIcon.Companion.Taxi: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Temperature: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "temperature",
-        small = R.drawable.bpk_temperature_sm,
+        small = R.drawable.bpk_temperature,
         large = R.drawable.bpk_temperature,
     )
 )
@@ -2067,7 +2066,7 @@ public val BpkIcon.Companion.Time: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "time",
         small = R.drawable.bpk_time_sm,
-        large = R.drawable.bpk_time,
+        large = R.drawable.bpk_time_sm,
     )
 )
 
@@ -2202,7 +2201,7 @@ public val BpkIcon.Companion.UseLocation: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.VdlCars: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "vdl-cars",
-        small = R.drawable.bpk_vdl_cars_sm,
+        small = R.drawable.bpk_vdl_cars,
         large = R.drawable.bpk_vdl_cars,
     )
 )
@@ -2268,14 +2267,6 @@ public val BpkIcon.Companion.VdlTabDropsSelected: BpkIcon by Delegates.singleton
         name = "vdl-tab-drops-selected",
         small = R.drawable.bpk_vdl_tab_drops_selected,
         large = R.drawable.bpk_vdl_tab_drops_selected,
-    )
-)
-
-public val BpkIcon.Companion.VdlTabProfile: BpkIcon by Delegates.singleton(
-    BpkIcon(
-        name = "vdl-tab-profile",
-        small = R.drawable.bpk_vdl_tab_profile,
-        large = R.drawable.bpk_vdl_tab_profile,
     )
 )
 
@@ -2346,7 +2337,7 @@ public val BpkIcon.Companion.Walk: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Wallet: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "wallet",
-        small = R.drawable.bpk_wallet_sm,
+        small = R.drawable.bpk_wallet,
         large = R.drawable.bpk_wallet,
     )
 )
@@ -2426,7 +2417,7 @@ public val BpkIcon.Companion.WeatherTornado: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.WeatherWind: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "weather--wind",
-        small = R.drawable.bpk_weather__wind_sm,
+        small = R.drawable.bpk_weather__wind,
         large = R.drawable.bpk_weather__wind,
     )
 )
@@ -2467,7 +2458,7 @@ public val BpkIcon.Companion.WorldApac: BpkIcon by Delegates.singleton(
     BpkIcon(
         name = "world--apac",
         small = R.drawable.bpk_world__apac_sm,
-        large = R.drawable.bpk_world__apac,
+        large = R.drawable.bpk_world__apac_sm,
     )
 )
 
@@ -2761,7 +2752,6 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.VdlHotels,
         BpkIcon.VdlTabDrops,
         BpkIcon.VdlTabDropsSelected,
-        BpkIcon.VdlTabProfile,
         BpkIcon.VdlTabProfileSelected,
         BpkIcon.VdlTabSaved,
         BpkIcon.VdlTabSavedSelected,
