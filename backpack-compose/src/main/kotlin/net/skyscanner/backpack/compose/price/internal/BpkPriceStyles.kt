@@ -44,12 +44,12 @@ internal fun BpkPriceSize.secondaryTextStyle(): TextStyle =
 internal fun BpkPriceStyle.mainTextColor(): Color =
     when (this) {
         BpkPriceStyle.onDefault -> BpkTheme.colors.textPrimary
-        BpkPriceStyle.onContrast -> BpkTheme.colors.surfaceDefault
+        BpkPriceStyle.onContrast -> BpkTheme.colors.textOnDark
     }
 
 @Composable
 internal fun BpkPriceStyle.secondaryTextColor(): Color =
     when (this) {
         BpkPriceStyle.onDefault -> BpkTheme.colors.textSecondary
-        BpkPriceStyle.onContrast -> BpkTheme.colors.surfaceDefault
+        BpkPriceStyle.onContrast -> BpkTheme.colors.textSecondaryOnContrast
     }
