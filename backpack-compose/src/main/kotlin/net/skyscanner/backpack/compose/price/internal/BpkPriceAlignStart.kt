@@ -80,6 +80,7 @@ internal fun BpkPriceAlignStart(
                         icon = icon,
                         contentDescription = null,
                         size = BpkIconSize.Small,
+                        tint = style.mainTextColor(),
                         modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
                     )
                 }
