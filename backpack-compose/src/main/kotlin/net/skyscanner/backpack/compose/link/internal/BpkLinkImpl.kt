@@ -50,7 +50,7 @@ internal fun BpkLinkImpl(
 ) {
     val textColor = when (linkStyle) {
         BpkLinkStyle.Default -> BpkTheme.colors.textPrimary
-        BpkLinkStyle.OnContrast -> BpkTheme.colors.surfaceDefault
+        BpkLinkStyle.OnContrast -> BpkTheme.colors.textOnDark
     }
 
     BpkText(
