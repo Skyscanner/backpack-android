@@ -24,7 +24,7 @@ internal object GeneratedColorTokenMap {
     val COLOR_TOKEN_MAP = mapOf(
         "0x1AFFFFFF" to listOf("BpkTheme.colors.surfaceTint"),
         "0x33000000" to listOf("BpkTheme.colors.overlay", "BpkTheme.colors.textDisabled"),
-        "0x80FFFFFF" to listOf("BpkTheme.colors.lineOnDark", "BpkTheme.colors.textDisabledOnDark"),
+        "0x80FFFFFF" to listOf("BpkTheme.colors.lineOnDark", "BpkTheme.colors.textDisabledOnDark", "BpkTheme.colors.textSecondaryOnContrast"),
         "0xB3000000" to listOf("BpkTheme.colors.scrim"),
         "0xFF0062E3" to listOf("BpkTheme.colors.coreAccent", "BpkTheme.colors.surfaceHero", "BpkTheme.colors.textHero"),
         "0xFF05203C" to listOf("BpkTheme.colors.corePrimary", "BpkTheme.colors.surfaceContrast"),
