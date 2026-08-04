@@ -36,7 +36,7 @@ enum class BpkPriceSize {
 }
 
 enum class BpkPriceStyle {
-    onDefault,
+    default,
     onContrast,
 }
 
@@ -49,7 +49,7 @@ fun BpkPrice(
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
     size: BpkPriceSize = BpkPriceSize.Small,
-    style: BpkPriceStyle = BpkPriceStyle.onDefault,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {

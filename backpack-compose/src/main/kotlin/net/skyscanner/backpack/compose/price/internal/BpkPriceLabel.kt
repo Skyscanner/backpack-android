@@ -39,7 +39,7 @@ internal fun BpkPriceLabel(
     price: String,
     size: BpkPriceSize,
     modifier: Modifier = Modifier,
-    style: BpkPriceStyle = BpkPriceStyle.onDefault,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     onPriceClicked: (() -> Unit)? = null,
 ) {
     if (onPriceClicked != null) {

@@ -44,7 +44,7 @@ internal fun BpkPriceAlignEnd(
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
-    style: BpkPriceStyle = BpkPriceStyle.onDefault,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {

@@ -49,7 +49,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @PriceComponent
 @ComposeStory("Default")
 fun PriceStoryDefault(modifier: Modifier = Modifier) {
-    PriceStory(style = BpkPriceStyle.onDefault, modifier = modifier)
+    PriceStory(style = BpkPriceStyle.default, modifier = modifier)
 }
 
 @Composable
