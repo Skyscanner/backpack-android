@@ -21,9 +21,10 @@ package net.skyscanner.backpack.compose.price.internal
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.link.BpkLink
+import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 
 /**
  * Renders the main price value shared by every [net.skyscanner.backpack.compose.price.BpkPriceAlign] variant.
@@ -38,6 +39,7 @@ internal fun BpkPriceLabel(
     price: String,
     size: BpkPriceSize,
     modifier: Modifier = Modifier,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     onPriceClicked: (() -> Unit)? = null,
 ) {
     if (onPriceClicked != null) {
@@ -45,12 +47,13 @@ internal fun BpkPriceLabel(
             text = price,
             onClick = onPriceClicked,
             textStyle = size.mainTextStyle(),
+            style = if (style == BpkPriceStyle.onContrast) BpkLinkStyle.OnContrast else BpkLinkStyle.Default,
             modifier = modifier,
         )
     } else {
         BpkText(
             text = price,
-            color = BpkTheme.colors.textPrimary,
+            color = style.mainTextColor(),
             style = size.mainTextStyle(),
             modifier = modifier,
         )

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -40,6 +41,7 @@ internal fun BpkPriceRow(
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
@@ -63,7 +65,7 @@ internal fun BpkPriceRow(
             BpkText(
                 modifier = Modifier.alignByBaseline(),
                 text = builder.toString(),
-                color = BpkTheme.colors.textSecondary,
+                color = style.secondaryTextColor(),
                 style = size.secondaryTextStyle(),
             )
         }
@@ -71,6 +73,7 @@ internal fun BpkPriceRow(
             BpkPriceLabel(
                 price = price,
                 size = size,
+                style = style,
                 onPriceClicked = onPriceClicked,
             )
             icon?.let {
@@ -78,6 +81,7 @@ internal fun BpkPriceRow(
                     icon = icon,
                     contentDescription = null,
                     size = BpkIconSize.Small,
+                    tint = style.mainTextColor(),
                     modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
                 )
             }
@@ -86,7 +90,7 @@ internal fun BpkPriceRow(
             BpkText(
                 modifier = Modifier.alignByBaseline(),
                 text = it,
-                color = BpkTheme.colors.textSecondary,
+                color = style.secondaryTextColor(),
                 style = size.secondaryTextStyle(),
             )
         }
