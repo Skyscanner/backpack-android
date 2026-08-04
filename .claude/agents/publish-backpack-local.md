@@ -7,7 +7,7 @@ model: haiku
 
 Round-trips local backpack-android changes into the skyscanner-app for manual testing, without cutting a real release.
 
-Uses the fixed version `99.9.9.SNAPSHOT` — high enough to never collide with real releases (currently ~83.x.x).
+Uses the fixed version `99.9.9-SNAPSHOT` — high enough to never collide with real releases (currently ~83.x.x). The `-SNAPSHOT` suffix is required so Gradle treats it as a changing module and re-resolves on each build.
 
 ## 0) Locate the two repos
 
@@ -27,7 +27,7 @@ Use `$BACKPACK_DIR` and `$APP_DIR` in place of any absolute path in the steps be
 
 ```bash
 cd "$BACKPACK_DIR"
-./gradlew publishToMavenLocal -Pversion="99.9.9.SNAPSHOT"
+./gradlew publishToMavenLocal -Pversion="99.9.9-SNAPSHOT"
 ```
 
 Run this directly (no need to hand off to the user — it's non-interactive). If the build fails, stop and report the failure; do not proceed to step 2.
@@ -41,7 +41,7 @@ Two files to update, both under `$APP_DIR/android/src/`:
 Update the `backpack` version entry:
 
 ```toml
-backpack = "99.9.9.SNAPSHOT"
+backpack = "99.9.9-SNAPSHOT"
 ```
 
 **b) `settings.gradle.kts`**
@@ -67,7 +67,7 @@ Do NOT add `mavenLocal()` to the `pluginManagement` repositories block — only 
 ## 3) Report
 
 Confirm to the user:
-- That `publishToMavenLocal` succeeded with version `99.9.9.SNAPSHOT`.
+- That `publishToMavenLocal` succeeded with version `99.9.9-SNAPSHOT`.
 - That both files in skyscanner-app were updated (or that `mavenLocal()` was already present and skipped).
 
-Remind them to sync/rebuild skyscanner-app next.
+Remind them to sync/rebuild skyscanner-app next, ideally with `--refresh-dependencies` since Gradle caches changing modules for 24h by default.
