@@ -21,8 +21,10 @@ package net.skyscanner.backpack.compose.videoplayer.internal
 import android.content.Context
 import android.provider.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -32,15 +34,17 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 internal fun rememberReducedMotionEnabled(): State<Boolean> {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    return produceState(initialValue = isReducedMotionEnabled(context), lifecycleOwner) {
+    val state = remember { mutableStateOf(isReducedMotionEnabled(context)) }
+    DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                value = isReducedMotionEnabled(context)
+                state.value = isReducedMotionEnabled(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
-        awaitDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
+    return state
 }
 
 internal fun isReducedMotionEnabled(context: Context): Boolean {

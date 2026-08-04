@@ -30,10 +30,11 @@ import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.align)) {
+class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.align, flavor.style)) {
 
     private val size = flavor.size
     private val align = flavor.align
+    private val style = flavor.style
 
     @Test
     fun priceOnly() {
@@ -44,6 +45,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 price = stringResource(id = R.string.price_price),
                 size = size,
                 align = align,
+                style = style,
             )
         }
     }
@@ -56,6 +58,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 trailingText = stringResource(id = R.string.price_trailing_text),
                 size = size,
                 align = align,
+                style = style,
             )
         }
     }
@@ -69,6 +72,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 previousPrice = stringResource(id = R.string.price_line_through_text),
                 size = size,
                 align = align,
+                style = style,
             )
         }
     }
@@ -83,6 +87,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
+                style = style,
             )
         }
     }
@@ -97,6 +102,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
+                style = style,
                 icon = BpkIcon.NewWindow,
             )
         }
@@ -110,6 +116,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 price = stringResource(id = R.string.price_price),
                 size = size,
                 align = align,
+                style = style,
                 onPriceClicked = {},
             )
         }
@@ -123,6 +130,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 trailingText = stringResource(id = R.string.price_trailing_text),
                 size = size,
                 align = align,
+                style = style,
                 onPriceClicked = {},
             )
         }
@@ -138,6 +146,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
+                style = style,
                 onPriceClicked = {},
             )
         }
@@ -153,6 +162,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 leadingText = stringResource(id = R.string.price_leading_text),
                 size = size,
                 align = align,
+                style = style,
                 icon = BpkIcon.NewWindow,
                 onPriceClicked = {},
             )
@@ -163,8 +173,10 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
         fun flavours(): List<Flavor> = BpkPriceSize.entries.flatMap { size ->
-            BpkPriceAlign.entries.map { align ->
-                Flavor(size = size, align = align)
+            BpkPriceAlign.entries.flatMap { align ->
+                BpkPriceStyle.entries.map { style ->
+                    Flavor(size = size, align = align, style = style)
+                }
             }
         }
     }
@@ -173,4 +185,5 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
 data class Flavor(
     val size: BpkPriceSize,
     val align: BpkPriceAlign,
+    val style: BpkPriceStyle,
 )
