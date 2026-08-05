@@ -155,7 +155,7 @@ private fun RenderSlot(slotType: BpkCellItemSlot) {
         is BpkCellItemSlot.Image -> {
             Image(
                 painter = painterResource(slotType.imageDrawable),
-                contentDescription = null,
+                contentDescription = slotType.contentDescription,
                 modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
             )
         }
