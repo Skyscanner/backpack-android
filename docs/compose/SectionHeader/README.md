@@ -24,10 +24,32 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-* `AccessibilityHeaderTagEnabled`: Used to disable `Heading()` accessibility tag - Optional, true by default.
+### Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `title` | `String` | Required text displayed as the section heading. |
+| `modifier` | `Modifier` | Optional Compose modifier applied to the section header. |
+| `description` | `String?` | Optional supporting text displayed below the title. Blank descriptions are not displayed. |
+| `button` | `BpkSectionHeaderButton?` | Optional trailing action. Tablets display a text button, while smaller screens display an arrow icon using the button text as its content description. |
+| `accessibilityHeaderTagEnabled` | `Boolean?` | Controls whether heading semantics are applied to the title. Defaults to `true`; `false` or `null` disables them. |
+| `type` | `BpkSectionHeaderType` | Controls the component appearance. Defaults to `BpkSectionHeaderType.Default`. |
+
+`BpkSectionHeaderButton` accepts:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `text` | `String` | Text displayed by the tablet button and used as the arrow icon's content description on smaller screens. |
+| `onClick` | `() -> Unit` | Action invoked when the trailing button is selected. |
+
+### Types
+
+- `BpkSectionHeaderType.Default` uses the standard text colours and primary button style.
+- `BpkSectionHeaderType.OnDark` uses on-dark text colours and the primary-on-dark button style.
 
 ### Basic section header with a title.
-If you don't specify a `style` parameter it will use the `.default` type
+
+If you don't specify a `type` parameter it will use `BpkSectionHeaderType.Default`.
 
 ```Kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
@@ -64,11 +86,27 @@ If you don't specify a `style` parameter it will use the `.default` type
     )
 ```
 
-### Section header with a title, description, trailing button and onDark style.
+### Accessibility heading semantics
+
+The title is exposed as an accessibility heading by default. Set
+`accessibilityHeaderTagEnabled` to `false` when another element already
+provides the appropriate heading semantics.
+
+```Kotlin
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
+
+    BpkSectionHeader(
+        title = stringResource(R.string.section_header_title),
+        accessibilityHeaderTagEnabled = false,
+    )
+```
+
+### Section header with a title, description, trailing button and OnDark type.
 
 ```Kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
+    import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
 
     BpkSectionHeader(
         title = stringResource(R.string.section_header_title),
@@ -80,3 +118,10 @@ If you don't specify a `style` parameter it will use the `.default` type
         type = OnDark,
     )
 ```
+
+## Cross-platform naming
+
+The appearance parameter is named `type` on Android and `style` on iOS.
+Both parameters provide equivalent default and on-dark appearance options.
+The platforms retain their existing names to follow their established API
+conventions and avoid source-breaking changes for existing consumers.
