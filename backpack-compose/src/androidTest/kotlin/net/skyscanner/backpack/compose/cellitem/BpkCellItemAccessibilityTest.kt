@@ -18,7 +18,11 @@
 
 package net.skyscanner.backpack.compose.cellitem
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodes
 import androidx.compose.ui.test.onNodeWithContentDescription
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Rule
@@ -48,5 +52,26 @@ class BpkCellItemAccessibilityTest {
         composeTestRule
             .onNodeWithContentDescription(imageContentDescription)
             .assertExists()
+    }
+
+    @Test
+    fun givenNoImageContentDescription_whenBpkCellItemRendered_thenDescriptionIsNotExposed() {
+        composeTestRule.setContent {
+            BpkTheme {
+                BpkCellItem(
+                    title = "Partner",
+                    slot = BpkCellItemSlot.Image(
+                        imageDrawable = android.R.drawable.ic_menu_gallery,
+                    ),
+                )
+            }
+        }
+
+        composeTestRule
+            .onAllNodes(
+                SemanticsMatcher.keyIsDefined(SemanticsProperties.ContentDescription),
+                useUnmergedTree = true,
+            )
+            .assertCountEquals(0)
     }
 }
