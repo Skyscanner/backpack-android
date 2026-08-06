@@ -55,7 +55,7 @@ configured text as its accessibility content description.
 
 If you don't specify a `type` parameter it will use `BpkSectionHeaderType.Default`.
 
-```Kotlin
+```kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 
     BpkSectionHeader(
@@ -65,7 +65,7 @@ If you don't specify a `type` parameter it will use `BpkSectionHeaderType.Defaul
 
 ### Section header with a title and description.
 
-```Kotlin
+```kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 
     BpkSectionHeader(
@@ -76,7 +76,7 @@ If you don't specify a `type` parameter it will use `BpkSectionHeaderType.Defaul
 
 ### Section header with a title, description and trailing button.
 
-```Kotlin
+```kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 
@@ -96,7 +96,7 @@ The title is exposed as an accessibility heading by default. Set
 `accessibilityHeaderTagEnabled` to `false` when another element already
 provides the appropriate heading semantics.
 
-```Kotlin
+```kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
 
     BpkSectionHeader(
@@ -107,7 +107,7 @@ provides the appropriate heading semantics.
 
 ### Section header with a title, description, trailing button and OnDark type.
 
-```Kotlin
+```kotlin
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeader
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
     import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderType.OnDark
