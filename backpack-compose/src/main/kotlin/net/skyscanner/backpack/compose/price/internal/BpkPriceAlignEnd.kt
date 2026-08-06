@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -43,6 +44,7 @@ internal fun BpkPriceAlignEnd(
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
@@ -65,7 +67,7 @@ internal fun BpkPriceAlignEnd(
                 builder.append(it)
                 BpkText(
                     text = builder.toString(),
-                    color = BpkTheme.colors.textSecondary,
+                    color = style.secondaryTextColor(),
                     style = size.secondaryTextStyle(),
                 )
             }
@@ -74,6 +76,7 @@ internal fun BpkPriceAlignEnd(
             BpkPriceLabel(
                 price = price,
                 size = size,
+                style = style,
                 onPriceClicked = onPriceClicked,
             )
             icon?.let {
@@ -81,6 +84,7 @@ internal fun BpkPriceAlignEnd(
                     icon = icon,
                     contentDescription = null,
                     size = BpkIconSize.Small,
+                    tint = style.mainTextColor(),
                     modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
                 )
             }
@@ -89,7 +93,7 @@ internal fun BpkPriceAlignEnd(
         trailingText?.let {
             BpkText(
                 text = it,
-                color = BpkTheme.colors.textSecondary,
+                color = style.secondaryTextColor(),
                 style = size.secondaryTextStyle(),
                 modifier = Modifier.applyIf(size == BpkPriceSize.ExtraSmall) {
                     offset(y = (-2).dp)

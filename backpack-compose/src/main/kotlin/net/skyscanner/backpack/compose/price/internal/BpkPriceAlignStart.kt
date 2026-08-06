@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -41,6 +42,7 @@ internal fun BpkPriceAlignStart(
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
+    style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
@@ -60,7 +62,7 @@ internal fun BpkPriceAlignStart(
                 builder.append(it)
                 BpkText(
                     text = builder.toString(),
-                    color = BpkTheme.colors.textSecondary,
+                    color = style.secondaryTextColor(),
                     style = size.secondaryTextStyle(),
                 )
             }
@@ -70,6 +72,7 @@ internal fun BpkPriceAlignStart(
                 BpkPriceLabel(
                     price = price,
                     size = size,
+                    style = style,
                     onPriceClicked = onPriceClicked,
                 )
                 icon?.let {
@@ -77,6 +80,7 @@ internal fun BpkPriceAlignStart(
                         icon = icon,
                         contentDescription = null,
                         size = BpkIconSize.Small,
+                        tint = style.mainTextColor(),
                         modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
                     )
                 }
@@ -89,7 +93,7 @@ internal fun BpkPriceAlignStart(
                 ) {
                     BpkText(
                         text = it,
-                        color = BpkTheme.colors.textSecondary,
+                        color = style.secondaryTextColor(),
                         style = size.secondaryTextStyle(),
                     )
                 }

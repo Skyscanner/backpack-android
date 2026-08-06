@@ -19,8 +19,10 @@
 package net.skyscanner.backpack.compose.price.internal
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
@@ -36,4 +38,18 @@ internal fun BpkPriceSize.secondaryTextStyle(): TextStyle =
     when (this) {
         BpkPriceSize.Large -> BpkTheme.typography.footnote
         BpkPriceSize.Small, BpkPriceSize.ExtraSmall -> BpkTheme.typography.caption
+    }
+
+@Composable
+internal fun BpkPriceStyle.mainTextColor(): Color =
+    when (this) {
+        BpkPriceStyle.default -> BpkTheme.colors.textPrimary
+        BpkPriceStyle.onContrast -> BpkTheme.colors.textOnDark
+    }
+
+@Composable
+internal fun BpkPriceStyle.secondaryTextColor(): Color =
+    when (this) {
+        BpkPriceStyle.default -> BpkTheme.colors.textSecondary
+        BpkPriceStyle.onContrast -> BpkTheme.colors.textSecondaryOnContrast
     }
