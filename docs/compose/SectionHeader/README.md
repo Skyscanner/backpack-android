@@ -37,9 +37,13 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 `BpkSectionHeaderButton` accepts:
 
+SectionHeader adapts its trailing action by screen size. On tablets, it renders
+a text button. On phones, it renders an arrow-only button and uses the
+configured text as its accessibility content description.
+
 | Parameter | Type | Description |
 | --- | --- | --- |
-| `text` | `String` | Text displayed by the tablet button and used as the arrow icon's content description on smaller screens. |
+| `text` | `String` | Label for the trailing action. Displayed as button text on tablets and used as the arrow-only button's content description on phones. |
 | `onClick` | `() -> Unit` | Action invoked when the trailing button is selected. |
 
 ### Types
