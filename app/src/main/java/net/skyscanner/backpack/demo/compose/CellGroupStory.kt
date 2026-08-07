@@ -96,6 +96,7 @@ fun CellGroupDefaultStory(modifier: Modifier = Modifier) {
                     icon = BpkIcon.Aircraft,
                     slot = BpkCellItemSlot.Image(
                         imageDrawable = R.drawable.sample_icon,
+                        contentDescription = "British Airways logo",
                     ),
                 ),
             ),

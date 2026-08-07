@@ -46,6 +46,7 @@ import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ChevronRight
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -69,7 +70,7 @@ internal fun BpkCellItemImpl(
 
     val shape = when (corner) {
         BpkCellItemCorner.Default -> RoundedCornerShape(0.dp)
-        BpkCellItemCorner.Rounded -> RoundedCornerShape(BpkSpacing.Md)
+        BpkCellItemCorner.Rounded -> RoundedCornerShape(BpkBorderRadius.Sm)
     }
 
     Row(
@@ -155,7 +156,7 @@ private fun RenderSlot(slotType: BpkCellItemSlot) {
         is BpkCellItemSlot.Image -> {
             Image(
                 painter = painterResource(slotType.imageDrawable),
-                contentDescription = null,
+                contentDescription = slotType.contentDescription,
                 modifier = Modifier.size(width = BpkSpacing.Xxl, height = BpkSpacing.Lg),
             )
         }

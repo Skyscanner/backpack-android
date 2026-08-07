@@ -119,6 +119,8 @@ BpkCellItem(
 
 Example of a BpkCellItem with Rounded corners:
 
+Rounded CellItems use `BpkBorderRadius.Sm` (8dp), matching the small 8pt radius token used by iOS.
+
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemCorner
@@ -194,15 +196,22 @@ BpkCellItem(
 
 ### Image (Image Display)
 
+Use `contentDescription` to provide a meaningful TalkBack description when the image conveys information. Leave it as `null` when the image is decorative.
+
 ```Kotlin
 import net.skyscanner.backpack.compose.cellitem.BpkCellItem
 import net.skyscanner.backpack.compose.cellitem.BpkCellItemSlot
 
 BpkCellItem(
   title = "Partner",
-  slot = BpkCellItemSlot.Image(R.drawable.partner_logo),
+  slot = BpkCellItemSlot.Image(
+    imageDrawable = R.drawable.partner_logo,
+    contentDescription = "Partner logo",
+  ),
 )
 ```
+
+Android’s image slot accepts a drawable resource ID, while iOS accepts a SwiftUI `Image`. Android retains the resource-based API because the component owns the image’s fixed dimensions and current usages use packaged drawable resources. Supporting arbitrary `Painter` or composable content would widen the API and requires separate decisions about sizing and rendering ownership.
 
 ## Complete Example
 
