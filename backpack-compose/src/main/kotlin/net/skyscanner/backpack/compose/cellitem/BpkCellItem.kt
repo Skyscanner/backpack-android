@@ -83,9 +83,12 @@ sealed interface BpkCellItemSlot {
      * Displays an image, typically used for branding or identification.
      *
      * @param imageDrawable The drawable resource ID for the image.
+     * @param contentDescription An optional description announced by TalkBack.
+     * Pass `null` when the image is decorative.
      */
     data class Image(
         @DrawableRes val imageDrawable: Int,
+        val contentDescription: String? = null,
     ) : BpkCellItemSlot
 }
 
