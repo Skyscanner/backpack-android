@@ -61,3 +61,22 @@ BPKBannerAlert(
     style = BPKBannerAlertStyle.OnContrast
 )
 ```
+
+Example of a BannerAlert with a custom icon and its own accessibility label:
+
+```Kotlin
+import net.skyscanner.backpack.compose.banneralert.BpkBannerAlert
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Airline
+
+BpkBannerAlert(
+    type = BpkBannerAlertType.Info,
+    message = "Hello world!",
+    alertTypeContentDescription = "Information",
+    icon = BpkIcon.Airline,
+    iconContentDescription = "Airline",
+)
+```
+
+By default, a custom `icon` is announced using `alertTypeContentDescription`. Use `iconContentDescription`
+to give the custom icon its own, more specific accessibility label instead.
