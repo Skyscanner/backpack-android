@@ -53,6 +53,7 @@ internal fun BpkBannerAlertImpl(
     alertTypeContentDescription: String,
     modifier: Modifier = Modifier,
     icon: BpkIcon? = null,
+    iconContentDescription: String? = null,
 ) {
 
     val background = when (style) {
@@ -88,7 +89,7 @@ internal fun BpkBannerAlertImpl(
             BpkIcon(
                 icon = iconFinal,
                 tint = tint,
-                contentDescription = alertTypeContentDescription,
+                contentDescription = iconContentDescription ?: alertTypeContentDescription,
             )
             BpkText(
                 modifier = Modifier

@@ -43,6 +43,7 @@ fun BpkBannerAlert(
     type: BpkBannerAlertType = BpkBannerAlertType.Info,
     icon: BpkIcon? = null,
     style: BpkBannerAlertStyle = BpkBannerAlertStyle.Default,
+    iconContentDescription: String? = null,
 ) {
     BpkBannerAlertImpl(
         modifier = modifier,
@@ -51,5 +52,6 @@ fun BpkBannerAlert(
         icon = icon,
         alertTypeContentDescription = alertTypeContentDescription,
         style = style,
+        iconContentDescription = iconContentDescription,
     )
 }
