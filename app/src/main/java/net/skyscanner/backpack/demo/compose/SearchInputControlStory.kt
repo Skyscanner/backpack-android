@@ -117,6 +117,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 0,
             style = style,
             docking = Docking.Top,
+            contentDescription = "Departing from London",
         )
         BpkSearchInputControl(
             inputText = "",
@@ -128,6 +129,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 1,
             style = style,
             docking = Docking.Middle,
+            contentDescription = "Where to?",
         )
         BpkSearchInputControl(
             inputText = "Thurs 9 May – Fri 29 May, 2025",
@@ -139,6 +141,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 2,
             style = style,
             docking = Docking.Middle,
+            contentDescription = "Leaving on Thurs 9 May, and returning Fri 29 May, 2025",
         )
         BpkSearchInputControl(
             inputText = "1 adult",
@@ -150,6 +153,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 3,
             style = style,
             docking = Docking.Bottom,
+            contentDescription = "1 adult travelling",
         )
     }
 }
