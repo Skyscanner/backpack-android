@@ -29,7 +29,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.platform.LocalContext
 import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
@@ -43,7 +42,6 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.videoplayer.internal.PlaybackEvent
 import net.skyscanner.backpack.compose.videoplayer.internal.isReducedMotionEnabled
@@ -58,14 +56,16 @@ class BpkVideoPlayerController internal constructor(
     context: Context,
     reducedMotionEnabled: Boolean,
 ) {
-    private val _playbackState = mutableStateOf<BpkVideoPlaybackState>(BpkVideoPlaybackState.Loading)
-    val playbackState: State<BpkVideoPlaybackState> get() = _playbackState
+    val playbackState: State<BpkVideoPlaybackState>
+        field = mutableStateOf<BpkVideoPlaybackState>(BpkVideoPlaybackState.Loading)
 
-    private val _isMuted = mutableStateOf(config.startsMuted)
-    val isMuted: State<Boolean> get() = _isMuted
+    val isMuted: State<Boolean>
+        field = mutableStateOf(config.startsMuted)
 
-    private val _progressState = mutableStateOf<BpkVideoPlayerProgress?>(null)
-    val progressState: State<BpkVideoPlayerProgress?> get() = _progressState
+    val progressState: State<BpkVideoPlayerProgress?>
+        field = mutableStateOf<BpkVideoPlayerProgress?>(null)
+
+    private var progressJob: Job? = null
 
     private val exoPlayer: ExoPlayer = run {
         val applicationContext = context.applicationContext
@@ -102,33 +102,11 @@ class BpkVideoPlayerController internal constructor(
         player.setMediaItem(MediaItem.fromUri(config.videoUrl.value))
         player.prepare()
         startLoadTimeout()
-
-        scope.launch {
-            snapshotFlow { _playbackState.value }
-                .collect { state ->
-                    if (state is BpkVideoPlaybackState.Playing) {
-                        while (isActive && _playbackState.value is BpkVideoPlaybackState.Playing) {
-                            val pos = exoPlayer.currentPosition
-                            val dur = exoPlayer.duration
-                            _progressState.value = if (dur > 0L) BpkVideoPlayerProgress(pos, dur) else null
-                            delay(PROGRESS_POLL_INTERVAL_MS.milliseconds)
-                        }
-                    } else {
-                        if (state !is BpkVideoPlaybackState.Ended) {
-                            _progressState.value = null
-                        }
-                    }
-                }
-        }
-    }
-
-    private companion object {
-        const val PROGRESS_POLL_INTERVAL_MS = 200L
     }
 
     fun play() {
-        if (_playbackState.value is BpkVideoPlaybackState.Failed) return
-        if (_playbackState.value is BpkVideoPlaybackState.Ended) player.seekTo(0)
+        if (playbackState.value is BpkVideoPlaybackState.Failed) return
+        if (playbackState.value is BpkVideoPlaybackState.Ended) player.seekTo(0)
         player.play()
     }
 
@@ -137,40 +115,66 @@ class BpkVideoPlayerController internal constructor(
     }
 
     fun toggle() {
-        if (_playbackState.value.isPlaying) pause() else play()
+        if (playbackState.value.isPlaying) pause() else play()
     }
 
     fun setMuted(muted: Boolean) {
-        _isMuted.value = muted
+        isMuted.value = muted
         player.volume = if (muted) 0f else 1f
     }
 
     fun resetToStart() {
         player.seekTo(0)
-        if (_playbackState.value is BpkVideoPlaybackState.Ended) {
-            _playbackState.value = BpkVideoPlaybackState.ReadyToPlay
+        if (playbackState.value is BpkVideoPlaybackState.Ended) {
+            playbackState.value = BpkVideoPlaybackState.ReadyToPlay
         }
     }
 
     fun dispose() {
         timeoutJob?.cancel()
+        progressJob?.cancel()
         player.release()
-        _progressState.value = null
     }
 
     private fun startLoadTimeout() {
         timeoutJob?.cancel()
         timeoutJob = scope.launch {
-            delay(config.loadTimeoutMs)
-            if (_playbackState.value == BpkVideoPlaybackState.Loading) {
-                _playbackState.value = BpkVideoPlaybackState.Failed(BpkVideoPlayerError.LoadTimeout)
+            delay(config.loadTimeoutMs.milliseconds)
+            if (playbackState.value == BpkVideoPlaybackState.Loading) {
+                playbackState.value = BpkVideoPlaybackState.Failed(BpkVideoPlayerError.LoadTimeout)
                 player.stop()
             }
         }
     }
 
+    private fun startProgressPolling() {
+        progressJob?.cancel()
+        progressJob = scope.launch {
+            while (true) {
+                val pos = exoPlayer.currentPosition
+                val dur = exoPlayer.duration
+                progressState.value = if (dur > 0L) BpkVideoPlayerProgress(pos, dur) else null
+                delay(PROGRESS_POLL_INTERVAL_MS.milliseconds)
+            }
+        }
+    }
+
+    private fun stopProgressPolling() {
+        progressJob?.cancel()
+        progressJob = null
+    }
+
+    private fun emitFinalProgress() {
+        val dur = exoPlayer.duration
+        if (dur > 0L) progressState.value = BpkVideoPlayerProgress(dur, dur)
+    }
+
+    companion object {
+        private const val PROGRESS_POLL_INTERVAL_MS = 200L
+    }
+
     private fun apply(event: PlaybackEvent) {
-        _playbackState.value = reducePlaybackState(_playbackState.value, event)
+        playbackState.value = reducePlaybackState(playbackState.value, event)
     }
 
     private fun playerListener() = object : Player.Listener {
@@ -181,18 +185,38 @@ class BpkVideoPlayerController internal constructor(
                     apply(PlaybackEvent.Ready(isPlaying = player.isPlaying))
                 }
                 Player.STATE_BUFFERING -> apply(PlaybackEvent.Buffering)
-                Player.STATE_ENDED -> apply(PlaybackEvent.Ended)
+                Player.STATE_ENDED -> {
+                    emitFinalProgress()
+                    stopProgressPolling()
+                    apply(PlaybackEvent.Ended)
+                }
                 Player.STATE_IDLE -> Unit
             }
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
+            if (isPlaying) {
+                startProgressPolling()
+            } else {
+                stopProgressPolling()
+            }
             apply(PlaybackEvent.IsPlayingChanged(isPlaying))
         }
 
         override fun onPlayerError(error: PlaybackException) {
             timeoutJob?.cancel()
+            stopProgressPolling()
             apply(PlaybackEvent.Error(error))
+        }
+
+        override fun onPositionDiscontinuity(
+            oldPosition: Player.PositionInfo,
+            newPosition: Player.PositionInfo,
+            reason: Int,
+        ) {
+            if (reason == Player.DISCONTINUITY_REASON_AUTO_TRANSITION) {
+                emitFinalProgress()
+            }
         }
     }
 }

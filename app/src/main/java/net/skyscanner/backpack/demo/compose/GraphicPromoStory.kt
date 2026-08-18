@@ -20,18 +20,28 @@ package net.skyscanner.backpack.demo.compose
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.filterNotNull
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromo
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoSponsorCTA
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicsPromoSponsor
 import net.skyscanner.backpack.compose.graphicpromotion.BpkGraphicPromoVerticalAlignment
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerConfig
@@ -41,7 +51,6 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.GraphicPromoComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
-
 @Composable
 @GraphicPromoComponent
 @ComposeStory
@@ -121,40 +130,74 @@ internal fun GraphicPromoStorySponsoredWithVideoBackground() {
             accessibilityLabel = "Sample video",
         ),
     )
-    BpkGraphicPromo(
+
+    LaunchedEffect(Unit) {
+        val quartilesFired = mutableSetOf<Int>()
+        snapshotFlow { controller.progressState.value }
+            .filterNotNull()
+            .collect { p ->
+                listOf(25, 50, 75, 100).forEach { q ->
+                    if (q !in quartilesFired && p.percentage >= q / 100f) {
+                        Log.d("BpkVideoProgress", "Quartile $q% reached")
+                        quartilesFired.add(q)
+                    }
+                }
+            }
+    }
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(BpkSpacing.Base),
-        headline = "Three Parks Challenge",
-        verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
-        overlayType = BpkOverlayType.SolidHigh,
-        sponsor = BpkGraphicsPromoSponsor(
-            accessibilityLabel = "In partnership with Skyland",
-            logo = "https://images.kiwi.com/airlines/64/FR.png",
-            title = "In partnership with Skyland",
-            callToAction = BpkGraphicPromoSponsorCTA(
-                accessibilityLabel = "Learn more about our sponsor",
-                onClick = {},
+    ) {
+        BpkGraphicPromo(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(BpkSpacing.Base),
+            headline = "Three Parks Challenge",
+            verticalAlignment = BpkGraphicPromoVerticalAlignment.Bottom,
+            overlayType = BpkOverlayType.SolidHigh,
+            sponsor = BpkGraphicsPromoSponsor(
+                accessibilityLabel = "In partnership with Skyland",
+                logo = "https://images.kiwi.com/airlines/64/FR.png",
+                title = "In partnership with Skyland",
+                callToAction = BpkGraphicPromoSponsorCTA(
+                    accessibilityLabel = "Learn more about our sponsor",
+                    onClick = {},
+                ),
             ),
-        ),
-        background = {
-            BpkVideoPlayer(
-                controller = controller,
-                modifier = Modifier.matchParentSize(),
-                scaleToFill = true,
+            background = {
+                BpkVideoPlayer(
+                    controller = controller,
+                    modifier = Modifier.matchParentSize(),
+                    scaleToFill = true,
+                )
+            },
+            sponsorLogo = {
+                Image(
+                    painter = painterResource(id = R.drawable.skyland),
+                    contentDescription = "Image",
+                    contentScale = ContentScale.Fit,
+                )
+            },
+            tapAction = {
+                Log.d("BpkGraphicPromo", "Tap on graphic promo")
+            },
+        )
+
+        controller.progressState.value?.let { p ->
+            net.skyscanner.backpack.compose.text.BpkText(
+                text = "${(p.percentage * 100).toInt()}%  •  ${p.positionMs / 1000}s / ${p.durationMs / 1000}s",
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = BpkSpacing.Md)
+                    .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(4.dp))
+                    .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
+                color = Color.White,
+                style = BpkTheme.typography.label1,
             )
-        },
-        sponsorLogo = {
-            Image(
-                painter = painterResource(id = R.drawable.skyland),
-                contentDescription = "Image",
-                contentScale = ContentScale.Fit,
-            )
-        },
-        tapAction = {
-            Log.d("BpkGraphicPromo", "Tap on graphic promo")
-        },
-    )
+        }
+    }
 }
 
 @Composable
