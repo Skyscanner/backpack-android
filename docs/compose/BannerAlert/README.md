@@ -64,7 +64,7 @@ BPKBannerAlert(
 
 Example of a BannerAlert with a custom icon and its own accessibility label:
 
-```Kotlin
+```kotlin
 import net.skyscanner.backpack.compose.banneralert.BpkBannerAlert
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Airline
@@ -78,5 +78,6 @@ BpkBannerAlert(
 )
 ```
 
-By default, a custom `icon` is announced using `alertTypeContentDescription`. Use `iconContentDescription`
-to give the custom icon its own, more specific accessibility label instead.
+By default, the rendered icon (whether the type's default icon or a custom `icon`) is announced using
+`alertTypeContentDescription`. Use `iconContentDescription` to give it its own, more specific accessibility
+label instead.
