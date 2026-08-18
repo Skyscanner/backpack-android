@@ -29,6 +29,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.platform.LocalContext
 import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
@@ -42,10 +43,12 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.videoplayer.internal.PlaybackEvent
 import net.skyscanner.backpack.compose.videoplayer.internal.isReducedMotionEnabled
 import net.skyscanner.backpack.compose.videoplayer.internal.reducePlaybackState
+import kotlin.time.Duration.Companion.milliseconds
 
 @Stable
 @OptIn(UnstableApi::class)
@@ -60,6 +63,9 @@ class BpkVideoPlayerController internal constructor(
 
     private val _isMuted = mutableStateOf(config.startsMuted)
     val isMuted: State<Boolean> get() = _isMuted
+
+    private val _progressState = mutableStateOf<BpkVideoPlayerProgress?>(null)
+    val progressState: State<BpkVideoPlayerProgress?> get() = _progressState
 
     private val exoPlayer: ExoPlayer = run {
         val applicationContext = context.applicationContext
@@ -96,6 +102,28 @@ class BpkVideoPlayerController internal constructor(
         player.setMediaItem(MediaItem.fromUri(config.videoUrl.value))
         player.prepare()
         startLoadTimeout()
+
+        scope.launch {
+            snapshotFlow { _playbackState.value }
+                .collect { state ->
+                    if (state is BpkVideoPlaybackState.Playing) {
+                        while (isActive && _playbackState.value is BpkVideoPlaybackState.Playing) {
+                            val pos = exoPlayer.currentPosition
+                            val dur = exoPlayer.duration
+                            _progressState.value = if (dur > 0L) BpkVideoPlayerProgress(pos, dur) else null
+                            delay(PROGRESS_POLL_INTERVAL_MS.milliseconds)
+                        }
+                    } else {
+                        if (state !is BpkVideoPlaybackState.Ended) {
+                            _progressState.value = null
+                        }
+                    }
+                }
+        }
+    }
+
+    private companion object {
+        const val PROGRESS_POLL_INTERVAL_MS = 200L
     }
 
     fun play() {
@@ -127,6 +155,7 @@ class BpkVideoPlayerController internal constructor(
     fun dispose() {
         timeoutJob?.cancel()
         player.release()
+        _progressState.value = null
     }
 
     private fun startLoadTimeout() {
