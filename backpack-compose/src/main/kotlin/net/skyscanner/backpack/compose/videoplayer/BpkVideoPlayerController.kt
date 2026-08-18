@@ -151,9 +151,13 @@ class BpkVideoPlayerController internal constructor(
         progressJob?.cancel()
         progressJob = scope.launch {
             while (true) {
-                val pos = exoPlayer.currentPosition
-                val dur = exoPlayer.duration
-                progressState.value = if (dur > 0L) BpkVideoPlayerProgress(pos, dur) else null
+                val positionMs = exoPlayer.currentPosition
+                val durationMs = exoPlayer.duration
+                progressState.value = if (durationMs > 0L) {
+                    BpkVideoPlayerProgress(positionMs, durationMs)
+                } else {
+                    null
+                }
                 delay(PROGRESS_POLL_INTERVAL_MS.milliseconds)
             }
         }
@@ -165,8 +169,10 @@ class BpkVideoPlayerController internal constructor(
     }
 
     private fun emitFinalProgress() {
-        val dur = exoPlayer.duration
-        if (dur > 0L) progressState.value = BpkVideoPlayerProgress(dur, dur)
+        val durationMs = exoPlayer.duration
+        if (durationMs > 0L) {
+            progressState.value = BpkVideoPlayerProgress(durationMs, durationMs)
+        }
     }
 
     companion object {
