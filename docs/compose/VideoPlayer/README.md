@@ -124,6 +124,44 @@ when (playbackState) {
     else                               -> { /* loading, buffering, etc. */ }
 }
 ```
+### Tracking playback progress
+
+`controller.progressState` exposes the current playback position as a `BpkVideoPlayerProgress?` Compose `State`. It is `null` when the duration is not yet known (e.g. before the asset is ready). Once playback starts it updates roughly every 200 ms, and a guaranteed final value at 100% is emitted at the end of each play-through — including loop boundaries.
+
+```kotlin
+val progress by controller.progressState
+
+progress?.let {
+    println("${it.positionMs} / ${it.durationMs} ms (${(it.percentage * 100).toInt()}%)")
+}
+```
+
+A common pattern is quartile tracking for analytics:
+
+```kotlin
+LaunchedEffect(Unit) {
+    val fired = mutableSetOf<Int>()
+    snapshotFlow { controller.progressState.value }
+        .filterNotNull()
+        .collect { p ->
+            listOf(25, 50, 75, 100).forEach { q ->
+                if (q !in fired && p.percentage >= q / 100f) {
+                    fired.add(q)
+                    trackEvent("video_quartile_$q")
+                }
+            }
+        }
+}
+```
+
+BpkVideoPlayerProgress fields:
+
+
+| Field  | Type | Description |
+| --- | --- | --- |
+| positionMs | Long | Current playback position in milliseconds |
+| durationMs | Long | Total video duration in milliseconds |
+| percentage | Float | positionMs / durationMs, 0f when duration is 0 |
 
 ### State reference
 
