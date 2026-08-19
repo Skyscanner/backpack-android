@@ -72,7 +72,6 @@ internal fun BpkControlFieldImpl(
 
     Box(
         modifier = modifier
-            .clearAndSetSemantics { this.contentDescription = contentDescription }
             .width(IntrinsicSize.Max)
             .requiredHeightIn(min = BpkFieldMinHeight)
             .background(backgroundColor, shape),
@@ -107,6 +106,7 @@ internal fun BpkControlFieldImpl(
             Box(
                 modifier = Modifier
                     .weight(1f)
+                    .clearAndSetSemantics { this.contentDescription = contentDescription }
                     .padding(
                         vertical = BpkSpacing.Base,
                         horizontal = BpkSpacing.Md,

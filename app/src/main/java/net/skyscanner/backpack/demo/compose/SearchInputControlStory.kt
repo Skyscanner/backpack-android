@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlStyle
 import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Calendar
@@ -151,6 +152,7 @@ internal fun SearchInputControlDockedStack(
                 .fillMaxWidth()
                 .clickable { currentFocusedIndex = 3 },
             isFocused = currentFocusedIndex == 3,
+            clearAction = BpkClearAction("Double to clear the text", onClick = {}),
             style = style,
             docking = Docking.Bottom,
             contentDescription = "1 adult travelling",
