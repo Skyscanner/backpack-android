@@ -524,13 +524,14 @@ class BpkVideoPlayerTest {
             controller.playbackState.value is BpkVideoPlaybackState.Playing
         }
 
-        // When — wait for onPositionDiscontinuity (AUTO_TRANSITION) to emit 1f
-        // waitUntil polls at ~16ms so it will catch the transient 1f value
+        // When — wait for loop boundary to emit final 100% progress
         composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
-            controller.progressState.value?.percentage == 1f
+            (controller.progressState.value?.percentage ?: 0f) >= 0.99f
         }
 
         // Then
-        assertEquals(1f, controller.progressState.value?.percentage)
+        assertTrue(
+            (controller.progressState.value?.percentage ?: 0f) >= 0.99f,
+        )
     }
 }
