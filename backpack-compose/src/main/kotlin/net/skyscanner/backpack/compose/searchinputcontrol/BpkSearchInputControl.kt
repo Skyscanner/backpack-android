@@ -52,6 +52,7 @@ sealed class Docking {
 fun BpkSearchInputControl(
     inputText: String,
     inputHint: String,
+    contentDescription: String,
     prefix: Prefix,
     modifier: Modifier = Modifier,
     clearAction: BpkClearAction? = null,
@@ -61,6 +62,7 @@ fun BpkSearchInputControl(
 ) {
     BpkControlFieldImpl(
         value = inputText,
+        contentDescription = contentDescription,
         modifier = modifier,
         placeholder = inputHint,
         prefix = prefix,
