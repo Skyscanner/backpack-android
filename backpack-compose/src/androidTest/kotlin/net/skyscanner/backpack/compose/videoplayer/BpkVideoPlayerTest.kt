@@ -177,7 +177,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(Player.REPEAT_MODE_ONE, controller.player.repeatMode)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.REPEAT_MODE_ONE, controller.player.repeatMode)
+        }
     }
 
     @Test
@@ -192,7 +194,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(Player.REPEAT_MODE_OFF, controller.player.repeatMode)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.REPEAT_MODE_OFF, controller.player.repeatMode)
+        }
     }
 
     @Test
@@ -207,7 +211,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(0f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(0f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -222,7 +228,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(1f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(1f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -240,13 +248,17 @@ class BpkVideoPlayerTest {
         composeTestRule.runOnIdle { controller.setMuted(false) }
 
         // Then
-        assertEquals(1f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(1f, controller.player.volume, 0f)
+        }
 
         // When
         composeTestRule.runOnIdle { controller.setMuted(true) }
 
         // Then
-        assertEquals(0f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(0f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -405,7 +417,9 @@ class BpkVideoPlayerTest {
         composeTestRule.waitForIdle()
 
         // Then
-        assertEquals(Player.STATE_IDLE, controller.player.playbackState)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.STATE_IDLE, controller.player.playbackState)
+        }
     }
 
     @Test
