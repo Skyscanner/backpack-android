@@ -23,5 +23,5 @@ data class BpkVideoPlayerProgress(
     val durationMs: Long,
 ) {
     val percentage: Float
-        get() = if (durationMs > 0) positionMs.toFloat() / durationMs.toFloat() else 0f
+        get() = if (durationMs > 0) (positionMs.toFloat() / durationMs.toFloat()).coerceIn(0f, 1f) else 0f
 }

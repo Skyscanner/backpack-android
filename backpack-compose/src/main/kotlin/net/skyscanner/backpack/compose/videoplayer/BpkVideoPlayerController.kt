@@ -107,7 +107,10 @@ class BpkVideoPlayerController internal constructor(
 
     fun play() {
         if (_playbackState.value is BpkVideoPlaybackState.Failed) return
-        if (_playbackState.value is BpkVideoPlaybackState.Ended) player.seekTo(0)
+        if (_playbackState.value is BpkVideoPlaybackState.Ended) {
+            _progressState.value = exoPlayer.duration.takeIf { it > 0L }?.let { BpkVideoPlayerProgress(0L, it) }
+            player.seekTo(0)
+        }
         player.play()
     }
 
@@ -125,6 +128,7 @@ class BpkVideoPlayerController internal constructor(
     }
 
     fun resetToStart() {
+        _progressState.value = exoPlayer.duration.takeIf { it > 0L }?.let { BpkVideoPlayerProgress(0L, it) }
         player.seekTo(0)
         if (_playbackState.value is BpkVideoPlaybackState.Ended) {
             _playbackState.value = BpkVideoPlaybackState.ReadyToPlay

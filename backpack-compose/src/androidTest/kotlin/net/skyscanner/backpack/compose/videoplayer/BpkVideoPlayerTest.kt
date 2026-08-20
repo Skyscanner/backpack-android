@@ -534,4 +534,58 @@ class BpkVideoPlayerTest {
             (controller.progressState.value?.percentage ?: 0f) >= 0.99f,
         )
     }
+
+    @Test
+    fun givenEndedVideo_whenResetToStart_thenProgressResetsToZero() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = false))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Ended
+        }
+
+        // When
+        composeTestRule.runOnIdle { controller.resetToStart() }
+
+        // Then
+        val progress = controller.progressState.value
+        assertNotNull(progress)
+        assertEquals(0L, progress!!.positionMs)
+        assertTrue(progress.durationMs > 0L)
+        assertEquals(0f, progress.percentage)
+    }
+
+    @Test
+    fun givenEndedVideo_whenPlay_thenProgressResetsToZero() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = false))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Ended
+        }
+
+        // When
+        composeTestRule.runOnIdle { controller.play() }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then — progress has reset and is advancing from the beginning
+        val progress = controller.progressState.value
+        assertNotNull(progress)
+        assertTrue(progress!!.durationMs > 0L)
+        assertTrue(progress.percentage < 0.5f)
+    }
 }

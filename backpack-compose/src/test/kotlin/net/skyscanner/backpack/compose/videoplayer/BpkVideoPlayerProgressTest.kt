@@ -46,4 +46,16 @@ class BpkVideoPlayerProgressTest {
         val progress = BpkVideoPlayerProgress(positionMs = 1_000L, durationMs = 0L)
         assertEquals(0f, progress.percentage)
     }
+
+    @Test
+    fun `given positionMs greater than durationMs, then percentage is clamped to 1f`() {
+        val progress = BpkVideoPlayerProgress(positionMs = 1100L, durationMs = 1000L)
+        assertEquals(1f, progress.percentage)
+    }
+
+    @Test
+    fun `given negative positionMs, then percentage is clamped to 0f`() {
+        val progress = BpkVideoPlayerProgress(positionMs = -100L, durationMs = 1000L)
+        assertEquals(0f, progress.percentage)
+    }
 }
