@@ -31,6 +31,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
@@ -50,6 +52,7 @@ import net.skyscanner.backpack.compose.utils.hideContentIf
 @Composable
 internal fun BpkControlFieldImpl(
     value: String,
+    contentDescription: String,
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     prefix: Prefix? = null,
@@ -103,6 +106,7 @@ internal fun BpkControlFieldImpl(
             Box(
                 modifier = Modifier
                     .weight(1f)
+                    .clearAndSetSemantics { this.contentDescription = contentDescription }
                     .padding(
                         vertical = BpkSpacing.Base,
                         horizontal = BpkSpacing.Md,
