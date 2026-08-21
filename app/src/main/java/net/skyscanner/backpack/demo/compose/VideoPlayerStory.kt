@@ -22,6 +22,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,9 +34,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.icon.BpkIconSize
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Expand
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayer
@@ -63,22 +66,41 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
             accessibilityLabel = "Sample video",
         ),
     )
-    Box(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(9f / 16f)
             .padding(BpkSpacing.Base),
     ) {
-        BpkVideoPlayer(
-            controller = controller,
-            scaleToFill = false,
-            modifier = Modifier.matchParentSize(),
-        )
-        BpkVideoPlayerDefaultControls(
-            controller = controller,
-            playContentDescription = "Play video",
-            pauseContentDescription = "Pause video",
-            modifier = Modifier.align(Alignment.TopEnd),
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(9f / 16f),
+        ) {
+            BpkVideoPlayer(
+                controller = controller,
+                scaleToFill = false,
+                modifier = Modifier.matchParentSize(),
+            )
+            BpkVideoPlayerDefaultControls(
+                controller = controller,
+                playContentDescription = "Play video",
+                pauseContentDescription = "Pause video",
+                modifier = Modifier.align(Alignment.TopEnd),
+            )
+        }
+
+        val progressText = controller.progressState.value?.let { p ->
+            "\n${(p.percentage * 100).toInt()}%  •  ${p.positionMs / 1000}s / ${p.durationMs / 1000}s"
+        } ?: "\n"
+
+        BpkText(
+            modifier = Modifier
+                .weight(1f)
+                .padding(top = BpkSpacing.Base),
+            text = "Video Progress can be collected inside the controller $progressText",
+            textAlign = TextAlign.Center,
+            color = BpkTheme.colors.textPrimary,
+            style = BpkTheme.typography.heading5,
         )
     }
 }
