@@ -30,6 +30,8 @@ import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.PLAYING_STATE_TIMEOUT_MS
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -175,7 +177,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(Player.REPEAT_MODE_ONE, controller.player.repeatMode)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.REPEAT_MODE_ONE, controller.player.repeatMode)
+        }
     }
 
     @Test
@@ -190,7 +194,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(Player.REPEAT_MODE_OFF, controller.player.repeatMode)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.REPEAT_MODE_OFF, controller.player.repeatMode)
+        }
     }
 
     @Test
@@ -205,7 +211,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(0f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(0f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -220,7 +228,9 @@ class BpkVideoPlayerTest {
         }
 
         // Then
-        assertEquals(1f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(1f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -238,13 +248,17 @@ class BpkVideoPlayerTest {
         composeTestRule.runOnIdle { controller.setMuted(false) }
 
         // Then
-        assertEquals(1f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(1f, controller.player.volume, 0f)
+        }
 
         // When
         composeTestRule.runOnIdle { controller.setMuted(true) }
 
         // Then
-        assertEquals(0f, controller.player.volume, 0f)
+        composeTestRule.runOnIdle {
+            assertEquals(0f, controller.player.volume, 0f)
+        }
     }
 
     @Test
@@ -403,6 +417,175 @@ class BpkVideoPlayerTest {
         composeTestRule.waitForIdle()
 
         // Then
-        assertEquals(Player.STATE_IDLE, controller.player.playbackState)
+        composeTestRule.runOnIdle {
+            assertEquals(Player.STATE_IDLE, controller.player.playbackState)
+        }
+    }
+
+    @Test
+    fun givenStubConfig_whenRendered_thenProgressIsNull() {
+        // When
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(stubConfig)
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // Then
+        assertNull(controller.progressState.value)
+    }
+
+    @Test
+    fun givenAutoPlay_whenStateReachesPlaying_thenProgressIsNotNull() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // When
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.progressState.value != null
+        }
+        assertNotNull(controller.progressState.value)
+    }
+
+    @Test
+    fun givenPlayingVideo_whenPaused_thenProgressRetainsLastValue() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.progressState.value != null
+        }
+
+        // When
+        composeTestRule.runOnIdle { controller.pause() }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Paused
+        }
+        val progressWhenPaused = controller.progressState.value
+
+        // Then — progress is retained (not nulled) and doesn't advance while paused
+        composeTestRule.mainClock.advanceTimeBy(500L)
+        assertEquals(progressWhenPaused, controller.progressState.value)
+    }
+
+    @Test
+    fun givenLoopFalse_whenVideoEnds_thenProgressPercentageIs100() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = false))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // When
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Ended
+        }
+
+        // Then
+        assertEquals(1f, controller.progressState.value?.percentage)
+    }
+
+    @Test
+    fun givenLoopTrue_whenFirstCycleCompletes_thenProgressReaches100Percent() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = true))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // When — wait for loop boundary to emit final 100% progress
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            (controller.progressState.value?.percentage ?: 0f) >= 0.99f
+        }
+
+        // Then
+        assertTrue(
+            (controller.progressState.value?.percentage ?: 0f) >= 0.99f,
+        )
+    }
+
+    @Test
+    fun givenEndedVideo_whenResetToStart_thenProgressResetsToZero() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = false))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Ended
+        }
+
+        // When
+        composeTestRule.runOnIdle { controller.resetToStart() }
+
+        // Then
+        val progress = controller.progressState.value
+        assertNotNull(progress)
+        assertEquals(0L, progress!!.positionMs)
+        assertTrue(progress.durationMs > 0L)
+        assertEquals(0f, progress.percentage)
+    }
+
+    @Test
+    fun givenEndedVideo_whenPlay_thenProgressResetsToZero() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true, loop = false))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = ENDED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Ended
+        }
+
+        // When
+        composeTestRule.runOnIdle { controller.play() }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then — progress has reset and is advancing from the beginning
+        val progress = controller.progressState.value
+        assertNotNull(progress)
+        assertTrue(progress!!.durationMs > 0L)
+        assertTrue(progress.percentage < 0.5f)
     }
 }

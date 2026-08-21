@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControl
 import net.skyscanner.backpack.compose.searchinputcontrol.BpkSearchInputControlStyle
 import net.skyscanner.backpack.compose.searchinputcontrol.Docking
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
+import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Calendar
@@ -117,6 +118,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 0,
             style = style,
             docking = Docking.Top,
+            contentDescription = "Departing from London",
         )
         BpkSearchInputControl(
             inputText = "",
@@ -128,6 +130,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 1,
             style = style,
             docking = Docking.Middle,
+            contentDescription = "Where to?",
         )
         BpkSearchInputControl(
             inputText = "Thurs 9 May – Fri 29 May, 2025",
@@ -139,6 +142,7 @@ internal fun SearchInputControlDockedStack(
             isFocused = currentFocusedIndex == 2,
             style = style,
             docking = Docking.Middle,
+            contentDescription = "Leaving on Thurs 9 May, and returning Fri 29 May, 2025",
         )
         BpkSearchInputControl(
             inputText = "1 adult",
@@ -148,8 +152,10 @@ internal fun SearchInputControlDockedStack(
                 .fillMaxWidth()
                 .clickable { currentFocusedIndex = 3 },
             isFocused = currentFocusedIndex == 3,
+            clearAction = BpkClearAction("Double to clear the text", onClick = {}),
             style = style,
             docking = Docking.Bottom,
+            contentDescription = "1 adult travelling",
         )
     }
 }

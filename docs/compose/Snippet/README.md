@@ -30,6 +30,9 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 * `AccessibilityHeaderTagEnabled`: Used to disable `Heading()` accessibility tag - Optional, true by default.
 
+> **Note:** The subheading parameter is named `subHeading` on Android and `subheading` on iOS. This
+> naming difference is a known, intentional discrepancy between the two platforms rather than a bug.
+
 ### Snippet with image only
 All text fields are optional, which means by default `BPKSnippet` only has an image.
 If you don't specify an `imageOrientation` parameter it will use the `Landscape` type
@@ -75,7 +78,7 @@ import net.skyscanner.backpack.compose.snippet.BpkSnippet
 import net.skyscanner.backpack.compose.snippet.ImageOrientation
 
     BpkSnippet(
-        description = description,
+        headline = headline,
         subHeading = subHeading,
         bodyText = bodyText,
         imageOrientation = imageOrientation,
