@@ -465,4 +465,40 @@
     <string name="settings_section_typography">Typography Sets</string>
     <string name="settings_typography_default">Default (Sans Serif)</string>
     <string name="settings_typography_alternative1">VDL 2</string>
+
+    <!-- Native compare stories (demo only) -->
+    <string name="native_compare_backpack">Backpack</string>
+    <string name="native_compare_native_material">Native (Material 3)</string>
+    <string name="native_compare_native">Native</string>
+    <string name="native_compare_state">State</string>
+    <string name="native_compare_same">Same</string>
+    <string name="native_compare_same_yes">yes</string>
+    <string name="native_compare_same_no">no</string>
+    <string name="native_compare_same_na">\u2013</string>
+    <string name="native_compare_state_fill">Fill</string>
+    <string name="native_compare_state_text">Text</string>
+    <string name="native_compare_state_pressed">Pressed</string>
+    <string name="native_compare_state_disabled">Disabled</string>
+    <string name="native_compare_button_only">button-only</string>
+    <string name="native_compare_button_only_note">button-only, %1$s</string>
+    <string name="native_compare_from_platform">from the platform</string>
+    <string name="native_compare_note_light_equals_core_primary">light = Core / Primary</string>
+    <string name="native_compare_note_equals_surface_highlight">= Surface / Highlight</string>
+    <string name="native_compare_note_equals_text_error">= Text / Error</string>
+    <string name="native_compare_ripple_text_primary" formatted="false">ripple, 20% of Text / Primary</string>
+    <string name="native_compare_token_core_primary">Core / Primary</string>
+    <string name="native_compare_token_text_on_dark">Text / On dark</string>
+    <string name="native_compare_token_surface_highlight">Surface / Highlight</string>
+    <string name="native_compare_token_text_primary">Text / Primary</string>
+    <string name="native_compare_token_text_primary_underlined">Text / Primary, underlined</string>
+    <string name="native_compare_token_text_error">Text / Error</string>
+    <string name="native_compare_token_text_disabled">Text / Disabled</string>
+    <string name="native_compare_primary">Primary</string>
+    <string name="native_compare_secondary">Secondary</string>
+    <string name="native_compare_destructive">Destructive</string>
+    <string name="native_compare_link">Link</string>
+    <string name="native_compare_primary_difference">Light: same. Dark: Backpack fills #024DAF, Core / Primary is #054184. Press and disabled are button-only on Backpack.</string>
+    <string name="native_compare_secondary_difference">Same colours in both modes. Backpack\'s fill is a button-only copy of Surface / Highlight.</string>
+    <string name="native_compare_destructive_difference">Same colours in both modes. Backpack\'s fill and text are button-only copies of Surface / Highlight and Text / Error.</string>
+    <string name="native_compare_link_difference">Same colour. Backpack underlines the label; Material does not.</string>
 </resources>
