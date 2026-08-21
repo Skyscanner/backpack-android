@@ -19,14 +19,6 @@
 package net.skyscanner.backpack.demo.compose.nativecompare
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -35,14 +27,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.common.R as BpkRes
 import net.skyscanner.backpack.demo.components.NativeCompareComponent
@@ -60,65 +49,28 @@ import net.skyscanner.backpack.meta.StoryKind
 @NativeCompareComponent
 @ComposeStory("Button", kind = StoryKind.DemoOnly)
 fun NativeButtonStory(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(vertical = BpkSpacing.Base),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    ComparisonStory(modifier = modifier) {
         ButtonComparison.entries.forEach { pair ->
             NativeButtonComparison(pair)
         }
     }
 }
 
-/** One comparison: the difference in a sentence, the two buttons, then the colour table. */
 @Composable
 internal fun NativeButtonComparison(pair: ButtonComparison, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = BpkSpacing.Base),
-        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-    ) {
-        BpkText(text = stringResource(pair.label), style = BpkTheme.typography.heading5)
-        BpkText(
-            text = stringResource(pair.difference),
-            style = BpkTheme.typography.footnote,
-            color = BpkTheme.colors.textSecondary,
-        )
-        TwoColumns(
-            backpack = { BpkText(text = stringResource(R.string.native_compare_backpack), style = BpkTheme.typography.label2) },
-            native = { BpkText(text = stringResource(R.string.native_compare_native_material), style = BpkTheme.typography.label2) },
-        )
-        listOf(true, false).forEach { enabled ->
-            TwoColumns(
-                verticalAlignment = Alignment.CenterVertically,
+    ComparisonPair(
+        label = pair.label,
+        difference = pair.difference,
+        rows = listOf(true, false).map { enabled ->
+            ComparisonRow(
                 backpack = { BpkButton(text = stringResource(R.string.button), type = pair.bpkType, enabled = enabled, onClick = {}) },
-                native = { BackpackMaterialTheme { pair.material(enabled) } },
+                native = { pair.material(enabled) },
             )
-        }
-        ComparisonTable(backpack = pair.bpkSwatches, native = pair.nativeSwatches)
-    }
-}
-
-/** Backpack at the start, the native component at the end, a fixed gap between. */
-@Composable
-private fun TwoColumns(
-    backpack: @Composable () -> Unit,
-    native: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    verticalAlignment: Alignment.Vertical = Alignment.Top,
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-        verticalAlignment = verticalAlignment,
-    ) {
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) { backpack() }
-        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) { native() }
-    }
+        },
+        backpack = pair.bpkSwatches,
+        native = pair.nativeSwatches,
+        modifier = modifier,
+    )
 }
 
 internal enum class ButtonComparison(

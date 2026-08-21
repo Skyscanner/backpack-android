@@ -51,8 +51,8 @@ import net.skyscanner.backpack.demo.R
 
 /**
  * One colour in the comparison table: which state it paints, the colour itself, and what design
- * knows it as. [name] resolves to the Figma variable name for a semantic token, or "button-only"
- * for a value that exists only inside the button. No literal text or hex: states and names are
+ * knows it as. [name] resolves to the Figma variable name for a semantic token, or "<component>-only"
+ * for a value that exists only inside that component. No literal text or hex: states and names are
  * string resources, colours are tokens or Backpack's own private colour resources.
  */
 internal data class Swatch(
@@ -61,18 +61,32 @@ internal data class Swatch(
     val color: @Composable () -> Color?,
 ) {
     companion object {
-        /** A button-only value, read from Backpack's private colour resource so light and dark stay in sync. */
-        fun buttonOnly(@StringRes state: Int, @ColorRes color: Int, @StringRes note: Int = 0) = Swatch(
+        /**
+         * A value that exists only inside one component, read from Backpack's private colour resource so
+         * light and dark stay in sync. [owner] names the component, e.g. "button-only".
+         */
+        fun componentOnly(
+            @StringRes state: Int,
+            @ColorRes color: Int,
+            @StringRes owner: Int,
+            @StringRes note: Int = 0,
+        ) = Swatch(
             state = state,
             name = {
                 if (note == 0) {
-                    stringResource(R.string.native_compare_button_only)
+                    stringResource(owner)
                 } else {
-                    stringResource(R.string.native_compare_button_only_note, stringResource(note))
+                    stringResource(R.string.native_compare_only_note, stringResource(owner), stringResource(note))
                 }
             },
             color = { colorResource(color) },
         )
+
+        fun buttonOnly(@StringRes state: Int, @ColorRes color: Int, @StringRes note: Int = 0) =
+            componentOnly(state, color, R.string.native_compare_button_only, note)
+
+        /** Nothing is painted for this state on this side. */
+        fun none(@StringRes state: Int) = overlay(state, R.string.native_compare_none)
 
         /** A semantic token, named as it appears in Figma. */
         fun token(@StringRes state: Int, @StringRes figmaName: Int, color: @Composable () -> Color) =
@@ -212,7 +226,7 @@ private fun Color.toHex(): String {
 
 private const val PERCENT = 100f
 
-private const val STATE_WIDTH_EM = 5f
+private const val STATE_WIDTH_EM = 7f
 private const val SAME_WIDTH_EM = 4f
 private const val STACK_ABOVE_FONT_SCALE = 1.3f
 private const val SWATCH_SIZE_EM = 1.2f
