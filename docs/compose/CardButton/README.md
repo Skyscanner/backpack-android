@@ -35,6 +35,10 @@ BpkSaveButton(
 )
 ```
 
+## Accessibility
+
+`BpkSaveButton` announces its checked state ("On"/"Off") to TalkBack before `contentDescription`. If the checked state is always the same in a given screen (e.g. every item in a "saved items" list), that announcement is redundant and can be confusing. Pass `announceState = false` to suppress it.
+
 Example of a Share Button on an image:
 
 ```Kotlin

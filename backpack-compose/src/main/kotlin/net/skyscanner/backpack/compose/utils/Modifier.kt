@@ -31,6 +31,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
@@ -101,3 +102,15 @@ internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment): Modifier = 
 @OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.invisibleSemantic(): Modifier =
     semantics { invisibleToUser() }
+
+/**
+ * Toggleable components (e.g. via [androidx.compose.foundation.selection.toggleable] with
+ * `Role.Switch`/`Role.Checkbox`) get a platform-generated "On"/"Off" state description that
+ * TalkBack announces before the node's own label. Passing [announceState] = false overrides
+ * that generated text on this node without touching the rest of its semantics, so traversal
+ * order and grouping are unaffected.
+ */
+internal fun Modifier.suppressToggleableStateAnnouncement(announceState: Boolean): Modifier =
+    applyIf(!announceState) {
+        semantics { stateDescription = "" }
+    }

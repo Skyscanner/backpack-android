@@ -46,12 +46,17 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.compose.utils.suppressToggleableStateAnnouncement
 
 enum class BpkSwitchStyle {
     Default,
     OnContrast,
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
+ * Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     text: String,
@@ -85,6 +90,10 @@ fun BpkSwitch(
     )
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
+ * Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     text: AnnotatedString,
@@ -118,6 +127,10 @@ fun BpkSwitch(
     )
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before
+ * [content]. Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     checked: Boolean,
@@ -143,7 +156,7 @@ fun BpkSwitch(
                     indication = null,
                     onValueChange = onCheckedChange!!,
                     enabled = enabled,
-                )
+                ).suppressToggleableStateAnnouncement(announceState)
             }
             .applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {
@@ -152,13 +165,10 @@ fun BpkSwitch(
                     if (!enabled) {
                         disabled()
                     }
+                    if (!announceState) {
+                        stateDescription = ""
+                    }
                 }
-            }
-            // toggleable()/the semantics block above attach a ToggleableState which TalkBack
-            // auto-announces as "On"/"Off" before the switch's label; this overrides that
-            // generated stateDescription without touching the semantics tree/traversal order.
-            .applyIf(!announceState) {
-                semantics { stateDescription = "" }
             },
     ) {
 
