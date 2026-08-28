@@ -156,7 +156,7 @@ fun BpkSwitch(
                     indication = null,
                     onValueChange = onCheckedChange!!,
                     enabled = enabled,
-                ).suppressToggleableStateAnnouncement(announceState)
+                ).suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
             }
             .applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {

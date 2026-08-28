@@ -122,7 +122,7 @@ internal fun BpkSaveCardButtonImpl(
                     )
                 } else Modifier,
             )
-            .suppressToggleableStateAnnouncement(announceState),
+            .suppressToggleableStateAnnouncement(shouldSuppress = !announceState),
         contentAlignment = Alignment.Center,
     ) {
         Box(modifier = Modifier.scale(scaleAnimation.value)) {
