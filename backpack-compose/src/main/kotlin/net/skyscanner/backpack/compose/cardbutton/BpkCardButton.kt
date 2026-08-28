@@ -42,6 +42,7 @@ fun BpkSaveButton(
     modifier: Modifier = Modifier,
     size: BpkCardButtonSize = BpkCardButtonSize.Default,
     style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+    announceState: Boolean = true,
 ) {
     BpkSaveCardButtonImpl(
         checked = checked,
@@ -50,6 +51,7 @@ fun BpkSaveButton(
         size = size,
         onCheckedChange = onCheckedChange,
         modifier = modifier,
+        announceState = announceState,
     )
 }
 

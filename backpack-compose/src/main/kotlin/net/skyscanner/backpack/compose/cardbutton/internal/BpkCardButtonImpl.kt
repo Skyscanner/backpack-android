@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
@@ -67,6 +68,7 @@ internal fun BpkSaveCardButtonImpl(
     size: BpkCardButtonSize,
     style: BpkCardButtonStyle,
     modifier: Modifier = Modifier,
+    announceState: Boolean = true,
 ) {
     var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
     val scaleAnimation = remember { Animatable(1f) }
@@ -119,6 +121,12 @@ internal fun BpkSaveCardButtonImpl(
                         },
                     )
                 } else Modifier,
+            )
+            .then(
+                // toggleable() attaches a ToggleableState which TalkBack auto-announces as "On"/"Off"
+                // before contentDescription; this overrides that generated stateDescription without
+                // touching the semantics tree/traversal order.
+                if (announceState) Modifier else Modifier.semantics { stateDescription = "" },
             ),
         contentAlignment = Alignment.Center,
     ) {

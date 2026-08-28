@@ -33,6 +33,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
@@ -63,6 +64,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
 ) {
     BpkSwitch(
         checked = checked,
@@ -73,6 +75,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         textStyle = textStyle,
         interactionSource = interactionSource,
+        announceState = announceState,
         content = {
             TextWithSpacer(
                 annotatedString = buildAnnotatedString { append(text) },
@@ -94,6 +97,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
 ) {
     BpkSwitch(
         checked = checked,
@@ -104,6 +108,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         textStyle = textStyle,
         interactionSource = interactionSource,
+        announceState = announceState,
         content = {
             TextWithSpacer(
                 annotatedString = text,
@@ -123,6 +128,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
     Row(
@@ -147,6 +153,12 @@ fun BpkSwitch(
                         disabled()
                     }
                 }
+            }
+            // toggleable()/the semantics block above attach a ToggleableState which TalkBack
+            // auto-announces as "On"/"Off" before the switch's label; this overrides that
+            // generated stateDescription without touching the semantics tree/traversal order.
+            .applyIf(!announceState) {
+                semantics { stateDescription = "" }
             },
     ) {
 
