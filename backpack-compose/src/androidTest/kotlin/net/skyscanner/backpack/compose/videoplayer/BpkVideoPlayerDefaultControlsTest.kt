@@ -77,6 +77,8 @@ class BpkVideoPlayerDefaultControlsTest {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
+
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = false))
@@ -101,6 +103,8 @@ class BpkVideoPlayerDefaultControlsTest {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
+
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
@@ -183,6 +187,8 @@ class BpkVideoPlayerDefaultControlsTest {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
+
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = false))
@@ -208,6 +214,8 @@ class BpkVideoPlayerDefaultControlsTest {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
+
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = false))
@@ -234,6 +242,8 @@ class BpkVideoPlayerDefaultControlsTest {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
         lateinit var controller: BpkVideoPlayerController
+
+        // When
         composeTestRule.setContent {
             BpkTheme {
                 controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
