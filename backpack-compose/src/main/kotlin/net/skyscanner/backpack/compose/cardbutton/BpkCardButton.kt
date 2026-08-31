@@ -34,6 +34,11 @@ enum class BpkCardButtonSize {
     Small,
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before
+ * [contentDescription]. Set to false when the state is redundant or misleading in context,
+ * e.g. a save button that is always shown checked in a "saved items" list.
+ */
 @Composable
 fun BpkSaveButton(
     checked: Boolean,
@@ -42,6 +47,7 @@ fun BpkSaveButton(
     modifier: Modifier = Modifier,
     size: BpkCardButtonSize = BpkCardButtonSize.Default,
     style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+    announceState: Boolean = true,
 ) {
     BpkSaveCardButtonImpl(
         checked = checked,
@@ -50,6 +56,7 @@ fun BpkSaveButton(
         size = size,
         onCheckedChange = onCheckedChange,
         modifier = modifier,
+        announceState = announceState,
     )
 }
 

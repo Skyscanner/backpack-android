@@ -33,6 +33,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
@@ -45,12 +46,17 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.compose.utils.suppressToggleableStateAnnouncement
 
 enum class BpkSwitchStyle {
     Default,
     OnContrast,
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
+ * Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     text: String,
@@ -63,6 +69,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
 ) {
     BpkSwitch(
         checked = checked,
@@ -73,6 +80,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         textStyle = textStyle,
         interactionSource = interactionSource,
+        announceState = announceState,
         content = {
             TextWithSpacer(
                 annotatedString = buildAnnotatedString { append(text) },
@@ -82,6 +90,10 @@ fun BpkSwitch(
     )
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
+ * Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     text: AnnotatedString,
@@ -94,6 +106,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
 ) {
     BpkSwitch(
         checked = checked,
@@ -104,6 +117,7 @@ fun BpkSwitch(
         switchAlignment = switchAlignment,
         textStyle = textStyle,
         interactionSource = interactionSource,
+        announceState = announceState,
         content = {
             TextWithSpacer(
                 annotatedString = text,
@@ -113,6 +127,10 @@ fun BpkSwitch(
     )
 }
 
+/**
+ * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before
+ * [content]. Set to false when the state is redundant or misleading in context.
+ */
 @Composable
 fun BpkSwitch(
     checked: Boolean,
@@ -123,6 +141,7 @@ fun BpkSwitch(
     switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
     textStyle: TextStyle? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
     content: @Composable RowScope.(Boolean) -> Unit,
 ) {
     Row(
@@ -137,7 +156,7 @@ fun BpkSwitch(
                     indication = null,
                     onValueChange = onCheckedChange!!,
                     enabled = enabled,
-                )
+                ).suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
             }
             .applyIf(onCheckedChange == null) {
                 semantics(mergeDescendants = true) {
@@ -145,6 +164,9 @@ fun BpkSwitch(
                     toggleableState = ToggleableState(checked)
                     if (!enabled) {
                         disabled()
+                    }
+                    if (!announceState) {
+                        stateDescription = ""
                     }
                 }
             },

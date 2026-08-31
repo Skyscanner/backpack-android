@@ -53,6 +53,7 @@ import net.skyscanner.backpack.compose.tokens.HeartOutline
 import net.skyscanner.backpack.compose.tokens.ShareAndroid
 import net.skyscanner.backpack.compose.tokens.internal.BpkCardButtonColors
 import net.skyscanner.backpack.compose.utils.clickableWithRipple
+import net.skyscanner.backpack.compose.utils.suppressToggleableStateAnnouncement
 
 private enum class BpkCardButtonState {
     Rest,
@@ -67,6 +68,7 @@ internal fun BpkSaveCardButtonImpl(
     size: BpkCardButtonSize,
     style: BpkCardButtonStyle,
     modifier: Modifier = Modifier,
+    announceState: Boolean = true,
 ) {
     var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
     val scaleAnimation = remember { Animatable(1f) }
@@ -119,7 +121,8 @@ internal fun BpkSaveCardButtonImpl(
                         },
                     )
                 } else Modifier,
-            ),
+            )
+            .suppressToggleableStateAnnouncement(shouldSuppress = !announceState),
         contentAlignment = Alignment.Center,
     ) {
         Box(modifier = Modifier.scale(scaleAnimation.value)) {
