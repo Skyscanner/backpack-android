@@ -238,6 +238,33 @@ class BpkVideoPlayerDefaultControlsTest {
     }
 
     @Test
+    fun givenNoSizeSpecified_whenPlaybackStateChangesToPlaying_thenPauseButtonKeepsDefaultSize() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+
+        // When
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                BpkVideoPlayerDefaultControls(
+                    controller = controller,
+                    playContentDescription = PLAY_LABEL,
+                    pauseContentDescription = PAUSE_LABEL,
+                )
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then
+        composeTestRule.onNodeWithContentDescription(PAUSE_LABEL)
+            .assertIsDisplayed()
+            .assertHeightIsEqualTo(DEFAULT_BUTTON_HEIGHT)
+    }
+
+    @Test
     fun givenLargeSize_whenPlaybackStateChangesToPlaying_thenPauseButtonKeepsLargeSize() {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
