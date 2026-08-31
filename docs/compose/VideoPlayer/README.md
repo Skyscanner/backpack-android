@@ -35,7 +35,7 @@ val controller = rememberBpkVideoPlayerController(
 
 ### Simple — built-in controls
 
-`BpkVideoPlayerDefaultControls` handles play/pause taps internally. Provide localized `playContentDescription` and `pauseContentDescription` — the component owns no user-facing copy.
+`BpkVideoPlayerDefaultControls` handles play/pause taps internally. Provide localized `playContentDescription` and `pauseContentDescription` — the component owns no user-facing copy. Pass `size` (`BpkButtonSize`) to control the button size — it defaults to `BpkButtonSize.Default`.
 
 ```kotlin
 Box {
@@ -47,6 +47,7 @@ Box {
         controller = controller,
         playContentDescription = stringResource(R.string.video_play_label),
         pauseContentDescription = stringResource(R.string.video_pause_label),
+        size = BpkButtonSize.Large,
         modifier = Modifier.align(Alignment.TopEnd),
     )
 }
