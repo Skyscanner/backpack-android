@@ -73,6 +73,12 @@
     <color name="__privateNavigationTabSelected">#ff054184</color>
     <color name="__privatePageIndicatorButtonCarouselNormalBackground">#80ffffff</color>
     <color name="__privatePageIndicatorButtonCarouselPressedBackground">#ccffffff</color>
+    <color name="__privateRadioDefaultDisabledBackground">#80ffffff</color>
+    <color name="__privateRadioDefaultSelectedBackground">#ff84e9ff</color>
+    <color name="__privateRadioDefaultUnselectedStroke">#80ffffff</color>
+    <color name="__privateRadioInvalidBackground">#ffff649c</color>
+    <color name="__privateRadioOnContrastSelectedBackground">#ff84e9ff</color>
+    <color name="__privateRadioOnContrastUnselectedBackground">#00ffffff</color>
     <color name="__privateSegmentedControlCanvasDefault">#ff131d2b</color>
     <color name="__privateSegmentedControlSurfaceContrast">#ff131d2b</color>
     <color name="__privateSegmentedControlSurfaceContrastOn">#ff054184</color>
