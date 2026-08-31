@@ -23,8 +23,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.internal.minHeight
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.PLAYING_STATE_TIMEOUT_MS
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.READY_STATE_TIMEOUT_MS
@@ -206,7 +206,7 @@ class BpkVideoPlayerDefaultControlsTest {
         // Then
         composeTestRule.onNodeWithContentDescription(PLAY_LABEL)
             .assertIsDisplayed()
-            .assertHeightIsEqualTo(DEFAULT_BUTTON_HEIGHT)
+            .assertHeightIsEqualTo(BpkButtonSize.Default.minHeight)
     }
 
     @Test
@@ -234,7 +234,7 @@ class BpkVideoPlayerDefaultControlsTest {
         // Then
         composeTestRule.onNodeWithContentDescription(PLAY_LABEL)
             .assertIsDisplayed()
-            .assertHeightIsEqualTo(LARGE_BUTTON_HEIGHT)
+            .assertHeightIsEqualTo(BpkButtonSize.Large.minHeight)
     }
 
     @Test
@@ -261,7 +261,7 @@ class BpkVideoPlayerDefaultControlsTest {
         // Then
         composeTestRule.onNodeWithContentDescription(PAUSE_LABEL)
             .assertIsDisplayed()
-            .assertHeightIsEqualTo(DEFAULT_BUTTON_HEIGHT)
+            .assertHeightIsEqualTo(BpkButtonSize.Default.minHeight)
     }
 
     @Test
@@ -289,13 +289,11 @@ class BpkVideoPlayerDefaultControlsTest {
         // Then
         composeTestRule.onNodeWithContentDescription(PAUSE_LABEL)
             .assertIsDisplayed()
-            .assertHeightIsEqualTo(LARGE_BUTTON_HEIGHT)
+            .assertHeightIsEqualTo(BpkButtonSize.Large.minHeight)
     }
 
     private companion object {
         const val PLAY_LABEL = "Play"
         const val PAUSE_LABEL = "Pause"
-        val DEFAULT_BUTTON_HEIGHT = 36.dp
-        val LARGE_BUTTON_HEIGHT = 48.dp
     }
 }
