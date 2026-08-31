@@ -47,8 +47,8 @@ Box {
         controller = controller,
         playContentDescription = stringResource(R.string.video_play_label),
         pauseContentDescription = stringResource(R.string.video_pause_label),
-        size = BpkButtonSize.Large,
         modifier = Modifier.align(Alignment.TopEnd),
+        size = BpkButtonSize.Large,
     )
 }
 ```

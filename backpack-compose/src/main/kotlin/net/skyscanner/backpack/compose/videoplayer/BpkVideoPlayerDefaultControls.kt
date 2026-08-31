@@ -42,8 +42,8 @@ fun BpkVideoPlayerDefaultControls(
     controller: BpkVideoPlayerController,
     playContentDescription: String,
     pauseContentDescription: String,
-    size: BpkButtonSize = BpkButtonSize.Default,
     modifier: Modifier = Modifier,
+    size: BpkButtonSize = BpkButtonSize.Default,
 ) {
     val playbackState by controller.playbackState
     if (playbackState.isLoading) return

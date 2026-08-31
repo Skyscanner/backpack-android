@@ -134,8 +134,8 @@ fun VideoPlayerLargeControlsStory(modifier: Modifier = Modifier) {
             controller = controller,
             playContentDescription = "Play video",
             pauseContentDescription = "Pause video",
-            size = BpkButtonSize.Large,
             modifier = Modifier.align(Alignment.TopEnd),
+            size = BpkButtonSize.Large,
         )
     }
 }
