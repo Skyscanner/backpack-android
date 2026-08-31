@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -101,6 +102,40 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             color = BpkTheme.colors.textPrimary,
             style = BpkTheme.typography.heading5,
+        )
+    }
+}
+
+// Use case 1b: same as above but with a Large size control button
+@Composable
+@VideoPlayerComponent
+@ComposeStory(name = "Default Controls - Large Button", kind = StoryKind.DemoOnly)
+fun VideoPlayerLargeControlsStory(modifier: Modifier = Modifier) {
+    val controller = rememberBpkVideoPlayerController(
+        config = BpkVideoPlayerConfig(
+            videoUrl = BpkVideoUrl(VIDEO_URL),
+            loop = false,
+            startsMuted = true,
+            accessibilityLabel = "Sample video",
+        ),
+    )
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(BpkSpacing.Base)
+            .aspectRatio(9f / 16f),
+    ) {
+        BpkVideoPlayer(
+            controller = controller,
+            scaleToFill = false,
+            modifier = Modifier.matchParentSize(),
+        )
+        BpkVideoPlayerDefaultControls(
+            controller = controller,
+            playContentDescription = "Play video",
+            pauseContentDescription = "Pause video",
+            size = BpkButtonSize.Large,
+            modifier = Modifier.align(Alignment.TopEnd),
         )
     }
 }

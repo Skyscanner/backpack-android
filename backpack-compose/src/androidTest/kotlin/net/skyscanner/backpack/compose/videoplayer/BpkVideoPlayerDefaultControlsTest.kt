@@ -18,10 +18,13 @@
 
 package net.skyscanner.backpack.compose.videoplayer
 
+import androidx.compose.ui.test.assertHeightIsEqualTo
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.PLAYING_STATE_TIMEOUT_MS
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.READY_STATE_TIMEOUT_MS
@@ -175,8 +178,87 @@ class BpkVideoPlayerDefaultControlsTest {
         assertTrue(controller.playbackState.value is BpkVideoPlaybackState.Paused)
     }
 
+    @Test
+    fun givenNoSizeSpecified_whenControlsRendered_thenDefaultButtonSizeIsApplied() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = false))
+                BpkVideoPlayerDefaultControls(
+                    controller = controller,
+                    playContentDescription = PLAY_LABEL,
+                    pauseContentDescription = PAUSE_LABEL,
+                )
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = READY_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.ReadyToPlay
+        }
+
+        // Then
+        composeTestRule.onNodeWithContentDescription(PLAY_LABEL)
+            .assertIsDisplayed()
+            .assertHeightIsEqualTo(DEFAULT_BUTTON_HEIGHT)
+    }
+
+    @Test
+    fun givenLargeSize_whenControlsRendered_thenLargeButtonSizeIsApplied() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = false))
+                BpkVideoPlayerDefaultControls(
+                    controller = controller,
+                    playContentDescription = PLAY_LABEL,
+                    pauseContentDescription = PAUSE_LABEL,
+                    size = BpkButtonSize.Large,
+                )
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = READY_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.ReadyToPlay
+        }
+
+        // Then
+        composeTestRule.onNodeWithContentDescription(PLAY_LABEL)
+            .assertIsDisplayed()
+            .assertHeightIsEqualTo(LARGE_BUTTON_HEIGHT)
+    }
+
+    @Test
+    fun givenLargeSize_whenPlaybackStateChangesToPlaying_thenPauseButtonKeepsLargeSize() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                BpkVideoPlayerDefaultControls(
+                    controller = controller,
+                    playContentDescription = PLAY_LABEL,
+                    pauseContentDescription = PAUSE_LABEL,
+                    size = BpkButtonSize.Large,
+                )
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then
+        composeTestRule.onNodeWithContentDescription(PAUSE_LABEL)
+            .assertIsDisplayed()
+            .assertHeightIsEqualTo(LARGE_BUTTON_HEIGHT)
+    }
+
     private companion object {
         const val PLAY_LABEL = "Play"
         const val PAUSE_LABEL = "Pause"
+        val DEFAULT_BUTTON_HEIGHT = 36.dp
+        val LARGE_BUTTON_HEIGHT = 48.dp
     }
 }

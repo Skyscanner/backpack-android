@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Pause
@@ -41,6 +42,7 @@ fun BpkVideoPlayerDefaultControls(
     controller: BpkVideoPlayerController,
     playContentDescription: String,
     pauseContentDescription: String,
+    size: BpkButtonSize = BpkButtonSize.Default,
     modifier: Modifier = Modifier,
 ) {
     val playbackState by controller.playbackState
@@ -50,6 +52,7 @@ fun BpkVideoPlayerDefaultControls(
         icon = if (playbackState.isPlaying) BpkIcon.Pause else BpkIcon.Play,
         contentDescription = if (playbackState.isPlaying) pauseContentDescription else playContentDescription,
         type = BpkButtonType.SecondaryOnDark,
+        size = size,
         modifier = modifier,
         onClick = { controller.toggle() },
     )
