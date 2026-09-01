@@ -165,7 +165,11 @@ internal fun BpkChipImpl(
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        horizontalArrangement = if (type == BpkChipType.Selectable) {
+            Arrangement.spacedBy(BpkSpacing.Md, Alignment.CenterHorizontally)
+        } else {
+            Arrangement.spacedBy(BpkSpacing.Md)
+        },
         modifier = modifier
             .height(chipConfig?.height ?: BpkSpacing.Xl)
             .border(BorderStroke(BpkBorderSize.Sm, strokeColor), ChipShape)

@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.compose.chip
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.chip.BpkChip
@@ -79,6 +82,23 @@ class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first
     }
 
     @Test
+    fun fullWidth() = snap(width = CHIP_FULL_WIDTH.dp) {
+        BpkChip(
+            text = "Chip",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    @Test
+    fun fullWidthWithIcon() = snap(width = CHIP_FULL_WIDTH.dp) {
+        BpkChip(
+            text = "Chip",
+            icon = BpkIcon.Deals,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    @Test
     @Variants(BpkTestVariant.Default)
     fun typeDropdown() {
         snap {
@@ -88,10 +108,38 @@ class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first
 
     @Test
     @Variants(BpkTestVariant.Default)
+    fun typeDropdownFullWidth() = snap(width = CHIP_FULL_WIDTH.dp) {
+        BpkDropdownChip(
+            text = "Chip",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun typeDropdownFullWidthWithIcon() = snap(width = CHIP_FULL_WIDTH.dp) {
+        BpkDropdownChip(
+            text = "Chip",
+            icon = BpkIcon.Deals,
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
     fun typeDismiss() {
         snap {
             BpkDismissibleChip(text = "Chip")
         }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun typeDismissFullWidth() = snap(width = CHIP_FULL_WIDTH.dp) {
+        BpkDismissibleChip(
+            text = "Chip",
+            modifier = Modifier.fillMaxWidth(),
+        )
     }
 
     @Test
@@ -139,3 +187,5 @@ class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first
 }
 
 private typealias Flavor = Pair<BpkChip.Style, Boolean>
+
+private const val CHIP_FULL_WIDTH = 200
