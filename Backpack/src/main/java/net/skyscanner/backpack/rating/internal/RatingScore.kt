@@ -34,7 +34,7 @@ internal class RatingScore(
 
     var rating: Float = 0f
         set(value) {
-            field = clamp(value, minRating, maxRating)
+            field = if (value.isNaN()) minRating else clamp(value, minRating, maxRating)
         }
 
     var scale: BpkRating.Scale = defaultScale

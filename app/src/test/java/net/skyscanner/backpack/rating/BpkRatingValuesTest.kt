@@ -97,9 +97,21 @@ class BpkRatingValuesTest : BpkSnapshotTest() {
         val value = 3.49f
         val subject = createTestRating(testContext, value = value)
 
-        assertEquals(value, subject.value, 0f)
+        assertEquals(value.toBits(), subject.value.toBits())
         assertEquals(
             "3.49",
+            subject.findViewById<TextView>(R.id.bpk_rating_badge).text.toString(),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun handlesNaNValue() {
+        val subject = createTestRating(testContext, value = Float.NaN)
+
+        assertEquals(0f.toBits(), subject.value.toBits())
+        assertEquals(
+            "0.0",
             subject.findViewById<TextView>(R.id.bpk_rating_badge).text.toString(),
         )
     }

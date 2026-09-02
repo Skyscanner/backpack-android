@@ -21,18 +21,30 @@ package net.skyscanner.backpack.compose.rating.internal
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.Locale
 
 class BpkRatingComponentsTest {
 
     @Test
     fun formatValuePreservesInputPrecision() {
-        assertEquals("3.49", formatValue(3.49f, BpkRatingScale.ZeroToFive))
-        assertEquals("4.794", formatValue(4.794f, BpkRatingScale.ZeroToFive))
+        assertEquals("3.49", formatValue(3.49f, BpkRatingScale.ZeroToFive, Locale.US))
+        assertEquals("4.794", formatValue(4.794f, BpkRatingScale.ZeroToFive, Locale.US))
+        assertEquals("3.4900002", formatValue(3.4900002f, BpkRatingScale.ZeroToFive, Locale.US))
     }
 
     @Test
     fun formatValueClampsToScale() {
-        assertEquals("0.0", formatValue(-1f, BpkRatingScale.ZeroToFive))
-        assertEquals("5.0", formatValue(6f, BpkRatingScale.ZeroToFive))
+        assertEquals("0.0", formatValue(-1f, BpkRatingScale.ZeroToFive, Locale.US))
+        assertEquals("5.0", formatValue(6f, BpkRatingScale.ZeroToFive, Locale.US))
+    }
+
+    @Test
+    fun formatValueUsesLocaleWithoutRounding() {
+        assertEquals("3,49", formatValue(3.49f, BpkRatingScale.ZeroToFive, Locale.GERMANY))
+    }
+
+    @Test
+    fun formatValueMapsNaNToScaleMinimum() {
+        assertEquals("0.0", formatValue(Float.NaN, BpkRatingScale.ZeroToFive, Locale.US))
     }
 }

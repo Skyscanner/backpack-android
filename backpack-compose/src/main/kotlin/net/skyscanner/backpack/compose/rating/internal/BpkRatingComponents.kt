@@ -31,6 +31,7 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.MeasurePolicy
 import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
@@ -41,6 +42,9 @@ import net.skyscanner.backpack.compose.rating.BpkRatingSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 internal fun BpkRatingNumbers(
@@ -52,9 +56,11 @@ internal fun BpkRatingNumbers(
     scaleColor: Color = BpkTheme.colors.textSecondary,
 ) {
     Row(modifier = modifier) {
+        val locale = LocalConfiguration.current.locales[0]
+
         BpkText(
             modifier = Modifier.alignByBaseline(),
-            text = formatValue(value, scale),
+            text = formatValue(value, scale, locale),
             style = when (size) {
                 BpkRatingSize.Base -> BpkTheme.typography.label1
                 BpkRatingSize.Large -> BpkTheme.typography.hero5
@@ -159,8 +165,17 @@ private fun Placeable.calculateBaselines(height: Int): Map<AlignmentLine, Int> {
     )
 }
 
-internal fun formatValue(value: Float, scale: BpkRatingScale): String =
-    value.coerceIn(scale.range).toString()
+internal fun formatValue(value: Float, scale: BpkRatingScale, locale: Locale): String {
+    val coercedValue = if (value.isNaN()) scale.range.start else value.coerceIn(scale.range)
+    val decimalValue = BigDecimal(coercedValue.toString()).stripTrailingZeros()
+    val fractionDigits = decimalValue.scale().coerceAtLeast(1)
+
+    return NumberFormat.getNumberInstance(locale).apply {
+        isGroupingUsed = false
+        minimumFractionDigits = fractionDigits
+        maximumFractionDigits = fractionDigits
+    }.format(decimalValue)
+}
 
 private val BpkRatingScale.range: ClosedFloatingPointRange<Float>
     get() = when (this) {
