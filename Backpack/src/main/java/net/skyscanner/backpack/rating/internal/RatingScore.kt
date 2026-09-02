@@ -34,8 +34,7 @@ internal class RatingScore(
 
     var rating: Float = 0f
         set(value) {
-            val clamped = clamp(value, minRating, maxRating)
-            field = (clamped * 10).toInt() / 10f // rounding to one decimal
+            field = clamp(value, minRating, maxRating)
         }
 
     var scale: BpkRating.Scale = defaultScale
