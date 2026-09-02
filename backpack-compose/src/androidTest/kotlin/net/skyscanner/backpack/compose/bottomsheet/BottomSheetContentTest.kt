@@ -26,6 +26,9 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Rule
 import org.junit.Test
 
+private const val FIRST_CONTENT = "First content"
+private const val SECOND_CONTENT = "Second content"
+
 class BottomSheetContentTest {
 
     @get:Rule
@@ -40,21 +43,21 @@ class BottomSheetContentTest {
                 BpkBottomSheet(
                     state = rememberBpkBottomSheetState(BpkBottomSheetValue.Expanded),
                     sheetContent = if (showFirstContent.value) {
-                        { BpkText(text = "First content") }
+                        { BpkText(text = FIRST_CONTENT) }
                     } else {
-                        { BpkText(text = "Second content") }
+                        { BpkText(text = SECOND_CONTENT) }
                     },
                     content = {},
                 )
             }
         }
 
-        composeTestRule.onNodeWithText("First content").assertExists()
+        composeTestRule.onNodeWithText(FIRST_CONTENT).assertExists()
 
         composeTestRule.runOnIdle { showFirstContent.value = false }
 
-        composeTestRule.onNodeWithText("Second content").assertExists()
-        composeTestRule.onNodeWithText("First content").assertDoesNotExist()
+        composeTestRule.onNodeWithText(SECOND_CONTENT).assertExists()
+        composeTestRule.onNodeWithText(FIRST_CONTENT).assertDoesNotExist()
     }
 
     @Test
@@ -67,19 +70,19 @@ class BottomSheetContentTest {
                     onDismissRequest = {},
                     title = "Title",
                     content = if (showFirstContent.value) {
-                        { BpkText(text = "First content") }
+                        { BpkText(text = FIRST_CONTENT) }
                     } else {
-                        { BpkText(text = "Second content") }
+                        { BpkText(text = SECOND_CONTENT) }
                     },
                 )
             }
         }
 
-        composeTestRule.onNodeWithText("First content").assertExists()
+        composeTestRule.onNodeWithText(FIRST_CONTENT).assertExists()
 
         composeTestRule.runOnIdle { showFirstContent.value = false }
 
-        composeTestRule.onNodeWithText("Second content").assertExists()
-        composeTestRule.onNodeWithText("First content").assertDoesNotExist()
+        composeTestRule.onNodeWithText(SECOND_CONTENT).assertExists()
+        composeTestRule.onNodeWithText(FIRST_CONTENT).assertDoesNotExist()
     }
 }
