@@ -34,7 +34,7 @@ internal fun BottomSheetContent(
     content: @Composable (ColumnScope.() -> Unit),
 ) {
     Column(modifier) {
-        val contentSlot = remember { movableContentOf { content() } }
+        val contentSlot = remember(content) { movableContentOf { content() } }
         when (dragHandleStyle) {
             BpkDragHandleStyle.Default -> contentSlot()
             is BpkDragHandleStyle.OnImage -> Box {

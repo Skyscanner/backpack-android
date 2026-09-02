@@ -117,7 +117,7 @@ private fun ModalBottomSheetContent(
     if (closeButton is BpkModalBottomSheetCloseAction.Close || !title.isNullOrEmpty() || action != null) {
         Box(modifier = modifier) {
             Column {
-                val contentSlot = remember { movableContentOf { content() } }
+                val contentSlot = remember(content) { movableContentOf { content() } }
                 when (dragHandleStyle) {
                     BpkDragHandleStyle.Default -> {
                         BpkModalBottomSheetHeader(
