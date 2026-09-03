@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.internal.BpkRadioColors
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -51,10 +51,10 @@ internal fun BpkRadioButtonImpl(
             enabled = enabled,
             interactionSource = interactionSource,
             colors = RadioButtonDefaults.colors(
-                selectedColor = BpkTheme.colors.coreAccent,
-                unselectedColor = BpkTheme.colors.textSecondary,
-                disabledSelectedColor = BpkTheme.colors.textDisabled,
-                disabledUnselectedColor = BpkTheme.colors.textDisabled,
+                selectedColor = BpkRadioColors.defaultSelectedBackground,
+                unselectedColor = BpkRadioColors.defaultUnselectedStroke,
+                disabledSelectedColor = BpkRadioColors.defaultDisabledBackground,
+                disabledUnselectedColor = BpkRadioColors.defaultDisabledBackground,
             ),
         )
     }
