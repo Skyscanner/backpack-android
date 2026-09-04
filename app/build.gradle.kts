@@ -156,6 +156,8 @@ dependencies {
     androidTestImplementation(libs.ktor.clientCio)
     implementation(project(":Backpack"))
     implementation(project(":backpack-compose"))
+    // Native-compare stories render Material 3 components next to Backpack ones (demo app only).
+    implementation(libs.compose.material3)
     implementation(project(":meta:annotations"))
     ksp(project(":meta:processor"))
     ksp(libs.destinations.ksp)
