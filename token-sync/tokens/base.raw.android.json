@@ -1,0 +1,2302 @@
+{
+  "aliases": {
+    "COLOUR_BRAND_BLUE_BRIGHT": "#a1eeffff",
+    "COLOUR_BRAND_BLUE_MUTED": "#d9f8ffff",
+    "COLOUR_MIDNIGHT_SKY": "#04182dff",
+    "COLOUR_DARK_BLUE_100": "#002b4bff",
+    "COLOUR_BRAND_GREEN_BRIGHT": "#93ffdeff",
+    "COLOUR_DARK_SKY": "#05203cff",
+    "COLOUR_DARK_SKY_85": "#154679ff",
+    "COLOUR_SKY_BLUE": "#0062e3ff",
+    "COLOUR_SKY_BLUE_85": "#024dafff",
+    "COLOUR_TWILIGHT": "#054184ff",
+    "COLOUR_TWILIGHT_85": "#024dafff",
+    "COLOUR_BRIGHT_BLUE": "#84e9ffff",
+    "COLOUR_BRIGHT_BLUE_20": "#d1f7ffff",
+    "COLOUR_LIGHT_BLUE": "#a1eeffff",
+    "COLOUR_MUTED_BLUE": "#d9f8ffff",
+    "COLOUR_BABY_BLUE": "#e3f0ffff",
+    "COLOUR_BABY_BLUE_40": "#94c3ffff",
+    "COLOUR_BABY_BLUE_30": "#b4d7ffff",
+    "COLOUR_BABY_BLUE_20": "#cfe4ffff",
+    "COLOUR_GREEN": "#0c838aff",
+    "COLOUR_MUTED_GREEN": "#d4fff2ff",
+    "COLOUR_BRIGHT_GREEN": "#62f1c6ff",
+    "COLOUR_BRIGHT_GREEN_30": "#93ffdeff",
+    "COLOUR_BRIGHT_GREEN_20": "#b1ffe7ff",
+    "COLOUR_AMBER": "#f55d42ff",
+    "COLOUR_ORANGE": "#ff7b59ff",
+    "COLOUR_YELLOW": "#feeb87ff",
+    "COLOUR_MUTED_YELLOW": "#fff7cfff",
+    "COLOUR_BRIGHT_YELLOW": "#fbf1bbff",
+    "COLOUR_BERRY": "#e70866ff",
+    "COLOUR_BERRY_75": "#c80456ff",
+    "COLOUR_BRIGHT_BERRY": "#ff649cff",
+    "COLOUR_PINK": "#ffa3e5ff",
+    "COLOUR_BRIGHT_PINK": "#ffcaddff",
+    "COLOUR_MUTED_PINK": "#ffe9f9ff",
+    "COLOUR_PURPLE": "#8e47baff",
+    "COLOUR_BRAND_PINK": "#ffa3e5ff",
+    "COLOUR_ECO_GREEN": "#0fa1a9ff",
+    "COLOUR_BRAND_ORANGE": "#ff7b59ff",
+    "COLOUR_BRAND_YELLOW": "#feeb87ff",
+    "NEUTRAL_NIGHT_NIGHT_SKY": "#054184ff",
+    "NEUTRAL_NIGHT_NIGHT_GREEN_SPOT": "#62f1c6ff",
+    "NEUTRAL_NIGHT_NIGHT_GREEN_FILL": "#b1ffe7ff",
+    "NEUTRAL_NIGHT_NIGHT_YELLOW_FILL": "#fbf1bbff",
+    "NEUTRAL_NIGHT_NIGHT_BERRY": "#ff649cff",
+    "NEUTRAL_NIGHT_NIGHT_PINK": "#ffcaddff",
+    "NEUTRAL_NIGHT_NIGHT_GREY_10": "#010913ff",
+    "NEUTRAL_NIGHT_NIGHT_BLUE": "#84e9ffff",
+    "NEUTRAL_NIGHT_NIGHT_GREY_20": "#131d2bff",
+    "NEUTRAL_NIGHT_NIGHT_GREY_25": "#243346ff",
+    "NEUTRAL_NIGHT_NIGHT_GREY_30": "#44505fff",
+    "NEUTRAL_NIGHT_NIGHT_GREY_40": "#bdc4cbff",
+    "NEUTRAL_CHARCOAL": "#161616ff",
+    "NEUTRAL_GREY_40": "#626971ff",
+    "NEUTRAL_GREY_30": "#c1c7cfff",
+    "NEUTRAL_GREY_20": "#e0e4e9ff",
+    "NEUTRAL_GREY_10": "#eff3f8ff",
+    "NEUTRAL_GREY_05": "#f5f7faff",
+    "NEUTRAL_WHITE": "#ffffffff",
+    "NEUTRAL_DARK_GREY_00": "#0b121dff",
+    "NEUTRAL_DARK_GREY_10": "#010913ff",
+    "NEUTRAL_DARK_GREY_20": "#131d2bff",
+    "NEUTRAL_DARK_GREY_25": "#243346ff",
+    "NEUTRAL_DARK_GREY_30": "#44505fff",
+    "NEUTRAL_DARK_GREY_40": "#bdc4cbff",
+    "ALPHA_BLACK_ALPHA_80": "#000000cc",
+    "ALPHA_BLACK_ALPHA_70": "#000000b2",
+    "ALPHA_BLACK_ALPHA_50": "#00000080",
+    "ALPHA_BLACK_ALPHA_25": "#16161640",
+    "ALPHA_BLACK_ALPHA_20": "#00000033",
+    "ALPHA_WHITE_ALPHA_80": "#ffffffcc",
+    "ALPHA_WHITE_ALPHA_50": "#ffffff80",
+    "ALPHA_WHITE_ALPHA_20": "#ffffff33",
+    "ALPHA_WHITE_ALPHA_10": "#ffffff1a",
+    "ALPHA_TRANSPARENT": "#ffffff00",
+    "RADIUS_NONE": "0",
+    "RADIUS_XS": "4",
+    "RADIUS_SM": "8",
+    "RADIUS_MD": "12",
+    "RADIUS_NAV_TABS": "18",
+    "RADIUS_LG": "24",
+    "RADIUS_XL": "48",
+    "RADIUS_FULL": "999",
+    "SPACING_NONE": "0",
+    "SPACING_XXS": "1",
+    "SPACING_XS": "2",
+    "SPACING_SM": "4",
+    "SPACING_MD": "8",
+    "SPACING_BASE": "16",
+    "SPACING_LG": "24",
+    "SPACING_XL": "32",
+    "SPACING_XXL": "40",
+    "SPACING_XXXL": "64",
+    "SPACING_XXXXL": "96",
+    "HEIGHTS_16": "16",
+    "HEIGHTS_20": "20",
+    "HEIGHTS_24": "24",
+    "HEIGHTS_32": "32",
+    "HEIGHTS_36": "36",
+    "HEIGHTS_40": "40",
+    "HEIGHTS_44": "44",
+    "HEIGHTS_48": "48",
+    "HEIGHTS_52": "52",
+    "HEIGHTS_56": "56",
+    "HEIGHTS_64": "64",
+    "BORDER_1": "1",
+    "BORDER_2": "2",
+    "BORDER_3": "3",
+    "MODAL_200": "200",
+    "MODAL_400": "400",
+    "MODAL_512": "512",
+    "MODAL_600": "600",
+    "MODAL_800": "800",
+    "MODAL_1000": "1000",
+    "MODAL_1024": "1024",
+    "TYPE_FAMILY_SKYSCANNER_RELATIVE": "Skyscanner Relative",
+    "TYPE_FAMILY_LARKEN": "Larken",
+    "TYPE_SIZE_12": "12",
+    "TYPE_SIZE_14": "14",
+    "TYPE_SIZE_16": "16",
+    "TYPE_SIZE_20": "20",
+    "TYPE_SIZE_24": "24",
+    "TYPE_SIZE_32": "32",
+    "TYPE_SIZE_40": "40",
+    "TYPE_SIZE_48": "48",
+    "TYPE_SIZE_64": "64",
+    "TYPE_SIZE_76": "76",
+    "TYPE_SIZE_96": "96",
+    "TYPE_SIZE_120": "120",
+    "TYPE_SIZE_144": "144",
+    "TYPE_SIZE_192": "192",
+    "TYPE_SIZE_240": "240",
+    "TYPE_LINE_HEIGHT_16": "16",
+    "TYPE_LINE_HEIGHT_20": "20",
+    "TYPE_LINE_HEIGHT_22": "22",
+    "TYPE_LINE_HEIGHT_24": "24",
+    "TYPE_LINE_HEIGHT_28": "28",
+    "TYPE_LINE_HEIGHT_32": "32",
+    "TYPE_LINE_HEIGHT_40": "40",
+    "TYPE_LINE_HEIGHT_48": "48",
+    "TYPE_LINE_HEIGHT_56": "56",
+    "TYPE_LINE_HEIGHT_64": "64",
+    "TYPE_LINE_HEIGHT_76": "76",
+    "TYPE_LINE_HEIGHT_82": "82",
+    "TYPE_LINE_HEIGHT_96": "96",
+    "TYPE_LINE_HEIGHT_115": "115",
+    "TYPE_LINE_HEIGHT_120": "120",
+    "TYPE_LINE_HEIGHT_153": "153",
+    "TYPE_LINE_HEIGHT_192": "192",
+    "TYPE_LETTER_SPACING_LOOSE_20": "1",
+    "TYPE_LETTER_SPACING_LOOSE_10": "0.6000000238418579",
+    "TYPE_LETTER_SPACING_DEFAULT": "0",
+    "TYPE_WEIGHT_900": "900",
+    "TYPE_WEIGHT_700": "700",
+    "TYPE_WEIGHT_400": "400",
+    "TYPE_WEIGHT_300": "300",
+    "TYPE_LETTER_SPACING_TIGHT_10": "-0.6000000238418579",
+    "TYPE_LETTER_SPACING_TIGHT_20": "-1",
+    "TYPE_LETTER_SPACING_TIGHT_30": "-1.2000000476837158",
+    "TYPE_LETTER_SPACING_TIGHT_40": "-2",
+    "TYPE_LETTER_SPACING_TIGHT_50": "-3.5"
+  },
+  "props": {
+    "RADIUS_NONE": {
+      "type": "size",
+      "category": "radii",
+      "value": "0",
+      "name": "RADIUS_NONE"
+    },
+    "RADIUS_XS": {
+      "type": "size",
+      "category": "radii",
+      "value": "4",
+      "name": "RADIUS_XS"
+    },
+    "RADIUS_SM": {
+      "type": "size",
+      "category": "radii",
+      "value": "8",
+      "name": "RADIUS_SM"
+    },
+    "RADIUS_MD": {
+      "type": "size",
+      "category": "radii",
+      "value": "12",
+      "name": "RADIUS_MD"
+    },
+    "RADIUS_NAV_TABS": {
+      "type": "size",
+      "category": "radii",
+      "value": "18",
+      "name": "RADIUS_NAV_TABS"
+    },
+    "RADIUS_LG": {
+      "type": "size",
+      "category": "radii",
+      "value": "24",
+      "name": "RADIUS_LG"
+    },
+    "RADIUS_XL": {
+      "type": "size",
+      "category": "radii",
+      "value": "48",
+      "name": "RADIUS_XL"
+    },
+    "RADIUS_FULL": {
+      "type": "size",
+      "category": "radii",
+      "value": "999",
+      "name": "RADIUS_FULL"
+    },
+    "SPACING_NONE": {
+      "type": "size",
+      "category": "spacings",
+      "value": "0",
+      "name": "SPACING_NONE"
+    },
+    "SPACING_XXS": {
+      "type": "size",
+      "category": "spacings",
+      "value": "1",
+      "name": "SPACING_XXS"
+    },
+    "SPACING_XS": {
+      "type": "size",
+      "category": "spacings",
+      "value": "2",
+      "name": "SPACING_XS"
+    },
+    "SPACING_SM": {
+      "type": "size",
+      "category": "spacings",
+      "value": "4",
+      "name": "SPACING_SM"
+    },
+    "SPACING_MD": {
+      "type": "size",
+      "category": "spacings",
+      "value": "8",
+      "name": "SPACING_MD"
+    },
+    "SPACING_BASE": {
+      "type": "size",
+      "category": "spacings",
+      "value": "16",
+      "name": "SPACING_BASE"
+    },
+    "SPACING_LG": {
+      "type": "size",
+      "category": "spacings",
+      "value": "24",
+      "name": "SPACING_LG"
+    },
+    "SPACING_XL": {
+      "type": "size",
+      "category": "spacings",
+      "value": "32",
+      "name": "SPACING_XL"
+    },
+    "SPACING_XXL": {
+      "type": "size",
+      "category": "spacings",
+      "value": "40",
+      "name": "SPACING_XXL"
+    },
+    "SPACING_XXXL": {
+      "type": "size",
+      "category": "spacings",
+      "value": "64",
+      "name": "SPACING_XXXL"
+    },
+    "SPACING_XXXXL": {
+      "type": "size",
+      "category": "spacings",
+      "value": "96",
+      "name": "SPACING_XXXXL"
+    },
+    "HEIGHTS_16": {
+      "type": "size",
+      "category": "spacings",
+      "value": "16",
+      "name": "HEIGHTS_16"
+    },
+    "HEIGHTS_20": {
+      "type": "size",
+      "category": "spacings",
+      "value": "20",
+      "name": "HEIGHTS_20"
+    },
+    "HEIGHTS_24": {
+      "type": "size",
+      "category": "spacings",
+      "value": "24",
+      "name": "HEIGHTS_24"
+    },
+    "HEIGHTS_32": {
+      "type": "size",
+      "category": "spacings",
+      "value": "32",
+      "name": "HEIGHTS_32"
+    },
+    "HEIGHTS_36": {
+      "type": "size",
+      "category": "spacings",
+      "value": "36",
+      "name": "HEIGHTS_36"
+    },
+    "HEIGHTS_40": {
+      "type": "size",
+      "category": "spacings",
+      "value": "40",
+      "name": "HEIGHTS_40"
+    },
+    "HEIGHTS_44": {
+      "type": "size",
+      "category": "spacings",
+      "value": "44",
+      "name": "HEIGHTS_44"
+    },
+    "HEIGHTS_48": {
+      "type": "size",
+      "category": "spacings",
+      "value": "48",
+      "name": "HEIGHTS_48"
+    },
+    "HEIGHTS_52": {
+      "type": "size",
+      "category": "spacings",
+      "value": "52",
+      "name": "HEIGHTS_52"
+    },
+    "HEIGHTS_56": {
+      "type": "size",
+      "category": "spacings",
+      "value": "56",
+      "name": "HEIGHTS_56"
+    },
+    "HEIGHTS_64": {
+      "type": "size",
+      "category": "spacings",
+      "value": "64",
+      "name": "HEIGHTS_64"
+    },
+    "BORDER_1": {
+      "type": "size",
+      "category": "borders",
+      "value": "1",
+      "name": "BORDER_1"
+    },
+    "BORDER_2": {
+      "type": "size",
+      "category": "borders",
+      "value": "2",
+      "name": "BORDER_2"
+    },
+    "BORDER_3": {
+      "type": "size",
+      "category": "borders",
+      "value": "3",
+      "name": "BORDER_3"
+    },
+    "MODAL_200": {
+      "type": "size",
+      "category": "spacings",
+      "value": "200",
+      "name": "MODAL_200"
+    },
+    "MODAL_400": {
+      "type": "size",
+      "category": "spacings",
+      "value": "400",
+      "name": "MODAL_400"
+    },
+    "MODAL_512": {
+      "type": "size",
+      "category": "spacings",
+      "value": "512",
+      "name": "MODAL_512"
+    },
+    "MODAL_600": {
+      "type": "size",
+      "category": "spacings",
+      "value": "600",
+      "name": "MODAL_600"
+    },
+    "MODAL_800": {
+      "type": "size",
+      "category": "spacings",
+      "value": "800",
+      "name": "MODAL_800"
+    },
+    "MODAL_1000": {
+      "type": "size",
+      "category": "spacings",
+      "value": "1000",
+      "name": "MODAL_1000"
+    },
+    "MODAL_1024": {
+      "type": "size",
+      "category": "spacings",
+      "value": "1024",
+      "name": "MODAL_1024"
+    },
+    "TYPE_FAMILY_SKYSCANNER_RELATIVE": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "name": "TYPE_FAMILY_SKYSCANNER_RELATIVE"
+    },
+    "TYPE_FAMILY_LARKEN": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "name": "TYPE_FAMILY_LARKEN"
+    },
+    "TYPE_SIZE_12": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "12",
+      "name": "TYPE_SIZE_12"
+    },
+    "TYPE_SIZE_14": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "14",
+      "name": "TYPE_SIZE_14"
+    },
+    "TYPE_SIZE_16": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "16",
+      "name": "TYPE_SIZE_16"
+    },
+    "TYPE_SIZE_20": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "20",
+      "name": "TYPE_SIZE_20"
+    },
+    "TYPE_SIZE_24": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "24",
+      "name": "TYPE_SIZE_24"
+    },
+    "TYPE_SIZE_32": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "32",
+      "name": "TYPE_SIZE_32"
+    },
+    "TYPE_SIZE_40": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "40",
+      "name": "TYPE_SIZE_40"
+    },
+    "TYPE_SIZE_48": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "48",
+      "name": "TYPE_SIZE_48"
+    },
+    "TYPE_SIZE_64": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "64",
+      "name": "TYPE_SIZE_64"
+    },
+    "TYPE_SIZE_76": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "76",
+      "name": "TYPE_SIZE_76"
+    },
+    "TYPE_SIZE_96": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "96",
+      "name": "TYPE_SIZE_96"
+    },
+    "TYPE_SIZE_120": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "120",
+      "name": "TYPE_SIZE_120"
+    },
+    "TYPE_SIZE_144": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "144",
+      "name": "TYPE_SIZE_144"
+    },
+    "TYPE_SIZE_192": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "192",
+      "name": "TYPE_SIZE_192"
+    },
+    "TYPE_SIZE_240": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "240",
+      "name": "TYPE_SIZE_240"
+    },
+    "TYPE_LINE_HEIGHT_16": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "16",
+      "name": "TYPE_LINE_HEIGHT_16"
+    },
+    "TYPE_LINE_HEIGHT_20": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "20",
+      "name": "TYPE_LINE_HEIGHT_20"
+    },
+    "TYPE_LINE_HEIGHT_22": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "22",
+      "name": "TYPE_LINE_HEIGHT_22"
+    },
+    "TYPE_LINE_HEIGHT_24": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "24",
+      "name": "TYPE_LINE_HEIGHT_24"
+    },
+    "TYPE_LINE_HEIGHT_28": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "28",
+      "name": "TYPE_LINE_HEIGHT_28"
+    },
+    "TYPE_LINE_HEIGHT_32": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "32",
+      "name": "TYPE_LINE_HEIGHT_32"
+    },
+    "TYPE_LINE_HEIGHT_40": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "40",
+      "name": "TYPE_LINE_HEIGHT_40"
+    },
+    "TYPE_LINE_HEIGHT_48": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "48",
+      "name": "TYPE_LINE_HEIGHT_48"
+    },
+    "TYPE_LINE_HEIGHT_56": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "56",
+      "name": "TYPE_LINE_HEIGHT_56"
+    },
+    "TYPE_LINE_HEIGHT_64": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "64",
+      "name": "TYPE_LINE_HEIGHT_64"
+    },
+    "TYPE_LINE_HEIGHT_76": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "76",
+      "name": "TYPE_LINE_HEIGHT_76"
+    },
+    "TYPE_LINE_HEIGHT_82": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "82",
+      "name": "TYPE_LINE_HEIGHT_82"
+    },
+    "TYPE_LINE_HEIGHT_96": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "96",
+      "name": "TYPE_LINE_HEIGHT_96"
+    },
+    "TYPE_LINE_HEIGHT_115": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "115",
+      "name": "TYPE_LINE_HEIGHT_115"
+    },
+    "TYPE_LINE_HEIGHT_120": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "120",
+      "name": "TYPE_LINE_HEIGHT_120"
+    },
+    "TYPE_LINE_HEIGHT_153": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "153",
+      "name": "TYPE_LINE_HEIGHT_153"
+    },
+    "TYPE_LINE_HEIGHT_192": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "192",
+      "name": "TYPE_LINE_HEIGHT_192"
+    },
+    "TYPE_LETTER_SPACING_LOOSE_20": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "1",
+      "name": "TYPE_LETTER_SPACING_LOOSE_20"
+    },
+    "TYPE_LETTER_SPACING_LOOSE_10": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "0.6000000238418579",
+      "name": "TYPE_LETTER_SPACING_LOOSE_10"
+    },
+    "TYPE_LETTER_SPACING_DEFAULT": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "0",
+      "name": "TYPE_LETTER_SPACING_DEFAULT"
+    },
+    "TYPE_WEIGHT_900": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "name": "TYPE_WEIGHT_900"
+    },
+    "TYPE_WEIGHT_700": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "name": "TYPE_WEIGHT_700"
+    },
+    "TYPE_WEIGHT_400": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "name": "TYPE_WEIGHT_400"
+    },
+    "TYPE_WEIGHT_300": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "300",
+      "name": "TYPE_WEIGHT_300"
+    },
+    "TYPE_LETTER_SPACING_TIGHT_10": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.6000000238418579",
+      "name": "TYPE_LETTER_SPACING_TIGHT_10"
+    },
+    "TYPE_LETTER_SPACING_TIGHT_20": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-1",
+      "name": "TYPE_LETTER_SPACING_TIGHT_20"
+    },
+    "TYPE_LETTER_SPACING_TIGHT_30": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-1.2000000476837158",
+      "name": "TYPE_LETTER_SPACING_TIGHT_30"
+    },
+    "TYPE_LETTER_SPACING_TIGHT_40": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-2",
+      "name": "TYPE_LETTER_SPACING_TIGHT_40"
+    },
+    "TYPE_LETTER_SPACING_TIGHT_50": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-3.5",
+      "name": "TYPE_LETTER_SPACING_TIGHT_50"
+    },
+    "ANIMATION_DURATION_XS": {
+      "type": "duration",
+      "category": "animations",
+      "value": "50ms",
+      "name": "ANIMATION_DURATION_XS"
+    },
+    "ANIMATION_DURATION_SM": {
+      "type": "duration",
+      "category": "animations",
+      "value": "200ms",
+      "name": "ANIMATION_DURATION_SM"
+    },
+    "ANIMATION_DURATION_BASE": {
+      "type": "duration",
+      "category": "animations",
+      "value": "400ms",
+      "name": "ANIMATION_DURATION_BASE"
+    },
+    "ELEVATION_XS": {
+      "type": "size",
+      "category": "elevation",
+      "value": "1",
+      "name": "ELEVATION_XS"
+    },
+    "ELEVATION_SM": {
+      "type": "size",
+      "category": "elevation",
+      "value": "2",
+      "name": "ELEVATION_SM"
+    },
+    "ELEVATION_BASE": {
+      "type": "size",
+      "category": "elevation",
+      "value": "4",
+      "name": "ELEVATION_BASE"
+    },
+    "ELEVATION_LG": {
+      "type": "size",
+      "category": "elevation",
+      "value": "8",
+      "name": "ELEVATION_LG"
+    },
+    "ELEVATION_XL": {
+      "type": "size",
+      "category": "elevation",
+      "value": "16",
+      "name": "ELEVATION_XL"
+    },
+    "ELEVATION_XXL": {
+      "type": "size",
+      "category": "elevation",
+      "value": "24",
+      "name": "ELEVATION_XXL"
+    },
+    "TYPOGRAPHY_DISPLAY_1_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_1_FAMILY"
+    },
+    "TEXT_PRIMARY": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#161616ff",
+      "originalValue": "{!NEUTRAL_CHARCOAL}",
+      "name": "TEXT_PRIMARY",
+      "darkValue": "#ffffffff",
+      "originalDarkValue": "{!NEUTRAL_WHITE}"
+    },
+    "TEXT_SECONDARY": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#626971ff",
+      "originalValue": "{!NEUTRAL_GREY_40}",
+      "name": "TEXT_SECONDARY",
+      "darkValue": "#bdc4cbff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_40}"
+    },
+    "TEXT_SECONDARY_ON_CONTRAST": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#ffffff80",
+      "originalValue": "{!ALPHA_WHITE_ALPHA_50}",
+      "name": "TEXT_SECONDARY_ON_CONTRAST",
+      "darkValue": "#ffffff80",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_50}"
+    },
+    "TEXT_INVERSE": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#ffffffff",
+      "originalValue": "{!NEUTRAL_WHITE}",
+      "name": "TEXT_INVERSE",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "TEXT_HERO": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#0062e3ff",
+      "originalValue": "{!COLOUR_SKY_BLUE}",
+      "name": "TEXT_HERO",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_NIGHT_NIGHT_GREY_10}"
+    },
+    "TEXT_DISABLED": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#00000033",
+      "originalValue": "{!ALPHA_BLACK_ALPHA_20}",
+      "name": "TEXT_DISABLED",
+      "darkValue": "#ffffff33",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_20}"
+    },
+    "TEXT_DISABLED_ON_DARK": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#ffffff80",
+      "originalValue": "{!ALPHA_WHITE_ALPHA_50}",
+      "name": "TEXT_DISABLED_ON_DARK",
+      "darkValue": "#ffffff80",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_50}"
+    },
+    "TEXT_ERROR": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#e70866ff",
+      "originalValue": "{!COLOUR_BERRY}",
+      "name": "TEXT_ERROR",
+      "darkValue": "#ff649cff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_BERRY}"
+    },
+    "TEXT_SUCCESS": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#0c838aff",
+      "originalValue": "{!COLOUR_GREEN}",
+      "name": "TEXT_SUCCESS",
+      "darkValue": "#62f1c6ff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_GREEN}"
+    },
+    "TEXT_ON_DARK": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#ffffffff",
+      "originalValue": "{!NEUTRAL_WHITE}",
+      "name": "TEXT_ON_DARK",
+      "darkValue": "#ffffffff",
+      "originalDarkValue": "{!NEUTRAL_WHITE}"
+    },
+    "TEXT_ON_LIGHT": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#161616ff",
+      "originalValue": "{!NEUTRAL_CHARCOAL}",
+      "name": "TEXT_ON_LIGHT",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "TYPOGRAPHY_DISPLAY_2_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_2_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_2_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_2_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_2_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "192",
+      "originalValue": "{!TYPE_SIZE_192}",
+      "name": "TYPOGRAPHY_DISPLAY_2_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_2_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.800000011920929",
+      "originalValue": "0.800000011920929",
+      "name": "TYPOGRAPHY_DISPLAY_2_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_2_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_2_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_DISPLAY_3_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_3_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_3_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_3_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_3_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "144",
+      "originalValue": "{!TYPE_SIZE_144}",
+      "name": "TYPOGRAPHY_DISPLAY_3_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_3_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.800000011920929",
+      "originalValue": "0.800000011920929",
+      "name": "TYPOGRAPHY_DISPLAY_3_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_3_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_3_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_DISPLAY_1_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_1_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_4_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_4_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_1_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "240",
+      "originalValue": "{!TYPE_SIZE_240}",
+      "name": "TYPOGRAPHY_DISPLAY_1_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_5_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_5_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_4_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_4_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_6_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_DISPLAY_6_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_4_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "96",
+      "originalValue": "{!TYPE_SIZE_96}",
+      "name": "TYPOGRAPHY_DISPLAY_4_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_1_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.800000011920929",
+      "originalValue": "0.800000011920929",
+      "name": "TYPOGRAPHY_DISPLAY_1_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_5_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_5_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_5_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "76",
+      "originalValue": "{!TYPE_SIZE_76}",
+      "name": "TYPOGRAPHY_DISPLAY_5_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_4_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.8500000238418579",
+      "originalValue": "0.8500000238418579",
+      "name": "TYPOGRAPHY_DISPLAY_4_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_1_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_1_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_DISPLAY_6_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_DISPLAY_6_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_1_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_1_FAMILY"
+    },
+    "TYPOGRAPHY_DISPLAY_4_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_4_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_DISPLAY_5_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.8500000238418579",
+      "originalValue": "0.8500000238418579",
+      "name": "TYPOGRAPHY_DISPLAY_5_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_1_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_1_WEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_6_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "48",
+      "originalValue": "{!TYPE_SIZE_48}",
+      "name": "TYPOGRAPHY_DISPLAY_6_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_6_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "0.8500000238418579",
+      "originalValue": "0.8500000238418579",
+      "name": "TYPOGRAPHY_DISPLAY_6_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_DISPLAY_5_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_5_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_1_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "120",
+      "originalValue": "{!TYPE_SIZE_120}",
+      "name": "TYPOGRAPHY_HERO_1_SIZE"
+    },
+    "TYPOGRAPHY_DISPLAY_6_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_DISPLAY_6_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_1_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_1_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_1_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_HERO_1_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_2_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_2_FAMILY"
+    },
+    "TYPOGRAPHY_HERO_2_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_2_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_2_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "96",
+      "originalValue": "{!TYPE_SIZE_96}",
+      "name": "TYPOGRAPHY_HERO_2_SIZE"
+    },
+    "TYPOGRAPHY_HERO_2_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_2_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_2_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_HERO_2_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_3_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_3_FAMILY"
+    },
+    "TYPOGRAPHY_HERO_3_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_3_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_3_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "76",
+      "originalValue": "{!TYPE_SIZE_76}",
+      "name": "TYPOGRAPHY_HERO_3_SIZE"
+    },
+    "TYPOGRAPHY_HERO_3_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_3_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_3_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.22",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_50}",
+      "name": "TYPOGRAPHY_HERO_3_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_4_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_4_FAMILY"
+    },
+    "TYPOGRAPHY_HERO_4_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_4_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_4_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "64",
+      "originalValue": "{!TYPE_SIZE_64}",
+      "name": "TYPOGRAPHY_HERO_4_SIZE"
+    },
+    "TYPOGRAPHY_HERO_4_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_4_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_4_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.12",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_40}",
+      "name": "TYPOGRAPHY_HERO_4_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_5_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_5_FAMILY"
+    },
+    "TYPOGRAPHY_HERO_5_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_5_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_6_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HERO_6_FAMILY"
+    },
+    "TYPOGRAPHY_HERO_5_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "48",
+      "originalValue": "{!TYPE_SIZE_48}",
+      "name": "TYPOGRAPHY_HERO_5_SIZE"
+    },
+    "TYPOGRAPHY_HERO_6_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "900",
+      "originalValue": "{!TYPE_WEIGHT_900}",
+      "name": "TYPOGRAPHY_HERO_6_WEIGHT"
+    },
+    "TYPOGRAPHY_HERO_6_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "40",
+      "originalValue": "{!TYPE_SIZE_40}",
+      "name": "TYPOGRAPHY_HERO_6_SIZE"
+    },
+    "TYPOGRAPHY_HERO_6_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_6_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_6_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.08",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_30}",
+      "name": "TYPOGRAPHY_HERO_6_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HERO_5_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1",
+      "originalValue": "1",
+      "name": "TYPOGRAPHY_HERO_5_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HERO_5_LETTER_SPACING": {
+      "type": "letter-spacing",
+      "category": "letter-spacings",
+      "value": "-0.12",
+      "originalValue": "{!TYPE_LETTER_SPACING_TIGHT_40}",
+      "name": "TYPOGRAPHY_HERO_5_LETTER_SPACING"
+    },
+    "TYPOGRAPHY_HEADING_1_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HEADING_1_FAMILY"
+    },
+    "TYPOGRAPHY_HEADING_1_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_HEADING_1_WEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_1_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "40",
+      "originalValue": "{!TYPE_SIZE_40}",
+      "name": "TYPOGRAPHY_HEADING_1_SIZE"
+    },
+    "TYPOGRAPHY_HEADING_1_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.2000000476837158",
+      "originalValue": "1.2000000476837158",
+      "name": "TYPOGRAPHY_HEADING_1_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_2_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HEADING_2_FAMILY"
+    },
+    "TYPOGRAPHY_HEADING_3_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HEADING_3_FAMILY"
+    },
+    "TYPOGRAPHY_HEADING_3_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_HEADING_3_WEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_3_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "24",
+      "originalValue": "{!TYPE_SIZE_24}",
+      "name": "TYPOGRAPHY_HEADING_3_SIZE"
+    },
+    "TYPOGRAPHY_HEADING_3_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.159999966621399",
+      "originalValue": "1.159999966621399",
+      "name": "TYPOGRAPHY_HEADING_3_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_4_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HEADING_4_FAMILY"
+    },
+    "TYPOGRAPHY_HEADING_4_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_HEADING_4_WEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_4_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "20",
+      "originalValue": "{!TYPE_SIZE_20}",
+      "name": "TYPOGRAPHY_HEADING_4_SIZE"
+    },
+    "TYPOGRAPHY_HEADING_4_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.2000000476837158",
+      "originalValue": "1.2000000476837158",
+      "name": "TYPOGRAPHY_HEADING_4_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_5_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_HEADING_5_FAMILY"
+    },
+    "TYPOGRAPHY_HEADING_5_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_HEADING_5_WEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_5_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "16",
+      "originalValue": "{!TYPE_SIZE_16}",
+      "name": "TYPOGRAPHY_HEADING_5_SIZE"
+    },
+    "TYPOGRAPHY_HEADING_5_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.25",
+      "originalValue": "1.25",
+      "name": "TYPOGRAPHY_HEADING_5_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_SUBHEADING_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_SUBHEADING_FAMILY"
+    },
+    "TYPOGRAPHY_SUBHEADING_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "300",
+      "originalValue": "{!TYPE_WEIGHT_300}",
+      "name": "TYPOGRAPHY_SUBHEADING_WEIGHT"
+    },
+    "TYPOGRAPHY_SUBHEADING_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "24",
+      "originalValue": "{!TYPE_SIZE_24}",
+      "name": "TYPOGRAPHY_SUBHEADING_SIZE"
+    },
+    "TYPOGRAPHY_SUBHEADING_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.3300000429153442",
+      "originalValue": "1.3300000429153442",
+      "name": "TYPOGRAPHY_SUBHEADING_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_BODY_LONGFORM_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_BODY_LONGFORM_FAMILY"
+    },
+    "TYPOGRAPHY_BODY_LONGFORM_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_BODY_LONGFORM_WEIGHT"
+    },
+    "TYPOGRAPHY_BODY_LONGFORM_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "20",
+      "originalValue": "{!TYPE_SIZE_20}",
+      "name": "TYPOGRAPHY_BODY_LONGFORM_SIZE"
+    },
+    "TYPOGRAPHY_BODY_LONGFORM_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.399999976158142",
+      "originalValue": "1.399999976158142",
+      "name": "TYPOGRAPHY_BODY_LONGFORM_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_2_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_HEADING_2_WEIGHT"
+    },
+    "TYPOGRAPHY_HEADING_2_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "32",
+      "originalValue": "{!TYPE_SIZE_32}",
+      "name": "TYPOGRAPHY_HEADING_2_SIZE"
+    },
+    "TYPOGRAPHY_HEADING_2_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.25",
+      "originalValue": "1.25",
+      "name": "TYPOGRAPHY_HEADING_2_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_BODY_DEFAULT_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_BODY_DEFAULT_FAMILY"
+    },
+    "TYPOGRAPHY_BODY_DEFAULT_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_BODY_DEFAULT_WEIGHT"
+    },
+    "TYPOGRAPHY_BODY_DEFAULT_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "16",
+      "originalValue": "{!TYPE_SIZE_16}",
+      "name": "TYPOGRAPHY_BODY_DEFAULT_SIZE"
+    },
+    "TYPOGRAPHY_BODY_DEFAULT_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.5",
+      "originalValue": "1.5",
+      "name": "TYPOGRAPHY_BODY_DEFAULT_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_FOOTNOTE_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_FOOTNOTE_FAMILY"
+    },
+    "TYPOGRAPHY_FOOTNOTE_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_FOOTNOTE_WEIGHT"
+    },
+    "TYPOGRAPHY_FOOTNOTE_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "14",
+      "originalValue": "{!TYPE_SIZE_14}",
+      "name": "TYPOGRAPHY_FOOTNOTE_SIZE"
+    },
+    "TYPOGRAPHY_FOOTNOTE_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.4279999732971191",
+      "originalValue": "1.4279999732971191",
+      "name": "TYPOGRAPHY_FOOTNOTE_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_CAPTION_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_CAPTION_FAMILY"
+    },
+    "TYPOGRAPHY_CAPTION_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_CAPTION_WEIGHT"
+    },
+    "TYPOGRAPHY_CAPTION_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "12",
+      "originalValue": "{!TYPE_SIZE_12}",
+      "name": "TYPOGRAPHY_CAPTION_SIZE"
+    },
+    "TYPOGRAPHY_CAPTION_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.3300000429153442",
+      "originalValue": "1.3300000429153442",
+      "name": "TYPOGRAPHY_CAPTION_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_1_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_LABEL_1_FAMILY"
+    },
+    "TYPOGRAPHY_LABEL_1_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_LABEL_1_WEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_1_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "16",
+      "originalValue": "{!TYPE_SIZE_16}",
+      "name": "TYPOGRAPHY_LABEL_1_SIZE"
+    },
+    "TYPOGRAPHY_LABEL_1_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.5",
+      "originalValue": "1.5",
+      "name": "TYPOGRAPHY_LABEL_1_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_2_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_LABEL_2_FAMILY"
+    },
+    "TYPOGRAPHY_LABEL_2_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_LABEL_2_WEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_3_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Skyscanner Relative",
+      "originalValue": "{!TYPE_FAMILY_SKYSCANNER_RELATIVE}",
+      "name": "TYPOGRAPHY_LABEL_3_FAMILY"
+    },
+    "TYPOGRAPHY_LABEL_3_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "700",
+      "originalValue": "{!TYPE_WEIGHT_700}",
+      "name": "TYPOGRAPHY_LABEL_3_WEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_2_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "14",
+      "originalValue": "{!TYPE_SIZE_14}",
+      "name": "TYPOGRAPHY_LABEL_2_SIZE"
+    },
+    "TYPOGRAPHY_LABEL_3_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "12",
+      "originalValue": "{!TYPE_SIZE_12}",
+      "name": "TYPOGRAPHY_LABEL_3_SIZE"
+    },
+    "TYPOGRAPHY_LABEL_2_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.4199999570846558",
+      "originalValue": "1.4199999570846558",
+      "name": "TYPOGRAPHY_LABEL_2_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_1_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_1_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_1_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "300",
+      "originalValue": "{!TYPE_WEIGHT_300}",
+      "name": "TYPOGRAPHY_EDITORIAL_1_WEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_1_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "48",
+      "originalValue": "{!TYPE_SIZE_48}",
+      "name": "TYPOGRAPHY_EDITORIAL_1_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_1_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.1670000553131104",
+      "originalValue": "1.1670000553131104",
+      "name": "TYPOGRAPHY_EDITORIAL_1_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_LABEL_3_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.3300000429153442",
+      "originalValue": "1.3300000429153442",
+      "name": "TYPOGRAPHY_LABEL_3_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_2_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_2_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_3_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_3_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_3_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_EDITORIAL_3_WEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_3_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "20",
+      "originalValue": "{!TYPE_SIZE_20}",
+      "name": "TYPOGRAPHY_EDITORIAL_3_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_3_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.399999976158142",
+      "originalValue": "1.399999976158142",
+      "name": "TYPOGRAPHY_EDITORIAL_3_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_4_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_4_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_5_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_5_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_5_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_EDITORIAL_5_WEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_5_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "14",
+      "originalValue": "{!TYPE_SIZE_14}",
+      "name": "TYPOGRAPHY_EDITORIAL_5_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_5_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.399999976158142",
+      "originalValue": "1.399999976158142",
+      "name": "TYPOGRAPHY_EDITORIAL_5_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_4_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_EDITORIAL_4_WEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_6_FAMILY": {
+      "type": "font",
+      "category": "typesettings",
+      "value": "Larken",
+      "originalValue": "{!TYPE_FAMILY_LARKEN}",
+      "name": "TYPOGRAPHY_EDITORIAL_6_FAMILY"
+    },
+    "TYPOGRAPHY_EDITORIAL_6_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_EDITORIAL_6_WEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_4_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "16",
+      "originalValue": "{!TYPE_SIZE_16}",
+      "name": "TYPOGRAPHY_EDITORIAL_4_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_6_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "12",
+      "originalValue": "{!TYPE_SIZE_12}",
+      "name": "TYPOGRAPHY_EDITORIAL_6_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_4_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.399999976158142",
+      "originalValue": "1.399999976158142",
+      "name": "TYPOGRAPHY_EDITORIAL_4_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_6_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.399999976158142",
+      "originalValue": "1.399999976158142",
+      "name": "TYPOGRAPHY_EDITORIAL_6_LINE_HEIGHT"
+    },
+    "TYPOGRAPHY_EDITORIAL_2_WEIGHT": {
+      "type": "string",
+      "category": "font-weights",
+      "value": "400",
+      "originalValue": "{!TYPE_WEIGHT_400}",
+      "name": "TYPOGRAPHY_EDITORIAL_2_WEIGHT"
+    },
+    "TEXT_DEPRECATED_LINK": {
+      "type": "color",
+      "category": "text-colors",
+      "value": "#0062e3ff",
+      "originalValue": "{!COLOUR_SKY_BLUE}",
+      "name": "TEXT_DEPRECATED_LINK",
+      "darkValue": "#84e9ffff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_BLUE}"
+    },
+    "TYPOGRAPHY_EDITORIAL_2_SIZE": {
+      "type": "font-size",
+      "category": "typesettings",
+      "value": "32",
+      "originalValue": "{!TYPE_SIZE_32}",
+      "name": "TYPOGRAPHY_EDITORIAL_2_SIZE"
+    },
+    "TYPOGRAPHY_EDITORIAL_2_LINE_HEIGHT": {
+      "type": "size",
+      "category": "typesettings",
+      "value": "1.25",
+      "originalValue": "1.25",
+      "name": "TYPOGRAPHY_EDITORIAL_2_LINE_HEIGHT"
+    },
+    "CORE_PRIMARY": {
+      "type": "color",
+      "category": "core-colors",
+      "value": "#05203cff",
+      "originalValue": "{!COLOUR_DARK_SKY}",
+      "name": "CORE_PRIMARY",
+      "darkValue": "#054184ff",
+      "originalDarkValue": "{!COLOUR_TWILIGHT}"
+    },
+    "CORE_ACCENT": {
+      "type": "color",
+      "category": "core-colors",
+      "value": "#0062e3ff",
+      "originalValue": "{!COLOUR_SKY_BLUE}",
+      "name": "CORE_ACCENT",
+      "darkValue": "#84e9ffff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_BLUE}"
+    },
+    "CORE_ECO": {
+      "type": "color",
+      "category": "core-colors",
+      "value": "#0fa1a9ff",
+      "originalValue": "{!COLOUR_ECO_GREEN}",
+      "name": "CORE_ECO",
+      "darkValue": "#0fa1a9ff",
+      "originalDarkValue": "{!COLOUR_ECO_GREEN}"
+    },
+    "STATUS_SUCCESS_SPOT": {
+      "type": "color",
+      "category": "status-colors",
+      "value": "#0c838aff",
+      "originalValue": "{!COLOUR_GREEN}",
+      "name": "STATUS_SUCCESS_SPOT",
+      "darkValue": "#62f1c6ff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_GREEN}"
+    },
+    "STATUS_WARNING_SPOT": {
+      "type": "color",
+      "category": "status-colors",
+      "value": "#f55d42ff",
+      "originalValue": "{!COLOUR_AMBER}",
+      "name": "STATUS_WARNING_SPOT",
+      "darkValue": "#feeb87ff",
+      "originalDarkValue": "{!COLOUR_YELLOW}"
+    },
+    "STATUS_DANGER_SPOT": {
+      "type": "color",
+      "category": "status-colors",
+      "value": "#e70866ff",
+      "originalValue": "{!COLOUR_BERRY}",
+      "name": "STATUS_DANGER_SPOT",
+      "darkValue": "#ff649cff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_BERRY}"
+    },
+    "SURFACE_DEFAULT": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#ffffffff",
+      "originalValue": "{!NEUTRAL_WHITE}",
+      "name": "SURFACE_DEFAULT",
+      "darkValue": "#131d2bff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_20}"
+    },
+    "SURFACE_SUCCESS_FILL": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#d4fff2ff",
+      "originalValue": "{!COLOUR_MUTED_GREEN}",
+      "name": "SURFACE_SUCCESS_FILL",
+      "darkValue": "#b1ffe7ff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_GREEN_20}"
+    },
+    "SURFACE_WARNING_FILL": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#fff7cfff",
+      "originalValue": "{!COLOUR_MUTED_YELLOW}",
+      "name": "SURFACE_WARNING_FILL",
+      "darkValue": "#fbf1bbff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_YELLOW}"
+    },
+    "SURFACE_DANGER_FILL": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#ffe9f9ff",
+      "originalValue": "{!COLOUR_MUTED_PINK}",
+      "name": "SURFACE_DANGER_FILL",
+      "darkValue": "#ffcaddff",
+      "originalDarkValue": "{!COLOUR_BRIGHT_PINK}"
+    },
+    "SURFACE_LOW_CONTRAST": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#f5f7faff",
+      "originalValue": "{!NEUTRAL_GREY_05}",
+      "name": "SURFACE_LOW_CONTRAST",
+      "darkValue": "#243346ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_25}"
+    },
+    "CANVAS_DEFAULT": {
+      "type": "color",
+      "category": "canvas-colors",
+      "value": "#ffffffff",
+      "originalValue": "{!NEUTRAL_WHITE}",
+      "name": "CANVAS_DEFAULT",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "SURFACE_ELEVATED": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#ffffffff",
+      "originalValue": "{!NEUTRAL_WHITE}",
+      "name": "SURFACE_ELEVATED",
+      "darkValue": "#243346ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_25}"
+    },
+    "CANVAS_CONTRAST": {
+      "type": "color",
+      "category": "canvas-colors",
+      "value": "#eff3f8ff",
+      "originalValue": "{!NEUTRAL_GREY_10}",
+      "name": "CANVAS_CONTRAST",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "SURFACE_TINT": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#ffffff1a",
+      "originalValue": "{!ALPHA_WHITE_ALPHA_10}",
+      "name": "SURFACE_TINT",
+      "darkValue": "#ffffff1a",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_10}"
+    },
+    "SURFACE_SUBTLE": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#e3f0ffff",
+      "originalValue": "{!COLOUR_BABY_BLUE}",
+      "name": "SURFACE_SUBTLE",
+      "darkValue": "#243346ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_25}"
+    },
+    "OTHER_LINE_DEFAULT": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#c1c7cfff",
+      "originalValue": "{!NEUTRAL_GREY_30}",
+      "name": "OTHER_LINE_DEFAULT",
+      "darkValue": "#ffffff33",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_20}"
+    },
+    "OTHER_LINE_SUBTLE": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#e0e4e9ff",
+      "originalValue": "{!NEUTRAL_GREY_20}",
+      "name": "OTHER_LINE_SUBTLE",
+      "darkValue": "#ffffff1a",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_10}"
+    },
+    "OTHER_LINE_ONCONTRAST": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#ffffff33",
+      "originalValue": "{!ALPHA_WHITE_ALPHA_20}",
+      "name": "OTHER_LINE_ONCONTRAST",
+      "darkValue": "#ffffff33",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_20}"
+    },
+    "SURFACE_HERO": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#0062e3ff",
+      "originalValue": "{!COLOUR_SKY_BLUE}",
+      "name": "SURFACE_HERO",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "OTHER_SCRIM": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#000000b2",
+      "originalValue": "{!ALPHA_BLACK_ALPHA_70}",
+      "name": "OTHER_SCRIM",
+      "darkValue": "#000000b2",
+      "originalDarkValue": "{!ALPHA_BLACK_ALPHA_70}"
+    },
+    "SURFACE_PROMO": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#0062e3ff",
+      "originalValue": "{!COLOUR_SKY_BLUE}",
+      "name": "SURFACE_PROMO",
+      "darkValue": "#243346ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_25}"
+    },
+    "OTHER_OVERLAY": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#00000033",
+      "originalValue": "{!ALPHA_BLACK_ALPHA_20}",
+      "name": "OTHER_OVERLAY",
+      "darkValue": "#ffffffcc",
+      "originalDarkValue": "{!ALPHA_WHITE_ALPHA_80}"
+    },
+    "SURFACE_CONTRAST": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#05203cff",
+      "originalValue": "{!COLOUR_DARK_SKY}",
+      "name": "SURFACE_CONTRAST",
+      "darkValue": "#010913ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_10}"
+    },
+    "OTHER_SHADOW": {
+      "type": "color",
+      "category": "line-colors",
+      "value": "#16161640",
+      "originalValue": "{!ALPHA_BLACK_ALPHA_25}",
+      "name": "OTHER_SHADOW",
+      "darkValue": "#16161640",
+      "originalDarkValue": "{!ALPHA_BLACK_ALPHA_25}"
+    },
+    "SURFACE_HIGHLIGHT": {
+      "type": "color",
+      "category": "surface-colors",
+      "value": "#e0e4e9ff",
+      "originalValue": "{!NEUTRAL_GREY_20}",
+      "name": "SURFACE_HIGHLIGHT",
+      "darkValue": "#243346ff",
+      "originalDarkValue": "{!NEUTRAL_DARK_GREY_25}"
+    }
+  },
+  "propKeys": [
+    "RADIUS_NONE",
+    "RADIUS_XS",
+    "RADIUS_SM",
+    "RADIUS_MD",
+    "RADIUS_NAV_TABS",
+    "RADIUS_LG",
+    "RADIUS_XL",
+    "RADIUS_FULL",
+    "SPACING_NONE",
+    "SPACING_XXS",
+    "SPACING_XS",
+    "SPACING_SM",
+    "SPACING_MD",
+    "SPACING_BASE",
+    "SPACING_LG",
+    "SPACING_XL",
+    "SPACING_XXL",
+    "SPACING_XXXL",
+    "SPACING_XXXXL",
+    "HEIGHTS_16",
+    "HEIGHTS_20",
+    "HEIGHTS_24",
+    "HEIGHTS_32",
+    "HEIGHTS_36",
+    "HEIGHTS_40",
+    "HEIGHTS_44",
+    "HEIGHTS_48",
+    "HEIGHTS_52",
+    "HEIGHTS_56",
+    "HEIGHTS_64",
+    "BORDER_1",
+    "BORDER_2",
+    "BORDER_3",
+    "MODAL_200",
+    "MODAL_400",
+    "MODAL_512",
+    "MODAL_600",
+    "MODAL_800",
+    "MODAL_1000",
+    "MODAL_1024",
+    "TYPE_FAMILY_SKYSCANNER_RELATIVE",
+    "TYPE_FAMILY_LARKEN",
+    "TYPE_SIZE_12",
+    "TYPE_SIZE_14",
+    "TYPE_SIZE_16",
+    "TYPE_SIZE_20",
+    "TYPE_SIZE_24",
+    "TYPE_SIZE_32",
+    "TYPE_SIZE_40",
+    "TYPE_SIZE_48",
+    "TYPE_SIZE_64",
+    "TYPE_SIZE_76",
+    "TYPE_SIZE_96",
+    "TYPE_SIZE_120",
+    "TYPE_SIZE_144",
+    "TYPE_SIZE_192",
+    "TYPE_SIZE_240",
+    "TYPE_LINE_HEIGHT_16",
+    "TYPE_LINE_HEIGHT_20",
+    "TYPE_LINE_HEIGHT_22",
+    "TYPE_LINE_HEIGHT_24",
+    "TYPE_LINE_HEIGHT_28",
+    "TYPE_LINE_HEIGHT_32",
+    "TYPE_LINE_HEIGHT_40",
+    "TYPE_LINE_HEIGHT_48",
+    "TYPE_LINE_HEIGHT_56",
+    "TYPE_LINE_HEIGHT_64",
+    "TYPE_LINE_HEIGHT_76",
+    "TYPE_LINE_HEIGHT_82",
+    "TYPE_LINE_HEIGHT_96",
+    "TYPE_LINE_HEIGHT_115",
+    "TYPE_LINE_HEIGHT_120",
+    "TYPE_LINE_HEIGHT_153",
+    "TYPE_LINE_HEIGHT_192",
+    "TYPE_LETTER_SPACING_LOOSE_20",
+    "TYPE_LETTER_SPACING_LOOSE_10",
+    "TYPE_LETTER_SPACING_DEFAULT",
+    "TYPE_WEIGHT_900",
+    "TYPE_WEIGHT_700",
+    "TYPE_WEIGHT_400",
+    "TYPE_WEIGHT_300",
+    "TYPE_LETTER_SPACING_TIGHT_10",
+    "TYPE_LETTER_SPACING_TIGHT_20",
+    "TYPE_LETTER_SPACING_TIGHT_30",
+    "TYPE_LETTER_SPACING_TIGHT_40",
+    "TYPE_LETTER_SPACING_TIGHT_50",
+    "ANIMATION_DURATION_XS",
+    "ANIMATION_DURATION_SM",
+    "ANIMATION_DURATION_BASE",
+    "ELEVATION_XS",
+    "ELEVATION_SM",
+    "ELEVATION_BASE",
+    "ELEVATION_LG",
+    "ELEVATION_XL",
+    "ELEVATION_XXL",
+    "TYPOGRAPHY_DISPLAY_1_FAMILY",
+    "TEXT_PRIMARY",
+    "TEXT_SECONDARY",
+    "TEXT_SECONDARY_ON_CONTRAST",
+    "TEXT_INVERSE",
+    "TEXT_HERO",
+    "TEXT_DISABLED",
+    "TEXT_DISABLED_ON_DARK",
+    "TEXT_ERROR",
+    "TEXT_SUCCESS",
+    "TEXT_ON_DARK",
+    "TEXT_ON_LIGHT",
+    "TYPOGRAPHY_DISPLAY_2_FAMILY",
+    "TYPOGRAPHY_DISPLAY_2_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_2_SIZE",
+    "TYPOGRAPHY_DISPLAY_2_LINE_HEIGHT",
+    "TYPOGRAPHY_DISPLAY_2_LETTER_SPACING",
+    "TYPOGRAPHY_DISPLAY_3_FAMILY",
+    "TYPOGRAPHY_DISPLAY_3_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_3_SIZE",
+    "TYPOGRAPHY_DISPLAY_3_LINE_HEIGHT",
+    "TYPOGRAPHY_DISPLAY_3_LETTER_SPACING",
+    "TYPOGRAPHY_DISPLAY_1_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_4_FAMILY",
+    "TYPOGRAPHY_DISPLAY_1_SIZE",
+    "TYPOGRAPHY_DISPLAY_5_FAMILY",
+    "TYPOGRAPHY_DISPLAY_4_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_6_FAMILY",
+    "TYPOGRAPHY_DISPLAY_4_SIZE",
+    "TYPOGRAPHY_DISPLAY_1_LINE_HEIGHT",
+    "TYPOGRAPHY_DISPLAY_5_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_5_SIZE",
+    "TYPOGRAPHY_DISPLAY_4_LINE_HEIGHT",
+    "TYPOGRAPHY_DISPLAY_1_LETTER_SPACING",
+    "TYPOGRAPHY_DISPLAY_6_WEIGHT",
+    "TYPOGRAPHY_HERO_1_FAMILY",
+    "TYPOGRAPHY_DISPLAY_4_LETTER_SPACING",
+    "TYPOGRAPHY_DISPLAY_5_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_1_WEIGHT",
+    "TYPOGRAPHY_DISPLAY_6_SIZE",
+    "TYPOGRAPHY_DISPLAY_6_LINE_HEIGHT",
+    "TYPOGRAPHY_DISPLAY_5_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_1_SIZE",
+    "TYPOGRAPHY_DISPLAY_6_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_1_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_1_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_2_FAMILY",
+    "TYPOGRAPHY_HERO_2_WEIGHT",
+    "TYPOGRAPHY_HERO_2_SIZE",
+    "TYPOGRAPHY_HERO_2_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_2_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_3_FAMILY",
+    "TYPOGRAPHY_HERO_3_WEIGHT",
+    "TYPOGRAPHY_HERO_3_SIZE",
+    "TYPOGRAPHY_HERO_3_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_3_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_4_FAMILY",
+    "TYPOGRAPHY_HERO_4_WEIGHT",
+    "TYPOGRAPHY_HERO_4_SIZE",
+    "TYPOGRAPHY_HERO_4_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_4_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_5_FAMILY",
+    "TYPOGRAPHY_HERO_5_WEIGHT",
+    "TYPOGRAPHY_HERO_6_FAMILY",
+    "TYPOGRAPHY_HERO_5_SIZE",
+    "TYPOGRAPHY_HERO_6_WEIGHT",
+    "TYPOGRAPHY_HERO_6_SIZE",
+    "TYPOGRAPHY_HERO_6_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_6_LETTER_SPACING",
+    "TYPOGRAPHY_HERO_5_LINE_HEIGHT",
+    "TYPOGRAPHY_HERO_5_LETTER_SPACING",
+    "TYPOGRAPHY_HEADING_1_FAMILY",
+    "TYPOGRAPHY_HEADING_1_WEIGHT",
+    "TYPOGRAPHY_HEADING_1_SIZE",
+    "TYPOGRAPHY_HEADING_1_LINE_HEIGHT",
+    "TYPOGRAPHY_HEADING_2_FAMILY",
+    "TYPOGRAPHY_HEADING_3_FAMILY",
+    "TYPOGRAPHY_HEADING_3_WEIGHT",
+    "TYPOGRAPHY_HEADING_3_SIZE",
+    "TYPOGRAPHY_HEADING_3_LINE_HEIGHT",
+    "TYPOGRAPHY_HEADING_4_FAMILY",
+    "TYPOGRAPHY_HEADING_4_WEIGHT",
+    "TYPOGRAPHY_HEADING_4_SIZE",
+    "TYPOGRAPHY_HEADING_4_LINE_HEIGHT",
+    "TYPOGRAPHY_HEADING_5_FAMILY",
+    "TYPOGRAPHY_HEADING_5_WEIGHT",
+    "TYPOGRAPHY_HEADING_5_SIZE",
+    "TYPOGRAPHY_HEADING_5_LINE_HEIGHT",
+    "TYPOGRAPHY_SUBHEADING_FAMILY",
+    "TYPOGRAPHY_SUBHEADING_WEIGHT",
+    "TYPOGRAPHY_SUBHEADING_SIZE",
+    "TYPOGRAPHY_SUBHEADING_LINE_HEIGHT",
+    "TYPOGRAPHY_BODY_LONGFORM_FAMILY",
+    "TYPOGRAPHY_BODY_LONGFORM_WEIGHT",
+    "TYPOGRAPHY_BODY_LONGFORM_SIZE",
+    "TYPOGRAPHY_BODY_LONGFORM_LINE_HEIGHT",
+    "TYPOGRAPHY_HEADING_2_WEIGHT",
+    "TYPOGRAPHY_HEADING_2_SIZE",
+    "TYPOGRAPHY_HEADING_2_LINE_HEIGHT",
+    "TYPOGRAPHY_BODY_DEFAULT_FAMILY",
+    "TYPOGRAPHY_BODY_DEFAULT_WEIGHT",
+    "TYPOGRAPHY_BODY_DEFAULT_SIZE",
+    "TYPOGRAPHY_BODY_DEFAULT_LINE_HEIGHT",
+    "TYPOGRAPHY_FOOTNOTE_FAMILY",
+    "TYPOGRAPHY_FOOTNOTE_WEIGHT",
+    "TYPOGRAPHY_FOOTNOTE_SIZE",
+    "TYPOGRAPHY_FOOTNOTE_LINE_HEIGHT",
+    "TYPOGRAPHY_CAPTION_FAMILY",
+    "TYPOGRAPHY_CAPTION_WEIGHT",
+    "TYPOGRAPHY_CAPTION_SIZE",
+    "TYPOGRAPHY_CAPTION_LINE_HEIGHT",
+    "TYPOGRAPHY_LABEL_1_FAMILY",
+    "TYPOGRAPHY_LABEL_1_WEIGHT",
+    "TYPOGRAPHY_LABEL_1_SIZE",
+    "TYPOGRAPHY_LABEL_1_LINE_HEIGHT",
+    "TYPOGRAPHY_LABEL_2_FAMILY",
+    "TYPOGRAPHY_LABEL_2_WEIGHT",
+    "TYPOGRAPHY_LABEL_3_FAMILY",
+    "TYPOGRAPHY_LABEL_3_WEIGHT",
+    "TYPOGRAPHY_LABEL_2_SIZE",
+    "TYPOGRAPHY_LABEL_3_SIZE",
+    "TYPOGRAPHY_LABEL_2_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_1_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_1_WEIGHT",
+    "TYPOGRAPHY_EDITORIAL_1_SIZE",
+    "TYPOGRAPHY_EDITORIAL_1_LINE_HEIGHT",
+    "TYPOGRAPHY_LABEL_3_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_2_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_3_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_3_WEIGHT",
+    "TYPOGRAPHY_EDITORIAL_3_SIZE",
+    "TYPOGRAPHY_EDITORIAL_3_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_4_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_5_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_5_WEIGHT",
+    "TYPOGRAPHY_EDITORIAL_5_SIZE",
+    "TYPOGRAPHY_EDITORIAL_5_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_4_WEIGHT",
+    "TYPOGRAPHY_EDITORIAL_6_FAMILY",
+    "TYPOGRAPHY_EDITORIAL_6_WEIGHT",
+    "TYPOGRAPHY_EDITORIAL_4_SIZE",
+    "TYPOGRAPHY_EDITORIAL_6_SIZE",
+    "TYPOGRAPHY_EDITORIAL_4_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_6_LINE_HEIGHT",
+    "TYPOGRAPHY_EDITORIAL_2_WEIGHT",
+    "TEXT_DEPRECATED_LINK",
+    "TYPOGRAPHY_EDITORIAL_2_SIZE",
+    "TYPOGRAPHY_EDITORIAL_2_LINE_HEIGHT",
+    "CORE_PRIMARY",
+    "CORE_ACCENT",
+    "CORE_ECO",
+    "STATUS_SUCCESS_SPOT",
+    "STATUS_WARNING_SPOT",
+    "STATUS_DANGER_SPOT",
+    "SURFACE_DEFAULT",
+    "SURFACE_SUCCESS_FILL",
+    "SURFACE_WARNING_FILL",
+    "SURFACE_DANGER_FILL",
+    "SURFACE_LOW_CONTRAST",
+    "CANVAS_DEFAULT",
+    "SURFACE_ELEVATED",
+    "CANVAS_CONTRAST",
+    "SURFACE_TINT",
+    "SURFACE_SUBTLE",
+    "OTHER_LINE_DEFAULT",
+    "OTHER_LINE_SUBTLE",
+    "OTHER_LINE_ONCONTRAST",
+    "SURFACE_HERO",
+    "OTHER_SCRIM",
+    "SURFACE_PROMO",
+    "OTHER_OVERLAY",
+    "SURFACE_CONTRAST",
+    "OTHER_SHADOW",
+    "SURFACE_HIGHLIGHT"
+  ]
+}
