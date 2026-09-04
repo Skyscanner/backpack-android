@@ -18,9 +18,12 @@
 
 package net.skyscanner.backpack.rating
 
+import android.widget.TextView
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.Variants
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class BpkRatingValuesTest : BpkSnapshotTest() {
@@ -86,5 +89,30 @@ class BpkRatingValuesTest : BpkSnapshotTest() {
     fun clampsUp() {
         val subject = createTestRating(testContext, value = 20.0f)
         snap(subject)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun preservesDecimalValue() {
+        val value = 3.49f
+        val subject = createTestRating(testContext, value = value)
+
+        assertEquals(value.toBits(), subject.value.toBits())
+        assertEquals(
+            "3.49",
+            subject.findViewById<TextView>(R.id.bpk_rating_badge).text.toString(),
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun handlesNaNValue() {
+        val subject = createTestRating(testContext, value = Float.NaN)
+
+        assertEquals(0f.toBits(), subject.value.toBits())
+        assertEquals(
+            "0.0",
+            subject.findViewById<TextView>(R.id.bpk_rating_badge).text.toString(),
+        )
     }
 }
