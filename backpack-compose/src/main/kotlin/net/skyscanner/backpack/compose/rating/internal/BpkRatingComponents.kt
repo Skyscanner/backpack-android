@@ -170,7 +170,12 @@ internal fun formatValue(value: Float, scale: BpkRatingScale, locale: Locale): S
     val decimalValue = BigDecimal(coercedValue.toString()).stripTrailingZeros()
     val fractionDigits = decimalValue.scale().coerceAtLeast(1)
 
-    return NumberFormat.getNumberInstance(locale).apply {
+    val latinNumeralsLocale = Locale.Builder()
+        .setLocale(locale)
+        .setUnicodeLocaleKeyword("nu", "latn")
+        .build()
+
+    return NumberFormat.getNumberInstance(latinNumeralsLocale).apply {
         isGroupingUsed = false
         minimumFractionDigits = fractionDigits
         maximumFractionDigits = fractionDigits

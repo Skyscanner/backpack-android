@@ -44,6 +44,11 @@ class BpkRatingComponentsTest {
     }
 
     @Test
+    fun formatValueUsesLatinDigitsInRtlLocale() {
+        assertEquals("8.5", formatValue(8.5f, BpkRatingScale.ZeroToTen, Locale.forLanguageTag("ar")))
+    }
+
+    @Test
     fun formatValueMapsNaNToScaleMinimum() {
         assertEquals("0.0", formatValue(Float.NaN, BpkRatingScale.ZeroToFive, Locale.US))
     }
