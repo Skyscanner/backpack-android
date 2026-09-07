@@ -57,6 +57,7 @@ fun BpkGraphicPromo(
     sponsorLogo: (@Composable () -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     tapAction: () -> Unit = {},
+    tapActionAccessibilityLabel: String? = null,
     animationIndicationNode: IndicationNodeFactory = getInteractiveBackgroundIndicationNodeFactory(),
 ) {
     BpkGraphicPromoImpl(
@@ -72,6 +73,7 @@ fun BpkGraphicPromo(
         sponsorLogo = sponsorLogo,
         interactionSource = interactionSource,
         tapAction = tapAction,
+        tapActionAccessibilityLabel = tapActionAccessibilityLabel,
         animationIndicationNode = animationIndicationNode,
     )
 }

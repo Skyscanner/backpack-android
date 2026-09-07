@@ -23,8 +23,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
@@ -46,6 +50,7 @@ class BpkGraphicPromoTest {
         subHeadline: String? = null,
         sponsor: BpkGraphicsPromoSponsor? = null,
         sponsorLogo: (@Composable () -> Unit)? = null,
+        tapActionAccessibilityLabel: String? = null,
     ) {
         composeTestRule.setContent {
             BpkTheme {
@@ -55,6 +60,7 @@ class BpkGraphicPromoTest {
                     subHeadline = subHeadline,
                     sponsor = sponsor,
                     sponsorLogo = sponsorLogo,
+                    tapActionAccessibilityLabel = tapActionAccessibilityLabel,
                     background = { Box(Modifier.fillMaxSize()) },
                 )
             }
@@ -158,6 +164,34 @@ class BpkGraphicPromoTest {
 
     // endregion
 
+    // region Tap action accessibility label tests
+
+    @Test
+    fun givenTapActionAccessibilityLabel_whenRendered_thenRootClickActionHasCustomLabel() {
+        // When
+        renderGraphicPromo(tapActionAccessibilityLabel = TAP_ACTION_LABEL)
+
+        // Then
+        composeTestRule.onNode(
+            matcher = hasContentDescription(HEADLINE),
+            useUnmergedTree = false,
+        ).assertOnClickLabelEquals(TAP_ACTION_LABEL)
+    }
+
+    @Test
+    fun givenNoTapActionAccessibilityLabel_whenRendered_thenRootClickActionHasNoLabel() {
+        // When
+        renderGraphicPromo()
+
+        // Then
+        composeTestRule.onNode(
+            matcher = hasContentDescription(HEADLINE),
+            useUnmergedTree = false,
+        ).assertOnClickLabelEquals(null)
+    }
+
+    // endregion
+
     private fun defaultSponsor(
         onCtaClick: () -> Unit = { },
     ) = BpkGraphicsPromoSponsor(
@@ -177,5 +211,12 @@ class BpkGraphicPromoTest {
         const val SPONSOR_TITLE = "Sponsored"
         const val SPONSOR_ACCESSIBILITY_LABEL = "Sponsored"
         const val CTA_LABEL = "Learn more about our sponsor"
+        const val TAP_ACTION_LABEL = "Open video"
     }
 }
+
+private fun SemanticsNodeInteraction.assertOnClickLabelEquals(value: String?): SemanticsNodeInteraction = assert(
+    SemanticsMatcher("${SemanticsActions.OnClick.name} = [$value]") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label == value
+    },
+)
