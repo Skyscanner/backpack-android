@@ -57,10 +57,13 @@ internal fun BpkRatingNumbers(
 ) {
     Row(modifier = modifier) {
         val locale = LocalConfiguration.current.locales[0]
+        val formattedValue = remember(value, scale, locale) {
+            formatValue(value, scale, locale)
+        }
 
         BpkText(
             modifier = Modifier.alignByBaseline(),
-            text = formatValue(value, scale, locale),
+            text = formattedValue,
             style = when (size) {
                 BpkRatingSize.Base -> BpkTheme.typography.label1
                 BpkRatingSize.Large -> BpkTheme.typography.hero5
