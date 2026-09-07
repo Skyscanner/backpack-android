@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.select.internal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
@@ -34,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
@@ -67,6 +69,7 @@ internal fun BpkSelectImpl(
     val selectText = selectedIndex?.let { options.getOrNull(selectedIndex) } ?: ""
     val focusManager = LocalFocusManager.current
     val scrollState = rememberScrollState()
+    var anchorHasFocus by remember { mutableStateOf(false) }
 
     LaunchedEffect(expanded, selectedIndex) {
         if (expanded && selectedIndex != null) {
@@ -78,9 +81,16 @@ internal fun BpkSelectImpl(
         onExpandedChange = { expanded = !expanded },
     ) {
         BpkStaticFieldImpl(
-            modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+            // BpkStaticFieldImpl is visual-only; the anchor needs a focus target for keyboard input.
+            modifier = modifier
+                .onFocusChanged { anchorHasFocus = it.isFocused }
+                .focusable(enabled = status != BpkFieldStatus.Disabled)
+                .menuAnchor(
+                    type = ExposedDropdownMenuAnchorType.PrimaryNotEditable,
+                    enabled = status != BpkFieldStatus.Disabled,
+                ),
             value = selectText,
-            isFocused = expanded,
+            isFocused = expanded || anchorHasFocus,
             placeholder = placeholder,
             status = status,
             trailingIcon = BpkIcon.ArrowDown,

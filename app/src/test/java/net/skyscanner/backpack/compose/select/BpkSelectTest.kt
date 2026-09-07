@@ -18,11 +18,21 @@
 
 package net.skyscanner.backpack.compose.select
 
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.isFocusable
 import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.pressKey
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.DisabledSelectSample
@@ -85,5 +95,21 @@ class BpkSelectTest : BpkSnapshotTest() {
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
         DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchSelectWidth)
+    }
+
+    @Test
+    fun dropdownCanBeOpenedWithExternalKeyboard() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                DefaultSelectSample(dropDownWidth = BpkDropDownWidth.MaxWidth)
+            }
+        }
+        composeTestRule.waitForIdle()
+        composeTestRule.onNode(isFocusable() and hasClickAction())
+            .assert(isFocusable())
+            .performSemanticsAction(SemanticsActions.RequestFocus)
+            .assertIsFocused()
+            .performKeyInput { pressKey(Key.Enter) }
+        composeTestRule.onNode(isPopup()).assertIsDisplayed()
     }
 }
