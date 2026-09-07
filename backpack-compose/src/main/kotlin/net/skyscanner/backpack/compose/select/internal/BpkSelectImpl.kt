@@ -90,7 +90,7 @@ internal fun BpkSelectImpl(
                     enabled = status != BpkFieldStatus.Disabled,
                 ),
             value = selectText,
-            isFocused = expanded || anchorHasFocus,
+            isFocused = status != BpkFieldStatus.Disabled && (expanded || anchorHasFocus),
             placeholder = placeholder,
             status = status,
             trailingIcon = BpkIcon.ArrowDown,
