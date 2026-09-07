@@ -100,6 +100,7 @@ internal fun BpkGraphicPromoImpl(
     sponsor: BpkGraphicsPromoSponsor? = null,
     sponsorLogo: (@Composable () -> Unit)? = null,
     tapAction: () -> Unit = {},
+    tapActionAccessibilityLabel: String? = null,
     animationIndicationNode: IndicationNodeFactory = InteractiveBackgroundIndicationNodeFactory,
 ) {
     val (aspectRatio, maxHeight) = getDeviceConstrains()
@@ -115,6 +116,7 @@ internal fun BpkGraphicPromoImpl(
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
+                onClickLabel = tapActionAccessibilityLabel,
                 onClick = tapAction,
             )
             .semantics(mergeDescendants = true) {
