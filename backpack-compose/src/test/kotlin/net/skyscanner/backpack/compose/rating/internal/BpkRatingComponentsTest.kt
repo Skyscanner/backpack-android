@@ -44,6 +44,19 @@ class BpkRatingComponentsTest {
     }
 
     @Test
+    fun formatValueUsesLatinDigitsInRtlLocale() {
+        val formattedValue = formatValue(
+            8.5f,
+            BpkRatingScale.ZeroToTen,
+            Locale.forLanguageTag("ar"),
+        )
+        val decimalSeparator = formattedValue.single { it !in '0'..'9' }
+
+        assertEquals("8", formattedValue.substringBefore(decimalSeparator))
+        assertEquals("5", formattedValue.substringAfter(decimalSeparator))
+    }
+
+    @Test
     fun formatValueMapsNaNToScaleMinimum() {
         assertEquals("0.0", formatValue(Float.NaN, BpkRatingScale.ZeroToFive, Locale.US))
     }

@@ -57,10 +57,13 @@ internal fun BpkRatingNumbers(
 ) {
     Row(modifier = modifier) {
         val locale = LocalConfiguration.current.locales[0]
+        val formattedValue = remember(value, scale, locale) {
+            formatValue(value, scale, locale)
+        }
 
         BpkText(
             modifier = Modifier.alignByBaseline(),
-            text = formatValue(value, scale, locale),
+            text = formattedValue,
             style = when (size) {
                 BpkRatingSize.Base -> BpkTheme.typography.label1
                 BpkRatingSize.Large -> BpkTheme.typography.hero5
@@ -170,7 +173,12 @@ internal fun formatValue(value: Float, scale: BpkRatingScale, locale: Locale): S
     val decimalValue = BigDecimal(coercedValue.toString()).stripTrailingZeros()
     val fractionDigits = decimalValue.scale().coerceAtLeast(1)
 
-    return NumberFormat.getNumberInstance(locale).apply {
+    val latinNumeralsLocale = Locale.Builder()
+        .setLocale(locale)
+        .setUnicodeLocaleKeyword("nu", "latn")
+        .build()
+
+    return NumberFormat.getNumberInstance(latinNumeralsLocale).apply {
         isGroupingUsed = false
         minimumFractionDigits = fractionDigits
         maximumFractionDigits = fractionDigits
