@@ -18,11 +18,24 @@
 
 package net.skyscanner.backpack.compose.select
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.isFocusable
 import androidx.compose.ui.test.isPopup
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyInput
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.pressKey
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
 import net.skyscanner.backpack.demo.compose.DisabledSelectSample
@@ -85,5 +98,28 @@ class BpkSelectTest : BpkSnapshotTest() {
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
         DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchSelectWidth)
+    }
+
+    @Test
+    fun dropdownCanBeOpenedWithExternalKeyboard() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSelect(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("keyboard_select"),
+                    options = listOf("London", "Paris"),
+                    selectedIndex = null,
+                    placeholder = "Placeholder",
+                )
+            }
+        }
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("keyboard_select")
+            .assert(isFocusable())
+            .performSemanticsAction(SemanticsActions.RequestFocus)
+            .assertIsFocused()
+            .performKeyInput { pressKey(Key.Enter) }
+        composeTestRule.onNode(isPopup()).assertIsDisplayed()
     }
 }
