@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.calendar.internal
 
+import android.os.SystemClock
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -38,6 +39,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -82,6 +85,13 @@ internal fun BpkCalendarDayCell(
     val selection = model.selection
     val inactive = model.inactive
     val interactionSource = remember { MutableInteractionSource() }
+    val loadingStartedAtMillis = remember { mutableLongStateOf(SystemClock.uptimeMillis()) }
+
+    LaunchedEffect(model.info.label) {
+        if (model.info.label is CellLabel.Loading) {
+            loadingStartedAtMillis.longValue = SystemClock.uptimeMillis()
+        }
+    }
 
     val status = model.info.status
     val style = model.info.style
@@ -163,9 +173,9 @@ internal fun BpkCalendarDayCell(
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
                         val transitionDelayMillis = if (initialState is CellLabel.Loading) {
-                            val shimmerCycleDurationMillis =
-                                BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis
-                            shimmerCycleDurationMillis * SHIMMER_CYCLES_BEFORE_CONTENT
+                            contentTransitionDelayMillis(
+                                loadingElapsedMillis = SystemClock.uptimeMillis() - loadingStartedAtMillis.longValue,
+                            )
                         } else {
                             0
                         }
@@ -328,5 +338,24 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+// Do not restart the two-cycle wait when content arrives late. Once the minimum is met,
+// align the change to the next shimmer boundary so the current shimmer is not interrupted.
+private fun contentTransitionDelayMillis(loadingElapsedMillis: Long): Int {
+    val shimmerCycleDurationMillis =
+        BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis
+    val minimumLoadingDurationMillis = shimmerCycleDurationMillis * SHIMMER_CYCLES_BEFORE_CONTENT
+
+    return if (loadingElapsedMillis < minimumLoadingDurationMillis) {
+        (minimumLoadingDurationMillis - loadingElapsedMillis).toInt()
+    } else {
+        val elapsedInCurrentCycleMillis = loadingElapsedMillis % shimmerCycleDurationMillis
+        if (elapsedInCurrentCycleMillis == 0L) {
+            0
+        } else {
+            (shimmerCycleDurationMillis - elapsedInCurrentCycleMillis).toInt()
+        }
+    }
+}
 
 private const val SHIMMER_CYCLES_BEFORE_CONTENT = 2
