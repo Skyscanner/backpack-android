@@ -162,14 +162,16 @@ internal fun BpkCalendarDayCell(
                     label = "AnimatedContent ${model.date}",
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
-                        val delay = if (initialState is CellLabel.Loading) {
-                            (BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis) * 2 // We want to show the shimmer at least twice
+                        val transitionDelayMillis = if (initialState is CellLabel.Loading) {
+                            val shimmerCycleDurationMillis =
+                                BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis
+                            shimmerCycleDurationMillis * SHIMMER_CYCLES_BEFORE_CONTENT
                         } else {
                             0
                         }
-                        fadeIn(animationSpec = tween(200, delayMillis = delay))
+                        fadeIn(animationSpec = tween(200, delayMillis = transitionDelayMillis))
                             .togetherWith(
-                                fadeOut(animationSpec = tween(200, delayMillis = delay)),
+                                fadeOut(animationSpec = tween(200, delayMillis = transitionDelayMillis)),
                             )
                     },
                     modifier = Modifier.matchParentSize(),
@@ -326,3 +328,5 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+private const val SHIMMER_CYCLES_BEFORE_CONTENT = 2
