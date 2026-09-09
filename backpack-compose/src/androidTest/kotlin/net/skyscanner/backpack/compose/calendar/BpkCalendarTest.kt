@@ -25,14 +25,17 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionContains
+import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.isFocusable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToNode
 import kotlinx.coroutines.test.runTest
@@ -197,6 +200,19 @@ class BpkCalendarTest {
         val state = controller.state
 
         assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun enabledDateCellsCanReceiveKeyboardFocus() = runTest {
+        val controller = createController(DefaultSingle)
+
+        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+
+        composeTestRule.onAllNodesWithText("2")
+            .onFirst()
+            .assert(isFocusable())
+            .performSemanticsAction(SemanticsActions.RequestFocus)
+            .assertIsFocused()
     }
 
     @Test

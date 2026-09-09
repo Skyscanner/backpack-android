@@ -47,6 +47,10 @@
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/loading.png" alt="Calendar2 component showing loading label" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/loading_dm.png" alt="Calendar2 component showing loading labels - dark mode" width="375" /> |
 
+## Accessibility
+
+Enabled date cells are focusable for keyboard navigation and use Backpack's bounded ripple indication for focus, hover, and press feedback. The indication is clipped to the date circle so optional day information does not affect its bounds.
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
