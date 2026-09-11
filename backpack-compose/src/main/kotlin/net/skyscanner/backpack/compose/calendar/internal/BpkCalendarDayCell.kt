@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.calendar.internal
 
+import android.os.SystemClock
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -26,6 +27,7 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,10 +39,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
@@ -68,10 +72,10 @@ import net.skyscanner.backpack.compose.skeleton.BpkShimmerSize
 import net.skyscanner.backpack.compose.skeleton.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkCalendarDayCell(
     model: CalendarCell.Day,
@@ -80,6 +84,14 @@ internal fun BpkCalendarDayCell(
 ) {
     val selection = model.selection
     val inactive = model.inactive
+    val interactionSource = remember { MutableInteractionSource() }
+    val loadingStartedAtMillis = remember { mutableLongStateOf(SystemClock.uptimeMillis()) }
+
+    LaunchedEffect(model.info.label) {
+        if (model.info.label is CellLabel.Loading) {
+            loadingStartedAtMillis.longValue = SystemClock.uptimeMillis()
+        }
+    }
 
     val status = model.info.status
     val style = model.info.style
@@ -93,13 +105,13 @@ internal fun BpkCalendarDayCell(
                 enabled = !inactive,
                 onClick = { onClick(model) },
                 onClickLabel = model.onClickLabel,
-                interactionSource = remember { MutableInteractionSource() },
+                interactionSource = interactionSource,
             )
             .testTag(model.testTag)
             .semantics {
                 testTagsAsResourceId = true
                 if (model.stateDescription != null) {
-                    stateDescription = model.stateDescription!!
+                    stateDescription = model.stateDescription
                 } else {
                     selected = selection != null && selection != Selection.Middle
                 }
@@ -118,6 +130,7 @@ internal fun BpkCalendarDayCell(
             Spacer(
                 Modifier
                     .size(BpkCalendarSizes.SelectionHeight)
+                    .clip(CircleShape)
                     .cellDayBackground(
                         coreAccent = BpkTheme.colors.coreAccent,
                         surfaceSubtle = BpkTheme.colors.surfaceSubtle,
@@ -127,6 +140,11 @@ internal fun BpkCalendarDayCell(
                     .highlightedDayBackground(
                         coreAccent = BpkTheme.colors.coreAccent,
                         highlighted = model.info.highlighted,
+                    )
+                    // Keep focus, hover, and press feedback on the date circle, not the day-info row.
+                    .indication(
+                        interactionSource = interactionSource,
+                        indication = bpkRipple(),
                     ),
             )
 
@@ -138,7 +156,7 @@ internal fun BpkCalendarDayCell(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = BpkTheme.typography.label1,
-                color = dateColor(selection, status, inactive, style),
+                color = dateColor(selection, inactive),
             )
         }
 
@@ -150,18 +168,20 @@ internal fun BpkCalendarDayCell(
                     .heightIn(min = BpkSpacing.Base),
             ) {
                 AnimatedContent(
-                    model.info.label,
+                    targetState = model.info.label,
                     label = "AnimatedContent ${model.date}",
                     contentAlignment = Alignment.Center,
                     transitionSpec = {
-                        val delay = if (initialState is CellLabel.Loading) {
-                            (BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis) * 2 // We want to show the shimmer at least twice
+                        val transitionDelayMillis = if (initialState is CellLabel.Loading) {
+                            contentTransitionDelayMillis(
+                                loadingElapsedMillis = SystemClock.uptimeMillis() - loadingStartedAtMillis.longValue,
+                            )
                         } else {
                             0
                         }
-                        fadeIn(animationSpec = tween(200, delayMillis = delay))
+                        fadeIn(animationSpec = tween(200, delayMillis = transitionDelayMillis))
                             .togetherWith(
-                                fadeOut(animationSpec = tween(200, delayMillis = delay)),
+                                fadeOut(animationSpec = tween(200, delayMillis = transitionDelayMillis)),
                             )
                     },
                     modifier = Modifier.matchParentSize(),
@@ -182,18 +202,16 @@ internal fun BpkCalendarDayCell(
                         }
 
                         is CellLabel.Icon -> {
-                            label.resId.let { resId ->
-                                BpkIcon.findBySmall(resId)?.let { bpkIcon ->
-                                    val iconTint = label.tint
-                                        ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
-                                        ?.let { Color(it) } ?: LocalContentColor.current
-                                    BpkIcon(
-                                        icon = bpkIcon,
-                                        tint = iconTint,
-                                        contentDescription = null,
-                                        modifier = Modifier,
-                                    )
-                                }
+                            BpkIcon.findBySmall(label.resId)?.let { bpkIcon ->
+                                val iconTint = label.tint
+                                    ?.let { colorRes -> ContextCompat.getColor(LocalContext.current, colorRes) }
+                                    ?.let { Color(it) } ?: LocalContentColor.current
+                                BpkIcon(
+                                    icon = bpkIcon,
+                                    tint = iconTint,
+                                    contentDescription = null,
+                                    modifier = Modifier,
+                                )
                             }
                         }
 
@@ -281,9 +299,7 @@ private fun Modifier.cellDayBackground(
 @Composable
 private fun dateColor(
     selection: Selection?,
-    status: CellStatus?,
     inactive: Boolean,
-    style: CellStatusStyle?,
 ): Color =
     when {
         selection != null ->
@@ -322,3 +338,24 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)
+
+// Do not restart the two-cycle wait when content arrives late. Once the minimum is met,
+// align the change to the next shimmer boundary so the current shimmer is not interrupted.
+private fun contentTransitionDelayMillis(loadingElapsedMillis: Long): Int {
+    val shimmerCycleDurationMillis =
+        BpkShimmerSize.Small.durationMillis + BpkShimmerSize.Small.delayMillis
+    val minimumLoadingDurationMillis = shimmerCycleDurationMillis * SHIMMER_CYCLES_BEFORE_CONTENT
+
+    return if (loadingElapsedMillis < minimumLoadingDurationMillis) {
+        (minimumLoadingDurationMillis - loadingElapsedMillis).toInt()
+    } else {
+        val elapsedInCurrentCycleMillis = loadingElapsedMillis % shimmerCycleDurationMillis
+        if (elapsedInCurrentCycleMillis == 0L) {
+            0
+        } else {
+            (shimmerCycleDurationMillis - elapsedInCurrentCycleMillis).toInt()
+        }
+    }
+}
+
+private const val SHIMMER_CYCLES_BEFORE_CONTENT = 2

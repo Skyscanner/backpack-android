@@ -24,9 +24,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
@@ -67,6 +75,35 @@ internal fun BpkNudgerImpl(
     fun setValue(value: Int) =
         onValueChange(value.coerceIn(range))
 
+    val decrementEnabled = enabled && coerced > range.first
+    val incrementEnabled = enabled && coerced < range.last
+
+    // A disabled button loses its focus target, which would drop keyboard focus to the root.
+    // Hand focus to the opposite button instead (DON-3704).
+    val decrementFocusRequester = remember { FocusRequester() }
+    val incrementFocusRequester = remember { FocusRequester() }
+    var decrementHasFocus by remember { mutableStateOf(false) }
+    var incrementHasFocus by remember { mutableStateOf(false) }
+    var pendingFocusMove by remember { mutableStateOf<NudgerButton?>(null) }
+
+    // The move has to wait for recomposition: when both buttons change enabled state on the same
+    // click the receiving button has no focus target yet while onClick is running.
+    LaunchedEffect(pendingFocusMove) {
+        val target = pendingFocusMove ?: return@LaunchedEffect
+        pendingFocusMove = null
+        when (target) {
+            // Only move once the button really did become disabled - the value is hoisted, so the
+            // host is free to ignore onValueChange and leave it enabled and focused.
+            NudgerButton.Increment -> if (!decrementEnabled && incrementEnabled) {
+                incrementFocusRequester.requestFocus()
+            }
+            NudgerButton.Decrement -> if (!incrementEnabled && decrementEnabled) {
+                decrementFocusRequester.requestFocus()
+            }
+        }
+        // When min == max both buttons are disabled and there is nowhere to move focus to.
+    }
+
     Row(
         modifier = if (allowSemantics) modifier.nudgerSemantics(value, ::setValue, range, enabled) else modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -75,11 +112,20 @@ internal fun BpkNudgerImpl(
         BpkButton(
             icon = BpkIcon.Minus,
             contentDescription = "", // handled by semantics modifier
-            enabled = enabled && coerced > range.first,
+            enabled = decrementEnabled,
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
-            onClick = { setValue(coerced - 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Decrement"),
+            onClick = {
+                // Recorded here because this is the last moment the button is still focused.
+                if (decrementHasFocus && coerced - 1 <= range.first) {
+                    pendingFocusMove = NudgerButton.Increment
+                }
+                setValue(coerced - 1)
+            },
+            modifier = Modifier
+                .focusRequester(decrementFocusRequester)
+                .onFocusChanged { decrementHasFocus = it.hasFocus }
+                .generateNudgerTestTag(testTag, "Decrement"),
         )
 
         BpkText(
@@ -102,11 +148,20 @@ internal fun BpkNudgerImpl(
         BpkButton(
             icon = BpkIcon.Plus,
             contentDescription = "", // handled by semantics modifier
-            enabled = enabled && coerced < range.last,
+            enabled = incrementEnabled,
             size = BpkButtonSize.Default,
             type = BpkButtonType.Secondary,
-            onClick = { setValue(coerced + 1) },
-            modifier = Modifier.generateNudgerTestTag(testTag, "Increment"),
+            onClick = {
+                // Recorded here because this is the last moment the button is still focused.
+                if (incrementHasFocus && coerced + 1 >= range.last) {
+                    pendingFocusMove = NudgerButton.Decrement
+                }
+                setValue(coerced + 1)
+            },
+            modifier = Modifier
+                .focusRequester(incrementFocusRequester)
+                .onFocusChanged { incrementHasFocus = it.hasFocus }
+                .generateNudgerTestTag(testTag, "Increment"),
         )
     }
 }
@@ -144,6 +199,8 @@ internal fun Modifier.nudgerSemantics(
             valueRange = range.first.toFloat()..range.last.toFloat(),
             steps = range.last - range.first,
         )
+
+private enum class NudgerButton { Decrement, Increment }
 
 @OptIn(ExperimentalComposeUiApi::class)
 private fun Modifier.generateNudgerTestTag(testTag: String?, action: String): Modifier {
