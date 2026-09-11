@@ -10,6 +10,17 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Nudger/screenshots/default.png" alt="Nudger component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Nudger/screenshots/default_dm.png" alt="Nudger component - dark mode" width="375" /> |
 
+## Accessibility
+
+The nudger is exposed to screen readers as a single adjustable control, so TalkBack announces the
+current value and offers the volume keys to change it rather than reading the `+` and `-` buttons
+separately.
+
+For external keyboards the two buttons are separate focus stops. When a button becomes disabled
+because the value reached `min` or `max`, keyboard focus moves to the opposite button so it is never
+lost. Note that Compose only makes buttons focusable outside of touch input mode, so this has no
+effect on touch interaction.
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
