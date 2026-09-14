@@ -33,7 +33,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
@@ -165,13 +164,7 @@ fun BpkSwitch(
                     if (!enabled) {
                         disabled()
                     }
-                    if (!announceState) {
-                        // A zero-width space is a non-empty stateDescription that renders as
-                        // nothing, fully suppressing TalkBack's default "checked"/"not checked"
-                        // announcement instead of falling back to it (see suppressToggleableStateAnnouncement).
-                        stateDescription = "\u200B"
-                    }
-                }
+                }.suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
             },
     ) {
 

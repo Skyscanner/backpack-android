@@ -110,7 +110,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
             }
         }
         composeTestRule.onNodeWithTag("switch")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "\u200B"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, SUPPRESSED_STATE_DESCRIPTION))
     }
 
     @Test
@@ -128,6 +128,6 @@ class BpkSwitchTest : BpkSnapshotTest() {
             }
         }
         composeTestRule.onNodeWithTag("switch")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "\u200B"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, SUPPRESSED_STATE_DESCRIPTION))
     }
 }

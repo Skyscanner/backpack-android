@@ -92,7 +92,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
             }
         }
         composeTestRule.onNodeWithTag("saveButton")
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "\u200B"))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, SUPPRESSED_STATE_DESCRIPTION))
     }
 
     companion object {
