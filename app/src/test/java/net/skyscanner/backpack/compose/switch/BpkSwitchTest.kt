@@ -18,11 +18,18 @@
 
 package net.skyscanner.backpack.compose.switch
 
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultDisabledCheckedSwitchExample
@@ -86,5 +93,41 @@ class BpkSwitchTest : BpkSnapshotTest() {
     @Variants(BpkTestVariant.Default)
     fun customContent() = snap(width = 200.dp) {
         CustomContentSwitchExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun announceStateFalseSuppressesStateDescription() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSwitch(
+                    text = "Wifi",
+                    checked = true,
+                    onCheckedChange = {},
+                    announceState = false,
+                    modifier = Modifier.testTag("switch"),
+                )
+            }
+        }
+        composeTestRule.onNodeWithTag("switch")
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "\u200B"))
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun announceStateFalseSuppressesStateDescriptionWhenReadOnly() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSwitch(
+                    text = "Wifi",
+                    checked = true,
+                    onCheckedChange = null,
+                    announceState = false,
+                    modifier = Modifier.testTag("switch"),
+                )
+            }
+        }
+        composeTestRule.onNodeWithTag("switch")
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "\u200B"))
     }
 }
