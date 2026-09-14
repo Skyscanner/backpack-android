@@ -112,5 +112,8 @@ fun Modifier.invisibleSemantic(): Modifier =
  */
 internal fun Modifier.suppressToggleableStateAnnouncement(shouldSuppress: Boolean): Modifier =
     applyIf(shouldSuppress) {
-        semantics { stateDescription = "" }
+        // TalkBack falls back to the default "checked"/"not checked" announcement when
+        // stateDescription is empty. A zero-width space is a non-empty value that renders
+        // as nothing, so it fully suppresses the announcement instead of falling back.
+        semantics { stateDescription = "\u200B" }
     }

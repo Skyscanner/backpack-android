@@ -166,7 +166,10 @@ fun BpkSwitch(
                         disabled()
                     }
                     if (!announceState) {
-                        stateDescription = ""
+                        // A zero-width space is a non-empty stateDescription that renders as
+                        // nothing, fully suppressing TalkBack's default "checked"/"not checked"
+                        // announcement instead of falling back to it (see suppressToggleableStateAnnouncement).
+                        stateDescription = "\u200B"
                     }
                 }
             },
