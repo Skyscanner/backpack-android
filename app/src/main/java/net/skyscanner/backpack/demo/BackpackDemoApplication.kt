@@ -22,6 +22,8 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.demo.data.SharedPreferences
 
 /**
  * Application class registered in AndroidManifest.xml
@@ -30,6 +32,9 @@ import androidx.appcompat.app.AppCompatDelegate
 class BackpackDemoApplication : Application() {
 
     companion object {
+        /** BpkConfiguration can be set once per process; Robolectric creates this Application once per test. */
+        @Volatile
+        private var configurationApplied = false
 
         private lateinit var instance: BackpackDemoApplication
 
@@ -47,5 +52,19 @@ class BackpackDemoApplication : Application() {
         super.onCreate()
         instance = applicationContext!! as BackpackDemoApplication
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        applyBpkConfigurationOnce()
+    }
+
+    /**
+     * Applies the saved configuration once per process. Activities are recreated on configuration
+     * changes (dark mode, rotation) and must never call setConfigs themselves: the second call throws.
+     */
+    private fun applyBpkConfigurationOnce() {
+        if (configurationApplied) return
+        val typographySet = SharedPreferences.getTypographySet(this)
+        BpkConfiguration.setConfigs(
+            typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
+        )
+        configurationApplied = true
     }
 }
