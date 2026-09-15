@@ -32,6 +32,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.compose.ContentFrame
+import androidx.media3.ui.compose.SURFACE_TYPE_SURFACE_VIEW
+import androidx.media3.ui.compose.SURFACE_TYPE_TEXTURE_VIEW
 import net.skyscanner.backpack.compose.videoplayer.internal.rememberReducedMotionEnabled
 
 @OptIn(UnstableApi::class)
@@ -40,6 +42,7 @@ fun BpkVideoPlayer(
     controller: BpkVideoPlayerController,
     modifier: Modifier = Modifier,
     scaleToFill: Boolean = false,
+    surfaceType: BpkVideoPlayerSurfaceType = BpkVideoPlayerSurfaceType.SurfaceView,
 ) {
     val reducedMotion by rememberReducedMotionEnabled()
 
@@ -58,6 +61,23 @@ fun BpkVideoPlayer(
             player = controller.player,
             contentScale = if (scaleToFill) ContentScale.Crop else ContentScale.Fit,
             modifier = Modifier.fillMaxSize(),
+            surfaceType = when (surfaceType) {
+                BpkVideoPlayerSurfaceType.SurfaceView -> SURFACE_TYPE_SURFACE_VIEW
+                BpkVideoPlayerSurfaceType.TextureView -> SURFACE_TYPE_TEXTURE_VIEW
+            },
         )
     }
 }
+
+/**
+ * The kind of Android view the video frames are drawn into.
+ *
+ * [SurfaceView] renders into its own hardware layer: cheaper and lower latency, and its last frame is
+ * held by the system compositor so it survives the app being backgrounded. The layer is composited
+ * outside the view hierarchy, though, so Compose alpha, z-order and clipping do not apply to it.
+ *
+ * [TextureView] renders inside the view hierarchy, so alpha, z-order, clipping and transforms behave
+ * like any other composable — the right choice when the video is faded, animated, cropped or overlaid.
+ * It costs an extra GPU copy and cannot display DRM-protected content.
+ */
+enum class BpkVideoPlayerSurfaceType { SurfaceView, TextureView, }
