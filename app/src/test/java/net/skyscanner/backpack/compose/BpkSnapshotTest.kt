@@ -115,4 +115,10 @@ abstract class BpkSnapshotTest(private val tags: List<Any> = emptyList()) {
             composeTestRule.onNode(isRoot()).captureRoboImage()
         }
     }
+
+    companion object {
+        // Mirrors the zero-width space used by Modifier.suppressToggleableStateAnnouncement
+        // to fully suppress TalkBack's default checked/unchecked state announcement.
+        const val SUPPRESSED_STATE_DESCRIPTION = "\u200B"
+    }
 }
