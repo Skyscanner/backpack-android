@@ -78,6 +78,20 @@ Box {
 
 Available controller actions: `play()`, `pause()`, `toggle()`, `setMuted(Boolean)`, `resetToStart()`.
 
+### Surface type
+
+By default the video is drawn into a `SurfaceView`, which renders in its own hardware layer. That is the cheapest option and its last frame is held by the system compositor, so it survives the app being backgrounded — but the layer is composited outside the view hierarchy, so Compose `alpha`, z-order and clipping do not apply to it. A video that is faded or animated can therefore stay fully opaque while everything around it fades.
+
+Pass `surfaceType = BpkVideoPlayerSurfaceType.TextureView` when the video takes part in normal Compose compositing. Alpha, z-order, clipping and transforms all behave as expected. It costs an extra GPU copy and cannot display DRM-protected content.
+
+```kotlin
+BpkVideoPlayer(
+    controller = controller,
+    modifier = Modifier.fillMaxSize(),
+    surfaceType = BpkVideoPlayerSurfaceType.TextureView,
+)
+```
+
 ### Shared controller — continuous playback across transitions
 
 Create a `BpkVideoPlayerController` and pass it to multiple `BpkVideoPlayer` calls. Playback continues uninterrupted when the view changes (e.g. card → fullscreen).
