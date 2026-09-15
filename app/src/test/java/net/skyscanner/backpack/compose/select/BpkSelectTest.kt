@@ -22,19 +22,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.isFocusable
 import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.pressKey
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.compose.DefaultSelectSample
 import net.skyscanner.backpack.demo.compose.DefaultSelectTextOnlySample
@@ -78,7 +82,7 @@ class BpkSelectTest : BpkSnapshotTest() {
 
     @Test
     fun dropdownlistMaxWidth() = snap(assertion = {
-        onNodeWithText("Placeholder").performClick()
+        onNode(isSelectAnchor()).performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
         DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MaxWidth)
@@ -86,7 +90,7 @@ class BpkSelectTest : BpkSnapshotTest() {
 
     @Test
     fun dropdownlistMatchOptionWidth() = snap(assertion = {
-        onNodeWithText("Placeholder").performClick()
+        onNode(isSelectAnchor()).performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
         DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchOptionWidth)
@@ -94,7 +98,7 @@ class BpkSelectTest : BpkSnapshotTest() {
 
     @Test
     fun dropdownlistMatchSelectWidth() = snap(assertion = {
-        onNodeWithText("Placeholder").performClick()
+        onNode(isSelectAnchor()).performClick()
         onNode(isPopup()).assertIsDisplayed()
     }, captureFullScreen = true) {
         DefaultSelectSample(selectedIndex = 0, dropDownWidth = BpkDropDownWidth.MatchSelectWidth)
@@ -122,4 +126,46 @@ class BpkSelectTest : BpkSnapshotTest() {
             .performKeyInput { pressKey(Key.Enter) }
         composeTestRule.onNode(isPopup()).assertIsDisplayed()
     }
+
+    @Test
+    fun anchorExposesDropdownListRoleMergedWithItsLabel() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSelect(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("role_select"),
+                    options = listOf("London", "Paris"),
+                    selectedIndex = null,
+                    placeholder = "Placeholder",
+                )
+            }
+        }
+        composeTestRule.onNodeWithTag("role_select")
+            .assert(isSelectAnchor())
+            .assertTextEquals("Placeholder")
+    }
+
+    @Test
+    fun disabledAnchorExposesDropdownListRole() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSelect(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("disabled_select"),
+                    options = listOf("London", "Paris"),
+                    selectedIndex = null,
+                    placeholder = "Placeholder",
+                    status = BpkFieldStatus.Disabled,
+                )
+            }
+        }
+        composeTestRule.onNodeWithTag("disabled_select")
+            .assert(isSelectAnchor())
+            .assertTextEquals("Placeholder")
+    }
+
+    private fun isSelectAnchor(): SemanticsMatcher =
+        SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.DropdownList)
 }
