@@ -52,3 +52,7 @@ BpkCheckbox(
     MyCustomContent()
 }
 ```
+
+## Accessibility
+
+For external keyboards, `BpkCheckbox` is a single Tab stop: only the row that wraps the label and the checkbox registers a focus target, not the checkbox control by itself.
