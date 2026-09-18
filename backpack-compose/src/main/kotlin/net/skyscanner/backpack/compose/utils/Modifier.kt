@@ -103,6 +103,11 @@ internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment): Modifier = 
 fun Modifier.invisibleSemantic(): Modifier =
     semantics { invisibleToUser() }
 
+// TalkBack falls back to the default "checked"/"not checked" announcement when stateDescription
+// is empty. A zero-width space is a non-empty value that renders as nothing, so it fully
+// suppresses the announcement instead of falling back.
+internal const val SUPPRESSED_STATE_DESCRIPTION = "\u200B"
+
 /**
  * Toggleable components (e.g. via [androidx.compose.foundation.selection.toggleable] with
  * `Role.Switch`/`Role.Checkbox`) get a platform-generated "On"/"Off" state description that
@@ -112,5 +117,5 @@ fun Modifier.invisibleSemantic(): Modifier =
  */
 internal fun Modifier.suppressToggleableStateAnnouncement(shouldSuppress: Boolean): Modifier =
     applyIf(shouldSuppress) {
-        semantics { stateDescription = "" }
+        semantics { stateDescription = SUPPRESSED_STATE_DESCRIPTION }
     }

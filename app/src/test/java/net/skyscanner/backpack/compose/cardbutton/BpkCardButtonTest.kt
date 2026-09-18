@@ -19,8 +19,15 @@
 package net.skyscanner.backpack.compose.cardbutton
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.onNodeWithTag
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -67,6 +74,25 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
                 onClick = {},
             )
         }
+    }
+
+    @Test
+    fun announceStateFalseSuppressesStateDescription() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSaveButton(
+                    checked = true,
+                    contentDescription = "Save",
+                    style = style,
+                    size = size,
+                    onCheckedChange = {},
+                    announceState = false,
+                    modifier = Modifier.testTag("saveButton"),
+                )
+            }
+        }
+        composeTestRule.onNodeWithTag("saveButton")
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, SUPPRESSED_STATE_DESCRIPTION))
     }
 
     companion object {
