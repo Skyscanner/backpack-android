@@ -24,8 +24,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.generated.NavGraphs
-import net.skyscanner.backpack.configuration.BpkConfiguration
-import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.util.BpkTypographySetManager
 
@@ -34,11 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        // Initialize BpkConfiguration with saved typography set
-        val typographySet = SharedPreferences.getTypographySet(this)
-        BpkConfiguration.setConfigs(
-            typography = typographySet == BpkConfiguration.BpkTypographySet.VDL_2,
-        )
+        // BpkConfiguration is set once per process in BackpackDemoApplication. Setting it here
+        // crashed on every activity recreation (dark mode, rotation) with "already been set".
         setTheme(BpkTypographySetManager.getTypographyTheme())
         setContent {
             DemoScaffold {
