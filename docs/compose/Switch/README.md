@@ -82,3 +82,5 @@ BpkSwitch(
 ## Accessibility
 
 `BpkSwitch` announces its checked state ("On"/"Off") to TalkBack before its label. If the checked state is always the same in a given context, that announcement is redundant and can be confusing. Pass `announceState = false` to suppress it.
+
+For external keyboards, `BpkSwitch` is a single Tab stop: only the row that wraps the label and the switch registers a focus target, not the switch control by itself.

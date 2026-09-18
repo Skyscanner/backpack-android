@@ -37,12 +37,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -87,6 +89,7 @@ fun SwitchStoryDefaultDefault(modifier: Modifier = Modifier) {
 
         AnnotatedStringSwitchExample()
         CustomContentSwitchExample()
+        SwitchWithIconExample()
         EmptyContentWithSwitchExample()
     }
 }
@@ -218,6 +221,23 @@ internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
             BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
             BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
         }
+    }
+}
+
+@Composable
+internal fun SwitchWithIconExample(modifier: Modifier = Modifier) {
+    var checked by remember { mutableStateOf(true) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        checked = checked,
+        onCheckedChange = { checked = it },
+    ) {
+        BpkText(text = stringResource(id = R.string.toggle_with_icon))
+        BpkIcon(
+            icon = BpkIcon.InformationCircle,
+            contentDescription = stringResource(id = R.string.toggle_with_icon_content_description),
+            modifier = Modifier.padding(start = BpkSpacing.Sm),
+        )
     }
 }
 

@@ -178,7 +178,6 @@ fun BpkSwitch(
         BpkSwitchImpl(
             modifier = Modifier.align(switchAlignment),
             checked = checked,
-            onCheckedChange = onCheckedChange,
             enabled = enabled,
             interactionSource = interactionSource,
             style = style,

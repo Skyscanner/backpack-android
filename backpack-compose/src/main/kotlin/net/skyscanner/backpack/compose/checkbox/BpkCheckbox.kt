@@ -148,7 +148,6 @@ fun BpkCheckbox(
                 state = state,
                 enabled = enabled,
                 interactionSource = interactionSource,
-                onClick = onClick,
                 style = style,
             )
         }
@@ -165,7 +164,6 @@ fun BpkCheckbox(
                 state = state,
                 enabled = enabled,
                 interactionSource = interactionSource,
-                onClick = onClick,
                 style = style,
             )
         }
