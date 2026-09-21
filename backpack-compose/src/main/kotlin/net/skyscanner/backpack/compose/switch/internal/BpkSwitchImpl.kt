@@ -36,7 +36,6 @@ import net.skyscanner.backpack.compose.tokens.internal.BpkSwitchColors
 @Composable
 internal fun BpkSwitchImpl(
     checked: Boolean,
-    onCheckedChange: ((Boolean) -> Unit)?,
     enabled: Boolean,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
@@ -46,8 +45,13 @@ internal fun BpkSwitchImpl(
     // Disable the enforcement to avoid the extra padding
     CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
         Switch(
+            // onCheckedChange is intentionally not forwarded: Material3's Switch attaches its own
+            // toggleable() (and thus its own focus target) whenever it is non-null, duplicating the
+            // outer Row's toggleable() in BpkSwitch.kt as a second Tab stop for external keyboards.
+            // Toggling is already driven by the outer Row; interactionSource is shared so the thumb's
+            // press/drag visuals keep animating.
             checked = checked,
-            onCheckedChange = onCheckedChange,
+            onCheckedChange = null,
             modifier = modifier.semantics { hideFromAccessibility() },
             enabled = enabled,
             interactionSource = interactionSource,

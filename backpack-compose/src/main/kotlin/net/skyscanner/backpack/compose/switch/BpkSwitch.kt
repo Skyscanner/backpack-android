@@ -33,7 +33,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.AnnotatedString
@@ -165,10 +164,7 @@ fun BpkSwitch(
                     if (!enabled) {
                         disabled()
                     }
-                    if (!announceState) {
-                        stateDescription = ""
-                    }
-                }
+                }.suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
             },
     ) {
 
@@ -182,7 +178,6 @@ fun BpkSwitch(
         BpkSwitchImpl(
             modifier = Modifier.align(switchAlignment),
             checked = checked,
-            onCheckedChange = onCheckedChange,
             enabled = enabled,
             interactionSource = interactionSource,
             style = style,

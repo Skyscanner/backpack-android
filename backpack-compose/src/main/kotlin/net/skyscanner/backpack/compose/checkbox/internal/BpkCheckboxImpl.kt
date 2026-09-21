@@ -44,7 +44,6 @@ import kotlin.math.floor
 @Composable
 internal fun BpkCheckboxImpl(
     state: ToggleableState,
-    onClick: (() -> Unit)?,
     enabled: Boolean,
     interactionSource: MutableInteractionSource,
     modifier: Modifier = Modifier,
@@ -57,7 +56,12 @@ internal fun BpkCheckboxImpl(
 
         TriStateCheckbox(
             state = state,
-            onClick = onClick,
+            // onClick is intentionally not forwarded: Material3's TriStateCheckbox attaches its own
+            // triStateToggleable() (and thus its own focus target) whenever it is non-null, duplicating
+            // the outer Row's triStateToggleable() in BpkCheckbox.kt as a second Tab stop for external
+            // keyboards. Toggling is already driven by the outer Row; interactionSource is shared so the
+            // checkbox's press visuals keep animating.
+            onClick = null,
             checkmarkStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
             outlineStroke = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
             enabled = enabled,
