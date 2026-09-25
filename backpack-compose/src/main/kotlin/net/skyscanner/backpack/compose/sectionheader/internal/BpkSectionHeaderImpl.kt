@@ -62,7 +62,7 @@ internal fun BpkSectionHeaderImpl(
             horizontalAlignment = Alignment.Start,
         ) {
             BpkText(
-                text = "HIDDEN GEMS TO DISCOVER.",
+                text = title,
                 style = (if (isTablet) BpkTheme.typography.heading2 else BpkTheme.typography.heading3).copy(
                     lineHeightStyle = LineHeightStyle(
                         alignment = LineHeightStyle.Alignment(topRatio = 0f),
