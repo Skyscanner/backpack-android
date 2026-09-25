@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.videoplayer.internal
 
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlaybackState
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerError
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerErrorCode
 
 /**
  * A player signal, decoupled from the Media3 `Player.Listener` callbacks so the state machine can be
@@ -31,7 +32,7 @@ internal sealed interface PlaybackEvent {
     data object Buffering : PlaybackEvent
     data object Ended : PlaybackEvent
     data class IsPlayingChanged(val isPlaying: Boolean) : PlaybackEvent
-    data class Error(val cause: Exception) : PlaybackEvent
+    data class Error(val cause: Exception, val code: BpkVideoPlayerErrorCode) : PlaybackEvent
 }
 
 /**
@@ -65,5 +66,5 @@ internal fun reducePlaybackState(
             }
 
         is PlaybackEvent.Error ->
-            BpkVideoPlaybackState.Failed(BpkVideoPlayerError.PlaybackFailed(event.cause))
+            BpkVideoPlaybackState.Failed(BpkVideoPlayerError.PlaybackFailed(event.cause, event.code))
     }

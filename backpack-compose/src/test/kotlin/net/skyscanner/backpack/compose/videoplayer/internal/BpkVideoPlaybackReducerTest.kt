@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.videoplayer.internal
 
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlaybackState
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerError
+import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerErrorCode
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -93,10 +94,19 @@ class BpkVideoPlaybackReducerTest {
     @Test
     fun `Error resolves to Failed with PlaybackFailed cause`() {
         val cause = IllegalStateException("boom")
-        val result = reducePlaybackState(BpkVideoPlaybackState.Playing, PlaybackEvent.Error(cause))
+        val event = PlaybackEvent.Error(cause, BpkVideoPlayerErrorCode.UnknownError)
+        val result = reducePlaybackState(BpkVideoPlaybackState.Playing, event)
         assertTrue(result is BpkVideoPlaybackState.Failed)
         val error = (result as BpkVideoPlaybackState.Failed).cause
         assertTrue(error is BpkVideoPlayerError.PlaybackFailed)
         assertEquals(cause, (error as BpkVideoPlayerError.PlaybackFailed).cause)
+    }
+
+    @Test
+    fun `Error carries its normalised code into PlaybackFailed`() {
+        val event = PlaybackEvent.Error(IllegalStateException("boom"), BpkVideoPlayerErrorCode.MediaErrNetwork)
+        val result = reducePlaybackState(BpkVideoPlaybackState.Playing, event)
+        val error = (result as BpkVideoPlaybackState.Failed).cause
+        assertEquals(BpkVideoPlayerErrorCode.MediaErrNetwork, error.code)
     }
 }

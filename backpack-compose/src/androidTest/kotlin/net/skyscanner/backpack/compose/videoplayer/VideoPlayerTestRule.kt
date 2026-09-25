@@ -72,5 +72,6 @@ class VideoPlayerTestRule : ExternalResource() {
         const val READY_STATE_TIMEOUT_MS = 7_000L
         const val PLAYING_STATE_TIMEOUT_MS = 5_000L
         const val ENDED_STATE_TIMEOUT_MS = 8_000L
+        const val FAILED_STATE_TIMEOUT_MS = 10_000L
     }
 }
