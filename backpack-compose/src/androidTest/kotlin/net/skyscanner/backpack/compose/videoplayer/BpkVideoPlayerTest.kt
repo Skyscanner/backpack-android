@@ -27,6 +27,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.media3.common.Player
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.ENDED_STATE_TIMEOUT_MS
+import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.FAILED_STATE_TIMEOUT_MS
 import net.skyscanner.backpack.compose.videoplayer.VideoPlayerTestRule.Companion.PLAYING_STATE_TIMEOUT_MS
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -60,6 +61,17 @@ class BpkVideoPlayerTest {
         startsMuted = startsMuted,
         autoPlay = autoPlay,
         loadTimeoutMs = loadTimeoutMs,
+        accessibilityLabel = "Test video",
+    )
+
+    // An unroutable host rather than a 404: the failure comes from the data source without depending on
+    // what a real server returns, and the extension is what media3 infers the media source from.
+    // The load timeout is set well beyond the test's own wait so that it cannot pre-empt the network
+    // error and report LoadTimeout instead of the code under test.
+    private fun unreachableConfig(extension: String) = BpkVideoPlayerConfig(
+        videoUrl = BpkVideoUrl("https://invalid.example/video.$extension"),
+        autoPlay = true,
+        loadTimeoutMs = FAILED_STATE_TIMEOUT_MS * 3,
         accessibilityLabel = "Test video",
     )
 
@@ -587,5 +599,116 @@ class BpkVideoPlayerTest {
         assertNotNull(progress)
         assertTrue(progress!!.durationMs > 0L)
         assertTrue(progress.percentage < 0.5f)
+    }
+
+    @Test
+    fun givenStubConfig_whenRendered_thenBytesTransferredStartsAtZero() {
+        // When
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(stubConfig)
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // Then
+        assertEquals(0L, controller.bytesTransferred.value)
+    }
+
+    @Test
+    fun givenBundledVideo_whenPlayed_thenBytesTransferredRemainsZero() {
+        // Given — a bundled resource is read through RawResourceDataSource, which reports isNetwork = false
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // When
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // Then — the counter tracks network bytes only, so local reads leave it at zero
+        composeTestRule.runOnIdle { assertEquals(0L, controller.bytesTransferred.value) }
+    }
+
+    @Test
+    fun givenPlayingVideo_whenRemovedFromComposition_thenBytesTransferredIsStillReadable() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        var showPlayer by mutableStateOf(true)
+        composeTestRule.setContent {
+            BpkTheme {
+                if (showPlayer) {
+                    controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
+                    BpkVideoPlayer(controller = controller)
+                }
+            }
+        }
+        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Playing
+        }
+
+        // When — disposal cancels publishing, releases the player, then publishes a final value
+        composeTestRule.runOnIdle { showPlayer = false }
+        composeTestRule.waitForIdle()
+
+        // Then — reading after disposal neither crashes nor loses the total
+        composeTestRule.runOnIdle { assertEquals(0L, controller.bytesTransferred.value) }
+    }
+
+    @Test
+    fun givenHlsUrl_whenPlaybackFails_thenErrorReportsTheNetworkCode() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(unreachableConfig("m3u8"))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // When
+        composeTestRule.waitUntil(timeoutMillis = FAILED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Failed
+        }
+
+        // Then
+        assertEquals(
+            BpkVideoPlayerErrorCode.MediaErrNetwork,
+            (controller.playbackState.value as BpkVideoPlaybackState.Failed).cause.code,
+        )
+    }
+
+    @Test
+    fun givenProgressiveUrl_whenPlaybackFails_thenErrorReportsTheNetworkCode() {
+        // Given
+        videoPlayerTestRule.disableReducedMotionSignal()
+        lateinit var controller: BpkVideoPlayerController
+        composeTestRule.setContent {
+            BpkTheme {
+                controller = rememberBpkVideoPlayerController(unreachableConfig("mp4"))
+                BpkVideoPlayer(controller = controller)
+            }
+        }
+
+        // When
+        composeTestRule.waitUntil(timeoutMillis = FAILED_STATE_TIMEOUT_MS) {
+            controller.playbackState.value is BpkVideoPlaybackState.Failed
+        }
+
+        // Then — the pair of tests exists to pin that an unreachable host reports the same code whatever
+        // the container is. The codes deliberately do not distinguish streaming from progressive media.
+        assertEquals(
+            BpkVideoPlayerErrorCode.MediaErrNetwork,
+            (controller.playbackState.value as BpkVideoPlaybackState.Failed).cause.code,
+        )
     }
 }

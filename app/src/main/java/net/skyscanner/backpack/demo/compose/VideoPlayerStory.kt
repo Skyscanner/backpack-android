@@ -53,6 +53,8 @@ import net.skyscanner.backpack.meta.StoryKind
 private const val VIDEO_URL =
     "https://content.skyscnr.com/media/68afbd83-d09a-48e8-9821-90c117b8f842/593d0fe4-5459-4c43-beb9-49f9ce79d365.m3u8"
 
+private const val BYTES_PER_KB = 1024
+
 // Use case 1: 16:9 card with built-in play/pause overlay
 @Composable
 @VideoPlayerComponent
@@ -93,11 +95,13 @@ fun VideoPlayerDefaultControlsStory(modifier: Modifier = Modifier) {
             "\n${(p.percentage * 100).toInt()}%  •  ${p.positionMs / 1000}s / ${p.durationMs / 1000}s"
         } ?: "\n"
 
+        val bytesText = "\n${controller.bytesTransferred.value / BYTES_PER_KB} KB transferred"
+
         BpkText(
             modifier = Modifier
                 .weight(1f)
                 .padding(top = BpkSpacing.Base),
-            text = "Video Progress can be collected inside the controller $progressText",
+            text = "Video Progress can be collected inside the controller $progressText$bytesText",
             textAlign = TextAlign.Center,
             color = BpkTheme.colors.textPrimary,
             style = BpkTheme.typography.heading5,

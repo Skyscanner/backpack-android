@@ -19,6 +19,25 @@
 package net.skyscanner.backpack.compose.videoplayer
 
 sealed class BpkVideoPlayerError {
-    data object LoadTimeout : BpkVideoPlayerError()
-    data class PlaybackFailed(val cause: Exception) : BpkVideoPlayerError()
+
+    /**
+     * A platform-neutral classification of this failure, suitable for reporting alongside iOS and Web.
+     *
+     * Report [BpkVideoPlayerErrorCode.wireName] rather than the constant name — see
+     * [BpkVideoPlayerErrorCode] for why.
+     */
+    abstract val code: BpkVideoPlayerErrorCode
+
+    data object LoadTimeout : BpkVideoPlayerError() {
+        override val code = BpkVideoPlayerErrorCode.LoadTimeout
+    }
+
+    /**
+     * @param code defaults to [BpkVideoPlayerErrorCode.UnknownError] only for callers constructing this
+     *   type themselves; failures raised by the player always carry a classified code.
+     */
+    data class PlaybackFailed(
+        val cause: Exception,
+        override val code: BpkVideoPlayerErrorCode = BpkVideoPlayerErrorCode.UnknownError,
+    ) : BpkVideoPlayerError()
 }
