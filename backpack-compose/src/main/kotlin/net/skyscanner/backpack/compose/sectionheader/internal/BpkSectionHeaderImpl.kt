@@ -21,12 +21,14 @@ package net.skyscanner.backpack.compose.sectionheader.internal
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.LineHeightStyle
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -39,8 +41,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.compose.utils.isSmallTablet
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.text.style.LineHeightStyle
 
 @Composable
 internal fun BpkSectionHeaderImpl(
@@ -65,7 +65,7 @@ internal fun BpkSectionHeaderImpl(
                 text = title,
                 style = (if (isTablet) BpkTheme.typography.heading2 else BpkTheme.typography.heading3).copy(
                     lineHeightStyle = LineHeightStyle(
-                        alignment = LineHeightStyle.Alignment(topRatio = 0f),
+                        alignment = LineHeightStyle.Alignment.Top,
                         trim = LineHeightStyle.Trim.FirstLineTop,
                     ),
                 ),
@@ -86,21 +86,21 @@ internal fun BpkSectionHeaderImpl(
         }
         button?.let {
             val startPadding = if (isTablet) BpkSpacing.Lg.times(2) else BpkSpacing.Lg
-            Row(modifier = Modifier.padding(start = startPadding)) {
-                if (isTablet) {
-                    BpkButton(
-                        text = it.text,
-                        onClick = it.onClick,
-                        type = getButtonType(type),
-                    )
-                } else {
-                    BpkButton(
-                        icon = BpkIcon.LongArrowRight,
-                        contentDescription = it.text,
-                        onClick = it.onClick,
-                        type = getButtonType(type),
-                    )
-                }
+            if (isTablet) {
+                BpkButton(
+                    text = it.text,
+                    onClick = it.onClick,
+                    type = getButtonType(type),
+                    modifier = Modifier.padding(start = startPadding),
+                )
+            } else {
+                BpkButton(
+                    icon = BpkIcon.LongArrowRight,
+                    contentDescription = it.text,
+                    onClick = it.onClick,
+                    type = getButtonType(type),
+                    modifier = Modifier.padding(start = startPadding),
+                )
             }
         }
     }
