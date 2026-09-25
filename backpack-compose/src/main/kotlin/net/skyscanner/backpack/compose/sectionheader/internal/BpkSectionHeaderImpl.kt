@@ -21,12 +21,14 @@ package net.skyscanner.backpack.compose.sectionheader.internal
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.LineHeightStyle
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -51,22 +53,22 @@ internal fun BpkSectionHeaderImpl(
 ) {
     val isTablet = isSmallTablet()
     Row(
-        horizontalArrangement = getHorizontalArrangement(isTablet),
         verticalAlignment = Alignment.Top,
         modifier = modifier,
     ) {
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm, Alignment.Top),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
             horizontalAlignment = Alignment.Start,
         ) {
             BpkText(
                 text = title,
-                style = if (isTablet) {
-                    BpkTheme.typography.heading2
-                } else {
-                    BpkTheme.typography.heading3
-                },
+                style = (if (isTablet) BpkTheme.typography.heading2 else BpkTheme.typography.heading3).copy(
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Top,
+                        trim = LineHeightStyle.Trim.FirstLineTop,
+                    ),
+                ),
                 color = getTextColor(type),
                 modifier = Modifier.semantics {
                     if (accessibilityHeaderTagEnabled == true) {
@@ -83,21 +85,22 @@ internal fun BpkSectionHeaderImpl(
             }
         }
         button?.let {
-            Row {
-                if (isTablet) {
-                    BpkButton(
-                        text = it.text,
-                        onClick = it.onClick,
-                        type = getButtonType(type),
-                    )
-                } else {
-                    BpkButton(
-                        icon = BpkIcon.LongArrowRight,
-                        contentDescription = it.text,
-                        onClick = it.onClick,
-                        type = getButtonType(type),
-                    )
-                }
+            val startPadding = if (isTablet) BpkSpacing.Lg.times(2) else BpkSpacing.Lg
+            if (isTablet) {
+                BpkButton(
+                    text = it.text,
+                    onClick = it.onClick,
+                    type = getButtonType(type),
+                    modifier = Modifier.padding(start = startPadding),
+                )
+            } else {
+                BpkButton(
+                    icon = BpkIcon.LongArrowRight,
+                    contentDescription = it.text,
+                    onClick = it.onClick,
+                    type = getButtonType(type),
+                    modifier = Modifier.padding(start = startPadding),
+                )
             }
         }
     }
@@ -106,15 +109,6 @@ internal fun BpkSectionHeaderImpl(
 private fun getButtonType(type: BpkSectionHeaderType): BpkButtonType = when (type) {
     Default -> BpkButtonType.Primary
     OnDark -> BpkButtonType.PrimaryOnDark
-}
-
-private fun getHorizontalArrangement(tablet: Boolean): Arrangement.HorizontalOrVertical {
-    val size = if (tablet) {
-        BpkSpacing.Lg.times(2)
-    } else {
-        BpkSpacing.Lg
-    }
-    return Arrangement.spacedBy(size)
 }
 
 @Composable
