@@ -27,23 +27,12 @@ import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Deals
-import net.skyscanner.backpack.configuration.BpkConfiguration
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first, "VDL2".takeIf { flavour.second })) {
-
-    private val vdl2 = flavour.second
-
-    @Before
-    fun setup() {
-        // Ensure we start from a known state
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(chipConfig = vdl2)
-    }
+class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour)) {
 
     @Test
     fun default() = snap {
@@ -177,15 +166,12 @@ class BpkChipTest(flavour: Flavor) : BpkSnapshotTest(listOfNotNull(flavour.first
 
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<Pair<BpkChip.Style, Boolean>> = BpkChip.Style.entries.flatMap { style ->
-            listOf(
-                Pair(style, true),
-                Pair(style, false),
-            )
+        fun flavours(): List<Flavor> = BpkChip.Style.entries.map { style ->
+            style
         }
     }
 }
 
-private typealias Flavor = Pair<BpkChip.Style, Boolean>
+private typealias Flavor = BpkChip.Style
 
 private const val CHIP_FULL_WIDTH = 200

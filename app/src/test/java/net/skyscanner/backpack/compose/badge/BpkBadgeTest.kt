@@ -26,27 +26,17 @@ import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.CloseCircle
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BpkBadgeTest(flavour: Flavor) :
-    BpkSnapshotTest(listOfNotNull(flavour.first, "VDL2".takeIf { flavour.second })) {
+    BpkSnapshotTest(listOfNotNull(flavour)) {
 
-    private val type: BpkBadgeType = flavour.first
-    private val vdl2 = flavour.second
-
-    @Before
-    fun setup() {
-        // Ensure we start from a known state
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(badgeConfig = vdl2)
-    }
+    private val type: BpkBadgeType = flavour
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
@@ -97,17 +87,13 @@ class BpkBadgeTest(flavour: Flavor) :
 
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0} Screenshot")
-        fun flavours(): List<Flavor> = BpkBadgeType.entries.flatMap { type ->
-            // Include VDL2 and non-VDL2 variants for all types
-            listOf(
-                Pair(type, true), // VDL2 enabled
-                Pair(type, false), // VDL2 disabled
-            )
+        fun flavours(): List<Flavor> = BpkBadgeType.entries.map { type ->
+            type
         }
     }
 }
 
-private typealias Flavor = Pair<BpkBadgeType, Boolean>
+private typealias Flavor = BpkBadgeType
 
 @Composable
 private fun BpkBadgeType.backgroundContent() = when (this) {

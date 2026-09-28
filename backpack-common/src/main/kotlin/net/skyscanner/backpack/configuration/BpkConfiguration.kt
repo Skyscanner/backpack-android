@@ -113,12 +113,12 @@ object BpkConfiguration {
     }
 
     fun setConfigs(
-        chipConfig: Boolean = false,
-        buttonConfig: Boolean = false,
-        cardConfig: Boolean = false,
-        badgeConfig: Boolean = false,
-        typography: Boolean = false,
-        iconography: Boolean = false,
+        chipConfig: Boolean = true,
+        buttonConfig: Boolean = true,
+        cardConfig: Boolean = true,
+        badgeConfig: Boolean = true,
+        typography: Boolean = true,
+        iconography: Boolean = true,
     ) {
         if (_hasSet) {
             throw IllegalStateException("BpkConfiguration has already been set")

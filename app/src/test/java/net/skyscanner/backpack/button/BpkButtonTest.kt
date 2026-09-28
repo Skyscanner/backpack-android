@@ -21,21 +21,18 @@ package net.skyscanner.backpack.button
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BpkButtonTest(flavour: Flavor) :
-    BpkSnapshotTest(listOfNotNull(flavour.first, flavour.second, "VDL2".takeIf { flavour.third })) {
+    BpkSnapshotTest(listOfNotNull(flavour.first, flavour.second)) {
 
     private val type: BpkButton.Type = flavour.first
     private val size: BpkButton.Size = flavour.second
-    private val beta = flavour.third
 
     private val icon
         get() = testContext.getDrawable(
@@ -44,13 +41,6 @@ class BpkButtonTest(flavour: Flavor) :
                 BpkButton.Size.Large -> R.drawable.bpk_long_arrow_right
             },
         )
-
-    @Before
-    fun setup() {
-        // Ensure we start from a known state
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(buttonConfig = beta)
-    }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
@@ -160,10 +150,7 @@ class BpkButtonTest(flavour: Flavor) :
         fun flavours(): List<Flavor> = BpkButton.Type.entries.flatMap { type ->
             BpkButton.Size.entries.flatMap { size ->
                 if (type == BpkButton.Type.Primary || size == BpkButton.Size.Standard) {
-                    listOf(
-                        Triple(type, size, true),
-                        Triple(type, size, false),
-                    )
+                    listOf(Pair(type, size))
                 } else {
                     emptyList()
                 }
@@ -172,7 +159,7 @@ class BpkButtonTest(flavour: Flavor) :
     }
 }
 
-private typealias Flavor = Triple<BpkButton.Type, BpkButton.Size, Boolean>
+private typealias Flavor = Pair<BpkButton.Type, BpkButton.Size>
 
 private fun BpkButton.Type.rowBackground() =
     when (this) {
