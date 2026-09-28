@@ -6,5 +6,3 @@ This directory is a collection of decisions that the squad has made on various t
 
 <!-- Please keep this in alphabetical order. -->
 
-- [Video player observability API](video-player-observability-api.md)
-
