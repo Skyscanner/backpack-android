@@ -186,7 +186,7 @@ class BpkVideoPlayerController internal constructor(
         bytesJob = scope.launch {
             while (isActive) {
                 publishBytesTransferred()
-                delay(BYTES_POLL_INTERVAL_MS.milliseconds)
+                delay(POLL_INTERVAL_MS.milliseconds)
             }
         }
     }
@@ -224,7 +224,7 @@ class BpkVideoPlayerController internal constructor(
                 } else {
                     null
                 }
-                delay(PROGRESS_POLL_INTERVAL_MS.milliseconds)
+                delay(POLL_INTERVAL_MS.milliseconds)
             }
         }
     }
@@ -242,8 +242,7 @@ class BpkVideoPlayerController internal constructor(
     }
 
     companion object {
-        private const val PROGRESS_POLL_INTERVAL_MS = 200L
-        private const val BYTES_POLL_INTERVAL_MS = 200L
+        private const val POLL_INTERVAL_MS = 200L
     }
 
     private fun apply(event: PlaybackEvent) {
