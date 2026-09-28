@@ -21,16 +21,6 @@ package net.skyscanner.backpack.compose.videoplayer.internal
 import androidx.media3.common.PlaybackException
 import net.skyscanner.backpack.compose.videoplayer.BpkVideoPlayerErrorCode
 
-/**
- * Normalises a Media3 `PlaybackException.errorCode` into a [BpkVideoPlayerErrorCode].
- *
- * Takes the raw `Int` rather than the exception so that the mapping stays free of Media3 types and
- * can be unit tested on the JVM: `PlaybackException` is abstract and its useful factories are
- * `@UnstableApi`, whereas its error code constants are compile-time inlined.
- *
- * The media item's container format deliberately plays no part: see [BpkVideoPlayerErrorCode] for
- * why HLS streams are classified the same way as progressive media.
- */
 internal fun bpkVideoPlayerErrorCode(media3ErrorCode: Int): BpkVideoPlayerErrorCode =
     when (media3ErrorCode) {
         PlaybackException.ERROR_CODE_DECODING_RESOURCES_RECLAIMED -> BpkVideoPlayerErrorCode.MediaErrAborted
@@ -47,15 +37,6 @@ internal fun bpkVideoPlayerErrorCode(media3ErrorCode: Int): BpkVideoPlayerErrorC
         else -> errorCodeByFamily(media3ErrorCode)
     }
 
-/**
- * Classifies by Media3's error code families rather than by individual constant, so that error
- * codes added in a future Media3 release are classified rather than silently becoming unknown.
- * It also avoids naming the `@UnstableApi` video-frame-processing constants.
- *
- * Codes outside these families — Media3's negative session codes, the miscellaneous `1000` family,
- * DRM errors other than an unsupported scheme, and `CUSTOM_ERROR_CODE_BASE` and above — are
- * deliberately unknown.
- */
 private fun errorCodeByFamily(media3ErrorCode: Int): BpkVideoPlayerErrorCode =
     when (media3ErrorCode) {
         in IO_ERROR_CODES -> BpkVideoPlayerErrorCode.MediaErrNetwork

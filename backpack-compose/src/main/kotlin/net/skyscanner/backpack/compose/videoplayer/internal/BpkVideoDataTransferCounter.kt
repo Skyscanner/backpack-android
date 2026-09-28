@@ -31,14 +31,9 @@ internal class BpkVideoDataTransferCounter {
 
     private val bytes = AtomicLong(0L)
 
-    /**
-     * Adds one transfer's byte count. Non-positive counts are ignored, as is anything the caller has
-     * already filtered out — notably transfers that did not come from the network.
-     */
     fun add(byteCount: Int) {
         if (byteCount > 0) bytes.addAndGet(byteCount.toLong())
     }
 
-    /** The running total. Monotonic: it is never reset for the lifetime of its counter. */
     val total: Long get() = bytes.get()
 }

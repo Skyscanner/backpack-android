@@ -74,26 +74,6 @@ class BpkVideoPlayerController internal constructor(
 
     private val _bytesTransferred = mutableLongStateOf(0L)
 
-    /**
-     * Cumulative bytes pulled over the network for this player's media item, updated as data arrives
-     * rather than when a load finishes — so the value is usable at any moment, not just once playback
-     * has ended.
-     *
-     * Counts network bytes only: a bundled or local video reports `0`. Includes bytes from transfers
-     * that were later cancelled or that failed, because those were still served and still cost money.
-     *
-     * Monotonic for the lifetime of this controller, which is the lifetime of one media item —
-     * [rememberBpkVideoPlayerController] builds a new controller whenever [BpkVideoPlayerConfig]
-     * changes, making this a per-impression total. Nothing resets it, including [resetToStart] and
-     * `loop`: a replay that re-fetches from the network adds to the total, which is the intended
-     * reading for a cost metric.
-     *
-     * Published at most every 200ms, with a final value published by [dispose].
-     *
-     * Report it once per impression when transfers have stopped — on lifecycle pause or scroll-away
-     * rather than from a consumer's own `onDispose`, whose ordering against this controller's disposal
-     * is not guaranteed. See the component README for the recommended pattern.
-     */
     val bytesTransferred: State<Long> get() = _bytesTransferred
 
     private var progressJob: Job? = null
@@ -215,10 +195,6 @@ class BpkVideoPlayerController internal constructor(
         _bytesTransferred.longValue = dataTransferCounter.total
     }
 
-    /**
-     * Counts transfers as their bytes arrive. Needs no removal: the data source factory owns it, and
-     * that dies with the player.
-     */
     private fun dataTransferListener() = object : TransferListener {
 
         override fun onTransferInitializing(source: DataSource, dataSpec: DataSpec, isNetwork: Boolean) = Unit
