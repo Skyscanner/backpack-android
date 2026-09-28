@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.videoplayer.internal
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
@@ -73,18 +74,21 @@ class BpkVideoDataTransferCounterTest {
         val start = CountDownLatch(1)
         val finished = CountDownLatch(THREADS)
 
-        repeat(THREADS) {
-            executor.execute {
-                start.await()
-                repeat(ADDITIONS_PER_THREAD) { counter.add(1) }
-                finished.countDown()
+        try {
+            repeat(THREADS) {
+                executor.execute {
+                    start.await()
+                    repeat(ADDITIONS_PER_THREAD) { counter.add(1) }
+                    finished.countDown()
+                }
             }
-        }
-        start.countDown()
+            start.countDown()
 
-        assertEquals(true, finished.await(TIMEOUT_SECONDS, TimeUnit.SECONDS))
-        executor.shutdown()
-        assertEquals((THREADS * ADDITIONS_PER_THREAD).toLong(), counter.total)
+            assertTrue(finished.await(TIMEOUT_SECONDS, TimeUnit.SECONDS))
+            assertEquals((THREADS * ADDITIONS_PER_THREAD).toLong(), counter.total)
+        } finally {
+            executor.shutdown()
+        }
     }
 
     private companion object {
