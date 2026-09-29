@@ -20,8 +20,6 @@ package net.skyscanner.backpack.util
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.configuration.BpkConfiguration
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,62 +27,23 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkTypographySetManagerTest {
 
-    @After
-    fun cleanup() {
-        BpkConfiguration.clearConfigs()
-    }
-
     @Test
-    fun getTypographyTheme_returnsBpkTheme_forDefaultSet() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs()
-
+    fun getTypographyTheme_returnsBpkThemeTypographyVdl2() {
         val result = BpkTypographySetManager.getTypographyTheme()
-
-        assertEquals(R.style.BpkTheme, result)
-    }
-
-    @Test
-    fun getTypographyTheme_returnsBpkThemeTypographyVdl2_forVdl2Set() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(typography = true)
-
-        val result = BpkTypographySetManager.getTypographyTheme()
-
         assertEquals(R.style.BpkTheme_Typography_Vdl2, result)
     }
 
     @Test
-    fun applyTypographySetToTheme_returnsBaseTheme_forDefaultSet() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs()
-
+    fun applyTypographySetToTheme_returnsVdl2Theme() {
         val baseTheme = R.style.BpkTheme
         val result = BpkTypographySetManager.applyTypographySetToTheme(baseTheme)
-
-        assertEquals(baseTheme, result)
-    }
-
-    @Test
-    fun applyTypographySetToTheme_returnsVdl2Theme_forVdl2Set() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(typography = true)
-
-        val baseTheme = R.style.BpkTheme
-        val result = BpkTypographySetManager.applyTypographySetToTheme(baseTheme)
-
         assertEquals(R.style.BpkTheme_Typography_Vdl2, result)
     }
 
     @Test
-    fun applyTypographySetToTheme_ignoresBaseTheme_whenVdl2IsActive() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(typography = true)
-
+    fun applyTypographySetToTheme_ignoresBaseTheme() {
         val customBaseTheme = R.style.BpkTheme
         val result = BpkTypographySetManager.applyTypographySetToTheme(customBaseTheme)
-
-        // Should return VDL2 theme regardless of base theme
         assertEquals(R.style.BpkTheme_Typography_Vdl2, result)
     }
 }

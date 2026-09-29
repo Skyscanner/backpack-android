@@ -22,7 +22,6 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
 import net.skyscanner.backpack.demo.compose.NoPaddingCardExample
 import net.skyscanner.backpack.demo.compose.NonClickableCardExample
@@ -30,21 +29,10 @@ import net.skyscanner.backpack.demo.compose.OnContrastStyleExample
 import net.skyscanner.backpack.demo.compose.OnDefaultStyleExample
 import net.skyscanner.backpack.demo.compose.OnStyleSwapExample
 import net.skyscanner.backpack.demo.compose.SmallCornersCardExample
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.ParameterizedRobolectricTestRunner
 
-@RunWith(ParameterizedRobolectricTestRunner::class)
-class BpkCardTest(val vdl2Enabled: Boolean) :
-    BpkSnapshotTest(if (vdl2Enabled) listOf("VDL2") else listOf("Default")) {
-
-    @Before
-    fun setup() {
-        // Ensure we start from a known state
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(cardConfig = vdl2Enabled)
-    }
+class BpkCardTest :
+    BpkSnapshotTest(emptyList()) {
 
     @Test
     fun onDefaultStyle() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
@@ -83,12 +71,5 @@ class BpkCardTest(val vdl2Enabled: Boolean) :
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     fun clickable() = snap(background = { BpkTheme.colors.surfaceHighlight }) {
         OnStyleSwapExample()
-    }
-
-    companion object {
-
-        @JvmStatic
-        @ParameterizedRobolectricTestRunner.Parameters
-        fun flavours(): List<Boolean> = listOf(true, false)
     }
 }
