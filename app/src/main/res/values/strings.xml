@@ -465,4 +465,132 @@
     <string name="settings_section_typography">Typography Sets</string>
     <string name="settings_typography_default">Default (Sans Serif)</string>
     <string name="settings_typography_alternative1">VDL 2</string>
+
+    <!-- Native compare stories (demo only) -->
+    <string name="native_compare_backpack">Backpack</string>
+    <string name="native_compare_native_material">Native (Material 3)</string>
+    <string name="native_compare_native">Native</string>
+    <string name="native_compare_state">State</string>
+    <string name="native_compare_same">Same</string>
+    <string name="native_compare_same_yes">yes</string>
+    <string name="native_compare_same_no">no</string>
+    <string name="native_compare_same_na">\u2013</string>
+    <string name="native_compare_state_fill">Fill</string>
+    <string name="native_compare_state_text">Text</string>
+    <string name="native_compare_state_pressed">Pressed</string>
+    <string name="native_compare_state_disabled">Disabled</string>
+    <string name="native_compare_button_only">button-only</string>
+    <string name="native_compare_only_note">%1$s, %2$s</string>
+    <string name="native_compare_none">none</string>
+    <string name="native_compare_from_platform">from the platform</string>
+    <string name="native_compare_note_light_equals_core_primary">light = Core / Primary</string>
+    <string name="native_compare_note_equals_surface_highlight">= Surface / Highlight</string>
+    <string name="native_compare_note_equals_text_error">= Text / Error</string>
+    <string name="native_compare_ripple_text_primary" formatted="false">ripple, 20% of Text / Primary</string>
+    <string name="native_compare_token_core_primary">Core / Primary</string>
+    <string name="native_compare_token_text_on_dark">Text / On dark</string>
+    <string name="native_compare_token_surface_highlight">Surface / Highlight</string>
+    <string name="native_compare_token_text_primary">Text / Primary</string>
+    <string name="native_compare_token_text_primary_underlined">Text / Primary, underlined</string>
+    <string name="native_compare_token_text_error">Text / Error</string>
+    <string name="native_compare_token_text_disabled">Text / Disabled</string>
+    <string name="native_compare_primary">Primary</string>
+    <string name="native_compare_secondary">Secondary</string>
+    <string name="native_compare_destructive">Destructive</string>
+    <string name="native_compare_link">Link</string>
+    <string name="native_compare_primary_difference">Light: same. Dark: Backpack fills #024DAF, Core / Primary is #054184. Press and disabled are button-only on Backpack.</string>
+    <string name="native_compare_secondary_difference">Same colours in both modes. Backpack\'s fill is a button-only copy of Surface / Highlight.</string>
+    <string name="native_compare_destructive_difference">Same colours in both modes. Backpack\'s fill and text are button-only copies of Surface / Highlight and Text / Error.</string>
+    <string name="native_compare_link_difference">Same colour. Backpack underlines the label; Material does not.</string>
+    <string name="native_compare_state_border">Border</string>
+    <string name="native_compare_state_placeholder">Placeholder</string>
+    <string name="native_compare_state_focused">Focused</string>
+    <string name="native_compare_state_cursor">Cursor</string>
+    <string name="native_compare_state_icon">Icon</string>
+    <string name="native_compare_state_selected">Selected</string>
+    <string name="native_compare_state_selected_text">Selected text</string>
+    <string name="native_compare_state_indicator">Indicator</string>
+    <string name="native_compare_state_track">Track</string>
+    <string name="native_compare_state_stop">Stop</string>
+    <string name="native_compare_state_divider">Divider</string>
+    <string name="native_compare_state_title">Title</string>
+    <string name="native_compare_state_body">Body</string>
+    <string name="native_compare_state_trailing">Trailing</string>
+    <string name="native_compare_state_switch_on">Switch on</string>
+    <string name="native_compare_state_nav_icon">Nav icon</string>
+    <string name="native_compare_state_actions">Actions</string>
+    <string name="native_compare_state_badge">Badge</string>
+    <string name="native_compare_state_badge_border">Badge border</string>
+    <string name="native_compare_token_text_secondary">Text / Secondary</string>
+    <string name="native_compare_token_text_primary_inverse">Text / Primary inverse</string>
+    <string name="native_compare_token_text_disabled_on_dark">Text / Disabled on dark</string>
+    <string name="native_compare_token_core_accent">Core / Accent</string>
+    <string name="native_compare_token_core_accent_ripple">Core / Accent, ripple</string>
+    <string name="native_compare_token_core_primary_border">Core / Primary, border</string>
+    <string name="native_compare_token_core_primary_indicator">Core / Primary, underline</string>
+    <string name="native_compare_token_text_primary_border">Text / Primary, border</string>
+    <string name="native_compare_token_line">Line / Default</string>
+    <string name="native_compare_token_surface_default">Surface / Default</string>
+    <string name="native_compare_token_surface_contrast">Surface / Contrast</string>
+    <string name="native_compare_token_status_danger_spot">Status / Danger spot</string>
+    <string name="native_compare_chip_only">chip-only</string>
+    <string name="native_compare_tab_only">tab-only</string>
+    <string name="native_compare_segmented_only">segmented-control-only</string>
+    <string name="native_compare_default">Default</string>
+    <string name="native_compare_canvas_default">Canvas default</string>
+    <string name="native_compare_surface_contrast">Surface contrast</string>
+    <!-- Text field -->
+    <string name="native_compare_text_field_value">Edinburgh</string>
+    <string name="native_compare_text_field_placeholder">Where to?</string>
+    <string name="native_compare_text_field_error_message">Enter a city</string>
+    <string name="native_compare_text_field_default">Default</string>
+    <string name="native_compare_text_field_error">Error</string>
+    <string name="native_compare_text_field_disabled">Disabled</string>
+    <string name="native_compare_text_field_default_difference">Same border, text and placeholder. Focus ring and cursor: Backpack uses Core / Accent, Material uses Core / Primary. Material draws no fill.</string>
+    <string name="native_compare_text_field_error_difference">Backpack borders with Text / Error and adds a danger icon. Material borders with Status / Danger spot and adds no icon.</string>
+    <string name="native_compare_text_field_disabled_difference">Backpack switches to its disabled tokens. Material dims the enabled colours instead.</string>
+    <!-- Chip -->
+    <string name="native_compare_chip_label">Direct</string>
+    <string name="native_compare_chip_selectable">Selectable</string>
+    <string name="native_compare_chip_dropdown">Dropdown</string>
+    <string name="native_compare_chip_dismissible">Dismissible</string>
+    <string name="native_compare_chip_selectable_difference">Same outline. Selected: Backpack fills Core / Primary, Material fills Surface / Highlight. Unselected text: Backpack Text / Primary, Material Text / Secondary.</string>
+    <string name="native_compare_chip_dropdown_difference">Same outline and text. Material tints the chevron Core / Primary; Backpack keeps it Text / Primary.</string>
+    <string name="native_compare_chip_dismissible_difference">Backpack fills Core / Primary with light text. Material\'s input chip stays outlined with Text / Secondary.</string>
+    <!-- Navigation tab group -->
+    <string name="native_compare_tab_first">Flights</string>
+    <string name="native_compare_tab_second">Hotels</string>
+    <string name="native_compare_tab_third">Car hire</string>
+    <string name="native_compare_tab_group_canvas_default_difference">Backpack draws outlined pills and fills the selected one Core / Accent. Material draws plain tabs with a Core / Primary underline.</string>
+    <string name="native_compare_tab_group_surface_contrast_difference">Backpack keeps the pills with a tab-only outline. Material keeps the underline; all text takes Text / On dark.</string>
+    <!-- Bottom navigation -->
+    <string name="native_compare_bottom_nav_explore">Explore</string>
+    <string name="native_compare_bottom_nav_trips">Trips</string>
+    <string name="native_compare_bottom_nav_hotels">Hotels</string>
+    <string name="native_compare_bottom_nav_badge">With badge</string>
+    <string name="native_compare_bottom_nav_default_difference">Same fill and text. Material adds a Surface / Highlight pill behind the selected icon and is taller. Backpack ripples Core / Accent.</string>
+    <string name="native_compare_bottom_nav_badge_difference">Backpack draws a Core / Accent dot with a Surface / Default ring. Material draws a Status / Danger spot dot.</string>
+    <!-- Segmented control -->
+    <string name="native_compare_segment_first">Best</string>
+    <string name="native_compare_segment_second">Cheapest</string>
+    <string name="native_compare_segment_third">Fastest</string>
+    <string name="native_compare_segmented_canvas_default_difference">Backpack sits on a segmented-control-only track and fills the selected segment Core / Primary. Material outlines every segment with Line and fills the selected one Surface / Highlight, with a tick.</string>
+    <string name="native_compare_segmented_surface_contrast_difference">Both Backpack fills are segmented-control-only. Material on a contrast surface uses Surface / Contrast and Core / Primary.</string>
+    <!-- Progress bar -->
+    <string name="native_compare_progress_small">Small</string>
+    <string name="native_compare_progress_large_stepped">Large, stepped</string>
+    <string name="native_compare_progress_small_difference">Same track. Backpack fills Core / Accent; Material fills Core / Primary and adds a stop dot at the end.</string>
+    <string name="native_compare_progress_large_stepped_difference">Backpack draws Surface / Default step dividers. Material has no steps.</string>
+    <!-- Navigation bar -->
+    <string name="native_compare_nav_bar_title">Trip details</string>
+    <string name="native_compare_nav_bar_action">Settings</string>
+    <string name="native_compare_nav_bar_default_difference">Same fill, title and back icon. Material tints action icons Text / Secondary; Backpack keeps them Text / Primary.</string>
+    <string name="native_compare_nav_bar_surface_contrast_difference">Same colours on both sides once Material takes the inverse surface roles.</string>
+    <!-- Cell item -->
+    <string name="native_compare_cell_title">Passenger details</string>
+    <string name="native_compare_cell_body">Names, dates of birth and documents</string>
+    <string name="native_compare_cell_chevron">Chevron</string>
+    <string name="native_compare_cell_switch">Switch</string>
+    <string name="native_compare_cell_chevron_difference">Same fill and title. Material tints body, icon and chevron Text / Secondary; Backpack keeps them Text / Primary.</string>
+    <string name="native_compare_cell_switch_difference">Switch on: Backpack tracks Core / Accent, Material tracks Core / Primary.</string>
 </resources>
