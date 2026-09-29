@@ -21,6 +21,9 @@ package net.skyscanner.backpack.compose.videoplayer
 /**
  * A platform-neutral classification of a video playback failure.
  *
+ * [wireName] is the reporting/join key shared with Backpack Web and iOS and must stay stable across
+ * refactors and releases, unlike the enum constant name, which follows Kotlin naming conventions and
+ * may change.
  */
 enum class BpkVideoPlayerErrorCode(val wireName: String) {
 
