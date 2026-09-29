@@ -78,8 +78,9 @@ android {
 
     sourceSets {
         getByName("screenshots") {
-            java.directories.add("src/internal/java")
-            res.directories.add("src/screenshots/res")
+            java.srcDirs(project.file("src/internal/java").path)
+            kotlin.srcDirs(project.file("src/internal/java").path)
+            res.srcDirs(project.file("src/internal/res").path, project.file("src/screenshots/res").path)
         }
     }
 
