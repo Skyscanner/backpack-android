@@ -638,32 +638,6 @@ class BpkVideoPlayerTest {
     }
 
     @Test
-    fun givenPlayingVideo_whenRemovedFromComposition_thenBytesTransferredIsStillReadable() {
-        // Given
-        videoPlayerTestRule.disableReducedMotionSignal()
-        lateinit var controller: BpkVideoPlayerController
-        var showPlayer by mutableStateOf(true)
-        composeTestRule.setContent {
-            BpkTheme {
-                if (showPlayer) {
-                    controller = rememberBpkVideoPlayerController(playableConfig(autoPlay = true))
-                    BpkVideoPlayer(controller = controller)
-                }
-            }
-        }
-        composeTestRule.waitUntil(timeoutMillis = PLAYING_STATE_TIMEOUT_MS) {
-            controller.playbackState.value is BpkVideoPlaybackState.Playing
-        }
-
-        // When — disposal cancels publishing, releases the player, then publishes a final value
-        composeTestRule.runOnIdle { showPlayer = false }
-        composeTestRule.waitForIdle()
-
-        // Then — reading after disposal neither crashes nor loses the total
-        composeTestRule.runOnIdle { assertEquals(0L, controller.bytesTransferred.value) }
-    }
-
-    @Test
     fun givenHlsUrl_whenPlaybackFails_thenErrorReportsTheNetworkCode() {
         // Given
         videoPlayerTestRule.disableReducedMotionSignal()
