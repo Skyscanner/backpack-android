@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.util.ColorPair
-import net.skyscanner.backpack.util.InternalBackpackApi
 
 object BpkConfiguration {
     sealed class BpkExperimentalComponent {
@@ -97,53 +96,6 @@ object BpkConfiguration {
         VDL_2,
     }
 
-    private var _hasSet: Boolean = false
-
-    // To allow testing, but shouldn't be used in production
-    @InternalBackpackApi
-    fun clearConfigs() {
-        chipConfig = null
-        buttonConfig = null
-        cardConfig = null
-        typographySet = BpkTypographySet.DEFAULT
-        badgeConfig = null
-        iconConfig = null
-
-        _hasSet = false
-    }
-
-    fun setConfigs(
-        chipConfig: Boolean = false,
-        buttonConfig: Boolean = false,
-        cardConfig: Boolean = false,
-        badgeConfig: Boolean = false,
-        typography: Boolean = false,
-        iconography: Boolean = false,
-    ) {
-        if (_hasSet) {
-            throw IllegalStateException("BpkConfiguration has already been set")
-        }
-        _hasSet = true
-        if (chipConfig) {
-            this.chipConfig = BpkExperimentalComponent.BpkChip()
-        }
-        if (buttonConfig) {
-            this.buttonConfig = BpkExperimentalComponent.BpkButton()
-        }
-        if (typography) {
-            this.typographySet = BpkTypographySet.VDL_2
-        }
-        if (cardConfig) {
-            this.cardConfig = BpkExperimentalComponent.BpkCard()
-        }
-        if (badgeConfig) {
-            this.badgeConfig = BpkExperimentalComponent.BpkBadge()
-        }
-        if (iconography) {
-            this.iconConfig = BpkExperimentalComponent.BpkIcon
-        }
-    }
-
     var logger: (() -> Unit)? = null
 
     fun performLogging() {
@@ -151,21 +103,15 @@ object BpkConfiguration {
         logger = null
     }
 
-    var chipConfig: BpkExperimentalComponent.BpkChip? = null
-        private set
+    val chipConfig: BpkExperimentalComponent.BpkChip = BpkExperimentalComponent.BpkChip()
 
-    var buttonConfig: BpkExperimentalComponent.BpkButton? = null
-        private set
+    val buttonConfig: BpkExperimentalComponent.BpkButton = BpkExperimentalComponent.BpkButton()
 
-    var cardConfig: BpkExperimentalComponent.BpkCard? = null
-        private set
+    val cardConfig: BpkExperimentalComponent.BpkCard = BpkExperimentalComponent.BpkCard()
 
-    var badgeConfig: BpkExperimentalComponent.BpkBadge? = null
-        private set
+    val badgeConfig: BpkExperimentalComponent.BpkBadge = BpkExperimentalComponent.BpkBadge()
 
-    var typographySet: BpkTypographySet = BpkTypographySet.DEFAULT
-        private set
+    val typographySet: BpkTypographySet = BpkTypographySet.VDL_2
 
-    var iconConfig: BpkExperimentalComponent.BpkIcon? = null
-        private set
+    val iconConfig: BpkExperimentalComponent.BpkIcon = BpkExperimentalComponent.BpkIcon
 }

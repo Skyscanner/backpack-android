@@ -20,18 +20,42 @@ package net.skyscanner.backpack.configuration
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class BpkConfigurationTest {
 
     @Test
-    fun `setConfigs sets chipConfig when called first time then throws the second time`() {
-        BpkConfiguration.setConfigs(chipConfig = true)
+    fun `chipConfig is initialised by default`() {
         assertNotNull(BpkConfiguration.chipConfig)
         assertEquals(BpkConfiguration.chipConfig, BpkConfiguration.BpkExperimentalComponent.BpkChip())
-        val result = runCatching { BpkConfiguration.setConfigs(buttonConfig = true) }
-        assertTrue(result.exceptionOrNull() is IllegalStateException)
+    }
+
+    @Test
+    fun `buttonConfig is initialised by default`() {
+        assertNotNull(BpkConfiguration.buttonConfig)
+        assertEquals(BpkConfiguration.buttonConfig, BpkConfiguration.BpkExperimentalComponent.BpkButton())
+    }
+
+    @Test
+    fun `cardConfig is initialised by default`() {
+        assertNotNull(BpkConfiguration.cardConfig)
+        assertEquals(BpkConfiguration.cardConfig, BpkConfiguration.BpkExperimentalComponent.BpkCard())
+    }
+
+    @Test
+    fun `badgeConfig is initialised by default`() {
+        assertNotNull(BpkConfiguration.badgeConfig)
+        assertEquals(BpkConfiguration.badgeConfig, BpkConfiguration.BpkExperimentalComponent.BpkBadge())
+    }
+
+    @Test
+    fun `typographySet is VDL_2 by default`() {
+        assertEquals(BpkConfiguration.BpkTypographySet.VDL_2, BpkConfiguration.typographySet)
+    }
+
+    @Test
+    fun `iconConfig is initialised by default`() {
+        assertNotNull(BpkConfiguration.iconConfig)
     }
 
     @Test
@@ -41,40 +65,5 @@ class BpkConfigurationTest {
         BpkConfiguration.performLogging()
         BpkConfiguration.performLogging()
         assertEquals(1, logCount)
-    }
-
-    @Test
-    fun `setConfigs with typography true sets VDL_2 typographySet`() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(typography = true)
-        assertEquals(BpkConfiguration.BpkTypographySet.VDL_2, BpkConfiguration.typographySet)
-    }
-
-    @Test
-    fun `default typographySet is DEFAULT`() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs()
-        assertEquals(BpkConfiguration.BpkTypographySet.DEFAULT, BpkConfiguration.typographySet)
-    }
-
-    @Test
-    fun `typographySet remains DEFAULT when typography is false`() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(typography = false)
-        assertEquals(BpkConfiguration.BpkTypographySet.DEFAULT, BpkConfiguration.typographySet)
-    }
-
-    @Test
-    fun `default iconographySet is null`() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs()
-        assertEquals(BpkConfiguration.iconConfig, null)
-    }
-
-    @Test
-    fun `setConfigs with iconography true sets icon config`() {
-        BpkConfiguration.clearConfigs()
-        BpkConfiguration.setConfigs(iconography = true)
-        assertNotNull(BpkConfiguration.iconConfig)
     }
 }
