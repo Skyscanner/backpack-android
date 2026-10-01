@@ -19,10 +19,14 @@
 package net.skyscanner.backpack.compose.price
 
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
@@ -165,6 +169,90 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 style = style,
                 icon = BpkIcon.NewWindow,
                 onPriceClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceLeadingIconOnly() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                leadingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun priceTrailingIconOnly() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                trailingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun priceLeadingAndTrailingIcon() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                leadingIcon = BpkIcon.InformationCircle,
+                trailingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun priceLeadingTextClickable() {
+        // Guards the merged clickable/accessible target: leadingText + icons must expose a single
+        // clickable node and the leadingText value must remain present in the semantics tree.
+        snap(
+            assertion = {
+                onNodeWithText(testContext.getString(R.string.price_leading_text_cheaper))
+                    .assertIsDisplayed()
+                    .assert(hasClickAction())
+            },
+        ) {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                leadingIcon = BpkIcon.InformationCircle,
+                trailingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+                onLeadingTextClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceLongWrapping() {
+        // Long, digits-only price (and trailingText) forced to wrap onto multiple lines by constraining
+        // the available width - locks in the End-align textAlign fix (price/trailingText must stay
+        // right-aligned line-to-line) and documents the known Start-align limitation (trailingText can
+        // collapse to zero width when the price's longest wrapped line fills the available space).
+        snap(width = 160.dp) {
+            BpkPrice(
+                price = stringResource(id = R.string.price_long),
+                trailingText = stringResource(id = R.string.price_trailing_text_two_people),
+                size = size,
+                align = align,
+                style = style,
             )
         }
     }
