@@ -146,7 +146,7 @@ private fun AnnotatedString.Builder.AppendLinkText(
     val linkText = match.groupValues.getOrNull(1) ?: ""
     val url = match.groupValues.getOrNull(2) ?: ""
 
-    if (linkText.isNotEmpty() || url.isNotEmpty()) {
+    if (linkText.isNotEmpty() && url.isNotEmpty()) {
         val linkAnnotation = LinkAnnotation.Url(
             url = url,
             linkInteractionListener = { onLinkClicked(url) },
