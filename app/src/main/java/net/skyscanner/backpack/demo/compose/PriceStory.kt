@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -40,6 +42,7 @@ import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PriceComponent
@@ -77,7 +80,8 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .padding(BpkSpacing.Base)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
         ) {
             Row(
@@ -200,6 +204,109 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                 },
                 style = style,
             )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                LeadingIconExample(
+                    align = BpkPriceAlign.Start,
+                    style = style,
+                    leadingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Start: leading icon only clicked!")
+                        }
+                    },
+                )
+                LeadingIconExample(
+                    align = BpkPriceAlign.End,
+                    style = style,
+                    leadingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("End: leading icon only clicked!")
+                        }
+                    },
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                LeadingIconExample(
+                    align = BpkPriceAlign.Start,
+                    style = style,
+                    trailingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Start: trailing icon only clicked!")
+                        }
+                    },
+                )
+                LeadingIconExample(
+                    align = BpkPriceAlign.End,
+                    style = style,
+                    trailingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("End: trailing icon only clicked!")
+                        }
+                    },
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                LeadingIconExample(
+                    align = BpkPriceAlign.Start,
+                    style = style,
+                    leadingIcon = BpkIcon.InformationCircle,
+                    trailingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("Start: both icons clicked!")
+                        }
+                    },
+                )
+                LeadingIconExample(
+                    align = BpkPriceAlign.End,
+                    style = style,
+                    leadingIcon = BpkIcon.InformationCircle,
+                    trailingIcon = BpkIcon.InformationCircle,
+                    onClick = {
+                        scope.launch {
+                            floatingNotificationState.show("End: both icons clicked!")
+                        }
+                    },
+                )
+            }
+            // Long, digits-only price wrapping onto two lines in a half-width
+            // container - used to check how the second line aligns relative to the first, for both
+            // Start (left) and End (right) alignment, side by side.
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            ) {
+                BpkPrice(
+                    modifier = Modifier
+                        .weight(1f),
+                    price = stringResource(id = R.string.price_long),
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.Start,
+                    style = style,
+                )
+                BpkPrice(
+                    modifier = Modifier
+                        .weight(1f),
+                    price = stringResource(id = R.string.price_long),
+                    trailingText = stringResource(id = R.string.price_trailing_text_two_people),
+                    size = BpkPriceSize.Large,
+                    align = BpkPriceAlign.End,
+                    style = style,
+                )
+            }
         }
 
         BpkFloatingNotification(floatingNotificationState)
@@ -224,5 +331,25 @@ private fun PriceExample(
         icon = icon,
         style = style,
         onPriceClicked = onClick,
+    )
+}
+
+@Composable
+private fun LeadingIconExample(
+    align: BpkPriceAlign,
+    style: BpkPriceStyle,
+    leadingIcon: BpkIcon? = null,
+    trailingIcon: BpkIcon? = null,
+    onClick: (() -> Unit)? = null,
+) {
+    BpkPrice(
+        price = stringResource(id = R.string.price_price),
+        leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        size = BpkPriceSize.Small,
+        align = align,
+        style = style,
+        onLeadingTextClicked = onClick,
     )
 }

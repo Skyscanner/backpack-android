@@ -53,3 +53,45 @@ BpkPrice(
   },
 )
 ```
+
+Example of a Price with a tappable leading text and icons:
+
+```Kotlin
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.price.BpkPrice
+import net.skyscanner.backpack.compose.price.BpkPriceAlign
+import net.skyscanner.backpack.compose.price.BpkPriceSize
+import net.skyscanner.backpack.compose.tokens.InformationCircle
+
+BpkPrice(
+  price = "£50",
+  leadingText = "£10 cheaper",
+  trailingIcon = BpkIcon.InformationCircle,
+  size = BpkPriceSize.Small,
+  align = BpkPriceAlign.Start,
+  onLeadingTextClicked = {
+    // Handle leading text (and icon) click
+    println("Leading text clicked!")
+  },
+)
+```
+
+Providing a `leadingIcon` and/or `trailingIcon` renders them either side of `leadingText` (they have no effect when
+`leadingText` is null). Providing an `onLeadingTextClicked` handler makes `leadingText` and both icons a single
+tappable, accessible target.
+
+Example of a long, digits-only price (e.g. for currencies/locales with large amounts) that wraps onto multiple
+lines:
+
+```Kotlin
+import net.skyscanner.backpack.compose.price.BpkPrice
+import net.skyscanner.backpack.compose.price.BpkPriceAlign
+import net.skyscanner.backpack.compose.price.BpkPriceSize
+
+BpkPrice(
+  price = "£1,830,000,000,000,000",
+  trailingText = "2 people £3,660,000,000,000,000",
+  size = BpkPriceSize.Large,
+  align = BpkPriceAlign.End,
+)
+```

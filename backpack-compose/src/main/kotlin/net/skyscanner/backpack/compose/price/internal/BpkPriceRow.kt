@@ -38,13 +38,18 @@ internal fun BpkPriceRow(
     price: String,
     modifier: Modifier = Modifier,
     leadingText: String? = null,
+    leadingIcon: BpkIcon? = null,
+    trailingIcon: BpkIcon? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
     style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
+    onLeadingTextClicked: (() -> Unit)? = null,
 ) {
+    val hasLeadingTextDecoration = leadingIcon != null || trailingIcon != null || onLeadingTextClicked != null
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
@@ -58,16 +63,36 @@ internal fun BpkPriceRow(
                 textDecoration = TextDecoration.LineThrough,
             )
         }
-        leadingText?.let {
-            val builder = StringBuilder()
-            previousPrice?.let { builder.append("• ") }
-            builder.append(it)
+        if (hasLeadingTextDecoration && previousPrice != null && leadingText != null) {
             BpkText(
                 modifier = Modifier.alignByBaseline(),
-                text = builder.toString(),
+                text = "•",
                 color = style.secondaryTextColor(),
                 style = size.secondaryTextStyle(),
             )
+        }
+        leadingText?.let {
+            if (hasLeadingTextDecoration) {
+                BpkPriceLeadingText(
+                    modifier = Modifier.alignByBaseline(),
+                    text = it,
+                    size = size,
+                    style = style,
+                    leadingIcon = leadingIcon,
+                    trailingIcon = trailingIcon,
+                    onClick = onLeadingTextClicked,
+                )
+            } else {
+                val builder = StringBuilder()
+                previousPrice?.let { builder.append("• ") }
+                builder.append(it)
+                BpkText(
+                    modifier = Modifier.alignByBaseline(),
+                    text = builder.toString(),
+                    color = style.secondaryTextColor(),
+                    style = size.secondaryTextStyle(),
+                )
+            }
         }
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.alignByBaseline()) {
             BpkPriceLabel(
