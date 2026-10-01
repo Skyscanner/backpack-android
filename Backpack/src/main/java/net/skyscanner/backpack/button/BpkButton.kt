@@ -25,6 +25,8 @@ import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.AttributeSet
+import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Button
 import androidx.annotation.Dimension
 import androidx.annotation.IntDef
 import androidx.appcompat.content.res.AppCompatResources
@@ -204,6 +206,11 @@ open class BpkButton(
                 progress.draw(canvas)
             }
         }
+    }
+
+    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        info.className = Button::class.java.name
     }
 
     private fun updateEnabledState() {

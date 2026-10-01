@@ -120,12 +120,12 @@ private fun buildAnnotatedStringFromMarkdown(
         } else {
             var currentIndex = 0
 
-            linkMatches.forEachIndexed { linkIndex, match ->
+            linkMatches.forEach { match ->
                 if (match.range.first > currentIndex) {
                     AppendRawText(textColor, text.substring(currentIndex, match.range.first))
                 }
 
-                AppendLinkText(match, linkIndex, onLinkClicked, textColor)
+                AppendLinkText(match, onLinkClicked, textColor)
 
                 currentIndex = match.range.last + 1
             }
@@ -140,7 +140,6 @@ private fun buildAnnotatedStringFromMarkdown(
 @Composable
 private fun AnnotatedString.Builder.AppendLinkText(
     match: MatchResult,
-    linkIndex: Int,
     onLinkClicked: (String) -> Unit,
     textColor: Color,
 ) {
@@ -148,8 +147,8 @@ private fun AnnotatedString.Builder.AppendLinkText(
     val url = match.groupValues.getOrNull(2) ?: ""
 
     if (linkText.isNotEmpty() || url.isNotEmpty()) {
-        val linkAnnotation = LinkAnnotation.Clickable(
-            tag = "LINK_$linkIndex",
+        val linkAnnotation = LinkAnnotation.Url(
+            url = url,
             linkInteractionListener = { onLinkClicked(url) },
         )
         withLink(linkAnnotation) {
