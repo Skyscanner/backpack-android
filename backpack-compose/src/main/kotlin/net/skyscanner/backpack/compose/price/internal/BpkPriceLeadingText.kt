@@ -18,25 +18,36 @@
 
 package net.skyscanner.backpack.compose.price.internal
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 /**
  * Renders [text] (the [net.skyscanner.backpack.compose.price.BpkPrice] `leadingText`) with optional decorative
  * icons either side. When [onClick] is set, the icons and text are exposed as a single clickable, accessible
- * target (icons are marked as decorative - the accessible label comes from [text]).
+ * target (icons are marked as decorative - the accessible label comes from [text] or [contentDescription] if
+ * provided).
+ *
+ * [clearAndSetSemantics] (rather than `semantics(mergeDescendants = true)`) is used to build that accessible
+ * target: `mergeDescendants` *merges* descendant semantics (including the child [BpkText]'s own text) into this
+ * node *in addition to* any contentDescription set here, so a screen reader would announce both the custom
+ * [contentDescription] and [text]. `clearAndSetSemantics` instead replaces the subtree's semantics outright,
+ * guaranteeing a single, clean announcement.
  */
 @Composable
 internal fun BpkPriceLeadingText(
@@ -46,6 +57,8 @@ internal fun BpkPriceLeadingText(
     modifier: Modifier = Modifier,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
+    contentDescription: String? = null,
+    textAlign: TextAlign? = null,
     onClick: (() -> Unit)? = null,
 ) {
     Row(
@@ -53,12 +66,18 @@ internal fun BpkPriceLeadingText(
             .let { base ->
                 if (onClick != null) {
                     base
-                        .clickableWithRipple(
-                            bounded = false,
+                        .clickable(
                             role = Role.Button,
                             onClick = onClick,
                         )
-                        .semantics(mergeDescendants = true) { }
+                        .clearAndSetSemantics {
+                            this.contentDescription = contentDescription ?: text
+                            this.role = Role.Button
+                            this.onClick(label = null) {
+                                onClick()
+                                true
+                            }
+                        }
                 } else {
                     base
                 }
@@ -78,6 +97,7 @@ internal fun BpkPriceLeadingText(
             text = text,
             color = style.secondaryTextColor(),
             style = size.secondaryTextStyle(),
+            textAlign = textAlign,
         )
         trailingIcon?.let {
             BpkIcon(

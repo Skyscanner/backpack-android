@@ -44,6 +44,7 @@ internal fun BpkPriceAlignEnd(
     leadingText: String? = null,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
@@ -82,6 +83,8 @@ internal fun BpkPriceAlignEnd(
                         style = style,
                         leadingIcon = leadingIcon,
                         trailingIcon = trailingIcon,
+                        contentDescription = leadingTextContentDescription,
+                        textAlign = TextAlign.End,
                         onClick = onLeadingTextClicked,
                     )
                 } else {
@@ -92,6 +95,7 @@ internal fun BpkPriceAlignEnd(
                         text = builder.toString(),
                         color = style.secondaryTextColor(),
                         style = size.secondaryTextStyle(),
+                        textAlign = TextAlign.End,
                     )
                 }
             }

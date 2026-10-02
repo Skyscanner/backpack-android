@@ -40,6 +40,7 @@ internal fun BpkPriceRow(
     leadingText: String? = null,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
@@ -80,6 +81,7 @@ internal fun BpkPriceRow(
                     style = style,
                     leadingIcon = leadingIcon,
                     trailingIcon = trailingIcon,
+                    contentDescription = leadingTextContentDescription,
                     onClick = onLeadingTextClicked,
                 )
             } else {

@@ -44,6 +44,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.NewWindow
+import net.skyscanner.backpack.compose.tokens.TrendDown
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.PriceComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -212,7 +213,7 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                 LeadingIconExample(
                     align = BpkPriceAlign.Start,
                     style = style,
-                    leadingIcon = BpkIcon.InformationCircle,
+                    leadingIcon = BpkIcon.TrendDown,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("Start: leading icon only clicked!")
@@ -222,7 +223,7 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                 LeadingIconExample(
                     align = BpkPriceAlign.End,
                     style = style,
-                    leadingIcon = BpkIcon.InformationCircle,
+                    leadingIcon = BpkIcon.TrendDown,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("End: leading icon only clicked!")
@@ -262,7 +263,7 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                 LeadingIconExample(
                     align = BpkPriceAlign.Start,
                     style = style,
-                    leadingIcon = BpkIcon.InformationCircle,
+                    leadingIcon = BpkIcon.TrendDown,
                     trailingIcon = BpkIcon.InformationCircle,
                     onClick = {
                         scope.launch {
@@ -273,7 +274,7 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                 LeadingIconExample(
                     align = BpkPriceAlign.End,
                     style = style,
-                    leadingIcon = BpkIcon.InformationCircle,
+                    leadingIcon = BpkIcon.TrendDown,
                     trailingIcon = BpkIcon.InformationCircle,
                     onClick = {
                         scope.launch {
@@ -282,9 +283,45 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     },
                 )
             }
-            // Long, digits-only price wrapping onto two lines in a half-width
+
+            // Long texts to wrapping onto two lines in a half-width
             // container - used to check how the second line aligns relative to the first, for both
             // Start (left) and End (right) alignment, side by side.
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            ) {
+                BpkPrice(
+                    modifier = Modifier
+                        .weight(1f),
+                    price = stringResource(id = R.string.price_price),
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.Start,
+                    style = style,
+                    leadingIcon = BpkIcon.TrendDown,
+                    leadingText = stringResource(id = R.string.price_leading_text_long),
+                    onLeadingTextClicked = {
+                        scope.launch {
+                            floatingNotificationState.show("End: both icons clicked!")
+                        }
+                    },
+                )
+                BpkPrice(
+                    modifier = Modifier
+                        .weight(1f),
+                    price = stringResource(id = R.string.price_price),
+                    size = BpkPriceSize.Small,
+                    align = BpkPriceAlign.End,
+                    style = style,
+                    leadingIcon = BpkIcon.TrendDown,
+                    leadingText = stringResource(id = R.string.price_leading_text_long),
+                    onLeadingTextClicked = {
+                        scope.launch {
+                            floatingNotificationState.show("End: both icons clicked!")
+                        }
+                    },
+                )
+            }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -339,12 +376,13 @@ private fun LeadingIconExample(
     align: BpkPriceAlign,
     style: BpkPriceStyle,
     leadingIcon: BpkIcon? = null,
+    leadingText: String = stringResource(id = R.string.price_leading_text_cheaper),
     trailingIcon: BpkIcon? = null,
     onClick: (() -> Unit)? = null,
 ) {
     BpkPrice(
         price = stringResource(id = R.string.price_price),
-        leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+        leadingText = leadingText,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         size = BpkPriceSize.Small,

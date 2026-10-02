@@ -267,6 +267,7 @@
     <string name="price_line_through_text">£2,033</string>
     <string name="price_leading_text">App only deal</string>
     <string name="price_leading_text_cheaper">£10 cheaper</string>
+    <string name="price_leading_text_long">£10 cheaper than usual. Learn more</string>
     <string name="price_long">£1,830,000,000,000,000</string>
     <string name="price_trailing_text_two_people">2 people £3,660,000,000,000,000</string>
     <string name="hotel_star_rating_title">Hotel star rating</string>

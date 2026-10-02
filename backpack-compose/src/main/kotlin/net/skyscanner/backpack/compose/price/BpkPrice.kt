@@ -43,6 +43,8 @@ enum class BpkPriceStyle {
 /**
  * @param leadingIcon optional icon shown before [leadingText]. Has no effect when [leadingText] is null.
  * @param trailingIcon optional icon shown after [leadingText]. Has no effect when [leadingText] is null.
+ * @param leadingTextContentDescription optional accessibility description for [leadingText] when [onLeadingTextClicked] is set.
+ * When null and [onLeadingTextClicked] is set, a default description based on [leadingText] is used.
  * @param onLeadingTextClicked optional callback invoked when [leadingText] (and [leadingIcon]/[trailingIcon], if
  * present) is tapped. When set, [leadingText] and its icons are exposed as a single clickable, accessible target.
  */
@@ -53,6 +55,7 @@ fun BpkPrice(
     leadingText: String? = null,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
@@ -68,6 +71,7 @@ fun BpkPrice(
         leadingText = leadingText,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
+        leadingTextContentDescription = leadingTextContentDescription,
         previousPrice = previousPrice,
         trailingText = trailingText,
         align = align,
