@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.price.internal
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
@@ -36,6 +35,7 @@ import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.price.BpkPriceStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.clickableWithRipple
 
 /**
  * Renders [text] (the [net.skyscanner.backpack.compose.price.BpkPrice] `leadingText`) with optional decorative
@@ -66,7 +66,7 @@ internal fun BpkPriceLeadingText(
             .let { base ->
                 if (onClick != null) {
                     base
-                        .clickable(
+                        .clickableWithRipple(
                             role = Role.Button,
                             onClick = onClick,
                         )
