@@ -53,9 +53,6 @@ fun BpkPrice(
     price: String,
     modifier: Modifier = Modifier,
     leadingText: String? = null,
-    leadingIcon: BpkIcon? = null,
-    trailingIcon: BpkIcon? = null,
-    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
@@ -63,6 +60,9 @@ fun BpkPrice(
     style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
+    leadingIcon: BpkIcon? = null,
+    trailingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
     onLeadingTextClicked: (() -> Unit)? = null,
 ) {
     BpkPriceImpl(
