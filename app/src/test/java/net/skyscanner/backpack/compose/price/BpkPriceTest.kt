@@ -21,9 +21,12 @@ package net.skyscanner.backpack.compose.price
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.NewWindow
+import net.skyscanner.backpack.compose.tokens.TrendDown
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -165,6 +168,76 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 style = style,
                 icon = BpkIcon.NewWindow,
                 onPriceClicked = {},
+            )
+        }
+    }
+
+    @Test
+    fun priceLeadingIconOnly() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                leadingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun priceTrailingIconOnly() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                trailingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun priceLeadingAndTrailingIcon() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                leadingText = stringResource(id = R.string.price_leading_text_cheaper),
+                leadingIcon = BpkIcon.InformationCircle,
+                trailingIcon = BpkIcon.InformationCircle,
+                size = size,
+                align = align,
+                style = style,
+            )
+        }
+    }
+
+    @Test
+    fun leadingTextLongWrapping() {
+        snap(width = 160.dp) {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                size = size,
+                align = align,
+                style = style,
+                leadingIcon = BpkIcon.TrendDown,
+                leadingText = stringResource(id = R.string.price_leading_text_long),
+            )
+        }
+    }
+
+    @Test
+    fun priceLongWrapping() {
+        snap(width = 160.dp) {
+            BpkPrice(
+                price = stringResource(id = R.string.price_long),
+                trailingText = stringResource(id = R.string.price_trailing_text_two_people),
+                size = size,
+                align = align,
+                style = style,
             )
         }
     }
