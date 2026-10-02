@@ -161,6 +161,8 @@ private fun AnnotatedString.Builder.AppendLinkText(
                 append(linkText)
             }
         }
+    } else {
+        AppendRawText(textColor, match.value)
     }
 }
 
