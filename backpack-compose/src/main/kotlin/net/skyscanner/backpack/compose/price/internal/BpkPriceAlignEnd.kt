@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -45,7 +44,6 @@ internal fun BpkPriceAlignEnd(
     leadingText: String? = null,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
-    leadingIconBackgroundColor: Color? = null,
     leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
@@ -85,7 +83,6 @@ internal fun BpkPriceAlignEnd(
                         style = style,
                         leadingIcon = leadingIcon,
                         trailingIcon = trailingIcon,
-                        leadingIconBackgroundColor = leadingIconBackgroundColor,
                         contentDescription = leadingTextContentDescription,
                         textAlign = TextAlign.End,
                         onClick = onLeadingTextClicked,

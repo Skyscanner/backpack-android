@@ -31,7 +31,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
@@ -215,7 +214,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.Start,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("Start: leading icon only clicked!")
@@ -226,7 +224,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.End,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     onClick = {
                         scope.launch {
                             floatingNotificationState.show("End: leading icon only clicked!")
@@ -267,7 +264,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.Start,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     trailingIcon = BpkIcon.InformationCircle,
                     onClick = {
                         scope.launch {
@@ -279,7 +275,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.End,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     trailingIcon = BpkIcon.InformationCircle,
                     onClick = {
                         scope.launch {
@@ -304,7 +299,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.Start,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     leadingText = stringResource(id = R.string.price_leading_text_long),
                     onLeadingTextClicked = {
                         scope.launch {
@@ -320,7 +314,6 @@ fun PriceStory(style: BpkPriceStyle, modifier: Modifier = Modifier) {
                     align = BpkPriceAlign.End,
                     style = style,
                     leadingIcon = BpkIcon.TrendDown,
-                    leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                     leadingText = stringResource(id = R.string.price_leading_text_long),
                     onLeadingTextClicked = {
                         scope.launch {
@@ -383,7 +376,6 @@ private fun LeadingIconExample(
     align: BpkPriceAlign,
     style: BpkPriceStyle,
     leadingIcon: BpkIcon? = null,
-    leadingIconBackgroundColor: Color? = null,
     leadingText: String = stringResource(id = R.string.price_leading_text_cheaper),
     trailingIcon: BpkIcon? = null,
     onClick: (() -> Unit)? = null,
@@ -392,7 +384,6 @@ private fun LeadingIconExample(
         price = stringResource(id = R.string.price_price),
         leadingText = leadingText,
         leadingIcon = leadingIcon,
-        leadingIconBackgroundColor = leadingIconBackgroundColor,
         trailingIcon = trailingIcon,
         size = BpkPriceSize.Small,
         align = align,
