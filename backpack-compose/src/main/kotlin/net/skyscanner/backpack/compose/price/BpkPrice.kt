@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.price
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.price.internal.BpkPriceImpl
 
@@ -42,9 +43,12 @@ enum class BpkPriceStyle {
 
 /**
  * @param leadingIcon optional icon shown before [leadingText]. Has no effect when [leadingText] is null.
- * @param trailingIcon optional icon shown after [leadingText]. Has no effect when [leadingText] is null.
+ * @param leadingIconBackgroundColor optional background color rendered as a circular badge behind [leadingIcon].
+ * Purely decorative - has no effect on [trailingIcon] or on [leadingText]'s clickable touch/semantics target.
+ * Has no effect when [leadingIcon] is null.
  * @param leadingTextContentDescription optional accessibility description for [leadingText] when [onLeadingTextClicked] is set.
  * When null and [onLeadingTextClicked] is set, a default description based on [leadingText] is used.
+ * @param trailingIcon optional icon shown after [leadingText]. Has no effect when [leadingText] is null.
  * @param onLeadingTextClicked optional callback invoked when [leadingText] (and [leadingIcon]/[trailingIcon], if
  * present) is tapped. When set, [leadingText] and its icons are exposed as a single clickable, accessible target.
  */
@@ -61,8 +65,9 @@ fun BpkPrice(
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
     leadingIcon: BpkIcon? = null,
-    trailingIcon: BpkIcon? = null,
+    leadingIconBackgroundColor: Color? = null,
     leadingTextContentDescription: String? = null,
+    trailingIcon: BpkIcon? = null,
     onLeadingTextClicked: (() -> Unit)? = null,
 ) {
     BpkPriceImpl(
@@ -71,6 +76,7 @@ fun BpkPrice(
         leadingText = leadingText,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
+        leadingIconBackgroundColor = leadingIconBackgroundColor,
         leadingTextContentDescription = leadingTextContentDescription,
         previousPrice = previousPrice,
         trailingText = trailingText,

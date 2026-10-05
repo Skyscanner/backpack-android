@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -41,6 +42,7 @@ internal fun BpkPriceAlignStart(
     leadingText: String? = null,
     leadingIcon: BpkIcon? = null,
     trailingIcon: BpkIcon? = null,
+    leadingIconBackgroundColor: Color? = null,
     leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
@@ -77,6 +79,7 @@ internal fun BpkPriceAlignStart(
                         style = style,
                         leadingIcon = leadingIcon,
                         trailingIcon = trailingIcon,
+                        leadingIconBackgroundColor = leadingIconBackgroundColor,
                         contentDescription = leadingTextContentDescription,
                         onClick = onLeadingTextClicked,
                     )
