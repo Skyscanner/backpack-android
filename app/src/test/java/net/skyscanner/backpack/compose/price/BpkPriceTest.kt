@@ -24,6 +24,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.tokens.NewWindow
 import net.skyscanner.backpack.compose.tokens.TrendDown
@@ -178,7 +179,8 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
             BpkPrice(
                 price = stringResource(id = R.string.price_price),
                 leadingText = stringResource(id = R.string.price_leading_text_cheaper),
-                leadingIcon = BpkIcon.InformationCircle,
+                leadingIcon = BpkIcon.TrendDown,
+                leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                 size = size,
                 align = align,
                 style = style,
@@ -206,7 +208,8 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
             BpkPrice(
                 price = stringResource(id = R.string.price_price),
                 leadingText = stringResource(id = R.string.price_leading_text_cheaper),
-                leadingIcon = BpkIcon.InformationCircle,
+                leadingIcon = BpkIcon.TrendDown,
+                leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                 trailingIcon = BpkIcon.InformationCircle,
                 size = size,
                 align = align,
@@ -224,6 +227,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
                 align = align,
                 style = style,
                 leadingIcon = BpkIcon.TrendDown,
+                leadingIconBackgroundColor = BpkTheme.colors.statusSuccessSpot,
                 leadingText = stringResource(id = R.string.price_leading_text_long),
             )
         }
