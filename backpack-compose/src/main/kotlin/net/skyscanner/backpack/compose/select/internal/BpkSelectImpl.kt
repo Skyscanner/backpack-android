@@ -38,6 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
@@ -83,6 +85,7 @@ internal fun BpkSelectImpl(
         BpkStaticFieldImpl(
             // BpkStaticFieldImpl is visual-only; the anchor needs a focus target for keyboard input.
             modifier = modifier
+                .semantics(mergeDescendants = true) { role = Role.DropdownList }
                 .onFocusChanged { anchorHasFocus = it.isFocused }
                 .focusable(enabled = status != BpkFieldStatus.Disabled)
                 .menuAnchor(
