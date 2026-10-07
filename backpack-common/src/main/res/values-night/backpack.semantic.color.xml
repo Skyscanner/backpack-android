@@ -31,6 +31,7 @@
     <color name="bpkScrim">#b3000000</color>
     <color name="bpkStatusDangerFill">#ffffcadd</color>
     <color name="bpkStatusDangerSpot">#ffff649c</color>
+    <color name="bpkStatusLoyaltySpot">#ffc9fc70</color>
     <color name="bpkStatusSuccessFill">#ffb1ffe7</color>
     <color name="bpkStatusSuccessSpot">#ff62f1c6</color>
     <color name="bpkStatusWarningFill">#fffbf1bb</color>

@@ -39,6 +39,7 @@ enum class BpkBadgeType {
     Outline,
     Brand,
     Subtle,
+    Loyalty,
 }
 
 @Composable

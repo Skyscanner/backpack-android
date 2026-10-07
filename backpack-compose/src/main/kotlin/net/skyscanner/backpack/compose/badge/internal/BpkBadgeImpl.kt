@@ -64,6 +64,7 @@ internal fun BpkBadgeImpl(
                         BpkBadgeType.Outline,
                         BpkBadgeType.Brand,
                         BpkBadgeType.Subtle,
+                        BpkBadgeType.Loyalty,
                     )
                 }?.let {
                     Modifier
@@ -138,6 +139,7 @@ private val BpkBadgeType.contentColor: Color
         BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
         BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
         BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
+        BpkBadgeType.Loyalty -> BpkTheme.colors.textOnLight
     }
 
 private val BpkBadgeType.backgroundColor: Color
@@ -152,6 +154,7 @@ private val BpkBadgeType.backgroundColor: Color
         BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
         BpkBadgeType.Outline -> Color.Transparent
         BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
+        BpkBadgeType.Loyalty -> BpkTheme.colors.statusLoyaltySpot
     }
 
 private val BpkBadgeType.borderColor: Color
