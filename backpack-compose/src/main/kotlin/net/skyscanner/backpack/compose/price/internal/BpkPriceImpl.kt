@@ -30,6 +30,9 @@ internal fun BpkPriceImpl(
     price: String,
     modifier: Modifier = Modifier,
     leadingText: String? = null,
+    leadingIcon: BpkIcon? = null,
+    trailingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     align: BpkPriceAlign = BpkPriceAlign.Start,
@@ -37,6 +40,7 @@ internal fun BpkPriceImpl(
     style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
+    onLeadingTextClicked: (() -> Unit)? = null,
 ) {
     when (align) {
         BpkPriceAlign.Start -> {
@@ -44,12 +48,16 @@ internal fun BpkPriceImpl(
                 price = price,
                 modifier = modifier,
                 leadingText = leadingText,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                leadingTextContentDescription = leadingTextContentDescription,
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
                 style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
+                onLeadingTextClicked = onLeadingTextClicked,
             )
         }
 
@@ -58,12 +66,16 @@ internal fun BpkPriceImpl(
                 price = price,
                 modifier = modifier,
                 leadingText = leadingText,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                leadingTextContentDescription = leadingTextContentDescription,
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
                 style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
+                onLeadingTextClicked = onLeadingTextClicked,
             )
         }
 
@@ -72,12 +84,16 @@ internal fun BpkPriceImpl(
                 price = price,
                 modifier = modifier,
                 leadingText = leadingText,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                leadingTextContentDescription = leadingTextContentDescription,
                 previousPrice = previousPrice,
                 trailingText = trailingText,
                 size = size,
                 style = style,
                 icon = icon,
                 onPriceClicked = onPriceClicked,
+                onLeadingTextClicked = onLeadingTextClicked,
             )
         }
     }

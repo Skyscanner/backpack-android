@@ -40,6 +40,14 @@ enum class BpkPriceStyle {
     onContrast,
 }
 
+/**
+ * @param leadingIcon optional icon shown before [leadingText]. Has no effect when [leadingText] is null.
+ * @param leadingTextContentDescription optional accessibility description for [leadingText] when [onLeadingTextClicked] is set.
+ * When null and [onLeadingTextClicked] is set, a default description based on [leadingText] is used.
+ * @param trailingIcon optional icon shown after [leadingText]. Has no effect when [leadingText] is null.
+ * @param onLeadingTextClicked optional callback invoked when [leadingText] (and [leadingIcon]/[trailingIcon], if
+ * present) is tapped. When set, [leadingText] and its icons are exposed as a single clickable, accessible target.
+ */
 @Composable
 fun BpkPrice(
     price: String,
@@ -52,11 +60,18 @@ fun BpkPrice(
     style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
+    leadingIcon: BpkIcon? = null,
+    leadingTextContentDescription: String? = null,
+    trailingIcon: BpkIcon? = null,
+    onLeadingTextClicked: (() -> Unit)? = null,
 ) {
     BpkPriceImpl(
         price = price,
         modifier = modifier,
         leadingText = leadingText,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        leadingTextContentDescription = leadingTextContentDescription,
         previousPrice = previousPrice,
         trailingText = trailingText,
         align = align,
@@ -64,5 +79,6 @@ fun BpkPrice(
         style = style,
         icon = icon,
         onPriceClicked = onPriceClicked,
+        onLeadingTextClicked = onLeadingTextClicked,
     )
 }

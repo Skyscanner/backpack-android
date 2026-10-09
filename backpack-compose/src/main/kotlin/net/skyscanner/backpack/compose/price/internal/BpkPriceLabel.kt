@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.price.internal
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.link.BpkLink
 import net.skyscanner.backpack.compose.link.BpkLinkStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
@@ -33,6 +34,11 @@ import net.skyscanner.backpack.compose.text.BpkText
  * recomposition and re-used cheaply inside lazy lists. Only when a click handler is supplied do we render a [BpkLink],
  * using the action-only overload which remembers its annotated string rather than rebuilding it (and parsing markdown)
  * on every recomposition.
+ *
+ * [textAlign] matters when [price] is long enough to wrap onto multiple lines: without it, wrapped lines default to
+ * [TextAlign.Start] regardless of the price's own [net.skyscanner.backpack.compose.price.BpkPriceAlign], so a
+ * shorter trailing line in an End-aligned price would hang to the left instead of lining up with the right edge of
+ * the longer line above it. Only applied to the non-clickable [BpkText] path - [BpkLink] has no textAlign param.
  */
 @Composable
 internal fun BpkPriceLabel(
@@ -40,6 +46,7 @@ internal fun BpkPriceLabel(
     size: BpkPriceSize,
     modifier: Modifier = Modifier,
     style: BpkPriceStyle = BpkPriceStyle.default,
+    textAlign: TextAlign? = null,
     onPriceClicked: (() -> Unit)? = null,
 ) {
     if (onPriceClicked != null) {
@@ -55,6 +62,7 @@ internal fun BpkPriceLabel(
             text = price,
             color = style.mainTextColor(),
             style = size.mainTextStyle(),
+            textAlign = textAlign,
             modifier = modifier,
         )
     }
