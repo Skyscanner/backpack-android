@@ -32,6 +32,7 @@ internal object GeneratedColorTokenMap {
         "0xFF161616" to listOf("BpkTheme.colors.textOnLight", "BpkTheme.colors.textPrimary"),
         "0xFF626971" to listOf("BpkTheme.colors.textSecondary"),
         "0xFFC1C7CF" to listOf("BpkTheme.colors.line"),
+        "0xFFC9FC70" to listOf("BpkTheme.colors.statusLoyaltySpot"),
         "0xFFD4FFF2" to listOf("BpkTheme.colors.statusSuccessFill"),
         "0xFFE0E4E9" to listOf("BpkTheme.colors.surfaceHighlight"),
         "0xFFE3F0FF" to listOf("BpkTheme.colors.surfaceSubtle"),
