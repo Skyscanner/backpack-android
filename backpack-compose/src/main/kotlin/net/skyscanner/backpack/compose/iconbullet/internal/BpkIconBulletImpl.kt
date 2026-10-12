@@ -53,7 +53,11 @@ internal fun BpkIconBulletImpl(
             contentDescription = null,
             size = size.iconSize,
             tint = type.contentColor,
-            modifier = Modifier.scale(size.iconScale),
+            modifier = if (size.iconScale != FullScale) {
+                Modifier.scale(size.iconScale)
+            } else {
+                Modifier
+            },
         )
     }
 }
