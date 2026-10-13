@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -42,19 +41,13 @@ internal fun BpkPriceAlignEnd(
     price: String,
     modifier: Modifier = Modifier,
     leadingText: String? = null,
-    leadingIcon: BpkIcon? = null,
-    trailingIcon: BpkIcon? = null,
-    leadingTextContentDescription: String? = null,
     previousPrice: String? = null,
     trailingText: String? = null,
     size: BpkPriceSize = BpkPriceSize.Small,
     style: BpkPriceStyle = BpkPriceStyle.default,
     icon: BpkIcon? = null,
     onPriceClicked: (() -> Unit)? = null,
-    onLeadingTextClicked: (() -> Unit)? = null,
 ) {
-    val hasLeadingTextDecoration = leadingIcon != null || trailingIcon != null || onLeadingTextClicked != null
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.End,
@@ -68,36 +61,15 @@ internal fun BpkPriceAlignEnd(
                     textDecoration = TextDecoration.LineThrough,
                 )
             }
-            if (hasLeadingTextDecoration && previousPrice != null && leadingText != null) {
+            leadingText?.let {
+                val builder = StringBuilder()
+                previousPrice?.let { builder.append(" • ") }
+                builder.append(it)
                 BpkText(
-                    text = " • ",
+                    text = builder.toString(),
                     color = style.secondaryTextColor(),
                     style = size.secondaryTextStyle(),
                 )
-            }
-            leadingText?.let {
-                if (hasLeadingTextDecoration) {
-                    BpkPriceLeadingText(
-                        text = it,
-                        size = size,
-                        style = style,
-                        leadingIcon = leadingIcon,
-                        trailingIcon = trailingIcon,
-                        contentDescription = leadingTextContentDescription,
-                        textAlign = TextAlign.End,
-                        onClick = onLeadingTextClicked,
-                    )
-                } else {
-                    val builder = StringBuilder()
-                    previousPrice?.let { builder.append(" • ") }
-                    builder.append(it)
-                    BpkText(
-                        text = builder.toString(),
-                        color = style.secondaryTextColor(),
-                        style = size.secondaryTextStyle(),
-                        textAlign = TextAlign.End,
-                    )
-                }
             }
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -105,7 +77,6 @@ internal fun BpkPriceAlignEnd(
                 price = price,
                 size = size,
                 style = style,
-                textAlign = TextAlign.End,
                 onPriceClicked = onPriceClicked,
             )
             icon?.let {
@@ -124,7 +95,6 @@ internal fun BpkPriceAlignEnd(
                 text = it,
                 color = style.secondaryTextColor(),
                 style = size.secondaryTextStyle(),
-                textAlign = TextAlign.End,
                 modifier = Modifier.applyIf(size == BpkPriceSize.ExtraSmall) {
                     offset(y = (-2).dp)
                 },
