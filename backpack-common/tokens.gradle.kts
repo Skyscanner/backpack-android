@@ -24,6 +24,7 @@ import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
 import net.skyscanner.backpack.tokens.BpkTextStyle
 import net.skyscanner.backpack.tokens.BpkTextUnit
+import net.skyscanner.backpack.tokens.androidFileOf
 import net.skyscanner.backpack.tokens.nodeFileOf
 import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
@@ -41,6 +42,8 @@ tasks {
     val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
         .readAs(BpkFormat.Json)
     val iconSource = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
+        .readAs(BpkFormat.Folder)
+    val iconOverrides = project.androidFileOf("backpack-common", "icons")
         .readAs(BpkFormat.Folder)
 
     val generateElevationTokens by registering {
@@ -156,11 +159,11 @@ tasks {
     val generateIcons by registering {
         this.group = group
         doLast {
-            iconSource
-                .parseAs(BpkIcon.Parser.Svg)
-                .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
-                .saveTo(BpkOutput.XmlIconFiles(iconSrc))
-                .execute()
+            // Local artwork takes precedence until the SVG package includes these updates.
+            val folders = iconSource.execute() + iconOverrides.execute().filter { it.isDirectory }
+            val icons = BpkIcon.Parser.Svg(folders)
+            val xml = BpkIcon.Format.Xml(rootDir, metadata)(icons)
+            BpkOutput.XmlIconFiles(iconSrc)(xml)
         }
     }
 
