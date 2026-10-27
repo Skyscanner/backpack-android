@@ -42,7 +42,6 @@ enum class BpkBadgeType {
     Loyalty,
 }
 
-
 enum class BpkBadgeStyle {
     Default,
     TrailingIcon,
