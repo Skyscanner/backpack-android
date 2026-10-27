@@ -43,6 +43,22 @@ BpkBadge(
 )
 ```
 
+Example of a Badge with trailing icon:
+
+```Kotlin
+import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.TickCircle
+
+BpkBadge(
+    text = "Badge text",
+    style = BpkBadgeStyle.TrailingIcon,
+    type = BpkBadgeType.Normal,
+    icon = BpkIcon.TickCircle,
+)
+```
+
 Example of a Badge with custom icon:
 
 ```Kotlin
