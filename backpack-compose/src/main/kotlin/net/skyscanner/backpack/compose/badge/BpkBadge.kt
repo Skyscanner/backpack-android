@@ -42,9 +42,26 @@ enum class BpkBadgeType {
     Loyalty,
 }
 
+
+enum class BpkBadgeStyle {
+    Default,
+    TrailingIcon,
+}
+
 @Composable
 fun BpkBadge(
     text: String,
+    modifier: Modifier = Modifier,
+    type: BpkBadgeType = BpkBadgeType.Normal,
+    icon: BpkIcon? = null,
+) {
+    BpkBadge(text = text, style = BpkBadgeStyle.Default, modifier = modifier, type = type, icon = icon)
+}
+
+@Composable
+fun BpkBadge(
+    text: String,
+    style: BpkBadgeStyle,
     modifier: Modifier = Modifier,
     type: BpkBadgeType = BpkBadgeType.Normal,
     icon: BpkIcon? = null,
@@ -53,17 +70,19 @@ fun BpkBadge(
         BpkBadgeType.Warning -> BpkIcon.InformationCircle
         BpkBadgeType.Destructive -> BpkIcon.Exclamation
         BpkBadgeType.Success -> BpkIcon.TickCircle
-        else -> icon
+        else -> null
     }
     BpkBadgeImpl(
         text = text,
         modifier = modifier,
         type = type,
+        style = style,
         icon = badgeIcon?.let {
             {
                 BadgeIcon(
                     icon = badgeIcon,
                     type = type,
+                    style = style,
                 )
             }
         },
@@ -77,14 +96,27 @@ fun BpkBadge(
     modifier: Modifier = Modifier,
     type: BpkBadgeType = BpkBadgeType.Normal,
 ) {
+    BpkBadge(text = text, icon = icon, style = BpkBadgeStyle.Default, modifier = modifier, type = type)
+}
+
+@Composable
+fun BpkBadge(
+    text: String,
+    icon: Painter,
+    style: BpkBadgeStyle,
+    modifier: Modifier = Modifier,
+    type: BpkBadgeType = BpkBadgeType.Normal,
+) {
     BpkBadgeImpl(
         text = text,
         modifier = modifier,
         type = type,
+        style = style,
         icon = {
             BadgeDrawable(
                 icon = icon,
                 type = type,
+                style = style,
             )
         },
     )

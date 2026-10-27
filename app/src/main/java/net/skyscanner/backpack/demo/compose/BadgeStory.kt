@@ -30,7 +30,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -39,6 +41,7 @@ import net.skyscanner.backpack.compose.tokens.PriceTag
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.components.BadgeComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.common.R as CommonR
 
 @Composable
 @BadgeComponent
@@ -52,9 +55,21 @@ fun BadgeStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@BadgeComponent
+@ComposeStory("Trailing icon")
+fun BadgeStoryTrailingIcon(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkBadgeType.entries.forEach { type ->
+            BadgeRow(type = type, style = BpkBadgeStyle.TrailingIcon)
+        }
+    }
+}
+
+@Composable
 private fun BadgeRow(
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
+    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -69,6 +84,16 @@ private fun BadgeRow(
             )
             .padding(BpkSpacing.Md),
     ) {
+
+        if (style == BpkBadgeStyle.TrailingIcon) {
+            BpkBadge(
+                text = type.toString(),
+                icon = painterResource(CommonR.drawable.bpk_information_circle_outline),
+                type = type,
+                style = style,
+            )
+            return@Row
+        }
 
         if (type !in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive)) {
             BpkBadge(

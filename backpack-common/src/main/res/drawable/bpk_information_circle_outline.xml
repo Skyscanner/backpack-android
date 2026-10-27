@@ -1,0 +1,14 @@
+<!-- Outlined variant using the information glyph from @skyscanner/bpk-svgs, icons/lg/information-circle.svg. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M12,2a10,10 0,1 0,0 20a10,10 0,1 0,0 -20zM12,4a8,8 0,1 0,0 16a8,8 0,1 0,0 -16z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M12.993,16.116a1,1 0,0 1,-1.986 0.001L11,16l-0.002,-5.001 0.007,-0.117a1,1 0,0 1,1.986 0l0.007,0.117L13,16zM11.998,8.996a0.999,0.999 0,0 1,0 -1.997h0.063a0.999,0.999 0,1 1,-0.063 1.997" />
+</vector>

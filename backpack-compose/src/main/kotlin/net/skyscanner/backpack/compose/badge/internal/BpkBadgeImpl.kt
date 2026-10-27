@@ -21,10 +21,12 @@ package net.skyscanner.backpack.compose.badge.internal
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -32,8 +34,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
@@ -49,10 +54,13 @@ internal fun BpkBadgeImpl(
     text: String,
     modifier: Modifier = Modifier,
     type: BpkBadgeType = BpkBadgeType.Normal,
+    style: BpkBadgeStyle = BpkBadgeStyle.Default,
     icon: @Composable (RowScope.() -> Unit)?,
 ) {
     Row(
         modifier = modifier
+            // Give weighted text a finite width, including inside horizontally scrolling containers.
+            .then(if (style == BpkBadgeStyle.TrailingIcon) Modifier.width(IntrinsicSize.Max) else Modifier)
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
@@ -77,15 +85,22 @@ internal fun BpkBadgeImpl(
     ) {
         val contentColor = type.contentColor
 
-        icon?.let { it() }
+        if (style == BpkBadgeStyle.Default) {
+            icon?.let { it() }
+        }
 
         BpkText(
             text = text,
+            modifier = if (style == BpkBadgeStyle.TrailingIcon) Modifier.weight(1f, fill = false) else Modifier,
             color = contentColor,
             style = BpkTheme.typography.footnote,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
+
+        if (style == BpkBadgeStyle.TrailingIcon) {
+            icon?.let { it() }
+        }
     }
 }
 
@@ -94,13 +109,23 @@ internal fun BadgeIcon(
     icon: BpkIcon,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
+    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
-    BpkIcon(
-        icon = icon,
-        contentDescription = null,
-        modifier = modifier,
-        tint = type.iconColor,
-    )
+    if (style == BpkBadgeStyle.Default) {
+        BpkIcon(
+            icon = icon,
+            contentDescription = null,
+            modifier = modifier,
+            tint = type.iconColor,
+        )
+    } else {
+        BadgeDrawable(
+            icon = painterResource(icon.small),
+            type = type,
+            modifier = modifier,
+            style = style,
+        )
+    }
 }
 
 @Composable
@@ -108,12 +133,13 @@ internal fun BadgeDrawable(
     icon: Painter,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
+    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
     Icon(
         painter = icon,
         contentDescription = null,
-        tint = type.iconColor,
-        modifier = modifier.requiredSize(BpkSpacing.Base, BpkSpacing.Base),
+        tint = if (style == BpkBadgeStyle.TrailingIcon) type.contentColor else type.iconColor,
+        modifier = modifier.requiredSize(if (style == BpkBadgeStyle.TrailingIcon) 12.dp else BpkSpacing.Base),
     )
 }
 
@@ -123,9 +149,7 @@ private val BpkBadgeType.iconColor: Color
         BpkBadgeType.Warning -> BpkTheme.colors.statusWarningSpot
         BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerSpot
         BpkBadgeType.Success -> BpkTheme.colors.statusSuccessSpot
-        else -> {
-            contentColor
-        }
+        else -> contentColor
     }
 
 private val BpkBadgeType.contentColor: Color
