@@ -47,6 +47,7 @@ Example of a Badge with trailing icon:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.TickCircle

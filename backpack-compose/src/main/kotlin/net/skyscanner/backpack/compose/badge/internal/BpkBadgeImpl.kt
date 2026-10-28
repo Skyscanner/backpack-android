@@ -21,12 +21,10 @@ package net.skyscanner.backpack.compose.badge.internal
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -34,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -59,8 +58,7 @@ internal fun BpkBadgeImpl(
 ) {
     Row(
         modifier = modifier
-            // Give weighted text a finite width, including inside horizontally scrolling containers.
-            .then(if (style == BpkBadgeStyle.TrailingIcon) Modifier.width(IntrinsicSize.Max) else Modifier)
+            .then(if (style == BpkBadgeStyle.TrailingIcon) Modifier.constrainUnboundedWidth() else Modifier)
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
@@ -139,7 +137,7 @@ internal fun BadgeDrawable(
         painter = icon,
         contentDescription = null,
         tint = if (style == BpkBadgeStyle.TrailingIcon) type.contentColor else type.iconColor,
-        modifier = modifier.requiredSize(if (style == BpkBadgeStyle.TrailingIcon) 12.dp else BpkSpacing.Base),
+        modifier = modifier.requiredSize(if (style == BpkBadgeStyle.TrailingIcon) TrailingIconSize else BpkSpacing.Base),
     )
 }
 
@@ -188,4 +186,18 @@ private val BpkBadgeType.borderColor: Color
         else -> Color.Transparent
     }
 
+private fun Modifier.constrainUnboundedWidth(): Modifier = layout { measurable, constraints ->
+    val measureConstraints = if (constraints.hasBoundedWidth) {
+        constraints
+    } else {
+        // Weighted text needs a finite width inside horizontally scrolling containers.
+        constraints.copy(maxWidth = measurable.maxIntrinsicWidth(constraints.maxHeight).coerceAtLeast(constraints.minWidth))
+    }
+    val placeable = measurable.measure(measureConstraints)
+    layout(placeable.width, placeable.height) {
+        placeable.placeRelative(0, 0)
+    }
+}
+
+private val TrailingIconSize = 12.dp
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)
