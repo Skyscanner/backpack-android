@@ -44,7 +44,7 @@ enum class BpkBadgeType {
 
 enum class BpkBadgeStyle {
     Default,
-    TrailingIcon,
+    Interactive,
 }
 
 @Composable
@@ -81,7 +81,6 @@ fun BpkBadge(
                 BadgeIcon(
                     icon = badgeIcon,
                     type = type,
-                    style = style,
                 )
             }
         },
@@ -115,7 +114,6 @@ fun BpkBadge(
             BadgeDrawable(
                 icon = icon,
                 type = type,
-                style = style,
             )
         },
     )

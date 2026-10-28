@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/default.png" alt="Badge component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/default_dm.png" alt="Badge component - dark mode" width="375" /> |
 
+## Interactive
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/interactive.png" alt="Interactive Badge component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/interactive_dm.png" alt="Interactive Badge component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -43,23 +49,6 @@ BpkBadge(
 )
 ```
 
-Example of a Badge with trailing icon:
-
-```Kotlin
-import net.skyscanner.backpack.compose.badge.BpkBadge
-import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
-import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.TickCircle
-
-BpkBadge(
-    text = "Badge text",
-    style = BpkBadgeStyle.TrailingIcon,
-    type = BpkBadgeType.Normal,
-    icon = BpkIcon.TickCircle,
-)
-```
-
 Example of a Badge with custom icon:
 
 ```Kotlin
@@ -71,5 +60,25 @@ BpkBadge(
   text = "Badge text",
   type = BpkBadgeType.Normal,
   icon = painterResource(id = R.drawable.sample_icon),
+)
+```
+
+Example of an interactive Badge:
+
+The Interactive style always displays a fixed 12dp outlined information glyph after the text. The `icon` parameter controls an optional leading icon; it cannot replace the trailing information glyph.
+
+```Kotlin
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
+
+BpkBadge(
+  text = "Badge text",
+  style = BpkBadgeStyle.Interactive,
+  modifier = Modifier.clickable(role = Role.Button) { /* Show supporting information. */ },
+  type = BpkBadgeType.Normal,
 )
 ```

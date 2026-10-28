@@ -45,7 +45,6 @@ import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import net.skyscanner.backpack.common.R as CommonR
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BpkBadgeTest(flavour: Flavor) :
@@ -100,25 +99,25 @@ class BpkBadgeTest(flavour: Flavor) :
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun trailingIcon() = snap(background = { type.backgroundContent() }) {
-        BpkBadge(text = "Badge", type = type, icon = BpkIcon.CloseCircle, style = BpkBadgeStyle.TrailingIcon)
+    fun interactiveWithIcon() = snap(background = { type.backgroundContent() }) {
+        BpkBadge(text = "Badge", type = type, icon = BpkIcon.CloseCircle, style = BpkBadgeStyle.Interactive)
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun trailingCustomIcon() = snap(background = { type.backgroundContent() }) {
+    fun interactiveWithCustomIcon() = snap(background = { type.backgroundContent() }) {
         BpkBadge(
             text = "Long badge text",
-            icon = painterResource(CommonR.drawable.bpk_information_circle_outline),
+            icon = painterResource(R.drawable.sample_icon),
             modifier = Modifier.width(100.dp),
             type = type,
-            style = BpkBadgeStyle.TrailingIcon,
+            style = BpkBadgeStyle.Interactive,
         )
     }
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    fun trailingIconInHorizontalLists() {
+    fun interactiveInHorizontalLists() {
         assumeTrue(type == BpkBadgeType.Normal)
 
         snap(assertion = {
@@ -130,13 +129,12 @@ class BpkBadgeTest(flavour: Flavor) :
                 assertTrue("Badge label must have a visible width", layouts.single().size.width > 0)
             }
         }) {
-            val icon = painterResource(CommonR.drawable.bpk_information_circle_outline)
             Column {
                 Row(Modifier.horizontalScroll(rememberScrollState())) {
-                    BpkBadge(text = "Badge", icon = icon, style = BpkBadgeStyle.TrailingIcon)
+                    BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive)
                 }
                 LazyRow {
-                    item { BpkBadge(text = "Badge", icon = icon, style = BpkBadgeStyle.TrailingIcon) }
+                    item { BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive) }
                 }
             }
         }

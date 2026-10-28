@@ -47,6 +47,7 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkBadgeColors
 import net.skyscanner.backpack.configuration.BpkConfiguration
+import net.skyscanner.backpack.common.R as CommonR
 
 @Composable
 internal fun BpkBadgeImpl(
@@ -58,7 +59,7 @@ internal fun BpkBadgeImpl(
 ) {
     Row(
         modifier = modifier
-            .then(if (style == BpkBadgeStyle.TrailingIcon) Modifier.constrainUnboundedWidth() else Modifier)
+            .then(if (style == BpkBadgeStyle.Interactive) Modifier.constrainUnboundedWidth() else Modifier)
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
@@ -83,21 +84,19 @@ internal fun BpkBadgeImpl(
     ) {
         val contentColor = type.contentColor
 
-        if (style == BpkBadgeStyle.Default) {
-            icon?.let { it() }
-        }
+        icon?.let { it() }
 
         BpkText(
             text = text,
-            modifier = if (style == BpkBadgeStyle.TrailingIcon) Modifier.weight(1f, fill = false) else Modifier,
+            modifier = if (style == BpkBadgeStyle.Interactive) Modifier.weight(1f, fill = false) else Modifier,
             color = contentColor,
             style = BpkTheme.typography.footnote,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
 
-        if (style == BpkBadgeStyle.TrailingIcon) {
-            icon?.let { it() }
+        if (style == BpkBadgeStyle.Interactive) {
+            BadgeInformationIcon(type = type)
         }
     }
 }
@@ -107,23 +106,13 @@ internal fun BadgeIcon(
     icon: BpkIcon,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
-    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
-    if (style == BpkBadgeStyle.Default) {
-        BpkIcon(
-            icon = icon,
-            contentDescription = null,
-            modifier = modifier,
-            tint = type.iconColor,
-        )
-    } else {
-        BadgeDrawable(
-            icon = painterResource(icon.small),
-            type = type,
-            modifier = modifier,
-            style = style,
-        )
-    }
+    BpkIcon(
+        icon = icon,
+        contentDescription = null,
+        modifier = modifier,
+        tint = type.iconColor,
+    )
 }
 
 @Composable
@@ -131,13 +120,22 @@ internal fun BadgeDrawable(
     icon: Painter,
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
-    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
     Icon(
         painter = icon,
         contentDescription = null,
-        tint = if (style == BpkBadgeStyle.TrailingIcon) type.contentColor else type.iconColor,
-        modifier = modifier.requiredSize(if (style == BpkBadgeStyle.TrailingIcon) TrailingIconSize else BpkSpacing.Base),
+        tint = type.iconColor,
+        modifier = modifier.requiredSize(BpkSpacing.Base),
+    )
+}
+
+@Composable
+private fun BadgeInformationIcon(type: BpkBadgeType) {
+    Icon(
+        painter = painterResource(CommonR.drawable.bpk_information_circle_outline),
+        contentDescription = null,
+        tint = type.contentColor,
+        modifier = Modifier.requiredSize(InformationIconSize),
     )
 }
 
@@ -199,5 +197,5 @@ private fun Modifier.constrainUnboundedWidth(): Modifier = layout { measurable, 
     }
 }
 
-private val TrailingIconSize = 12.dp
+private val InformationIconSize = 12.dp
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)
