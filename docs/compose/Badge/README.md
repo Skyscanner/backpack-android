@@ -65,20 +65,16 @@ BpkBadge(
 
 Example of an interactive Badge:
 
-The Interactive style always displays a fixed 12dp outlined information glyph after the text. The `icon` parameter controls an optional leading icon; it cannot replace the trailing information glyph.
+The Interactive style requires an `onClick` callback and always render a trailing info logo.
 
 ```Kotlin
-import androidx.compose.foundation.clickable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 
 BpkBadge(
   text = "Badge text",
-  style = BpkBadgeStyle.Interactive,
-  modifier = Modifier.clickable(role = Role.Button) { /* Show supporting information. */ },
+  style = BpkBadgeStyle.Interactive(onClick = { /* Log.d("clicked") */ }),
   type = BpkBadgeType.Normal,
 )
 ```

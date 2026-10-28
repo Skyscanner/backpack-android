@@ -58,7 +58,7 @@ fun BadgeStory(modifier: Modifier = Modifier) {
 fun BadgeStoryInteractive(modifier: Modifier = Modifier) {
     Column(modifier) {
         BpkBadgeType.entries.forEach { type ->
-            BadgeRow(type = type, style = BpkBadgeStyle.Interactive)
+            BadgeRow(type = type, style = BpkBadgeStyle.Interactive(onClick = {}))
         }
     }
 }
@@ -83,7 +83,7 @@ private fun BadgeRow(
             .padding(BpkSpacing.Md),
     ) {
 
-        if (style == BpkBadgeStyle.Interactive) {
+        if (style is BpkBadgeStyle.Interactive) {
             BpkBadge(
                 text = type.toString(),
                 type = type,

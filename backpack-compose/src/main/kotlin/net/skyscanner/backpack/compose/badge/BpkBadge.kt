@@ -42,9 +42,9 @@ enum class BpkBadgeType {
     Loyalty,
 }
 
-enum class BpkBadgeStyle {
-    Default,
-    Interactive,
+sealed class BpkBadgeStyle {
+    data object Default : BpkBadgeStyle()
+    data class Interactive(val onClick: () -> Unit) : BpkBadgeStyle()
 }
 
 @Composable

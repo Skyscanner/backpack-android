@@ -27,9 +27,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertHasClickAction
+import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.dp
@@ -40,6 +47,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.demo.R
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Test
@@ -55,7 +63,9 @@ class BpkBadgeTest(flavour: Flavor) :
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
     fun text() {
-        snap(background = { type.backgroundContent() }) {
+        snap(background = { type.backgroundContent() }, assertion = {
+            onNodeWithText("Badge").assertHasNoClickAction()
+        }) {
             BpkBadge(text = "Badge", type = type)
         }
     }
@@ -99,8 +109,22 @@ class BpkBadgeTest(flavour: Flavor) :
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun interactiveWithIcon() = snap(background = { type.backgroundContent() }) {
-        BpkBadge(text = "Badge", type = type, icon = BpkIcon.CloseCircle, style = BpkBadgeStyle.Interactive)
+    fun interactiveWithIcon() {
+        var clicks = 0
+        snap(background = { type.backgroundContent() }, assertion = {
+            onNodeWithText("Badge")
+                .assertHasClickAction()
+                .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
+                .performSemanticsAction(SemanticsActions.OnClick) { it() }
+            assertEquals(1, clicks)
+        }) {
+            BpkBadge(
+                text = "Badge",
+                type = type,
+                icon = BpkIcon.CloseCircle,
+                style = BpkBadgeStyle.Interactive(onClick = { clicks++ }),
+            )
+        }
     }
 
     @Test
@@ -111,7 +135,7 @@ class BpkBadgeTest(flavour: Flavor) :
             icon = painterResource(R.drawable.sample_icon),
             modifier = Modifier.width(100.dp),
             type = type,
-            style = BpkBadgeStyle.Interactive,
+            style = BpkBadgeStyle.Interactive(onClick = {}),
         )
     }
 
@@ -131,10 +155,10 @@ class BpkBadgeTest(flavour: Flavor) :
         }) {
             Column {
                 Row(Modifier.horizontalScroll(rememberScrollState())) {
-                    BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive)
+                    BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive(onClick = {}))
                 }
                 LazyRow {
-                    item { BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive) }
+                    item { BpkBadge(text = "Badge", style = BpkBadgeStyle.Interactive(onClick = {})) }
                 }
             }
         }

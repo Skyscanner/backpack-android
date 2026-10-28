@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.badge.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -30,10 +31,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -42,6 +45,7 @@ import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -57,12 +61,26 @@ internal fun BpkBadgeImpl(
     style: BpkBadgeStyle = BpkBadgeStyle.Default,
     icon: @Composable (RowScope.() -> Unit)?,
 ) {
+    val interactiveStyle = when (style) {
+        BpkBadgeStyle.Default -> null
+        is BpkBadgeStyle.Interactive -> style
+    }
     Row(
         modifier = modifier
-            .then(if (style == BpkBadgeStyle.Interactive) Modifier.constrainUnboundedWidth() else Modifier)
+            .then(if (interactiveStyle != null) Modifier.constrainUnboundedWidth() else Modifier)
             .semantics(mergeDescendants = true) { }
             .border(BpkBorderSize.Sm, type.borderColor, BadgeShape)
             .background(type.backgroundColor, BadgeShape)
+            .then(
+                if (interactiveStyle != null) {
+                    Modifier.clip(BadgeShape).clickable(
+                        interactionSource = null,
+                        indication = bpkRipple(),
+                        role = Role.Button,
+                        onClick = interactiveStyle.onClick,
+                    )
+                } else Modifier,
+            )
             .then(
                 BpkConfiguration.badgeConfig?.endPadding?.takeIf {
                     type !in listOf(
@@ -88,14 +106,14 @@ internal fun BpkBadgeImpl(
 
         BpkText(
             text = text,
-            modifier = if (style == BpkBadgeStyle.Interactive) Modifier.weight(1f, fill = false) else Modifier,
+            modifier = if (interactiveStyle != null) Modifier.weight(1f, fill = false) else Modifier,
             color = contentColor,
             style = BpkTheme.typography.footnote,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
 
-        if (style == BpkBadgeStyle.Interactive) {
+        if (interactiveStyle != null) {
             BadgeInformationIcon(type = type)
         }
     }
