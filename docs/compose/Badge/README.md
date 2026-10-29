@@ -10,6 +10,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/default.png" alt="Badge component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/default_dm.png" alt="Badge component - dark mode" width="375" /> |
 
+## Interactive
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/interactive.png" alt="Interactive Badge component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Badge/screenshots/interactive_dm.png" alt="Interactive Badge component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -54,5 +60,21 @@ BpkBadge(
   text = "Badge text",
   type = BpkBadgeType.Normal,
   icon = painterResource(id = R.drawable.sample_icon),
+)
+```
+
+Example of an interactive Badge:
+
+The Interactive style requires an `onClick` callback and always render a trailing info logo.
+
+```Kotlin
+import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
+
+BpkBadge(
+  text = "Badge text",
+  style = BpkBadgeStyle.Interactive(onClick = { /* Log.d("clicked") */ }),
+  type = BpkBadgeType.Normal,
 )
 ```

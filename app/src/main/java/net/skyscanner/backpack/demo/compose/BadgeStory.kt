@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeStyle
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -52,9 +53,21 @@ fun BadgeStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@BadgeComponent
+@ComposeStory("Interactive")
+fun BadgeStoryInteractive(modifier: Modifier = Modifier) {
+    Column(modifier) {
+        BpkBadgeType.entries.forEach { type ->
+            BadgeRow(type = type, style = BpkBadgeStyle.Interactive(onClick = {}))
+        }
+    }
+}
+
+@Composable
 private fun BadgeRow(
     type: BpkBadgeType,
     modifier: Modifier = Modifier,
+    style: BpkBadgeStyle = BpkBadgeStyle.Default,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -69,6 +82,15 @@ private fun BadgeRow(
             )
             .padding(BpkSpacing.Md),
     ) {
+
+        if (style is BpkBadgeStyle.Interactive) {
+            BpkBadge(
+                text = type.toString(),
+                type = type,
+                style = style,
+            )
+            return@Row
+        }
 
         if (type !in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive)) {
             BpkBadge(
