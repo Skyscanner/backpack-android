@@ -14,7 +14,7 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 28
+  api-level: 35
 
 jobs:
 
@@ -178,7 +178,7 @@ jobs:
           api-level: ${{ env.api-level }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          avd-name: avd-x86-default-28
+          avd-name: avd-x86-default-${{ env.api-level }}
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -189,17 +189,19 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
-          avd-name: avd-x86-default-28
+          avd-name: avd-x86-default-${{ env.api-level }}
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            set -e
             # uninstall first to avoid signature error. see https://github.com/ReactiveCircus/android-emulator-runner/issues/319
             adb uninstall net.skyscanner.backpack || :
             adb uninstall net.skyscanner.backpack.test || :
             adb uninstall net.skyscanner.backpack.compose.test || :
             adb uninstall net.skyscanner.backpack.common.test || :
 
-            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest && killall -INT crashpad_handler || true
+            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
+            killall -INT crashpad_handler || true
 
   # ============================================
   # Screenshot Tests - Parallelized by Variant
