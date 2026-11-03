@@ -15,6 +15,7 @@ env:
   flavour: oss
   config: debug
   api-level: 35
+  emulator-arch: x86_64
 
 jobs:
 
@@ -167,7 +168,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ env.api-level }}
+          key: avd-${{ env.emulator-arch }}-${{ env.api-level }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -176,9 +177,10 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          arch: ${{ env.emulator-arch }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          avd-name: avd-x86-default-${{ env.api-level }}
+          avd-name: avd-${{ env.emulator-arch }}-default-${{ env.api-level }}
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -188,8 +190,9 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          arch: ${{ env.emulator-arch }}
           force-avd-creation: false
-          avd-name: avd-x86-default-${{ env.api-level }}
+          avd-name: avd-${{ env.emulator-arch }}-default-${{ env.api-level }}
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
