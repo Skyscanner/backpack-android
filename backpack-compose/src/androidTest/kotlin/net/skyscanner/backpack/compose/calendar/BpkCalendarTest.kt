@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.compose.calendar
 
+import androidx.compose.ui.input.InputMode
+import androidx.compose.ui.input.InputModeManager
+import androidx.compose.ui.platform.LocalInputModeManager
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -205,8 +208,16 @@ class BpkCalendarTest {
     @Test
     fun enabledDateCellsCanReceiveKeyboardFocus() = runTest {
         val controller = createController(DefaultSingle)
+        lateinit var inputModeManager: InputModeManager
 
-        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+        composeTestRule.setContent {
+            inputModeManager = LocalInputModeManager.current
+            BpkTheme { BpkCalendar(controller) }
+        }
+
+        composeTestRule.runOnIdle {
+            assertTrue(inputModeManager.requestInputMode(InputMode.Keyboard))
+        }
 
         composeTestRule.onAllNodesWithText("2")
             .onFirst()

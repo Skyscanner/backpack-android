@@ -14,7 +14,8 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 28
+  api-level: 35
+  emulator-arch: x86_64
 
 jobs:
 
@@ -167,7 +168,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ env.api-level }}
+          key: avd-${{ env.emulator-arch }}-${{ env.api-level }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -176,9 +177,10 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          arch: ${{ env.emulator-arch }}
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          avd-name: avd-x86-default-28
+          avd-name: avd-${{ env.emulator-arch }}-default-${{ env.api-level }}
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -188,18 +190,31 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          arch: ${{ env.emulator-arch }}
           force-avd-creation: false
-          avd-name: avd-x86-default-28
+          avd-name: avd-${{ env.emulator-arch }}-default-${{ env.api-level }}
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            set -e
             # uninstall first to avoid signature error. see https://github.com/ReactiveCircus/android-emulator-runner/issues/319
             adb uninstall net.skyscanner.backpack || :
             adb uninstall net.skyscanner.backpack.test || :
             adb uninstall net.skyscanner.backpack.compose.test || :
             adb uninstall net.skyscanner.backpack.common.test || :
 
-            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest && killall -INT crashpad_handler || true
+            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest --continue
+            killall -INT crashpad_handler || true
+
+      - name: Upload Android test reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-test-results
+          path: |
+            **/build/reports/androidTests/
+            **/build/outputs/androidTest-results/
+          retention-days: 7
 
   # ============================================
   # Screenshot Tests - Parallelized by Variant
