@@ -203,8 +203,18 @@ jobs:
             adb uninstall net.skyscanner.backpack.compose.test || :
             adb uninstall net.skyscanner.backpack.common.test || :
 
-            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
+            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest --continue
             killall -INT crashpad_handler || true
+
+      - name: Upload Android test reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-test-results
+          path: |
+            **/build/reports/androidTests/
+            **/build/outputs/androidTest-results/
+          retention-days: 7
 
   # ============================================
   # Screenshot Tests - Parallelized by Variant

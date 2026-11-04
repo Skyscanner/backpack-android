@@ -18,9 +18,25 @@
 
 package net.skyscanner.backpack.util
 
+import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 /**
- * Activity only used for test purposes
+ * Hosts View tests with content clear of the system bars.
  */
-class TestActivity : AppCompatActivity()
+class TestActivity : AppCompatActivity() {
+    override fun setContentView(view: View) {
+        val content = FrameLayout(this)
+        ViewCompat.setOnApplyWindowInsetsListener(content) { container, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            container.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        content.addView(view)
+        super.setContentView(content)
+        ViewCompat.requestApplyInsets(content)
+    }
+}
