@@ -41,7 +41,7 @@ jobs:
 
   UnitTests:
     name: Unit Tests
-    runs-on: ubuntu-24.04-2cores-tools-public
+    runs-on: ubuntu-24.04-8cores-public
     timeout-minutes: 15
 
     steps:
