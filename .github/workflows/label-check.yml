@@ -2,22 +2,19 @@ name: label-check
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, synchronize]
+    # Initial PR checks run in pr.yml after automated dependency labeling.
+    types: [labeled, unlabeled]
 
 permissions: {}
 
 jobs:
   label-check:
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
+    permissions:
+      pull-requests: read
 
     steps:
-      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
-        id: app-token
-        with:
-          client-id: ${{ vars.GH_CLIENT_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
-      - uses: docker://agilepathway/pull-request-label-checker:latest
+      - uses: docker://agilepathway/pull-request-label-checker@sha256:253c71fe97d6ae19fff21608f1e10493ec322e7c95d4fed4695b2b8d11f58fb2
         with:
           one_of: major,minor,patch,dependencies,skip-changelog
-          repo_token: ${{ steps.app-token.outputs.token }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
