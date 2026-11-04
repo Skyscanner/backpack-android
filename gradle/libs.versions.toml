@@ -4,9 +4,9 @@ ksp = "2.3.12" # depends on Kotlin version
 compilerTesting = "0.14.0"
 destinations = "2.3.0" # update this alongside with compiler version
 
-androidPlugin = "9.4.1"
-lint = "32.4.0"  # keep this aligned with androidSdkCommon; review both when androidPlugin major/minor changes
-androidSdkCommon = "32.4.0" # for androidPlugin X.Y.Z, lint/sdk-common are typically (X+23).Y.Z
+androidPlugin = "9.5.0"
+lint = "32.5.0"  # keep this aligned with androidSdkCommon; review both when androidPlugin major/minor changes
+androidSdkCommon = "32.5.0" # for androidPlugin X.Y.Z, lint/sdk-common are typically (X+23).Y.Z
 
 detekt = "1.23.8"
 media3 = "1.11.1"
@@ -45,6 +45,7 @@ androidx-coreKts = "androidx.core:core-ktx:1.19.1"
 androidx-concurrentFutures = "androidx.concurrent:concurrent-futures:1.3.0"
 
 androidx-lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 androidx-lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 androidx-lifecycleViewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycleRuntimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }

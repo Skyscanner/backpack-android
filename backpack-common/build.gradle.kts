@@ -45,6 +45,12 @@ dependencies {
     api(libs.compose.ui)
     implementation(libs.compose.runtime)
 
+    constraints {
+        implementation(libs.androidx.lifecycleRuntime) {
+            because("Lifecycle 2.10+ provides lint checks compatible with AGP 9.5")
+        }
+    }
+
     // Test dependencies
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.espressoCore)
