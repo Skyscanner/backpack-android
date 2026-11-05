@@ -2,22 +2,30 @@ name: label-check
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, synchronize]
+    # Initial PR checks run in pr.yml after automated dependency labeling.
+    types: [labeled, unlabeled]
 
 permissions: {}
 
 jobs:
   label-check:
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
+    permissions:
+      pull-requests: read
 
     steps:
-      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: app-token
+      - name: Check release label
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
-          client-id: ${{ vars.GH_CLIENT_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
-      - uses: docker://agilepathway/pull-request-label-checker:latest
-        with:
-          one_of: major,minor,patch,dependencies,skip-changelog
-          repo_token: ${{ steps.app-token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const allowedLabels = ['major', 'minor', 'patch', 'dependencies', 'skip-changelog'];
+            const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+              ...context.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const matchingLabels = labels.map(label => label.name).filter(label => allowedLabels.includes(label));
+            if (matchingLabels.length !== 1) {
+              core.setFailed(`Expected exactly one of: ${allowedLabels.join(', ')}. Found: ${matchingLabels.join(', ') || 'none'}.`);
+            }

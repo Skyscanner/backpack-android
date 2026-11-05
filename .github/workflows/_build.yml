@@ -2,9 +2,6 @@ name: Build
 
 on:
   workflow_call:
-    secrets:
-      GH_APP_PRIVATE_KEY:
-        required: true
 
 
 defaults:
@@ -26,7 +23,7 @@ jobs:
 
   StaticAnalysis:
     name: DetektAndLint
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
     timeout-minutes: 15
 
     steps:
@@ -44,7 +41,7 @@ jobs:
 
   UnitTests:
     name: Unit Tests
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-8cores-public
     timeout-minutes: 15
 
     steps:
@@ -59,7 +56,7 @@ jobs:
 
   BuildAndTokens:
     name: Build & Tokens
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
     timeout-minutes: 20
     permissions:
       statuses: write
@@ -67,15 +64,9 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: app-token
-        with:
-          client-id: ${{ vars.GH_CLIENT_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
 
       - name: Fetch Dependabot metadata
@@ -83,7 +74,7 @@ jobs:
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' }}
         with:
-          github-token: "${{ steps.app-token.outputs.token }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
           skip-commit-verification: true
 
       - name: Setup NPM
@@ -97,7 +88,7 @@ jobs:
         uses: docker://ghcr.io/danger/danger-kotlin:1.2.0
         if: ${{ github.event_name == 'pull_request' }}
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/actions/setup-java
 
@@ -124,7 +115,7 @@ jobs:
       - name: Token commit
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]' && steps.tokenUpdate.outputs.CHANGED_FILES != '' && contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-') }}
         env:
-          TOKEN: ${{ steps.app-token.outputs.token }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
@@ -143,7 +134,8 @@ jobs:
 
   Android:
     name: Android tests
-    runs-on: ubuntu-24.04-16cores-public
+    # The emulator runs alongside Gradle and the Kotlin compiler.
+    runs-on: ubuntu-24.04-8cores-public
     timeout-minutes: 30
 
     steps:
@@ -224,7 +216,7 @@ jobs:
 
   Screenshots:
     name: Screenshots (${{ matrix.variant.name }})
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
     timeout-minutes: 20
     strategy:
       matrix:
@@ -264,23 +256,17 @@ jobs:
 
   Screenshots-Collect:
     name: Collect & commit screenshots
-    runs-on: ubuntu-24.04-16cores-public
+    runs-on: ubuntu-24.04-2cores-tools-public
     needs: Screenshots
     permissions:
       pull-requests: write
       contents: write
     timeout-minutes: 5
     steps:
-      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: app-token
-        with:
-          client-id: ${{ vars.GH_CLIENT_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
 
       - name: Download all screenshot artifacts
@@ -319,7 +305,7 @@ jobs:
       - name: Commit changes
         if: ${{ github.event_name == 'pull_request' && steps.combineScreenshots.outputs.CHANGED_FILES != '' }}
         env:
-          TOKEN: ${{ steps.app-token.outputs.token }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
         run: |
           git config --local user.email "197108191+skyscanner-backpack-bot[bot]@users.noreply.github.com"
