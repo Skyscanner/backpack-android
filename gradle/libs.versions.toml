@@ -4,7 +4,7 @@ ksp = "2.3.12" # depends on Kotlin version
 compilerTesting = "0.14.0"
 destinations = "2.3.0" # update this alongside with compiler version
 
-androidPlugin = "9.5.0"
+androidPlugin = "9.5.1"
 lint = "32.5.0"  # keep this aligned with androidSdkCommon; review both when androidPlugin major/minor changes
 androidSdkCommon = "32.5.0" # for androidPlugin X.Y.Z, lint/sdk-common are typically (X+23).Y.Z
 
