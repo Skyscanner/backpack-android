@@ -16,6 +16,43 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
+| Parameter | Description |
+|---|---|
+| `helpAction` | **Experimental.** Accessible trailing help button outside the switch toggle target. |
+
+```Kotlin
+@OptIn(ExperimentalBackpackApi::class)
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { },
+  helpAction = BpkSwitchHelpAction(contentDescription = "Help", onClick = { }),
+)
+```
+
+### Help sheet consumer contract
+
+`helpAction` opens consumer-owned help. For a font-scaling sheet title, pass no
+`title` to `BpkModalBottomSheet`; retain its `closeButton` and render the title as a
+`BpkTheme.typography.heading5` heading in a scrollable content slot. This avoids the
+shared modal header's intentionally unscaled title while keeping the close control
+visible and accessible. Use caller-localised text for the help label, title, message,
+and close content description.
+
+The help target has a `BpkSpacing.Sm` gap after the label and remains enabled when the
+switch is disabled, because help is informational. Both the help target and switch are
+vertically centred as in the stable switch row.
+
+For the experimental help overload, a caller `modifier` decorates the whole help-row
+layout. It does not identify the nested Switch semantics node: use the switch label to
+query that node in Compose tests. This preserves the help button as a sibling rather
+than extending the switch toggle target over it.
+
+The visual switch can still be tapped, but the space between the help target and switch
+is deliberately outside both actions so the help button remains outside the switch
+toggle target. The visual-switch tap uses no separate keyboard focus or accessibility
+node; it also has no independent pressed-state indication.
+
 Example of a Switch:
 
 ```Kotlin

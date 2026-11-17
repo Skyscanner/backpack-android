@@ -125,6 +125,10 @@
     <string name="toggle_with_icon">Label with Icon</string>
     <string name="toggle_with_icon_trailing">Label with Icon Trailing</string>
     <string name="toggle_with_icon_content_description">More information</string>
+    <string name="toggle_help">Help</string>
+    <string name="toggle_help_title">About this switch</string>
+    <string name="toggle_help_message">This example shows help content without changing the switch state.</string>
+    <string name="toggle_help_long_message">This is a longer help message that demonstrates how bottom sheet content remains readable when it needs additional vertical space. This is a longer help message that demonstrates how bottom sheet content remains readable when it needs additional vertical space.</string>
     <string name="toggle_on_contrast_unchecked">On Contrast Unchecked</string>
     <string name="toggle_on_contrast_intermediate">On Contrast Indeterminate</string>
     <string name="toggle_on_contrast_checked">On Contrast Checked</string>
