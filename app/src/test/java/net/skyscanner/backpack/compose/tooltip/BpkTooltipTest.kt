@@ -28,7 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,8 +48,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.longClick
 import androidx.test.espresso.Espresso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.BpkSnapshotTest
@@ -313,7 +311,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         modifier: Modifier = Modifier,
     ) {
         val state = rememberBpkTooltipState()
-        val scope = remember { CoroutineScope(Job()) }
+        val scope = rememberCoroutineScope()
         LaunchedEffect(Unit) { scope.launch { state.show() } }
         LaunchedEffect(cancelShow) {
             if (cancelShow) scope.cancel()
