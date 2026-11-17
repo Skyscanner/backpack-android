@@ -18,6 +18,30 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
+| Parameter | Description |
+|---|---|
+| `bottomContent` | **Experimental.** Optional content below the flight leg row. |
+
+### Experimental bottom content accessibility
+
+Bottom content is full-width below the codes/duration row. It is inside the flight
+leg's merged semantics: supply non-interactive content only. When `contentDescription`
+is `null`, the complete leg including bottom content is hidden from TalkBack. When it
+is set, TalkBack reads that description as the leg's single focus target, so callers
+must append the bottom-content text to `contentDescription` themselves.
+
+```Kotlin
+@OptIn(ExperimentalBackpackApi::class)
+BpkFlightLeg(
+  departureArrivalTime = "19:50 - 22:45",
+  description = AnnotatedString("LHR-SIN"),
+  stopsInfo = "Direct",
+  duration = "7h 55m",
+  contentDescription = "19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport",
+  bottomContent = { BpkText(text = "Nearby airport") },
+)
+```
+
 Example of a FlightLeg:
 
 ```Kotlin

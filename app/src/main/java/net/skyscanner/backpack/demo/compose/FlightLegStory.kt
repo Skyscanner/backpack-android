@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FlightLegComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @FlightLegComponent
@@ -66,7 +67,26 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 
         BpkText(text = stringResource(id = R.string.flight_leg_complete_short_stops_example), color = BpkTheme.colors.textPrimary)
         CompleteFlightLegShortStopsSample()
+
+        Spacer(modifier = Modifier.height(BpkSpacing.Lg))
+
+        BpkText(text = "With bottom content", color = BpkTheme.colors.textPrimary)
+        FlightLegWithBottomContentSample()
     }
+}
+
+@Composable
+@OptIn(ExperimentalBackpackApi::class)
+internal fun FlightLegWithBottomContentSample(modifier: Modifier = Modifier) {
+    BpkFlightLeg(
+        departureArrivalTime = "19:50 - 22:45",
+        description = AnnotatedString("LHR-SIN, SwissAir"),
+        stopsInfo = "Direct",
+        duration = "7h 55m",
+        contentDescription = "19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport",
+        bottomContent = { BpkText(text = "Nearby airport") },
+        modifier = modifier,
+    )
 }
 
 @Composable
