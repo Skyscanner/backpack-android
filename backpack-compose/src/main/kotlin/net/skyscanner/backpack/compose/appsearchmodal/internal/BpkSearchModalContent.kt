@@ -26,6 +26,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.compose.appsearchmodal.BpkAppSearchModalResult
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
@@ -36,7 +37,7 @@ internal fun BpkSearchModalContent(
     modifier: Modifier = Modifier,
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
-    LazyColumn(modifier = modifier) {
+    LazyColumn(modifier = modifier.testTag("searchModalResults")) {
         results.shortcuts?.let {
             item {
                 BpkShortcuts(shortcuts = it, behaviouralEventWrapper = behaviouralEventWrapper)

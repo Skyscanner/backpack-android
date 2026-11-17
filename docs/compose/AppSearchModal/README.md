@@ -34,6 +34,26 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
+`accessory` is an **experimental** composable slot. It appears below the search
+input and above the results in Content and Loading states. Opt in with
+`@OptIn(ExperimentalBackpackApi::class)` before supplying it; it is hidden in
+the Error state. The existing overload without `accessory` remains stable.
+
+| Parameter | Description |
+|---|---|
+| `accessory` | **Experimental.** Content displayed between the input summary and results. |
+
+```Kotlin
+@OptIn(ExperimentalBackpackApi::class)
+@Composable
+fun SearchModalWithAccessory() {
+    BpkAppSearchModal(
+        // other required parameters
+        accessory = { BpkText(text = stringResource(id = R.string.generic_message)) },
+    )
+}
+```
+
 Example of a AppSearchModal in Content state:
 
 ```Kotlin
