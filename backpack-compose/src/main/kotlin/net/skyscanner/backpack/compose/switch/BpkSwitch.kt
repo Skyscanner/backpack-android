@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.switch
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -50,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -282,6 +284,7 @@ private fun BpkSwitchWithHelpAction(
     announceState: Boolean,
     content: @Composable () -> Unit,
 ) {
+    val helpInteractionSource = remember { MutableInteractionSource() }
     val currentChecked = rememberUpdatedState(checked)
     val currentOnCheckedChange = rememberUpdatedState(onCheckedChange)
     Layout(
@@ -318,13 +321,20 @@ private fun BpkSwitchWithHelpAction(
             Box(
                 modifier = Modifier
                     .size(HelpActionTouchTarget)
-                    .clickable(role = Role.Button, onClick = helpAction.onClick)
+                    .clickable(
+                        interactionSource = helpInteractionSource,
+                        indication = null,
+                        role = Role.Button,
+                        onClick = helpAction.onClick,
+                    )
                     .semantics { contentDescription = helpAction.contentDescription },
                 contentAlignment = Alignment.CenterStart,
             ) {
                 BpkIcon(
                     icon = BpkIcon.InformationCircle,
                     contentDescription = null,
+                    // Keep the 48dp hit target invisible; draw feedback around the icon like navigation actions.
+                    modifier = Modifier.indication(helpInteractionSource, bpkRipple(bounded = false)),
                     tint = BpkTheme.colors.textSecondary,
                 )
             }
