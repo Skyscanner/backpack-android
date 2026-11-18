@@ -56,12 +56,18 @@ import org.robolectric.RuntimeEnvironment
 class BpkFlightLegTest : BpkSnapshotTest() {
 
     @Test
-    fun `given bottom content when rendered then it sits below the flight leg row`() = snap(assertion = {
-        val row = onNodeWithText("19:50 - 22:45", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        val slot = onNodeWithTag("bottomContent", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        check(slot.top >= row.bottom)
-    }) {
-        FlightLegWithBottomContentForTest()
+    fun `given bottom content when rendered then it aligns with airport codes after the logo`() {
+        composeTestRule.setContent {
+            net.skyscanner.backpack.demo.BackpackDemoTheme {
+                FlightLegWithBottomContentForTest()
+            }
+        }
+        val codes = composeTestRule.onNodeWithText("LHR-SIN, SwissAir", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        check(slot.top >= codes.bottom)
+        check(kotlin.math.abs(slot.left - codes.left) <= 1f)
     }
 
     @Test
@@ -69,14 +75,14 @@ class BpkFlightLegTest : BpkSnapshotTest() {
     fun `given long slot content at large font scale when rendered then it does not overlap warning`() {
         withLargeFontScale {
             setComplexLegContent(rtl = false)
-            assertComplexLegBounds()
+            assertComplexLegBounds(rtl = false)
         }
     }
 
     @Test
-    fun `given slot in rtl complex leg when rendered then it does not overlap the row or warning`() {
+    fun `given slot in rtl complex leg when rendered then it aligns with codes before existing notices`() {
         setComplexLegContent(rtl = true)
-        assertComplexLegBounds()
+        assertComplexLegBounds(rtl = true)
     }
 
     @Test
@@ -283,6 +289,7 @@ class BpkFlightLegTest : BpkSnapshotTest() {
             stopsInfo = "Direct",
             duration = "7h 55m",
             contentDescription = null,
+            carrierLogoContent = { BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null) },
             bottomContent = {
                 net.skyscanner.backpack.compose.text.BpkText(
                     text = "Nearby airport",
@@ -306,6 +313,7 @@ class BpkFlightLegTest : BpkSnapshotTest() {
                         nextDayArrival = "+1",
                         operatedBy = "Partly operated by WestJet",
                         warning = "Change airports in London",
+                        carrierLogoContent = { BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null) },
                         bottomContent = {
                             net.skyscanner.backpack.compose.text.BpkText(
                                 text = "Nearby airport information with deliberately long content",
@@ -319,23 +327,21 @@ class BpkFlightLegTest : BpkSnapshotTest() {
         }
     }
 
-    private fun assertComplexLegBounds() {
-        val warning = composeTestRule.onNodeWithText("Change airports in London", useUnmergedTree = true)
+    private fun assertComplexLegBounds(rtl: Boolean) {
+        fun bounds(text: String) = composeTestRule.onNodeWithText(text, useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot
+        val codes = bounds("LHR-SIN, partly operated overnight direct flight")
+        val operatedBy = bounds("Partly operated by WestJet")
+        val warning = bounds("Change airports in London")
         val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot
-        val row = composeTestRule.onNodeWithText("19:50 - 22:45", useUnmergedTree = true)
-            .fetchSemanticsNode().boundsInRoot
-        val dayChange = composeTestRule.onNodeWithText("+1", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        val stops = composeTestRule.onNodeWithText("2 Stops", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        val duration = composeTestRule.onNodeWithText("7h 55m", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        val rowBottom = maxOf(warning.bottom, row.bottom, dayChange.bottom, stops.bottom, duration.bottom)
-        val gap = slot.top - rowBottom
         val expectedGap = net.skyscanner.backpack.compose.tokens.BpkSpacing.Sm.value * composeTestRule.density.density
         val leg = composeTestRule.onNodeWithTag("flightLeg").fetchSemanticsNode().boundsInRoot
-        check(slot.top >= rowBottom)
+        check(kotlin.math.abs(slot.top - codes.bottom - expectedGap) <= 1f)
+        check(kotlin.math.abs(if (rtl) slot.right - codes.right else slot.left - codes.left) <= 1f)
+        check(slot.bottom <= operatedBy.top)
+        check(operatedBy.bottom <= warning.top)
         check(slot.left >= leg.left && slot.right <= leg.right)
-        check(kotlin.math.abs(gap - expectedGap) <= 1f)
         composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true).assertIsDisplayed()
     }
 
