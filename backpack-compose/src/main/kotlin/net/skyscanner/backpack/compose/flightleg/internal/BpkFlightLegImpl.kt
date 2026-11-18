@@ -120,6 +120,10 @@ internal fun BpkFlightLegImpl(
                         style = BpkTheme.typography.caption,
                         color = BpkTheme.colors.textSecondary,
                     )
+                    bottomContent?.let {
+                        Spacer(modifier = Modifier.height(BpkSpacing.Sm))
+                        it()
+                    }
                     operatedBy?.let {
                         BpkText(
                             text = it,
@@ -149,10 +153,6 @@ internal fun BpkFlightLegImpl(
                         color = BpkTheme.colors.textSecondary,
                     )
                 }
-            }
-            bottomContent?.let {
-                Spacer(modifier = Modifier.height(BpkSpacing.Sm))
-                it()
             }
         }
     }
