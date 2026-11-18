@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.compose.switch
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -67,6 +69,39 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.junit.Test
 
 class BpkSwitchTest : BpkSnapshotTest() {
+
+    @Test
+    @OptIn(ExperimentalBackpackApi::class)
+    fun `given padded full width help switch when physically tapped then help and toggle are independent`() {
+        var checked by mutableStateOf(false)
+        var helpClicks = 0
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                BpkSwitch(
+                    text = "Include nearby airports",
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                    helpAction = BpkSwitchHelpAction("Help") { helpClicks++ },
+                    shouldTruncate = false,
+                    textStyle = BpkTheme.typography.label1,
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = BpkSpacing.Lg, vertical = BpkSpacing.Base)
+                        .testTag("switch"),
+                )
+            }
+        }
+
+        composeTestRule.onNodeWithContentDescription("Help").performTouchInput {
+            click(androidx.compose.ui.geometry.Offset(4.dp.toPx(), height / 2f))
+        }
+        check(helpClicks == 1) { "Info icon tap must open help" }
+        check(!checked) { "Info icon tap must not toggle the switch" }
+        composeTestRule.onNodeWithTag("switch").performTouchInput {
+            click(androidx.compose.ui.geometry.Offset(width - 26.dp.toPx(), height / 2f))
+        }
+        check(checked) { "Visual switch center tap must toggle" }
+        check(helpClicks == 1)
+    }
 
     @Test
     @OptIn(ExperimentalBackpackApi::class)
