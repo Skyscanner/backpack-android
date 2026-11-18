@@ -72,6 +72,20 @@ class BpkTooltipTest : BpkSnapshotTest() {
     }
 
     @Test
+    fun `given long title when tooltip opens then close button retains its full touch target`() {
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                TooltipSample(showInitially = true, title = "A very long translated nearby airports explanation title")
+            }
+        }
+        val close = composeTestRule.onNodeWithContentDescription("Close tooltip")
+        val bounds = close.fetchSemanticsNode().boundsInRoot
+        check(bounds.width >= 48 * composeTestRule.density.density) { "close=$bounds" }
+        close.assertIsDisplayed().performClick()
+        close.assertDoesNotExist()
+    }
+
+    @Test
     fun `given close button when clicked then tooltip dismisses and callback runs once`() {
         var dismissCalls = 0
         composeTestRule.setContent {
@@ -272,6 +286,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
     @OptIn(ExperimentalBackpackApi::class)
     private fun TooltipSample(
         showInitially: Boolean,
+        title: String = "Tooltip title",
         modifier: Modifier = Modifier,
         dismissProgrammatically: Boolean = false,
         showAgain: Boolean = false,
@@ -292,7 +307,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
             contentAlignment = Alignment.TopCenter,
         ) {
             BpkTooltip(
-                title = "Tooltip title",
+                title = title,
                 text = "Tooltip text",
                 closeAccessibilityLabel = "Close tooltip",
                 state = state,
