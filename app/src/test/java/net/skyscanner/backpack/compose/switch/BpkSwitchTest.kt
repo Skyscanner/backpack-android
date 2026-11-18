@@ -504,7 +504,8 @@ class BpkSwitchTest : BpkSnapshotTest() {
         check(help.left >= row.left && help.right <= row.right)
         check(label.left >= row.left && label.right <= row.right)
         if (rtl) check(help.right <= label.left + 1f) else check(help.left >= label.right - 1f)
-        val expectedGap = BpkSpacing.Sm.value * composeTestRule.density.density
+        // The touch target abuts the label; centring the icon supplies its visual inset.
+        val expectedGap = BpkSpacing.None.value * composeTestRule.density.density
         val actualGap = if (rtl) label.left - help.right else help.left - label.right
         check(kotlin.math.abs(actualGap - expectedGap) <= 1f)
         composeTestRule.onNodeWithTag("helpRow").performTouchInput {

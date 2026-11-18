@@ -48,8 +48,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
@@ -328,10 +328,11 @@ private fun BpkSwitchWithHelpAction(
                         onClick = helpAction.onClick,
                     )
                     .semantics { contentDescription = helpAction.contentDescription },
-                contentAlignment = Alignment.CenterStart,
+                contentAlignment = Alignment.Center,
             ) {
                 BpkIcon(
                     icon = BpkIcon.InformationCircle,
+                    size = BpkIconSize.Large,
                     contentDescription = null,
                     // Keep the 48dp hit target invisible; draw feedback around the icon like navigation actions.
                     modifier = Modifier.indication(helpInteractionSource, bpkRipple(bounded = false)),
@@ -361,23 +362,22 @@ private fun BpkSwitchWithHelpAction(
             .measure(constraints.copy(minWidth = 0, minHeight = 0))
         val help = helpMeasurable
             .measure(constraints.copy(minWidth = 0, minHeight = 0))
-        val helpGap = BpkSpacing.Sm.roundToPx()
         val label = labelMeasurable
             .measure(
                 constraints.copy(
                     minWidth = 0,
                     minHeight = 0,
-                    maxWidth = (constraints.maxWidth - switch.width - help.width - helpGap).coerceAtLeast(0),
+                    maxWidth = (constraints.maxWidth - switch.width - help.width).coerceAtLeast(0),
                 ),
             )
-        val contentWidth = label.width + helpGap + help.width + switch.width
+        val contentWidth = label.width + help.width + switch.width
         val width = (if (constraints.hasBoundedWidth) constraints.maxWidth else contentWidth)
             .coerceIn(constraints.minWidth, constraints.maxWidth)
         val height = maxOf(label.height, help.height, switch.height)
             .coerceIn(constraints.minHeight, constraints.maxHeight)
         layout(width, height) {
             label.placeRelative(0, (height - label.height) / 2)
-            help.placeRelative(label.width + helpGap, (height - help.height) / 2)
+            help.placeRelative(label.width, (height - help.height) / 2)
             switch.placeRelative(width - switch.width, when (switchAlignment) {
                 Alignment.Top -> 0
                 Alignment.Bottom -> height - switch.height
@@ -387,7 +387,7 @@ private fun BpkSwitchWithHelpAction(
     }
 }
 
-private val HelpActionTouchTarget = 48.dp
+private val HelpActionTouchTarget = BpkSpacing.Xxl + BpkSpacing.Md
 
 @Composable
 private fun RowScope.TextWithSpacer(
