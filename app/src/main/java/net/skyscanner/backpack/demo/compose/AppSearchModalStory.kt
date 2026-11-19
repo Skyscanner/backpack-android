@@ -22,12 +22,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -44,8 +46,10 @@ import net.skyscanner.backpack.compose.appsearchmodal.BpkShortcut
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.tokens.Airports
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.City
 import net.skyscanner.backpack.compose.tokens.Landmark
 import net.skyscanner.backpack.compose.tokens.UseLocation
@@ -53,6 +57,7 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.AppSearchModalComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.meta.StoryKind
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @AppSearchModalComponent
@@ -84,6 +89,31 @@ fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
 
 @Composable
 @AppSearchModalComponent
+@ComposeStory("Content with accessory", kind = StoryKind.DemoOnly)
+fun AppSearchModalStoryContentWithAccessory(modifier: Modifier = Modifier) {
+    AppSearchModalStory(result = contentResult(), accessory = ::AppSearchModalAccessory)
+}
+
+@Composable
+@AppSearchModalComponent
+@ComposeStory("Loading with accessory", kind = StoryKind.DemoOnly)
+fun AppSearchModalStoryLoadingWithAccessory(modifier: Modifier = Modifier) {
+    AppSearchModalStory(
+        result = loadingResult(),
+        inputText = stringResource(id = R.string.city_dubai),
+        accessory = ::AppSearchModalAccessory,
+    )
+}
+
+@Composable
+@AppSearchModalComponent
+@ComposeStory("Error with accessory", kind = StoryKind.DemoOnly)
+fun AppSearchModalStoryErrorWithAccessory(modifier: Modifier = Modifier) {
+    AppSearchModalStory(result = errorResult(), accessory = ::AppSearchModalAccessory)
+}
+
+@Composable
+@AppSearchModalComponent
 @ComposeStory("Prefix - Text")
 fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
     AppSearchModalStory(
@@ -98,19 +128,27 @@ fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
 @Composable
 private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
+    accessory: (@Composable () -> Unit)? = null,
     modifier: Modifier = Modifier,
     inputText: String = "",
     prefix: Prefix = Prefix.Icon(),
 ) {
     Column(modifier.fillMaxSize()) {
-        DefaultAppSearchModalSample(result = result, inputText = inputText, prefix = prefix)
+        DefaultAppSearchModalSample(
+            result = result,
+            inputText = inputText,
+            prefix = prefix,
+            accessory = accessory,
+        )
     }
 }
 
 @Composable
+@OptIn(ExperimentalBackpackApi::class)
 internal fun DefaultAppSearchModalSample(
     result: BpkAppSearchModalResult,
     inputText: String,
+    accessory: (@Composable () -> Unit)? = null,
     modifier: Modifier = Modifier,
     prefix: Prefix = Prefix.Icon(),
 ) {
@@ -122,21 +160,67 @@ internal fun DefaultAppSearchModalSample(
             onClick = { showModal.value = true },
         )
         if (showModal.value) {
-            BpkAppSearchModal(
-                title = stringResource(id = R.string.destination),
+            AppSearchModal(
+                result = result,
                 inputText = destination.value,
-                inputHint = stringResource(id = R.string.text_field_hint),
-                results = result,
-                closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
-                onClose = { showModal.value = false },
                 onInputChanged = { destination.value = it },
-                clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
-                    destination.value = ""
-                },
+                onClose = { showModal.value = false },
                 prefix = prefix,
+                accessory = accessory,
             )
         }
     }
+}
+
+@Composable
+@OptIn(ExperimentalBackpackApi::class)
+private fun AppSearchModal(
+    result: BpkAppSearchModalResult,
+    inputText: String,
+    onInputChanged: (String) -> Unit,
+    onClose: () -> Unit,
+    prefix: Prefix,
+    accessory: (@Composable () -> Unit)?,
+) {
+    val clearAction = BpkClearAction(stringResource(id = R.string.text_field_clear_action_description)) {
+        onInputChanged("")
+    }
+    if (accessory == null) {
+        BpkAppSearchModal(
+            title = stringResource(id = R.string.destination),
+            inputText = inputText,
+            inputHint = stringResource(id = R.string.text_field_hint),
+            results = result,
+            closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+            onClose = onClose,
+            onInputChanged = onInputChanged,
+            clearAction = clearAction,
+            prefix = prefix,
+        )
+    } else {
+        BpkAppSearchModal(
+            title = stringResource(id = R.string.destination),
+            inputText = inputText,
+            inputHint = stringResource(id = R.string.text_field_hint),
+            results = result,
+            closeAccessibilityLabel = stringResource(id = R.string.navigation_close),
+            onClose = onClose,
+            onInputChanged = onInputChanged,
+            clearAction = clearAction,
+            accessory = accessory,
+            prefix = prefix,
+        )
+    }
+}
+
+@Composable
+private fun AppSearchModalAccessory() {
+    BpkText(
+        text = stringResource(id = R.string.generic_message),
+        modifier = Modifier
+            .padding(horizontal = BpkSpacing.Base)
+            .testTag("appSearchModalAccessory"),
+    )
 }
 
 @Composable

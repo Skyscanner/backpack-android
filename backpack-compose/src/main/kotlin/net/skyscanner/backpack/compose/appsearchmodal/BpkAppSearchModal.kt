@@ -30,6 +30,7 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.searchinputsummary.Prefix
 import net.skyscanner.backpack.compose.textfield.BpkClearAction
 import net.skyscanner.backpack.compose.utils.BpkBehaviouralEventWrapper
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 sealed class BpkAppSearchModalResult {
     data class Content(
@@ -81,6 +82,73 @@ fun BpkAppSearchModal(
     prefix: Prefix = Prefix.Icon(),
     behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
 ) {
+    BpkAppSearchModalContent(
+        title = title,
+        inputText = inputText,
+        inputHint = inputHint,
+        results = results,
+        closeAccessibilityLabel = closeAccessibilityLabel,
+        onInputChanged = onInputChanged,
+        onClose = onClose,
+        clearAction = clearAction,
+        accessory = null,
+        modifier = modifier,
+        state = state,
+        prefix = prefix,
+        behaviouralEventWrapper = behaviouralEventWrapper,
+    )
+}
+
+@ExperimentalBackpackApi
+@Composable
+fun BpkAppSearchModal(
+    title: String,
+    inputText: String,
+    inputHint: String,
+    results: BpkAppSearchModalResult,
+    closeAccessibilityLabel: String,
+    onInputChanged: (String) -> Unit,
+    onClose: () -> Unit,
+    clearAction: BpkClearAction,
+    accessory: (@Composable () -> Unit)?,
+    modifier: Modifier = Modifier,
+    state: BpkModalState = rememberBpkModalState(),
+    prefix: Prefix = Prefix.Icon(),
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper? = null,
+) {
+    BpkAppSearchModalContent(
+        title = title,
+        inputText = inputText,
+        inputHint = inputHint,
+        results = results,
+        closeAccessibilityLabel = closeAccessibilityLabel,
+        onInputChanged = onInputChanged,
+        onClose = onClose,
+        clearAction = clearAction,
+        accessory = accessory,
+        modifier = modifier,
+        state = state,
+        prefix = prefix,
+        behaviouralEventWrapper = behaviouralEventWrapper,
+    )
+}
+
+@Composable
+private fun BpkAppSearchModalContent(
+    title: String,
+    inputText: String,
+    inputHint: String,
+    results: BpkAppSearchModalResult,
+    closeAccessibilityLabel: String,
+    onInputChanged: (String) -> Unit,
+    onClose: () -> Unit,
+    clearAction: BpkClearAction,
+    accessory: (@Composable () -> Unit)?,
+    modifier: Modifier,
+    state: BpkModalState,
+    prefix: Prefix,
+    behaviouralEventWrapper: BpkBehaviouralEventWrapper?,
+) {
     BpkModal(
         navIcon = NavIcon.Close(
             contentDescription = closeAccessibilityLabel,
@@ -98,6 +166,7 @@ fun BpkAppSearchModal(
             results = results,
             onInputChanged = onInputChanged,
             clearAction = clearAction,
+            accessory = accessory,
             prefix = prefix,
             behaviouralEventWrapper = behaviouralEventWrapper,
         )
