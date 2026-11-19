@@ -335,7 +335,7 @@ private fun BpkSwitchWithHelpAction(
                     contentDescription = null,
                     // Keep the 48dp hit target invisible; draw feedback around the icon like navigation actions.
                     modifier = Modifier.indication(helpInteractionSource, bpkRipple(bounded = false)),
-                    tint = BpkTheme.colors.textSecondary,
+                    tint = if (style == BpkSwitchStyle.OnContrast) BpkTheme.colors.textOnDark else BpkTheme.colors.textSecondary,
                 )
             }
         }

@@ -39,9 +39,9 @@ shared modal header's intentionally unscaled title while keeping the close contr
 visible and accessible. Use caller-localised text for the help label, title, message,
 and close content description.
 
-The help target has a `BpkSpacing.Sm` gap after the label and remains enabled when the
-switch is disabled, because help is informational. Both the help target and switch are
-vertically centred as in the stable switch row.
+The help touch target sits next to the label; the centred icon provides visual spacing.
+Help remains enabled when the switch is disabled because it is informational. The help
+target is vertically centred, and the switch follows the requested switch alignment.
 
 For the experimental help overload, a caller `modifier` decorates the whole help-row
 layout. It does not identify the nested Switch semantics node: use the switch label to

@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.switch
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -244,6 +245,20 @@ class BpkSwitchTest : BpkSnapshotTest() {
     @Test
     fun switchWithHelp() = snap(width = 320.dp) {
         SwitchWithHelpExample()
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    @OptIn(ExperimentalBackpackApi::class)
+    fun switchWithHelpOnContrast() = snap(width = 320.dp) {
+        BpkSwitch(
+            text = "Help on contrast",
+            checked = false,
+            onCheckedChange = {},
+            helpAction = BpkSwitchHelpAction("Help") {},
+            style = BpkSwitchStyle.OnContrast,
+            modifier = Modifier.fillMaxWidth().background(BpkTheme.colors.surfaceContrast).padding(BpkSpacing.Base),
+        )
     }
 
     @Test
