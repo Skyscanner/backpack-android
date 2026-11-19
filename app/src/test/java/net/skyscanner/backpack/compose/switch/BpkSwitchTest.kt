@@ -41,6 +41,8 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -170,8 +172,9 @@ class BpkSwitchTest : BpkSnapshotTest() {
         composeTestRule.onNodeWithText("Wifi")
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch))
         composeTestRule.onNodeWithTag("switch").assertIsDisplayed()
-        composeTestRule.onAllNodes(SemanticsMatcher.keyIsDefined(SemanticsActions.OnClick))
-            .assertCountEquals(2)
+        composeTestRule.onAllNodes(
+            SemanticsMatcher.keyIsDefined(SemanticsActions.OnClick) and hasAnyAncestor(hasTestTag("switch")),
+        ).assertCountEquals(2)
     }
 
     @Test
