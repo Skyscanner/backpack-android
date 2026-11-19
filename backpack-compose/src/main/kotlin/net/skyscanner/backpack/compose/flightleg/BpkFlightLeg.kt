@@ -25,6 +25,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import net.skyscanner.backpack.compose.flightleg.internal.BpkFlightLegImpl
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 fun BpkFlightLeg(
@@ -50,6 +51,39 @@ fun BpkFlightLeg(
         stopsInfo = stopsInfo,
         duration = duration,
         contentDescription = contentDescription,
+        bottomContent = null,
+        modifier = modifier,
+        nextDayArrival = nextDayArrival,
+        highlightStopsInfo = highlightStopsInfo,
+        operatedBy = operatedBy,
+        warning = warning,
+        carrierLogoContent = carrierLogoContent,
+    )
+}
+
+@ExperimentalBackpackApi
+@Composable
+fun BpkFlightLeg(
+    departureArrivalTime: String,
+    description: AnnotatedString,
+    stopsInfo: String,
+    duration: String,
+    contentDescription: String?,
+    bottomContent: (@Composable () -> Unit)?,
+    modifier: Modifier = Modifier,
+    nextDayArrival: String? = null,
+    highlightStopsInfo: Boolean = false,
+    operatedBy: String? = null,
+    warning: String? = null,
+    carrierLogoContent: @Composable (BoxScope.() -> Unit)? = null,
+) {
+    BpkFlightLegImpl(
+        departureArrivalTime = departureArrivalTime,
+        description = description,
+        stopsInfo = stopsInfo,
+        duration = duration,
+        contentDescription = contentDescription,
+        bottomContent = bottomContent,
         modifier = modifier,
         nextDayArrival = nextDayArrival,
         highlightStopsInfo = highlightStopsInfo,
