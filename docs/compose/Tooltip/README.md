@@ -32,3 +32,9 @@ BpkTooltip(
 ```
 
 Use `BpkTooltipAnchorPosition.BelowEnd` to align a rich tooltip beneath the logical end of its anchor. End alignment follows the reading direction and keeps the popup inside the window. Long titles wrap while preserving the close button’s touch target.
+
+### Example
+
+| Day | Night |
+| --- | --- |
+| ![Tooltip in day mode](screenshots/default.png) | ![Tooltip in night mode](screenshots/default_dm.png) |
