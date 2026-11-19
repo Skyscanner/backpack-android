@@ -36,7 +36,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
@@ -287,12 +286,12 @@ private fun BpkSwitchWithHelpAction(
     val helpInteractionSource = remember { MutableInteractionSource() }
     val currentChecked = rememberUpdatedState(checked)
     val currentOnCheckedChange = rememberUpdatedState(onCheckedChange)
-    Layout(
-        modifier = modifier,
-        content = {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
+                    .weight(1f, fill = false)
                     .applyIf(onCheckedChange != null) {
                         toggleable(
                             value = checked,
@@ -339,51 +338,22 @@ private fun BpkSwitchWithHelpAction(
                     tint = BpkTheme.colors.textSecondary,
                 )
             }
-            BpkSwitchImpl(
-                modifier = Modifier
-                    .applyIf(onCheckedChange != null) {
-                        pointerInput(enabled) {
-                            if (enabled) {
-                                detectTapGestures { currentOnCheckedChange.value!!(!currentChecked.value) }
-                            }
-                        }
-                    },
-                checked = checked,
-                enabled = enabled,
-                interactionSource = interactionSource,
-                style = style,
-            )
-        },
-    ) { measurables, constraints ->
-        val labelMeasurable = measurables[0]
-        val helpMeasurable = measurables[1]
-        val switchMeasurable = measurables[2]
-        val switch = switchMeasurable
-            .measure(constraints.copy(minWidth = 0, minHeight = 0))
-        val help = helpMeasurable
-            .measure(constraints.copy(minWidth = 0, minHeight = 0))
-        val label = labelMeasurable
-            .measure(
-                constraints.copy(
-                    minWidth = 0,
-                    minHeight = 0,
-                    maxWidth = (constraints.maxWidth - switch.width - help.width).coerceAtLeast(0),
-                ),
-            )
-        val contentWidth = label.width + help.width + switch.width
-        val width = (if (constraints.hasBoundedWidth) constraints.maxWidth else contentWidth)
-            .coerceIn(constraints.minWidth, constraints.maxWidth)
-        val height = maxOf(label.height, help.height, switch.height)
-            .coerceIn(constraints.minHeight, constraints.maxHeight)
-        layout(width, height) {
-            label.placeRelative(0, (height - label.height) / 2)
-            help.placeRelative(label.width, (height - help.height) / 2)
-            switch.placeRelative(width - switch.width, when (switchAlignment) {
-                Alignment.Top -> 0
-                Alignment.Bottom -> height - switch.height
-                else -> (height - switch.height) / 2
-            })
         }
+        BpkSwitchImpl(
+            modifier = Modifier
+                .align(switchAlignment)
+                .applyIf(onCheckedChange != null) {
+                    pointerInput(enabled) {
+                        if (enabled) {
+                            detectTapGestures { currentOnCheckedChange.value!!(!currentChecked.value) }
+                        }
+                    }
+                },
+            checked = checked,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            style = style,
+        )
     }
 }
 
