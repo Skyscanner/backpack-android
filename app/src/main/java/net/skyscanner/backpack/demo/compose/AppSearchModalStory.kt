@@ -63,42 +63,43 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
 @AppSearchModalComponent
 @ComposeStory("Content")
 fun AppSearchModalStoryContent(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = contentResult())
+    AppSearchModalStory(modifier = modifier, result = contentResult())
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Content-InputText", kind = StoryKind.DemoOnly)
 fun AppSearchModalStoryContentInputText(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = contentResult(), inputText = stringResource(id = R.string.city_rio))
+    AppSearchModalStory(modifier = modifier, result = contentResult(), inputText = stringResource(id = R.string.city_rio))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Loading")
 fun AppSearchModalStoryLoading(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
+    AppSearchModalStory(modifier = modifier, result = loadingResult(), inputText = stringResource(id = R.string.city_dubai))
 }
 
 @Composable
 @AppSearchModalComponent
 @ComposeStory("Error")
 fun AppSearchModalStoryError(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = errorResult())
+    AppSearchModalStory(modifier = modifier, result = errorResult())
 }
 
 @Composable
 @AppSearchModalComponent
-@ComposeStory("Content with accessory", kind = StoryKind.DemoOnly)
+@ComposeStory("Content with accessory")
 fun AppSearchModalStoryContentWithAccessory(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = contentResult(), accessory = ::AppSearchModalAccessory)
+    AppSearchModalStory(modifier = modifier, result = contentResult(), accessory = ::AppSearchModalAccessory)
 }
 
 @Composable
 @AppSearchModalComponent
-@ComposeStory("Loading with accessory", kind = StoryKind.DemoOnly)
+@ComposeStory("Loading with accessory")
 fun AppSearchModalStoryLoadingWithAccessory(modifier: Modifier = Modifier) {
     AppSearchModalStory(
+        modifier = modifier,
         result = loadingResult(),
         inputText = stringResource(id = R.string.city_dubai),
         accessory = ::AppSearchModalAccessory,
@@ -109,7 +110,7 @@ fun AppSearchModalStoryLoadingWithAccessory(modifier: Modifier = Modifier) {
 @AppSearchModalComponent
 @ComposeStory("Error with accessory", kind = StoryKind.DemoOnly)
 fun AppSearchModalStoryErrorWithAccessory(modifier: Modifier = Modifier) {
-    AppSearchModalStory(result = errorResult(), accessory = ::AppSearchModalAccessory)
+    AppSearchModalStory(modifier = modifier, result = errorResult(), accessory = ::AppSearchModalAccessory)
 }
 
 @Composable
@@ -117,6 +118,7 @@ fun AppSearchModalStoryErrorWithAccessory(modifier: Modifier = Modifier) {
 @ComposeStory("Prefix - Text")
 fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
     AppSearchModalStory(
+        modifier = modifier,
         result = contentResult(),
         inputText = stringResource(id = R.string.city_dubai),
         prefix = Prefix.Text(
@@ -128,8 +130,8 @@ fun AppSearchModalStoryPrefixText(modifier: Modifier = Modifier) {
 @Composable
 private fun AppSearchModalStory(
     result: BpkAppSearchModalResult,
-    accessory: (@Composable () -> Unit)? = null,
     modifier: Modifier = Modifier,
+    accessory: (@Composable () -> Unit)? = null,
     inputText: String = "",
     prefix: Prefix = Prefix.Icon(),
 ) {
@@ -144,12 +146,11 @@ private fun AppSearchModalStory(
 }
 
 @Composable
-@OptIn(ExperimentalBackpackApi::class)
 internal fun DefaultAppSearchModalSample(
     result: BpkAppSearchModalResult,
     inputText: String,
-    accessory: (@Composable () -> Unit)? = null,
     modifier: Modifier = Modifier,
+    accessory: (@Composable () -> Unit)? = null,
     prefix: Prefix = Prefix.Icon(),
 ) {
     val destination = remember { mutableStateOf(inputText) }

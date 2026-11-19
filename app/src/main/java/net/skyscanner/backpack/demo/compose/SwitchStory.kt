@@ -54,6 +54,7 @@ import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
@@ -100,6 +101,13 @@ fun SwitchStoryDefaultDefault(modifier: Modifier = Modifier) {
         EmptyContentWithSwitchExample()
         SwitchWithHelpExample()
     }
+}
+
+@Composable
+@SwitchComponent
+@ComposeStory("With help", kind = StoryKind.ScreenshotOnly)
+fun SwitchWithHelpScreenshot(modifier: Modifier = Modifier) {
+    SwitchWithHelpExample(modifier = modifier.padding(BpkSpacing.Base))
 }
 
 @Composable
