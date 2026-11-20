@@ -93,7 +93,7 @@ internal fun BpkBadgeImpl(
                     )
                 }?.let {
                     Modifier
-                        .padding(end = it)
+                        .padding(start = BpkSpacing.Md, end = it)
                         .padding(vertical = BpkSpacing.Sm)
                 } ?: Modifier.padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
             ),
@@ -182,17 +182,22 @@ private val BpkBadgeType.contentColor: Color
 
 private val BpkBadgeType.backgroundColor: Color
     @Composable
-    get() = when (this) {
-        BpkBadgeType.Normal -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Subtle -> BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
-        BpkBadgeType.Success -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Warning -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Destructive -> BpkConfiguration.badgeConfig?.backgroundColor ?: BpkBadgeColors.backgroundNormal
-        BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
-        BpkBadgeType.Outline -> Color.Transparent
-        BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
-        BpkBadgeType.Loyalty -> BpkTheme.colors.statusLoyaltySpot
+    get() {
+        // Use the configured background colour only when it has been explicitly set (non-transparent),
+        // otherwise fall back to the theme-aware default badge background.
+        val configuredBackground = BpkConfiguration.badgeConfig.backgroundColor.takeIf { it != Color.Transparent }
+        return when (this) {
+            BpkBadgeType.Normal -> configuredBackground ?: BpkBadgeColors.backgroundNormal
+            BpkBadgeType.Subtle -> BpkBadgeColors.backgroundNormal
+            BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
+            BpkBadgeType.Success -> configuredBackground ?: BpkBadgeColors.backgroundNormal
+            BpkBadgeType.Warning -> configuredBackground ?: BpkBadgeColors.backgroundNormal
+            BpkBadgeType.Destructive -> configuredBackground ?: BpkBadgeColors.backgroundNormal
+            BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
+            BpkBadgeType.Outline -> Color.Transparent
+            BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
+            BpkBadgeType.Loyalty -> BpkTheme.colors.statusLoyaltySpot
+        }
     }
 
 private val BpkBadgeType.borderColor: Color
