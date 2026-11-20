@@ -99,7 +99,8 @@ BpkModal(
 
 By default the modal slides in from and out to the bottom. If the host already animates the screen the modal belongs to
 (for example a navigation transition), set `animated = false` so the modal doesn't animate on top of it. The modal then
-appears and disappears immediately; `modalState.hide()` and `onDismiss` behave the same way.
+appears and disappears immediately: `BpkModalState.hide()` and `onDismiss` are still invoked, but right away instead of after
+the exit animation.
 
 ```Kotlin
 BpkModal(

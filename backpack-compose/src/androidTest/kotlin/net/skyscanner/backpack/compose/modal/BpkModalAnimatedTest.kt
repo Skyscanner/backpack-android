@@ -18,13 +18,16 @@
 
 package net.skyscanner.backpack.compose.modal
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
@@ -37,21 +40,21 @@ class BpkModalAnimatedTest {
     private val dismissCount = AtomicInteger(0)
 
     @Test
-    fun givenAnimated_whenCloseClicked_thenOnDismissOnlyCalledOnceAnimationFinishes() {
+    fun givenAnimated_whenCloseClicked_thenOnDismissIsCalledOnceAfterTheAnimationFinishes() {
         composeTestRule.mainClock.autoAdvance = false
         setContent(animated = true)
         composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs + FRAME_MS)
 
         composeTestRule.onNodeWithContentDescription(CLOSE).performClick()
-        composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 2)
+        composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs - FRAME_MS * 2)
         assertEquals(0, dismissCount.get())
 
-        composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs.toLong())
-        assertTrue(dismissCount.get() > 0)
+        composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 4)
+        assertEquals(1, dismissCount.get())
     }
 
     @Test
-    fun givenNotAnimated_whenCloseClicked_thenOnDismissCalledWithoutWaitingForAnimation() {
+    fun givenNotAnimated_whenCloseClicked_thenOnDismissIsCalledOnceWithoutWaitingForAnimation() {
         composeTestRule.mainClock.autoAdvance = false
         setContent(animated = false)
         composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 2)
@@ -59,19 +62,27 @@ class BpkModalAnimatedTest {
         composeTestRule.onNodeWithContentDescription(CLOSE).performClick()
         composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 2)
 
-        assertTrue(dismissCount.get() > 0)
+        assertEquals(1, dismissCount.get())
     }
 
     private fun setContent(animated: Boolean) {
         composeTestRule.setContent {
             BpkTheme {
-                val state = rememberBpkModalState()
-                BpkModal(
-                    state = state,
-                    navIcon = NavIcon.Close(contentDescription = CLOSE, onClick = { state.hide() }),
-                    onDismiss = { dismissCount.incrementAndGet() },
-                    animated = animated,
-                ) {}
+                // Like real callers, remove the modal from the composition once it has been dismissed. BpkModal calls
+                // onDismiss on every recomposition while it is hidden, so this is what makes the call count exact.
+                var showModal by remember { mutableStateOf(true) }
+                if (showModal) {
+                    val state = rememberBpkModalState()
+                    BpkModal(
+                        state = state,
+                        navIcon = NavIcon.Close(contentDescription = CLOSE, onClick = { state.hide() }),
+                        onDismiss = {
+                            dismissCount.incrementAndGet()
+                            showModal = false
+                        },
+                        animated = animated,
+                    ) {}
+                }
             }
         }
     }

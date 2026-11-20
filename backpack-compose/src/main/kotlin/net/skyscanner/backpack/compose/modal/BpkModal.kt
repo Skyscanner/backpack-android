@@ -39,7 +39,8 @@ enum class ModalStyle {
  *
  * @param animated whether the modal slides in and out vertically. Set to `false` when the host already animates the
  * screen the modal belongs to (e.g. a navigation transition) and the modal must not animate on top of it. When `false`
- * the modal appears and disappears immediately, but [BpkModalState.hide] and [onDismiss] behave exactly the same.
+ * the modal appears and disappears immediately: [BpkModalState.hide] and [onDismiss] are still invoked, but right away
+ * instead of after the exit animation.
  */
 @Composable
 @Suppress("ModifierMissing")
