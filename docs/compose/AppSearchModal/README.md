@@ -134,3 +134,15 @@ BpkAppSearchModal(
     prefix = Prefix.Text("Your text here")
 )
 ```
+
+### Content with accessory
+
+| Day | Night |
+| --- | --- |
+| ![Content with accessory in day mode](screenshots/content-with-accessory.png) | ![Content with accessory in night mode](screenshots/content-with-accessory_dm.png) |
+
+### Loading with accessory
+
+| Day | Night |
+| --- | --- |
+| ![Loading with accessory in day mode](screenshots/loading-with-accessory.png) | ![Loading with accessory in night mode](screenshots/loading-with-accessory_dm.png) |

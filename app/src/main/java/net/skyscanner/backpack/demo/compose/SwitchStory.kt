@@ -22,6 +22,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,12 +34,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkModalBottomSheetCloseAction
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkModalBottomSheetState
 import net.skyscanner.backpack.compose.switch.BpkSwitch
+import net.skyscanner.backpack.compose.switch.BpkSwitchHelpAction
 import net.skyscanner.backpack.compose.switch.BpkSwitchStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -48,6 +54,8 @@ import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SwitchComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.meta.StoryKind
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @SwitchComponent
@@ -91,6 +99,73 @@ fun SwitchStoryDefaultDefault(modifier: Modifier = Modifier) {
         CustomContentSwitchExample()
         SwitchWithIconExample()
         EmptyContentWithSwitchExample()
+        SwitchWithHelpExample()
+    }
+}
+
+@Composable
+@SwitchComponent
+@ComposeStory("With help", kind = StoryKind.ScreenshotOnly)
+fun SwitchWithHelpScreenshot(modifier: Modifier = Modifier) {
+    SwitchWithHelpExample(modifier = modifier.padding(BpkSpacing.Base))
+}
+
+@Composable
+@OptIn(ExperimentalBackpackApi::class)
+internal fun SwitchWithHelpExample(
+    modifier: Modifier = Modifier,
+    longHelpContent: Boolean = true,
+    showHelpInitially: Boolean = false,
+) {
+    var checked by remember { mutableStateOf(false) }
+    var showHelp by remember { mutableStateOf(showHelpInitially) }
+    val sheetState = rememberBpkModalBottomSheetState(skipPartiallyExpanded = true)
+    BpkSwitch(
+        text = stringResource(R.string.toggle_default),
+        checked = checked,
+        onCheckedChange = { checked = it },
+        helpAction = BpkSwitchHelpAction(
+            contentDescription = stringResource(R.string.toggle_help),
+            onClick = { showHelp = true },
+        ),
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("switchWithHelp"),
+        shouldTruncate = false,
+        textStyle = BpkTheme.typography.label2,
+    )
+    if (showHelp) {
+        BpkModalBottomSheet(
+            onDismissRequest = { showHelp = false },
+            state = sheetState,
+            closeButton = BpkModalBottomSheetCloseAction.Close(
+                contentDescription = stringResource(R.string.generic_dismiss),
+                onClick = { showHelp = false },
+            ),
+        ) {
+            Column(
+                modifier = Modifier
+                    .heightIn(max = BpkSpacing.Xxl * 8)
+                    .verticalScroll(rememberScrollState())
+                    .testTag("switchHelpScroll"),
+            ) {
+                BpkText(
+                    text = stringResource(R.string.toggle_help_title),
+                    style = BpkTheme.typography.heading5,
+                    modifier = Modifier
+                        .padding(BpkSpacing.Base)
+                        .testTag("switchHelpTitle"),
+                )
+                BpkText(
+                    text = stringResource(
+                        if (longHelpContent) R.string.toggle_help_long_message else R.string.toggle_help_message,
+                    ),
+                    modifier = Modifier
+                        .padding(BpkSpacing.Base)
+                        .testTag("switchHelpMessage"),
+                )
+            }
+        }
     }
 }
 
