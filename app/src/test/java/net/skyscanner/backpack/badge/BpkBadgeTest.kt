@@ -23,6 +23,7 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
+import org.junit.Assert.assertEquals
 import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,6 +42,7 @@ class BpkBadgeTest(flavour: Flavor) :
             this.type = this@BpkBadgeTest.type
             text = "Badge"
         }
+        assertBadgePadding(badge)
         snap(badge, background = type.rowBackground() ?: R.color.bpkCanvas)
     }
 
@@ -55,6 +57,7 @@ class BpkBadgeTest(flavour: Flavor) :
             text = "Badge"
             icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick_circle_sm)
         }
+        assertBadgePadding(badge)
         snap(badge, background = type.rowBackground() ?: R.color.bpkCanvas)
     }
 
@@ -68,7 +71,18 @@ class BpkBadgeTest(flavour: Flavor) :
             this.type = this@BpkBadgeTest.type
             text = "Badge"
         }
+        assertBadgePadding(badge)
         snap(badge, background = type.rowBackground() ?: R.color.bpkCanvas)
+    }
+
+    private fun assertBadgePadding(badge: BpkBadge) {
+        val horizontalPadding = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        val verticalPadding = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+        assertEquals("Badge start padding", horizontalPadding, badge.paddingStart)
+        assertEquals("Badge end padding", horizontalPadding, badge.paddingEnd)
+        assertEquals("Badge top padding", verticalPadding, badge.paddingTop)
+        assertEquals("Badge bottom padding", verticalPadding, badge.paddingBottom)
+        assertEquals("Badge icon gap", verticalPadding, badge.compoundDrawablePadding)
     }
 
     companion object {

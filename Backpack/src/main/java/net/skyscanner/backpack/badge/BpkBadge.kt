@@ -189,7 +189,7 @@ open class BpkBadge @JvmOverloads constructor(
         }?.let {
             val horizontalPadding = it.endPadding.value * resources.displayMetrics.density
             this.setPaddingRelative(
-                0, paddingSm, horizontalPadding.toInt(), paddingSm,
+                paddingMd, paddingSm, horizontalPadding.toInt(), paddingSm,
             )
         } ?: run {
             this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
@@ -199,7 +199,10 @@ open class BpkBadge @JvmOverloads constructor(
         this.setTextColor(context.getColor(type.textColor))
 
         // Set background
-        val defaultBgColour = BpkConfiguration.badgeConfig?.backgroundColor?.toArgb()?.let { ColorStateList.valueOf(it) }
+        // Use the configured background colour only when it has been explicitly set (non-transparent),
+        // otherwise fall back to the type's default badge background colour.
+        val defaultBgColour = BpkConfiguration.badgeConfig.backgroundColor.toArgb().takeIf { it != Color.TRANSPARENT }
+            ?.let { ColorStateList.valueOf(it) }
             ?: context.getColorStateList(type.bgColor)
         when (type) {
             Type.Outline -> setBackground(
