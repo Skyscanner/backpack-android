@@ -34,6 +34,14 @@ enum class ModalStyle {
     SurfaceContrast,
 }
 
+/**
+ * A fullscreen modal.
+ *
+ * @param animated whether the modal slides in and out vertically. Set to `false` when the host already animates the
+ * screen the modal belongs to (e.g. a navigation transition) and the modal must not animate on top of it. When `false`
+ * the modal appears and disappears immediately: [BpkModalState.hide] and [onDismiss] are still invoked, but right away
+ * instead of after the exit animation.
+ */
 @Composable
 @Suppress("ModifierMissing")
 fun BpkModal(
@@ -45,6 +53,7 @@ fun BpkModal(
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
+    animated: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
     BpkModalImpl(
@@ -56,6 +65,7 @@ fun BpkModal(
         action = action,
         title = title,
         onDismiss = onDismiss,
+        animated = animated,
         content = content,
     )
 }
