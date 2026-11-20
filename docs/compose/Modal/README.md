@@ -95,6 +95,20 @@ BpkModal(
 )
 ```
 
+### Animation
+
+By default the modal slides in from and out to the bottom. If the host already animates the screen the modal belongs to
+(for example a navigation transition), set `animated = false` so the modal doesn't animate on top of it. The modal then
+appears and disappears immediately; `modalState.hide()` and `onDismiss` behave the same way.
+
+```Kotlin
+BpkModal(
+    navIcon = NavIcon.Close(...),
+    animated = false,
+    ...
+)
+```
+
 ### Navigation Bar State
 
 The modal's navigation bar state can be customized using the `navBarState` parameter:
