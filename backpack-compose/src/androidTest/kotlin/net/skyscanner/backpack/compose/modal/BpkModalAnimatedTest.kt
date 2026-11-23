@@ -46,10 +46,12 @@ class BpkModalAnimatedTest {
         composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs + FRAME_MS)
 
         composeTestRule.onNodeWithContentDescription(CLOSE).performClick()
-        composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs - FRAME_MS * 2)
+        // Just before the exit animation ends, onDismiss must not have been called yet.
+        composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs - BOUNDARY_MARGIN_MS)
         assertEquals(0, dismissCount.get())
 
-        composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 4)
+        // Just after the exit animation ends, onDismiss must have been called exactly once.
+        composeTestRule.mainClock.advanceTimeBy(BOUNDARY_MARGIN_MS * 2)
         assertEquals(1, dismissCount.get())
     }
 
@@ -89,6 +91,8 @@ class BpkModalAnimatedTest {
 
     private companion object {
         const val CLOSE = "Close"
+        // Compose test clock frame interval; the clock is virtual so this is deterministic across devices.
         const val FRAME_MS = 16L
+        const val BOUNDARY_MARGIN_MS = FRAME_MS * 2
     }
 }
