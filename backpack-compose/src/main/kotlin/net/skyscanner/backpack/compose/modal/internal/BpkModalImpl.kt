@@ -22,6 +22,8 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -63,6 +65,7 @@ internal fun BpkModalImpl(
     action: TextAction?,
     title: String?,
     onDismiss: (() -> Unit)?,
+    animated: Boolean,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val isVisible = state.isVisible
@@ -121,8 +124,8 @@ internal fun BpkModalImpl(
 
         AnimatedVisibility(
             visibleState = isVisible,
-            enter = slideInVertically(tween(ModalAnimationDurationMs)) { it },
-            exit = slideOutVertically(tween(ModalAnimationDurationMs)) { it },
+            enter = if (animated) slideInVertically(tween(ModalAnimationDurationMs)) { it } else EnterTransition.None,
+            exit = if (animated) slideOutVertically(tween(ModalAnimationDurationMs)) { it } else ExitTransition.None,
             modifier = modifier.fillMaxSize(),
         ) {
             Column(modifier = Modifier.fillMaxSize().background(backgroundColor)) {
