@@ -43,12 +43,6 @@ class BpkConfigurationTest {
     }
 
     @Test
-    fun `badgeConfig is initialised by default`() {
-        assertNotNull(BpkConfiguration.badgeConfig)
-        assertEquals(BpkConfiguration.badgeConfig, BpkConfiguration.BpkExperimentalComponent.BpkBadge())
-    }
-
-    @Test
     fun `typographySet is VDL_2 by default`() {
         assertEquals(BpkConfiguration.BpkTypographySet.VDL_2, BpkConfiguration.typographySet)
     }

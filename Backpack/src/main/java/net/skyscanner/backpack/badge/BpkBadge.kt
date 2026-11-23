@@ -28,9 +28,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.graphics.toArgb
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.text.BpkText
 
 open class BpkBadge @JvmOverloads constructor(
@@ -184,23 +182,13 @@ open class BpkBadge @JvmOverloads constructor(
         // set padding
         val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
         val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
-        BpkConfiguration.badgeConfig?.takeIf {
-            type !in listOf(Type.Inverse, Type.Strong, Type.Outline, Type.Brand, Type.Subtle)
-        }?.let {
-            val horizontalPadding = it.endPadding.value * resources.displayMetrics.density
-            this.setPaddingRelative(
-                0, paddingSm, horizontalPadding.toInt(), paddingSm,
-            )
-        } ?: run {
-            this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
-        }
+        this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
         // set Text color
         this.setTextColor(context.getColor(type.textColor))
 
         // Set background
-        val defaultBgColour = BpkConfiguration.badgeConfig?.backgroundColor?.toArgb()?.let { ColorStateList.valueOf(it) }
-            ?: context.getColorStateList(type.bgColor)
+        val defaultBgColour = context.getColorStateList(type.bgColor)
         when (type) {
             Type.Outline -> setBackground(
                 solid = ColorStateList.valueOf(Color.TRANSPARENT),
