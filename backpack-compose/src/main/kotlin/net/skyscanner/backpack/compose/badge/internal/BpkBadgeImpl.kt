@@ -50,7 +50,6 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.internal.BpkBadgeColors
-import net.skyscanner.backpack.configuration.BpkConfiguration
 import net.skyscanner.backpack.common.R as CommonR
 
 @Composable
@@ -81,22 +80,7 @@ internal fun BpkBadgeImpl(
                     )
                 } else Modifier,
             )
-            .then(
-                BpkConfiguration.badgeConfig?.endPadding?.takeIf {
-                    type !in listOf(
-                        BpkBadgeType.Inverse,
-                        BpkBadgeType.Strong,
-                        BpkBadgeType.Outline,
-                        BpkBadgeType.Brand,
-                        BpkBadgeType.Subtle,
-                        BpkBadgeType.Loyalty,
-                    )
-                }?.let {
-                    Modifier
-                        .padding(start = BpkSpacing.Md, end = it)
-                        .padding(vertical = BpkSpacing.Sm)
-                } ?: Modifier.padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
-            ),
+            .padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Sm),
         horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -182,22 +166,18 @@ private val BpkBadgeType.contentColor: Color
 
 private val BpkBadgeType.backgroundColor: Color
     @Composable
-    get() {
-        // Use the configured background colour only when it has been explicitly set (non-transparent),
-        // otherwise fall back to the theme-aware default badge background.
-        val configuredBackground = BpkConfiguration.badgeConfig.backgroundColor.takeIf { it != Color.Transparent }
-        return when (this) {
-            BpkBadgeType.Normal -> configuredBackground ?: BpkBadgeColors.backgroundNormal
-            BpkBadgeType.Subtle -> BpkBadgeColors.backgroundNormal
-            BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
-            BpkBadgeType.Success -> configuredBackground ?: BpkBadgeColors.backgroundNormal
-            BpkBadgeType.Warning -> configuredBackground ?: BpkBadgeColors.backgroundNormal
-            BpkBadgeType.Destructive -> configuredBackground ?: BpkBadgeColors.backgroundNormal
-            BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
-            BpkBadgeType.Outline -> Color.Transparent
-            BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
-            BpkBadgeType.Loyalty -> BpkTheme.colors.statusLoyaltySpot
-        }
+    get() = when (this) {
+        BpkBadgeType.Normal,
+        BpkBadgeType.Subtle,
+        BpkBadgeType.Success,
+        BpkBadgeType.Warning,
+        BpkBadgeType.Destructive,
+        -> BpkBadgeColors.backgroundNormal
+        BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
+        BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
+        BpkBadgeType.Outline -> Color.Transparent
+        BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
+        BpkBadgeType.Loyalty -> BpkTheme.colors.statusLoyaltySpot
     }
 
 private val BpkBadgeType.borderColor: Color
