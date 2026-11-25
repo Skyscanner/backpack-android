@@ -332,7 +332,7 @@ BpkStackCardList(
 `BpkStackCardList` accepts independently optional `headerContent` and `emptyContent`
 slots (both default to `null`). Header content sits below the section header, even
 with no cards. Empty content replaces cards/accessories when `totalCount` is zero.
-Absent slots add no spacing. The original overload remains available.
+Absent slots add no spacing.
 
 `useTwoColumnsOnTablet` defaults to `false`. When enabled, the component uses two
 equal-width columns when the **current window is wider than 769 dp** (the Backpack

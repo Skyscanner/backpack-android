@@ -35,31 +35,6 @@ sealed class BpkStackCardAccessoryStyle {
     data class Button(val title: String, val icon: BpkIcon, val onClick: () -> Unit) : BpkStackCardAccessoryStyle()
 }
 
-@Composable
-fun BpkStackCardList(
-    title: String,
-    totalCount: Int,
-    modifier: Modifier = Modifier,
-    description: String? = null,
-    accessoryStyle: BpkStackCardAccessoryStyle? = null,
-    headerButton: BpkSectionHeaderButton? = null,
-    accessibilityHeaderTagEnabled: Boolean? = true,
-    isInScrollableContainer: Boolean = false,
-    content: @Composable ((Int) -> Unit),
-) {
-    BpkStackCardListImpl(
-        title = title,
-        description = description,
-        totalCount = totalCount,
-        modifier = modifier,
-        accessoryStyle = accessoryStyle,
-        headerButton = headerButton,
-        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
-        isInScrollableContainer = isInScrollableContainer,
-        content = content,
-    )
-}
-
 /**
  * A stack of cards with optional full-width content below its section header and when empty.
  *
