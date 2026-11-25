@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -409,7 +408,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
     @Test
     fun switchWithHelpAtLargeFontScale() {
         snap(width = 240.dp) {
-            WithLargeFontScale {
+            DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
                 HelpRow(label = "A deliberately long label that wraps over multiple lines")
             }
         }
@@ -421,7 +420,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
         var rtl by mutableStateOf(false)
         composeTestRule.setContent {
             BackpackDemoTheme {
-                WithLargeFontScale {
+                DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
                     CompositionLocalProvider(
                         LocalLayoutDirection provides if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
                     ) {
@@ -467,7 +466,12 @@ class BpkSwitchTest : BpkSnapshotTest() {
     fun `given font scale two when help sheet opens then title close and scroll content remain visible`() {
         composeTestRule.setContent {
             BackpackDemoTheme {
-                WithLargeFontScale { SwitchWithHelpExample() }
+                DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
+                    // The dialog reads configuration from its host view, so scope that host to this test.
+                    AndroidView(factory = { context ->
+                        ComposeView(context).apply { setContent { SwitchWithHelpExample() } }
+                    })
+                }
             }
         }
         composeTestRule.onNodeWithText("Default").assertIsDisplayed()
@@ -625,16 +629,5 @@ class BpkSwitchTest : BpkSnapshotTest() {
             )
         }
         check(checked())
-    }
-
-    @Composable
-    private fun WithLargeFontScale(content: @Composable () -> Unit) {
-        DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
-            val currentContent by rememberUpdatedState(content)
-            // Dialogs read font scale from their host view's context, so give this test its own host.
-            AndroidView(factory = { context ->
-                ComposeView(context).apply { setContent { currentContent() } }
-            })
-        }
     }
 }
