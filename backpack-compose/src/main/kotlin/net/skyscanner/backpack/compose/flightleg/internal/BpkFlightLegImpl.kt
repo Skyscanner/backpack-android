@@ -74,85 +74,83 @@ internal fun BpkFlightLegImpl(
                 }
             },
     ) {
-        Column {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                carrierLogoContent?.let {
-                    Box(
-                        modifier = Modifier
-                            .padding(top = BpkSpacing.Sm)
-                            .size(BpkSpacing.Lg)
-                            .graphicsLayer(
-                                clip = true,
-                                shape = RoundedCornerShape(BpkBorderRadius.Xs),
-                                // CompositingStrategy.Offscreen ensures proper clipping when `carrierLogoContent`
-                                // fills the whole space. Without it, the background can bleed through at the edges
-                                // due to how Compose composites clipped layers. This is the recommended solution.
-                                // See https://developer.android.com/develop/ui/compose/graphics/draw/modifiers
-                                compositingStrategy = CompositingStrategy.Offscreen,
-                            )
-                            .background(BpkTheme.colors.textOnDark),
-                        content = it,
-                        contentAlignment = Alignment.Center,
-                    )
-                    Spacer(modifier = Modifier.width(BpkSpacing.Base))
-                }
-                Column(
-                    modifier = Modifier.weight(0.67f),
-                    horizontalAlignment = Alignment.Start,
-                ) {
-                    Row {
-                        BpkText(
-                            text = departureArrivalTime,
-                            style = BpkTheme.typography.heading5,
-                            color = BpkTheme.colors.textPrimary,
+        Row(modifier = Modifier.fillMaxWidth()) {
+            carrierLogoContent?.let {
+                Box(
+                    modifier = Modifier
+                        .padding(top = BpkSpacing.Sm)
+                        .size(BpkSpacing.Lg)
+                        .graphicsLayer(
+                            clip = true,
+                            shape = RoundedCornerShape(BpkBorderRadius.Xs),
+                            // CompositingStrategy.Offscreen ensures proper clipping when `carrierLogoContent`
+                            // fills the whole space. Without it, the background can bleed through at the edges
+                            // due to how Compose composites clipped layers. This is the recommended solution.
+                            // See https://developer.android.com/develop/ui/compose/graphics/draw/modifiers
+                            compositingStrategy = CompositingStrategy.Offscreen,
                         )
-                        nextDayArrival?.let {
-                            BpkText(
-                                modifier = Modifier.align(Alignment.Top),
-                                text = it,
-                                style = BpkTheme.typography.caption,
-                                color = BpkTheme.colors.textPrimary,
-                            )
-                        }
-                    }
+                        .background(BpkTheme.colors.textOnDark),
+                    content = it,
+                    contentAlignment = Alignment.Center,
+                )
+                Spacer(modifier = Modifier.width(BpkSpacing.Base))
+            }
+            Column(
+                modifier = Modifier.weight(0.67f),
+                horizontalAlignment = Alignment.Start,
+            ) {
+                Row {
                     BpkText(
-                        text = description,
-                        style = BpkTheme.typography.caption,
-                        color = BpkTheme.colors.textSecondary,
+                        text = departureArrivalTime,
+                        style = BpkTheme.typography.heading5,
+                        color = BpkTheme.colors.textPrimary,
                     )
-                    bottomContent?.let {
-                        Spacer(modifier = Modifier.height(BpkSpacing.Sm))
-                        it()
-                    }
-                    operatedBy?.let {
+                    nextDayArrival?.let {
                         BpkText(
+                            modifier = Modifier.align(Alignment.Top),
                             text = it,
                             style = BpkTheme.typography.caption,
-                            color = BpkTheme.colors.textSecondary,
-                        )
-                    }
-                    warning?.let {
-                        BpkText(
-                            text = it,
-                            style = BpkTheme.typography.label3,
-                            color = BpkTheme.colors.textError,
+                            color = BpkTheme.colors.textPrimary,
                         )
                     }
                 }
-                Column(
-                    horizontalAlignment = Alignment.End,
-                ) {
+                BpkText(
+                    text = description,
+                    style = BpkTheme.typography.caption,
+                    color = BpkTheme.colors.textSecondary,
+                )
+                bottomContent?.let {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Sm))
+                    it()
+                }
+                operatedBy?.let {
                     BpkText(
-                        text = stopsInfo,
-                        style = BpkTheme.typography.label3,
-                        color = if (highlightStopsInfo) BpkTheme.colors.textError else BpkTheme.colors.textPrimary,
-                    )
-                    BpkText(
-                        text = duration,
+                        text = it,
                         style = BpkTheme.typography.caption,
                         color = BpkTheme.colors.textSecondary,
                     )
                 }
+                warning?.let {
+                    BpkText(
+                        text = it,
+                        style = BpkTheme.typography.label3,
+                        color = BpkTheme.colors.textError,
+                    )
+                }
+            }
+            Column(
+                horizontalAlignment = Alignment.End,
+            ) {
+                BpkText(
+                    text = stopsInfo,
+                    style = BpkTheme.typography.label3,
+                    color = if (highlightStopsInfo) BpkTheme.colors.textError else BpkTheme.colors.textPrimary,
+                )
+                BpkText(
+                    text = duration,
+                    style = BpkTheme.typography.caption,
+                    color = BpkTheme.colors.textSecondary,
+                )
             }
         }
     }
