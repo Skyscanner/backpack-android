@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.switch
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -30,15 +29,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
@@ -54,6 +57,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.BpkTestVariant
@@ -404,8 +408,8 @@ class BpkSwitchTest : BpkSnapshotTest() {
 
     @Test
     fun switchWithHelpAtLargeFontScale() {
-        withLargeFontScale {
-            snap(width = 240.dp) {
+        snap(width = 240.dp) {
+            WithLargeFontScale {
                 HelpRow(label = "A deliberately long label that wraps over multiple lines")
             }
         }
@@ -413,11 +417,11 @@ class BpkSwitchTest : BpkSnapshotTest() {
 
     @Test
     fun `given font scale two when the help row wraps then all controls stay visible in ltr and rtl`() {
-        withLargeFontScale {
-            var checked by mutableStateOf(false)
-            var rtl by mutableStateOf(false)
-            composeTestRule.setContent {
-                BackpackDemoTheme {
+        var checked by mutableStateOf(false)
+        var rtl by mutableStateOf(false)
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                WithLargeFontScale {
                     CompositionLocalProvider(
                         LocalLayoutDirection provides if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
                     ) {
@@ -429,12 +433,12 @@ class BpkSwitchTest : BpkSnapshotTest() {
                     }
                 }
             }
-            assertHelpRowBounds(rtl = false) { checked }
-            checked = false
-            rtl = true
-            composeTestRule.waitForIdle()
-            assertHelpRowBounds(rtl = true) { checked }
         }
+        assertHelpRowBounds(rtl = false) { checked }
+        checked = false
+        rtl = true
+        composeTestRule.waitForIdle()
+        assertHelpRowBounds(rtl = true) { checked }
     }
 
     @Test
@@ -461,25 +465,27 @@ class BpkSwitchTest : BpkSnapshotTest() {
 
     @Test
     fun `given font scale two when help sheet opens then title close and scroll content remain visible`() {
-        withLargeFontScale {
-            composeTestRule.setContent { BackpackDemoTheme { SwitchWithHelpExample() } }
-            composeTestRule.onNodeWithText("Default").assertIsDisplayed()
-            composeTestRule.onNodeWithContentDescription("Help").performClick()
-            composeTestRule.onNodeWithTag("switchHelpTitle").assertIsDisplayed()
-            composeTestRule.onNodeWithContentDescription("Dismiss").assertIsDisplayed()
-            val scroll = composeTestRule.onNodeWithTag("switchHelpScroll")
-                .assert(SemanticsMatcher.keyIsDefined(SemanticsActions.ScrollBy))
-            val messageBeforeScroll = composeTestRule.onNodeWithTag("switchHelpMessage")
-                .fetchSemanticsNode().boundsInRoot.top
-            scroll.performSemanticsAction(SemanticsActions.ScrollBy) { action ->
-                action(0f, 100f)
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                WithLargeFontScale { SwitchWithHelpExample() }
             }
-            composeTestRule.waitForIdle()
-            val messageAfterScroll = composeTestRule.onNodeWithTag("switchHelpMessage")
-                .fetchSemanticsNode().boundsInRoot.top
-            check(messageAfterScroll < messageBeforeScroll)
-            composeTestRule.onNodeWithContentDescription("Dismiss").assertIsDisplayed()
         }
+        composeTestRule.onNodeWithText("Default").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Help").performClick()
+        composeTestRule.onNodeWithTag("switchHelpTitle").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Dismiss").assertIsDisplayed()
+        val scroll = composeTestRule.onNodeWithTag("switchHelpScroll")
+            .assert(SemanticsMatcher.keyIsDefined(SemanticsActions.ScrollBy))
+        val messageBeforeScroll = composeTestRule.onNodeWithTag("switchHelpMessage")
+            .fetchSemanticsNode().boundsInRoot.top
+        scroll.performSemanticsAction(SemanticsActions.ScrollBy) { action ->
+            action(0f, 100f)
+        }
+        composeTestRule.waitForIdle()
+        val messageAfterScroll = composeTestRule.onNodeWithTag("switchHelpMessage")
+            .fetchSemanticsNode().boundsInRoot.top
+        check(messageAfterScroll < messageBeforeScroll)
+        composeTestRule.onNodeWithContentDescription("Dismiss").assertIsDisplayed()
     }
 
     @Test
@@ -621,14 +627,14 @@ class BpkSwitchTest : BpkSnapshotTest() {
         check(checked())
     }
 
-    private fun withLargeFontScale(block: () -> Unit) {
-        val resources = composeTestRule.activity.resources
-        val original = Configuration(resources.configuration)
-        resources.updateConfiguration(Configuration(original).apply { fontScale = 2f }, resources.displayMetrics)
-        try {
-            block()
-        } finally {
-            resources.updateConfiguration(original, resources.displayMetrics)
+    @Composable
+    private fun WithLargeFontScale(content: @Composable () -> Unit) {
+        DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(2f)) {
+            val currentContent by rememberUpdatedState(content)
+            // Dialogs read font scale from their host view's context, so give this test its own host.
+            AndroidView(factory = { context ->
+                ComposeView(context).apply { setContent { currentContent() } }
+            })
         }
     }
 }
