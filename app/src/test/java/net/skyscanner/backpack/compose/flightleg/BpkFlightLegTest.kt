@@ -42,11 +42,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.FlightLegWithBottomContentSample
 import net.skyscanner.backpack.demo.compose.BasicFlightLegSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegLongStopsSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegShortStopsSample
@@ -179,6 +182,12 @@ class BpkFlightLegTest : BpkSnapshotTest() {
         }
         composeTestRule.onNodeWithTag("leg", useUnmergedTree = true)
             .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.HideFromAccessibility))
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun nearbyAirportBadge() = snap(width = 320.dp) {
+        FlightLegWithBottomContentSample()
     }
 
     @Test
