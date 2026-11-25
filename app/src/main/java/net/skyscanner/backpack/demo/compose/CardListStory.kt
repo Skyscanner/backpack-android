@@ -66,44 +66,6 @@ import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
 @CardListComponent
-@ComposeStory("Stack - Chips and adaptive columns")
-fun AdaptiveCardListStackStory(modifier: Modifier = Modifier) {
-    var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
-    val chips = listOf(
-        BpkSingleChipItem(stringResource(R.string.card_list_all)),
-        BpkSingleChipItem(stringResource(R.string.card_list_saved)),
-    )
-    val selectedCards = if (selectedIndex == 0) dataList.take(5) else emptyList()
-    BpkStackCardList(
-        title = stringResource(R.string.card_list_title),
-        totalCount = selectedCards.size,
-        modifier = modifier.padding(horizontal = BpkSpacing.Base),
-        useTwoColumnsOnTablet = true,
-        accessoryStyle = if (selectedCards.size > 2) {
-            BpkStackCardAccessoryStyle.Expand(
-                collapsedCount = 2,
-                expandText = stringResource(R.string.card_list_show_more),
-                collapsedText = stringResource(R.string.card_list_show_less),
-            )
-        } else null,
-        headerContent = {
-            BpkSingleSelectChipGroup(
-                chips = chips,
-                selectedIndex = selectedIndex,
-                onItemClicked = { selectedIndex = chips.indexOf(it) },
-            )
-        },
-        emptyContent = {
-            BpkButton(
-                text = stringResource(R.string.card_list_find_destination),
-                onClick = { selectedIndex = 0 },
-            )
-        },
-    ) { index -> StackItem(selectedCards[index]) }
-}
-
-@Composable
-@CardListComponent
 @ComposeStory("Rail")
 fun CardListRailStory(modifier: Modifier = Modifier) {
     Column(modifier) {
@@ -449,6 +411,47 @@ fun ColumnCardListStackWithButtonAndSectionHeaderAccessoryStory(modifier: Modifi
                 },
             ),
         ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack - Chips and adaptive columns")
+fun AdaptiveCardListStackStory(modifier: Modifier = Modifier) {
+    var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
+    val chips = listOf(
+        BpkSingleChipItem(stringResource(R.string.card_list_all)),
+        BpkSingleChipItem(stringResource(R.string.card_list_saved)),
+    )
+    val selectedCards = if (selectedIndex == 0) dataList.take(5) else emptyList()
+
+    Column(modifier) {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            totalCount = selectedCards.size,
+            modifier = Modifier.padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+            useTwoColumnsOnTablet = true,
+            accessoryStyle = if (selectedCards.size > 2) {
+                BpkStackCardAccessoryStyle.Expand(
+                    collapsedCount = 2,
+                    expandText = stringResource(R.string.card_list_show_more),
+                    collapsedText = stringResource(R.string.card_list_show_less),
+                )
+            } else null,
+            headerContent = {
+                BpkSingleSelectChipGroup(
+                    chips = chips,
+                    selectedIndex = selectedIndex,
+                    onItemClicked = { selectedIndex = chips.indexOf(it) },
+                )
+            },
+            emptyContent = {
+                BpkButton(
+                    text = stringResource(R.string.card_list_find_destination),
+                    onClick = { selectedIndex = 0 },
+                )
+            },
+        ) { index -> StackItem(selectedCards[index]) }
     }
 }
 

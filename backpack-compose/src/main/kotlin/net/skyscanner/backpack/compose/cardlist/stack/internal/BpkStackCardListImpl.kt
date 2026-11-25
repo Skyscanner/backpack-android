@@ -227,10 +227,10 @@ private fun ExpandableLazyColumn(
         }
 
         headerContent?.let { slot ->
-            item { Box(Modifier.fillMaxWidth()) { slot() } }
+            item { Box(Modifier.fillMaxWidth().animateItem()) { slot() } }
         }
         if (emptyContent != null) {
-            item { Box(Modifier.fillMaxWidth()) { emptyContent() } }
+            item { Box(Modifier.fillMaxWidth().animateItem()) { emptyContent() } }
         } else if (columnCount == 1) {
             items(targetCount) {
                 Box(Modifier.animateItem()) {

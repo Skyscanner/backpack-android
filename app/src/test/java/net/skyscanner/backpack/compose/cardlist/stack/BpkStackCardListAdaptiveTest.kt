@@ -29,12 +29,16 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.WindowInfo
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.text.BpkText
@@ -48,130 +52,130 @@ import org.robolectric.annotation.Config
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 @Config(qualifiers = "w700dp-h1000dp-mdpi", sdk = [35])
-class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotTest() {
+class BpkStackCardListAdaptiveTest(
+    private val stackType: StackType,
+) : BpkSnapshotTest(listOf(stackType)) {
 
     @Test
-    fun `given opt in when window crosses tablet width then columns adapt`() {
-        val width = mutableStateOf(TABLET_WIDTH)
+    @Variants(BpkTestVariant.Default)
+    fun columnsAdaptWhenWindowCrossesTabletWidth() {
+        val windowWidth = mutableStateOf(TABLET_WIDTH)
         snap(
             width = 650.dp,
             assertion = {
-                var first = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
-                var second = onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot
-                assertTrue(second.top > first.top)
-                for (tabletWidth in listOf(TABLET_WINDOW_WIDTH, TABLET_WINDOW_WIDTH + 1)) {
-                    runOnIdle { width.value = tabletWidth }
-                    waitForIdle()
-                    first = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
-                    second = onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot
-                    val last = onNodeWithTag("card-2").fetchSemanticsNode().boundsInRoot
-                    assertEquals(first.top, second.top, 1f)
-                    assertEquals(first.width, second.width, 1f)
-                    assertEquals(first.width, last.width, 1f)
-                    assertTrue(last.top > first.top)
-                }
-                runOnIdle { width.value = TABLET_WIDTH }
+                assertSingleColumn()
+
+                runOnIdle { windowWidth.value = TABLET_WINDOW_WIDTH }
                 waitForIdle()
-                assertTrue(
-                    onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot.top >
-                        onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot.top,
-                )
+                assertTwoColumns()
+
+                runOnIdle { windowWidth.value = TABLET_WIDTH }
+                waitForIdle()
+                assertSingleColumn()
             },
-        ) { WindowWidth(width.value) { ListFixture() } }
+        ) { WindowWidth(windowWidth.value) { ListFixture() } }
     }
 
     @Test
-    fun `given false opt in when wide then keeps one column`() = snap(
+    @Variants(BpkTestVariant.Default)
+    fun staysSingleColumnOnTabletByDefault() = snap(
         width = 650.dp,
-        assertion = {
-            assertTrue(
-                onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot.top >
-                    onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot.top,
-            )
-        },
-    ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture(adaptive = false) } }
+        assertion = { assertSingleColumn() },
+    ) {
+        WindowWidth(TABLET_WINDOW_WIDTH) {
+            BpkStackCardList(
+                title = "Destinations",
+                totalCount = 3,
+                isInScrollableContainer = stackType.isInScrollableContainer,
+            ) { Card(it) }
+        }
+    }
 
     @Test
-    fun `given expanded list when empty and resized then expansion survives`() {
+    @Variants(BpkTestVariant.Default)
+    fun expansionSurvivesEmptyListAndResize() {
         val count = mutableStateOf(3)
-        val width = mutableStateOf(TABLET_WIDTH)
+        val windowWidth = mutableStateOf(TABLET_WIDTH)
         snap(
             width = 650.dp,
             assertion = {
                 onNodeWithTag("card-2").assertDoesNotExist()
                 onNodeWithText("More").performClick()
                 onNodeWithTag("card-2").assertExists()
+
                 runOnIdle {
                     count.value = 0
-                    width.value = TABLET_WINDOW_WIDTH
+                    windowWidth.value = TABLET_WINDOW_WIDTH
                 }
-                onNodeWithTag("header").assertExists()
-                onNodeWithText("Find a destination").performClick()
+                onNodeWithTag("header").assertIsDisplayed()
+                onNodeWithText("Find a destination").assertIsDisplayed()
                 onNodeWithTag("card-0").assertDoesNotExist()
                 onNodeWithText("Less").assertDoesNotExist()
+
                 runOnIdle { count.value = 3 }
                 onNodeWithTag("card-2").assertExists()
-                onNodeWithText("Less").assertExists()
                 onNodeWithText("Find a destination").assertDoesNotExist()
                 onNodeWithText("Less").performClick()
                 onNodeWithTag("card-2").assertDoesNotExist()
             },
-        ) { WindowWidth(width.value) { ListFixture(count = count.value, expandable = true) } }
+        ) {
+            WindowWidth(windowWidth.value) { ListFixture(count = count.value, expandable = true) }
+        }
     }
 
     @Test
-    fun `given independent optional slots when empty then only supplied slots render`() {
-        val header = mutableStateOf(false)
-        val empty = mutableStateOf(false)
-        snap(
-            assertion = {
-                for (showHeader in listOf(false, true)) {
-                    for (showEmpty in listOf(false, true)) {
-                        runOnIdle {
-                            header.value = showHeader
-                            empty.value = showEmpty
-                        }
-                        if (showHeader) onNodeWithTag("header").assertExists()
-                        else onNodeWithTag("header").assertDoesNotExist()
-                        if (showEmpty) onNodeWithText("Find a destination").assertExists()
-                        else onNodeWithText("Find a destination").assertDoesNotExist()
-                        onNodeWithTag("card-0").assertDoesNotExist()
-                    }
-                }
-            },
-        ) { ListFixture(count = 0, header = header.value, empty = empty.value) }
-    }
+    @Variants(BpkTestVariant.Default)
+    fun emptyListShowsOnlyHeaderContent() = snap(
+        assertion = {
+            onNodeWithTag("header").assertIsDisplayed()
+            onNodeWithText("Find a destination").assertDoesNotExist()
+            onNodeWithTag("card-0").assertDoesNotExist()
+        },
+    ) { ListFixture(count = 0, empty = false) }
 
     @Test
-    fun `given tablet and odd count when rendered then slots span both columns`() = snap(
+    @Variants(BpkTestVariant.Default)
+    fun emptyListShowsOnlyEmptyContent() = snap(
+        assertion = {
+            onNodeWithText("Find a destination").assertIsDisplayed()
+            onNodeWithTag("header").assertDoesNotExist()
+            onNodeWithTag("card-0").assertDoesNotExist()
+        },
+    ) { ListFixture(count = 0, header = false) }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun headerContentSpansBothColumns() = snap(
         width = 650.dp,
         assertion = {
-            val first = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
-            val second = onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot
-            val header = onNodeWithTag("header").fetchSemanticsNode().boundsInRoot
+            val first = boundsOf("card-0")
+            val second = boundsOf("card-1")
+            val header = boundsOf("header")
             assertTrue(header.width > first.width + second.width)
             assertTrue(header.bottom <= first.top)
         },
     ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture() } }
 
     @Test
-    fun `given one tablet card when rendered then keeps half width`() = snap(
+    @Variants(BpkTestVariant.Default)
+    fun singleCardKeepsColumnWidthOnTablet() = snap(
         width = 650.dp,
         assertion = {
-            val card = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
-            val header = onNodeWithTag("header").fetchSemanticsNode().boundsInRoot
-            assertTrue(card.width < header.width / 2)
+            assertTrue(boundsOf("card-0").width < boundsOf("header").width / 2)
             onNodeWithTag("card-1").assertDoesNotExist()
         },
     ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture(count = 1) } }
 
     @Test
-    fun `given large text when tablet layout is enabled then content remains visible`() = snap(
+    @Variants(BpkTestVariant.Default)
+    fun largeFontKeepsContentVisibleOnTablet() = snap(
         width = 650.dp,
         assertion = {
-            onNodeWithTag("header").assertExists()
-            onNodeWithTag("card-0").assertExists()
-            onNodeWithTag("card-2").assertExists()
+            assertTwoColumns()
+            onNodeWithText("Filter destinations").assertIsDisplayed()
+            onNodeWithText("Card 0").assertIsDisplayed()
+            onNodeWithText("Card 1").assertIsDisplayed()
+            onNodeWithText("Card 2").assertIsDisplayed()
         },
     ) {
         CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, fontScale = 2f)) {
@@ -179,25 +183,25 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
         }
     }
 
-    @Test
-    fun `given original positional API when wide then remains single column`() = snap(
-        width = 650.dp,
-        assertion = {
-            assertTrue(
-                onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot.top >
-                    onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot.top,
-            )
-        },
-    ) {
-        WindowWidth(TABLET_WINDOW_WIDTH) {
-            BpkStackCardList("Destinations", 3, Modifier, null, null, null, true, embedded) { Card(it) }
-        }
+    private fun ComposeTestRule.boundsOf(tag: String) = onNodeWithTag(tag).fetchSemanticsNode().boundsInRoot
+
+    private fun ComposeTestRule.assertSingleColumn() {
+        assertTrue(boundsOf("card-1").top > boundsOf("card-0").top)
+    }
+
+    private fun ComposeTestRule.assertTwoColumns() {
+        val first = boundsOf("card-0")
+        val second = boundsOf("card-1")
+        val last = boundsOf("card-2")
+        assertEquals(first.top, second.top, 1f)
+        assertEquals(first.width, second.width, 1f)
+        assertEquals(first.width, last.width, 1f)
+        assertTrue(last.top > first.top)
     }
 
     @Composable
     private fun ListFixture(
         count: Int = 3,
-        adaptive: Boolean = true,
         expandable: Boolean = false,
         header: Boolean = true,
         empty: Boolean = true,
@@ -205,8 +209,8 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
         BpkStackCardList(
             title = "Destinations",
             totalCount = count,
-            isInScrollableContainer = embedded,
-            useTwoColumnsOnTablet = adaptive,
+            isInScrollableContainer = stackType.isInScrollableContainer,
+            useTwoColumnsOnTablet = true,
             accessoryStyle = if (expandable && count > 2) {
                 BpkStackCardAccessoryStyle.Expand(collapsedCount = 2, expandText = "More", collapsedText = "Less")
             } else null,
@@ -234,10 +238,15 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
         CompositionLocalProvider(LocalWindowInfo provides window, content = content)
     }
 
+    enum class StackType(val isInScrollableContainer: Boolean) {
+        Column(isInScrollableContainer = true),
+        LazyColumn(isInScrollableContainer = false),
+    }
+
     companion object {
         @JvmStatic
-        @ParameterizedRobolectricTestRunner.Parameters(name = "embedded={0}")
-        fun parameters() = listOf(arrayOf(true), arrayOf(false))
+        @ParameterizedRobolectricTestRunner.Parameters(name = "{0}")
+        fun stackTypes(): List<StackType> = StackType.entries
     }
 }
 

@@ -37,6 +37,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.text.BpkText
@@ -45,6 +48,7 @@ import net.skyscanner.backpack.compose.tokens.AddCircle
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
+import org.robolectric.annotation.Config
 
 class BpkStackCardListTest : BpkSnapshotTest() {
 
@@ -250,6 +254,54 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             ),
         ) { index -> StackItem(dataList[index]) }
     }
+
+    @Test
+    @Config(qualifiers = TABLET_QUALIFIERS)
+    fun lazyColumnStackWithTwoColumnsOnTablet() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            totalCount = 5,
+            useTwoColumnsOnTablet = true,
+            headerContent = { CategoryChips(selectedIndex = 0) },
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    @Config(qualifiers = TABLET_QUALIFIERS)
+    fun columnStackWithTwoColumnsOnTablet() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            totalCount = 5,
+            isInScrollableContainer = true,
+            useTwoColumnsOnTablet = true,
+            headerContent = { CategoryChips(selectedIndex = 0) },
+        ) { index -> StackItem(dataList[index]) }
+    }
+
+    @Test
+    fun columnStackWithHeaderAndEmptyContent() = snap {
+        BpkStackCardList(
+            title = stringResource(R.string.card_list_title),
+            totalCount = 0,
+            isInScrollableContainer = true,
+            headerContent = { CategoryChips(selectedIndex = 1) },
+            emptyContent = {
+                BpkButton(text = stringResource(R.string.card_list_find_destination), onClick = {})
+            },
+        ) { index -> StackItem(dataList[index]) }
+    }
+}
+
+@Composable
+private fun CategoryChips(selectedIndex: Int) {
+    BpkSingleSelectChipGroup(
+        chips = listOf(
+            BpkSingleChipItem(stringResource(R.string.card_list_all)),
+            BpkSingleChipItem(stringResource(R.string.card_list_saved)),
+        ),
+        selectedIndex = selectedIndex,
+        onItemClicked = {},
+    )
 }
 
 @Composable
@@ -336,3 +388,4 @@ private val dataList = listOf(
 )
 
 private const val TOTAL_CARDS = 9
+private const val TABLET_QUALIFIERS = "w800dp-h1280dp-mdpi"
