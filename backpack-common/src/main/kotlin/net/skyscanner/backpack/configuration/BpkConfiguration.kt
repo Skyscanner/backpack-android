@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.configuration
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.util.ColorPair
@@ -83,11 +82,6 @@ object BpkConfiguration {
             val dismissibleTrailingIconColorOnImage: ColorPair = ColorPair(0xFFFFFFFF, 0xFFFFFFFF),
         ) : BpkExperimentalComponent()
 
-        data class BpkBadge(
-            val backgroundColor: Color = Color.Transparent,
-            val endPadding: Dp = 8.dp,
-        ) : BpkExperimentalComponent()
-
         data object BpkIcon : BpkExperimentalComponent()
     }
 
@@ -108,8 +102,6 @@ object BpkConfiguration {
     val buttonConfig: BpkExperimentalComponent.BpkButton = BpkExperimentalComponent.BpkButton()
 
     val cardConfig: BpkExperimentalComponent.BpkCard = BpkExperimentalComponent.BpkCard()
-
-    val badgeConfig: BpkExperimentalComponent.BpkBadge = BpkExperimentalComponent.BpkBadge()
 
     val typographySet: BpkTypographySet = BpkTypographySet.VDL_2
 

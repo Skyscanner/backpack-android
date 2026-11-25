@@ -35,6 +35,8 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertHasNoClickAction
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performSemanticsAction
@@ -45,6 +47,7 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.demo.R
 import org.junit.Assert.assertEquals
@@ -65,6 +68,9 @@ class BpkBadgeTest(flavour: Flavor) :
     fun text() {
         snap(background = { type.backgroundContent() }, assertion = {
             onNodeWithText("Badge").assertHasNoClickAction()
+            assertBadgePadding(
+                hasLeadingIcon = type in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive),
+            )
         }) {
             BpkBadge(text = "Badge", type = type)
         }
@@ -76,7 +82,9 @@ class BpkBadgeTest(flavour: Flavor) :
         // Skip some combinations to reduce test volume while maintaining coverage
         assumeTrue(type in listOf(BpkBadgeType.Normal, BpkBadgeType.Strong, BpkBadgeType.Success))
 
-        snap(background = { type.backgroundContent() }) {
+        snap(background = { type.backgroundContent() }, assertion = {
+            assertBadgePadding(hasLeadingIcon = true)
+        }) {
             BpkBadge(text = "Badge", type = type, icon = BpkIcon.CloseCircle)
         }
     }
@@ -87,7 +95,9 @@ class BpkBadgeTest(flavour: Flavor) :
         // Test RTL only for types with default icons
         assumeTrue(type in listOf(BpkBadgeType.Success, BpkBadgeType.Warning, BpkBadgeType.Destructive))
 
-        snap(background = { type.backgroundContent() }) {
+        snap(background = { type.backgroundContent() }, assertion = {
+            assertBadgePadding(hasLeadingIcon = true)
+        }) {
             BpkBadge(text = "Badge", type = type)
         }
     }
@@ -98,7 +108,9 @@ class BpkBadgeTest(flavour: Flavor) :
         // Test custom icon only for Normal type to avoid excessive combinations
         assumeTrue(type == BpkBadgeType.Normal)
 
-        snap {
+        snap(assertion = {
+            assertBadgePadding(hasLeadingIcon = true)
+        }) {
             BpkBadge(
                 text = "Badge",
                 type = type,
@@ -117,6 +129,7 @@ class BpkBadgeTest(flavour: Flavor) :
                 .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
                 .performSemanticsAction(SemanticsActions.OnClick) { it() }
             assertEquals(1, clicks)
+            assertBadgePadding(hasLeadingIcon = true, hasTrailingIcon = true)
         }) {
             BpkBadge(
                 text = "Badge",
@@ -129,7 +142,9 @@ class BpkBadgeTest(flavour: Flavor) :
 
     @Test
     @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    fun interactiveWithCustomIcon() = snap(background = { type.backgroundContent() }) {
+    fun interactiveWithCustomIcon() = snap(background = { type.backgroundContent() }, assertion = {
+        assertBadgePadding(text = "Long badge text", hasLeadingIcon = true, hasTrailingIcon = true)
+    }) {
         BpkBadge(
             text = "Long badge text",
             icon = painterResource(R.drawable.sample_icon),
@@ -137,6 +152,22 @@ class BpkBadgeTest(flavour: Flavor) :
             type = type,
             style = BpkBadgeStyle.Interactive(onClick = {}),
         )
+    }
+
+    private fun ComposeTestRule.assertBadgePadding(
+        text: String = "Badge",
+        hasLeadingIcon: Boolean,
+        hasTrailingIcon: Boolean = false,
+    ) {
+        val badgeBounds = onNodeWithText(text).getUnclippedBoundsInRoot()
+        val textBounds = onNodeWithText(text, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val expectedStart = BpkSpacing.Md + if (hasLeadingIcon) BpkSpacing.Base + BpkSpacing.Sm else 0.dp
+        val expectedEnd = BpkSpacing.Md + if (hasTrailingIcon) 12.dp + BpkSpacing.Sm else 0.dp
+        val isRtl = BpkTestVariant.current == BpkTestVariant.Rtl
+        val actualStart = if (isRtl) badgeBounds.right - textBounds.right else textBounds.left - badgeBounds.left
+        val actualEnd = if (isRtl) textBounds.left - badgeBounds.left else badgeBounds.right - textBounds.right
+        assertEquals("Badge start inset, including icon and gap", expectedStart.value, actualStart.value, 0.5f)
+        assertEquals("Badge end inset, including icon and gap", expectedEnd.value, actualEnd.value, 0.5f)
     }
 
     @Test
