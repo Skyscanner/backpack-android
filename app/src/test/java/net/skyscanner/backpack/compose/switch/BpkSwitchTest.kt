@@ -122,8 +122,10 @@ class BpkSwitchTest : BpkSnapshotTest() {
         val interactions = MutableInteractionSource()
         val events = mutableListOf<Interaction>()
         var checked by mutableStateOf(false)
+        var layoutDirection = LayoutDirection.Ltr
         composeTestRule.setContent {
             BackpackDemoTheme {
+                layoutDirection = LocalLayoutDirection.current
                 LaunchedEffect(interactions) { interactions.interactions.collect { events.add(it) } }
                 BpkSwitch(
                     text = "Wifi",
@@ -137,7 +139,12 @@ class BpkSwitchTest : BpkSnapshotTest() {
         }
         val row = composeTestRule.onNodeWithTag("row")
         row.performTouchInput {
-            down(androidx.compose.ui.geometry.Offset(width - 26.dp.toPx(), height / 2f))
+            down(
+                androidx.compose.ui.geometry.Offset(
+                    x = if (layoutDirection == LayoutDirection.Rtl) 1f else width - 1f,
+                    y = height / 2f,
+                ),
+            )
             advanceEventTime(200)
         }
         composeTestRule.mainClock.advanceTimeBy(200)
