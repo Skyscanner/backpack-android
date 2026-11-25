@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.flightleg
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.width
@@ -30,6 +29,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.onNodeWithTag
@@ -50,6 +51,8 @@ import net.skyscanner.backpack.demo.compose.BasicFlightLegSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegLongStopsSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegShortStopsSample
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.robolectric.RuntimeEnvironment
 
@@ -68,10 +71,8 @@ class BpkFlightLegTest : BpkSnapshotTest() {
     @Test
     @OptIn(ExperimentalBackpackApi::class)
     fun `given long slot content at large font scale when rendered then it does not overlap warning`() {
-        withLargeFontScale {
-            setComplexLegContent(rtl = false)
-            assertComplexLegBounds(rtl = false)
-        }
+        setComplexLegContent(rtl = false, fontScale = 2f)
+        assertComplexLegBounds(rtl = false)
     }
 
     @Test
@@ -119,9 +120,9 @@ class BpkFlightLegTest : BpkSnapshotTest() {
         useExperimental = true
         composeTestRule.waitForIdle()
         val experimentalBounds = composeTestRule.onNodeWithTag("leg", useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        check(stableBounds.width == experimentalBounds.width)
-        check(stableBounds.height == experimentalBounds.height)
-        check(stableChildren == legChildBounds())
+        assertEquals("Null slot must preserve leg width", stableBounds.width, experimentalBounds.width, 0f)
+        assertEquals("Null slot must preserve leg height", stableBounds.height, experimentalBounds.height, 0f)
+        assertEquals("Null slot must preserve child bounds", stableChildren, legChildBounds())
     }
 
     @Test
@@ -147,7 +148,8 @@ class BpkFlightLegTest : BpkSnapshotTest() {
         }
         val leg = composeTestRule.onNodeWithTag("leg").fetchSemanticsNode()
         val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true).fetchSemanticsNode()
-        check(
+        assertTrue(
+            "Bottom content must stay inside the leg: slot=${slot.boundsInRoot}, leg=${leg.boundsInRoot}",
             slot.boundsInRoot.left >= leg.boundsInRoot.left &&
                 slot.boundsInRoot.right <= leg.boundsInRoot.right &&
                 slot.boundsInRoot.top >= leg.boundsInRoot.top &&
@@ -176,7 +178,7 @@ class BpkFlightLegTest : BpkSnapshotTest() {
             }
         }
         composeTestRule.onNodeWithTag("leg", useUnmergedTree = true)
-            .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.InvisibleToUser))
+            .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.HideFromAccessibility))
     }
 
     @Test
@@ -287,9 +289,9 @@ class BpkFlightLegTest : BpkSnapshotTest() {
             .fetchSemanticsNode().boundsInRoot
         val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot
-        check(slot.top >= codes.bottom)
+        assertTrue("Bottom content must not overlap airport codes", slot.top >= codes.bottom)
         val startDifference = if (layoutDirection == LayoutDirection.Rtl) slot.right - codes.right else slot.left - codes.left
-        check(kotlin.math.abs(startDifference) <= 1f) { "Bottom content must align with airport codes at the logical start" }
+        assertEquals("Bottom content must align with airport codes at the logical start", 0f, startDifference, 1f)
     }
 
     @Composable
@@ -312,28 +314,30 @@ class BpkFlightLegTest : BpkSnapshotTest() {
     }
 
     @OptIn(ExperimentalBackpackApi::class)
-    private fun setComplexLegContent(rtl: Boolean) {
+    private fun setComplexLegContent(rtl: Boolean, fontScale: Float = 1f) {
         composeTestRule.setContent {
             net.skyscanner.backpack.demo.BackpackDemoTheme {
-                CompositionLocalProvider(LocalLayoutDirection provides if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr) {
-                    BpkFlightLeg(
-                        departureArrivalTime = "19:50 - 22:45",
-                        description = AnnotatedString("LHR-SIN, partly operated overnight direct flight"),
-                        stopsInfo = "2 Stops",
-                        duration = "7h 55m",
-                        contentDescription = null,
-                        nextDayArrival = "+1",
-                        operatedBy = "Partly operated by WestJet",
-                        warning = "Change airports in London",
-                        carrierLogoContent = { BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null) },
-                        bottomContent = {
-                            net.skyscanner.backpack.compose.text.BpkText(
-                                text = "Nearby airport information with deliberately long content",
-                                modifier = Modifier.testTag("bottomContent"),
-                            )
-                        },
-                        modifier = Modifier.width(320.dp).testTag("flightLeg"),
-                    )
+                DeviceConfigurationOverride(DeviceConfigurationOverride.FontScale(fontScale)) {
+                    CompositionLocalProvider(LocalLayoutDirection provides if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr) {
+                        BpkFlightLeg(
+                            departureArrivalTime = "19:50 - 22:45",
+                            description = AnnotatedString("LHR-SIN, partly operated overnight direct flight"),
+                            stopsInfo = "2 Stops",
+                            duration = "7h 55m",
+                            contentDescription = null,
+                            nextDayArrival = "+1",
+                            operatedBy = "Partly operated by WestJet",
+                            warning = "Change airports in London",
+                            carrierLogoContent = { BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null) },
+                            bottomContent = {
+                                net.skyscanner.backpack.compose.text.BpkText(
+                                    text = "Nearby airport information with deliberately long content",
+                                    modifier = Modifier.testTag("bottomContent"),
+                                )
+                            },
+                            modifier = Modifier.width(320.dp).testTag("flightLeg"),
+                        )
+                    }
                 }
             }
         }
@@ -349,25 +353,19 @@ class BpkFlightLegTest : BpkSnapshotTest() {
             .fetchSemanticsNode().boundsInRoot
         val expectedGap = net.skyscanner.backpack.compose.tokens.BpkSpacing.Sm.value * composeTestRule.density.density
         val leg = composeTestRule.onNodeWithTag("flightLeg").fetchSemanticsNode().boundsInRoot
-        check(kotlin.math.abs(slot.top - codes.bottom - expectedGap) <= 1f)
-        check(kotlin.math.abs(if (rtl) slot.right - codes.right else slot.left - codes.left) <= 1f)
-        check(slot.bottom <= operatedBy.top)
-        check(operatedBy.bottom <= warning.top)
-        check(slot.left >= leg.left && slot.right <= leg.right)
+        assertEquals("Bottom content gap must use Backpack spacing", expectedGap, slot.top - codes.bottom, 1f)
+        assertEquals(
+            "Bottom content must align with airport codes at the logical start",
+            if (rtl) codes.right else codes.left,
+            if (rtl) slot.right else slot.left,
+            1f,
+        )
+        assertTrue("Bottom content must not overlap the operator notice", slot.bottom <= operatedBy.top)
+        assertTrue("Operator notice must not overlap the warning", operatedBy.bottom <= warning.top)
+        assertTrue("Bottom content must stay within the leg width", slot.left >= leg.left && slot.right <= leg.right)
         composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true).assertIsDisplayed()
     }
 
     private fun legChildBounds() = listOf("19:50 - 22:45", "+1", "2 Stops", "7h 55m", "Change airports in London")
         .map { composeTestRule.onNodeWithText(it, useUnmergedTree = true).fetchSemanticsNode().boundsInRoot }
-
-    private fun withLargeFontScale(block: () -> Unit) {
-        val resources = composeTestRule.activity.resources
-        val original = Configuration(resources.configuration)
-        resources.updateConfiguration(Configuration(original).apply { fontScale = 2f }, resources.displayMetrics)
-        try {
-            block()
-        } finally {
-            resources.updateConfiguration(original, resources.displayMetrics)
-        }
-    }
 }
