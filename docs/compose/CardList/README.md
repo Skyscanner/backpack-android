@@ -335,11 +335,11 @@ with no cards. Empty content replaces cards/accessories when `totalCount` is zer
 Absent slots add no spacing. The original overload remains available.
 
 `useTwoColumnsOnTablet` defaults to `false`. When enabled, the component uses two
-equal-width columns at a **current window width of at least 600 dp**, including
-foldables, and one below that threshold. It responds to resizing and rotation.
-Header, slots and accessories span the full width. Odd final rows retain a normal
-cell width and follow layout direction. Counts and callback indices refer to
-cards, not rows; the component does not round limits or filter content.
+equal-width columns when the **current window is wider than 769 dp** (the Backpack
+tablet breakpoint), including foldables, and one column otherwise. It responds to
+resizing and rotation. Header, slots and accessories span the full width. Odd final
+rows retain a normal cell width and follow layout direction. Counts and callback
+indices refer to cards, not rows; the component does not round limits or filter content.
 
 ```kotlin
 BpkStackCardList(

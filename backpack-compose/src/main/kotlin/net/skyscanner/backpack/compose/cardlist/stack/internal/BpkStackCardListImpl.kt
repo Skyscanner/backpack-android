@@ -33,9 +33,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -46,6 +43,7 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ChevronDown
 import net.skyscanner.backpack.compose.tokens.ChevronUp
+import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
 internal fun BpkStackCardListImpl(
@@ -86,8 +84,7 @@ internal fun BpkStackCardListImpl(
         else -> totalCount
     }
 
-    val windowWidth = with(LocalDensity.current) { LocalWindowInfo.current.containerSize.width.toDp() }
-    val columnCount = if (useTwoColumnsOnTablet && windowWidth >= TABLET_MIN_WIDTH.dp) 2 else 1
+    val columnCount = if (useTwoColumnsOnTablet && isTablet()) 2 else 1
 
     if (isInScrollableContainer) {
         ExpandableColumn(
@@ -393,5 +390,4 @@ private fun CardRow(
     }
 }
 
-private const val TABLET_MIN_WIDTH = 600
 internal const val MINIMUM_EXPANDED_COUNT = 2

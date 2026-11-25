@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.utils.TABLET_WIDTH
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -50,15 +51,15 @@ import org.robolectric.annotation.Config
 class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotTest() {
 
     @Test
-    fun `given opt in when window crosses 600 dp then columns adapt`() {
-        val width = mutableStateOf(599)
+    fun `given opt in when window crosses tablet width then columns adapt`() {
+        val width = mutableStateOf(TABLET_WIDTH)
         snap(
             width = 650.dp,
             assertion = {
                 var first = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
                 var second = onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot
                 assertTrue(second.top > first.top)
-                for (tabletWidth in listOf(600, 601)) {
+                for (tabletWidth in listOf(TABLET_WINDOW_WIDTH, TABLET_WINDOW_WIDTH + 1)) {
                     runOnIdle { width.value = tabletWidth }
                     waitForIdle()
                     first = onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot
@@ -69,7 +70,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
                     assertEquals(first.width, last.width, 1f)
                     assertTrue(last.top > first.top)
                 }
-                runOnIdle { width.value = 599 }
+                runOnIdle { width.value = TABLET_WIDTH }
                 waitForIdle()
                 assertTrue(
                     onNodeWithTag("card-1").fetchSemanticsNode().boundsInRoot.top >
@@ -88,12 +89,12 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
                     onNodeWithTag("card-0").fetchSemanticsNode().boundsInRoot.top,
             )
         },
-    ) { WindowWidth(600) { ListFixture(adaptive = false) } }
+    ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture(adaptive = false) } }
 
     @Test
     fun `given expanded list when empty and resized then expansion survives`() {
         val count = mutableStateOf(3)
-        val width = mutableStateOf(599)
+        val width = mutableStateOf(TABLET_WIDTH)
         snap(
             width = 650.dp,
             assertion = {
@@ -102,7 +103,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
                 onNodeWithTag("card-2").assertExists()
                 runOnIdle {
                     count.value = 0
-                    width.value = 600
+                    width.value = TABLET_WINDOW_WIDTH
                 }
                 onNodeWithTag("header").assertExists()
                 onNodeWithText("Find a destination").performClick()
@@ -151,7 +152,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
             assertTrue(header.width > first.width + second.width)
             assertTrue(header.bottom <= first.top)
         },
-    ) { WindowWidth(600) { ListFixture() } }
+    ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture() } }
 
     @Test
     fun `given one tablet card when rendered then keeps half width`() = snap(
@@ -162,7 +163,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
             assertTrue(card.width < header.width / 2)
             onNodeWithTag("card-1").assertDoesNotExist()
         },
-    ) { WindowWidth(600) { ListFixture(count = 1) } }
+    ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture(count = 1) } }
 
     @Test
     fun `given large text when tablet layout is enabled then content remains visible`() = snap(
@@ -174,7 +175,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
         },
     ) {
         CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, fontScale = 2f)) {
-            WindowWidth(600) { ListFixture() }
+            WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture() }
         }
     }
 
@@ -188,7 +189,7 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
             )
         },
     ) {
-        WindowWidth(600) {
+        WindowWidth(TABLET_WINDOW_WIDTH) {
             BpkStackCardList("Destinations", 3, Modifier, null, null, null, true, embedded) { Card(it) }
         }
     }
@@ -239,3 +240,5 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
         fun parameters() = listOf(arrayOf(true), arrayOf(false))
     }
 }
+
+private const val TABLET_WINDOW_WIDTH = TABLET_WIDTH + 1

@@ -63,8 +63,9 @@ fun BpkStackCardList(
 /**
  * A stack of cards with optional full-width content below its section header and when empty.
  *
- * @param useTwoColumnsOnTablet When true, uses two equal-width columns at a current window width of
- * at least 600 dp. Defaults to false. Counts refer to cards, not rows; odd counts are not rounded.
+ * @param useTwoColumnsOnTablet When true, uses two equal-width columns when the current window is
+ * wider than the Backpack tablet breakpoint (769 dp). Defaults to false. Counts refer to cards,
+ * not rows; odd counts are not rounded.
  * @param headerContent Optional content below the section header, including when there are no cards.
  * Null adds no spacing. The caller owns any state inside this slot, such as chip selection.
  * @param emptyContent Optional content shown instead of cards/accessories when [totalCount] is zero.
