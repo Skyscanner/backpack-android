@@ -125,10 +125,8 @@ class BpkSwitchTest : BpkSnapshotTest() {
         val interactions = MutableInteractionSource()
         val events = mutableListOf<Interaction>()
         var checked by mutableStateOf(false)
-        var layoutDirection = LayoutDirection.Ltr
         composeTestRule.setContent {
             BackpackDemoTheme {
-                layoutDirection = LocalLayoutDirection.current
                 LaunchedEffect(interactions) { interactions.interactions.collect { events.add(it) } }
                 BpkSwitch(
                     text = "Wifi",
@@ -140,20 +138,18 @@ class BpkSwitchTest : BpkSnapshotTest() {
                 )
             }
         }
-        val row = composeTestRule.onNodeWithTag("row")
-        row.performTouchInput {
-            down(
-                androidx.compose.ui.geometry.Offset(
-                    x = if (layoutDirection == LayoutDirection.Rtl) 1f else width - 1f,
-                    y = height / 2f,
-                ),
-            )
+        val visualSwitch = composeTestRule.onNode(
+            SemanticsMatcher.keyIsDefined(SemanticsProperties.HideFromAccessibility) and hasAnyAncestor(hasTestTag("row")),
+            useUnmergedTree = true,
+        )
+        visualSwitch.performTouchInput {
+            down(center)
             advanceEventTime(200)
         }
         composeTestRule.mainClock.advanceTimeBy(200)
         composeTestRule.waitForIdle()
         check(!checked)
-        row.performTouchInput { up() }
+        visualSwitch.performTouchInput { up() }
         composeTestRule.waitForIdle()
         val press = events.filterIsInstance<PressInteraction.Press>().single()
         check(events.filterIsInstance<PressInteraction.Release>().single().press == press)
@@ -182,13 +178,14 @@ class BpkSwitchTest : BpkSnapshotTest() {
         }
 
         composeTestRule.onNodeWithContentDescription("Help").performTouchInput {
-            click(androidx.compose.ui.geometry.Offset(4.dp.toPx(), height / 2f))
+            click(center)
         }
         check(helpClicks == 1) { "Info icon tap must open help" }
         check(!checked) { "Info icon tap must not toggle the switch" }
-        composeTestRule.onNodeWithTag("switch").performTouchInput {
-            click(androidx.compose.ui.geometry.Offset(width - 26.dp.toPx(), height / 2f))
-        }
+        composeTestRule.onNode(
+            SemanticsMatcher.keyIsDefined(SemanticsProperties.HideFromAccessibility) and hasAnyAncestor(hasTestTag("switch")),
+            useUnmergedTree = true,
+        ).performTouchInput { click(center) }
         check(checked) { "Visual switch center tap must toggle" }
         check(helpClicks == 1)
     }
