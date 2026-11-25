@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
@@ -162,6 +163,20 @@ class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotT
             onNodeWithTag("card-1").assertDoesNotExist()
         },
     ) { WindowWidth(600) { ListFixture(count = 1) } }
+
+    @Test
+    fun `given large text when tablet layout is enabled then content remains visible`() = snap(
+        width = 650.dp,
+        assertion = {
+            onNodeWithTag("header").assertExists()
+            onNodeWithTag("card-0").assertExists()
+            onNodeWithTag("card-2").assertExists()
+        },
+    ) {
+        CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, fontScale = 2f)) {
+            WindowWidth(600) { ListFixture() }
+        }
+    }
 
     @Test
     fun `given original positional API when wide then remains single column`() = snap(
