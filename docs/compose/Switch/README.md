@@ -16,6 +16,42 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
+| Parameter | Description |
+|---|---|
+| `helpAction` | **Experimental.** Accessible trailing help button outside the switch toggle target. |
+
+```Kotlin
+@OptIn(ExperimentalBackpackApi::class)
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { },
+  helpAction = BpkSwitchHelpAction(contentDescription = "Help", onClick = { }),
+)
+```
+
+### Help sheet consumer contract
+
+`helpAction` opens consumer-owned help. For a font-scaling sheet title, pass no
+`title` to `BpkModalBottomSheet`; retain its `closeButton` and render the title as a
+`BpkTheme.typography.heading5` heading in a scrollable content slot. This avoids the
+shared modal header's intentionally unscaled title while keeping the close control
+visible and accessible. Use caller-localised text for the help label, title, message,
+and close content description.
+
+The help touch target sits next to the label; the centred icon provides visual spacing.
+Help remains enabled when the switch is disabled because it is informational. The help
+target is vertically centred, and the switch follows the requested switch alignment.
+
+For the experimental help overload, the row is the switch toggle target, including
+blank space and the visible switch. The help button consumes its own taps independently
+and does not toggle the row. The row supplies the switch semantics and press feedback.
+
+The visual switch can still be tapped, but the space between the help target and switch
+is deliberately outside both actions so the help button remains outside the switch
+toggle target. The visual-switch tap uses no separate keyboard focus or accessibility
+node; it also has no independent pressed-state indication.
+
 Example of a Switch:
 
 ```Kotlin
@@ -84,3 +120,9 @@ BpkSwitch(
 `BpkSwitch` announces its checked state ("On"/"Off") to TalkBack before its label. If the checked state is always the same in a given context, that announcement is redundant and can be confusing. Pass `announceState = false` to suppress it.
 
 For external keyboards, `BpkSwitch` is a single Tab stop: only the row that wraps the label and the switch registers a focus target, not the switch control by itself.
+
+### Switch with help
+
+| Day | Night |
+| --- | --- |
+| ![Switch with help in day mode](screenshots/with-help.png) | ![Switch with help in night mode](screenshots/with-help_dm.png) |

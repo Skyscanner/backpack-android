@@ -19,10 +19,14 @@
 package net.skyscanner.backpack.compose.switch
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.Composable
@@ -30,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -39,18 +44,29 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.theme.bpkRipple
 import net.skyscanner.backpack.compose.switch.internal.BpkSwitchImpl
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.InformationCircle
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.suppressToggleableStateAnnouncement
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 enum class BpkSwitchStyle {
     Default,
     OnContrast,
 }
+
+@ExperimentalBackpackApi
+data class BpkSwitchHelpAction(
+    val contentDescription: String,
+    val onClick: () -> Unit,
+)
 
 /**
  * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
@@ -89,6 +105,38 @@ fun BpkSwitch(
     )
 }
 
+@ExperimentalBackpackApi
+@Composable
+fun BpkSwitch(
+    text: String,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    helpAction: BpkSwitchHelpAction,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
+    shouldTruncate: Boolean = true,
+    switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    textStyle: TextStyle? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
+) {
+    BpkSwitchWithHelpAction(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        helpAction = helpAction,
+        modifier = modifier,
+        enabled = enabled,
+        style = style,
+        switchAlignment = switchAlignment,
+        textStyle = textStyle,
+        interactionSource = interactionSource,
+        announceState = announceState,
+    ) {
+        HelpLabelText(buildAnnotatedString { append(text) }, shouldTruncate)
+    }
+}
+
 /**
  * @param announceState Whether TalkBack announces the checked state ("On"/"Off") before [text].
  * Set to false when the state is redundant or misleading in context.
@@ -124,6 +172,38 @@ fun BpkSwitch(
             )
         },
     )
+}
+
+@ExperimentalBackpackApi
+@Composable
+fun BpkSwitch(
+    text: AnnotatedString,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    helpAction: BpkSwitchHelpAction,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    style: BpkSwitchStyle = BpkSwitchStyle.Default,
+    shouldTruncate: Boolean = true,
+    switchAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    textStyle: TextStyle? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    announceState: Boolean = true,
+) {
+    BpkSwitchWithHelpAction(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        helpAction = helpAction,
+        modifier = modifier,
+        enabled = enabled,
+        style = style,
+        switchAlignment = switchAlignment,
+        textStyle = textStyle,
+        interactionSource = interactionSource,
+        announceState = announceState,
+    ) {
+        HelpLabelText(text, shouldTruncate)
+    }
 }
 
 /**
@@ -186,6 +266,90 @@ fun BpkSwitch(
 }
 
 @Composable
+@OptIn(ExperimentalBackpackApi::class)
+private fun BpkSwitchWithHelpAction(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    helpAction: BpkSwitchHelpAction,
+    modifier: Modifier,
+    enabled: Boolean,
+    style: BpkSwitchStyle,
+    switchAlignment: Alignment.Vertical,
+    textStyle: TextStyle?,
+    interactionSource: MutableInteractionSource,
+    announceState: Boolean,
+    content: @Composable () -> Unit,
+) {
+    val helpInteractionSource = remember { MutableInteractionSource() }
+    Row(
+        modifier = modifier
+            .applyIf(onCheckedChange != null) {
+                toggleable(
+                    value = checked,
+                    role = Role.Switch,
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onValueChange = onCheckedChange!!,
+                    enabled = enabled,
+                ).suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
+            }
+            .applyIf(onCheckedChange == null) {
+                semantics(mergeDescendants = true) {
+                    role = Role.Switch
+                    toggleableState = ToggleableState(checked)
+                    if (!enabled) disabled()
+                }.suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
+            },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .weight(1f, fill = false),
+            ) {
+                BpkToggleableContent(
+                    enabled = enabled,
+                    onContrast = style == BpkSwitchStyle.OnContrast,
+                    textStyle = textStyle ?: BpkTheme.typography.footnote,
+                    content = content,
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .size(HelpActionTouchTarget)
+                    .clickable(
+                        interactionSource = helpInteractionSource,
+                        indication = null,
+                        role = Role.Button,
+                        onClick = helpAction.onClick,
+                    )
+                    .semantics { contentDescription = helpAction.contentDescription },
+                contentAlignment = Alignment.Center,
+            ) {
+                BpkIcon(
+                    icon = BpkIcon.InformationCircle,
+                    size = BpkIconSize.Large,
+                    contentDescription = null,
+                    // Keep the 48dp hit target invisible; draw feedback around the icon like navigation actions.
+                    modifier = Modifier.indication(helpInteractionSource, bpkRipple(bounded = false)),
+                    tint = if (style == BpkSwitchStyle.OnContrast) BpkTheme.colors.textOnDark else BpkTheme.colors.textSecondary,
+                )
+            }
+        }
+        BpkSwitchImpl(
+            modifier = Modifier.align(switchAlignment),
+            checked = checked,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            style = style,
+        )
+    }
+}
+
+private val HelpActionTouchTarget = BpkSpacing.Xxl + BpkSpacing.Md
+
+@Composable
 private fun RowScope.TextWithSpacer(
     annotatedString: AnnotatedString,
     shouldTruncate: Boolean,
@@ -198,5 +362,19 @@ private fun RowScope.TextWithSpacer(
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.width(BpkSpacing.Base))
+    }
+}
+
+@Composable
+private fun HelpLabelText(
+    annotatedString: AnnotatedString,
+    shouldTruncate: Boolean,
+) {
+    annotatedString.takeIf { it.isNotEmpty() }?.let {
+        BpkText(
+            text = annotatedString,
+            maxLines = if (shouldTruncate) 1 else Int.MAX_VALUE,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }
