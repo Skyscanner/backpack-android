@@ -44,8 +44,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
+@Config(qualifiers = "w700dp-h1000dp-mdpi", sdk = [35])
 class BpkStackCardListAdaptiveTest(private val embedded: Boolean) : BpkSnapshotTest() {
 
     @Test
