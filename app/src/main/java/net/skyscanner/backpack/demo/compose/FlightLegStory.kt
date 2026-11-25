@@ -70,7 +70,7 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(BpkSpacing.Lg))
 
-        BpkText(text = "With bottom content", color = BpkTheme.colors.textPrimary)
+        BpkText(text = stringResource(id = R.string.flight_leg_bottom_content_example), color = BpkTheme.colors.textPrimary)
         FlightLegWithBottomContentSample()
     }
 }
@@ -83,8 +83,8 @@ internal fun FlightLegWithBottomContentSample(modifier: Modifier = Modifier) {
         description = AnnotatedString("LHR-SIN, SwissAir"),
         stopsInfo = "Direct",
         duration = "7h 55m",
-        contentDescription = "19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport",
-        bottomContent = { BpkText(text = "Nearby airport") },
+        contentDescription = stringResource(id = R.string.flight_leg_nearby_airport_content_description),
+        bottomContent = { BpkText(text = stringResource(id = R.string.flight_leg_nearby_airport)) },
         modifier = modifier,
     )
 }

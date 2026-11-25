@@ -290,6 +290,9 @@
     <string name="flight_leg_basic_example">Basic Flight Leg</string>
     <string name="flight_leg_complete_long_stops_example">Complete Flight Leg(long stops info)</string>
     <string name="flight_leg_complete_short_stops_example">Complete Flight Leg(short stops info)</string>
+    <string name="flight_leg_bottom_content_example">With bottom content</string>
+    <string name="flight_leg_nearby_airport">Nearby airport</string>
+    <string name="flight_leg_nearby_airport_content_description">19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport</string>
 
     <string name="maps_markers_pointers_only">Pointers</string>
     <string name="maps_markers_badges">Badges</string>

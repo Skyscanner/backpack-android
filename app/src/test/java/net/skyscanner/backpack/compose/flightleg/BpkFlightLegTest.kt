@@ -56,21 +56,13 @@ import org.robolectric.RuntimeEnvironment
 class BpkFlightLegTest : BpkSnapshotTest() {
 
     @Test
-    fun `given bottom content when rendered then it aligns with airport codes after the logo`() {
-        var layoutDirection = LayoutDirection.Ltr
-        composeTestRule.setContent {
-            net.skyscanner.backpack.demo.BackpackDemoTheme {
-                layoutDirection = LocalLayoutDirection.current
-                FlightLegWithBottomContentForTest()
-            }
-        }
-        val codes = composeTestRule.onNodeWithText("LHR-SIN, SwissAir", useUnmergedTree = true)
-            .fetchSemanticsNode().boundsInRoot
-        val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
-            .fetchSemanticsNode().boundsInRoot
-        check(slot.top >= codes.bottom)
-        val startDifference = if (layoutDirection == LayoutDirection.Rtl) slot.right - codes.right else slot.left - codes.left
-        check(kotlin.math.abs(startDifference) <= 1f) { "Bottom content must align with airport codes at the logical start" }
+    fun `given ltr bottom content when rendered then it aligns with airport codes after the logo`() {
+        assertBottomContentAlignment(LayoutDirection.Ltr)
+    }
+
+    @Test
+    fun `given rtl bottom content when rendered then it aligns with airport codes after the logo`() {
+        assertBottomContentAlignment(LayoutDirection.Rtl)
     }
 
     @Test
@@ -281,6 +273,23 @@ class BpkFlightLegTest : BpkSnapshotTest() {
                 },
             )
         }
+    }
+
+    private fun assertBottomContentAlignment(layoutDirection: LayoutDirection) {
+        composeTestRule.setContent {
+            net.skyscanner.backpack.demo.BackpackDemoTheme {
+                CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
+                    FlightLegWithBottomContentForTest()
+                }
+            }
+        }
+        val codes = composeTestRule.onNodeWithText("LHR-SIN, SwissAir", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
+            .fetchSemanticsNode().boundsInRoot
+        check(slot.top >= codes.bottom)
+        val startDifference = if (layoutDirection == LayoutDirection.Rtl) slot.right - codes.right else slot.left - codes.left
+        check(kotlin.math.abs(startDifference) <= 1f) { "Bottom content must align with airport codes at the logical start" }
     }
 
     @Composable
