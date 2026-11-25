@@ -57,8 +57,10 @@ class BpkFlightLegTest : BpkSnapshotTest() {
 
     @Test
     fun `given bottom content when rendered then it aligns with airport codes after the logo`() {
+        var layoutDirection = LayoutDirection.Ltr
         composeTestRule.setContent {
             net.skyscanner.backpack.demo.BackpackDemoTheme {
+                layoutDirection = LocalLayoutDirection.current
                 FlightLegWithBottomContentForTest()
             }
         }
@@ -67,7 +69,8 @@ class BpkFlightLegTest : BpkSnapshotTest() {
         val slot = composeTestRule.onNodeWithTag("bottomContent", useUnmergedTree = true)
             .fetchSemanticsNode().boundsInRoot
         check(slot.top >= codes.bottom)
-        check(kotlin.math.abs(slot.left - codes.left) <= 1f)
+        val startDifference = if (layoutDirection == LayoutDirection.Rtl) slot.right - codes.right else slot.left - codes.left
+        check(kotlin.math.abs(startDifference) <= 1f) { "Bottom content must align with airport codes at the logical start" }
     }
 
     @Test
