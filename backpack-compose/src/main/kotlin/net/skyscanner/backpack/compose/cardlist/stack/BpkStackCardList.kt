@@ -59,3 +59,44 @@ fun BpkStackCardList(
         content = content,
     )
 }
+
+/**
+ * A stack of cards with optional full-width content below its section header and when empty.
+ *
+ * @param useTwoColumnsOnTablet When true, uses two equal-width columns at a current window width of
+ * at least 600 dp. Defaults to false. Counts refer to cards, not rows; odd counts are not rounded.
+ * @param headerContent Optional content below the section header, including when there are no cards.
+ * Null adds no spacing. The caller owns any state inside this slot, such as chip selection.
+ * @param emptyContent Optional content shown instead of cards/accessories when [totalCount] is zero.
+ * Null preserves the existing empty appearance. Expansion state survives an empty list.
+ */
+@Composable
+fun BpkStackCardList(
+    title: String,
+    totalCount: Int,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+    accessoryStyle: BpkStackCardAccessoryStyle? = null,
+    headerButton: BpkSectionHeaderButton? = null,
+    accessibilityHeaderTagEnabled: Boolean? = true,
+    isInScrollableContainer: Boolean = false,
+    useTwoColumnsOnTablet: Boolean = false,
+    headerContent: (@Composable () -> Unit)? = null,
+    emptyContent: (@Composable () -> Unit)? = null,
+    content: @Composable (Int) -> Unit,
+) {
+    BpkStackCardListImpl(
+        title = title,
+        description = description,
+        totalCount = totalCount,
+        modifier = modifier,
+        accessoryStyle = accessoryStyle,
+        headerButton = headerButton,
+        accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
+        isInScrollableContainer = isInScrollableContainer,
+        useTwoColumnsOnTablet = useTwoColumnsOnTablet,
+        headerContent = headerContent,
+        emptyContent = emptyContent,
+        content = content,
+    )
+}

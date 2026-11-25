@@ -385,6 +385,9 @@
     <string name="navigation_tabs_hotels">Hotels</string>
     <string name="navigation_tabs_carhire">Car hire</string>
 
+    <string name="card_list_all">All</string>
+    <string name="card_list_saved">Saved</string>
+    <string name="card_list_find_destination">Find a destination</string>
     <string name="card_list_title">Must-visit spots</string>
     <string name="card_list_description">Check out these world-famous destinations perfect for visiting in spring.</string>
     <string name="card_list_header_button_text">Action</string>

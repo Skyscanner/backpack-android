@@ -327,3 +327,43 @@ BpkStackCardList(
     // content
 }
 ```
+### Optional slots and tablet columns
+
+`BpkStackCardList` accepts independently optional `headerContent` and `emptyContent`
+slots (both default to `null`). Header content sits below the section header, even
+with no cards. Empty content replaces cards/accessories when `totalCount` is zero.
+Absent slots add no spacing. The original overload remains available.
+
+`useTwoColumnsOnTablet` defaults to `false`. When enabled, the component uses two
+equal-width columns at a **current window width of at least 600 dp**, including
+foldables, and one below that threshold. It responds to resizing and rotation.
+Header, slots and accessories span the full width. Odd final rows retain a normal
+cell width and follow layout direction. Counts and callback indices refer to
+cards, not rows; the component does not round limits or filter content.
+
+```kotlin
+BpkStackCardList(
+    title = title,
+    totalCount = selectedCards.size,
+    accessoryStyle = if (selectedCards.size > collapsedCount) {
+        BpkStackCardAccessoryStyle.Expand(
+            collapsedCount = collapsedCount,
+            expandText = showMore,
+            collapsedText = showLess,
+        )
+    } else null,
+    isInScrollableContainer = true,
+    useTwoColumnsOnTablet = true,
+    headerContent = {
+        BpkSingleSelectChipGroup(chips, selectedIndex, onItemClicked = selectCategory)
+    },
+    emptyContent = { BpkButton(text = findDestination, onClick = startSearch) },
+) { index -> DestinationCard(selectedCards[index]) }
+```
+
+Keep the same call mounted when changing selected cards or displaying an empty
+category: expansion remains internally saveable across these changes. The caller
+owns chip selection. Embedded lists use non-scrolling rows inside the parent
+scroller; standalone lists keep lazy scrolling. `expandedCount` can stay unset to
+use the actual `totalCount`; omit the expansion accessory when all cards fit.
+Existing expansion count behaviour is unchanged.

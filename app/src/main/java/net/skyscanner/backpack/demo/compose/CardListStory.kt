@@ -32,7 +32,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,9 +45,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.cardlist.rail.BpkRailCardList
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
 import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleChipItem
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.snippet.BpkSnippet
@@ -56,6 +63,44 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardListComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
+
+@Composable
+@CardListComponent
+@ComposeStory("Stack - Chips and adaptive columns")
+fun AdaptiveCardListStackStory(modifier: Modifier = Modifier) {
+    var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
+    val chips = listOf(
+        BpkSingleChipItem(stringResource(R.string.card_list_all)),
+        BpkSingleChipItem(stringResource(R.string.card_list_saved)),
+    )
+    val selectedCards = if (selectedIndex == 0) dataList.take(5) else emptyList()
+    BpkStackCardList(
+        title = stringResource(R.string.card_list_title),
+        totalCount = selectedCards.size,
+        modifier = modifier.padding(horizontal = BpkSpacing.Base),
+        useTwoColumnsOnTablet = true,
+        accessoryStyle = if (selectedCards.size > 2) {
+            BpkStackCardAccessoryStyle.Expand(
+                collapsedCount = 2,
+                expandText = stringResource(R.string.card_list_show_more),
+                collapsedText = stringResource(R.string.card_list_show_less),
+            )
+        } else null,
+        headerContent = {
+            BpkSingleSelectChipGroup(
+                chips = chips,
+                selectedIndex = selectedIndex,
+                onItemClicked = { selectedIndex = chips.indexOf(it) },
+            )
+        },
+        emptyContent = {
+            BpkButton(
+                text = stringResource(R.string.card_list_find_destination),
+                onClick = { selectedIndex = 0 },
+            )
+        },
+    ) { index -> StackItem(selectedCards[index]) }
+}
 
 @Composable
 @CardListComponent
