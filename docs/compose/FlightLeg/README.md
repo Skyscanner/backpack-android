@@ -18,6 +18,43 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
+| Parameter | Description |
+|---|---|
+| `bottomContent` | **Experimental.** Content below the airport codes, aligned with their start edge. Required on the experimental overload; pass `null` to omit the content. |
+
+Pass `bottomContent` by name. It is required and precedes the optional `modifier`, keeping existing positional calls (including a null `nextDayArrival`) unambiguous. A trailing lambda continues to supply `carrierLogoContent`.
+
+### Experimental bottom content accessibility
+
+Bottom content is placed in the flight-details column after the airport codes with
+a `BpkSpacing.Sm` gap, before the operator and warning notices. It aligns with the
+codes in both layout directions, whether or not a carrier logo is present. It is
+inside the flight leg's merged semantics: supply non-interactive content only. When `contentDescription`
+is `null`, the complete leg including bottom content is hidden from TalkBack. When it
+is set, TalkBack reads that description as the leg's single focus target, so callers
+must append the bottom-content text to `contentDescription` themselves.
+If a supplied component merges its own semantics, such as `BpkBadge`, hide that component
+from accessibility with `Modifier.semantics { hideFromAccessibility() }`. Its label is
+already part of the leg description and must not become a second TalkBack target.
+
+```Kotlin
+@OptIn(ExperimentalBackpackApi::class)
+BpkFlightLeg(
+  departureArrivalTime = "19:50 - 22:45",
+  description = AnnotatedString("LHR-SIN"),
+  stopsInfo = "Direct",
+  duration = "7h 55m",
+  contentDescription = "19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport",
+  bottomContent = {
+    BpkBadge(
+      text = "Nearby airport",
+      type = BpkBadgeType.Subtle,
+      modifier = Modifier.semantics { hideFromAccessibility() },
+    )
+  },
+)
+```
+
 Example of a FlightLeg:
 
 ```Kotlin
