@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.flightleg
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import net.skyscanner.backpack.compose.text.BpkText
 
@@ -33,4 +34,12 @@ private fun StableFlightLegOverloadCompileFixture() {
     ) {
         BpkText(text = "Carrier logo trailing lambda")
     }
+}
+
+@Composable
+private fun StableFlightLegPositionalNullCompileFixture() {
+    BpkFlightLeg(
+        "19:50 - 22:45", AnnotatedString("LHR-SIN"),
+        "Direct", "7h 55m", null, Modifier, null,
+    )
 }

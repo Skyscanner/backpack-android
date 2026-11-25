@@ -20,9 +20,9 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 | Parameter | Description |
 |---|---|
-| `bottomContent` | **Experimental.** Optional content below the airport codes, aligned with their start edge. Defaults to `null`. |
+| `bottomContent` | **Experimental.** Content below the airport codes, aligned with their start edge. Required on the experimental overload; pass `null` to omit the content. |
 
-Pass `bottomContent` by name. A trailing lambda continues to supply `carrierLogoContent`, preserving existing callers.
+Pass `bottomContent` by name. It is required and precedes the optional `modifier`, keeping existing positional calls (including a null `nextDayArrival`) unambiguous. A trailing lambda continues to supply `carrierLogoContent`.
 
 ### Experimental bottom content accessibility
 
