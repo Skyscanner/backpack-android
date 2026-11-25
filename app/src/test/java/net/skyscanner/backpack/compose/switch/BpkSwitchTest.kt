@@ -20,6 +20,10 @@ package net.skyscanner.backpack.compose.switch
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.interaction.Interaction
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -72,6 +76,79 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.junit.Test
 
 class BpkSwitchTest : BpkSnapshotTest() {
+
+    @Test
+    @OptIn(ExperimentalBackpackApi::class)
+    fun `given full width help row when blank space is tapped then it toggles except when disabled`() {
+        var checked by mutableStateOf(false)
+        var enabled by mutableStateOf(true)
+        var rtl by mutableStateOf(false)
+        var helpClicks = 0
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                CompositionLocalProvider(LocalLayoutDirection provides if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr) {
+                    BpkSwitch(
+                        text = "Wifi",
+                        checked = checked,
+                        onCheckedChange = { checked = it },
+                        enabled = enabled,
+                        helpAction = BpkSwitchHelpAction("Help") { helpClicks++ },
+                        modifier = Modifier.fillMaxWidth().testTag("row"),
+                    )
+                }
+            }
+        }
+        repeat(2) {
+            composeTestRule.onNodeWithTag("row").performTouchInput { click(center) }
+            check(checked) { "Blank space must toggle in either reading direction" }
+            composeTestRule.onNodeWithContentDescription("Help").performClick()
+            check(checked)
+            enabled = false
+            composeTestRule.waitForIdle()
+            composeTestRule.onNodeWithTag("row").performTouchInput { click(center) }
+            check(checked) { "Disabled row must not toggle" }
+            composeTestRule.onNodeWithContentDescription("Help").performClick()
+            checked = false
+            enabled = true
+            rtl = true
+            composeTestRule.waitForIdle()
+        }
+        check(helpClicks == 4)
+    }
+
+    @Test
+    @OptIn(ExperimentalBackpackApi::class)
+    fun `given help row when visual switch is held then press feedback follows press and release`() {
+        val interactions = MutableInteractionSource()
+        val events = mutableListOf<Interaction>()
+        var checked by mutableStateOf(false)
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                LaunchedEffect(interactions) { interactions.interactions.collect { events.add(it) } }
+                BpkSwitch(
+                    text = "Wifi",
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                    helpAction = BpkSwitchHelpAction("Help") {},
+                    interactionSource = interactions,
+                    modifier = Modifier.fillMaxWidth().testTag("row"),
+                )
+            }
+        }
+        val row = composeTestRule.onNodeWithTag("row")
+        row.performTouchInput {
+            down(androidx.compose.ui.geometry.Offset(width - 26.dp.toPx(), height / 2f))
+            advanceEventTime(200)
+        }
+        composeTestRule.mainClock.advanceTimeBy(200)
+        composeTestRule.waitForIdle()
+        check(!checked)
+        row.performTouchInput { up() }
+        composeTestRule.waitForIdle()
+        val press = events.filterIsInstance<PressInteraction.Press>().single()
+        check(events.filterIsInstance<PressInteraction.Release>().single().press == press)
+        check(checked)
+    }
 
     @Test
     @OptIn(ExperimentalBackpackApi::class)
@@ -173,7 +250,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch))
         composeTestRule.onNodeWithTag("switch").assertIsDisplayed()
         composeTestRule.onAllNodes(
-            SemanticsMatcher.keyIsDefined(SemanticsActions.OnClick) and hasAnyAncestor(hasTestTag("switch")),
+            SemanticsMatcher.keyIsDefined(SemanticsActions.OnClick) and (hasTestTag("switch") or hasAnyAncestor(hasTestTag("switch"))),
         ).assertCountEquals(2)
     }
 

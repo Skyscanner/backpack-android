@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.switch
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,10 +31,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
@@ -284,31 +281,32 @@ private fun BpkSwitchWithHelpAction(
     content: @Composable () -> Unit,
 ) {
     val helpInteractionSource = remember { MutableInteractionSource() }
-    val currentChecked = rememberUpdatedState(checked)
-    val currentOnCheckedChange = rememberUpdatedState(onCheckedChange)
-    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = modifier
+            .applyIf(onCheckedChange != null) {
+                toggleable(
+                    value = checked,
+                    role = Role.Switch,
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onValueChange = onCheckedChange!!,
+                    enabled = enabled,
+                ).suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
+            }
+            .applyIf(onCheckedChange == null) {
+                semantics(mergeDescendants = true) {
+                    role = Role.Switch
+                    toggleableState = ToggleableState(checked)
+                    if (!enabled) disabled()
+                }.suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
+            },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .weight(1f, fill = false)
-                    .applyIf(onCheckedChange != null) {
-                        toggleable(
-                            value = checked,
-                            role = Role.Switch,
-                            interactionSource = interactionSource,
-                            indication = null,
-                            onValueChange = onCheckedChange!!,
-                            enabled = enabled,
-                        ).suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
-                    }
-                    .applyIf(onCheckedChange == null) {
-                        semantics(mergeDescendants = true) {
-                            role = Role.Switch
-                            toggleableState = ToggleableState(checked)
-                            if (!enabled) disabled()
-                        }.suppressToggleableStateAnnouncement(shouldSuppress = !announceState)
-                    },
+                    .weight(1f, fill = false),
             ) {
                 BpkToggleableContent(
                     enabled = enabled,
@@ -340,15 +338,7 @@ private fun BpkSwitchWithHelpAction(
             }
         }
         BpkSwitchImpl(
-            modifier = Modifier
-                .align(switchAlignment)
-                .applyIf(onCheckedChange != null) {
-                    pointerInput(enabled) {
-                        if (enabled) {
-                            detectTapGestures { currentOnCheckedChange.value!!(!currentChecked.value) }
-                        }
-                    }
-                },
+            modifier = Modifier.align(switchAlignment),
             checked = checked,
             enabled = enabled,
             interactionSource = interactionSource,

@@ -43,10 +43,9 @@ The help touch target sits next to the label; the centred icon provides visual s
 Help remains enabled when the switch is disabled because it is informational. The help
 target is vertically centred, and the switch follows the requested switch alignment.
 
-For the experimental help overload, a caller `modifier` decorates the whole help-row
-layout. It does not identify the nested Switch semantics node: use the switch label to
-query that node in Compose tests. This preserves the help button as a sibling rather
-than extending the switch toggle target over it.
+For the experimental help overload, the row is the switch toggle target, including
+blank space and the visible switch. The help button consumes its own taps independently
+and does not toggle the row. The row supplies the switch semantics and press feedback.
 
 The visual switch can still be tapped, but the space between the help target and switch
 is deliberately outside both actions so the help button remains outside the switch
