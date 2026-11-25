@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.compose.flightleg
 
+import android.view.ViewGroup
+import androidx.core.view.allViews
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.width
@@ -54,6 +57,7 @@ import net.skyscanner.backpack.demo.compose.BasicFlightLegSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegLongStopsSample
 import net.skyscanner.backpack.demo.compose.CompleteFlightLegShortStopsSample
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -162,6 +166,33 @@ class BpkFlightLegTest : BpkSnapshotTest() {
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf("Flight leg. Nearby airport")))
         composeTestRule.onNodeWithText("Nearby airport", useUnmergedTree = true)
             .assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.ContentDescription))
+    }
+
+    @Test
+    fun `given badge demo when read by talkback then only the leg is accessible`() {
+        composeTestRule.setContent {
+            net.skyscanner.backpack.demo.BackpackDemoTheme {
+                FlightLegWithBottomContentSample(modifier = Modifier.testTag("leg"))
+            }
+        }
+        val leg = composeTestRule.onNodeWithTag("leg")
+            .assert(
+                SemanticsMatcher.expectValue(
+                    SemanticsProperties.ContentDescription,
+                    listOf("19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport"),
+                ),
+            )
+            .fetchSemanticsNode()
+        val badge = composeTestRule.onNodeWithText("Nearby airport").fetchSemanticsNode()
+        composeTestRule.runOnIdle {
+            val provider = (composeTestRule.activity.window.decorView as ViewGroup).allViews
+                .mapNotNull { it.accessibilityNodeProvider }
+                .single()
+            val legInfo = requireNotNull(provider.createAccessibilityNodeInfo(leg.id))
+            val badgeInfo = requireNotNull(provider.createAccessibilityNodeInfo(badge.id))
+            assertTrue("The whole leg must remain available to TalkBack", legInfo.isVisibleToUser)
+            assertFalse("The badge must not be a second TalkBack target", badgeInfo.isVisibleToUser)
+        }
     }
 
     @Test

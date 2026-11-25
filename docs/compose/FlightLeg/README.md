@@ -33,6 +33,9 @@ inside the flight leg's merged semantics: supply non-interactive content only. W
 is `null`, the complete leg including bottom content is hidden from TalkBack. When it
 is set, TalkBack reads that description as the leg's single focus target, so callers
 must append the bottom-content text to `contentDescription` themselves.
+If a supplied component merges its own semantics, such as `BpkBadge`, hide that component
+from accessibility with `Modifier.semantics { hideFromAccessibility() }`. Its label is
+already part of the leg description and must not become a second TalkBack target.
 
 ```Kotlin
 @OptIn(ExperimentalBackpackApi::class)
@@ -42,7 +45,13 @@ BpkFlightLeg(
   stopsInfo = "Direct",
   duration = "7h 55m",
   contentDescription = "19:50 to 22:45. Direct. 7 hours 55 minutes. Nearby airport",
-  bottomContent = { BpkText(text = "Nearby airport") },
+  bottomContent = {
+    BpkBadge(
+      text = "Nearby airport",
+      type = BpkBadgeType.Subtle,
+      modifier = Modifier.semantics { hideFromAccessibility() },
+    )
+  },
 )
 ```
 

@@ -30,6 +30,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -89,6 +91,7 @@ internal fun FlightLegWithBottomContentSample(modifier: Modifier = Modifier) {
         bottomContent = {
             BpkBadge(
                 text = stringResource(id = R.string.flight_leg_nearby_airport),
+                modifier = Modifier.semantics { hideFromAccessibility() },
                 type = BpkBadgeType.Subtle,
             )
         },
