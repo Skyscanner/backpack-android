@@ -29,6 +29,11 @@ dependencies {
     testImplementation(libs.kotlin.compilerTesting)
     testImplementation(libs.kotlin.compilerTestingKsp)
 
+    // Compile-testing's embedded KSP engine must match the processor API version.
+    testRuntimeOnly(libs.google.ksp)
+    testRuntimeOnly(libs.google.kspAaEmbeddable)
+    testRuntimeOnly(libs.google.kspCommonDeps)
+
     // Detekt rules
     detektPlugins(libs.detektRules.compose)
     detektPlugins(libs.detektRules.formatting)
