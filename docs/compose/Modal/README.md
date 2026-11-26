@@ -110,6 +110,21 @@ BpkModal(
 )
 ```
 
+### Dimmed background
+
+The modal is shown in its own window, which dims the content behind it. When the modal covers the whole screen the dim is
+only visible as a flash while the modal appears or disappears, for example when `animated = false`. Set
+`dimBackground = false` to turn it off.
+
+```Kotlin
+BpkModal(
+    navIcon = NavIcon.Close(...),
+    animated = false,
+    dimBackground = false,
+    ...
+)
+```
+
 ### Navigation Bar State
 
 The modal's navigation bar state can be customized using the `navBarState` parameter:
