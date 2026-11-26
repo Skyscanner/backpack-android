@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RichTooltip
-import androidx.compose.material3.RichTooltipColors
 import androidx.compose.material3.TooltipAnchorPosition
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
@@ -173,7 +172,7 @@ fun BpkTooltip(
                         }
                     },
                     text = { BpkText(text = text) },
-                    colors = RichTooltipColors(
+                    colors = TooltipDefaults.richTooltipColors(
                         containerColor = BpkTheme.colors.surfaceDefault,
                         contentColor = BpkTheme.colors.textPrimary,
                         titleContentColor = BpkTheme.colors.textPrimary,

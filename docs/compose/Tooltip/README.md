@@ -18,7 +18,7 @@ Outside-tap dismissal is validated on device. Robolectric Compose touch injectio
 Compose root rather than Material3's popup window, so it cannot exercise the popup's outside-tap
 dismiss path locally.
 
-```Kotlin
+```kotlin
 @OptIn(ExperimentalBackpackApi::class)
 val state = rememberBpkTooltipState()
 BpkTooltip(

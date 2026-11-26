@@ -55,6 +55,8 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class BpkTooltipTest : BpkSnapshotTest() {
@@ -68,7 +70,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText("Tooltip title").assertIsDisplayed()
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.Heading, Unit))
-        check(composeTestRule.onNodeWithTag("anchor").fetchSemanticsNode().boundsInRoot == before)
+        assertEquals("Showing the tooltip must not move its anchor", before, composeTestRule.onNodeWithTag("anchor").fetchSemanticsNode().boundsInRoot)
     }
 
     @Test
@@ -80,7 +82,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         }
         val close = composeTestRule.onNodeWithContentDescription("Close tooltip")
         val bounds = close.fetchSemanticsNode().boundsInRoot
-        check(bounds.width >= 48 * composeTestRule.density.density) { "close=$bounds" }
+        assertTrue("Close target must be at least 48dp wide: $bounds", bounds.width >= 48 * composeTestRule.density.density)
         close.assertIsDisplayed().performClick()
         close.assertDoesNotExist()
     }
@@ -98,7 +100,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
             .performClick()
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText("Tooltip title").assertDoesNotExist()
-        check(dismissCalls == 1) { "dismissCalls=$dismissCalls" }
+        assertEquals("User dismissal must notify exactly once", 1, dismissCalls)
     }
 
     @Test
@@ -111,7 +113,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         val closeAction = close.fetchSemanticsNode().config[SemanticsActions.OnClick].action
         closeAction?.invoke()
         closeAction?.invoke()
-        check(dismissCalls == 1)
+        assertEquals("User dismissal must notify exactly once", 1, dismissCalls)
     }
 
     @Test
@@ -126,7 +128,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         showAgain = true
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithContentDescription("Close tooltip").performClick()
-        check(dismissCalls == 2)
+        assertEquals("Each presentation must notify once", 2, dismissCalls)
     }
 
     @Test
@@ -144,7 +146,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         }
         dismissProgrammatically = true
         composeTestRule.waitForIdle()
-        check(dismissCalls == 0)
+        assertEquals("Non-user dismissal must not invoke the callback", 0, dismissCalls)
     }
 
     @Test
@@ -158,7 +160,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         }
         visible = false
         composeTestRule.waitForIdle()
-        check(dismissCalls == 0)
+        assertEquals("Non-user dismissal must not invoke the callback", 0, dismissCalls)
     }
 
     @Test
@@ -177,7 +179,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         cancelShow = true
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText("Tooltip title").assertDoesNotExist()
-        check(dismissCalls == 0)
+        assertEquals("Non-user dismissal must not invoke the callback", 0, dismissCalls)
     }
 
     @Test
@@ -194,7 +196,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         composeTestRule.onNodeWithText("Tooltip title").assertIsDisplayed()
         generation++
         composeTestRule.waitForIdle()
-        check(dismissCalls == 0)
+        assertEquals("Non-user dismissal must not invoke the callback", 0, dismissCalls)
     }
 
     @Test
@@ -210,8 +212,8 @@ class BpkTooltipTest : BpkSnapshotTest() {
         composeTestRule.setContent { BackpackDemoTheme { TooltipSample(showInitially = true) } }
         val close = composeTestRule.onNodeWithContentDescription("Close tooltip")
         val bounds = close.fetchSemanticsNode().boundsInRoot
-        check(bounds.width >= 48 * composeTestRule.density.density)
-        check(bounds.height >= 48 * composeTestRule.density.density)
+        assertTrue("Close target must be at least 48dp wide: $bounds", bounds.width >= 48 * composeTestRule.density.density)
+        assertTrue("Close target must be at least 48dp high: $bounds", bounds.height >= 48 * composeTestRule.density.density)
         composeTestRule.onNodeWithText("Tooltip title").assertIsDisplayed()
         composeTestRule.onNodeWithText("Tooltip text").assertIsDisplayed()
     }
@@ -225,7 +227,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         Espresso.pressBack()
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithText("Tooltip title").assertDoesNotExist()
-        check(dismissCalls == 1)
+        assertEquals("User dismissal must notify exactly once", 1, dismissCalls)
     }
 
     @Test
@@ -237,7 +239,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         composeTestRule.onNodeWithContentDescription("Close tooltip").performClick()
         Espresso.pressBack()
         composeTestRule.waitForIdle()
-        check(dismissCalls == 1)
+        assertEquals("User dismissal must notify exactly once", 1, dismissCalls)
     }
 
     // Robolectric dispatches performTouchInput to the Compose root, not Material3's Popup window,
@@ -255,8 +257,8 @@ class BpkTooltipTest : BpkSnapshotTest() {
             val root = composeTestRule.onNodeWithTag("root").fetchSemanticsNode().boundsInWindow
             close.assertIsDisplayed()
             val closeBounds = close.fetchSemanticsNode().boundsInWindow
-            check(closeBounds.top >= root.top) { "close=$closeBounds root=$root" }
-            check(closeBounds.bottom <= root.bottom) { "close=$closeBounds root=$root" }
+            assertTrue("Close target must not extend above the root: close=$closeBounds root=$root", closeBounds.top >= root.top)
+            assertTrue("Close target must not extend below the root: close=$closeBounds root=$root", closeBounds.bottom <= root.bottom)
         } finally {
             resources.updateConfiguration(original, resources.displayMetrics)
         }
@@ -272,8 +274,8 @@ class BpkTooltipTest : BpkSnapshotTest() {
         composeTestRule.setContent { BackpackDemoTheme { TooltipSample(showInitially = true) } }
         val tooltip = composeTestRule.onNodeWithText("Tooltip title").fetchSemanticsNode().boundsInWindow
         val root = composeTestRule.onNodeWithTag("root").fetchSemanticsNode().boundsInWindow
-        check(tooltip.top >= root.top && tooltip.bottom <= root.bottom) { "tooltip=$tooltip root=$root" }
-        check(tooltip.left >= root.left && tooltip.right <= root.right) { "tooltip=$tooltip root=$root" }
+        assertTrue("Tooltip must fit vertically: tooltip=$tooltip root=$root", tooltip.top >= root.top && tooltip.bottom <= root.bottom)
+        assertTrue("Tooltip must fit horizontally: tooltip=$tooltip root=$root", tooltip.left >= root.left && tooltip.right <= root.right)
     }
 
     @Test
