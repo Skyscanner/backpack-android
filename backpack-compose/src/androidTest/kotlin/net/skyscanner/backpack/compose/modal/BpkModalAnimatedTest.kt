@@ -18,16 +18,22 @@
 
 package net.skyscanner.backpack.compose.modal
 
+import android.view.Window
+import android.view.WindowManager
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.window.DialogWindowProvider
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
@@ -67,7 +73,35 @@ class BpkModalAnimatedTest {
         assertEquals(1, dismissCount.get())
     }
 
-    private fun setContent(animated: Boolean) {
+    @Test
+    fun givenDimBackgroundIsDefault_whenShown_thenWindowDimsBehind() {
+        setContent(animated = true)
+        composeTestRule.waitForIdle()
+
+        assertTrue(dialogFlags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0)
+    }
+
+    @Test
+    fun givenDimBackgroundIsFalse_whenShown_thenWindowDoesNotDimBehind() {
+        setContent(animated = true, dimBackground = false)
+        composeTestRule.waitForIdle()
+
+        assertFalse(dialogFlags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0)
+    }
+
+    @Test
+    fun givenNotAnimated_whenShown_thenWindowAnimationsAreDisabled() {
+        setContent(animated = false)
+        composeTestRule.waitForIdle()
+
+        assertEquals(0, dialogWindowAnimations)
+    }
+
+    private var dialogWindow: Window? = null
+    private val dialogFlags get() = dialogWindow!!.attributes.flags
+    private val dialogWindowAnimations get() = dialogWindow!!.attributes.windowAnimations
+
+    private fun setContent(animated: Boolean, dimBackground: Boolean = true) {
         composeTestRule.setContent {
             BpkTheme {
                 // Like real callers, remove the modal from the composition once it has been dismissed. BpkModal calls
@@ -83,7 +117,10 @@ class BpkModalAnimatedTest {
                             showModal = false
                         },
                         animated = animated,
-                    ) {}
+                        dimBackground = dimBackground,
+                    ) {
+                        dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
+                    }
                 }
             }
         }

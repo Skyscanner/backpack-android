@@ -66,6 +66,7 @@ internal fun BpkModalImpl(
     title: String?,
     onDismiss: (() -> Unit)?,
     animated: Boolean,
+    dimBackground: Boolean,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val isVisible = state.isVisible
@@ -105,6 +106,9 @@ internal fun BpkModalImpl(
                 navigationBarColor = android.graphics.Color.TRANSPARENT
                 windowInsetsController.isAppearanceLightStatusBars = isBackgroundLight
                 windowInsetsController.isAppearanceLightNavigationBars = isBackgroundLight
+                if (!dimBackground) clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                // Without this the window plays its own enter/exit animation, which would defeat `animated = false`.
+                if (!animated) setWindowAnimations(0)
             }
         }
 
