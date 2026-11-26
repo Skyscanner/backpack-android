@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.tooltip
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -40,26 +39,49 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasScrollAction
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
-import androidx.compose.ui.test.longClick
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import androidx.test.espresso.Espresso
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 
 class BpkTooltipTest : BpkSnapshotTest() {
+
+    // Popup windows read Android configuration separately from the anchor composition.
+    private var initialFontScale = 1f
+
+    @Before
+    fun rememberFontScale() {
+        initialFontScale = RuntimeEnvironment.getFontScale()
+    }
+
+    @After
+    fun restoreFontScale() {
+        RuntimeEnvironment.setFontScale(initialFontScale)
+    }
 
     @Test
     fun `given explicit show when tooltip is visible then anchor bounds are unchanged`() {
@@ -248,20 +270,79 @@ class BpkTooltipTest : BpkSnapshotTest() {
 
     @Test
     fun `given font scale two when tooltip is visible then close remains on screen`() {
-        val resources = composeTestRule.activity.resources
-        val original = Configuration(resources.configuration)
-        resources.updateConfiguration(Configuration(original).apply { fontScale = 2f }, resources.displayMetrics)
-        try {
-            composeTestRule.setContent { BackpackDemoTheme { TooltipSample(showInitially = true) } }
-            val close = composeTestRule.onNodeWithContentDescription("Close tooltip")
-            val root = composeTestRule.onNodeWithTag("root").fetchSemanticsNode().boundsInWindow
-            close.assertIsDisplayed()
-            val closeBounds = close.fetchSemanticsNode().boundsInWindow
-            assertTrue("Close target must not extend above the root: close=$closeBounds root=$root", closeBounds.top >= root.top)
-            assertTrue("Close target must not extend below the root: close=$closeBounds root=$root", closeBounds.bottom <= root.bottom)
-        } finally {
-            resources.updateConfiguration(original, resources.displayMetrics)
+        RuntimeEnvironment.setFontScale(2f)
+        composeTestRule.setContent { BackpackDemoTheme { TooltipSample(showInitially = true) } }
+        val close = composeTestRule.onNodeWithContentDescription("Close tooltip")
+        val root = composeTestRule.onNodeWithTag("root").fetchSemanticsNode().boundsInWindow
+        close.assertIsDisplayed()
+        val closeBounds = close.fetchSemanticsNode().boundsInWindow
+        assertTrue("Close target must not extend above the root: close=$closeBounds root=$root", closeBounds.top >= root.top)
+        assertTrue("Close target must not extend below the root: close=$closeBounds root=$root", closeBounds.bottom <= root.bottom)
+    }
+
+    @Test
+    fun `given a tooltip body when rendered then it uses Backpack body typography`() {
+        var expectedStyle = TextStyle.Default
+        composeTestRule.setContent {
+            BackpackDemoTheme {
+                expectedStyle = BpkTheme.typography.bodyDefault
+                TooltipSample(showInitially = true)
+            }
         }
+
+        val actualStyle = textLayout("Tooltip text").layoutInput.style
+        assertEquals("Body font size must use Backpack", expectedStyle.fontSize, actualStyle.fontSize)
+        assertEquals("Body font family must use Backpack", expectedStyle.fontFamily, actualStyle.fontFamily)
+        assertEquals("Body line height must use Backpack", expectedStyle.lineHeight, actualStyle.lineHeight)
+        val range = composeTestRule.onNode(hasScrollAction()).fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange]
+        assertEquals("Short content must fit without scrolling", 0f, range.maxValue(), 0f)
+    }
+
+    @Test
+    fun `given a long message at font scale two when shown then all text is reachable and close remains fixed`() {
+        assertLongMessageIsReadable()
+    }
+
+    @Test
+    @Config(qualifiers = "w640dp-h360dp-land")
+    fun `given a small landscape window at font scale two when shown then all text is reachable and close remains fixed`() {
+        assertLongMessageIsReadable(landscape = true)
+    }
+
+    private fun assertLongMessageIsReadable(landscape: Boolean = false) {
+        val title = "Include nearby airports near your departure and arrival locations"
+        val message = List(6) { "Find cheaper options by expanding your search to nearby airports." }.joinToString(" ")
+        RuntimeEnvironment.setFontScale(2f)
+        composeTestRule.setContent { BackpackDemoTheme { TooltipSample(showInitially = true, title = title, text = message) } }
+        val root = composeTestRule.onNodeWithTag("root").fetchSemanticsNode().boundsInWindow
+        assertEquals("The test must use the intended window orientation: $root", landscape, root.width > root.height)
+        val layout = textLayout(message)
+        assertEquals("The test must use 200% font scale", 2f, layout.layoutInput.density.fontScale, 0f)
+        assertFalse("Message clipped: height=${layout.size.height}, lastLineBottom=${layout.getLineBottom(layout.lineCount - 1)}", layout.hasVisualOverflow)
+        assertFalse("The title must be laid out fully", textLayout(title).hasVisualOverflow)
+        val close = composeTestRule.onNodeWithContentDescription("Close tooltip").assertIsDisplayed()
+        val closeBefore = close.fetchSemanticsNode().boundsInWindow
+        val scroll = composeTestRule.onNode(hasScrollAction()).assertIsDisplayed()
+        val viewport = scroll.fetchSemanticsNode().boundsInWindow
+        val lastLineHeight = layout.getLineBottom(layout.lineCount - 1) - layout.getLineTop(layout.lineCount - 1)
+        assertTrue("The viewport must show at least one complete line: $viewport", viewport.height >= lastLineHeight)
+        val range = scroll.fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange]
+        assertTrue("Long text must overflow the viewport and be scrollable", range.maxValue() > 0f)
+
+        scroll.performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, range.maxValue()) }
+        composeTestRule.waitForIdle()
+
+        assertEquals("The end of the message must be reachable", range.maxValue(), range.value(), 1f)
+        assertEquals("Scrolling must keep the close action fixed", closeBefore, close.fetchSemanticsNode().boundsInWindow)
+        close.assertIsDisplayed().performClick()
+        close.assertDoesNotExist()
+    }
+
+    private fun textLayout(text: String): TextLayoutResult {
+        val results = mutableListOf<TextLayoutResult>()
+        composeTestRule.onNodeWithText(text).performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(results) }
+        assertEquals("The text must expose exactly one layout result", 1, results.size)
+        return results.single()
     }
 
     @Test
@@ -289,6 +370,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
     private fun TooltipSample(
         showInitially: Boolean,
         title: String = "Tooltip title",
+        text: String = "Tooltip text",
         modifier: Modifier = Modifier,
         dismissProgrammatically: Boolean = false,
         showAgain: Boolean = false,
@@ -310,7 +392,7 @@ class BpkTooltipTest : BpkSnapshotTest() {
         ) {
             BpkTooltip(
                 title = title,
-                text = "Tooltip text",
+                text = text,
                 closeAccessibilityLabel = "Close tooltip",
                 state = state,
                 content = { Box(modifier = Modifier.size(48.dp).testTag("anchor")) },

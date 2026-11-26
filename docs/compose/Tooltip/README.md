@@ -12,6 +12,8 @@ to once per user presentation. A shared Material3 tooltip mutex can cancel this 
 another tooltip shows; that is not a user dismissal and does not invoke the callback. TalkBack
 reads title, close button, then text.
 
+The body uses Backpack `bodyDefault` typography. The tooltip grows with its content up to the available window height; longer messages scroll independently while the title and close action stay visible.
+
 ### Verification notes
 
 Outside-tap dismissal is validated on device. Robolectric Compose touch injection targets the

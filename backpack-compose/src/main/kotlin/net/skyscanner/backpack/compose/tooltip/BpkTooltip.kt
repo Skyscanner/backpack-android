@@ -20,6 +20,8 @@ package net.skyscanner.backpack.compose.tooltip
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -171,7 +173,13 @@ fun BpkTooltip(
                             }
                         }
                     },
-                    text = { BpkText(text = text) },
+                    text = {
+                        BpkText(
+                            text = text,
+                            style = BpkTheme.typography.bodyDefault,
+                            modifier = Modifier.verticalScroll(rememberScrollState()),
+                        )
+                    },
                     colors = TooltipDefaults.richTooltipColors(
                         containerColor = BpkTheme.colors.surfaceDefault,
                         contentColor = BpkTheme.colors.textPrimary,
