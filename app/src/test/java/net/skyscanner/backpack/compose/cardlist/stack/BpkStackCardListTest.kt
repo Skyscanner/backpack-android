@@ -262,7 +262,7 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             title = stringResource(R.string.card_list_title),
             totalCount = 5,
             useTwoColumnsOnTablet = true,
-            headerContent = { CategoryChips(selectedIndex = 0) },
+            controlsContent = { CategoryChips(selectedIndex = 0) },
         ) { index -> StackItem(dataList[index]) }
     }
 
@@ -274,17 +274,17 @@ class BpkStackCardListTest : BpkSnapshotTest() {
             totalCount = 5,
             isInScrollableContainer = true,
             useTwoColumnsOnTablet = true,
-            headerContent = { CategoryChips(selectedIndex = 0) },
+            controlsContent = { CategoryChips(selectedIndex = 0) },
         ) { index -> StackItem(dataList[index]) }
     }
 
     @Test
-    fun columnStackWithHeaderAndEmptyContent() = snap {
+    fun columnStackWithControlsAndEmptyContent() = snap {
         BpkStackCardList(
             title = stringResource(R.string.card_list_title),
             totalCount = 0,
             isInScrollableContainer = true,
-            headerContent = { CategoryChips(selectedIndex = 1) },
+            controlsContent = { CategoryChips(selectedIndex = 1) },
             emptyContent = {
                 BpkButton(text = stringResource(R.string.card_list_find_destination), onClick = {})
             },

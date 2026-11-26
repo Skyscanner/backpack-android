@@ -438,7 +438,7 @@ fun AdaptiveCardListStackStory(modifier: Modifier = Modifier) {
                     collapsedText = stringResource(R.string.card_list_show_less),
                 )
             } else null,
-            headerContent = {
+            controlsContent = {
                 BpkSingleSelectChipGroup(
                     chips = chips,
                     selectedIndex = selectedIndex,

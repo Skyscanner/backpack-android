@@ -107,7 +107,7 @@ class BpkStackCardListAdaptiveTest(
                     count.value = 0
                     windowWidth.value = TABLET_WINDOW_WIDTH
                 }
-                onNodeWithTag("header").assertIsDisplayed()
+                onNodeWithTag("controls").assertIsDisplayed()
                 onNodeWithText("Find a destination").assertIsDisplayed()
                 onNodeWithTag("card-0").assertDoesNotExist()
                 onNodeWithText("Less").assertDoesNotExist()
@@ -125,9 +125,9 @@ class BpkStackCardListAdaptiveTest(
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun emptyListShowsOnlyHeaderContent() = snap(
+    fun emptyListShowsOnlyControlsContent() = snap(
         assertion = {
-            onNodeWithTag("header").assertIsDisplayed()
+            onNodeWithTag("controls").assertIsDisplayed()
             onNodeWithText("Find a destination").assertDoesNotExist()
             onNodeWithTag("card-0").assertDoesNotExist()
         },
@@ -138,21 +138,21 @@ class BpkStackCardListAdaptiveTest(
     fun emptyListShowsOnlyEmptyContent() = snap(
         assertion = {
             onNodeWithText("Find a destination").assertIsDisplayed()
-            onNodeWithTag("header").assertDoesNotExist()
+            onNodeWithTag("controls").assertDoesNotExist()
             onNodeWithTag("card-0").assertDoesNotExist()
         },
-    ) { ListFixture(count = 0, header = false) }
+    ) { ListFixture(count = 0, controls = false) }
 
     @Test
     @Variants(BpkTestVariant.Default)
-    fun headerContentSpansBothColumns() = snap(
+    fun controlsContentSpansBothColumns() = snap(
         width = 650.dp,
         assertion = {
             val first = boundsOf("card-0")
             val second = boundsOf("card-1")
-            val header = boundsOf("header")
-            assertTrue(header.width > first.width + second.width)
-            assertTrue(header.bottom <= first.top)
+            val controls = boundsOf("controls")
+            assertTrue(controls.width > first.width + second.width)
+            assertTrue(controls.bottom <= first.top)
         },
     ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture() } }
 
@@ -161,7 +161,7 @@ class BpkStackCardListAdaptiveTest(
     fun singleCardKeepsColumnWidthOnTablet() = snap(
         width = 650.dp,
         assertion = {
-            assertTrue(boundsOf("card-0").width < boundsOf("header").width / 2)
+            assertTrue(boundsOf("card-0").width < boundsOf("controls").width / 2)
             onNodeWithTag("card-1").assertDoesNotExist()
         },
     ) { WindowWidth(TABLET_WINDOW_WIDTH) { ListFixture(count = 1) } }
@@ -203,7 +203,7 @@ class BpkStackCardListAdaptiveTest(
     private fun ListFixture(
         count: Int = 3,
         expandable: Boolean = false,
-        header: Boolean = true,
+        controls: Boolean = true,
         empty: Boolean = true,
     ) {
         BpkStackCardList(
@@ -214,8 +214,8 @@ class BpkStackCardListAdaptiveTest(
             accessoryStyle = if (expandable && count > 2) {
                 BpkStackCardAccessoryStyle.Expand(collapsedCount = 2, expandText = "More", collapsedText = "Less")
             } else null,
-            headerContent = if (header) {
-                { Box(Modifier.fillMaxWidth().testTag("header")) { BpkText("Filter destinations") } }
+            controlsContent = if (controls) {
+                { Box(Modifier.fillMaxWidth().testTag("controls")) { BpkText("Filter destinations") } }
             } else null,
             emptyContent = if (empty) {
                 { BpkButton(text = "Find a destination", onClick = {}) }

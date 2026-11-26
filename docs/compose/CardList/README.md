@@ -46,7 +46,7 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack-with-button-accessory-and-section-header-button.png" alt="CardList component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack-with-button-accessory-and-section-header-button_dm.png" alt="CardList component - dark mode" width="375" /> |
 
-## Stack with header content, empty content and tablet columns
+## Stack with controls content, empty content and tablet columns
 
 | Day                                                                                                                                                                                            | Night                                                                                                                                                                                                         |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -334,14 +334,14 @@ BpkStackCardList(
 }
 ```
 
-# Stack with header content, empty content and tablet columns
+# Stack with controls content, empty content and tablet columns
 
 These options work with both the lazy and the column (`isInScrollableContainer = true`) variants.
 
-* `headerContent` (optional): shown full width below the section header, including when there are no cards. Use it for things like filter chips. The caller owns any state inside it.
+* `controlsContent` (optional): shown full width below the section header, including when there are no cards. Use it for things like filter chips. The caller owns any state inside it.
 * `emptyContent` (optional): shown instead of the cards and accessory when `totalCount` is `0`.
 * `useTwoColumnsOnTablet` (defaults to `false`): shows the cards in two equal-width columns when the window is wider than 769 dp (the Backpack tablet breakpoint), and in one column otherwise. It updates when the window is resized or rotated.
-    * The section header, `headerContent`, `emptyContent` and accessory always span the full width.
+    * The section header, `controlsContent`, `emptyContent` and accessory always span the full width.
     * An odd last card keeps its column width, and columns follow the layout direction.
     * `totalCount`, `collapsedCount`, `expandedCount` and the `content` index always count cards, not rows.
 * The expanded or collapsed state is kept when `totalCount` changes or drops to `0`, as long as the same `BpkStackCardList` stays in the composition.
@@ -365,7 +365,7 @@ BpkStackCardList(
             collapsedCount = 2,
         )
     } else null,
-    headerContent = {
+    controlsContent = {
         BpkSingleSelectChipGroup(
             chips = chips,
             selectedIndex = selectedIndex,

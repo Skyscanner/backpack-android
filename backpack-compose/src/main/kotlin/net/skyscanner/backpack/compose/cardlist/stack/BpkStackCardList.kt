@@ -41,7 +41,7 @@ sealed class BpkStackCardAccessoryStyle {
  * @param useTwoColumnsOnTablet When true, uses two equal-width columns when the current window is
  * wider than the Backpack tablet breakpoint (769 dp). Defaults to false. Counts refer to cards,
  * not rows; odd counts are not rounded.
- * @param headerContent Optional content below the section header, including when there are no cards.
+ * @param controlsContent Optional content below the section header, including when there are no cards.
  * Null adds no spacing. The caller owns any state inside this slot, such as chip selection.
  * @param emptyContent Optional content shown instead of cards/accessories when [totalCount] is zero.
  * Null preserves the existing empty appearance. Expansion state survives an empty list.
@@ -57,7 +57,7 @@ fun BpkStackCardList(
     accessibilityHeaderTagEnabled: Boolean? = true,
     isInScrollableContainer: Boolean = false,
     useTwoColumnsOnTablet: Boolean = false,
-    headerContent: (@Composable () -> Unit)? = null,
+    controlsContent: (@Composable () -> Unit)? = null,
     emptyContent: (@Composable () -> Unit)? = null,
     content: @Composable (Int) -> Unit,
 ) {
@@ -71,7 +71,7 @@ fun BpkStackCardList(
         accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         isInScrollableContainer = isInScrollableContainer,
         useTwoColumnsOnTablet = useTwoColumnsOnTablet,
-        headerContent = headerContent,
+        controlsContent = controlsContent,
         emptyContent = emptyContent,
         content = content,
     )

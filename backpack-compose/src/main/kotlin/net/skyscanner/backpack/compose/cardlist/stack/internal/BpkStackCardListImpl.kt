@@ -56,7 +56,7 @@ internal fun BpkStackCardListImpl(
     accessibilityHeaderTagEnabled: Boolean? = true,
     isInScrollableContainer: Boolean = false,
     useTwoColumnsOnTablet: Boolean = false,
-    headerContent: (@Composable () -> Unit)? = null,
+    controlsContent: (@Composable () -> Unit)? = null,
     emptyContent: (@Composable () -> Unit)? = null,
     content: @Composable ((Int) -> Unit),
 ) {
@@ -99,7 +99,7 @@ internal fun BpkStackCardListImpl(
             totalCount = totalCount,
             targetCount = targetCount,
             columnCount = columnCount,
-            headerContent = headerContent,
+            controlsContent = controlsContent,
             emptyContent = visibleEmptyContent,
             content = content,
             modifier = modifier,
@@ -115,7 +115,7 @@ internal fun BpkStackCardListImpl(
             totalCount = totalCount,
             targetCount = targetCount,
             columnCount = columnCount,
-            headerContent = headerContent,
+            controlsContent = controlsContent,
             emptyContent = visibleEmptyContent,
             accessoryStyle = accessoryStyle,
             content = content,
@@ -136,7 +136,7 @@ private fun ExpandableColumn(
     totalCount: Int,
     targetCount: Int,
     columnCount: Int,
-    headerContent: (@Composable () -> Unit)?,
+    controlsContent: (@Composable () -> Unit)?,
     emptyContent: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     content: @Composable (Int) -> Unit,
@@ -150,7 +150,7 @@ private fun ExpandableColumn(
             accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         )
 
-        headerContent?.let { slot -> Box(Modifier.fillMaxWidth()) { slot() } }
+        controlsContent?.let { slot -> Box(Modifier.fillMaxWidth()) { slot() } }
         if (emptyContent != null) {
             Box(Modifier.fillMaxWidth()) { emptyContent() }
         } else {
@@ -210,7 +210,7 @@ private fun ExpandableLazyColumn(
     targetCount: Int,
     accessoryStyle: BpkStackCardAccessoryStyle?,
     columnCount: Int,
-    headerContent: (@Composable () -> Unit)?,
+    controlsContent: (@Composable () -> Unit)?,
     emptyContent: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     content: @Composable ((Int) -> Unit),
@@ -226,7 +226,7 @@ private fun ExpandableLazyColumn(
             )
         }
 
-        headerContent?.let { slot ->
+        controlsContent?.let { slot ->
             item { Box(Modifier.fillMaxWidth().animateItem()) { slot() } }
         }
         if (emptyContent != null) {
