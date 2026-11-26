@@ -76,32 +76,69 @@ class BpkModalAnimatedTest {
     @Test
     fun givenDimBackgroundIsDefault_whenShown_thenWindowDimsBehind() {
         setContent(animated = true)
-        composeTestRule.waitForIdle()
 
-        assertTrue(dialogFlags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0)
+        assertTrue(dialogDimsBehind())
     }
 
     @Test
     fun givenDimBackgroundIsFalse_whenShown_thenWindowDoesNotDimBehind() {
         setContent(animated = true, dimBackground = false)
+
+        assertFalse(dialogDimsBehind())
+    }
+
+    @Test
+    fun givenDimBackgroundChangesBackToTrue_whenRecomposed_thenWindowDimsBehindAgain() {
+        setContent(animated = true, dimBackground = false)
+
+        dimBackgroundState.value = true
         composeTestRule.waitForIdle()
 
-        assertFalse(dialogFlags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0)
+        assertTrue(dialogDimsBehind())
     }
 
     @Test
     fun givenNotAnimated_whenShown_thenWindowAnimationsAreDisabled() {
         setContent(animated = false)
-        composeTestRule.waitForIdle()
 
-        assertEquals(0, dialogWindowAnimations)
+        assertEquals(0, dialogWindowAnimations())
+    }
+
+    @Test
+    fun givenAnimatedChangesBackToTrue_whenRecomposed_thenDefaultWindowAnimationsAreRestored() {
+        setContent(animated = true)
+        val defaultWindowAnimations = dialogWindowAnimations()
+
+        animatedState.value = false
+        composeTestRule.waitForIdle()
+        assertEquals(0, dialogWindowAnimations())
+
+        animatedState.value = true
+        composeTestRule.waitForIdle()
+        assertEquals(defaultWindowAnimations, dialogWindowAnimations())
     }
 
     private var dialogWindow: Window? = null
-    private val dialogFlags get() = dialogWindow!!.attributes.flags
-    private val dialogWindowAnimations get() = dialogWindow!!.attributes.windowAnimations
+    private val animatedState = mutableStateOf(true)
+    private val dimBackgroundState = mutableStateOf(true)
+
+    private fun dialogDimsBehind(): Boolean = readDialogWindow { attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0 }
+
+    private fun dialogWindowAnimations(): Int = readDialogWindow { attributes.windowAnimations }
+
+    private fun <T> readDialogWindow(read: Window.() -> T): T {
+        var result: T? = null
+        composeTestRule.runOnIdle {
+            val window = checkNotNull(dialogWindow) { "The modal's dialog window was not composed" }
+            result = window.read()
+        }
+        @Suppress("UNCHECKED_CAST")
+        return result as T
+    }
 
     private fun setContent(animated: Boolean, dimBackground: Boolean = true) {
+        animatedState.value = animated
+        dimBackgroundState.value = dimBackground
         composeTestRule.setContent {
             BpkTheme {
                 // Like real callers, remove the modal from the composition once it has been dismissed. BpkModal calls
@@ -116,8 +153,8 @@ class BpkModalAnimatedTest {
                             dismissCount.incrementAndGet()
                             showModal = false
                         },
-                        animated = animated,
-                        dimBackground = dimBackground,
+                        animated = animatedState.value,
+                        dimBackground = dimBackgroundState.value,
                     ) {
                         dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
                     }

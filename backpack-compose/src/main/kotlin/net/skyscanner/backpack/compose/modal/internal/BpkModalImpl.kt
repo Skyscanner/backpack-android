@@ -36,6 +36,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
@@ -94,6 +95,8 @@ internal fun BpkModalImpl(
         onDismissRequest = { isVisible.targetState = false },
     ) {
         val dialogWindow = getDialogWindow()
+        // Read before the first mutation below, so it can be restored when `animated` becomes true again.
+        val defaultWindowAnimations = remember(dialogWindow) { dialogWindow?.attributes?.windowAnimations ?: 0 }
         // Determine if icons should be light based on background luminance
         val isBackgroundLight = backgroundColor.luminance() > 0.5f
 
@@ -106,9 +109,13 @@ internal fun BpkModalImpl(
                 navigationBarColor = android.graphics.Color.TRANSPARENT
                 windowInsetsController.isAppearanceLightStatusBars = isBackgroundLight
                 windowInsetsController.isAppearanceLightNavigationBars = isBackgroundLight
-                if (!dimBackground) clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                if (dimBackground) {
+                    addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                } else {
+                    clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                }
                 // Without this the window plays its own enter/exit animation, which would defeat `animated = false`.
-                if (!animated) setWindowAnimations(0)
+                setWindowAnimations(if (animated) defaultWindowAnimations else 0)
             }
         }
 
