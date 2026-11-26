@@ -46,6 +46,12 @@
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack-with-button-accessory-and-section-header-button.png" alt="CardList component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack-with-button-accessory-and-section-header-button_dm.png" alt="CardList component - dark mode" width="375" /> |
 
+## Stack with controls content, empty content and tablet columns
+
+| Day                                                                                                                                                                                            | Night                                                                                                                                                                                                         |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack---chips-and-adaptive-columns.png" alt="CardList component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardList/screenshots/stack---chips-and-adaptive-columns_dm.png" alt="CardList component - dark mode" width="375" /> |
+
 
 ## Installation
 
@@ -325,5 +331,54 @@ BpkStackCardList(
     ),
 ) { index ->
     // content
+}
+```
+
+# Stack with controls content, empty content and tablet columns
+
+These options work with both the lazy and the column (`isInScrollableContainer = true`) variants.
+
+* `controlsContent` (optional): shown full width below the section header, including when there are no cards. Use it for things like filter chips. The caller owns any state inside it.
+* `emptyContent` (optional): shown instead of the cards and accessory when `totalCount` is `0`.
+* `useTwoColumnsOnTablet` (defaults to `false`): shows the cards in two equal-width columns when the window is wider than 769 dp (the Backpack tablet breakpoint), and in one column otherwise. It updates when the window is resized or rotated.
+    * The section header, `controlsContent`, `emptyContent` and accessory always span the full width.
+    * An odd last card keeps its column width, and columns follow the layout direction.
+    * `totalCount`, `collapsedCount`, `expandedCount` and the `content` index always count cards, not rows.
+* The expanded or collapsed state is kept when `totalCount` changes or drops to `0`, as long as the same `BpkStackCardList` stays in the composition.
+* Pass `accessoryStyle = null` when every card already fits, so no expand button is shown.
+
+```Kotlin
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardAccessoryStyle
+import net.skyscanner.backpack.compose.cardlist.stack.BpkStackCardList
+import net.skyscanner.backpack.compose.chipgroup.single.BpkSingleSelectChipGroup
+
+BpkStackCardList(
+    title = stringResource(R.string.card_list_title),
+    totalCount = selectedCards.size,
+    isInScrollableContainer = true,
+    useTwoColumnsOnTablet = true,
+    accessoryStyle = if (selectedCards.size > 2) {
+        BpkStackCardAccessoryStyle.Expand(
+            expandText = stringResource(R.string.card_list_show_more),
+            collapsedText = stringResource(R.string.card_list_show_less),
+            collapsedCount = 2,
+        )
+    } else null,
+    controlsContent = {
+        BpkSingleSelectChipGroup(
+            chips = chips,
+            selectedIndex = selectedIndex,
+            onItemClicked = { selectedIndex = chips.indexOf(it) },
+        )
+    },
+    emptyContent = {
+        BpkButton(
+            text = stringResource(R.string.card_list_find_destination),
+            onClick = {},
+        )
+    },
+) { index ->
+    // content for selectedCards[index]
 }
 ```

@@ -22,6 +22,8 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -41,6 +43,7 @@ import net.skyscanner.backpack.compose.sectionheader.BpkSectionHeaderButton
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ChevronDown
 import net.skyscanner.backpack.compose.tokens.ChevronUp
+import net.skyscanner.backpack.compose.utils.isTablet
 
 @Composable
 internal fun BpkStackCardListImpl(
@@ -52,6 +55,9 @@ internal fun BpkStackCardListImpl(
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
     isInScrollableContainer: Boolean = false,
+    useTwoColumnsOnTablet: Boolean = false,
+    controlsContent: (@Composable () -> Unit)? = null,
+    emptyContent: (@Composable () -> Unit)? = null,
     content: @Composable ((Int) -> Unit),
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -78,6 +84,9 @@ internal fun BpkStackCardListImpl(
         else -> totalCount
     }
 
+    val columnCount = if (useTwoColumnsOnTablet && isTablet()) 2 else 1
+    val visibleEmptyContent = if (totalCount == 0) emptyContent else null
+
     if (isInScrollableContainer) {
         ExpandableColumn(
             expanded = expanded,
@@ -89,6 +98,9 @@ internal fun BpkStackCardListImpl(
             accessoryStyle = accessoryStyle,
             totalCount = totalCount,
             targetCount = targetCount,
+            columnCount = columnCount,
+            controlsContent = controlsContent,
+            emptyContent = visibleEmptyContent,
             content = content,
             modifier = modifier,
         )
@@ -102,6 +114,9 @@ internal fun BpkStackCardListImpl(
             accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
             totalCount = totalCount,
             targetCount = targetCount,
+            columnCount = columnCount,
+            controlsContent = controlsContent,
+            emptyContent = visibleEmptyContent,
             accessoryStyle = accessoryStyle,
             content = content,
             modifier = modifier,
@@ -110,7 +125,7 @@ internal fun BpkStackCardListImpl(
 }
 
 @Composable
-fun ExpandableColumn(
+private fun ExpandableColumn(
     expanded: Boolean,
     onButtonTap: () -> Unit,
     title: String,
@@ -120,6 +135,9 @@ fun ExpandableColumn(
     accessoryStyle: BpkStackCardAccessoryStyle?,
     totalCount: Int,
     targetCount: Int,
+    columnCount: Int,
+    controlsContent: (@Composable () -> Unit)?,
+    emptyContent: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     content: @Composable (Int) -> Unit,
 ) {
@@ -132,13 +150,14 @@ fun ExpandableColumn(
             accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         )
 
-        Column(modifier = Modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
-            for (index in 0 until targetCount) {
-                content(index)
-            }
+        controlsContent?.let { slot -> Box(Modifier.fillMaxWidth()) { slot() } }
+        if (emptyContent != null) {
+            Box(Modifier.fillMaxWidth()) { emptyContent() }
+        } else {
+            StackCards(targetCount = targetCount, columnCount = columnCount, content = content)
         }
 
-        accessoryStyle?.let {
+        accessoryStyle?.takeIf { emptyContent == null }?.let {
             when (it) {
                 is BpkStackCardAccessoryStyle.Expand -> {
                     val expandedCount = it.expandedCount ?: totalCount
@@ -180,7 +199,7 @@ fun ExpandableColumn(
 }
 
 @Composable
-fun ExpandableLazyColumn(
+private fun ExpandableLazyColumn(
     isExpanded: Boolean,
     onButtonTap: () -> Unit,
     title: String,
@@ -190,6 +209,9 @@ fun ExpandableLazyColumn(
     totalCount: Int,
     targetCount: Int,
     accessoryStyle: BpkStackCardAccessoryStyle?,
+    columnCount: Int,
+    controlsContent: (@Composable () -> Unit)?,
+    emptyContent: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     content: @Composable ((Int) -> Unit),
 ) {
@@ -204,13 +226,31 @@ fun ExpandableLazyColumn(
             )
         }
 
-        items(targetCount) {
-            Box(Modifier.animateItem()) {
-                content(it)
+        controlsContent?.let { slot ->
+            item { Box(Modifier.fillMaxWidth().animateItem()) { slot() } }
+        }
+        if (emptyContent != null) {
+            item { Box(Modifier.fillMaxWidth().animateItem()) { emptyContent() } }
+        } else if (columnCount == 1) {
+            items(targetCount) {
+                Box(Modifier.animateItem()) {
+                    content(it)
+                }
+            }
+        } else {
+            val rowCount = (targetCount + columnCount - 1) / columnCount
+            items(rowCount) { row ->
+                CardRow(
+                    firstIndex = row * columnCount,
+                    targetCount = targetCount,
+                    columnCount = columnCount,
+                    modifier = Modifier.animateItem(),
+                    content = content,
+                )
             }
         }
 
-        accessoryStyle?.let {
+        accessoryStyle?.takeIf { emptyContent == null }?.let {
             when (it) {
                 is BpkStackCardAccessoryStyle.Expand -> {
                     val expandedCount = it.expandedCount ?: totalCount
@@ -251,6 +291,40 @@ fun ExpandableLazyColumn(
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun StackCards(targetCount: Int, columnCount: Int, content: @Composable (Int) -> Unit) {
+    Column(modifier = Modifier.animateContentSize(), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+        if (columnCount == 1) {
+            for (index in 0 until targetCount) {
+                content(index)
+            }
+        } else {
+            for (firstIndex in 0 until targetCount step columnCount) {
+                CardRow(firstIndex = firstIndex, targetCount = targetCount, columnCount = columnCount, content = content)
+            }
+        }
+    }
+}
+
+@Composable
+private fun CardRow(
+    firstIndex: Int,
+    targetCount: Int,
+    columnCount: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable (Int) -> Unit,
+) {
+    Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+        for (index in firstIndex until firstIndex + columnCount) {
+            if (index < targetCount) {
+                Box(Modifier.weight(1f)) { content(index) }
+            } else {
+                Spacer(Modifier.weight(1f))
             }
         }
     }

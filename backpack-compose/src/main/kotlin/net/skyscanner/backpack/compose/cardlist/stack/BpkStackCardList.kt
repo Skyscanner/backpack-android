@@ -35,6 +35,17 @@ sealed class BpkStackCardAccessoryStyle {
     data class Button(val title: String, val icon: BpkIcon, val onClick: () -> Unit) : BpkStackCardAccessoryStyle()
 }
 
+/**
+ * A stack of cards with optional full-width content below its section header and when empty.
+ *
+ * @param useTwoColumnsOnTablet When true, uses two equal-width columns when the current window is
+ * wider than the Backpack tablet breakpoint (769 dp). Defaults to false. Counts refer to cards,
+ * not rows; odd counts are not rounded.
+ * @param controlsContent Optional content below the section header, including when there are no cards.
+ * Null adds no spacing. The caller owns any state inside this slot, such as chip selection.
+ * @param emptyContent Optional content shown instead of cards/accessories when [totalCount] is zero.
+ * Null preserves the existing empty appearance. Expansion state survives an empty list.
+ */
 @Composable
 fun BpkStackCardList(
     title: String,
@@ -45,7 +56,10 @@ fun BpkStackCardList(
     headerButton: BpkSectionHeaderButton? = null,
     accessibilityHeaderTagEnabled: Boolean? = true,
     isInScrollableContainer: Boolean = false,
-    content: @Composable ((Int) -> Unit),
+    useTwoColumnsOnTablet: Boolean = false,
+    controlsContent: (@Composable () -> Unit)? = null,
+    emptyContent: (@Composable () -> Unit)? = null,
+    content: @Composable (Int) -> Unit,
 ) {
     BpkStackCardListImpl(
         title = title,
@@ -56,6 +70,9 @@ fun BpkStackCardList(
         headerButton = headerButton,
         accessibilityHeaderTagEnabled = accessibilityHeaderTagEnabled,
         isInScrollableContainer = isInScrollableContainer,
+        useTwoColumnsOnTablet = useTwoColumnsOnTablet,
+        controlsContent = controlsContent,
+        emptyContent = emptyContent,
         content = content,
     )
 }
