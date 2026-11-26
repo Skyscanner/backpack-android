@@ -30,9 +30,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.hideFromAccessibility
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import net.skyscanner.backpack.compose.badge.BpkBadge
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 import net.skyscanner.backpack.compose.flightleg.bpkAirportHighlightStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -43,6 +47,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FlightLegComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 @Composable
 @FlightLegComponent
@@ -66,7 +71,35 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 
         BpkText(text = stringResource(id = R.string.flight_leg_complete_short_stops_example), color = BpkTheme.colors.textPrimary)
         CompleteFlightLegShortStopsSample()
+
+        Spacer(modifier = Modifier.height(BpkSpacing.Lg))
+
+        BpkText(text = stringResource(id = R.string.flight_leg_bottom_content_example), color = BpkTheme.colors.textPrimary)
+        FlightLegWithBottomContentSample()
     }
+}
+
+@Composable
+@OptIn(ExperimentalBackpackApi::class)
+internal fun FlightLegWithBottomContentSample(modifier: Modifier = Modifier) {
+    BpkFlightLeg(
+        departureArrivalTime = "19:50 - 22:45",
+        description = AnnotatedString("LHR-SIN, SwissAir"),
+        stopsInfo = "Direct",
+        duration = "7h 55m",
+        contentDescription = stringResource(id = R.string.flight_leg_nearby_airport_content_description),
+        bottomContent = {
+            BpkBadge(
+                text = stringResource(id = R.string.flight_leg_nearby_airport),
+                modifier = Modifier.semantics { hideFromAccessibility() },
+                type = BpkBadgeType.Subtle,
+            )
+        },
+        carrierLogoContent = {
+            BpkIcon(icon = BpkIcon.Aircraft, tint = BpkTheme.colors.textOnLight, contentDescription = null)
+        },
+        modifier = modifier,
+    )
 }
 
 @Composable

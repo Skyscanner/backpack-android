@@ -25,18 +25,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import net.skyscanner.backpack.compose.text.BpkText
@@ -44,7 +44,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkFlightLegImpl(
     departureArrivalTime: String,
@@ -53,6 +52,7 @@ internal fun BpkFlightLegImpl(
     duration: String,
     contentDescription: String?,
     modifier: Modifier = Modifier,
+    bottomContent: (@Composable () -> Unit)? = null,
     nextDayArrival: String? = null,
     highlightStopsInfo: Boolean = false,
     operatedBy: String? = null,
@@ -66,7 +66,7 @@ internal fun BpkFlightLegImpl(
                 if (contentDescription == null) {
                     // prevent screen readers from reading this allowing a broader
                     // content description to be set on the parent node
-                    invisibleToUser()
+                    hideFromAccessibility()
                 } else {
                     this.contentDescription = contentDescription
                 }
@@ -117,6 +117,10 @@ internal fun BpkFlightLegImpl(
                     style = BpkTheme.typography.caption,
                     color = BpkTheme.colors.textSecondary,
                 )
+                bottomContent?.let {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Sm))
+                    it()
+                }
                 operatedBy?.let {
                     BpkText(
                         text = it,
