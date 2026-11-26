@@ -369,9 +369,9 @@ class BpkTooltipTest : BpkSnapshotTest() {
     @OptIn(ExperimentalBackpackApi::class)
     private fun TooltipSample(
         showInitially: Boolean,
+        modifier: Modifier = Modifier,
         title: String = "Tooltip title",
         text: String = "Tooltip text",
-        modifier: Modifier = Modifier,
         dismissProgrammatically: Boolean = false,
         showAgain: Boolean = false,
         onDismissRequest: (() -> Unit)? = null,

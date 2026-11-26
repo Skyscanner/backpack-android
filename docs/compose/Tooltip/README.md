@@ -21,15 +21,22 @@ Compose root rather than Material3's popup window, so it cannot exercise the pop
 dismiss path locally.
 
 ```kotlin
+@Composable
 @OptIn(ExperimentalBackpackApi::class)
-val state = rememberBpkTooltipState()
-BpkTooltip(
-  title = "Nearby airports",
-  text = "Find more options by expanding your airport search.",
-  closeAccessibilityLabel = stringResource(R.string.close),
-  state = state,
-) {
-  Anchor()
+fun TooltipExample() {
+  val state = rememberBpkTooltipState()
+  val scope = rememberCoroutineScope()
+  BpkTooltip(
+    title = "Nearby airports",
+    text = "Find more options by expanding your airport search.",
+    closeAccessibilityLabel = stringResource(R.string.navigation_close),
+    state = state,
+  ) {
+    BpkButton(
+      text = stringResource(R.string.generic_show),
+      onClick = { scope.launch { state.show() } },
+    )
+  }
 }
 ```
 
