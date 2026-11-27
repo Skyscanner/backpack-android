@@ -98,14 +98,14 @@ BpkModal(
 ### Animation
 
 By default the modal slides in from and out to the bottom. If the host already animates the screen the modal belongs to
-(for example a navigation transition), set `animated = false` so the modal doesn't animate on top of it. The modal then
+(for example a navigation transition), set `transitionAnimation = false` so the modal doesn't animate on top of it. The modal then
 appears and disappears without animation: `BpkModalState.hide()` (including its optional `onHidden` callback) and `onDismiss`
 are still invoked, but as soon as the modal is hidden instead of after the exit animation.
 
 ```Kotlin
 BpkModal(
     navIcon = NavIcon.Close(...),
-    animated = false,
+    transitionAnimation = false,
     ...
 )
 ```
@@ -113,13 +113,13 @@ BpkModal(
 ### Dimmed background
 
 The modal is shown in its own window, which dims the content behind it. When the modal covers the whole screen the dim is
-only visible as a flash while the modal appears or disappears, for example when `animated = false`. Set
+only visible as a flash while the modal appears or disappears, for example when `transitionAnimation = false`. Set
 `dimBackground = false` to turn it off.
 
 ```Kotlin
 BpkModal(
     navIcon = NavIcon.Close(...),
-    animated = false,
+    transitionAnimation = false,
     dimBackground = false,
     ...
 )

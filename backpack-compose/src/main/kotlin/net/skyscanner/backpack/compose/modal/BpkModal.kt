@@ -37,13 +37,13 @@ enum class ModalStyle {
 /**
  * A fullscreen modal.
  *
- * @param animated whether the modal slides in and out vertically. Set to `false` when the host already animates the
- * screen the modal belongs to (e.g. a navigation transition) and the modal must not animate on top of it. When `false`
- * the modal appears and disappears immediately: [BpkModalState.hide] and [onDismiss] are still invoked, but right away
- * instead of after the exit animation. The dialog window's own enter/exit animation is disabled too.
+ * @param transitionAnimation whether the modal slides in and out vertically. Set to `false` when the host already
+ * animates the screen the modal belongs to (e.g. a navigation transition) and the modal must not animate on top of it.
+ * When `false` the modal appears and disappears immediately: [BpkModalState.hide] and [onDismiss] are still invoked,
+ * but right away instead of after the exit animation. The dialog window's own enter/exit animation is disabled too.
  * @param dimBackground whether the content behind the modal is dimmed while it is shown. Set to `false` when the modal
  * covers the screen and the dim would only show as a flash while it appears or disappears (e.g. together with
- * `animated = false`).
+ * `transitionAnimation = false`).
  */
 @Composable
 @Suppress("ModifierMissing")
@@ -56,7 +56,7 @@ fun BpkModal(
     action: TextAction? = null,
     title: String? = null,
     onDismiss: (() -> Unit)? = null,
-    animated: Boolean = true,
+    transitionAnimation: Boolean = true,
     dimBackground: Boolean = true,
     content: @Composable BoxScope.() -> Unit,
 ) {
@@ -69,7 +69,7 @@ fun BpkModal(
         action = action,
         title = title,
         onDismiss = onDismiss,
-        animated = animated,
+        transitionAnimation = transitionAnimation,
         dimBackground = dimBackground,
         content = content,
     )

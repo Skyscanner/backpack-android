@@ -66,7 +66,7 @@ internal fun BpkModalImpl(
     action: TextAction?,
     title: String?,
     onDismiss: (() -> Unit)?,
-    animated: Boolean,
+    transitionAnimation: Boolean,
     dimBackground: Boolean,
     content: @Composable BoxScope.() -> Unit,
 ) {
@@ -95,7 +95,7 @@ internal fun BpkModalImpl(
         onDismissRequest = { isVisible.targetState = false },
     ) {
         val dialogWindow = getDialogWindow()
-        // Read before the first mutation below, so it can be restored when `animated` becomes true again.
+        // Read before the first mutation below, so it can be restored when `transitionAnimation` becomes true again.
         val defaultWindowAnimations = remember(dialogWindow) { dialogWindow?.attributes?.windowAnimations ?: 0 }
         // Determine if icons should be light based on background luminance
         val isBackgroundLight = backgroundColor.luminance() > 0.5f
@@ -114,8 +114,9 @@ internal fun BpkModalImpl(
                 } else {
                     clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
                 }
-                // Without this the window plays its own enter/exit animation, which would defeat `animated = false`.
-                setWindowAnimations(if (animated) defaultWindowAnimations else 0)
+                // Without this the window plays its own enter/exit animation, which would defeat
+                // `transitionAnimation = false`.
+                setWindowAnimations(if (transitionAnimation) defaultWindowAnimations else 0)
             }
         }
 
@@ -135,8 +136,16 @@ internal fun BpkModalImpl(
 
         AnimatedVisibility(
             visibleState = isVisible,
-            enter = if (animated) slideInVertically(tween(ModalAnimationDurationMs)) { it } else EnterTransition.None,
-            exit = if (animated) slideOutVertically(tween(ModalAnimationDurationMs)) { it } else ExitTransition.None,
+            enter = if (transitionAnimation) {
+                slideInVertically(tween(ModalAnimationDurationMs)) { it }
+            } else {
+                EnterTransition.None
+            },
+            exit = if (transitionAnimation) {
+                slideOutVertically(tween(ModalAnimationDurationMs)) { it }
+            } else {
+                ExitTransition.None
+            },
             modifier = modifier.fillMaxSize(),
         ) {
             Column(modifier = Modifier.fillMaxSize().background(backgroundColor)) {

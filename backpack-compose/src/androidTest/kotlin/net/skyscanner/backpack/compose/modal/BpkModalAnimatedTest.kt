@@ -48,7 +48,7 @@ class BpkModalAnimatedTest {
     @Test
     fun givenAnimated_whenCloseClicked_thenOnDismissIsCalledOnceAfterTheAnimationFinishes() {
         composeTestRule.mainClock.autoAdvance = false
-        setContent(animated = true)
+        setContent(transitionAnimation = true)
         composeTestRule.mainClock.advanceTimeBy(ModalAnimationDurationMs + FRAME_MS)
 
         composeTestRule.onNodeWithContentDescription(CLOSE).performClick()
@@ -64,7 +64,7 @@ class BpkModalAnimatedTest {
     @Test
     fun givenNotAnimated_whenCloseClicked_thenOnDismissIsCalledOnceWithoutWaitingForAnimation() {
         composeTestRule.mainClock.autoAdvance = false
-        setContent(animated = false)
+        setContent(transitionAnimation = false)
         composeTestRule.mainClock.advanceTimeBy(FRAME_MS * 2)
 
         composeTestRule.onNodeWithContentDescription(CLOSE).performClick()
@@ -75,21 +75,21 @@ class BpkModalAnimatedTest {
 
     @Test
     fun givenDimBackgroundIsDefault_whenShown_thenWindowDimsBehind() {
-        setContent(animated = true)
+        setContent(transitionAnimation = true)
 
         assertTrue(dialogDimsBehind())
     }
 
     @Test
     fun givenDimBackgroundIsFalse_whenShown_thenWindowDoesNotDimBehind() {
-        setContent(animated = true, dimBackground = false)
+        setContent(transitionAnimation = true, dimBackground = false)
 
         assertFalse(dialogDimsBehind())
     }
 
     @Test
     fun givenDimBackgroundChangesBackToTrue_whenRecomposed_thenWindowDimsBehindAgain() {
-        setContent(animated = true, dimBackground = false)
+        setContent(transitionAnimation = true, dimBackground = false)
 
         dimBackgroundState.value = true
         composeTestRule.waitForIdle()
@@ -99,30 +99,32 @@ class BpkModalAnimatedTest {
 
     @Test
     fun givenNotAnimated_whenShown_thenWindowAnimationsAreDisabled() {
-        setContent(animated = false)
+        setContent(transitionAnimation = false)
 
         assertEquals(0, dialogWindowAnimations())
     }
 
     @Test
     fun givenAnimatedChangesBackToTrue_whenRecomposed_thenDefaultWindowAnimationsAreRestored() {
-        setContent(animated = true)
+        setContent(transitionAnimation = true)
         val defaultWindowAnimations = dialogWindowAnimations()
 
-        animatedState.value = false
+        transitionAnimationState.value = false
         composeTestRule.waitForIdle()
         assertEquals(0, dialogWindowAnimations())
 
-        animatedState.value = true
+        transitionAnimationState.value = true
         composeTestRule.waitForIdle()
         assertEquals(defaultWindowAnimations, dialogWindowAnimations())
     }
 
     private var dialogWindow: Window? = null
-    private val animatedState = mutableStateOf(true)
+    private val transitionAnimationState = mutableStateOf(true)
     private val dimBackgroundState = mutableStateOf(true)
 
-    private fun dialogDimsBehind(): Boolean = readDialogWindow { attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0 }
+    private fun dialogDimsBehind(): Boolean = readDialogWindow {
+        attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND != 0
+    }
 
     private fun dialogWindowAnimations(): Int = readDialogWindow { attributes.windowAnimations }
 
@@ -136,8 +138,8 @@ class BpkModalAnimatedTest {
         return result as T
     }
 
-    private fun setContent(animated: Boolean, dimBackground: Boolean = true) {
-        animatedState.value = animated
+    private fun setContent(transitionAnimation: Boolean, dimBackground: Boolean = true) {
+        transitionAnimationState.value = transitionAnimation
         dimBackgroundState.value = dimBackground
         composeTestRule.setContent {
             BpkTheme {
@@ -153,7 +155,7 @@ class BpkModalAnimatedTest {
                             dismissCount.incrementAndGet()
                             showModal = false
                         },
-                        animated = animatedState.value,
+                        transitionAnimation = transitionAnimationState.value,
                         dimBackground = dimBackgroundState.value,
                     ) {
                         dialogWindow = (LocalView.current.parent as? DialogWindowProvider)?.window
